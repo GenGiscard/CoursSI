@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Chaîne d'information — Chaîne d'acquisition · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+
+  .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--amber)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,60px) 80px}
+  section{padding:50px 0 46px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4.2vw,42px);line-height:1.04;margin:12px 0 16px}
+  h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.5vw,25px);margin:0 0 14px;letter-spacing:-.01em}
+  .lede{font-size:16.5px;max-width:64ch;color:var(--ink-soft);margin:0 0 20px}
+  p{margin:0 0 14px} h4{font-family:var(--display)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0}
+  .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .chip.k{background:rgba(189,138,42,.1);border-color:rgba(189,138,42,.4);color:#8a6313}
+
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:6px 0}
+  .panel h4{font-weight:700;font-size:16px;margin:0 0 10px}
+  .panel ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft)}
+  .panel ul li{margin-bottom:5px} .panel ul li b{color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .note{font-size:13.5px;color:var(--ink-soft);background:rgba(189,138,42,.08);border:1px solid rgba(189,138,42,.3);border-radius:10px;padding:13px 16px;margin-top:8px}
+  .note b{color:var(--ink)}
+  .danger{background:rgba(192,73,46,.07);border-color:rgba(192,73,46,.32)}
+
+  table.data{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px;margin:6px 0}
+  table.data th,table.data td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left}
+  table.data thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.data td b{font-family:var(--mono);color:var(--ink)}
+  table.data tr:last-child td{border-bottom:none}
+
+  .exoprog{display:flex;align-items:center;gap:14px;margin-bottom:20px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 16px}
+  .exoprog .lab{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:700;white-space:nowrap}
+  .exoprog .track{flex:1 1 auto;height:7px;background:var(--cream);border-radius:5px;overflow:hidden}
+  .exoprog .track i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+  .exolist{display:flex;flex-direction:column;gap:14px}
+  .exo{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:13px;padding:18px 20px;transition:.2s}
+  .exo.locked{filter:grayscale(.7);opacity:.5;pointer-events:none}
+  .exo.done{border-left-color:var(--green)}
+  .exohead{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+  .exonum{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber);background:rgba(189,138,42,.1);padding:2px 8px;border-radius:5px}
+  .exo.done .exonum{color:var(--green);background:rgba(61,126,95,.12)}
+  .exohead h4{font-weight:700;font-size:16px;margin:0;flex:1 1 auto}
+  .exostatus{font-family:var(--mono);font-size:18px}
+  .exoq{font-size:14.5px;margin:0 0 12px;color:var(--ink)} .exoq b{font-family:var(--mono);font-size:13.5px}
+  .choices{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+  .choice{font-family:var(--body);font-size:14px;background:var(--cream);border:1px solid var(--line-strong);border-radius:9px;padding:9px 15px;cursor:pointer;color:var(--ink);transition:.15s}
+  .choice:hover{border-color:var(--amber);background:#fff}
+  .choice.good{background:rgba(61,126,95,.14);border-color:var(--ok);color:#2c6147;font-weight:600}
+  .choice.bad{background:rgba(192,73,46,.12);border-color:var(--no);color:#8f3a24}
+  .numrow{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .num{font-family:var(--mono);font-size:15px;width:160px;padding:10px 13px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink)}
+  .num:focus{outline:none;border-color:var(--amber)}
+  .num.good{border-color:var(--ok);background:rgba(61,126,95,.07)}
+  .num.bad{border-color:var(--no);background:rgba(192,73,46,.06)}
+  .unit{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
+  .exoactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .btn{font-family:var(--mono);font-size:12.5px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn:hover{background:#fff;border-color:var(--amber);color:#8a6313}
+  .btn.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .btn.primary:hover{background:#3a342e;color:#fff}
+  .feedback{font-size:13.5px;margin-top:11px;font-weight:600;display:none}
+  .feedback.show{display:block}
+  .feedback.ok{color:var(--ok)} .feedback.no{color:var(--no)}
+  .feedback.nudge{color:#8a6313;background:rgba(189,138,42,.1);border:1px solid rgba(189,138,42,.35);padding:9px 13px;border-radius:8px;font-weight:500}
+  .indice,.correction{font-size:13.5px;margin-top:11px;padding:12px 15px;border-radius:9px;line-height:1.5}
+  .indice{background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.3);color:#1f5575}
+  .correction{background:rgba(61,126,95,.09);border:1px solid rgba(61,126,95,.35);color:#2c6147} .correction b{color:#235038}
+
+  .game{background:var(--ink);color:var(--cream);border-radius:18px;padding:26px 28px;margin:8px 0}
+  .game .ghead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+  .game .gtitle{font-family:var(--display);font-weight:800;font-size:21px}
+  .game .ghud{display:flex;gap:18px;font-family:var(--mono);font-size:12px;color:#C9BBA8}
+  .game .ghud b{color:#E9A36F;font-size:15px;display:block}
+  .gbar{height:8px;background:rgba(255,255,255,.12);border-radius:5px;overflow:hidden;margin-bottom:20px}
+  .gbar i{display:block;height:100%;width:100%;background:#E9A36F;transition:width .1s linear}
+  .gprompt{text-align:center;padding:14px 0 22px}
+  .gprompt .gname{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,38px);letter-spacing:-.01em}
+  .gbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:600px;margin:0 auto}
+  .gbtn{font-family:var(--display);font-weight:700;font-size:16px;padding:16px 8px;border-radius:12px;cursor:pointer;border:2px solid;transition:.12s;background:transparent}
+  .gbtn.ana{color:#E9A36F;border-color:rgba(233,163,111,.55)} .gbtn.ana:hover{background:rgba(233,163,111,.14)}
+  .gbtn.tor{color:#9FCBAE;border-color:rgba(159,203,174,.55)} .gbtn.tor:hover{background:rgba(159,203,174,.14)}
+  .gbtn.num{color:#7FB7D6;border-color:rgba(127,183,214,.55)} .gbtn.num:hover{background:rgba(127,183,214,.14)}
+  .gbtn.hit{transform:scale(.96)}
+  .gstart{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 0}
+  .gstart p{color:#C9BBA8;font-size:14px;max-width:48ch;margin:0}
+  .gbig{font-family:var(--mono);font-size:13px;background:#E9A36F;color:#2A2622;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;font-weight:700}
+  .gflash{text-align:center;font-family:var(--mono);font-size:13px;min-height:20px;margin-top:14px;color:#C9BBA8}
+  .gover{text-align:center;padding:10px 0}
+  .gover .gscore{font-family:var(--display);font-weight:800;font-size:36px;color:#E9A36F}
+
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--green);color:#fff;border-radius:10px;padding:12px 18px}
+
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:36px 0 34px}
+    .gbtns{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_information.html">← Séquence : information</a>
+    <div class="brand">
+      <div class="mark">TP</div>
+      <div><h1>Chaîne d'acquisition</h1><p>Première · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="links" id="links">
+      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
+      <a href="#proto" class="navlink"><span>02</span>Protocole</a>
+      <a href="#exos" class="navlink"><span>03</span>Exercices</a>
+      <a href="#analyse" class="navlink"><span>04</span>Analyse</a>
+      <a href="#jeu" class="navlink"><span>05</span>Mini-jeu</a>
+      <a href="#synth" class="navlink"><span>06</span>Synthèse</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 01 -->
+    <section id="obj">
+      <span class="kicker">TP · Chaîne d'information</span>
+      <h2>Exploiter une<br>chaîne d'acquisition</h2>
+      <p class="lede">On relie un capteur à une carte à microcontrôleur, on lit la valeur <b>numérisée</b> et on remonte à la grandeur physique. Objectif&nbsp;: comprendre le passage <b>grandeur → signal → nombre</b> et chiffrer la <b>résolution</b>.</p>
+      <div class="panel">
+        <h4>Ce que tu vas faire</h4>
+        <ul>
+          <li>Identifier la <b>nature</b> du signal d'un capteur (analogique, TOR, numérique).</li>
+          <li>Lire la <b>valeur numérique</b> renvoyée par le convertisseur (CAN).</li>
+          <li>Calculer le <b>nombre de niveaux</b> et le <b>quantum</b> d'un CAN.</li>
+          <li>Convertir un <b>code</b> en tension, puis en <b>grandeur physique</b>.</li>
+        </ul>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <span class="chip k">capteur → signal</span><span class="chip k">N = 2ⁿ</span><span class="chip k">q = E/2ⁿ</span><span class="chip k">code → tension</span>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="proto">
+      <span class="kicker">02 · Avant de mesurer</span>
+      <h3>Protocole &amp; sécurité</h3>
+      <div class="two">
+        <div class="panel">
+          <h4>Brancher &amp; lire</h4>
+          <ul>
+            <li>Alimenter le capteur&nbsp;: <b>VCC</b> et <b>GND</b>.</li>
+            <li>Relier la <b>sortie signal</b> à une <b>entrée analogique</b> (ex.&nbsp;A0).</li>
+            <li>Le microcontrôleur <b>numérise</b> via son CAN&nbsp;: il renvoie un <b>code</b> (0 à 1023 sur 10 bits).</li>
+          </ul>
+        </div>
+        <div class="panel danger">
+          <h4>Sécurité</h4>
+          <ul>
+            <li>Respecter la <b>tension d'alimentation</b> du capteur (<b>3,3 V</b> ou <b>5 V</b>).</li>
+            <li>Ne pas <b>court-circuiter</b> VCC et GND.</li>
+            <li>Vérifier le câblage <b>avant</b> de mettre sous tension.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel" style="margin-top:16px">
+        <h4>Correspondance code ↔ tension (CAN 10 bits, 0–5 V)</h4>
+        <table class="data">
+          <thead><tr><th>Tension d'entrée</th><th>Code renvoyé</th><th>Remarque</th></tr></thead>
+          <tbody>
+            <tr><td><b>0 V</b></td><td><b>0</b></td><td>minimum</td></tr>
+            <tr><td><b>2,5 V</b></td><td><b>512</b></td><td>moitié de la plage</td></tr>
+            <tr><td><b>5 V</b></td><td><b>1023</b></td><td>maximum (2¹⁰ − 1)</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Sur ta carte réelle, remplace ces valeurs par tes propres relevés (la pleine échelle peut différer&nbsp;: 3,3&nbsp;V, 5&nbsp;V…).</div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="exos">
+      <span class="kicker">03 · À toi de jouer</span>
+      <h3>Exercices guidés</h3>
+      <p class="lede">Chaque exercice se débloque quand le précédent est réussi (ou après avoir vu la correction). Bloqué·e&nbsp;? Demande un indice, puis la correction.</p>
+      <div class="exoprog"><span class="lab" id="progLab">0 / 0 validés</span><div class="track"><i id="progBar"></i></div></div>
+      <div class="exolist" id="exos"></div>
+    </section>
+
+    <!-- 04 -->
+    <section id="analyse">
+      <span class="kicker">04 · Interpréter</span>
+      <h3>Comprendre les limites de la mesure</h3>
+      <p class="lede">Une chaîne d'acquisition n'est jamais parfaite. Deux limites principales&nbsp;:</p>
+      <div class="two">
+        <div class="panel">
+          <h4>La résolution</h4>
+          <ul>
+            <li>Le CAN ne peut distinguer que <b>2ⁿ niveaux</b>&nbsp;: en-dessous du <b>quantum</b>, deux valeurs sont confondues.</li>
+            <li>Augmenter <b>n</b> (bits) → quantum plus petit → mesure plus fine (mais plus de données).</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>Le capteur lui-même</h4>
+          <ul>
+            <li><b>Précision</b> et <b>justesse</b> limitées, dérive avec la température, bruit.</li>
+            <li><b>Étendue de mesure</b>&nbsp;: hors plage, la mesure n'a plus de sens.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <span class="chip">résolution</span><span class="chip">quantum</span><span class="chip">étendue de mesure</span><span class="chip">incertitude</span>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section id="jeu">
+      <span class="kicker">05 · Réflexe express</span>
+      <h3>Analogique, TOR ou Numérique&nbsp;?</h3>
+      <p class="lede">30 secondes pour classer un maximum de signaux selon leur nature. Continu (analogique), deux états (TOR) ou valeurs codées (numérique)&nbsp;? Enchaîne pour faire grimper le combo.</p>
+      <div class="game" id="game">
+        <div class="ghead">
+          <div class="gtitle">⚡ Quelle nature de signal&nbsp;?</div>
+          <div class="ghud">
+            <div>Score<b id="gScore">0</b></div>
+            <div>Combo<b id="gStreak">×1</b></div>
+            <div>Temps<b id="gTime">30</b></div>
+          </div>
+        </div>
+        <div class="gbar"><i id="gBar"></i></div>
+        <div id="gArea">
+          <div class="gstart" id="gStart">
+            <p>Classe chaque exemple selon la nature de son signal&nbsp;: analogique (continu), TOR (2 états) ou numérique (codé en bits).</p>
+            <button class="gbig" id="gPlay">▶ Démarrer (30 s)</button>
+          </div>
+        </div>
+        <div class="gflash" id="gFlash"></div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="synth" style="border-bottom:none">
+      <span class="kicker">06 · Bilan</span>
+      <h3>Ce qu'il faut retenir du TP</h3>
+      <div class="panel">
+        <ul>
+          <li>Le capteur transforme une <b>grandeur physique</b> en <b>signal</b>&nbsp;; sa nature peut être analogique, TOR ou numérique.</li>
+          <li>Le CAN code le signal sur <b>2ⁿ niveaux</b> avec un quantum <b>q = étendue/2ⁿ</b>.</li>
+          <li>On convertit&nbsp;: <b>code → tension → grandeur physique</b> (via la sensibilité du capteur).</li>
+          <li>La <b>résolution</b> et la qualité du <b>capteur</b> fixent les limites de la mesure.</li>
+        </ul>
+      </div>
+      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> de la séquence&nbsp;? Retourne au hub de séquence.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== Moteur d'exercices =====
+  var EXOS=[
+    {type:'qcm', titre:'R\u00f4le du capteur',
+     q:'Un capteur a pour r\u00f4le de\u2026',
+     choix:['transformer une grandeur physique en un signal exploitable','amplifier la puissance du moteur','stocker l\u2019\u00e9nergie','afficher une valeur'], bon:0,
+     indice:'Le capteur est l\u2019entr\u00e9e de la cha\u00eene d\u2019information : il « traduit » le monde physique.',
+     corr:'Il transforme une grandeur physique (le mesurande) en un signal, le plus souvent \u00e9lectrique.'},
+    {type:'qcm', titre:'Nature du signal d\u2019un fin de course',
+     q:'Le signal d\u00e9livr\u00e9 par un fin de course (interrupteur) est de nature\u2026',
+     choix:['analogique','logique (TOR)','num\u00e9rique cod\u00e9 sur 8 bits'], bon:1,
+     indice:'Il n\u2019a que deux \u00e9tats possibles.',
+     corr:'Logique / TOR : deux \u00e9tats seulement (0 ou 1, ouvert ou ferm\u00e9).'},
+    {type:'num', titre:'Niveaux d\u2019un CAN 8 bits',
+     q:'Combien de niveaux distincts un convertisseur 8 bits peut-il coder ?',
+     rep:256, tol:0, unite:'niveaux',
+     indice:'n bits \u2192 2\u207F niveaux.',
+     corr:'2\u2078 = 256 niveaux.'},
+    {type:'num', titre:'Niveaux d\u2019un CAN 10 bits',
+     q:'Et un convertisseur 10 bits ? (nombre de niveaux)',
+     rep:1024, tol:0, unite:'niveaux',
+     indice:'2 puissance 10.',
+     corr:'2\u00b9\u2070 = 1024 niveaux.'},
+    {type:'num', titre:'Quantum (pas de quantification)',
+     q:'CAN 10 bits sur une \u00e9tendue de 5 V. Calcule le quantum q (en mV, 2 d\u00e9cimales).',
+     rep:4.88, tol:0.1, unite:'mV',
+     indice:'q = \u00e9tendue / 2\u207F. Convertis en mV (\u00d71000).',
+     corr:'q = 5 / 1024 \u2248 0,00488 V \u2248 4,88 mV.'},
+    {type:'num', titre:'Conversion code \u2192 tension',
+     q:'Un CAN 10 bits (plage 0\u20135 V) renvoie le code 512. \u00c0 quelle tension cela correspond-il ? (V, 2 d\u00e9cimales)',
+     rep:2.5, tol:0.05, unite:'V',
+     indice:'U = (code / nombre de niveaux) \u00d7 pleine \u00e9chelle.',
+     corr:'U \u2248 512 / 1024 \u00d7 5 = 2,50 V (la moiti\u00e9 de la plage).'},
+    {type:'qcm', titre:'L\u2019\u00e9chantillonnage',
+     q:'\u00c9chantillonner un signal, c\u2019est\u2026',
+     choix:['pr\u00e9lever sa valeur \u00e0 intervalles de temps r\u00e9guliers','l\u2019arrondir au niveau le plus proche','le filtrer pour enlever le bruit'], bon:0,
+     indice:'C\u2019est l\u2019op\u00e9ration « dans le temps » de la num\u00e9risation.',
+     corr:'Pr\u00e9lever la valeur du signal \u00e0 intervalles r\u00e9guliers (p\u00e9riode Te, fr\u00e9quence fe = 1/Te).'},
+    {type:'num', titre:'Fr\u00e9quence d\u2019\u00e9chantillonnage',
+     q:'La p\u00e9riode d\u2019\u00e9chantillonnage vaut Te = 2 ms. Calcule la fr\u00e9quence fe (en Hz).',
+     rep:500, tol:5, unite:'Hz',
+     indice:'fe = 1 / Te, avec Te en secondes (2 ms = 0,002 s).',
+     corr:'fe = 1 / 0,002 = 500 Hz.'},
+    {type:'num', titre:'Capteur lin\u00e9aire',
+     q:'Un capteur de temp\u00e9rature lin\u00e9aire a une sensibilit\u00e9 de 10 mV/\u00b0C. Il d\u00e9livre 0,25 V. Quelle temp\u00e9rature mesure-t-il ? (\u00b0C)',
+     rep:25, tol:1, unite:'\u00b0C',
+     indice:'0,25 V = 250 mV. Temp\u00e9rature = tension / sensibilit\u00e9.',
+     corr:'250 mV / (10 mV/\u00b0C) = 25 \u00b0C.'}
+  ];
+
+  var attempted=EXOS.map(function(){return false;});
+  var done=EXOS.map(function(){return false;});
+  function esc(s){return String(s);}
+  function exoMarkup(e,i){
+    var locked=i>0?' locked':'';
+    var field;
+    if(e.type==='qcm'){
+      field='<div class="choices">'+e.choix.map(function(ch,j){return '<button class="choice" data-exo="'+i+'" data-j="'+j+'">'+esc(ch)+'</button>';}).join('')+'</div>';
+    }else{
+      field='<div class="numrow"><input class="num" type="text" inputmode="decimal" autocomplete="off" data-exo="'+i+'" placeholder="r\u00e9ponse"><span class="unit">'+(e.unite||'')+'</span></div>';
+    }
+    return '<div class="exo'+locked+'" id="exo'+i+'">'+
+      '<div class="exohead"><span class="exonum">Exo '+(i+1)+'</span><h4>'+esc(e.titre)+'</h4><span class="exostatus" id="st'+i+'"></span></div>'+
+      '<p class="exoq">'+esc(e.q)+'</p>'+field+
+      '<div class="exoactions">'+
+        (e.type==='num'?'<button class="btn primary" data-act="check" data-exo="'+i+'">V\u00e9rifier</button>':'')+
+        '<button class="btn" data-act="hint" data-exo="'+i+'">\uD83E\uDD14 Je bloque</button>'+
+        '<button class="btn" data-act="show" data-exo="'+i+'">Montre-moi</button>'+
+      '</div>'+
+      '<div class="feedback" id="fb'+i+'"></div>'+
+      '<div class="indice" id="ind'+i+'" hidden>\uD83D\uDCA1 '+esc(e.indice)+'</div>'+
+      '<div class="correction" id="cor'+i+'" hidden>\u2713 '+esc(e.corr)+'</div>'+
+    '</div>';
+  }
+  function updateProgress(){
+    var n=done.filter(Boolean).length;
+    document.getElementById('progLab').textContent=n+' / '+EXOS.length+' valid\u00e9s';
+    document.getElementById('progBar').style.width=(n/EXOS.length*100)+'%';
+  }
+  function unlock(i){ if(i<EXOS.length){var el=document.getElementById('exo'+i);if(el)el.classList.remove('locked');} }
+  function markDone(i){
+    if(done[i])return; done[i]=true;
+    var ex=document.getElementById('exo'+i); if(ex)ex.classList.add('done');
+    var st=document.getElementById('st'+i); if(st)st.textContent='\u2705';
+    unlock(i+1); updateProgress();
+  }
+  function feedback(i,cls,msg){var fb=document.getElementById('fb'+i);fb.className='feedback show '+cls;fb.textContent=msg;}
+  function checkNum(i){
+    var e=EXOS[i];
+    var inp=document.querySelector('.num[data-exo="'+i+'"]');
+    var raw=(inp.value||'').trim().replace(/\s/g,'').replace(',', '.');
+    var v=parseFloat(raw); attempted[i]=true;
+    if(isNaN(v)){ feedback(i,'no','Entre une valeur num\u00e9rique.'); inp.classList.remove('good'); inp.classList.add('bad'); return; }
+    if(Math.abs(v-e.rep)<=e.tol){ feedback(i,'ok','\u2713 Correct !'); inp.classList.remove('bad'); inp.classList.add('good'); inp.disabled=true; markDone(i); }
+    else{ feedback(i,'no','Pas tout \u00e0 fait. R\u00e9essaie, ou demande un indice.'); inp.classList.remove('good'); inp.classList.add('bad'); }
+  }
+  function chooseQcm(i,j,btn){
+    var e=EXOS[i]; attempted[i]=true;
+    if(j===e.bon){ btn.classList.add('good'); document.querySelectorAll('.choice[data-exo="'+i+'"]').forEach(function(b){b.disabled=true;}); feedback(i,'ok','\u2713 Bonne r\u00e9ponse !'); markDone(i); }
+    else{ btn.classList.add('bad'); btn.disabled=true; feedback(i,'no','Non. Essaie une autre proposition ou demande un indice.'); }
+  }
+  function toggleHint(i){ var ind=document.getElementById('ind'+i); ind.hidden=!ind.hidden; }
+  function showCorr(i){
+    if(!attempted[i]){ feedback(i,'nudge','Tente d\u2019abord ta r\u00e9ponse \uD83D\uDC46 puis reviens voir la correction.'); return; }
+    document.getElementById('cor'+i).hidden=false;
+    var inp=document.querySelector('.num[data-exo="'+i+'"]'); if(inp)inp.disabled=true;
+    markDone(i);
+  }
+  function bindExos(){
+    var list=document.getElementById('exos');
+    list.addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.classList.contains('choice')){ chooseQcm(+t.getAttribute('data-exo'),+t.getAttribute('data-j'),t); return; }
+      var act=t.getAttribute('data-act'); if(!act)return;
+      var i=+t.getAttribute('data-exo');
+      if(act==='check')checkNum(i); else if(act==='hint')toggleHint(i); else if(act==='show')showCorr(i);
+    });
+    list.addEventListener('keydown',function(ev){
+      if(ev.key==='Enter'&&ev.target.classList.contains('num')){ ev.preventDefault(); checkNum(+ev.target.getAttribute('data-exo')); }
+    });
+  }
+  document.getElementById('exos').innerHTML=EXOS.map(exoMarkup).join('');
+  bindExos(); updateProgress();
+
+  // ===== Mini-jeu : Analogique / TOR / Numérique ? =====
+  (function(){
+    var GR=[
+      {n:'Bouton poussoir',t:'tor'},{n:'Fin de course',t:'tor'},
+      {n:'D\u00e9tecteur de pr\u00e9sence (0/1)',t:'tor'},{n:'Interrupteur',t:'tor'},
+      {n:'Microphone (tension)',t:'ana'},{n:'Photor\u00e9sistance (tension)',t:'ana'},
+      {n:'Potentiom\u00e8tre (tension)',t:'ana'},{n:'Thermistance (tension)',t:'ana'},
+      {n:'Sortie d\u2019un CAN',t:'num'},{n:'Liaison I2C (suite de bits)',t:'num'},
+      {n:'Capteur DS18B20 (num\u00e9rique)',t:'num'},{n:'Suite de 0 et de 1',t:'num'}
+    ];
+    var area=document.getElementById('gArea'), flash=document.getElementById('gFlash');
+    var sScore=document.getElementById('gScore'), sStreak=document.getElementById('gStreak'),
+        sTime=document.getElementById('gTime'), bar=document.getElementById('gBar');
+    var TOTAL=30, time=TOTAL, score=0, streak=0, best=0, cur=null, timer=null, playing=false;
+    var LABEL={ana:'un signal ANALOGIQUE',tor:'un signal TOR',num:'un signal NUM\u00c9RIQUE'};
+
+    function pick(){ cur=GR[Math.floor(Math.random()*GR.length)]; render(); }
+    function render(){
+      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
+        '<div class="gbtns">'+
+          '<button class="gbtn ana" data-t="ana">ANALOGIQUE</button>'+
+          '<button class="gbtn tor" data-t="tor">TOR</button>'+
+          '<button class="gbtn num" data-t="num">NUM\u00c9RIQUE</button>'+
+        '</div>';
+    }
+    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+    function answer(t,btn){
+      if(!playing)return;
+      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait '+LABEL[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
+      if(btn)btn.classList.add('hit');
+      hud(); pick();
+    }
+    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+    function end(){
+      playing=false; if(timer){clearInterval(timer);timer=null;} best=Math.max(best,score);
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div>'+
+        '<p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Meilleur score : '+best+'</p>'+
+        '<button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent='';
+    }
+    document.getElementById('game').addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.id==='gPlay'||t.getAttribute('data-act')==='restart'){start();return;}
+      var tt=t.getAttribute('data-t'); if(tt&&playing)answer(tt,t);
+    });
+  })();
+</script>
+</body>
+</html>

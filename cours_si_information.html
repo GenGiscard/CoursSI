@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaîne d'information — Cours · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1340px;margin:0 auto}
+
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:26px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--steel);border-color:var(--steel)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:8px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .brand h1{font-family:var(--display);font-size:14.5px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .progress{height:3px;background:var(--cream);border-radius:3px;overflow:hidden;margin:14px 0 16px}
+  .progress i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--steel)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px)}
+  .slide{min-height:78vh;padding:60px 0 56px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  .slide h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4.4vw,46px);line-height:1.03;margin:12px 0 18px}
+  .slide h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.6vw,26px);letter-spacing:-.01em;margin:0 0 14px}
+  .lede{font-size:17px;max-width:64ch;color:var(--ink-soft);margin:0 0 22px}
+  p{margin:0 0 14px}
+  h4{font-family:var(--display)}
+
+  .big-idea{background:var(--ink);color:var(--cream);border-radius:16px;padding:26px 30px;max-width:62ch;
+    font-family:var(--display);font-weight:600;font-size:clamp(18px,2.4vw,23px);line-height:1.3;letter-spacing:-.01em}
+  .big-idea b{color:#7FB7D6;font-weight:700}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0}
+  .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .chip.k{background:rgba(46,106,142,.09);border-color:rgba(46,106,142,.35);color:#1f5575}
+
+  .eqrow{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0}
+  .eqcard{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--rail,var(--steel));border-radius:12px;padding:16px 20px;min-width:230px}
+  .eqcard .lab{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+  .eqcard .eq{font-family:var(--mono);font-weight:700;font-size:clamp(18px,2.4vw,24px);color:var(--ink);letter-spacing:-.01em}
+  .eqcard .eq small{font-weight:400;color:var(--ink-soft);font-size:.62em}
+  .eqcard .sub{font-size:12.5px;color:var(--ink-soft);margin-top:7px}
+
+  .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:13px;margin-top:8px}
+  .dom{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--rail);border-radius:12px;padding:16px 18px}
+  .dom h4{font-weight:700;font-size:15px;margin:0 0 10px}
+  .dom .pair{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:var(--ink-soft)}
+  .dom .pair b{color:var(--ink);font-family:var(--mono);font-size:12.5px}
+  .dom .res{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--rail);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+
+  .figwrap{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;margin:6px 0}
+  .figwrap svg{width:100%;height:auto;display:block}
+  .figcap{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:12px;text-align:center}
+
+  .anim{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin:6px 0}
+  .anim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#FCFAF4}
+  .anim .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .anim .cap .ph{font-family:var(--mono);font-weight:700;font-size:12px;color:#fff;background:var(--steel);border-radius:6px;padding:3px 8px;flex:0 0 auto}
+  .anim .cap .txt{font-size:14px;color:var(--ink)}
+  .anim .ctrl{margin-top:12px;display:flex;gap:8px;align-items:center}
+  .btn{font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:7px 13px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn:hover{background:#fff;border-color:var(--steel);color:var(--steel)}
+  .dots{display:flex;gap:5px;margin-left:6px}
+  .dots b{width:7px;height:7px;border-radius:50%;background:var(--line-strong);transition:.2s}
+  .dots b.on{background:var(--steel);transform:scale(1.25)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .note{font-size:13.5px;color:var(--ink-soft);background:rgba(46,106,142,.07);border:1px solid rgba(46,106,142,.28);border-radius:10px;padding:13px 16px;margin-top:6px}
+  .note b{color:var(--ink)}
+
+  .recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .rc{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+  .rc .t{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);font-weight:700;margin-bottom:6px}
+  .rc .e{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink)}
+  .rc p{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0}
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--cream);border-radius:10px;padding:12px 18px}
+
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.nav .progress{display:none}.nav.open .links{display:block;margin-top:10px}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .two{grid-template-columns:1fr}.main{padding:0 16px}.slide{min-height:auto;padding:42px 0 40px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_information.html">← Séquence : information</a>
+    <div class="brand">
+      <div class="mark">SI</div>
+      <div><h1>Chaîne d'information</h1><p>Première · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="links" id="links">
+      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
+      <a href="#s2" class="navlink"><span>02</span>Les 3 fonctions</a>
+      <a href="#s3" class="navlink"><span>03</span>Les capteurs</a>
+      <a href="#s4" class="navlink"><span>04</span>Nature des signaux</a>
+      <a href="#s5" class="navlink"><span>05</span>Numérisation</a>
+      <a href="#s6" class="navlink"><span>06</span>Résolution &amp; acquisition</a>
+      <a href="#s7" class="navlink"><span>07</span>Traiter &amp; communiquer</a>
+      <a href="#s8" class="navlink"><span>08</span>À retenir</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 01 -->
+    <section class="slide" id="s1">
+      <span class="kicker">Première · Spé SI · Information</span>
+      <h2>Comment un système<br>perçoit-il et décide-t-il&nbsp;?</h2>
+      <p class="lede">Un portail automatique qui détecte un obstacle, une station météo, un robot suiveur de ligne&nbsp;: tous <b>captent</b> une grandeur, la <b>traitent</b> pour décider, puis <b>communiquent</b> ou agissent. C'est la <b>chaîne d'information</b>.</p>
+      <div class="big-idea">La chaîne d'information capte des grandeurs physiques, les transforme en données, les traite pour <b>décider</b>, puis <b>pilote la chaîne d'énergie</b>. C'est le « système nerveux » du produit.</div>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">🌡️ température</span><span class="chip">💡 lumière</span><span class="chip">📏 distance</span><span class="chip">🧭 position</span>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="slide" id="s2">
+      <span class="kicker">02 · Structure</span>
+      <h3>Acquérir → Traiter → Communiquer</h3>
+      <p class="lede">Trois fonctions enchaînées. Le traitement produit une décision (un « ordre ») qui commande la chaîne d'énergie.</p>
+      <div class="figwrap">
+        <svg viewBox="0 0 920 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chaîne d'information : acquérir, traiter, communiquer, et lien vers la chaîne d'énergie">
+          <defs><marker id="arr" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#2E6A8E"/></marker>
+            <marker id="arrC" markerWidth="11" markerHeight="11" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#B85C2E"/></marker></defs>
+          <text x="20" y="34" font-family="'JetBrains Mono',monospace" font-size="12" fill="#5C544B">Grandeur physique</text>
+          <line x1="20" y1="80" x2="660" y2="80" stroke="#2E6A8E" stroke-width="2.5" marker-end="url(#arr)"/>
+          <g font-family="'Bricolage Grotesque',sans-serif">
+            <g><rect x="20" y="100" width="190" height="90" rx="11" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/>
+              <text x="115" y="132" text-anchor="middle" font-size="17" font-weight="700" fill="#2A2622">ACQUÉRIR</text>
+              <text x="115" y="156" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">capteurs</text>
+              <text x="115" y="173" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">grandeur → signal</text></g>
+            <g><rect x="240" y="100" width="190" height="90" rx="11" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2"/>
+              <text x="335" y="132" text-anchor="middle" font-size="17" font-weight="700" fill="#2A2622">TRAITER</text>
+              <text x="335" y="156" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">microcontrôleur</text>
+              <text x="335" y="173" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">décider (algorithme)</text></g>
+            <g><rect x="460" y="100" width="200" height="90" rx="11" fill="#FFFDF8" stroke="#8A5A7A" stroke-width="2"/>
+              <text x="560" y="132" text-anchor="middle" font-size="16" font-weight="700" fill="#2A2622">COMMUNIQUER</text>
+              <text x="560" y="156" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">afficher · transmettre</text>
+              <text x="560" y="173" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" fill="#5C544B">dialoguer</text></g>
+            <g><rect x="710" y="100" width="190" height="90" rx="11" fill="#FBF0E8" stroke="#B85C2E" stroke-width="2" stroke-dasharray="5 4"/>
+              <text x="805" y="138" text-anchor="middle" font-size="14.5" font-weight="700" fill="#8f4520">CHAÎNE</text>
+              <text x="805" y="160" text-anchor="middle" font-size="14.5" font-weight="700" fill="#8f4520">D'ÉNERGIE</text></g>
+          </g>
+          <line x1="335" y1="190" x2="335" y2="215" stroke="#B85C2E" stroke-width="2"/>
+          <line x1="335" y1="215" x2="805" y2="215" stroke="#B85C2E" stroke-width="2"/>
+          <line x1="805" y1="215" x2="805" y2="190" stroke="#B85C2E" stroke-width="2" marker-end="url(#arrC)"/>
+          <text x="560" y="234" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8f4520">« ordre » envoyé au préactionneur</text>
+        </svg>
+        <div class="figcap">La chaîne d'information décide&nbsp;; elle commande la chaîne d'énergie qui agit.</div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="slide" id="s3">
+      <span class="kicker">03 · Acquérir</span>
+      <h3>Le capteur&nbsp;: d'une grandeur physique à un signal</h3>
+      <div class="big-idea" style="font-size:20px;padding:22px 26px">Un <b>capteur</b> transforme une grandeur physique (le <b>mesurande</b>) en un signal exploitable, le plus souvent électrique.</div>
+      <div class="domains" style="margin-top:20px">
+        <div class="dom" style="--rail:var(--copper)"><h4>Température</h4><div class="pair"><span>Capteur</span><b>thermistance (CTN)</b></div><div class="res">→ tension / résistance</div></div>
+        <div class="dom" style="--rail:var(--amber)"><h4>Lumière</h4><div class="pair"><span>Capteur</span><b>photorésistance (LDR)</b></div><div class="res">→ résistance variable</div></div>
+        <div class="dom" style="--rail:var(--steel)"><h4>Distance</h4><div class="pair"><span>Capteur</span><b>télémètre ultrason</b></div><div class="res">→ durée / signal num.</div></div>
+        <div class="dom" style="--rail:var(--green)"><h4>Position angulaire</h4><div class="pair"><span>Capteur</span><b>potentiomètre · codeur</b></div><div class="res">→ tension / impulsions</div></div>
+        <div class="dom" style="--rail:var(--plum)"><h4>Présence / contact</h4><div class="pair"><span>Capteur</span><b>fin de course (ILS)</b></div><div class="res">→ TOR (0 / 1)</div></div>
+        <div class="dom" style="--rail:var(--copper)"><h4>Accélération</h4><div class="pair"><span>Capteur</span><b>accéléromètre (MEMS)</b></div><div class="res">→ signal numérique</div></div>
+      </div>
+      <div class="chips" style="margin-top:14px">
+        <span class="chip k">étendue de mesure</span><span class="chip k">sensibilité</span><span class="chip k">précision</span><span class="chip k">temps de réponse</span>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="slide" id="s4">
+      <span class="kicker">04 · La forme du signal</span>
+      <h3>Trois natures de signaux</h3>
+      <div class="two">
+        <div>
+          <div class="figwrap">
+            <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparaison signal analogique, logique TOR, numérique">
+              <!-- analogique -->
+              <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B85C2E" font-weight="700">ANALOGIQUE — continu</text>
+              <path d="M10,60 Q60,20 110,55 T210,45 T320,60 T410,40" fill="none" stroke="#B85C2E" stroke-width="2.4"/>
+              <!-- TOR -->
+              <text x="10" y="118" font-family="'JetBrains Mono',monospace" font-size="11" fill="#3D7E5F" font-weight="700">LOGIQUE (TOR) — 2 états</text>
+              <path d="M10,165 H70 V135 H150 V165 H230 V135 H320 V165 H410" fill="none" stroke="#3D7E5F" stroke-width="2.4"/>
+              <text x="10" y="158" font-family="'JetBrains Mono',monospace" font-size="9" fill="#5C544B">0</text>
+              <text x="74" y="148" font-family="'JetBrains Mono',monospace" font-size="9" fill="#5C544B">1</text>
+              <!-- numérique -->
+              <text x="10" y="212" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2E6A8E" font-weight="700">NUMÉRIQUE — par paliers</text>
+              <path d="M10,250 H60 V232 H110 V214 H160 V226 H210 V208 H260 V230 H320 V218 H410" fill="none" stroke="#2E6A8E" stroke-width="2.4"/>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="eqcard" style="--rail:var(--copper)"><div class="lab">Analogique</div><div class="eq" style="font-size:17px">continu</div><div class="sub">varie sans rupture dans le temps ET en valeur (ex.&nbsp;: tension d'un micro)</div></div>
+          <div class="eqcard" style="--rail:var(--green);margin-top:12px"><div class="lab">Logique / TOR</div><div class="eq" style="font-size:17px">2 états · 0 ou 1</div><div class="sub">tout ou rien (ex.&nbsp;: bouton, fin de course)</div></div>
+          <div class="eqcard" style="--rail:var(--steel);margin-top:12px"><div class="lab">Numérique</div><div class="eq" style="font-size:17px">valeurs discrètes</div><div class="sub">suite de nombres codés en bits — exploitable par un calculateur</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="slide" id="s5">
+      <span class="kicker">05 · D'analogique à numérique</span>
+      <h3>La numérisation (conversion A → N)</h3>
+      <p class="lede">Pour qu'un calculateur traite un signal analogique, il faut le <b>numériser</b>&nbsp;: deux opérations, l'échantillonnage puis la quantification.</p>
+      <div class="anim">
+        <canvas id="cv" width="900" height="300" aria-label="Animation : numérisation d'un signal (échantillonnage puis quantification)"></canvas>
+        <div class="cap"><span class="ph" id="phLab">1/4</span><span class="txt" id="phTxt">…</span></div>
+        <div class="ctrl"><button class="btn" id="replay">↻ Rejouer</button>
+          <div class="dots" id="dots"><b class="on"></b><b></b><b></b><b></b></div></div>
+      </div>
+      <div class="eqrow" style="margin-top:16px">
+        <div class="eqcard" style="--rail:var(--steel)"><div class="lab">Échantillonnage</div><div class="eq">prélever à <small>intervalle Te</small></div><div class="sub">fréquence d'échantillonnage fe = 1/Te</div></div>
+        <div class="eqcard" style="--rail:var(--green)"><div class="lab">Quantification</div><div class="eq">arrondir <small>au niveau le + proche</small></div><div class="sub">sur 2ⁿ niveaux (n = nombre de bits)</div></div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="slide" id="s6">
+      <span class="kicker">06 · Quantifier la qualité</span>
+      <h3>Résolution &amp; chaîne d'acquisition</h3>
+      <div class="two">
+        <div>
+          <div class="eqcard" style="--rail:var(--steel)"><div class="lab">Nombre de niveaux</div><div class="eq">N = 2ⁿ</div><div class="sub">n bits → 2ⁿ valeurs possibles (ex.&nbsp;: 8 bits → 256)</div></div>
+          <div class="eqcard" style="--rail:var(--copper);margin-top:12px"><div class="lab">Quantum (pas)</div><div class="eq">q = étendue / 2ⁿ</div><div class="sub">plus n est grand, plus q est petit → meilleure résolution</div></div>
+          <div class="note" style="margin-top:14px"><b>Exemple.</b> Un CAN 10 bits sur une étendue de 5&nbsp;V&nbsp;: 2¹⁰ = 1024 niveaux, q = 5/1024 ≈ <b>4,9&nbsp;mV</b>.</div>
+        </div>
+        <div>
+          <h4 style="font-weight:700;margin:0 0 10px">La chaîne d'acquisition</h4>
+          <div class="figwrap">
+            <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chaîne d'acquisition : capteur, conditionnement, CAN, traitement">
+              <defs><marker id="a2" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#5C544B"/></marker></defs>
+              <g font-family="'Bricolage Grotesque',sans-serif" font-size="12" font-weight="700" fill="#2A2622">
+                <rect x="20" y="20" width="150" height="40" rx="8" fill="#FFFDF8" stroke="#B85C2E" stroke-width="1.8"/><text x="95" y="45" text-anchor="middle">Capteur</text>
+                <rect x="20" y="80" width="150" height="40" rx="8" fill="#FFFDF8" stroke="#BD8A2A" stroke-width="1.8"/><text x="95" y="105" text-anchor="middle" font-size="11">Conditionnement</text>
+                <rect x="20" y="140" width="150" height="40" rx="8" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="1.8"/><text x="95" y="165" text-anchor="middle">CAN</text>
+                <rect x="210" y="80" width="150" height="40" rx="8" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="1.8"/><text x="285" y="105" text-anchor="middle">Traitement</text>
+              </g>
+              <line x1="95" y1="60" x2="95" y2="80" stroke="#5C544B" stroke-width="1.6" marker-end="url(#a2)"/>
+              <line x1="95" y1="120" x2="95" y2="140" stroke="#5C544B" stroke-width="1.6" marker-end="url(#a2)"/>
+              <line x1="170" y1="160" x2="285" y2="160" stroke="#5C544B" stroke-width="1.6"/>
+              <line x1="285" y1="160" x2="285" y2="120" stroke="#5C544B" stroke-width="1.6" marker-end="url(#a2)"/>
+              <text x="103" y="74" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5C544B">amplifier/filtrer</text>
+              <text x="103" y="134" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#5C544B">numériser</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="slide" id="s7">
+      <span class="kicker">07 · Décider &amp; dialoguer</span>
+      <h3>Traiter et communiquer</h3>
+      <div class="two">
+        <div>
+          <h4 style="font-weight:700;margin:0 0 8px">Traiter, c'est décider</h4>
+          <p>Le microcontrôleur compare la mesure à un <b>seuil</b> et en déduit une action&nbsp;: c'est un algorithme.</p>
+          <div class="eqcard" style="--rail:var(--green)"><div class="lab">Logique de décision</div><div class="eq" style="font-size:16px">si mesure &gt; seuil<br>alors agir</div><div class="sub">ex.&nbsp;: si distance &lt; 20&nbsp;cm → arrêter le moteur</div></div>
+          <div class="chips" style="margin-top:12px"><span class="chip k">seuil</span><span class="chip k">condition</span><span class="chip">Python / Blockly</span></div>
+        </div>
+        <div>
+          <h4 style="font-weight:700;margin:0 0 8px">Communiquer l'information</h4>
+          <p>Le résultat est restitué ou transmis&nbsp;:</p>
+          <div class="domains">
+            <div class="dom" style="--rail:var(--plum)"><h4>Afficher</h4><div class="res">écran, LED, signal sonore</div></div>
+            <div class="dom" style="--rail:var(--steel)"><h4>Transmettre</h4><div class="res">liaison série, Wi-Fi, radio</div></div>
+          </div>
+          <div class="note" style="margin-top:12px">La même information peut être <b>affichée</b> à l'utilisateur ET <b>envoyée</b> comme ordre à la chaîne d'énergie.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="slide" id="s8">
+      <span class="kicker">08 · Synthèse</span>
+      <h3>À retenir</h3>
+      <div class="recap">
+        <div class="rc"><div class="t">Structure</div><div class="e" style="font-size:13px">Acquérir → Traiter → Communiquer</div><p>elle pilote la chaîne d'énergie</p></div>
+        <div class="rc"><div class="t">Capteur</div><div class="e" style="font-size:13px">grandeur → signal</div><p>mesurande → électrique</p></div>
+        <div class="rc"><div class="t">Signaux</div><div class="e" style="font-size:13px">analogique · TOR · num.</div><p>trois natures</p></div>
+        <div class="rc"><div class="t">Numériser</div><div class="e" style="font-size:13px">échantillonner + quantifier</div><p>pour traiter par calculateur</p></div>
+        <div class="rc"><div class="t">Résolution</div><div class="e">N = 2ⁿ · q = E/2ⁿ</div><p>n bits → finesse</p></div>
+        <div class="rc"><div class="t">Décider</div><div class="e" style="font-size:13px">si seuil → action</div><p>algorithme de traitement</p></div>
+      </div>
+      <div class="cta">🔧 Prochaine étape&nbsp;: au <b style="color:#7FB7D6">TP</b>, on exploite une chaîne d'acquisition réelle.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav (menu, surlignage, progression, clavier) =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var bar=document.getElementById('bar'), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');var idx=ids.indexOf(en.target.id);if(bar&&idx>=0)bar.style.width=((idx+1)/ids.length*100)+'%';}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== Animation : numérisation (échantillonnage + quantification) =====
+  (function(){
+    var cv=document.getElementById('cv'); if(!cv||!cv.getContext) return;
+    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var x0=50, x1=W-24, y0=26, y1=H-34, plotW=x1-x0, plotH=y1-y0;
+    function f(t){ return 0.5 + 0.30*Math.sin(t*Math.PI*2*1.25) + 0.13*Math.sin(t*Math.PI*2*2.6+1.1); }
+    var N=12, BITS=3, LEVELS=8;
+    function toX(t){ return x0 + t*plotW; }
+    function toY(v){ return y1 - v*plotH; }
+    function lvlOf(v){ return Math.max(0,Math.min(LEVELS-1, Math.round(v*(LEVELS-1)))); }
+    function quant(v){ return lvlOf(v)/(LEVELS-1); }
+
+    var captions=[
+      'Le capteur fournit un signal analogique : continu dans le temps et en valeur.',
+      '\u00c9chantillonnage : on pr\u00e9l\u00e8ve la valeur \u00e0 intervalles r\u00e9guliers (p\u00e9riode Te).',
+      'Quantification : chaque \u00e9chantillon est arrondi au niveau le plus proche (3 bits \u2192 8 niveaux).',
+      'R\u00e9sultat : une suite de valeurs num\u00e9riques (des bits), exploitable par le calculateur.'
+    ];
+    var phLab=document.getElementById('phLab'), phTxt=document.getElementById('phTxt');
+    var dots=Array.prototype.slice.call(document.querySelectorAll('#dots b'));
+    var t=0, phase=0, timer=null;
+
+    function axes(){
+      ctx.strokeStyle='rgba(42,38,34,.28)'; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x0,y1); ctx.lineTo(x1,y1); ctx.stroke();
+      ctx.fillStyle='#5C544B'; ctx.font='11px "JetBrains Mono",monospace';
+      ctx.save(); ctx.translate(16,(y0+y1)/2); ctx.rotate(-Math.PI/2); ctx.textAlign='center'; ctx.fillText('valeur',0,0); ctx.restore();
+      ctx.textAlign='center'; ctx.fillText('temps',(x0+x1)/2, H-10);
+    }
+    function levels(alpha){
+      ctx.strokeStyle='rgba(46,106,142,'+alpha+')'; ctx.lineWidth=1; ctx.setLineDash([3,4]);
+      for(var k=0;k<LEVELS;k++){ var y=toY(k/(LEVELS-1)); ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke(); }
+      ctx.setLineDash([]);
+    }
+    function analog(){
+      ctx.strokeStyle='#B85C2E'; ctx.lineWidth=2.4; ctx.beginPath();
+      for(var i=0;i<=220;i++){ var tt=i/220, X=toX(tt), Y=toY(f(tt)); if(i===0)ctx.moveTo(X,Y); else ctx.lineTo(X,Y); }
+      ctx.stroke();
+    }
+    function samples(){
+      for(var i=0;i<N;i++){ var tt=i/(N-1), X=toX(tt), Yv=toY(f(tt));
+        ctx.strokeStyle='rgba(46,106,142,.45)'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(X,y1); ctx.lineTo(X,Yv); ctx.stroke();
+        ctx.fillStyle='#2E6A8E'; ctx.beginPath(); ctx.arc(X,Yv,3.4,0,7); ctx.fill(); }
+    }
+    function staircase(){
+      ctx.strokeStyle='#2c6147'; ctx.lineWidth=2.4; ctx.beginPath();
+      for(var i=0;i<N;i++){ var tt=i/(N-1), Y=toY(quant(f(tt))), X=toX(tt), Xn=(i<N-1)?toX((i+1)/(N-1)):X;
+        if(i===0)ctx.moveTo(X,Y); else ctx.lineTo(X,Y); ctx.lineTo(Xn,Y); }
+      ctx.stroke();
+      for(var j=0;j<N;j++){ var t3=j/(N-1); ctx.fillStyle='#3D7E5F'; ctx.beginPath(); ctx.arc(toX(t3),toY(quant(f(t3))),3.4,0,7); ctx.fill(); }
+    }
+    function codes(){
+      ctx.fillStyle='#235038'; ctx.font='700 10px "JetBrains Mono",monospace'; ctx.textAlign='center';
+      for(var i=0;i<N;i+=2){ var tt=i/(N-1), b=lvlOf(f(tt)).toString(2); while(b.length<BITS)b='0'+b;
+        ctx.fillText(b, toX(tt), toY(quant(f(tt)))-9); }
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      levels(phase>=2?0.55:0.12);
+      axes();
+      analog();
+      if(phase>=1) samples();
+      if(phase>=2) staircase();
+      if(phase>=3) codes();
+      // légende
+      ctx.textAlign='left'; ctx.font='11px "JetBrains Mono",monospace';
+      ctx.fillStyle='#B85C2E'; ctx.fillText('— analogique', x0+6, y0+12);
+      if(phase>=2){ ctx.fillStyle='#2c6147'; ctx.fillText('— numérique', x0+120, y0+12); }
+    }
+    function setPhase(p){ phase=p; if(phLab)phLab.textContent=(p+1)+'/4'; if(phTxt)phTxt.textContent=captions[p]; dots.forEach(function(d,i){d.classList.toggle('on',i===p);}); }
+    function step(){ t++; var p=Math.min(3, Math.floor(t/80)); if(p!==phase) setPhase(p); draw(); }
+
+    setPhase(0); draw(); timer=setInterval(step,40);
+    var replay=document.getElementById('replay');
+    if(replay) replay.addEventListener('click', function(){ t=0; setPhase(0); draw(); });
+  })();
+</script>
+</body>
+</html>
