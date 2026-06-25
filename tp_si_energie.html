@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Chaîne d'énergie — 4 défis · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .tpscore{background:var(--ink);color:var(--cream);border-radius:11px;padding:12px 14px;margin-bottom:14px}
+  .tpscore .sc-row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;color:#C9BBA8}
+  .tpscore .sc-row b{font-family:var(--display);font-size:24px;color:#E9A36F;font-weight:800}
+  .tpscore .sc-rank{font-family:var(--mono);font-size:11px;color:#9FCBAE;margin-top:4px;font-weight:700}
+  .tpscore .sc-track{height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:8px}
+  .tpscore .sc-track i{display:block;height:100%;width:0;background:#E9A36F;transition:width .4s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--amber)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,60px) 80px}
+  section{padding:48px 0 44px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4.2vw,42px);line-height:1.04;margin:12px 0 16px}
+  h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.5vw,25px);margin:0 0 6px;letter-spacing:-.01em}
+  .lede{font-size:16px;max-width:64ch;color:var(--ink-soft);margin:8px 0 18px}
+  p{margin:0 0 14px} h4{font-family:var(--display)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0}
+  .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .chip.k{background:rgba(189,138,42,.1);border-color:rgba(189,138,42,.4);color:#8a6313}
+  .badge-defi{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#8a6313;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:6px 0}
+  .panel h4{font-weight:700;font-size:16px;margin:0 0 10px}
+  .panel ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft)} .panel ul li{margin-bottom:5px} .panel ul li b{color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .note{font-size:13.5px;color:var(--ink-soft);background:rgba(189,138,42,.08);border:1px solid rgba(189,138,42,.3);border-radius:10px;padding:13px 16px;margin-top:8px} .note b{color:var(--ink)}
+  table.data{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px;margin:6px 0}
+  table.data th,table.data td{padding:9px 14px;border-bottom:1px solid var(--line);text-align:left}
+  table.data thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.data td b{font-family:var(--mono);color:var(--ink)} table.data tr:last-child td{border-bottom:none}
+
+  /* ---- Défi 1 : builder ---- */
+  .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+  .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
+  .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
+  .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
+  .bslot.bad{border-color:var(--no);background:rgba(192,73,46,.08);animation:shake .35s}
+  .bslot.lit{box-shadow:0 0 0 3px rgba(61,126,95,.25)}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  .bslot .ic{font-size:22px;line-height:1} .bslot .lb{font-family:var(--display);font-weight:700;font-size:12.5px}
+  .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
+  .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
+  .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
+    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+  .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
+  .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
+
+  /* ---- arcade (Défi 2 & 3) ---- */
+  .game{background:var(--ink);color:var(--cream);border-radius:18px;padding:24px 26px;margin:6px 0}
+  .game .ghead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .game .gtitle{font-family:var(--display);font-weight:800;font-size:20px}
+  .game .ghud{display:flex;gap:16px;font-family:var(--mono);font-size:12px;color:#C9BBA8}
+  .game .ghud b{color:#E9A36F;font-size:15px;display:block}
+  .gbar{height:8px;background:rgba(255,255,255,.12);border-radius:5px;overflow:hidden;margin-bottom:18px}
+  .gbar i{display:block;height:100%;width:100%;background:#E9A36F;transition:width .1s linear}
+  .gprompt{text-align:center;padding:8px 0 18px}
+  .gprompt .gq{font-family:var(--mono);font-size:clamp(17px,3vw,24px);color:#fff;font-weight:700;letter-spacing:.01em}
+  .gprompt .gask{font-family:var(--mono);font-size:13px;color:#C9BBA8;margin-top:6px}
+  .gprompt .gname{font-family:var(--display);font-weight:800;font-size:clamp(26px,4.6vw,40px)}
+  .gopts{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;max-width:520px;margin:0 auto}
+  .gopt{font-family:var(--mono);font-weight:700;font-size:18px;padding:15px;border-radius:11px;cursor:pointer;border:2px solid rgba(233,163,111,.5);color:#E9A36F;background:transparent;transition:.12s}
+  .gopt:hover{background:rgba(233,163,111,.14)}
+  .gbtns{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px;margin:0 auto}
+  .gbtn{font-family:var(--display);font-weight:700;font-size:18px;padding:17px;border-radius:12px;cursor:pointer;border:2px solid;transition:.12s;background:transparent}
+  .gbtn.eff{color:#E9A36F;border-color:rgba(233,163,111,.55)} .gbtn.eff:hover{background:rgba(233,163,111,.14)}
+  .gbtn.flx{color:#7FB7D6;border-color:rgba(127,183,214,.55)} .gbtn.flx:hover{background:rgba(127,183,214,.14)}
+  .gstart{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 0}
+  .gstart p{color:#C9BBA8;font-size:14px;max-width:48ch;margin:0}
+  .gbig{font-family:var(--mono);font-size:13px;background:#E9A36F;color:#2A2622;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;font-weight:700}
+  .gflash{text-align:center;font-family:var(--mono);font-size:13px;min-height:20px;margin-top:14px;color:#C9BBA8}
+  .gover{text-align:center;padding:10px 0}
+  .gover .gscore{font-family:var(--display);font-weight:800;font-size:34px;color:#E9A36F}
+
+  /* ---- Défi 4 : optimizer ---- */
+  .optim{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .opt-target{font-family:var(--mono);font-size:12.5px;font-weight:700;color:#8a6313;background:rgba(189,138,42,.1);border:1px solid rgba(189,138,42,.35);border-radius:9px;padding:10px 14px;margin-bottom:16px}
+  .opt-bars{display:flex;align-items:flex-end;gap:12px;height:150px;padding:8px 6px;background:var(--cream);border-radius:10px;margin-bottom:18px}
+  .obar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .obar .col{width:100%;max-width:60px;background:linear-gradient(180deg,#2E6A8E,#3D7E5F);border-radius:6px 6px 0 0;transition:height .25s;min-height:3px}
+  .obar .ov{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px}
+  .obar .ol{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);margin-top:6px;text-align:center}
+  .opt-rows{display:flex;flex-direction:column;gap:13px;margin-bottom:16px}
+  .orow{display:grid;grid-template-columns:120px 1fr 62px;gap:12px;align-items:center}
+  .orow .oname{font-family:var(--display);font-weight:700;font-size:13.5px}
+  .orow input[type=range]{width:100%;accent-color:var(--amber)}
+  .orow .oeta{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--steel);text-align:right}
+  .opt-readout{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .ord{flex:1 1 150px;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+  .ord .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .ord .v{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--ink);margin-top:3px}
+  .ord.budget .v.over{color:var(--no)}
+  .opt-status{font-family:var(--mono);font-size:14px;font-weight:700;padding:12px 15px;border-radius:9px;text-align:center}
+  .opt-status.win{background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.4);color:#2c6147}
+  .opt-status.miss{background:var(--cream);border:1px solid var(--line);color:var(--ink-soft)}
+  .opt-status.over{background:rgba(192,73,46,.08);border:1px solid rgba(192,73,46,.35);color:#8f3a24}
+
+  .btn{font-family:var(--mono);font-size:12.5px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn:hover{background:#fff;border-color:var(--amber);color:#8a6313}
+  .btn.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)} .btn.primary:hover{background:#3a342e;color:#fff}
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--green);color:#fff;border-radius:10px;padding:12px 18px}
+
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
+    .gopts,.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:90px 1fr 50px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_energie.html">← Séquence : énergie</a>
+    <div class="brand">
+      <div class="mark">TP</div>
+      <div><h1>Chaîne d'énergie</h1><p>4 défis · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="tpscore">
+      <div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div>
+      <div class="sc-rank" id="scRank">🔧 Apprenti</div>
+      <div class="sc-track"><i id="scTrack"></i></div>
+    </div>
+    <div class="links" id="links">
+      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
+      <a href="#proto" class="navlink"><span>02</span>Protocole</a>
+      <a href="#defi1" class="navlink"><span>D1</span>Assemble la chaîne</a>
+      <a href="#defi2" class="navlink"><span>D2</span>Puissance express</a>
+      <a href="#defi3" class="navlink"><span>D3</span>Effort ou Flux ?</a>
+      <a href="#defi4" class="navlink"><span>D4</span>Chasse au rendement</a>
+      <a href="#synth" class="navlink"><span>06</span>Synthèse</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="obj">
+      <span class="kicker">TP · Chaîne d'énergie</span>
+      <h2>4 défis pour maîtriser<br>P, E et η</h2>
+      <p class="lede">Pas de questionnaire&nbsp;: tu apprends en jouant. Quatre défis te font manipuler la chaîne d'énergie, calculer vite, distinguer effort et flux, et optimiser un rendement. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
+      <div class="two">
+        <div class="panel"><h4>Les 4 défis</h4><ul>
+          <li><b>D1 · Assemble la chaîne</b> — remets les 5 fonctions dans l'ordre.</li>
+          <li><b>D2 · Puissance express</b> — calcule P = U·I et P = C·ω contre la montre.</li>
+          <li><b>D3 · Effort ou Flux ?</b> — classe les grandeurs en un éclair.</li>
+          <li><b>D4 · Chasse au rendement</b> — règle les étages pour atteindre la cible.</li>
+        </ul></div>
+        <div class="panel"><h4>Notions travaillées</h4>
+          <div class="chips"><span class="chip k">P = U·I</span><span class="chip k">P = C·ω</span><span class="chip k">η = Pu/Pa</span><span class="chip k">η global = Πη</span><span class="chip k">effort × flux</span></div>
+          <div class="note" style="margin-top:12px">Astuce&nbsp;: tu peux rejouer chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proto">
+      <span class="kicker">02 · Repère</span>
+      <h3>Protocole &amp; mesures de référence</h3>
+      <p class="lede">Sur le banc moteur, on mesure l'électrique en entrée et le mécanique en sortie. Ces valeurs servent de fil rouge.</p>
+      <table class="data">
+        <thead><tr><th>Grandeur</th><th>Entrée (électrique)</th><th>Sortie (mécanique)</th></tr></thead>
+        <tbody>
+          <tr><td>Effort</td><td><b>U = 24 V</b></td><td><b>C = 2,5 N·m</b></td></tr>
+          <tr><td>Flux</td><td><b>I = 8,0 A</b></td><td><b>ω = 60 rad/s</b></td></tr>
+          <tr><td>Puissance</td><td><b>P = 192 W</b></td><td><b>P = 150 W</b></td></tr>
+        </tbody>
+      </table>
+      <div class="note">Rendement de la chaîne mesuré&nbsp;: η = 150 / 192 ≈ <b>0,78</b>. Remplace par tes relevés sur ton banc réel.</div>
+    </section>
+
+    <!-- DÉFI 1 -->
+    <section id="defi1">
+      <div class="badge-defi">DÉFI 1 · jusqu'à 120 pts</div>
+      <h3>Assemble la chaîne d'énergie</h3>
+      <p class="lede">Clique les blocs pour remplir les cases dans le bon ordre, de la source vers l'effet. Reclique une case pour libérer un bloc.</p>
+      <div class="builder">
+        <div class="bslots" id="bslots"></div>
+        <div class="bhint">De l'alimentation jusqu'à la transmission du mouvement.</div>
+        <div class="bpool" id="bpool"></div>
+        <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 2 -->
+    <section id="defi2">
+      <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
+      <h3>Puissance express</h3>
+      <p class="lede">40 secondes pour calculer un maximum de puissances. Choisis la bonne valeur de P. Les bonnes réponses d'affilée font monter le combo.</p>
+      <div class="game" id="g2">
+        <div class="ghead"><div class="gtitle">⚡ Puissance express</div>
+          <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
+        <div class="gbar"><i id="g2Bar"></i></div>
+        <div id="g2Area"><div class="gstart"><p>Calcule P = U·I (électrique) ou P = C·ω (mécanique) et choisis la bonne valeur en watts.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
+        <div class="gflash" id="g2Flash"></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 3 -->
+    <section id="defi3">
+      <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
+      <h3>Effort ou Flux ?</h3>
+      <p class="lede">30 secondes pour classer un maximum de grandeurs. Effort (force, couple, tension, pression) ou flux (vitesse, débit, intensité)&nbsp;?</p>
+      <div class="game" id="g3">
+        <div class="ghead"><div class="gtitle">⚡ Effort ou Flux ?</div>
+          <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
+        <div class="gbar"><i id="g3Bar"></i></div>
+        <div id="g3Area"><div class="gstart"><p>Classe chaque grandeur selon sa nature dans le bilan P = effort × flux.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
+        <div class="gflash" id="g3Flash"></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 4 -->
+    <section id="defi4">
+      <div class="badge-defi">DÉFI 4 · optimisation · jusqu'à 160 pts</div>
+      <h3>La chasse au rendement</h3>
+      <p class="lede">La chaîne reçoit <b>250 W</b>. Règle le rendement de chaque étage pour atteindre la puissance utile cible <b>sans dépasser ton budget</b>. Observe&nbsp;: le rendement global est le <b>produit</b> des trois.</p>
+      <div class="optim">
+        <div class="opt-target" id="optTarget">🎯 Objectif : P utile ≥ 185 W · Budget ≤ 64 pts</div>
+        <div class="opt-bars" id="optBars"></div>
+        <div class="opt-rows" id="optRows"></div>
+        <div class="opt-readout" id="optReadout"></div>
+        <div class="opt-status miss" id="optStatus">Règle les curseurs pour atteindre la cible.</div>
+      </div>
+      <div class="note" style="margin-top:12px">Indice méca&nbsp;: pour un même « budget » réparti, un rendement <b>équilibré</b> entre les étages donne un meilleur produit qu'un réglage déséquilibré.</div>
+    </section>
+
+    <section id="synth" style="border-bottom:none">
+      <span class="kicker">06 · Bilan</span>
+      <h3>Ce qu'il faut retenir</h3>
+      <div class="panel"><ul>
+        <li>La chaîne d'énergie&nbsp;: <b>Alimenter → Stocker → Distribuer → Convertir → Transmettre</b>.</li>
+        <li><b>P = U·I</b> (élec.) et <b>P = C·ω</b> (méca.)&nbsp;; le rendement <b>η = Pu/Pa</b> chiffre les pertes.</li>
+        <li>Toute grandeur est un <b>effort</b> ou un <b>flux</b>&nbsp;; leur produit est une puissance.</li>
+        <li>Le rendement global est le <b>produit</b> des rendements&nbsp;: <b>η_g = η₁·η₂·η₃</b>.</li>
+      </ul></div>
+      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== Score global du TP =====
+  var contrib={d1:0,d2:0,d3:0,d4:0};
+  var RANKS=[[0,'🔧 Apprenti'],[100,'⚙️ Technicien·ne'],[250,'📐 Ingénieur·e'],[450,'🏆 Expert·e']];
+  function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
+  function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
+  function renderScore(){
+    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4;
+    document.getElementById('scVal').textContent=tot;
+    document.getElementById('scRank').textContent=rankFor(tot);
+    document.getElementById('scTrack').style.width=Math.min(100,tot/560*100)+'%';
+  }
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  // ===== DÉFI 1 : Assemble la chaîne =====
+  (function(){
+    var CHAIN=[{lb:'Alimenter',ic:'\uD83D\uDD0C'},{lb:'Stocker',ic:'\uD83D\uDD0B'},{lb:'Distribuer',ic:'\uD83C\uDF9B\uFE0F'},{lb:'Convertir',ic:'\u2699\uFE0F'},{lb:'Transmettre',ic:'\uD83D\uDD29'}];
+    var slots=[null,null,null,null,null];
+    var pool=shuffle([0,1,2,3,4]);
+    var attempts=0, solved=false;
+    var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
+
+    function render(){
+      slotsEl.innerHTML=slots.map(function(idx,i){
+        if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25">\u2795</span></div>';
+        return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
+      }).join('');
+      poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
+    }
+    slotsEl.addEventListener('click',function(ev){
+      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+    });
+    poolEl.addEventListener('click',function(ev){
+      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+      var idx=+b.getAttribute('data-idx');
+      var free=slots.indexOf(null); if(free<0)return;
+      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+    });
+    document.getElementById('bverify').addEventListener('click',function(){
+      if(solved)return;
+      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les 5 blocs.'; return; }
+      attempts++;
+      var ok=slots.every(function(idx,i){return idx===i;});
+      var cells=slotsEl.querySelectorAll('.bslot');
+      if(ok){
+        solved=true;
+        var pts=attempts===1?120:attempts===2?85:attempts===3?55:35;
+        var k=0; var iv=setInterval(function(){ if(k<5){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },140);
+        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+        setContrib('d1',pts);
+      }else{
+        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+        msg.style.color='#8f3a24'; msg.textContent=nb+' / 5 bien placés. Réessaie !';
+      }
+    });
+    render();
+  })();
+
+  // ===== DÉFI 2 : Puissance express (arcade MCQ) =====
+  (function(){
+    function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+    function makeOptions(correct){
+      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+      var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:25),Math.max(1,correct-(correct<60?8:20)),correct*2,Math.round(correct*0.75)];
+      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+      while(arr.length<4){var v=correct+ri(1,30);if(!seen[v]){seen[v]=1;arr.push(v);}}
+      return shuffle(arr);
+    }
+    function makeRound(){
+      var q,c;
+      if(Math.random()<0.5){ var u=[6,9,12,12,15,18,24][ri(0,6)], i=ri(1,8); c=u*i; q='U = '+u+' V \u00b7 I = '+i+' A'; }
+      else{ var cs=[1,1.5,2,2.5,3,4], cc=cs[ri(0,5)], w=[10,20,30,40,50,60][ri(0,5)]; c=Math.round(cc*w); q='C = '+String(cc).replace('.',',')+' N\u00b7m \u00b7 \u03c9 = '+w+' rad/s'; }
+      return {q:q, correct:c, opts:makeOptions(c)};
+    }
+    var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
+    var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
+    var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+    function next(){ cur=makeRound();
+      area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">P = ? (W)</div></div>'+
+        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+' W</button>';}).join('')+'</div>';
+    }
+    function answer(v){
+      if(!playing)return;
+      if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+      else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+' W  (\u22123 s)'; flash.style.color='#E29A86'; }
+      hud(); next();
+    }
+    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d2', Math.min(150,score));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent='';
+    }
+    document.getElementById('g2').addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
+      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+    });
+  })();
+
+  // ===== DÉFI 3 : Effort ou Flux ? (reflex) =====
+  (function(){
+    var GR=[{n:'Force F',u:'N',t:'eff'},{n:'Vitesse V',u:'m/s',t:'flx'},{n:'Couple C',u:'N\u00b7m',t:'eff'},{n:'Vitesse angulaire \u03c9',u:'rad/s',t:'flx'},
+            {n:'Tension U',u:'V',t:'eff'},{n:'Intensit\u00e9 I',u:'A',t:'flx'},{n:'Pression p',u:'Pa',t:'eff'},{n:'D\u00e9bit Q',u:'m\u00b3/s',t:'flx'}];
+    var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
+    var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
+    var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+    function pick(){ cur=GR[Math.floor(Math.random()*GR.length)];
+      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div><div class="gask">'+cur.u+'</div></div>'+
+        '<div class="gbtns"><button class="gbtn eff" data-t="eff">EFFORT</button><button class="gbtn flx" data-t="flx">FLUX</button></div>'; }
+    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+    function answer(t){ if(!playing)return;
+      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 '+(cur.t==='eff'?'c\u2019\u00e9tait un EFFORT':'c\u2019\u00e9tait un FLUX')+'  (\u22122 s)'; flash.style.color='#E29A86'; }
+      hud(); pick(); }
+    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d3', Math.min(150,score*5));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*5)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent=''; }
+    document.getElementById('g3').addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
+      var tt=t.getAttribute('data-t'); if(tt&&playing)answer(tt); });
+  })();
+
+  // ===== DÉFI 4 : Chasse au rendement (optimizer) =====
+  (function(){
+    var IN=250, TARGET=185, BUDGET=64, BASE=70;
+    var STAGES=['Variateur','Moteur','R\u00e9ducteur'];
+    var etas=[85,85,85];
+    var rowsEl=document.getElementById('optRows'), barsEl=document.getElementById('optBars'),
+        readEl=document.getElementById('optReadout'), statEl=document.getElementById('optStatus');
+    function compute(){
+      var e=etas.map(function(x){return x/100;});
+      var p1=IN*e[0], p2=p1*e[1], pu=p2*e[2];
+      var glob=e[0]*e[1]*e[2];
+      var cost=etas.reduce(function(s,x){return s+(x-BASE);},0);
+      return {p:[IN,p1,p2,pu], pu:pu, glob:glob, cost:cost};
+    }
+    function renderRows(){
+      rowsEl.innerHTML=STAGES.map(function(nm,i){
+        return '<div class="orow"><span class="oname">'+nm+'</span>'+
+          '<input type="range" min="70" max="99" value="'+etas[i]+'" data-stage="'+i+'">'+
+          '<span class="oeta" id="oeta'+i+'">\u03b7 = '+(etas[i]/100).toFixed(2)+'</span></div>';
+      }).join('');
+    }
+    function renderAll(){
+      var c=compute();
+      var labels=['Entr\u00e9e','apr\u00e8s '+STAGES[0],'apr\u00e8s '+STAGES[1],'P utile'];
+      barsEl.innerHTML=c.p.map(function(pw,i){
+        var h=Math.max(3,pw/IN*100);
+        return '<div class="obar"><span class="ov">'+Math.round(pw)+' W</span><div class="col" style="height:'+h+'%"></div><span class="ol">'+labels[i]+'</span></div>';
+      }).join('');
+      for(var i=0;i<3;i++){var el=document.getElementById('oeta'+i); if(el)el.textContent='\u03b7 = '+(etas[i]/100).toFixed(2);}
+      var over=c.cost>BUDGET;
+      readEl.innerHTML=
+        '<div class="ord"><div class="l">Rendement global</div><div class="v">'+c.glob.toFixed(2)+'</div></div>'+
+        '<div class="ord"><div class="l">Puissance utile</div><div class="v">'+Math.round(c.pu)+' W</div></div>'+
+        '<div class="ord budget"><div class="l">Budget</div><div class="v'+(over?' over':'')+'">'+c.cost+' / '+BUDGET+'</div></div>';
+      if(over){ statEl.className='opt-status over'; statEl.textContent='\u26a0 Budget d\u00e9pass\u00e9 ('+c.cost+' pts) \u2014 baisse un rendement.'; }
+      else if(c.pu>=TARGET){
+        var bal=(Math.max.apply(null,etas)-Math.min.apply(null,etas))<=5;
+        var pts=Math.min(160, 100 + (BUDGET-c.cost)*2 + (bal?30:0));
+        statEl.className='opt-status win'; statEl.textContent='\u2713 Cible atteinte ! +'+pts+' pts'+(bal?' (bonus \u00e9quilibre \u2696)':'');
+        setContrib('d4',pts);
+      } else { statEl.className='opt-status miss'; statEl.textContent='P utile = '+Math.round(c.pu)+' W \u2014 encore '+Math.max(0,Math.ceil(TARGET-c.pu))+' W \u00e0 gagner.'; }
+    }
+    rowsEl.addEventListener('input',function(ev){
+      var t=ev.target; if(t.type!=='range')return;
+      etas[+t.getAttribute('data-stage')]=+t.value; renderAll();
+    });
+    renderRows(); renderAll();
+  })();
+
+  renderScore();
+</script>
+</body>
+</html>
