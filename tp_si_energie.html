@@ -138,6 +138,62 @@
   .opt-status.miss{background:var(--cream);border:1px solid var(--line);color:var(--ink-soft)}
   .opt-status.over{background:rgba(192,73,46,.08);border:1px solid rgba(192,73,46,.35);color:#8f3a24}
 
+  /* ---- Défi 5 : voyage ---- */
+  .voyage{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .vstat{font-family:var(--mono);font-size:13px;font-weight:700;padding:10px 14px;border-radius:9px;margin-bottom:14px;background:var(--cream);border:1px solid var(--line);color:var(--ink-soft);text-align:center}
+  .vstat.win{background:rgba(61,126,95,.12);border-color:rgba(61,126,95,.4);color:#2c6147}
+  .vstat.fail{background:rgba(192,73,46,.08);border-color:rgba(192,73,46,.35);color:#8f3a24}
+  .vbars{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
+  .vbar .vlab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:5px}
+  .vbar .vlab b{color:var(--ink)}
+  .vtrack{height:14px;background:var(--cream);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .vtrack i{display:block;height:100%;width:0;background:var(--steel);transition:width .12s linear}
+  .vhud{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-align:center;margin-bottom:14px}
+  .vhud span{color:var(--ink);font-weight:700}
+  .vmodes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .vmode{font-family:var(--display);font-weight:700;font-size:14px;background:var(--cream);border:2px solid var(--line-strong);border-radius:11px;padding:12px 8px;cursor:pointer;display:flex;flex-direction:column;gap:3px;align-items:center;transition:.12s}
+  .vmode small{font-family:var(--mono);font-size:9.5px;font-weight:400;color:var(--ink-soft)}
+  .vmode:hover{border-color:var(--amber)} .vmode.sel{border-color:var(--amber);background:rgba(189,138,42,.1)}
+  .vactions{display:flex;gap:10px}
+
+  /* ---- Défi 6 : associations ---- */
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .mcol{display:flex;flex-direction:column;gap:9px}
+  .mitem{font-family:var(--display);font-weight:700;font-size:14px;background:var(--paper);border:2px solid var(--line-strong);border-radius:11px;padding:13px 16px;cursor:pointer;text-align:center;transition:.12s}
+  .mitem:hover{border-color:var(--amber)}
+  .mitem.sel{border-color:var(--steel);background:rgba(46,106,142,.1)}
+  .mitem.done{border-color:var(--green);background:rgba(61,126,95,.12);color:#2c6147;cursor:default;pointer-events:none}
+  .mitem.bad{border-color:var(--no);animation:shake .35s}
+  .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+  .mmsg{font-family:var(--mono);font-size:13px;font-weight:700}
+
+  /* ---- Défi 7 : mots croisés ---- */
+  .cwbox{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .cw-wrap{overflow-x:auto;padding-bottom:6px}
+  .cw{display:grid;gap:2px;background:var(--line-strong);padding:2px;border-radius:8px;width:max-content;margin:0 auto}
+  .cw .cell{width:30px;height:30px;position:relative;background:#fff;border-radius:2px}
+  .cw .cell.block{background:#2A2622}
+  .cw input{width:100%;height:100%;border:none;background:transparent;text-align:center;font-family:var(--mono);font-weight:700;font-size:15px;text-transform:uppercase;color:var(--ink);padding:0;border-radius:2px}
+  .cw input:focus{outline:2px solid var(--amber);background:#FFF8EC}
+  .cw .num{position:absolute;top:1px;left:2px;font-size:8px;font-family:var(--mono);color:var(--ink-soft);line-height:1;pointer-events:none}
+  .cw .cell.good input{background:rgba(61,126,95,.2);color:#2c6147}
+  .cw .cell.bad input{background:rgba(192,73,46,.16);color:#8f3a24}
+  .cw-clues{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}
+  .cw-clues h5{font-family:var(--display);font-weight:800;font-size:14px;margin:0 0 8px;color:#8a6313}
+  .cw-clues ul{list-style:none;margin:0;padding:0;font-size:13px;color:var(--ink-soft)}
+  .cw-clues li{margin-bottom:6px} .cw-clues li b{color:var(--ink);font-family:var(--mono)}
+
+  /* ---- Défi 8 : recherche ---- */
+  .research{display:flex;flex-direction:column;gap:12px}
+  .ritem{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.15s}
+  .ritem.solved{border-color:var(--green);background:rgba(61,126,95,.06)}
+  .ritem .rq{font-size:14px;font-weight:600;margin-bottom:9px}
+  .ritem .rrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .ritem input[type=text]{flex:1 1 200px;font-family:var(--mono);font-size:14px;padding:9px 12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--cream)}
+  .ritem input[type=text]:focus{outline:2px solid var(--amber);background:#fff}
+  .ritem .rmsg{font-family:var(--mono);font-size:12px;font-weight:700;min-width:84px}
+  .ritem .rhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:7px}
+
   .btn{font-family:var(--mono);font-size:12.5px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--ink);transition:.15s}
   .btn:hover{background:#fff;border-color:var(--amber);color:#8a6313}
   .btn.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)} .btn.primary:hover{background:#3a342e;color:#fff}
@@ -177,7 +233,11 @@
       <a href="#defi2" class="navlink"><span>D2</span>Puissance express</a>
       <a href="#defi3" class="navlink"><span>D3</span>Effort ou Flux ?</a>
       <a href="#defi4" class="navlink"><span>D4</span>Chasse au rendement</a>
-      <a href="#synth" class="navlink"><span>06</span>Synthèse</a>
+      <a href="#defi5" class="navlink"><span>D5</span>Le grand voyage</a>
+      <a href="#defi6" class="navlink"><span>D6</span>Composant ↔ fonction</a>
+      <a href="#defi7" class="navlink"><span>D7</span>Mots croisés</a>
+      <a href="#defi8" class="navlink"><span>D8</span>Mission recherche</a>
+      <a href="#synth" class="navlink"><span>09</span>Synthèse</a>
     </div>
   </aside>
 
@@ -188,11 +248,15 @@
       <h2>4 défis pour maîtriser<br>P, E et η</h2>
       <p class="lede">Pas de questionnaire&nbsp;: tu apprends en jouant. Quatre défis te font manipuler la chaîne d'énergie, calculer vite, distinguer effort et flux, et optimiser un rendement. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
       <div class="two">
-        <div class="panel"><h4>Les 4 défis</h4><ul>
+        <div class="panel"><h4>Les 8 défis</h4><ul>
           <li><b>D1 · Assemble la chaîne</b> — remets les 5 fonctions dans l'ordre.</li>
-          <li><b>D2 · Puissance express</b> — calcule P = U·I et P = C·ω contre la montre.</li>
+          <li><b>D2 · Puissance express</b> — P = U·I et P = C·ω contre la montre.</li>
           <li><b>D3 · Effort ou Flux ?</b> — classe les grandeurs en un éclair.</li>
-          <li><b>D4 · Chasse au rendement</b> — règle les étages pour atteindre la cible.</li>
+          <li><b>D4 · Chasse au rendement</b> — règle les étages pour viser la cible.</li>
+          <li><b>D5 · Le grand voyage</b> — simulation d'autonomie de la batterie.</li>
+          <li><b>D6 · Composant ↔ Fonction</b> — associe les éléments.</li>
+          <li><b>D7 · Mots croisés</b> — le vocabulaire de l'énergie.</li>
+          <li><b>D8 · Mission recherche</b> 🔎 — trouve les réponses sur le web.</li>
         </ul></div>
         <div class="panel"><h4>Notions travaillées</h4>
           <div class="chips"><span class="chip k">P = U·I</span><span class="chip k">P = C·ω</span><span class="chip k">η = Pu/Pa</span><span class="chip k">η global = Πη</span><span class="chip k">effort × flux</span></div>
@@ -272,6 +336,60 @@
       <div class="note" style="margin-top:12px">Indice méca&nbsp;: pour un même « budget » réparti, un rendement <b>équilibré</b> entre les étages donne un meilleur produit qu'un réglage déséquilibré.</div>
     </section>
 
+    <!-- DÉFI 5 -->
+    <section id="defi5">
+      <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
+      <h3>Le grand voyage</h3>
+      <p class="lede">Ton VAE doit parcourir <b>40 km</b> avec une batterie de <b>500 Wh</b>. Choisis ton niveau d'assistance&nbsp;: plus tu vas vite, plus tu consommes. Arriveras-tu avant la panne&nbsp;? (E = P·Δt)</p>
+      <div class="voyage" id="voyage">
+        <div class="vstat" id="vStat">Prêt à partir.</div>
+        <div class="vbars">
+          <div class="vbar"><div class="vlab"><span>Distance</span><b id="vDist">0 / 40 km</b></div><div class="vtrack"><i id="vDistBar"></i></div></div>
+          <div class="vbar"><div class="vlab"><span>Batterie</span><b id="vBatt">500 Wh</b></div><div class="vtrack"><i id="vBattBar" style="width:100%;background:#3D7E5F"></i></div></div>
+        </div>
+        <div class="vhud"><span id="vSpeed">0 km/h</span> · mode <span id="vMode">Normal</span> · <span id="vTime">0,0 h</span></div>
+        <div class="vmodes" id="vModes">
+          <button class="vmode" data-m="eco">🍃 Éco<small>150 W · 18 km/h</small></button>
+          <button class="vmode sel" data-m="normal">⚙️ Normal<small>250 W · 25 km/h</small></button>
+          <button class="vmode" data-m="sport">🔥 Sport<small>440 W · 32 km/h</small></button>
+        </div>
+        <div class="vactions"><button class="btn primary" id="vGo">▶ Partir</button><button class="btn" id="vReset">↻ Recommencer</button></div>
+      </div>
+      <div class="note" style="margin-top:12px">Stratégie&nbsp;: le mode Sport est rapide mais gourmand (tu risques la panne)&nbsp;; l'Éco arrive à coup sûr mais lentement. Le meilleur score récompense vitesse <i>et</i> batterie restante.</div>
+    </section>
+
+    <!-- DÉFI 6 -->
+    <section id="defi6">
+      <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
+      <h3>Composant ↔ Fonction</h3>
+      <p class="lede">Relie chaque composant à la fonction qu'il assure dans la chaîne d'énergie. Clique un composant, puis sa fonction.</p>
+      <div class="match" id="match">
+        <div class="mcol" id="mLeft"></div>
+        <div class="mcol" id="mRight"></div>
+      </div>
+      <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
+    </section>
+
+    <!-- DÉFI 7 : mots croisés -->
+    <section id="defi7">
+      <div class="badge-defi">DÉFI 7 · mots croisés · jusqu'à 130 pts</div>
+      <h3>Les mots croisés de l'énergie</h3>
+      <p class="lede">Remplis la grille avec le vocabulaire de la chaîne d'énergie&nbsp;: une lettre par case, puis vérifie.</p>
+      <div class="cwbox">
+        <div class="cw-wrap"><div class="cw" id="cwGrid"></div></div>
+        <div class="cw-clues"><div><h5>Horizontal →</h5><ul id="cwH"></ul></div><div><h5>Vertical ↓</h5><ul id="cwV"></ul></div></div>
+        <div class="bactions"><button class="btn primary" id="cwCheck">Vérifier</button><button class="btn" id="cwClear">Effacer</button><span class="bmsg" id="cwMsg"></span></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 8 : mission recherche -->
+    <section id="defi8">
+      <div class="badge-defi">DÉFI 8 · mission recherche 🔎 · jusqu'à 120 pts</div>
+      <h3>Mission recherche Internet</h3>
+      <p class="lede">Ces réponses ne sont pas dans le cours&nbsp;: fouille le web (moteur de recherche, sites fiables) pour trouver le mot ou la valeur exacte, puis vérifie.</p>
+      <div class="research" id="research"></div>
+    </section>
+
     <section id="synth" style="border-bottom:none">
       <span class="kicker">06 · Bilan</span>
       <h3>Ce qu'il faut retenir</h3>
@@ -306,15 +424,15 @@
   });
 
   // ===== Score global du TP =====
-  var contrib={d1:0,d2:0,d3:0,d4:0};
-  var RANKS=[[0,'🔧 Apprenti'],[100,'⚙️ Technicien·ne'],[250,'📐 Ingénieur·e'],[450,'🏆 Expert·e']];
+  var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0,d7:0,d8:0};
+  var RANKS=[[0,'🔧 Apprenti'],[250,'⚙️ Technicien·ne'],[600,'📐 Ingénieur·e'],[900,'🏆 Expert·e']];
   function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
   function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
   function renderScore(){
-    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4;
+    var tot=0,kk; for(kk in contrib)tot+=contrib[kk];
     document.getElementById('scVal').textContent=tot;
     document.getElementById('scRank').textContent=rankFor(tot);
-    document.getElementById('scTrack').style.width=Math.min(100,tot/560*100)+'%';
+    document.getElementById('scTrack').style.width=Math.min(100,tot/1110*100)+'%';
   }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
@@ -483,6 +601,155 @@
       etas[+t.getAttribute('data-stage')]=+t.value; renderAll();
     });
     renderRows(); renderAll();
+  })();
+
+  // ===== DÉFI 5 : Le grand voyage (simulation autonomie) =====
+  (function(){
+    var GOAL=40, CAP=500;
+    var MODES={eco:{P:150,v:18},normal:{P:250,v:25},sport:{P:440,v:32}};
+    var MODEFR={eco:'\u00c9co',normal:'Normal',sport:'Sport'};
+    var mode='normal', dist=0, batt=CAP, timeH=0, timer=null, running=false, done=false;
+    var st=document.getElementById('vStat'), dEl=document.getElementById('vDist'), dBar=document.getElementById('vDistBar'),
+        bEl=document.getElementById('vBatt'), bBar=document.getElementById('vBattBar'),
+        spEl=document.getElementById('vSpeed'), moEl=document.getElementById('vMode'), tiEl=document.getElementById('vTime');
+    function render(){
+      dEl.textContent=dist.toFixed(1)+' / '+GOAL+' km'; dBar.style.width=Math.min(100,dist/GOAL*100)+'%';
+      bEl.textContent=Math.round(batt)+' Wh';
+      var pc=Math.max(0,batt/CAP*100); bBar.style.width=pc+'%';
+      bBar.style.background = pc>50?'#3D7E5F':(pc>20?'#BD8A2A':'#C0492E');
+      spEl.textContent=(running?MODES[mode].v:0)+' km/h';
+      moEl.textContent=MODEFR[mode]; tiEl.textContent=timeH.toFixed(1).replace('.',',')+' h';
+    }
+    function stop(){ if(timer){clearInterval(timer);timer=null;} running=false; }
+    function win(){
+      stop(); done=true;
+      var pts=Math.min(150, 90+Math.round(batt/CAP*40)+Math.round(Math.max(0,(2.3-timeH))*22));
+      st.className='vstat win'; st.textContent='\u2713 Arriv\u00e9 ! '+Math.round(batt)+' Wh restants en '+timeH.toFixed(1).replace('.',',')+' h \u2014 +'+pts+' pts';
+      setContrib('d5',pts);
+    }
+    function fail(){ stop(); done=true; st.className='vstat fail'; st.textContent='\u26a1 Panne \u00e0 '+dist.toFixed(1)+' km ! Essaie un mode plus \u00e9conome.'; }
+    function tick(){
+      var m=MODES[mode], dt=0.01; dist+=m.v*dt; batt-=m.P*dt; timeH+=dt;
+      if(dist>=GOAL){ dist=GOAL; render(); return win(); }
+      if(batt<=0){ batt=0; render(); return fail(); }
+      render();
+    }
+    document.getElementById('vModes').addEventListener('click',function(ev){
+      var b=ev.target.closest('.vmode'); if(!b||done)return;
+      mode=b.getAttribute('data-m');
+      document.querySelectorAll('.vmode').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); render();
+    });
+    document.getElementById('vGo').addEventListener('click',function(){
+      if(running||done)return; running=true; st.className='vstat'; st.textContent='En route\u2026';
+      if(timer)clearInterval(timer); timer=setInterval(tick,100);
+    });
+    document.getElementById('vReset').addEventListener('click',function(){
+      stop(); dist=0; batt=CAP; timeH=0; done=false; st.className='vstat'; st.textContent='Pr\u00eat \u00e0 partir.'; render();
+    });
+    render();
+  })();
+
+  // ===== DÉFI 6 : Composant <-> Fonction (associations) =====
+  (function(){
+    var PAIRS=[{c:'Batterie',f:'Stocker'},{c:'Panneau PV',f:'Alimenter'},{c:'Variateur',f:'Distribuer'},{c:'Moteur',f:'Convertir'},{c:'R\u00e9ducteur',f:'Transmettre'}];
+    var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
+    var selL=null, matched=0, wrong=0, done=false;
+    var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
+    function render(){
+      leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
+      rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
+    }
+    function onClick(ev){
+      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+      var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
+      if(side==='L'){
+        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+        it.classList.add('sel'); selL={p:p,el:it};
+      } else {
+        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un composant.'; return; }
+        if(selL.p===p){
+          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+          msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
+          if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
+        } else {
+          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+        }
+      }
+    }
+    leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
+    document.getElementById('mReset').addEventListener('click',function(){
+      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+    });
+    render();
+  })();
+
+  // ===== DÉFI 7 : mots croisés =====
+  (function(){
+    var CW={"GRID": ["COUPLE.....", "...U.......", "...I.......", "...S.......", "...S..B....", "...A..A....", "...N..T...W", "...C..T...A", "..RENDEMENT", "......R.N.T", "......I.E..", "...MOTEUR..", "........G..", "........I..", "....JOULE.."], "H": {"8,2": "Rapport Pu/Pa, toujours < 1", "11,3": "Convertit l'electrique en mecanique", "0,0": "Effort de rotation (N.m)", "14,4": "Unite SI d'energie"}, "V": {"0,3": "Effort x flux, en watts", "4,6": "Stocke l'energie electrique", "8,8": "Puissance integree dans le temps", "6,10": "Unite SI de puissance"}};
+    var box=document.getElementById('cwGrid'); if(!box)return;
+    var rows=CW.GRID.map(function(r){return r.split('');});
+    var Hn=rows.length, Wn=rows[0].length;
+    function white(r,c){return r>=0&&r<Hn&&c>=0&&c<Wn&&rows[r][c]!=='.';}
+    function norm(s){return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z]/g,'');}
+    var num={},cnt=0,across=[],down=[];
+    for(var r=0;r<Hn;r++)for(var c=0;c<Wn;c++){ if(!white(r,c))continue;
+      var sA=!white(r,c-1)&&white(r,c+1), sD=!white(r-1,c)&&white(r+1,c);
+      if(sA||sD){cnt++;num[r+'_'+c]=cnt;}
+      if(sA){var len=0,a='';while(white(r,c+len)){a+=rows[r][c+len];len++;} across.push({n:cnt,r:r,c:c,len:len,clue:(CW.H[r+','+c]||'')});}
+      if(sD){var l2=0,b='';while(white(r+l2,c)){b+=rows[r+l2][c];l2++;} down.push({n:num[r+'_'+c],r:r,c:c,len:l2,clue:(CW.V[r+','+c]||'')});}
+    }
+    box.style.display='grid'; box.style.gridTemplateColumns='repeat('+Wn+',30px)';
+    var html='';
+    for(var rr=0;rr<Hn;rr++)for(var cc=0;cc<Wn;cc++){
+      if(!white(rr,cc)){html+='<div class="cell block"></div>';continue;}
+      var n=num[rr+'_'+cc];
+      html+='<div class="cell" data-r="'+rr+'" data-c="'+cc+'">'+(n?'<span class="num">'+n+'</span>':'')+'<input maxlength="1" data-r="'+rr+'" data-c="'+cc+'"></div>';
+    }
+    box.innerHTML=html;
+    box.addEventListener('input',function(ev){ var t=ev.target; if(t.tagName==='INPUT'){ t.value=t.value.toUpperCase().replace(/[^A-Za-z]/g,''); t.parentNode.classList.remove('good','bad'); } });
+    function clues(list,el){ el.innerHTML=list.slice().sort(function(x,y){return x.n-y.n;}).map(function(w){return '<li><b>'+w.n+'.</b> '+w.clue+' <span style="opacity:.5">('+w.len+')</span></li>';}).join(''); }
+    clues(across,document.getElementById('cwH')); clues(down,document.getElementById('cwV'));
+    function cellInput(r,c){return box.querySelector('input[data-r="'+r+'"][data-c="'+c+'"]');}
+    function wordOk(w,isDown){ for(var i=0;i<w.len;i++){var r=w.r+(isDown?i:0),c=w.c+(isDown?0:i);if(norm(cellInput(r,c).value)!==rows[r][c])return false;} return true; }
+    document.getElementById('cwCheck').addEventListener('click',function(){
+      var inputs=box.querySelectorAll('input');
+      inputs.forEach(function(inp){ var r=+inp.getAttribute('data-r'),c=+inp.getAttribute('data-c'); var cell=inp.parentNode; cell.classList.remove('good','bad');
+        if(norm(inp.value)===rows[r][c]){cell.classList.add('good');} else if(inp.value){cell.classList.add('bad');} });
+      var cwn=0; across.forEach(function(w){if(wordOk(w,false))cwn++;}); down.forEach(function(w){if(wordOk(w,true))cwn++;});
+      var totalW=across.length+down.length, pts=Math.round(cwn/totalW*130);
+      var msg=document.getElementById('cwMsg');
+      if(cwn===totalW){ msg.style.color='#2c6147'; msg.textContent='\u2713 Grille compl\u00e8te ! +130 pts'; }
+      else { msg.style.color='#8a6313'; msg.textContent=cwn+' / '+totalW+' mots corrects \u2014 +'+pts+' pts'; }
+      setContrib('d7',pts);
+    });
+    document.getElementById('cwClear').addEventListener('click',function(){
+      box.querySelectorAll('input').forEach(function(inp){inp.value='';inp.parentNode.classList.remove('good','bad');});
+      document.getElementById('cwMsg').textContent='';
+    });
+  })();
+
+  // ===== DÉFI 8 : mission recherche =====
+  (function(){
+    var DATA=[
+      {q:"\uD83D\uDD0E Combien de watts vaut environ 1 cheval-vapeur (ch)\u00a0?", type:'num', min:730, max:750, hint:"Cherche \u00ab cheval-vapeur en watts \u00bb."},
+      {q:"\uD83D\uDD0E Quel est le nom de l\u2019unit\u00e9 d\u2019\u00e9nergie (\u2248 3600 J) factur\u00e9e par EDF\u00a0?", type:'text', accept:['wattheure','kilowattheure','kwh'], hint:"Regarde une facture d\u2019\u00e9lectricit\u00e9."},
+      {q:"\uD83D\uDD0E En quelle ann\u00e9e Alessandro Volta a-t-il invent\u00e9 la pile \u00e9lectrique\u00a0?", type:'num', min:1799, max:1801, hint:"Cherche \u00ab pile de Volta date \u00bb."}
+    ];
+    var box=document.getElementById('research'); if(!box)return;
+    var solved=[false,false,false];
+    function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+    box.innerHTML=DATA.map(function(d,i){return '<div class="ritem" id="ri'+i+'"><div class="rq">'+d.q+'</div><div class="rrow"><input type="text" data-i="'+i+'" placeholder="ta r\u00e9ponse\u2026"><button class="btn primary" data-check="'+i+'">V\u00e9rifier</button><span class="rmsg" id="rm'+i+'"></span></div><div class="rhint">'+d.hint+'</div></div>';}).join('');
+    function check(i){
+      var d=DATA[i], inp=box.querySelector('input[data-i="'+i+'"]'), val=inp.value, m=document.getElementById('rm'+i), ok=false;
+      if(d.type==='num'){ var mt=val.replace(',','.').match(/-?\d+(\.\d+)?/); if(mt){var x=parseFloat(mt[0]); ok=x>=d.min&&x<=d.max;} }
+      else { var nv=norm(val); ok=d.accept.some(function(a){var na=norm(a);return na.length>0&&nv.indexOf(na)>=0;}); }
+      if(ok){ solved[i]=true; m.style.color='#2c6147'; m.textContent='\u2713 Trouv\u00e9 !'; document.getElementById('ri'+i).classList.add('solved'); var n=0;solved.forEach(function(s){if(s)n++;}); setContrib('d8',n*40); }
+      else { m.style.color='#8f3a24'; m.textContent='\u2717 Continue \u00e0 chercher'; }
+    }
+    box.addEventListener('click',function(ev){ var b=ev.target.closest('[data-check]'); if(b)check(+b.getAttribute('data-check')); });
+    box.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){var inp=ev.target;if(inp.tagName==='INPUT'){ev.preventDefault();check(+inp.getAttribute('data-i'));}} });
   })();
 
   renderScore();
