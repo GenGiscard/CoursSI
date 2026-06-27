@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sciences de l'Ingénieur — Fiche BO &amp; Séquences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC;
+    --paper:#FFFDF8;
+    --ink:#2A2622;
+    --ink-soft:#5C544B;
+    --copper:#B85C2E;
+    --steel:#2E6A8E;
+    --green:#3D7E5F;
+    --amber:#BD8A2A;
+    --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12);
+    --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--body);
+    color:var(--ink);
+    background-color:var(--cream);
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Layout ---------- */
+  .shell{display:flex;min-height:100vh;max-width:1320px;margin:0 auto}
+  .nav{
+    width:248px;flex:0 0 248px;position:sticky;top:0;align-self:flex-start;
+    height:100vh;padding:28px 20px;border-right:1px solid var(--line);
+    background:var(--paper);overflow-y:auto;
+  }
+  .brand{display:flex;gap:12px;align-items:flex-start;margin-bottom:26px}
+  .brand .mark{
+    width:38px;height:38px;flex:0 0 38px;border-radius:9px;
+    background:var(--ink);color:var(--cream);font-family:var(--mono);font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:15px;letter-spacing:-.5px;
+  }
+  .brand h1{font-family:var(--display);font-size:16px;line-height:1.15;margin:2px 0 3px;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin:0}
+  .nav a{
+    display:block;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);
+    text-decoration:none;padding:8px 11px;border-radius:7px;margin-bottom:2px;
+    border-left:2px solid transparent;transition:.15s;
+  }
+  .nav a:hover{background:var(--cream);color:var(--ink)}
+  .nav a.on{background:var(--cream);color:var(--ink);border-left-color:var(--copper);font-weight:500}
+  .nav .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);opacity:.7;margin:18px 0 6px 11px}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,56px) 90px}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 30px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);font-weight:500}
+  .hero h2{
+    font-family:var(--display);font-weight:800;letter-spacing:-.02em;
+    font-size:clamp(30px,5vw,52px);line-height:1.02;margin:14px 0 16px;
+  }
+  .hero h2 em{font-style:normal;color:var(--copper)}
+  .hero .lede{font-size:17px;max-width:62ch;color:var(--ink-soft)}
+  .src-pill{
+    display:inline-flex;gap:8px;align-items:center;margin-top:20px;
+    font-family:var(--mono);font-size:11.5px;background:var(--paper);
+    border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--ink-soft);
+  }
+  .src-pill b{color:var(--ink);font-weight:700}
+
+  /* ---------- Sections ---------- */
+  section{padding:46px 0;border-bottom:1px solid var(--line);scroll-margin-top:14px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--copper);font-weight:700;letter-spacing:.05em}
+  .sec-head h3{font-family:var(--display);font-weight:800;font-size:clamp(22px,3vw,30px);letter-spacing:-.015em;margin:0}
+  .sec-intro{color:var(--ink-soft);max-width:66ch;margin:-8px 0 24px}
+
+  /* ---------- Overview table ---------- */
+  .tbl{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+  .tbl th,.tbl td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl td b{font-family:var(--display);font-weight:700}
+  .tbl .hh{font-family:var(--mono);font-weight:700;color:var(--copper)}
+
+  /* ---------- Competency legend ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+  .badge{
+    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.02em;
+    padding:4px 10px;border-radius:6px;border:1px solid;white-space:nowrap;display:inline-flex;gap:6px;align-items:center;
+  }
+  .badge .dot{width:7px;height:7px;border-radius:50%}
+  .c-i{color:#8f4520;border-color:rgba(184,92,46,.45);background:rgba(184,92,46,.09)} .c-i .dot{background:var(--copper)}
+  .c-a{color:#1f5575;border-color:rgba(46,106,142,.45);background:rgba(46,106,142,.09)} .c-a .dot{background:var(--steel)}
+  .c-m{color:#2c6147;border-color:rgba(61,126,95,.45);background:rgba(61,126,95,.10)} .c-m .dot{background:var(--green)}
+  .c-e{color:#8a6313;border-color:rgba(189,138,42,.5);background:rgba(189,138,42,.11)} .c-e .dot{background:var(--amber)}
+  .c-c{color:#6e4660;border-color:rgba(138,90,122,.45);background:rgba(138,90,122,.10)} .c-c .dot{background:var(--plum)}
+
+  /* ---------- Generic cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 20px;
+    position:relative;transition:.18s;border-top:3px solid var(--rail,var(--line-strong));
+  }
+  .card:hover{box-shadow:0 6px 22px rgba(42,38,34,.08);transform:translateY(-2px)}
+  .card h4{font-family:var(--display);font-weight:700;font-size:16.5px;margin:0 0 4px;letter-spacing:-.01em}
+  .card .tag{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .card p{font-size:13.5px;color:var(--ink-soft);margin:0 0 12px}
+  .card .badges{display:flex;flex-wrap:wrap;gap:5px}
+  .card .meta{font-size:12px;color:var(--ink);margin:9px 0 0;padding-top:9px;border-top:1px dashed var(--line)}
+  .card .meta b{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;display:block;margin-bottom:1px}
+
+  /* ---------- Cartes-liens vers les hubs de séquence ---------- */
+  a.card{text-decoration:none;color:inherit;display:block}
+  .card .tag{padding-right:78px}
+  .card .st{position:absolute;top:15px;right:15px;font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;
+    text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap}
+  .card .st.ok{color:#2c6147;background:rgba(61,126,95,.13);border:1px solid rgba(61,126,95,.42)}
+  .card .st.soon{color:var(--ink-soft);background:var(--cream);border:1px solid var(--line)}
+  .card .open{font-family:var(--mono);font-size:11px;color:var(--copper);font-weight:500;margin-top:12px;
+    display:flex;align-items:center;gap:5px;transition:.18s}
+  a.card:hover .open{gap:9px}
+  .card.soon{opacity:.6}
+  .card.soon:hover{box-shadow:none;transform:none}
+  .hub-hint{font-family:var(--mono);font-size:12px;color:#8f4520;background:rgba(184,92,46,.07);
+    border:1px solid rgba(184,92,46,.25);border-radius:8px;padding:9px 13px;margin-top:14px;display:inline-block}
+  .hub-hint b{color:var(--ink)}
+
+  /* ---------- Competency detail cards ---------- */
+  .comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .comp .cc{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--rail);border-radius:11px;padding:16px 18px}
+  .comp .cc .top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .comp .cc .ord{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--rail)}
+  .comp .cc h4{font-family:var(--display);font-weight:800;font-size:17px;margin:0;letter-spacing:-.01em}
+  .comp .cc ul{margin:0;padding-left:17px;font-size:13px;color:var(--ink-soft)}
+  .comp .cc ul li{margin-bottom:3px}
+
+  /* ---------- Theme chips ---------- */
+  .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:6px}
+  .theme{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:16px 18px}
+  .theme .n{font-family:var(--mono);font-size:11px;color:var(--copper);font-weight:700}
+  .theme h4{font-family:var(--display);font-weight:700;font-size:15.5px;margin:5px 0 9px;letter-spacing:-.01em}
+  .theme ul{margin:0;padding-left:16px;font-size:12.5px;color:var(--ink-soft)}
+  .theme ul li{margin-bottom:2px}
+
+  /* ---------- Info blocks ---------- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .panel h4{font-family:var(--display);font-weight:700;font-size:16px;margin:0 0 10px;display:flex;align-items:center;gap:9px}
+  .panel h4 .ic{font-family:var(--mono);font-size:11px;background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--ink-soft)}
+  .panel ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-soft)}
+  .panel ul li{margin-bottom:4px}
+  .panel ul li b{color:var(--ink);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .chip{font-family:var(--mono);font-size:11px;background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:4px 9px;color:var(--ink)}
+
+  .note{font-size:13px;color:var(--ink-soft);background:rgba(189,138,42,.08);border:1px solid rgba(189,138,42,.3);border-radius:10px;padding:13px 16px;margin-top:8px}
+  .note b{color:var(--ink)}
+
+  /* ---------- Sources ---------- */
+  .sources{font-size:13px}
+  .sources li{margin-bottom:7px;color:var(--ink-soft)}
+  .sources a{color:var(--steel);text-decoration:none;border-bottom:1px solid rgba(46,106,142,.3)}
+  .sources a:hover{border-bottom-color:var(--steel)}
+  footer{padding:30px 0 0;font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+
+  /* ---------- Mobile ---------- */
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;height:auto;flex:none;border-right:none;border-bottom:1px solid var(--line);padding:14px 18px;z-index:40}
+    .nav .links{display:none;margin-top:12px}
+    .nav.open .links{display:block}
+    .brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer;align-self:center}
+    .grid2{grid-template-columns:1fr}
+    .main{padding:0 18px 60px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+
+  <!-- ======== NAV ======== -->
+  <aside class="nav" id="nav">
+    <div class="brand">
+      <div class="mark">SI</div>
+      <div>
+        <h1>Sciences de l'Ingénieur</h1>
+        <p>Fiche BO &amp; séquences</p>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">Menu</button>
+    </div>
+    <div class="links" id="links">
+      <div class="grp">Le programme (BO)</div>
+      <a href="#vue" class="navlink">Vue d'ensemble</a>
+      <a href="#seconde-bo" class="navlink">Seconde — option SI</a>
+      <a href="#terminal-bo" class="navlink">Cycle terminal — spé SI</a>
+      <div class="grp">Propositions de séquences</div>
+      <a href="#seq-seconde" class="navlink">Séquences Seconde</a>
+      <a href="#seq-premiere" class="navlink">Séquences Première</a>
+      <div class="grp">Repères</div>
+      <a href="#sources" class="navlink">Textes &amp; sources</a>
+    </div>
+  </aside>
+
+  <!-- ======== MAIN ======== -->
+  <main class="main">
+
+    <header class="hero" id="top">
+      <span class="kicker">Voie générale — lycée</span>
+      <h2>Sciences de l'Ingénieur<br><em>du programme aux séquences</em></h2>
+      <p class="lede">Une synthèse du Bulletin officiel pour l'option de Seconde et la spécialité du cycle terminal, suivie de propositions de séquences prêtes à adapter pour la Seconde et la Première.</p>
+      <span class="src-pill">📘 Référence&nbsp;: <b>BO spécial n°1 du 22 janvier 2019</b> · arrêtés du 17-1-2019</span>
+      <div class="hub-hint">▸ <b>Hub des séquences</b> — clique sur une séquence pour ouvrir son module (cours · TP · évaluation).</div>
+    </header>
+
+    <!-- ===== VUE D'ENSEMBLE ===== -->
+    <section id="vue">
+      <div class="sec-head"><span class="sec-num">01</span><h3>Vue d'ensemble</h3></div>
+      <p class="sec-intro">Trois niveaux, deux textes, une même logique de démarche de l'ingénieur qui s'approfondit du collège vers le supérieur.</p>
+      <table class="tbl">
+        <thead>
+          <tr><th>Niveau</th><th>Statut</th><th>Horaire élève</th><th>Logique</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Seconde GT</b></td>
+            <td class="hh">Enseignement optionnel</td>
+            <td>1 h 30 / semaine</td>
+            <td>Exploration par <b>défis</b> — appétence &amp; découverte des métiers</td>
+          </tr>
+          <tr>
+            <td><b>Première</b></td>
+            <td class="hh">Spécialité</td>
+            <td>4 h / semaine</td>
+            <td>Bases scientifiques &amp; technologiques + projet <b>12 h</b></td>
+          </tr>
+          <tr>
+            <td><b>Terminale</b></td>
+            <td class="hh">Spécialité (+ 2 h physique)</td>
+            <td>6 h + 2 h / semaine</td>
+            <td>Approfondissement + projet <b>48 h</b> → épreuve écrite &amp; Grand oral</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note"><b>À retenir&nbsp;:</b> le programme de spécialité est conçu <b>sur les deux ans</b> du cycle terminal. La mention « 1<sup>re</sup> » désigne les contenus acquis et évalués en fin de première&nbsp;; « T<sup>ale</sup> » ceux développés sur l'ensemble du cycle. L'évaluation finale porte sur les deux années.</p>
+    </section>
+
+    <!-- ===== SECONDE — BO ===== -->
+    <section id="seconde-bo">
+      <div class="sec-head"><span class="sec-num">02</span><h3>Seconde — option Sciences de l'ingénieur</h3></div>
+      <p class="sec-intro">Programme commun avec « Création et innovation technologiques ». Un enseignement d'exploration qui prolonge la technologie du collège, organisé en <b>défis</b> à relever en équipe.</p>
+
+      <div class="grid2">
+        <div class="panel">
+          <h4><span class="ic">but</span> Objectifs</h4>
+          <ul>
+            <li>Développer l'<b>appétence</b> pour les études scientifiques et technologiques.</li>
+            <li>Découvrir des <b>métiers</b> et domaines professionnels des SI.</li>
+            <li>Appréhender la place de l'<b>expérimentation</b> pour valider un choix technologique.</li>
+            <li>Adopter une <b>démarche collective</b> de résolution de problème.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4><span class="ic">prog</span> Deux grandes parties</h4>
+          <ul>
+            <li><b>Raisonner, pratiquer une démarche scientifique, expérimenter</b> — protocole, hypothèses, mesures, analyse.</li>
+            <li><b>Présenter et argumenter</b> — restituer des résultats, convaincre (contribution à l'oral).</li>
+          </ul>
+          <div style="margin-top:12px">
+            <div style="font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Trois champs explorés</div>
+            <div class="chips">
+              <span class="chip">⚡ Énergie</span>
+              <span class="chip">📡 Information</span>
+              <span class="chip">🧱 Matériaux &amp; structures</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h4><span class="ic">comp</span> Compétences travaillées</h4>
+        <ul style="columns:2;column-gap:30px">
+          <li>Mettre en œuvre une démarche scientifique <b>en équipe</b>.</li>
+          <li>Réaliser des <b>expérimentations</b> selon un protocole défini.</li>
+          <li>Comprendre les contraintes <b>socio-économiques et environnementales</b>.</li>
+          <li>Mener une <b>recherche documentaire</b> et une veille technologique.</li>
+          <li>Présenter des résultats et <b>argumenter</b>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== CYCLE TERMINAL — BO ===== -->
+    <section id="terminal-bo">
+      <div class="sec-head"><span class="sec-num">03</span><h3>Cycle terminal — spécialité SI</h3></div>
+      <p class="sec-intro">Le cœur du programme&nbsp;: cinq compétences structurantes, mobilisées sur des supports pluri-technologiques et multi-physiques. Ce code couleur est repris dans les séquences plus bas.</p>
+
+      <div class="legend">
+        <span class="badge c-i"><span class="dot"></span>Innover</span>
+        <span class="badge c-a"><span class="dot"></span>Analyser</span>
+        <span class="badge c-m"><span class="dot"></span>Modéliser &amp; résoudre</span>
+        <span class="badge c-e"><span class="dot"></span>Expérimenter &amp; simuler</span>
+        <span class="badge c-c"><span class="dot"></span>Communiquer</span>
+      </div>
+
+      <div class="comp">
+        <div class="cc" style="--rail:var(--copper)">
+          <div class="top"><span class="ord">01</span><h4>Innover</h4></div>
+          <ul>
+            <li>Créer des produits innovants&nbsp;: rompre avec / améliorer l'existant.</li>
+            <li>Approche design, méthodes agiles, veille technologique.</li>
+            <li>Imaginer, représenter et matérialiser une solution (prototypage rapide).</li>
+          </ul>
+        </div>
+        <div class="cc" style="--rail:var(--steel)">
+          <div class="top"><span class="ord">02</span><h4>Analyser</h4></div>
+          <ul>
+            <li>Organisation fonctionnelle &amp; matérielle (ingénierie système, SysML).</li>
+            <li>Chaînes d'énergie &amp; d'information&nbsp;: puissance, rendements, traitement.</li>
+            <li>Réseaux, asservissement, écarts de performances.</li>
+          </ul>
+        </div>
+        <div class="cc" style="--rail:var(--green)">
+          <div class="top"><span class="ord">03</span><h4>Modéliser &amp; résoudre</h4></div>
+          <ul>
+            <li>Hypothèses, modélisation plane, grandeurs effort / flux.</li>
+            <li>Cinématique, statique, dynamique&nbsp;; circuits (Kirchhoff).</li>
+            <li>Comportement séquentiel, états-transitions, programmation.</li>
+          </ul>
+        </div>
+        <div class="cc" style="--rail:var(--amber)">
+          <div class="top"><span class="ord">04</span><h4>Expérimenter &amp; simuler</h4></div>
+          <ul>
+            <li>Protocoles, capteurs, chaîne d'acquisition, micro-contrôleur.</li>
+            <li>Erreurs &amp; incertitudes de mesure.</li>
+            <li>Simulation multi-physique&nbsp;; valider un modèle (écarts simulé/mesuré).</li>
+          </ul>
+        </div>
+        <div class="cc" style="--rail:var(--plum)">
+          <div class="top"><span class="ord">05</span><h4>Communiquer</h4></div>
+          <ul>
+            <li>Rechercher, traiter, organiser l'information.</li>
+            <li>Support adapté, travail collaboratif (espaces partagés, ENT).</li>
+            <li>Argumenter et convaincre (préparation du Grand oral).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4 style="font-family:var(--display);font-weight:800;font-size:18px;margin:30px 0 4px">Trois grandes thématiques contextualisantes</h4>
+      <p class="sec-intro" style="margin-bottom:12px">Non exhaustives — elles ancrent les supports dans des problématiques actuelles.</p>
+      <div class="themes">
+        <div class="theme">
+          <span class="n">T1</span>
+          <h4>Territoires &amp; produits intelligents, mobilité</h4>
+          <ul>
+            <li>Structures et enveloppes</li>
+            <li>Réseaux de communication &amp; d'énergie</li>
+            <li>Objets connectés, internet des objets</li>
+            <li>Mobilités des personnes et des biens</li>
+          </ul>
+        </div>
+        <div class="theme">
+          <span class="n">T2</span>
+          <h4>L'homme assisté, réparé, augmenté</h4>
+          <ul>
+            <li>Produits d'assistance santé &amp; sécurité</li>
+            <li>Aide et compensation du handicap</li>
+            <li>Augmentation des performances du corps</li>
+          </ul>
+        </div>
+        <div class="theme">
+          <span class="n">T3</span>
+          <h4>Design responsable &amp; prototypage</h4>
+          <ul>
+            <li>Ingénierie design de produits innovants</li>
+            <li>Prototypage (réalité matérielle ou virtuelle)</li>
+            <li>Applications numériques nomades</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:24px">
+        <div class="panel">
+          <h4><span class="ic">labo</span> Champs disciplinaires &amp; outils</h4>
+          <ul>
+            <li><b>Mécanique</b> — point &amp; solide, statique, cinématique, dynamique, énergétique.</li>
+            <li><b>Électricité &amp; signal</b> — électrocinétique, capteurs, modulation.</li>
+            <li><b>Informatique &amp; numérique</b> — Python, états-transitions, réseaux.</li>
+            <li>Outils&nbsp;: <b>SysML</b> (bases), modeleur volumique, simulation multi-physique, <b>FabLab</b>, jumeau numérique.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4><span class="ic">éval</span> Projets &amp; baccalauréat</h4>
+          <ul>
+            <li>Projet <b>12 h</b> en première (équipe, possible sous forme de défi).</li>
+            <li>Projet <b>48 h</b> en terminale + <b>note interdisciplinaire</b> obligatoire.</li>
+            <li>Épreuve écrite de terminale&nbsp;: 2 parties (SI + physique), <b>coef. 16</b>.</li>
+            <li>Spé abandonnée en fin de 1<sup>re</sup>&nbsp;: contrôle continu, <b>coef. 8</b>.</li>
+            <li>Le projet de terminale sert de support au <b>Grand oral</b>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SÉQUENCES SECONDE ===== -->
+    <section id="seq-seconde">
+      <div class="sec-head"><span class="sec-num">04</span><h3>Séquences — Seconde (option SI)</h3></div>
+      <p class="sec-intro">Une progression annuelle (~30 × 1 h 30) en <b>défis</b> couvrant les trois champs. Chaque défi suit le même fil&nbsp;: problème → hypothèses → protocole → mesures → analyse → restitution orale.</p>
+
+      <div class="cards" id="grid-2de"></div>
+    </section>
+
+    <!-- ===== SÉQUENCES PREMIÈRE ===== -->
+    <section id="seq-premiere">
+      <div class="sec-head"><span class="sec-num">05</span><h3>Séquences — Première (spé SI)</h3></div>
+      <p class="sec-intro">Couverture des contenus « 1<sup>re</sup> » du programme (~120 h dont 12 h de projet). Deux séquences transversales (00 et 09) s'infusent dans toutes les autres via les TP.</p>
+
+      <div class="cards" id="grid-1re"></div>
+
+      <p class="note"><b>Liberté pédagogique&nbsp;:</b> le BO fixe des <b>compétences et des connaissances</b>, pas une liste de séquences imposée. Cette progression est une proposition cohérente à réordonner selon tes supports, ton plateau technique et tes co-disciplines (physique-chimie, NSI).</p>
+    </section>
+
+    <!-- ===== SOURCES ===== -->
+    <section id="sources" style="border-bottom:none">
+      <div class="sec-head"><span class="sec-num">06</span><h3>Textes officiels &amp; sources</h3></div>
+      <ul class="sources">
+        <li>Programme d'enseignement optionnel CIT &amp; SI — Seconde GT — <b>arrêté du 17-1-2019</b> (NOR MENE1901570A) — <a href="https://www.education.gouv.fr/bo/19/Special1/MENE1901570A.htm">education.gouv.fr</a></li>
+        <li>Programme de spécialité SI — première &amp; terminale — <b>arrêté du 17-1-2019</b> (NOR MENE1901640A) — <a href="https://www.education.gouv.fr/bo/19/Special1/MENE1901640A.htm">education.gouv.fr</a></li>
+        <li>Annexe complète du programme de spécialité — <a href="https://eduscol.education.gouv.fr/5832/programmes-et-ressources-en-sciences-de-l-ingenieur-voie-gt">éduscol · ressources SI voie GT</a></li>
+        <li>Sciences physiques, complément de la spé SI en terminale — BO spécial n°8 du 25 février 2019.</li>
+        <li>Définition de l'épreuve de terminale — <a href="https://www.education.gouv.fr/bo/2024/Hebdo19/MENE2408179N">note de service du BO 2024</a> (thématiques confirmées).</li>
+      </ul>
+      <footer>Fiche de synthèse — programmes en vigueur au 22-01-2019 · à recouper avec les éventuelles notes de service académiques.</footer>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Config des s\u00e9quences (bascule pret:true \u00e0 mesure de la production) =====
+  var COMP={I:['c-i','Innover'],A:['c-a','Analyser'],M:['c-m','Mod\u00e9liser'],E:['c-e','Exp\u00e9rimenter'],C:['c-c','Communiquer']};
+
+  var SEC_2DE=[
+    {tag:"D\u00e9fi 0 \u00b7 Transversal \u00b7 ~3 sem.", titre:"Qu\u2019est-ce qu\u2019un ing\u00e9nieur ?", desc:"D\u00e9cortiquer un produit du quotidien : besoin, fonctions, m\u00e9tiers. Pose la d\u00e9marche et le vocabulaire de l\u2019ann\u00e9e.", comps:["A","C"], rail:"--ink-soft", hub:"hub_si_2de_ingenieur.html", pret:false},
+    {tag:"Champ Information \u00b7 ~5 sem.", titre:"La station qui surveille", desc:"Mini-station de mesure (temp\u00e9rature, humidit\u00e9, lumi\u00e8re) avec acquisition et affichage des donn\u00e9es.", comps:["E","A"], rail:"--steel", hub:"hub_si_2de_station.html", pret:false},
+    {tag:"Champ \u00c9nergie \u00b7 ~5 sem.", titre:"Rouler propre", desc:"Comparer des solutions de mobilit\u00e9 d\u00e9carbon\u00e9e : production, stockage, autonomie. Essais de performance.", comps:["E","A"], rail:"--amber", hub:"hub_si_2de_mobilite.html", pret:false},
+    {tag:"Mat\u00e9riaux &amp; structures \u00b7 ~5 sem.", titre:"Tenir la charge", desc:"Franchir une port\u00e9e avec une passerelle qui supporte une charge cible. Mat\u00e9riaux, essais, optimisation.", comps:["E","M"], rail:"--green", hub:"hub_si_2de_structure.html", pret:false},
+    {tag:"Pluritechno \u00b7 \u00ab homme augment\u00e9 \u00bb \u00b7 ~5 sem.", titre:"L\u2019objet qui aide", desc:"Imaginer un dispositif d\u2019assistance simple. Analyse du besoin \u2192 prototype 3D \u2192 test d\u2019usage.", comps:["I","A"], rail:"--plum", hub:"hub_si_2de_assistance.html", pret:false},
+    {tag:"D\u00e9fi final \u00b7 Libre \u00b7 ~6 sem.", titre:"Notre innovation", desc:"Mini-projet d\u2019\u00e9quipe au choix, restitution orale soign\u00e9e. Autonomie, cr\u00e9ativit\u00e9, argumentation.", comps:["I","C"], rail:"--copper", hub:"hub_si_2de_projet.html", pret:false}
+  ];
+
+  var SEC_1RE=[
+    {tag:"S\u00e9q. 00 \u00b7 Transversale", titre:"D\u00e9marche de l\u2019ing\u00e9nieur &amp; \u00e9carts de performances", desc:"Cahier des charges, crit\u00e8res, triptyque <b>attendu / simul\u00e9 / mesur\u00e9</b>. Le r\u00e9flexe \u00e0 r\u00e9activer partout.", comps:["A","E"], rail:"--ink-soft", hub:"hub_si_demarche.html", pret:false},
+    {tag:"S\u00e9q. 01 \u00b7 Analyse syst\u00e8me", titre:"Ing\u00e9nierie syst\u00e8me &amp; analyse fonctionnelle", desc:"Besoin, exigences, cas d\u2019utilisation, diagrammes de blocs, analyse structurelle \u2014 bases de <b>SysML</b>.", comps:["A"], rail:"--steel", hub:"hub_si_sysml.html", pret:false},
+    {tag:"S\u00e9q. 02 \u00b7 \u00c9nergie", titre:"La cha\u00eene d\u2019\u00e9nergie", desc:"Alimenter / stocker / distribuer / convertir / transmettre. <b>Effort &amp; flux</b>, puissance, \u00e9nergie, rendements.", comps:["A","M"], rail:"--amber", hub:"hub_si_energie.html", pret:true},
+    {tag:"S\u00e9q. 03 \u00b7 Information", titre:"Cha\u00eene d\u2019information &amp; capteurs", desc:"Acqu\u00e9rir / traiter / communiquer. Capteurs, conditionnement, num\u00e9risation, cha\u00eene d\u2019acquisition.", comps:["A","E"], rail:"--steel", hub:"hub_si_information.html", pret:true},
+    {tag:"S\u00e9q. 04 \u00b7 M\u00e9canique", titre:"Cin\u00e9matique \u2014 mod\u00e9liser les mouvements", desc:"Trajectoires, liaisons, sch\u00e9ma cin\u00e9matique, torseur cin\u00e9matique, vitesses &amp; acc\u00e9l\u00e9rations, loi E/S.", comps:["M"], rail:"--green", hub:"hub_si_cinematique.html", pret:true},
+    {tag:"S\u00e9q. 05 \u00b7 M\u00e9canique", titre:"Statique \u2014 mod\u00e9liser les actions m\u00e9caniques", desc:"Mod\u00e9lisation plane, hypoth\u00e8ses, graphe de liaisons, torseurs d\u2019actions. (PFS approfondi en terminale.)", comps:["M"], rail:"--green", hub:"hub_si_statique.html", pret:false},
+    {tag:"S\u00e9q. 06 \u00b7 \u00c9lectricit\u00e9", titre:"Circuits \u00e9lectriques", desc:"Mod\u00e8les R / L / C, sources, <b>lois de Kirchhoff</b>, lois de comportement. Courants &amp; tensions, mesures.", comps:["M","E"], rail:"--green", hub:"hub_si_electrique.html", pret:false},
+    {tag:"S\u00e9q. 07 \u00b7 Num\u00e9rique", titre:"Programmation &amp; comportement \u00e9v\u00e9nementiel", desc:"<b>Python</b>, structures algorithmiques, comportement s\u00e9quentiel et <b>diagramme \u00e9tats-transitions</b>.", comps:["M","A"], rail:"--steel", hub:"hub_si_prog.html", pret:false},
+    {tag:"S\u00e9q. 08 \u00b7 R\u00e9seaux", titre:"Communication &amp; r\u00e9seaux", desc:"Signaux &amp; donn\u00e9es, supports filaire / sans fil, <b>protocoles, trames, encapsulation</b>, d\u00e9bit, intro IoT.", comps:["A","M"], rail:"--steel", hub:"hub_si_reseaux.html", pret:false},
+    {tag:"S\u00e9q. 09 \u00b7 Transversale", titre:"Mesures, incertitudes &amp; exp\u00e9rimentation", desc:"Protocole, appareils &amp; capteurs, erreurs &amp; <b>incertitudes</b>, traitement de donn\u00e9es, \u00e9carts abs./rel.", comps:["E","A"], rail:"--amber", hub:"hub_si_mesures.html", pret:false},
+    {tag:"S\u00e9q. 10 \u00b7 Projet 12 h", titre:"D\u00e9fi de conception en \u00e9quipe", desc:"Imaginer et mat\u00e9rialiser tout ou partie d\u2019une solution originale (approche design, FabLab), puis restituer.", comps:["I","C"], rail:"--copper", hub:"hub_si_projet.html", pret:false}
+  ];
+
+  function siBadges(keys){
+    return keys.map(function(k){var c=COMP[k];return '<span class="badge '+c[0]+'"><span class="dot"></span>'+c[1]+'</span>';}).join('');
+  }
+  function siCard(s){
+    var inner=
+      '<div class="st '+(s.pret?'ok">Disponible':'soon">\u00c0 venir')+'</div>'+
+      '<div class="tag">'+s.tag+'</div>'+
+      '<h4>'+s.titre+'</h4>'+
+      '<p>'+s.desc+'</p>'+
+      '<div class="badges">'+siBadges(s.comps)+'</div>'+
+      (s.pret?'<div class="open">Ouvrir le module \u2192</div>':'');
+    if(s.pret) return '<a class="card" style="--rail:var('+s.rail+')" href="'+s.hub+'">'+inner+'</a>';
+    return '<div class="card soon" style="--rail:var('+s.rail+')">'+inner+'</div>';
+  }
+  function siRender(id,list){var el=document.getElementById(id);if(el)el.innerHTML=list.map(siCard).join('');}
+  siRender('grid-2de',SEC_2DE);
+  siRender('grid-1re',SEC_1RE);
+
+  // --- Menu mobile ---
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () { nav.classList.toggle('open'); });
+  }
+  document.querySelectorAll('.navlink').forEach(function (a) {
+    a.addEventListener('click', function () { nav.classList.remove('open'); });
+  });
+
+  // --- Surlignage actif au scroll ---
+  var links = Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var map = {};
+  links.forEach(function (l) {
+    var id = l.getAttribute('href').slice(1);
+    var t = document.getElementById(id);
+    if (t) map[id] = l;
+  });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('on'); });
+        var active = map[en.target.id];
+        if (active) active.classList.add('on');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  Object.keys(map).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+
+  // --- Navigation clavier entre sections ---
+  var ids = Object.keys(map);
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    var cur = -1;
+    for (var i = 0; i < ids.length; i++) {
+      var r = document.getElementById(ids[i]).getBoundingClientRect();
+      if (r.top <= 80) cur = i;
+    }
+    var next = e.key === 'ArrowDown' ? Math.min(cur + 1, ids.length - 1) : Math.max(cur - 1, 0);
+    var target = document.getElementById(ids[next]);
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+</script>
+</body>
+</html>
