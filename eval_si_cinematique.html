@@ -10,7 +10,7 @@
 <style>
   :root{
     --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
     --ok:#3D7E5F; --no:#C0492E;
     --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
     --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
@@ -21,19 +21,19 @@
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
     background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
     background-size:30px 30px;line-height:1.55;min-height:100vh}
-  .wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
-  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
   .topbar h1{font-family:var(--display);font-size:17px;margin:0;font-weight:800}
   .topbar p{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .topbar .back{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:var(--paper)}
   .topbar .back:hover{border-color:var(--green);color:var(--green)}
 
-  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:18px}
-  h2{font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,30px);margin:0 0 8px;letter-spacing:-.01em}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(21px,3.6vw,28px);margin:0 0 8px;letter-spacing:-.01em}
   .lede{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
   label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:14px 0 6px}
-  input[type=text],input[type=password],input[type=number]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--cream);color:var(--ink)}
+  input[type=text],input[type=password]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--cream);color:var(--ink)}
   input:focus{outline:none;border-color:var(--green)}
   .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:11px;padding:13px 22px;cursor:pointer;transition:.15s}
   .btn:hover{background:#346b50} .btn:disabled{opacity:.5;cursor:not-allowed}
@@ -41,26 +41,60 @@
   .err{color:var(--no);font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px}
   .hint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px}
 
-  .qnum{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
-  .qnum .progress{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
-  .q{border-top:1px solid var(--line);padding:18px 0}
-  .q:first-of-type{border-top:none}
-  .q .qt{font-family:var(--display);font-weight:700;font-size:16px;margin-bottom:4px}
-  .q .qt .badge{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--green);background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.3);border-radius:6px;padding:2px 7px;margin-right:8px;vertical-align:middle}
-  .opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-  .opt{display:flex;align-items:center;gap:10px;font-size:14.5px;padding:10px 13px;border:1px solid var(--line);border-radius:9px;cursor:pointer;background:var(--cream);transition:.12s}
-  .opt:hover{border-color:var(--green)}
-  .opt input{accent-color:var(--green);width:16px;height:16px;flex:0 0 16px}
-  .opt.sel{border-color:var(--green);background:rgba(61,126,95,.07)}
-  .numwrap{max-width:240px;margin-top:8px}
+  /* progress */
+  .pbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .pbar .track{flex:1;height:8px;background:var(--cream);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .pbar .track i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+  .pbar .lab{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:700}
 
-  .scorebig{font-family:var(--display);font-weight:800;font-size:54px;color:var(--green);line-height:1}
-  .scoresub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:4px}
-  .recap{margin-top:18px}
-  .ri{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
-  .ri .ic{flex:0 0 22px;font-weight:700;font-family:var(--mono)}
+  /* exam layout */
+  .exam-grid{display:grid;grid-template-columns:1fr 312px;gap:20px;align-items:start}
+  .calc-side{position:sticky;top:18px}
+
+  /* exercise */
+  .exo{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  .exo .etag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.1);border:1px solid rgba(61,126,95,.3);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+  .exo h3{font-family:var(--display);font-weight:800;font-size:21px;margin:0 0 6px}
+  .exo .ctx{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .exo canvas{width:100%;height:auto;display:block;border-radius:11px;background:#FCFAF4;border:1px solid var(--line);margin-bottom:12px}
+  .data{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .data .d{font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .data .d b{color:var(--steel)}
+  .part{border-top:1px solid var(--line);padding:14px 0}
+  .part:last-child{padding-bottom:0}
+  .part .pq{font-size:14.5px;font-weight:600;margin-bottom:8px;display:flex;gap:8px;align-items:baseline}
+  .part .pq .pn{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700;flex:0 0 auto}
+  .part .pq .pts{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink-soft);background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:1px 7px;flex:0 0 auto}
+  .ansrow{display:flex;align-items:center;gap:10px}
+  .ansrow input{width:160px;font-family:var(--mono);font-size:15px;padding:9px 12px;border:1px solid var(--line-strong);border-radius:9px;background:var(--cream);color:var(--ink)}
+  .ansrow input:focus{outline:none;border-color:var(--green)}
+  .ansrow .unit{font-family:var(--mono);font-size:13px;color:var(--ink-soft);font-weight:700}
+
+  /* calculator */
+  .calc{background:var(--ink);border-radius:16px;padding:16px;color:#fff}
+  .calc .ct{font-family:var(--display);font-weight:800;font-size:14px;margin:0 0 10px;color:#E9A36F;display:flex;align-items:center;gap:7px}
+  .calc .disp{background:#1d1916;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;min-height:62px;text-align:right;margin-bottom:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px}
+  .calc .disp .expr{font-family:var(--mono);font-size:13px;color:#9C9088;word-break:break-all;min-height:16px}
+  .calc .disp .res{font-family:var(--mono);font-size:24px;font-weight:700;color:#fff;word-break:break-all}
+  .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .key{font-family:var(--mono);font-size:16px;font-weight:700;padding:13px 0;border-radius:9px;border:none;cursor:pointer;background:#36302b;color:#F2E9DD;transition:.1s}
+  .key:hover{background:#433b34}
+  .key.op{background:#4a4039;color:#E9A36F}
+  .key.fn{background:#3a4a44;color:#9FCBAE;font-size:14px}
+  .key.eq{background:#E9A36F;color:#2A2622;grid-column:span 3}
+  .key.clr{background:#5a3a32;color:#E9A893}
+  .calc .chint{font-family:var(--mono);font-size:9.5px;color:#8A7E72;margin-top:9px;text-align:center}
+
+  /* result */
+  .scorebig{font-family:var(--display);font-weight:800;font-size:56px;color:var(--green);line-height:1}
+  .scoresub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .rankpill{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.35);border-radius:999px;padding:6px 16px;margin-top:12px}
+  .recap{margin-top:20px}
+  .rexo{margin-bottom:12px} .rexo .rh{font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:4px}
+  .ri{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .ri .ic{flex:0 0 20px;font-weight:700;font-family:var(--mono)}
   .ri.good .ic{color:var(--ok)} .ri.bad .ic{color:var(--no)}
-  .ri .det{flex:1} .ri .det .sol{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:2px}
+  .ri .det{flex:1} .ri .det .sol{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
   .sync{font-family:var(--mono);font-size:11.5px;margin-top:14px;color:var(--ink-soft)}
 
   table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
@@ -71,6 +105,7 @@
   .footlink a{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line-strong)}
   .footlink a:hover{color:var(--green)}
   [hidden]{display:none !important}
+  @media(max-width:860px){ .exam-grid{grid-template-columns:1fr} .calc-side{position:static} }
 </style>
 </head>
 <body>
@@ -85,7 +120,7 @@
   <section id="screen-home">
     <div class="card">
       <h2>Avant de commencer</h2>
-      <p class="lede">Renseigne ton identité et le code d'accès fourni par ton professeur. L'évaluation comporte 12 questions et n'est notée qu'une fois validée.</p>
+      <p class="lede">Cette évaluation comporte <b>3 exercices</b> appuyés sur des schémas animés&nbsp;: tu lis les données sur le schéma et tu calcules. Une <b>calculatrice</b> est à ta disposition sur le côté. Note finale sur 20.</p>
       <label for="inNom">Nom et prénom</label>
       <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
       <label for="inClasse">Classe</label>
@@ -98,14 +133,44 @@
     <div class="footlink"><a id="profLink">Espace enseignant</a></div>
   </section>
 
-  <!-- QUIZ -->
-  <section id="screen-quiz" hidden>
-    <div class="card">
-      <div class="qnum"><h2 style="margin:0">Questions</h2><span class="progress" id="prog">0 / 12 répondues</span></div>
-      <div id="quizList"></div>
-      <div class="err" id="quizErr"></div>
-      <div style="margin-top:18px"><button class="btn" id="submitBtn">Valider mes réponses</button></div>
-      <div class="hint">Une fois validé, tu ne pourras plus modifier tes réponses.</div>
+  <!-- EXAM -->
+  <section id="screen-exam" hidden>
+    <div class="pbar"><span class="lab" id="progLab">0 / 11 questions</span><div class="track"><i id="progBar"></i></div></div>
+    <div class="exam-grid">
+      <div id="exoCol"></div>
+      <div class="calc-side">
+        <div class="calc">
+          <div class="ct">🧮 Calculatrice</div>
+          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
+          <div class="keys" id="calcKeys">
+            <button class="key clr" data-k="C">C</button>
+            <button class="key clr" data-k="back">⌫</button>
+            <button class="key op" data-k="(">(</button>
+            <button class="key op" data-k=")">)</button>
+            <button class="key" data-k="7">7</button>
+            <button class="key" data-k="8">8</button>
+            <button class="key" data-k="9">9</button>
+            <button class="key op" data-k="/">÷</button>
+            <button class="key" data-k="4">4</button>
+            <button class="key" data-k="5">5</button>
+            <button class="key" data-k="6">6</button>
+            <button class="key op" data-k="*">×</button>
+            <button class="key" data-k="1">1</button>
+            <button class="key" data-k="2">2</button>
+            <button class="key" data-k="3">3</button>
+            <button class="key op" data-k="-">−</button>
+            <button class="key" data-k="0">0</button>
+            <button class="key" data-k=".">.</button>
+            <button class="key fn" data-k="pi">π</button>
+            <button class="key op" data-k="+">+</button>
+            <button class="key fn" data-k="sqrt">√</button>
+            <button class="key eq" data-k="=">=</button>
+          </div>
+          <div class="chint">× et ÷ pour multiplier/diviser · π disponible · √( pour une racine</div>
+        </div>
+        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
+        <div class="err" id="examErr" style="text-align:center"></div>
+      </div>
     </div>
   </section>
 
@@ -113,8 +178,9 @@
   <section id="screen-result" hidden>
     <div class="card">
       <h2>Résultat</h2>
-      <div class="scorebig" id="scoreBig">0 / 12</div>
+      <div class="scorebig" id="scoreBig">0 / 20</div>
       <div class="scoresub" id="scoreSub"></div>
+      <div><span class="rankpill" id="rankPill"></span></div>
       <div class="recap" id="recap"></div>
       <div class="sync" id="syncMsg"></div>
     </div>
@@ -148,26 +214,39 @@
   var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
   var FB_NODE='resultats_si_cinematique';
 
-  var QUESTIONS=[
-   {type:'qcm', q:'La trajectoire d\u2019un point, c\u2019est\u2026', opts:['L\u2019ensemble des positions successives qu\u2019il occupe','Sa vitesse \u00e0 un instant donn\u00e9','La distance jusqu\u2019\u00e0 l\u2019axe de rotation','La dur\u00e9e de son d\u00e9placement'], a:0},
-   {type:'qcm', q:'Dans un mouvement de translation\u2026', opts:['Tous les points ont le m\u00eame vecteur vitesse','Chaque point tourne autour d\u2019un axe','La vitesse augmente avec la distance \u00e0 l\u2019axe','Les points suivent des cercles concentriques'], a:0},
-   {type:'vf', q:'Dans une rotation, tous les points ont la m\u00eame vitesse lin\u00e9aire V.', a:false},
-   {type:'num', q:'Un point est \u00e0 R = 0,2 m de l\u2019axe et \u03c9 = 10 rad/s. Vitesse V = R\u00b7\u03c9 ? (en m/s)', a:2, tol:0.3},
-   {type:'num', q:'Une roue tourne \u00e0 N = 300 tr/min. Vitesse angulaire \u03c9 \u2248 ? (en rad/s)', a:31.4, tol:1.5},
-   {type:'qcm', q:'La vitesse instantan\u00e9e d\u2019un point, c\u2019est\u2026', opts:['La limite de la vitesse moyenne quand \u0394t \u2192 0','La vitesse moyenne sur tout le trajet','Toujours \u00e9gale \u00e0 la vitesse maximale','La distance divis\u00e9e par le rayon'], a:0},
-   {type:'vf', q:'Dans un mouvement uniforme, l\u2019acc\u00e9l\u00e9ration est nulle.', a:true},
-   {type:'num', q:'Mouvement uniform\u00e9ment vari\u00e9 : v\u2080 = 2 m/s, a = 3 m/s\u00b2, t = 4 s. Vitesse v = v\u2080 + a\u00b7t ? (en m/s)', a:14, tol:0.3},
-   {type:'qcm', q:'\u00c0 quoi sert principalement un r\u00e9ducteur ?', opts:['R\u00e9duire la vitesse de rotation (et augmenter le couple)','Augmenter la vitesse de rotation','Transformer une translation en chaleur','Mesurer une distance'], a:0},
-   {type:'num', q:'R\u00e9ducteur : \u03c9_e = 300 tr/min, Z\u2081 = 20 (entr\u00e9e), Z\u2082 = 60 (sortie). \u03c9_s = \u03c9_e\u00b7Z\u2081/Z\u2082 ? (en tr/min)', a:100, tol:1},
-   {type:'qcm', q:'La liaison glissi\u00e8re autorise\u2026', opts:['Une translation selon un axe','Une rotation autour d\u2019un axe','Une rotation + une translation','Aucun mouvement'], a:0},
-   {type:'qcm', q:'La liaison pivot autorise\u2026', opts:['Une rotation autour d\u2019un axe','Une translation selon un axe','Tous les mouvements','Aucun mouvement'], a:0}
+  // ===== Exercices =====
+  var EXOS=[
+    { anim:'conv', tag:'Exercice 1 · 10 pts', title:'Le tapis convoyeur',
+      ctx:'Un moteur entra\u00eene une poulie via un r\u00e9ducteur ; la poulie fait avancer un tapis qui transporte des colis. Lis les valeurs sur le sch\u00e9ma.',
+      data:[['N moteur','1200 tr/min'],['R\u00e9ducteur','Z\u2081 = 15 / Z\u2082 = 60'],['Rayon poulie R','0,05 m'],['Trajet colis L','3 m']],
+      parts:[
+        {q:'Vitesse de rotation en sortie du r\u00e9ducteur : N_s = N\u00b7(Z\u2081/Z\u2082) ?', a:300, tol:2, pts:2, unit:'tr/min', sol:'N_s = 1200 \u00d7 15/60 = 300 tr/min'},
+        {q:'Vitesse angulaire de la poulie : \u03c9 = N_s\u00b72\u03c0/60 ?', a:31.4, tol:1, pts:2, unit:'rad/s', sol:'\u03c9 = 300 \u00d7 2\u03c0/60 \u2248 31,4 rad/s'},
+        {q:'Vitesse du tapis (point du bord de la poulie) : V = R\u00b7\u03c9 ?', a:1.57, tol:0.15, pts:3, unit:'m/s', sol:'V = 0,05 \u00d7 31,4 \u2248 1,57 m/s'},
+        {q:'Temps pour qu\u2019un colis parcoure L : t = L/V ?', a:1.91, tol:0.2, pts:3, unit:'s', sol:'t = 3 / 1,57 \u2248 1,9 s'}
+      ] },
+    { anim:'acc', tag:'Exercice 2 · 7 pts', title:'Le d\u00e9marrage du chariot',
+      ctx:'Un chariot part de l\u2019arr\u00eat et acc\u00e9l\u00e8re de fa\u00e7on uniforme. Mouvement rectiligne uniform\u00e9ment vari\u00e9.',
+      data:[['Vitesse initiale v\u2080','0 m/s'],['Acc\u00e9l\u00e9ration a','2,5 m/s\u00b2']],
+      parts:[
+        {q:'Vitesse atteinte apr\u00e8s t = 6 s : v = v\u2080 + a\u00b7t ?', a:15, tol:0.3, pts:2, unit:'m/s', sol:'v = 0 + 2,5 \u00d7 6 = 15 m/s'},
+        {q:'Conversion de cette vitesse en km/h (\u00d7 3,6) ?', a:54, tol:1, pts:2, unit:'km/h', sol:'15 \u00d7 3,6 = 54 km/h'},
+        {q:'Temps pour atteindre 25 m/s : t = v/a ?', a:10, tol:0.3, pts:3, unit:'s', sol:'t = 25 / 2,5 = 10 s'}
+      ] },
+    { anim:'wheel', tag:'Exercice 3 · 7 pts', title:'Le point sur la roue',
+      ctx:'Une roue tourne \u00e0 vitesse constante. On s\u2019int\u00e9resse \u00e0 la vitesse de deux points situ\u00e9s \u00e0 des distances diff\u00e9rentes de l\u2019axe.',
+      data:[['Rayon roue R','0,30 m'],['Rotation N','100 tr/min']],
+      parts:[
+        {q:'Vitesse angulaire : \u03c9 = N\u00b72\u03c0/60 ?', a:10.47, tol:0.5, pts:2, unit:'rad/s', sol:'\u03c9 = 100 \u00d7 2\u03c0/60 \u2248 10,47 rad/s'},
+        {q:'Vitesse d\u2019un point du bord (R = 0,30 m) : V = R\u00b7\u03c9 ?', a:3.14, tol:0.2, pts:3, unit:'m/s', sol:'V = 0,30 \u00d7 10,47 \u2248 3,14 m/s'},
+        {q:'Vitesse d\u2019un point \u00e0 mi-rayon (R/2 = 0,15 m) ?', a:1.57, tol:0.15, pts:2, unit:'m/s', sol:'V\u2019 = 0,15 \u00d7 10,47 \u2248 1,57 m/s'}
+      ] }
   ];
-  var TOTAL=QUESTIONS.length;
+  var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
 
   var student={nom:'',classe:''};
-  var answers=new Array(TOTAL);
 
-  function show(id){ ['screen-home','screen-quiz','screen-result','screen-prof'].forEach(function(s){document.getElementById(s).hidden=(s!==id);}); window.scrollTo(0,0); }
+  function show(id){ ['screen-home','screen-exam','screen-result','screen-prof'].forEach(function(s){document.getElementById(s).hidden=(s!==id);}); window.scrollTo(0,0); }
   function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
 
   // ===== Accueil =====
@@ -179,86 +258,198 @@
     if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
     if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
     err.textContent=''; student.nom=nom; student.classe=cls;
-    buildQuiz(); show('screen-quiz');
+    buildExam(); show('screen-exam'); startAnim();
   });
   document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
 
-  // ===== Quiz =====
-  function buildQuiz(){
-    var list=document.getElementById('quizList'); var html='';
-    QUESTIONS.forEach(function(qq,i){
-      var badge=qq.type==='qcm'?'QCM':qq.type==='vf'?'Vrai / Faux':'Calcul';
-      html+='<div class="q"><div class="qt"><span class="badge">'+badge+'</span>'+(i+1)+'. '+qq.q+'</div>';
-      if(qq.type==='qcm'){
-        html+='<div class="opts">'+qq.opts.map(function(o,j){
-          return '<label class="opt" data-q="'+i+'"><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>';
-        }).join('')+'</div>';
-      } else if(qq.type==='vf'){
-        html+='<div class="opts">'+['Vrai','Faux'].map(function(o,j){
-          return '<label class="opt" data-q="'+i+'"><input type="radio" name="q'+i+'" value="'+(j===0?'true':'false')+'"><span>'+o+'</span></label>';
-        }).join('')+'</div>';
-      } else {
-        html+='<div class="numwrap"><input type="number" step="any" name="q'+i+'" placeholder="Ta r\u00e9ponse"></div>';
-      }
+  // ===== Construction des exercices =====
+  function buildExam(){
+    var col=document.getElementById('exoCol'); var html='';
+    EXOS.forEach(function(ex,ei){
+      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+      ex.parts.forEach(function(p,pi){
+        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
+      });
       html+='</div>';
     });
-    list.innerHTML=html;
-    list.addEventListener('change',updateProgress);
-    list.addEventListener('input',updateProgress);
-    list.addEventListener('change',function(ev){
-      var lab=ev.target.closest('.opt');
-      if(lab){ var qi=lab.getAttribute('data-q');
-        list.querySelectorAll('.opt[data-q="'+qi+'"]').forEach(function(x){x.classList.remove('sel');});
-        lab.classList.add('sel');
-      }
-    });
+    col.innerHTML=html;
+    col.addEventListener('input',updateProgress);
     updateProgress();
   }
-  function collect(){
-    for(var i=0;i<TOTAL;i++){
-      var qq=QUESTIONS[i];
-      if(qq.type==='num'){ var el=document.querySelector('input[name="q'+i+'"]'); answers[i]=(el&&el.value!=='')?el.value:null; }
-      else { var sel=document.querySelector('input[name="q'+i+'"]:checked'); answers[i]=sel?sel.value:null; }
-    }
+  function readAll(){
+    var vals={};
+    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){
+      vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value;
+    });
+    return vals;
   }
-  function updateProgress(){ collect(); var n=answers.filter(function(a){return a!==null&&a!==undefined;}).length;
-    document.getElementById('prog').textContent=n+' / '+TOTAL+' répondues'; }
+  function updateProgress(){
+    var vals=readAll(); var n=0;
+    Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+  }
 
+  // ===== Validation / notation =====
+  var warned=false;
   document.getElementById('submitBtn').addEventListener('click',function(){
-    collect();
-    var n=answers.filter(function(a){return a!==null&&a!==undefined;}).length;
-    var err=document.getElementById('quizErr');
-    if(n<TOTAL){ err.textContent='Il reste '+(TOTAL-n)+' question(s) sans r\u00e9ponse. Tu peux quand m\u00eame valider, mais elles seront compt\u00e9es fausses.';
-      if(!this.dataset.warned){ this.dataset.warned='1'; return; } }
-    err.textContent=''; grade();
+    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+    var err=document.getElementById('examErr');
+    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+    err.textContent=''; grade(vals);
   });
 
-  function grade(){
-    var score=0, recapHtml='';
-    QUESTIONS.forEach(function(qq,i){
-      var ans=answers[i], good=false, shown='', sol='';
-      if(qq.type==='qcm'){ good=(ans!==null&&+ans===qq.a); shown=(ans!==null)?qq.opts[+ans]:'\u2014 (pas de r\u00e9ponse)'; sol='R\u00e9ponse : '+qq.opts[qq.a]; }
-      else if(qq.type==='vf'){ good=(ans!==null&&(ans==='true')===qq.a); shown=(ans===null)?'\u2014 (pas de r\u00e9ponse)':(ans==='true'?'Vrai':'Faux'); sol='R\u00e9ponse : '+(qq.a?'Vrai':'Faux'); }
-      else { var v=parseNum(ans); good=(!isNaN(v)&&Math.abs(v-qq.a)<=(qq.tol||0.01)); shown=(ans===null||ans==='')?'\u2014 (pas de r\u00e9ponse)':ans; sol='R\u00e9ponse : '+String(qq.a).replace('.',','); }
-      if(good)score++;
-      recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(i+1)+'. '+qq.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+sol)+'</div></div></div>';
+  function grade(vals){
+    var pts=0, recapHtml='';
+    EXOS.forEach(function(ex,ei){
+      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+      ex.parts.forEach(function(p,pi){
+        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+      });
+      recapHtml+='</div>';
     });
-    var pct=Math.round(score/TOTAL*100);
-    document.getElementById('scoreBig').textContent=score+' / '+TOTAL;
-    document.getElementById('scoreSub').textContent=pct+' % de r\u00e9ussite \u2014 '+student.nom+' ('+student.classe+')';
+    var pct=Math.round(pts/MAXPTS*100);
+    var note=Math.round(pts/MAXPTS*20*10)/10;
+    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
+    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+    document.getElementById('rankPill').textContent=rank;
     document.getElementById('recap').innerHTML=recapHtml;
     show('screen-result');
-    sendResult(score,pct);
+    animateScore(note);
+    sendResult(pts,pct,note);
+  }
+  function animateScore(note){
+    var el=document.getElementById('scoreBig'); var cur=0; var target=note;
+    var steps=24, i=0;
+    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
   }
 
-  function sendResult(score,pct){
-    var msg=document.getElementById('syncMsg');
-    msg.textContent='Enregistrement\u2026';
-    var payload={ nom:student.nom, classe:student.classe, score:score, total:TOTAL, pourcentage:pct, date:new Date().toISOString() };
+  function sendResult(pts,pct,note){
+    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
     fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
       .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
       .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
       .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+  }
+
+  // ===== Calculatrice =====
+  (function(){
+    var expr='', justEval=false;
+    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+    function evaluate(){
+      try{
+        var s=expr; var i=0;
+        function p(){return s[i];}
+        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+        function factor(){
+          if(s[i]==='-'){ i++; return -factor(); }
+          if(s[i]==='+'){ i++; return factor(); }
+          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+          return number();
+        }
+        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+        var res=expr2();
+        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+        var out=Math.round(res*1e6)/1e6;
+        resEl.textContent=String(out).replace('.',',');
+        return out;
+      }catch(e){ resEl.textContent='Erreur'; return null; }
+    }
+    function press(k){
+      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+      // chiffre ou opérateur
+      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+      expr+=k; disp();
+    }
+    document.getElementById('calcKeys').addEventListener('click',function(ev){
+      var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k'));
+    });
+  })();
+
+  // ===== Animations canvas (pédagogiques, en boucle) =====
+  var phase=0, animTimer=null;
+  function startAnim(){ if(animTimer)return; animTimer=setInterval(function(){ phase+=0.05; drawAll(); },50); }
+  function drawAll(){ drawConv(); drawAcc(); drawWheel(); }
+  function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{c:c,x:c.getContext('2d'),W:c.width,H:c.height}:null; }
+
+  function drawConv(){
+    var o=ctxOf('cv_conv'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var lx=120, rx=W-120, cy=H/2+10, rr=40;
+    // belt
+    g.strokeStyle='#5C544B';g.lineWidth=3;
+    g.beginPath();g.moveTo(lx,cy-rr);g.lineTo(rx,cy-rr);g.moveTo(lx,cy+rr);g.lineTo(rx,cy+rr);g.stroke();
+    g.beginPath();g.arc(lx,cy,rr,Math.PI/2,Math.PI*1.5);g.stroke();
+    g.beginPath();g.arc(rx,cy,rr,-Math.PI/2,Math.PI/2);g.stroke();
+    // rollers
+    [lx,rx].forEach(function(cx){ g.fillStyle='#EDE4D4';g.beginPath();g.arc(cx,cy,rr,0,7);g.fill();g.strokeStyle='#B85C2E';g.lineWidth=2;g.stroke();
+      g.strokeStyle='#B85C2E';g.lineWidth=2;var an=phase*2;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(an)*rr*0.8,cy+Math.sin(an)*rr*0.8);g.stroke(); });
+    // belt dashes moving
+    g.strokeStyle='rgba(46,106,142,.5)';g.lineWidth=3;g.setLineDash([14,12]);g.lineDashOffset=-(phase*60)%26;
+    g.beginPath();g.moveTo(lx,cy-rr);g.lineTo(rx,cy-rr);g.stroke();g.setLineDash([]);g.lineDashOffset=0;
+    // packages on top
+    var span=rx-lx; for(var i=0;i<3;i++){ var t=((phase*0.18+i/3)%1); var px=lx+t*span; g.fillStyle='#3D7E5F';g.fillRect(px-15,cy-rr-22,30,22);g.fillStyle='#2c6147';g.fillRect(px-15,cy-rr-22,30,5); }
+    // label R
+    g.strokeStyle='#2E6A8E';g.lineWidth=1.6;g.beginPath();g.moveTo(lx,cy);g.lineTo(lx,cy-rr);g.stroke();
+    g.fillStyle='#2E6A8E';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('R',lx-14,cy-rr/2);
+    g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('moteur \u2192 r\u00e9ducteur \u2192 poulie \u2192 tapis',lx-2,H-12);
+    g.textAlign='right';g.fillText('\u2192 sens d\u2019avance',rx+2,cy-rr-30);
+  }
+
+  function drawAcc(){
+    var o=ctxOf('cv_acc'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var roadY=H-46, x0=40, x1=W-60;
+    g.fillStyle='#ECE4D5';g.fillRect(0,roadY,W,30);
+    // loop t in 0..1
+    var T=2.2; var tt=(phase%T)/T; var pos=tt*tt; // accelerated
+    var cx=x0+pos*(x1-x0);
+    // speed lines
+    g.strokeStyle='rgba(184,92,46,'+(0.2+0.6*tt)+')';g.lineWidth=2;
+    for(var k=0;k<4;k++){ var ly=H-58-k*7; g.beginPath();g.moveTo(cx-40-tt*30-k*6,ly);g.lineTo(cx-18-k*4,ly);g.stroke(); }
+    // car
+    g.fillStyle='#B85C2E';g.fillRect(cx-26,roadY-22,52,18);g.fillStyle='#8f4422';g.fillRect(cx-16,roadY-30,28,10);
+    g.fillStyle='#2A2622';g.beginPath();g.arc(cx-15,roadY-2,6,0,7);g.arc(cx+13,roadY-2,6,0,7);g.fill();
+    // v-t mini graph
+    var gx=W-150,gy=30,gw=120,gh=70;
+    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;g.strokeRect(gx,gy,gw,gh);
+    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('v',gx+3,gy+10);g.fillText('t',gx+gw-8,gy+gh-4);
+    g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.moveTo(gx,gy+gh);g.lineTo(gx+tt*gw,gy+gh-tt*gh);g.stroke();
+    g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('a = 2,5 m/s\u00b2 \u2014 v augmente lin\u00e9airement',x0,24);
+  }
+
+  function drawWheel(){
+    var o=ctxOf('cv_wheel'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var cx=W/2,cy=H/2+6,rw=78,an=phase*1.4;
+    // wheel
+    g.fillStyle='#EDE4D4';g.beginPath();g.arc(cx,cy,rw,0,7);g.fill();
+    g.strokeStyle='#5C544B';g.lineWidth=4;g.stroke();
+    g.strokeStyle='#C9BBA8';g.lineWidth=2;for(var k=0;k<8;k++){var a=an+k*Math.PI/4;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*rw,cy+Math.sin(a)*rw);g.stroke();}
+    g.fillStyle='#2A2622';g.beginPath();g.arc(cx,cy,7,0,7);g.fill();
+    // rim point
+    var pr=cx+Math.cos(an)*rw, prY=cy+Math.sin(an)*rw;
+    g.fillStyle='#B85C2E';g.beginPath();g.arc(pr,prY,8,0,7);g.fill();
+    // mid point R/2
+    var mr=cx+Math.cos(an)*rw/2, mrY=cy+Math.sin(an)*rw/2;
+    g.fillStyle='#2E6A8E';g.beginPath();g.arc(mr,mrY,7,0,7);g.fill();
+    // radius label
+    g.strokeStyle='#3D7E5F';g.lineWidth=1.6;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+rw,cy);g.stroke();
+    g.fillStyle='#3D7E5F';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('R = 0,30 m',cx+rw/2,cy-8);
+    g.fillStyle='#B85C2E';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('\u25cf point du bord',16,24);
+    g.fillStyle='#2E6A8E';g.fillText('\u25cf point \u00e0 R/2',16,42);
   }
 
   // ===== Prof =====
@@ -266,31 +457,27 @@
   document.getElementById('profBack').addEventListener('click',backHome);
   document.getElementById('profBack2').addEventListener('click',backHome);
   document.getElementById('profBtn').addEventListener('click',function(){
-    var p=document.getElementById('inPass').value;
-    var err=document.getElementById('profErr');
+    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
     if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
     err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
   });
   document.getElementById('profRefresh').addEventListener('click',loadResults);
-
   function loadResults(){
     var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
-    fetch(FB_URL+'/'+FB_NODE+'.json')
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
-        var rows=Object.keys(data).map(function(k){ return data[k]; }).filter(Boolean);
-        rows.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
-        var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Score</th><th>%</th><th>Date</th></tr></thead><tbody>';
-        rows.forEach(function(r){
-          var d=r.date?new Date(r.date):null;
-          var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
-          html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+(r.score!=null?r.score+'/'+(r.total||TOTAL):'\u2014')+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
-        });
-        html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
-        box.innerHTML=html;
-      })
-      .catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+      rows.forEach(function(r){
+        var d=r.date?new Date(r.date):null;
+        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+      });
+      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+      box.innerHTML=html;
+    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
 </body>
