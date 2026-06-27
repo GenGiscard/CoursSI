@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statique — Cours · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+
+  .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--steel);border-color:var(--steel)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
+  .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--steel)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px) 90px}
+  section{padding:54px 0 48px;border-bottom:1px solid var(--line);min-height:60vh}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(27px,4.4vw,44px);line-height:1.04;margin:12px 0 16px}
+  h3{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,23px);margin:18px 0 8px}
+  .lede{font-size:16.5px;max-width:62ch;color:var(--ink-soft);margin:8px 0 18px}
+  p{margin:0 0 14px;max-width:64ch} b{color:var(--ink)}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+  .chip{font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:6px 12px;color:var(--ink)}
+  .chip.s{background:rgba(46,106,142,.09);border-color:rgba(46,106,142,.4);color:#235877}
+
+  .big-idea{background:var(--steel);color:#fff;border-radius:16px;padding:24px 26px;margin:14px 0}
+  .big-idea .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .big-idea .v{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.7vw,26px);line-height:1.2}
+  .big-idea .v b{color:#FCE0B0}
+
+  .eqcard{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .eqcard .eq{font-family:var(--mono);font-size:clamp(16px,2.3vw,21px);font-weight:700;color:var(--ink);letter-spacing:.01em}
+  .eqcard .leg{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .eqcard .leg b{color:var(--steel)}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:10px 0}
+  figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
+  figure svg,figure canvas{width:100%;height:auto;display:block}
+  figcaption{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:10px;text-align:center}
+  .cap{font-family:var(--mono);font-size:13px;color:var(--ink);background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.28);border-radius:10px;padding:11px 15px;margin-top:12px;min-height:42px;display:flex;align-items:center;gap:10px}
+  .cap .ph{font-weight:700;color:var(--steel);flex:0 0 auto}
+
+  table.t{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px;margin:10px 0}
+  table.t th,table.t td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  table.t thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.t td b{font-family:var(--mono);color:var(--ink)} table.t tr:last-child td{border-bottom:none}
+
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABQCAYAAABGfRh7AAAMsUlEQVR42u2ce3Bc1X3HP+ecu+9dvSXLsnjUZkiMeZqQpIlbexIeNpi4NthYMhYppanBaZnMUEjTB4aGTmLayaMT6kBDMClYxA4QIGATD2SIDQ6JCzgkpjSm02IaLD9Wj13t695z+sfdXcl4Jd1d7drNzN6Z9Whmr3fv+Z7v7/f7fn/nJ4mOT19vOAWXAuJGcFvYsC4Eg0agTvIzGK2RsQhWNmdzqkDIGrBzBiyBMWBOAQjYOSwhxCkBQRRexX9OxUMIEAJJ/aqDAGBNzRhR03AY+6GGgWdM5SAYY9Ba1+zxHCMwjgFH1DArmnHJp0wQDOD3WSglpwKy4uqQMWAFDSJQI0KY/OIdjXGc8kBQSjI4nORfvnQzVy64GNvRKFn99KGBmDDEhKC9FhxwHKRlEd/5Ioe+8zBWQ0NJMCZkgjaG9uYmutpbT5puqFnia2gAbSrLCTnbxhiD42ikktVOVy5ba5gXjeMglMLYduWJUQhRfMkaVImaS6S8GJpKjNV1Qh2EOgh1EOog1EGowEBNqvi0RkrJK/v2s/6r9xMJBd1GhUf0R4zgs0HN6iAMmzJ2RAiwbbpv/wKB07pBa5iGop0WCAUNNpxM8dqbbxOORtCTaPQPKsSkgYMRQy4kSRnjXTUKicllMenMqWdC8UOkJBgOEQkFPLvOQnvNHzKIkECWyQRjqap1pKoCgsmHhtYGrb1ZToEr5402rpMqx6kK3BCoJ8Z6daiDUAehDsL/Q7F0HJrjeg9eE7wEhJhGA9MYt0pog1tiPqjmDAg9vW6zZ+VoDOlsFp/PV5ZOyBmDHZBU2lwTgYCrFOVEmsp9Q/h8kwJRFRCCAT9nzOokGg6VBcKwETToBNqkKavPZAxCKX77rfuRkXB+gaLEbQYhBbmBI8hweEJJPy0QCh3oT14wl/3bvlXsG3q6HAcsiyMPPcLw1sexGhsnbYuXUo3Jfb/yJJqEz0L4/ROyoSpMUFISCvjLj2ch8Fmq4nMXGQ55/65ah0OBemXdX+gET+dkp0rSuWoglH1mWUYlqeuEOgh1EH73FGPZiXGKjO0prUjpSV4YfZKqQ7lJTlhWUW5XetnJJDh6cm1uXMUog4Ha6oRsLkcilXaB8Li7RmuEUqQy2Yoqi3EcZvT14pvRkW+0itLeQUqSb/ySwR+/iAqHSqrGaYHgaHdu4eU39nPdF+8lGgmXJZuHDHxeZviTSJhBxynPQWhN48IF+GfN9HCvQ/xHOyASrh0TcrbDkcFhMjm7LBAGDaSiAhGWFY3rOMmkK7W1KckE42iEkuhUprJxnXLzgc+y8FlWWSBYBqTQ00qMQinXLk9w7iCUKh0qtaoOhZen+6Ems1B1nVAH4RSDIIRAypNshqSs2glUVUDI5nKkUxkspWrvDIXIZ/xUeU2YWoEghMAYw5zuLi6adzaHjsZxHI2lajOQV5hEs+NDhM6bh9XWWmzOnDIQXMkrOPuMLnY/+BW+cusNBIM+jg4NI6Ws3gBonvr20BAyFqPz1pv5vXv/Hl9Ls6fptJqHg6uUDaGAnztuuIbd393I2qWLSIymGBlNTS9EhEAohU6OYnI5WpYtZfY3N9J29RKkVFWrsVUTS+4RgGbOrE4e2vAF1ixZxIZNW3h533/QEA4R8Puwy4hhoRQ6k8HJZAjPP5+OvjVEz/nwmO+oYmKsoot0Z6J1XjBd9rGLWHTx+Wza9hz3Pvw4Bw8dpbkhihQCZxJVKaTEaI09NISvq4sZvdfScsWlrmPW2mVHlees5VQq0CmzmSmFQEmJozU+S/Hnq5fyykMbWXftFaQzWYaTo6VDJL84J5nEaE3rqhXM/ua9tF5xKcIwNpJT7u7rqU+g5GQABAK+4oLKbZooKTGA42hmdbRx31/dwo777mLBRedwZHCYbM52q0g+7k02i50YIXLJxZzxT/cw808/i68x5lpfQfkzSYWmjZTgs5jMoanQmedtKNWLkFLym3f/lzndM5nT3YkQAtvRCCk8nxW5n+OWUW0MZ87s4Ialn6J7RhtvvHWAgYFjfDKk+Eg6gT1rFl3rP0fnjWvxt7QU2+migsUbbVxzJSVDP/s5Rx7b5s43fZBFxiADfkTzwh4zEa2TqTRCCq6/chF/c9MqTu/sOK6PUO6ltUYIiRBwND7EXz+4jY5du7hjxWX4r1mOLxw6fgfLNXGFhAmk3z3IwMP9jOzajVAK4T+xs2S0RjVEJgaBPBswhmPDCbraW7itbzm3rLwSv8/C0bri6XfH0aj8rw4kE0ki0chY/FaS9AqLEwInleLwD37IsSeewYwkkLHohCdQRRBaFvVMGe6WUmRyOYaTo3z83A9x55/1sPgT890+n6NRsvyDlILtllIWs37ZSc8Yt6GSB3Twpy9z+HtbyLzz36hoBGFZk0prozWqMYpo+sPVxrIUjqOn1AJKSkZGU2itWXX5Au783GrOOq1rWiFijKlMTI1jTeqd/+LQ5n4Se15F+ixkMD9U6iGZy0gQ0f6pNeboUILmhigw9QiezH9xfDhBW1OUW3s/w629nyESDBb/b00d5TjW2CMjHP7+4ww+sx09mkZFI95a+fkwd4ZH8J/Whdrz/NMb4iNJ9u4/gNaaYMA/abuvQONoKEjWdnh2115+tOsXdLY2M3f2aQghcBydf84qgjEuYRohiO98gfc2fp3Ey68i/QFkIDD1SHFBho+m0LZN05JLmfkX6xAmnxGeeulV7v72FvbuP0BjNIzfN7XMLYRIIpUmZ9ssW/hRNqzr5dw5Z5yQAKe9+3kGJt96m0ObH2F07+vIQH7xHuS4UAqdzaJTKULnzaOjbzWxCy9w33McbcBNUKlMln/uf5qv/dtTDMQHaW6IIfLxPjm7BAJBfCRJQzTE+pVLuG3tChpjEXT+1+ErCpFxi8/GBzm8ZStD23dislmX+tor9TXOSAKro4PW1Stou2qxW0oLMrzAhPGJ7Z333ufuB/rp3/FTMNAQCXtSjZaS5GzN4EiCubO7+dubrqNn8cIiK6TXKjKO+lobjj23gyP927DfH0DFoiDk1LMJBRmeSIJP0XTFZbT3rMTf2nwCwEUQCt/taI2Vp/DOn73GnZv6eWXfW0TDIYIenKAAlFKMpjOkMlkWf2I+d93cy0fmnuUtRBxdLHmJfW9yaPOjpPa9iQqFEH6/d+pnMuhMhsj8C2nv6xlzoPmziOPuNyW2t+AElZTYjsOmbc+xcbN3J1hQnFK6IRIKBLhp+WV88Y+vpaO5Mb/RulhpPrgzmYHDDDzyGMM7fwLaoCJhTyWv4ECdRAL/rJm09q6k5fLjHWgpLVIShLFNGQuR9waOcM93trL5mRewbU1j1FuIKCVxHE18OMns7hl86caV3LjsUreKaO3OMuZjV9s2R556lmNbn8A+egwVjboP7YX6QuAkk4hggKarFtNx3TVYDTFPMnxSEAqHJG7f0P2Q3a//mr/b9Cgv/vyXREJBQgG/p2aJpRSpTIZkKsOiS87j7nW9LLjwnOL7I794jUObHyG9/21UJIzw+aamvgAhFTqdRudyRD92CR19PYTPmn2Cl5j0Y4xHj1xwgq5FNnz3yZ38w4NbOXDwfZobosUd91JShxJJLCm5Yfnl3L7kD/Bt30H8hZeQQiILJ8dTUb/QdE0mCZx5Ou3Xr6Z54YITBJUnt2vKbBSMd4KH40N89aFt3P/E86TTORpjYYx2wZqq1yC05nAixe1Nis/7bIZCEZQX6ud3VicSyGiE5mVX0XbtH2GF80OdhinPHqcNQiknuHf/b7hz06M8t/vfCQX8hIMBHO1MupkKGBaS20KaW8KSuKMnP5rPlzydSmMcm9iC36ejr5fg6d3Tc6DTAaEYItoUwdiy/SW+/K/9/PqdgzTFoljWxCHi/p0luD1sWB8SxM3EE85CKUwuh5McJXD2HNr7emj6+Ecron7VQRgfIuR7C0OJJP/4vSe57/vPMpRI0hyLYkoYM08g5I2OTiSQTY20XLOMtuVXo/z+qiy+qiCUCpFfHfgfNnx7C0/+ZA8+SxENhY4rqZOCUKD+6CgGQWzRAjrXrsY/s3Pa1K85CGMdalMsqU++uIe7HniM1986QGM0gt9nYedHc0qBcJzRmfdh2vvW0DD/gposvmYgjIWIoWDMRtMZvvHoU3xjy9Mcjg+7JRU46ugxEIREGeManfZWWletoPXqJUilqkr9kwpCKdV54N3fctf9rjGzpMAOhfjLfHU4mkiilKLp8k/TvmYV/rbWmu7+SQWh2ArUY/ni+T2vcc8D/by07z+5o9nHeitH+vxzmbm2h+i8uRMand9pEEoaM9thw8NPYG3fwR19y/EvvdJNjE5+JvEkTsD/H/USMayikj2kAAAAAElFTkSuQmCC"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_statique.html">← Séquence : statique</a>
+    <div class="brand">
+      <div class="mark">C</div>
+      <div><h1>Statique</h1><p>Cours · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="prog"><i id="progBar"></i></div>
+    <div class="links" id="links">
+      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
+      <a href="#s2" class="navlink"><span>02</span>La force</a>
+      <a href="#s3" class="navlink"><span>03</span>Le moment</a>
+      <a href="#s4" class="navlink"><span>04</span>Le PFS</a>
+      <a href="#s5" class="navlink"><span>05</span>Deux forces</a>
+      <a href="#s6" class="navlink"><span>06</span>Trois forces</a>
+      <a href="#s7" class="navlink"><span>07</span>Liaisons</a>
+      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="s1">
+      <span class="kicker">Statique · problématique</span>
+      <h2>Pourquoi rien ne bouge ?</h2>
+      <div class="twocol">
+        <div>
+          <p class="lede">Cette équerre murale supporte une charge&nbsp;: elle ne bouge pas, elle est en <b>équilibre</b>. Pourtant des forces s'exercent sur elle.</p>
+          <p>La <b>statique</b> étudie les solides <b>immobiles</b> soumis à des actions mécaniques, et cherche les conditions qui garantissent cet équilibre.</p>
+          <div class="chips"><span class="chip s">forces</span><span class="chip s">moments</span><span class="chip s">équilibre</span></div>
+        </div>
+        <figure>
+          <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="10" width="22" height="220" fill="#cfc4b2"/>
+            <line x1="42" y1="40" x2="240" y2="40" stroke="#2A2622" stroke-width="6"/>
+            <line x1="42" y1="40" x2="180" y2="150" stroke="#2E6A8E" stroke-width="6"/>
+            <rect x="200" y="40" width="70" height="46" rx="4" fill="#3D7E5F"/>
+            <text x="235" y="68" font-family="JetBrains Mono,monospace" font-size="12" fill="#fff" text-anchor="middle">charge</text>
+            <line x1="235" y1="92" x2="235" y2="150" stroke="#C0492E" stroke-width="3" marker-end="url(#aR)"/>
+            <text x="248" y="128" font-family="JetBrains Mono,monospace" font-size="12" fill="#C0492E">poids</text>
+            <defs><marker id="aR" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0492E"/></marker></defs>
+          </svg>
+          <figcaption>Un solide en équilibre&nbsp;: la somme des actions mécaniques se compense.</figcaption>
+        </figure>
+      </div>
+      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Un solide est <b>en équilibre</b> quand toutes les actions mécaniques qu'il subit <b>se compensent</b> — en translation comme en rotation.</div></div>
+    </section>
+
+    <section id="s2">
+      <span class="kicker">02 · Modéliser une action</span>
+      <h2>La force : un vecteur</h2>
+      <div class="twocol">
+        <figure>
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="120" x2="340" y2="120" stroke="#235877" stroke-width="1.4" stroke-dasharray="6 5"/>
+            <text x="300" y="112" font-family="JetBrains Mono,monospace" font-size="11" fill="#235877">droite d'action</text>
+            <circle cx="120" cy="120" r="6" fill="#2A2622"/>
+            <text x="92" y="150" font-family="JetBrains Mono,monospace" font-size="11" fill="#2A2622">point d'application</text>
+            <line x1="120" y1="120" x2="250" y2="120" stroke="#C0492E" stroke-width="6" marker-end="url(#aF)"/>
+            <text x="180" y="104" font-family="JetBrains Mono,monospace" font-size="13" fill="#C0492E" font-weight="700">F</text>
+            <text x="258" y="124" font-family="JetBrains Mono,monospace" font-size="11" fill="#C0492E">sens →</text>
+            <text x="150" y="92" font-family="JetBrains Mono,monospace" font-size="11" fill="#5C544B">longueur ∝ intensité (N)</text>
+            <defs><marker id="aF" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#C0492E"/></marker></defs>
+          </svg>
+          <figcaption>Les 4 caractéristiques d'une force.</figcaption>
+        </figure>
+        <div>
+          <p class="lede">Une action mécanique se modélise par une <b>force</b>, représentée par un <b>vecteur</b>.</p>
+          <p>Quatre caractéristiques la définissent&nbsp;: son <b>point d'application</b>, sa <b>droite d'action</b> (la direction), son <b>sens</b>, et son <b>intensité</b> (la norme).</p>
+          <div class="eqcard"><div class="eq">F  →  intensité en newtons (N)</div><div class="leg">On note le vecteur <b>F⃗</b>. Sur un schéma, la <b>longueur</b> de la flèche est proportionnelle à l'intensité.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3">
+      <span class="kicker">03 · L'effet de rotation</span>
+      <h2>Le moment d'une force</h2>
+      <p class="lede">Une même force ne produit pas le même effet selon l'endroit où elle s'applique&nbsp;: c'est le <b>moment</b> qui mesure son pouvoir de <b>rotation</b> autour d'un axe.</p>
+      <figure>
+        <canvas id="cvMoment" width="640" height="250"></canvas>
+        <div class="cap" id="capMoment"><span class="ph">—</span><span id="capMomentTxt">…</span></div>
+      </figure>
+      <div class="eqcard"><div class="eq">M = F × d&nbsp;&nbsp;(N·m)</div><div class="leg"><b>d</b> = le <b>bras de levier</b>&nbsp;: la distance perpendiculaire entre l'axe et la droite d'action de la force.</div></div>
+    </section>
+
+    <section id="s4">
+      <span class="kicker">04 · La condition d'équilibre</span>
+      <h2>Le principe fondamental de la statique</h2>
+      <p class="lede">Pour qu'un solide reste immobile, deux conditions doivent être réunies <b>en même temps</b>.</p>
+      <div class="big-idea">
+        <div class="t">Principe fondamental de la statique (PFS)</div>
+        <div class="v">① La somme des forces est nulle&nbsp;: <b>Σ F⃗ = 0⃗</b><br>② La somme des moments est nulle&nbsp;: <b>Σ M = 0</b></div>
+      </div>
+      <div class="twocol">
+        <div class="card"><h3 style="margin-top:0">① Pas de translation</h3><p style="margin:0">Si les forces ne se compensent pas, le solide est poussé dans une direction&nbsp;: il <b>glisse</b>.</p></div>
+        <div class="card"><h3 style="margin-top:0">② Pas de rotation</h3><p style="margin:0">Si les moments ne se compensent pas, le solide est mis à <b>tourner</b> autour d'un axe.</p></div>
+      </div>
+    </section>
+
+    <section id="s5">
+      <span class="kicker">05 · Cas simple</span>
+      <h2>Solide soumis à deux forces</h2>
+      <div class="twocol">
+        <div>
+          <p class="lede">Quand un solide à l'équilibre n'est soumis qu'à <b>deux forces</b>, leur situation est très contrainte.</p>
+          <p>Les deux forces ont&nbsp;: la <b>même intensité</b>, des <b>sens opposés</b>, et la <b>même droite d'action</b> (on dit qu'elles sont <b>directement opposées</b>).</p>
+          <div class="chips"><span class="chip s">même intensité</span><span class="chip s">sens opposés</span><span class="chip s">même droite d'action</span></div>
+        </div>
+        <figure>
+          <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+            <line x1="150" y1="10" x2="150" y2="230" stroke="#235877" stroke-width="1.2" stroke-dasharray="6 5"/>
+            <line x1="120" y1="30" x2="180" y2="30" stroke="#7a7064" stroke-width="6"/>
+            <line x1="150" y1="30" x2="150" y2="115" stroke="#2E6A8E" stroke-width="6" marker-end="url(#aT)"/>
+            <text x="158" y="80" font-family="JetBrains Mono,monospace" font-size="12" fill="#2E6A8E" font-weight="700">T (câble)</text>
+            <rect x="125" y="150" width="50" height="40" rx="4" fill="#3D7E5F"/>
+            <line x1="150" y1="190" x2="150" y2="225" stroke="#C0492E" stroke-width="6" marker-end="url(#aP)"/>
+            <text x="158" y="216" font-family="JetBrains Mono,monospace" font-size="12" fill="#C0492E" font-weight="700">P (poids)</text>
+            <defs>
+              <marker id="aT" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#2E6A8E"/></marker>
+              <marker id="aP" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#C0492E"/></marker>
+            </defs>
+          </svg>
+          <figcaption>Masse suspendue&nbsp;: T = P, opposées, même droite d'action.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="s6">
+      <span class="kicker">06 · Cas du triangle des forces</span>
+      <h2>Solide soumis à trois forces</h2>
+      <p class="lede">Avec <b>trois forces</b>, l'équilibre impose deux propriétés géométriques que l'animation met en évidence.</p>
+      <figure>
+        <canvas id="cvForces" width="640" height="250"></canvas>
+        <div class="cap" id="capForces"><span class="ph">—</span><span id="capForcesTxt">…</span></div>
+      </figure>
+      <div class="eqcard"><div class="eq">droites concourantes&nbsp;&nbsp;+&nbsp;&nbsp;Σ F⃗ = 0⃗</div><div class="leg">Les <b>trois droites d'action</b> se croisent en un même point, et placées bout à bout les vecteurs forment un <b>triangle fermé</b>.</div></div>
+    </section>
+
+    <section id="s7">
+      <span class="kicker">07 · Modéliser les appuis</span>
+      <h2>Liaisons &amp; réactions d'appui</h2>
+      <p class="lede">Là où le solide est en contact avec son support, naît une <b>réaction</b>. Sa nature dépend du type de liaison&nbsp;: c'est ce qu'il faut connaître pour calculer un équilibre.</p>
+      <table class="t">
+        <thead><tr><th>Liaison</th><th>Mouvement bloqué</th><th>Réaction (inconnues)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Appui simple</b></td><td>translation perpendiculaire au contact</td><td><b>1</b> force ⊥ au contact</td></tr>
+          <tr><td><b>Articulation</b> (pivot)</td><td>toutes les translations</td><td><b>1</b> force de direction quelconque = <b>2</b> composantes</td></tr>
+          <tr><td><b>Encastrement</b></td><td>translations <b>et</b> rotation</td><td><b>1</b> force (2 comp.) <b>+ 1</b> moment</td></tr>
+        </tbody>
+      </table>
+      <p>Résoudre un problème de statique, c'est écrire le <b>PFS</b> sur le solide isolé pour trouver ces réactions inconnues.</p>
+    </section>
+
+    <section id="s8" style="border-bottom:none">
+      <span class="kicker">08 · L'essentiel</span>
+      <h2>Synthèse</h2>
+      <div class="eqcard"><div class="eq">Une force = un vecteur (point, droite d'action, sens, intensité en N)</div></div>
+      <div class="eqcard"><div class="eq">M = F × d&nbsp;&nbsp;—&nbsp;&nbsp;d = bras de levier (N·m)</div></div>
+      <div class="big-idea"><div class="t">Le PFS</div><div class="v"><b>Σ F⃗ = 0⃗</b> (pas de translation) et <b>Σ M = 0</b> (pas de rotation).</div></div>
+      <div class="card">
+        <h3 style="margin-top:0">Cas particuliers</h3>
+        <p style="margin:0"><b>2 forces</b>&nbsp;: même intensité, opposées, même droite d'action. — <b>3 forces</b>&nbsp;: droites concourantes + triangle des forces fermé.</p>
+      </div>
+      <a class="cta" href="hub_si_statique.html">🔧 Passer au TP « Leviers &amp; équilibres » →</a>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var prog=document.getElementById('progBar');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
+    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+  }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+    var a=Math.atan2(y2-y1,x2-x1),L=9;g.beginPath();g.moveTo(x2,y2);
+    g.lineTo(x2-L*Math.cos(a-0.4),y2-L*Math.sin(a-0.4));g.lineTo(x2-L*Math.cos(a+0.4),y2-L*Math.sin(a+0.4));g.closePath();g.fill();}
+
+  // ===== Animation : moment / bras de levier =====
+  (function(){
+    var cv=document.getElementById('cvMoment'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var capP=document.querySelector('#capMoment .ph'), capT=document.getElementById('capMomentTxt');
+    var CAPS=[
+      ['1','Voici un solide qui peut tourner autour de l\u2019axe O (le pivot).'],
+      ['2','On applique une force F \u00e0 la distance d de l\u2019axe : d est le bras de levier.'],
+      ['3','La force cr\u00e9e un moment M = F \u00d7 d : le solide se met \u00e0 tourner.'],
+      ['4','Plus le bras de levier d est grand, plus le moment est grand.']
+    ];
+    var p=0, F=50;
+    function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    function draw(){
+      var idx=Math.floor(p)%4, frac=p-Math.floor(p);
+      g.clearRect(0,0,W,H);
+      var ox=130, oy=H/2;             // pivot O
+      var d = (idx>=3)? 230 : 150;    // bras de levier en px
+      var dm = (idx>=3)? 0.8 : 0.5;   // valeur en m
+      var ang = 0;
+      if(idx===2) ang = 0.32*ease(frac);
+      else if(idx===3) ang = 0.5;
+      // sol / hachures
+      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;
+      g.beginPath();g.moveTo(40,oy+54);g.lineTo(W-40,oy+54);g.stroke();
+      for(var hx=50;hx<W-40;hx+=16){g.beginPath();g.moveTo(hx,oy+54);g.lineTo(hx-7,oy+62);g.stroke();}
+      // support pivot
+      g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-13,oy+54);g.lineTo(ox+13,oy+54);g.closePath();g.fill();
+      // barre (tourne de -ang)
+      var ex=ox+Math.cos(ang)* (d+40), ey=oy+Math.sin(ang)*(d+40);
+      g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';
+      g.beginPath();g.moveTo(ox,oy);g.lineTo(ex,ey);g.stroke();g.lineCap='butt';
+      // pivot point
+      g.fillStyle='#fff';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(ox,oy,6,0,7);g.fill();g.stroke();
+      g.fillStyle='#2A2622';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('O',ox,oy-12);
+      // point d'application sur la barre à distance d
+      var fx=ox+Math.cos(ang)*d, fy=oy+Math.sin(ang)*d;
+      if(idx>=1){
+        // bras de levier (segment O -> projection)
+        g.strokeStyle='#2E6A8E';g.lineWidth=1.6;g.setLineDash([4,4]);
+        g.beginPath();g.moveTo(ox,oy+30);g.lineTo(fx,oy+30);g.stroke();g.setLineDash([]);
+        g.fillStyle='#2E6A8E';g.font='12px "JetBrains Mono",monospace';g.fillText('d = '+String(dm).replace('.',',')+' m',(ox+fx)/2,oy+46);
+        // force F vers le bas
+        arrow(g,fx,fy,fx,fy+62,'#C0492E',5);
+        g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F = 50 N',fx+34,fy+40);
+      }
+      if(idx>=2){
+        // flèche de rotation autour de O
+        g.strokeStyle='#3D7E5F';g.lineWidth=2.4;g.beginPath();g.arc(ox,oy,40,-0.5,0.9);g.stroke();
+        var aa=0.9;arrow(g,ox+40*Math.cos(aa),oy+40*Math.sin(aa),ox+40*Math.cos(aa+0.18),oy+40*Math.sin(aa+0.18),'#3D7E5F',2.4);
+        g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';
+        g.fillText('M = F \u00d7 d = '+Math.round(F*dm)+' N\u00b7m',ox+60,oy-30);
+      }
+      g.textAlign='left';
+      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1];
+    }
+    setInterval(function(){ p=(p+0.012)% 4; draw(); }, 40); draw();
+  })();
+
+  // ===== Animation : 3 forces + triangle =====
+  (function(){
+    var cv=document.getElementById('cvForces'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var capP=document.querySelector('#capForces .ph'), capT=document.getElementById('capForcesTxt');
+    var CAPS=[
+      ['1','Trois forces s\u2019appliquent sur le solide en un m\u00eame point.'],
+      ['2','Leurs droites d\u2019action sont concourantes : elles se croisent en un point.'],
+      ['3','On place les trois vecteurs bout \u00e0 bout\u2026'],
+      ['4','\u2026 le triangle se ferme : Σ F = 0 \u2192 le solide est en \u00e9quilibre.']
+    ];
+    var N={x:175,y:135};
+    var V=[{x:78,y:-26},{x:-30,y:64},{x:-48,y:-38}]; // somme = (0,0)
+    var T0={x:430,y:80};
+    var starts=[{x:T0.x,y:T0.y}];
+    starts.push({x:starts[0].x+V[0].x,y:starts[0].y+V[0].y});
+    starts.push({x:starts[1].x+V[1].x,y:starts[1].y+V[1].y});
+    var COL=['#C0492E','#2E6A8E','#3D7E5F'];
+    var p=0;
+    function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    function draw(){
+      var idx=Math.floor(p)%4, frac=p-Math.floor(p);
+      g.clearRect(0,0,W,H);
+      // noeud / solide
+      if(idx<2 || idx===1){}
+      // lignes d'action concourantes (phase 2)
+      if(idx===1){ g.strokeStyle='rgba(35,88,119,.4)';g.lineWidth=1;g.setLineDash([5,5]);
+        for(var k=0;k<3;k++){var vx=V[k].x,vy=V[k].y,nrm=Math.hypot(vx,vy);
+          g.beginPath();g.moveTo(N.x-vx/nrm*120,N.y-vy/nrm*120);g.lineTo(N.x+vx/nrm*120,N.y+vy/nrm*120);g.stroke();}
+        g.setLineDash([]);
+      }
+      // noeud
+      g.fillStyle='#2A2622';g.beginPath();g.arc(N.x,N.y,6,0,7);g.fill();
+      g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';
+      if(idx<2) g.fillText('point d\u2019application',N.x,N.y+24);
+      if(idx<2){
+        // 3 forces depuis le noeud
+        for(var i=0;i<3;i++){ arrow(g,N.x,N.y,N.x+V[i].x,N.y+V[i].y,COL[i],5);
+          g.fillStyle=COL[i];g.font='700 13px "JetBrains Mono",monospace';
+          g.fillText('F'+(i+1),N.x+V[i].x*1.18,N.y+V[i].y*1.18); }
+      } else {
+        // chaîne bout à bout (interpolée en phase 3, complète en phase 4)
+        var u = (idx===2)? ease(frac) : 1;
+        for(var j=0;j<3;j++){
+          var sx=N.x+(starts[j].x-N.x)*u, sy=N.y+(starts[j].y-N.y)*u;
+          arrow(g,sx,sy,sx+V[j].x,sy+V[j].y,COL[j],5);
+          g.fillStyle=COL[j];g.font='700 12px "JetBrains Mono",monospace';
+          g.fillText('F'+(j+1),sx+V[j].x*0.5,sy+V[j].y*0.5-6);
+        }
+        if(idx===3){ g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
+          g.fillText('triangle ferm\u00e9', T0.x-4, T0.y-14); }
+      }
+      g.textAlign='left';
+      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1];
+    }
+    setInterval(function(){ p=(p+0.011)%4; draw(); }, 40); draw();
+  })();
+</script>
+</body>
+</html>

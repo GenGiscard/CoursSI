@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statique — Séquence · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 22px 80px}
+  .top{display:flex;align-items:center;justify-content:space-between;padding:20px 0;margin-bottom:8px}
+  .back{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-decoration:none;display:inline-flex;gap:7px;align-items:center;
+    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 13px;transition:.15s}
+  .back:hover{color:var(--green);border-color:var(--green)}
+  .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .hero{padding:18px 0 8px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:500}
+  h1{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(30px,5.6vw,52px);line-height:1.0;margin:12px 0 14px}
+  .lede{font-size:16.5px;max-width:60ch;color:var(--ink-soft);margin:0 0 18px}
+  .badges{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
+  .badge{font-family:var(--mono);font-size:11px;font-weight:500;padding:4px 10px;border-radius:6px;border:1px solid;display:inline-flex;gap:6px;align-items:center}
+  .badge .dot{width:7px;height:7px;border-radius:50%}
+  .c-m{color:#2c6147;border-color:rgba(61,126,95,.45);background:rgba(61,126,95,.10)} .c-m .dot{background:var(--green)}
+  .c-e{color:#8a6313;border-color:rgba(189,138,42,.5);background:rgba(189,138,42,.11)} .c-e .dot{background:var(--amber)}
+  .bochips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-family:var(--mono);font-size:11px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .flow{display:flex;align-items:stretch;gap:10px;margin:26px 0 30px;flex-wrap:wrap}
+  .step{flex:1 1 180px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 16px}
+  .step .n{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--green);font-weight:700}
+  .step .v{font-family:var(--display);font-weight:700;font-size:15px;margin-top:3px}
+  .step .d{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .flow .arr{align-self:center;font-family:var(--mono);color:var(--line-strong);font-size:18px;flex:0 0 auto}
+  h2.sec{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em;margin:0 0 4px}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0 0 18px}
+  .mods{display:grid;grid-template-columns:1fr;gap:14px}
+  .mod{display:block;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);
+    border-left:5px solid var(--rail);border-radius:14px;padding:20px 22px;position:relative;transition:.18s}
+  a.mod:hover{box-shadow:0 8px 26px rgba(42,38,34,.09);transform:translateY(-2px)}
+  .mod .row{display:flex;align-items:flex-start;gap:16px}
+  .mod .ico{font-size:30px;line-height:1;flex:0 0 auto;margin-top:2px}
+  .mod .body{flex:1 1 auto;min-width:0}
+  .mod .type{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--rail);font-weight:700}
+  .mod h3{font-family:var(--display);font-weight:700;font-size:19px;margin:3px 0 6px;letter-spacing:-.01em}
+  .mod p{font-size:13.5px;color:var(--ink-soft);margin:0}
+  .mod .go{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:500;margin-top:12px;display:flex;align-items:center;gap:6px;transition:.18s}
+  a.mod:hover .go{gap:10px}
+  .mod .st{position:absolute;top:18px;right:20px;font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .mod .st.ok{color:#2c6147;background:rgba(61,126,95,.13);border:1px solid rgba(61,126,95,.42)}
+  .mod .st.soon{color:var(--ink-soft);background:var(--cream);border:1px solid var(--line)}
+  .mod.soon{opacity:.62}.mod.soon:hover{box-shadow:none;transform:none}
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="fiche_si_bo_sequences.html">← Tous les modules SI</a>
+    <span class="lvl">Première · Spé SI · Séquence 05</span>
+  </div>
+
+  <header class="hero">
+    <span class="kicker">Mécanique</span>
+    <h1>Statique<br><span style="font-weight:700;font-size:.6em;color:var(--ink-soft)">l'équilibre des solides</span></h1>
+    <p class="lede">Étudier les actions mécaniques qui s'exercent sur un solide immobile : forces, moments, et les conditions qui garantissent l'équilibre d'un système.</p>
+    <div class="badges">
+      <span class="badge c-m"><span class="dot"></span>Modéliser &amp; résoudre</span>
+      <span class="badge c-e"><span class="dot"></span>Expérimenter</span>
+    </div>
+    <div class="bochips">
+      <span class="chip">force &amp; vecteur</span>
+      <span class="chip">moment M = F·d</span>
+      <span class="chip">bras de levier</span>
+      <span class="chip">PFS : ΣF = 0, ΣM = 0</span>
+      <span class="chip">2 forces / 3 forces</span>
+      <span class="chip">liaisons &amp; réactions</span>
+    </div>
+  </header>
+
+  <div class="flow">
+    <div class="step"><div class="n">01 · Cours</div><div class="v">Comprendre</div><div class="d">forces, moments, équilibre</div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="n">02 · TP</div><div class="v">Résoudre</div><div class="d">leviers et équilibres en jeu</div></div>
+    <div class="arr">→</div>
+    <div class="step"><div class="n">03 · Éval</div><div class="v">Valider</div><div class="d">les acquis, noter</div></div>
+  </div>
+
+  <h2 class="sec">Les modules de la séquence</h2>
+  <p class="sub">Trois temps complémentaires. Les modules s'activent à mesure de leur mise en ligne.</p>
+  <div class="mods" id="mods"></div>
+
+  <footer>Séquence rattachée au BO spécial n°1 du 22 janvier 2019 · spécialité SI, cycle terminal.</footer>
+</div>
+
+<script>
+  var MODULES=[
+    {type:'Cours', icon:'\uD83D\uDCD8', titre:'Statique \u2014 l\u2019\u00e9quilibre des solides',
+     desc:'8 diapositives projetables : la force (vecteur), le moment M = F\u00b7d et le bras de levier (animation), le principe fondamental de la statique, l\u2019\u00e9quilibre sous 2 puis 3 forces (animation triangle), liaisons et r\u00e9actions d\u2019appui.',
+     file:'cours_si_statique.html', rail:'--steel', pret:true},
+    {type:'TP', icon:'\uD83D\uDD27', titre:'Leviers &amp; \u00e9quilibres',
+     desc:'6 d\u00e9fis-jeux : assembler une condition d\u2019\u00e9quilibre, bras de levier express, tri force/moment, simulateur d\u2019\u00e9quilibre du levier, et plus. Score et rangs.',
+     file:'tp_si_statique.html', rail:'--amber', pret:false},
+    {type:'\u00c9valuation', icon:'\u2705', titre:'Valider les acquis',
+     desc:'\u00c9valuation \u00e0 gros exercices anim\u00e9s avec calculatrice (r\u00e9actions d\u2019appui d\u2019une poutre\u2026) et d\u00e9p\u00f4t des r\u00e9sultats au tableau de bord enseignant.',
+     file:'eval_si_statique.html', rail:'--green', pret:false}
+  ];
+  function modHTML(m){
+    var inner=
+      '<div class="st '+(m.pret?'ok">Disponible':'soon">\u00c0 venir')+'</div>'+
+      '<div class="row"><div class="ico">'+m.icon+'</div>'+
+        '<div class="body"><div class="type">'+m.type+'</div><h3>'+m.titre+'</h3><p>'+m.desc+'</p>'+
+          (m.pret?'<div class="go">Ouvrir \u2192</div>':'')+'</div></div>';
+    if(m.pret) return '<a class="mod" style="--rail:var('+m.rail+')" href="'+m.file+'">'+inner+'</a>';
+    return '<div class="mod soon" style="--rail:var('+m.rail+')">'+inner+'</div>';
+  }
+  var el=document.getElementById('mods');
+  if(el) el.innerHTML=MODULES.map(modHTML).join('');
+</script>
+</body>
+</html>
