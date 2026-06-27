@@ -23,6 +23,7 @@
     background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
     background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
+
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
@@ -45,6 +46,7 @@
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
   .nav a.navlink.on span{opacity:1;color:var(--amber)}
+
   .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,60px) 80px}
   section{padding:48px 0 44px;border-bottom:1px solid var(--line)}
   .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500}
@@ -56,18 +58,24 @@
   .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
   .chip.k{background:rgba(189,138,42,.1);border-color:rgba(189,138,42,.4);color:#8a6313}
   .badge-defi{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#8a6313;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+
   .panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:6px 0}
   .panel h4{font-weight:700;font-size:16px;margin:0 0 10px}
   .panel ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft)} .panel ul li{margin-bottom:5px} .panel ul li b{color:var(--ink)}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
   .note{font-size:13.5px;color:var(--ink-soft);background:rgba(189,138,42,.08);border:1px solid rgba(189,138,42,.3);border-radius:10px;padding:13px 16px;margin-top:8px} .note b{color:var(--ink)}
+  table.data{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px;margin:6px 0}
+  table.data th,table.data td{padding:9px 14px;border-bottom:1px solid var(--line);text-align:left}
+  table.data thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.data td b{font-family:var(--mono);color:var(--ink)} table.data tr:last-child td{border-bottom:none}
 
-  /* builder */
+  /* ---- builder (Défi 1) ---- */
   .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
   .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
-  .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+  .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
   .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
-  .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff}
+  .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
   .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
   .bslot.bad{border-color:var(--no);background:rgba(192,73,46,.08);animation:shake .35s}
   .bslot.lit{box-shadow:0 0 0 3px rgba(61,126,95,.25)}
@@ -75,12 +83,13 @@
   .bslot .ic{font-size:22px;line-height:1} .bslot .lb{font-family:var(--display);font-weight:700;font-size:12px;text-align:center;padding:0 4px}
   .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
   .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
-  .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+  .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
+    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
   .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
   .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
 
-  /* arcade */
+  /* ---- arcade (Défi 2 & 3) ---- */
   .game{background:var(--ink);color:var(--cream);border-radius:18px;padding:24px 26px;margin:6px 0}
   .game .ghead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px}
   .game .gtitle{font-family:var(--display);font-weight:800;font-size:20px}
@@ -89,31 +98,33 @@
   .gbar{height:8px;background:rgba(255,255,255,.12);border-radius:5px;overflow:hidden;margin-bottom:18px}
   .gbar i{display:block;height:100%;width:100%;background:#E9A36F;transition:width .1s linear}
   .gprompt{text-align:center;padding:8px 0 18px}
-  .gprompt .gq{font-family:var(--mono);font-size:clamp(17px,3vw,24px);color:#fff;font-weight:700}
+  .gprompt .gq{font-family:var(--mono);font-size:clamp(17px,3vw,24px);color:#fff;font-weight:700;letter-spacing:.01em}
   .gprompt .gask{font-family:var(--mono);font-size:13px;color:#C9BBA8;margin-top:6px}
-  .gprompt .gname{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.4vw,38px)}
+  .gprompt .gname{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.2vw,38px)}
   .gopts{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;max-width:520px;margin:0 auto}
   .gopt{font-family:var(--mono);font-weight:700;font-size:18px;padding:15px;border-radius:11px;cursor:pointer;border:2px solid rgba(233,163,111,.5);color:#E9A36F;background:transparent;transition:.12s}
   .gopt:hover{background:rgba(233,163,111,.14)}
-  .gbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;max-width:600px;margin:0 auto}
+  .gbtns{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;max-width:560px;margin:0 auto}
   .gbtn{font-family:var(--display);font-weight:700;font-size:16px;padding:16px 8px;border-radius:12px;cursor:pointer;border:2px solid;transition:.12s;background:transparent}
+  .gbtn small{display:block;font-family:var(--mono);font-size:9.5px;font-weight:400;opacity:.8;margin-top:3px}
   .gbtn.ana{color:#E9A36F;border-color:rgba(233,163,111,.55)} .gbtn.ana:hover{background:rgba(233,163,111,.14)}
-  .gbtn.tor{color:#9FCBAE;border-color:rgba(159,203,174,.55)} .gbtn.tor:hover{background:rgba(159,203,174,.14)}
-  .gbtn.num{color:#7FB7D6;border-color:rgba(127,183,214,.55)} .gbtn.num:hover{background:rgba(127,183,214,.14)}
+  .gbtn.tor{color:#7FB7D6;border-color:rgba(127,183,214,.55)} .gbtn.tor:hover{background:rgba(127,183,214,.14)}
+  .gbtn.num{color:#9FCBAE;border-color:rgba(159,203,174,.55)} .gbtn.num:hover{background:rgba(159,203,174,.14)}
   .gstart{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 0}
   .gstart p{color:#C9BBA8;font-size:14px;max-width:48ch;margin:0}
   .gbig{font-family:var(--mono);font-size:13px;background:#E9A36F;color:#2A2622;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;font-weight:700}
   .gflash{text-align:center;font-family:var(--mono);font-size:13px;min-height:20px;margin-top:14px;color:#C9BBA8}
-  .gover{text-align:center;padding:10px 0} .gover .gscore{font-family:var(--display);font-weight:800;font-size:34px;color:#E9A36F}
+  .gover{text-align:center;padding:10px 0}
+  .gover .gscore{font-family:var(--display);font-weight:800;font-size:34px;color:#E9A36F}
 
-  /* sliders / readouts / status (résolution, radar) */
+  /* ---- interactif canvas (Défi 4 & 5) ---- */
   .resbox,.park{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .resbox canvas,.park canvas{width:100%;height:auto;display:block;border-radius:8px;background:#FCFAF4;margin-bottom:14px}
-  .orow{display:grid;grid-template-columns:120px 1fr 92px;gap:12px;align-items:center;margin-bottom:14px}
+  .resbox canvas,.park canvas{width:100%;height:auto;display:block;border-radius:9px;background:#FCFAF4;border:1px solid var(--line);margin-bottom:14px}
+  .orow{display:grid;grid-template-columns:120px 1fr 88px;gap:12px;align-items:center;margin-bottom:8px}
   .orow .oname{font-family:var(--display);font-weight:700;font-size:13.5px}
   .orow input[type=range]{width:100%;accent-color:var(--amber)}
   .orow .oeta{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--steel);text-align:right}
-  .opt-readout{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+  .opt-readout{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
   .ord{flex:1 1 130px;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
   .ord .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
   .ord .v{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--ink);margin-top:3px}
@@ -121,9 +132,9 @@
   .opt-status.win{background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.4);color:#2c6147}
   .opt-status.miss{background:var(--cream);border:1px solid var(--line);color:var(--ink-soft)}
   .opt-status.over{background:rgba(192,73,46,.08);border:1px solid rgba(192,73,46,.35);color:#8f3a24}
-  .vactions{display:flex;gap:10px;margin-bottom:14px}
+  .vactions{display:flex;gap:10px;margin-bottom:12px}
 
-  /* matching */
+  /* ---- matching (Défi 6) ---- */
   .match{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .mcol{display:flex;flex-direction:column;gap:9px}
   .mitem{font-family:var(--display);font-weight:700;font-size:14px;background:var(--paper);border:2px solid var(--line-strong);border-radius:11px;padding:13px 16px;cursor:pointer;text-align:center;transition:.12s}
@@ -134,37 +145,11 @@
   .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
   .mmsg{font-family:var(--mono);font-size:13px;font-weight:700}
 
-  /* ---- Défi 7 : mots croisés ---- */
-  .cwbox{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
-  .cw-wrap{overflow-x:auto;padding-bottom:6px}
-  .cw{display:grid;gap:2px;background:var(--line-strong);padding:2px;border-radius:8px;width:max-content;margin:0 auto}
-  .cw .cell{width:30px;height:30px;position:relative;background:#fff;border-radius:2px}
-  .cw .cell.block{background:#2A2622}
-  .cw input{width:100%;height:100%;border:none;background:transparent;text-align:center;font-family:var(--mono);font-weight:700;font-size:15px;text-transform:uppercase;color:var(--ink);padding:0;border-radius:2px}
-  .cw input:focus{outline:2px solid var(--amber);background:#FFF8EC}
-  .cw .num{position:absolute;top:1px;left:2px;font-size:8px;font-family:var(--mono);color:var(--ink-soft);line-height:1;pointer-events:none}
-  .cw .cell.good input{background:rgba(61,126,95,.2);color:#2c6147}
-  .cw .cell.bad input{background:rgba(192,73,46,.16);color:#8f3a24}
-  .cw-clues{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0}
-  .cw-clues h5{font-family:var(--display);font-weight:800;font-size:14px;margin:0 0 8px;color:#8a6313}
-  .cw-clues ul{list-style:none;margin:0;padding:0;font-size:13px;color:var(--ink-soft)}
-  .cw-clues li{margin-bottom:6px} .cw-clues li b{color:var(--ink);font-family:var(--mono)}
-
-  /* ---- Défi 8 : recherche ---- */
-  .research{display:flex;flex-direction:column;gap:12px}
-  .ritem{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;transition:.15s}
-  .ritem.solved{border-color:var(--green);background:rgba(61,126,95,.06)}
-  .ritem .rq{font-size:14px;font-weight:600;margin-bottom:9px}
-  .ritem .rrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .ritem input[type=text]{flex:1 1 200px;font-family:var(--mono);font-size:14px;padding:9px 12px;border:1px solid var(--line-strong);border-radius:8px;background:var(--cream)}
-  .ritem input[type=text]:focus{outline:2px solid var(--amber);background:#fff}
-  .ritem .rmsg{font-family:var(--mono);font-size:12px;font-weight:700;min-width:84px}
-  .ritem .rhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:7px}
-
   .btn{font-family:var(--mono);font-size:12.5px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--ink);transition:.15s}
   .btn:hover{background:#fff;border-color:var(--amber);color:#8a6313}
   .btn.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)} .btn.primary:hover{background:#3a342e;color:#fff}
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--green);color:#fff;border-radius:10px;padding:12px 18px}
+
   .menu-btn{display:none}
   @media(max-width:880px){
     .shell{flex-direction:column}
@@ -172,13 +157,14 @@
     .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
     .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
     .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
-    .gopts,.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:84px 1fr 72px}
+    .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:84px 1fr 76px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
 </style>
 </head>
 <body>
 <div class="shell">
+
   <aside class="nav" id="nav">
     <a class="back" href="hub_si_information.html">← Séquence : information</a>
     <div class="brand">
@@ -193,15 +179,14 @@
     </div>
     <div class="links" id="links">
       <a href="#obj" class="navlink"><span>01</span>Objectif</a>
+      <a href="#proto" class="navlink"><span>02</span>Repère</a>
       <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a>
       <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a>
       <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a>
       <a href="#defi4" class="navlink"><span>D4</span>Règle la résolution</a>
       <a href="#defi5" class="navlink"><span>D5</span>Radar de recul</a>
       <a href="#defi6" class="navlink"><span>D6</span>Capteur ↔ grandeur</a>
-      <a href="#defi7" class="navlink"><span>D7</span>Mots croisés</a>
-      <a href="#defi8" class="navlink"><span>D8</span>Mission recherche</a>
-      <a href="#synth" class="navlink"><span>10</span>Synthèse</a>
+      <a href="#synth" class="navlink"><span>07</span>Synthèse</a>
     </div>
   </aside>
 
@@ -209,99 +194,113 @@
 
     <section id="obj">
       <span class="kicker">TP · Chaîne d'information</span>
-      <h2>6 défis pour maîtriser<br>capteurs &amp; numérisation</h2>
-      <p class="lede">On joue&nbsp;: assembler la chaîne d'acquisition, calculer vite des niveaux et des fréquences, classer les signaux, régler une résolution, piloter un capteur à seuil, et relier capteurs et grandeurs. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
+      <h2>6 défis pour capter,<br>numériser et décider</h2>
+      <p class="lede">On joue&nbsp;: tu construis une chaîne d'acquisition, tu numérises à toute vitesse, tu règles une résolution, et tu pilotes un radar de recul à seuil. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
       <div class="two">
-        <div class="panel"><h4>Les 8 défis</h4><ul>
+        <div class="panel"><h4>Les 6 défis</h4><ul>
           <li><b>D1 · Chaîne d'acquisition</b> — remets les blocs dans l'ordre.</li>
           <li><b>D2 · Numérise express</b> — niveaux 2ⁿ et fréquence fe contre la montre.</li>
           <li><b>D3 · Ana / TOR / Num</b> — classe les signaux en un éclair.</li>
-          <li><b>D4 · Règle la résolution</b> — trouve le nombre de bits utile.</li>
-          <li><b>D5 · Radar de recul</b> — règle le seuil de freinage au plus près.</li>
-          <li><b>D6 · Capteur ↔ grandeur</b> — relie capteur et grandeur mesurée.</li>
-          <li><b>D7 · Mots croisés</b> — le vocabulaire de la numérisation.</li>
-          <li><b>D8 · Mission recherche</b> 🔎 — trouve les réponses sur le web.</li>
+          <li><b>D4 · Règle la résolution</b> — trouve le bon nombre de bits.</li>
+          <li><b>D5 · Radar de recul</b> — règle le seuil, arrête-toi au plus près.</li>
+          <li><b>D6 · Capteur ↔ grandeur</b> — relie chaque capteur à sa mesure.</li>
         </ul></div>
         <div class="panel"><h4>Notions travaillées</h4>
-          <div class="chips"><span class="chip k">capteur → signal</span><span class="chip k">N = 2ⁿ</span><span class="chip k">q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil → action</span></div>
-          <div class="note" style="margin-top:12px">Astuce&nbsp;: chaque défi est rejouable&nbsp;; seul ton <b>meilleur</b> score compte.</div>
+          <div class="chips"><span class="chip k">capteur</span><span class="chip k">CAN</span><span class="chip k">2ⁿ niveaux</span><span class="chip k">quantum q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil</span></div>
+          <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
         </div>
       </div>
     </section>
 
-    <!-- D1 -->
+    <section id="proto">
+      <span class="kicker">02 · Repère</span>
+      <h3>La chaîne d'information en bref</h3>
+      <p class="lede">Une grandeur physique du monde réel est captée, mise en forme, numérisée, puis traitée par un calculateur qui décide.</p>
+      <table class="data">
+        <thead><tr><th>Fonction</th><th>Rôle</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr><td>Acquérir</td><td>Capter la grandeur physique</td><td><b>Capteur de distance</b></td></tr>
+          <tr><td>Conditionner</td><td>Mettre en forme le signal</td><td><b>Amplificateur</b></td></tr>
+          <tr><td>Numériser</td><td>Convertir en valeurs binaires</td><td><b>CAN n bits</b></td></tr>
+          <tr><td>Traiter</td><td>Calculer et décider</td><td><b>Microcontrôleur</b></td></tr>
+        </tbody>
+      </table>
+      <div class="note">Repère clé&nbsp;: un CAN de <b>n bits</b> distingue <b>2ⁿ niveaux</b>&nbsp;; le pas de quantification (quantum) vaut <b>q = E / 2ⁿ</b> sur une étendue E.</div>
+    </section>
+
+    <!-- DÉFI 1 -->
     <section id="defi1">
       <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div>
       <h3>Assemble la chaîne d'acquisition</h3>
-      <p class="lede">Range les blocs dans l'ordre, du monde physique jusqu'au calculateur.</p>
+      <p class="lede">Clique les blocs pour les ranger dans l'ordre du signal, de la grandeur physique jusqu'à la décision.</p>
       <div class="builder">
         <div class="bslots" id="bslots"></div>
-        <div class="bhint">Du capteur au traitement de l'information.</div>
+        <div class="bhint">Du capteur jusqu'au calculateur qui traite l'information.</div>
         <div class="bpool" id="bpool"></div>
         <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
       </div>
     </section>
 
-    <!-- D2 -->
+    <!-- DÉFI 2 -->
     <section id="defi2">
       <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
       <h3>Numérise express</h3>
-      <p class="lede">40 secondes pour répondre : nombre de niveaux d'un CAN (2ⁿ) ou fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p>
+      <p class="lede">40 secondes&nbsp;: pour chaque CAN, donne le nombre de niveaux (2ⁿ) ou la fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p>
       <div class="game" id="g2">
         <div class="ghead"><div class="gtitle">⚡ Numérise express</div>
           <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
         <div class="gbar"><i id="g2Bar"></i></div>
-        <div id="g2Area"><div class="gstart"><p>Réponds vite : niveaux d'un CAN (2ⁿ) ou fréquence fe = 1/Te.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
+        <div id="g2Area"><div class="gstart"><p>2ⁿ niveaux pour un CAN n bits, et fe = 1/Te. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
         <div class="gflash" id="g2Flash"></div>
       </div>
     </section>
 
-    <!-- D3 -->
+    <!-- DÉFI 3 -->
     <section id="defi3">
       <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
-      <h3>Analogique, TOR ou Numérique&nbsp;?</h3>
-      <p class="lede">30 secondes pour classer un maximum de signaux : continu (analogique), 2 états (TOR) ou codé en bits (numérique).</p>
+      <h3>Analogique / TOR / Numérique</h3>
+      <p class="lede">30 secondes pour classer chaque signal&nbsp;: <b>analogique</b> (continu), <b>TOR</b> (deux états) ou <b>numérique</b> (codé sur plusieurs bits)&nbsp;?</p>
       <div class="game" id="g3">
         <div class="ghead"><div class="gtitle">⚡ Nature du signal</div>
           <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
         <div class="gbar"><i id="g3Bar"></i></div>
-        <div id="g3Area"><div class="gstart"><p>Classe chaque exemple selon la nature de son signal.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
+        <div id="g3Area"><div class="gstart"><p>Identifie la nature du signal le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
         <div class="gflash" id="g3Flash"></div>
       </div>
     </section>
 
-    <!-- D4 -->
+    <!-- DÉFI 4 -->
     <section id="defi4">
       <div class="badge-defi">DÉFI 4 · résolution · jusqu'à 140 pts</div>
       <h3>Règle la résolution</h3>
-      <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle au signal analogique. Trouve le nombre de bits qui fait passer le quantum <b>sous 40 mV</b> (étendue 5 V) — sans gaspiller.</p>
+      <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle à la courbe analogique. Trouve le nombre de bits <b>minimal</b> pour que le quantum passe sous la cible.</p>
       <div class="resbox">
-        <canvas id="resCv" width="900" height="220" aria-label="Signal analogique et sa numérisation selon le nombre de bits"></canvas>
+        <canvas id="resCv" width="900" height="220"></canvas>
         <div class="orow"><span class="oname">Bits (n)</span><input type="range" min="1" max="8" value="3" id="resBits"><span class="oeta" id="resN">3 bits</span></div>
         <div class="opt-readout">
           <div class="ord"><div class="l">Niveaux 2ⁿ</div><div class="v" id="resLevels">8</div></div>
           <div class="ord"><div class="l">Quantum (5 V)</div><div class="v" id="resQ">625 mV</div></div>
           <div class="ord"><div class="l">Débit</div><div class="v" id="resRate">3 bits/éch.</div></div>
         </div>
-        <div class="opt-status miss" id="resStatus">Objectif : quantum ≤ 40 mV.</div>
+        <div class="opt-status miss" id="resStatus">🎯 Objectif : quantum ≤ 40 mV sur une étendue de 5 V.</div>
       </div>
     </section>
 
-    <!-- D5 -->
+    <!-- DÉFI 5 -->
     <section id="defi5">
       <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
       <h3>Radar de recul — capteur à seuil</h3>
-      <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b> : la voiture freine quand distance ≤ seuil… mais elle ne s'arrête pas net&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p>
+      <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b>&nbsp;: dès que distance ≤ seuil, ça freine. Mais le freinage prend de la distance&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p>
       <div class="park">
-        <canvas id="parkCv" width="900" height="170" aria-label="Voiture reculant vers un mur avec seuil de freinage"></canvas>
+        <canvas id="parkCv" width="900" height="170"></canvas>
         <div class="orow"><span class="oname">Seuil (cm)</span><input type="range" min="5" max="60" value="20" id="parkT"><span class="oeta" id="parkTv">20 cm</span></div>
         <div class="vactions"><button class="btn primary" id="parkGo">▶ Reculer</button><button class="btn" id="parkReset">↻ Rejouer</button></div>
-        <div class="opt-status miss" id="parkStatus">Règle le seuil, puis recule.</div>
+        <div class="opt-status miss" id="parkStatus">Règle le seuil, puis lance le recul.</div>
       </div>
-      <div class="note" style="margin-top:12px">Si la mesure passe sous le seuil → ordre « freiner ». Mais il reste une <b>distance de freinage</b> : le seuil doit l'anticiper, sinon c'est le mur&nbsp;!</div>
+      <div class="note" style="margin-top:12px">Logique du capteur à seuil&nbsp;: <b>si mesure &lt; seuil → action</b>. Ici il faut anticiper la distance de freinage (~11 cm)&nbsp;: un seuil trop court = collision.</div>
     </section>
 
-    <!-- D6 -->
+    <!-- DÉFI 6 -->
     <section id="defi6">
       <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
       <h3>Capteur ↔ Grandeur mesurée</h3>
@@ -313,34 +312,14 @@
       <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
     </section>
 
-    <!-- DÉFI 7 : mots croisés -->
-    <section id="defi7">
-      <div class="badge-defi">DÉFI 7 · mots croisés · jusqu'à 130 pts</div>
-      <h3>Les mots croisés de l'information</h3>
-      <p class="lede">Remplis la grille avec le vocabulaire des capteurs et de la numérisation&nbsp;: une lettre par case, puis vérifie.</p>
-      <div class="cwbox">
-        <div class="cw-wrap"><div class="cw" id="cwGrid"></div></div>
-        <div class="cw-clues"><div><h5>Horizontal →</h5><ul id="cwH"></ul></div><div><h5>Vertical ↓</h5><ul id="cwV"></ul></div></div>
-        <div class="bactions"><button class="btn primary" id="cwCheck">Vérifier</button><button class="btn" id="cwClear">Effacer</button><span class="bmsg" id="cwMsg"></span></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 8 : mission recherche -->
-    <section id="defi8">
-      <div class="badge-defi">DÉFI 8 · mission recherche 🔎 · jusqu'à 120 pts</div>
-      <h3>Mission recherche Internet</h3>
-      <p class="lede">Ces réponses ne sont pas dans le cours&nbsp;: fouille le web (moteur de recherche, sites fiables) pour trouver le mot ou la valeur exacte, puis vérifie.</p>
-      <div class="research" id="research"></div>
-    </section>
-
     <section id="synth" style="border-bottom:none">
-      <span class="kicker">08 · Bilan</span>
+      <span class="kicker">07 · Bilan</span>
       <h3>Ce qu'il faut retenir</h3>
       <div class="panel"><ul>
-        <li>Chaîne d'acquisition&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li>
-        <li>Le capteur transforme une <b>grandeur physique</b> en signal (analogique, TOR ou numérique).</li>
-        <li>Numériser&nbsp;: <b>2ⁿ niveaux</b>, quantum <b>q = étendue/2ⁿ</b>, échantillonnage <b>fe = 1/Te</b>.</li>
-        <li>Traiter, c'est décider&nbsp;: <b>si mesure &lt; seuil → action</b> (en anticipant les délais réels).</li>
+        <li>La chaîne d'information&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li>
+        <li>Un signal est <b>analogique</b>, <b>TOR</b> ou <b>numérique</b>&nbsp;; le CAN transforme l'analogique en numérique.</li>
+        <li>CAN n bits → <b>2ⁿ niveaux</b>&nbsp;; quantum <b>q = E / 2ⁿ</b>&nbsp;: plus de bits = plus fin.</li>
+        <li>Échantillonnage&nbsp;: <b>fe = 1/Te</b>. Un capteur à <b>seuil</b> déclenche une action quand la mesure franchit une valeur.</li>
       </ul></div>
       <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
     </section>
@@ -367,27 +346,20 @@
   });
 
   // ===== Score global =====
-  var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0,d7:0,d8:0};
-  var RANKS=[[0,'🔧 Apprenti'],[250,'⚙️ Technicien·ne'],[600,'📐 Ingénieur·e'],[900,'🏆 Expert·e']];
+  var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0};
+  var RANKS=[[0,'🔧 Apprenti'],[200,'⚙️ Technicien·ne'],[450,'📐 Ingénieur·e'],[700,'🏆 Expert·e']];
   function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
   function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
   function renderScore(){
-    var tot=0,kk; for(kk in contrib)tot+=contrib[kk];
+    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
     document.getElementById('scVal').textContent=tot;
     document.getElementById('scRank').textContent=rankFor(tot);
-    document.getElementById('scTrack').style.width=Math.min(100,tot/1110*100)+'%';
+    document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
   }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
-  function makeOptions(correct){
-    var seen={},arr=[];seen[correct]=1;arr.push(correct);
-    var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct*2,correct+(correct<60?10:30),Math.max(1,correct-(correct<60?8:24)),Math.round(correct*0.75)];
-    for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
-    while(arr.length<4){var v=correct+ri(1,40);if(!seen[v]){seen[v]=1;arr.push(v);}}
-    return shuffle(arr);
-  }
 
-  // ===== D1 : builder (chaîne d'acquisition) =====
+  // ===== DÉFI 1 : Assemble la chaîne d'acquisition =====
   (function(){
     var CHAIN=[{lb:'Capteur',ic:'\uD83D\uDCE1'},{lb:'Conditionnement',ic:'\uD83C\uDF9A\uFE0F'},{lb:'CAN',ic:'\uD83D\uDD22'},{lb:'Traitement',ic:'\uD83E\uDDE0'}];
     var N=CHAIN.length;
@@ -402,27 +374,49 @@
       }).join('');
       poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
     }
-    slotsEl.addEventListener('click',function(ev){ if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
-      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return; pool.push(slots[i]); slots[i]=null; msg.textContent=''; render(); });
-    poolEl.addEventListener('click',function(ev){ if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
-      var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return; slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render(); });
+    slotsEl.addEventListener('click',function(ev){
+      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+    });
+    poolEl.addEventListener('click',function(ev){
+      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+      var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
+      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+    });
     document.getElementById('bverify').addEventListener('click',function(){
-      if(solved)return; if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
-      attempts++; var ok=slots.every(function(idx,i){return idx===i;}); var cells=slotsEl.querySelectorAll('.bslot');
-      if(ok){ solved=true; var pts=attempts===1?100:attempts===2?70:attempts===3?45:30;
+      if(solved)return;
+      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
+      attempts++;
+      var ok=slots.every(function(idx,i){return idx===i;});
+      var cells=slotsEl.querySelectorAll('.bslot');
+      if(ok){
+        solved=true;
+        var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
         var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
-        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts'; setContrib('d1',pts);
-      } else { var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
-        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400); msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !'; }
+        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+        setContrib('d1',pts);
+      }else{
+        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+        msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
+      }
     });
     render();
   })();
 
-  // ===== D2 : Numérise express (arcade) =====
+  // ===== DÉFI 2 : Numérise express (arcade) =====
   (function(){
+    function makeOptions(correct){
+      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+      var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:correct<300?25:80),Math.max(1,correct-(correct<60?8:correct<300?20:60)),correct*2,Math.round(correct*0.75)];
+      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+      while(arr.length<4){var v=correct+ri(1,40);if(!seen[v]){seen[v]=1;arr.push(v);}}
+      return shuffle(arr);
+    }
     function makeRound(){
-      if(Math.random()<0.5){ var n=ri(2,10); var c=Math.pow(2,n); return {q:'CAN '+n+' bits',ask:'Combien de niveaux ?',correct:c,opts:makeOptions(c)}; }
-      var ts=[1,2,4,5,8,10], t=ts[ri(0,5)]; var c=Math.round(1000/t); return {q:'Te = '+t+' ms',ask:'Fréquence fe = ? (Hz)',correct:c,opts:makeOptions(c)};
+      if(Math.random()<0.5){ var n=ri(2,10); var c=Math.pow(2,n); return {q:'CAN '+n+' bits',ask:'Combien de niveaux ? (2\u207f)',correct:c,opts:makeOptions(c)}; }
+      else { var ts=[1,2,4,5,8,10], t=ts[ri(0,5)]; var c=Math.round(1000/t); return {q:'Te = '+t+' ms',ask:'Fréquence fe = 1/Te ? (Hz)',correct:c,opts:makeOptions(c)}; }
     }
     var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
     var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
@@ -430,123 +424,148 @@
     function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
     function next(){ cur=makeRound();
       area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
-        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>'; }
-    function answer(v){ if(!playing)return;
+        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
+    }
+    function answer(v){
+      if(!playing)return;
       if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
       else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'  (\u22123 s)'; flash.style.color='#E29A86'; }
-      hud(); next(); }
+      hud(); next();
+    }
     function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
     function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;} setContrib('d2',Math.min(150,score));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>'; flash.textContent=''; }
-    document.getElementById('g2').addEventListener('click',function(ev){ var t=ev.target;
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d2', Math.min(150,score));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent='';
+    }
+    document.getElementById('g2').addEventListener('click',function(ev){
+      var t=ev.target;
       if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v')); });
+      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+    });
   })();
 
-  // ===== D3 : Analogique / TOR / Numérique (reflex) =====
+  // ===== DÉFI 3 : Analogique / TOR / Numérique (reflex 3 voies) =====
   (function(){
-    var GR=[{n:'Bouton poussoir',t:'tor'},{n:'Fin de course',t:'tor'},{n:'D\u00e9tecteur de pr\u00e9sence (0/1)',t:'tor'},{n:'Interrupteur',t:'tor'},
-            {n:'Microphone (tension)',t:'ana'},{n:'Photor\u00e9sistance (tension)',t:'ana'},{n:'Potentiom\u00e8tre (tension)',t:'ana'},{n:'Thermistance (tension)',t:'ana'},
-            {n:'Sortie d\u2019un CAN',t:'num'},{n:'Liaison I2C (bits)',t:'num'},{n:'Capteur DS18B20 (num\u00e9rique)',t:'num'},{n:'Suite de 0 et de 1',t:'num'}];
-    var LABEL={ana:'un signal ANALOGIQUE',tor:'un signal TOR',num:'un signal NUM\u00c9RIQUE'};
+    var SIG=[
+      {n:'Tension d\u2019un microphone',t:'ana'},{n:'Interrupteur (ouvert/ferm\u00e9)',t:'tor'},{n:'Octet 0110\u00a01001',t:'num'},
+      {n:'Sortie d\u2019un thermom\u00e8tre \u00e0 cadran',t:'ana'},{n:'D\u00e9tecteur de pr\u00e9sence (oui/non)',t:'tor'},{n:'Code RVB (24 bits)',t:'num'},
+      {n:'Signal continu d\u2019un potentiom\u00e8tre',t:'ana'},{n:'Bouton poussoir',t:'tor'},{n:'Valeur d\u2019un CAN 8 bits',t:'num'},
+      {n:'Niveau sonore variable',t:'ana'},{n:'Fin de course (0 ou 1)',t:'tor'},{n:'Trame binaire I\u00b2C',t:'num'}
+    ];
     var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
     var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
     var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    function pick(){ cur=GR[Math.floor(Math.random()*GR.length)];
+    var FR={ana:'ANALOGIQUE',tor:'TOR',num:'NUM\u00c9RIQUE'};
+    function pick(){ cur=SIG[Math.floor(Math.random()*SIG.length)];
       area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
-        '<div class="gbtns"><button class="gbtn ana" data-t="ana">ANALOGIQUE</button><button class="gbtn tor" data-t="tor">TOR</button><button class="gbtn num" data-t="num">NUMÉRIQUE</button></div>'; }
+        '<div class="gbtns"><button class="gbtn ana" data-t="ana">ANALOGIQUE<small>continu</small></button>'+
+        '<button class="gbtn tor" data-t="tor">TOR<small>2 \u00e9tats</small></button>'+
+        '<button class="gbtn num" data-t="num">NUM\u00c9RIQUE<small>codé n bits</small></button></div>'; }
     function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
     function answer(t){ if(!playing)return;
       if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait '+LABEL[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
+      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait '+FR[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
       hud(); pick(); }
     function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
     function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;} setContrib('d3',Math.min(150,score*5));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*5)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>'; flash.textContent=''; }
-    document.getElementById('g3').addEventListener('click',function(ev){ var t=ev.target;
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d3', Math.min(150,score*6));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent=''; }
+    document.getElementById('g3').addEventListener('click',function(ev){
+      var t=ev.target;
       if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      var tt=t.getAttribute('data-t'); if(tt&&playing)answer(tt); });
+      var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
   })();
 
-  // ===== D4 : Règle la résolution (canvas interactif) =====
+  // ===== DÉFI 4 : Règle la résolution (canvas interactif) =====
   (function(){
     var cv=document.getElementById('resCv'); if(!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
-    var x0=46,x1=W-20,y0=18,y1=H-30,pw=x1-x0,ph=y1-y0;
+    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var x0=46,x1=W-20,y0=18,y1=H-26,pw=x1-x0,ph=y1-y0;
     function f(t){return 0.5+0.30*Math.sin(t*Math.PI*2*1.1)+0.12*Math.sin(t*Math.PI*2*2.3+0.7);}
     var bitsEl=document.getElementById('resBits');
     function draw(){
       var n=+bitsEl.value, L=Math.pow(2,n);
       ctx.clearRect(0,0,W,H);
       var shown=Math.min(L,32);
-      ctx.strokeStyle='rgba(46,106,142,.13)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
+      ctx.strokeStyle='rgba(46,106,142,.12)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
       for(var k=0;k<=shown;k++){var y=y1-(k/shown)*ph;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();}
       ctx.setLineDash([]);
       ctx.strokeStyle='rgba(42,38,34,.28)';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0,y1);ctx.lineTo(x1,y1);ctx.stroke();
       ctx.strokeStyle='#B85C2E';ctx.lineWidth=2.2;ctx.beginPath();
-      for(var i=0;i<=200;i++){var t=i/200,X=x0+t*pw,Y=y1-f(t)*ph;if(i===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+      for(var i=0;i<=240;i++){var t=i/240,X=x0+t*pw,Y=y1-f(t)*ph;if(i===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
       var Ns=44;
       ctx.strokeStyle='#2c6147';ctx.lineWidth=2.2;ctx.beginPath();
-      for(var s=0;s<Ns;s++){var tt=s/(Ns-1);var q=Math.round(f(tt)*(L-1))/(L-1);var X2=x0+tt*pw,Y2=y1-q*ph,Xn=(s<Ns-1)?x0+((s+1)/(Ns-1))*pw:X2;if(s===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);ctx.lineTo(Xn,Y2);}ctx.stroke();
-      ctx.fillStyle='#B85C2E';ctx.font='11px "JetBrains Mono",monospace';ctx.textAlign='left';ctx.fillText('— analogique',x0+6,y0+12);
-      ctx.fillStyle='#2c6147';ctx.fillText('— numérique '+n+' bits',x0+118,y0+12);
+      for(var s=0;s<Ns;s++){var t2=s/(Ns-1);var q=Math.round(f(t2)*(L-1))/(L-1);var X2=x0+t2*pw,Y2=y1-q*ph,Xn=(s<Ns-1)?x0+((s+1)/(Ns-1))*pw:X2;if(s===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);ctx.lineTo(Xn,Y2);}ctx.stroke();
+      ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='left';
+      ctx.fillText('analogique',x0+6,y0+12);ctx.fillStyle='#2c6147';ctx.fillText('numérisé '+L+' niveaux',x0+92,y0+12);
       var q_mV=5000/L;
       document.getElementById('resN').textContent=n+' bit'+(n>1?'s':'');
       document.getElementById('resLevels').textContent=L;
       document.getElementById('resQ').textContent=(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV';
       document.getElementById('resRate').textContent=n+' bits/éch.';
       var st=document.getElementById('resStatus');
-      if(q_mV<=40){ var pts=Math.min(140,100+(n===7?40:(n===8?25:10)));
-        st.className='opt-status win'; st.textContent='\u2713 Quantum '+(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV \u2264 40 mV \u2014 +'+pts+' pts'+(n===7?' (bits minimal \uD83D\uDC4C)':''); setContrib('d4',pts);
-      } else { st.className='opt-status miss'; st.textContent='Quantum '+Math.round(q_mV)+' mV \u2014 descends \u2264 40 mV (augmente n).'; }
+      if(q_mV<=40){ var pts=Math.min(140,100+(n===7?40:n===8?25:10));
+        st.className='opt-status win'; st.textContent='\u2713 Quantum '+(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV \u2264 40 mV \u2014 +'+pts+' pts'+(n===7?' (bits minimal \uD83D\uDC4C)':'');
+        setContrib('d4',pts);
+      } else { st.className='opt-status miss'; st.textContent='Quantum '+Math.round(q_mV)+' mV \u2014 trop grossier, descends \u2264 40 mV (augmente n).'; }
     }
     bitsEl.addEventListener('input',draw); draw();
   })();
 
-  // ===== D5 : Radar de recul (simulation seuil) =====
+  // ===== DÉFI 5 : Radar de recul (simulation capteur à seuil) =====
   (function(){
     var cv=document.getElementById('parkCv'); if(!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'),W=cv.width,H=cv.height;
+    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
     var D0=100, dist=D0, speed=0, braking=false, timer=null, running=false, done=false;
     var Tel=document.getElementById('parkT'), Tv=document.getElementById('parkTv'), st=document.getElementById('parkStatus');
-    function sx(d){ var wallX=W-46, left=80; return wallX-(d/D0)*(wallX-left); }
+    var wallX=W-46, leftX=80;
+    function sx(d){ return wallX-(d/D0)*(wallX-leftX); }
     function draw(){
       ctx.clearRect(0,0,W,H);
-      ctx.fillStyle='#EFE8DA';ctx.fillRect(0,H-46,W,30);
-      ctx.fillStyle='#8A5A7A';ctx.fillRect(W-44,H-96,16,74);
-      var T=+Tel.value, tx=sx(T);
-      ctx.strokeStyle='rgba(189,138,42,.85)';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(tx,H-104);ctx.lineTo(tx,H-18);ctx.stroke();ctx.setLineDash([]);
-      ctx.fillStyle='#8a6313';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('seuil '+T+' cm',tx,H-108);
+      ctx.fillStyle='#ECE4D5';ctx.fillRect(0,H-44,W,30);
+      for(var d=10;d<=90;d+=20){var gx=sx(d);ctx.strokeStyle='rgba(42,38,34,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(gx,H-44);ctx.lineTo(gx,H-14);ctx.stroke();}
+      ctx.fillStyle='#8A5A7A';ctx.fillRect(W-42,H-96,18,82);
       var cx=sx(dist);
-      ctx.fillStyle='#2E6A8E';ctx.fillRect(cx-46,H-78,46,30);
-      ctx.fillStyle='#cfe0ec';ctx.fillRect(cx-30,H-72,18,12);
-      ctx.fillStyle='#2A2622';ctx.beginPath();ctx.arc(cx-34,H-48,6,0,7);ctx.arc(cx-12,H-48,6,0,7);ctx.fill();
-      ctx.fillStyle='#5C544B';ctx.font='700 13px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText(Math.max(0,Math.round(dist))+' cm',cx-23,H-86);
+      ctx.fillStyle='#2E6A8E';ctx.fillRect(cx-46,H-76,46,30);
+      ctx.fillStyle='#21516e';ctx.fillRect(cx-38,H-72,30,12);
+      ctx.fillStyle='#2A2622';ctx.beginPath();ctx.arc(cx-34,H-46,6,0,7);ctx.arc(cx-12,H-46,6,0,7);ctx.fill();
+      var T=+Tel.value, tx=sx(T);
+      ctx.strokeStyle='rgba(189,138,42,.85)';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(tx,H-112);ctx.lineTo(tx,H-14);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#8a6313';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('seuil '+T+' cm',tx,H-116);
+      ctx.fillStyle='#5C544B';ctx.font='700 13px "JetBrains Mono",monospace';ctx.fillText(Math.max(0,Math.round(dist))+' cm',(cx-23+wallX)/2,H-100);
     }
-    function stop(){ if(timer){clearInterval(timer);timer=null;} running=false; done=true;
+    function stop(){
+      if(timer){clearInterval(timer);timer=null;} running=false; done=true;
       var gap=Math.max(0,dist); draw();
-      if(dist<=0){ st.className='opt-status over'; st.textContent='\uD83D\uDCA5 BOUM ! Seuil trop court : pense \u00e0 la distance de freinage.'; }
+      if(dist<=0.5){ st.className='opt-status over'; st.textContent='\uD83D\uDCA5 BOUM ! Seuil trop court : pense \u00e0 la distance de freinage.'; }
       else { var pts=Math.max(40,Math.round(150-gap*7)); st.className='opt-status win'; st.textContent='\u2713 Arr\u00eat \u00e0 '+Math.round(gap)+' cm du mur \u2014 +'+pts+' pts'+(gap<=8?' (au plus pr\u00e8s \uD83C\uDFAF)':''); setContrib('d5',pts); }
     }
     function tick(){
-      if(!braking){ dist-=2; if(dist<= +Tel.value){ braking=true; speed=2; } }
-      else { dist-=speed; speed*=0.82; if(speed<0.06){ return stop(); } }
+      if(!braking){ dist-=2; if(dist<=+Tel.value){ braking=true; speed=2; } }
+      else { dist-=speed; speed*=0.82; if(speed<0.06||dist<=0){ if(dist<0)dist=0; return stop(); } }
       if(dist<=0){ dist=0; return stop(); }
       draw();
     }
     Tel.addEventListener('input',function(){ Tv.textContent=Tel.value+' cm'; if(!running&&!done)draw(); });
-    document.getElementById('parkGo').addEventListener('click',function(){ if(running||done)return; running=true;braking=false;speed=0;
-      st.className='opt-status miss'; st.textContent='Recul en cours\u2026'; if(timer)clearInterval(timer); timer=setInterval(tick,60); });
-    document.getElementById('parkReset').addEventListener('click',function(){ if(timer){clearInterval(timer);timer=null;} dist=D0;speed=0;braking=false;running=false;done=false;
-      st.className='opt-status miss'; st.textContent='Règle le seuil, puis recule.'; draw(); });
+    document.getElementById('parkGo').addEventListener('click',function(){
+      if(running||done)return; running=true; braking=false; speed=0;
+      st.className='opt-status miss'; st.textContent='Recul en cours\u2026';
+      if(timer)clearInterval(timer); timer=setInterval(tick,60);
+    });
+    document.getElementById('parkReset').addEventListener('click',function(){
+      if(timer){clearInterval(timer);timer=null;} dist=D0; speed=0; braking=false; running=false; done=false;
+      st.className='opt-status miss'; st.textContent='Règle le seuil, puis lance le recul.'; draw();
+    });
     draw();
   })();
 
-  // ===== D6 : Capteur <-> Grandeur (associations) =====
+  // ===== DÉFI 6 : Capteur <-> Grandeur (associations) =====
   (function(){
-    var PAIRS=[{c:'Thermistance',f:'Temp\u00e9rature'},{c:'Photor\u00e9sistance',f:'Lumi\u00e8re'},{c:'T\u00e9l\u00e9m\u00e8tre ultrason',f:'Distance'},{c:'Potentiom\u00e8tre',f:'Position'},{c:'Acc\u00e9l\u00e9rom\u00e8tre',f:'Acc\u00e9l\u00e9ration'}];
+    var PAIRS=[{c:'Thermistance',f:'Température'},{c:'Photorésistance',f:'Lumière'},{c:'Capteur ultrason',f:'Distance'},{c:'Potentiomètre',f:'Position'},{c:'Accéléromètre',f:'Accélération'}];
     var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
     var selL=null, matched=0, wrong=0, done=false;
     var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
@@ -554,86 +573,30 @@
       leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
       rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
     }
-    function onClick(ev){ if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+    function onClick(ev){
+      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
       var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
-      if(side==='L'){ document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');}); it.classList.add('sel'); selL={p:p,el:it}; }
-      else { if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un capteur.'; return; }
-        if(selL.p===p){ selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+      if(side==='L'){
+        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+        it.classList.add('sel'); selL={p:p,el:it};
+      } else {
+        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un capteur.'; return; }
+        if(selL.p===p){
+          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
           msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
           if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
-        } else { wrong++; var bad=it, sl=selL.el; bad.classList.add('bad'); setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400); selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.'; }
+        } else {
+          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+        }
       }
     }
     leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
-    document.getElementById('mReset').addEventListener('click',function(){ L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render(); });
+    document.getElementById('mReset').addEventListener('click',function(){
+      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+    });
     render();
-  })();
-
-  // ===== DÉFI 7 : mots croisés =====
-  (function(){
-    var CW={"GRID": ["......B.....", "....C.I...N.", "....A.N...I.", "....P.A...V.", "OCTET.I...E.", "....E.R...A.", "...NUMERIQUE", "....R....U..", ".....SIGNAL.", ".........N..", ".........T..", ".......SEUIL", ".........M.."], "H": {"6,3": "Signal code en bits (0 et 1)", "8,5": "Ce que delivre un capteur", "4,0": "Groupe de 8 bits", "11,7": "Valeur qui declenche une action"}, "V": {"1,4": "Transforme une grandeur physique en signal", "0,6": "Systeme a deux chiffres : 0 et 1", "6,9": "Plus petit ecart de tension code", "1,10": "Un CAN n bits en a 2^n"}};
-    var box=document.getElementById('cwGrid'); if(!box)return;
-    var rows=CW.GRID.map(function(r){return r.split('');});
-    var Hn=rows.length, Wn=rows[0].length;
-    function white(r,c){return r>=0&&r<Hn&&c>=0&&c<Wn&&rows[r][c]!=='.';}
-    function norm(s){return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z]/g,'');}
-    var num={},cnt=0,across=[],down=[];
-    for(var r=0;r<Hn;r++)for(var c=0;c<Wn;c++){ if(!white(r,c))continue;
-      var sA=!white(r,c-1)&&white(r,c+1), sD=!white(r-1,c)&&white(r+1,c);
-      if(sA||sD){cnt++;num[r+'_'+c]=cnt;}
-      if(sA){var len=0,a='';while(white(r,c+len)){a+=rows[r][c+len];len++;} across.push({n:cnt,r:r,c:c,len:len,clue:(CW.H[r+','+c]||'')});}
-      if(sD){var l2=0,b='';while(white(r+l2,c)){b+=rows[r+l2][c];l2++;} down.push({n:num[r+'_'+c],r:r,c:c,len:l2,clue:(CW.V[r+','+c]||'')});}
-    }
-    box.style.display='grid'; box.style.gridTemplateColumns='repeat('+Wn+',30px)';
-    var html='';
-    for(var rr=0;rr<Hn;rr++)for(var cc=0;cc<Wn;cc++){
-      if(!white(rr,cc)){html+='<div class="cell block"></div>';continue;}
-      var n=num[rr+'_'+cc];
-      html+='<div class="cell" data-r="'+rr+'" data-c="'+cc+'">'+(n?'<span class="num">'+n+'</span>':'')+'<input maxlength="1" data-r="'+rr+'" data-c="'+cc+'"></div>';
-    }
-    box.innerHTML=html;
-    box.addEventListener('input',function(ev){ var t=ev.target; if(t.tagName==='INPUT'){ t.value=t.value.toUpperCase().replace(/[^A-Za-z]/g,''); t.parentNode.classList.remove('good','bad'); } });
-    function clues(list,el){ el.innerHTML=list.slice().sort(function(x,y){return x.n-y.n;}).map(function(w){return '<li><b>'+w.n+'.</b> '+w.clue+' <span style="opacity:.5">('+w.len+')</span></li>';}).join(''); }
-    clues(across,document.getElementById('cwH')); clues(down,document.getElementById('cwV'));
-    function cellInput(r,c){return box.querySelector('input[data-r="'+r+'"][data-c="'+c+'"]');}
-    function wordOk(w,isDown){ for(var i=0;i<w.len;i++){var r=w.r+(isDown?i:0),c=w.c+(isDown?0:i);if(norm(cellInput(r,c).value)!==rows[r][c])return false;} return true; }
-    document.getElementById('cwCheck').addEventListener('click',function(){
-      var inputs=box.querySelectorAll('input');
-      inputs.forEach(function(inp){ var r=+inp.getAttribute('data-r'),c=+inp.getAttribute('data-c'); var cell=inp.parentNode; cell.classList.remove('good','bad');
-        if(norm(inp.value)===rows[r][c]){cell.classList.add('good');} else if(inp.value){cell.classList.add('bad');} });
-      var cwn=0; across.forEach(function(w){if(wordOk(w,false))cwn++;}); down.forEach(function(w){if(wordOk(w,true))cwn++;});
-      var totalW=across.length+down.length, pts=Math.round(cwn/totalW*130);
-      var msg=document.getElementById('cwMsg');
-      if(cwn===totalW){ msg.style.color='#2c6147'; msg.textContent='\u2713 Grille compl\u00e8te ! +130 pts'; }
-      else { msg.style.color='#8a6313'; msg.textContent=cwn+' / '+totalW+' mots corrects \u2014 +'+pts+' pts'; }
-      setContrib('d7',pts);
-    });
-    document.getElementById('cwClear').addEventListener('click',function(){
-      box.querySelectorAll('input').forEach(function(inp){inp.value='';inp.parentNode.classList.remove('good','bad');});
-      document.getElementById('cwMsg').textContent='';
-    });
-  })();
-
-  // ===== DÉFI 8 : mission recherche =====
-  (function(){
-    var DATA=[
-      {q:"\uD83D\uDD0E Fr\u00e9quence d\u2019\u00e9chantillonnage d\u2019un CD audio standard (en kHz)\u00a0?", type:'num', min:44, max:45, hint:"Cherche \u00ab fr\u00e9quence \u00e9chantillonnage CD audio \u00bb."},
-      {q:"\uD83D\uDD0E En quelle ann\u00e9e Claude Shannon a-t-il publi\u00e9 sa th\u00e9orie de l\u2019information\u00a0?", type:'num', min:1947, max:1949, hint:"Cherche \u00ab Shannon th\u00e9orie information 1948 \u00bb."},
-      {q:"\uD83D\uDD0E Sigle anglais d\u2019un capteur d\u2019image d\u2019appareil photo num\u00e9rique (CCD ou son rival)\u00a0?", type:'text', accept:['ccd','cmos'], hint:"Cherche \u00ab capteur image appareil photo CCD CMOS \u00bb."}
-    ];
-    var box=document.getElementById('research'); if(!box)return;
-    var solved=[false,false,false];
-    function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
-    box.innerHTML=DATA.map(function(d,i){return '<div class="ritem" id="ri'+i+'"><div class="rq">'+d.q+'</div><div class="rrow"><input type="text" data-i="'+i+'" placeholder="ta r\u00e9ponse\u2026"><button class="btn primary" data-check="'+i+'">V\u00e9rifier</button><span class="rmsg" id="rm'+i+'"></span></div><div class="rhint">'+d.hint+'</div></div>';}).join('');
-    function check(i){
-      var d=DATA[i], inp=box.querySelector('input[data-i="'+i+'"]'), val=inp.value, m=document.getElementById('rm'+i), ok=false;
-      if(d.type==='num'){ var mt=val.replace(',','.').match(/-?\d+(\.\d+)?/); if(mt){var x=parseFloat(mt[0]); ok=x>=d.min&&x<=d.max;} }
-      else { var nv=norm(val); ok=d.accept.some(function(a){var na=norm(a);return na.length>0&&nv.indexOf(na)>=0;}); }
-      if(ok){ solved[i]=true; m.style.color='#2c6147'; m.textContent='\u2713 Trouv\u00e9 !'; document.getElementById('ri'+i).classList.add('solved'); var n=0;solved.forEach(function(s){if(s)n++;}); setContrib('d8',n*40); }
-      else { m.style.color='#8f3a24'; m.textContent='\u2717 Continue \u00e0 chercher'; }
-    }
-    box.addEventListener('click',function(ev){ var b=ev.target.closest('[data-check]'); if(b)check(+b.getAttribute('data-check')); });
-    box.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){var inp=ev.target;if(inp.tagName==='INPUT'){ev.preventDefault();check(+inp.getAttribute('data-i'));}} });
   })();
 
   renderScore();
