@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Évaluation Chaîne d'information · Spé SI Première</title>
+<title>Évaluation — Information · Spé SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -14,264 +14,448 @@
     --ok:#3D7E5F; --no:#C0492E;
     --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
     --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace; --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
     background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:760px;margin:0 auto;padding:0 22px 80px}
-  .top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-  .back{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);text-decoration:none;display:inline-flex;gap:7px;align-items:center;
-    background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px 13px;transition:.15s}
-  .back:hover{color:var(--green);border-color:var(--green)}
-  .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
-  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green);font-weight:500}
-  h1{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(28px,5.5vw,46px);line-height:1.02;margin:12px 0 12px}
-  .lede{font-size:16px;color:var(--ink-soft);max-width:60ch;margin:0 0 22px}
-  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:16px}
-  .card h3{font-family:var(--display);font-weight:700;font-size:18px;margin:0 0 14px}
-  label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 6px;font-weight:700}
-  .fld{margin-bottom:14px}
-  input[type=text]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink)}
-  input[type=text]:focus{outline:none;border-color:var(--green)}
-  .codefld input{font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase}
-  .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .btn{font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--cream);border:1px solid var(--ink);border-radius:9px;padding:12px 20px;cursor:pointer;transition:.15s;font-weight:500}
-  .btn:hover{background:#3a342e}
-  .btn.alt{background:var(--cream);color:var(--ink);border-color:var(--line-strong)}
-  .btn.alt:hover{border-color:var(--green);color:#2c6147}
-  .btn.go{background:var(--green);border-color:var(--green)}
-  .btn.go:hover{background:#34664c}
-  .btn:disabled{opacity:.5;cursor:not-allowed}
-  .inline-msg{font-size:13px;margin-top:10px;font-weight:600;display:none}
-  .inline-msg.show{display:block} .inline-msg.err{color:var(--no)} .inline-msg.ok{color:var(--ok)}
-  .pill{display:inline-block;font-family:var(--mono);font-size:11px;color:#2c6147;background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.4);border-radius:999px;padding:4px 11px;margin-bottom:10px}
-  .hidden{display:none}
-  .qcount{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:16px}
-  .q{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin-bottom:13px}
-  .q .qn{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--green);background:rgba(61,126,95,.1);padding:2px 8px;border-radius:5px;display:inline-block;margin-bottom:9px}
-  .q .qt{font-size:15px;font-weight:600;margin:0 0 13px;color:var(--ink)}
-  .opts{display:flex;flex-direction:column;gap:8px}
-  .opt{font-family:var(--body);font-size:14.5px;text-align:left;background:var(--cream);border:1px solid var(--line-strong);border-radius:9px;padding:11px 15px;cursor:pointer;color:var(--ink);transition:.12s}
-  .opt:hover{border-color:var(--green);background:#fff}
-  .opt.sel{background:rgba(61,126,95,.12);border-color:var(--green);color:#2c6147;font-weight:600}
-  .vf{display:flex;gap:10px} .vf .opt{flex:1;text-align:center;font-weight:600}
-  .numrow{display:flex;align-items:center;gap:10px}
-  .numrow input{width:170px;font-family:var(--mono);font-size:15px;padding:10px 13px;border:1px solid var(--line-strong);border-radius:9px;background:#fff;color:var(--ink)}
-  .numrow input:focus{outline:none;border-color:var(--green)} .numrow .u{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
-  .submit-row{margin-top:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .score-big{font-family:var(--display);font-weight:800;font-size:52px;line-height:1;color:var(--green)}
-  .score-sub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:6px}
-  .recap{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
-  .rc{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700}
-  .rc.y{background:rgba(61,126,95,.14);color:#2c6147;border:1px solid rgba(61,126,95,.4)}
-  .rc.n{background:rgba(192,73,46,.12);color:#8f3a24;border:1px solid rgba(192,73,46,.4)}
-  .send-status{font-family:var(--mono);font-size:13px;margin-top:18px;padding:12px 15px;border-radius:9px}
-  .send-status.pending{background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.3);color:#1f5575}
-  .send-status.done{background:rgba(61,126,95,.1);border:1px solid rgba(61,126,95,.4);color:#2c6147}
-  .send-status.fail{background:rgba(192,73,46,.08);border:1px solid rgba(192,73,46,.35);color:#8f3a24}
-  .teach-link{font-family:var(--mono);font-size:12px;color:var(--ink-soft);text-decoration:underline;cursor:pointer;background:none;border:none;padding:0;margin-top:6px}
-  table.dash{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13px;margin-top:14px}
-  table.dash th,table.dash td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left}
-  table.dash thead th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
-  table.dash td b{font-family:var(--mono)} table.dash tr:last-child td{border-bottom:none}
-  .dash-meta{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin:6px 0 0}
-  footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
-  @media(max-width:560px){.meta-row{grid-template-columns:1fr}}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .topbar h1{font-family:var(--display);font-size:17px;margin:0;font-weight:800}
+  .topbar p{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .topbar .back{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:var(--paper)}
+  .topbar .back:hover{border-color:var(--green);color:var(--green)}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(21px,3.6vw,28px);margin:0 0 8px;letter-spacing:-.01em}
+  .lede{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
+  label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:14px 0 6px}
+  input[type=text],input[type=password]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--cream);color:var(--ink)}
+  input:focus{outline:none;border-color:var(--green)}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:11px;padding:13px 22px;cursor:pointer;transition:.15s}
+  .btn:hover{background:#346b50} .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--green);color:var(--green)}
+  .err{color:var(--no);font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px}
+
+  .pbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .pbar .track{flex:1;height:8px;background:var(--cream);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .pbar .track i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+  .pbar .lab{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:700}
+
+  .exam-grid{display:grid;grid-template-columns:1fr 312px;gap:20px;align-items:start}
+  .calc-side{position:sticky;top:18px}
+
+  .exo{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  .exo .etag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.1);border:1px solid rgba(61,126,95,.3);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+  .exo h3{font-family:var(--display);font-weight:800;font-size:21px;margin:0 0 6px}
+  .exo .ctx{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .exo canvas{width:100%;height:auto;display:block;border-radius:11px;background:#FCFAF4;border:1px solid var(--line);margin-bottom:12px}
+  .data{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .data .d{font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .data .d b{color:var(--steel)}
+  .part{border-top:1px solid var(--line);padding:14px 0}
+  .part:last-child{padding-bottom:0}
+  .part .pq{font-size:14.5px;font-weight:600;margin-bottom:8px;display:flex;gap:8px;align-items:baseline}
+  .part .pq .pn{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700;flex:0 0 auto}
+  .part .pq .pts{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink-soft);background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:1px 7px;flex:0 0 auto}
+  .ansrow{display:flex;align-items:center;gap:10px}
+  .ansrow input{width:160px;font-family:var(--mono);font-size:15px;padding:9px 12px;border:1px solid var(--line-strong);border-radius:9px;background:var(--cream);color:var(--ink)}
+  .ansrow input:focus{outline:none;border-color:var(--green)}
+  .ansrow .unit{font-family:var(--mono);font-size:13px;color:var(--ink-soft);font-weight:700}
+
+  .calc{background:var(--ink);border-radius:16px;padding:16px;color:#fff}
+  .calc .ct{font-family:var(--display);font-weight:800;font-size:14px;margin:0 0 10px;color:#E9A36F;display:flex;align-items:center;gap:7px}
+  .calc .disp{background:#1d1916;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;min-height:62px;text-align:right;margin-bottom:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px}
+  .calc .disp .expr{font-family:var(--mono);font-size:13px;color:#9C9088;word-break:break-all;min-height:16px}
+  .calc .disp .res{font-family:var(--mono);font-size:24px;font-weight:700;color:#fff;word-break:break-all}
+  .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .key{font-family:var(--mono);font-size:16px;font-weight:700;padding:13px 0;border-radius:9px;border:none;cursor:pointer;background:#36302b;color:#F2E9DD;transition:.1s}
+  .key:hover{background:#433b34}
+  .key.op{background:#4a4039;color:#E9A36F}
+  .key.fn{background:#3a4a44;color:#9FCBAE;font-size:14px}
+  .key.eq{background:#E9A36F;color:#2A2622;grid-column:span 3}
+  .key.clr{background:#5a3a32;color:#E9A893}
+  .calc .chint{font-family:var(--mono);font-size:9.5px;color:#8A7E72;margin-top:9px;text-align:center}
+
+  .scorebig{font-family:var(--display);font-weight:800;font-size:56px;color:var(--green);line-height:1}
+  .scoresub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .rankpill{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.35);border-radius:999px;padding:6px 16px;margin-top:12px}
+  .recap{margin-top:20px}
+  .rexo{margin-bottom:12px} .rexo .rh{font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:4px}
+  .ri{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .ri .ic{flex:0 0 20px;font-weight:700;font-family:var(--mono)}
+  .ri.good .ic{color:var(--ok)} .ri.bad .ic{color:var(--no)}
+  .ri .det{flex:1} .ri .det .sol{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .sync{font-family:var(--mono);font-size:11.5px;margin-top:14px;color:var(--ink-soft)}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  td b{font-family:var(--mono)}
+  .footlink{text-align:center;margin-top:20px}
+  .footlink a{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line-strong)}
+  .footlink a:hover{color:var(--green)}
+  [hidden]{display:none !important}
+  @media(max-width:860px){ .exam-grid{grid-template-columns:1fr} .calc-side{position:static} }
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
 </style>
 </head>
 <body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
 <div class="wrap">
-  <div class="top">
-    <a class="back" href="hub_si_information.html">← Séquence : information</a>
-    <span class="lvl">Première · Spé SI · Évaluation</span>
+  <div class="topbar">
+    <div class="mark">SI</div>
+    <div><h1>Évaluation — Information</h1><p>Spé Sciences de l'ingénieur · Première</p></div>
+    <a class="back" href="hub_si_information.html">← Séquence</a>
   </div>
 
-  <!-- ACCUEIL -->
-  <section id="accueil">
-    <span class="kicker">Évaluation</span>
-    <h1>Chaîne d'information</h1>
-    <p class="lede">12 questions sur les fonctions, les capteurs, la nature des signaux, la numérisation et la résolution. Tes résultats sont transmis à ton enseignant.</p>
+  <section id="screen-home">
     <div class="card">
-      <h3>Avant de commencer</h3>
-      <div class="meta-row">
-        <div class="fld"><label>Ton nom &amp; prénom</label><input type="text" id="fNom" autocomplete="off" placeholder="Ex. Camille Durand"></div>
-        <div class="fld"><label>Classe</label><input type="text" id="fClasse" autocomplete="off" placeholder="Ex. 1re SI 2"></div>
+      <h2>Avant de commencer</h2>
+      <p class="lede">Cette évaluation comporte <b>3 exercices</b> appuyés sur des schémas animés&nbsp;: tu lis les données sur le schéma et tu calcules. Une <b>calculatrice</b> est à ta disposition sur le côté. Note finale sur 20.</p>
+      <label for="inNom">Nom et prénom</label>
+      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
+      <label for="inClasse">Classe</label>
+      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
+      <label for="inCode">Code d'accès</label>
+      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
+      <div class="err" id="homeErr"></div>
+      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
+    </div>
+    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
+  </section>
+
+  <section id="screen-exam" hidden>
+    <div class="pbar"><span class="lab" id="progLab">0 / 10 questions</span><div class="track"><i id="progBar"></i></div></div>
+    <div class="exam-grid">
+      <div id="exoCol"></div>
+      <div class="calc-side">
+        <div class="calc">
+          <div class="ct">🧮 Calculatrice</div>
+          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
+          <div class="keys" id="calcKeys">
+            <button class="key clr" data-k="C">C</button>
+            <button class="key clr" data-k="back">⌫</button>
+            <button class="key op" data-k="(">(</button>
+            <button class="key op" data-k=")">)</button>
+            <button class="key" data-k="7">7</button>
+            <button class="key" data-k="8">8</button>
+            <button class="key" data-k="9">9</button>
+            <button class="key op" data-k="/">÷</button>
+            <button class="key" data-k="4">4</button>
+            <button class="key" data-k="5">5</button>
+            <button class="key" data-k="6">6</button>
+            <button class="key op" data-k="*">×</button>
+            <button class="key" data-k="1">1</button>
+            <button class="key" data-k="2">2</button>
+            <button class="key" data-k="3">3</button>
+            <button class="key op" data-k="-">−</button>
+            <button class="key" data-k="0">0</button>
+            <button class="key" data-k=".">.</button>
+            <button class="key fn" data-k="pi">π</button>
+            <button class="key op" data-k="+">+</button>
+            <button class="key fn" data-k="sqrt">√</button>
+            <button class="key eq" data-k="=">=</button>
+          </div>
+          <div class="chint">× et ÷ pour multiplier/diviser · π disponible · √( pour une racine</div>
+        </div>
+        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
+        <div class="err" id="examErr" style="text-align:center"></div>
       </div>
-      <div class="fld codefld"><label>Code d'accès (donné par l'enseignant)</label><input type="text" id="fCode" autocomplete="off" placeholder="CODE"></div>
-      <button class="btn go" id="startBtn">Commencer l'évaluation</button>
-      <div class="inline-msg err" id="startMsg"></div>
-    </div>
-    <button class="teach-link" id="teachToggle">Espace enseignant</button>
-    <div class="card hidden" id="teachPanel" style="margin-top:12px">
-      <h3>Tableau de bord enseignant</h3>
-      <div class="fld codefld"><label>Mot de passe</label><input type="text" id="fPass" autocomplete="off" placeholder="••••••••"></div>
-      <button class="btn alt" id="dashBtn">Afficher les résultats</button>
-      <div class="inline-msg err" id="dashMsg"></div>
-      <div id="dashContent"></div>
     </div>
   </section>
 
-  <!-- QUIZ -->
-  <section id="quiz" class="hidden">
-    <span class="kicker" id="quizWho">Évaluation en cours</span>
-    <h1>Réponds aux 12 questions</h1>
-    <p class="qcount">Une seule réponse par question. Tu valides l'ensemble à la fin.</p>
-    <div id="questions"></div>
-    <div class="submit-row">
-      <button class="btn go" id="submitBtn">Valider mon évaluation</button>
-      <span class="inline-msg err" id="submitMsg"></span>
-    </div>
-  </section>
-
-  <!-- RÉSULTAT -->
-  <section id="resultat" class="hidden">
-    <span class="kicker">Terminé</span>
-    <h1>Ton résultat</h1>
+  <section id="screen-result" hidden>
     <div class="card">
-      <span class="pill">Évaluation enregistrée</span>
-      <div class="score-big" id="rScore">—</div>
-      <div class="score-sub" id="rSub"></div>
-      <div class="recap" id="rRecap"></div>
-      <div class="send-status pending" id="sendStatus">Envoi des résultats…</div>
+      <h2>Résultat</h2>
+      <div class="scorebig" id="scoreBig">0 / 20</div>
+      <div class="scoresub" id="scoreSub"></div>
+      <div><span class="rankpill" id="rankPill"></span></div>
+      <div class="recap" id="recap"></div>
+      <div class="sync" id="syncMsg"></div>
     </div>
-    <footer>Chaîne d'information &amp; capteurs · Spé SI Première · BO spécial n°1 du 22 janvier 2019</footer>
+  </section>
+
+  <section id="screen-prof" hidden>
+    <div class="card">
+      <h2>Espace enseignant</h2>
+      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
+      <div id="profGate">
+        <label for="inPass">Mot de passe</label>
+        <input type="password" id="inPass" autocomplete="off">
+        <div class="err" id="profErr"></div>
+        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
+          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
+      </div>
+      <div id="profData" hidden>
+        <div id="profTable"></div>
+        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
+          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
+      </div>
+    </div>
   </section>
 </div>
 
 <script>
-  // ===== Configuration =====
-  var EVAL_CODE = 'INFO2026';
-  var DASH_PASS = 'Agostini2025';
-  var FB_URL    = 'https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
-  var FB_NODE   = 'resultats_si_information';
+  var EVAL_CODE='INFO2026';
+  var PROF_PASS='Agostini2025';
+  var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
+  var FB_NODE='resultats_si_information';
 
-  // ===== Questions =====
-  var QUESTIONS=[
-    {type:'qcm', q:'Dans quel ordre s\u2019encha\u00eenent les fonctions de la cha\u00eene d\u2019information ?',
-     choix:['Acqu\u00e9rir \u2192 Traiter \u2192 Communiquer','Traiter \u2192 Acqu\u00e9rir \u2192 Communiquer','Communiquer \u2192 Traiter \u2192 Acqu\u00e9rir'], bon:0},
-    {type:'qcm', q:'Quel est le r\u00f4le d\u2019un capteur ?',
-     choix:['Transformer une grandeur physique en signal','Amplifier la puissance m\u00e9canique','Stocker l\u2019\u00e9nergie','Transmettre le mouvement'], bon:0},
-    {type:'vf', q:'Un bouton poussoir d\u00e9livre un signal analogique.', bon:false},
-    {type:'qcm', q:'Un signal compos\u00e9 de valeurs discr\u00e8tes cod\u00e9es en bits est de nature\u2026',
-     choix:['analogique','logique (TOR)','num\u00e9rique'], bon:2},
-    {type:'num', q:'Combien de niveaux un convertisseur 8 bits peut-il coder ?', rep:256, tol:0, unite:'niveaux'},
-    {type:'num', q:'Combien de niveaux un convertisseur 12 bits peut-il coder ?', rep:4096, tol:0, unite:'niveaux'},
-    {type:'num', q:'Quantum d\u2019un CAN 8 bits sur une \u00e9tendue de 5 V. Calcule q (en mV, 1 d\u00e9cimale).', rep:19.5, tol:0.5, unite:'mV'},
-    {type:'num', q:'CAN 10 bits (0\u20135 V). Le code 256 correspond \u00e0 quelle tension ? (V, 2 d\u00e9cimales)', rep:1.25, tol:0.05, unite:'V'},
-    {type:'qcm', q:'Arrondir chaque \u00e9chantillon au niveau le plus proche s\u2019appelle\u2026',
-     choix:['l\u2019\u00e9chantillonnage','la quantification','le filtrage'], bon:1},
-    {type:'num', q:'P\u00e9riode d\u2019\u00e9chantillonnage Te = 4 ms. Calcule la fr\u00e9quence fe (en Hz).', rep:250, tol:5, unite:'Hz'},
-    {type:'vf', q:'Plus le nombre de bits est grand, meilleure est la r\u00e9solution.', bon:true},
-    {type:'qcm', q:'Dans un produit, la cha\u00eene d\u2019information\u2026',
-     choix:['capte, traite et commande la cha\u00eene d\u2019\u00e9nergie','fournit la puissance m\u00e9canique','remplace la source d\u2019\u00e9nergie','transmet le couple aux roues'], bon:0}
+  var EXOS=[
+    { anim:'can', tag:'Exercice 1 · 10 pts', title:'Le convertisseur analogique-num\u00e9rique',
+      ctx:'Un CAN transforme une tension analogique en un code binaire. Plus il a de bits, plus la conversion est fine. Lis les valeurs sur le sch\u00e9ma.',
+      data:[['\u00c9tendue Vref','5 V'],['R\u00e9solution','8 bits']],
+      parts:[
+        {q:'Nombre de niveaux : 2\u207f ?', a:256, tol:0.5, pts:2, unit:'niveaux', sol:'2\u2078 = 256 niveaux'},
+        {q:'Quantum q = Vref/2\u207f ? (en mV)', a:19.5, tol:0.6, pts:3, unit:'mV', sol:'q = 5/256 \u2248 0,0195 V = 19,5 mV'},
+        {q:'Tension pour le code N = 100 : V = N\u00b7q ? (en V)', a:1.95, tol:0.06, pts:3, unit:'V', sol:'V = 100 \u00d7 0,0195 \u2248 1,95 V'},
+        {q:'Code num\u00e9rique pour 2,5 V : N = V/q ?', a:128, tol:2, pts:2, unit:'code', sol:'N = 2,5/0,0195 \u2248 128'}
+      ] },
+    { anim:'samp', tag:'Exercice 2 · 7 pts', title:'L\u2019\u00e9chantillonnage',
+      ctx:'Pour num\u00e9riser un signal, on rel\u00e8ve sa valeur \u00e0 intervalles r\u00e9guliers Te. Rappel : fe = 1/Te.',
+      data:[['P\u00e9riode Te','2 ms']],
+      parts:[
+        {q:'Fr\u00e9quence d\u2019\u00e9chantillonnage : fe = 1/Te ? (en Hz)', a:500, tol:5, pts:2, unit:'Hz', sol:'fe = 1/0,002 = 500 Hz'},
+        {q:'Nombre d\u2019\u00e9chantillons relev\u00e9s en 1 s ?', a:500, tol:2, pts:2, unit:'\u00e9ch.', sol:'500 \u00d7 1 = 500 \u00e9chantillons'},
+        {q:'Dur\u00e9e pour relever 2000 \u00e9chantillons : t = N/fe ? (en s)', a:4, tol:0.2, pts:3, unit:'s', sol:'t = 2000/500 = 4 s'}
+      ] },
+    { anim:'sensor', tag:'Exercice 3 · 7 pts', title:'Le capteur de temp\u00e9rature',
+      ctx:'Un capteur lin\u00e9aire d\u00e9livre une tension proportionnelle \u00e0 la temp\u00e9rature, num\u00e9ris\u00e9e par un CAN.',
+      data:[['Sensibilit\u00e9 capteur','10 mV/\u00b0C'],['Quantum du CAN','20 mV']],
+      parts:[
+        {q:'Tension d\u00e9livr\u00e9e \u00e0 30 \u00b0C : U = k\u00b7\u03b8 ? (en mV)', a:300, tol:5, pts:2, unit:'mV', sol:'U = 10 \u00d7 30 = 300 mV'},
+        {q:'Convertis cette tension en volts ?', a:0.3, tol:0.01, pts:2, unit:'V', sol:'300 mV = 0,3 V'},
+        {q:'Plus petite variation de temp\u00e9rature d\u00e9tectable : q/k ? (en \u00b0C)', a:2, tol:0.2, pts:3, unit:'\u00b0C', sol:'r\u00e9solution = 20/10 = 2 \u00b0C'}
+      ] }
   ];
+  var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
 
-  var answers = QUESTIONS.map(function(){return null;});
-  var nom='', classe='', submitted=false;
-  function $(id){return document.getElementById(id);}
-  function showMsg(id,cls,txt){var e=$(id);e.className='inline-msg show '+cls;e.textContent=txt;}
-  function hideMsg(id){var e=$(id);e.className='inline-msg';}
+  var student={nom:'',classe:''};
+  function show(id){ ['screen-home','screen-exam','screen-result','screen-prof'].forEach(function(s){document.getElementById(s).hidden=(s!==id);}); window.scrollTo(0,0); }
+  function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
 
-  $('startBtn').addEventListener('click', function(){
-    nom=($('fNom').value||'').trim(); classe=($('fClasse').value||'').trim();
-    var code=($('fCode').value||'').trim().toUpperCase();
-    if(!nom){ showMsg('startMsg','err','Indique ton nom et pr\u00e9nom.'); return; }
-    if(code!==EVAL_CODE){ showMsg('startMsg','err','Code d\u2019acc\u00e8s incorrect.'); return; }
-    hideMsg('startMsg'); $('accueil').classList.add('hidden');
-    $('quizWho').textContent=nom+(classe?' \u00b7 '+classe:'');
-    $('quiz').classList.remove('hidden'); renderQuestions(); window.scrollTo(0,0);
+  document.getElementById('startBtn').addEventListener('click',function(){
+    var nom=document.getElementById('inNom').value.trim();
+    var cls=document.getElementById('inClasse').value.trim();
+    var code=document.getElementById('inCode').value.trim();
+    var err=document.getElementById('homeErr');
+    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+    err.textContent=''; student.nom=nom; student.classe=cls;
+    buildExam(); show('screen-exam'); startAnim();
   });
+  document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
 
-  function renderQuestions(){
-    $('questions').innerHTML=QUESTIONS.map(function(q,i){
-      var body;
-      if(q.type==='num'){
-        body='<div class="numrow"><input type="text" inputmode="decimal" autocomplete="off" data-q="'+i+'" placeholder="r\u00e9ponse"><span class="u">'+(q.unite||'')+'</span></div>';
-      }else if(q.type==='vf'){
-        body='<div class="vf"><button class="opt" data-q="'+i+'" data-v="1">Vrai</button><button class="opt" data-q="'+i+'" data-v="0">Faux</button></div>';
-      }else{
-        body='<div class="opts">'+q.choix.map(function(c,j){return '<button class="opt" data-q="'+i+'" data-v="'+j+'">'+c+'</button>';}).join('')+'</div>';
-      }
-      return '<div class="q"><span class="qn">Q'+(i+1)+'</span><p class="qt">'+q.q+'</p>'+body+'</div>';
-    }).join('');
-    $('questions').addEventListener('click', function(ev){
-      var b=ev.target; if(!b.classList.contains('opt'))return;
-      var i=+b.getAttribute('data-q'), v=+b.getAttribute('data-v');
-      $('questions').querySelectorAll('.opt[data-q="'+i+'"]').forEach(function(s){s.classList.remove('sel');});
-      b.classList.add('sel');
-      answers[i]=(QUESTIONS[i].type==='vf')?(v===1):v;
-    });
-  }
-  function readNums(){
-    QUESTIONS.forEach(function(q,i){
-      if(q.type!=='num')return;
-      var inp=$('questions').querySelector('input[data-q="'+i+'"]');
-      var raw=(inp.value||'').trim().replace(/\s/g,'').replace(',', '.');
-      answers[i]=raw===''?null:parseFloat(raw);
-    });
-  }
-  function grade(){
-    var detail=QUESTIONS.map(function(q,i){
-      var a=answers[i];
-      if(a===null||(typeof a==='number'&&isNaN(a)))return false;
-      if(q.type==='num')return Math.abs(a-q.rep)<=q.tol;
-      if(q.type==='vf')return a===q.bon;
-      return a===q.bon;
-    });
-    var score=detail.filter(Boolean).length;
-    return {detail:detail, score:score, total:QUESTIONS.length, pct:Math.round(score/QUESTIONS.length*100)};
-  }
-  $('submitBtn').addEventListener('click', function(){
-    if(submitted)return; readNums();
-    var unanswered=answers.filter(function(a){return a===null||(typeof a==='number'&&isNaN(a));}).length;
-    if(unanswered>0){ showMsg('submitMsg','err','Il reste '+unanswered+' question(s) sans r\u00e9ponse.'); return; }
-    hideMsg('submitMsg'); submitted=true; $('submitBtn').disabled=true;
-    var r=grade();
-    $('quiz').classList.add('hidden'); $('resultat').classList.remove('hidden');
-    $('rScore').textContent=r.score+' / '+r.total; $('rSub').textContent='Soit '+r.pct+' %';
-    $('rRecap').innerHTML=r.detail.map(function(ok,i){return '<div class="rc '+(ok?'y':'n')+'">'+(i+1)+'</div>';}).join('');
-    window.scrollTo(0,0); sendResult(r);
-  });
-  function sendResult(r){
-    var payload={nom:nom, classe:classe, score:r.score, total:r.total, pourcentage:r.pct,
-      detail:r.detail.map(function(b){return b?1:0;}), date:new Date().toISOString()};
-    var st=$('sendStatus'); st.className='send-status pending'; st.textContent='Envoi des r\u00e9sultats\u2026';
-    fetch(FB_URL+'/'+FB_NODE+'.json', {method:'POST', body:JSON.stringify(payload)})
-      .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
-      .then(function(){ st.className='send-status done'; st.textContent='\u2713 R\u00e9sultats transmis \u00e0 ton enseignant.'; })
-      .catch(function(){
-        st.className='send-status fail';
-        st.innerHTML='\u2717 \u00c9chec de l\u2019envoi (r\u00e9seau ?). <button class="btn alt" id="retryBtn" style="margin-left:8px;padding:6px 12px">R\u00e9essayer</button>';
-        var rb=$('retryBtn'); if(rb) rb.addEventListener('click', function(){ sendResult(r); });
+  function buildExam(){
+    var col=document.getElementById('exoCol'); var html='';
+    EXOS.forEach(function(ex,ei){
+      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+      ex.parts.forEach(function(p,pi){
+        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
       });
+      html+='</div>';
+    });
+    col.innerHTML=html;
+    col.addEventListener('input',updateProgress);
+    updateProgress();
   }
-  $('teachToggle').addEventListener('click', function(){ $('teachPanel').classList.toggle('hidden'); });
-  $('dashBtn').addEventListener('click', function(){
-    var p=($('fPass').value||'').trim();
-    if(p!==DASH_PASS){ showMsg('dashMsg','err','Mot de passe incorrect.'); return; }
-    hideMsg('dashMsg');
-    var box=$('dashContent'); box.innerHTML='<p class="dash-meta">Chargement\u2026</p>';
-    fetch(FB_URL+'/'+FB_NODE+'.json')
-      .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
-      .then(function(data){ renderDash(data); })
-      .catch(function(){ box.innerHTML='<p class="dash-meta" style="color:#8f3a24">Erreur de chargement (r\u00e9seau ?).</p>'; });
+  function readAll(){
+    var vals={};
+    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
+    return vals;
+  }
+  function updateProgress(){
+    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+  }
+
+  var warned=false;
+  document.getElementById('submitBtn').addEventListener('click',function(){
+    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+    var err=document.getElementById('examErr');
+    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+    err.textContent=''; grade(vals);
   });
-  function renderDash(data){
-    var box=$('dashContent');
-    if(!data){ box.innerHTML='<p class="dash-meta">Aucun r\u00e9sultat pour l\u2019instant.</p>'; return; }
-    var rows=Object.keys(data).map(function(k){return data[k];}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-    var moy=Math.round(rows.reduce(function(s,r){return s+(r.pourcentage||0);},0)/rows.length);
-    var html='<p class="dash-meta">'+rows.length+' copie(s) \u00b7 moyenne '+moy+' %</p>'+
-      '<table class="dash"><thead><tr><th>Nom</th><th>Classe</th><th>Score</th><th>%</th><th>Date</th></tr></thead><tbody>'+
-      rows.map(function(r){
+
+  function grade(vals){
+    var pts=0, recapHtml='';
+    EXOS.forEach(function(ex,ei){
+      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+      ex.parts.forEach(function(p,pi){
+        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+      });
+      recapHtml+='</div>';
+    });
+    var pct=Math.round(pts/MAXPTS*100);
+    var note=Math.round(pts/MAXPTS*20*10)/10;
+    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
+    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+    document.getElementById('rankPill').textContent=rank;
+    document.getElementById('recap').innerHTML=recapHtml;
+    show('screen-result'); animateScore(note); sendResult(pts,pct,note);
+  }
+  function animateScore(note){
+    var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
+    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
+  }
+  function sendResult(pts,pct,note){
+    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+  }
+
+  // ===== Calculatrice =====
+  (function(){
+    var expr='', justEval=false;
+    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+    function evaluate(){
+      try{
+        var s=expr, i=0;
+        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+        function factor(){
+          if(s[i]==='-'){ i++; return -factor(); }
+          if(s[i]==='+'){ i++; return factor(); }
+          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+          return number();
+        }
+        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+        var res=expr2();
+        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+        var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
+      }catch(e){ resEl.textContent='Erreur'; return null; }
+    }
+    function press(k){
+      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+      expr+=k; disp();
+    }
+    document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
+  })();
+
+  // ===== Animations =====
+  var phase=0, animTimer=null;
+  function startAnim(){ if(animTimer)return; animTimer=setInterval(function(){ phase+=0.05; drawAll(); },50); }
+  function drawAll(){ drawCan(); drawSamp(); drawSensor(); }
+  function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{x:c.getContext('2d'),W:c.width,H:c.height}:null; }
+
+  function drawCan(){
+    var o=ctxOf('cv_can'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var x0=46,x1=W-20,y0=20,y1=H-30,pw=x1-x0,ph=y1-y0,L=8;
+    function f(t){return 0.5+0.32*Math.sin(t*Math.PI*2*1.0+0.3)+0.12*Math.sin(t*Math.PI*2*2.2);}
+    g.strokeStyle='rgba(46,106,142,.13)';g.lineWidth=1;g.setLineDash([3,4]);
+    for(var k=0;k<=L;k++){var y=y1-(k/L)*ph;g.beginPath();g.moveTo(x0,y);g.lineTo(x1,y);g.stroke();}
+    g.setLineDash([]);
+    g.strokeStyle='rgba(42,38,34,.28)';g.lineWidth=1.3;g.beginPath();g.moveTo(x0,y0);g.lineTo(x0,y1);g.lineTo(x1,y1);g.stroke();
+    g.strokeStyle='#B85C2E';g.lineWidth=2.2;g.beginPath();
+    for(var i=0;i<=200;i++){var t=i/200,X=x0+t*pw,Y=y1-f(t)*ph;if(i===0)g.moveTo(X,Y);else g.lineTo(X,Y);}g.stroke();
+    var Ns=36;g.strokeStyle='#2c6147';g.lineWidth=2.2;g.beginPath();
+    for(var s=0;s<Ns;s++){var t2=s/(Ns-1);var q=Math.round(f(t2)*(L-1))/(L-1);var X2=x0+t2*pw,Y2=y1-q*ph,Xn=(s<Ns-1)?x0+((s+1)/(Ns-1))*pw:X2;if(s===0)g.moveTo(X2,Y2);else g.lineTo(X2,Y2);g.lineTo(Xn,Y2);}g.stroke();
+    var ct=(phase*0.12)%1, cx=x0+ct*pw, cvv=Math.round(f(ct)*(L-1))/(L-1), cyp=y1-cvv*ph;
+    g.strokeStyle='rgba(189,138,42,.8)';g.lineWidth=1.5;g.setLineDash([4,4]);g.beginPath();g.moveTo(cx,y0);g.lineTo(cx,y1);g.stroke();g.setLineDash([]);
+    g.fillStyle='#BD8A2A';g.beginPath();g.arc(cx,cyp,5,0,7);g.fill();
+    g.fillStyle='#B85C2E';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('signal analogique',x0+6,y0+12);
+    g.fillStyle='#2c6147';g.fillText('valeurs num\u00e9ris\u00e9es',x0+150,y0+12);
+    g.fillStyle='#5C544B';g.textAlign='right';g.fillText('principe \u2014 illustration sur 8 niveaux',x1,H-10);
+  }
+
+  function drawSamp(){
+    var o=ctxOf('cv_samp'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var x0=46,x1=W-20,cy=H/2,amp=H*0.3,pw=x1-x0;
+    g.strokeStyle='rgba(42,38,34,.2)';g.lineWidth=1;g.beginPath();g.moveTo(x0,cy);g.lineTo(x1,cy);g.stroke();
+    g.strokeStyle='#B85C2E';g.lineWidth=2.2;g.beginPath();
+    for(var i=0;i<=240;i++){var t=i/240;var y=cy-Math.sin(t*Math.PI*2*2.0+0.4)*amp;var X=x0+t*pw;if(i===0)g.moveTo(X,y);else g.lineTo(X,y);}g.stroke();
+    var Nsamp=14, scan=((phase*0.15)%1);
+    for(var s=0;s<=Nsamp;s++){var t2=s/Nsamp;var X2=x0+t2*pw;var y2=cy-Math.sin(t2*Math.PI*2*2.0+0.4)*amp;var cap=t2<=scan;
+      g.strokeStyle='rgba(46,106,142,.3)';g.lineWidth=1;g.beginPath();g.moveTo(X2,cy);g.lineTo(X2,y2);g.stroke();
+      g.fillStyle=cap?'#2E6A8E':'rgba(46,106,142,.3)';g.beginPath();g.arc(X2,y2,cap?4:3,0,7);g.fill();}
+    var sx=x0+scan*pw;g.strokeStyle='rgba(189,138,42,.7)';g.lineWidth=1.5;g.beginPath();g.moveTo(sx,18);g.lineTo(sx,H-18);g.stroke();
+    var xa=x0, xb=x0+(1/Nsamp)*pw;
+    g.strokeStyle='#5C544B';g.lineWidth=1;g.beginPath();g.moveTo(xa,H-16);g.lineTo(xb,H-16);g.stroke();
+    g.fillStyle='#5C544B';g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('Te',(xa+xb)/2,H-20);
+    g.textAlign='left';g.fillStyle='#B85C2E';g.fillText('signal',x0+4,16);g.fillStyle='#2E6A8E';g.fillText('\u25cf \u00e9chantillons',x0+66,16);
+  }
+
+  function drawSensor(){
+    var o=ctxOf('cv_sensor'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var tx=70, top=40, bot=H-52, tubeW=14, cy=H/2;
+    g.strokeStyle='#5C544B';g.lineWidth=2;g.fillStyle='#fff';
+    g.beginPath();g.arc(tx,bot,18,0,7);g.fill();g.stroke();
+    g.beginPath();g.moveTo(tx-tubeW/2,top);g.lineTo(tx-tubeW/2,bot);g.moveTo(tx+tubeW/2,top);g.lineTo(tx+tubeW/2,bot);g.arc(tx,top,tubeW/2,Math.PI,0);g.stroke();
+    var lvl=0.45+0.4*(0.5+0.5*Math.sin(phase*0.8));
+    var mtop=bot-(bot-top)*lvl;
+    g.fillStyle='#C0492E';g.beginPath();g.arc(tx,bot,13,0,7);g.fill();g.fillRect(tx-5,mtop,10,bot-mtop);
+    var theta=Math.round(lvl*50);
+    g.fillStyle='#2A2622';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(theta+' \u00b0C',tx,top-8);
+    function arrow(xa,xb,yy){g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(xa,yy);g.lineTo(xb,yy);g.lineTo(xb-7,yy-5);g.moveTo(xb,yy);g.lineTo(xb-7,yy+5);g.stroke();}
+    arrow(tx+22,150,cy);
+    g.fillStyle='#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.fillRect(150,cy-26,130,52);g.strokeRect(150,cy-26,130,52);
+    g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Capteur',215,cy-6);
+    g.fillStyle='#2E6A8E';g.font='10px "JetBrains Mono",monospace';g.fillText('10 mV/\u00b0C',215,cy+12);
+    arrow(282,330,cy);
+    g.fillStyle='#FFFDF8';g.strokeStyle='#3D7E5F';g.lineWidth=2;g.fillRect(330,cy-26,150,52);g.strokeRect(330,cy-26,150,52);
+    g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.fillText('CAN',405,cy-6);
+    var U=theta*10, code=Math.round(U/20);
+    g.fillStyle='#3D7E5F';g.font='10px "JetBrains Mono",monospace';g.fillText('U = '+U+' mV \u2192 code '+code,405,cy+12);
+    g.fillStyle='#5C544B';g.font='10px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('temp\u00e9rature \u2192 tension \u2192 code num\u00e9rique',70,H-14);
+  }
+
+  // ===== Prof =====
+  function backHome(){ show('screen-home'); }
+  document.getElementById('profBack').addEventListener('click',backHome);
+  document.getElementById('profBack2').addEventListener('click',backHome);
+  document.getElementById('profBtn').addEventListener('click',function(){
+    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
+    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+  });
+  document.getElementById('profRefresh').addEventListener('click',loadResults);
+  function loadResults(){
+    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+      rows.forEach(function(r){
         var d=r.date?new Date(r.date):null;
-        var ds=d?(('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)):'\u2014';
-        return '<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+(r.score||0)+'/'+(r.total||0)+'</b></td><td><b>'+(r.pourcentage||0)+'</b></td><td>'+ds+'</td></tr>';
-      }).join('')+'</tbody></table>';
-    box.innerHTML=html;
+        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+      });
+      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+      box.innerHTML=html;
+    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
 </body>
