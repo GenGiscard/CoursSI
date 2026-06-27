@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP Cinématique — 6 défis · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .tpscore{background:var(--ink);color:var(--cream);border-radius:11px;padding:12px 14px;margin-bottom:14px}
+  .tpscore .sc-row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;color:#C9BBA8}
+  .tpscore .sc-row b{font-family:var(--display);font-size:24px;color:#E9A36F;font-weight:800}
+  .tpscore .sc-rank{font-family:var(--mono);font-size:11px;color:#9FCBAE;margin-top:4px;font-weight:700}
+  .tpscore .sc-track{height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:8px}
+  .tpscore .sc-track i{display:block;height:100%;width:0;background:#E9A36F;transition:width .4s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--amber)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,60px) 80px}
+  section{padding:48px 0 44px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4.2vw,42px);line-height:1.04;margin:12px 0 16px}
+  h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.5vw,25px);margin:0 0 6px;letter-spacing:-.01em}
+  .lede{font-size:16px;max-width:64ch;color:var(--ink-soft);margin:8px 0 18px}
+  p{margin:0 0 14px} h4{font-family:var(--display)}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0}
+  .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .chip.k{background:rgba(189,138,42,.1);border-color:rgba(189,138,42,.4);color:#8a6313}
+  .badge-defi{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#8a6313;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin:6px 0}
+  .panel h4{font-weight:700;font-size:16px;margin:0 0 10px}
+  .panel ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink-soft)} .panel ul li{margin-bottom:5px} .panel ul li b{color:var(--ink)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .note{font-size:13.5px;color:var(--ink-soft);background:rgba(189,138,42,.08);border:1px solid rgba(189,138,42,.3);border-radius:10px;padding:13px 16px;margin-top:8px} .note b{color:var(--ink)}
+  table.data{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px;margin:6px 0}
+  table.data th,table.data td{padding:9px 14px;border-bottom:1px solid var(--line);text-align:left}
+  table.data thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.data td b{font-family:var(--mono);color:var(--ink)} table.data tr:last-child td{border-bottom:none}
+
+  /* builder */
+  .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+  .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
+  .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
+  .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
+  .bslot.bad{border-color:var(--no);background:rgba(192,73,46,.08);animation:shake .35s}
+  .bslot.lit{box-shadow:0 0 0 3px rgba(61,126,95,.25)}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  .bslot .ic{font-size:22px;line-height:1} .bslot .lb{font-family:var(--display);font-weight:700;font-size:12px;text-align:center;padding:0 4px}
+  .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
+  .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
+  .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
+    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+  .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
+  .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
+
+  /* arcade */
+  .game{background:var(--ink);color:var(--cream);border-radius:18px;padding:24px 26px;margin:6px 0}
+  .game .ghead{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .game .gtitle{font-family:var(--display);font-weight:800;font-size:20px}
+  .game .ghud{display:flex;gap:16px;font-family:var(--mono);font-size:12px;color:#C9BBA8}
+  .game .ghud b{color:#E9A36F;font-size:15px;display:block}
+  .gbar{height:8px;background:rgba(255,255,255,.12);border-radius:5px;overflow:hidden;margin-bottom:18px}
+  .gbar i{display:block;height:100%;width:100%;background:#E9A36F;transition:width .1s linear}
+  .gprompt{text-align:center;padding:8px 0 18px}
+  .gprompt .gq{font-family:var(--mono);font-size:clamp(17px,3vw,24px);color:#fff;font-weight:700;letter-spacing:.01em}
+  .gprompt .gask{font-family:var(--mono);font-size:13px;color:#C9BBA8;margin-top:6px}
+  .gprompt .gname{font-family:var(--display);font-weight:800;font-size:clamp(24px,4.2vw,38px)}
+  .gopts{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;max-width:520px;margin:0 auto}
+  .gopt{font-family:var(--mono);font-weight:700;font-size:18px;padding:15px;border-radius:11px;cursor:pointer;border:2px solid rgba(233,163,111,.5);color:#E9A36F;background:transparent;transition:.12s}
+  .gopt:hover{background:rgba(233,163,111,.14)}
+  .gbtns{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:520px;margin:0 auto}
+  .gbtn{font-family:var(--display);font-weight:700;font-size:18px;padding:17px;border-radius:12px;cursor:pointer;border:2px solid;transition:.12s;background:transparent}
+  .gbtn small{display:block;font-family:var(--mono);font-size:9.5px;font-weight:400;opacity:.8;margin-top:3px}
+  .gbtn.tr{color:#E9A36F;border-color:rgba(233,163,111,.55)} .gbtn.tr:hover{background:rgba(233,163,111,.14)}
+  .gbtn.ro{color:#7FB7D6;border-color:rgba(127,183,214,.55)} .gbtn.ro:hover{background:rgba(127,183,214,.14)}
+  .gstart{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:14px 0}
+  .gstart p{color:#C9BBA8;font-size:14px;max-width:48ch;margin:0}
+  .gbig{font-family:var(--mono);font-size:13px;background:#E9A36F;color:#2A2622;border:none;border-radius:10px;padding:12px 22px;cursor:pointer;font-weight:700}
+  .gflash{text-align:center;font-family:var(--mono);font-size:13px;min-height:20px;margin-top:14px;color:#C9BBA8}
+  .gover{text-align:center;padding:10px 0}
+  .gover .gscore{font-family:var(--display);font-weight:800;font-size:34px;color:#E9A36F}
+
+  /* interactif (réducteur + course) */
+  .resbox,.park{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .resbox canvas,.park canvas{width:100%;height:auto;display:block;border-radius:9px;background:#FCFAF4;border:1px solid var(--line);margin-bottom:14px}
+  .orow{display:grid;grid-template-columns:150px 1fr 96px;gap:12px;align-items:center;margin-bottom:10px}
+  .orow .oname{font-family:var(--display);font-weight:700;font-size:13.5px}
+  .orow input[type=range]{width:100%;accent-color:var(--amber)}
+  .orow .oeta{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--steel);text-align:right}
+  .opt-readout{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+  .ord{flex:1 1 150px;background:var(--cream);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+  .ord .l{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .ord .v{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--ink);margin-top:3px}
+  .opt-status{font-family:var(--mono);font-size:14px;font-weight:700;padding:12px 15px;border-radius:9px;text-align:center}
+  .opt-status.win{background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.4);color:#2c6147}
+  .opt-status.miss{background:var(--cream);border:1px solid var(--line);color:var(--ink-soft)}
+  .opt-status.over{background:rgba(192,73,46,.08);border:1px solid rgba(192,73,46,.35);color:#8f3a24}
+  .vactions{display:flex;gap:10px;margin-bottom:12px}
+
+  /* matching */
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .mcol{display:flex;flex-direction:column;gap:9px}
+  .mitem{font-family:var(--display);font-weight:700;font-size:13.5px;background:var(--paper);border:2px solid var(--line-strong);border-radius:11px;padding:13px 14px;cursor:pointer;text-align:center;transition:.12s}
+  .mitem:hover{border-color:var(--amber)}
+  .mitem.sel{border-color:var(--steel);background:rgba(46,106,142,.1)}
+  .mitem.done{border-color:var(--green);background:rgba(61,126,95,.12);color:#2c6147;cursor:default;pointer-events:none}
+  .mitem.bad{border-color:var(--no);animation:shake .35s}
+  .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+  .mmsg{font-family:var(--mono);font-size:13px;font-weight:700}
+
+  .btn{font-family:var(--mono);font-size:12.5px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:8px 14px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn:hover{background:#fff;border-color:var(--amber);color:#8a6313}
+  .btn.primary{background:var(--ink);color:var(--cream);border-color:var(--ink)} .btn.primary:hover{background:#3a342e;color:#fff}
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--green);color:#fff;border-radius:10px;padding:12px 18px}
+
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
+    .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:96px 1fr 76px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_cinematique.html">← Séquence : cinématique</a>
+    <div class="brand">
+      <div class="mark">TP</div>
+      <div><h1>Cinématique</h1><p>6 défis · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="tpscore">
+      <div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div>
+      <div class="sc-rank" id="scRank">🔧 Apprenti</div>
+      <div class="sc-track"><i id="scTrack"></i></div>
+    </div>
+    <div class="links" id="links">
+      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
+      <a href="#proto" class="navlink"><span>02</span>Repère</a>
+      <a href="#defi1" class="navlink"><span>D1</span>Chaîne de transmission</a>
+      <a href="#defi2" class="navlink"><span>D2</span>Vitesse express</a>
+      <a href="#defi3" class="navlink"><span>D3</span>Translation / Rotation</a>
+      <a href="#defi4" class="navlink"><span>D4</span>Règle le réducteur</a>
+      <a href="#defi5" class="navlink"><span>D5</span>La course</a>
+      <a href="#defi6" class="navlink"><span>D6</span>Liaison ↔ mouvement</a>
+      <a href="#synth" class="navlink"><span>07</span>Synthèse</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="obj">
+      <span class="kicker">TP · Cinématique</span>
+      <h2>6 défis pour décrire<br>et transmettre le mouvement</h2>
+      <p class="lede">On joue&nbsp;: tu montes une chaîne de transmission, tu calcules des vitesses à toute allure, tu règles un réducteur pour viser une vitesse cible, et tu pilotes une course entre mouvement uniforme et accéléré. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
+      <div class="two">
+        <div class="panel"><h4>Les 6 défis</h4><ul>
+          <li><b>D1 · Chaîne de transmission</b> — remets les blocs dans l'ordre.</li>
+          <li><b>D2 · Vitesse express</b> — V = R·ω et tr/min → rad/s contre la montre.</li>
+          <li><b>D3 · Translation / Rotation</b> — classe les mouvements en un éclair.</li>
+          <li><b>D4 · Règle le réducteur</b> — choisis Z₁ et Z₂ pour la bonne vitesse.</li>
+          <li><b>D5 · La course</b> — règle l'accélération pour finir ex æquo.</li>
+          <li><b>D6 · Liaison ↔ mouvement</b> — relie chaque liaison à ses mobilités.</li>
+        </ul></div>
+        <div class="panel"><h4>Notions travaillées</h4>
+          <div class="chips"><span class="chip k">trajectoire</span><span class="chip k">V = R·ω</span><span class="chip k">tr/min → rad/s</span><span class="chip k">v = v₀ + a·t</span><span class="chip k">réducteur</span><span class="chip k">liaisons</span></div>
+          <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proto">
+      <span class="kicker">02 · Repère</span>
+      <h3>Vitesses &amp; transmission en bref</h3>
+      <p class="lede">Un point en rotation à la distance R de l'axe a une vitesse V = R·ω. Un réducteur relie l'entrée et la sortie par le rapport des dentures.</p>
+      <table class="data">
+        <thead><tr><th>Relation</th><th>Formule</th><th>Unités</th></tr></thead>
+        <tbody>
+          <tr><td>Vitesse d'un point en rotation</td><td><b>V = R·ω</b></td><td>m/s · m · rad/s</td></tr>
+          <tr><td>Conversion vitesse de rotation</td><td><b>ω = N·2π/60</b></td><td>rad/s ← tr/min</td></tr>
+          <tr><td>Mouvement uniformément varié</td><td><b>v = v₀ + a·t</b></td><td>m/s · m/s² · s</td></tr>
+          <tr><td>Réducteur (loi entrée/sortie)</td><td><b>ω_s / ω_e = Z₁ / Z₂</b></td><td>rapport des dentures</td></tr>
+        </tbody>
+      </table>
+      <div class="note">Repère clé&nbsp;: pour <b>réduire</b> la vitesse (ω_s &lt; ω_e), il faut une roue de sortie <b>plus grande</b> que l'entrée (Z₂ &gt; Z₁).</div>
+    </section>
+
+    <!-- DÉFI 1 -->
+    <section id="defi1">
+      <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div>
+      <h3>Assemble la chaîne de transmission</h3>
+      <p class="lede">Clique les blocs pour les ranger&nbsp;: du moteur (rotation) jusqu'au chariot (translation), en passant par la conversion du mouvement.</p>
+      <div class="builder">
+        <div class="bslots" id="bslots"></div>
+        <div class="bhint">Le système vis-écrou transforme la rotation en translation.</div>
+        <div class="bpool" id="bpool"></div>
+        <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 2 -->
+    <section id="defi2">
+      <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
+      <h3>Vitesse express</h3>
+      <p class="lede">40 secondes&nbsp;: calcule la vitesse d'un point V = R·ω, ou convertis une vitesse de rotation tr/min → rad/s. Choisis la bonne valeur.</p>
+      <div class="game" id="g2">
+        <div class="ghead"><div class="gtitle">⚡ Vitesse express</div>
+          <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
+        <div class="gbar"><i id="g2Bar"></i></div>
+        <div id="g2Area"><div class="gstart"><p>V = R·ω et ω ≈ N·π/30. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
+        <div class="gflash" id="g2Flash"></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 3 -->
+    <section id="defi3">
+      <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
+      <h3>Translation ou Rotation ?</h3>
+      <p class="lede">30 secondes pour classer chaque mouvement&nbsp;: <b>translation</b> (tous les points vont dans le même sens) ou <b>rotation</b> (autour d'un axe)&nbsp;?</p>
+      <div class="game" id="g3">
+        <div class="ghead"><div class="gtitle">⚡ Nature du mouvement</div>
+          <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
+        <div class="gbar"><i id="g3Bar"></i></div>
+        <div id="g3Area"><div class="gstart"><p>Identifie la nature du mouvement le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
+        <div class="gflash" id="g3Flash"></div>
+      </div>
+    </section>
+
+    <!-- DÉFI 4 -->
+    <section id="defi4">
+      <div class="badge-defi">DÉFI 4 · réglage · jusqu'à 140 pts</div>
+      <h3>Règle le réducteur</h3>
+      <p class="lede">Le moteur tourne à <b>300 tr/min</b>. Choisis les dentures Z₁ (entrée) et Z₂ (sortie) pour que la sortie tourne à la <b>vitesse cible</b>. Rappel&nbsp;: ω_s = ω_e · Z₁/Z₂.</p>
+      <div class="resbox">
+        <div class="orow"><span class="oname">Pignon entrée Z₁</span><input type="range" min="10" max="40" value="20" id="z1"><span class="oeta" id="z1v">20 dents</span></div>
+        <div class="orow"><span class="oname">Pignon sortie Z₂</span><input type="range" min="10" max="60" value="40" id="z2"><span class="oeta" id="z2v">40 dents</span></div>
+        <div class="opt-readout">
+          <div class="ord"><div class="l">Rapport Z₁/Z₂</div><div class="v" id="redRatio">0,50</div></div>
+          <div class="ord"><div class="l">ω entrée</div><div class="v">300 tr/min</div></div>
+          <div class="ord"><div class="l">ω sortie</div><div class="v" id="redWs">150 tr/min</div></div>
+        </div>
+        <div class="opt-status miss" id="redStatus">🎯 Objectif : ω_s = 100 tr/min (±4). Règle Z₁ et Z₂.</div>
+      </div>
+    </section>
+
+    <!-- DÉFI 5 -->
+    <section id="defi5">
+      <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
+      <h3>La course — uniforme contre accéléré</h3>
+      <p class="lede">Deux mobiles, 100 m à parcourir. <b>A</b> roule à vitesse constante (8 m/s). <b>B</b> part de l'arrêt et accélère. Règle l'accélération <b>a</b> de B pour finir <b>ex æquo</b> avec A&nbsp;!</p>
+      <div class="park">
+        <canvas id="raceCv" width="900" height="180"></canvas>
+        <div class="orow"><span class="oname">Accélération a</span><input type="range" min="5" max="30" value="13" id="raceA"><span class="oeta" id="raceAv">1,3 m/s²</span></div>
+        <div class="vactions"><button class="btn primary" id="raceGo">▶ Lancer la course</button><button class="btn" id="raceReset">↻ Rejouer</button></div>
+        <div class="opt-status miss" id="raceStatus">Règle a, puis lance la course (A = uniforme à 8 m/s).</div>
+      </div>
+      <div class="note" style="margin-top:12px">B parcourt x = ½·a·t². Pour finir en même temps que A (qui met 12,5 s), il faut a ≈ <b>1,28 m/s²</b>. À toi de l'approcher&nbsp;!</div>
+    </section>
+
+    <!-- DÉFI 6 -->
+    <section id="defi6">
+      <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
+      <h3>Liaison ↔ Mouvement</h3>
+      <p class="lede">Relie chaque liaison mécanique aux mobilités qu'elle autorise. Clique une liaison, puis son mouvement.</p>
+      <div class="match" id="match">
+        <div class="mcol" id="mLeft"></div>
+        <div class="mcol" id="mRight"></div>
+      </div>
+      <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
+    </section>
+
+    <section id="synth" style="border-bottom:none">
+      <span class="kicker">07 · Bilan</span>
+      <h3>Ce qu'il faut retenir</h3>
+      <div class="panel"><ul>
+        <li>Deux mouvements de base&nbsp;: <b>translation</b> et <b>rotation</b>&nbsp;; certains les combinent.</li>
+        <li>En rotation, un point à la distance R a la vitesse <b>V = R·ω</b> (ω en rad/s).</li>
+        <li>Mouvement uniformément varié&nbsp;: <b>v = v₀ + a·t</b>&nbsp;; à l'arrêt, x = ½·a·t².</li>
+        <li>Un réducteur applique <b>ω_s/ω_e = Z₁/Z₂</b>&nbsp;; chaque liaison autorise des mobilités précises.</li>
+      </ul></div>
+      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== Score global =====
+  var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0};
+  var RANKS=[[0,'🔧 Apprenti'],[200,'⚙️ Technicien·ne'],[450,'📐 Ingénieur·e'],[700,'🏆 Expert·e']];
+  function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
+  function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
+  function renderScore(){
+    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
+    document.getElementById('scVal').textContent=tot;
+    document.getElementById('scRank').textContent=rankFor(tot);
+    document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
+  }
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+
+  // ===== DÉFI 1 : Chaîne de transmission =====
+  (function(){
+    var CHAIN=[{lb:'Moteur',ic:'\u2699\uFE0F'},{lb:'Réducteur',ic:'\uD83D\uDD27'},{lb:'Vis-écrou',ic:'\uD83D\uDD29'},{lb:'Chariot',ic:'\uD83D\uDCE6'}];
+    var N=CHAIN.length;
+    var slots=[]; for(var z=0;z<N;z++)slots.push(null);
+    var pool=shuffle(CHAIN.map(function(_,i){return i;}));
+    var attempts=0, solved=false;
+    var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
+    function render(){
+      slotsEl.innerHTML=slots.map(function(idx,i){
+        if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25">\u2795</span></div>';
+        return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
+      }).join('');
+      poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
+    }
+    slotsEl.addEventListener('click',function(ev){
+      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+    });
+    poolEl.addEventListener('click',function(ev){
+      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+      var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
+      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+    });
+    document.getElementById('bverify').addEventListener('click',function(){
+      if(solved)return;
+      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
+      attempts++;
+      var ok=slots.every(function(idx,i){return idx===i;});
+      var cells=slotsEl.querySelectorAll('.bslot');
+      if(ok){
+        solved=true;
+        var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
+        var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
+        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+        setContrib('d1',pts);
+      }else{
+        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+        msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
+      }
+    });
+    render();
+  })();
+
+  // ===== DÉFI 2 : Vitesse express (arcade) =====
+  (function(){
+    var PAIRS=[{R:0.2,w:15,V:3},{R:0.25,w:8,V:2},{R:0.5,w:6,V:3},{R:0.3,w:10,V:3},{R:0.1,w:20,V:2},{R:0.4,w:5,V:2},{R:0.2,w:25,V:5},{R:0.15,w:20,V:3},{R:0.5,w:8,V:4},{R:0.25,w:16,V:4}];
+    var NS=[60,90,120,180,300,600];
+    function makeOptions(correct){
+      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+      var cands=[correct+1,correct-1,Math.round(correct*2),Math.round(correct*1.5),Math.max(1,correct-2),correct+3];
+      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+      while(arr.length<4){var v=correct+ri(1,8);if(!seen[v]){seen[v]=1;arr.push(v);}}
+      return shuffle(arr);
+    }
+    function makeRound(){
+      if(Math.random()<0.5){ var p=PAIRS[ri(0,PAIRS.length-1)]; return {q:'R = '+String(p.R).replace('.',',')+' m \u00b7 \u03c9 = '+p.w+' rad/s', ask:'V = R\u00b7\u03c9 ? (m/s)', correct:p.V, opts:makeOptions(p.V)}; }
+      else { var Nn=NS[ri(0,NS.length-1)]; var c=Math.round(Nn*Math.PI/30); return {q:'N = '+Nn+' tr/min', ask:'\u03c9 \u2248 ? (rad/s)', correct:c, opts:makeOptions(c)}; }
+    }
+    var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
+    var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
+    var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+    function next(){ cur=makeRound();
+      area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
+        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
+    }
+    function answer(v){
+      if(!playing)return;
+      if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+      else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'  (\u22123 s)'; flash.style.color='#E29A86'; }
+      hud(); next();
+    }
+    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d2', Math.min(150,score));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent='';
+    }
+    document.getElementById('g2').addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
+      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+    });
+  })();
+
+  // ===== DÉFI 3 : Translation / Rotation (reflex) =====
+  (function(){
+    var MOV=[
+      {n:'Ascenseur qui monte',t:'tr'},{n:'Roue de v\u00e9lo',t:'ro'},{n:'Tapis roulant',t:'tr'},{n:'H\u00e9lice de drone',t:'ro'},
+      {n:'Tiroir qu\u2019on ouvre',t:'tr'},{n:'Man\u00e8ge',t:'ro'},{n:'Piston dans un cylindre',t:'tr'},{n:'Aiguille d\u2019horloge',t:'ro'},
+      {n:'Porte coulissante',t:'tr'},{n:'Toupie',t:'ro'},{n:'Chariot sur un rail droit',t:'tr'},{n:'Disque vinyle',t:'ro'}
+    ];
+    var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
+    var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
+    var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+    var FR={tr:'TRANSLATION',ro:'ROTATION'};
+    function pick(){ cur=MOV[Math.floor(Math.random()*MOV.length)];
+      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
+        '<div class="gbtns"><button class="gbtn tr" data-t="tr">TRANSLATION<small>même direction</small></button>'+
+        '<button class="gbtn ro" data-t="ro">ROTATION<small>autour d\u2019un axe</small></button></div>'; }
+    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+    function answer(t){ if(!playing)return;
+      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait une '+FR[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
+      hud(); pick(); }
+    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+      setContrib('d3', Math.min(150,score*6));
+      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+      flash.textContent=''; }
+    document.getElementById('g3').addEventListener('click',function(ev){
+      var t=ev.target;
+      if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
+      var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
+  })();
+
+  // ===== DÉFI 4 : Règle le réducteur =====
+  (function(){
+    var WE=300, TARGET=100, BAND=4;
+    var z1El=document.getElementById('z1'), z2El=document.getElementById('z2');
+    var z1v=document.getElementById('z1v'), z2v=document.getElementById('z2v');
+    var ratioEl=document.getElementById('redRatio'), wsEl=document.getElementById('redWs'), st=document.getElementById('redStatus');
+    function upd(){
+      var z1=+z1El.value, z2=+z2El.value;
+      var ratio=z1/z2, ws=WE*ratio;
+      z1v.textContent=z1+' dents'; z2v.textContent=z2+' dents';
+      ratioEl.textContent=ratio.toFixed(2).replace('.',',');
+      wsEl.textContent=Math.round(ws)+' tr/min';
+      var diff=Math.abs(ws-TARGET);
+      if(diff<=BAND){
+        var pts=Math.min(140, 100 + (diff<1?40:diff<=2?20:8));
+        st.className='opt-status win'; st.textContent='\u2713 ω_s = '+Math.round(ws)+' tr/min \u2014 cible atteinte ! +'+pts+' pts'+(diff<1?' (pile poil \uD83C\uDFAF)':'');
+        setContrib('d4',pts);
+      } else {
+        st.className='opt-status miss';
+        st.textContent='ω_s = '+Math.round(ws)+' tr/min \u2014 vise 100 tr/min ('+(ws>TARGET?'augmente Z₂ ou baisse Z₁':'baisse Z₂ ou augmente Z₁')+').';
+      }
+    }
+    z1El.addEventListener('input',upd); z2El.addEventListener('input',upd); upd();
+  })();
+
+  // ===== DÉFI 5 : La course (uniforme vs accéléré) =====
+  (function(){
+    var cv=document.getElementById('raceCv'); if(!cv||!cv.getContext)return;
+    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var D=100, VA=8;
+    var a=1.3, t=0, xA=0, xB=0, fA=null, fB=null, timer=null, running=false, done=false;
+    var aEl=document.getElementById('raceA'), aV=document.getElementById('raceAv'), st=document.getElementById('raceStatus');
+    var x0=60, x1=W-50;
+    function sx(x){ return x0+(x/D)*(x1-x0); }
+    function car(x,yc,col){ ctx.fillStyle=col; ctx.fillRect(sx(x)-30,yc-13,30,20); ctx.fillStyle='rgba(0,0,0,.55)'; ctx.beginPath(); ctx.arc(sx(x)-23,yc+7,5,0,7); ctx.arc(sx(x)-7,yc+7,5,0,7); ctx.fill(); }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      var yA=54, yB=H-46;
+      // finish line
+      ctx.strokeStyle='rgba(42,38,34,.4)';ctx.setLineDash([6,5]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx(D),24);ctx.lineTo(sx(D),H-18);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('100 m',sx(D),18);
+      // lanes
+      ctx.strokeStyle='rgba(42,38,34,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,yA+14);ctx.lineTo(x1,yA+14);ctx.moveTo(x0,yB+14);ctx.lineTo(x1,yB+14);ctx.stroke();
+      // labels
+      ctx.textAlign='left';ctx.fillStyle='#2E6A8E';ctx.font='700 12px "JetBrains Mono",monospace';ctx.fillText('A · uniforme 8 m/s',x0,yA-18);
+      ctx.fillStyle='#B85C2E';ctx.fillText('B · accéléré '+(+aEl.value/10).toFixed(1).replace('.',',')+' m/s²',x0,yB-18);
+      // live distances
+      ctx.textAlign='right';ctx.fillStyle='#5C544B';ctx.font='11px "JetBrains Mono",monospace';
+      ctx.fillText(Math.min(D,xA).toFixed(0)+' m',x1,yA-18);
+      ctx.fillText(Math.min(D,xB).toFixed(0)+' m',x1,yB-18);
+      car(Math.min(D,xA),yA,'#2E6A8E'); car(Math.min(D,xB),yB,'#B85C2E');
+    }
+    function finish(){
+      if(timer){clearInterval(timer);timer=null;} running=false; done=true; draw();
+      var d=fB-fA;
+      var pts=Math.max(40,Math.round(150-Math.abs(d)*50));
+      var verdict;
+      if(Math.abs(d)<=0.15) verdict='\u2713 EX \u00c6QUO parfait ! ';
+      else if(d<0) verdict='B gagne de '+Math.abs(d).toFixed(1).replace('.',',')+' s. ';
+      else verdict='A gagne de '+d.toFixed(1).replace('.',',')+' s. ';
+      st.className='opt-status '+(Math.abs(d)<=0.15?'win':'miss');
+      st.textContent=verdict+'+'+pts+' pts  (A : '+fA.toFixed(1).replace('.',',')+' s · B : '+fB.toFixed(1).replace('.',',')+' s)';
+      setContrib('d5',pts);
+    }
+    function tick(){
+      var dt=0.08; t+=dt;
+      if(fA===null){ xA=VA*t; if(xA>=D){xA=D; fA=t;} }
+      if(fB===null){ xB=0.5*a*t*t; if(xB>=D){xB=D; fB=t;} }
+      draw();
+      if(fA!==null&&fB!==null) finish();
+    }
+    aEl.addEventListener('input',function(){ aV.textContent=(+aEl.value/10).toFixed(1).replace('.',',')+' m/s\u00b2'; if(!running&&!done)draw(); });
+    document.getElementById('raceGo').addEventListener('click',function(){
+      if(running)return; a=+aEl.value/10; t=0; xA=0; xB=0; fA=null; fB=null; running=true; done=false;
+      st.className='opt-status miss'; st.textContent='Course en cours\u2026';
+      if(timer)clearInterval(timer); timer=setInterval(tick,50);
+    });
+    document.getElementById('raceReset').addEventListener('click',function(){
+      if(timer){clearInterval(timer);timer=null;} t=0;xA=0;xB=0;fA=null;fB=null;running=false;done=false;
+      st.className='opt-status miss'; st.textContent='Règle a, puis lance la course (A = uniforme à 8 m/s).'; draw();
+    });
+    draw();
+  })();
+
+  // ===== DÉFI 6 : Liaison <-> Mouvement =====
+  (function(){
+    var PAIRS=[{c:'Pivot',f:'Rotation (1 axe)'},{c:'Glissière',f:'Translation (1 axe)'},{c:'Pivot glissant',f:'Rotation + translation'},{c:'Hélicoïdale',f:'Rotation-translation liées'},{c:'Encastrement',f:'Aucun mouvement'}];
+    var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
+    var selL=null, matched=0, wrong=0, done=false;
+    var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
+    function render(){
+      leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
+      rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
+    }
+    function onClick(ev){
+      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+      var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
+      if(side==='L'){
+        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+        it.classList.add('sel'); selL={p:p,el:it};
+      } else {
+        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord une liaison.'; return; }
+        if(selL.p===p){
+          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+          msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
+          if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
+        } else {
+          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+        }
+      }
+    }
+    leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
+    document.getElementById('mReset').addEventListener('click',function(){
+      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+    });
+    render();
+  })();
+
+  renderScore();
+</script>
+</body>
+</html>
