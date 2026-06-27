@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluation — Cinématique · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .topbar h1{font-family:var(--display);font-size:17px;margin:0;font-weight:800}
+  .topbar p{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .topbar .back{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:var(--paper)}
+  .topbar .back:hover{border-color:var(--green);color:var(--green)}
+
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:18px}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(22px,4vw,30px);margin:0 0 8px;letter-spacing:-.01em}
+  .lede{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
+  label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:14px 0 6px}
+  input[type=text],input[type=password],input[type=number]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--cream);color:var(--ink)}
+  input:focus{outline:none;border-color:var(--green)}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:11px;padding:13px 22px;cursor:pointer;transition:.15s}
+  .btn:hover{background:#346b50} .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--green);color:var(--green)}
+  .err{color:var(--no);font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px}
+
+  .qnum{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px}
+  .qnum .progress{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  .q{border-top:1px solid var(--line);padding:18px 0}
+  .q:first-of-type{border-top:none}
+  .q .qt{font-family:var(--display);font-weight:700;font-size:16px;margin-bottom:4px}
+  .q .qt .badge{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--green);background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.3);border-radius:6px;padding:2px 7px;margin-right:8px;vertical-align:middle}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+  .opt{display:flex;align-items:center;gap:10px;font-size:14.5px;padding:10px 13px;border:1px solid var(--line);border-radius:9px;cursor:pointer;background:var(--cream);transition:.12s}
+  .opt:hover{border-color:var(--green)}
+  .opt input{accent-color:var(--green);width:16px;height:16px;flex:0 0 16px}
+  .opt.sel{border-color:var(--green);background:rgba(61,126,95,.07)}
+  .numwrap{max-width:240px;margin-top:8px}
+
+  .scorebig{font-family:var(--display);font-weight:800;font-size:54px;color:var(--green);line-height:1}
+  .scoresub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:4px}
+  .recap{margin-top:18px}
+  .ri{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+  .ri .ic{flex:0 0 22px;font-weight:700;font-family:var(--mono)}
+  .ri.good .ic{color:var(--ok)} .ri.bad .ic{color:var(--no)}
+  .ri .det{flex:1} .ri .det .sol{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:2px}
+  .sync{font-family:var(--mono);font-size:11.5px;margin-top:14px;color:var(--ink-soft)}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  td b{font-family:var(--mono)}
+  .footlink{text-align:center;margin-top:20px}
+  .footlink a{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line-strong)}
+  .footlink a:hover{color:var(--green)}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="mark">SI</div>
+    <div><h1>Évaluation — Cinématique</h1><p>Spé Sciences de l'ingénieur · Première</p></div>
+    <a class="back" href="hub_si_cinematique.html">← Séquence</a>
+  </div>
+
+  <!-- ACCUEIL -->
+  <section id="screen-home">
+    <div class="card">
+      <h2>Avant de commencer</h2>
+      <p class="lede">Renseigne ton identité et le code d'accès fourni par ton professeur. L'évaluation comporte 12 questions et n'est notée qu'une fois validée.</p>
+      <label for="inNom">Nom et prénom</label>
+      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
+      <label for="inClasse">Classe</label>
+      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
+      <label for="inCode">Code d'accès</label>
+      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
+      <div class="err" id="homeErr"></div>
+      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
+    </div>
+    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="screen-quiz" hidden>
+    <div class="card">
+      <div class="qnum"><h2 style="margin:0">Questions</h2><span class="progress" id="prog">0 / 12 répondues</span></div>
+      <div id="quizList"></div>
+      <div class="err" id="quizErr"></div>
+      <div style="margin-top:18px"><button class="btn" id="submitBtn">Valider mes réponses</button></div>
+      <div class="hint">Une fois validé, tu ne pourras plus modifier tes réponses.</div>
+    </div>
+  </section>
+
+  <!-- RESULTAT -->
+  <section id="screen-result" hidden>
+    <div class="card">
+      <h2>Résultat</h2>
+      <div class="scorebig" id="scoreBig">0 / 12</div>
+      <div class="scoresub" id="scoreSub"></div>
+      <div class="recap" id="recap"></div>
+      <div class="sync" id="syncMsg"></div>
+    </div>
+  </section>
+
+  <!-- PROF -->
+  <section id="screen-prof" hidden>
+    <div class="card">
+      <h2>Espace enseignant</h2>
+      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
+      <div id="profGate">
+        <label for="inPass">Mot de passe</label>
+        <input type="password" id="inPass" autocomplete="off">
+        <div class="err" id="profErr"></div>
+        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
+          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
+      </div>
+      <div id="profData" hidden>
+        <div id="profTable"></div>
+        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
+          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // ===== Config =====
+  var EVAL_CODE='CINE2026';
+  var PROF_PASS='Agostini2025';
+  var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
+  var FB_NODE='resultats_si_cinematique';
+
+  var QUESTIONS=[
+   {type:'qcm', q:'La trajectoire d\u2019un point, c\u2019est\u2026', opts:['L\u2019ensemble des positions successives qu\u2019il occupe','Sa vitesse \u00e0 un instant donn\u00e9','La distance jusqu\u2019\u00e0 l\u2019axe de rotation','La dur\u00e9e de son d\u00e9placement'], a:0},
+   {type:'qcm', q:'Dans un mouvement de translation\u2026', opts:['Tous les points ont le m\u00eame vecteur vitesse','Chaque point tourne autour d\u2019un axe','La vitesse augmente avec la distance \u00e0 l\u2019axe','Les points suivent des cercles concentriques'], a:0},
+   {type:'vf', q:'Dans une rotation, tous les points ont la m\u00eame vitesse lin\u00e9aire V.', a:false},
+   {type:'num', q:'Un point est \u00e0 R = 0,2 m de l\u2019axe et \u03c9 = 10 rad/s. Vitesse V = R\u00b7\u03c9 ? (en m/s)', a:2, tol:0.3},
+   {type:'num', q:'Une roue tourne \u00e0 N = 300 tr/min. Vitesse angulaire \u03c9 \u2248 ? (en rad/s)', a:31.4, tol:1.5},
+   {type:'qcm', q:'La vitesse instantan\u00e9e d\u2019un point, c\u2019est\u2026', opts:['La limite de la vitesse moyenne quand \u0394t \u2192 0','La vitesse moyenne sur tout le trajet','Toujours \u00e9gale \u00e0 la vitesse maximale','La distance divis\u00e9e par le rayon'], a:0},
+   {type:'vf', q:'Dans un mouvement uniforme, l\u2019acc\u00e9l\u00e9ration est nulle.', a:true},
+   {type:'num', q:'Mouvement uniform\u00e9ment vari\u00e9 : v\u2080 = 2 m/s, a = 3 m/s\u00b2, t = 4 s. Vitesse v = v\u2080 + a\u00b7t ? (en m/s)', a:14, tol:0.3},
+   {type:'qcm', q:'\u00c0 quoi sert principalement un r\u00e9ducteur ?', opts:['R\u00e9duire la vitesse de rotation (et augmenter le couple)','Augmenter la vitesse de rotation','Transformer une translation en chaleur','Mesurer une distance'], a:0},
+   {type:'num', q:'R\u00e9ducteur : \u03c9_e = 300 tr/min, Z\u2081 = 20 (entr\u00e9e), Z\u2082 = 60 (sortie). \u03c9_s = \u03c9_e\u00b7Z\u2081/Z\u2082 ? (en tr/min)', a:100, tol:1},
+   {type:'qcm', q:'La liaison glissi\u00e8re autorise\u2026', opts:['Une translation selon un axe','Une rotation autour d\u2019un axe','Une rotation + une translation','Aucun mouvement'], a:0},
+   {type:'qcm', q:'La liaison pivot autorise\u2026', opts:['Une rotation autour d\u2019un axe','Une translation selon un axe','Tous les mouvements','Aucun mouvement'], a:0}
+  ];
+  var TOTAL=QUESTIONS.length;
+
+  var student={nom:'',classe:''};
+  var answers=new Array(TOTAL);
+
+  function show(id){ ['screen-home','screen-quiz','screen-result','screen-prof'].forEach(function(s){document.getElementById(s).hidden=(s!==id);}); window.scrollTo(0,0); }
+  function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
+
+  // ===== Accueil =====
+  document.getElementById('startBtn').addEventListener('click',function(){
+    var nom=document.getElementById('inNom').value.trim();
+    var cls=document.getElementById('inClasse').value.trim();
+    var code=document.getElementById('inCode').value.trim();
+    var err=document.getElementById('homeErr');
+    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+    err.textContent=''; student.nom=nom; student.classe=cls;
+    buildQuiz(); show('screen-quiz');
+  });
+  document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
+
+  // ===== Quiz =====
+  function buildQuiz(){
+    var list=document.getElementById('quizList'); var html='';
+    QUESTIONS.forEach(function(qq,i){
+      var badge=qq.type==='qcm'?'QCM':qq.type==='vf'?'Vrai / Faux':'Calcul';
+      html+='<div class="q"><div class="qt"><span class="badge">'+badge+'</span>'+(i+1)+'. '+qq.q+'</div>';
+      if(qq.type==='qcm'){
+        html+='<div class="opts">'+qq.opts.map(function(o,j){
+          return '<label class="opt" data-q="'+i+'"><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>';
+        }).join('')+'</div>';
+      } else if(qq.type==='vf'){
+        html+='<div class="opts">'+['Vrai','Faux'].map(function(o,j){
+          return '<label class="opt" data-q="'+i+'"><input type="radio" name="q'+i+'" value="'+(j===0?'true':'false')+'"><span>'+o+'</span></label>';
+        }).join('')+'</div>';
+      } else {
+        html+='<div class="numwrap"><input type="number" step="any" name="q'+i+'" placeholder="Ta r\u00e9ponse"></div>';
+      }
+      html+='</div>';
+    });
+    list.innerHTML=html;
+    list.addEventListener('change',updateProgress);
+    list.addEventListener('input',updateProgress);
+    list.addEventListener('change',function(ev){
+      var lab=ev.target.closest('.opt');
+      if(lab){ var qi=lab.getAttribute('data-q');
+        list.querySelectorAll('.opt[data-q="'+qi+'"]').forEach(function(x){x.classList.remove('sel');});
+        lab.classList.add('sel');
+      }
+    });
+    updateProgress();
+  }
+  function collect(){
+    for(var i=0;i<TOTAL;i++){
+      var qq=QUESTIONS[i];
+      if(qq.type==='num'){ var el=document.querySelector('input[name="q'+i+'"]'); answers[i]=(el&&el.value!=='')?el.value:null; }
+      else { var sel=document.querySelector('input[name="q'+i+'"]:checked'); answers[i]=sel?sel.value:null; }
+    }
+  }
+  function updateProgress(){ collect(); var n=answers.filter(function(a){return a!==null&&a!==undefined;}).length;
+    document.getElementById('prog').textContent=n+' / '+TOTAL+' répondues'; }
+
+  document.getElementById('submitBtn').addEventListener('click',function(){
+    collect();
+    var n=answers.filter(function(a){return a!==null&&a!==undefined;}).length;
+    var err=document.getElementById('quizErr');
+    if(n<TOTAL){ err.textContent='Il reste '+(TOTAL-n)+' question(s) sans r\u00e9ponse. Tu peux quand m\u00eame valider, mais elles seront compt\u00e9es fausses.';
+      if(!this.dataset.warned){ this.dataset.warned='1'; return; } }
+    err.textContent=''; grade();
+  });
+
+  function grade(){
+    var score=0, recapHtml='';
+    QUESTIONS.forEach(function(qq,i){
+      var ans=answers[i], good=false, shown='', sol='';
+      if(qq.type==='qcm'){ good=(ans!==null&&+ans===qq.a); shown=(ans!==null)?qq.opts[+ans]:'\u2014 (pas de r\u00e9ponse)'; sol='R\u00e9ponse : '+qq.opts[qq.a]; }
+      else if(qq.type==='vf'){ good=(ans!==null&&(ans==='true')===qq.a); shown=(ans===null)?'\u2014 (pas de r\u00e9ponse)':(ans==='true'?'Vrai':'Faux'); sol='R\u00e9ponse : '+(qq.a?'Vrai':'Faux'); }
+      else { var v=parseNum(ans); good=(!isNaN(v)&&Math.abs(v-qq.a)<=(qq.tol||0.01)); shown=(ans===null||ans==='')?'\u2014 (pas de r\u00e9ponse)':ans; sol='R\u00e9ponse : '+String(qq.a).replace('.',','); }
+      if(good)score++;
+      recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(i+1)+'. '+qq.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+sol)+'</div></div></div>';
+    });
+    var pct=Math.round(score/TOTAL*100);
+    document.getElementById('scoreBig').textContent=score+' / '+TOTAL;
+    document.getElementById('scoreSub').textContent=pct+' % de r\u00e9ussite \u2014 '+student.nom+' ('+student.classe+')';
+    document.getElementById('recap').innerHTML=recapHtml;
+    show('screen-result');
+    sendResult(score,pct);
+  }
+
+  function sendResult(score,pct){
+    var msg=document.getElementById('syncMsg');
+    msg.textContent='Enregistrement\u2026';
+    var payload={ nom:student.nom, classe:student.classe, score:score, total:TOTAL, pourcentage:pct, date:new Date().toISOString() };
+    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+  }
+
+  // ===== Prof =====
+  function backHome(){ show('screen-home'); }
+  document.getElementById('profBack').addEventListener('click',backHome);
+  document.getElementById('profBack2').addEventListener('click',backHome);
+  document.getElementById('profBtn').addEventListener('click',function(){
+    var p=document.getElementById('inPass').value;
+    var err=document.getElementById('profErr');
+    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+  });
+  document.getElementById('profRefresh').addEventListener('click',loadResults);
+
+  function loadResults(){
+    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+    fetch(FB_URL+'/'+FB_NODE+'.json')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+        var rows=Object.keys(data).map(function(k){ return data[k]; }).filter(Boolean);
+        rows.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+        var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Score</th><th>%</th><th>Date</th></tr></thead><tbody>';
+        rows.forEach(function(r){
+          var d=r.date?new Date(r.date):null;
+          var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+          html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+(r.score!=null?r.score+'/'+(r.total||TOTAL):'\u2014')+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+        });
+        html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+        box.innerHTML=html;
+      })
+      .catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+  }
+</script>
+</body>
+</html>
