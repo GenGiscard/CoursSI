@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuits — TP « Loi d'Ohm & circuits » · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber-d);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .scorebox{background:var(--ink);border-radius:13px;padding:13px 15px;margin-bottom:14px;color:#fff}
+  .scorebox .sl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+  .scorebox .sv{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margin:3px 0 2px}
+  .scorebox .sv .mx{font-size:14px;font-weight:500;opacity:.55}
+  .scorebox .rk{font-family:var(--mono);font-size:12px;font-weight:700;color:#FCE0B0;margin-top:4px}
+  .scorebox .prog{height:6px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:9px}
+  .scorebox .prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .35s}
+  .nav a.navlink{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink .dn{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+  .nav a.navlink .nm{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav a.navlink .bd{font-size:10px;font-weight:700;color:var(--amber-d)}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber)}
+  .nav a.navlink.on .dn{background:var(--amber);color:#fff;border-color:var(--amber)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,56px) 90px}
+  section{padding:48px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-d);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(25px,4vw,40px);line-height:1.05;margin:10px 0 8px}
+  .lede{font-size:16px;max-width:60ch;color:var(--ink-soft);margin:6px 0 16px}
+  p{margin:0 0 12px;max-width:62ch}
+  .intro{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .ranks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .rankchip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--cream)}
+  .game{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-top:14px}
+  .tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber-d);background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:6px}
+  .pts-badge{font-family:var(--mono);font-size:10px;color:var(--ink-soft);margin-left:6px}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--amber);color:#fff;border:none;border-radius:10px;padding:11px 18px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--amber-d)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--amber);color:var(--amber-d)}
+  .msg{font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:12px;min-height:18px}
+  .msg.ok{color:var(--ok)} .msg.no{color:var(--no)}
+  .hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:6px}
+  .slots{display:flex;flex-direction:column;gap:8px;margin:8px 0 14px}
+  .slot{display:flex;align-items:center;gap:10px;border:1.5px dashed var(--line-strong);border-radius:10px;padding:11px 13px;min-height:46px;background:var(--cream)}
+  .slot .sn{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--amber-d);flex:0 0 auto}
+  .slot.filled{border-style:solid;border-color:var(--ok);background:rgba(61,126,95,.08)}
+  .slot .txt{font-size:13.5px;font-weight:600}
+  .pool{display:flex;flex-wrap:wrap;gap:8px}
+  .pchip{font-family:var(--body);font-size:13.5px;font-weight:600;background:var(--paper);border:1.5px solid var(--line-strong);border-radius:10px;padding:10px 13px;cursor:pointer;transition:.12s}
+  .pchip:hover{border-color:var(--amber);transform:translateY(-1px)}
+  .pchip.bad{border-color:var(--no);background:rgba(192,73,46,.09);animation:shk .3s}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .arc-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+  .timepill{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px}
+  .timepill b{color:var(--amber-d)}
+  .qbox{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,28px);margin:10px 0 14px;min-height:36px}
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .opt{font-family:var(--mono);font-size:15px;font-weight:700;background:var(--cream);border:1.5px solid var(--line-strong);border-radius:11px;padding:14px;cursor:pointer;transition:.12s;text-align:center}
+  .opt:hover{border-color:var(--amber);background:#fff}
+  .opt.ok{border-color:var(--ok);background:rgba(61,126,95,.12)} .opt.no{border-color:var(--no);background:rgba(192,73,46,.1)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .bigbtn{font-family:var(--display);font-weight:800;font-size:18px;padding:18px;border-radius:13px;border:2px solid var(--line-strong);background:var(--cream);cursor:pointer;transition:.12s}
+  .bigbtn:hover{border-color:var(--amber);background:#fff}
+  .bigbtn.serie{color:var(--copper)} .bigbtn.para{color:var(--steel)}
+  .streak{font-family:var(--mono);font-size:11.5px;color:var(--amber-d);font-weight:700;margin-top:8px;min-height:16px}
+  canvas{width:100%;height:auto;display:block;background:#FCFAF4;border:1px solid var(--line);border-radius:11px}
+  .ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .ctrl label{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-soft)}
+  input[type=range]{flex:1 1 180px;accent-color:var(--amber)}
+  .readout{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .roundpill{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .mcol{display:flex;flex-direction:column;gap:9px}
+  .mcol .h{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .mitem{font-family:var(--body);font-size:13.5px;font-weight:600;border:1.5px solid var(--line-strong);border-radius:10px;padding:11px 13px;cursor:pointer;transition:.12s;background:var(--paper)}
+  .mitem:hover{border-color:var(--amber)}
+  .mitem.sel{border-color:var(--amber);background:rgba(189,138,42,.1)}
+  .mitem.done{border-color:var(--ok);background:rgba(61,126,95,.1);color:var(--ok);cursor:default;pointer-events:none}
+  .mitem.bad{animation:shk .3s;border-color:var(--no)}
+  .final{background:linear-gradient(135deg,#2A2622,#3a322c);color:#fff;border-radius:18px;padding:28px;text-align:center}
+  .final .fs{font-family:var(--display);font-weight:800;font-size:46px;line-height:1}
+  .final .fr{font-family:var(--mono);font-size:15px;color:#FCE0B0;margin-top:8px;font-weight:700}
+  .final .fd{font-size:13.5px;opacity:.8;margin-top:10px}
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
+    .opts,.two,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_electrique.html">← Séquence : circuits</a>
+    <div class="brand">
+      <div class="mark">⚡</div>
+      <div><h1>Loi d'Ohm &amp; circuits</h1><p>TP · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Défis</button>
+    </div>
+    <div class="scorebox">
+      <div class="sl">Score total</div>
+      <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div>
+      <div class="rk" id="rankLine">🔧 Apprenti</div>
+      <div class="prog"><i id="progBar"></i></div>
+    </div>
+    <div class="links" id="links">
+      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Loi d'Ohm express</span><b class="bd" id="bd1">0</b></a>
+      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Assemble le circuit</span><b class="bd" id="bd2">0</b></a>
+      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Série ou parallèle ?</span><b class="bd" id="bd3">0</b></a>
+      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Règle la résistance</span><b class="bd" id="bd4">0</b></a>
+      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">La loi des nœuds</span><b class="bd" id="bd5">0</b></a>
+      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Grandeur ↔ unité</span><b class="bd" id="bd6">0</b></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="intro" style="border-bottom:none;padding-bottom:8px">
+      <span class="kicker">TP · 6 défis</span>
+      <h2>Loi d'Ohm &amp; circuits</h2>
+      <div class="intro">
+        <p class="lede">Six défis-jeux pour maîtriser l'électricité en agissant : calculer avec la loi d'Ohm contre la montre, monter un circuit, régler une résistance, équilibrer un nœud. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <div class="ranks">
+          <span class="rankchip">🔧 Apprenti · &lt; 200</span>
+          <span class="rankchip">⚙️ Technicien·ne · 200+</span>
+          <span class="rankchip">📐 Ingénieur·e · 450+</span>
+          <span class="rankchip">🏆 Expert·e · 700+</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="d1">
+      <span class="tag">⚡ Défi 1<span class="pts-badge">/ 160 pts</span></span>
+      <h2>Loi d'Ohm express</h2>
+      <p class="lede">Calcule un maximum de valeurs avec <b>U = R × I</b> en 40 secondes (trouve U, I ou R). Une série enchaînée rapporte un bonus.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d1time">40</b> s</span>
+          <span class="timepill">Score : <b id="d1score">0</b></span>
+          <button class="btn" id="d1start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d1q">Appuie sur Démarrer pour lancer le défi.</div>
+        <div class="opts" id="d1opts"></div>
+        <div class="streak" id="d1streak"></div>
+        <div class="msg" id="d1msg"></div>
+      </div>
+    </section>
+
+    <section id="d2">
+      <span class="tag">🧩 Défi 2<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Assemble le circuit</h2>
+      <p class="lede">Reconstitue une boucle complète en partant de la borne + du générateur. Clique les éléments dans le bon ordre.</p>
+      <div class="game">
+        <div class="slots" id="d2slots"></div>
+        <div class="hint" style="margin-bottom:8px">À placer :</div>
+        <div class="pool" id="d2pool"></div>
+        <div class="msg" id="d2msg"></div>
+        <div style="margin-top:12px"><button class="btn alt" id="d2reset">Recommencer</button></div>
+      </div>
+    </section>
+
+    <section id="d3">
+      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <h2>Série ou parallèle ?</h2>
+      <p class="lede">Pour chaque propriété qui apparaît, décide en un éclair si elle caractérise un montage <b>série</b> ou <b>parallèle</b>. 35 secondes.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d3time">35</b> s</span>
+          <span class="timepill">Score : <b id="d3score">0</b></span>
+          <button class="btn" id="d3start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d3q">Appuie sur Démarrer.</div>
+        <div class="two">
+          <button class="bigbtn serie" id="d3serie" disabled>SÉRIE<br><span style="font-size:11px;font-weight:500">une boucle</span></button>
+          <button class="bigbtn para" id="d3para" disabled>PARALLÈLE<br><span style="font-size:11px;font-weight:500">plusieurs branches</span></button>
+        </div>
+        <div class="streak" id="d3streak"></div>
+        <div class="msg" id="d3msg"></div>
+      </div>
+    </section>
+
+    <section id="d4">
+      <span class="tag">🎚️ Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <h2>Règle la résistance</h2>
+      <p class="lede">La tension U est fixée. Règle la <b>résistance R</b> pour obtenir exactement l'<b>intensité visée</b> : rappelle-toi que I = U / R.</p>
+      <div class="game">
+        <div class="roundpill" id="d4round">Manche 1 / 3</div>
+        <canvas id="cvOhmTP" width="640" height="220"></canvas>
+        <div class="ctrl">
+          <label>R</label>
+          <input type="range" id="d4slider" min="1" max="40" step="1" value="10">
+          <span class="readout" id="d4r">10 Ω</span>
+          <span class="readout" id="d4i">I = — A</span>
+        </div>
+        <div class="ctrl"><span class="readout" id="d4target">objectif : —</span></div>
+        <button class="btn" id="d4check">Valider</button>
+        <div class="msg" id="d4msg"></div>
+      </div>
+    </section>
+
+    <section id="d5">
+      <span class="tag">🔀 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <h2>La loi des nœuds</h2>
+      <p class="lede">À un nœud, tout ce qui entre ressort. Trouve l'<b>intensité manquante</b> (le « ? ») grâce à Σ I_entrant = Σ I_sortant.</p>
+      <div class="game">
+        <div class="roundpill" id="d5round">Manche 1 / 4</div>
+        <canvas id="cvNodeTP" width="640" height="220"></canvas>
+        <div class="hint" style="margin:10px 0 6px">Quelle est l'intensité manquante ?</div>
+        <div class="opts" id="d5opts"></div>
+        <div class="msg" id="d5msg"></div>
+      </div>
+    </section>
+
+    <section id="d6">
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Grandeur ↔ unité ↔ appareil</h2>
+      <p class="lede">Relie chaque grandeur électrique à son unité et son appareil de mesure. Clique à gauche, puis sa correspondance à droite.</p>
+      <div class="game">
+        <div class="match">
+          <div class="mcol"><div class="h">Grandeur</div><div id="d6left"></div></div>
+          <div class="mcol"><div class="h">Unité · appareil</div><div id="d6right"></div></div>
+        </div>
+        <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="fin" style="border-bottom:none">
+      <div class="final">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
+        <div class="fs"><span id="finScore">0</span> / 820</div>
+        <div class="fr" id="finRank">🔧 Apprenti</div>
+        <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  var KEYS=['d1','d2','d3','d4','d5','d6'];
+  var MAXES={d1:160,d2:120,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var best={};
+  function el(id){return document.getElementById(id);}
+  function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
+  function refresh(){
+    var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
+    el('scoreNow').textContent=tot; el('finScore').textContent=tot;
+    var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
+    el('progBar').style.width=(tot/TOTALMAX*100)+'%';
+    KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
+  }
+  function setContrib(key,val){var m=MAXES[key];var v=Math.max(0,Math.min(m,Math.round(val)));if(v>(best[key]||0)){best[key]=v;refresh();}}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
+
+  var nav=el('nav'), mb=el('menuBtn');
+  if(mb) mb.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(el(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(el(id));});
+
+  function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+    var a=Math.atan2(y2-y1,x2-x1),L=9;g.beginPath();g.moveTo(x2,y2);
+    g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();}
+  function cdot(g,x,y,r,col){g.fillStyle=col;g.beginPath();g.arc(x,y,r,0,7);g.fill();}
+
+  // ===== D1 — arcade loi d'Ohm =====
+  (function(){
+    var Rs=[2,4,5,8,10,20,40], Is=[0.2,0.5,1,1.5,2,3];
+    var qEl=el('d1q'),opts=el('d1opts'),msg=el('d1msg'),stEl=el('d1streak');
+    var time,score,streak,timer,cur,running=false;
+    function gen(){
+      var R=Rs[Math.floor(Math.random()*Rs.length)], I=Is[Math.floor(Math.random()*Is.length)], U=Math.round(R*I*100)/100;
+      var type=Math.floor(Math.random()*3), q,ans,unit;
+      if(type===0){q='R = '+R+' \u03a9 , I = '+fmt(I)+' A → U = ?';ans=U;unit=' V';}
+      else if(type===1){q='U = '+fmt(U)+' V , R = '+R+' \u03a9 → I = ?';ans=I;unit=' A';}
+      else {q='U = '+fmt(U)+' V , I = '+fmt(I)+' A → R = ?';ans=R;unit=' \u03a9';}
+      var set={}; set[ans]=true; var arr=[ans], tries=0;
+      while(arr.length<4&&tries<50){tries++;var cand;
+        if(unit===' \u03a9') cand=Rs[Math.floor(Math.random()*Rs.length)];
+        else if(unit===' A') cand=Is[Math.floor(Math.random()*Is.length)];
+        else cand=Math.round((ans*(0.4+Math.random()*1.5))*100)/100;
+        if(cand>0&&!set[cand]){set[cand]=true;arr.push(cand);}}
+      while(arr.length<4){var c2=Math.round((ans+arr.length)*100)/100;if(!set[c2]){set[c2]=true;arr.push(c2);}}
+      cur={ans:ans};
+      qEl.textContent=q;
+      opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+fmt(v)+unit+'</button>';}).join('');
+    }
+    function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
+    function start(){if(running)return;running=true;score=0;streak=0;time=40;el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';el('d1start').disabled=true;gen();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);el('d1start').disabled=false;el('d1start').textContent='Rejouer';opts.innerHTML='';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    opts.addEventListener('click',function(ev){if(!running)return;var b=ev.target.closest('.opt');if(!b)return;var v=parseFloat(b.getAttribute('data-v'));
+      if(Math.abs(v-cur.ans)<1e-6){streak++;var g=18+Math.min(streak,5)*2;score+=g;el('d1score').textContent=score;stEl.textContent='🔥 série ×'+streak+'  (+'+g+')';b.classList.add('ok');setTimeout(gen,170);}
+      else{streak=0;stEl.textContent='série perdue';b.classList.add('no');var ok=opts.querySelector('.opt[data-v="'+cur.ans+'"]');if(ok)ok.classList.add('ok');setTimeout(gen,430);}});
+    el('d1start').addEventListener('click',start);
+  })();
+
+  // ===== D2 — builder circuit =====
+  (function(){
+    var STEPS=['Borne + du générateur','Interrupteur','Lampe (récepteur)','Ampèremètre (en série)','Borne − du générateur'];
+    var slots=el('d2slots'),pool=el('d2pool'),msg=el('d2msg');
+    var idx,wrong;
+    function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
+      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d2s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+      pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
+    pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
+      if(i===idx){var sl=el('d2s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
+        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*18);setContrib('d2',sc);msg.className='msg ok';msg.textContent='✓ Circuit bouclé ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas le prochain élément.';}});
+    el('d2reset').addEventListener('click',start);
+    start();
+  })();
+
+  // ===== D3 — reflex série/parallèle =====
+  (function(){
+    var ITEMS=[
+      {t:'même intensité partout',k:'serie'},{t:'les tensions s\u2019additionnent',k:'serie'},
+      {t:'une seule boucle de courant',k:'serie'},{t:'R_eq = R\u2081 + R\u2082',k:'serie'},
+      {t:'un composant grillé coupe tout',k:'serie'},
+      {t:'même tension aux bornes',k:'para'},{t:'les intensités s\u2019additionnent',k:'para'},
+      {t:'plusieurs branches en dérivation',k:'para'},{t:'I = I\u2081 + I\u2082 au nœud',k:'para'},
+      {t:'chaque branche fonctionne seule',k:'para'}
+    ];
+    var qEl=el('d3q'),msg=el('d3msg'),stEl=el('d3streak'),bS=el('d3serie'),bP=el('d3para');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d3time').textContent=time;if(time<=0)stop();}
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';bS.disabled=false;bP.disabled=false;el('d3start').disabled=true;next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);bS.disabled=true;bP.disabled=true;el('d3start').disabled=false;el('d3start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d3',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function answer(k){if(!running)return;if(k===cur.k){streak++;score+=11+Math.min(streak,4)*2;el('d3score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+(cur.k==='serie'?'SÉRIE':'PARALLÈLE');}next();}
+    bS.addEventListener('click',function(){answer('serie');});
+    bP.addEventListener('click',function(){answer('para');});
+    el('d3start').addEventListener('click',start);
+  })();
+
+  // ===== D4 — règle la résistance (sim) =====
+  (function(){
+    var cv=el('cvOhmTP'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+    var ROUNDS=[{U:12,target:2},{U:10,target:0.5},{U:24,target:3}];
+    var ri=0, solved=false, sl=el('d4slider'), flow=0;
+    var TL={x:120,y:55},TR={x:520,y:55},BR={x:520,y:165},BL={x:120,y:165};
+    var Per=2*((TR.x-TL.x)+(BR.y-TR.y));
+    function P(t){var d=((t%1)+1)%1*Per,a=TR.x-TL.x,b=BR.y-TR.y;
+      if(d<a)return{x:TL.x+d,y:TL.y};d-=a;if(d<b)return{x:TR.x,y:TR.y+d};d-=b;if(d<a)return{x:BR.x-d,y:BR.y};d-=a;return{x:BL.x,y:BL.y-d};}
+    function R(){return parseFloat(sl.value);}
+    function I(){return ROUNDS[ri].U/R();}
+    function draw(){
+      g.clearRect(0,0,W,H); var U=ROUNDS[ri].U, i=I();
+      g.strokeStyle='#2A2622';g.lineWidth=3;g.beginPath();g.moveTo(TL.x,TL.y);g.lineTo(TR.x,TR.y);g.lineTo(BR.x,BR.y);g.lineTo(BL.x,BL.y);g.lineTo(TL.x,TL.y);g.stroke();
+      // pile
+      var by=(TL.y+BL.y)/2;g.lineWidth=3;g.beginPath();g.moveTo(TL.x-9,by-12);g.lineTo(TL.x+9,by-12);g.stroke();g.lineWidth=6;g.beginPath();g.moveTo(TL.x-13,by);g.lineTo(TL.x+13,by);g.stroke();g.lineWidth=3;g.beginPath();g.moveTo(TL.x-9,by+12);g.lineTo(TL.x+9,by+12);g.stroke();
+      g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='right';g.fillText('U = '+U+' V',TL.x-18,by+5);
+      // résistance variable (haut)
+      var rx0=TL.x+150,rx1=TL.x+250,ry=TL.y,seg=(rx1-rx0)/6;
+      g.strokeStyle='#BD8A2A';g.lineWidth=3;g.beginPath();g.moveTo(rx0,ry);for(var z=0;z<6;z++){g.lineTo(rx0+seg*(z+0.5),ry+((z%2)?7:-7));}g.lineTo(rx1,ry);g.stroke();
+      // flèche réglage
+      arrow(g,rx0-6,ry+22,rx1+6,ry-22,'#9a6f15',1.6);
+      g.fillStyle='#8a6313';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('R = '+R()+' \u03a9',(rx0+rx1)/2,ry-14);
+      // ampèremètre (droite) : cercle A
+      var ay=(TR.y+BR.y)/2;g.fillStyle='#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=2.5;g.beginPath();g.arc(TR.x,ay,15,0,7);g.fill();g.stroke();
+      g.fillStyle='#2E6A8E';g.font='700 13px "JetBrains Mono",monospace';g.fillText('A',TR.x,ay+5);
+      // charges
+      flow+=Math.min(0.03, i*0.006);
+      var n=14;for(var k=0;k<n;k++){var pt=P(flow+k/n);cdot(g,pt.x,pt.y,3.2,'#C0492E');}
+      g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('I = '+fmt(i)+' A',(BR.x+BL.x)/2,BR.y+24);
+      el('d4r').textContent=R()+' Ω'; el('d4i').textContent='I = '+fmt(i)+' A';
+    }
+    function setRound(){solved=false;el('d4round').textContent='Manche '+(ri+1)+' / 3';el('d4msg').textContent='';el('d4msg').className='msg';el('d4check').disabled=false;sl.value='10';el('d4target').textContent='objectif : I = '+fmt(ROUNDS[ri].target)+' A  (U = '+ROUNDS[ri].U+' V)';}
+    sl.addEventListener('input',function(){});
+    el('d4check').addEventListener('click',function(){if(solved)return;var diff=Math.abs(I()-ROUNDS[ri].target);var msg=el('d4msg');
+      if(diff<=0.02){solved=true;setContrib('d4',(ri+1)*50);msg.className='msg ok';
+        if(ri<2){msg.textContent='🎚️ Intensité atteinte ! Manche suivante…';el('d4check').disabled=true;setTimeout(function(){ri++;setRound();},1100);}
+        else{msg.textContent='🏆 Les 3 manches réussies — défi complet ! +150 pts';el('d4check').disabled=true;}}
+      else{msg.className='msg no';msg.textContent='I = '+fmt(I())+' A (objectif '+fmt(ROUNDS[ri].target)+' A). Ajuste R : R = U / I.';}});
+    setInterval(draw,40); setRound(); draw();
+  })();
+
+  // ===== D5 — loi des nœuds (MCQ) =====
+  (function(){
+    var cv=el('cvNodeTP'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+    var ROUNDS=[
+      {ins:[{v:5,lab:'I'}], outs:[{v:3,lab:'I\u2081'},{v:null,lab:'I\u2082'}]},
+      {ins:[{v:4,lab:'I\u2081'},{v:2,lab:'I\u2082'}], outs:[{v:null,lab:'I'}]},
+      {ins:[{v:8,lab:'I'}], outs:[{v:null,lab:'I\u2081'},{v:3,lab:'I\u2082'}]},
+      {ins:[{v:1.5,lab:'I\u2081'},{v:2.5,lab:'I\u2082'}], outs:[{v:null,lab:'I'}]}
+    ];
+    var ri=0, locked=false, opts=el('d5opts'), msg=el('d5msg');
+    function answerOf(r){var si=0;r.ins.forEach(function(o){si+=o.v||0;});var so=0;r.outs.forEach(function(o){if(o.v!=null)so+=o.v;});return Math.round((si-so)*100)/100;}
+    function draw(){
+      g.clearRect(0,0,W,H); var r=ROUNDS[ri], N={x:300,y:H/2};
+      g.strokeStyle='#2A2622';g.lineWidth=3;
+      // ins à gauche (empilés) : fil + flèche vers le nœud
+      var ny=r.ins.length>1?[N.y-34,N.y+34]:[N.y];
+      r.ins.forEach(function(o,k){var y=ny[k],sx=70,sy=y;
+        g.strokeStyle='#2A2622';g.lineWidth=3;g.beginPath();g.moveTo(sx,sy);g.lineTo(N.x,N.y);g.stroke();
+        var dx=N.x-sx,dy=N.y-sy,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+        arrow(g,N.x-ux*60,N.y-uy*60,N.x-ux*30,N.y-uy*30,'#C0492E',2.6);
+        g.fillStyle='#C0492E';g.font='700 14px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(o.lab+' = '+(o.v==null?'?':fmt(o.v)+' A'),120,y-10);});
+      // outs à droite
+      var my=r.outs.length>1?[N.y-34,N.y+34]:[N.y];
+      r.outs.forEach(function(o,k){var y=my[k];g.strokeStyle='#2A2622';g.lineWidth=3;g.beginPath();g.moveTo(N.x,N.y);g.lineTo(540,y);g.stroke();
+        arrow(g,500,y,536,y,'#2E6A8E',2.5);
+        g.fillStyle=(o.v==null)?'#BD8A2A':'#2E6A8E';g.font='700 14px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(o.lab+' = '+(o.v==null?'?':fmt(o.v)+' A'),490,y-10);});
+      cdot(g,N.x,N.y,6,'#2A2622');
+      g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('nœud',N.x,N.y+22);
+    }
+    function setRound(){locked=false;el('d5round').textContent='Manche '+(ri+1)+' / 4';msg.textContent='';msg.className='msg';draw();
+      var ans=answerOf(ROUNDS[ri]); var set={};set[ans]=true;var arr=[ans],k=1;
+      var cand=[ans+1,ans-1,ans+2,ans-2,ans+0.5,ans-0.5,ans+3];
+      cand.forEach(function(c){c=Math.round(c*100)/100;if(c>0&&!set[c]&&arr.length<4){set[c]=true;arr.push(c);}});
+      while(arr.length<4){var c2=ans+k;if(!set[c2]){set[c2]=true;arr.push(c2);}k++;}
+      opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+fmt(v)+' A</button>';}).join('');
+    }
+    opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var v=parseFloat(b.getAttribute('data-v'));var ans=answerOf(ROUNDS[ri]);
+      if(Math.abs(v-ans)<1e-6){locked=true;b.classList.add('ok');setContrib('d5',(ri+1)*35);msg.className='msg ok';
+        if(ri<3){msg.textContent='✓ Bien vu ! Manche suivante…';setTimeout(function(){ri++;setRound();},1000);}
+        else{msg.textContent='🏆 Les 4 nœuds résolus — défi complet ! +140 pts';}}
+      else{b.classList.add('no');msg.className='msg no';msg.textContent='Σ entrant = Σ sortant : recompte.';setTimeout(function(){b.classList.remove('no');},480);}});
+    setRound();
+  })();
+
+  // ===== D6 — matching grandeur/unité =====
+  (function(){
+    var PAIRS=[
+      ['Tension U','volt (V) · voltmètre'],
+      ['Intensité I','ampère (A) · ampèremètre'],
+      ['Résistance R','ohm (Ω) · ohmmètre'],
+      ['Puissance P','watt (W) · wattmètre'],
+      ['Énergie E','joule (J) · compteur']
+    ];
+    var left=el('d6left'),right=el('d6right'),msg=el('d6msg');
+    var sel=null,done=0;
+    function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
+      left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+      right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
+    function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
+      if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
+      if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*24);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +120 pts';}}
+      else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
+    left.addEventListener('click',click);right.addEventListener('click',click);
+    build();
+  })();
+
+  refresh();
+</script>
+</body>
+</html>
