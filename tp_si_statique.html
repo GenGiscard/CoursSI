@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statique — TP « Leviers & équilibres » · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber-d);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .scorebox{background:var(--ink);border-radius:13px;padding:13px 15px;margin-bottom:14px;color:#fff}
+  .scorebox .sl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+  .scorebox .sv{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margin:3px 0 2px}
+  .scorebox .sv .mx{font-size:14px;font-weight:500;opacity:.55}
+  .scorebox .rk{font-family:var(--mono);font-size:12px;font-weight:700;color:#FCE0B0;margin-top:4px}
+  .scorebox .prog{height:6px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:9px}
+  .scorebox .prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .35s}
+  .nav a.navlink{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink .dn{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+  .nav a.navlink .nm{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav a.navlink .bd{font-size:10px;font-weight:700;color:var(--amber-d)}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber)}
+  .nav a.navlink.on .dn{background:var(--amber);color:#fff;border-color:var(--amber)}
+
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,56px) 90px}
+  section{padding:48px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-d);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(25px,4vw,40px);line-height:1.05;margin:10px 0 8px}
+  .lede{font-size:16px;max-width:60ch;color:var(--ink-soft);margin:6px 0 16px}
+  p{margin:0 0 12px;max-width:62ch}
+  .intro{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .ranks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .rankchip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--cream)}
+
+  .game{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-top:14px}
+  .tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber-d);background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:6px}
+  .pts-badge{font-family:var(--mono);font-size:10px;color:var(--ink-soft);margin-left:6px}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--amber);color:#fff;border:none;border-radius:10px;padding:11px 18px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--amber-d)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--amber);color:var(--amber-d)}
+  .msg{font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:12px;min-height:18px}
+  .msg.ok{color:var(--ok)} .msg.no{color:var(--no)}
+  .hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:6px}
+
+  /* builder D1 */
+  .slots{display:flex;flex-direction:column;gap:8px;margin:8px 0 14px}
+  .slot{display:flex;align-items:center;gap:10px;border:1.5px dashed var(--line-strong);border-radius:10px;padding:11px 13px;min-height:46px;background:var(--cream)}
+  .slot .sn{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--amber-d);flex:0 0 auto}
+  .slot.filled{border-style:solid;border-color:var(--ok);background:rgba(61,126,95,.08)}
+  .slot .txt{font-size:13.5px;font-weight:600}
+  .pool{display:flex;flex-wrap:wrap;gap:8px}
+  .pchip{font-family:var(--body);font-size:13.5px;font-weight:600;background:var(--paper);border:1.5px solid var(--line-strong);border-radius:10px;padding:10px 13px;cursor:pointer;transition:.12s}
+  .pchip:hover{border-color:var(--amber);transform:translateY(-1px)}
+  .pchip.bad{border-color:var(--no);background:rgba(192,73,46,.09);animation:shk .3s}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+  /* arcade / reflex */
+  .arc-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+  .timepill{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px}
+  .timepill b{color:var(--amber-d)}
+  .qbox{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,28px);margin:10px 0 14px;min-height:36px}
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .opt{font-family:var(--mono);font-size:15px;font-weight:700;background:var(--cream);border:1.5px solid var(--line-strong);border-radius:11px;padding:14px;cursor:pointer;transition:.12s;text-align:center}
+  .opt:hover{border-color:var(--amber);background:#fff}
+  .opt.ok{border-color:var(--ok);background:rgba(61,126,95,.12)} .opt.no{border-color:var(--no);background:rgba(192,73,46,.1)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .bigbtn{font-family:var(--display);font-weight:800;font-size:18px;padding:18px;border-radius:13px;border:2px solid var(--line-strong);background:var(--cream);cursor:pointer;transition:.12s}
+  .bigbtn:hover{border-color:var(--amber);background:#fff}
+  .bigbtn.force{color:var(--copper)} .bigbtn.moment{color:var(--steel)}
+  .streak{font-family:var(--mono);font-size:11.5px;color:var(--amber-d);font-weight:700;margin-top:8px;min-height:16px}
+
+  /* sim */
+  canvas{width:100%;height:auto;display:block;background:#FCFAF4;border:1px solid var(--line);border-radius:11px}
+  .ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
+  .ctrl label{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-soft)}
+  input[type=range]{flex:1 1 180px;accent-color:var(--amber)}
+  .readout{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .roundpill{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+
+  /* matching */
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .mcol{display:flex;flex-direction:column;gap:9px}
+  .mcol .h{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .mitem{font-family:var(--body);font-size:13.5px;font-weight:600;border:1.5px solid var(--line-strong);border-radius:10px;padding:11px 13px;cursor:pointer;transition:.12s;background:var(--paper)}
+  .mitem:hover{border-color:var(--amber)}
+  .mitem.sel{border-color:var(--amber);background:rgba(189,138,42,.1)}
+  .mitem.done{border-color:var(--ok);background:rgba(61,126,95,.1);color:var(--ok);cursor:default;pointer-events:none}
+  .mitem.bad{animation:shk .3s;border-color:var(--no)}
+
+  .final{background:linear-gradient(135deg,#2A2622,#3a322c);color:#fff;border-radius:18px;padding:28px;text-align:center}
+  .final .fs{font-family:var(--display);font-weight:800;font-size:46px;line-height:1}
+  .final .fr{font-family:var(--mono);font-size:15px;color:#FCE0B0;margin-top:8px;font-weight:700}
+  .final .fd{font-size:13.5px;opacity:.8;margin-top:10px}
+
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
+    .opts,.two,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_statique.html">← Séquence : statique</a>
+    <div class="brand">
+      <div class="mark">🔧</div>
+      <div><h1>Leviers &amp; équilibres</h1><p>TP · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Défis</button>
+    </div>
+    <div class="scorebox">
+      <div class="sl">Score total</div>
+      <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div>
+      <div class="rk" id="rankLine">🔧 Apprenti</div>
+      <div class="prog"><i id="progBar"></i></div>
+    </div>
+    <div class="links" id="links">
+      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a>
+      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a>
+      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a>
+      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a>
+      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a>
+      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="intro" style="border-bottom:none;padding-bottom:8px">
+      <span class="kicker">TP · 6 défis</span>
+      <h2>Leviers &amp; équilibres</h2>
+      <div class="intro">
+        <p class="lede">Six défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <div class="ranks">
+          <span class="rankchip">🔧 Apprenti · &lt; 200</span>
+          <span class="rankchip">⚙️ Technicien·ne · 200+</span>
+          <span class="rankchip">📐 Ingénieur·e · 450+</span>
+          <span class="rankchip">🏆 Expert·e · 700+</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- D1 -->
+    <section id="d1">
+      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Assemble la condition d'équilibre</h2>
+      <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p>
+      <div class="game">
+        <div class="slots" id="d1slots"></div>
+        <div class="hint" style="margin-bottom:8px">À placer :</div>
+        <div class="pool" id="d1pool"></div>
+        <div class="msg" id="d1msg"></div>
+        <div style="margin-top:12px"><button class="btn alt" id="d1reset">Recommencer</button></div>
+      </div>
+    </section>
+
+    <!-- D2 -->
+    <section id="d2">
+      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 160 pts</span></span>
+      <h2>Bras de levier express</h2>
+      <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d2time">40</b> s</span>
+          <span class="timepill">Score : <b id="d2score">0</b></span>
+          <button class="btn" id="d2start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d2q">Appuie sur Démarrer pour lancer le défi.</div>
+        <div class="opts" id="d2opts"></div>
+        <div class="streak" id="d2streak"></div>
+        <div class="msg" id="d2msg"></div>
+      </div>
+    </section>
+
+    <!-- D3 -->
+    <section id="d3">
+      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <h2>Force ou moment ?</h2>
+      <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d3time">35</b> s</span>
+          <span class="timepill">Score : <b id="d3score">0</b></span>
+          <button class="btn" id="d3start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d3q">Appuie sur Démarrer.</div>
+        <div class="two">
+          <button class="bigbtn force" id="d3force" disabled>FORCE<br><span style="font-size:11px;font-weight:500">translation</span></button>
+          <button class="bigbtn moment" id="d3moment" disabled>MOMENT<br><span style="font-size:11px;font-weight:500">rotation</span></button>
+        </div>
+        <div class="streak" id="d3streak"></div>
+        <div class="msg" id="d3msg"></div>
+      </div>
+    </section>
+
+    <!-- D4 -->
+    <section id="d4">
+      <span class="tag">⚖️ Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <h2>L'équilibre du levier</h2>
+      <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b> : il faut F₁·d₁ = F₂·d₂.</p>
+      <div class="game">
+        <div class="roundpill" id="d4round">Manche 1 / 3</div>
+        <canvas id="cvLevier" width="640" height="240"></canvas>
+        <div class="ctrl">
+          <label>d₂ (droite)</label>
+          <input type="range" id="d4slider" min="0.1" max="1" step="0.05" value="0.5">
+          <span class="readout" id="d4d2">0,50 m</span>
+        </div>
+        <div class="ctrl" style="gap:18px">
+          <span class="readout" id="d4left">à gauche : —</span>
+          <span class="readout" id="d4mom">Δ moment : —</span>
+        </div>
+        <button class="btn" id="d4check">Valider l'équilibre</button>
+        <div class="msg" id="d4msg"></div>
+      </div>
+    </section>
+
+    <!-- D5 -->
+    <section id="d5">
+      <span class="tag">📐 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <h2>Ferme le triangle</h2>
+      <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p>
+      <div class="game">
+        <div class="roundpill" id="d5round">Manche 1 / 4</div>
+        <canvas id="cvTri" width="640" height="240"></canvas>
+        <div class="hint" style="margin:10px 0 6px">Quelle force F₃ (composantes en x ; y) ferme le triangle ?</div>
+        <div class="opts" id="d5opts"></div>
+        <div class="msg" id="d5msg"></div>
+      </div>
+    </section>
+
+    <!-- D6 -->
+    <section id="d6">
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Liaison ↔ réaction</h2>
+      <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p>
+      <div class="game">
+        <div class="match">
+          <div class="mcol"><div class="h">Notion</div><div id="d6left"></div></div>
+          <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
+        </div>
+        <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="fin" style="border-bottom:none">
+      <div class="final">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
+        <div class="fs"><span id="finScore">0</span> / 820</div>
+        <div class="fr" id="finRank">🔧 Apprenti</div>
+        <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  // ===== Socle score =====
+  var KEYS=['d1','d2','d3','d4','d5','d6'];
+  var MAXES={d1:120,d2:160,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var best={};
+  function el(id){return document.getElementById(id);}
+  function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
+  function refresh(){
+    var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
+    el('scoreNow').textContent=tot; el('finScore').textContent=tot;
+    var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
+    el('progBar').style.width=(tot/TOTALMAX*100)+'%';
+    KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
+  }
+  function setContrib(key,val){var m=MAXES[key];var v=Math.max(0,Math.min(m,Math.round(val)));if(v>(best[key]||0)){best[key]=v;refresh();}}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  // ===== Nav =====
+  var nav=el('nav'), mb=el('menuBtn');
+  if(mb) mb.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(el(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(el(id));});
+
+  function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+    var a=Math.atan2(y2-y1,x2-x1),L=9;g.beginPath();g.moveTo(x2,y2);
+    g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();}
+
+  // ===== D1 — builder =====
+  (function(){
+    var STEPS=['Isoler le solide étudié','Faire le bilan des actions mécaniques',
+      'Écrire Σ F\u20D7 = 0\u20D7 (translation)','Écrire Σ M = 0 (rotation)','Résoudre les inconnues'];
+    var slots=el('d1slots'), pool=el('d1pool'), msg=el('d1msg');
+    var idx, wrong;
+    function start(){
+      idx=0; wrong=0; msg.textContent=''; msg.className='msg';
+      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d1s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+      var order=shuffle(STEPS.map(function(s,i){return {s:s,i:i};}));
+      pool.innerHTML=order.map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');
+    }
+    pool.addEventListener('click',function(ev){
+      var b=ev.target.closest('.pchip'); if(!b)return;
+      var i=parseInt(b.getAttribute('data-i'),10);
+      if(i===idx){
+        var sl=el('d1s'+idx); sl.classList.add('filled'); sl.querySelector('.txt').textContent=STEPS[idx];
+        b.remove(); idx++;
+        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*18); setContrib('d1',sc); msg.className='msg ok'; msg.textContent='✓ Raisonnement complet ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}
+      } else { wrong++; b.classList.add('bad'); setTimeout(function(){b.classList.remove('bad');},320); msg.className='msg no'; msg.textContent='Ce n\u2019est pas la prochaine étape.'; }
+    });
+    el('d1reset').addEventListener('click',start);
+    start();
+  })();
+
+  // ===== D2 — arcade M=F·d =====
+  (function(){
+    var ds=[0.2,0.25,0.3,0.4,0.5,0.6,0.8,1.0];
+    var qEl=el('d2q'),opts=el('d2opts'),msg=el('d2msg'),stEl=el('d2streak');
+    var time,score,streak,timer,cur,running=false;
+    function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
+    function gen(){
+      var type=Math.floor(Math.random()*3);
+      var F=(Math.floor(Math.random()*10)+1)*10, d=ds[Math.floor(Math.random()*ds.length)];
+      var M=Math.round(F*d*100)/100, q, ans, unit;
+      if(type===0){q='F = '+F+' N , d = '+fmt(d)+' m → M = ?';ans=M;unit=' N·m';}
+      else if(type===1){q='M = '+fmt(M)+' N·m , d = '+fmt(d)+' m → F = ?';ans=F;unit=' N';}
+      else {q='M = '+fmt(M)+' N·m , F = '+F+' N → d = ?';ans=Math.round(M/F*100)/100;unit=' m';}
+      var set={}; set[ans]=true; var arr=[ans];
+      var tries=0;
+      while(arr.length<4 && tries<40){tries++;
+        var cand;
+        if(unit===' m') cand=Math.round((ans*(0.4+Math.random()*1.4))*100)/100;
+        else cand=Math.round(ans+(Math.floor(Math.random()*9)-4)*(unit===' N·m'?Math.max(1,Math.round(ans*0.12)):10));
+        if(cand>0 && !set[cand]){set[cand]=true;arr.push(cand);}
+      }
+      while(arr.length<4){var c2=ans+arr.length;if(!set[c2]){set[c2]=true;arr.push(c2);}}
+      cur={ans:ans,unit:unit};
+      qEl.textContent=q;
+      opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+fmt(v)+unit+'</button>';}).join('');
+    }
+    function tick(){ time--; el('d2time').textContent=time; if(time<=0) stop(); }
+    function start(){ if(running)return; running=true; score=0;streak=0;time=40; el('d2score').textContent='0'; el('d2time').textContent='40'; msg.textContent='';stEl.textContent=''; el('d2start').disabled=true; gen(); timer=setInterval(tick,1000); }
+    function stop(){ running=false; clearInterval(timer); el('d2start').disabled=false; el('d2start').textContent='Rejouer'; opts.innerHTML=''; qEl.textContent='Terminé !'; setContrib('d2',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
+    opts.addEventListener('click',function(ev){ if(!running)return; var b=ev.target.closest('.opt'); if(!b)return;
+      var v=parseFloat(b.getAttribute('data-v'));
+      if(Math.abs(v-cur.ans)<1e-6){ streak++; var g=18+Math.min(streak,5)*2; score+=g; el('d2score').textContent=score; stEl.textContent='🔥 série ×'+streak+'  (+'+g+')'; b.classList.add('ok'); setTimeout(gen,180); }
+      else { streak=0; stEl.textContent='série perdue'; b.classList.add('no'); var ok=opts.querySelector('.opt[data-v="'+cur.ans+'"]'); if(ok)ok.classList.add('ok'); setTimeout(gen,420); }
+    });
+    el('d2start').addEventListener('click',start);
+  })();
+
+  // ===== D3 — reflex force/moment =====
+  (function(){
+    var ITEMS=[
+      {t:'une intensité en newtons (N)',k:'force'},{t:'fait glisser le solide',k:'force'},
+      {t:'la tension d\u2019un câble',k:'force'},{t:'le poids P d\u2019un objet',k:'force'},
+      {t:'pousser un chariot',k:'force'},{t:'une traction sur une barre',k:'force'},
+      {t:'s\u2019exprime en N·m',k:'moment'},{t:'fait tourner autour d\u2019un axe',k:'moment'},
+      {t:'M = F × d',k:'moment'},{t:'le bras de levier intervient',k:'moment'},
+      {t:'serrer un boulon avec une clé',k:'moment'},{t:'un effet de rotation',k:'moment'}
+    ];
+    var qEl=el('d3q'),msg=el('d3msg'),stEl=el('d3streak'),bF=el('d3force'),bM=el('d3moment');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){ if(!pool.length)pool=shuffle(ITEMS); cur=pool.pop(); qEl.textContent='« '+cur.t+' »'; }
+    function tick(){ time--; el('d3time').textContent=time; if(time<=0) stop(); }
+    function start(){ if(running)return; running=true; score=0;streak=0;time=35;pool=shuffle(ITEMS);
+      el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';
+      bF.disabled=false;bM.disabled=false; el('d3start').disabled=true; next(); timer=setInterval(tick,1000); }
+    function stop(){ running=false; clearInterval(timer); bF.disabled=true;bM.disabled=true; el('d3start').disabled=false; el('d3start').textContent='Rejouer'; qEl.textContent='Terminé !'; setContrib('d3',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
+    function answer(k){ if(!running)return;
+      if(k===cur.k){ streak++; score+=11+Math.min(streak,4)*2; el('d3score').textContent=score; stEl.textContent='🔥 série ×'+streak; }
+      else { streak=0; stEl.textContent='raté — c\u2019était '+(cur.k==='force'?'FORCE':'MOMENT'); }
+      next();
+    }
+    bF.addEventListener('click',function(){answer('force');});
+    bM.addEventListener('click',function(){answer('moment');});
+    el('d3start').addEventListener('click',start);
+  })();
+
+  // ===== D4 — simulateur levier =====
+  (function(){
+    var cv=el('cvLevier'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+    var ROUNDS=[{F1:40,d1:0.30,F2:30},{F1:50,d1:0.40,F2:40},{F1:60,d1:0.50,F2:50}];
+    var ri=0, solved=false;
+    var sl=el('d4slider');
+    function cur(){return ROUNDS[ri];}
+    function d2(){return parseFloat(sl.value);}
+    function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
+    function draw(){
+      g.clearRect(0,0,W,H); var c=cur();
+      var ox=W/2, oy=120, halfPx=250, scale=halfPx/1.0; // 1 m -> 250 px
+      var dM=c.F2*d2()-c.F1*c.d1; // >0 : penche à droite
+      var ang=Math.max(-0.28,Math.min(0.28, dM/120));
+      // support
+      g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-16,oy+70);g.lineTo(ox+16,oy+70);g.closePath();g.fill();
+      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;g.beginPath();g.moveTo(60,oy+70);g.lineTo(W-60,oy+70);g.stroke();
+      // beam
+      var cos=Math.cos(ang),sin=Math.sin(ang);
+      function P(dx){return {x:ox+dx*cos, y:oy+dx*sin};}
+      var lP=P(-c.d1*scale), rP=P(d2()*scale);
+      g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';
+      var a=P(-halfPx), b=P(halfPx); g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();g.lineCap='butt';
+      g.fillStyle='#fff';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(ox,oy,6,0,7);g.fill();g.stroke();
+      // weights (taille ∝ F)
+      function box(p,F,col,lab){var w=20+F*0.5;g.fillStyle=col;g.fillRect(p.x-w/2,p.y-w-4,w,w);
+        g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(F+' N',p.x,p.y-w/2-2);}
+      box(lP,c.F1,'#2E6A8E'); box(rP,c.F2,'#BD8A2A');
+      // distances
+      g.fillStyle='#235877';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('d₁ = '+fmt(c.d1)+' m',lP.x,oy+92);
+      g.fillStyle='#8a6313';g.fillText('d₂ = '+fmt(d2())+' m',rP.x,oy+92);
+      el('d4d2').textContent=fmt(d2())+' m';
+      el('d4left').textContent='à gauche : F₁·d₁ = '+fmt(c.F1*c.d1)+' N·m';
+      el('d4mom').textContent='Δ moment : '+(dM>0?'+':'')+fmt(dM)+' N·m';
+    }
+    function setRound(){ solved=false; el('d4round').textContent='Manche '+(ri+1)+' / 3'; el('d4msg').textContent=''; el('d4msg').className='msg'; el('d4check').disabled=false; sl.value='0.5'; draw(); }
+    sl.addEventListener('input',draw);
+    el('d4check').addEventListener('click',function(){
+      if(solved)return; var c=cur(); var dM=Math.abs(c.F2*d2()-c.F1*c.d1);
+      var msg=el('d4msg');
+      if(dM<=0.6){ solved=true; setContrib('d4',(ri+1)*50); msg.className='msg ok';
+        if(ri<2){ msg.textContent='⚖️ Équilibre parfait ! Manche suivante…'; el('d4check').disabled=true; setTimeout(function(){ri++;setRound();},1100); }
+        else { msg.textContent='🏆 Les 3 manches réussies — défi complet ! +150 pts'; el('d4check').disabled=true; }
+      } else if(dM<=c.F2*0.18){ msg.className='msg no'; msg.textContent='Tout proche ! Ajuste encore un peu (Δ = '+fmt(dM)+' N·m).'; }
+      else { msg.className='msg no'; msg.textContent='Pas encore équilibré (Δ = '+fmt(dM)+' N·m). Vise F₁·d₁ = F₂·d₂.'; }
+    });
+    setRound();
+  })();
+
+  // ===== D5 — ferme le triangle =====
+  (function(){
+    var cv=el('cvTri'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+    var ROUNDS=[
+      {F1:{x:60,y:-20},F2:{x:-30,y:50}},
+      {F1:{x:50,y:30},F2:{x:20,y:-60}},
+      {F1:{x:-40,y:-40},F2:{x:70,y:10}},
+      {F1:{x:0,y:-70},F2:{x:55,y:30}}
+    ];
+    var ri=0, locked=false, opts=el('d5opts'), msg=el('d5msg'), CHOSEN=null;
+    function sum(c){return {x:c.F1.x+c.F2.x, y:c.F1.y+c.F2.y};}
+    function draw(extra){
+      g.clearRect(0,0,W,H); var c=ROUNDS[ri];
+      var sx=190, sy=70, sc=1.4;
+      // chaîne F1 puis F2
+      var A={x:sx+c.F1.x*sc, y:sy+c.F1.y*sc};
+      var B={x:A.x+c.F2.x*sc, y:A.y+c.F2.y*sc};
+      arrow(g,sx,sy,A.x,A.y,'#C0492E',5); 
+      g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('F₁',(sx+A.x)/2+8,(sy+A.y)/2-6);
+      arrow(g,A.x,A.y,B.x,B.y,'#2E6A8E',5);
+      g.fillStyle='#2E6A8E';g.fillText('F₂',(A.x+B.x)/2+8,(A.y+B.y)/2-6);
+      // point de départ et d'arrivée
+      g.fillStyle='#2A2622';g.beginPath();g.arc(sx,sy,5,0,7);g.fill();
+      g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.fillText('départ',sx,sy-12);
+      g.fillStyle='#2A2622';g.beginPath();g.arc(B.x,B.y,5,0,7);g.fill();
+      // gap B -> départ (à fermer)
+      if(!extra){ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1.6;g.setLineDash([5,5]);
+        g.beginPath();g.moveTo(B.x,B.y);g.lineTo(sx,sy);g.stroke();g.setLineDash([]);
+        g.fillStyle='#5C544B';g.fillText('F₃ = ?',(B.x+sx)/2,(B.y+sy)/2-8); }
+      else { arrow(g,B.x,B.y,sx,sy,'#3D7E5F',5); g.fillStyle='#3D7E5F';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F₃',(B.x+sx)/2-10,(B.y+sy)/2-8);
+        g.fillStyle='#235877';g.fillText('triangle fermé ✓', sx+ (B.x-sx)/2, sy-30); }
+    }
+    function setRound(){
+      locked=false; CHOSEN=null; el('d5round').textContent='Manche '+(ri+1)+' / 4'; msg.textContent='';msg.className='msg'; draw(false);
+      var c=ROUNDS[ri], s=sum(c); var correct={x:-s.x,y:-s.y};
+      var set={}, arr=[]; function key(o){return o.x+'_'+o.y;}
+      arr.push(correct); set[key(correct)]=true;
+      var distr=[{x:s.x,y:s.y},{x:-s.x,y:s.y},{x:s.x,y:-s.y}];
+      distr.forEach(function(d){if(!set[key(d)]){set[key(d)]=true;arr.push(d);}});
+      var k=1; while(arr.length<4){var d2={x:-s.x+k*7,y:-s.y-k*5};if(!set[key(d2)]){set[key(d2)]=true;arr.push(d2);}k++;}
+      opts.innerHTML=shuffle(arr).map(function(o){return '<button class="opt" data-x="'+o.x+'" data-y="'+o.y+'">( '+o.x+' ; '+o.y+' )</button>';}).join('');
+    }
+    opts.addEventListener('click',function(ev){ if(locked)return; var b=ev.target.closest('.opt'); if(!b)return;
+      var c=ROUNDS[ri], s=sum(c); var x=parseInt(b.getAttribute('data-x'),10), y=parseInt(b.getAttribute('data-y'),10);
+      if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*35); msg.className='msg ok';
+        if(ri<3){ msg.textContent='✓ Triangle fermé ! Manche suivante…'; setTimeout(function(){ri++;setRound();},1100); }
+        else { msg.textContent='🏆 Les 4 triangles fermés — défi complet ! +140 pts'; }
+      } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ramène pas au point de départ. Pense à F₃ = −(F₁+F₂).'; setTimeout(function(){b.classList.remove('no');},500); }
+    });
+    setRound();
+  })();
+
+  // ===== D6 — matching =====
+  (function(){
+    var PAIRS=[
+      ['Appui simple','1 réaction perpendiculaire au contact'],
+      ['Articulation (pivot)','réaction quelconque = 2 composantes'],
+      ['Encastrement','1 réaction + 1 moment'],
+      ['Le PFS','Σ F\u20D7 = 0\u20D7 et Σ M = 0'],
+      ['Bras de levier','distance ⊥ à la droite d\u2019action']
+    ];
+    var left=el('d6left'), right=el('d6right'), msg=el('d6msg');
+    var sel=null, done=0;
+    function build(){
+      done=0; sel=null; msg.textContent='';msg.className='msg';
+      var L=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};}));
+      var R=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};}));
+      left.innerHTML=L.map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+      right.innerHTML=R.map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+    }
+    function click(ev){
+      var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+      if(!sel){ if(it.getAttribute('data-side')!=='L'){return;} sel=it; it.classList.add('sel'); return; }
+      if(it.getAttribute('data-side')!=='R'){ sel.classList.remove('sel'); sel=(it.getAttribute('data-side')==='L')?it:null; if(sel)sel.classList.add('sel'); return; }
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){
+        it.classList.add('done'); sel.classList.remove('sel'); sel.classList.add('done'); sel=null; done++;
+        setContrib('d6',done*24);
+        if(done===PAIRS.length){ msg.className='msg ok'; msg.textContent='🔗 Tout est relié — défi complet ! +120 pts'; }
+      } else { var bad=it, s=sel; bad.classList.add('bad'); s.classList.add('bad'); setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420); sel=null; msg.className='msg no'; msg.textContent='Mauvaise correspondance, réessaie.'; }
+    }
+    left.addEventListener('click',click); right.addEventListener('click',click);
+    build();
+  })();
+
+  refresh();
+</script>
+</body>
+</html>
