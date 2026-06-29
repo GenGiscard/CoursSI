@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SysML — TP « Modéliser le système » · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--amber-d);border-color:var(--amber)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .scorebox{background:var(--ink);border-radius:13px;padding:13px 15px;margin-bottom:14px;color:#fff}
+  .scorebox .sl{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+  .scorebox .sv{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;margin:3px 0 2px}
+  .scorebox .sv .mx{font-size:14px;font-weight:500;opacity:.55}
+  .scorebox .rk{font-family:var(--mono);font-size:12px;font-weight:700;color:#FCE0B0;margin-top:4px}
+  .scorebox .prog{height:6px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:9px}
+  .scorebox .prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .35s}
+  .nav a.navlink{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink .dn{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+  .nav a.navlink .nm{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav a.navlink .bd{font-size:10px;font-weight:700;color:var(--amber-d)}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber)}
+  .nav a.navlink.on .dn{background:var(--amber);color:#fff;border-color:var(--amber)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,56px) 90px}
+  section{padding:48px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-d);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(25px,4vw,40px);line-height:1.05;margin:10px 0 8px}
+  .lede{font-size:16px;max-width:60ch;color:var(--ink-soft);margin:6px 0 16px}
+  p{margin:0 0 12px;max-width:62ch}
+  .intro{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .ranks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .rankchip{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:8px;padding:6px 11px;background:var(--cream)}
+  .game{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-top:14px}
+  .tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:var(--amber-d);background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);border-radius:999px;padding:4px 12px;margin-bottom:6px}
+  .pts-badge{font-family:var(--mono);font-size:10px;color:var(--ink-soft);margin-left:6px}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--amber);color:#fff;border:none;border-radius:10px;padding:11px 18px;cursor:pointer;transition:.15s}
+  .btn:hover{background:var(--amber-d)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--amber);color:var(--amber-d)}
+  .msg{font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:12px;min-height:18px}
+  .msg.ok{color:var(--ok)} .msg.no{color:var(--no)}
+  .hint{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:6px}
+  .slots{display:flex;flex-direction:column;gap:8px;margin:8px 0 14px}
+  .slot{display:flex;align-items:center;gap:10px;border:1.5px dashed var(--line-strong);border-radius:10px;padding:11px 13px;min-height:46px;background:var(--cream)}
+  .slot .sn{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--amber-d);flex:0 0 auto}
+  .slot.filled{border-style:solid;border-color:var(--ok);background:rgba(61,126,95,.08)}
+  .slot .txt{font-size:13.5px;font-weight:600}
+  .pool{display:flex;flex-wrap:wrap;gap:8px}
+  .pchip{font-family:var(--body);font-size:13.5px;font-weight:600;background:var(--paper);border:1.5px solid var(--line-strong);border-radius:10px;padding:10px 13px;cursor:pointer;transition:.12s}
+  .pchip:hover{border-color:var(--amber);transform:translateY(-1px)}
+  .pchip.bad{border-color:var(--no);background:rgba(192,73,46,.09);animation:shk .3s}
+  @keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .arc-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+  .timepill{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:6px 12px}
+  .timepill b{color:var(--amber-d)}
+  .qbox{font-family:var(--mono);font-weight:700;font-size:clamp(16px,2.5vw,22px);margin:10px 0 14px;min-height:36px;background:#1d1916;color:#F2E9DD;border-radius:11px;padding:18px;text-align:center;line-height:1.4}
+  .opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .opt{font-family:var(--mono);font-size:14.5px;font-weight:700;background:var(--cream);border:1.5px solid var(--line-strong);border-radius:11px;padding:14px;cursor:pointer;transition:.12s;text-align:center}
+  .opt:hover{border-color:var(--amber);background:#fff}
+  .opt.ok{border-color:var(--ok);background:rgba(61,126,95,.12)} .opt.no{border-color:var(--no);background:rgba(192,73,46,.1)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .bigbtn{font-family:var(--display);font-weight:800;font-size:18px;padding:18px;border-radius:13px;border:2px solid var(--line-strong);background:var(--cream);cursor:pointer;transition:.12s}
+  .bigbtn:hover{border-color:var(--amber);background:#fff}
+  .bigbtn.exig{color:var(--steel)} .bigbtn.sol{color:var(--copper)}
+  .streak{font-family:var(--mono);font-size:11.5px;color:var(--amber-d);font-weight:700;margin-top:8px;min-height:16px}
+  .stateline{font-size:15px;margin:8px 0 14px}
+  .statepill{display:inline-block;font-family:var(--mono);font-size:14px;font-weight:700;color:#fff;border-radius:8px;padding:6px 14px}
+  .roundpill{font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+  .match{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .mcol{display:flex;flex-direction:column;gap:9px}
+  .mcol .h{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .mitem{font-family:var(--body);font-size:13.5px;font-weight:600;border:1.5px solid var(--line-strong);border-radius:10px;padding:11px 13px;cursor:pointer;transition:.12s;background:var(--paper)}
+  .mitem:hover{border-color:var(--amber)}
+  .mitem.sel{border-color:var(--amber);background:rgba(189,138,42,.1)}
+  .mitem.done{border-color:var(--ok);background:rgba(61,126,95,.1);color:var(--ok);cursor:default;pointer-events:none}
+  .mitem.bad{animation:shk .3s;border-color:var(--no)}
+  .final{background:linear-gradient(135deg,#2A2622,#3a322c);color:#fff;border-radius:18px;padding:28px;text-align:center}
+  .final .fs{font-family:var(--display);font-weight:800;font-size:46px;line-height:1}
+  .final .fr{font-family:var(--mono);font-size:15px;color:#FCE0B0;margin-top:8px;font-weight:700}
+  .final .fd{font-size:13.5px;opacity:.8;margin-top:10px}
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
+    .opts,.two,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_sysml.html">← Séquence : SysML</a>
+    <div class="brand">
+      <div class="mark">🔧</div>
+      <div><h1>Modéliser le système</h1><p>TP · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Défis</button>
+    </div>
+    <div class="scorebox">
+      <div class="sl">Score total</div>
+      <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div>
+      <div class="rk" id="rankLine">🔧 Apprenti</div>
+      <div class="prog"><i id="progBar"></i></div>
+    </div>
+    <div class="links" id="links">
+      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Exigence ou solution ?</span><b class="bd" id="bd1">0</b></a>
+      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">La démarche</span><b class="bd" id="bd2">0</b></a>
+      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Reconnais le diagramme</span><b class="bd" id="bd3">0</b></a>
+      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Automate du portail</span><b class="bd" id="bd4">0</b></a>
+      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Le bon bloc</span><b class="bd" id="bd5">0</b></a>
+      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Terme ↔ définition</span><b class="bd" id="bd6">0</b></a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="intro" style="border-bottom:none;padding-bottom:8px">
+      <span class="kicker">TP · 6 défis</span>
+      <h2>Modéliser le système</h2>
+      <div class="intro">
+        <p class="lede">Six défis-jeux pour maîtriser l'ingénierie système en agissant : distinguer exigences et solutions, ordonner la démarche, reconnaître les diagrammes, piloter un automate. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <div class="ranks">
+          <span class="rankchip">🔧 Apprenti · &lt; 200</span>
+          <span class="rankchip">⚙️ Technicien·ne · 200+</span>
+          <span class="rankchip">📐 Ingénieur·e · 450+</span>
+          <span class="rankchip">🏆 Expert·e · 700+</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="d1">
+      <span class="tag">🎯 Défi 1<span class="pts-badge">/ 160 pts</span></span>
+      <h2>Exigence ou solution ?</h2>
+      <p class="lede">Pour chaque phrase, décide si c'est une <b>exigence</b> (ce que le système <i>doit</i> faire) ou une <b>solution technique</b> (le <i>comment</i>). 40 secondes.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d1time">40</b> s</span>
+          <span class="timepill">Score : <b id="d1score">0</b></span>
+          <button class="btn" id="d1start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d1q">Appuie sur Démarrer pour lancer le défi.</div>
+        <div class="two">
+          <button class="bigbtn exig" id="d1exig" disabled>EXIGENCE<br><span style="font-size:11px;font-weight:500">le besoin</span></button>
+          <button class="bigbtn sol" id="d1sol" disabled>SOLUTION<br><span style="font-size:11px;font-weight:500">le comment</span></button>
+        </div>
+        <div class="streak" id="d1streak"></div>
+        <div class="msg" id="d1msg"></div>
+      </div>
+    </section>
+
+    <section id="d2">
+      <span class="tag">🧩 Défi 2<span class="pts-badge">/ 120 pts</span></span>
+      <h2>La démarche de conception</h2>
+      <p class="lede">Remets dans l'ordre les étapes de la conception d'un système, du <b>besoin</b> jusqu'à la <b>réalisation</b>. Clique les étiquettes dans le bon ordre.</p>
+      <div class="game">
+        <div class="slots" id="d2slots"></div>
+        <div class="hint" style="margin-bottom:8px">À placer :</div>
+        <div class="pool" id="d2pool"></div>
+        <div class="msg" id="d2msg"></div>
+        <div style="margin-top:12px"><button class="btn alt" id="d2reset">Recommencer</button></div>
+      </div>
+    </section>
+
+    <section id="d3">
+      <span class="tag">🔎 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <h2>Reconnais le diagramme</h2>
+      <p class="lede">D'après ce qu'il représente, retrouve le bon <b>diagramme SysML</b> en un éclair. 35 secondes.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d3time">35</b> s</span>
+          <span class="timepill">Score : <b id="d3score">0</b></span>
+          <button class="btn" id="d3start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d3q">Appuie sur Démarrer.</div>
+        <div class="opts" id="d3opts"></div>
+        <div class="streak" id="d3streak"></div>
+        <div class="msg" id="d3msg"></div>
+      </div>
+    </section>
+
+    <section id="d4">
+      <span class="tag">🚦 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <h2>Automate du portail</h2>
+      <p class="lede">Le portail automatique suit un diagramme d'états. Étant donné l'<b>état courant</b> et l'<b>événement</b>, choisis le bon <b>état suivant</b>.</p>
+      <div class="game">
+        <div class="roundpill" id="d4round">Manche 1 / 4</div>
+        <div class="stateline" id="d4state"></div>
+        <div class="hint" style="margin-bottom:8px">Quel est l'état suivant ?</div>
+        <div class="opts" id="d4opts"></div>
+        <div class="msg" id="d4msg"></div>
+      </div>
+    </section>
+
+    <section id="d5">
+      <span class="tag">🧱 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <h2>Le bon bloc</h2>
+      <p class="lede">D'après la <b>fonction</b> décrite, retrouve le <b>bloc</b> du drone qui l'assure. 35 secondes.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d5time">35</b> s</span>
+          <span class="timepill">Score : <b id="d5score">0</b></span>
+          <button class="btn" id="d5start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d5q">Appuie sur Démarrer.</div>
+        <div class="opts" id="d5opts"></div>
+        <div class="streak" id="d5streak"></div>
+        <div class="msg" id="d5msg"></div>
+      </div>
+    </section>
+
+    <section id="d6">
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Terme SysML ↔ définition</h2>
+      <p class="lede">Relie chaque terme à sa définition. Clique à gauche, puis sa correspondance à droite.</p>
+      <div class="game">
+        <div class="match">
+          <div class="mcol"><div class="h">Terme</div><div id="d6left"></div></div>
+          <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
+        </div>
+        <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="fin" style="border-bottom:none">
+      <div class="final">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
+        <div class="fs"><span id="finScore">0</span> / 820</div>
+        <div class="fr" id="finRank">🔧 Apprenti</div>
+        <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  var KEYS=['d1','d2','d3','d4','d5','d6'];
+  var MAXES={d1:160,d2:120,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var best={};
+  function el(id){return document.getElementById(id);}
+  function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
+  function refresh(){
+    var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
+    el('scoreNow').textContent=tot; el('finScore').textContent=tot;
+    var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
+    el('progBar').style.width=(tot/TOTALMAX*100)+'%';
+    KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
+  }
+  function setContrib(key,val){var m=MAXES[key];var v=Math.max(0,Math.min(m,Math.round(val)));if(v>(best[key]||0)){best[key]=v;refresh();}}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  var nav=el('nav'), mb=el('menuBtn');
+  if(mb) mb.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(el(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(el(id));});
+
+  // ===== D1 — exigence ou solution =====
+  (function(){
+    var ITEMS=[
+      {t:'le drone doit voler au moins 25 minutes',k:'exig'},{t:'la masse totale doit être inférieure à 900 g',k:'exig'},
+      {t:'le portail doit s\u2019ouvrir en moins de 8 s',k:'exig'},{t:'le système doit résister à la pluie',k:'exig'},
+      {t:'l\u2019arrêt d\u2019urgence doit agir en moins d\u20191 s',k:'exig'},{t:'le vélo doit assister jusqu\u2019à 25 km/h',k:'exig'},
+      {t:'utiliser une batterie lithium 4S',k:'sol'},{t:'monter un moteur brushless',k:'sol'},
+      {t:'ajouter un capteur infrarouge',k:'sol'},{t:'programmer la commande en Python',k:'sol'},
+      {t:'choisir un châssis en fibre de carbone',k:'sol'},{t:'installer un vérin électrique',k:'sol'}
+    ];
+    var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bE=el('d1exig'),bS=el('d1sol');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
+    function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';bE.disabled=false;bS.disabled=false;el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);bE.disabled=true;bS.disabled=true;el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function answer(k){if(!running)return;if(k===cur.k){streak++;score+=16+Math.min(streak,5)*2;el('d1score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+(cur.k==='exig'?'EXIGENCE':'SOLUTION');}next();}
+    bE.addEventListener('click',function(){answer('exig');});
+    bS.addEventListener('click',function(){answer('sol');});
+    el('d1start').addEventListener('click',start);
+  })();
+
+  // ===== D2 — builder démarche =====
+  (function(){
+    var STEPS=['Identifier le besoin (bête à cornes)','Définir les exigences (cahier des charges)','Modéliser la structure (diagramme de blocs)','Modéliser le comportement (états, cas d\u2019usage)','Simuler et vérifier les exigences','Réaliser le système'];
+    var slots=el('d2slots'),pool=el('d2pool'),msg=el('d2msg');
+    var idx,wrong;
+    function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
+      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d2s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+      pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
+    pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
+      if(i===idx){var sl=el('d2s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
+        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*15);setContrib('d2',sc);msg.className='msg ok';msg.textContent='✓ Démarche ordonnée ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
+    el('d2reset').addEventListener('click',start);
+    start();
+  })();
+
+  // ===== D3 — reconnais le diagramme =====
+  (function(){
+    var LABS={blocs:'Diagramme de blocs',etats:'Diagramme d\u2019états',exig:'Diagramme des exigences',usage:'Cas d\u2019usage'};
+    var ORDER=['blocs','etats','exig','usage'];
+    var ITEMS=[
+      {t:'montre de quoi le système est composé',k:'blocs'},{t:'décrit les sous-systèmes et leurs liens',k:'blocs'},
+      {t:'liste ce que le système doit faire',k:'exig'},{t:'le besoin traduit en critères mesurables',k:'exig'},
+      {t:'montre les situations du système et leurs transitions',k:'etats'},{t:'comment le système réagit aux événements',k:'etats'},
+      {t:'ce que l\u2019utilisateur peut faire avec le système',k:'usage'},{t:'les actions possibles pour l\u2019acteur',k:'usage'}
+    ];
+    var qEl=el('d3q'),opts=el('d3opts'),msg=el('d3msg'),stEl=el('d3streak');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d3time').textContent=time;if(time<=0)stop();}
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';el('d3start').disabled=true;
+      opts.innerHTML=ORDER.map(function(k){return '<button class="opt" data-k="'+k+'">'+LABS[k]+'</button>';}).join('');next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);el('d3start').disabled=false;el('d3start').textContent='Rejouer';qEl.textContent='Terminé !';opts.innerHTML='';setContrib('d3',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    opts.addEventListener('click',function(ev){if(!running)return;var b=ev.target.closest('.opt');if(!b)return;var k=b.getAttribute('data-k');
+      if(k===cur.k){streak++;score+=11+Math.min(streak,4)*2;el('d3score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était : '+LABS[cur.k];}next();});
+    el('d3start').addEventListener('click',start);
+  })();
+
+  // ===== D4 — automate du portail =====
+  (function(){
+    var COL={'FERMÉ':'#C0492E','OUVERTURE':'#BD8A2A','OUVERT':'#3D7E5F','FERMETURE':'#2E6A8E'};
+    var ROUNDS=[
+      {state:'FERMÉ',event:'appui sur le bouton',next:'OUVERTURE'},
+      {state:'OUVERTURE',event:'fin de course haute atteinte',next:'OUVERT'},
+      {state:'OUVERT',event:'temporisation écoulée',next:'FERMETURE'},
+      {state:'FERMETURE',event:'fin de course basse atteinte',next:'FERMÉ'}
+    ];
+    var STATES=['FERMÉ','OUVERTURE','OUVERT','FERMETURE'];
+    var ri=0, locked=false, opts=el('d4opts'), msg=el('d4msg');
+    function setRound(){locked=false;el('d4round').textContent='Manche '+(ri+1)+' / 4';var r=ROUNDS[ri];
+      el('d4state').innerHTML='État courant : <span class="statepill" style="background:'+COL[r.state]+'">'+r.state+'</span> &nbsp;—&nbsp; événement : <b>'+r.event+'</b>';
+      msg.textContent='';msg.className='msg';
+      opts.innerHTML=shuffle(STATES).map(function(s){return '<button class="opt" data-s="'+s+'" style="border-color:'+COL[s]+'">'+s+'</button>';}).join('');}
+    opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var s=b.getAttribute('data-s');var r=ROUNDS[ri];
+      if(s===r.next){locked=true;b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*150));msg.className='msg ok';
+        if(ri<3){msg.textContent='✓ Bonne transition ! Manche suivante…';setTimeout(function(){ri++;setRound();},1100);}
+        else{msg.textContent='🏆 Automate maîtrisé — défi complet ! +150 pts';}}
+      else{b.classList.add('no');msg.className='msg no';msg.textContent='Suis le cycle du portail sur le diagramme.';setTimeout(function(){b.classList.remove('no');},460);}});
+    setRound();
+  })();
+
+  // ===== D5 — le bon bloc =====
+  (function(){
+    var LABS={prop:'Propulsion',capt:'Capteurs',chas:'Châssis',cmd:'Commande'};
+    var ORDER=['prop','capt','chas','cmd'];
+    var ITEMS=[
+      {t:'générer la poussée, faire avancer',k:'prop'},{t:'transformer l\u2019énergie en mouvement',k:'prop'},
+      {t:'mesurer l\u2019altitude et la position',k:'capt'},{t:'détecter un obstacle',k:'capt'},
+      {t:'porter et relier les composants',k:'chas'},{t:'assurer la rigidité de la structure',k:'chas'},
+      {t:'décider et piloter les moteurs',k:'cmd'},{t:'exécuter le programme de vol',k:'cmd'}
+    ];
+    var qEl=el('d5q'),opts=el('d5opts'),msg=el('d5msg'),stEl=el('d5streak');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d5time').textContent=time;if(time<=0)stop();}
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';el('d5start').disabled=true;
+      opts.innerHTML=ORDER.map(function(k){return '<button class="opt" data-k="'+k+'">'+LABS[k]+'</button>';}).join('');next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';opts.innerHTML='';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    opts.addEventListener('click',function(ev){if(!running)return;var b=ev.target.closest('.opt');if(!b)return;var k=b.getAttribute('data-k');
+      if(k===cur.k){streak++;score+=12+Math.min(streak,4)*2;el('d5score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était : '+LABS[cur.k];}next();});
+    el('d5start').addEventListener('click',start);
+  })();
+
+  // ===== D6 — matching terme/définition =====
+  (function(){
+    var PAIRS=[
+      ['Système','ensemble organisé de composants'],
+      ['Frontière','limite entre le système et l\u2019extérieur'],
+      ['Exigence','ce que le système doit faire'],
+      ['Critère','grandeur mesurable d\u2019une exigence'],
+      ['État','situation du système à un instant']
+    ];
+    var left=el('d6left'),right=el('d6right'),msg=el('d6msg');
+    var sel=null,done=0;
+    function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
+      left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+      right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
+    function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
+      if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
+      if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*24);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +120 pts';}}
+      else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
+    left.addEventListener('click',click);right.addEventListener('click',click);
+    build();
+  })();
+
+  refresh();
+</script>
+</body>
+</html>
