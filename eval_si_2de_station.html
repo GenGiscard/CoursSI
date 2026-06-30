@@ -214,41 +214,41 @@
   var FB_NODE='resultats_si_2de_station';
 
   var EXOS=[
-    { anim:'lecture', tag:'Exercice 1 \u00b7 8 pts', title:'Lire les capteurs',
-      ctx:'La station affiche les valeurs de trois capteurs. Observe l\u2019\u00e9cran anim\u00e9, puis exploite une s\u00e9rie de mesures de température.',
-      data:[['Affichage','24 °C \u00b7 55 % \u00b7 300 lux'],['S\u00e9rie T','22 ; 23 ; 24 ; 24 ; 25 ; 26 °C'],['Nombre de mesures','6']],
+    { anim:'station', tag:'Exercice 1 \u00b7 8 pts', title:'Lire les capteurs',
+      ctx:'Une station affiche les valeurs de ses capteurs. Lis le tableau et calcule.',
+      data:[['Température','24 °C'],['Consigne','20 °C'],['Mesures / heure','12']],
       parts:[
-        {q:'Combien de capteurs la station affiche-t-elle ?', a:3, tol:0.1, pts:2, unit:'', sol:'3 capteurs : température, humidité, lumière'},
-        {q:'Moyenne de la s\u00e9rie : (22+23+24+24+25+26) / 6 ?', a:24, tol:0.1, pts:4, unit:'°C', sol:'144 / 6 = 24 °C'},
-        {q:'\u00c9tendue : valeur max \u2212 valeur min (26 \u2212 22) ?', a:4, tol:0.1, pts:2, unit:'°C', sol:'26 \u2212 22 = 4 °C'}
+        {q:'Combien de grandeurs une station T/H/L mesure-t-elle ?', a:3, tol:0.1, pts:2, unit:'', sol:'température, humidité, lumière \u2192 3'},
+        {q:'Nombre de mesures en 5 heures : 12 \u00d7 5 ?', a:60, tol:0.1, pts:3, unit:'', sol:'12 \u00d7 5 = 60 mesures'},
+        {q:'\u00c9cart \u00e0 la consigne : 24 \u2212 20 ?', a:4, tol:0.1, pts:3, unit:'°C', sol:'24 \u2212 20 = 4 °C'}
       ] },
     { anim:'seuil', tag:'Exercice 2 \u00b7 8 pts', title:'Le seuil d\u2019alerte',
-      ctx:'Un seuil maximal de 25 °C est fix\u00e9. La station compare chaque mesure \u00e0 ce seuil et d\u00e9clenche une alerte en cas de d\u00e9passement.',
-      data:[['Seuil max','25 °C'],['Mesure','28 °C'],['Mesures > seuil','3 sur 5']],
+      ctx:'Un seuil d\u2019alerte est fix\u00e9 \u00e0 25 °C. Deux mesures sont relev\u00e9es : 22 °C puis 27 °C.',
+      data:[['Seuil','25 °C'],['Mesure 1','22 °C'],['Mesure 2','27 °C']],
       parts:[
-        {q:'D\u00e9passement : mesure \u2212 seuil (28 \u2212 25) ?', a:3, tol:0.1, pts:3, unit:'°C', sol:'28 \u2212 25 = 3 °C'},
-        {q:'3 mesures sur 5 d\u00e9passent le seuil. Pourcentage : 3 / 5 \u00d7 100 ?', a:60, tol:0.5, pts:3, unit:'%', sol:'3 / 5 \u00d7 100 = 60 %'},
-        {q:'La mesure (28 °C) d\u00e9passe-t-elle le seuil (25 °C) ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:2, unit:'', sol:'28 > 25 \u2192 oui \u2192 1'}
+        {q:'D\u00e9passement de la mesure 2 : 27 \u2212 25 ?', a:2, tol:0.1, pts:3, unit:'°C', sol:'27 \u2212 25 = 2 °C au-dessus du seuil'},
+        {q:'La mesure 1 (22 °C) d\u00e9passe-t-elle le seuil ? (1 = oui, 0 = non)', a:0, tol:0.1, pts:2, unit:'', sol:'22 < 25 \u2192 non \u2192 0'},
+        {q:'La mesure 2 (27 °C) d\u00e9clenche-t-elle l\u2019alerte ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:3, unit:'', sol:'27 > 25 \u2192 oui \u2192 1'}
       ] },
-    { anim:'chaine', tag:'Exercice 3 \u00b7 8 pts', title:'\u00c9chantillonnage',
-      ctx:'La station enregistre une mesure \u00e0 intervalle r\u00e9gulier. On compte les mesures sur une dur\u00e9e donn\u00e9e.',
-      data:[['Intervalle','une mesure / 10 s'],['Dur\u00e9e','2 min'],['Rappel','1 min = 60 s']],
+    { anim:'chaine', tag:'Exercice 3 \u00b7 8 pts', title:'Enregistrer les donn\u00e9es',
+      ctx:'La station enregistre une valeur \u00e0 intervalle r\u00e9gulier, puis stocke les mesures.',
+      data:[['P\u00e9riode','5 min'],['Dur\u00e9e','60 min'],['Taille / mesure','4 octets']],
       parts:[
-        {q:'Dur\u00e9e en secondes : 2 \u00d7 60 ?', a:120, tol:0.1, pts:2, unit:'s', sol:'2 \u00d7 60 = 120 s'},
-        {q:'Une mesure toutes les 10 s pendant 120 s : combien d\u2019intervalles ? (120 / 10)', a:12, tol:0.1, pts:3, unit:'', sol:'120 / 10 = 12'},
-        {q:'En mesurant toutes les 5 s au lieu de 10 s, obtient-on plus de mesures ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:3, unit:'', sol:'intervalle plus court \u2192 plus de mesures \u2192 1'}
+        {q:'Nombre de mesures en 1 heure : 60 / 5 ?', a:12, tol:0.1, pts:3, unit:'', sol:'60 / 5 = 12 mesures'},
+        {q:'M\u00e9moire utilis\u00e9e : 12 \u00d7 4 ?', a:48, tol:0.1, pts:3, unit:'octets', sol:'12 \u00d7 4 = 48 octets'},
+        {q:'Combien de maillons compte la cha\u00eene d\u2019acquisition (grandeur \u2192 capteur \u2192 nombre \u2192 \u00e9cran) ?', a:4, tol:0.1, pts:2, unit:'', sol:'4 maillons'}
       ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
-    var QB=[
-    {q:'Un capteur de température mesure\u2026', opts:['la lumière','la chaleur','le son'], correct:1, pts:2},
-    {q:'La grandeur \u00ab lumière \u00bb se mesure en\u2026', opts:['lux','°C','%'], correct:0, pts:2},
-    {q:'Dans la cha\u00eene d\u2019acquisition, le capteur\u2026', opts:['affiche la valeur','transforme une grandeur en signal','fixe le seuil'], correct:1, pts:2},
-    {q:'Un \u00ab seuil \u00bb, c\u2019est\u2026', opts:['une unité de mesure','la valeur limite \u00e0 ne pas dépasser','un type de capteur'], correct:1, pts:2},
-    {q:'Une LDR (photorésistance) sert \u00e0 mesurer\u2026', opts:['l\u2019humidité','la lumière','la température'], correct:1, pts:2},
-    {q:'Si la température dépasse le seuil maximal, la station\u2026', opts:['déclenche une alerte','s\u2019éteint','change d\u2019unité'], correct:0, pts:2},
-    {q:'Pour suivre l\u2019évolution dans le temps, on utilise\u2026', opts:['une seule valeur','un graphique','rien du tout'], correct:1, pts:2},
-    {q:'Une station \u00ab connectée \u00bb peut en plus\u2026', opts:['partager ses données sur un réseau','fabriquer des capteurs','supprimer les seuils'], correct:0, pts:2}
+  var QB=[
+    {q:'Une thermistance (CTN) mesure\u2026', opts:['la lumière','la température','le son'], correct:1, pts:2},
+    {q:'Une photorésistance (LDR) mesure\u2026', opts:['la lumière','la température','l\u2019humidité'], correct:0, pts:2},
+    {q:'L\u2019unité de l\u2019humidité de l\u2019air est\u2026', opts:['le °C','le %','le lux'], correct:1, pts:2},
+    {q:'Un seuil, c\u2019est\u2026', opts:['la valeur moyenne','la valeur limite à ne pas dépasser','la première mesure'], correct:1, pts:2},
+    {q:'La cha\u00eene d\u2019acquisition commence par\u2026', opts:['l\u2019affichage','la grandeur physique','le réseau'], correct:1, pts:2},
+    {q:'Un capteur fournit d\u2019abord\u2026', opts:['un nombre déjà affiché','un signal à convertir en nombre','une image'], correct:1, pts:2},
+    {q:'Une alerte se déclenche quand\u2026', opts:['la station démarre','la valeur dépasse le seuil','on appuie sur un bouton'], correct:1, pts:2},
+    {q:'Un graphique de mesures montre surtout\u2026', opts:['le prix','l\u2019évolution dans le temps','la masse'], correct:1, pts:2}
   ];
   var qbSel={};
   var MAXB=0; QB.forEach(function(q){ MAXB+=q.pts; }); MAXPTS+=MAXB; NQ+=QB.length;
@@ -395,58 +395,54 @@
   // ===== Animations =====
   var phase=0, animTimer=null;
   function startAnim(){ if(animTimer)return; animTimer=setInterval(function(){ phase+=0.05; drawAll(); },50); }
-  function drawAll(){ drawLecture(); drawSeuil(); drawChaine(); }
+  function drawAll(){ drawStation(); drawSeuil(); drawChaine(); }
   function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{x:c.getContext('2d'),W:c.width,H:c.height}:null; }
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
-  function drawLecture(){
-    var o=ctxOf('cv_lecture'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var rows=[{n:'Température',v:'24 °C',c:'#E0916A'},{n:'Humidité',v:'55 %',c:'#7FB0CC'},{n:'Lumière',v:'300 lux',c:'#E0C070'}];
-    var seg=phase%9, active=Math.floor(seg/1.6)%3;
-    var sx=W/2-165, sy=42, sw=330, sh=138;
-    g.fillStyle='#1d1916';rrect(g,sx,sy,sw,sh,12);g.fill();
-    g.fillStyle='#7ED0A0';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('STATION \u00b7 mesures',sx+18,sy+24);
-    rows.forEach(function(r,i){var y=sy+54+i*30, on=(i===active);
-      if(on){g.fillStyle='rgba(255,255,255,.08)';rrect(g,sx+10,y-16,sw-20,26,6);g.fill();}
-      g.fillStyle=on?'#fff':'#cabfb0';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(r.n,sx+22,y+2);
-      g.fillStyle=r.c;g.textAlign='right';g.fillText(r.v,sx+sw-22,y+2);});
-    g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('3 capteurs, 3 grandeurs lues',W/2,16);
+  function drawStation(){
+    var o=ctxOf('cv_station'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var rows=[{lab:'Température',val:'24 °C',c:'#B85C2E'},{lab:'Humidité',val:'55 %',c:'#2E6A8E'},{lab:'Lumière',val:'300 lux',c:'#BD8A2A'}];
+    var seg=phase%9, shown=Math.max(0,Math.min(3,Math.floor(seg/1.8)));
+    var px=120,py=30,pw=W-240,ph=150;
+    g.fillStyle='#1d1916';rrect(g,px,py,pw,ph,12);g.fill();
+    g.fillStyle='#E8DCC8';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('STATION',px+16,py+24);
+    for(var i=0;i<3;i++){var y=py+50+i*32;
+      if(i<shown){var r=rows[i];
+        g.fillStyle=r.c;g.beginPath();g.arc(px+24,y,6,0,7);g.fill();
+        g.fillStyle='#F2E9DD';g.font='13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(r.lab,px+40,y+4);
+        g.fillStyle='#7ED0A0';g.font='700 15px "JetBrains Mono",monospace';g.textAlign='right';g.fillText(r.val,px+pw-18,y+5);}
+      else{g.strokeStyle='rgba(255,255,255,.12)';g.lineWidth=1;g.beginPath();g.moveTo(px+40,y);g.lineTo(px+pw-18,y);g.stroke();}}
+    g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(shown>=3?'3 grandeurs mesurées':('Lecture des capteurs\u2026 ('+shown+'/3)'),W/2,202);
     g.textAlign='left';
   }
 
   function drawSeuil(){
     var o=ctxOf('cv_seuil'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var x0=58,x1=W-26,yb=188,yt=36, seuil=0.6;
-    function xF(t){return x0+t*(x1-x0);} function yF(v){return yb-v*(yb-yt);}
-    function val(t){return 0.12+0.82*t;}
-    var tcross=(seuil-0.12)/0.82, seg=phase%8, p=Math.min(1,seg/5);
-    g.strokeStyle='rgba(42,38,34,.5)';g.lineWidth=1.5;g.beginPath();g.moveTo(x0,yt-4);g.lineTo(x0,yb);g.lineTo(x1,yb);g.stroke();
-    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('température',x0+4,yt-6);g.textAlign='right';g.fillText('temps',x1,yb+14);
-    g.strokeStyle='#B85C2E';g.lineWidth=1.5;g.setLineDash([7,5]);g.beginPath();g.moveTo(x0,yF(seuil));g.lineTo(x1,yF(seuil));g.stroke();g.setLineDash([]);
-    g.fillStyle='#a44a26';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('seuil 25 °C',x0+6,yF(seuil)-5);
-    var first=true;g.strokeStyle='#2E6A8E';g.lineWidth=3;g.beginPath();
-    for(var t=0;t<=Math.min(p,tcross)+1e-9;t+=0.02){var X=xF(t),Y=yF(val(t));if(first){g.moveTo(X,Y);first=false;}else g.lineTo(X,Y);}g.stroke();
-    if(p>tcross){g.strokeStyle='#C0492E';g.lineWidth=3;g.beginPath();var f2=true;for(var t2=tcross;t2<=p+1e-9;t2+=0.02){var X2=xF(t2),Y2=yF(val(t2));if(f2){g.moveTo(X2,Y2);f2=false;}else g.lineTo(X2,Y2);}g.stroke();
-      g.fillStyle='#C0492E';g.beginPath();g.arc(xF(tcross),yF(seuil),4,0,7);g.fill();}
-    g.fillStyle=p>tcross?'#C0492E':'#2E6A8E';g.beginPath();g.arc(xF(p),yF(val(p)),4,0,7);g.fill();
-    g.fillStyle=p>tcross?'#C0492E':'#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(p>tcross?'dépassement \u2192 ALERTE':'sous le seuil, tout va bien',W/2,16);
+    var x0=54,x1=W-24,yb=190,yt=42;
+    function yF(v){return yb-(v-15)/(30-15)*(yb-yt);}
+    g.strokeStyle='rgba(42,38,34,.5)';g.lineWidth=1.5;g.beginPath();g.moveTo(x0,yt-2);g.lineTo(x0,yb);g.lineTo(x1,yb);g.stroke();
+    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('température (°C)',x0+4,yt-6);g.textAlign='right';g.fillText('temps',x1,yb+13);
+    g.strokeStyle='#B85C2E';g.lineWidth=1.5;g.setLineDash([7,5]);g.beginPath();g.moveTo(x0,yF(25));g.lineTo(x1,yF(25));g.stroke();g.setLineDash([]);
+    g.fillStyle='#a44a26';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='right';g.fillText('seuil 25 °C',x1,yF(25)-5);
+    var seg=phase%8;
+    var m1={x:x0+0.30*(x1-x0),v:22}, m2={x:x0+0.70*(x1-x0),v:27};
+    if(seg>=1){g.strokeStyle='#3D7E5F';g.lineWidth=2.5;g.beginPath();g.moveTo(x0+0.08*(x1-x0),yF(20));g.lineTo(m1.x,yF(m1.v));g.stroke();
+      g.fillStyle='#3D7E5F';g.beginPath();g.arc(m1.x,yF(m1.v),5,0,7);g.fill();
+      g.fillStyle='#2c6147';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('22 °C',m1.x,yF(m1.v)+18);}
+    if(seg>=3.5){g.strokeStyle='#C0492E';g.lineWidth=2.5;g.beginPath();g.moveTo(m1.x,yF(m1.v));g.lineTo(m2.x,yF(m2.v));g.stroke();
+      g.fillStyle='#C0492E';g.beginPath();g.arc(m2.x,yF(m2.v),5,0,7);g.fill();
+      g.fillStyle='#C0492E';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('27 °C',m2.x,yF(m2.v)+18);
+      g.fillStyle='#C0492E';rrect(g,m2.x-44,yF(m2.v)-34,88,20,7);g.fill();g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.fillText('ALERTE !',m2.x,yF(m2.v)-20);}
     g.textAlign='left';
   }
 
   function drawChaine(){
     var o=ctxOf('cv_chaine'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var x0=50,x1=W-30,yL=132,total=120,step=10;
-    function xF(s){return x0+s/total*(x1-x0);}
-    var seg=phase%11, shownT=Math.min(total,(seg/7)*total);
-    g.strokeStyle='#5C544B';g.lineWidth=1.5;g.beginPath();g.moveTo(x0,yL);g.lineTo(x1,yL);g.stroke();
-    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';
-    for(var s=0;s<=total;s+=30){var x=xF(s);g.beginPath();g.moveTo(x,yL-4);g.lineTo(x,yL+4);g.stroke();g.fillText(s+'s',x,yL+18);}
-    var count=0;
-    for(var k=10;k<=total;k+=step){ if(k<=shownT){ var xk=xF(k);
-      g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.moveTo(xk,yL);g.lineTo(xk,yL-34);g.stroke();
-      g.fillStyle='#2E6A8E';g.beginPath();g.arc(xk,yL-34,4,0,7);g.fill(); count++; } }
-    g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Une mesure toutes les 10 s (sur 120 s)',W/2,16);
-    g.fillStyle='#2c6147';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(count+' mesure'+(count>1?'s':''),W/2,202);
+    var ST=[{t:'Grandeur',c:'#B85C2E'},{t:'Capteur',c:'#2E6A8E'},{t:'Nombre',c:'#3D7E5F'},{t:'\u00c9cran',c:'#8A5A7A'}];
+    var cx=[92,248,404,556], cy=120, w=128, hh=58, seg=phase%9, active=Math.floor(seg/1.6)%4;
+    for(var i=0;i<3;i++){var xa=cx[i]+w/2,xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
+    for(var j=0;j<4;j++){var on=(j===active),s=ST[j];g.fillStyle=on?s.c:'#FFFDF8';g.strokeStyle=s.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,10);g.fill();g.stroke();g.fillStyle=on?'#fff':s.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(s.t,cx[j],cy+5);}
+    g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('La cha\u00eene d\u2019acquisition (4 maillons)',W/2,28);
     g.textAlign='left';
   }
 
