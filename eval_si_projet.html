@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Évaluation — Conduire un projet · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --ok:#3D7E5F; --no:#C0492E;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+  .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .topbar h1{font-family:var(--display);font-size:17px;margin:0;font-weight:800}
+  .topbar p{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .topbar .back{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:6px 10px;background:var(--paper)}
+  .topbar .back:hover{border-color:var(--green);color:var(--green)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:18px}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(21px,3.6vw,28px);margin:0 0 8px;letter-spacing:-.01em}
+  .lede{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
+  label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin:14px 0 6px}
+  input[type=text],input[type=password]{width:100%;font-family:var(--body);font-size:15px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;background:var(--cream);color:var(--ink)}
+  input:focus{outline:none;border-color:var(--green)}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:11px;padding:13px 22px;cursor:pointer;transition:.15s}
+  .btn:hover{background:#346b50} .btn:disabled{opacity:.5;cursor:not-allowed}
+  .btn.alt{background:var(--cream);color:var(--ink);border:1px solid var(--line-strong)} .btn.alt:hover{background:#fff;border-color:var(--green);color:var(--green)}
+  .err{color:var(--no);font-family:var(--mono);font-size:12.5px;font-weight:700;margin-top:10px;min-height:16px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px}
+  .pbar{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+  .pbar .track{flex:1;height:8px;background:var(--cream);border:1px solid var(--line);border-radius:5px;overflow:hidden}
+  .pbar .track i{display:block;height:100%;width:0;background:var(--green);transition:width .3s}
+  .pbar .lab{font-family:var(--mono);font-size:11px;color:var(--ink-soft);font-weight:700}
+  .exam-grid{display:grid;grid-template-columns:1fr 312px;gap:20px;align-items:start}
+  .calc-side{position:sticky;top:18px}
+  .exo{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}
+  .exo .etag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.1);border:1px solid rgba(61,126,95,.3);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+  .exo h3{font-family:var(--display);font-weight:800;font-size:21px;margin:0 0 6px}
+  .exo .ctx{color:var(--ink-soft);font-size:14.5px;margin:0 0 14px}
+  .exo canvas{width:100%;height:auto;display:block;border-radius:11px;background:#FCFAF4;border:1px solid var(--line);margin-bottom:12px}
+  .data{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .data .d{font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .data .d b{color:var(--steel)}
+  .part{border-top:1px solid var(--line);padding:14px 0}
+  .part:last-child{padding-bottom:0}
+  .part .pq{font-size:14.5px;font-weight:600;margin-bottom:8px;display:flex;gap:8px;align-items:baseline}
+  .part .pq .pn{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:700;flex:0 0 auto}
+  .part .pq .pts{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--ink-soft);background:var(--cream);border:1px solid var(--line);border-radius:6px;padding:1px 7px;flex:0 0 auto}
+  .ansrow{display:flex;align-items:center;gap:10px}
+  .ansrow input{width:160px;font-family:var(--mono);font-size:15px;padding:9px 12px;border:1px solid var(--line-strong);border-radius:9px;background:var(--cream);color:var(--ink)}
+  .ansrow input:focus{outline:none;border-color:var(--green)}
+  .ansrow .unit{font-family:var(--mono);font-size:13px;color:var(--ink-soft);font-weight:700}
+  .calc{background:var(--ink);border-radius:16px;padding:16px;color:#fff}
+  .calc .ct{font-family:var(--display);font-weight:800;font-size:14px;margin:0 0 10px;color:#E9A36F;display:flex;align-items:center;gap:7px}
+  .calc .disp{background:#1d1916;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 14px;min-height:62px;text-align:right;margin-bottom:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px}
+  .calc .disp .expr{font-family:var(--mono);font-size:13px;color:#9C9088;word-break:break-all;min-height:16px}
+  .calc .disp .res{font-family:var(--mono);font-size:24px;font-weight:700;color:#fff;word-break:break-all}
+  .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .key{font-family:var(--mono);font-size:16px;font-weight:700;padding:13px 0;border-radius:9px;border:none;cursor:pointer;background:#36302b;color:#F2E9DD;transition:.1s}
+  .key:hover{background:#433b34}
+  .key.op{background:#4a4039;color:#E9A36F}
+  .key.fn{background:#3a4a44;color:#9FCBAE;font-size:14px}
+  .key.eq{background:#E9A36F;color:#2A2622;grid-column:span 3}
+  .key.clr{background:#5a3a32;color:#E9A893}
+  .calc .chint{font-family:var(--mono);font-size:9.5px;color:#8A7E72;margin-top:9px;text-align:center}
+  .scorebig{font-family:var(--display);font-weight:800;font-size:56px;color:var(--green);line-height:1}
+  .scoresub{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .rankpill{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;color:#2c6147;background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.35);border-radius:999px;padding:6px 16px;margin-top:12px}
+  .recap{margin-top:20px}
+  .rexo{margin-bottom:12px} .rexo .rh{font-family:var(--display);font-weight:700;font-size:15px;margin-bottom:4px}
+  .ri{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+  .ri .ic{flex:0 0 20px;font-weight:700;font-family:var(--mono)}
+  .ri.good .ic{color:var(--ok)} .ri.bad .ic{color:var(--no)}
+  .ri .det{flex:1} .ri .det .sol{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:2px}
+  .sync{font-family:var(--mono);font-size:11.5px;margin-top:14px;color:var(--ink-soft)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  td b{font-family:var(--mono)}
+  .footlink{text-align:center;margin-top:20px}
+  .footlink a{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line-strong)}
+  .footlink a:hover{color:var(--green)}
+  [hidden]{display:none !important}
+  @media(max-width:860px){ .exam-grid{grid-template-columns:1fr} .calc-side{position:static} }
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="wrap">
+  <div class="topbar">
+    <div class="mark">SI</div>
+    <div><h1>Évaluation — Conduire un projet</h1><p>Spé Sciences de l'ingénieur · Première</p></div>
+    <a class="back" href="hub_si_projet.html">← Séquence</a>
+  </div>
+
+  <section id="screen-home">
+    <div class="card">
+      <h2>Avant de commencer</h2>
+      <p class="lede">Cette évaluation comporte <b>3 exercices</b> appuyés sur des schémas animés&nbsp;: tu observes et tu calcules. Une <b>calculatrice</b> est à ta disposition. Note finale sur 20.</p>
+      <label for="inNom">Nom et prénom</label>
+      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
+      <label for="inClasse">Classe</label>
+      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
+      <label for="inCode">Code d'accès</label>
+      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
+      <div class="err" id="homeErr"></div>
+      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
+    </div>
+    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
+  </section>
+
+  <section id="screen-exam" hidden>
+    <div class="pbar"><span class="lab" id="progLab">0 / 9 questions</span><div class="track"><i id="progBar"></i></div></div>
+    <div class="exam-grid">
+      <div id="exoCol"></div>
+      <div class="calc-side">
+        <div class="calc">
+          <div class="ct">🧮 Calculatrice</div>
+          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
+          <div class="keys" id="calcKeys">
+            <button class="key clr" data-k="C">C</button>
+            <button class="key clr" data-k="back">⌫</button>
+            <button class="key op" data-k="(">(</button>
+            <button class="key op" data-k=")">)</button>
+            <button class="key" data-k="7">7</button>
+            <button class="key" data-k="8">8</button>
+            <button class="key" data-k="9">9</button>
+            <button class="key op" data-k="/">÷</button>
+            <button class="key" data-k="4">4</button>
+            <button class="key" data-k="5">5</button>
+            <button class="key" data-k="6">6</button>
+            <button class="key op" data-k="*">×</button>
+            <button class="key" data-k="1">1</button>
+            <button class="key" data-k="2">2</button>
+            <button class="key" data-k="3">3</button>
+            <button class="key op" data-k="-">−</button>
+            <button class="key" data-k="0">0</button>
+            <button class="key" data-k=".">.</button>
+            <button class="key fn" data-k="pi">π</button>
+            <button class="key op" data-k="+">+</button>
+            <button class="key fn" data-k="sqrt">√</button>
+            <button class="key eq" data-k="=">=</button>
+          </div>
+          <div class="chint">+ − × ÷ pour tes calculs</div>
+        </div>
+        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
+        <div class="err" id="examErr" style="text-align:center"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="screen-result" hidden>
+    <div class="card">
+      <h2>Résultat</h2>
+      <div class="scorebig" id="scoreBig">0 / 20</div>
+      <div class="scoresub" id="scoreSub"></div>
+      <div><span class="rankpill" id="rankPill"></span></div>
+      <div class="recap" id="recap"></div>
+      <div class="sync" id="syncMsg"></div>
+    </div>
+  </section>
+
+  <section id="screen-prof" hidden>
+    <div class="card">
+      <h2>Espace enseignant</h2>
+      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
+      <div id="profGate">
+        <label for="inPass">Mot de passe</label>
+        <input type="password" id="inPass" autocomplete="off">
+        <div class="err" id="profErr"></div>
+        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
+          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
+      </div>
+      <div id="profData" hidden>
+        <div id="profTable"></div>
+        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
+          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  var EVAL_CODE='PROJET2026';
+  var PROF_PASS='Agostini2025';
+  var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
+  var FB_NODE='resultats_si_projet';
+
+  var EXOS=[
+    { anim:'gantt', tag:'Exercice 1 · 8 pts', title:'Le diagramme de Gantt',
+      ctx:'Quatre tâches composent le projet. B et C démarrent toutes deux après A ; D attend la fin de B et de C. Calcule la durée de chaque chemin, puis celle du projet.',
+      data:[['A','4 j (départ)'],['B','3 j (après A)'],['C','5 j (après A)'],['D','2 j (après B et C)']],
+      parts:[
+        {q:'Durée du chemin A \u2192 B \u2192 D : 4 + 3 + 2 ?', a:9, tol:0.1, pts:2, unit:'j', sol:'4 + 3 + 2 = 9 j'},
+        {q:'Durée du chemin A \u2192 C \u2192 D : 4 + 5 + 2 ?', a:11, tol:0.1, pts:3, unit:'j', sol:'4 + 5 + 2 = 11 j'},
+        {q:'Durée totale du projet (le chemin le plus long) ?', a:11, tol:0.1, pts:3, unit:'j', sol:'max(9 ; 11) = 11 j'}
+      ] },
+    { anim:'critical', tag:'Exercice 2 · 8 pts', title:'Chemin critique &amp; marge',
+      ctx:'Le chemin le plus long est le chemin critique : il impose la durée du projet. Une tâche hors de ce chemin dispose d\u2019une marge.',
+      data:[['Chemin A\u2192C\u2192D','11 j'],['Chemin A\u2192B\u2192D','9 j'],['Retard testé','C : +2 j']],
+      parts:[
+        {q:'Durée du chemin critique ?', a:11, tol:0.1, pts:3, unit:'j', sol:'le plus long = 11 j'},
+        {q:'Marge sur la tâche B : 11 \u2212 9 ?', a:2, tol:0.1, pts:2, unit:'j', sol:'11 \u2212 9 = 2 j de marge'},
+        {q:'Si C passe de 5 à 7 j, nouvelle durée : 4 + 7 + 2 ?', a:13, tol:0.1, pts:3, unit:'j', sol:'A\u2192C\u2192D = 4 + 7 + 2 = 13 j (> 9)'}
+      ] },
+    { anim:'jalons', tag:'Exercice 3 · 8 pts', title:'Jalons &amp; avancement',
+      ctx:'Le projet est planifié sur 25 jours. Un jalon « mi-parcours » est prévu à la moitié du travail. Au jour 15, on a réalisé 12 jours de travail.',
+      data:[['Durée prévue','25 j'],['Travail réalisé','12 j'],['Jour courant','15']],
+      parts:[
+        {q:'Avancement réel : 12 / 25 \u00d7 100 ? (%)', a:48, tol:0.5, pts:3, unit:'%', sol:'12 / 25 \u00d7 100 = 48 %'},
+        {q:'Jalon mi-parcours = 50 % de 25 jours ? (en jours)', a:12.5, tol:0.1, pts:2, unit:'j', sol:'0,5 \u00d7 25 = 12,5 j'},
+        {q:'A-t-on dépassé la moitié du travail ? (1 = oui, 0 = non)', a:0, tol:0.1, pts:3, unit:'', sol:'48 % < 50 % \u2192 non \u2192 0'}
+      ] }
+  ];
+  var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
+
+  var student={nom:'',classe:''};
+  function show(id){ ['screen-home','screen-exam','screen-result','screen-prof'].forEach(function(s){document.getElementById(s).hidden=(s!==id);}); window.scrollTo(0,0); }
+  function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
+
+  document.getElementById('startBtn').addEventListener('click',function(){
+    var nom=document.getElementById('inNom').value.trim();
+    var cls=document.getElementById('inClasse').value.trim();
+    var code=document.getElementById('inCode').value.trim();
+    var err=document.getElementById('homeErr');
+    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+    err.textContent=''; student.nom=nom; student.classe=cls;
+    buildExam(); show('screen-exam'); startAnim();
+  });
+  document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
+
+  function buildExam(){
+    var col=document.getElementById('exoCol'); var html='';
+    EXOS.forEach(function(ex,ei){
+      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+      ex.parts.forEach(function(p,pi){
+        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
+      });
+      html+='</div>';
+    });
+    col.innerHTML=html;
+    col.addEventListener('input',updateProgress);
+    updateProgress();
+  }
+  function readAll(){
+    var vals={};
+    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
+    return vals;
+  }
+  function updateProgress(){
+    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+  }
+
+  var warned=false;
+  document.getElementById('submitBtn').addEventListener('click',function(){
+    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+    var err=document.getElementById('examErr');
+    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+    err.textContent=''; grade(vals);
+  });
+
+  function grade(vals){
+    var pts=0, recapHtml='';
+    EXOS.forEach(function(ex,ei){
+      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+      ex.parts.forEach(function(p,pi){
+        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+      });
+      recapHtml+='</div>';
+    });
+    var pct=Math.round(pts/MAXPTS*100);
+    var note=Math.round(pts/MAXPTS*20*10)/10;
+    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
+    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+    document.getElementById('rankPill').textContent=rank;
+    document.getElementById('recap').innerHTML=recapHtml;
+    show('screen-result'); animateScore(note); sendResult(pts,pct,note);
+  }
+  function animateScore(note){
+    var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
+    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
+  }
+  function sendResult(pts,pct,note){
+    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+  }
+
+  // ===== Calculatrice =====
+  (function(){
+    var expr='', justEval=false;
+    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+    function evaluate(){
+      try{
+        var s=expr, i=0;
+        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+        function factor(){
+          if(s[i]==='-'){ i++; return -factor(); }
+          if(s[i]==='+'){ i++; return factor(); }
+          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+          return number();
+        }
+        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+        var res=expr2();
+        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+        var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
+      }catch(e){ resEl.textContent='Erreur'; return null; }
+    }
+    function press(k){
+      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+      expr+=k; disp();
+    }
+    document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
+  })();
+
+  // ===== Animations =====
+  var phase=0, animTimer=null;
+  function startAnim(){ if(animTimer)return; animTimer=setInterval(function(){ phase+=0.05; drawAll(); },50); }
+  function drawAll(){ drawGantt(); drawCritical(); drawJalons(); }
+  function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{x:c.getContext('2d'),W:c.width,H:c.height}:null; }
+  function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+
+  function drawGantt(){
+    var o=ctxOf('cv_gantt'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var x0=58,x1=W-24,maxD=13;
+    function xF(d){return x0+d/maxD*(x1-x0);}
+    var rows=[{n:'A',s:0,e:4,c:'#2E6A8E'},{n:'B',s:4,e:7,c:'#3D7E5F'},{n:'C',s:4,e:9,c:'#B85C2E'},{n:'D',s:9,e:11,c:'#8A5A7A'}];
+    var ys=[40,78,116,154], bh=24, seg=phase%9;
+    g.font='9px "JetBrains Mono",monospace';
+    for(var d=0;d<=maxD;d++){var x=xF(d);g.strokeStyle='rgba(42,38,34,.10)';g.lineWidth=1;g.beginPath();g.moveTo(x,28);g.lineTo(x,184);g.stroke();if(d%2===0){g.fillStyle='#5C544B';g.textAlign='center';g.fillText(d+'j',x,200);}}
+    rows.forEach(function(r,i){
+      var y=ys[i];
+      g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='right';g.fillText(r.n,x0-8,y+bh/2+4);
+      g.fillStyle='rgba(42,38,34,.06)';rrect(g,xF(r.s),y,xF(r.e)-xF(r.s),bh,6);g.fill();
+      var appear=(i===0)?0.3:(i<3)?2.2:4.2, prog=Math.max(0,Math.min(1,(seg-appear)/1.6));
+      if(prog>0){g.fillStyle=r.c;rrect(g,xF(r.s),y,(xF(r.e)-xF(r.s))*prog,bh,6);g.fill();
+        if(prog>0.55){g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText((r.e-r.s)+'j',(xF(r.s)+xF(r.e))/2,y+bh/2+4);}}
+    });
+    if(seg>=6.4){g.strokeStyle='#B85C2E';g.lineWidth=2;g.setLineDash([4,3]);g.beginPath();g.moveTo(xF(11),28);g.lineTo(xF(11),184);g.stroke();g.setLineDash([]);
+      g.fillStyle='#a44a26';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('Durée projet = 11 j',xF(11)-152,42);}
+    g.textAlign='left';
+  }
+
+  function drawCritical(){
+    var o=ctxOf('cv_critical'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var A={x:74,y:112}, B={x:312,y:62}, C={x:312,y:162}, D={x:566,y:112}, seg=phase%9;
+    function edge(P,Q,col,wd,dur,dy){g.strokeStyle=col;g.lineWidth=wd;g.beginPath();g.moveTo(P.x,P.y);g.lineTo(Q.x,Q.y);g.stroke();g.fillStyle=col;g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(dur,(P.x+Q.x)/2,(P.y+Q.y)/2+dy);}
+    function node(P,lab){g.fillStyle='#FFFDF8';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(P.x,P.y,22,0,7);g.fill();g.stroke();g.fillStyle='#2A2622';g.font='800 16px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(lab,P.x,P.y+6);}
+    edge(A,B,'#d3cbbf',3,'3 j',-7);edge(B,D,'#d3cbbf',3,'2 j',-7);edge(A,C,'#d3cbbf',3,'5 j',17);edge(C,D,'#d3cbbf',3,'2 j',17);
+    if(seg>=2.3){edge(A,C,'#B85C2E',6,'5 j',17);edge(C,D,'#B85C2E',6,'2 j',17);g.fillStyle='#a44a26';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('chemin critique = 11 j',W/2,22);}
+    if(seg>=4.3){edge(A,B,'#2E6A8E',4,'3 j',-7);edge(B,D,'#2E6A8E',4,'2 j',-7);g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('A\u2192B\u2192D = 9 j',B.x,40);}
+    if(seg>=6.3){g.fillStyle='#2c6147';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('marge sur B = 11 \u2212 9 = 2 j',W/2,206);}
+    node(A,'A');node(B,'B');node(C,'C');node(D,'D');
+    g.textAlign='left';
+  }
+
+  function drawJalons(){
+    var o=ctxOf('cv_jalons'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+    var x0=64,x1=W-40,maxD=25,yBar=92,bh=22, seg=phase%9;
+    function xF(d){return x0+d/maxD*(x1-x0);}
+    g.fillStyle='rgba(42,38,34,.07)';rrect(g,x0,yBar,xF(25)-x0,bh,7);g.fill();
+    g.fillStyle='#5C544B';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('PRÉVU : 25 j',x0,yBar-9);
+    var prog=Math.max(0,Math.min(1,seg/4)), done=12*prog;
+    g.fillStyle='#3D7E5F';rrect(g,x0,yBar,xF(done)-x0,bh,7);g.fill();
+    if(prog>0.35){g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(Math.round(done)+' j réalisés',(x0+xF(done))/2,yBar+15);}
+    var yLine=yBar+bh+22;
+    g.strokeStyle='#5C544B';g.lineWidth=1.5;g.beginPath();g.moveTo(x0,yLine);g.lineTo(x1,yLine);g.stroke();
+    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';
+    for(var d=0;d<=25;d+=5){var x=xF(d);g.beginPath();g.moveTo(x,yLine-4);g.lineTo(x,yLine+4);g.stroke();g.fillText(d+'j',x,yLine+16);}
+    if(seg>=2){var xj=xF(12.5);g.strokeStyle='#8A5A7A';g.lineWidth=2;g.setLineDash([3,3]);g.beginPath();g.moveTo(xj,48);g.lineTo(xj,yLine);g.stroke();g.setLineDash([]);
+      g.fillStyle='#8A5A7A';g.beginPath();g.moveTo(xj,38);g.lineTo(xj+8,47);g.lineTo(xj,56);g.lineTo(xj-8,47);g.closePath();g.fill();
+      g.fillStyle='#7a4f6a';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('jalon mi-parcours 12,5 j',xj,32);}
+    if(seg>=5){var xt=xF(15);g.strokeStyle='#B85C2E';g.lineWidth=2;g.beginPath();g.moveTo(xt,yBar-3);g.lineTo(xt,yLine+8);g.stroke();
+      g.fillStyle='#a44a26';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('jour 15',xt,yLine+30);}
+    if(seg>=6.5){g.fillStyle='#a44a26';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('48 % < 50 % \u2192 en retard sur le jalon',W/2,206);}
+    g.textAlign='left';
+  }
+
+  // ===== Prof =====
+  function backHome(){ show('screen-home'); }
+  document.getElementById('profBack').addEventListener('click',backHome);
+  document.getElementById('profBack2').addEventListener('click',backHome);
+  document.getElementById('profBtn').addEventListener('click',function(){
+    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
+    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+  });
+  document.getElementById('profRefresh').addEventListener('click',loadResults);
+  function loadResults(){
+    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+      rows.forEach(function(r){
+        var d=r.date?new Date(r.date):null;
+        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+      });
+      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+      box.innerHTML=html;
+    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+  }
+</script>
+</body>
+</html>
