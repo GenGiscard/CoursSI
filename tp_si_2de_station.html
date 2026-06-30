@@ -127,6 +127,7 @@
 .estic-bar .estic-txt span{font-size:10px;opacity:.72}
 .estic-bar .estic-copy{margin-left:auto;font-size:9.5px;opacity:.6;text-align:right}
 @media(max-width:880px){.estic-bar .estic-copy{display:none}}
+  .bigbtn.amb{color:#9a6f15}
 </style>
 </head>
 <body>
@@ -135,7 +136,7 @@
   <aside class="nav" id="nav">
     <a class="back" href="hub_si_2de_station.html">← Séquence : station</a>
     <div class="brand">
-      <div class="mark">🌡</div>
+      <div class="mark">📟</div>
       <div><h1>Mesurer et réagir</h1><p>TP · Option SI</p></div>
       <button class="menu-btn" id="menuBtn">Défis</button>
     </div>
@@ -149,9 +150,9 @@
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Quelle grandeur ?</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Grandeur ↔ capteur</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Chaîne d'acquisition</span><b class="bd" id="bd3">0</b></a>
-      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Lis les données</span><b class="bd" id="bd4">0</b></a>
-      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Déclencher l'alerte ?</span><b class="bd" id="bd5">0</b></a>
-      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Terme ↔ définition</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle action ?</span><b class="bd" id="bd4">0</b></a>
+      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Dépasse le seuil ?</span><b class="bd" id="bd5">0</b></a>
+      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a>
     </div>
   </aside>
 
@@ -160,7 +161,7 @@
       <span class="kicker">TP · 6 défis</span>
       <h2>Mesurer et réagir</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux pour maîtriser une station de mesure : reconnaître les grandeurs, choisir les capteurs, ordonner la chaîne d'acquisition, lire les données et réagir aux seuils. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Six défis-jeux autour d'une station de mesure : reconnaître les grandeurs, ordonner la chaîne d'acquisition, comparer aux seuils et déclencher la bonne action. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -173,10 +174,10 @@
     <section id="d1">
       <span class="tag">🌡 Défi 1<span class="pts-badge">/ 160 pts</span></span>
       <h2>Quelle grandeur ?</h2>
-      <p class="lede">Pour chaque situation, dis quelle <b>grandeur physique</b> est mesurée : température, humidité ou lumière. 35 secondes.</p>
+      <p class="lede">Pour chaque indice (capteur, valeur, situation), dis quelle <b>grandeur</b> est concernée : température, humidité ou lumière. 40 secondes.</p>
       <div class="game">
         <div class="arc-head">
-          <span class="timepill">⏱ <b id="d1time">35</b> s</span>
+          <span class="timepill">⏱ <b id="d1time">40</b> s</span>
           <span class="timepill">Score : <b id="d1score">0</b></span>
           <button class="btn" id="d1start">Démarrer</button>
         </div>
@@ -184,7 +185,7 @@
         <div class="three">
           <button class="bigbtn cop" id="d1t" disabled>TEMPÉRATURE<br><span style="font-size:10px;font-weight:500">°C</span></button>
           <button class="bigbtn stl" id="d1h" disabled>HUMIDITÉ<br><span style="font-size:10px;font-weight:500">%</span></button>
-          <button class="bigbtn grn" id="d1l" disabled>LUMIÈRE<br><span style="font-size:10px;font-weight:500">lux</span></button>
+          <button class="bigbtn amb" id="d1l" disabled>LUMIÈRE<br><span style="font-size:10px;font-weight:500">lux</span></button>
         </div>
         <div class="streak" id="d1streak"></div>
         <div class="msg" id="d1msg"></div>
@@ -194,20 +195,20 @@
     <section id="d2">
       <span class="tag">🔗 Défi 2<span class="pts-badge">/ 130 pts</span></span>
       <h2>Grandeur ↔ capteur</h2>
-      <p class="lede">Relie chaque grandeur (ou unité) à ce qui lui correspond. Clique à gauche, puis à droite.</p>
+      <p class="lede">Relie chaque élément à sa définition. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
         <div class="match">
-          <div class="mcol"><div class="h">Grandeur / unité</div><div id="d2left"></div></div>
-          <div class="mcol"><div class="h">Correspondance</div><div id="d2right"></div></div>
+          <div class="mcol"><div class="h">Élément</div><div id="d2left"></div></div>
+          <div class="mcol"><div class="h">Définition / capteur</div><div id="d2right"></div></div>
         </div>
         <div class="msg" id="d2msg"></div>
       </div>
     </section>
 
     <section id="d3">
-      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 120 pts</span></span>
       <h2>Ordonne la chaîne d'acquisition</h2>
-      <p class="lede">Remets dans l'ordre les étapes qui mènent de la grandeur physique à l'affichage.</p>
+      <p class="lede">Remets dans l'ordre les maillons de la chaîne d'acquisition, de la grandeur jusqu'à l'écran. Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
         <div class="slots" id="d3slots"></div>
         <div class="hint" style="margin-bottom:8px">À placer :</div>
@@ -218,11 +219,11 @@
     </section>
 
     <section id="d4">
-      <span class="tag">📈 Défi 4<span class="pts-badge">/ 150 pts</span></span>
-      <h2>Lis les données</h2>
-      <p class="lede">Observe chaque lecture de la station et choisis la bonne interprétation. (4 manches)</p>
+      <span class="tag">🚦 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <h2>Quelle action ?</h2>
+      <p class="lede">Pour chaque mesure comparée à son seuil, choisis l'<b>action</b> que la station doit déclencher.</p>
       <div class="game">
-        <div class="roundpill" id="d4round">Lecture 1 / 4</div>
+        <div class="roundpill" id="d4round">Scénario 1 / 4</div>
         <div class="specbox" id="d4spec"></div>
         <div class="opts three" id="d4opts"></div>
         <div class="msg" id="d4msg"></div>
@@ -230,9 +231,9 @@
     </section>
 
     <section id="d5">
-      <span class="tag">🚨 Défi 5<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Déclencher l'alerte ?</h2>
-      <p class="lede">Compare la valeur au seuil. S'il est dépassé, déclenche l'alerte ; sinon, tout va bien. 35 secondes.</p>
+      <span class="tag">📏 Défi 5<span class="pts-badge">/ 130 pts</span></span>
+      <h2>Dépasse le seuil ?</h2>
+      <p class="lede">Compare la valeur mesurée au seuil : la station doit-elle réagir ? 35 secondes.</p>
       <div class="game">
         <div class="arc-head">
           <span class="timepill">⏱ <b id="d5time">35</b> s</span>
@@ -241,8 +242,8 @@
         </div>
         <div class="qbox" id="d5q">Appuie sur Démarrer.</div>
         <div class="two">
-          <button class="bigbtn no" id="d5al" disabled>🚨 ALERTE</button>
-          <button class="bigbtn ok" id="d5ok" disabled>✓ TOUT VA BIEN</button>
+          <button class="bigbtn cop" id="d5over" disabled>DÉPASSE LE SEUIL</button>
+          <button class="bigbtn grn" id="d5norm" disabled>DANS LA NORME</button>
         </div>
         <div class="streak" id="d5streak"></div>
         <div class="msg" id="d5msg"></div>
@@ -250,14 +251,21 @@
     </section>
 
     <section id="d6">
-      <span class="tag">🧠 Défi 6<span class="pts-badge">/ 130 pts</span></span>
-      <h2>Terme ↔ définition</h2>
-      <p class="lede">Relie chaque mot-clé à sa définition. Clique à gauche, puis à droite.</p>
+      <span class="tag">⚡ Défi 6<span class="pts-badge">/ 130 pts</span></span>
+      <h2>Vrai ou faux ?</h2>
+      <p class="lede">Réponds vite : l'affirmation sur la station est-elle vraie ou fausse ? 35 secondes.</p>
       <div class="game">
-        <div class="match">
-          <div class="mcol"><div class="h">Terme</div><div id="d6left"></div></div>
-          <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d6time">35</b> s</span>
+          <span class="timepill">Score : <b id="d6score">0</b></span>
+          <button class="btn" id="d6start">Démarrer</button>
         </div>
+        <div class="qbox" id="d6q">Appuie sur Démarrer.</div>
+        <div class="two">
+          <button class="bigbtn grn" id="d6v" disabled>VRAI</button>
+          <button class="bigbtn cop" id="d6f" disabled>FAUX</button>
+        </div>
+        <div class="streak" id="d6streak"></div>
         <div class="msg" id="d6msg"></div>
       </div>
     </section>
@@ -275,7 +283,7 @@
 
 <script>
   var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:160,d2:130,d3:130,d4:150,d5:120,d6:130}, TOTALMAX=820;
+  var MAXES={d1:160,d2:130,d3:120,d4:150,d5:130,d6:130}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -300,22 +308,22 @@
   // ===== D1 — quelle grandeur ? =====
   (function(){
     var ITEMS=[
-      {t:'il fait 23 °C dans la serre',k:'t'},{t:'mesurer la chaleur d\u2019un four',k:'t'},{t:'la pièce se réchauffe',k:'t'},{t:'relever la température de l\u2019eau',k:'t'},
-      {t:'l\u2019air contient 48 % d\u2019eau',k:'h'},{t:'le linge est-il sec ?',k:'h'},{t:'la cave est trop humide',k:'h'},{t:'mesurer le taux d\u2019humidité',k:'h'},
-      {t:'la pièce reçoit 320 lux',k:'l'},{t:'fait-il assez clair pour lire ?',k:'l'},{t:'allumer quand il fait sombre',k:'l'},{t:'mesurer l\u2019éclairement',k:'l'}
+      {t:'thermistance CTN',k:'tmp'},{t:'23,5 °C',k:'tmp'},{t:'il fait trop chaud',k:'tmp'},{t:'on mesure en °C',k:'tmp'},
+      {t:'hygromètre',k:'hum'},{t:'48 %',k:'hum'},{t:'l\u2019air est trop sec',k:'hum'},{t:'on mesure en %',k:'hum'},
+      {t:'photorésistance LDR',k:'lum'},{t:'320 lux',k:'lum'},{t:'la pièce est sombre',k:'lum'},{t:'on mesure en lux',k:'lum'}
     ];
-    var LAB={t:'TEMPÉRATURE',h:'HUMIDITÉ',l:'LUMIÈRE'};
+    var LAB={tmp:'TEMPÉRATURE',hum:'HUMIDITÉ',lum:'LUMIÈRE'};
     var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bT=el('d1t'),bH=el('d1h'),bL=el('d1l');
     var time,score,streak,timer,cur,running=false,pool;
     function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
     function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
     function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='35';msg.textContent='';stEl.textContent='';en(bT);en(bH);en(bL);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
+    function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';en(bT);en(bH);en(bL);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
     function stop(){running=false;clearInterval(timer);dis(bT);dis(bH);dis(bL);el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
     function answer(k){if(!running)return;if(k===cur.k){streak++;score+=12+Math.min(streak,5)*2;el('d1score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+LAB[cur.k];}next();}
-    bT.addEventListener('click',function(){answer('t');});
-    bH.addEventListener('click',function(){answer('h');});
-    bL.addEventListener('click',function(){answer('l');});
+    bT.addEventListener('click',function(){answer('tmp');});
+    bH.addEventListener('click',function(){answer('hum');});
+    bL.addEventListener('click',function(){answer('lum');});
     el('d1start').addEventListener('click',start);
   })();
 
@@ -323,10 +331,10 @@
   (function(){
     var PAIRS=[
       ['Température','thermistance (CTN)'],
-      ['Humidité de l\u2019air','hygromètre'],
+      ['Humidité','hygromètre'],
       ['Lumière','photorésistance (LDR)'],
-      ['Mesure en °C','la température'],
-      ['Mesure en lux','la lumière']
+      ['Seuil','valeur limite à ne pas dépasser'],
+      ['Alerte','réaction au dépassement']
     ];
     var left=el('d2left'),right=el('d2right'),msg=el('d2msg');
     var sel=null,done=0;
@@ -345,7 +353,7 @@
 
   // ===== D3 — builder chaîne d'acquisition =====
   (function(){
-    var STEPS=['Une grandeur physique','Le capteur la transforme en signal','La carte convertit en nombre','Le programme traite la valeur','L\u2019écran affiche la donnée'];
+    var STEPS=['La grandeur physique','Le capteur','La conversion en nombre','Le traitement (programme)','L\u2019affichage'];
     var slots=el('d3slots'),pool=el('d3pool'),msg=el('d3msg');
     var idx,wrong;
     function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
@@ -353,78 +361,82 @@
       pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
     pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
       if(i===idx){var sl=el('d3s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(45,130-wrong*15);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Chaîne reconstituée ! +'+Math.min(130,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
-      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
+        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*15);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Chaîne ordonnée ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas le prochain maillon.';}});
     el('d3reset').addEventListener('click',start);
     start();
   })();
 
-  // ===== D4 — lis les données (rounds MCQ) =====
+  // ===== D4 — quelle action ? (rounds MCQ) =====
   (function(){
     var ROUNDS=[
-      {disp:'À 14 h, la courbe est à son point le plus haut.',q:'Que se passe-t-il à 14 h ?',ans:'La température est maximale',opts:['La température est maximale','La température est minimale','Il n\u2019y a pas de mesure']},
-      {disp:'La courbe descend de 22 °C à 18 °C en 2 h.',q:'La température\u2026',ans:'baisse',opts:['monte','baisse','reste stable']},
-      {disp:'Tableau : 9 h \u2192 19 °C ; 12 h \u2192 24 °C.',q:'Entre 9 h et 12 h, la température a\u2026',ans:'augmenté de 5 °C',opts:['augmenté de 5 °C','baissé de 5 °C','pas changé']},
-      {disp:'La valeur reste à 21 °C toute la nuit.',q:'Pendant la nuit, la température est\u2026',ans:'stable',opts:['stable','en hausse','en chute']}
+      {part:'Température 28 °C \u00b7 seuil 25 °C',ans:'Allumer le ventilateur',opts:['Allumer le ventilateur','Allumer le chauffage','Ne rien faire']},
+      {part:'Humidité 30 % \u00b7 seuil mini 40 %',ans:'Humidifier l\u2019air',opts:['Humidifier l\u2019air','Ouvrir la fenêtre','Allumer la lumière']},
+      {part:'Lumière 80 lux \u00b7 seuil mini 200 lux',ans:'Allumer l\u2019éclairage',opts:['Allumer l\u2019éclairage','Fermer les volets','Couper le courant']},
+      {part:'Température 21 °C \u00b7 seuil 25 °C',ans:'Ne rien faire (dans la norme)',opts:['Ne rien faire (dans la norme)','Allumer le ventilateur','Déclencher l\u2019alarme']}
     ];
     var ri=0,locked=false,spec=el('d4spec'),opts=el('d4opts'),msg=el('d4msg');
-    function setRound(){locked=false;el('d4round').textContent='Lecture '+(ri+1)+' / 4';var r=ROUNDS[ri];
-      spec.innerHTML='<div class="gr">'+r.disp+'</div><div class="rowline"><span>'+r.q+'</span><b>?</b></div>';
+    function setRound(){locked=false;el('d4round').textContent='Scénario '+(ri+1)+' / 4';var r=ROUNDS[ri];
+      spec.innerHTML='<div class="gr">'+r.part+'</div><div class="rowline"><span>quelle action déclencher ?</span><b>?</b></div>';
       opts.innerHTML=shuffle(r.opts.slice()).map(function(o){return '<button class="opt" data-o="'+o+'">'+o+'</button>';}).join('');
       msg.textContent='';msg.className='msg';}
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var o=b.getAttribute('data-o'),r=ROUNDS[ri];locked=true;
       if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*150));msg.className='msg ok';
-        if(ri<3){msg.textContent='✓ Bonne lecture ! Suivante…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Données maîtrisées — défi complet ! +150 pts';}}
-      else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ Bonne réponse : '+r.ans+'. On rejoue la lecture.';setTimeout(setRound,1600);}});
+        if(ri<3){msg.textContent='✓ Bonne réaction ! Scénario suivant…';setTimeout(function(){ri++;setRound();},1000);}
+        else{msg.textContent='🏆 Station bien pilotée — défi complet ! +150 pts';}}
+      else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ La bonne action : '+r.ans+'. On rejoue le scénario.';setTimeout(setRound,1700);}});
     setRound();
   })();
 
-  // ===== D5 — déclencher l'alerte ? =====
+  // ===== D5 — dépasse le seuil ? (arcade numérique) =====
   (function(){
-    var ITEMS=[
-      {t:'T = 28 °C · seuil max 25 °C',k:'al'},{t:'T = 22 °C · seuil max 25 °C',k:'ok'},
-      {t:'Humidité 80 % · seuil max 70 %',k:'al'},{t:'Humidité 55 % · seuil max 70 %',k:'ok'},
-      {t:'Lumière 150 lux · seuil min 300 lux',k:'al'},{t:'Lumière 420 lux · seuil min 300 lux',k:'ok'},
-      {t:'T = 30 °C · seuil max 28 °C',k:'al'},{t:'T = 19 °C · seuil max 28 °C',k:'ok'},
-      {t:'Humidité 90 % · seuil max 85 %',k:'al'},{t:'Lumière 600 lux · seuil min 200 lux',k:'ok'}
-    ];
-    var LAB={al:'ALERTE',ok:'TOUT VA BIEN'};
-    var qEl=el('d5q'),msg=el('d5msg'),stEl=el('d5streak'),bA=el('d5al'),bO=el('d5ok');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent=cur.t;}
+    var CTX=[{g:'Température',u:'°C',lo:16,hi:30},{g:'Humidité',u:'%',lo:30,hi:70},{g:'Lumière',u:'lux',lo:120,hi:480}];
+    var qEl=el('d5q'),msg=el('d5msg'),stEl=el('d5streak'),bO=el('d5over'),bN=el('d5norm');
+    var time,score,streak,timer,cur,running=false;
+    function gen(){
+      var c=CTX[Math.floor(Math.random()*CTX.length)];
+      var span=c.hi-c.lo, seuil=c.lo+Math.round(Math.random()*span*0.7)+Math.round(span*0.1);
+      var step=Math.max(2,Math.round(span*0.12));
+      var d=(Math.floor(Math.random()*step)+1)*(Math.random()<0.5?1:-1);
+      var val=seuil+d; if(val===seuil)val=seuil+step;
+      cur={over:val>seuil};
+      qEl.textContent=c.g+' mesurée : '+val+' '+c.u+'   —   seuil : '+seuil+' '+c.u;
+    }
     function tick(){time--;el('d5time').textContent=time;if(time<=0)stop();}
     function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';en(bA);en(bO);el('d5start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bA);dis(bO);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(k){if(!running)return;if(k===cur.k){streak++;score+=11+Math.min(streak,5)*2;el('d5score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — il fallait : '+LAB[cur.k];}next();}
-    bA.addEventListener('click',function(){answer('al');});
-    bO.addEventListener('click',function(){answer('ok');});
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';en(bO);en(bN);el('d5start').disabled=true;gen();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);dis(bO);dis(bN);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function answer(over){if(!running)return;if(over===cur.over){streak++;score+=12+Math.min(streak,4)*2;el('d5score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}gen();}
+    bO.addEventListener('click',function(){answer(true);});
+    bN.addEventListener('click',function(){answer(false);});
     el('d5start').addEventListener('click',start);
   })();
 
-  // ===== D6 — matching terme / définition =====
+  // ===== D6 — vrai ou faux ? (arcade) =====
   (function(){
-    var PAIRS=[
-      ['Capteur','transforme une grandeur en signal'],
-      ['Grandeur','ce que l\u2019on mesure (température, lumière…)'],
-      ['Acquisition','la chaîne capteur → nombre → affichage'],
-      ['Seuil','la valeur limite à ne pas dépasser'],
-      ['Alerte','la réaction déclenchée au dépassement']
+    var ITEMS=[
+      {t:'Un capteur transforme une grandeur en signal.',v:true},
+      {t:'La LDR mesure la température.',v:false},
+      {t:'Le seuil est la valeur limite à ne pas dépasser.',v:true},
+      {t:'L\u2019hygromètre mesure la lumière.',v:false},
+      {t:'Une alerte se déclenche au dépassement du seuil.',v:true},
+      {t:'Un graphique montre l\u2019évolution dans le temps.',v:true},
+      {t:'La température se mesure en lux.',v:false},
+      {t:'Une station connectée peut envoyer ses données.',v:true},
+      {t:'Le capteur affiche un nombre sans aucune conversion.',v:false},
+      {t:'Plus il fait sombre, moins la LDR laisse passer de courant.',v:true}
     ];
-    var left=el('d6left'),right=el('d6right'),msg=el('d6msg');
-    var sel=null,done=0;
-    function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
-      left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
-      right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
-    function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
-      if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
-      if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*26);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +130 pts';}}
-      else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
-    left.addEventListener('click',click);right.addEventListener('click',click);
-    build();
+    var qEl=el('d6q'),msg=el('d6msg'),stEl=el('d6streak'),bV=el('d6v'),bF=el('d6f');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d6time').textContent=time;if(time<=0)stop();}
+    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d6score').textContent='0';el('d6time').textContent='35';msg.textContent='';stEl.textContent='';en(bV);en(bF);el('d6start').disabled=true;next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);dis(bV);dis(bF);el('d6start').disabled=false;el('d6start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d6',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d6score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
+    bV.addEventListener('click',function(){answer(true);});
+    bF.addEventListener('click',function(){answer(false);});
+    el('d6start').addEventListener('click',start);
   })();
 
   refresh();
