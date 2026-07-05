@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Station — TP « Mesurer et réagir » · Option SI Seconde</title>
+<title>Ingénieur ? — TP « Décortiquer un produit » · Option SI Seconde</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -127,8 +127,7 @@
 .estic-bar .estic-txt span{font-size:10px;opacity:.72}
 .estic-bar .estic-copy{margin-left:auto;font-size:9.5px;opacity:.6;text-align:right}
 @media(max-width:880px){.estic-bar .estic-copy{display:none}}
-  .bigbtn.amb{color:#9a6f15}
-  /* --- Jeux d'arcade (défis 7-8) --- */
+  /* --- Jeux d'arcade (défis 7-9) --- */
   .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
   .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
   .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
@@ -139,16 +138,18 @@
   .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;line-height:1.15;cursor:pointer;text-align:center;padding:4px;animation:molepop .14s ease}
   @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
   .hole.empty .mole{visibility:hidden}
+  .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
+  .snakeleg b{color:#8a6313}
 </style>
 </head>
 <body>
 <header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
 <div class="shell">
   <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_station.html">← Séquence : station</a>
+    <a class="back" href="hub_si_2de_ingenieur.html">← Séquence : ingénieur ?</a>
     <div class="brand">
-      <div class="mark">📟</div>
-      <div><h1>Mesurer et réagir</h1><p>TP · Option SI</p></div>
+      <div class="mark">🔧</div>
+      <div><h1>Décortiquer un produit</h1><p>TP · Option SI</p></div>
       <button class="menu-btn" id="menuBtn">Défis</button>
     </div>
     <div class="scorebox">
@@ -158,23 +159,24 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
-      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Quelle grandeur ?</span><b class="bd" id="bd1">0</b></a>
-      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Grandeur ↔ capteur</span><b class="bd" id="bd2">0</b></a>
-      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Chaîne d'acquisition</span><b class="bd" id="bd3">0</b></a>
-      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle action ?</span><b class="bd" id="bd4">0</b></a>
-      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Dépasse le seuil ?</span><b class="bd" id="bd5">0</b></a>
-      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, solution ?</span><b class="bd" id="bd1">0</b></a>
+      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Fonction ↔ solution</span><b class="bd" id="bd2">0</b></a>
+      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Quelle contrainte ?</span><b class="bd" id="bd3">0</b></a>
+      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Décortiquer la trottinette</span><b class="bd" id="bd4">0</b></a>
+      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ordonne la démarche</span><b class="bd" id="bd5">0</b></a>
+      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Le bon métier</span><b class="bd" id="bd6">0</b></a>
       <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
       <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
+      <a href="#d9" class="navlink"><span class="dn">9</span><span class="nm">Snake gourmand</span><b class="bd" id="bd9">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 8 défis</span>
-      <h2>Mesurer et réagir</h2>
+      <span class="kicker">TP · 9 défis</span>
+      <h2>Décortiquer un produit</h2>
       <div class="intro">
-        <p class="lede">Huit défis-jeux autour d'une station de mesure : reconnaître les grandeurs, ordonner la chaîne d'acquisition, comparer aux seuils et déclencher la bonne action. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Neuf défis-jeux pour penser comme un ingénieur : distinguer besoin, fonction et solution, repérer les contraintes, décortiquer un objet, ordonner la démarche. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -185,9 +187,9 @@
     </section>
 
     <section id="d1">
-      <span class="tag">🌡 Défi 1<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Quelle grandeur ?</h2>
-      <p class="lede">Pour chaque indice (capteur, valeur, situation), dis quelle <b>grandeur</b> est concernée : température, humidité ou lumière. 40 secondes.</p>
+      <span class="tag">🎯 Défi 1<span class="pts-badge">/ 120 pts</span></span>
+      <h2>Besoin, fonction ou solution ?</h2>
+      <p class="lede">Pour chaque phrase, dis s'il s'agit d'un <b>besoin</b> (le pourquoi), d'une <b>fonction</b> (le quoi) ou d'une <b>solution technique</b> (le comment). 40 secondes.</p>
       <div class="game">
         <div class="arc-head">
           <span class="timepill">⏱ <b id="d1time">40</b> s</span>
@@ -196,9 +198,9 @@
         </div>
         <div class="qbox" id="d1q">Appuie sur Démarrer.</div>
         <div class="three">
-          <button class="bigbtn cop" id="d1t" disabled>TEMPÉRATURE<br><span style="font-size:10px;font-weight:500">°C</span></button>
-          <button class="bigbtn stl" id="d1h" disabled>HUMIDITÉ<br><span style="font-size:10px;font-weight:500">%</span></button>
-          <button class="bigbtn amb" id="d1l" disabled>LUMIÈRE<br><span style="font-size:10px;font-weight:500">lux</span></button>
+          <button class="bigbtn stl" id="d1b" disabled>BESOIN<br><span style="font-size:10px;font-weight:500">le pourquoi</span></button>
+          <button class="bigbtn grn" id="d1f" disabled>FONCTION<br><span style="font-size:10px;font-weight:500">le quoi</span></button>
+          <button class="bigbtn cop" id="d1s" disabled>SOLUTION<br><span style="font-size:10px;font-weight:500">le comment</span></button>
         </div>
         <div class="streak" id="d1streak"></div>
         <div class="msg" id="d1msg"></div>
@@ -207,36 +209,44 @@
 
     <section id="d2">
       <span class="tag">🔗 Défi 2<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Grandeur ↔ capteur</h2>
-      <p class="lede">Relie chaque élément à sa définition. Clique à gauche, puis sa correspondance à droite.</p>
+      <h2>Fonction ↔ solution</h2>
+      <p class="lede">Relie chaque fonction à une solution technique qui la réalise. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
         <div class="match">
-          <div class="mcol"><div class="h">Élément</div><div id="d2left"></div></div>
-          <div class="mcol"><div class="h">Définition / capteur</div><div id="d2right"></div></div>
+          <div class="mcol"><div class="h">Fonction</div><div id="d2left"></div></div>
+          <div class="mcol"><div class="h">Solution technique</div><div id="d2right"></div></div>
         </div>
         <div class="msg" id="d2msg"></div>
       </div>
     </section>
 
     <section id="d3">
-      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Ordonne la chaîne d'acquisition</h2>
-      <p class="lede">Remets dans l'ordre les maillons de la chaîne d'acquisition, de la grandeur jusqu'à l'écran. Clique les étiquettes dans le bon ordre.</p>
+      <span class="tag">⚖️ Défi 3<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Quelle contrainte ?</h2>
+      <p class="lede">Chaque exigence est une contrainte. Dis si elle concerne la <b>sécurité</b>, l'<b>environnement</b> ou le <b>coût</b>. 35 secondes.</p>
       <div class="game">
-        <div class="slots" id="d3slots"></div>
-        <div class="hint" style="margin-bottom:8px">À placer :</div>
-        <div class="pool" id="d3pool"></div>
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d3time">35</b> s</span>
+          <span class="timepill">Score : <b id="d3score">0</b></span>
+          <button class="btn" id="d3start">Démarrer</button>
+        </div>
+        <div class="qbox" id="d3q">Appuie sur Démarrer.</div>
+        <div class="three">
+          <button class="bigbtn cop" id="d3s" disabled>SÉCURITÉ</button>
+          <button class="bigbtn grn" id="d3e" disabled>ENVIRONNEMENT</button>
+          <button class="bigbtn stl" id="d3c" disabled>COÛT</button>
+        </div>
+        <div class="streak" id="d3streak"></div>
         <div class="msg" id="d3msg"></div>
-        <div style="margin-top:12px"><button class="btn alt" id="d3reset">Recommencer</button></div>
       </div>
     </section>
 
     <section id="d4">
-      <span class="tag">🚦 Défi 4<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Quelle action ?</h2>
-      <p class="lede">Pour chaque mesure comparée à son seuil, choisis l'<b>action</b> que la station doit déclencher.</p>
+      <span class="tag">🛴 Défi 4<span class="pts-badge">/ 110 pts</span></span>
+      <h2>Décortiquer la trottinette</h2>
+      <p class="lede">Pour chaque pièce de la trottinette électrique, choisis la <b>fonction</b> qu'elle assure.</p>
       <div class="game">
-        <div class="roundpill" id="d4round">Scénario 1 / 4</div>
+        <div class="roundpill" id="d4round">Pièce 1 / 4</div>
         <div class="specbox" id="d4spec"></div>
         <div class="opts three" id="d4opts"></div>
         <div class="msg" id="d4msg"></div>
@@ -244,47 +254,33 @@
     </section>
 
     <section id="d5">
-      <span class="tag">📏 Défi 5<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Dépasse le seuil ?</h2>
-      <p class="lede">Compare la valeur mesurée au seuil : la station doit-elle réagir ? 35 secondes.</p>
+      <span class="tag">🧩 Défi 5<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Ordonne la démarche</h2>
+      <p class="lede">Remets dans l'ordre les cinq temps de la démarche de l'ingénieur. Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d5time">35</b> s</span>
-          <span class="timepill">Score : <b id="d5score">0</b></span>
-          <button class="btn" id="d5start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d5q">Appuie sur Démarrer.</div>
-        <div class="two">
-          <button class="bigbtn cop" id="d5over" disabled>DÉPASSE LE SEUIL</button>
-          <button class="bigbtn grn" id="d5norm" disabled>DANS LA NORME</button>
-        </div>
-        <div class="streak" id="d5streak"></div>
+        <div class="slots" id="d5slots"></div>
+        <div class="hint" style="margin-bottom:8px">À placer :</div>
+        <div class="pool" id="d5pool"></div>
         <div class="msg" id="d5msg"></div>
+        <div style="margin-top:12px"><button class="btn alt" id="d5reset">Recommencer</button></div>
       </div>
     </section>
 
     <section id="d6">
-      <span class="tag">⚡ Défi 6<span class="pts-badge">/ 110 pts</span></span>
-      <h2>Vrai ou faux ?</h2>
-      <p class="lede">Réponds vite : l'affirmation sur la station est-elle vraie ou fausse ? 35 secondes.</p>
+      <span class="tag">🧑‍🔧 Défi 6<span class="pts-badge">/ 100 pts</span></span>
+      <h2>Le bon métier</h2>
+      <p class="lede">Relie chaque réalisation au domaine d'ingénierie correspondant. Clique à gauche, puis à droite.</p>
       <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d6time">35</b> s</span>
-          <span class="timepill">Score : <b id="d6score">0</b></span>
-          <button class="btn" id="d6start">Démarrer</button>
+        <div class="match">
+          <div class="mcol"><div class="h">Réalisation</div><div id="d6left"></div></div>
+          <div class="mcol"><div class="h">Domaine</div><div id="d6right"></div></div>
         </div>
-        <div class="qbox" id="d6q">Appuie sur Démarrer.</div>
-        <div class="two">
-          <button class="bigbtn grn" id="d6v" disabled>VRAI</button>
-          <button class="bigbtn cop" id="d6f" disabled>FAUX</button>
-        </div>
-        <div class="streak" id="d6streak"></div>
         <div class="msg" id="d6msg"></div>
       </div>
     </section>
 
     <section id="d7">
-      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 70 pts</span></span>
       <h2>Runner à portes</h2>
       <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre (← → ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
       <div class="game">
@@ -299,9 +295,9 @@
     </section>
 
     <section id="d8">
-      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 70 pts</span></span>
       <h2>Tape-taupe</h2>
-      <p class="lede">Tape <b>seulement</b> les éléments qui correspondent à la fonction demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
+      <p class="lede">Tape <b>seulement</b> les étiquettes qui collent à la consigne (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
       <div class="game">
         <div class="arc-head">
           <span class="timepill">⏱ <b id="d8time">40</b> s</span>
@@ -312,6 +308,24 @@
         <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
         <div class="molegrid" id="d8grid"></div>
         <div class="msg" id="d8msg"></div>
+      </div>
+    </section>
+
+    <section id="d9">
+      <span class="tag">🐍 Défi 9<span class="pts-badge">/ 70 pts</span></span>
+      <h2>Snake gourmand</h2>
+      <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d9start">Démarrer</button></div>
+        <canvas id="d9cv" width="440" height="330" class="gamecanvas"></canvas>
+        <div class="snakeleg" id="d9leg"></div>
+        <div class="pad"><button class="padbtn" id="d9up">▲</button></div>
+        <div class="pad">
+          <button class="padbtn" id="d9left">◀</button>
+          <button class="padbtn" id="d9down">▼</button>
+          <button class="padbtn" id="d9right">▶</button>
+        </div>
+        <div class="msg" id="d9msg"></div>
       </div>
     </section>
 
@@ -327,8 +341,8 @@
 </div>
 
 <script>
-  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
-  var MAXES={d1:120,d2:100,d3:90,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8','d9'];
+  var MAXES={d1:120,d2:100,d3:90,d4:110,d5:90,d6:100,d7:70,d8:70,d9:70}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -350,36 +364,36 @@
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(el(id));});
 
-  // ===== D1 — quelle grandeur ? =====
+  // ===== D1 — besoin / fonction / solution =====
   (function(){
     var ITEMS=[
-      {t:'thermistance CTN',k:'tmp'},{t:'23,5 °C',k:'tmp'},{t:'il fait trop chaud',k:'tmp'},{t:'on mesure en °C',k:'tmp'},
-      {t:'hygromètre',k:'hum'},{t:'48 %',k:'hum'},{t:'l\u2019air est trop sec',k:'hum'},{t:'on mesure en %',k:'hum'},
-      {t:'photorésistance LDR',k:'lum'},{t:'320 lux',k:'lum'},{t:'la pièce est sombre',k:'lum'},{t:'on mesure en lux',k:'lum'}
+      {t:'se déplacer en ville',k:'bes'},{t:'se nourrir sainement',k:'bes'},{t:'communiquer à distance',k:'bes'},{t:'se protéger du froid',k:'bes'},{t:'se laver les mains',k:'bes'},
+      {t:'freiner',k:'fon'},{t:'éclairer la route',k:'fon'},{t:'mesurer la vitesse',k:'fon'},{t:'chauffer l\u2019eau',k:'fon'},{t:'maintenir au froid',k:'fon'},
+      {t:'un frein à disque',k:'sol'},{t:'une ampoule LED',k:'sol'},{t:'un capteur de vitesse',k:'sol'},{t:'une résistance chauffante',k:'sol'},{t:'un compresseur',k:'sol'}
     ];
-    var LAB={tmp:'TEMPÉRATURE',hum:'HUMIDITÉ',lum:'LUMIÈRE'};
-    var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bT=el('d1t'),bH=el('d1h'),bL=el('d1l');
+    var LAB={bes:'BESOIN',fon:'FONCTION',sol:'SOLUTION'};
+    var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bB=el('d1b'),bF=el('d1f'),bS=el('d1s');
     var time,score,streak,timer,cur,running=false,pool;
     function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
     function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
     function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';en(bT);en(bH);en(bL);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bT);dis(bH);dis(bL);el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';en(bB);en(bF);en(bS);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);dis(bB);dis(bF);dis(bS);el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
     function answer(k){if(!running)return;if(k===cur.k){streak++;score+=12+Math.min(streak,5)*2;el('d1score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+LAB[cur.k];}next();}
-    bT.addEventListener('click',function(){answer('tmp');});
-    bH.addEventListener('click',function(){answer('hum');});
-    bL.addEventListener('click',function(){answer('lum');});
+    bB.addEventListener('click',function(){answer('bes');});
+    bF.addEventListener('click',function(){answer('fon');});
+    bS.addEventListener('click',function(){answer('sol');});
     el('d1start').addEventListener('click',start);
   })();
 
-  // ===== D2 — matching grandeur / capteur =====
+  // ===== D2 — matching fonction / solution =====
   (function(){
     var PAIRS=[
-      ['Température','thermistance (CTN)'],
-      ['Humidité','hygromètre'],
-      ['Lumière','photorésistance (LDR)'],
-      ['Seuil','valeur limite à ne pas dépasser'],
-      ['Alerte','réaction au dépassement']
+      ['Freiner','frein à disque'],
+      ['Éclairer','ampoule LED'],
+      ['Stocker l\u2019énergie','batterie'],
+      ['Mesurer la température','capteur thermique'],
+      ['Mettre en mouvement','moteur électrique']
     ];
     var left=el('d2left'),right=el('d2right'),msg=el('d2msg');
     var sel=null,done=0;
@@ -396,92 +410,87 @@
     build();
   })();
 
-  // ===== D3 — builder chaîne d'acquisition =====
+  // ===== D3 — quelle contrainte ? =====
   (function(){
-    var STEPS=['La grandeur physique','Le capteur','La conversion en nombre','Le traitement (programme)','L\u2019affichage'];
-    var slots=el('d3slots'),pool=el('d3pool'),msg=el('d3msg');
-    var idx,wrong;
-    function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
-      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d3s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
-      pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
-    pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
-      if(i===idx){var sl=el('d3s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Chaîne ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
-      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas le prochain maillon.';}});
-    el('d3reset').addEventListener('click',start);
-    start();
+    var ITEMS=[
+      {t:'ne pas blesser l\u2019utilisateur',k:'sec'},{t:'résister aux chocs',k:'sec'},{t:'ne pas surchauffer',k:'sec'},{t:'avoir des bords arrondis',k:'sec'},
+      {t:'être recyclable',k:'env'},{t:'consommer peu d\u2019énergie',k:'env'},{t:'utiliser des matériaux durables',k:'env'},{t:'limiter les déchets',k:'env'},
+      {t:'rester abordable',k:'cou'},{t:'utiliser peu de matière',k:'cou'},{t:'être simple à fabriquer',k:'cou'},{t:'respecter le budget',k:'cou'}
+    ];
+    var LAB={sec:'SÉCURITÉ',env:'ENVIRONNEMENT',cou:'COÛT'};
+    var qEl=el('d3q'),msg=el('d3msg'),stEl=el('d3streak'),bS=el('d3s'),bE=el('d3e'),bC=el('d3c');
+    var time,score,streak,timer,cur,running=false,pool;
+    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+    function tick(){time--;el('d3time').textContent=time;if(time<=0)stop();}
+    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
+    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';en(bS);en(bE);en(bC);el('d3start').disabled=true;next();timer=setInterval(tick,1000);}
+    function stop(){running=false;clearInterval(timer);dis(bS);dis(bE);dis(bC);el('d3start').disabled=false;el('d3start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d3',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+    function answer(k){if(!running)return;if(k===cur.k){streak++;score+=12+Math.min(streak,4)*2;el('d3score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+LAB[cur.k];}next();}
+    bS.addEventListener('click',function(){answer('sec');});
+    bE.addEventListener('click',function(){answer('env');});
+    bC.addEventListener('click',function(){answer('cou');});
+    el('d3start').addEventListener('click',start);
   })();
 
-  // ===== D4 — quelle action ? (rounds MCQ) =====
+  // ===== D4 — décortiquer la trottinette (rounds MCQ) =====
   (function(){
     var ROUNDS=[
-      {part:'Température 28 °C \u00b7 seuil 25 °C',ans:'Allumer le ventilateur',opts:['Allumer le ventilateur','Allumer le chauffage','Ne rien faire']},
-      {part:'Humidité 30 % \u00b7 seuil mini 40 %',ans:'Humidifier l\u2019air',opts:['Humidifier l\u2019air','Ouvrir la fenêtre','Allumer la lumière']},
-      {part:'Lumière 80 lux \u00b7 seuil mini 200 lux',ans:'Allumer l\u2019éclairage',opts:['Allumer l\u2019éclairage','Fermer les volets','Couper le courant']},
-      {part:'Température 21 °C \u00b7 seuil 25 °C',ans:'Ne rien faire (dans la norme)',opts:['Ne rien faire (dans la norme)','Allumer le ventilateur','Déclencher l\u2019alarme']}
+      {part:'la batterie',ans:'Alimenter en énergie',opts:['Alimenter en énergie','Diriger','Freiner']},
+      {part:'le moteur',ans:'Mettre en mouvement',opts:['Éclairer','Mettre en mouvement','Stocker l\u2019énergie']},
+      {part:'le frein',ans:'Ralentir et arrêter',opts:['Ralentir et arrêter','Alimenter','Mesurer']},
+      {part:'le guidon',ans:'Diriger',opts:['Protéger','Diriger','Recharger']}
     ];
     var ri=0,locked=false,spec=el('d4spec'),opts=el('d4opts'),msg=el('d4msg');
-    function setRound(){locked=false;el('d4round').textContent='Scénario '+(ri+1)+' / 4';var r=ROUNDS[ri];
-      spec.innerHTML='<div class="gr">'+r.part+'</div><div class="rowline"><span>quelle action déclencher ?</span><b>?</b></div>';
+    function setRound(){locked=false;el('d4round').textContent='Pièce '+(ri+1)+' / 4';var r=ROUNDS[ri];
+      spec.innerHTML='<div class="gr">'+r.part+'</div><div class="rowline"><span>quelle fonction assure-t-elle ?</span><b>?</b></div>';
       opts.innerHTML=shuffle(r.opts.slice()).map(function(o){return '<button class="opt" data-o="'+o+'">'+o+'</button>';}).join('');
       msg.textContent='';msg.className='msg';}
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var o=b.getAttribute('data-o'),r=ROUNDS[ri];locked=true;
-      if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
-        if(ri<3){msg.textContent='✓ Bonne réaction ! Scénario suivant…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Station bien pilotée — défi complet ! +120 pts';}}
-      else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ La bonne action : '+r.ans+'. On rejoue le scénario.';setTimeout(setRound,1700);}});
+      if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*110));msg.className='msg ok';
+        if(ri<3){msg.textContent='✓ Bonne fonction ! Pièce suivante…';setTimeout(function(){ri++;setRound();},1000);}
+        else{msg.textContent='🏆 Trottinette décortiquée — défi complet ! +110 pts';}}
+      else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ La bonne fonction : '+r.ans+'. On rejoue la pièce.';setTimeout(setRound,1600);}});
     setRound();
   })();
 
-  // ===== D5 — dépasse le seuil ? (arcade numérique) =====
+  // ===== D5 — builder démarche =====
   (function(){
-    var CTX=[{g:'Température',u:'°C',lo:16,hi:30},{g:'Humidité',u:'%',lo:30,hi:70},{g:'Lumière',u:'lux',lo:120,hi:480}];
-    var qEl=el('d5q'),msg=el('d5msg'),stEl=el('d5streak'),bO=el('d5over'),bN=el('d5norm');
-    var time,score,streak,timer,cur,running=false;
-    function gen(){
-      var c=CTX[Math.floor(Math.random()*CTX.length)];
-      var span=c.hi-c.lo, seuil=c.lo+Math.round(Math.random()*span*0.7)+Math.round(span*0.1);
-      var step=Math.max(2,Math.round(span*0.12));
-      var d=(Math.floor(Math.random()*step)+1)*(Math.random()<0.5?1:-1);
-      var val=seuil+d; if(val===seuil)val=seuil+step;
-      cur={over:val>seuil};
-      qEl.textContent=c.g+' mesurée : '+val+' '+c.u+'   —   seuil : '+seuil+' '+c.u;
-    }
-    function tick(){time--;el('d5time').textContent=time;if(time<=0)stop();}
-    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';en(bO);en(bN);el('d5start').disabled=true;gen();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bO);dis(bN);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(over){if(!running)return;if(over===cur.over){streak++;score+=12+Math.min(streak,4)*2;el('d5score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}gen();}
-    bO.addEventListener('click',function(){answer(true);});
-    bN.addEventListener('click',function(){answer(false);});
-    el('d5start').addEventListener('click',start);
+    var STEPS=['Analyser le besoin','Imaginer des solutions','Réaliser un prototype','Tester et mesurer','Communiquer les résultats'];
+    var slots=el('d5slots'),pool=el('d5pool'),msg=el('d5msg');
+    var idx,wrong;
+    function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
+      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d5s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+      pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
+    pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
+      if(i===idx){var sl=el('d5s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d5',sc);msg.className='msg ok';msg.textContent='✓ Démarche ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
+    el('d5reset').addEventListener('click',start);
+    start();
   })();
 
-  // ===== D6 — vrai ou faux ? (arcade) =====
+  // ===== D6 — matching métier =====
   (function(){
-    var ITEMS=[
-      {t:'Un capteur transforme une grandeur en signal.',v:true},
-      {t:'La LDR mesure la température.',v:false},
-      {t:'Le seuil est la valeur limite à ne pas dépasser.',v:true},
-      {t:'L\u2019hygromètre mesure la lumière.',v:false},
-      {t:'Une alerte se déclenche au dépassement du seuil.',v:true},
-      {t:'Un graphique montre l\u2019évolution dans le temps.',v:true},
-      {t:'La température se mesure en lux.',v:false},
-      {t:'Une station connectée peut envoyer ses données.',v:true},
-      {t:'Le capteur affiche un nombre sans aucune conversion.',v:false},
-      {t:'Plus il fait sombre, moins la LDR laisse passer de courant.',v:true}
+    var PAIRS=[
+      ['Une éolienne','ingénieur·e énergie'],
+      ['Une application mobile','ingénieur·e informatique'],
+      ['Une prothèse de jambe','ingénieur·e biomédical'],
+      ['Un pont','ingénieur·e génie civil'],
+      ['Un robot industriel','ingénieur·e mécanique']
     ];
-    var qEl=el('d6q'),msg=el('d6msg'),stEl=el('d6streak'),bV=el('d6v'),bF=el('d6f');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
-    function tick(){time--;el('d6time').textContent=time;if(time<=0)stop();}
-    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d6score').textContent='0';el('d6time').textContent='35';msg.textContent='';stEl.textContent='';en(bV);en(bF);el('d6start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bV);dis(bF);el('d6start').disabled=false;el('d6start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d6',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d6score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
-    bV.addEventListener('click',function(){answer(true);});
-    bF.addEventListener('click',function(){answer(false);});
-    el('d6start').addEventListener('click',start);
+    var left=el('d6left'),right=el('d6right'),msg=el('d6msg');
+    var sel=null,done=0;
+    function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
+      left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+      right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
+    function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
+      if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
+      if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*20);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +100 pts';}}
+      else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
+    left.addEventListener('click',click);right.addEventListener('click',click);
+    build();
   })();
 
   // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
@@ -491,18 +500,20 @@
     function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
     function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
     var QBANK=[
-      {q:'Un capteur sert à\u2026',ok:'mesurer une grandeur',no:'produire de l\u2019énergie'},
-      {q:'La température se mesure en\u2026',ok:'degrés Celsius',no:'mètres'},
-      {q:'Un thermomètre mesure\u2026',ok:'la température',no:'la vitesse'},
-      {q:'1re étape de la chaîne d\u2019info :',ok:'acquérir',no:'communiquer'},
-      {q:'Un capteur de lumière mesure\u2026',ok:'la luminosité',no:'le poids'},
-      {q:'Une grandeur physique, c\u2019est\u2026',ok:'une mesure du réel',no:'un logiciel'},
-      {q:'L\u2019humidité se mesure en\u2026',ok:'pourcentage (%)',no:'volts'},
-      {q:'Après acquérir, on\u2026',ok:'traite l\u2019information',no:'jette la donnée'},
-      {q:'Un capteur transforme une grandeur en\u2026',ok:'signal électrique',no:'chaleur'},
-      {q:'La pression se mesure en\u2026',ok:'hectopascals',no:'secondes'},
-      {q:'La station « surveille » en\u2026',ok:'mesurant en continu',no:'devinant'},
-      {q:'Communiquer l\u2019info, c\u2019est\u2026',ok:'l\u2019afficher ou l\u2019envoyer',no:'l\u2019effacer'}
+      {q:'Un besoin, c\u2019est\u2026',ok:'un problème à résoudre',no:'une solution technique'},
+      {q:'« éclairer la route » est\u2026',ok:'une fonction',no:'une contrainte'},
+      {q:'« coûter < 30 € » est\u2026',ok:'une contrainte',no:'une fonction'},
+      {q:'1re étape de la démarche :',ok:'analyser le besoin',no:'fabriquer d\u2019abord'},
+      {q:'Le cahier des charges liste\u2026',ok:'fonctions & contraintes',no:'les clients'},
+      {q:'Un ingénieur part d\u2019\u2026',ok:'un besoin réel',no:'une techno à la mode'},
+      {q:'« peser < 500 g » est\u2026',ok:'une contrainte',no:'une fonction'},
+      {q:'Après réaliser, on\u2026',ok:'teste & améliore',no:'oublie le projet'},
+      {q:'« alerter si chute » est\u2026',ok:'une fonction',no:'un besoin'},
+      {q:'Un prototype sert à\u2026',ok:'tester l\u2019idée',no:'décorer l\u2019objet'},
+      {q:'« résister à la pluie » est\u2026',ok:'une contrainte',no:'une fonction'},
+      {q:'Le besoin exprime\u2026',ok:'un manque à combler',no:'une solution toute faite'},
+      {q:'Innover, c\u2019est\u2026',ok:'répondre à un besoin utile',no:'copier sans changer'},
+      {q:'« filtrer l\u2019eau » est\u2026',ok:'une fonction',no:'une contrainte'}
     ];
     var TARGET=12;
     var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
@@ -521,8 +532,8 @@
       g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
       g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
     }
-    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
-    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function commit(){setContrib('d7',Math.min(70,Math.round(correct/TARGET*70)));}
+    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(70,Math.round(correct/TARGET*70));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
     function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
       if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
       draw();}
@@ -537,24 +548,85 @@
   // ===== D8 — tape-taupe (3 vies, ralenti) =====
   (function(){
     var ITEMS=[
-      {t:'un capteur de température',cat:'acq'},{t:'un capteur de lumière',cat:'acq'},{t:'un bouton poussoir',cat:'acq'},{t:'un thermomètre',cat:'acq'},{t:'un détecteur de présence',cat:'acq'},
-      {t:'un microcontrôleur',cat:'trait'},{t:'une carte Arduino',cat:'trait'},{t:'un programme',cat:'trait'},{t:'calculer une moyenne',cat:'trait'},{t:'comparer à un seuil',cat:'trait'},
-      {t:'un écran',cat:'comm'},{t:'une LED d\u2019alerte',cat:'comm'},{t:'un haut-parleur',cat:'comm'},{t:'envoyer un SMS',cat:'comm'},{t:'un afficheur',cat:'comm'}
+      {t:'se repérer dans le noir',cat:'besoin'},{t:'porter de lourdes charges',cat:'besoin'},{t:'arroser sans gaspiller',cat:'besoin'},{t:'surveiller un bébé',cat:'besoin'},{t:'se déplacer sans se fatiguer',cat:'besoin'},
+      {t:'mesurer une distance',cat:'fonction'},{t:'avertir par un son',cat:'fonction'},{t:'stocker de l\u2019énergie',cat:'fonction'},{t:'afficher l\u2019heure',cat:'fonction'},{t:'ouvrir tout seul',cat:'fonction'},
+      {t:'tenir dans la poche',cat:'contrainte'},{t:'supporter la chaleur',cat:'contrainte'},{t:'durer 2 ans',cat:'contrainte'},{t:'coûter < 50 €',cat:'contrainte'},{t:'flotter sur l\u2019eau',cat:'contrainte'}
     ];
-    var CATS={acq:'ce qui ACQUIERT',trait:'ce qui TRAITE',comm:'ce qui COMMUNIQUE'};
+    var CATS={besoin:'BESOINS',fonction:'FONCTIONS',contrainte:'CONTRAINTES'};
     var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
-    var HOLES=6, cells=[], target='acq', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+    var HOLES=6, cells=[], target='besoin', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
     function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
     function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
-    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
+    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape les '+CATS[target]+' !';}
     function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
     function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
-    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(70,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
     function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
     function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
-    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(70,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
     startBtn.addEventListener('click',start);
     build();setConsigne();lifeEl.textContent=hearts();
+  })();
+
+  // ===== D9 — snake gourmand (14 questions) =====
+  (function(){
+    var cv=el('d9cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    var COLS=14, ROWS=12, CS=Math.floor(Math.min(W/COLS,(H-52)/ROWS));
+    var ox=Math.floor((W-CS*COLS)/2), oy=28;
+    var QBANK=[
+      {q:'le PROTOTYPE',ok:'1re version à tester',bad:['le prix de vente','le nom du client']},
+      {q:'le BESOIN',ok:'le point de départ du projet',bad:['une pièce métallique','un logiciel']},
+      {q:'une FONCTION',ok:'à quoi l\u2019objet sert',bad:['la couleur choisie','le nom du client']},
+      {q:'une CONTRAINTE',ok:'une limite à respecter',bad:['une idée nouvelle','un croquis']},
+      {q:'ITÉRER',ok:'améliorer en recommençant',bad:['jeter le projet','vendre vite']},
+      {q:'le CAHIER DES CHARGES',ok:'la liste des exigences',bad:['la facture','la publicité']},
+      {q:'INNOVER',ok:'apporter du nouveau utile',bad:['copier à l\u2019identique','monter le prix']},
+      {q:'ANALYSER LE BESOIN',ok:'la 1re étape du projet',bad:['la dernière étape','une étape de fabrication']},
+      {q:'le CROQUIS',ok:'un dessin rapide de l\u2019idée',bad:['un test final','un budget']},
+      {q:'le BRAINSTORMING',ok:'chercher plein d\u2019idées',bad:['choisir le prix','fabriquer l\u2019objet']},
+      {q:'une SOLUTION',ok:'une réponse technique',bad:['un problème','une limite']},
+      {q:'TESTER',ok:'vérifier que ça marche',bad:['oublier l\u2019objet','le repeindre']},
+      {q:'un CRITÈRE',ok:'ce qui mesure la réussite',bad:['un client','une couleur']},
+      {q:'la DÉMARCHE DE PROJET',ok:'imaginer, réaliser, tester',bad:['acheter et revendre','peindre et vernir']}
+    ];
+    var snake, dir, ndir, foods, cur, lives, sc, running, done, loop, msg=el('d9msg'), leg=el('d9leg'), startBtn=el('d9start');
+    function onSnake(p){return snake.some(function(s){return s.x===p.x&&s.y===p.y;});}
+    function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
+    function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
+    function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
+      g.strokeStyle='rgba(42,38,34,.10)';g.lineWidth=1;g.strokeRect(ox+.5,oy+.5,CS*COLS,CS*ROWS);
+      g.fillStyle='#8a6313';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('🐍 Snake gourmand',W/2,18);
+      if(foods)foods.forEach(function(f){var x=ox+f.x*CS,y=oy+f.y*CS;g.fillStyle='#BD8A2A';rr(g,x+2,y+2,CS-4,CS-4,6);g.fill();g.fillStyle='#fff';g.font='700 '+Math.floor(CS*0.62)+'px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(f.n),x+CS/2,y+CS*0.72);});
+      if(snake)snake.forEach(function(s,i){g.fillStyle=i===0?'#B85C2E':'#3D7E5F';rr(g,ox+s.x*CS+1,oy+s.y*CS+1,CS-2,CS-2,5);g.fill();});
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,ox,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+sc,ox+CS*COLS,H-8);g.textAlign='left';
+    }
+    function resetSnake(){var cx=Math.floor(COLS/2),cy=Math.floor(ROWS/2);snake=[{x:cx,y:cy},{x:cx-1,y:cy},{x:cx-2,y:cy}];dir={x:1,y:0};ndir={x:1,y:0};}
+    function loseLife(){lives--;if(lives<=0){finish();return;}resetSnake();newQuestion();msg.className='msg no';msg.textContent='Perdu une vie ! Il te reste '+lives+' \u2764';draw();}
+    function commit(){setContrib('d9',Math.min(70,sc));}
+    function finish(){running=false;done=true;if(loop)clearInterval(loop);var pts=Math.min(70,sc);setContrib('d9',pts);msg.className='msg ok';msg.textContent='🐍 Fini — score : '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';draw();}
+    function step(){if(!running)return;dir=ndir;var nx=snake[0].x+dir.x, ny=snake[0].y+dir.y;
+      if(nx<0||ny<0||nx>=COLS||ny>=ROWS){loseLife();return;}
+      if(snake.some(function(s){return s.x===nx&&s.y===ny;})){loseLife();return;}
+      var head={x:nx,y:ny}; var f=foods.filter(function(z){return z.x===nx&&z.y===ny;})[0];
+      if(f){if(f.ok){sc+=20;commit();snake.unshift(head);newQuestion();msg.className='msg ok';msg.textContent='✓ Bonne réponse ! +20';}else{loseLife();return;}}
+      else{snake.unshift(head);snake.pop();}
+      draw();}
+    function turn(x,y){if(!running)return;if(dir.x===-x&&dir.y===-y)return;ndir={x:x,y:y};}
+    function start(){if(running)return;lives=3;sc=0;done=false;msg.textContent='';resetSnake();newQuestion();running=true;startBtn.disabled=true;loop=setInterval(step,150);}
+    startBtn.addEventListener('click',start);
+    el('d9up').addEventListener('click',function(){turn(0,-1);});
+    el('d9down').addEventListener('click',function(){turn(0,1);});
+    el('d9left').addEventListener('click',function(){turn(-1,0);});
+    el('d9right').addEventListener('click',function(){turn(1,0);});
+    document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
+    lives=3;sc=0;resetSnake();newQuestion();draw();
   })();
 
   refresh();

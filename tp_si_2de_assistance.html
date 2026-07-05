@@ -128,6 +128,17 @@
 .estic-bar .estic-copy{margin-left:auto;font-size:9.5px;opacity:.6;text-align:right}
 @media(max-width:880px){.estic-bar .estic-copy{display:none}}
   .bigbtn.amb{color:#9a6f15}
+  /* --- Jeux d'arcade (défis 7-8) --- */
+  .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
+  .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
+  .padbtn:active{background:#2A2622;color:#FFFDF8}
+  .consigne{text-align:center;font-weight:800;font-size:15px;margin:6px auto;padding:9px;border-radius:10px;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);color:#8a6313;max-width:460px}
+  .molegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;margin:10px auto}
+  .hole{aspect-ratio:1/1;border-radius:12px;background:rgba(42,38,34,.06);border:2px dashed rgba(42,38,34,.18);display:flex;align-items:center;justify-content:center;padding:5px}
+  .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;line-height:1.15;cursor:pointer;text-align:center;padding:4px;animation:molepop .14s ease}
+  @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
+  .hole.empty .mole{visibility:hidden}
 </style>
 </head>
 <body>
@@ -153,15 +164,17 @@
       <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle solution choisir ?</span><b class="bd" id="bd4">0</b></a>
       <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Confort ou sécurité ?</span><b class="bd" id="bd5">0</b></a>
       <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
+      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 6 défis</span>
+      <span class="kicker">TP · 8 défis</span>
       <h2>Concevoir un automatisme</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux sur les systèmes d'assistance : reconnaître ordre/traitement/action, associer déclencheur et système, ordonner la boucle de commande, choisir la bonne solution. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Huit défis-jeux sur les systèmes d'assistance : reconnaître ordre/traitement/action, associer déclencheur et système, ordonner la boucle de commande, choisir la bonne solution. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -172,7 +185,7 @@
     </section>
 
     <section id="d1">
-      <span class="tag">🔘 Défi 1<span class="pts-badge">/ 160 pts</span></span>
+      <span class="tag">🔘 Défi 1<span class="pts-badge">/ 120 pts</span></span>
       <h2>Ordre, traitement ou action ?</h2>
       <p class="lede">Pour chaque situation, dis à quelle étape de la boucle de commande elle correspond. 40 secondes.</p>
       <div class="game">
@@ -193,7 +206,7 @@
     </section>
 
     <section id="d2">
-      <span class="tag">🔗 Défi 2<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🔗 Défi 2<span class="pts-badge">/ 100 pts</span></span>
       <h2>Déclencheur ↔ système</h2>
       <p class="lede">Relie chaque déclencheur au système domotique qu'il actionne. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
@@ -206,7 +219,7 @@
     </section>
 
     <section id="d3">
-      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 90 pts</span></span>
       <h2>Ordonne la boucle de commande</h2>
       <p class="lede">Remets dans l'ordre les quatre étapes de la boucle de commande. Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
@@ -219,7 +232,7 @@
     </section>
 
     <section id="d4">
-      <span class="tag">🤝 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <span class="tag">🤝 Défi 4<span class="pts-badge">/ 120 pts</span></span>
       <h2>Quelle solution choisir ?</h2>
       <p class="lede">Pour chaque situation, choisis la meilleure solution d'assistance.</p>
       <div class="game">
@@ -231,7 +244,7 @@
     </section>
 
     <section id="d5">
-      <span class="tag">🛎️ Défi 5<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🛎️ Défi 5<span class="pts-badge">/ 100 pts</span></span>
       <h2>Confort ou sécurité ?</h2>
       <p class="lede">Ce système d'assistance répond-il d'abord à un besoin de confort, ou de sécurité ? 35 secondes.</p>
       <div class="game">
@@ -251,7 +264,7 @@
     </section>
 
     <section id="d6">
-      <span class="tag">⚡ Défi 6<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">⚡ Défi 6<span class="pts-badge">/ 110 pts</span></span>
       <h2>Vrai ou faux ?</h2>
       <p class="lede">Réponds vite : l'affirmation sur les automatismes est-elle vraie ou fausse ? 35 secondes.</p>
       <div class="game">
@@ -270,6 +283,38 @@
       </div>
     </section>
 
+    <section id="d7">
+      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Runner à portes</h2>
+      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre (← → ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
+        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
+        <div class="pad">
+          <button class="padbtn" id="d7left">◀ Gauche</button>
+          <button class="padbtn" id="d7right">Droite ▶</button>
+        </div>
+        <div class="msg" id="d7msg"></div>
+      </div>
+    </section>
+
+    <section id="d8">
+      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Tape-taupe</h2>
+      <p class="lede">Tape <b>seulement</b> les éléments qui correspondent au rôle demandé (il change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d8time">40</b> s</span>
+          <span class="timepill">Vies : <b id="d8life">❤❤❤</b></span>
+          <span class="timepill">Score : <b id="d8score">0</b></span>
+          <button class="btn" id="d8start">Démarrer</button>
+        </div>
+        <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
+        <div class="molegrid" id="d8grid"></div>
+        <div class="msg" id="d8msg"></div>
+      </div>
+    </section>
+
     <section id="fin" style="border-bottom:none">
       <div class="final">
         <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
@@ -282,8 +327,8 @@
 </div>
 
 <script>
-  var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:160,d2:130,d3:120,d4:150,d5:130,d6:130}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var MAXES={d1:120,d2:100,d3:90,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -344,8 +389,8 @@
     function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
       if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
       if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d2',done*26);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +130 pts';}}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d2',done*20);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +100 pts';}}
       else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
     left.addEventListener('click',click);right.addEventListener('click',click);
     build();
@@ -361,7 +406,7 @@
       pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
     pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
       if(i===idx){var sl=el('d3s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*15);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Boucle ordonnée ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Boucle ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
       else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
     el('d3reset').addEventListener('click',start);
     start();
@@ -381,9 +426,9 @@
       opts.innerHTML=shuffle(r.opts.slice()).map(function(o){return '<button class="opt" data-o="'+o+'">'+o+'</button>';}).join('');
       msg.textContent='';msg.className='msg';}
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var o=b.getAttribute('data-o'),r=ROUNDS[ri];locked=true;
-      if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*150));msg.className='msg ok';
+      if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
         if(ri<3){msg.textContent='✓ Bon choix ! Situation suivante…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Solutions bien choisies — défi complet ! +150 pts';}}
+        else{msg.textContent='🏆 Solutions bien choisies — défi complet ! +120 pts';}}
       else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ Le meilleur choix : '+r.ans+'. On rejoue la situation.';setTimeout(setRound,1700);}});
     setRound();
   })();
@@ -440,6 +485,79 @@
     bV.addEventListener('click',function(){answer(true);});
     bF.addEventListener('click',function(){answer(false);});
     el('d6start').addEventListener('click',start);
+  })();
+
+  // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
+  (function(){
+    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+    var QBANK=[
+      {q:'Un capteur donne au système\u2026',ok:'une information',no:'de la force'},
+      {q:'Un actionneur sert à\u2026',ok:'agir sur le monde',no:'mesurer'},
+      {q:'Un détecteur de mouvement est un\u2026',ok:'capteur',no:'actionneur'},
+      {q:'Un moteur qui ouvre un portail est un\u2026',ok:'actionneur',no:'capteur'},
+      {q:'Un système automatique fonctionne\u2026',ok:'sans intervention humaine',no:'seulement à la main'},
+      {q:'La domotique automatise\u2026',ok:'la maison',no:'la voiture'},
+      {q:'Une consigne, c\u2019est\u2026',ok:'la valeur souhaitée',no:'une panne'},
+      {q:'1re action d\u2019une boucle de commande :',ok:'comparer à la consigne',no:'tout éteindre'},
+      {q:'Un thermostat compare la température à\u2026',ok:'la consigne',no:'l\u2019heure'},
+      {q:'Rendre un lieu accessible, c\u2019est\u2026',ok:'faciliter l\u2019usage pour tous',no:'le rendre plus cher'},
+      {q:'Une porte automatique s\u2019ouvre avec un\u2026',ok:'capteur de présence',no:'interrupteur manuel'},
+      {q:'Le « traitement » sert à\u2026',ok:'décider quoi faire',no:'éclairer la pièce'}
+    ];
+    var TARGET=12;
+    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+    }
+    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+      draw();}
+    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+    startBtn.addEventListener('click',start);
+    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+    newQ();draw();
+  })();
+
+  // ===== D8 — tape-taupe (3 vies, ralenti) =====
+  (function(){
+    var ITEMS=[
+      {t:'un détecteur de présence',cat:'capt'},{t:'un capteur de température',cat:'capt'},{t:'un bouton poussoir',cat:'capt'},{t:'un capteur de lumière',cat:'capt'},{t:'un interrupteur',cat:'capt'},
+      {t:'un moteur',cat:'act'},{t:'une LED',cat:'act'},{t:'un vérin',cat:'act'},{t:'une sonnette',cat:'act'},{t:'un radiateur',cat:'act'},
+      {t:'un microcontrôleur',cat:'trait'},{t:'une carte programmable',cat:'trait'},{t:'un programme',cat:'trait'},{t:'une condition si\u2026alors',cat:'trait'},{t:'comparer à un seuil',cat:'trait'}
+    ];
+    var CATS={capt:'les CAPTEURS',act:'les ACTIONNEURS',trait:'le TRAITEMENT'};
+    var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
+    var HOLES=6, cells=[], target='capt', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
+    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
+    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    startBtn.addEventListener('click',start);
+    build();setConsigne();lifeEl.textContent=hearts();
   })();
 
   refresh();
