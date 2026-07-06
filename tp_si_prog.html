@@ -132,6 +132,19 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* --- Jeux d'arcade (défis 7-8) --- */
+  .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
+  .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
+  .padbtn:active{background:#2A2622;color:#FFFDF8}
+  .consigne{text-align:center;font-weight:800;font-size:15px;margin:6px auto;padding:9px;border-radius:10px;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);color:#8a6313;max-width:460px}
+  .molegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;margin:10px auto}
+  .hole{aspect-ratio:1/1;border-radius:12px;background:rgba(42,38,34,.06);border:2px dashed rgba(42,38,34,.18);display:flex;align-items:center;justify-content:center;padding:5px}
+  .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;line-height:1.15;cursor:pointer;text-align:center;padding:4px;animation:molepop .14s ease}
+  @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
+  .hole.empty .mole{visibility:hidden}
+  .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
+  .snakeleg b{color:#8a6313}
 </style>
 </head>
 <body>
@@ -157,15 +170,17 @@
       <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Déroule le programme</span><b class="bd" id="bd4">0</b></a>
       <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">L'automate à états</span><b class="bd" id="bd5">0</b></a>
       <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Instruction ↔ rôle</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
+      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Snake gourmand</span><b class="bd" id="bd8">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 6 défis</span>
+      <span class="kicker">TP · 8 défis</span>
       <h2>Algorithmes &amp; états</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux pour maîtriser la programmation en agissant : ordonner un algorithme, évaluer des conditions contre la montre, dérouler une boucle, piloter un automate à états. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Huit défis-jeux pour maîtriser la programmation en agissant : ordonner un algorithme, évaluer des conditions contre la montre, dérouler une boucle, piloter un automate à états. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -176,7 +191,7 @@
     </section>
 
     <section id="d1">
-      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 90 pts</span></span>
       <h2>Trace l'algorithme</h2>
       <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de l'algorithme « ventilateur intelligent ». Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
@@ -189,7 +204,7 @@
     </section>
 
     <section id="d2">
-      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 160 pts</span></span>
+      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 120 pts</span></span>
       <h2>Vrai ou faux ?</h2>
       <p class="lede">Évalue un maximum de <b>conditions booléennes</b> en 40 secondes. Une série enchaînée rapporte un bonus.</p>
       <div class="game">
@@ -209,7 +224,7 @@
     </section>
 
     <section id="d3">
-      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 100 pts</span></span>
       <h2>Quel type ?</h2>
       <p class="lede">Pour chaque valeur affichée, choisis son <b>type</b> en un éclair : entier, flottant, booléen ou chaîne. 35 secondes.</p>
       <div class="game">
@@ -231,7 +246,7 @@
     </section>
 
     <section id="d4">
-      <span class="tag">🔁 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <span class="tag">🔁 Défi 4<span class="pts-badge">/ 120 pts</span></span>
       <h2>Déroule le programme</h2>
       <p class="lede">Lis le programme, déroule la boucle dans ta tête, et trouve la <b>valeur finale</b> de la variable.</p>
       <div class="game">
@@ -244,7 +259,7 @@
     </section>
 
     <section id="d5">
-      <span class="tag">🚦 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <span class="tag">🚦 Défi 5<span class="pts-badge">/ 100 pts</span></span>
       <h2>L'automate à états</h2>
       <p class="lede">À partir de l'<b>état courant</b> et de l'<b>événement</b>, choisis le bon <b>état suivant</b>.</p>
       <div class="game">
@@ -261,7 +276,7 @@
     </section>
 
     <section id="d6">
-      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 110 pts</span></span>
       <h2>Instruction ↔ rôle</h2>
       <p class="lede">Relie chaque instruction (ou notion) à son rôle. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
@@ -270,6 +285,39 @@
           <div class="mcol"><div class="h">Rôle</div><div id="d6right"></div></div>
         </div>
         <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="d7">
+      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Runner à portes</h2>
+      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre (← → ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
+        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
+        <div class="pad">
+          <button class="padbtn" id="d7left">◀ Gauche</button>
+          <button class="padbtn" id="d7right">Droite ▶</button>
+        </div>
+        <div class="msg" id="d7msg"></div>
+      </div>
+    </section>
+
+    <section id="d8">
+      <span class="tag">🐍 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Snake gourmand</h2>
+      <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d8start">Démarrer</button></div>
+        <canvas id="d8cv" width="440" height="330" class="gamecanvas"></canvas>
+        <div class="snakeleg" id="d8leg"></div>
+        <div class="pad"><button class="padbtn" id="d8up">▲</button></div>
+        <div class="pad">
+          <button class="padbtn" id="d8left">◀</button>
+          <button class="padbtn" id="d8down">▼</button>
+          <button class="padbtn" id="d8right">▶</button>
+        </div>
+        <div class="msg" id="d8msg"></div>
       </div>
     </section>
 
@@ -285,8 +333,8 @@
 </div>
 
 <script>
-  var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:120,d2:160,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var MAXES={d1:90,d2:120,d3:100,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -321,7 +369,7 @@
       pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
     pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
       if(i===idx){var sl=el('d1s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*18);setContrib('d1',sc);msg.className='msg ok';msg.textContent='✓ Algorithme complet ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*14);setContrib('d1',sc);msg.className='msg ok';msg.textContent='✓ Algorithme complet ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
       else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
     el('d1reset').addEventListener('click',start);
     start();
@@ -383,9 +431,9 @@
       opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+v+'</button>';}).join('');
     }
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var v=parseInt(b.getAttribute('data-v'),10);
-      if(v===ROUNDS[ri].ans){locked=true;b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*150));msg.className='msg ok';
+      if(v===ROUNDS[ri].ans){locked=true;b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
         if(ri<3){msg.textContent='✓ Exact ! Manche suivante…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Les 4 programmes déroulés — défi complet ! +150 pts';}}
+        else{msg.textContent='🏆 Les 4 programmes déroulés — défi complet ! +120 pts';}}
       else{b.classList.add('no');msg.className='msg no';msg.textContent='Déroule encore : note la variable à chaque tour.';setTimeout(function(){b.classList.remove('no');},480);}});
     setRound();
   })();
@@ -406,9 +454,9 @@
       opts.innerHTML=shuffle(r.states.slice()).map(function(s){return '<button class="opt" data-s="'+s+'">'+s+'</button>';}).join('');
     }
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var s=b.getAttribute('data-s');
-      if(s===ROUNDS[ri].ans){locked=true;b.classList.add('ok');setContrib('d5',(ri+1)*35);msg.className='msg ok';
+      if(s===ROUNDS[ri].ans){locked=true;b.classList.add('ok');setContrib('d5',(ri+1)*25);msg.className='msg ok';
         if(ri<3){msg.textContent='✓ Bonne transition ! Manche suivante…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Les 4 transitions trouvées — défi complet ! +140 pts';}}
+        else{msg.textContent='🏆 Les 4 transitions trouvées — défi complet ! +100 pts';}}
       else{b.classList.add('no');msg.className='msg no';msg.textContent='Ce n\u2019est pas l\u2019état atteint par cette transition.';setTimeout(function(){b.classList.remove('no');},480);}});
     setRound();
   })();
@@ -430,11 +478,122 @@
     function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
       if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
       if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*24);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +120 pts';}}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*22);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +110 pts';}}
       else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
     left.addEventListener('click',click);right.addEventListener('click',click);
     build();
+  })();
+
+  // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
+  (function(){
+    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+    var QBANK=[
+      {q:'Une variable sert à\u2026',ok:'stocker une valeur',no:'éteindre l\u2019ordinateur'},
+      {q:'Une boucle sert à\u2026',ok:'répéter des instructions',no:'arrêter le programme'},
+      {q:'Une condition « si » teste\u2026',ok:'vrai ou faux',no:'la couleur de l\u2019écran'},
+      {q:'Un algorithme, c\u2019est\u2026',ok:'une suite d\u2019étapes',no:'un composant électronique'},
+      {q:'En Python, afficher se fait avec\u2026',ok:'print()',no:'paint()'},
+      {q:'« x = 5 » est une\u2026',ok:'affectation',no:'boucle infinie'},
+      {q:'Une fonction permet de\u2026',ok:'réutiliser du code',no:'casser le programme'},
+      {q:'Un bug, c\u2019est\u2026',ok:'une erreur dans le code',no:'une pièce mécanique'},
+      {q:'« for i in range(3) » répète\u2026',ok:'3 fois',no:'une seule fois'},
+      {q:'Les instructions s\u2019exécutent\u2026',ok:'dans l\u2019ordre',no:'au hasard'},
+      {q:'« if\u2026else » choisit entre\u2026',ok:'deux chemins',no:'deux couleurs'},
+      {q:'Une entrée (input) sert à\u2026',ok:'lire une donnée',no:'afficher un texte'}
+    ];
+    var TARGET=12;
+    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+    }
+    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+      draw();}
+    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+    startBtn.addEventListener('click',start);
+    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+    newQ();draw();
+  })();
+
+  // ===== D8 — snake gourmand (14 questions) =====
+  (function(){
+    var cv=el('d8cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    var COLS=14, ROWS=12, CS=Math.floor(Math.min(W/COLS,(H-52)/ROWS));
+    var ox=Math.floor((W-CS*COLS)/2), oy=28;
+    var QBANK=[
+      {q:'une VARIABLE',ok:'une case qui stocke une valeur',bad:['un composant','une teinte']},
+      {q:'une BOUCLE',ok:'répète des instructions',bad:['arrête le code','efface l\u2019écran']},
+      {q:'une CONDITION',ok:'un test vrai/faux',bad:['une répétition','une teinte']},
+      {q:'une FONCTION',ok:'un bloc de code réutilisable',bad:['un bug','un écran']},
+      {q:'un ALGORITHME',ok:'une méthode pas à pas',bad:['une panne','un câble']},
+      {q:'print()',ok:'affiche à l\u2019écran',bad:['lit le clavier','éteint le PC']},
+      {q:'input()',ok:'lit une donnée saisie',bad:['affiche un texte','crée une boucle']},
+      {q:'une AFFECTATION',ok:'donner une valeur à une variable',bad:['répéter une action','tester une condition']},
+      {q:'une BOUCLE FOR',ok:'répète un nombre connu de fois',bad:['répète tant que c\u2019est vrai','ne répète jamais']},
+      {q:'un OPÉRATEUR',ok:'un symbole de calcul',bad:['une variable','un écran']},
+      {q:'un BUG',ok:'une erreur dans le programme',bad:['une fonction utile','un composant']},
+      {q:'DÉBOGUER',ok:'corriger les erreurs',bad:['ajouter des bugs','éteindre l\u2019ordi']},
+      {q:'une INSTRUCTION',ok:'une action à exécuter',bad:['un défaut','une teinte']},
+      {q:'un COMMENTAIRE',ok:'une note ignorée par la machine',bad:['une erreur bloquante','une variable']}
+    ];
+    var snake, dir, ndir, foods, cur, lives, sc, running, done, loop, msg=el('d8msg'), leg=el('d8leg'), startBtn=el('d8start');
+    function onSnake(p){return snake.some(function(s){return s.x===p.x&&s.y===p.y;});}
+    function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
+    function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
+    function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
+      g.strokeStyle='rgba(42,38,34,.10)';g.lineWidth=1;g.strokeRect(ox+.5,oy+.5,CS*COLS,CS*ROWS);
+      g.fillStyle='#8a6313';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('🐍 Snake gourmand',W/2,18);
+      if(foods)foods.forEach(function(f){var x=ox+f.x*CS,y=oy+f.y*CS;g.fillStyle='#BD8A2A';rr(g,x+2,y+2,CS-4,CS-4,6);g.fill();g.fillStyle='#fff';g.font='700 '+Math.floor(CS*0.62)+'px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(f.n),x+CS/2,y+CS*0.72);});
+      if(snake)snake.forEach(function(s,i){g.fillStyle=i===0?'#B85C2E':'#3D7E5F';rr(g,ox+s.x*CS+1,oy+s.y*CS+1,CS-2,CS-2,5);g.fill();});
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,ox,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+sc,ox+CS*COLS,H-8);g.textAlign='left';
+    }
+    function resetSnake(){var cx=Math.floor(COLS/2),cy=Math.floor(ROWS/2);snake=[{x:cx,y:cy},{x:cx-1,y:cy},{x:cx-2,y:cy}];dir={x:1,y:0};ndir={x:1,y:0};}
+    function loseLife(){lives--;if(lives<=0){finish();return;}resetSnake();newQuestion();msg.className='msg no';msg.textContent='Perdu une vie ! Il te reste '+lives+' \u2764';draw();}
+    function commit(){setContrib('d8',Math.min(90,sc));}
+    function finish(){running=false;done=true;if(loop)clearInterval(loop);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg ok';msg.textContent='🐍 Fini — score : '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';draw();}
+    function step(){if(!running)return;dir=ndir;var nx=snake[0].x+dir.x, ny=snake[0].y+dir.y;
+      if(nx<0||ny<0||nx>=COLS||ny>=ROWS){loseLife();return;}
+      if(snake.some(function(s){return s.x===nx&&s.y===ny;})){loseLife();return;}
+      var head={x:nx,y:ny}; var f=foods.filter(function(z){return z.x===nx&&z.y===ny;})[0];
+      if(f){if(f.ok){sc+=20;commit();snake.unshift(head);newQuestion();msg.className='msg ok';msg.textContent='✓ Bonne réponse ! +20';}else{loseLife();return;}}
+      else{snake.unshift(head);snake.pop();}
+      draw();}
+    function turn(x,y){if(!running)return;if(dir.x===-x&&dir.y===-y)return;ndir={x:x,y:y};}
+    function start(){if(running)return;lives=3;sc=0;done=false;msg.textContent='';resetSnake();newQuestion();running=true;startBtn.disabled=true;loop=setInterval(step,150);}
+    startBtn.addEventListener('click',start);
+    el('d8up').addEventListener('click',function(){turn(0,-1);});
+    el('d8down').addEventListener('click',function(){turn(0,1);});
+    el('d8left').addEventListener('click',function(){turn(-1,0);});
+    el('d8right').addEventListener('click',function(){turn(1,0);});
+    document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
+    lives=3;sc=0;resetSnake();newQuestion();draw();
   })();
 
   refresh();
