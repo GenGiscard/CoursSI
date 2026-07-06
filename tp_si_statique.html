@@ -139,6 +139,17 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* --- Jeux d'arcade (défis 7-8) --- */
+  .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
+  .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
+  .padbtn:active{background:#2A2622;color:#FFFDF8}
+  .consigne{text-align:center;font-weight:800;font-size:15px;margin:6px auto;padding:9px;border-radius:10px;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);color:#8a6313;max-width:460px}
+  .molegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;margin:10px auto}
+  .hole{aspect-ratio:1/1;border-radius:12px;background:rgba(42,38,34,.06);border:2px dashed rgba(42,38,34,.18);display:flex;align-items:center;justify-content:center;padding:5px}
+  .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;line-height:1.12;cursor:pointer;text-align:center;padding:3px;animation:molepop .14s ease}
+  @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
+  .hole.empty .mole{visibility:hidden}
 </style>
 </head>
 <body>
@@ -164,15 +175,17 @@
       <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a>
       <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a>
       <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
+      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 6 défis</span>
+      <span class="kicker">TP · 8 défis</span>
       <h2>Leviers &amp; équilibres</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Huit défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -184,7 +197,7 @@
 
     <!-- D1 -->
     <section id="d1">
-      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 90 pts</span></span>
       <h2>Assemble la condition d'équilibre</h2>
       <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
@@ -198,7 +211,7 @@
 
     <!-- D2 -->
     <section id="d2">
-      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 160 pts</span></span>
+      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 120 pts</span></span>
       <h2>Bras de levier express</h2>
       <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p>
       <div class="game">
@@ -216,7 +229,7 @@
 
     <!-- D3 -->
     <section id="d3">
-      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 100 pts</span></span>
       <h2>Force ou moment ?</h2>
       <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p>
       <div class="game">
@@ -237,7 +250,7 @@
 
     <!-- D4 -->
     <section id="d4">
-      <span class="tag">⚖️ Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <span class="tag">⚖️ Défi 4<span class="pts-badge">/ 120 pts</span></span>
       <h2>L'équilibre du levier</h2>
       <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b> : il faut F₁·d₁ = F₂·d₂.</p>
       <div class="game">
@@ -259,7 +272,7 @@
 
     <!-- D5 -->
     <section id="d5">
-      <span class="tag">📐 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <span class="tag">📐 Défi 5<span class="pts-badge">/ 100 pts</span></span>
       <h2>Ferme le triangle</h2>
       <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p>
       <div class="game">
@@ -273,7 +286,7 @@
 
     <!-- D6 -->
     <section id="d6">
-      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 110 pts</span></span>
       <h2>Liaison ↔ réaction</h2>
       <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p>
       <div class="game">
@@ -282,6 +295,38 @@
           <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
         </div>
         <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="d7">
+      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Runner à portes</h2>
+      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre (← → ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
+        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
+        <div class="pad">
+          <button class="padbtn" id="d7left">◀ Gauche</button>
+          <button class="padbtn" id="d7right">Droite ▶</button>
+        </div>
+        <div class="msg" id="d7msg"></div>
+      </div>
+    </section>
+
+    <section id="d8">
+      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Tape-taupe</h2>
+      <p class="lede">Tape <b>seulement</b> ce qui relève de la notion demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d8time">40</b> s</span>
+          <span class="timepill">Vies : <b id="d8life">❤❤❤</b></span>
+          <span class="timepill">Score : <b id="d8score">0</b></span>
+          <button class="btn" id="d8start">Démarrer</button>
+        </div>
+        <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
+        <div class="molegrid" id="d8grid"></div>
+        <div class="msg" id="d8msg"></div>
       </div>
     </section>
 
@@ -298,8 +343,8 @@
 
 <script>
   // ===== Socle score =====
-  var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:120,d2:160,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var MAXES={d1:90,d2:120,d3:100,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -345,7 +390,7 @@
       if(i===idx){
         var sl=el('d1s'+idx); sl.classList.add('filled'); sl.querySelector('.txt').textContent=STEPS[idx];
         b.remove(); idx++;
-        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*18); setContrib('d1',sc); msg.className='msg ok'; msg.textContent='✓ Raisonnement complet ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*14); setContrib('d1',sc); msg.className='msg ok'; msg.textContent='✓ Raisonnement complet ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}
       } else { wrong++; b.classList.add('bad'); setTimeout(function(){b.classList.remove('bad');},320); msg.className='msg no'; msg.textContent='Ce n\u2019est pas la prochaine étape.'; }
     });
     el('d1reset').addEventListener('click',start);
@@ -458,9 +503,9 @@
     el('d4check').addEventListener('click',function(){
       if(solved)return; var c=cur(); var dM=Math.abs(c.F2*d2()-c.F1*c.d1);
       var msg=el('d4msg');
-      if(dM<=0.6){ solved=true; setContrib('d4',(ri+1)*50); msg.className='msg ok';
+      if(dM<=0.6){ solved=true; setContrib('d4',(ri+1)*40); msg.className='msg ok';
         if(ri<2){ msg.textContent='⚖️ Équilibre parfait ! Manche suivante…'; el('d4check').disabled=true; setTimeout(function(){ri++;setRound();},1100); }
-        else { msg.textContent='🏆 Les 3 manches réussies — défi complet ! +150 pts'; el('d4check').disabled=true; }
+        else { msg.textContent='🏆 Les 3 manches réussies — défi complet ! +120 pts'; el('d4check').disabled=true; }
       } else if(dM<=c.F2*0.18){ msg.className='msg no'; msg.textContent='Tout proche ! Ajuste encore un peu (Δ = '+fmt(dM)+' N·m).'; }
       else { msg.className='msg no'; msg.textContent='Pas encore équilibré (Δ = '+fmt(dM)+' N·m). Vise F₁·d₁ = F₂·d₂.'; }
     });
@@ -511,9 +556,9 @@
     }
     opts.addEventListener('click',function(ev){ if(locked)return; var b=ev.target.closest('.opt'); if(!b)return;
       var c=ROUNDS[ri], s=sum(c); var x=parseInt(b.getAttribute('data-x'),10), y=parseInt(b.getAttribute('data-y'),10);
-      if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*35); msg.className='msg ok';
+      if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*25); msg.className='msg ok';
         if(ri<3){ msg.textContent='✓ Triangle fermé ! Manche suivante…'; setTimeout(function(){ri++;setRound();},1100); }
-        else { msg.textContent='🏆 Les 4 triangles fermés — défi complet ! +140 pts'; }
+        else { msg.textContent='🏆 Les 4 triangles fermés — défi complet ! +100 pts'; }
       } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ramène pas au point de départ. Pense à F₃ = −(F₁+F₂).'; setTimeout(function(){b.classList.remove('no');},500); }
     });
     setRound();
@@ -543,12 +588,85 @@
       if(it.getAttribute('data-side')!=='R'){ sel.classList.remove('sel'); sel=(it.getAttribute('data-side')==='L')?it:null; if(sel)sel.classList.add('sel'); return; }
       if(it.getAttribute('data-i')===sel.getAttribute('data-i')){
         it.classList.add('done'); sel.classList.remove('sel'); sel.classList.add('done'); sel=null; done++;
-        setContrib('d6',done*24);
-        if(done===PAIRS.length){ msg.className='msg ok'; msg.textContent='🔗 Tout est relié — défi complet ! +120 pts'; }
+        setContrib('d6',done*22);
+        if(done===PAIRS.length){ msg.className='msg ok'; msg.textContent='🔗 Tout est relié — défi complet ! +110 pts'; }
       } else { var bad=it, s=sel; bad.classList.add('bad'); s.classList.add('bad'); setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420); sel=null; msg.className='msg no'; msg.textContent='Mauvaise correspondance, réessaie.'; }
     }
     left.addEventListener('click',click); right.addEventListener('click',click);
     build();
+  })();
+
+  // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
+  (function(){
+    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+    var QBANK=[
+      {q:'Une force se mesure en\u2026',ok:'newtons',no:'mètres'},
+      {q:'À l\u2019équilibre, la somme des forces est\u2026',ok:'nulle',no:'maximale'},
+      {q:'Le moment dépend de\u2026',ok:'la distance (bras de levier)',no:'la couleur'},
+      {q:'Une action mécanique peut être\u2026',ok:'une force',no:'une température'},
+      {q:'Un appui simple crée une réaction\u2026',ok:'perpendiculaire',no:'nulle'},
+      {q:'Le PFS s\u2019applique à un solide\u2026',ok:'en équilibre',no:'en mouvement rapide'},
+      {q:'Deux forces s\u2019équilibrent si elles sont\u2026',ok:'opposées et égales',no:'dans le même sens'},
+      {q:'Le poids s\u2019applique au\u2026',ok:'centre de gravité',no:'coin supérieur'},
+      {q:'Un moment se mesure en\u2026',ok:'newton-mètres',no:'litres'},
+      {q:'Plus le bras de levier est grand, le moment est\u2026',ok:'plus grand',no:'plus petit'},
+      {q:'Une liaison pivot autorise\u2026',ok:'une rotation',no:'aucun mouvement'},
+      {q:'La résultante, c\u2019est\u2026',ok:'la somme des forces',no:'la plus petite force'}
+    ];
+    var TARGET=12;
+    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+    }
+    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+      draw();}
+    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+    startBtn.addEventListener('click',start);
+    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+    newQ();draw();
+  })();
+
+  // ===== D8 — tape-taupe (3 vies, ralenti) =====
+  (function(){
+    var ITEMS=[
+      {t:'le poids d\u2019un objet',cat:'force'},{t:'une traction sur un câble',cat:'force'},{t:'une poussée',cat:'force'},{t:'la réaction d\u2019un appui',cat:'force'},{t:'une force de contact',cat:'force'},
+      {t:'un couple de serrage',cat:'moment'},{t:'un bras de levier',cat:'moment'},{t:'faire tourner autour d\u2019un axe',cat:'moment'},{t:'un moment de force',cat:'moment'},{t:'desserrer un boulon',cat:'moment'},
+      {t:'somme des forces nulle',cat:'equi'},{t:'un solide immobile',cat:'equi'},{t:'des forces qui se compensent',cat:'equi'},{t:'le PFS',cat:'equi'},{t:'une résultante nulle',cat:'equi'}
+    ];
+    var CATS={force:'la FORCE',moment:'le MOMENT',equi:'l\u2019ÉQUILIBRE'};
+    var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
+    var HOLES=6, cells=[], target='force', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
+    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
+    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    startBtn.addEventListener('click',start);
+    build();setConsigne();lifeEl.textContent=hearts();
   })();
 
   refresh();
