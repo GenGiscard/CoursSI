@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
@@ -176,6 +174,14 @@
   .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
   .exo-ta{width:100%;box-sizing:border-box;min-height:62px;font-family:inherit;font-size:13.5px;line-height:1.5;padding:9px 11px;border:2px solid rgba(42,38,34,.18);border-radius:9px;background:#fff;resize:vertical;margin:6px 0 2px}
   .btn[disabled]{opacity:.42;cursor:not-allowed}
+  .exo-card{box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -247,8 +253,10 @@
             <polygon points="174,142 165,138 165,146" fill="#5C544B"/>
             <text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text>
           </svg>
-          <textarea class="exo-ta" id="ex1txt" placeholder="Écris ton analyse ici : quelle force ? où s'applique-t-elle ? quel effet de rotation ?"></textarea>
-          <div class="exo-q"><button class="btn" id="ex1try">Valider mon analyse</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <p>Calcule le poids des livres, puis le moment qu’il crée par rapport à la fixation (g = 9,81 N/kg).</p>
+          <div class="exo-q">a) Poids P = <input class="numin" id="ex1p" inputmode="decimal"> N</div>
+          <div class="exo-q">b) Moment M = P × d = <input class="numin" id="ex1m" inputmode="decimal"> N·m</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
           <div class="exo-fb" id="ex1fb"></div>
           <div class="exo-sol" id="ex1sol" hidden>
             <p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p>
@@ -286,27 +294,29 @@
         <div class="exo-card adv">
           <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div>
           <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p>
-          <svg class="exo-fig" viewBox="0 0 320 158" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
-            <rect x="40" y="54" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
-            <polygon points="40,64 30,84 50,84" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
-            <polygon points="280,64 270,84 290,84" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
-            <text x="40" y="98" text-anchor="middle" fill="#6a4560" font-weight="700">A</text>
-            <text x="280" y="98" text-anchor="middle" fill="#6a4560" font-weight="700">B</text>
-            <line x1="100" y1="16" x2="100" y2="52" stroke="#a44a26" stroke-width="2.6"/>
-            <polygon points="100,60 95,49 105,49" fill="#a44a26"/>
+          <svg class="exo-fig" viewBox="0 0 320 184" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
+            <line x1="100" y1="16" x2="100" y2="44" stroke="#a44a26" stroke-width="2.6"/>
+            <polygon points="100,50 94,38 106,38" fill="#a44a26"/>
             <text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text>
-            <line x1="66" y1="106" x2="66" y2="88" stroke="#3D7E5F" stroke-width="2.2"/>
-            <polygon points="66,82 61,92 71,92" fill="#3D7E5F"/>
-            <text x="66" y="120" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text>
-            <line x1="254" y1="106" x2="254" y2="88" stroke="#3D7E5F" stroke-width="2.2"/>
-            <polygon points="254,82 249,92 259,92" fill="#3D7E5F"/>
-            <text x="254" y="120" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text>
-            <line x1="40" y1="136" x2="100" y2="136" stroke="#5C544B"/>
-            <polygon points="40,136 48,132 48,140" fill="#5C544B"/><polygon points="100,136 92,132 92,140" fill="#5C544B"/>
-            <text x="70" y="150" text-anchor="middle" fill="#5C544B">1 m</text>
-            <line x1="150" y1="136" x2="280" y2="136" stroke="#5C544B"/>
-            <polygon points="280,136 272,132 272,140" fill="#5C544B"/>
-            <text x="150" y="150" text-anchor="middle" fill="#5C544B">L = 4 m</text>
+            <rect x="40" y="50" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
+            <polygon points="40,60 30,80 50,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
+            <polygon points="280,60 270,80 290,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
+            <text x="20" y="56" fill="#6a4560" font-weight="700">A</text>
+            <text x="294" y="56" fill="#6a4560" font-weight="700">B</text>
+            <line x1="40" y1="120" x2="40" y2="94" stroke="#3D7E5F" stroke-width="2.4"/>
+            <polygon points="40,84 35,94 45,94" fill="#3D7E5F"/>
+            <text x="40" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text>
+            <line x1="280" y1="120" x2="280" y2="94" stroke="#3D7E5F" stroke-width="2.4"/>
+            <polygon points="280,84 275,94 285,94" fill="#3D7E5F"/>
+            <text x="280" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text>
+            <line x1="40" y1="152" x2="100" y2="152" stroke="#5C544B" stroke-width="1"/>
+            <polygon points="40,152 47,148.5 47,155.5" fill="#5C544B"/>
+            <polygon points="100,152 93,148.5 93,155.5" fill="#5C544B"/>
+            <text x="70" y="148" text-anchor="middle" fill="#5C544B">1 m</text>
+            <line x1="40" y1="170" x2="280" y2="170" stroke="#5C544B" stroke-width="1"/>
+            <polygon points="40,170 47,166.5 47,173.5" fill="#5C544B"/>
+            <polygon points="280,170 273,166.5 273,173.5" fill="#5C544B"/>
+            <text x="160" y="182" text-anchor="middle" fill="#5C544B">L = 4 m</text>
           </svg>
           <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div>
           <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
@@ -805,9 +815,11 @@
     gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
 
     var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var ta=el('ex1txt'), fb=el('ex1fb');
-      if(!ta||ta.value.trim().length<10){fb.className='exo-fb no';fb.textContent='Écris d\u2019abord ton analyse (au moins une phrase).';return;}
-      unlock('ex1reveal','Voir l\u2019analyse'); fb.className='exo-fb ok'; fb.textContent='✓ Bien ! Compare maintenant avec l\u2019analyse proposée.';
+      var p=num(el('ex1p').value), m=num(el('ex1m').value), fb=el('ex1fb');
+      var okP=Math.abs(p-29.4)<1.2, okM=Math.abs(m-5.9)<0.5;
+      if(okP&&okM){fb.className='exo-fb ok';fb.textContent='✓ Exact : P = 3 × 9,81 ≈ 29,4 N et M = P × 0,20 ≈ 5,9 N·m.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okP?'':'a) P = m × g. ')+(okM?'':'b) M = P × d (d en mètres).');}
+      unlock('ex1reveal','Voir l’analyse');
     });
     var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
       var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
