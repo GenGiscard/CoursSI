@@ -150,6 +150,32 @@
   .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;line-height:1.12;cursor:pointer;text-align:center;padding:3px;animation:molepop .14s ease}
   @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
   .hole.empty .mole{visibility:hidden}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:88px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:118px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:58px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .exo-ta{width:100%;box-sizing:border-box;min-height:62px;font-family:inherit;font-size:13.5px;line-height:1.5;padding:9px 11px;border:2px solid rgba(42,38,34,.18);border-radius:9px;background:#fff;resize:vertical;margin:6px 0 2px}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -169,6 +195,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a>
@@ -196,6 +223,105 @@
     </section>
 
     <!-- D1 -->
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour appliquer la statique : un cas réel, un simulateur, un calcul avec formule, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — l'étagère au mur</div>
+          <p>Une étagère est fixée au mur par une équerre. On pose dessus une pile de livres de <b>3 kg</b>, dont le centre de gravité est à <b>20 cm</b> du mur. Décris les actions mécaniques en jeu et explique pourquoi l'équerre risque de se déformer si on éloigne les livres.</p>
+          <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
+            <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/>
+            <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
+            <path d="M38 79 L38 112 L72 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
+            <rect x="150" y="44" width="15" height="26" fill="#B85C2E"/>
+            <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/>
+            <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/>
+            <line x1="174" y1="40" x2="174" y2="112" stroke="#a44a26" stroke-width="2.6"/>
+            <polygon points="174,120 169,109 179,109" fill="#a44a26"/>
+            <text x="182" y="100" fill="#a44a26" font-weight="700">P</text>
+            <line x1="32" y1="142" x2="174" y2="142" stroke="#5C544B" stroke-width="1"/>
+            <polygon points="32,142 41,138 41,146" fill="#5C544B"/>
+            <polygon points="174,142 165,138 165,146" fill="#5C544B"/>
+            <text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text>
+          </svg>
+          <textarea class="exo-ta" id="ex1txt" placeholder="Écris ton analyse ici : quelle force ? où s'applique-t-elle ? quel effet de rotation ?"></textarea>
+          <div class="exo-q"><button class="btn" id="ex1try">Valider mon analyse</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p>
+            <p>Par rapport à la fixation, ce poids crée un <b>moment</b> M = P × d ≈ 29 × 0,20 ≈ <b>5,9 N·m</b> qui tend à faire basculer l'étagère.</p>
+            <p>L'équerre exerce une <b>réaction</b> (force vers le haut + moment) pour rétablir l'équilibre. Plus les livres sont <b>loin</b> du mur, plus d augmente → plus le moment est grand → plus l'équerre est sollicitée et risque de plier.</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — la balance (loi du levier)</div>
+          <p>Fais varier les masses et les distances. La balance est en équilibre quand <b>m<sub>G</sub> × d<sub>G</sub> = m<sub>D</sub> × d<sub>D</sub></b> (les moments se compensent).</p>
+          <canvas id="ex2cv" width="480" height="240" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Masse gauche</span><input type="range" id="ex2mL" min="1" max="10" step="1" value="4"><b><span id="ex2mLv">4</span> kg</b></label>
+            <label><span class="nm2">Distance gauche</span><input type="range" id="ex2dL" min="0.5" max="2.5" step="0.5" value="1"><b><span id="ex2dLv">1.0</span> m</b></label>
+            <label><span class="nm2">Masse droite</span><input type="range" id="ex2mR" min="1" max="10" step="1" value="2"><b><span id="ex2mRv">2</span> kg</b></label>
+            <label><span class="nm2">Distance droite</span><input type="range" id="ex2dR" min="0.5" max="2.5" step="0.5" value="2"><b><span id="ex2dRv">2.0</span> m</b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — moment de serrage</div>
+          <p>On serre un boulon avec une clé de longueur <b>d = 25 cm</b>, en tirant perpendiculairement avec <b>F = 80 N</b>. Formule du moment : <b>M = F × d</b> (d en mètres).</p>
+          <div class="exo-q">a) Moment M = <input class="numin" id="ex3a" inputmode="decimal"> N·m</div>
+          <div class="exo-q">b) Force F' pour M = 30 N·m avec la même clé : F' = <input class="numin" id="ex3b" inputmode="decimal"> N</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> d = 25 cm = 0,25 m → M = F × d = 80 × 0,25 = <b>20 N·m</b>.</p>
+            <p><b>b)</b> F' = M / d = 30 / 0,25 = <b>120 N</b> (une clé plus longue demande moins de force).</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div>
+          <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p>
+          <svg class="exo-fig" viewBox="0 0 320 158" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
+            <rect x="40" y="54" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
+            <polygon points="40,64 30,84 50,84" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
+            <polygon points="280,64 270,84 290,84" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
+            <text x="40" y="98" text-anchor="middle" fill="#6a4560" font-weight="700">A</text>
+            <text x="280" y="98" text-anchor="middle" fill="#6a4560" font-weight="700">B</text>
+            <line x1="100" y1="16" x2="100" y2="52" stroke="#a44a26" stroke-width="2.6"/>
+            <polygon points="100,60 95,49 105,49" fill="#a44a26"/>
+            <text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text>
+            <line x1="66" y1="106" x2="66" y2="88" stroke="#3D7E5F" stroke-width="2.2"/>
+            <polygon points="66,82 61,92 71,92" fill="#3D7E5F"/>
+            <text x="66" y="120" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text>
+            <line x1="254" y1="106" x2="254" y2="88" stroke="#3D7E5F" stroke-width="2.2"/>
+            <polygon points="254,82 249,92 259,92" fill="#3D7E5F"/>
+            <text x="254" y="120" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text>
+            <line x1="40" y1="136" x2="100" y2="136" stroke="#5C544B"/>
+            <polygon points="40,136 48,132 48,140" fill="#5C544B"/><polygon points="100,136 92,132 92,140" fill="#5C544B"/>
+            <text x="70" y="150" text-anchor="middle" fill="#5C544B">1 m</text>
+            <line x1="150" y1="136" x2="280" y2="136" stroke="#5C544B"/>
+            <polygon points="280,136 272,132 272,140" fill="#5C544B"/>
+            <text x="150" y="150" text-anchor="middle" fill="#5C544B">L = 4 m</text>
+          </svg>
+          <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>Bilan :</b> charge F = 600 N (↓) à 1 m de A ; réactions R<sub>A</sub>, R<sub>B</sub> (↑).</p>
+            <p><b>Moment en A</b> (ΣM<sub>/A</sub> = 0) : R<sub>B</sub> × 4 − 600 × 1 = 0 → R<sub>B</sub> = 600 / 4 = <b>150 N</b>.</p>
+            <p><b>Résultante</b> (ΣF = 0) : R<sub>A</sub> + R<sub>B</sub> − 600 = 0 → R<sub>A</sub> = 600 − 150 = <b>450 N</b>.</p>
+            <p><b>Vérif.</b> (ΣM<sub>/B</sub>) : R<sub>A</sub> × 4 − 600 × 3 = 1800 − 1800 = 0 ✓</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section id="d1">
       <span class="tag">🧩 Défi 1<span class="pts-badge">/ 90 pts</span></span>
       <h2>Assemble la condition d'équilibre</h2>
@@ -667,6 +793,64 @@
     function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
     startBtn.addEventListener('click',start);
     build();setConsigne();lifeEl.textContent=hearts();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var ta=el('ex1txt'), fb=el('ex1fb');
+      if(!ta||ta.value.trim().length<10){fb.className='exo-fb no';fb.textContent='Écris d\u2019abord ton analyse (au moins une phrase).';return;}
+      unlock('ex1reveal','Voir l\u2019analyse'); fb.className='exo-fb ok'; fb.textContent='✓ Bien ! Compare maintenant avec l\u2019analyse proposée.';
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-20)<0.5, okB=Math.abs(b-120)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : M = 80 × 0,25 = 20 N·m et F\u2019 = 30 / 0,25 = 120 N.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) M = F × d avec d en mètres. ')+(okB?'':'b) isole F\u2019 = M / d.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var ra=num(el('ex4ra').value), rb=num(el('ex4rb').value), fb=el('ex4fb');
+      var okA=Math.abs(ra-450)<5, okB=Math.abs(rb-150)<5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : R_B = 600×1/4 = 150 N, puis R_A = 600 − 150 = 450 N.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ Écris ΣM/A = 0 pour R_B, puis ΣF = 0 pour R_A.';}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function v(id){return parseFloat(el(id).value);}
+      function draw(){
+        var mL=v('ex2mL'),dL=v('ex2dL'),mR=v('ex2mR'),dR=v('ex2dR');
+        el('ex2mLv').textContent=mL; el('ex2dLv').textContent=dL.toFixed(1);
+        el('ex2mRv').textContent=mR; el('ex2dRv').textContent=dR.toFixed(1);
+        var pL=mL*dL, pR=mR*dR;
+        var rot=Math.max(-0.34,Math.min(0.34,(pR-pL)*0.014));
+        var cx=W/2, py=H-72, L=190;
+        g.clearRect(0,0,W,H);
+        g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=1;g.beginPath();g.moveTo(40,py+42);g.lineTo(W-40,py+42);g.stroke();
+        g.fillStyle='#5C544B';g.beginPath();g.moveTo(cx,py);g.lineTo(cx-18,py+42);g.lineTo(cx+18,py+42);g.closePath();g.fill();
+        var lx=cx-L*Math.cos(rot), ly=py-L*Math.sin(rot), rx=cx+L*Math.cos(rot), ry=py+L*Math.sin(rot);
+        g.strokeStyle='#2E6A8E';g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(lx,ly);g.lineTo(rx,ry);g.stroke();
+        function weight(m,d,side){var f=d/2.5; var wx=cx-side*f*L*Math.cos(rot), wy=py-side*f*L*Math.sin(rot); var r=9+m*1.4;
+          g.strokeStyle='rgba(42,38,34,.35)';g.lineWidth=1.5;g.beginPath();g.moveTo(wx,wy);g.lineTo(wx,wy+r+4);g.stroke();
+          g.fillStyle='#B85C2E';g.beginPath();g.arc(wx,wy+r+4+r,r,0,7);g.fill();
+          g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(m+'kg',wx,wy+r+4+r+4);}
+        weight(mL,dL,1); weight(mR,dR,-1);
+        var out=el('ex2out'); var eq=Math.abs(pL-pR)<0.05;
+        var verdict=eq?'⚖️ ÉQUILIBRÉ':(pL>pR?'⬅️ penche à GAUCHE':'penche à DROITE ➡️');
+        out.textContent='Gauche m×d = '+pL.toFixed(1)+'   ·   Droite m×d = '+pR.toFixed(1)+'   →   '+verdict;
+      }
+      ['ex2mL','ex2dL','ex2mR','ex2dR'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
+      draw();
+    })();
   })();
 
   refresh();
