@@ -127,6 +127,19 @@
 .estic-bar .estic-txt span{font-size:10px;opacity:.72}
 .estic-bar .estic-copy{margin-left:auto;font-size:9.5px;opacity:.6;text-align:right}
 @media(max-width:880px){.estic-bar .estic-copy{display:none}}
+  /* --- Jeux d'arcade (défis 7-8) --- */
+  .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
+  .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
+  .padbtn:active{background:#2A2622;color:#FFFDF8}
+  .consigne{text-align:center;font-weight:800;font-size:15px;margin:6px auto;padding:9px;border-radius:10px;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);color:#8a6313;max-width:460px}
+  .molegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;margin:10px auto}
+  .hole{aspect-ratio:1/1;border-radius:12px;background:rgba(42,38,34,.06);border:2px dashed rgba(42,38,34,.18);display:flex;align-items:center;justify-content:center;padding:5px}
+  .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:11px;line-height:1.12;cursor:pointer;text-align:center;padding:3px;animation:molepop .14s ease}
+  @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
+  .hole.empty .mole{visibility:hidden}
+  .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
+  .snakeleg b{color:#8a6313}
 </style>
 </head>
 <body>
@@ -152,15 +165,17 @@
       <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Peut commencer ?</span><b class="bd" id="bd4">0</b></a>
       <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ordonne les phases</span><b class="bd" id="bd5">0</b></a>
       <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Terme ↔ définition</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Tape-taupe</span><b class="bd" id="bd7">0</b></a>
+      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Snake gourmand</span><b class="bd" id="bd8">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 6 défis</span>
+      <span class="kicker">TP · 8 défis</span>
       <h2>Conduire un projet</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux pour piloter un projet d'ingénieur : estimer une durée, situer une phase, reconnaître jalons et revues, gérer les antériorités, planifier. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Huit défis-jeux pour piloter un projet d'ingénieur : estimer une durée, situer une phase, reconnaître jalons et revues, gérer les antériorités, planifier. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -171,7 +186,7 @@
     </section>
 
     <section id="d1">
-      <span class="tag">⏱ Défi 1<span class="pts-badge">/ 160 pts</span></span>
+      <span class="tag">⏱ Défi 1<span class="pts-badge">/ 120 pts</span></span>
       <h2>Calcule la durée</h2>
       <p class="lede">En série, on <b>additionne</b> les durées ; en parallèle, c'est le <b>chemin le plus long</b> (le chemin critique) qui impose la durée du projet. 40 secondes.</p>
       <div class="game">
@@ -188,7 +203,7 @@
     </section>
 
     <section id="d2">
-      <span class="tag">🧭 Défi 2<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🧭 Défi 2<span class="pts-badge">/ 100 pts</span></span>
       <h2>Quelle phase ?</h2>
       <p class="lede">Pour chaque activité, dis à quelle phase du projet elle appartient : <b>analyse</b>, <b>conception</b> ou <b>réalisation</b>. 35 secondes.</p>
       <div class="game">
@@ -209,7 +224,7 @@
     </section>
 
     <section id="d3">
-      <span class="tag">🚩 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🚩 Défi 3<span class="pts-badge">/ 100 pts</span></span>
       <h2>Tâche, jalon ou revue ?</h2>
       <p class="lede">Une <b>tâche</b> a une durée, un <b>jalon</b> est un instant clé (durée nulle), une <b>revue</b> est une réunion de décision. Classe-les vite. 35 secondes.</p>
       <div class="game">
@@ -230,7 +245,7 @@
     </section>
 
     <section id="d4">
-      <span class="tag">🔀 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <span class="tag">🔀 Défi 4<span class="pts-badge">/ 120 pts</span></span>
       <h2>Peut commencer ?</h2>
       <p class="lede">Une tâche ne peut démarrer que si <b>toutes ses antériorités</b> sont terminées. Lis l'état du projet et décide.</p>
       <div class="game">
@@ -245,7 +260,7 @@
     </section>
 
     <section id="d5">
-      <span class="tag">🧩 Défi 5<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🧩 Défi 5<span class="pts-badge">/ 90 pts</span></span>
       <h2>Ordonne les phases</h2>
       <p class="lede">Remets dans l'ordre les grandes phases d'un projet d'ingénieur. Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
@@ -258,7 +273,7 @@
     </section>
 
     <section id="d6">
-      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 110 pts</span></span>
       <h2>Terme ↔ définition</h2>
       <p class="lede">Relie chaque terme de gestion de projet à sa définition. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
@@ -267,6 +282,41 @@
           <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
         </div>
         <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="d7">
+      <span class="tag">🔨 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Tape-taupe</h2>
+      <p class="lede">Tape <b>seulement</b> ce qui correspond à la phase demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d7time">40</b> s</span>
+          <span class="timepill">Vies : <b id="d7life">❤❤❤</b></span>
+          <span class="timepill">Score : <b id="d7score">0</b></span>
+          <button class="btn" id="d7start">Démarrer</button>
+        </div>
+        <div class="consigne" id="d7cons">Appuie sur Démarrer.</div>
+        <div class="molegrid" id="d7grid"></div>
+        <div class="msg" id="d7msg"></div>
+      </div>
+    </section>
+
+    <section id="d8">
+      <span class="tag">🐍 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Snake gourmand</h2>
+      <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d8start">Démarrer</button></div>
+        <canvas id="d8cv" width="440" height="330" class="gamecanvas"></canvas>
+        <div class="snakeleg" id="d8leg"></div>
+        <div class="pad"><button class="padbtn" id="d8up">▲</button></div>
+        <div class="pad">
+          <button class="padbtn" id="d8left">◀</button>
+          <button class="padbtn" id="d8down">▼</button>
+          <button class="padbtn" id="d8right">▶</button>
+        </div>
+        <div class="msg" id="d8msg"></div>
       </div>
     </section>
 
@@ -282,8 +332,8 @@
 </div>
 
 <script>
-  var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:160,d2:130,d3:130,d4:150,d5:120,d6:130}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var MAXES={d1:120,d2:100,d3:100,d4:120,d5:90,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -401,9 +451,9 @@
       spec.innerHTML='<div class="gr">Tâche '+r.task+'</div><div class="rowline"><span>antériorités</span><b>'+r.pred+'</b></div><div class="rowline"><span>état du projet</span><b>'+r.state+'</b></div>';
       msg.textContent='';msg.className='msg';bOk.disabled=false;bNo.disabled=false;}
     function answer(choice){if(locked)return;var r=ROUNDS[ri];locked=true;bOk.disabled=true;bNo.disabled=true;
-      if(choice===r.can){setContrib('d4',Math.round((ri+1)/4*150));msg.className='msg ok';
+      if(choice===r.can){setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
         if(ri<3){msg.textContent='✓ '+r.why+'. Manche suivante…';setTimeout(function(){ri++;setRound();},1200);}
-        else{msg.textContent='🏆 Antériorités maîtrisées — défi complet ! +150 pts';}}
+        else{msg.textContent='🏆 Antériorités maîtrisées — défi complet ! +120 pts';}}
       else{msg.className='msg no';msg.textContent='✗ '+r.why+'. Recommence la manche.';setTimeout(function(){locked=false;bOk.disabled=false;bNo.disabled=false;msg.textContent='';msg.className='msg';},1300);}}
     bOk.addEventListener('click',function(){answer(true);});
     bNo.addEventListener('click',function(){answer(false);});
@@ -420,7 +470,7 @@
       pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
     pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
       if(i===idx){var sl=el('d5s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*15);setContrib('d5',sc);msg.className='msg ok';msg.textContent='✓ Phases ordonnées ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d5',sc);msg.className='msg ok';msg.textContent='✓ Phases ordonnées ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
       else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine phase.';}});
     el('d5reset').addEventListener('click',start);
     start();
@@ -443,11 +493,95 @@
     function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
       if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
       if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*26);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +130 pts';}}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*22);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +110 pts';}}
       else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
     left.addEventListener('click',click);right.addEventListener('click',click);
     build();
+  })();
+
+  // ===== D7 — tape-taupe (3 vies, ralenti) =====
+  (function(){
+    var ITEMS=[
+      {t:'définir les tâches',cat:'plan'},{t:'estimer les durées',cat:'plan'},{t:'fixer les jalons',cat:'plan'},{t:'établir le Gantt',cat:'plan'},{t:'répartir les rôles',cat:'plan'},
+      {t:'avancer les tâches',cat:'suiv'},{t:'mettre à jour le planning',cat:'suiv'},{t:'faire une revue',cat:'suiv'},{t:'gérer les imprévus',cat:'suiv'},{t:'mesurer l\u2019avancement',cat:'suiv'},
+      {t:'livrer le produit',cat:'clot'},{t:'présenter le bilan',cat:'clot'},{t:'archiver les documents',cat:'clot'},{t:'valider avec le client',cat:'clot'},{t:'tirer les leçons',cat:'clot'}
+    ];
+    var CATS={plan:'PLANIFIER',suiv:'SUIVRE',clot:'CLÔTURER'};
+    var grid=el('d7grid'), consEl=el('d7cons'), msg=el('d7msg'), startBtn=el('d7start'), timeEl=el('d7time'), scoreEl=el('d7score'), lifeEl=el('d7life');
+    var HOLES=6, cells=[], target='plan', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
+    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape ce qui sert à '+CATS[target]+' !';}
+    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d7',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d7',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    startBtn.addEventListener('click',start);
+    build();setConsigne();lifeEl.textContent=hearts();
+  })();
+
+  // ===== D8 — snake gourmand (14 questions) =====
+  (function(){
+    var cv=el('d8cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    var COLS=14, ROWS=12, CS=Math.floor(Math.min(W/COLS,(H-52)/ROWS));
+    var ox=Math.floor((W-CS*COLS)/2), oy=28;
+    var QBANK=[
+      {q:'un JALON',ok:'une étape clé du projet',bad:['une simple tâche','une panne']},
+      {q:'le diagramme de GANTT',ok:'le planning des tâches',bad:['un schéma électrique','une facture']},
+      {q:'une TÂCHE',ok:'une action à réaliser',bad:['un jalon final','un budget']},
+      {q:'une REVUE DE PROJET',ok:'un point d\u2019avancement',bad:['une pause déjeuner','une panne']},
+      {q:'un LIVRABLE',ok:'un résultat à fournir',bad:['une réunion','un retard']},
+      {q:'une ÉCHÉANCE',ok:'une date limite',bad:['un budget','un outil']},
+      {q:'le CHEMIN CRITIQUE',ok:'la suite de tâches la plus longue',bad:['la tâche la plus courte','une pause']},
+      {q:'une RESSOURCE',ok:'un moyen pour agir',bad:['un obstacle','un retard']},
+      {q:'le CAHIER DES CHARGES',ok:'les exigences du projet',bad:['le planning détaillé','la facture']},
+      {q:'un RÉTROPLANNING',ok:'planifier depuis la fin',bad:['improviser','tout refaire']},
+      {q:'un IMPRÉVU',ok:'un événement non prévu',bad:['une tâche planifiée','un jalon']},
+      {q:'l\u2019AVANCEMENT',ok:'la part de travail faite',bad:['le budget restant','la teinte']},
+      {q:'le BILAN',ok:'le retour sur le projet',bad:['le lancement','une tâche']},
+      {q:'un RÔLE',ok:'la fonction d\u2019un membre',bad:['une date','un outil']}
+    ];
+    var snake, dir, ndir, foods, cur, lives, sc, running, done, loop, msg=el('d8msg'), leg=el('d8leg'), startBtn=el('d8start');
+    function onSnake(p){return snake.some(function(s){return s.x===p.x&&s.y===p.y;});}
+    function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
+    function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
+    function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
+      g.strokeStyle='rgba(42,38,34,.10)';g.lineWidth=1;g.strokeRect(ox+.5,oy+.5,CS*COLS,CS*ROWS);
+      g.fillStyle='#8a6313';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('🐍 Snake gourmand',W/2,18);
+      if(foods)foods.forEach(function(f){var x=ox+f.x*CS,y=oy+f.y*CS;g.fillStyle='#BD8A2A';rr(g,x+2,y+2,CS-4,CS-4,6);g.fill();g.fillStyle='#fff';g.font='700 '+Math.floor(CS*0.62)+'px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(f.n),x+CS/2,y+CS*0.72);});
+      if(snake)snake.forEach(function(s,i){g.fillStyle=i===0?'#B85C2E':'#3D7E5F';rr(g,ox+s.x*CS+1,oy+s.y*CS+1,CS-2,CS-2,5);g.fill();});
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,ox,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+sc,ox+CS*COLS,H-8);g.textAlign='left';
+    }
+    function resetSnake(){var cx=Math.floor(COLS/2),cy=Math.floor(ROWS/2);snake=[{x:cx,y:cy},{x:cx-1,y:cy},{x:cx-2,y:cy}];dir={x:1,y:0};ndir={x:1,y:0};}
+    function loseLife(){lives--;if(lives<=0){finish();return;}resetSnake();newQuestion();msg.className='msg no';msg.textContent='Perdu une vie ! Il te reste '+lives+' \u2764';draw();}
+    function commit(){setContrib('d8',Math.min(90,sc));}
+    function finish(){running=false;done=true;if(loop)clearInterval(loop);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg ok';msg.textContent='🐍 Fini — score : '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';draw();}
+    function step(){if(!running)return;dir=ndir;var nx=snake[0].x+dir.x, ny=snake[0].y+dir.y;
+      if(nx<0||ny<0||nx>=COLS||ny>=ROWS){loseLife();return;}
+      if(snake.some(function(s){return s.x===nx&&s.y===ny;})){loseLife();return;}
+      var head={x:nx,y:ny}; var f=foods.filter(function(z){return z.x===nx&&z.y===ny;})[0];
+      if(f){if(f.ok){sc+=20;commit();snake.unshift(head);newQuestion();msg.className='msg ok';msg.textContent='✓ Bonne réponse ! +20';}else{loseLife();return;}}
+      else{snake.unshift(head);snake.pop();}
+      draw();}
+    function turn(x,y){if(!running)return;if(dir.x===-x&&dir.y===-y)return;ndir={x:x,y:y};}
+    function start(){if(running)return;lives=3;sc=0;done=false;msg.textContent='';resetSnake();newQuestion();running=true;startBtn.disabled=true;loop=setInterval(step,150);}
+    startBtn.addEventListener('click',start);
+    el('d8up').addEventListener('click',function(){turn(0,-1);});
+    el('d8down').addEventListener('click',function(){turn(0,1);});
+    el('d8left').addEventListener('click',function(){turn(-1,0);});
+    el('d8right').addEventListener('click',function(){turn(1,0);});
+    document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
+    lives=3;sc=0;resetSnake();newQuestion();draw();
   })();
 
   refresh();
