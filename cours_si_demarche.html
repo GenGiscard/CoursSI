@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -89,6 +87,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -229,6 +234,12 @@
       <p class="lede">Un écart se chiffre. L'<b>écart relatif</b> rapporte la différence à la valeur de référence, en pourcentage.</p>
       <div class="eqcard"><div class="eq">écart relatif = |valeur − référence| / référence × 100 (%)</div><div class="leg">La <b>référence</b> est souvent la valeur du cahier des charges ou la valeur simulée.</div></div>
       <div class="card"><h3 style="margin-top:0">Exemple</h3><p style="margin:0">Autonomie attendue <b>25 min</b>, mesurée <b>22 min</b> : écart = |22 − 25| / 25 × 100 = <b>12 %</b>.</p></div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">De l'écart absolu à l'écart relatif</div>
+        <canvas id="cvquant" width="900" height="220" aria-label="Quantifier un écart : attendu, mesuré, écart absolu et relatif"></canvas>
+        <div class="cap"><b id="qtphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="qtcap">On compare attendu et mesuré.</span></div>
+      </div>
     </section>
 
     <section id="s8" style="border-bottom:none">
@@ -338,6 +349,48 @@
     }
     setInterval(function(){phaseC+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvquant'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var x0=70,xMax=770, att=8, mes=7.2;
+  function X(v){return x0+(v/att)*(xMax-x0);}
+  var caps=[
+    'On compare la performance ATTENDUE (cahier des charges) et la performance MESUR\u00c9E.',
+    '\u00c9cart absolu = attendu \u2212 mesur\u00e9 = 8 \u2212 7,2 = 0,8 h.',
+    '\u00c9cart relatif = \u00e9cart / r\u00e9f\u00e9rence = 0,8 / 8 = 10 %.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<5.5?1:2));
+    g.clearRect(0,0,W,H);
+    // attendu
+    g.fillStyle='rgba(61,126,95,.75)';g.beginPath();g.rect(x0,44,X(att)-x0,30);g.fill();
+    g.fillStyle='#5C544B';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('attendu',x0,36);
+    g.fillStyle='#2c6147';g.textAlign='left';g.fillText('8 h',X(att)+8,64);
+    // mesuré
+    g.fillStyle='rgba(189,138,42,.85)';g.beginPath();g.rect(x0,96,X(mes)-x0,30);g.fill();
+    g.fillStyle='#5C544B';g.textAlign='left';g.fillText('mesur\u00e9',x0,88);
+    g.fillStyle='#8a6313';g.fillText('7,2 h',X(mes)+8,116);
+    // écart (phase 1+)
+    if(phase>=1){
+      g.strokeStyle='#C0492E';g.lineWidth=2;
+      g.beginPath();g.moveTo(X(mes),132);g.lineTo(X(att),132);g.moveTo(X(mes),126);g.lineTo(X(mes),138);g.moveTo(X(att),126);g.lineTo(X(att),138);g.stroke();
+      g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('\u00e9cart = 0,8 h',(X(mes)+X(att))/2,152);
+    }
+    // écart relatif (phase 2)
+    if(phase>=2){
+      g.fillStyle='#235877';g.font='800 24px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+      g.fillText('\u00e9cart relatif = 0,8 / 8 = 10 %',W/2,196);
+    }
+    var cap=document.getElementById('qtcap'), ph=document.getElementById('qtphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
