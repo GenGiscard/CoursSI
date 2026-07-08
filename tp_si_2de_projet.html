@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -141,6 +139,39 @@
   .hole.empty .mole{visibility:hidden}
   .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
   .snakeleg b{color:#8a6313}
+  .snakeleg .legn{font-size:20px;color:#B85C2E;line-height:1;vertical-align:-1px}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:150px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:70px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -160,6 +191,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, contrainte</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Créativité ↔ principe</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">La démarche de projet</span><b class="bd" id="bd3">0</b></a>
@@ -183,6 +215,84 @@
           <span class="rankchip">📐 Ingénieur·e · 450+</span>
           <span class="rankchip">🏆 Expert·e · 700+</span>
         </div>
+      </div>
+    </section>
+
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour piloter un projet : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — le planning du projet</div>
+          <p>Votre équipe conçoit une innovation en 4 étapes : <b>idée (2 j)</b>, <b>plan (3 j)</b>, <b>prototype (4 j)</b>, <b>test (1 j)</b>. a) Durée totale si les étapes s'enchaînent ? b) En vous répartissant le travail, vous faites le prototype <b>2× plus vite (4 → 2 j)</b> : nouvelle durée totale ?</p>
+          <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9">
+            <line x1="20" y1="66" x2="252" y2="66" stroke="#5C544B" stroke-width="1"/>
+            <rect x="20" y="34" width="44" height="22" rx="2" fill="#2E6A8E" fill-opacity="0.8"/><text x="42" y="49" text-anchor="middle" fill="#fff" font-weight="700">idée 2</text>
+            <rect x="64" y="34" width="66" height="22" rx="2" fill="#3D7E5F" fill-opacity="0.85"/><text x="97" y="49" text-anchor="middle" fill="#fff" font-weight="700">plan 3</text>
+            <rect x="130" y="34" width="88" height="22" rx="2" fill="#BD8A2A" fill-opacity="0.9"/><text x="174" y="49" text-anchor="middle" fill="#fff" font-weight="700">proto 4</text>
+            <rect x="218" y="34" width="22" height="22" rx="2" fill="#C0492E" fill-opacity="0.85"/><text x="229" y="49" text-anchor="middle" fill="#fff" font-weight="700">1</text>
+            <text x="240" y="82" text-anchor="middle" fill="#5C544B" font-weight="700">10 j</text>
+          </svg>
+          <div class="exo-q">a) Durée totale = <input class="numin" id="ex1a" inputmode="decimal"> jours</div>
+          <div class="exo-q">b) Avec le prototype accéléré = <input class="numin" id="ex1b" inputmode="decimal"> jours</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> 2 + 3 + 4 + 1 = <b>10 jours</b>.</p>
+            <p><b>b)</b> le prototype passe de 4 à 2 j : 2 + 3 + 2 + 1 = <b>8 jours</b>. Bien s'organiser fait gagner du temps.</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — répartir le budget</div>
+          <p>Votre projet dispose d'un budget de <b>200 €</b>. Répartis-le entre <b>matériaux</b>, <b>impression 3D</b> et <b>divers</b> : la barre reste verte tant que tu ne dépasses pas le budget.</p>
+          <canvas id="ex2cv" width="480" height="112" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Matériaux (€)</span><input type="range" id="ex2mat" min="0" max="150" step="5" value="80"><b><span id="ex2matv">80</span></b></label>
+            <label><span class="nm2">Impression 3D (€)</span><input type="range" id="ex2imp" min="0" max="120" step="5" value="45"><b><span id="ex2impv">45</span></b></label>
+            <label><span class="nm2">Divers (€)</span><input type="range" id="ex2div" min="0" max="80" step="5" value="30"><b><span id="ex2divv">30</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — répartir le travail en équipe</div>
+          <p>Une partie du projet représente <b>36 heures</b> de travail. On rappelle : durée = charge ÷ (heures par jour).</p>
+          <div class="exo-q">a) Seul, à 6 h/jour → <input class="numin" id="ex3a" inputmode="decimal"> jours</div>
+          <div class="exo-q">b) À 3 (18 h/jour au total) → <input class="numin" id="ex3b" inputmode="decimal"> jours</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> 36 ÷ 6 = <b>6 jours</b>.</p>
+            <p><b>b)</b> 36 ÷ 18 = <b>2 jours</b>. À plusieurs, on avance plus vite (si le travail est partageable).</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — série ou parallèle ? <span class="lvl-badge">niveau +</span></div>
+          <p>Deux tâches indépendantes : <b>A (5 j)</b> et <b>B (3 j)</b>. a) Durée si on les fait l'une après l'autre (en série). b) Durée si deux équipes les font <b>en parallèle</b>.</p>
+          <svg class="exo-fig" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
+            <text x="10" y="30" fill="#5C544B" font-weight="700">série</text>
+            <rect x="46" y="18" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="31" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text>
+            <rect x="156" y="18" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="189" y="31" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text>
+            <text x="228" y="31" fill="#c0392b" font-weight="700">8 j</text>
+            <text x="10" y="72" fill="#5C544B" font-weight="700">parallèle</text>
+            <rect x="46" y="56" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="69" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text>
+            <rect x="46" y="78" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="79" y="91" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text>
+            <text x="164" y="76" fill="#2c6147" font-weight="700">5 j</text>
+          </svg>
+          <div class="exo-q">a) En série = <input class="numin" id="ex4a" inputmode="decimal"> jours</div>
+          <div class="exo-q">b) En parallèle = <input class="numin" id="ex4b" inputmode="decimal"> jours</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> en série : 5 + 3 = <b>8 jours</b>.</p>
+            <p><b>b)</b> en parallèle : la durée est celle de la tâche la plus longue, max(5 ; 3) = <b>5 jours</b>. Paralléliser fait gagner 3 jours ici.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -543,7 +653,7 @@
     function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
     function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
     function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
-    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span><b class="legn">'+['','①','②','③'][f.n]+'</b> '+f.t+'</span>';}).join(' &nbsp; ');}
     function draw(){
       g.clearRect(0,0,W,H);
       g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
@@ -574,6 +684,59 @@
     el('d8right').addEventListener('click',function(){turn(1,0);});
     document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
     lives=3;sc=0;resetSnake();newQuestion();draw();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-10)<0.5, okB=Math.abs(b-8)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2+3+4+1 = 10 j ; avec le prototype à 2 j → 8 j.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) additionne les 4 étapes. ')+(okB?'':'b) remplace 4 par 2 pour le prototype.');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-6)<0.5, okB=Math.abs(b-2)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 36/6 = 6 j ; 36/18 = 2 j.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 36 ÷ 6. ')+(okB?'':'b) 36 ÷ 18.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-8)<0.5, okB=Math.abs(b-5)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : série 5+3 = 8 j ; parallèle max(5,3) = 5 j.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 5 + 3. ')+(okB?'':'b) la plus longue des deux.');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function draw(){
+        var mat=+el('ex2mat').value, imp=+el('ex2imp').value, dv=+el('ex2div').value;
+        el('ex2matv').textContent=mat; el('ex2impv').textContent=imp; el('ex2divv').textContent=dv;
+        var total=mat+imp+dv, budget=200, reste=budget-total, ok=total<=budget;
+        g.clearRect(0,0,W,H);
+        var x0=20, maxW=W-40, y=34, hh=26, sc=maxW/budget;
+        g.fillStyle='#efe9dd';g.beginPath();g.rect(x0,y,maxW,hh);g.fill();
+        var segs=[[mat,'#2E6A8E'],[imp,'#3D7E5F'],[dv,'#BD8A2A']], x=x0;
+        for(var i=0;i<segs.length;i++){var wv=Math.min(segs[i][0]*sc,x0+maxW-x);if(wv>0){g.fillStyle=segs[i][1];g.beginPath();g.rect(x,y,wv,hh);g.fill();x+=segs[i][0]*sc;}}
+        var bx=x0+budget*sc;g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.moveTo(bx,y-6);g.lineTo(bx,y+hh+6);g.stroke();
+        g.fillStyle='#5C544B';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='right';g.fillText('budget 200 €',bx-4,y-9);
+        g.fillStyle=ok?'#2c6147':'#a44a26';g.font='800 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+        g.fillText('total : '+total+' €   '+(ok?('· reste '+reste+' €'):('· dépassement de '+(-reste)+' €')),W/2,H-14);
+        var o=el('ex2out'); if(o) o.textContent='total '+total+' € / 200 €  →  '+(ok?('reste '+reste+' €'):('dépassé de '+(-reste)+' € !'));
+      }
+      ['ex2mat','ex2imp','ex2div'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
+      draw();
+    })();
   })();
 
   refresh();
