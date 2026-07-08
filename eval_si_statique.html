@@ -224,24 +224,24 @@
       ctx:'Une poutre horizontale repose sur deux appuis A et B. Une charge F est appliqu\u00e9e \u00e0 la distance a de A. On cherche les r\u00e9actions des appuis.',
       data:[['Longueur L','4 m'],['Charge F','600 N'],['Distance a (de A)','1 m']],
       parts:[
-        {q:'Moment de la charge par rapport \u00e0 A : M = F\u00b7a ? (N\u00b7m)', a:600, tol:1, pts:2, unit:'N\u00b7m', sol:'M = 600 \u00d7 1 = 600 N\u00b7m'},
-        {q:'\u00c9quilibre des moments en A : r\u00e9action en B, R_B = F\u00b7a / L ? (N)', a:150, tol:2, pts:3, unit:'N', sol:'R_B = 600\u00d71/4 = 150 N'},
-        {q:'\u00c9quilibre des forces verticales : R_A = F \u2212 R_B ? (N)', a:450, tol:2, pts:3, unit:'N', sol:'R_A = 600 \u2212 150 = 450 N'},
+        {q:'Moment de la charge par rapport \u00e0 A ? (N\u00b7m)', a:600, tol:1, pts:2, unit:'N\u00b7m', sol:'M = 600 \u00d7 1 = 600 N\u00b7m'},
+        {q:'\u00c9quilibre des moments en A : r\u00e9action en B, R_B ? (N)', a:150, tol:2, pts:3, unit:'N', sol:'R_B = 600\u00d71/4 = 150 N'},
+        {q:'\u00c9quilibre des forces verticales : R_A ? (N)', a:450, tol:2, pts:3, unit:'N', sol:'R_A = 600 \u2212 150 = 450 N'},
         {q:'V\u00e9rification : R_A + R_B ? (doit valoir F) (N)', a:600, tol:2, pts:2, unit:'N', sol:'450 + 150 = 600 N = F \u2713'}
       ] },
     { anim:'lever', tag:'Exercice 2 · 7 pts', title:'Le moment de serrage',
       ctx:'On serre un boulon avec une cl\u00e9. La force appliqu\u00e9e cr\u00e9e un moment autour de l\u2019axe du boulon. Rappel : M = F \u00d7 d.',
       data:[['Force F','80 N'],['Bras de levier d','0,25 m']],
       parts:[
-        {q:'Moment de serrage : M = F\u00b7d ? (N\u00b7m)', a:20, tol:0.5, pts:2, unit:'N\u00b7m', sol:'M = 80 \u00d7 0,25 = 20 N\u00b7m'},
-        {q:'Pour un moment M = 30 N\u00b7m avec d = 0,25 m : force F = M/d ? (N)', a:120, tol:2, pts:3, unit:'N', sol:'F = 30/0,25 = 120 N'},
+        {q:'Moment de serrage : M ? (N\u00b7m)', a:20, tol:0.5, pts:2, unit:'N\u00b7m', sol:'M = 80 \u00d7 0,25 = 20 N\u00b7m'},
+        {q:'Pour un moment M = 30 N\u00b7m avec d = 0,25 m : force F ? (N)', a:120, tol:2, pts:3, unit:'N', sol:'F = 30/0,25 = 120 N'},
         {q:'Avec une rallonge (d = 0,5 m), force pour M = 30 N\u00b7m ? (N)', a:60, tol:2, pts:2, unit:'N', sol:'F = 30/0,5 = 60 N'}
       ] },
     { anim:'tri3', tag:'Exercice 3 · 7 pts', title:'L\u2019\u00e9quilibre sous trois forces',
       ctx:'Un point est en \u00e9quilibre sous trois forces : le poids P (vertical), une force horizontale H, et la tension du c\u00e2ble T. Elles forment un triangle rectangle.',
       data:[['Poids P','300 N'],['Force horizontale H','400 N']],
       parts:[
-        {q:'Tension du c\u00e2ble (hypot\u00e9nuse) : T = \u221a(P\u00b2 + H\u00b2) ? (N)', a:500, tol:3, pts:3, unit:'N', sol:'T = \u221a(300\u00d7300 + 400\u00d7400) = \u221a250000 = 500 N'},
+        {q:'Tension du c\u00e2ble (hypot\u00e9nuse) : T ? (N)', a:500, tol:3, pts:3, unit:'N', sol:'T = \u221a(300\u00d7300 + 400\u00d7400) = \u221a250000 = 500 N'},
         {q:'Inversement, si P = 300 N et T = 500 N : H = \u221a(T\u00b2 \u2212 P\u00b2) ? (N)', a:400, tol:3, pts:3, unit:'N', sol:'H = \u221a(500\u00d7500 \u2212 300\u00d7300) = \u221a160000 = 400 N'},
         {q:'Si le poids double (P = 600 N, H = 800 N) : T = \u221a(P\u00b2 + H\u00b2) ? (N)', a:1000, tol:5, pts:1, unit:'N', sol:'T = \u221a(600\u00d7600 + 800\u00d7800) = 1000 N'}
       ] }
@@ -373,10 +373,11 @@
   function startAnim(){ if(animTimer)return; animTimer=setInterval(function(){ phase+=0.05; drawAll(); },50); }
   function drawAll(){ drawBeam(); drawLever(); drawTri3(); }
   function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{x:c.getContext('2d'),W:c.width,H:c.height}:null; }
-  function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;
-    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
-    var a=Math.atan2(y2-y1,x2-x1),L=9;g.beginPath();g.moveTo(x2,y2);
-    g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();}
+  function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;g.lineCap='round';
+    var a=Math.atan2(y2-y1,x2-x1),len=Math.hypot(x2-x1,y2-y1),L=Math.min(11,len*0.8);
+    var bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
+    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.4),y2-L*Math.sin(a-0.4));g.lineTo(x2-L*Math.cos(a+0.4),y2-L*Math.sin(a+0.4));g.closePath();g.fill();g.lineCap='butt';}
 
   function drawBeam(){
     var o=ctxOf('cv_beam'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
@@ -395,7 +396,7 @@
     g.fillStyle='#2A2622';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
     g.fillText('A',xA,oy+58);g.fillText('B',xB,oy+58);
     // charge F (vers le bas) sur la poutre
-    arrow(g,xF,oy-12-22*pulse,xF,oy-8,'#C0492E',5);
+    arrow(g,xF,oy-44+8*pulse,xF,oy-4,'#C0492E',5);
     g.fillStyle='#C0492E';g.font='700 12px "JetBrains Mono",monospace';g.fillText('F = 600 N',xF,oy-20-22*pulse);
     // réactions (vers le haut), longueur ∝ R
     var s=0.6+0.4*pulse;

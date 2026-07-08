@@ -100,6 +100,8 @@
   @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
   @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  .vec{position:relative;display:inline-block;line-height:1}
+  .vec::after{content:"→";position:absolute;left:0;right:0;top:-.62em;font-size:.6em;font-weight:400;line-height:1;text-align:center}
 </style>
 </head>
 <body>
@@ -120,7 +122,7 @@
       <a href="#s4" class="navlink"><span>04</span>Le PFS</a>
       <a href="#s5" class="navlink"><span>05</span>Deux forces</a>
       <a href="#s6" class="navlink"><span>06</span>Trois forces</a>
-      <a href="#s7" class="navlink"><span>07</span>Liaisons</a>
+      
       <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
     </div>
   </aside>
@@ -140,7 +142,7 @@
           <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
             <rect x="20" y="10" width="22" height="220" fill="#cfc4b2"/>
             <line x1="42" y1="40" x2="240" y2="40" stroke="#2A2622" stroke-width="6"/>
-            <line x1="42" y1="40" x2="180" y2="150" stroke="#2E6A8E" stroke-width="6"/>
+            <line x1="42" y1="150" x2="180" y2="40" stroke="#2E6A8E" stroke-width="6"/>
             <rect x="200" y="40" width="70" height="46" rx="4" fill="#3D7E5F"/>
             <text x="235" y="68" font-family="JetBrains Mono,monospace" font-size="12" fill="#fff" text-anchor="middle">charge</text>
             <line x1="235" y1="92" x2="235" y2="150" stroke="#C0492E" stroke-width="3" marker-end="url(#aR)"/>
@@ -162,10 +164,10 @@
             <line x1="20" y1="120" x2="340" y2="120" stroke="#235877" stroke-width="1.4" stroke-dasharray="6 5"/>
             <text x="300" y="112" font-family="JetBrains Mono,monospace" font-size="11" fill="#235877">droite d'action</text>
             <circle cx="120" cy="120" r="6" fill="#2A2622"/>
-            <text x="92" y="150" font-family="JetBrains Mono,monospace" font-size="11" fill="#2A2622">point d'application</text>
-            <line x1="120" y1="120" x2="250" y2="120" stroke="#C0492E" stroke-width="6" marker-end="url(#aF)"/>
+            <text x="78" y="166" font-family="JetBrains Mono,monospace" font-size="11" fill="#2A2622">point d'application</text>
+            <line x1="120" y1="120" x2="250" y2="120" stroke="#C0492E" stroke-width="4" marker-end="url(#aF)"/>
             <text x="180" y="104" font-family="JetBrains Mono,monospace" font-size="13" fill="#C0492E" font-weight="700">F</text>
-            <text x="258" y="124" font-family="JetBrains Mono,monospace" font-size="11" fill="#C0492E">sens →</text>
+            <text x="262" y="138" font-family="JetBrains Mono,monospace" font-size="11" fill="#C0492E">sens →</text>
             <text x="150" y="92" font-family="JetBrains Mono,monospace" font-size="11" fill="#5C544B">longueur ∝ intensité (N)</text>
             <defs><marker id="aF" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#C0492E"/></marker></defs>
           </svg>
@@ -174,7 +176,7 @@
         <div>
           <p class="lede">Une action mécanique se modélise par une <b>force</b>, représentée par un <b>vecteur</b>.</p>
           <p>Quatre caractéristiques la définissent&nbsp;: son <b>point d'application</b>, sa <b>droite d'action</b> (la direction), son <b>sens</b>, et son <b>intensité</b> (la norme).</p>
-          <div class="eqcard"><div class="eq">F  →  intensité en newtons (N)</div><div class="leg">On note le vecteur <b>F⃗</b>. Sur un schéma, la <b>longueur</b> de la flèche est proportionnelle à l'intensité.</div></div>
+          <div class="eqcard"><div class="eq">F  →  intensité en newtons (N)</div><div class="leg">On note le vecteur <b><span class="vec">F</span></b>. Sur un schéma, la <b>longueur</b> de la flèche est proportionnelle à l'intensité.</div></div>
         </div>
       </div>
     </section>
@@ -196,7 +198,7 @@
       <p class="lede">Pour qu'un solide reste immobile, deux conditions doivent être réunies <b>en même temps</b>.</p>
       <div class="big-idea">
         <div class="t">Principe fondamental de la statique (PFS)</div>
-        <div class="v">① La somme des forces est nulle&nbsp;: <b>Σ F⃗ = 0⃗</b><br>② La somme des moments est nulle&nbsp;: <b>Σ M = 0</b></div>
+        <div class="v">① La somme des forces est nulle&nbsp;: <b>Σ <span class="vec">F</span> = <span class="vec">0</span></b><br>② La somme des moments est nulle&nbsp;: <b>Σ M = 0</b></div>
       </div>
       <div class="twocol">
         <div class="card"><h3 style="margin-top:0">① Pas de translation</h3><p style="margin:0">Si les forces ne se compensent pas, le solide est poussé dans une direction&nbsp;: il <b>glisse</b>.</p></div>
@@ -217,10 +219,10 @@
           <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
             <line x1="150" y1="10" x2="150" y2="230" stroke="#235877" stroke-width="1.2" stroke-dasharray="6 5"/>
             <line x1="120" y1="30" x2="180" y2="30" stroke="#7a7064" stroke-width="6"/>
-            <line x1="150" y1="30" x2="150" y2="115" stroke="#2E6A8E" stroke-width="6" marker-end="url(#aT)"/>
+            <line x1="150" y1="115" x2="150" y2="30" stroke="#2E6A8E" stroke-width="3.5" marker-end="url(#aT)"/>
             <text x="158" y="80" font-family="JetBrains Mono,monospace" font-size="12" fill="#2E6A8E" font-weight="700">T (câble)</text>
             <rect x="125" y="150" width="50" height="40" rx="4" fill="#3D7E5F"/>
-            <line x1="150" y1="190" x2="150" y2="225" stroke="#C0492E" stroke-width="6" marker-end="url(#aP)"/>
+            <line x1="150" y1="190" x2="150" y2="225" stroke="#C0492E" stroke-width="3.5" marker-end="url(#aP)"/>
             <text x="158" y="216" font-family="JetBrains Mono,monospace" font-size="12" fill="#C0492E" font-weight="700">P (poids)</text>
             <defs>
               <marker id="aT" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#2E6A8E"/></marker>
@@ -240,30 +242,16 @@
         <canvas id="cvForces" width="640" height="250"></canvas>
         <div class="cap" id="capForces"><span class="ph">—</span><span id="capForcesTxt">…</span></div>
       </figure>
-      <div class="eqcard"><div class="eq">droites concourantes&nbsp;&nbsp;+&nbsp;&nbsp;Σ F⃗ = 0⃗</div><div class="leg">Les <b>trois droites d'action</b> se croisent en un même point, et placées bout à bout les vecteurs forment un <b>triangle fermé</b>.</div></div>
+      <div class="eqcard"><div class="eq">droites concourantes&nbsp;&nbsp;+&nbsp;&nbsp;Σ <span class="vec">F</span> = <span class="vec">0</span></div><div class="leg">Les <b>trois droites d'action</b> se croisent en un même point, et placées bout à bout les vecteurs forment un <b>triangle fermé</b>.</div></div>
     </section>
 
-    <section id="s7">
-      <span class="kicker">07 · Modéliser les appuis</span>
-      <h2>Liaisons &amp; réactions d'appui</h2>
-      <p class="lede">Là où le solide est en contact avec son support, naît une <b>réaction</b>. Sa nature dépend du type de liaison&nbsp;: c'est ce qu'il faut connaître pour calculer un équilibre.</p>
-      <table class="t">
-        <thead><tr><th>Liaison</th><th>Mouvement bloqué</th><th>Réaction (inconnues)</th></tr></thead>
-        <tbody>
-          <tr><td><b>Appui simple</b></td><td>translation perpendiculaire au contact</td><td><b>1</b> force ⊥ au contact</td></tr>
-          <tr><td><b>Articulation</b> (pivot)</td><td>toutes les translations</td><td><b>1</b> force de direction quelconque = <b>2</b> composantes</td></tr>
-          <tr><td><b>Encastrement</b></td><td>translations <b>et</b> rotation</td><td><b>1</b> force (2 comp.) <b>+ 1</b> moment</td></tr>
-        </tbody>
-      </table>
-      <p>Résoudre un problème de statique, c'est écrire le <b>PFS</b> sur le solide isolé pour trouver ces réactions inconnues.</p>
-    </section>
 
     <section id="s8" style="border-bottom:none">
       <span class="kicker">08 · L'essentiel</span>
       <h2>Synthèse</h2>
       <div class="eqcard"><div class="eq">Une force = un vecteur (point, droite d'action, sens, intensité en N)</div></div>
-      <div class="eqcard"><div class="eq">M = F × d&nbsp;&nbsp;—&nbsp;&nbsp;d = bras de levier (N·m)</div></div>
-      <div class="big-idea"><div class="t">Le PFS</div><div class="v"><b>Σ F⃗ = 0⃗</b> (pas de translation) et <b>Σ M = 0</b> (pas de rotation).</div></div>
+      <div class="eqcard"><div class="eq">M = F × d&nbsp;&nbsp;avec&nbsp;&nbsp;d = bras de levier (N·m)</div></div>
+      <div class="big-idea"><div class="t">Le PFS</div><div class="v"><b>Σ <span class="vec">F</span> = <span class="vec">0</span></b> (pas de translation) et <b>Σ M = 0</b> (pas de rotation).</div></div>
       <div class="card">
         <h3 style="margin-top:0">Cas particuliers</h3>
         <p style="margin:0"><b>2 forces</b>&nbsp;: même intensité, opposées, même droite d'action. — <b>3 forces</b>&nbsp;: droites concourantes + triangle des forces fermé.</p>
