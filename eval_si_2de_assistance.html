@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -109,6 +107,13 @@
   .qopt{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;text-align:left;background:#F8F4EC;border:1.5px solid rgba(42,38,34,.22);border-radius:10px;padding:11px 14px;cursor:pointer;transition:.12s;color:#2A2622}
   .qopt:hover{border-color:#3D7E5F;background:#fff}
   .qopt.sel{border-color:#3D7E5F;background:rgba(61,126,95,.12);font-weight:600}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -218,24 +223,24 @@
       ctx:'Une porte automatique répète un cycle : ouverture (2 s), attente (6 s), puis fermeture (2 s). Observe la frise du cycle qui se déroule.',
       data:[['Ouverture','2 s'],['Attente','6 s'],['Fermeture','2 s']],
       parts:[
-        {q:'Durée totale d\u2019un cycle : 2 + 6 + 2 ?', a:10, tol:0.1, pts:3, unit:'s', sol:'2 + 6 + 2 = 10 s'},
-        {q:'Nombre de cycles complets en 60 s : 60 / 10 ?', a:6, tol:0.1, pts:3, unit:'', sol:'60 / 10 = 6 cycles'},
+        {q:'Dur\u00e9e totale d\u2019un cycle ?', a:10, tol:0.1, pts:3, unit:'s', sol:'2 + 6 + 2 = 10 s'},
+        {q:'Nombre de cycles complets en 60 s ?', a:6, tol:0.1, pts:3, unit:'', sol:'60 / 10 = 6 cycles'},
         {q:'Combien d\u2019étapes compte la boucle de commande (ordre, traiter, agir, vérifier) ?', a:4, tol:0.1, pts:2, unit:'', sol:'4 étapes'}
       ] },
     { anim:'energie', tag:'Exercice 2 \u00b7 8 pts', title:'Des économies domotiques',
       ctx:'Une maison remplace 5 ampoules de 60 W par des LED de 10 W. Compare la puissance avant et après.',
       data:[['Nombre d\u2019ampoules','5'],['Ancienne (chacune)','60 W'],['LED (chacune)','10 W']],
       parts:[
-        {q:'Puissance économisée par ampoule : 60 \u2212 10 ?', a:50, tol:0.1, pts:2, unit:'W', sol:'60 \u2212 10 = 50 W'},
-        {q:'Puissance totale AVANT (les 5) : 60 \u00d7 5 ?', a:300, tol:1, pts:3, unit:'W', sol:'60 \u00d7 5 = 300 W'},
-        {q:'\u00c9conomie totale pour les 5 ampoules : 50 \u00d7 5 ?', a:250, tol:1, pts:3, unit:'W', sol:'50 \u00d7 5 = 250 W'}
+        {q:'Puissance \u00e9conomis\u00e9e par ampoule ?', a:50, tol:0.1, pts:2, unit:'W', sol:'60 \u2212 10 = 50 W'},
+        {q:'Puissance totale AVANT (les 5) ?', a:300, tol:1, pts:3, unit:'W', sol:'60 \u00d7 5 = 300 W'},
+        {q:'\u00c9conomie totale pour les 5 ampoules ?', a:250, tol:1, pts:3, unit:'W', sol:'50 \u00d7 5 = 250 W'}
       ] },
     { anim:'rampe', tag:'Exercice 3 \u00b7 8 pts', title:'Rendre l\u2019entrée accessible',
       ctx:'Pour rendre une entrée accessible en fauteuil, on remplace 3 marches de 15 cm par une rampe de 900 cm de long.',
       data:[['Marches','3 \u00d7 15 cm'],['Longueur de rampe','900 cm'],['Pente maxi conseillée','6 %']],
       parts:[
-        {q:'Hauteur totale à franchir : 3 \u00d7 15 ?', a:45, tol:0.1, pts:3, unit:'cm', sol:'3 \u00d7 15 = 45 cm'},
-        {q:'Pente de la rampe : 45 / 900 \u00d7 100 ? (%)', a:5, tol:0.2, pts:3, unit:'%', sol:'45 / 900 \u00d7 100 = 5 %'},
+        {q:'Hauteur totale \u00e0 franchir ?', a:45, tol:0.1, pts:3, unit:'cm', sol:'3 \u00d7 15 = 45 cm'},
+        {q:'Pente de la rampe ? (%)', a:5, tol:0.2, pts:3, unit:'%', sol:'45 / 900 \u00d7 100 = 5 %'},
         {q:'Cette pente (5 %) respecte-t-elle la limite de 6 % ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:2, unit:'', sol:'5 \u2264 6 \u2192 oui \u2192 1'}
       ] }
   ];

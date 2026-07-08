@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -110,6 +108,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -220,23 +225,23 @@
       data:[['\u00c9tendue Vref','5 V'],['R\u00e9solution','8 bits']],
       parts:[
         {q:'Nombre de niveaux : 2\u207f ?', a:256, tol:0.5, pts:2, unit:'niveaux', sol:'2\u2078 = 256 niveaux'},
-        {q:'Quantum q = Vref/2\u207f ? (en mV)', a:19.5, tol:0.6, pts:3, unit:'mV', sol:'q = 5/256 \u2248 0,0195 V = 19,5 mV'},
-        {q:'Tension pour le code N = 100 : V = N\u00b7q ? (en V)', a:1.95, tol:0.06, pts:3, unit:'V', sol:'V = 100 \u00d7 0,0195 \u2248 1,95 V'},
-        {q:'Code num\u00e9rique pour 2,5 V : N = V/q ?', a:128, tol:2, pts:2, unit:'code', sol:'N = 2,5/0,0195 \u2248 128'}
+        {q:'Quantum q ? (en mV)', a:19.5, tol:0.6, pts:3, unit:'mV', sol:'q = 5/256 \u2248 0,0195 V = 19,5 mV'},
+        {q:'Tension pour le code N = 100 ? (en V)', a:1.95, tol:0.06, pts:3, unit:'V', sol:'V = 100 \u00d7 0,0195 \u2248 1,95 V'},
+        {q:'Code num\u00e9rique pour 2,5 V ?', a:128, tol:2, pts:2, unit:'code', sol:'N = 2,5/0,0195 \u2248 128'}
       ] },
     { anim:'samp', tag:'Exercice 2 · 7 pts', title:'L\u2019\u00e9chantillonnage',
       ctx:'Pour num\u00e9riser un signal, on rel\u00e8ve sa valeur \u00e0 intervalles r\u00e9guliers Te. Rappel : fe = 1/Te.',
       data:[['P\u00e9riode Te','2 ms']],
       parts:[
-        {q:'Fr\u00e9quence d\u2019\u00e9chantillonnage : fe = 1/Te ? (en Hz)', a:500, tol:5, pts:2, unit:'Hz', sol:'fe = 1/0,002 = 500 Hz'},
+        {q:'Fr\u00e9quence d\u2019\u00e9chantillonnage ? (en Hz)', a:500, tol:5, pts:2, unit:'Hz', sol:'fe = 1/0,002 = 500 Hz'},
         {q:'Nombre d\u2019\u00e9chantillons relev\u00e9s en 1 s ?', a:500, tol:2, pts:2, unit:'\u00e9ch.', sol:'500 \u00d7 1 = 500 \u00e9chantillons'},
-        {q:'Dur\u00e9e pour relever 2000 \u00e9chantillons : t = N/fe ? (en s)', a:4, tol:0.2, pts:3, unit:'s', sol:'t = 2000/500 = 4 s'}
+        {q:'Dur\u00e9e pour relever 2000 \u00e9chantillons ? (en s)', a:4, tol:0.2, pts:3, unit:'s', sol:'t = 2000/500 = 4 s'}
       ] },
     { anim:'sensor', tag:'Exercice 3 · 7 pts', title:'Le capteur de temp\u00e9rature',
       ctx:'Un capteur lin\u00e9aire d\u00e9livre une tension proportionnelle \u00e0 la temp\u00e9rature, num\u00e9ris\u00e9e par un CAN.',
       data:[['Sensibilit\u00e9 capteur','10 mV/\u00b0C'],['Quantum du CAN','20 mV']],
       parts:[
-        {q:'Tension d\u00e9livr\u00e9e \u00e0 30 \u00b0C : U = k\u00b7\u03b8 ? (en mV)', a:300, tol:5, pts:2, unit:'mV', sol:'U = 10 \u00d7 30 = 300 mV'},
+        {q:'Tension d\u00e9livr\u00e9e \u00e0 30 \u00b0C ? (en mV)', a:300, tol:5, pts:2, unit:'mV', sol:'U = 10 \u00d7 30 = 300 mV'},
         {q:'Convertis cette tension en volts ?', a:0.3, tol:0.01, pts:2, unit:'V', sol:'300 mV = 0,3 V'},
         {q:'Plus petite variation de temp\u00e9rature d\u00e9tectable : q/k ? (en \u00b0C)', a:2, tol:0.2, pts:3, unit:'\u00b0C', sol:'r\u00e9solution = 20/10 = 2 \u00b0C'}
       ] }

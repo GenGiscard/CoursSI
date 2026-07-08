@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -109,6 +107,13 @@
   .qopt{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;text-align:left;background:#F8F4EC;border:1.5px solid rgba(42,38,34,.22);border-radius:10px;padding:11px 14px;cursor:pointer;transition:.12s;color:#2A2622}
   .qopt:hover{border-color:#3D7E5F;background:#fff}
   .qopt.sel{border-color:#3D7E5F;background:rgba(61,126,95,.12);font-weight:600}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -218,25 +223,25 @@
       ctx:'Un trajet de 10 km. Observe les deux barres qui se remplissent : une voiture thermique émet 120 g de CO\u2082 par km, un vélo n\u2019en émet pas.',
       data:[['Distance','10 km'],['Voiture thermique','120 g/km'],['Vélo','0 g/km']],
       parts:[
-        {q:'CO\u2082 total pour la voiture : 120 \u00d7 10 ?', a:1200, tol:1, pts:3, unit:'g', sol:'120 \u00d7 10 = 1200 g'},
-        {q:'CO\u2082 total pour le vélo : 0 \u00d7 10 ?', a:0, tol:0.1, pts:2, unit:'g', sol:'0 \u00d7 10 = 0 g'},
-        {q:'\u00c9cart entre les deux : 1200 \u2212 0 ?', a:1200, tol:1, pts:3, unit:'g', sol:'1200 \u2212 0 = 1200 g'}
+        {q:'CO\u2082 total pour la voiture ?', a:1200, tol:1, pts:3, unit:'g', sol:'120 \u00d7 10 = 1200 g'},
+        {q:'CO\u2082 total pour le v\u00e9lo ?', a:0, tol:0.1, pts:2, unit:'g', sol:'0 \u00d7 10 = 0 g'},
+        {q:'\u00c9cart entre les deux ?', a:1200, tol:1, pts:3, unit:'g', sol:'1200 \u2212 0 = 1200 g'}
       ] },
     { anim:'rendement', tag:'Exercice 2 \u00b7 8 pts', title:'Le rendement du moteur',
       ctx:'Chaque moteur reçoit 100 kJ d\u2019énergie. Le moteur thermique en transmet 25 kJ aux roues, l\u2019électrique 75 kJ : le reste part en chaleur.',
       data:[['Énergie fournie','100 kJ'],['Thermique \u2014 utile','25 kJ'],['Électrique \u2014 utile','75 kJ']],
       parts:[
-        {q:'Rendement du moteur thermique : 25 / 100 \u00d7 100 ? (%)', a:25, tol:0.5, pts:3, unit:'%', sol:'25 / 100 \u00d7 100 = 25 %'},
-        {q:'Rendement du moteur électrique : 75 / 100 \u00d7 100 ? (%)', a:75, tol:0.5, pts:3, unit:'%', sol:'75 / 100 \u00d7 100 = 75 %'},
-        {q:'\u00c9cart de rendement : 75 \u2212 25 ?', a:50, tol:0.5, pts:2, unit:'points', sol:'75 \u2212 25 = 50 points'}
+        {q:'Rendement du moteur thermique ? (%)', a:25, tol:0.5, pts:3, unit:'%', sol:'25 / 100 \u00d7 100 = 25 %'},
+        {q:'Rendement du moteur \u00e9lectrique ? (%)', a:75, tol:0.5, pts:3, unit:'%', sol:'75 / 100 \u00d7 100 = 75 %'},
+        {q:'\u00c9cart de rendement ?', a:50, tol:0.5, pts:2, unit:'points', sol:'75 \u2212 25 = 50 points'}
       ] },
     { anim:'semaine', tag:'Exercice 3 \u00b7 8 pts', title:'Le budget CO\u2082 de la semaine',
       ctx:'Un élève fait du covoiturage 3 jours par semaine, sur un trajet aller de 6 km, à 25 g de CO\u2082 par km.',
       data:[['Trajet (aller)','6 km'],['Émission','25 g/km'],['Jours de covoiturage','3 (aller-retour)']],
       parts:[
-        {q:'Distance quotidienne aller-retour : 6 \u00d7 2 ?', a:12, tol:0.1, pts:2, unit:'km', sol:'6 \u00d7 2 = 12 km'},
-        {q:'CO\u2082 émis en un jour : 12 \u00d7 25 ?', a:300, tol:1, pts:3, unit:'g', sol:'12 \u00d7 25 = 300 g'},
-        {q:'CO\u2082 sur les 3 jours : 300 \u00d7 3 ?', a:900, tol:1, pts:3, unit:'g', sol:'300 \u00d7 3 = 900 g'}
+        {q:'Distance quotidienne aller-retour ?', a:12, tol:0.1, pts:2, unit:'km', sol:'6 \u00d7 2 = 12 km'},
+        {q:'CO\u2082 \u00e9mis en un jour ?', a:300, tol:1, pts:3, unit:'g', sol:'12 \u00d7 25 = 300 g'},
+        {q:'CO\u2082 sur les 3 jours ?', a:900, tol:1, pts:3, unit:'g', sol:'300 \u00d7 3 = 900 g'}
       ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });

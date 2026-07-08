@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -89,6 +87,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -175,6 +180,12 @@
           <div class="eqcard"><div class="eq">freiner&nbsp;&rarr; frein à disque / frein à patin</div><div class="leg">La <b>fonction</b> « freiner » a plusieurs <b>solutions</b> possibles.</div></div>
           <div class="eqcard"><div class="eq">éclairer&nbsp;&rarr; ampoule LED / phare halogène</div><div class="leg">Même <b>fonction</b>, des <b>solutions techniques</b> différentes.</div></div>
         </div>
+      </div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Une fonction, plusieurs solutions</div>
+        <canvas id="cvfonc" width="900" height="230" aria-label="Une fonction peut être réalisée par plusieurs solutions techniques"></canvas>
+        <div class="cap"><b id="fophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="focap">Une fonction dit ce que le produit doit faire.</span></div>
       </div>
     </section>
 
@@ -336,6 +347,45 @@
     }
     setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvfonc'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var sols=['Vis','Clou','Colle','Soudure'], sx=[135,355,575,795], sy=170, chosen=0;
+  var fx=W/2, fy=46;
+  var caps=[
+    'Une FONCTION dit ce que le produit doit faire (son r\u00f4le).',
+    'Plusieurs SOLUTIONS techniques peuvent r\u00e9aliser la m\u00eame fonction.',
+    'Une fonction, plusieurs solutions : l\u2019ing\u00e9nieur choisit la mieux adapt\u00e9e.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<5.5?1:2));
+    var shown=phase<1?0:(phase>=2?4:Math.min(4,Math.floor((T-2)/0.7)+1));
+    g.clearRect(0,0,W,H);
+    // fonction
+    g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2.4;g.beginPath();g.rect(fx-150,fy-26,300,52);g.fill();g.stroke();
+    g.fillStyle='#235877';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('FONCTION',fx,fy-6);
+    g.font='700 15px "Bricolage Grotesque",sans-serif';g.fillText('Assembler deux pi\u00e8ces',fx,fy+15);
+    // solutions
+    for(var k=0;k<4;k++){ if(k>=shown) continue;
+      var isC=(phase>=2 && k===chosen), dim=(phase>=2 && k!==chosen);
+      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1.4;g.beginPath();g.moveTo(fx,fy+26);g.lineTo(sx[k]+55,sy-22);g.stroke();
+      g.globalAlpha=dim?0.4:1;
+      g.fillStyle=isC?'#e3efe8':'#fbeecf';g.strokeStyle=isC?'#3D7E5F':'#BD8A2A';g.lineWidth=isC?2.6:1.8;
+      g.beginPath();g.rect(sx[k],sy-22,110,44);g.fill();g.stroke();
+      g.fillStyle=isC?'#2c6147':'#8a6313';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(sols[k],sx[k]+55,sy+4);
+      if(isC){g.font='800 12px "JetBrains Mono",monospace';g.fillText('\u2713 choisie',sx[k]+55,sy+36);}
+      g.globalAlpha=1;
+    }
+    var cap=document.getElementById('focap'), ph=document.getElementById('fophase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>

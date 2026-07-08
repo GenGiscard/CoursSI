@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -110,6 +108,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -223,26 +228,26 @@
       ctx:'Le moteur d\u2019un v\u00e9lo \u00e0 assistance \u00e9lectrique re\u00e7oit de la puissance \u00e9lectrique et fournit de la puissance m\u00e9canique. Lis les valeurs sur le sch\u00e9ma.',
       data:[['Tension U','36 V'],['Intensit\u00e9 I','5 A'],['Couple moteur C','8 N\u00b7m'],['Vitesse \u03c9','20 rad/s']],
       parts:[
-        {q:'Puissance \u00e9lectrique absorb\u00e9e : P_a = U\u00b7I ?', a:180, tol:1, pts:2, unit:'W', sol:'P_a = 36 \u00d7 5 = 180 W'},
-        {q:'Puissance m\u00e9canique utile : P_u = C\u00b7\u03c9 ?', a:160, tol:1, pts:2, unit:'W', sol:'P_u = 8 \u00d7 20 = 160 W'},
-        {q:'Rendement du moteur : \u03b7 = P_u/P_a ? (sans unit\u00e9)', a:0.89, tol:0.02, pts:3, unit:'', sol:'\u03b7 = 160/180 \u2248 0,89'},
-        {q:'Puissance perdue : P_pertes = P_a \u2212 P_u ?', a:20, tol:1, pts:3, unit:'W', sol:'P_pertes = 180 \u2212 160 = 20 W'}
+        {q:'Puissance \u00e9lectrique absorb\u00e9e ?', a:180, tol:1, pts:2, unit:'W', sol:'P_a = 36 \u00d7 5 = 180 W'},
+        {q:'Puissance m\u00e9canique utile ?', a:160, tol:1, pts:2, unit:'W', sol:'P_u = 8 \u00d7 20 = 160 W'},
+        {q:'Rendement du moteur ? (sans unit\u00e9)', a:0.89, tol:0.02, pts:3, unit:'', sol:'\u03b7 = 160/180 \u2248 0,89'},
+        {q:'Puissance perdue ?', a:20, tol:1, pts:3, unit:'W', sol:'P_pertes = 180 \u2212 160 = 20 W'}
       ] },
     { anim:'batt', tag:'Exercice 2 · 8 pts', title:'L\u2019autonomie de la batterie',
       ctx:'La batterie du VAE stocke une \u00e9nergie ; le moteur la consomme \u00e0 une puissance moyenne. Rappel : E = P\u00b7\u0394t.',
       data:[['Capacit\u00e9 batterie','500 Wh'],['Puissance moyenne P','250 W'],['Vitesse v','25 km/h']],
       parts:[
-        {q:'Autonomie en temps : t = E/P ?', a:2, tol:0.1, pts:2, unit:'h', sol:'t = 500 / 250 = 2 h'},
-        {q:'Distance parcourue : d = v\u00b7t ?', a:50, tol:1, pts:3, unit:'km', sol:'d = 25 \u00d7 2 = 50 km'},
-        {q:'\u00c9nergie pour un trajet de 30 km : E = P\u00b7(30/v) ?', a:300, tol:10, pts:3, unit:'Wh', sol:'E = 250 \u00d7 (30/25) = 300 Wh'}
+        {q:'Autonomie en temps ?', a:2, tol:0.1, pts:2, unit:'h', sol:'t = 500 / 250 = 2 h'},
+        {q:'Distance parcourue ?', a:50, tol:1, pts:3, unit:'km', sol:'d = 25 \u00d7 2 = 50 km'},
+        {q:'\u00c9nergie pour un trajet de 30 km ?', a:300, tol:10, pts:3, unit:'Wh', sol:'E = 250 \u00d7 (30/25) = 300 Wh'}
       ] },
     { anim:'flow', tag:'Exercice 3 · 7 pts', title:'Le rendement de la cha\u00eene compl\u00e8te',
       ctx:'La puissance traverse trois \u00e9tages, chacun avec son rendement. Le rendement global est le produit des rendements.',
       data:[['P absorb\u00e9e','250 W'],['Variateur \u03b7\u2081','0,95'],['Moteur \u03b7\u2082','0,85'],['R\u00e9ducteur \u03b7\u2083','0,92']],
       parts:[
-        {q:'Rendement global : \u03b7 = \u03b7\u2081\u00b7\u03b7\u2082\u00b7\u03b7\u2083 ? (sans unit\u00e9)', a:0.743, tol:0.012, pts:3, unit:'', sol:'\u03b7 = 0,95 \u00d7 0,85 \u00d7 0,92 \u2248 0,743'},
-        {q:'Puissance utile en sortie : P_u = P_a\u00b7\u03b7 ?', a:185.7, tol:3, pts:2, unit:'W', sol:'P_u = 250 \u00d7 0,743 \u2248 185,7 W'},
-        {q:'Puissance totale perdue : P_pertes = P_a \u2212 P_u ?', a:64.3, tol:3, pts:2, unit:'W', sol:'P_pertes = 250 \u2212 185,7 \u2248 64,3 W'}
+        {q:'Rendement global ? (sans unit\u00e9)', a:0.743, tol:0.012, pts:3, unit:'', sol:'\u03b7 = 0,95 \u00d7 0,85 \u00d7 0,92 \u2248 0,743'},
+        {q:'Puissance utile en sortie ?', a:185.7, tol:3, pts:2, unit:'W', sol:'P_u = 250 \u00d7 0,743 \u2248 185,7 W'},
+        {q:'Puissance totale perdue ?', a:64.3, tol:3, pts:2, unit:'W', sol:'P_pertes = 250 \u2212 185,7 \u2248 64,3 W'}
       ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });

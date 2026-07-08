@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -109,6 +107,13 @@
   .qopt{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:14px;text-align:left;background:#F8F4EC;border:1.5px solid rgba(42,38,34,.22);border-radius:10px;padding:11px 14px;cursor:pointer;transition:.12s;color:#2A2622}
   .qopt:hover{border-color:#3D7E5F;background:#fff}
   .qopt.sel{border-color:#3D7E5F;background:rgba(61,126,95,.12);font-weight:600}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -218,24 +223,24 @@
       ctx:'Après un brainstorming, la classe a produit 20 idées. Après tri, elle en élimine 14. Observe les idées : celles retenues passent au vert.',
       data:[['Idées produites','20'],['Idées éliminées','14'],['Idées retenues','?']],
       parts:[
-        {q:'Nombre d\u2019idées retenues : 20 \u2212 14 ?', a:6, tol:0.1, pts:3, unit:'', sol:'20 \u2212 14 = 6 idées'},
-        {q:'Part des idées retenues : 6 / 20 \u00d7 100 ? (%)', a:30, tol:0.5, pts:3, unit:'%', sol:'6 / 20 \u00d7 100 = 30 %'},
+        {q:'Nombre d\u2019id\u00e9es retenues ?', a:6, tol:0.1, pts:3, unit:'', sol:'20 \u2212 14 = 6 idées'},
+        {q:'Part des id\u00e9es retenues ? (%)', a:30, tol:0.5, pts:3, unit:'%', sol:'6 / 20 \u00d7 100 = 30 %'},
         {q:'Combien d\u2019étapes compte la démarche de projet (imaginer, concevoir, réaliser, tester) ?', a:4, tol:0.1, pts:2, unit:'', sol:'4 étapes'}
       ] },
     { anim:'budget', tag:'Exercice 2 \u00b7 8 pts', title:'Le budget du prototype',
       ctx:'Le prototype utilise trois composants : une LED (3 \u20ac), un capteur (8 \u20ac) et une carte (12 \u20ac). Le budget maximum est de 30 \u20ac.',
       data:[['LED','3 \u20ac'],['Capteur','8 \u20ac'],['Carte','12 \u20ac'],['Budget maxi','30 \u20ac']],
       parts:[
-        {q:'Coût total des composants : 3 + 8 + 12 ?', a:23, tol:0.1, pts:3, unit:'\u20ac', sol:'3 + 8 + 12 = 23 \u20ac'},
-        {q:'Marge restante : 30 \u2212 23 ?', a:7, tol:0.1, pts:3, unit:'\u20ac', sol:'30 \u2212 23 = 7 \u20ac'},
+        {q:'Co\u00fbt total des composants ?', a:23, tol:0.1, pts:3, unit:'\u20ac', sol:'3 + 8 + 12 = 23 \u20ac'},
+        {q:'Marge restante ?', a:7, tol:0.1, pts:3, unit:'\u20ac', sol:'30 \u2212 23 = 7 \u20ac'},
         {q:'Le prototype respecte-t-il le budget ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:2, unit:'', sol:'23 \u2264 30 \u2192 oui \u2192 1'}
       ] },
     { anim:'iter', tag:'Exercice 3 \u00b7 8 pts', title:'Le planning du projet',
       ctx:'Le projet dure 6 séances de 2 h. On y réalise 3 itérations : à chaque fois, on teste puis on améliore le prototype.',
       data:[['Séances','6'],['Durée par séance','2 h'],['Itérations','3']],
       parts:[
-        {q:'Temps total de projet : 6 \u00d7 2 ?', a:12, tol:0.1, pts:3, unit:'h', sol:'6 \u00d7 2 = 12 h'},
-        {q:'Nombre de séances par itération : 6 / 3 ?', a:2, tol:0.1, pts:3, unit:'', sol:'6 / 3 = 2 séances'},
+        {q:'Temps total de projet ?', a:12, tol:0.1, pts:3, unit:'h', sol:'6 \u00d7 2 = 12 h'},
+        {q:'Nombre de s\u00e9ances par it\u00e9ration ?', a:2, tol:0.1, pts:3, unit:'', sol:'6 / 3 = 2 séances'},
         {q:'Combien d\u2019éléments contient une bonne présentation (le besoin, la solution, la preuve que \u00e7a marche) ?', a:3, tol:0.1, pts:2, unit:'', sol:'3 éléments'}
       ] }
   ];

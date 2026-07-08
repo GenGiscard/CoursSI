@@ -18,9 +18,7 @@
     --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;min-height:100vh}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 80px}
   .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
   .topbar .mark{width:40px;height:40px;border-radius:10px;background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
@@ -103,6 +101,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -212,25 +217,25 @@
       ctx:'Un fichier est envoyé sur une liaison. Observe le remplissage, puis calcule (1 octet = 8 bits).',
       data:[['Fichier','5 Mo'],['Débit','8 Mbit/s']],
       parts:[
-        {q:'Taille du fichier en Mbit : 5 × 8 ?', a:40, tol:0.5, pts:2, unit:'Mbit', sol:'5 × 8 = 40 Mbit'},
-        {q:'Temps : t = taille / débit = 40 / 8 ? (s)', a:5, tol:0.1, pts:3, unit:'s', sol:'40 / 8 = 5 s'},
-        {q:'Avec un débit de 20 Mbit/s : t = 40 / 20 ? (s)', a:2, tol:0.1, pts:2, unit:'s', sol:'40 / 20 = 2 s'},
+        {q:'Taille du fichier en Mbit ?', a:40, tol:0.5, pts:2, unit:'Mbit', sol:'5 × 8 = 40 Mbit'},
+        {q:'Temps ? (s)', a:5, tol:0.1, pts:3, unit:'s', sol:'40 / 8 = 5 s'},
+        {q:'Avec un d\u00e9bit de 20 Mbit/s ? (s)', a:2, tol:0.1, pts:2, unit:'s', sol:'40 / 20 = 2 s'},
         {q:'Quel débit pour transmettre 40 Mbit en 4 s ? (débit = taille / t)', a:10, tol:0.2, pts:3, unit:'Mbit/s', sol:'40 / 4 = 10 Mbit/s'}
       ] },
     { anim:'packets', tag:'Exercice 2 · 7 pts', title:'Découpage en paquets',
       ctx:'Un message est découpé en paquets de taille maximale fixée, chacun recevant un en-tête.',
       data:[['Message','6000 octets'],['Taille max / paquet','1500 octets'],['En-tête','40 octets / paquet']],
       parts:[
-        {q:'Nombre de paquets : 6000 / 1500 ?', a:4, tol:0.5, pts:3, unit:'paquets', sol:'6000 / 1500 = 4 paquets'},
-        {q:'En-têtes ajoutés au total : 4 × 40 ? (octets)', a:160, tol:1, pts:2, unit:'octets', sol:'4 × 40 = 160 octets'},
-        {q:'Total d\u2019octets transmis : 6000 + 160 ? (octets)', a:6160, tol:5, pts:2, unit:'octets', sol:'6000 + 160 = 6160 octets'}
+        {q:'Nombre de paquets ?', a:4, tol:0.5, pts:3, unit:'paquets', sol:'6000 / 1500 = 4 paquets'},
+        {q:'En-t\u00eates ajout\u00e9s au total ? (octets)', a:160, tol:1, pts:2, unit:'octets', sol:'4 × 40 = 160 octets'},
+        {q:'Total d\u2019octets transmis ? (octets)', a:6160, tol:5, pts:2, unit:'octets', sol:'6000 + 160 = 6160 octets'}
       ] },
     { anim:'layers', tag:'Exercice 3 · 7 pts', title:'Le modèle en couches',
       ctx:'En descendant les couches, chaque couche ajoute son en-tête au message (encapsulation).',
       data:[['Message','100 octets'],['Couches','4'],['En-tête / couche','20 octets']],
       parts:[
-        {q:'En-têtes ajoutés en descendant les 4 couches : 4 × 20 ? (octets)', a:80, tol:1, pts:2, unit:'octets', sol:'4 × 20 = 80 octets'},
-        {q:'Taille du message encapsulé : 100 + 80 ? (octets)', a:180, tol:1, pts:3, unit:'octets', sol:'100 + 80 = 180 octets'},
+        {q:'En-t\u00eates ajout\u00e9s en descendant les 4 couches ? (octets)', a:80, tol:1, pts:2, unit:'octets', sol:'4 × 20 = 80 octets'},
+        {q:'Taille du message encapsul\u00e9 ? (octets)', a:180, tol:1, pts:3, unit:'octets', sol:'100 + 80 = 180 octets'},
         {q:'Nombre d\u2019en-têtes \u00e0 retirer \u00e0 la réception ?', a:4, tol:0.5, pts:2, unit:'en-têtes', sol:'4 couches → 4 en-têtes retirés'}
       ] }
   ];
