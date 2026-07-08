@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conduite de projet — Cours · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1300px;margin:0 auto}
+  .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--steel);border-color:var(--steel)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
+  .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--steel)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px) 90px}
+  section{padding:54px 0 48px;border-bottom:1px solid var(--line);min-height:60vh}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(27px,4.4vw,44px);line-height:1.04;margin:12px 0 16px}
+  h3{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,23px);margin:18px 0 8px}
+  .lede{font-size:16.5px;max-width:62ch;color:var(--ink-soft);margin:8px 0 18px}
+  p{margin:0 0 14px;max-width:64ch} b{color:var(--ink)}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:center}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+  .chip{font-family:var(--mono);font-size:12px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:6px 12px;color:var(--ink)}
+  .chip.s{background:rgba(46,106,142,.09);border-color:rgba(46,106,142,.4);color:#235877}
+  .big-idea{background:var(--steel);color:#fff;border-radius:16px;padding:24px 26px;margin:14px 0}
+  .big-idea .t{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:8px}
+  .big-idea .v{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.7vw,26px);line-height:1.2}
+  .big-idea .v b{color:#FCE0B0}
+  .eqcard{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:12px;padding:16px 20px;margin:14px 0}
+  .eqcard .eq{font-family:var(--mono);font-size:clamp(14px,2vw,18px);font-weight:700;color:var(--ink);letter-spacing:.01em}
+  .eqcard .leg{font-size:13px;color:var(--ink-soft);margin-top:7px}
+  .eqcard .leg b{color:var(--steel)}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:10px 0}
+  .pipe{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:14px 0}
+  .pipe .ph{flex:1 1 130px;background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--steel);border-radius:10px;padding:12px 14px}
+  .pipe .ph .n{font-family:var(--mono);font-size:10px;color:var(--steel);font-weight:700}
+  .pipe .ph .t{font-family:var(--display);font-weight:700;font-size:14.5px;margin-top:3px}
+  .pipe .ph .d{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .pipe .ar{align-self:center;color:var(--line-strong);font-family:var(--mono);flex:0 0 auto}
+  figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
+  figure canvas{width:100%;height:auto;display:block}
+  .cap{font-family:var(--mono);font-size:13px;color:var(--ink);background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.28);border-radius:10px;padding:11px 15px;margin-top:12px;min-height:42px;display:flex;align-items:center;gap:10px}
+  .cap .ph{font-weight:700;color:var(--steel);flex:0 0 auto;width:18px;height:18px;border-radius:5px;background:rgba(46,106,142,.16);display:flex;align-items:center;justify-content:center;font-size:11px}
+  table.t{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px;margin:10px 0}
+  table.t th,table.t td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  table.t thead th{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.t td b{font-family:var(--mono);color:var(--ink)} table.t tr:last-child td{border-bottom:none}
+  .crit{color:#a44a26;font-weight:700}
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_projet.html">← Séquence : projet</a>
+    <div class="brand">
+      <div class="mark">C</div>
+      <div><h1>Conduite de projet</h1><p>Cours · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="prog"><i id="progBar"></i></div>
+    <div class="links" id="links">
+      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
+      <a href="#s2" class="navlink"><span>02</span>Les phases</a>
+      <a href="#s3" class="navlink"><span>03</span>Jalons &amp; revues</a>
+      <a href="#s4" class="navlink"><span>04</span>Le diagramme de Gantt</a>
+      <a href="#s5" class="navlink"><span>05</span>Répartir les tâches</a>
+      <a href="#s6" class="navlink"><span>06</span>Travailler en équipe</a>
+      <a href="#s7" class="navlink"><span>07</span>Antériorités &amp; durée</a>
+      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <section id="s1">
+      <span class="kicker">Projet · problématique</span>
+      <h2>Réussir un projet, c'est s'organiser</h2>
+      <div class="twocol">
+        <div>
+          <p class="lede">Un projet transforme un <b>besoin</b> en <b>système réel</b>, en <b>équipe</b>, avec un <b>temps</b> et des <b>moyens</b> limités.</p>
+          <p>Sans organisation, on oublie des étapes, on prend du retard, on refait. Conduire un projet, c'est planifier, jalonner et coordonner.</p>
+          <div class="chips"><span class="chip s">besoin → système</span><span class="chip s">en équipe</span><span class="chip s">temps limité</span></div>
+        </div>
+        <figure>
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect x="16" y="58" width="86" height="34" rx="7" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="1.8"/>
+            <text x="59" y="79" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#235877" text-anchor="middle">Besoin</text>
+            <rect x="258" y="58" width="86" height="34" rx="7" fill="#2E6A8E"/>
+            <text x="301" y="79" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#fff" text-anchor="middle">Système</text>
+            <line x1="106" y1="75" x2="254" y2="75" stroke="#5C544B" stroke-width="1.6" stroke-dasharray="5 4"/>
+            <polygon points="254,75 246,71 246,79" fill="#5C544B"/>
+            <g font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">
+              <circle cx="150" cy="75" r="4" fill="#B85C2E"/><text x="150" y="60">jalon</text>
+              <circle cx="200" cy="75" r="4" fill="#B85C2E"/><text x="200" y="60">jalon</text>
+            </g>
+            <text x="180" y="104" font-family="JetBrains Mono,monospace" font-size="9" fill="#5C544B" text-anchor="middle">temps · équipe · moyens</text>
+          </svg>
+          <figcaption style="font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:10px;text-align:center">Du besoin au système, étape par étape.</figcaption>
+        </figure>
+      </div>
+      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Conduire un projet = <b>planifier</b>, <b>jalonner</b> et <b>coordonner</b> pour livrer dans les délais.</div></div>
+    </section>
+
+    <section id="s2">
+      <span class="kicker">02 · Le déroulé</span>
+      <h2>Les phases d'un projet</h2>
+      <p class="lede">Un projet se déroule en phases successives, du besoin jusqu'au bilan.</p>
+      <div class="pipe">
+        <div class="ph"><div class="n">01</div><div class="t">Analyser</div><div class="d">le besoin, le cahier des charges</div></div>
+        <div class="ar">→</div>
+        <div class="ph"><div class="n">02</div><div class="t">Concevoir</div><div class="d">solutions, choix techniques</div></div>
+        <div class="ar">→</div>
+        <div class="ph"><div class="n">03</div><div class="t">Réaliser</div><div class="d">fabriquer, assembler</div></div>
+        <div class="ar">→</div>
+        <div class="ph"><div class="n">04</div><div class="t">Valider</div><div class="d">essais, conformité</div></div>
+      </div>
+      <div class="eqcard"><div class="eq">chaque phase produit un livrable et prépare la suivante</div></div>
+    </section>
+
+    <section id="s3">
+      <span class="kicker">03 · Des points de contrôle</span>
+      <h2>Jalons &amp; revues</h2>
+      <p class="lede">Un <b>jalon</b> est une date-clé qui marque la fin d'une phase. On y tient une <b>revue</b> : on vérifie le travail et on <b>autorise</b> (ou non) la phase suivante.</p>
+      <figure>
+        <canvas id="cvJalons" width="640" height="250"></canvas>
+        <div class="cap" id="capJal"><span class="ph">—</span><span id="capJalTxt">…</span></div>
+      </figure>
+      <div class="eqcard"><div class="eq">jalon = date-clé · revue = validation pour continuer</div><div class="leg">Une revue peut décider de <b>poursuivre</b>, de <b>corriger</b> ou d'<b>arrêter</b>.</div></div>
+    </section>
+
+    <section id="s4">
+      <span class="kicker">04 · Planifier dans le temps</span>
+      <h2>Le diagramme de Gantt</h2>
+      <p class="lede">Le <b>Gantt</b> place chaque <b>tâche</b> sur un axe de temps. Des tâches peuvent se dérouler <b>en parallèle</b> ; d'autres s'enchaînent.</p>
+      <figure>
+        <canvas id="cvGantt" width="640" height="250"></canvas>
+        <div class="cap" id="capGan"><span class="ph">—</span><span id="capGanTxt">…</span></div>
+      </figure>
+      <div class="eqcard"><div class="eq">chemin critique = enchaînement le plus long</div><div class="leg">Le <b>chemin critique</b> (en cuivre) fixe la <b>durée minimale</b> du projet.</div></div>
+    </section>
+
+    <section id="s5">
+      <span class="kicker">05 · Qui fait quoi</span>
+      <h2>Répartir les tâches</h2>
+      <p class="lede">On découpe le projet en <b>tâches</b>, on les <b>attribue</b> à un responsable et on <b>estime</b> leur durée.</p>
+      <table class="t">
+        <thead><tr><th>Tâche</th><th>Responsable</th><th>Durée</th></tr></thead>
+        <tbody>
+          <tr><td>Analyse du besoin</td><td><b>Léa</b></td><td>2 sem.</td></tr>
+          <tr><td>Conception</td><td><b>Sam</b></td><td>3 sem.</td></tr>
+          <tr><td>Achats / approvisionnement</td><td><b>Noa</b></td><td>2 sem.</td></tr>
+          <tr><td>Réalisation</td><td><b>Sam + Léa</b></td><td>3 sem.</td></tr>
+          <tr><td>Essais</td><td><b>Noa</b></td><td>1 sem.</td></tr>
+        </tbody>
+      </table>
+      <div class="chips"><span class="chip s">découper</span><span class="chip s">attribuer</span><span class="chip s">estimer la durée</span></div>
+    </section>
+
+    <section id="s6">
+      <span class="kicker">06 · Avancer ensemble</span>
+      <h2>Travailler en équipe</h2>
+      <p class="lede">Un projet est collectif&nbsp;: il faut <b>coordonner</b> les tâches, <b>communiquer</b> régulièrement et <b>gérer les aléas</b>.</p>
+      <div class="card">
+        <h3 style="margin-top:0">Les bons réflexes</h3>
+        <p style="margin:0">Faire des <b>points d'avancement</b> courts et réguliers · partager un <b>planning visible</b> de tous · signaler tôt un <b>retard</b> ou un <b>blocage</b> · garder une <b>trace</b> des décisions.</p>
+      </div>
+      <div class="eqcard"><div class="eq">communiquer tôt évite les retards en cascade</div></div>
+    </section>
+
+    <section id="s7">
+      <span class="kicker">07 · L'enchaînement</span>
+      <h2>Antériorités &amp; durée</h2>
+      <p class="lede">Une tâche a parfois des <b>antériorités</b>&nbsp;: elle ne peut commencer qu'une fois d'autres terminées. La <b>durée totale</b> dépend de cet enchaînement.</p>
+      <table class="t">
+        <thead><tr><th>Tâche</th><th>Antériorité</th><th>Durée</th></tr></thead>
+        <tbody>
+          <tr><td class="crit">A · Analyse</td><td>—</td><td>2</td></tr>
+          <tr><td class="crit">B · Conception</td><td>A</td><td>3</td></tr>
+          <tr><td>C · Achats</td><td>A</td><td>2</td></tr>
+          <tr><td class="crit">D · Réalisation</td><td>B et C</td><td>3</td></tr>
+          <tr><td class="crit">E · Essais</td><td>D</td><td>1</td></tr>
+        </tbody>
+      </table>
+      <div class="eqcard"><div class="eq">chemin critique A → B → D → E = 2 + 3 + 3 + 1 = 9 semaines</div><div class="leg">C (achats) se fait <b>en parallèle</b> de B&nbsp;: il dispose d'une <b>marge</b>.</div></div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Le chemin critique fixe la durée du projet</div>
+        <canvas id="cvcrit" width="900" height="240" aria-label="Réseau de tâches, chemins et chemin critique"></canvas>
+        <div class="cap"><b id="crphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="crcap">Un réseau de tâches avec antériorités.</span></div>
+      </div>
+    </section>
+
+    <section id="s8" style="border-bottom:none">
+      <span class="kicker">08 · L'essentiel</span>
+      <h2>Synthèse</h2>
+      <div class="eqcard"><div class="eq">phases : analyser → concevoir → réaliser → valider</div></div>
+      <div class="eqcard"><div class="eq">jalon = date-clé · revue = validation pour continuer</div></div>
+      <div class="big-idea"><div class="t">Planifier</div><div class="v">Le <b>Gantt</b> place les tâches dans le temps ; le <b>chemin critique</b> fixe la durée du projet.</div></div>
+      <div class="card"><h3 style="margin-top:0">Coordonner</h3><p style="margin:0">Répartir les tâches, communiquer régulièrement, gérer les aléas.</p></div>
+      <a class="cta" href="hub_si_projet.html">🔧 Passer au TP « Planifier un projet » →</a>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var prog=document.getElementById('progBar');
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
+    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+  }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+  function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
+
+  // ===== Animation : jalons & revues =====
+  (function(){
+    var cv=document.getElementById('cvJalons'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function setCap(n,t){document.querySelector('#capJal .ph').textContent=n;document.getElementById('capJalTxt').textContent=t;}
+    var REV=['Lancement','Conception','Réalisation','Finale'];
+    var PHA=['Analyse','Conception','Réalisation','Validation'];
+    var y=128, xL=70, xR=W-50, n=4;
+    function xM(i){return xL + (i+1)*(xR-xL)/n;}
+    var phaseJ=0;
+    function diamond(x,yy,r){g.beginPath();g.moveTo(x,yy-r);g.lineTo(x+r,yy);g.lineTo(x,yy+r);g.lineTo(x-r,yy);g.closePath();}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      var active=Math.floor(phaseJ/1.7)%n;
+      // base line
+      g.strokeStyle='rgba(42,38,34,.2)';g.lineWidth=3;g.beginPath();g.moveTo(xL,y);g.lineTo(xR,y);g.stroke();
+      // progress fill up to active milestone
+      g.strokeStyle='#2E6A8E';g.lineWidth=3;g.beginPath();g.moveTo(xL,y);g.lineTo(xM(active),y);g.stroke();
+      // phase labels (segments)
+      for(var s=0;s<n;s++){var xa=s===0?xL:xM(s-1), xb=xM(s);
+        g.fillStyle=(s<=active)?'#235877':'#9a9088';g.font='10px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText(PHA[s],(xa+xb)/2,y+30);}
+      // milestones
+      for(var i=0;i<n;i++){var x=xM(i),done=i<active,now=i===active;
+        if(done||now){g.fillStyle=now?'#B85C2E':'#2E6A8E';diamond(x,y,11);g.fill();
+          g.strokeStyle='#fff';g.lineWidth=2;
+          if(done){g.beginPath();g.moveTo(x-4,y);g.lineTo(x-1,y+4);g.lineTo(x+5,y-4);g.stroke();}}
+        else{g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;diamond(x,y,11);g.fill();g.stroke();}
+        g.fillStyle=(i<=active)?'#2A2622':'#9a9088';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText('revue',x,y-44);g.fillText(REV[i],x,y-30);}
+      setCap(String(active+1),'Revue de '+REV[active].toLowerCase()+' : on valide la phase « '+PHA[active]+' » et on autorise la suivante.');
+      g.textAlign='left';
+    }
+    setInterval(function(){phaseJ+=0.05; draw();},50); draw();
+  })();
+
+  // ===== Animation : diagramme de Gantt =====
+  (function(){
+    var cv=document.getElementById('cvGantt'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function setCap(n,t){document.querySelector('#capGan .ph').textContent=n;document.getElementById('capGanTxt').textContent=t;}
+    var TASKS=[
+      {n:'A Analyse',s:0,d:2,crit:true},
+      {n:'B Conception',s:2,d:3,crit:true},
+      {n:'C Achats',s:2,d:2,crit:false},
+      {n:'D Réalisation',s:5,d:3,crit:true},
+      {n:'E Essais',s:8,d:1,crit:true}
+    ];
+    var NW=9, xL=120, xR=W-24, yTop=46, rowH=30, barH=18;
+    function xF(w){return xL + w*(xR-xL)/NW;}
+    var phaseG=0;
+    function draw(){
+      g.clearRect(0,0,W,H);
+      var cursor=Math.min(NW,(phaseG%7)/5*NW);
+      // week grid
+      for(var w=0;w<=NW;w++){var x=xF(w);g.strokeStyle=(w===0||w===NW)?'rgba(42,38,34,.3)':'rgba(42,38,34,.1)';g.lineWidth=1;g.beginPath();g.moveTo(x,yTop-8);g.lineTo(x,yTop+TASKS.length*rowH);g.stroke();
+        if(w<NW){g.fillStyle='#9a9088';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('S'+(w+1),(xF(w)+xF(w+1))/2,yTop-12);}}
+      // rows
+      TASKS.forEach(function(t,i){var y=yTop+i*rowH+rowH/2;
+        g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(t.n,12,y+4);
+        var bx=xF(t.s), bw=xF(t.s+t.d)-xF(t.s);
+        // light full bar
+        g.fillStyle=t.crit?'rgba(184,92,46,.18)':'rgba(46,106,142,.18)';rrect(g,bx,y-barH/2,bw,barH,5);g.fill();
+        // solid portion up to cursor
+        var doneW=Math.max(0,Math.min(t.s+t.d,cursor)-t.s);
+        if(doneW>0){var sw=xF(t.s+doneW)-xF(t.s);g.fillStyle=t.crit?'#B85C2E':'#2E6A8E';rrect(g,bx,y-barH/2,sw,barH,5);g.fill();}
+      });
+      // cursor line
+      var cx=xF(cursor);g.strokeStyle='#3D7E5F';g.lineWidth=2;g.setLineDash([4,3]);g.beginPath();g.moveTo(cx,yTop-8);g.lineTo(cx,yTop+TASKS.length*rowH+4);g.stroke();g.setLineDash([]);
+      if(cursor>=NW-0.05){g.fillStyle='#2c6147';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='right';g.fillText('durée = 9 semaines',xR,yTop+TASKS.length*rowH+20);
+        setCap('✓','Chemin critique A → B → D → E : la durée minimale du projet est de 9 semaines.');}
+      else setCap('▸','Les tâches se placent dans le temps ; C (achats) se déroule en parallèle de B.');
+      g.textAlign='left';
+    }
+    setInterval(function(){phaseG+=0.05; draw();},50); draw();
+  })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvcrit'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var A=[130,64],B=[130,176],C=[430,120],D=[710,120];
+  var caps=[
+    'Ant\u00e9riorit\u00e9s : A et B doivent finir avant C ; C avant D.',
+    'Chemin A \u2192 C \u2192 D : 2 + 3 + 2 = 7 jours.',
+    'Chemin B \u2192 C \u2192 D : 5 + 3 + 2 = 10 jours.',
+    'Le plus long est le CHEMIN CRITIQUE : 10 jours \u2014 il fixe la dur\u00e9e du projet.'
+  ];
+  function edge(a,b,col,w){g.strokeStyle=col;g.lineWidth=w;g.beginPath();g.moveTo(a[0]+38,a[1]);g.lineTo(b[0]-38,b[1]);g.stroke();
+    var an=Math.atan2(b[1]-a[1],b[0]-a[0]);g.fillStyle=col;g.beginPath();g.moveTo(b[0]-38,b[1]);g.lineTo(b[0]-38-10*Math.cos(an-0.4),b[1]-10*Math.sin(an-0.4));g.lineTo(b[0]-38-10*Math.cos(an+0.4),b[1]-10*Math.sin(an+0.4));g.closePath();g.fill();}
+  function node(pos,lab,fill,stroke,wd){g.fillStyle=fill;g.strokeStyle=stroke;g.lineWidth=wd;g.beginPath();g.rect(pos[0]-38,pos[1]-22,76,44);g.fill();g.stroke();
+    g.fillStyle=stroke;g.font='700 15px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,pos[0],pos[1]+5);}
+  var T=0;
+  function step(){
+    T+=0.03; if(T>12) T=0;
+    var phase=(T<2.2?0:(T<5?1:(T<8?2:3)));
+    g.clearRect(0,0,W,H);
+    var gray='rgba(42,38,34,.3)';
+    // arêtes de base
+    edge(A,C,gray,1.6); edge(B,C,gray,1.6); edge(C,D,gray,1.6);
+    // surbrillance chemins
+    if(phase===1){edge(A,C,'#2E6A8E',3.5);edge(C,D,'#2E6A8E',3.5);}
+    if(phase===2){edge(B,C,'#C0492E',3.5);edge(C,D,'#C0492E',3.5);}
+    if(phase===3){edge(B,C,'#3D7E5F',4);edge(C,D,'#3D7E5F',4);}
+    // noeuds
+    var hlA=(phase===1), hlB=(phase===2||phase===3), crit=(phase===3);
+    node(A,'A 2j',hlA?'#dce8f2':'#FCFAF4',hlA?'#2E6A8E':'#9a9385',hlA?2.4:1.5);
+    node(B,'B 5j',crit?'#e3efe8':(hlB?'#f4e4dd':'#FCFAF4'),crit?'#3D7E5F':(hlB?'#C0492E':'#9a9385'),hlB?2.4:1.5);
+    node(C,'C 3j',(phase>=1)?'#eef1e9':'#FCFAF4',crit?'#3D7E5F':'#5C544B',crit?2.6:1.6);
+    node(D,'D 2j',(phase>=1)?'#eef1e9':'#FCFAF4',crit?'#3D7E5F':'#5C544B',crit?2.6:1.6);
+    // sommes
+    g.textAlign='center';g.font='800 20px "Bricolage Grotesque",sans-serif';
+    if(phase===1){g.fillStyle='#235877';g.fillText('2 + 3 + 2 = 7 jours',W/2,224);}
+    if(phase===2){g.fillStyle='#a44a26';g.fillText('5 + 3 + 2 = 10 jours',W/2,224);}
+    if(phase===3){g.fillStyle='#2c6147';g.fillText('chemin critique = 10 jours',W/2,224);}
+    var cap=document.getElementById('crcap'), ph=document.getElementById('crphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462','\u2463'][phase];
+  }
+  setInterval(step,40); step();
+})();
+</script>
+</body>
+</html>
