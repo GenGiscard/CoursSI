@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinématique — Cours · Spé SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;max-width:1340px;margin:0 auto}
+  .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
+    padding:26px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+  .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+  .nav .back:hover{color:var(--steel);border-color:var(--steel)}
+  .brand{display:flex;gap:11px;align-items:center;margin-bottom:8px}
+  .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
+    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .brand h1{font-family:var(--display);font-size:14.5px;line-height:1.1;margin:0;font-weight:800}
+  .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
+  .progress{height:3px;background:var(--cream);border-radius:3px;overflow:hidden;margin:14px 0 16px}
+  .progress i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
+  .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+  .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
+  .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
+  .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
+  .nav a.navlink.on span{opacity:1;color:var(--steel)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px)}
+  .slide{min-height:78vh;padding:60px 0 56px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);font-weight:500}
+  .slide h2{font-family:var(--display);font-weight:800;letter-spacing:-.02em;font-size:clamp(26px,4.4vw,46px);line-height:1.03;margin:12px 0 18px}
+  .slide h3{font-family:var(--display);font-weight:700;font-size:clamp(19px,2.6vw,26px);letter-spacing:-.01em;margin:0 0 14px}
+  .lede{font-size:17px;max-width:64ch;color:var(--ink-soft);margin:0 0 22px}
+  p{margin:0 0 14px} h4{font-family:var(--display)}
+  .big-idea{background:var(--ink);color:var(--cream);border-radius:16px;padding:26px 30px;max-width:62ch;
+    font-family:var(--display);font-weight:600;font-size:clamp(18px,2.4vw,23px);line-height:1.3;letter-spacing:-.01em}
+  .big-idea b{color:#7FB7D6;font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0}
+  .chip{font-family:var(--mono);font-size:11.5px;background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink)}
+  .chip.k{background:rgba(46,106,142,.09);border-color:rgba(46,106,142,.35);color:#1f5575}
+  .eqrow{display:flex;flex-wrap:wrap;gap:14px;margin:8px 0}
+  .eqcard{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--rail,var(--steel));border-radius:12px;padding:16px 20px;min-width:230px}
+  .eqcard .lab{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:8px}
+  .eqcard .eq{font-family:var(--mono);font-weight:700;font-size:clamp(17px,2.3vw,23px);color:var(--ink);letter-spacing:-.01em}
+  .eqcard .eq small{font-weight:400;color:var(--ink-soft);font-size:.62em}
+  .eqcard .sub{font-size:12.5px;color:var(--ink-soft);margin-top:7px}
+  .domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:13px;margin-top:8px}
+  .dom{background:var(--paper);border:1px solid var(--line);border-top:3px solid var(--rail);border-radius:12px;padding:16px 18px}
+  .dom h4{font-weight:700;font-size:15px;margin:0 0 10px}
+  .dom .pair{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;color:var(--ink-soft)}
+  .dom .pair b{color:var(--ink);font-family:var(--mono);font-size:12.5px}
+  .dom .res{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--rail);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .figwrap{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px;margin:6px 0}
+  .figwrap svg{width:100%;height:auto;display:block}
+  .figcap{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:12px;text-align:center}
+  .anim{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 20px 14px;margin:6px 0}
+  .anim canvas{width:100%;height:auto;display:block;border-radius:8px;background:#FCFAF4}
+  .anim .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .anim .cap .ph{font-family:var(--mono);font-weight:700;font-size:12px;color:#fff;background:var(--steel);border-radius:6px;padding:3px 8px;flex:0 0 auto}
+  .anim .cap .txt{font-size:14px;color:var(--ink)}
+  .anim .ctrl{margin-top:12px;display:flex;gap:8px;align-items:center}
+  .btn{font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line-strong);border-radius:8px;padding:7px 13px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn:hover{background:#fff;border-color:var(--steel);color:var(--steel)}
+  .dots{display:flex;gap:5px;margin-left:6px}
+  .dots b{width:7px;height:7px;border-radius:50%;background:var(--line-strong);transition:.2s}
+  .dots b.on{background:var(--steel);transform:scale(1.25)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .note{font-size:13.5px;color:var(--ink-soft);background:rgba(46,106,142,.07);border:1px solid rgba(46,106,142,.28);border-radius:10px;padding:13px 16px;margin-top:6px}
+  .note b{color:var(--ink)}
+  table.liai{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13px;margin:6px 0}
+  table.liai th,table.liai td{padding:9px 13px;border-bottom:1px solid var(--line);text-align:left}
+  table.liai thead th{font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:var(--cream)}
+  table.liai td b{font-family:var(--mono);color:var(--ink)} table.liai tr:last-child td{border-bottom:none}
+  .recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .rc{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 16px}
+  .rc .t{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);font-weight:700;margin-bottom:6px}
+  .rc .e{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--ink)}
+  .rc p{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0}
+  .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--cream);border-radius:10px;padding:12px 18px}
+  .menu-btn{display:none}
+  @media(max-width:880px){
+    .shell{flex-direction:column}
+    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+    .nav .links,.nav .progress{display:none}.nav.open .links{display:block;margin-top:10px}
+    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+    .two{grid-template-columns:1fr}.main{padding:0 16px}.slide{min-height:auto;padding:42px 0 40px}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+</style>
+</head>
+<body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell">
+  <aside class="nav" id="nav">
+    <a class="back" href="hub_si_cinematique.html">← Séquence : cinématique</a>
+    <div class="brand">
+      <div class="mark">SI</div>
+      <div><h1>Cinématique</h1><p>Première · Spé SI</p></div>
+      <button class="menu-btn" id="menuBtn">Plan</button>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
+    <div class="links" id="links">
+      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
+      <a href="#s2" class="navlink"><span>02</span>Trajectoire</a>
+      <a href="#s3" class="navlink"><span>03</span>Translation / rotation</a>
+      <a href="#s4" class="navlink"><span>04</span>La vitesse</a>
+      <a href="#s5" class="navlink"><span>05</span>V = R·ω</a>
+      <a href="#s6" class="navlink"><span>06</span>Uniforme / varié</a>
+      <a href="#s7" class="navlink"><span>07</span>Liaisons &amp; loi E/S</a>
+      <a href="#s8" class="navlink"><span>08</span>À retenir</a>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- 01 -->
+    <section class="slide" id="s1">
+      <span class="kicker">Première · Spé SI · Cinématique</span>
+      <h2>Décrire et prévoir<br>un mouvement</h2>
+      <p class="lede">Le bras d'un robot, la flèche d'une grue, un essuie-glace&nbsp;: pour concevoir un mécanisme, il faut <b>décrire</b> le mouvement de ses points et <b>prévoir</b> leur vitesse et leur course. C'est la <b>cinématique</b>.</p>
+      <div class="big-idea">La cinématique étudie les mouvements <b>indépendamment des causes</b> (les forces viennent après, en statique/dynamique). On y décrit position, <b>vitesse</b> et accélération d'un point au cours du temps.</div>
+      <div class="chips" style="margin-top:18px">
+        <span class="chip">🤖 bras robot</span><span class="chip">🏗️ grue</span><span class="chip">🚗 essuie-glace</span>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="slide" id="s2">
+      <span class="kicker">02 · Repérer</span>
+      <h3>Trajectoire &amp; position d'un point</h3>
+      <p class="lede">La <b>trajectoire</b> d'un point est l'ensemble des positions qu'il occupe au cours du temps, vue dans un <b>repère</b> donné. Sa forme dépend du repère choisi.</p>
+      <div class="two">
+        <div class="figwrap">
+          <svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trajectoire d'un point dans un repère">
+            <line x1="30" y1="200" x2="360" y2="200" stroke="#5C544B" stroke-width="1.5"/>
+            <line x1="30" y1="200" x2="30" y2="20" stroke="#5C544B" stroke-width="1.5"/>
+            <text x="352" y="218" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5C544B">x</text>
+            <text x="14" y="28" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5C544B">y</text>
+            <path d="M55,180 Q140,40 230,110 T350,60" fill="none" stroke="#2E6A8E" stroke-width="2.6"/>
+            <circle cx="55" cy="180" r="4.5" fill="#B85C2E"/><text x="40" y="172" font-family="'JetBrains Mono',monospace" font-size="10" fill="#B85C2E">t₀</text>
+            <circle cx="230" cy="110" r="4.5" fill="#2E6A8E"/><text x="236" y="104" font-family="'JetBrains Mono',monospace" font-size="10" fill="#2E6A8E">t₁</text>
+            <circle cx="350" cy="60" r="4.5" fill="#3D7E5F"/><text x="330" y="52" font-family="'JetBrains Mono',monospace" font-size="10" fill="#3D7E5F">t₂</text>
+          </svg>
+          <div class="figcap">La trajectoire relie les positions successives du point.</div>
+        </div>
+        <div>
+          <div class="eqcard" style="--rail:var(--steel)"><div class="lab">Position</div><div class="eq">M(t) <small>repérée dans (O, x, y)</small></div><div class="sub">à chaque instant, le point occupe une position</div></div>
+          <div class="eqcard" style="--rail:var(--copper);margin-top:12px"><div class="lab">Trajectoire</div><div class="eq" style="font-size:16px">ensemble des positions</div><div class="sub">rectiligne, circulaire, quelconque…</div></div>
+          <div class="chips" style="margin-top:12px"><span class="chip k">repère</span><span class="chip k">point matériel</span><span class="chip k">instant t</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="slide" id="s3">
+      <span class="kicker">03 · Deux mouvements de base</span>
+      <h3>Translation &amp; rotation</h3>
+      <div class="two">
+        <div class="figwrap">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mouvement de translation">
+            <text x="10" y="22" font-family="'Bricolage Grotesque',sans-serif" font-size="14" font-weight="700" fill="#2E6A8E">TRANSLATION</text>
+            <rect x="40" y="60" width="80" height="50" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/>
+            <rect x="230" y="60" width="80" height="50" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2" stroke-dasharray="4 3" opacity=".6"/>
+            <line x1="120" y1="85" x2="228" y2="85" stroke="#B85C2E" stroke-width="2" marker-end="url(#a)"/>
+            <line x1="55" y1="70" x2="60" y2="70" stroke="#3D7E5F" stroke-width="2"/>
+            <defs><marker id="a" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#B85C2E"/></marker></defs>
+            <text x="40" y="150" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5C544B">tous les points ont</text>
+            <text x="40" y="166" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5C544B">le même vecteur vitesse</text>
+          </svg>
+        </div>
+        <div class="figwrap">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mouvement de rotation">
+            <text x="10" y="22" font-family="'Bricolage Grotesque',sans-serif" font-size="14" font-weight="700" fill="#3D7E5F">ROTATION</text>
+            <circle cx="150" cy="115" r="62" fill="none" stroke="#5C544B" stroke-width="1" stroke-dasharray="3 4"/>
+            <circle cx="150" cy="115" r="4" fill="#2A2622"/>
+            <line x1="150" y1="115" x2="205" y2="86" stroke="#3D7E5F" stroke-width="2.4"/>
+            <circle cx="205" cy="86" r="5" fill="#B85C2E"/>
+            <path d="M193,55 A40 40 0 0 1 223 78" fill="none" stroke="#2E6A8E" stroke-width="2" marker-end="url(#b)"/>
+            <defs><marker id="b" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2E6A8E"/></marker></defs>
+            <text x="214" y="70" font-family="'JetBrains Mono',monospace" font-size="12" fill="#2E6A8E">ω</text>
+            <text x="40" y="180" font-family="'JetBrains Mono',monospace" font-size="11" fill="#5C544B">chaque point décrit un cercle</text>
+          </svg>
+        </div>
+      </div>
+      <div class="chips" style="margin-top:6px">
+        <span class="chip k">translation rectiligne</span><span class="chip k">translation curviligne</span><span class="chip k">rotation autour d'un axe</span>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="slide" id="s4">
+      <span class="kicker">04 · Quantifier le mouvement</span>
+      <h3>De la vitesse moyenne à la vitesse instantanée</h3>
+      <p class="lede">La <b>vitesse moyenne</b> entre deux instants est la pente de la <b>sécante</b>. En rapprochant les instants, on obtient la <b>vitesse instantanée</b>&nbsp;: la pente de la <b>tangente</b> (la dérivée de la position).</p>
+      <div class="anim">
+        <canvas id="cv" width="900" height="320" aria-label="Animation : la sécante devient tangente quand Δt diminue"></canvas>
+        <div class="cap"><span class="ph" id="phLab">1/4</span><span class="txt" id="phTxt">…</span></div>
+        <div class="ctrl"><button class="btn" id="replay">↻ Rejouer</button>
+          <div class="dots" id="dots"><b class="on"></b><b></b><b></b><b></b></div></div>
+      </div>
+      <div class="eqrow" style="margin-top:16px">
+        <div class="eqcard" style="--rail:var(--copper)"><div class="lab">Vitesse moyenne</div><div class="eq">v = Δx / Δt <small>(m/s)</small></div><div class="sub">pente de la sécante entre deux instants</div></div>
+        <div class="eqcard" style="--rail:var(--green)"><div class="lab">Vitesse instantanée</div><div class="eq">v(t) = dx/dt</div><div class="sub">limite quand Δt → 0 : pente de la tangente</div></div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="slide" id="s5">
+      <span class="kicker">05 · En rotation</span>
+      <h3>Relier vitesse linéaire et vitesse angulaire</h3>
+      <div class="two">
+        <div class="figwrap">
+          <svg viewBox="0 0 380 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vitesse de deux points sur une barre en rotation">
+            <circle cx="60" cy="200" r="4" fill="#2A2622"/>
+            <line x1="60" y1="200" x2="320" y2="70" stroke="#5C544B" stroke-width="3"/>
+            <circle cx="190" cy="135" r="5" fill="#2E6A8E"/>
+            <circle cx="320" cy="70" r="5" fill="#B85C2E"/>
+            <line x1="190" y1="135" x2="225" y2="200" stroke="#2E6A8E" stroke-width="2.2" marker-end="url(#v1)"/>
+            <line x1="320" y1="70" x2="390" y2="200" stroke="#B85C2E" stroke-width="2.2" marker-end="url(#v2)"/>
+            <defs><marker id="v1" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#2E6A8E"/></marker>
+            <marker id="v2" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#B85C2E"/></marker></defs>
+            <text x="120" y="160" font-family="'JetBrains Mono',monospace" font-size="11" fill="#2E6A8E">R₁ · V₁</text>
+            <text x="300" y="58" font-family="'JetBrains Mono',monospace" font-size="11" fill="#B85C2E">R₂ · V₂</text>
+            <path d="M85,200 A30 30 0 0 1 96 178" fill="none" stroke="#3D7E5F" stroke-width="2" marker-end="url(#w)"/>
+            <marker id="w" markerWidth="9" markerHeight="9" refX="6" refY="4" orient="auto"><path d="M0,0 L7,4 L0,8 Z" fill="#3D7E5F"/></marker>
+            <text x="98" y="186" font-family="'JetBrains Mono',monospace" font-size="12" fill="#3D7E5F">ω</text>
+          </svg>
+          <div class="figcap">Même ω pour toute la barre, mais V plus grande si R plus grand.</div>
+        </div>
+        <div>
+          <div class="eqcard" style="--rail:var(--steel)"><div class="lab">Vitesse d'un point en rotation</div><div class="eq">V = R · ω</div><div class="sub">R en m, ω en rad/s, V en m/s</div></div>
+          <div class="note" style="margin-top:14px"><b>Attention aux unités.</b> ω se mesure en <b>rad/s</b>. Pour passer des tours/min (tr/min) aux rad/s&nbsp;: ω = N × 2π / 60.</div>
+          <div class="chips" style="margin-top:12px"><span class="chip k">rad/s</span><span class="chip k">tr/min → rad/s</span><span class="chip">V ∝ R</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="slide" id="s6">
+      <span class="kicker">06 · Comment varie la vitesse</span>
+      <h3>Mouvement uniforme &amp; uniformément varié</h3>
+      <div class="two">
+        <div class="figwrap">
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphes vitesse-temps : uniforme et uniformément varié">
+            <!-- uniforme -->
+            <line x1="30" y1="100" x2="170" y2="100" stroke="#5C544B" stroke-width="1.3"/>
+            <line x1="30" y1="100" x2="30" y2="20" stroke="#5C544B" stroke-width="1.3"/>
+            <line x1="38" y1="55" x2="165" y2="55" stroke="#2E6A8E" stroke-width="2.6"/>
+            <text x="34" y="16" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5C544B">v</text>
+            <text x="80" y="118" font-family="'Bricolage Grotesque',sans-serif" font-size="12" font-weight="700" fill="#2E6A8E">uniforme</text>
+            <text x="78" y="46" font-family="'JetBrains Mono',monospace" font-size="9" fill="#5C544B">a = 0</text>
+            <!-- uniformément varié -->
+            <line x1="210" y1="100" x2="360" y2="100" stroke="#5C544B" stroke-width="1.3"/>
+            <line x1="210" y1="100" x2="210" y2="20" stroke="#5C544B" stroke-width="1.3"/>
+            <line x1="216" y1="92" x2="352" y2="32" stroke="#3D7E5F" stroke-width="2.6"/>
+            <text x="214" y="16" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5C544B">v</text>
+            <text x="234" y="118" font-family="'Bricolage Grotesque',sans-serif" font-size="12" font-weight="700" fill="#3D7E5F">unif. varié</text>
+            <text x="300" y="50" font-family="'JetBrains Mono',monospace" font-size="9" fill="#5C544B">a = cte</text>
+            <text x="30" y="160" font-family="'JetBrains Mono',monospace" font-size="10" fill="#5C544B">t (en abscisse) →</text>
+          </svg>
+        </div>
+        <div>
+          <div class="eqcard" style="--rail:var(--steel)"><div class="lab">Uniforme</div><div class="eq" style="font-size:16px">v = constante</div><div class="sub">accélération nulle (a = 0)</div></div>
+          <div class="eqcard" style="--rail:var(--green);margin-top:12px"><div class="lab">Uniformément varié</div><div class="eq">v = v₀ + a·t</div><div class="sub">x = x₀ + v₀·t + ½·a·t²</div></div>
+          <div class="note" style="margin-top:12px">L'<b>accélération</b> a (m/s²) est la dérivée de la vitesse&nbsp;: a = dv/dt.</div>
+        </div>
+      </div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Chronophotographie : deux mobiles côte à côte</div>
+        <canvas id="cvchrono" width="900" height="260" aria-label="Chronophotographie : mouvement uniforme et mouvement accéléré"></canvas>
+        <div class="cap"><b id="chronophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="chronocap">Deux mobiles partent au même instant.</span></div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="slide" id="s7">
+      <span class="kicker">07 · Modéliser le mécanisme</span>
+      <h3>Liaisons &amp; loi entrée-sortie</h3>
+      <div class="two">
+        <div>
+          <h4 style="font-weight:700;margin:0 0 8px">Les liaisons usuelles</h4>
+          <table class="liai">
+            <thead><tr><th>Liaison</th><th>Mouvement autorisé</th></tr></thead>
+            <tbody>
+              <tr><td><b>Pivot</b></td><td>rotation (1 axe)</td></tr>
+              <tr><td><b>Glissière</b></td><td>translation (1 direction)</td></tr>
+              <tr><td><b>Pivot glissant</b></td><td>rotation + translation</td></tr>
+              <tr><td><b>Hélicoïdale</b></td><td>vis-écrou (rotation ↔ translation liées)</td></tr>
+              <tr><td><b>Encastrement</b></td><td>aucun (pièces solidaires)</td></tr>
+            </tbody>
+          </table>
+          <div class="note" style="margin-top:10px">Le <b>schéma cinématique</b> représente le mécanisme par ses liaisons pour analyser les mouvements.</div>
+        </div>
+        <div>
+          <h4 style="font-weight:700;margin:0 0 8px">La loi entrée-sortie</h4>
+          <p>Elle relie le mouvement <b>d'entrée</b> à celui de <b>sortie</b> du mécanisme.</p>
+          <div class="eqcard" style="--rail:var(--copper)"><div class="lab">Réducteur (engrenages)</div><div class="eq" style="font-size:17px">ω<sub>s</sub> / ω<sub>e</sub> = Z<sub>e</sub> / Z<sub>s</sub></div><div class="sub">rapport de transmission (Z = nb de dents)</div></div>
+          <div class="eqcard" style="--rail:var(--green);margin-top:12px"><div class="lab">Système vis-écrou</div><div class="eq" style="font-size:16px">x = (pas / 2π) · θ</div><div class="sub">transforme une rotation en translation</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="slide" id="s8">
+      <span class="kicker">08 · Synthèse</span>
+      <h3>À retenir</h3>
+      <div class="recap">
+        <div class="rc"><div class="t">Trajectoire</div><div class="e" style="font-size:13px">positions successives</div><p>dépend du repère</p></div>
+        <div class="rc"><div class="t">Mouvements</div><div class="e" style="font-size:13px">translation / rotation</div><p>les deux bases</p></div>
+        <div class="rc"><div class="t">Vitesse</div><div class="e">v = dx/dt</div><p>pente de la tangente</p></div>
+        <div class="rc"><div class="t">Rotation</div><div class="e">V = R·ω</div><p>ω en rad/s</p></div>
+        <div class="rc"><div class="t">Varié</div><div class="e" style="font-size:13px">v = v₀ + a·t</div><p>a = dv/dt</p></div>
+        <div class="rc"><div class="t">Loi E/S</div><div class="e" style="font-size:13px">entrée → sortie</div><p>rapport de transmission</p></div>
+      </div>
+      <div class="cta">🔧 Prochaine étape&nbsp;: au <b style="color:#7FB7D6">TP</b>, on mesure des vitesses sur un système réel.</div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // ===== Nav =====
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+  if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
+  var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
+  var bar=document.getElementById('bar'), map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
+  var ids=Object.keys(map);
+  var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');var idx=ids.indexOf(en.target.id);if(bar&&idx>=0)bar.style.width=((idx+1)/ids.length*100)+'%';}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ids.forEach(function(id){obs.observe(document.getElementById(id));});
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+  });
+
+  // ===== Animation : sécante → tangente (vitesse moyenne → instantanée) =====
+  (function(){
+    var cv=document.getElementById('cv'); if(!cv||!cv.getContext) return;
+    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+    var x0=52, x1=W-24, y0=24, y1=H-36, plotW=x1-x0, plotH=y1-y0;
+    function xpos(t){ return 0.5 + 0.30*Math.sin(t*Math.PI*1.5 - 0.3); } // position en [0,1] selon t in [0,1]
+    function tX(t){ return x0 + t*plotW; }
+    function vY(v){ return y1 - v*plotH; }
+    var tA=0.36, dtMax=0.40, dtMin=0.02;
+    function deriv(t){ var e=0.0015; return (xpos(t+e)-xpos(t-e))/(2*e); }
+
+    var captions=[
+      'La position du point \u00e9volue au cours du temps : c\u2019est la courbe x(t).',
+      'Vitesse moyenne entre A et B : pente de la s\u00e9cante, \u0394x / \u0394t.',
+      'On rapproche les deux instants : \u0394t diminue, la s\u00e9cante pivote.',
+      '\u00c0 la limite, la s\u00e9cante devient la tangente : vitesse instantan\u00e9e v(t) = dx/dt.'
+    ];
+    var phLab=document.getElementById('phLab'), phTxt=document.getElementById('phTxt');
+    var dots=Array.prototype.slice.call(document.querySelectorAll('#dots b'));
+    var t=0, phase=0, timer=null, PH=80;
+
+    function axes(){
+      ctx.strokeStyle='rgba(42,38,34,.28)'; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(x0,y0); ctx.lineTo(x0,y1); ctx.lineTo(x1,y1); ctx.stroke();
+      ctx.fillStyle='#5C544B'; ctx.font='11px "JetBrains Mono",monospace';
+      ctx.save(); ctx.translate(16,(y0+y1)/2); ctx.rotate(-Math.PI/2); ctx.textAlign='center'; ctx.fillText('position x',0,0); ctx.restore();
+      ctx.textAlign='center'; ctx.fillText('temps t',(x0+x1)/2, H-10);
+    }
+    function curve(){
+      ctx.strokeStyle='#2E6A8E'; ctx.lineWidth=2.6; ctx.beginPath();
+      for(var i=0;i<=220;i++){ var tt=i/220, X=tX(tt), Y=vY(xpos(tt)); if(i===0)ctx.moveTo(X,Y); else ctx.lineTo(X,Y); }
+      ctx.stroke();
+    }
+    function lineAcross(xa,ya,mC,color,w,dash){
+      ctx.save(); ctx.beginPath(); ctx.rect(x0,y0,plotW,plotH); ctx.clip();
+      ctx.strokeStyle=color; ctx.lineWidth=w; if(dash)ctx.setLineDash(dash); else ctx.setLineDash([]);
+      var yL=ya+mC*(x0-xa), yR=ya+mC*(x1-xa);
+      ctx.beginPath(); ctx.moveTo(x0,yL); ctx.lineTo(x1,yR); ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    }
+    function dot(X,Y,color,label,lx,ly){
+      ctx.fillStyle=color; ctx.beginPath(); ctx.arc(X,Y,5,0,7); ctx.fill();
+      if(label){ ctx.fillStyle=color; ctx.font='700 12px "JetBrains Mono",monospace'; ctx.textAlign='center'; ctx.fillText(label,X+lx,Y+ly); }
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      axes(); curve();
+      var shrink=Math.max(0,Math.min(1,(t-PH)/(2*PH)));         // 0 -> 1 sur phases 1..3
+      var dt = (phase>=1) ? (dtMax + (dtMin-dtMax)*shrink) : dtMax;
+      var xA=tX(tA), yA=vY(xpos(tA));
+      var tB=Math.min(0.995, tA+dt), xB=tX(tB), yB=vY(xpos(tB));
+      if(phase>=1){
+        // triangle Δt / Δx
+        if(dt>dtMin*1.6){
+          ctx.strokeStyle='rgba(184,92,46,.55)'; ctx.lineWidth=1.2; ctx.setLineDash([4,3]);
+          ctx.beginPath(); ctx.moveTo(xA,yA); ctx.lineTo(xB,yA); ctx.lineTo(xB,yB); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle='#B85C2E'; ctx.font='11px "JetBrains Mono",monospace'; ctx.textAlign='center';
+          ctx.fillText('\u0394t',(xA+xB)/2, yA+15);
+          ctx.textAlign='left'; ctx.fillText('\u0394x', xB+6,(yA+yB)/2);
+        }
+        // sécante
+        var mSec=(yB-yA)/(xB-xA);
+        lineAcross(xA,yA,mSec,'#B85C2E',2,null);
+      }
+      if(phase>=3){
+        // tangente (pente dérivée), en canvas
+        var mTan = -plotH*deriv(tA)/plotW;
+        lineAcross(xA,yA,mTan,'#3D7E5F',2.4,[7,4]);
+        ctx.fillStyle='#235038'; ctx.font='700 12px "JetBrains Mono",monospace'; ctx.textAlign='left';
+        ctx.fillText('tangente \u2192 v(t)', xA+70, yA-12);
+      }
+      if(phase>=1){
+        dot(xA,yA,'#2A2622','A',-12,-10);
+        if(dt>dtMin*1.6) dot(xB,yB,'#2A2622','B',12,-10);
+      }
+    }
+    function setPhase(p){ phase=p; if(phLab)phLab.textContent=(p+1)+'/4'; if(phTxt)phTxt.textContent=captions[p]; dots.forEach(function(d,i){d.classList.toggle('on',i===p);}); }
+    function step(){ t++; if(t>4.4*PH) t=Math.round(4.4*PH); var p=Math.min(3,Math.floor(t/PH)); if(p!==phase) setPhase(p); draw(); }
+
+    setPhase(0); draw(); timer=setInterval(step,40);
+    var replay=document.getElementById('replay');
+    if(replay) replay.addEventListener('click', function(){ t=0; setPhase(0); draw(); });
+  })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvchrono'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, x0=60, yU=92, yA=192;
+  function xu(t){return x0+75*t;}
+  function xa(t){return x0+21*t*t;}
+  var caps=[
+    'Deux mobiles partent au même instant, du même point de départ.',
+    'À chaque « flash » (intervalles de temps ÉGAUX), on marque leur position.',
+    'Écarts égaux → vitesse constante (uniforme). Écarts croissants → mouvement accéléré.'
+  ];
+  function track(y,col,label){
+    g.strokeStyle='rgba(42,38,34,.16)';g.lineWidth=2;g.beginPath();g.moveTo(x0-24,y+24);g.lineTo(W-16,y+24);g.stroke();
+    g.fillStyle=col;g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText(label,x0-24,y-30);
+  }
+  function flash(x,y,col){
+    g.strokeStyle='rgba(42,38,34,.22)';g.lineWidth=1;g.beginPath();g.moveTo(x,y-12);g.lineTo(x,y+24);g.stroke();
+    g.globalAlpha=0.45;g.fillStyle=col;g.beginPath();g.arc(x,y,6,0,7);g.fill();g.globalAlpha=1;
+  }
+  function mobile(x,y,col){g.fillStyle=col;g.beginPath();g.arc(x,y,11,0,7);g.fill();g.strokeStyle='#fff';g.lineWidth=2.5;g.stroke();}
+  function gaps(y,fn,col){
+    g.strokeStyle=col;g.lineWidth=2.5;
+    for(var k=1;k<=6;k++){var a=fn(k-1),b=fn(k);g.beginPath();g.moveTo(a,y+34);g.lineTo(b,y+34);g.moveTo(a,y+30);g.lineTo(a,y+38);g.moveTo(b,y+30);g.lineTo(b,y+38);g.stroke();}
+  }
+  var T=0;
+  function step(){
+    T+=0.035; if(T>8.6) T=0;
+    var t=(T<6?T:6), phase=(T<0.5?0:(T<6?1:2)), nf=Math.floor(t+1e-6);
+    g.clearRect(0,0,W,H);
+    track(yU,'#2E6A8E','UNIFORME — vitesse constante');
+    track(yA,'#3D7E5F','ACCÉLÉRÉ — la vitesse augmente');
+    for(var k=0;k<=nf;k++){ flash(xu(k),yU,'#2E6A8E'); flash(xa(k),yA,'#3D7E5F'); }
+    if(phase===2){
+      gaps(yU,xu,'#2E6A8E'); gaps(yA,xa,'#C0492E');
+      g.textAlign='center';g.font='700 12px "JetBrains Mono",monospace';
+      g.fillStyle='#235877';g.fillText('écarts égaux',(xu(0)+xu(6))/2,yU+54);
+      g.fillStyle='#a44a26';g.fillText('écarts croissants',(xa(0)+xa(6))/2,yA+54);
+    }
+    mobile(xu(t),yU,'#2E6A8E'); mobile(xa(t),yA,'#3D7E5F');
+    var cap=document.getElementById('chronocap'), ph=document.getElementById('chronophase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['①','②','③'][phase];
+  }
+  setInterval(step,40); step();
+})();
+</script>
+</body>
+</html>
