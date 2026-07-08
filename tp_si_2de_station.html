@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -139,6 +137,38 @@
   .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;line-height:1.15;cursor:pointer;text-align:center;padding:4px;animation:molepop .14s ease}
   @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
   .hole.empty .mole{visibility:hidden}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:150px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:70px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -158,6 +188,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Quelle grandeur ?</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Grandeur ↔ capteur</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Chaîne d'acquisition</span><b class="bd" id="bd3">0</b></a>
@@ -181,6 +212,83 @@
           <span class="rankchip">📐 Ingénieur·e · 450+</span>
           <span class="rankchip">🏆 Expert·e · 700+</span>
         </div>
+      </div>
+    </section>
+
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour comprendre l'acquisition de données : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la fréquence des mesures</div>
+          <p>Une station météo mesure la température <b>toutes les 15 minutes</b>, 24 h/24. a) Combien de mesures effectue-t-elle par <b>jour</b> ? b) Et sur une <b>semaine</b> ?</p>
+          <svg class="exo-fig" viewBox="0 0 300 116" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="46" y1="28" x2="46" y2="100" stroke="#7a7064" stroke-width="4"/>
+            <line x1="30" y1="100" x2="62" y2="100" stroke="#7a7064" stroke-width="3"/>
+            <rect x="27" y="20" width="38" height="24" rx="4" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/>
+            <text x="46" y="37" text-anchor="middle" font-size="11" fill="#235877" font-weight="700">T°</text>
+            <text x="46" y="114" text-anchor="middle" font-size="9" fill="#5C544B">station</text>
+            <line x1="92" y1="60" x2="288" y2="60" stroke="#5C544B" stroke-width="1.4"/>
+            <g fill="#BD8A2A"><circle cx="108" cy="60" r="4"/><circle cx="140" cy="60" r="4"/><circle cx="172" cy="60" r="4"/><circle cx="204" cy="60" r="4"/><circle cx="236" cy="60" r="4"/><circle cx="268" cy="60" r="4"/></g>
+            <text x="190" y="84" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">1 mesure toutes les 15 min</text>
+          </svg>
+          <div class="exo-q">a) Mesures par jour = <input class="numin" id="ex1a" inputmode="decimal"></div>
+          <div class="exo-q">b) Mesures par semaine = <input class="numin" id="ex1b" inputmode="decimal"></div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> 1 jour = 24 × 60 = 1440 min. Nombre de mesures = 1440 ÷ 15 = <b>96 mesures</b>.</p>
+            <p><b>b)</b> 96 × 7 = <b>672 mesures</b> sur une semaine.</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — l'échantillonnage</div>
+          <p>La courbe montre la température sur une journée. Règle la <b>période d'échantillonnage</b> : les points de mesure se placent sur la courbe. Plus la période est courte, plus on a de mesures (et de détails).</p>
+          <canvas id="ex2cv" width="480" height="150" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Période (min)</span><input type="range" id="ex2per" min="15" max="240" step="15" value="60"><b><span id="ex2perv">60</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — le débit de données</div>
+          <p>Un capteur envoie une mesure de <b>2 octets</b> toutes les <b>10 secondes</b>. On rappelle : 1 h = 3600 s, et 1 ko = 1000 octets.</p>
+          <div class="exo-q">a) Données par heure = <input class="numin" id="ex3a" inputmode="decimal"> octets</div>
+          <div class="exo-q">b) Converti en kilo-octets = <input class="numin" id="ex3b" inputmode="decimal"> ko</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> mesures par heure = 3600 ÷ 10 = 360 ; données = 360 × 2 = <b>720 octets</b>.</p>
+            <p><b>b)</b> 720 ÷ 1000 = <b>0,72 ko</b>.</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — la numérisation <span class="lvl-badge">niveau +</span></div>
+          <p>Le signal du capteur (analogique) est <b>numérisé sur 8 bits</b> pour une plage de température de <b>0 à 25,6 °C</b>. On rappelle : nombre de niveaux = 2<sup>n</sup>, et résolution = plage ÷ nombre de niveaux.</p>
+          <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="34" y1="12" x2="34" y2="104" stroke="#5C544B" stroke-width="1.4"/>
+            <line x1="34" y1="104" x2="288" y2="104" stroke="#5C544B" stroke-width="1.4"/>
+            <g stroke="rgba(46,106,142,.25)" stroke-dasharray="3 3"><line x1="34" y1="28" x2="288" y2="28"/><line x1="34" y1="47" x2="288" y2="47"/><line x1="34" y1="66" x2="288" y2="66"/><line x1="34" y1="85" x2="288" y2="85"/></g>
+            <path d="M34 100 Q108 18 180 56 T286 30" fill="none" stroke="#2E6A8E" stroke-width="2"/>
+            <path d="M34 100 H74 V85 H114 V47 H154 V66 H194 V47 H234 V28 H286" fill="none" stroke="#BD8A2A" stroke-width="2"/>
+            <text x="55" y="122" font-size="9" fill="#2E6A8E" font-weight="700">— analogique</text>
+            <text x="185" y="122" font-size="9" fill="#8a6313" font-weight="700">— numérisé (256 niveaux)</text>
+          </svg>
+          <div class="exo-q">a) Nombre de niveaux = <input class="numin" id="ex4a" inputmode="decimal"></div>
+          <div class="exo-q">b) Résolution = <input class="numin" id="ex4b" inputmode="decimal"> °C</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> 8 bits → 2<sup>8</sup> = <b>256 niveaux</b>.</p>
+            <p><b>b)</b> résolution = plage ÷ niveaux = 25,6 ÷ 256 = <b>0,1 °C</b>. Chaque « marche » de la numérisation vaut 0,1 °C : avec plus de bits, on colle mieux à la courbe réelle.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -555,6 +663,62 @@
     function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
     startBtn.addEventListener('click',start);
     build();setConsigne();lifeEl.textContent=hearts();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-96)<0.5, okB=Math.abs(b-672)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 1440/15 = 96 par jour ; 96 × 7 = 672 par semaine.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) (24×60) ÷ 15. ')+(okB?'':'b) mesures par jour × 7.');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-720)<1, okB=Math.abs(b-0.72)<0.02;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : (3600/10)×2 = 720 o/h ; 720/1000 = 0,72 ko.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) mesures par heure × 2 octets. ')+(okB?'':'b) ÷ 1000.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-256)<0.5, okB=Math.abs(b-0.1)<0.01;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2⁸ = 256 niveaux ; 25,6/256 = 0,1 °C.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 2 puissance 8. ')+(okB?'':'b) plage ÷ nombre de niveaux.');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function temp(t){ return 12 + 9*Math.sin((t-8)/24*2*Math.PI); } // °C sur 24h, min ~6h
+      function draw(){
+        var per=parseInt(el('ex2per').value,10);
+        el('ex2perv').textContent=per;
+        var n=Math.round(1440/per);
+        g.clearRect(0,0,W,H);
+        var x0=40, x1=W-16, y0=18, y1=H-26;
+        function X(t){return x0+(t/24)*(x1-x0);}
+        function Y(T){return y1-((T-2)/20)*(y1-y0);}
+        g.strokeStyle='rgba(42,38,34,.14)';g.lineWidth=1;
+        for(var hh=0;hh<=24;hh+=6){g.beginPath();g.moveTo(X(hh),y0);g.lineTo(X(hh),y1);g.stroke();g.fillStyle='#9a9385';g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(hh+'h',X(hh),y1+14);}
+        g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();
+        for(var t=0;t<=24;t+=0.2){var xx=X(t),yy=Y(temp(t));if(t===0)g.moveTo(xx,yy);else g.lineTo(xx,yy);}
+        g.stroke();
+        g.fillStyle='#BD8A2A';
+        for(var m=0;m<=1440;m+=per){var th=m/60;var xx=X(th),yy=Y(temp(th));g.beginPath();g.arc(xx,yy,3.6,0,7);g.fill();}
+        var o=el('ex2out'); if(o) o.textContent='période '+per+' min → '+n+' mesures / jour';
+      }
+      var e=el('ex2per'); if(e) e.addEventListener('input',draw);
+      draw();
+    })();
   })();
 
   refresh();

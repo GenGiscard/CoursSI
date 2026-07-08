@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -141,6 +139,39 @@
   .hole.empty .mole{visibility:hidden}
   .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
   .snakeleg b{color:#8a6313}
+  .snakeleg .legn{font-size:20px;color:#B85C2E;line-height:1;vertical-align:-1px}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:150px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:70px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -160,6 +191,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Traction, compression, flexion</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Forme ↔ propriété</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Transmission de l'effort</span><b class="bd" id="bd3">0</b></a>
@@ -183,6 +215,92 @@
           <span class="rankchip">📐 Ingénieur·e · 450+</span>
           <span class="rankchip">🏆 Expert·e · 700+</span>
         </div>
+      </div>
+    </section>
+
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour comprendre les structures : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — le pont sur deux piliers</div>
+          <p>Un petit pont repose sur <b>2 piliers</b>. Une charge de <b>600 kg</b> est posée au milieu du tablier. On rappelle : poids = masse × g, avec g = 10 N/kg.</p>
+          <svg class="exo-fig" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="10" y1="104" x2="290" y2="104" stroke="#5C544B" stroke-width="1.5"/>
+            <rect x="42" y="62" width="20" height="42" fill="#cfc4b2" stroke="#7a7064"/>
+            <rect x="238" y="62" width="20" height="42" fill="#cfc4b2" stroke="#7a7064"/>
+            <rect x="30" y="50" width="240" height="12" fill="#3D7E5F"/>
+            <rect x="130" y="24" width="40" height="24" rx="3" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="150" y="40" text-anchor="middle" font-size="10" fill="#235877" font-weight="700">600 kg</text>
+            <text x="52" y="118" text-anchor="middle" font-size="9" fill="#5C544B">pilier</text>
+            <text x="248" y="118" text-anchor="middle" font-size="9" fill="#5C544B">pilier</text>
+          </svg>
+          <div class="exo-q">a) Poids total = <input class="numin" id="ex1a" inputmode="decimal"> N</div>
+          <div class="exo-q">b) Effort supporté par chaque pilier = <input class="numin" id="ex1b" inputmode="decimal"> N</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> poids = 600 × 10 = <b>6000 N</b>.</p>
+            <p><b>b)</b> charge au milieu → répartie également : 6000 ÷ 2 = <b>3000 N</b> par pilier.</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — la charge se déplace</div>
+          <p>Une charge de <b>1000 N</b> se déplace sur une poutre posée sur 2 appuis (A à gauche, B à droite). Déplace la charge : l'appui le plus proche supporte le plus d'effort.</p>
+          <canvas id="ex2cv" width="480" height="150" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Position (A → B)</span><input type="range" id="ex2pos" min="0" max="100" step="1" value="30"><b><span id="ex2posv">30</span>%</b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — la triangulation</div>
+          <p>On rigidifie une structure en la <b>triangulant</b> (le triangle est indéformable). Pour une poutre triangulée alignant <b>n triangles</b>, le nombre de barres est <b>2n + 1</b>.</p>
+          <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="20" y1="75" x2="280" y2="75" stroke="#2E6A8E" stroke-width="2.5"/>
+            <line x1="60" y1="30" x2="220" y2="30" stroke="#2E6A8E" stroke-width="2.5"/>
+            <g stroke="#BD8A2A" stroke-width="2">
+              <line x1="20" y1="75" x2="60" y2="30"/><line x1="60" y1="30" x2="100" y2="75"/><line x1="100" y1="75" x2="140" y2="30"/><line x1="140" y1="30" x2="180" y2="75"/><line x1="180" y1="75" x2="220" y2="30"/><line x1="220" y1="30" x2="280" y2="75"/>
+            </g>
+            <g fill="#235877"><circle cx="20" cy="75" r="3"/><circle cx="100" cy="75" r="3"/><circle cx="180" cy="75" r="3"/><circle cx="280" cy="75" r="3"/><circle cx="60" cy="30" r="3"/><circle cx="140" cy="30" r="3"/><circle cx="220" cy="30" r="3"/></g>
+            <text x="150" y="95" text-anchor="middle" font-size="10" fill="#2c6147" font-weight="700">5 triangles</text>
+          </svg>
+          <div class="exo-q">a) Barres pour 5 triangles = <input class="numin" id="ex3a" inputmode="decimal"></div>
+          <div class="exo-q">b) Barres pour 8 triangles = <input class="numin" id="ex3b" inputmode="decimal"></div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> 2 × 5 + 1 = <b>11 barres</b>.</p>
+            <p><b>b)</b> 2 × 8 + 1 = <b>17 barres</b>. La triangulation ajoute peu de barres mais rend la structure rigide.</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — charge décentrée <span class="lvl-badge">niveau +</span></div>
+          <p>Une poutre de <b>4 m</b> repose sur A (gauche) et B (droite). Une charge de <b>900 N</b> est placée à <b>1 m de A</b>. En équilibrant les moments autour de A : R<sub>B</sub> × 4 = 900 × 1.</p>
+          <svg class="exo-fig" viewBox="0 0 300 116" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="40" y1="54" x2="260" y2="54" stroke="#2A2622" stroke-width="6"/>
+            <polygon points="40,54 30,74 50,74" fill="#7a7064"/><polygon points="260,54 250,74 270,74" fill="#7a7064"/>
+            <text x="40" y="90" text-anchor="middle" font-size="11" fill="#5C544B" font-weight="700">A</text>
+            <text x="260" y="90" text-anchor="middle" font-size="11" fill="#5C544B" font-weight="700">B</text>
+            <line x1="95" y1="18" x2="95" y2="48" stroke="#C0492E" stroke-width="3.5"/><polygon points="95,52 90,42 100,42" fill="#C0492E"/>
+            <text x="95" y="14" text-anchor="middle" font-size="10" fill="#C0492E" font-weight="700">900 N</text>
+            <text x="68" y="70" text-anchor="middle" font-size="9" fill="#5C544B">1 m</text>
+            <text x="180" y="70" text-anchor="middle" font-size="9" fill="#5C544B">3 m</text>
+          </svg>
+          <div class="exo-q">a) Réaction en B = <input class="numin" id="ex4a" inputmode="decimal"> N</div>
+          <div class="exo-q">b) Réaction en A = <input class="numin" id="ex4b" inputmode="decimal"> N</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> moments autour de A : R<sub>B</sub> × 4 = 900 × 1, donc R<sub>B</sub> = 900 ÷ 4 = <b>225 N</b>.</p>
+            <p><b>b)</b> équilibre des forces : R<sub>A</sub> = 900 − 225 = <b>675 N</b>. L'appui le plus proche de la charge (A) supporte davantage.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -568,7 +686,7 @@
     function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
     function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
     function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
-    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span><b class="legn">'+['','①','②','③'][f.n]+'</b> '+f.t+'</span>';}).join(' &nbsp; ');}
     function draw(){
       g.clearRect(0,0,W,H);
       g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
@@ -599,6 +717,61 @@
     el('d8right').addEventListener('click',function(){turn(1,0);});
     document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
     lives=3;sc=0;resetSnake();newQuestion();draw();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-6000)<1, okB=Math.abs(b-3000)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 600 × 10 = 6000 N ; 6000 ÷ 2 = 3000 N par pilier.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) masse × 10. ')+(okB?'':'b) poids ÷ 2 (charge au milieu).');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-11)<0.5, okB=Math.abs(b-17)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 2×5+1 = 11 ; 2×8+1 = 17 barres.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ Applique 2n + 1 : a) n=5, b) n=8.';}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-225)<1, okB=Math.abs(b-675)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : R_B = 900×1/4 = 225 N ; R_A = 900 − 225 = 675 N.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) R_B × 4 = 900 × 1. ')+(okB?'':'b) 900 − R_B.');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function draw(){
+        var p=parseInt(el('ex2pos').value,10)/100, F=1000;
+        el('ex2posv').textContent=Math.round(p*100);
+        var Rb=F*p, Ra=F*(1-p);
+        g.clearRect(0,0,W,H);
+        var xA=70, xB=W-70, by=70;
+        g.strokeStyle='#2A2622';g.lineWidth=7;g.lineCap='round';g.beginPath();g.moveTo(xA,by);g.lineTo(xB,by);g.stroke();g.lineCap='butt';
+        g.fillStyle='#7a7064';
+        [[xA,'A'],[xB,'B']].forEach(function(s){g.beginPath();g.moveTo(s[0],by+3);g.lineTo(s[0]-11,by+22);g.lineTo(s[0]+11,by+22);g.closePath();g.fill();});
+        var xL=xA+p*(xB-xA);
+        g.strokeStyle='#C0492E';g.lineWidth=4;g.beginPath();g.moveTo(xL,by-46);g.lineTo(xL,by-6);g.stroke();
+        g.beginPath();g.moveTo(xL,by-3);g.lineTo(xL-6,by-14);g.lineTo(xL+6,by-14);g.closePath();g.fillStyle='#C0492E';g.fill();
+        g.fillStyle='#C0492E';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('1000 N',xL,by-50);
+        function reac(x,val,lab){var h=val/F*46;g.strokeStyle='#3D7E5F';g.lineWidth=4;g.beginPath();g.moveTo(x,by+50);g.lineTo(x,by+50-h);g.stroke();g.beginPath();g.moveTo(x,by+50-h-3);g.lineTo(x-6,by+50-h+8);g.lineTo(x+6,by+50-h+8);g.closePath();g.fillStyle='#3D7E5F';g.fill();g.fillStyle='#2c6147';g.font='700 11px "JetBrains Mono",monospace';g.fillText(lab+' '+Math.round(val)+' N',x,by+50+14);}
+        reac(xA,Ra,'A'); reac(xB,Rb,'B');
+        var o=el('ex2out'); if(o) o.textContent='appui A : '+Math.round(Ra)+' N   ·   appui B : '+Math.round(Rb)+' N   (total 1000 N)';
+      }
+      var e=el('ex2pos'); if(e) e.addEventListener('input',draw);
+      draw();
+    })();
   })();
 
   refresh();
