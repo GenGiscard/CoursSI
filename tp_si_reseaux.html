@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -124,6 +122,51 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* --- Jeux d'arcade (défis 7-8) --- */
+  .gamecanvas{width:100%;max-width:520px;display:block;margin:8px auto;border-radius:12px;background:#fbf7ee;border:1px solid rgba(42,38,34,.14);touch-action:none}
+  .pad{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  .padbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;border:2px solid #2A2622;background:#FFFDF8;color:#2A2622;border-radius:10px;padding:9px 18px;cursor:pointer;min-width:54px}
+  .padbtn:active{background:#2A2622;color:#FFFDF8}
+  .consigne{text-align:center;font-weight:800;font-size:15px;margin:6px auto;padding:9px;border-radius:10px;background:rgba(189,138,42,.12);border:1px solid rgba(189,138,42,.4);color:#8a6313;max-width:460px}
+  .molegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:440px;margin:10px auto}
+  .hole{aspect-ratio:1/1;border-radius:12px;background:rgba(42,38,34,.06);border:2px dashed rgba(42,38,34,.18);display:flex;align-items:center;justify-content:center;padding:5px}
+  .mole{width:100%;height:100%;border:none;border-radius:10px;background:#B85C2E;color:#fff;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;line-height:1.15;cursor:pointer;text-align:center;padding:4px;animation:molepop .14s ease}
+  @keyframes molepop{from{transform:scale(.5);opacity:.3}to{transform:scale(1);opacity:1}}
+  .hole.empty .mole{visibility:hidden}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-card code{font-family:'JetBrains Mono',monospace;font-size:13px;background:rgba(46,106,142,.09);padding:1px 5px;border-radius:4px}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:118px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:58px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .exo-ta{width:100%;box-sizing:border-box;min-height:62px;font-family:inherit;font-size:13.5px;line-height:1.5;padding:9px 11px;border:2px solid rgba(42,38,34,.18);border-radius:9px;background:#fff;resize:vertical;margin:6px 0 2px}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -143,21 +186,24 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Débit express</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Assemble les couches</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Local ou Internet ?</span><b class="bd" id="bd3">0</b></a>
       <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Le bon en-tête</span><b class="bd" id="bd4">0</b></a>
       <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Route le paquet</span><b class="bd" id="bd5">0</b></a>
       <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Équipement ↔ rôle</span><b class="bd" id="bd6">0</b></a>
+      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
+      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
     </div>
   </aside>
 
   <main class="main">
     <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 6 défis</span>
+      <span class="kicker">TP · 8 défis</span>
       <h2>Adresses &amp; transmissions</h2>
       <div class="intro">
-        <p class="lede">Six défis-jeux pour maîtriser les réseaux en agissant : calculer un temps de transmission, encapsuler un message, router un paquet selon son adresse. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
+        <p class="lede">Huit défis-jeux pour maîtriser les réseaux en agissant : calculer un temps de transmission, encapsuler un message, router un paquet selon son adresse. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
         <div class="ranks">
           <span class="rankchip">🔧 Apprenti · &lt; 200</span>
           <span class="rankchip">⚙️ Technicien·ne · 200+</span>
@@ -167,8 +213,87 @@
       </div>
     </section>
 
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour appliquer les réseaux : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — temps de téléchargement</div>
+          <p>Tu télécharges une vidéo de <b>150 Mo</b> via ta box, avec un débit mesuré de <b>25 Mo/s</b>. On rappelle : <b>temps = taille ÷ débit</b>.</p>
+          <svg class="exo-fig" viewBox="0 0 300 106" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9">
+            <rect x="14" y="40" width="40" height="30" rx="3" fill="#eef4f8" stroke="#2E6A8E" stroke-width="1.5"/><rect x="26" y="72" width="16" height="5" fill="#2E6A8E"/>
+            <text x="34" y="90" text-anchor="middle" fill="#5C544B">PC</text>
+            <line x1="54" y1="55" x2="120" y2="55" stroke="#3D7E5F" stroke-width="2"/>
+            <rect x="120" y="42" width="46" height="26" rx="4" fill="#c8a56d" stroke="#8a6a3c"/><text x="143" y="59" text-anchor="middle" fill="#5b431f">box</text>
+            <line x1="166" y1="55" x2="214" y2="55" stroke="#3D7E5F" stroke-width="2"/>
+            <text x="190" y="48" text-anchor="middle" fill="#2c6147" font-weight="700">25 Mo/s</text>
+            <ellipse cx="256" cy="55" rx="34" ry="19" fill="#eaf0f5" stroke="#2E6A8E" stroke-width="1.5"/><text x="256" y="58" text-anchor="middle" fill="#235877" font-weight="700">Internet</text>
+            <text x="150" y="100" text-anchor="middle" font-size="10" fill="#8a6313" font-weight="700">fichier : 150 Mo</text>
+          </svg>
+          <div class="exo-q">a) Temps de téléchargement = <input class="numin" id="ex1a" inputmode="decimal"> s</div>
+          <div class="exo-q">b) Si le débit tombe à 10 Mo/s, temps = <input class="numin" id="ex1b" inputmode="decimal"> s</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> temps = taille ÷ débit = 150 ÷ 25 = <b>6 s</b>.</p>
+            <p><b>b)</b> 150 ÷ 10 = <b>15 s</b>. Plus le débit est faible, plus c'est long (temps inversement proportionnel au débit).</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — le débit</div>
+          <p>Règle la <b>taille</b> du fichier et le <b>débit</b>. Les paquets circulent d'autant plus vite que le débit est grand, et on calcule le <b>temps = taille ÷ débit</b>.</p>
+          <canvas id="ex2cv" width="480" height="110" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Taille (Mo)</span><input type="range" id="ex2size" min="10" max="500" step="10" value="150"><b><span id="ex2sizev">150</span></b></label>
+            <label><span class="nm2">Débit (Mo/s)</span><input type="range" id="ex2debit" min="1" max="100" step="1" value="25"><b><span id="ex2debitv">25</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — débits et unités</div>
+          <p>a) Un fichier de <b>2 Go</b> est envoyé à <b>50 Mo/s</b> (attention : 2 Go = 2000 Mo). Temps ?<br>b) Un débit de <b>100 Mbit/s</b> vaut combien de Mo/s ? (rappel : 1 octet = 8 bits).</p>
+          <div class="exo-q">a) Temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div>
+          <div class="exo-q">b) Débit = <input class="numin" id="ex3b" inputmode="decimal"> Mo/s</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> 2 Go = 2000 Mo, donc temps = 2000 ÷ 50 = <b>40 s</b>.</p>
+            <p><b>b)</b> 100 Mbit/s ÷ 8 = <b>12,5 Mo/s</b> (on divise par 8 car 1 octet = 8 bits).</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — adressage IP <span class="lvl-badge">prépa / L1</span></div>
+          <p>Une adresse IPv4 fait <b>32 bits</b> (4 octets). Un réseau en <b>/24</b> (masque 255.255.255.0) réserve les 24 premiers bits au réseau ; il reste <b>8 bits</b> pour les machines. a) Combien d'adresses au total ? (2<sup>8</sup>) b) Combien sont utilisables pour des machines ? (on retire l'adresse réseau et l'adresse de diffusion).</p>
+          <svg class="exo-fig" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="12" font-weight="700">
+            <rect x="20" y="14" width="55" height="24" rx="3" fill="#dce8f2" stroke="#2E6A8E"/><text x="47" y="31" text-anchor="middle" fill="#235877">192</text>
+            <rect x="79" y="14" width="55" height="24" rx="3" fill="#dce8f2" stroke="#2E6A8E"/><text x="106" y="31" text-anchor="middle" fill="#235877">168</text>
+            <rect x="138" y="14" width="45" height="24" rx="3" fill="#dce8f2" stroke="#2E6A8E"/><text x="160" y="31" text-anchor="middle" fill="#235877">1</text>
+            <rect x="187" y="14" width="45" height="24" rx="3" fill="#fbeecf" stroke="#BD8A2A"/><text x="209" y="31" text-anchor="middle" fill="#8a6313">?</text>
+            <rect x="20" y="56" width="164" height="16" fill="#5cb2ea" fill-opacity="0.8"/><rect x="184" y="56" width="48" height="16" fill="#e8b84b" fill-opacity="0.9"/>
+            <text x="102" y="88" text-anchor="middle" font-size="9.5" fill="#235877">24 bits réseau (/24)</text>
+            <text x="208" y="88" text-anchor="middle" font-size="9.5" fill="#8a6313">8 bits machine</text>
+            <text x="150" y="110" text-anchor="middle" font-size="10.5" fill="#2c6147">8 bits → 2⁸ = 256 adresses</text>
+          </svg>
+          <div class="exo-q">a) Adresses au total = <input class="numin" id="ex4a" inputmode="decimal"></div>
+          <div class="exo-q">b) Adresses utilisables = <input class="numin" id="ex4b" inputmode="decimal"></div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> 8 bits pour les machines → 2<sup>8</sup> = <b>256 adresses</b>.</p>
+            <p><b>b)</b> On retire 2 adresses (l'adresse du réseau et l'adresse de diffusion/broadcast) : 256 − 2 = <b>254 machines</b>.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section id="d1">
-      <span class="tag">⚡ Défi 1<span class="pts-badge">/ 160 pts</span></span>
+      <span class="tag">⚡ Défi 1<span class="pts-badge">/ 120 pts</span></span>
       <h2>Débit express</h2>
       <p class="lede">Calcule un maximum de temps de transmission avec <b>t = taille / débit</b> en 40 secondes (trouve t, la taille ou le débit). Attention aux conversions <b>octet ↔ bit</b> !</p>
       <div class="game">
@@ -185,7 +310,7 @@
     </section>
 
     <section id="d2">
-      <span class="tag">🧩 Défi 2<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🧩 Défi 2<span class="pts-badge">/ 90 pts</span></span>
       <h2>Assemble les couches</h2>
       <p class="lede">Remets dans l'ordre les étapes de l'<b>encapsulation</b> d'un message (analogie de la lettre). Clique les étiquettes dans le bon ordre.</p>
       <div class="game">
@@ -198,7 +323,7 @@
     </section>
 
     <section id="d3">
-      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 130 pts</span></span>
+      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 100 pts</span></span>
       <h2>Local ou Internet ?</h2>
       <p class="lede">Pour chaque situation, décide si la communication reste sur le <b>réseau local</b> (gérée par le switch) ou doit sortir vers <b>Internet</b> (via le routeur). 35 secondes.</p>
       <div class="game">
@@ -218,7 +343,7 @@
     </section>
 
     <section id="d4">
-      <span class="tag">📦 Défi 4<span class="pts-badge">/ 150 pts</span></span>
+      <span class="tag">📦 Défi 4<span class="pts-badge">/ 120 pts</span></span>
       <h2>Le bon en-tête</h2>
       <p class="lede">Encapsule le message en cliquant les couches de l'<b>application vers le physique</b>, puis, à la réception, désencapsule-le dans le <b>sens inverse</b>.</p>
       <div class="game">
@@ -231,7 +356,7 @@
     </section>
 
     <section id="d5">
-      <span class="tag">🔀 Défi 5<span class="pts-badge">/ 140 pts</span></span>
+      <span class="tag">🔀 Défi 5<span class="pts-badge">/ 100 pts</span></span>
       <h2>Route le paquet</h2>
       <p class="lede">Ta machine veut envoyer un paquet. Selon l'<b>adresse IP de destination</b>, choisis qui s'en charge : le <b>switch</b> (même réseau local) ou le <b>routeur</b> (autre réseau).</p>
       <div class="game">
@@ -244,7 +369,7 @@
     </section>
 
     <section id="d6">
-      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 120 pts</span></span>
+      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 110 pts</span></span>
       <h2>Équipement ↔ rôle</h2>
       <p class="lede">Relie chaque élément du réseau à son rôle. Clique à gauche, puis sa correspondance à droite.</p>
       <div class="game">
@@ -253,6 +378,38 @@
           <div class="mcol"><div class="h">Rôle</div><div id="d6right"></div></div>
         </div>
         <div class="msg" id="d6msg"></div>
+      </div>
+    </section>
+
+    <section id="d7">
+      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Runner à portes</h2>
+      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre (← → ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
+      <div class="game">
+        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
+        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
+        <div class="pad">
+          <button class="padbtn" id="d7left">◀ Gauche</button>
+          <button class="padbtn" id="d7right">Droite ▶</button>
+        </div>
+        <div class="msg" id="d7msg"></div>
+      </div>
+    </section>
+
+    <section id="d8">
+      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
+      <h2>Tape-taupe</h2>
+      <p class="lede">Tape <b>seulement</b> ce qui appartient à la catégorie demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
+      <div class="game">
+        <div class="arc-head">
+          <span class="timepill">⏱ <b id="d8time">40</b> s</span>
+          <span class="timepill">Vies : <b id="d8life">❤❤❤</b></span>
+          <span class="timepill">Score : <b id="d8score">0</b></span>
+          <button class="btn" id="d8start">Démarrer</button>
+        </div>
+        <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
+        <div class="molegrid" id="d8grid"></div>
+        <div class="msg" id="d8msg"></div>
       </div>
     </section>
 
@@ -268,8 +425,8 @@
 </div>
 
 <script>
-  var KEYS=['d1','d2','d3','d4','d5','d6'];
-  var MAXES={d1:160,d2:120,d3:130,d4:150,d5:140,d6:120}, TOTALMAX=820;
+  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+  var MAXES={d1:120,d2:90,d3:100,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
   function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
@@ -333,7 +490,7 @@
       pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
     pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
       if(i===idx){var sl=el('d2s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(40,120-wrong*18);setContrib('d2',sc);msg.className='msg ok';msg.textContent='✓ Encapsulation ordonnée ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*14);setContrib('d2',sc);msg.className='msg ok';msg.textContent='✓ Encapsulation ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
       else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
     el('d2reset').addEventListener('click',start);
     start();
@@ -386,7 +543,7 @@
       var order=phase==='down'?[0,1,2,3]:[3,2,1,0];
       if(i===order[idx]){ idx++; headers+=(phase==='down')?1:-1; drawToken();
         if(idx===4){ if(phase==='down'){ phase='up'; idx=0; inst.textContent='Désencapsulation : clique les couches du physique vers l\u2019application.'; msg.className='msg ok'; msg.textContent='✓ Encapsulé ! Maintenant, désencapsule à la réception.'; }
-          else { done=true; var sc=Math.max(40,150-wrong*15); setContrib('d4',sc); drawToken(); msg.className='msg ok'; msg.textContent='🏆 Message transmis et reconstitué — défi complet ! +'+Math.min(150,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':''); } } }
+          else { done=true; var sc=Math.max(30,120-wrong*16); setContrib('d4',sc); drawToken(); msg.className='msg ok'; msg.textContent='🏆 Message transmis et reconstitué — défi complet ! +'+Math.min(120,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':''); } } }
       else { wrong++; b.classList.add('no'); setTimeout(function(){b.classList.remove('no');},360); msg.className='msg no'; msg.textContent=(phase==='down'?'Dans l\u2019ordre : Application → Transport → Réseau → Physique.':'Dans l\u2019ordre inverse : Physique → Réseau → Transport → Application.'); }
     });
     el('d4reset').addEventListener('click',start);
@@ -408,10 +565,10 @@
       msg.textContent='';msg.className='msg';
       opts.innerHTML=shuffle([{k:'switch',l:'Switch (réseau local)'},{k:'routeur',l:'Routeur (autre réseau)'}]).map(function(o){return '<button class="opt" data-k="'+o.k+'">'+o.l+'</button>';}).join('');}
     opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var k=b.getAttribute('data-k');var r=ROUNDS[ri];
-      if(k===r.ans){locked=true;b.classList.add('ok');setContrib('d5',(ri+1)*35);msg.className='msg ok';
+      if(k===r.ans){locked=true;b.classList.add('ok');setContrib('d5',(ri+1)*25);msg.className='msg ok';
         var why=r.ans==='switch'?'Même réseau (192.168.1.x) → le switch suffit.':'Réseau différent → il faut passer par le routeur.';
         if(ri<3){msg.textContent='✓ '+why+' Manche suivante…';setTimeout(function(){ri++;setRound();},1300);}
-        else{msg.textContent='🏆 Routage maîtrisé — défi complet ! +140 pts';}}
+        else{msg.textContent='🏆 Routage maîtrisé — défi complet ! +100 pts';}}
       else{b.classList.add('no');msg.className='msg no';msg.textContent='Compare les 3 premiers nombres de l\u2019adresse à ceux de ta machine.';setTimeout(function(){b.classList.remove('no');},480);}});
     setRound();
   })();
@@ -433,11 +590,142 @@
     function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
       if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
       if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*24);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +120 pts';}}
+      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d6',done*22);
+        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +110 pts';}}
       else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
     left.addEventListener('click',click);right.addEventListener('click',click);
     build();
+  })();
+
+  // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
+  (function(){
+    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+    var QBANK=[
+      {q:'Une adresse IP identifie\u2026',ok:'un appareil sur le réseau',no:'la couleur de l\u2019écran'},
+      {q:'Un routeur sert à\u2026',ok:'relier des réseaux',no:'stocker des fichiers'},
+      {q:'Le Wi-Fi est une connexion\u2026',ok:'sans fil',no:'filaire'},
+      {q:'Un serveur\u2026',ok:'fournit un service',no:'demande un service'},
+      {q:'Un client\u2026',ok:'demande un service',no:'héberge le site'},
+      {q:'Les données circulent en\u2026',ok:'paquets',no:'un seul bloc'},
+      {q:'Le DNS traduit\u2026',ok:'un nom en adresse IP',no:'une image en texte'},
+      {q:'Un réseau local se dit\u2026',ok:'LAN',no:'CPU'},
+      {q:'Un câble Ethernet est\u2026',ok:'filaire',no:'sans fil'},
+      {q:'Internet est un réseau\u2026',ok:'mondial',no:'local uniquement'},
+      {q:'Un protocole, c\u2019est\u2026',ok:'des règles d\u2019échange',no:'un câble'},
+      {q:'La box relie la maison à\u2026',ok:'Internet',no:'l\u2019imprimante'}
+    ];
+    var TARGET=12;
+    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+    function draw(){
+      g.clearRect(0,0,W,H);
+      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
+      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+    }
+    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+      draw();}
+    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+    startBtn.addEventListener('click',start);
+    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+    newQ();draw();
+  })();
+
+  // ===== D8 — tape-taupe (3 vies, ralenti) =====
+  (function(){
+    var ITEMS=[
+      {t:'un routeur',cat:'equip'},{t:'un switch',cat:'equip'},{t:'une box',cat:'equip'},{t:'un serveur',cat:'equip'},{t:'un point d\u2019accès Wi-Fi',cat:'equip'},
+      {t:'un câble Ethernet',cat:'conn'},{t:'le Wi-Fi',cat:'conn'},{t:'la fibre optique',cat:'conn'},{t:'le Bluetooth',cat:'conn'},{t:'un câble RJ45',cat:'conn'},
+      {t:'une adresse IP',cat:'adr'},{t:'une adresse MAC',cat:'adr'},{t:'un nom de domaine',cat:'adr'},{t:'un numéro de port',cat:'adr'},{t:'une URL',cat:'adr'}
+    ];
+    var CATS={equip:'les ÉQUIPEMENTS',conn:'les moyens de CONNEXION',adr:'les ADRESSES'};
+    var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
+    var HOLES=6, cells=[], target='equip', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
+    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
+    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+    startBtn.addEventListener('click',start);
+    build();setConsigne();lifeEl.textContent=hearts();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-6)<0.3, okB=Math.abs(b-15)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 150 ÷ 25 = 6 s et 150 ÷ 10 = 15 s.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) temps = taille ÷ débit. ')+(okB?'':'b) même formule avec 10 Mo/s.');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-40)<0.5, okB=Math.abs(b-12.5)<0.2;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 2000 ÷ 50 = 40 s ; 100 ÷ 8 = 12,5 Mo/s.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) convertis 2 Go = 2000 Mo. ')+(okB?'':'b) divise les Mbit/s par 8.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-256)<0.5, okB=Math.abs(b-254)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2⁸ = 256, puis 256 − 2 = 254 machines.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 2 puissance 8. ')+(okB?'':'b) total − 2 (réseau + broadcast).');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height, phase=0;
+      function step(){
+        var taille=parseFloat(el('ex2size').value), debit=parseFloat(el('ex2debit').value);
+        el('ex2sizev').textContent=taille; el('ex2debitv').textContent=debit;
+        var t=taille/debit;
+        g.clearRect(0,0,W,H);
+        var y=H/2-6, xa=70, xb=W-70;
+        g.fillStyle='#eef4f8';g.strokeStyle='#2E6A8E';g.lineWidth=1.5;
+        g.beginPath();g.rect(20,y-14,40,34);g.fill();g.stroke();
+        g.fillStyle='#235877';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('serveur',40,y+30);
+        g.beginPath();g.rect(W-60,y-14,40,34);g.fillStyle='#eef4f8';g.fill();g.strokeStyle='#2E6A8E';g.stroke();
+        g.fillStyle='#235877';g.fillText('PC',W-40,y+30);
+        g.strokeStyle='#3D7E5F';g.lineWidth=3;g.beginPath();g.moveTo(xa,y+3);g.lineTo(xb,y+3);g.stroke();
+        phase+=Math.min(debit,80)*0.9;
+        var N=9, span=xb-xa;
+        g.fillStyle='#BD8A2A';
+        for(var i=0;i<N;i++){var d=((phase+i*span/N)%span); g.beginPath();g.arc(xa+d,y+3,4,0,7);g.fill();}
+        g.fillStyle='#2A2622';g.font='800 14px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText(taille+' Mo ÷ '+debit+' Mo/s = '+t.toFixed(1)+' s',W/2,22);
+        el('ex2out').textContent='temps = taille ÷ débit = '+taille+' ÷ '+debit+' = '+t.toFixed(1)+' s';
+      }
+      ['ex2size','ex2debit'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',step);});
+      setInterval(step,45); step();
+    })();
   })();
 
   refresh();
