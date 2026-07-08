@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -88,6 +86,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -191,6 +196,12 @@
       <p class="lede">Un résultat de mesure s'écrit <b>valeur ± incertitude</b>, avec l'unité. Cela définit un <b>encadrement</b> de la valeur vraie.</p>
       <div class="eqcard"><div class="eq">résultat = valeur ± u&nbsp;&nbsp;(unité)</div><div class="leg">La valeur vraie est comprise dans l'intervalle <b>[valeur − u ; valeur + u]</b>.</div></div>
       <div class="card"><h3 style="margin-top:0">Exemple</h3><p style="margin:0">L = <b>12,4 ± 0,2 cm</b> : la longueur vraie est comprise entre <b>12,2 cm</b> et <b>12,6 cm</b>.</p></div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Le résultat s'écrit sous la forme x ± u</div>
+        <canvas id="cvinc" width="900" height="210" aria-label="Mesure, dispersion et intervalle d'incertitude x plus ou moins u"></canvas>
+        <div class="cap"><b id="incphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="inccap">On mesure une valeur x.</span></div>
+      </div>
     </section>
 
     <section id="s6">
@@ -216,6 +227,12 @@
       <div class="eqcard"><div class="eq">écart absolu = |mesure − référence|</div></div>
       <div class="eqcard"><div class="eq">écart relatif = |mesure − référence| / référence × 100 (%)</div><div class="leg">Un écart relatif <b>faible</b> indique une mesure <b>proche</b> de la référence.</div></div>
       <div class="card"><h3 style="margin-top:0">Exemple</h3><p style="margin:0">g de référence <b>9,81 m/s²</b>, mesuré <b>9,60</b> : écart relatif = 0,21 / 9,81 × 100 ≈ <b>2,1 %</b>.</p></div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Conforme ou non ? L'écart à la référence</div>
+        <canvas id="cvtol" width="900" height="220" aria-label="Comparaison d'une mesure à une valeur de référence avec bande de tolérance"></canvas>
+        <div class="cap"><b id="tolphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="tolcap">On compare la mesure à une valeur de référence.</span></div>
+      </div>
     </section>
 
     <section id="s8" style="border-bottom:none">
@@ -325,6 +342,98 @@
     }
     setInterval(function(){phaseS+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvtol'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var vmin=238,vmax=262, ref=250, tol=5, ay=120;
+  function X(v){return 80+(v-vmin)/(vmax-vmin)*(W-160);}
+  var caps=[
+    'On compare la mesure \u00e0 une valeur de r\u00e9f\u00e9rence, avec une tol\u00e9rance (bande verte).',
+    '\u00c9cart = |mesure \u2212 r\u00e9f\u00e9rence|. Si l\u2019\u00e9cart \u2264 tol\u00e9rance \u2192 CONFORME.',
+    'Hors de la bande : NON CONFORME \u2014 la mesure s\u2019\u00e9carte trop de la r\u00e9f\u00e9rence.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>12) T=0;
+    var m=ref+8*Math.sin(T*0.85), ecart=Math.abs(m-ref), inb=ecart<=tol;
+    var phase=(T<1.8?0:(inb?1:2));
+    g.clearRect(0,0,W,H);
+    // bande de tolérance
+    g.fillStyle='rgba(61,126,95,.18)';g.fillRect(X(ref-tol),ay-34,X(ref+tol)-X(ref-tol),68);
+    g.strokeStyle='#3D7E5F';g.setLineDash([4,4]);g.lineWidth=1.5;
+    g.beginPath();g.moveTo(X(ref-tol),ay-34);g.lineTo(X(ref-tol),ay+34);g.moveTo(X(ref+tol),ay-34);g.lineTo(X(ref+tol),ay+34);g.stroke();g.setLineDash([]);
+    g.fillStyle='#2c6147';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('tol\u00e9rance \u00b1'+tol,X(ref),ay-42);
+    // axe
+    g.strokeStyle='#5C544B';g.lineWidth=1.5;g.beginPath();g.moveTo(60,ay);g.lineTo(W-60,ay);g.stroke();
+    // référence
+    g.strokeStyle='#2E6A8E';g.lineWidth=2.5;g.beginPath();g.moveTo(X(ref),ay-40);g.lineTo(X(ref),ay+40);g.stroke();
+    g.fillStyle='#235877';g.textAlign='center';g.fillText('r\u00e9f\u00e9rence '+ref+' \u03a9',X(ref),ay+56);
+    // mesure
+    var col=inb?'#3D7E5F':'#C0492E', xm=X(m);
+    g.strokeStyle=col;g.lineWidth=2;g.beginPath();g.moveTo(xm,ay-30);g.lineTo(xm,ay);g.stroke();
+    g.fillStyle=col;g.beginPath();g.arc(xm,ay,7,0,7);g.fill();
+    g.font='700 12px "JetBrains Mono",monospace';g.fillText('mesure '+m.toFixed(1)+' \u03a9',xm,ay-38);
+    // écart
+    g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=1;g.beginPath();g.moveTo(X(ref),ay+22);g.lineTo(xm,ay+22);g.stroke();
+    g.fillStyle='#5C544B';g.font='700 11px "JetBrains Mono",monospace';g.fillText('\u00e9cart '+ecart.toFixed(1),(X(ref)+xm)/2,ay+18);
+    // verdict
+    g.fillStyle=col;g.font='800 20px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+    g.fillText(inb?'\u2713 CONFORME':'\u2717 NON CONFORME',W/2,H-14);
+    var cap=document.getElementById('tolcap'), ph=document.getElementById('tolphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvinc'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var x0=80,x1=820,ay=120, vMin=23.3,vMax=25.3, xm=24.3,u=0.4, vrai=24.12;
+  function X(v){return x0+(v-vMin)/(vMax-vMin)*(x1-x0);}
+  var jit=[-.34,-.2,-.11,.02,.06,.16,.26,.31,-.05,.12];
+  var caps=[
+    'On mesure une grandeur : on obtient une valeur x.',
+    'En r\u00e9p\u00e9tant la mesure, les r\u00e9sultats se DISPERSENT autour de x.',
+    'On exprime le r\u00e9sultat x \u00b1 u : un intervalle qui contient la valeur vraie.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<5?1:2));
+    g.clearRect(0,0,W,H);
+    // intervalle (phase 2)
+    if(phase>=2){
+      g.fillStyle='rgba(46,106,142,.12)';g.fillRect(X(xm-u),ay-46,X(xm+u)-X(xm-u),92);
+      g.strokeStyle='#2E6A8E';g.lineWidth=2;
+      g.beginPath();g.moveTo(X(xm-u),ay-46);g.lineTo(X(xm-u),ay+46);g.moveTo(X(xm+u),ay-46);g.lineTo(X(xm+u),ay+46);g.stroke();
+      g.fillStyle='#235877';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('x \u2212 u',X(xm-u),ay-52);g.fillText('x + u',X(xm+u),ay-52);
+    }
+    // axe
+    g.strokeStyle='#5C544B';g.lineWidth=1.5;g.beginPath();g.moveTo(x0-10,ay);g.lineTo(x1+10,ay);g.stroke();
+    for(var v=23.5;v<=25.2;v+=0.5){var xx=X(v);g.beginPath();g.moveTo(xx,ay-5);g.lineTo(xx,ay+5);g.stroke();g.fillStyle='#9a9385';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(v.toFixed(1),xx,ay+20);}
+    // mesures dispersées (phase 1+)
+    if(phase>=1){
+      var n=Math.min(jit.length, Math.floor((phase>=2?1:(T-2)/2.6)*jit.length)+1);
+      if(phase>=2) n=jit.length;
+      for(var k=0;k<n;k++){var vx=xm+jit[k];g.fillStyle='rgba(189,138,42,.85)';g.beginPath();g.arc(X(vx),ay-6-(k%3)*7,4.5,0,7);g.fill();}
+    }
+    // valeur x (repère central)
+    g.strokeStyle='#C0492E';g.lineWidth=2;g.beginPath();g.moveTo(X(xm),ay-40);g.lineTo(X(xm),ay+40);g.stroke();
+    g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('x = 24,3',X(xm),ay+62);
+    // valeur vraie (phase 2)
+    if(phase>=2){g.fillStyle='#3D7E5F';g.beginPath();g.arc(X(vrai),ay+40,6,0,7);g.fill();g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('valeur vraie',X(vrai),ay+80);
+      g.fillStyle='#235877';g.font='800 20px "Bricolage Grotesque",sans-serif';g.fillText('x \u00b1 u = 24,3 \u00b1 0,4',W/2,26);}
+    var cap=document.getElementById('inccap'), ph=document.getElementById('incphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
