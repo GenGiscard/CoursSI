@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
@@ -218,6 +216,39 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .gamecanvas{display:block;width:100%;max-width:480px;margin:0 auto;background:#FCFAF4;border:1px solid rgba(42,38,34,.14);border-radius:12px}
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:150px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:70px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -239,6 +270,7 @@
     <div class="links" id="links">
       <a href="#obj" class="navlink"><span>01</span>Objectif</a>
       <a href="#proto" class="navlink"><span>02</span>Protocole</a>
+      <a href="#exos" class="navlink"><span>🎯</span>Exercices d'application</a>
       <a href="#defi1" class="navlink"><span>D1</span>Assemble la chaîne</a>
       <a href="#defi2" class="navlink"><span>D2</span>Puissance express</a>
       <a href="#defi3" class="navlink"><span>D3</span>Effort ou Flux ?</a>
@@ -291,6 +323,82 @@
     </section>
 
     <!-- DÉFI 1 -->
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour maîtriser l'énergie : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la consommation d'un radiateur</div>
+          <p>Un radiateur électrique de <b>1500 W</b> fonctionne <b>4 h par jour</b>. On rappelle : énergie = puissance × durée, et 1 kWh = 1000 Wh.</p>
+          <svg class="exo-fig" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <rect x="24" y="34" width="108" height="46" rx="5" fill="#e9a893" fill-opacity="0.35" stroke="#C0492E" stroke-width="1.5"/>
+            <g stroke="#C0492E" stroke-width="2" stroke-opacity="0.7"><line x1="42" y1="40" x2="42" y2="74"/><line x1="60" y1="40" x2="60" y2="74"/><line x1="78" y1="40" x2="78" y2="74"/><line x1="96" y1="40" x2="96" y2="74"/><line x1="114" y1="40" x2="114" y2="74"/></g>
+            <text x="78" y="96" text-anchor="middle" font-size="11" fill="#C0492E" font-weight="700">1500 W</text>
+            <circle cx="222" cy="52" r="28" fill="#eef4f8" stroke="#2E6A8E" stroke-width="1.5"/>
+            <line x1="222" y1="52" x2="222" y2="34" stroke="#235877" stroke-width="2"/><line x1="222" y1="52" x2="236" y2="58" stroke="#235877" stroke-width="2"/>
+            <text x="222" y="96" text-anchor="middle" font-size="11" fill="#235877" font-weight="700">4 h / jour</text>
+          </svg>
+          <div class="exo-q">a) Énergie par jour = <input class="numin" id="ex1a" inputmode="decimal"> kWh</div>
+          <div class="exo-q">b) Coût par jour (1 kWh = 0,20 €) = <input class="numin" id="ex1b" inputmode="decimal"> €</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> énergie = 1500 × 4 = 6000 Wh = <b>6 kWh</b>.</p>
+            <p><b>b)</b> coût = 6 × 0,20 = <b>1,20 €</b> par jour (soit ~36 € par mois).</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — le rendement</div>
+          <p>Un convertisseur reçoit une puissance et n'en restitue qu'une partie (le reste est perdu, souvent en chaleur). Règle la <b>puissance d'entrée</b> et le <b>rendement</b> : on visualise la puissance utile et les pertes.</p>
+          <canvas id="ex2cv" width="480" height="130" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Puissance d'entrée (W)</span><input type="range" id="ex2pin" min="100" max="1000" step="50" value="800"><b><span id="ex2pinv">800</span></b></label>
+            <label><span class="nm2">Rendement (%)</span><input type="range" id="ex2eta" min="10" max="100" step="5" value="75"><b><span id="ex2etav">75</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — le rendement d'un moteur</div>
+          <p>Un moteur reçoit <b>800 W</b> d'énergie électrique et fournit <b>600 W</b> de puissance mécanique utile. On rappelle : rendement = puissance utile ÷ puissance reçue × 100.</p>
+          <div class="exo-q">a) Rendement = <input class="numin" id="ex3a" inputmode="decimal"> %</div>
+          <div class="exo-q">b) Puissance perdue = <input class="numin" id="ex3b" inputmode="decimal"> W</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> rendement = 600 ÷ 800 × 100 = <b>75 %</b>.</p>
+            <p><b>b)</b> puissance perdue = 800 − 600 = <b>200 W</b> (dissipée en chaleur).</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — chaîne d'énergie <span class="lvl-badge">prépa / L1</span></div>
+          <p>Une chaîne d'énergie enchaîne deux étages : une <b>conversion</b> (rendement 90 %) puis une <b>transmission</b> (rendement 80 %). Le rendement global est le <b>produit</b> des rendements.</p>
+          <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
+            <text x="30" y="44" text-anchor="middle" fill="#235877" font-weight="700">1000 W</text>
+            <line x1="52" y1="48" x2="78" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="84,48 74,43 74,53" fill="#5C544B"/>
+            <rect x="84" y="30" width="60" height="36" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="114" y="46" text-anchor="middle" fill="#235877" font-weight="700">conversion</text><text x="114" y="58" text-anchor="middle" fill="#235877">η = 90%</text>
+            <line x1="144" y1="48" x2="164" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="170,48 160,43 160,53" fill="#5C544B"/>
+            <rect x="170" y="30" width="66" height="36" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="203" y="46" text-anchor="middle" fill="#2c6147" font-weight="700">transmission</text><text x="203" y="58" text-anchor="middle" fill="#2c6147">η = 80%</text>
+            <line x1="236" y1="48" x2="262" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="268,48 258,43 258,53" fill="#5C544B"/>
+            <text x="282" y="44" text-anchor="middle" fill="#8a6313" font-weight="700">? W</text>
+          </svg>
+          <div class="exo-q">a) Rendement global = <input class="numin" id="ex4a" inputmode="decimal"> %</div>
+          <div class="exo-q">b) Puissance de sortie (entrée 1000 W) = <input class="numin" id="ex4b" inputmode="decimal"> W</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> rendement global = 0,90 × 0,80 = 0,72 = <b>72 %</b> (les rendements se multiplient, ils ne s'additionnent pas).</p>
+            <p><b>b)</b> sortie = 1000 × 0,72 = <b>720 W</b>. Chaque étage « grignote » l'énergie : d'où l'intérêt de limiter le nombre de conversions.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section id="defi1">
       <div class="badge-defi">DÉFI 1 · jusqu'à 120 pts</div>
       <h3>Assemble la chaîne d'énergie</h3>
@@ -763,6 +871,70 @@
   })();
 
   renderScore();
+</script>
+<script>
+(function(){
+function el(id){return document.getElementById(id);}
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-6)<0.1, okB=Math.abs(b-1.2)<0.05;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 1500 \u00d7 4 = 6000 Wh = 6 kWh ; 6 \u00d7 0,20 = 1,20 \u20ac.';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) P \u00d7 t, puis \u00f7 1000. ')+(okB?'':'b) kWh \u00d7 0,20.');}
+      unlock('ex1reveal','Voir l\u2019analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-75)<0.5, okB=Math.abs(b-200)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 600/800 \u00d7 100 = 75 % ; 800 \u2212 600 = 200 W.';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) utile \u00f7 re\u00e7ue \u00d7 100. ')+(okB?'':'b) re\u00e7ue \u2212 utile.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-72)<0.5, okB=Math.abs(b-720)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 0,9 \u00d7 0,8 = 72 % ; 1000 \u00d7 0,72 = 720 W.';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) multiplie les rendements. ')+(okB?'':'b) 1000 \u00d7 rendement global.');}
+      unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function draw(){
+        var Pin=+el('ex2pin').value, eta=+el('ex2eta').value;
+        el('ex2pinv').textContent=Pin; el('ex2etav').textContent=eta;
+        var Put=Pin*eta/100, pertes=Pin-Put;
+        g.clearRect(0,0,W,H);
+        var cy=H*0.42, bx=W*0.42, bw=70, sc=44/1000;
+        g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=1.5;g.beginPath();g.rect(bx,cy-26,bw,52);g.fill();g.stroke();
+        g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('convertisseur',bx+bw/2,cy+3);
+        // entrée
+        var hIn=Math.max(6,Pin*sc);
+        g.fillStyle='rgba(46,106,142,.7)';g.beginPath();g.rect(20,cy-hIn/2,bx-20,hIn);g.fill();
+        g.fillStyle='#235877';g.textAlign='left';g.fillText(Pin+' W',24,cy-hIn/2-4);
+        // sortie utile
+        var hOut=Math.max(4,Put*sc);
+        g.fillStyle='rgba(61,126,95,.8)';g.beginPath();g.rect(bx+bw,cy-hOut/2,W-40-(bx+bw),hOut);g.fill();
+        g.fillStyle='#2c6147';g.textAlign='right';g.fillText('utile '+Put.toFixed(0)+' W',W-22,cy-hOut/2-4);
+        // pertes (vers le bas)
+        var hL=Math.max(2,pertes*sc);
+        g.fillStyle='rgba(192,73,46,.65)';g.beginPath();g.rect(bx+bw/2-hL/2,cy+26,hL,26);g.fill();
+        g.fillStyle='#a44a26';g.textAlign='center';g.fillText('pertes '+pertes.toFixed(0)+' W',bx+bw/2,H-6);
+        var o=el('ex2out'); if(o) o.textContent='P utile = '+Pin+' \u00d7 '+eta+'% = '+Put.toFixed(0)+' W   \u00b7   pertes = '+pertes.toFixed(0)+' W';
+      }
+      ['ex2pin','ex2eta'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
+      draw();
+    })();
+  })();
+})();
 </script>
 </body>
 </html>
