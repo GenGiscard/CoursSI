@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -86,6 +84,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -175,6 +180,12 @@ nom = "barriere"      <span class="cm"># une chaîne de caractères (str)</span>
 
 <span class="kw">while</span> bouton == "appuye":  <span class="cm"># tant que vrai</span>
     attendre()</pre>
+      </div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Une boucle qui s'exécute pas à pas</div>
+        <canvas id="cvloop" width="900" height="250" aria-label="Exécution animée d'une boucle tant que"></canvas>
+        <div class="cap"><b id="loopphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="loopcap">Une boucle répète des instructions.</span></div>
       </div>
     </section>
 
@@ -330,6 +341,53 @@ nom = "barriere"      <span class="cm"># une chaîne de caractères (str)</span>
     }
     setInterval(function(){fr++; if(fr%55===0){active=(active+1)%3;} draw();},40); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvloop'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var lines=['compteur = 0','tant que compteur < 4 :','\u2003avancer d\u2019une case','\u2003compteur = compteur + 1'];
+  var caps={
+    check:'Test : compteur < 4 ? \u2192 VRAI, on entre dans la boucle.',
+    body:'On ex\u00e9cute le corps de la boucle : avancer d\u2019une case.',
+    inc:'On incr\u00e9mente : compteur = compteur + 1.',
+    stop:'Test : compteur < 4 ? \u2192 FAUX : la boucle s\u2019arr\u00eate.'
+  };
+  var counter=0, st='check', fr=0, tokenX=0;
+  function advance(){
+    if(st==='check'){ st = counter<4 ? 'body':'stop'; }
+    else if(st==='body'){ st='inc'; }
+    else if(st==='inc'){ counter++; st='check'; }
+    else if(st==='stop'){ counter=0; st='check'; }
+  }
+  var hl={check:1,body:2,inc:3,stop:1};
+  var ind={check:'\u2460',body:'\u2461',inc:'\u2462',stop:'\u25a0'};
+  function step(){
+    fr++; if(fr%24===0) advance();
+    // token cible = cellule counter
+    var cellX0=560, cw=58, tgt=cellX0+counter*cw;
+    tokenX += (tgt-tokenX)*0.2;
+    g.clearRect(0,0,W,H);
+    // code
+    for(var k=0;k<4;k++){var y=40+k*44;
+      if(k===hl[st]){g.fillStyle=(st==='stop')?'rgba(192,73,46,.16)':'rgba(46,106,142,.16)';g.fillRect(24,y-20,470,34);
+        g.fillStyle=(st==='stop')?'#C0492E':'#2E6A8E';g.beginPath();g.moveTo(12,y-6);g.lineTo(20,y-3);g.lineTo(12,y);g.closePath();g.fill();}
+      g.fillStyle='#2A2622';g.font='15px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(lines[k],32,y);
+    }
+    // compteur
+    g.fillStyle='#5C544B';g.font='700 14px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('compteur =',560,44);
+    g.fillStyle='#235877';g.font='800 30px "Bricolage Grotesque",sans-serif';g.fillText(counter,690,50);
+    // cellules
+    for(var c=0;c<5;c++){var x=560+c*58;g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1.5;g.fillStyle=(c<counter)?'rgba(61,126,95,.18)':'#FCFAF4';g.beginPath();g.rect(x,120,50,50);g.fill();g.stroke();g.fillStyle='#9a9385';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(c,x+25,190);}
+    // jeton
+    g.fillStyle=(st==='stop')?'#3D7E5F':'#C0492E';g.beginPath();g.arc(tokenX+25,145,15,0,7);g.fill();g.fillStyle='#fff';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('\u25b6',tokenX+25,150);
+    if(st==='stop'){g.fillStyle='#2c6147';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('4 cases parcourues \u2713',700,230);}
+    var cap=document.getElementById('loopcap'), ph=document.getElementById('loopphase');
+    if(cap) cap.textContent=caps[st];
+    if(ph) ph.textContent=ind[st];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>

@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -93,6 +91,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -226,6 +231,12 @@
         </tbody>
       </table>
       <div class="eqcard"><div class="eq">le système DOIT … (critère, niveau)</div><div class="leg">L'ensemble des exigences forme le <b>cahier des charges</b>. SysML les regroupe dans le <b>diagramme des exigences</b>.</div></div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Du besoin aux exigences vérifiées</div>
+        <canvas id="cvexig" width="900" height="260" aria-label="Traçabilité : le besoin se décompose en exigences vérifiées, taux de couverture"></canvas>
+        <div class="cap"><b id="exphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="excap">Le besoin se décompose en exigences.</span></div>
+      </div>
     </section>
 
     <section id="s5">
@@ -376,6 +387,49 @@
     }
     setInterval(function(){phaseS+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvexig'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var reqs=[['R1 \u2014 s\u2019ouvre en moins de 8 s',1],['R2 \u2014 r\u00e9siste \u00e0 500 N',1],['R3 \u2014 autonomie 5 h',1],['R4 \u2014 masse < 800 g',0],['R5 \u2014 signal lumineux',1]];
+  var bx=[110,130], rX=340, rW=470, y0=34, dy=46;
+  var caps=[
+    'Le besoin se d\u00e9compose en exigences pr\u00e9cises et v\u00e9rifiables.',
+    'On v\u00e9rifie CHAQUE exigence sur le prototype : satisfaite ou non ?',
+    'Le taux de couverture = part d\u2019exigences satisfaites : ici 4 / 5 = 80 %.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<6?1:2));
+    var shown=phase<1?0:(phase>=2?5:Math.floor((T-2)/0.8)+1);
+    g.clearRect(0,0,W,H);
+    // besoin
+    g.fillStyle='#fbeecf';g.strokeStyle='#BD8A2A';g.lineWidth=2;g.beginPath();g.rect(bx[0]-70,bx[1]-34,140,68);g.fill();g.stroke();
+    g.fillStyle='#8a6313';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('BESOIN',bx[0],bx[1]-6);g.font='11px "JetBrains Mono",monospace';g.fillText('(le portail)',bx[0],bx[1]+14);
+    // exigences
+    for(var k=0;k<5;k++){var y=y0+k*dy+16;
+      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1.4;g.beginPath();g.moveTo(bx[0]+70,bx[1]);g.lineTo(rX-8,y);g.stroke();
+      var ok=reqs[k][1], done=(k<shown);
+      g.fillStyle=done?(ok?'rgba(61,126,95,.10)':'rgba(192,73,46,.10)'):'#FCFAF4';
+      g.strokeStyle=done?(ok?'#3D7E5F':'#C0492E'):'rgba(42,38,34,.22)';g.lineWidth=1.6;
+      g.beginPath();g.rect(rX,y-15,rW,30);g.fill();g.stroke();
+      g.fillStyle='#2A2622';g.font='13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(reqs[k][0],rX+12,y+4);
+      if(done){g.fillStyle=ok?'#2c6147':'#a44a26';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(ok?'\u2713':'\u2717',rX+rW-20,y+6);}
+    }
+    // couverture (phase 2)
+    if(phase>=2){
+      g.fillStyle='#efe9dd';g.fillRect(rX,246,rW,10);
+      g.fillStyle='#3D7E5F';g.fillRect(rX,246,rW*0.8,10);
+      g.fillStyle='#235877';g.font='800 16px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('couverture : 4 / 5 = 80 %',rX,240);
+    }
+    var cap=document.getElementById('excap'), ph=document.getElementById('exphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
