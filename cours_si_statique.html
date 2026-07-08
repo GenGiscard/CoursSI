@@ -204,6 +204,12 @@
         <div class="card"><h3 style="margin-top:0">① Pas de translation</h3><p style="margin:0">Si les forces ne se compensent pas, le solide est poussé dans une direction&nbsp;: il <b>glisse</b>.</p></div>
         <div class="card"><h3 style="margin-top:0">② Pas de rotation</h3><p style="margin:0">Si les moments ne se compensent pas, le solide est mis à <b>tourner</b> autour d'un axe.</p></div>
       </div>
+    
+      <div class="figwrap" style="margin-top:14px">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Équilibre : la somme des forces est nulle</div>
+        <canvas id="cvpfs" width="900" height="240" aria-label="Principe fondamental : une force déplace le solide, la force opposée rétablit l'équilibre"></canvas>
+        <div class="cap"><b id="pfsphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="pfscap">Un solide au repos.</span></div>
+      </div>
     </section>
 
     <section id="s5">
@@ -405,6 +411,54 @@
     }
     setInterval(function(){ p=(p+0.011)%4; draw(); }, 40); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvpfs'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=W/2, gy=176, bw=92, bh=60;
+  function arrow(x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w;g.lineCap='round';
+    var a=Math.atan2(y2-y1,x2-x1),L=13,bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
+    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();g.lineCap='butt';}
+  var caps=[
+    'Un solide au repos, avec une SEULE force appliqu\u00e9e.',
+    'Une force non \u00e9quilibr\u00e9e \u2192 le solide se met en MOUVEMENT.',
+    'On ajoute la force oppos\u00e9e (m\u00eame intensit\u00e9) : \u03a3F = 0 \u2192 le solide reste en \u00c9QUILIBRE.'
+  ];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<5?1:2));
+    var bx;
+    if(phase===1){var pr=(T-2)/3; bx=cx-bw/2-40+pr*210;}
+    else if(phase===2){bx=cx-bw/2;}
+    else {bx=cx-bw/2-40;}
+    g.clearRect(0,0,W,H);
+    // sol hachuré
+    g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(80,gy);g.lineTo(W-80,gy);g.stroke();
+    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;for(var x=90;x<W-80;x+=22){g.beginPath();g.moveTo(x,gy);g.lineTo(x-9,gy+10);g.stroke();}
+    // lignes de vitesse (phase 1)
+    if(phase===1){g.strokeStyle='rgba(46,106,142,.4)';g.lineWidth=2;for(var s=0;s<3;s++){var lx=bx-14-s*12;g.beginPath();g.moveTo(lx,gy-bh*0.7);g.lineTo(lx-14,gy-bh*0.7);g.stroke();}}
+    // solide
+    var byT=gy-bh, mcx=bx+bw/2, mcy=gy-bh/2;
+    g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(bx,byT,bw,bh);g.fill();g.stroke();
+    g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('solide',mcx,mcy+4);
+    // force appliquée (droite, rouge)
+    arrow(bx+bw,mcy,bx+bw+70,mcy,'#C0492E',5);
+    g.fillStyle='#C0492E';g.font='700 14px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('F',bx+bw+74,mcy-8);
+    // phase 2 : force opposée + équilibre
+    if(phase===2){
+      arrow(bx,mcy,bx-70,mcy,'#2E6A8E',5);
+      g.fillStyle='#235877';g.textAlign='right';g.fillText('F\u2032',bx-74,mcy-8);
+      g.fillStyle='#2c6147';g.font='800 22px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u03a3F = 0',cx,gy+42);
+      g.strokeStyle='#3D7E5F';g.lineWidth=2.5;g.beginPath();g.arc(mcx,byT-26,13,0,7);g.moveTo(mcx-6,byT-26);g.lineTo(mcx-1,byT-21);g.lineTo(mcx+7,byT-32);g.stroke();
+    }
+    var cap=document.getElementById('pfscap'), ph=document.getElementById('pfsphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
