@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
@@ -160,9 +158,52 @@
     .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:84px 1fr 76px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
+
+  /* ===== Header ESTIC ===== */
+  .estic-bar{display:flex;align-items:center;gap:11px;padding:8px 18px;background:#FFFFFF;border-bottom:1px solid rgba(42,38,34,.12);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  .estic-bar .estic-logo{height:30px;width:auto;display:block;flex:0 0 auto}
+  .estic-bar .estic-txt{display:flex;flex-direction:column;line-height:1.12}
+  .estic-bar .estic-txt strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:13px;font-weight:800;color:#2A2622;letter-spacing:-.01em}
+  .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
+  .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
+  @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .gamecanvas{display:block;width:100%;max-width:480px;margin:0 auto;background:#FCFAF4;border:1px solid rgba(42,38,34,.14);border-radius:12px}
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:104px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:150px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:70px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
+<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
 <div class="shell">
 
   <aside class="nav" id="nav">
@@ -180,6 +221,7 @@
     <div class="links" id="links">
       <a href="#obj" class="navlink"><span>01</span>Objectif</a>
       <a href="#proto" class="navlink"><span>02</span>Repère</a>
+      <a href="#exos" class="navlink"><span>🎯</span>Exercices d'application</a>
       <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a>
       <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a>
       <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a>
@@ -229,6 +271,82 @@
     </section>
 
     <!-- DÉFI 1 -->
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour maîtriser la chaîne d'information : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la taille d'un message</div>
+          <p>Un texte de <b>200 caractères</b> passe dans la chaîne d'information (acquérir → traiter → communiquer). Chaque caractère est codé sur <b>1 octet</b> (soit 8 bits).</p>
+          <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
+            <rect x="14" y="30" width="70" height="34" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="49" y="51" text-anchor="middle" fill="#235877" font-weight="700">Acquérir</text>
+            <line x1="84" y1="47" x2="104" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="110,47 100,42 100,52" fill="#5C544B"/>
+            <rect x="110" y="30" width="66" height="34" rx="5" fill="#fbeecf" stroke="#BD8A2A" stroke-width="1.5"/><text x="143" y="51" text-anchor="middle" fill="#8a6313" font-weight="700">Traiter</text>
+            <line x1="176" y1="47" x2="196" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="202,47 192,42 192,52" fill="#5C544B"/>
+            <rect x="202" y="30" width="84" height="34" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="244" y="51" text-anchor="middle" fill="#2c6147" font-weight="700">Communiquer</text>
+            <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">message : 200 caractères</text>
+          </svg>
+          <div class="exo-q">a) Taille du message = <input class="numin" id="ex1a" inputmode="decimal"> octets</div>
+          <div class="exo-q">b) Taille en bits = <input class="numin" id="ex1b" inputmode="decimal"> bits</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> 200 caractères × 1 octet = <b>200 octets</b>.</p>
+            <p><b>b)</b> 200 × 8 = <b>1600 bits</b> (1 octet = 8 bits).</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — le codage binaire</div>
+          <p>Toute information numérique est une suite de <b>bits</b> (0 ou 1). Choisis un nombre : on l'écrit sur <b>8 bits</b>. Chaque bit « pèse » une puissance de 2.</p>
+          <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Nombre (0–255)</span><input type="range" id="ex2num" min="0" max="255" step="1" value="42"><b><span id="ex2numv">42</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — le temps de transmission</div>
+          <p>Un fichier de <b>2400 bits</b> est transmis sur une liaison. On rappelle : temps = quantité de données ÷ débit.</p>
+          <div class="exo-q">a) À 300 bits/s → temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div>
+          <div class="exo-q">b) À 600 bits/s → temps = <input class="numin" id="ex3b" inputmode="decimal"> s</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> 2400 ÷ 300 = <b>8 s</b>.</p>
+            <p><b>b)</b> 2400 ÷ 600 = <b>4 s</b>. Doubler le débit divise le temps par 2.</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combien de bits ? <span class="lvl-badge">prépa / L1</span></div>
+          <p>Pour coder <b>N symboles différents</b>, il faut <b>n bits</b> tels que <b>2<sup>n</sup> ≥ N</b>. Combien de bits pour coder l'alphabet (26 lettres) ? Et pour 1000 valeurs ?</p>
+          <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10">
+            <g>
+              <rect x="30" y="12" width="24" height="14" fill="#5cb2ea" fill-opacity="0.55"/><text x="60" y="23" fill="#235877">1 bit → 2</text>
+              <rect x="30" y="32" width="40" height="14" fill="#5cb2ea" fill-opacity="0.6"/><text x="76" y="43" fill="#235877">2 bits → 4</text>
+              <rect x="30" y="52" width="60" height="14" fill="#5cb2ea" fill-opacity="0.65"/><text x="96" y="63" fill="#235877">3 bits → 8</text>
+              <rect x="30" y="72" width="88" height="14" fill="#5cb2ea" fill-opacity="0.7"/><text x="124" y="83" fill="#235877">4 bits → 16</text>
+              <rect x="30" y="92" width="130" height="14" fill="#e8b84b" fill-opacity="0.9"/><text x="166" y="103" fill="#8a6313" font-weight="700">5 bits → 32 ≥ 26 ✓</text>
+            </g>
+            <text x="150" y="124" text-anchor="middle" font-size="9.5" fill="#2c6147" font-weight="700">on prend le plus petit n tel que 2ⁿ ≥ N</text>
+          </svg>
+          <div class="exo-q">a) 26 lettres → <input class="numin" id="ex4a" inputmode="decimal"> bits</div>
+          <div class="exo-q">b) 1000 valeurs → <input class="numin" id="ex4b" inputmode="decimal"> bits</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> 2<sup>4</sup> = 16 &lt; 26 mais 2<sup>5</sup> = 32 ≥ 26, donc <b>5 bits</b> suffisent.</p>
+            <p><b>b)</b> 2<sup>9</sup> = 512 &lt; 1000 mais 2<sup>10</sup> = 1024 ≥ 1000, donc <b>10 bits</b>.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section id="defi1">
       <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div>
       <h3>Assemble la chaîne d'acquisition</h3>
@@ -600,6 +718,64 @@
   })();
 
   renderScore();
+</script>
+<script>
+(function(){
+function el(id){return document.getElementById(id);}
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-200)<0.5, okB=Math.abs(b-1600)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 200 octets ; 200 \u00d7 8 = 1600 bits.';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 1 caract\u00e8re = 1 octet. ')+(okB?'':'b) octets \u00d7 8.');}
+      unlock('ex1reveal','Voir l\u2019analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-8)<0.3, okB=Math.abs(b-4)<0.3;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 2400/300 = 8 s ; 2400/600 = 4 s.';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 2400 \u00f7 300. ')+(okB?'':'b) 2400 \u00f7 600.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-5)<0.5, okB=Math.abs(b-10)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 5 bits (2\u2075=32\u226526) ; 10 bits (2\u00b9\u2070=1024\u22651000).';}
+      else{fb.className='exo-fb no';fb.textContent='\u2717 Plus petit n tel que 2\u207f \u2265 N : a) N=26, b) N=1000.';}
+      unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      function draw(){
+        var n=+el('ex2num').value;
+        el('ex2numv').textContent=n;
+        g.clearRect(0,0,W,H);
+        var bits=[],w=[128,64,32,16,8,4,2,1];
+        for(var i=7;i>=0;i--) bits.push((n>>i)&1);
+        var bw=44, gap=8, tot=8*bw+7*gap, x0=(W-tot)/2, y=28;
+        for(var k=0;k<8;k++){var on=bits[k]===1,x=x0+k*(bw+gap);
+          g.fillStyle=on?'#BD8A2A':'#efe9dd';g.strokeStyle='rgba(42,38,34,.2)';g.lineWidth=1;
+          g.beginPath();g.rect(x,y,bw,44);g.fill();g.stroke();
+          g.fillStyle=on?'#fff':'#b8b0a2';g.font='800 20px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(bits[k],x+bw/2,y+30);
+          g.fillStyle='#9a9385';g.font='700 10px "JetBrains Mono",monospace';g.fillText(w[k],x+bw/2,y+58);}
+        g.fillStyle='#2A2622';g.font='800 15px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText(n+'  =  '+bits.join(''),W/2,H-8);
+        var o=el('ex2out'); if(o) o.textContent=n+' en binaire (8 bits) = '+bits.join('');
+      }
+      var e=el('ex2num'); if(e) e.addEventListener('input',draw);
+      draw();
+    })();
+  })();
+})();
 </script>
 </body>
 </html>
