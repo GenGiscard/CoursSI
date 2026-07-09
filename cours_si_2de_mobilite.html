@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -89,6 +87,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -209,6 +214,12 @@
           <div class="eqcard"><div class="eq">moteur électrique&nbsp;: 100 d'énergie &rarr; ~75 aux roues</div><div class="leg">Beaucoup moins de pertes : un <b>bon rendement</b>.</div></div>
         </div>
       </div>
+    
+      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">De l'énergie de départ à l'énergie aux roues</div>
+        <canvas id="cvroues" width="900" height="260" style="width:100%;height:auto;display:block" aria-label="Chaîne d'énergie d'un véhicule avec pertes au moteur et à la transmission"></canvas>
+        <div class="cap"><b id="rophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="rocap">L'énergie part du réservoir.</span></div>
+      </figure>
     </section>
 
     <section id="s7">
@@ -323,6 +334,43 @@
     }
     setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvroues'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, midY=112, maxH=58;
+  var caps=[
+    'L\u2019\u00e9nergie part du r\u00e9servoir et doit atteindre les roues.',
+    '\u00c0 chaque \u00e9tage, une partie est perdue : chaleur (moteur), frottements (transmission).',
+    'Seule ~25 % de l\u2019\u00e9nergie arrive aux roues : c\u2019est le rendement global.'
+  ];
+  function block(x1,x2,lab){g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.rect(x1,midY-34,x2-x1,68);g.fill();g.stroke();g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(lab,(x1+x2)/2,midY+4);}
+  function seg(x1,x2,frac,flow,phase){var hh=maxH*frac;g.fillStyle='rgba(61,126,95,.32)';g.fillRect(x1,midY-hh/2,x2-x1,hh);
+    if(phase>=1){g.fillStyle='#3D7E5F';for(var i=0;i<5;i++){var u=((flow+i/5)%1);g.globalAlpha=0.8;g.beginPath();g.arc(x1+u*(x2-x1),midY,Math.max(2,hh/6),0,7);g.fill();}g.globalAlpha=1;}}
+  function loss(x,w,lab,phase){if(phase<1)return;g.fillStyle='rgba(192,73,46,.32)';g.fillRect(x-w/2,midY+34,w,60);g.fillStyle='#a44a26';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,x,midY+110);}
+  var flow=0,T=0;
+  function step(){
+    flow+=0.02; if(flow>1) flow-=1;
+    T+=0.03; if(T>10) T=0;
+    var phase=(T<2?0:(T<6?1:2));
+    g.clearRect(0,0,W,H);
+    // segments d'énergie
+    seg(140,250,1.0,flow,phase); seg(360,490,0.30,flow,phase); seg(600,700,0.25,flow,phase);
+    // pertes
+    loss(305,42,'chaleur \u221270%',phase); loss(545,12,'frott. \u22125%',phase);
+    // blocs
+    block(40,140,'r\u00e9servoir'); block(250,360,'moteur'); block(490,600,'transmission'); block(700,800,'roues');
+    // pourcentages
+    g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
+    g.fillStyle='#2c6147';g.fillText('100%',195,midY-40); g.fillText('30%',425,midY-30); g.fillText('25%',650,midY-28); g.fillText('25%',750,midY-44);
+    // rendement (phase 2)
+    if(phase>=2){g.fillStyle='#235877';g.font='800 20px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('rendement global \u2248 25 %',W/2,244);}
+    var cap=document.getElementById('rocap'), ph=document.getElementById('rophase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
