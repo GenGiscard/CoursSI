@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -89,6 +87,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -172,6 +177,12 @@
           <div class="eqcard"><div class="eq">plier une planche &rarr; flexion</div><div class="leg">La planche se <b>courbe</b>.</div></div>
         </div>
       </div>
+    
+      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Les trois sollicitations d'une pièce</div>
+        <canvas id="cvsolli" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Traction, compression et flexion d'une pièce"></canvas>
+        <div class="cap"><b id="sophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="socap">Traction.</span></div>
+      </figure>
     </section>
 
     <section id="s4">
@@ -324,6 +335,55 @@
     }
     setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvsolli'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=450, midY=105;
+  function arrow(x1,y1,x2,y2){g.strokeStyle='#C0492E';g.fillStyle='#C0492E';g.lineWidth=4;g.lineCap='round';
+    var a=Math.atan2(y2-y1,x2-x1),L=13,bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
+    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();g.lineCap='butt';}
+  var caps=[
+    'TRACTION : deux forces tirent \u2014 la pi\u00e8ce s\u2019allonge.',
+    'COMPRESSION : deux forces poussent \u2014 la pi\u00e8ce se raccourcit.',
+    'FLEXION : une charge fait PLIER la pi\u00e8ce.'
+  ];
+  var T=0, half=140;
+  function step(){
+    T+=0.03; if(T>10.5) T=0;
+    var phase=(T<3.4?0:(T<6.8?1:2)), tp=(phase===0?T:(phase===1?T-3.4:T-6.8)), s=Math.min(1,tp/1.6);
+    g.clearRect(0,0,W,H);
+    g.fillStyle='#2A2622';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+    if(phase===0){
+      var ext=s*24;
+      g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half-ext,midY-16,(half+ext)*2,32);g.fill();g.stroke();
+      arrow(cx-half-ext-8,midY,cx-half-ext-70,midY); arrow(cx+half+ext+8,midY,cx+half+ext+70,midY);
+      g.fillStyle='#235877';g.fillText('TRACTION',cx,midY+70);
+    } else if(phase===1){
+      var comp=s*20;
+      g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half+comp,midY-18-comp*0.4,(half-comp)*2,36+comp*0.8);g.fill();g.stroke();
+      arrow(cx-half+comp-70,midY,cx-half+comp-8,midY); arrow(cx+half-comp+70,midY,cx+half-comp+8,midY);
+      g.fillStyle='#235877';g.fillText('COMPRESSION',cx,midY+70);
+    } else {
+      var sag=s*34;
+      // supports
+      g.fillStyle='#7a7064';g.beginPath();g.moveTo(cx-half,midY+12);g.lineTo(cx-half-12,midY+34);g.lineTo(cx-half+12,midY+34);g.closePath();g.fill();
+      g.beginPath();g.moveTo(cx+half,midY+12);g.lineTo(cx+half-12,midY+34);g.lineTo(cx+half+12,midY+34);g.closePath();g.fill();
+      // poutre courbée
+      g.strokeStyle='#2E6A8E';g.lineWidth=10;g.lineCap='round';g.beginPath();
+      for(var x=cx-half;x<=cx+half;x+=6){var yy=midY + sag*(1-Math.pow((x-cx)/half,2));if(x===cx-half)g.moveTo(x,yy);else g.lineTo(x,yy);}
+      g.stroke();g.lineCap='butt';
+      // charge
+      arrow(cx,midY-58,cx,midY+sag-8);
+      g.fillStyle='#235877';g.fillText('FLEXION',cx,midY+80);
+    }
+    var cap=document.getElementById('socap'), ph=document.getElementById('sophase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
