@@ -18,9 +18,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -89,6 +87,13 @@
   .estic-bar .estic-txt span{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5C544B;margin-top:1px}
   .estic-bar .estic-copy{margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;color:#5C544B;text-align:right;line-height:1.3}
   @media(max-width:560px){.estic-bar .estic-copy{font-size:8.5px}.estic-bar .estic-logo{height:26px}}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
 <body>
@@ -174,6 +179,12 @@
           <div class="eqcard"><div class="eq">le moteur s'active &rarr; action</div><div class="leg">Le système agit concrètement.</div></div>
         </div>
       </div>
+    
+      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
+        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Capteur → traitement → actionneur</div>
+        <canvas id="cvota" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Chaîne d'un automatisme : le capteur détecte, le traitement décide, l'actionneur agit"></canvas>
+        <div class="cap"><b id="otphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="otcap">Le capteur détecte.</span></div>
+      </figure>
     </section>
 
     <section id="s4">
@@ -312,6 +323,48 @@
     }
     setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('cvota'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, midY=96;
+  var caps=[
+    'Le capteur re\u00e7oit une information : une pr\u00e9sence est d\u00e9tect\u00e9e.',
+    'Le traitement d\u00e9cide selon une condition : SI pr\u00e9sence ALORS agir.',
+    'L\u2019actionneur ex\u00e9cute l\u2019action : la porte s\u2019ouvre.'
+  ];
+  function block(x1,x2,col,t1,t2,hl){g.fillStyle=hl?col+'22':'#FFFDF8';g.strokeStyle=col;g.lineWidth=hl?2.6:1.8;g.beginPath();g.rect(x1,midY-34,x2-x1,68);g.fill();g.stroke();
+    g.fillStyle=col;g.font='700 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(t1,(x1+x2)/2,midY-4);g.font='11px "JetBrains Mono",monospace';g.fillStyle='#5C544B';g.fillText(t2,(x1+x2)/2,midY+16);}
+  function tok(x){g.fillStyle='#BD8A2A';g.beginPath();g.arc(x,midY,7,0,7);g.fill();}
+  var T=0;
+  function step(){
+    T+=0.03; if(T>9) T=0;
+    var phase=(T<2?0:(T<4.5?1:2)), present=(T<7.5);
+    g.clearRect(0,0,W,H);
+    // personne (présence)
+    if(present){g.fillStyle='#5C544B';g.beginPath();g.arc(40,midY-14,9,0,7);g.fill();g.fillRect(35,midY-4,10,26);g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('pr\u00e9sence',40,midY+40);}
+    // blocs
+    block(80,250,'#2E6A8E','CAPTEUR','d\u00e9tecte',phase===0&&present);
+    var vrai=(phase>=1&&present);
+    block(360,560,'#BD8A2A','TRAITEMENT',(phase>=1?('pr\u00e9sence ? '+(vrai?'VRAI':'FAUX')):'condition'),phase===1);
+    block(670,850,'#3D7E5F','ACTIONNEUR',(phase>=2?'porte OUVERTE':'porte ferm\u00e9e'),phase===2);
+    // flèches
+    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;
+    g.beginPath();g.moveTo(250,midY);g.lineTo(354,midY);g.moveTo(560,midY);g.lineTo(664,midY);g.stroke();
+    // token
+    if(phase===1){var u=Math.min(1,(T-2)/2);tok(250+u*104);}
+    if(phase===2){var u2=Math.min(1,(T-4.5)/1.6);tok(560+u2*104);}
+    // porte (près de l'actionneur)
+    var dx=760, open=(phase>=2);
+    g.strokeStyle='#7a7064';g.lineWidth=3;g.beginPath();g.moveTo(dx-2,midY+44);g.lineTo(dx-2,midY+80);g.moveTo(dx+42,midY+44);g.lineTo(dx+42,midY+80);g.stroke();
+    g.fillStyle=open?'rgba(61,126,95,.35)':'rgba(122,112,100,.35)';
+    if(open){g.fillRect(dx-2,midY+46,8,32);g.fillRect(dx+34,midY+46,8,32);} else {g.fillRect(dx,midY+46,40,32);}
+    var cap=document.getElementById('otcap'), ph=document.getElementById('otphase');
+    if(cap) cap.textContent=caps[phase];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+  }
+  setInterval(step,40); step();
+})();
 </script>
 </body>
 </html>
