@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -136,6 +134,36 @@
   .hole.empty .mole{visibility:hidden}
   .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
   .snakeleg b{color:#8a6313}
+  .snakeleg .legn{font-size:20px;color:#B85C2E;line-height:1;vertical-align:-1px}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .exo-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .exo-ta{width:100%;box-sizing:border-box;min-height:62px;font-family:inherit;font-size:13.5px;line-height:1.5;padding:9px 11px;border:2px solid rgba(42,38,34,.18);border-radius:9px;background:#fff;resize:vertical;margin:6px 0 2px}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -155,6 +183,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Exigence ou solution ?</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">La démarche</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Reconnais le diagramme</span><b class="bd" id="bd3">0</b></a>
@@ -178,6 +207,91 @@
           <span class="rankchip">📐 Ingénieur·e · 450+</span>
           <span class="rankchip">🏆 Expert·e · 700+</span>
         </div>
+      </div>
+    </section>
+
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices pour appliquer l'ingénierie système : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — le diagramme d'états d'un portail</div>
+          <p>Voici le diagramme d'états d'un portail automatique. Chaque bulle est un <b>état</b>, chaque flèche une <b>transition</b>. Compte-les.</p>
+          <svg class="exo-fig" viewBox="0 0 300 185" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10">
+            <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8a6a3c"/></marker></defs>
+            <path d="M188 34 L246 74" stroke="#8a6a3c" stroke-width="1.6" marker-end="url(#ah)"/>
+            <path d="M250 116 L188 152" stroke="#8a6a3c" stroke-width="1.6" marker-end="url(#ah)"/>
+            <path d="M112 152 L52 116" stroke="#8a6a3c" stroke-width="1.6" marker-end="url(#ah)"/>
+            <path d="M48 74 L110 34" stroke="#8a6a3c" stroke-width="1.6" marker-end="url(#ah)"/>
+            <ellipse cx="150" cy="26" rx="44" ry="18" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.6"/><text x="150" y="30" text-anchor="middle" fill="#235877" font-weight="700">Fermé</text>
+            <ellipse cx="256" cy="93" rx="44" ry="18" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.6"/><text x="256" y="97" text-anchor="middle" fill="#235877" font-weight="700">Ouverture</text>
+            <ellipse cx="150" cy="160" rx="44" ry="18" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.6"/><text x="150" y="164" text-anchor="middle" fill="#235877" font-weight="700">Ouvert</text>
+            <ellipse cx="44" cy="93" rx="44" ry="18" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.6"/><text x="44" y="97" text-anchor="middle" fill="#235877" font-weight="700">Fermeture</text>
+          </svg>
+          <div class="exo-q">a) Nombre d'états = <input class="numin" id="ex1a" inputmode="decimal"></div>
+          <div class="exo-q">b) Nombre de transitions = <input class="numin" id="ex1b" inputmode="decimal"></div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>4 états</b> : Fermé, Ouverture, Ouvert, Fermeture.</p>
+            <p><b>4 transitions</b> : Fermé→Ouverture, Ouverture→Ouvert, Ouvert→Fermeture, Fermeture→Fermé. Le cycle boucle sur lui-même.</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — la machine à états</div>
+          <p>Clique sur <b>Étape suivante</b> : le portail change d'état à chaque événement (appui bouton, fin de course). Observe l'état courant et la transition.</p>
+          <canvas id="ex2cv" width="340" height="200" class="gamecanvas" style="max-width:360px"></canvas>
+          <div class="exo-btns">
+            <button class="btn" id="ex2next">▶ Étape suivante</button>
+            <button class="btn alt" id="ex2reset">⟲ Début</button>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — exigences et traçabilité</div>
+          <p>a) Une exigence impose un temps de réponse <b>≤ 1,5 s</b>. On mesure <b>1,2 s</b>. Quelle est la marge (limite − mesure) ?<br>b) Sur <b>8 exigences</b>, <b>6</b> sont satisfaites. Quel est le taux de couverture (en %) ?</p>
+          <div class="exo-q">a) Marge = <input class="numin" id="ex3a" inputmode="decimal"> s</div>
+          <div class="exo-q">b) Taux de couverture = <input class="numin" id="ex3b" inputmode="decimal"> %</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> Marge = 1,5 − 1,2 = <b>0,3 s</b>. La mesure respecte l'exigence (marge positive).</p>
+            <p><b>b)</b> 6 / 8 × 100 = <b>75 %</b> des exigences sont couvertes.</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — espace d'états <span class="lvl-badge">prépa / L1</span></div>
+          <p>Un système possède <b>3 capteurs binaires</b> (chacun vaut 0 ou 1). a) Combien d'états possibles au total ? (2<sup>n</sup>) b) Si une exigence <b>interdit l'état « 0 0 0 »</b> (tout à l'arrêt), combien d'états valides restent-ils ?</p>
+          <svg class="exo-fig" viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
+            <text x="95" y="15" text-anchor="middle" fill="#235877" font-weight="700">C1</text><text x="150" y="15" text-anchor="middle" fill="#235877" font-weight="700">C2</text><text x="205" y="15" text-anchor="middle" fill="#235877" font-weight="700">C3</text>
+            <rect x="66" y="22" width="176" height="18" rx="3" fill="#fdecea" stroke="#c0392b"/>
+            <text x="95" y="35" text-anchor="middle" fill="#c0392b" font-weight="700">0</text><text x="150" y="35" text-anchor="middle" fill="#c0392b" font-weight="700">0</text><text x="205" y="35" text-anchor="middle" fill="#c0392b" font-weight="700">0</text><text x="262" y="35" fill="#c0392b" font-weight="700" font-size="9">interdit</text>
+            <g fill="#2A2622">
+            <text x="95" y="54" text-anchor="middle">0</text><text x="150" y="54" text-anchor="middle">0</text><text x="205" y="54" text-anchor="middle">1</text>
+            <text x="95" y="72" text-anchor="middle">0</text><text x="150" y="72" text-anchor="middle">1</text><text x="205" y="72" text-anchor="middle">0</text>
+            <text x="95" y="90" text-anchor="middle">0</text><text x="150" y="90" text-anchor="middle">1</text><text x="205" y="90" text-anchor="middle">1</text>
+            <text x="95" y="108" text-anchor="middle">1</text><text x="150" y="108" text-anchor="middle">0</text><text x="205" y="108" text-anchor="middle">0</text>
+            <text x="95" y="126" text-anchor="middle">1</text><text x="150" y="126" text-anchor="middle">0</text><text x="205" y="126" text-anchor="middle">1</text>
+            <text x="95" y="144" text-anchor="middle">1</text><text x="150" y="144" text-anchor="middle">1</text><text x="205" y="144" text-anchor="middle">0</text>
+            <text x="95" y="162" text-anchor="middle">1</text><text x="150" y="162" text-anchor="middle">1</text><text x="205" y="162" text-anchor="middle">1</text>
+            </g>
+            <text x="150" y="182" text-anchor="middle" fill="#2c6147" font-weight="700">2³ = 8 combinaisons</text>
+          </svg>
+          <div class="exo-q">a) États possibles = <input class="numin" id="ex4a" inputmode="decimal"></div>
+          <div class="exo-q">b) États valides = <input class="numin" id="ex4b" inputmode="decimal"></div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> 3 capteurs binaires → 2<sup>3</sup> = <b>8 états</b> possibles.</p>
+            <p><b>b)</b> On retire l'état interdit « 0 0 0 » : 8 − 1 = <b>7 états valides</b>.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -524,7 +638,7 @@
     function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
     function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
     function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
-    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span><b class="legn">'+['','①','②','③'][f.n]+'</b> '+f.t+'</span>';}).join(' &nbsp; ');}
     function draw(){
       g.clearRect(0,0,W,H);
       g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
@@ -555,6 +669,63 @@
     el('d8right').addEventListener('click',function(){turn(1,0);});
     document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
     lives=3;sc=0;resetSnake();newQuestion();draw();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-4)<0.5, okB=Math.abs(b-4)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 4 états et 4 transitions (le cycle boucle).';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) compte les bulles. ')+(okB?'':'b) compte les flèches.');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-0.3)<0.05, okB=Math.abs(b-75)<1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : marge 1,5 − 1,2 = 0,3 s ; couverture 6/8 = 75 %.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) limite − mesure. ')+(okB?'':'b) satisfaites / total × 100.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-8)<0.5, okB=Math.abs(b-7)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2³ = 8 états, puis 8 − 1 = 7 valides.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 2 puissance 3. ')+(okB?'':'b) retire l\u2019état interdit.');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+      var S=['Fermé','Ouverture','Ouvert','Fermeture'];
+      var EV=['appui bouton','fin de course','appui bouton','fin de course'];
+      var P=[[W/2,30],[W-58,H/2],[W/2,H-30],[58,H/2]];
+      var cur=0;
+      function arrow(a,b){var dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+        var sx=a[0]+ux*52,sy=a[1]+uy*22,ex=b[0]-ux*54,ey=b[1]-uy*24;
+        g.strokeStyle='#8a6a3c';g.lineWidth=1.8;g.beginPath();g.moveTo(sx,sy);g.lineTo(ex,ey);g.stroke();
+        var aa=Math.atan2(ey-sy,ex-sx);g.fillStyle='#8a6a3c';g.beginPath();g.moveTo(ex,ey);g.lineTo(ex-9*Math.cos(aa-0.4),ey-9*Math.sin(aa-0.4));g.lineTo(ex-9*Math.cos(aa+0.4),ey-9*Math.sin(aa+0.4));g.closePath();g.fill();}
+      function draw(){
+        g.clearRect(0,0,W,H);
+        for(var i=0;i<4;i++) arrow(P[i],P[(i+1)%4]);
+        for(var j=0;j<4;j++){var p=P[j],act=(j===cur);
+          g.beginPath();g.ellipse(p[0],p[1],48,20,0,0,7);
+          g.fillStyle=act?'#BD8A2A':'#eef4f8';g.fill();
+          g.strokeStyle=act?'#8a6313':'#2E6A8E';g.lineWidth=act?2.4:1.6;g.stroke();
+          g.fillStyle=act?'#fff':'#235877';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(S[j],p[0],p[1]+4);}
+        el('ex2out').textContent='État courant : '+S[cur]+'   —   prochain événement : '+EV[cur];
+      }
+      var bn=el('ex2next'); if(bn) bn.addEventListener('click',function(){cur=(cur+1)%4;draw();});
+      var br=el('ex2reset'); if(br) br.addEventListener('click',function(){cur=0;draw();});
+      draw();
+    })();
   })();
 
   refresh();

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Fabrication additive · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0;scroll-margin-top:64px}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px;padding:10px 14px;cursor:pointer;transition:.15s}
+  .chip:hover{background:#eef3f6} .chip.used{opacity:.35;pointer-events:none;text-decoration:line-through}
+  .seq{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px;background:#faf6ec;border:1px dashed var(--line);border-radius:10px;padding:10px}
+  .seq .s{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 11px}
+  .seq .s.ok{border-color:var(--green);background:#eef6f0;color:var(--green)}
+  .seq .s.no{border-color:var(--copper);background:#fbeee9;color:var(--copper)}
+  .seq .arr{color:var(--sub)}
+
+  .sim{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;margin-top:10px}
+  @media(max-width:720px){.sim{grid-template-columns:1fr}}
+  .ctrl label{display:block;font-weight:600;margin:14px 0 4px;font-size:15px}
+  .ctrl input[type=range]{width:100%}
+  .ctrl .val{font-family:'JetBrains Mono',monospace;color:var(--steel);font-weight:700}
+  .gauge{margin:9px 0}
+  .gauge .gl{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .gauge .gb{height:9px;background:#eee6d6;border-radius:5px;overflow:hidden;margin-top:3px}
+  .gauge .gb>i{display:block;height:100%;transition:width .2s}
+  canvas.simc{width:100%;height:auto;display:block;background:#fcfaf4;border:1px solid var(--line);border-radius:10px}
+
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Fabrication additive<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Piloter la chaîne d'impression 3D</h1>
+      <p class="lede">Le FabLab du lycée doit produire un support de capteur. À toi de mener la pièce du modèle 3D jusqu'à l'objet — en faisant les bons choix.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Reconstituer la chaîne numérique</h2>
+      <p class="task">🎯 Clique les 5 étapes <b>dans l'ordre</b>, du modèle 3D à l'objet fini.</p>
+      <div class="chips" id="chips"></div>
+      <div class="seq" id="seq"><span style="color:#a89e8c;font-family:'JetBrains Mono',monospace;font-size:13px">clique une étape…</span></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aReset">Recommencer</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>Ordre correct :</b> CAO → STL → Trancheur → G-code → Imprimante.<br>On modélise (CAO), on exporte la surface en maillage (STL), le trancheur découpe en couches et génère les ordres machine (G-code), que l'imprimante exécute.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Régler les paramètres</h2>
+      <p class="task">🎯 Fais varier la <b>hauteur de couche</b> et le <b>remplissage</b>. Observe l'impact sur la coupe de la pièce et sur les 4 indicateurs.</p>
+      <div class="sim">
+        <div><canvas id="simc" class="simc" width="520" height="300" aria-label="Coupe d'une pièce imprimée selon les réglages"></canvas></div>
+        <div class="ctrl">
+          <label>Hauteur de couche : <span class="val" id="lhV">0,20</span> mm</label>
+          <input type="range" id="lh" min="10" max="30" value="20">
+          <label>Remplissage : <span class="val" id="inV">20</span> %</label>
+          <input type="range" id="in" min="10" max="90" value="20" step="5">
+          <div class="gauge"><div class="gl"><span>Résolution</span><span id="gRes">—</span></div><div class="gb"><i id="bRes" style="background:var(--steel)"></i></div></div>
+          <div class="gauge"><div class="gl"><span>Solidité</span><span id="gSol">—</span></div><div class="gb"><i id="bSol" style="background:var(--green)"></i></div></div>
+          <div class="gauge"><div class="gl"><span>Temps</span><span id="gTim">—</span></div><div class="gb"><i id="bTim" style="background:var(--amber)"></i></div></div>
+          <div class="gauge"><div class="gl"><span>Matière</span><span id="gMat">—</span></div><div class="gb"><i id="bMat" style="background:var(--copper)"></i></div></div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:15px;color:var(--sub)">💡 Une couche <b>fine</b> améliore la surface mais allonge le temps. Un remplissage <b>élevé</b> renforce la pièce mais consomme matière et temps. Le bon réglage dépend du besoin.</p>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Combien de couches ? Combien de temps ?</h2>
+      <p class="task">Le support mesure <b>60 mm</b> de haut, imprimé en couches de <b>0,20 mm</b>, à raison de <b>8 s par couche</b>.</p>
+      <div class="row"><span>a) Nombre de couches :</span><input class="numin" id="cN" inputmode="numeric" placeholder="?"><span>couches</span></div>
+      <div class="row"><span>b) Durée d'impression :</span><input class="numin" id="cT" inputmode="decimal" placeholder="?"><span>minutes</span></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> nombre de couches = hauteur ÷ hauteur de couche = 60 ÷ 0,20 = <b>300 couches</b>.<br><b>b)</b> durée = 300 × 8 = 2400 s = 2400 ÷ 60 = <b>40 min</b>.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Quelle masse de plastique ?</h2>
+      <p class="task">Le trancheur estime le volume de matière à <b>12 cm³</b>. Le PLA a une masse volumique ρ = <b>1,24 g/cm³</b>.</p>
+      <div class="row"><span>Masse de matière :</span><input class="numin" id="dM" inputmode="decimal" placeholder="?"><span>g</span></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>m = V × ρ</b> = 12 × 1,24 = <b>14,88 g</b> ≈ 14,9 g.<br>Utile pour estimer le coût (au gramme) et vérifier qu'il reste assez de filament sur la bobine.</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Pour aller plus loin — orientation &amp; anisotropie</h2>
+      <p class="task">Les couches se <b>décollent</b> plus facilement entre elles qu'elles ne se cassent. Une pièce sera tirée verticalement (traction).</p>
+      <div class="two" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0">
+        <figure style="margin:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px">
+          <svg viewBox="0 0 200 150" style="width:100%;height:auto" aria-label="Couches horizontales, effort vertical">
+            <g stroke="#3D7E5F" fill="#cfe3d6"><rect x="70" y="40" width="60" height="10"/><rect x="70" y="52" width="60" height="10"/><rect x="70" y="64" width="60" height="10"/><rect x="70" y="76" width="60" height="10"/><rect x="70" y="88" width="60" height="10"/></g>
+            <path d="M100 30 v-16 M100 108 v16 M94 14 l6 -8 6 8 M94 124 l6 8 6 -8" stroke="#C0492E" stroke-width="2" fill="none"/>
+            <text x="100" y="145" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">couches ⊥ effort</text>
+          </svg>
+        </figure>
+        <figure style="margin:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px">
+          <svg viewBox="0 0 200 150" style="width:100%;height:auto" aria-label="Couches verticales, effort vertical">
+            <g stroke="#3D7E5F" fill="#cfe3d6"><rect x="76" y="40" width="10" height="58"/><rect x="88" y="40" width="10" height="58"/><rect x="100" y="40" width="10" height="58"/><rect x="112" y="40" width="10" height="58"/></g>
+            <path d="M100 30 v-16 M100 108 v16 M94 14 l6 -8 6 8 M94 124 l6 8 6 -8" stroke="#C0492E" stroke-width="2" fill="none"/>
+            <text x="100" y="145" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">couches ∥ effort</text>
+          </svg>
+        </figure>
+      </div>
+      <p>Pour que la pièce résiste le mieux à cette traction verticale, les couches doivent être…</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">Perpendiculaires à l'effort (à plat)</button>
+        <button data-v="1">Parallèles à l'effort (debout)</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>Parallèles à l'effort.</b> Si les couches sont perpendiculaires, la traction cherche à les <b>décoller</b> (zone la plus faible) → rupture nette entre couches. En orientant les couches dans le sens de l'effort, on sollicite le plastique lui-même, bien plus résistant. <br><span style="color:var(--sub)">C'est l'anisotropie : une pièce imprimée n'a pas la même résistance dans toutes les directions.</span></div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- A : chaîne numérique ---- */
+(function(){
+  var correct=['CAO','STL','Trancheur','G-code','Imprimante'];
+  var pool=['STL','Imprimante','CAO','G-code','Trancheur']; // affiché mélangé
+  var chosen=[];
+  var chipsBox=el('chips'), seqBox=el('seq');
+  function drawChips(){ chipsBox.innerHTML=''; pool.forEach(function(name){
+    var c=document.createElement('span'); c.className='chip'+(chosen.indexOf(name)>=0?' used':''); c.textContent=name;
+    c.addEventListener('click',function(){ if(chosen.indexOf(name)>=0)return; chosen.push(name); render(); });
+    chipsBox.appendChild(c); }); }
+  function render(){
+    drawChips();
+    if(!chosen.length){ seqBox.innerHTML='<span style="color:#a89e8c;font-family:\'JetBrains Mono\',monospace;font-size:13px">clique une étape…</span>'; return; }
+    seqBox.innerHTML=''; chosen.forEach(function(n,i){ var s=document.createElement('span'); s.className='s'; s.textContent=n; s.dataset.i=i; seqBox.appendChild(s);
+      if(i<chosen.length-1){ var a=document.createElement('span'); a.className='arr'; a.textContent='→'; seqBox.appendChild(a); } });
+  }
+  el('aCheck').addEventListener('click',function(){
+    if(chosen.length<5){ el('aFb').className='exo-fb no'; el('aFb').textContent='Il manque des étapes ('+chosen.length+'/5).'; return; }
+    var ok=true; var spans=seqBox.querySelectorAll('.s');
+    chosen.forEach(function(n,i){ var good=(n===correct[i]); if(!good)ok=false; spans[i].className='s '+(good?'ok':'no'); });
+    if(ok){ el('aFb').className='exo-fb ok'; el('aFb').textContent='✓ Chaîne correcte, bravo !'; }
+    else { el('aFb').className='exo-fb no'; el('aFb').textContent='✗ L\u2019ordre n\u2019est pas bon. Regarde la correction.'; el('aSol').classList.add('show'); }
+  });
+  el('aReset').addEventListener('click',function(){ chosen=[]; el('aFb').textContent=''; el('aFb').className='exo-fb'; el('aSol').classList.remove('show'); render(); });
+  render();
+})();
+
+/* ---- B : simulateur ---- */
+(function(){
+  var cv=el('simc'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var lh=el('lh'), inf=el('in');
+  function setG(id,bar,pct,txt){ el(id).textContent=txt; el(bar).style.width=Math.max(4,Math.min(100,pct))+'%'; }
+  function draw(){
+    var lhmm=(+lh.value)/100, infp=(+inf.value);
+    el('lhV').textContent=lhmm.toFixed(2).replace('.',','); el('inV').textContent=infp;
+    g.clearRect(0,0,W,H);
+    // coupe : un rectangle rempli de couches d'épaisseur ∝ hauteur de couche, hachures ∝ remplissage
+    var px=90,py=40,pw=340,ph=210;
+    // couches
+    var layerPx=Math.max(3, lhmm*40); // échelle visuelle
+    g.save(); g.beginPath(); g.rect(px,py,pw,ph); g.clip();
+    for(var y=py; y<py+ph; y+=layerPx){ g.fillStyle=((Math.round((y-py)/layerPx))%2)?'#dcebe0':'#cfe3d6'; g.fillRect(px,y,pw,layerPx-0.6); }
+    // remplissage : grille dont la densité dépend de infp
+    var stepI=Math.max(10, 60 - infp*0.6);
+    g.strokeStyle='rgba(61,126,95,.5)'; g.lineWidth=1.4;
+    for(var d=-ph;d<pw;d+=stepI){ g.beginPath(); g.moveTo(px+d,py+ph); g.lineTo(px+d+ph,py); g.stroke(); g.beginPath(); g.moveTo(px+d,py); g.lineTo(px+d+ph,py+ph); g.stroke(); }
+    g.restore();
+    // contour
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3; g.strokeRect(px,py,pw,ph);
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('coupe de la pièce',px+pw/2,py+ph+22);
+    // repère hauteur de couche
+    g.strokeStyle='#2E6A8E'; g.lineWidth=1.5; g.beginPath(); g.moveTo(px-14,py); g.lineTo(px-14,py+layerPx); g.stroke();
+    g.beginPath(); g.moveTo(px-18,py); g.lineTo(px-10,py); g.moveTo(px-18,py+layerPx); g.lineTo(px-10,py+layerPx); g.stroke();
+    g.fillStyle='#2E6A8E'; g.save(); g.translate(px-24,py+ph/2); g.rotate(-Math.PI/2); g.textAlign='center'; g.fillText('hauteur de couche',0,0); g.restore();
+    // indicateurs
+    var res=100-(lhmm-0.1)/0.2*70;         // fine -> résolution haute
+    var sol=20+infp*0.8;                    // remplissage -> solidité
+    var tim=(0.20/lhmm)*40 + infp*0.5;      // couche fine + infill -> temps
+    var mat=15+infp*0.85;                   // remplissage -> matière
+    setG('gRes','bRes',res, lhmm<=0.14?'fine':(lhmm<=0.24?'moyenne':'grossière'));
+    setG('gSol','bSol',sol, infp>=60?'élevée':(infp>=30?'correcte':'faible'));
+    setG('gTim','bTim',Math.min(100,tim), tim>70?'long':(tim>40?'moyen':'court'));
+    setG('gMat','bMat',Math.min(100,mat), mat>70?'beaucoup':(mat>40?'moyenne':'peu'));
+  }
+  lh.addEventListener('input',draw); inf.addEventListener('input',draw); draw();
+})();
+
+/* ---- helper corrections verrouillées ---- */
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){
+    var r=validator();
+    el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg;
+    el(showBtn).disabled=false;              // débloque la correction seulement après Vérifier
+  });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* ---- C ---- */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var n=numf(el('cN').value), t=numf(el('cT').value);
+  var okN=Math.abs(n-300)<1, okT=Math.abs(t-40)<0.5;
+  if(okN&&okT) return {ok:true,msg:'✓ Parfait : 300 couches, 40 min.'};
+  var parts=[]; parts.push(okN?'a) ✓':'a) ✗'); parts.push(okT?'b) ✓':'b) ✗');
+  return {ok:false,msg:'✗ '+parts.join('  ')+' — clique « Voir la correction ».'};
+});
+/* ---- D ---- */
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var m=numf(el('dM').value);
+  if(Math.abs(m-14.88)<0.2) return {ok:true,msg:'✓ Exact : 14,88 g ≈ 14,9 g.'};
+  return {ok:false,msg:'✗ Ce n\u2019est pas la bonne valeur. Pense à m = V × ρ.'};
+});
+/* ---- E ---- */
+(function(){
+  var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : couches parallèles à l\u2019effort.'};
+    return {ok:false,msg:'✗ Non — les couches se décolleraient. Voir l\u2019explication.'};
+  });
+})();
+</script>
+</body>
+</html>

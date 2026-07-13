@@ -19,9 +19,7 @@
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;font-family:var(--body);color:var(--ink);background-color:var(--cream);
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:30px 30px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
     padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
@@ -141,6 +139,39 @@
   .hole.empty .mole{visibility:hidden}
   .snakeleg{max-width:460px;margin:6px auto 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:#5C544B;text-align:center;line-height:1.6}
   .snakeleg b{color:#8a6313}
+  .snakeleg .legn{font-size:20px;color:#B85C2E;line-height:1;vertical-align:-1px}
+  /* halos lumineux animés */
+  body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(64px);will-change:transform}
+  body::before{width:54vw;height:54vw;left:-12vw;top:-14vw;background:radial-gradient(circle at 50% 50%,rgba(46,106,142,.42),transparent 68%);animation:auroraA 28s ease-in-out infinite alternate}
+  body::after{width:48vw;height:48vw;right:-10vw;bottom:-14vw;background:radial-gradient(circle at 50% 50%,rgba(61,126,95,.38),transparent 68%);animation:auroraB 34s ease-in-out infinite alternate}
+  @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
+  @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
+  @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* --- Exercices d'application --- */
+  .exo-wrap{display:grid;gap:16px;margin-top:10px}
+  .exo-card{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 18px;box-shadow:0 3px 14px rgba(42,38,34,.06)}
+  .exo-card.adv{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .exo-h{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .exo-num{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#2E6A8E;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:14px;flex:none}
+  .exo-card.adv .exo-num{background:#8A5A7A}
+  .lvl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1.5px solid #8A5A7A;color:#8A5A7A;border-radius:20px;padding:2px 9px;letter-spacing:.03em}
+  .exo-card p{font-size:14.5px;line-height:1.55;color:#2A2622;margin:6px 0}
+  .exo-q{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px;font-weight:600}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:15px;width:92px;padding:7px 9px;border:2px solid rgba(42,38,34,.2);border-radius:9px;background:#fff;text-align:right}
+  .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .exo-fb.ok{color:#2c6147}.exo-fb.no{color:#a44a26}
+  .exo-sol{background:rgba(46,106,142,.08);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .exo-sol b{color:#235877}
+  .exo-card.adv .exo-sol{background:rgba(138,90,122,.09)}
+  .exo-card.adv .exo-sol b{color:#6a4560}
+  .sliders{display:grid;gap:9px;margin:10px 0}
+  .sliders label{font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px}
+  .sliders label>span.nm2{min-width:120px}
+  .sliders input[type=range]{flex:1;accent-color:#2E6A8E}
+  .sliders b{font-family:'JetBrains Mono',monospace;min-width:64px;text-align:right}
+  .exo-out{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
+  .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
+  .btn[disabled]{opacity:.42;cursor:not-allowed}
 </style>
 </head>
 <body>
@@ -160,6 +191,7 @@
       <div class="prog"><i id="progBar"></i></div>
     </div>
     <div class="links" id="links">
+            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
       <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Quelle source ?</span><b class="bd" id="bd1">0</b></a>
       <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">La chaîne d'énergie</span><b class="bd" id="bd2">0</b></a>
       <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Ordonne la chaîne</span><b class="bd" id="bd3">0</b></a>
@@ -183,6 +215,85 @@
           <span class="rankchip">📐 Ingénieur·e · 450+</span>
           <span class="rankchip">🏆 Expert·e · 700+</span>
         </div>
+      </div>
+    </section>
+
+    <section id="exos">
+      <span class="kicker">Exercices d'application</span>
+      <h2>S'entraîner : du concret au calcul</h2>
+      <p class="lede">Quatre exercices sur le déplacement : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
+      <div class="exo-wrap">
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la vitesse du vélo</div>
+          <p>Un vélo électrique parcourt <b>24 km</b> en <b>1 h 30</b> (soit 1,5 h). On rappelle : vitesse moyenne = distance ÷ temps.</p>
+          <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="20" y1="78" x2="280" y2="78" stroke="#7a7064" stroke-width="3"/>
+            <circle cx="55" cy="66" r="12" fill="none" stroke="#2E6A8E" stroke-width="2.5"/>
+            <circle cx="90" cy="66" r="12" fill="none" stroke="#2E6A8E" stroke-width="2.5"/>
+            <path d="M55 66 L75 50 L90 66 M75 50 L82 45" fill="none" stroke="#2E6A8E" stroke-width="2"/>
+            <line x1="260" y1="40" x2="260" y2="78" stroke="#5C544B" stroke-width="2"/>
+            <path d="M260 40 L282 47 L260 54 Z" fill="#C0492E"/>
+            <line x1="100" y1="88" x2="255" y2="88" stroke="#8a6313" stroke-dasharray="3 2"/>
+            <text x="150" y="34" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="700">24 km</text>
+            <text x="150" y="98" text-anchor="middle" font-size="10" fill="#5C544B">en 1 h 30</text>
+          </svg>
+          <div class="exo-q">a) Vitesse moyenne = <input class="numin" id="ex1a" inputmode="decimal"> km/h</div>
+          <div class="exo-q">b) Temps pour 40 km à cette vitesse = <input class="numin" id="ex1b" inputmode="decimal"> h</div>
+          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
+          <div class="exo-fb" id="ex1fb"></div>
+          <div class="exo-sol" id="ex1sol" hidden>
+            <p><b>a)</b> v = distance ÷ temps = 24 ÷ 1,5 = <b>16 km/h</b>.</p>
+            <p><b>b)</b> temps = distance ÷ vitesse = 40 ÷ 16 = <b>2,5 h</b> (2 h 30).</p>
+          </div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">2</span> Simulateur — vitesse = distance ÷ temps</div>
+          <p>Règle la <b>distance</b> et le <b>temps</b> du trajet. La vitesse se calcule en direct, et le véhicule roule d'autant plus vite que la vitesse est grande.</p>
+          <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas>
+          <div class="sliders">
+            <label><span class="nm2">Distance (km)</span><input type="range" id="ex2d" min="5" max="100" step="5" value="24"><b><span id="ex2dv">24</span></b></label>
+            <label><span class="nm2">Temps (h)</span><input type="range" id="ex2t" min="0.5" max="5" step="0.5" value="1.5"><b><span id="ex2tv">1.5</span></b></label>
+          </div>
+          <div class="exo-out" id="ex2out">—</div>
+        </div>
+
+        <div class="exo-card">
+          <div class="exo-h"><span class="exo-num">3</span> Calcul — conversions et distance</div>
+          <p>a) Convertis <b>54 km/h</b> en m/s (rappel : on divise par 3,6).<br>b) Une trottinette roule à <b>15 km/h</b> pendant <b>20 min</b>. Distance parcourue (d = v × t, avec t en heures) ?</p>
+          <div class="exo-q">a) 54 km/h = <input class="numin" id="ex3a" inputmode="decimal"> m/s</div>
+          <div class="exo-q">b) Distance = <input class="numin" id="ex3b" inputmode="decimal"> km</div>
+          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
+          <div class="exo-fb" id="ex3fb"></div>
+          <div class="exo-sol" id="ex3sol" hidden>
+            <p><b>a)</b> 54 ÷ 3,6 = <b>15 m/s</b>.</p>
+            <p><b>b)</b> 20 min = 20/60 = 1/3 h ; d = 15 × 1/3 = <b>5 km</b>.</p>
+          </div>
+        </div>
+
+        <div class="exo-card adv">
+          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — la vitesse moyenne <span class="lvl-badge">niveau +</span></div>
+          <p>Un trajet se fait en deux parties : <b>30 km à 60 km/h</b>, puis <b>30 km à 30 km/h</b>. a) Temps total du trajet ? b) Vitesse moyenne sur tout le trajet. <b>Attention</b> : ce n'est pas la moyenne des deux vitesses !</p>
+          <svg class="exo-fig" viewBox="0 0 300 92" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
+            <line x1="22" y1="52" x2="150" y2="52" stroke="#3D7E5F" stroke-width="5"/>
+            <line x1="150" y1="52" x2="278" y2="52" stroke="#BD8A2A" stroke-width="5"/>
+            <circle cx="22" cy="52" r="5" fill="#2A2622"/><circle cx="150" cy="52" r="5" fill="#2A2622"/><circle cx="278" cy="52" r="5" fill="#2A2622"/>
+            <text x="86" y="38" text-anchor="middle" font-size="10" fill="#2c6147" font-weight="700">30 km · 60 km/h</text>
+            <text x="214" y="38" text-anchor="middle" font-size="10" fill="#8a6313" font-weight="700">30 km · 30 km/h</text>
+            <text x="22" y="76" text-anchor="middle" font-size="9" fill="#5C544B">départ</text>
+            <text x="278" y="76" text-anchor="middle" font-size="9" fill="#5C544B">arrivée</text>
+          </svg>
+          <div class="exo-q">a) Temps total = <input class="numin" id="ex4a" inputmode="decimal"> h</div>
+          <div class="exo-q">b) Vitesse moyenne = <input class="numin" id="ex4b" inputmode="decimal"> km/h</div>
+          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
+          <div class="exo-fb" id="ex4fb"></div>
+          <div class="exo-sol" id="ex4sol" hidden>
+            <p><b>a)</b> temps₁ = 30 ÷ 60 = 0,5 h ; temps₂ = 30 ÷ 30 = 1 h ; total = <b>1,5 h</b>.</p>
+            <p><b>b)</b> distance totale = 60 km ; v moyenne = 60 ÷ 1,5 = <b>40 km/h</b> (et non 45 !). On divise la distance totale par le temps total, jamais la moyenne des vitesses.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -538,7 +649,7 @@
     function onFood(p){return foods&&foods.some(function(f){return f.x===p.x&&f.y===p.y;});}
     function freeCell(){var p,tries=0;do{p={x:Math.floor(Math.random()*COLS),y:Math.floor(Math.random()*ROWS)};tries++;}while(tries<300&&(onSnake(p)||onFood(p)));return p;}
     function newQuestion(){cur=QBANK[Math.floor(Math.random()*QBANK.length)];var opts=shuffle([{t:cur.ok,ok:true},{t:cur.bad[0],ok:false},{t:cur.bad[1],ok:false}]);foods=[];opts.forEach(function(o,idx){var p=freeCell();p.n=idx+1;p.t=o.t;p.ok=o.ok;foods.push(p);});drawLeg();}
-    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span>'+['','①','②','③'][f.n]+' '+f.t+'</span>';}).join(' &nbsp; ');}
+    function drawLeg(){if(!cur){leg.textContent='';return;}leg.innerHTML='Mange la définition de <b>'+cur.q+'</b> &nbsp; '+foods.slice().sort(function(a,b){return a.n-b.n;}).map(function(f){return '<span><b class="legn">'+['','①','②','③'][f.n]+'</b> '+f.t+'</span>';}).join(' &nbsp; ');}
     function draw(){
       g.clearRect(0,0,W,H);
       g.fillStyle='#fbf7ee';g.fillRect(ox,oy,CS*COLS,CS*ROWS);
@@ -569,6 +680,61 @@
     el('d8right').addEventListener('click',function(){turn(1,0);});
     document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowUp')turn(0,-1);else if(k==='ArrowDown')turn(0,1);else if(k==='ArrowLeft')turn(-1,0);else if(k==='ArrowRight')turn(1,0);});
     lives=3;sc=0;resetSnake();newQuestion();draw();
+  })();
+
+  // ===== Exercices d'application =====
+  (function(){
+    function num(v){return parseFloat(String(v||'').replace(',','.'));}
+    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+    gate('ex3reveal','ex3sol','Correction','Masquer');
+    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+
+    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+      var okA=Math.abs(a-16)<0.5, okB=Math.abs(b-2.5)<0.1;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 24/1,5 = 16 km/h ; 40/16 = 2,5 h.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) distance ÷ temps. ')+(okB?'':'b) distance ÷ vitesse.');}
+      unlock('ex1reveal','Voir l’analyse');
+    });
+    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+      var okA=Math.abs(a-15)<0.3, okB=Math.abs(b-5)<0.2;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 54/3,6 = 15 m/s ; 15 × 1/3 = 5 km.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) ÷ 3,6. ')+(okB?'':'b) 20 min = 1/3 h, puis v × t.');}
+      unlock('ex3reveal','Correction');
+    });
+    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+      var okA=Math.abs(a-1.5)<0.1, okB=Math.abs(b-40)<0.5;
+      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 0,5 + 1 = 1,5 h ; 60/1,5 = 40 km/h.';}
+      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) 30/60 + 30/30. ')+(okB?'':'b) distance totale ÷ temps total (pas 45 !).');}
+      unlock('ex4reveal','Correction détaillée');
+    });
+
+    (function(){
+      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height, pos=0;
+      function step(){
+        var d=parseFloat(el('ex2d').value), t=parseFloat(el('ex2t').value);
+        el('ex2dv').textContent=d; el('ex2tv').textContent=t.toFixed(1);
+        var v=d/t;
+        g.clearRect(0,0,W,H);
+        var y=H-34, xa=30, xb=W-40;
+        g.strokeStyle='#7a7064';g.lineWidth=3;g.beginPath();g.moveTo(xa,y+16);g.lineTo(xb+10,y+16);g.stroke();
+        g.strokeStyle='rgba(42,38,34,.2)';g.setLineDash([8,8]);g.beginPath();g.moveTo(xa,y+16);g.lineTo(xb+10,y+16);g.stroke();g.setLineDash([]);
+        pos+=Math.min(v,90)*0.05; if(pos>(xb-xa))pos=0;
+        var cx=xa+pos;
+        g.fillStyle='#2E6A8E';g.beginPath();g.rect(cx,y-4,30,14);g.fill();
+        g.fillStyle='#173a52';g.beginPath();g.rect(cx+5,y-11,16,8);g.fill();
+        g.fillStyle='#2A2622';g.beginPath();g.arc(cx+8,y+11,4,0,7);g.arc(cx+23,y+11,4,0,7);g.fill();
+        g.fillStyle='#2A2622';g.font='800 15px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText('v = '+d+' km ÷ '+t.toFixed(1)+' h = '+v.toFixed(1)+' km/h',W/2,26);
+        var o=el('ex2out'); if(o) o.textContent='v = distance ÷ temps = '+v.toFixed(1)+' km/h';
+      }
+      ['ex2d','ex2t'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',step);});
+      setInterval(step,45); step();
+    })();
   })();
 
   refresh();

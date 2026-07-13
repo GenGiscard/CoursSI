@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LE DÉGEL — Station Thulé-6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --frost:#e4f0f7; --dim:#8ba0ad; --night:#04070e;
+    --ice:#8fd8ff; --ice-dim:#3a7fa8; --aurora:#7effc0; --violet:#b57ce8; --warm:#f0a53a; --alarm:#e05a6b; }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;overflow:hidden;background:var(--night)}
+  body{color:var(--frost);font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;-webkit-font-smoothing:antialiased}
+  #fx{position:fixed;inset:0;z-index:0;display:block}
+  #frost{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:screen;
+    background:radial-gradient(120% 80% at 50% -10%,rgba(143,216,255,.06),transparent 55%)}
+  #vign{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 120% at 50% 42%,transparent 40%,rgba(0,0,0,.74) 100%)}
+  #fade{position:fixed;inset:0;z-index:40;background:#000;pointer-events:none;opacity:1;transition:opacity 1.1s ease}
+  #fade.clear{opacity:0}
+  #flash{position:fixed;inset:0;z-index:41;pointer-events:none;opacity:0;background:#eaf6ff}
+  #flash.go{animation:fl .55s ease-out}#flash.red{background:#e05a6b}
+  @keyframes fl{0%{opacity:.6}100%{opacity:0}}
+
+  .hud{position:fixed;z-index:6;top:0;left:0;right:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:9px clamp(12px,3vw,26px)}
+  .hud .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:var(--ice);text-transform:uppercase}
+  .hud .depth{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.1em;flex:1;min-width:70px}
+  .stat{display:flex;align-items:center;gap:7px}
+  .stat .l{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase}
+  .stat .bar{width:96px;height:6px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+  #chalBar{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--alarm),var(--warm));transition:width .5s}
+  .stat.low #chalBar{background:linear-gradient(90deg,#4a90c0,var(--ice))}
+  .hbtn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--dim);background:none;border:1px solid rgba(139,160,173,.3);border-radius:4px;padding:5px 9px;cursor:pointer;text-transform:uppercase}
+  .hbtn:hover{color:var(--ice);border-color:var(--ice-dim)}
+  .hbtn.new{color:var(--warm);border-color:var(--warm);animation:pp 1.4s ease-in-out infinite}
+  @keyframes pp{50%{opacity:.5}}
+
+  #focal{position:fixed;z-index:3;left:50%;top:43%;transform:translate(-50%,-50%);width:min(560px,86vw);pointer-events:none;filter:drop-shadow(0 0 40px rgba(143,216,255,.12))}
+  #focal svg{width:100%;height:auto;display:block}
+
+  #stage{position:fixed;z-index:5;left:0;right:0;bottom:0;top:0;display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(18px,6vw,90px) clamp(28px,7vh,70px);pointer-events:none}
+  #speaker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ice);margin-bottom:10px;opacity:0;transition:.5s}
+  #speaker.froid{color:var(--violet)} #speaker.crew{color:var(--warm)} #speaker.you{color:var(--dim)} #speaker.dead{color:var(--alarm)}
+  #line{font-size:clamp(23px,4.3vw,42px);line-height:1.22;max-width:900px;opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease;text-shadow:0 2px 30px rgba(0,0,0,.7)}
+  #line.in{opacity:1;transform:none}
+  #line em{color:var(--ice);font-style:italic}
+  #line.froid em{color:var(--violet)}
+  #next{pointer-events:auto;margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;cursor:pointer;opacity:0;transition:.4s;display:inline-flex;gap:8px;width:max-content}
+  #next.show{opacity:.85}#next:hover{color:var(--ice)}#next .a{animation:bob 1.4s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateX(4px)}}
+
+  #act{position:fixed;z-index:8;left:0;right:0;bottom:0;padding:0 clamp(18px,6vw,90px) clamp(26px,6vh,60px);pointer-events:none;display:none}
+  #act.on{display:block}
+  .choices{display:flex;flex-direction:column;gap:10px;max-width:600px;pointer-events:auto}
+  .choice{font-family:'Oswald',sans-serif;font-weight:300;font-size:19px;text-align:left;color:var(--frost);background:linear-gradient(90deg,rgba(12,24,34,.86),rgba(6,14,22,.5));border:1px solid rgba(143,216,255,.22);border-left:2px solid var(--ice-dim);border-radius:6px;padding:14px 18px;cursor:pointer;transition:.18s;backdrop-filter:blur(3px)}
+  .choice:hover{border-left-color:var(--ice);transform:translateX(4px);color:#fff}
+  .choice.danger{border-left-color:var(--alarm)}
+  .choice.lure{border-left-color:var(--warm);color:#f7e6c8}
+  .choice.lure:hover{background:linear-gradient(90deg,rgba(48,34,14,.9),rgba(24,16,6,.6))}
+  .choice small{display:block;font-size:12px;color:var(--dim);letter-spacing:.06em;margin-top:3px}
+
+  .term{max-width:600px;pointer-events:auto;background:linear-gradient(160deg,rgba(8,18,26,.95),rgba(4,10,18,.9));border:1px solid var(--ice-dim);border-radius:10px;padding:16px 20px;backdrop-filter:blur(4px);box-shadow:0 10px 40px rgba(0,0,0,.5)}
+  .term .rk{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ice);display:flex;justify-content:space-between;margin-bottom:8px}
+  .term .q{font-family:'Oswald',sans-serif;font-weight:300;font-size:19px;line-height:1.35;margin-bottom:12px}
+  .term .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .term input{font-family:'JetBrains Mono',monospace;font-size:17px;width:130px;padding:9px 11px;background:#05101a;color:var(--ice);border:1px solid rgba(143,216,255,.3);border-radius:6px;text-align:right;outline:none}
+  .term input:focus{border-color:var(--ice)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#04120f;background:var(--ice);border:none;border-radius:6px;padding:11px 16px;cursor:pointer;font-weight:700}
+  .btn:hover{background:#b6e8ff}
+  .btn.ghost{background:none;color:var(--dim);border:1px solid rgba(139,160,173,.3)}
+  .btn.ghost:hover{color:var(--ice);border-color:var(--ice-dim)}
+  .fbk{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:9px;min-height:16px}
+  .fbk.bad{color:var(--alarm)} .fbk.good{color:var(--ice)}
+
+  .overlay{position:fixed;z-index:22;inset:0;display:none;background:rgba(4,7,14,.92);backdrop-filter:blur(5px);padding:52px clamp(16px,5vw,40px);overflow-y:auto}
+  .overlay.on{display:flex;justify-content:center;align-items:flex-start}
+  .obox{max-width:600px;width:100%;background:linear-gradient(160deg,#0a1822,#06101a);border:1px solid var(--ice-dim);border-radius:12px;padding:24px 26px}
+  .obox .lk{font-family:'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:var(--ice);margin-bottom:4px}
+  .obox h4{font-family:'Oswald',sans-serif;font-weight:500;font-size:23px;margin:0 0 14px}
+  .obox .body{font-family:'Oswald',sans-serif;font-weight:300;font-size:17px;line-height:1.55}
+  .obox .body b{color:var(--warm);font-weight:500}
+  .obox .f{font-family:'JetBrains Mono',monospace;font-size:16px;color:var(--ice);background:#05101a;border:1px solid rgba(143,216,255,.2);border-radius:7px;padding:11px 14px;margin:12px 0;text-align:center}
+  .obox .ex{border-left:3px solid var(--warm);background:rgba(240,165,58,.08);padding:10px 14px;margin:12px 0;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.7}
+  .obox .ex b{color:var(--ice)}
+  .frag{border-left:2px solid var(--ice-dim);padding:4px 0 4px 14px;margin:16px 0}
+  .frag .fk{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--warm);text-transform:uppercase}
+  .frag .fb{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.5;margin-top:5px;color:var(--frost)}
+  .frag.locked .fb{color:var(--dim);font-style:normal}
+
+  #toast{position:fixed;z-index:25;left:50%;bottom:24px;transform:translateX(-50%) translateY(18px);opacity:0;transition:.3s;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;background:rgba(10,22,30,.95);border:1px solid var(--ice-dim);color:var(--ice);padding:9px 15px;border-radius:8px;pointer-events:none}
+  #toast.on{opacity:1;transform:translateX(-50%)}
+  #toast.cold{border-color:var(--violet);color:var(--violet)}#toast.warm{border-color:var(--warm);color:var(--warm)}
+
+  #title{position:fixed;z-index:30;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+  #title .sub{font-family:'JetBrains Mono',monospace;letter-spacing:.4em;font-size:clamp(10px,2.6vw,13px);color:var(--ice-dim);text-transform:uppercase;margin-bottom:18px}
+  #title h1{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.2em;font-size:clamp(46px,13vw,120px);margin:0;color:var(--frost);text-shadow:0 0 60px rgba(143,216,255,.3)}
+  #title .depth{font-family:'JetBrains Mono',monospace;letter-spacing:.3em;font-size:13px;color:var(--warm);margin:6px 0 26px}
+  #title .tag{max-width:470px;color:var(--dim);font-size:19px;font-style:italic;margin:0 auto 28px}
+  #title input{font-family:'Cormorant Garamond',serif;font-size:19px;text-align:center;background:rgba(12,24,34,.7);color:var(--ice);border:1px solid var(--ice-dim);border-radius:8px;padding:12px 16px;width:min(300px,80vw);outline:none;margin-bottom:16px}
+  .credit{position:fixed;z-index:31;bottom:8px;left:0;right:0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;color:#3a4b55;text-transform:uppercase}
+  a{color:var(--ice)}
+</style>
+</head>
+<body>
+  <svg id="gdefs" width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs>
+    <radialGradient id="gNight" cx="50%" cy="38%" r="85%"><stop offset="0" stop-color="#0a1826"/><stop offset=".7" stop-color="#050c18"/><stop offset="1" stop-color="#03060e"/></radialGradient>
+    <radialGradient id="gWarm" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff0d0"/><stop offset=".35" stop-color="#f0a53a"/><stop offset="1" stop-color="#3a1e08" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gIce" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#e9f8ff"/><stop offset=".4" stop-color="#8fd8ff"/><stop offset="1" stop-color="#0e2436" stop-opacity="0"/></radialGradient>
+    <linearGradient id="gMetal" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#3a5060"/><stop offset=".5" stop-color="#182833"/><stop offset="1" stop-color="#070f18"/></linearGradient>
+    <linearGradient id="gGlassC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c3a48"/><stop offset="1" stop-color="#060f18"/></linearGradient>
+    <linearGradient id="gIceWall" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#2a4a5e"/><stop offset="1" stop-color="#0a1622"/></linearGradient>
+    <filter id="fglow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="fbloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="15"/></filter>
+    <filter id="forganic"><feTurbulence type="fractalNoise" baseFrequency="0.016 0.024" numOctaves="2" seed="3" result="n"><animate attributeName="baseFrequency" dur="14s" values="0.016 0.024;0.022 0.03;0.016 0.024" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs></svg>
+  <canvas id="fx"></canvas>
+  <div id="frost"></div>
+  <div id="vign"></div>
+  <div id="focal"></div>
+
+  <div class="hud">
+    <span class="tag">THULÉ-6</span>
+    <span class="depth" id="depth">−48 m sous la glace</span>
+    <div class="stat" id="chalStat"><span class="l">Chaleur</span><div class="bar"><i id="chalBar"></i></div></div>
+    <button class="hbtn" id="codexBtn">DOSSIER</button>
+    <button class="hbtn" id="sndBtn">SON ✕</button>
+  </div>
+
+  <div id="stage"><div id="speaker"></div><div id="line"></div><div id="next"><span>Continuer</span><span class="a">▸</span></div></div>
+  <div id="act"></div>
+
+  <div class="overlay" id="lesson"><div class="obox">
+    <div class="lk">Journal technique · aide</div><h4 id="lessonTitle"></h4>
+    <div class="body" id="lessonBody"></div>
+    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('lesson')">Revenir</button>
+  </div></div>
+  <div class="overlay" id="codex"><div class="obox">
+    <div class="lk">Dossier — Station Thulé-6</div><h4>Ce que tu as trouvé sous la glace</h4>
+    <div id="codexList"></div>
+    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('codex')">Fermer</button>
+  </div></div>
+
+  <div id="toast"></div><div id="flash"></div><div id="fade" class="clear"></div>
+
+  <div id="title">
+    <div class="sub">Sciences de l'ingénieur · récit d'horreur</div>
+    <h1>LE DÉGEL</h1>
+    <div class="depth">STATION THULÉ-6 · −62 °C</div>
+    <p class="tag">Ensevelie depuis l'automne, silencieuse depuis six jours. Tu descends la rallumer. Ils l'avaient laissée geler — exprès.</p>
+    <input id="nameIn" maxlength="16" placeholder="Ton nom…" autocomplete="off">
+    <div><button class="btn" id="startBtn">Entrer</button></div>
+  </div>
+  <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ===================== DÉCOR ANIMÉ (froid) ===================== */
+var FX=(function(){
+  var cv,g,W,H,t=0,cfg={},raf,reduce=false,shakeAmt=0,flakes=[],motes=[];
+  function rnd(a,b){ return a+Math.random()*(b-a); }
+  function seed(){
+    flakes=[]; var n=cfg.dense||120;
+    for(var i=0;i<n;i++){ var d=rnd(0.3,1); flakes.push({x:Math.random()*W,y:Math.random()*H,d:d,len:rnd(4,12)*d,s:rnd(1,3)*d,ph:Math.random()*6.28}); }
+    motes=[]; for(var j=0;j<10;j++) motes.push({x:Math.random()*W,y:Math.random()*H,r:rnd(1.2,3),ph:Math.random()*6.28,sp:rnd(0.04,0.14)});
+  }
+  function resize(){ W=cv.width=window.innerWidth||800; H=cv.height=window.innerHeight||600; seed(); }
+  function set(c){ cfg=c||{}; seed(); }
+  function shake(a){ shakeAmt=a||10; }
+  function aurora(){
+    g.globalCompositeOperation='lighter';
+    var cols=[[126,255,192],[150,130,255]];
+    for(var c=0;c<2;c++){ var col=cols[c], yb=46+c*26, amp=22+c*10;
+      function edge(x){ return yb+Math.sin(x*0.006+t*0.008+c*2)*amp+Math.sin(x*0.014+t*0.016)*amp*0.4; }
+      g.beginPath(); g.moveTo(0,edge(0));
+      for(var x=0;x<=W;x+=22) g.lineTo(x,edge(x));
+      for(var x2=W;x2>=0;x2-=22) g.lineTo(x2,edge(x2)+130);
+      g.closePath();
+      var ag=g.createLinearGradient(0,yb-amp,0,yb+amp+130); ag.addColorStop(0,'rgba('+col.join(',')+',.10)'); ag.addColorStop(1,'rgba('+col.join(',')+',0)');
+      g.fillStyle=ag; g.fill();
+    }
+    g.globalCompositeOperation='source-over';
+  }
+  function thing(px,py){
+    g.fillStyle='rgba(8,16,26,'+cfg.presence+')'; g.beginPath();
+    var R=Math.min(W,H)*0.33;
+    for(var k=0;k<=11;k++){ var a=k/11*6.28, rr=R*(0.62+0.38*Math.sin(k*2.7+t*0.004)); var x=px+Math.cos(a)*rr*0.92, y=py+Math.sin(a)*rr; if(k===0)g.moveTo(x,y); else g.lineTo(x,y); }
+    g.closePath(); g.fill();
+    g.strokeStyle='rgba(143,216,255,'+(cfg.presence*0.5)+')'; g.lineWidth=1;
+    for(var v=0;v<5;v++){ var a2=v*1.3+t*0.003; g.beginPath(); g.moveTo(px,py); g.lineTo(px+Math.cos(a2)*R*0.7,py+Math.sin(a2)*R*0.7); g.stroke(); }
+    if(cfg.eyes){ g.globalCompositeOperation='lighter';
+      for(var e=0;e<2;e++){ var ex=px+(e?42:-42), ey=py-20, er=5+2*Math.sin(t*0.05+e);
+        var eg=g.createRadialGradient(ex,ey,0,ex,ey,er*4); eg.addColorStop(0,'rgba(180,230,255,.9)'); eg.addColorStop(1,'rgba(143,216,255,0)');
+        g.fillStyle=eg; g.beginPath(); g.arc(ex,ey,er*4,0,7); g.fill(); }
+      g.globalCompositeOperation='source-over';
+    }
+  }
+  function frame(){
+    t+=reduce?0.3:1;
+    var sx=0,sy=0; if(shakeAmt>0.2){ sx=(Math.random()-.5)*shakeAmt; sy=(Math.random()-.5)*shakeAmt; shakeAmt*=0.88; }
+    g.setTransform(1,0,0,1,sx,sy); g.clearRect(-40,-40,W+80,H+80);
+    var top=cfg.top||[10,22,34], bot=cfg.bot||[3,6,12];
+    var grd=g.createLinearGradient(0,0,0,H); grd.addColorStop(0,'rgb('+top.join(',')+')'); grd.addColorStop(1,'rgb('+bot.join(',')+')');
+    g.fillStyle=grd; g.fillRect(-40,-40,W+80,H+80);
+    if(cfg.aurora) aurora();
+    if(cfg.presence){ var px=W*0.5+Math.sin(t*0.001)*W*0.18, py=H*0.56; thing(px,py); }
+    // blizzard : stries poussées par le vent
+    var wind=cfg.wind||3, pc=cfg.partCol||[220,240,255];
+    for(var i=0;i<flakes.length;i++){ var p=flakes[i];
+      if(!reduce){ p.x-=wind*p.d+Math.sin(t*0.02+p.ph)*0.6; p.y+=p.s; }
+      if(p.x<-14){ p.x=W+14; p.y=Math.random()*H; } if(p.y>H+14){ p.y=-14; p.x=Math.random()*W; }
+      var a=(0.12+0.3*p.d);
+      g.strokeStyle='rgba('+pc[0]+','+pc[1]+','+pc[2]+','+a+')'; g.lineWidth=p.d*1.3;
+      g.beginPath(); g.moveTo(p.x,p.y); g.lineTo(p.x+wind*1.4*p.d,p.y-p.len*0.4); g.stroke();
+    }
+    g.globalCompositeOperation='lighter'; var mc=cfg.presence?[143,216,255]:[200,235,255];
+    for(var mm=0;mm<motes.length;mm++){ var mo=motes[mm]; if(!reduce){ mo.y-=mo.sp; mo.x-=wind*0.3; if(mo.y<-6||mo.x<-6){mo.y=H+6;mo.x=Math.random()*W;} }
+      var gl=0.22+0.28*Math.sin(t*0.04+mo.ph); if(gl<0)gl=0; var rr=mo.r*5;
+      var mg=g.createRadialGradient(mo.x,mo.y,0,mo.x,mo.y,rr); mg.addColorStop(0,'rgba('+mc[0]+','+mc[1]+','+mc[2]+','+gl+')'); mg.addColorStop(1,'rgba('+mc[0]+','+mc[1]+','+mc[2]+',0)');
+      g.fillStyle=mg; g.beginPath(); g.arc(mo.x,mo.y,rr,0,7); g.fill();
+    }
+    g.globalCompositeOperation='source-over';
+    if(cfg.grade){ g.fillStyle=cfg.grade; g.fillRect(-40,-40,W+80,H+80); }
+    g.setTransform(1,0,0,1,0,0); raf(frame);
+  }
+  return { init:function(){ cv=el('fx'); if(!cv||!cv.getContext) return; g=cv.getContext('2d');
+      raf=window.requestAnimationFrame||function(f){return setTimeout(f,33);};
+      reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      resize(); window.addEventListener('resize',resize); frame(); }, set:set, shake:shake };
+})();
+
+/* ===================== PLANS FOCAUX ===================== */
+var FOCAL={
+  snowcat:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><path d="M0 220 Q120 200 200 214 Q300 230 400 210 L400 300 L0 300 Z" fill="#0e1c2a"/><g><rect x="130" y="150" width="140" height="46" rx="8" fill="url(#gMetal)" stroke="#3a5060"/><rect x="150" y="130" width="90" height="30" rx="6" fill="#0e1c26" stroke="#3a5060"/><rect x="160" y="136" width="70" height="18" rx="3" fill="url(#gGlassC)"/><g filter="url(#fglow)"><circle cx="272" cy="172" r="8" fill="#f0a53a"/></g><path d="M118 196 h164" stroke="#1a2a36" stroke-width="10" stroke-linecap="round"/></g><g filter="url(#fglow)"><path d="M280 172 L360 150 L360 194 Z" fill="url(#gWarm)" opacity=".2"/></g></svg>',
+  hatch:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><circle cx="200" cy="150" r="112" fill="url(#gMetal)" stroke="#0a141a" stroke-width="4"/><circle cx="200" cy="150" r="96" fill="url(#gIceWall)" stroke="#4a7a92" stroke-width="3"/><g stroke="#bfe6ff" stroke-width="1" opacity=".5"><path d="M200 60 L214 110 L260 118 L222 150 L236 200 L200 168 L164 200 L178 150 L140 118 L186 110 Z" fill="none"/></g><g fill="#4a6a70"><circle cx="200" cy="54" r="4"/><circle cx="296" cy="150" r="4"/><circle cx="200" cy="246" r="4"/><circle cx="104" cy="150" r="4"/></g><circle cx="200" cy="150" r="40" fill="url(#gGlassC)" stroke="#4a7a92" stroke-width="2"/><rect x="196" y="122" width="8" height="16" rx="2" fill="#e05a6b"><animate attributeName="opacity" values=".3;1;.3" dur="1.6s" repeatCount="indefinite"/></rect></svg>',
+  reactor:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><rect x="120" y="70" width="160" height="170" rx="10" fill="url(#gMetal)" stroke="#3a5060" stroke-width="2"/><circle cx="200" cy="150" r="150" fill="url(#gWarm)" opacity=".16" filter="url(#fbloom)"><animate attributeName="opacity" values=".12;.22;.12" dur="3s" repeatCount="indefinite"/></circle><circle cx="200" cy="150" r="52" fill="#1a0f06" stroke="#7a4a1a" stroke-width="2"/><g filter="url(#fglow)"><circle cx="200" cy="150" r="30" fill="url(#gWarm)"><animate attributeName="r" values="26;34;26" dur="2.4s" repeatCount="indefinite"/></circle></g><g stroke="#f0a53a" stroke-width="2" opacity=".7"><line x1="120" y1="120" x2="90" y2="120"/><line x1="280" y1="180" x2="310" y2="180"/></g><text x="200" y="262" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8ba0ad">CŒUR — SALLE 3</text></svg>',
+  corridor:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><g fill="url(#gMetal)"><path d="M0 30 L150 110 L150 200 L0 280 Z"/><path d="M400 30 L250 110 L250 200 L400 280 Z"/><path d="M0 30 L400 30 L250 110 L150 110 Z" opacity=".55"/><path d="M0 280 L400 280 L250 200 L150 200 Z" opacity=".8"/></g><g stroke="#bfe6ff" stroke-width="1" opacity=".22"><path d="M150 110 L150 200 M250 110 L250 200 M120 96 L120 214 M280 96 L280 214"/></g><g filter="url(#fglow)"><rect x="188" y="112" width="24" height="4" fill="#8fd8ff"><animate attributeName="opacity" values=".2;1;.3;.9;.2" dur="3.4s" repeatCount="indefinite"/></rect></g></svg>',
+  frozen_crew:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><rect x="150" y="40" width="100" height="240" rx="8" fill="url(#gIceWall)" opacity=".85"/><g opacity=".78"><path d="M200 150 Q186 210 182 270 M200 150 Q214 210 218 270" stroke="#2a4652" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M184 128 Q160 150 150 190 M216 128 Q240 150 250 190" stroke="#2a4652" stroke-width="9" fill="none" stroke-linecap="round"/><ellipse cx="200" cy="104" rx="24" ry="28" fill="#20363c" stroke="#3a5a60"/><path d="M182 122 Q200 110 218 122 L214 175 Q200 184 186 175 Z" fill="#20363c"/><ellipse cx="191" cy="101" rx="5" ry="7" fill="#05100f"/><ellipse cx="210" cy="101" rx="5" ry="7" fill="#05100f"/><circle cx="191" cy="101" r="1.6" fill="#8fd8ff"><animate attributeName="opacity" values=".4;1;.4" dur="3s" repeatCount="indefinite"/></circle><circle cx="210" cy="101" r="1.6" fill="#8fd8ff"><animate attributeName="opacity" values=".4;1;.4" dur="3s" repeatCount="indefinite"/></circle></g><g stroke="#bfe6ff" stroke-width="1" opacity=".3"><path d="M158 60 l20 30 M242 90 l-18 26 M170 220 l16 24"/></g></svg>',
+  radio:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><rect x="120" y="100" width="160" height="110" rx="8" fill="url(#gMetal)" stroke="#3a5060" stroke-width="2"/><rect x="138" y="118" width="124" height="44" rx="3" fill="#06161c" stroke="#8fd8ff"/><text x="200" y="146" text-anchor="middle" font-family="JetBrains Mono" font-size="15" fill="#8fd8ff">0110 0100<animate attributeName="opacity" values="1;.15;1" dur="1.8s" repeatCount="indefinite"/></text><g fill="#4a6a70"><circle cx="150" cy="186" r="7"/><circle cx="180" cy="186" r="7"/></g><line x1="240" y1="100" x2="270" y2="60" stroke="#3a5060" stroke-width="3"/><g stroke="#bfe6ff" stroke-width="1" opacity=".3"><path d="M124 104 l16 20 M270 200 l-14 8"/></g></svg>',
+  arches:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><path d="M40 260 Q200 60 360 260" fill="none" stroke="url(#gMetal)" stroke-width="14"/><g stroke="#3a5060" stroke-width="8"><line x1="90" y1="182" x2="90" y2="260"/><line x1="200" y1="96" x2="200" y2="120"/><line x1="310" y1="182" x2="310" y2="260"/></g><g fill="#e05a6b"><polygon points="90,176 82,190 98,190"/><polygon points="310,176 302,190 318,190"/><polygon points="200,90 192,104 208,104"/></g><path d="M120 150 Q200 120 280 150" stroke="#bfe6ff" stroke-width="1" fill="none" opacity=".4"/><text x="200" y="286" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8ba0ad">COUPOLE — PRESSION DU GEL</text></svg>',
+  heater:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><rect x="110" y="120" width="180" height="60" rx="8" fill="url(#gMetal)" stroke="#3a5060"/><g filter="url(#fglow)"><g stroke="#f0a53a" stroke-width="5" fill="none"><path d="M130 150 h30 l10 -16 14 32 14 -32 14 32 14 -32 10 16 h30"><animate attributeName="stroke" values="#7a4a1a;#f0a53a;#ff6a2a;#f0a53a" dur="2s" repeatCount="indefinite"/></path></g></g><circle cx="200" cy="150" r="120" fill="url(#gWarm)" opacity=".12" filter="url(#fbloom)"/><text x="200" y="212" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#8ba0ad">CHAUFFAGE D\u2019APPOINT</text></svg>',
+  entity:'<svg viewBox="0 0 400 320"><rect width="400" height="320" fill="url(#gNight)"/><circle cx="200" cy="170" r="150" fill="url(#gIce)" opacity=".14" filter="url(#fbloom)"/><g filter="url(#forganic)"><path d="M200 60 L250 120 L330 130 L268 178 L292 262 L200 214 L108 262 L132 178 L70 130 L150 120 Z" fill="#12222e" stroke="#3a5a68" stroke-width="3"><animate attributeName="opacity" values=".85;1;.85" dur="3s" repeatCount="indefinite"/></path></g><g filter="url(#fglow)"><circle cx="180" cy="160" r="7" fill="#8fd8ff"/><circle cx="222" cy="158" r="7" fill="#b57ce8"/></g><g stroke="#bfe6ff" stroke-width="1" opacity=".4"><path d="M200 170 l60 -20 M200 170 l-56 -14 M200 170 l30 60"/></g></svg>',
+  evac:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="url(#gNight)"/><path d="M0 0 L400 0 L400 80 Q200 118 0 80 Z" fill="url(#gIce)" opacity=".14"/><path d="M0 220 Q200 206 400 224 L400 300 L0 300 Z" fill="#0e1c2a"/><g transform="translate(30 0)"><rect x="90" y="160" width="120" height="40" rx="8" fill="url(#gMetal)" stroke="#3a5060"/><rect x="106" y="142" width="70" height="26" rx="5" fill="url(#gGlassC)" stroke="#3a5060"/><g filter="url(#fglow)"><circle cx="212" cy="178" r="7" fill="#f0a53a"/></g></g><g fill="#dff0f7" opacity=".8"><circle cx="330" cy="90" r="2"/><circle cx="360" cy="70" r="1.5"/><circle cx="300" cy="60" r="1.5"/></g></svg>',
+  fire:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#160a04"/><circle cx="200" cy="180" r="180" fill="url(#gWarm)" opacity=".4" filter="url(#fbloom)"><animate attributeName="opacity" values=".3;.55;.3" dur="1.2s" repeatCount="indefinite"/></circle><g filter="url(#forganic)"><path d="M160 260 Q150 170 200 90 Q250 170 240 260 Z" fill="#f0a53a"/><path d="M178 260 Q172 190 200 130 Q228 190 222 260 Z" fill="#ffd27a"/></g><rect y="258" width="400" height="42" fill="#0a0402"/></svg>',
+  sleep:'<svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#0c1420"/><rect width="400" height="300" fill="#dfeefc" opacity=".08"><animate attributeName="opacity" values=".04;.14;.04" dur="5s" repeatCount="indefinite"/></rect><g opacity=".5"><ellipse cx="200" cy="210" rx="46" ry="20" fill="#16222e"/><path d="M200 210 Q176 168 188 130 Q208 150 212 178 Q232 158 224 128 Q244 160 220 210 Z" fill="#1a2a38"/><circle cx="200" cy="118" r="20" fill="#1a2a38"/></g><g fill="#bfe6ff"><circle cx="140" cy="90" r="1.5"><animate attributeName="cy" values="90;300" dur="6s" repeatCount="indefinite"/></circle><circle cx="260" cy="70" r="1.5"><animate attributeName="cy" values="70;300" dur="7s" repeatCount="indefinite"/></circle></g></svg>'
+};
+
+/* ===================== COURS ===================== */
+var COURS={
+energie:{t:"Le rendement",h:"Le rendement \u03b7 compare l'\u00e9nergie <b>utile</b> qui sort \u00e0 l'\u00e9nergie <b>absorb\u00e9e</b> qui entre :<div class='f'>\u03b7 = P utile / P absorb\u00e9e</div>En inversant : <b>P absorb\u00e9e = P utile / \u03b7</b>.<div class='ex'>1500 W utiles, \u03b7 = 0,75 \u2192 1500 / 0,75 = <b>2000 W</b></div>"},
+info:{t:"Binaire \u2192 d\u00e9cimal",h:"Chaque bit vaut une puissance de 2 : <b>128, 64, 32, 16, 8, 4, 2, 1</b>. On additionne les positions \u00e0 1.<div class='ex'>0110 0100 \u2192 64 + 32 + 4 = <b>100</b></div>"},
+statique:{t:"Effort r\u00e9parti",h:"Une force r\u00e9partie \u00e9galement sur plusieurs appuis se divise entre eux :<div class='f'>effort par appui = force / nombre d'appuis</div><div class='ex'>12000 N sur 4 arcs \u2192 12000 / 4 = <b>3000 N</b></div>"},
+elec:{t:"Puissance par effet Joule",h:"Une r\u00e9sistance parcourue par un courant dissipe une puissance en chaleur :<div class='f'>P = R \u00d7 I\u00b2</div><div class='ex'>R = 8 \u03a9, I = 5 A \u2192 8 \u00d7 5\u00b2 = 8 \u00d7 25 = <b>200 W</b></div>"}
+};
+
+/* ===================== DOSSIER ===================== */
+var LORE={
+v1:{k:"Journal — Dr Sorel",b:"Le carottage a remont\u00e9 quelque chose de pris dans la glace depuis 40 000 ans. \u00c7a n'aurait pas d\u00fb \u00eatre \u2014 ti\u00e8de \u2014 au toucher."},
+v2:{k:"Note — labo bio",b:"\u00c7a ne d\u00e9g\u00e8le pas. \u00c7a se r\u00e9veille. Et \u00e7a a faim de chaleur \u2014 la n\u00f4tre. Baissez tout. Priez pour le froid."},
+v3:{k:"Radio — cap. Vlad",b:"On a coup\u00e9 le chauffage central pour le rendormir. On g\u00e8le. Mais tant qu'il fait froid, il dort. Ne. Chauffez. Pas. La salle 3."},
+v4:{k:"Quartiers — carte postale",b:"Une carte postale d'un lagon ensoleill\u00e9, scotch\u00e9e au-dessus d'une couchette : \u00ab Reviens vite. Il fait si chaud, ici. \u2014 Papa \u00bb"},
+v5:{k:"Directive — Compagnie",b:"La station reste OP\u00c9RATIONNELLE. R\u00e9tablissez chauffage et production. Le \u00ab sp\u00e9cimen \u00bb est un actif strat\u00e9gique. Aucune \u00e9vacuation autoris\u00e9e."}
+};
+
+/* ===================== SCÈNES ===================== */
+var S={
+approach:{ depth:"surface · −62 °C", mood:{top:[10,20,34],bot:[3,6,14],aurora:true,wind:4,dense:130,partCol:[220,240,255]}, focal:'snowcat',
+  seq:[{sp:'you',t:"Le blizzard efface le monde. Plus de ciel, plus de sol. <em>Que du blanc.</em>"},{sp:'you',t:"Station Thulé-6. Silencieuse depuis six jours."},{sp:'froid',t:"Tu es venue nous <em>réchauffer</em> ? …reste."}],
+  ch:[{t:"Forcer le sas gelé",go:"dome"}] },
+
+dome:{ depth:"−48 m · sas", mood:{top:[8,16,26],bot:[2,5,11],wind:3,dense:90,partCol:[210,235,255]}, focal:'hatch', lore:'v4',
+  seq:[{sp:'',t:"Le sas est pris dans la glace. Mort."},{sp:'',t:"Il faut rétablir le réchauffeur pour dégeler les vérins."}],
+  pz:{dom:'energie', q:"Le réchauffeur doit fournir 1500 W utiles à un rendement de 0,75. Puissance à tirer du groupe (W) ?", ans:2000, tol:5, ok:"corridor", okline:"Le givre craque. Le sas cède dans un souffle d'air à peine moins glacé."} },
+
+corridor:{ depth:"−49 m · coursive", mood:{top:[6,12,20],bot:[2,4,9],wind:2,dense:70,partCol:[200,230,255]}, focal:'frozen_crew', scare:true, lore:'v1',
+  seq:[{sp:'',t:"Un équipier, debout, pris dans le givre du mur."},{sp:'dead',t:"Ses yeux te suivent. <em>Lentement.</em>"},{sp:'',t:"Près de lui, une radio gelée clignote encore."}],
+  ch:[{t:"Décrocher la radio",go:"radio"}] },
+
+radio:{ depth:"−49 m · coursive", mood:{top:[6,12,20],bot:[2,4,9],wind:2,dense:70,partCol:[200,230,255]}, focal:'radio',
+  seq:[{sp:'',t:"La dernière salve, figée dans la glace. En binaire."}],
+  pz:{dom:'info', q:"Salve radio : 0110 0100. Convertis en décimal (début du message).", ans:100, tol:0.5, ok:"warn", okline:"100 → « d ». Les lettres se rassemblent, tremblantes…"} },
+
+warn:{ depth:"−50 m · coursive", mood:{top:[8,8,18],bot:[2,3,8],wind:2,dense:50,partCol:[181,124,232],grade:'rgba(50,20,80,.1)'}, focal:'frozen_crew', lore:'v2',
+  seq:[{sp:'crew',t:"« …dégel amorcé. <em>NE CHAUFFEZ PAS LA SALLE 3.</em> »"},{sp:'',t:"La salle 3. Le cœur. La seule pièce encore tiède."},{sp:'froid',t:"N'aie pas peur du chaud. <em>Le chaud, c'est moi qui te le donne.</em>"}],
+  ch:[{t:"Descendre à la salle 3",go:"core"}] },
+
+core:{ depth:"−52 m · salle 3", mood:{top:[10,14,20],bot:[3,4,10],wind:1,dense:40,partCol:[220,235,255],presence:0.16}, focal:'reactor', lore:'v5',
+  seq:[{sp:'',t:"La salle 3. Le réacteur ronronne — seul îlot de chaleur."},{sp:'',t:"Dans le mur de glace, une <em>forme</em>. Immense. Elle bouge à peine."},{sp:'',t:"La coupole gémit sous la pression du gel. Tiens-la."}],
+  pz:{dom:'statique', q:"La coupole encaisse 12000 N répartis sur 4 arcs porteurs. Effort à tenir par arc (N) ?", ans:3000, tol:5, ok:"thaw", okline:"Les arcs tiennent. La forme, elle, s'est rapprochée du verre."} },
+
+thaw:{ depth:"−52 m · salle 3", mood:{top:[10,10,18],bot:[3,3,9],wind:1,dense:44,partCol:[181,124,232],presence:0.3,eyes:true,grade:'rgba(45,18,72,.12)'}, focal:'entity', scare:true, lore:'v3',
+  seq:[{sp:'',t:"Une main de givre se plaque contre le verre, de l'intérieur."},{sp:'froid',t:"Tu as froid. <em>Depuis toujours, tu as froid.</em>"},{sp:'froid',t:"Assieds-toi. Là. Tu sens ? Il fait <em>bon</em>, maintenant."},{sp:'you',t:"Mes paupières pèsent des tonnes."}],
+  pz:{dom:'elec', q:"Pour ne pas t'endormir, rallume le chauffage d'appoint : R = 8 Ω, I = 5 A. Puissance dissipée (W) ? (P = R·I²)", ans:200, tol:1, ok:"offer", okline:"La résistance rougeoie. La vraie chaleur te réveille d'un coup."} },
+
+offer:{ depth:"−52 m · le choix", mood:{top:[8,8,16],bot:[2,3,9],wind:2,dense:44,partCol:[181,124,232],presence:0.32,eyes:true}, focal:'entity',
+  seq:[{sp:'froid',t:"« Reste. <em>Plus jamais froid.</em> »"},{sp:'you',t:"Trois gestes. Un seul me ramène à la surface."}],
+  ch:[
+    {t:"Rejoindre le traîneau — fuir",go:"end_evac"},
+    {t:"Surcharger le réacteur — la brûler",go:"end_burn",cls:'danger'},
+    {t:"S'asseoir. Se reposer.",go:"end_sleep",cls:'lure',sub:"il fait si bon…"}
+  ] },
+
+end_evac:{ depth:"surface", mood:{top:[12,22,36],bot:[4,8,16],aurora:true,wind:4,dense:120,partCol:[225,242,255]}, focal:'evac', end:true,
+  seq:[{sp:'',t:"Tu forces la porte dans le blizzard. Le traîneau démarre au quart de tour."},{sp:'',t:"Thulé-6 disparaît dans le blanc. La forme, dans la glace, n'a pas fini de fondre."},{sp:'you',t:"Mais toi, tu remontes. Vivante. Et tu sais ce qui dort là-dessous."}],
+  final:function(){ return G.chal>=45 ? "Tu t'en sors, lucide et au chaud. La rigueur t'a gardée éveillée." : "Tu t'en sors de justesse, engourdie jusqu'aux os. Chaleur : "+Math.round(G.chal)+" %."; } },
+end_burn:{ depth:"−52 m · brasier", mood:{top:[30,12,4],bot:[10,3,1],wind:2,dense:30,partCol:[255,200,120],grade:'rgba(90,30,5,.14)'}, focal:'fire', end:true,
+  seq:[{sp:'',t:"Tu pousses le réacteur au-delà du rouge."},{sp:'',t:"La salle 3 s'embrase. La glace hurle en fondant — puis se tait."},{sp:'you',t:"Thulé-6 brûle dans la nuit polaire. Tu l'as arrêtée. Il ne restera rien à trouver."}],
+  final:function(){ return "Tu as tout brûlé pour l'arrêter. Un sacrifice — mais un choix, calculé."; } },
+end_sleep:{ depth:"le blanc", mood:{top:[14,20,30],bot:[6,10,18],wind:1,dense:60,partCol:[220,235,255],grade:'rgba(40,50,70,.1)'}, focal:'sleep', end:true,
+  seq:[{sp:'froid',t:"Tu t'assieds. La neige est douce, tiède presque."},{sp:'',t:"Tes calculs s'effacent, un à un, comme des flocons sur la langue."},{sp:'froid',t:"« Là. Tu vois. <em>Plus jamais froid.</em> »"}],
+  final:function(){ return "Tu t'es endormie dans le blanc. Reprends-toi \u2014 la chaleur, la vraie, se garde à force de méthode."; } },
+end_frozen:{ depth:"gel total", mood:{top:[6,10,20],bot:[2,3,8],wind:5,dense:120,partCol:[200,225,255],grade:'rgba(20,30,60,.16)'}, focal:'frozen_crew', end:true,
+  seq:[{sp:'',t:"Tes doigts ne répondent plus. Puis tes pensées."},{sp:'',t:"Le gel gagne, calmement, sans haine."}],
+  final:function(){ return "Le froid a eu le dernier mot. Recommence \u2014 garde la chaleur, garde la tête."; } }
+};
+
+/* ===================== ÉTAT ===================== */
+var G={name:"", chal:100, cur:null, seq:[], si:0, sound:false, codex:[]};
+function setChal(){ var v=Math.max(0,Math.min(100,G.chal)); el('chalBar').style.width=v+'%'; el('chalStat').className='stat'+(v<=40?' low':''); }
+function cool(d,why){ G.chal=Math.max(0,G.chal+d); setChal(); if(d<0){ toast((why||'le froid te gagne')+' '+d+'%','cold'); if(d<=-9){ FX.shake(10); flash(false); } } else toast('Chaleur +'+d,'warm'); if(G.chal<=0){ transition('end_frozen'); return true;} return false; }
+function flash(red){ var f=el('flash'); f.className=''; void f.offsetWidth; f.className='go'+(red?' red':''); }
+function toast(m,cls){ var t=el('toast'); t.textContent=m; t.className='on'+(cls?' '+cls:''); clearTimeout(t._t); t._t=setTimeout(function(){t.className='';},2200); }
+function addLore(id){ if(id && G.codex.indexOf(id)<0){ G.codex.push(id); el('codexBtn').classList.add('new'); toast('Fragment ajouté au dossier'); } }
+function scare(red){ flash(red); FX.shake(20); sting(); }
+
+function transition(id){ el('fade').classList.remove('clear'); setTimeout(function(){ enter(id); el('fade').classList.add('clear'); }, 700); }
+function enter(id){
+  G.cur=id; var sc=S[id];
+  el('depth').textContent=sc.depth||''; FX.set(sc.mood||{}); el('focal').innerHTML=FOCAL[sc.focal]||'';
+  el('act').className=''; el('act').innerHTML='';
+  if(sc.lore) addLore(sc.lore);
+  if(!sc.end && id!=='approach'){ if(cool(-4)) return; }
+  G.seq=(sc.seq||[]).slice(); G.si=0;
+  el('speaker').style.opacity=0; el('line').classList.remove('in'); el('next').classList.remove('show');
+  if(sc.scare) setTimeout(function(){ scare(sc.focal==='entity'); }, 520);
+  setTimeout(showLine, 380);
+}
+var SPKLAB={you:'toi',crew:'équipage — dernière salve',froid:'❄  la voix sous la glace',dead:'—'};
+function showLine(){
+  var sc=S[G.cur];
+  if(G.si>=G.seq.length){ afterLines(sc); return; }
+  var it=G.seq[G.si], sp=it.sp||'';
+  var spEl=el('speaker'); if(sp){ spEl.textContent=SPKLAB[sp]||sp; spEl.className=sp; spEl.style.opacity=.9; } else spEl.style.opacity=0;
+  var L=el('line'); L.className=(sp==='froid'?'froid':''); L.classList.remove('in');
+  setTimeout(function(){ L.innerHTML=it.t; L.classList.add('in'); el('next').classList.add('show'); }, 130);
+}
+function advance(){ if(G.si<G.seq.length){ G.si++; el('next').classList.remove('show'); showLine(); } }
+function afterLines(sc){
+  el('next').classList.remove('show'); el('speaker').style.opacity=0; el('line').classList.remove('in');
+  var act=el('act'); act.className='on'; act.innerHTML='';
+  if(sc.end){ var box=document.createElement('div'); box.className='term'; box.style.borderColor='rgba(139,160,173,.3)';
+    box.innerHTML='<div class="rk"><span>Fin</span><span>THULÉ-6</span></div><div class="q" style="color:var(--ice)">'+sc.final()+'</div>';
+    var b=document.createElement('button'); b.className='btn'; b.textContent='Recommencer'; b.onclick=function(){location.reload();}; box.appendChild(b); act.appendChild(box); return; }
+  if(sc.pz){ renderPuzzle(sc.pz); return; }
+  var wrap=document.createElement('div'); wrap.className='choices';
+  (sc.ch||[]).forEach(function(c){ var b=document.createElement('button'); b.className='choice'+(c.cls?' '+c.cls:'');
+    b.innerHTML=c.t+(c.sub?'<small>'+c.sub+'</small>':'');
+    b.onclick=function(){ transition(c.go); }; wrap.appendChild(b); });
+  act.appendChild(wrap);
+}
+function renderPuzzle(pz){
+  var act=el('act'); var w=document.createElement('div'); w.className='term';
+  w.innerHTML='<div class="rk"><span>Terminal · '+COURS[pz.dom].t+'</span><span>THULÉ-6</span></div><div class="q">'+pz.q+'</div>';
+  var row=document.createElement('div'); row.className='row';
+  var inp=document.createElement('input'); inp.setAttribute('inputmode','decimal'); inp.placeholder='?';
+  var sub=document.createElement('button'); sub.className='btn'; sub.textContent='Exécuter';
+  var fb=document.createElement('div'); fb.className='fbk'; var done=false;
+  function check(){ if(done)return; var v=numf(inp.value);
+    if(!isNaN(v)&&Math.abs(v-pz.ans)<pz.tol){ done=true; inp.disabled=true; sub.disabled=true;
+      var warm=(pz.dom==='energie'||pz.dom==='elec')?16:6; cool(warm);
+      fb.className='fbk good'; fb.textContent='✓ '+(pz.okline||'Rétabli.');
+      var nb=document.createElement('button'); nb.className='btn'; nb.style.marginTop='12px'; nb.textContent='Continuer'; nb.onclick=function(){ transition(pz.ok); }; w.appendChild(nb);
+    } else { fb.className='fbk bad'; fb.textContent='✗ Erreur. Tes doigts tremblent de froid.'; if(cool(-10,'erreur')) return; } }
+  sub.onclick=check; inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+  row.appendChild(inp); row.appendChild(sub); w.appendChild(row);
+  var tools=document.createElement('div'); tools.style.cssText='margin-top:10px;display:flex;gap:9px;flex-wrap:wrap';
+  var cb=document.createElement('button'); cb.className='btn ghost'; cb.textContent='📖 Cours'; cb.onclick=function(){ openLesson(pz.dom); };
+  tools.appendChild(cb); w.appendChild(tools); w.appendChild(fb); act.appendChild(w); inp.focus();
+}
+function openLesson(dom){ var c=COURS[dom]; if(!c)return; el('lessonTitle').textContent=c.t; el('lessonBody').innerHTML=c.h; el('lesson').classList.add('on'); }
+function closeOv(id){ el(id).classList.remove('on'); }
+function renderCodex(){ var order=['v1','v2','v3','v4','v5'], html='';
+  order.forEach(function(id){ var L=LORE[id], has=G.codex.indexOf(id)>=0;
+    html+='<div class="frag'+(has?'':' locked')+'"><div class="fk">'+(has?L.k:'▨ fragment non trouvé')+'</div><div class="fb">'+(has?L.b:'—')+'</div></div>'; });
+  el('codexList').innerHTML=html; }
+
+var AC=null,dn=null;
+function actx(){ if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;} } return AC; }
+function toggleSound(){ var c=actx(); if(!c)return; G.sound=!G.sound; el('sndBtn').textContent=G.sound?'SON ●':'SON ✕';
+  if(G.sound){ if(c.state==='suspended')c.resume(); var o=c.createOscillator(),gg=c.createGain(),o2=c.createOscillator(),g2=c.createGain();
+    o.type='sine'; o.frequency.value=40; gg.gain.value=0.05; o2.type='triangle'; o2.frequency.value=61; g2.gain.value=0.02;
+    o.connect(gg).connect(c.destination); o2.connect(g2).connect(c.destination); o.start(); o2.start(); dn=[o,o2];
+  } else if(dn){ try{dn[0].stop();dn[1].stop();}catch(e){} dn=null; } }
+function sting(){ if(!(G.sound&&AC))return; try{ var o=AC.createOscillator(),gg=AC.createGain(); o.type='sawtooth'; o.frequency.value=300; gg.gain.value=0.08; o.connect(gg).connect(AC.destination); o.start(); o.frequency.exponentialRampToValueAtTime(1400,AC.currentTime+0.14); gg.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+0.4); o.stop(AC.currentTime+0.42);}catch(e){} }
+
+el('next').addEventListener('click',advance);
+document.addEventListener('keydown',function(e){ if((e.key===' '||e.key==='Enter')&&el('next').classList.contains('show')){ e.preventDefault(); advance(); } });
+el('sndBtn').onclick=toggleSound;
+el('codexBtn').onclick=function(){ el('codexBtn').classList.remove('new'); renderCodex(); el('codex').classList.add('on'); };
+el('startBtn').onclick=function(){ G.name=(el('nameIn').value.trim()||'l\u2019Ingénieure'); el('title').style.display='none'; setChal(); transition('approach'); };
+el('nameIn').addEventListener('keydown',function(e){ if(e.key==='Enter') el('startBtn').click(); });
+FX.init(); setChal();
+</script>
+</body>
+</html>

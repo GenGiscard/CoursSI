@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Évaluation — Fabrication additive · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+
+  .wrap{max-width:820px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:20px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(24px,3.6vw,34px);margin:4px 0 6px;font-weight:800}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;outline:none}
+  .idbox input:focus{border-color:var(--steel)}
+
+  .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .q .qh{font-weight:700;margin-bottom:10px}
+  .q .qh .n{font-family:'JetBrains Mono',monospace;color:#fff;background:var(--steel);border-radius:7px;padding:2px 8px;font-size:13px;margin-right:8px}
+  .opts{display:grid;gap:8px}
+  .opts label{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.12s}
+  .opts label:hover{border-color:var(--steel)}
+  .opts input{margin-top:3px}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .unit{color:var(--sub);margin-left:8px}
+  .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
+  .corr.show{display:block}
+  .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
+  .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
+  .corr .sol{color:var(--sub);margin-top:5px}
+
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:9px;padding:12px 20px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.06)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
+  .scorebox.show{display:block}
+  .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
+  .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
+
+  .teacher{margin-top:40px;border-top:1px dashed var(--line);padding-top:16px}
+  .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);cursor:pointer;text-decoration:underline}
+  #dash{display:none;margin-top:14px}
+  #dash.show{display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+  th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub);letter-spacing:.06em}
+  .stat{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:4px 8px 4px 0;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .stat b{color:var(--steel);font-size:18px}
+  .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
+  .barq>i{display:block;height:100%;background:var(--green)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Évaluation — Fabrication additive<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">Évaluation · Première spé SI · /8</div>
+      <h1>Fabrication additive</h1>
+      <p style="color:var(--sub);margin:0">Réponds aux 8 questions, puis clique « Terminer ». Ta note et les corrections s'afficheront.</p>
+      <div class="idbox">
+        <input id="nom" placeholder="Nom Prénom" autocomplete="off">
+        <input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px">
+      </div>
+    </div>
+
+    <div id="quiz"></div>
+
+    <div style="margin-top:8px"><button class="btn" id="submit">Terminer &amp; envoyer</button></div>
+
+    <div class="scorebox" id="scorebox">
+      <div class="big" id="scoreBig">—</div>
+      <div class="st" id="scoreSt"></div>
+    </div>
+
+    <div class="teacher">
+      <span class="tlink" id="tlink">· Espace enseignant ·</span>
+      <div id="dash">
+        <div id="dashLogin" style="margin-top:8px">
+          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
+          <button class="btn g" id="pwBtn">Ouvrir</button>
+          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
+        </div>
+        <div id="dashData" style="display:none">
+          <div id="stats" style="margin:10px 0"></div>
+          <div id="perQ"></div>
+          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
+          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- Firebase (RTDB seule, sans auth) ---- */
+var db=null;
+try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
+var NODE='eval_fabadd';
+
+/* ---- Questions (énoncés sans formule) ---- */
+var Q=[
+ {t:'qcm', q:'La fabrication additive consiste à…', opts:['ajouter la matière couche par couche','retirer la matière d\u2019un bloc','déformer une tôle','couler un métal dans un moule'], c:0,
+   sol:'Elle ajoute la matière là où il en faut, à partir d\u2019un modèle 3D.'},
+ {t:'qcm', q:'Quel procédé fond un fil plastique déposé par une buse ?', opts:['SLA (résine)','FDM (dépôt de fil)','SLS (poudre)','Usinage'], c:1,
+   sol:'FDM = dépôt de fil fondu, le procédé le plus répandu.'},
+ {t:'qcm', q:'Quel fichier transmet la géométrie de la CAO au trancheur ?', opts:['le G-code','le PDF','le fichier STL','le DXF'], c:2,
+   sol:'Le STL décrit la surface sous forme d\u2019un maillage de triangles.'},
+ {t:'qcm', q:'Que produit le trancheur pour piloter la machine ?', opts:['un fichier STL','le G-code','un plan 2D','une photo'], c:1,
+   sol:'Le trancheur génère le G-code : la liste des ordres (déplacements, températures…).'},
+ {t:'num', q:'Une pièce de 50 mm de haut est imprimée en couches de 0,25 mm. Combien de couches ?', a:200, tol:1, unit:'couches',
+   sol:'nombre de couches = hauteur ÷ hauteur de couche = 50 ÷ 0,25 = 200.'},
+ {t:'num', q:'Le volume de matière est estimé à 20 cm³. Le PLA a une masse volumique de 1,24 g/cm³. Quelle masse de plastique ?', a:24.8, tol:0.2, unit:'g',
+   sol:'masse = volume × masse volumique = 20 × 1,24 = 24,8 g.'},
+ {t:'qcm', q:'À quoi servent les supports ?', opts:['décorer la pièce','soutenir les surplombs pendant l\u2019impression','augmenter la vitesse','remplacer le remplissage'], c:1,
+   sol:'Sous un surplomb, la matière n\u2019a rien pour se poser : on ajoute des supports temporaires.'},
+ {t:'qcm', q:'Un défaut typique d\u2019une pièce FDM est…', opts:['une résistance identique dans toutes les directions','d\u2019être plus fragile ENTRE les couches (anisotropie)','l\u2019absence totale de couches','d\u2019être toujours transparente'], c:1,
+   sol:'Les couches se décollent plus facilement qu\u2019elles ne cassent : la pièce est anisotrope.'}
+];
+
+/* ---- Rendu ---- */
+(function(){
+  var box=el('quiz');
+  Q.forEach(function(it,i){
+    var d=document.createElement('div'); d.className='q'; d.id='q'+i;
+    var head='<div class="qh"><span class="n">'+(i+1)+'</span>'+it.q+'</div>';
+    var body='';
+    if(it.t==='qcm'){ body='<div class="opts">'+it.opts.map(function(o,j){ return '<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>'; }).join('')+'</div>'; }
+    else { body='<div><input class="numin" id="n'+i+'" inputmode="decimal" placeholder="?"><span class="unit">'+(it.unit||'')+'</span></div>'; }
+    d.innerHTML=head+body+'<div class="corr" id="c'+i+'"></div>';
+    box.appendChild(d);
+  });
+})();
+
+/* ---- Correction & envoi ---- */
+var sent=false;
+el('submit').addEventListener('click',function(){
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
+  var score=0, detail=[];
+  Q.forEach(function(it,i){
+    var ok=false, given='';
+    if(it.t==='qcm'){ var r=document.querySelector('input[name="q'+i+'"]:checked'); given=r?(+r.value):-1; ok=(given===it.c); }
+    else { var v=numf(el('n'+i).value); given=v; ok=(!isNaN(v)&&Math.abs(v-it.a)<it.tol); }
+    if(ok) score++;
+    detail.push(ok?1:0);
+    var c=el('c'+i); c.className='corr show '+(ok?'ok':'no');
+    var right = it.t==='qcm' ? it.opts[it.c] : (String(it.a).replace('.',',')+' '+(it.unit||''));
+    c.innerHTML=(ok?'✓ Correct.':'✗ Réponse attendue : <b>'+right+'</b>')+'<div class="sol">'+it.sol+'</div>';
+  });
+  el('scoreBig').textContent=score+' / '+Q.length;
+  el('scoreSt').textContent = score>=6?'Très bien !':(score>=4?'Correct — à consolider.':'À revoir avec le cours.');
+  el('scorebox').classList.add('show');
+  el('submit').disabled=true; sent=true;
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  // Firebase
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:Q.length, detail:detail, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
+  else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
+});
+
+/* ---- Espace enseignant ---- */
+el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
+el('pwBtn').addEventListener('click',function(){
+  if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); }
+  else { el('pwFb').textContent='Mot de passe incorrect.'; }
+});
+el('refresh') && el('refresh').addEventListener('click',loadDash);
+function loadDash(){
+  if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
+  db.ref(NODE).once('value').then(function(snap){
+    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); });
+    rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    // stats
+    var n=rows.length, sum=0, perQ=new Array(Q.length).fill(0);
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ perQ[i]+=d; }); });
+    var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / '+Q.length+'</span>';
+    // taux par question
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par question</h3>';
+    for(var i=0;i<Q.length;i++){ var p=n?Math.round(perQ[i]/n*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:34px">Q'+(i+1)+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('perQ').innerHTML=pq;
+    // table
+    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+    rows.forEach(function(r){ var tr=document.createElement('tr');
+      tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||Q.length)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+  }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
+}
+</script>
+</body>
+</html>

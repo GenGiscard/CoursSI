@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ÉCO-CONCEPTEUR · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:860px;margin:0 auto;padding:18px clamp(14px,4vw,28px) 80px}
+  .hud{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-bottom:12px}
+  .hud b{color:var(--steel);font-size:18px}
+
+  .brief{background:linear-gradient(135deg,#fff8ea,#f2e9d5);border:1px solid var(--line);border-radius:16px;padding:18px 22px;margin-bottom:16px}
+  .brief .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--copper);text-transform:uppercase}
+  .brief h2{margin:4px 0 4px;font-size:24px;font-weight:800}
+  .brief p{margin:0 0 10px;color:var(--sub)}
+  .reqs{display:flex;flex-wrap:wrap;gap:8px}
+  .req{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+
+  .grid{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+  @media(max-width:740px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .panel h3{margin:0 0 10px;font-size:15px;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--sub)}
+  .mats{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .mat{text-align:left;background:#fff;border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:10px;padding:10px 12px;cursor:pointer;transition:.13s}
+  .mat:hover{transform:translateY(-2px)} .mat.sel{background:#eef3f6;box-shadow:0 3px 10px rgba(90,80,60,.1)}
+  .mat .mn{font-weight:800;font-size:16px} .mat .ms{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);margin-top:3px;line-height:1.5}
+  .opts{display:grid;gap:8px;margin-top:6px}
+  .opt{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer}
+  .opt:hover{border-color:var(--green)} .opt input{margin-top:3px}
+  .opt .on{font-weight:700} .opt .od{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)}
+
+  .res .line{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .res .line .v{font-family:'JetBrains Mono',monospace;font-weight:700}
+  .res .line.ok .v{color:var(--green)} .res .line.no .v{color:var(--copper)}
+  .res .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)}
+  .ecogauge{margin-top:12px}
+  .ecogauge .lab{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);display:flex;justify-content:space-between}
+  .ecobar{position:relative;height:14px;background:linear-gradient(90deg,#cfe3d6,#f3d9a6,#ecc2b4);border-radius:7px;margin-top:4px;overflow:hidden}
+  .ecobar>i{position:absolute;top:0;left:0;height:100%;background:rgba(42,38,34,.18);transition:width .25s}
+  .ecobar>.target{position:absolute;top:-3px;width:2px;height:20px;background:var(--ink)}
+  .prod{display:flex;justify-content:center;margin:6px 0}
+  .prod svg{width:120px;height:80px}
+
+  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:10px;padding:13px 22px;cursor:pointer;font-weight:700;width:100%;margin-top:14px}
+  .btn:hover{filter:brightness(1.06)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .fb{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:18px;text-align:center}
+  .fb.ok{color:var(--green)} .fb.no{color:var(--copper)}
+
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(248,244,236,.92);backdrop-filter:blur(3px);z-index:30;padding:24px}
+  .modal.show{display:flex}
+  .mbox{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px 30px;text-align:center;max-width:440px}
+  .mbox .big{font-size:46px;font-weight:800;color:var(--green)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">ÉCO-CONCEPTEUR<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hud"><span>Commande : <b id="hI">1</b> / 5</span><span>Score : <b id="hS">0</b></span></div>
+
+    <div class="brief">
+      <div class="k">Cahier des charges</div>
+      <h2 id="bName">—</h2>
+      <p id="bDesc">—</p>
+      <div class="reqs" id="bReqs"></div>
+    </div>
+
+    <div class="grid">
+      <div>
+        <div class="panel"><h3>1 · Choisis le matériau</h3><div class="mats" id="mats"></div></div>
+        <div class="panel" style="margin-top:14px"><h3>2 · Ajoute des leviers d'éco-conception</h3><div class="opts" id="opts"></div></div>
+      </div>
+      <div class="panel res">
+        <h3>Ta conception</h3>
+        <div class="prod" id="prod"></div>
+        <div class="line" id="lRes"><span>Résistance <span class="tag" id="tRes"></span></span><span class="v" id="vRes">—</span></div>
+        <div class="line" id="lCost"><span>Coût <span class="tag" id="tCost"></span></span><span class="v" id="vCost">—</span></div>
+        <div class="line" id="lEco"><span>Éco-score <span class="tag" id="tEco"></span></span><span class="v" id="vEco">—</span></div>
+        <div class="ecogauge"><div class="lab"><span>impact ACV</span><span>▮ cible</span></div><div class="ecobar"><i id="ecoFill"></i><span class="target" id="ecoTarget"></span></div></div>
+        <button class="btn" id="validate" disabled>Valider la conception</button>
+        <div class="fb" id="fb"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="modal"><div class="mbox">
+    <div class="k" style="font-family:'JetBrains Mono',monospace;color:var(--copper);letter-spacing:.16em;text-transform:uppercase">Bureau d'études — bilan</div>
+    <div class="big" id="mScore">0</div>
+    <p id="mMsg" style="color:var(--sub)"></p>
+    <button class="btn" id="again">Recommencer</button>
+  </div></div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var r1=function(x){return Math.round(x*10)/10;};
+
+var MATS={
+  acier:{n:'Acier', res:90, cost:8, co2:14, recyc:3, col:'#2E6A8E', tip:'résistant · bon marché · lourd'},
+  alu:{n:'Aluminium', res:70, cost:14, co2:20, recyc:4, col:'#3D7E5F', tip:'léger · CO₂ élevé'},
+  comp:{n:'Composite', res:85, cost:30, co2:26, recyc:0, col:'#8A5A7A', tip:'ultra-léger · cher · non recyclable'},
+  poly:{n:'Polymère', res:40, cost:4, co2:6, recyc:1, col:'#BD8A2A', tip:'léger · pas cher · peu résistant'}
+};
+var OPTS=[
+  {id:'alleg', n:'Allègement (topologie)', d:'−20% matière & CO₂, mais −15% résistance'},
+  {id:'recy', n:'Matière recyclée', d:'−40% CO₂, −10% coût, mais −10% résistance'},
+  {id:'dura', n:'Durabilité ×2', d:'impact amorti (÷1,5), mais +30% coût'},
+  {id:'local', n:'Transport local', d:'−3 CO₂, mais +1 € (circuit court)'}
+];
+var BRIEFS=[
+  {n:'Boîtier de capteur', d:'Léger, bon marché, peu sollicité.', reqRes:35, budget:6, target:8},
+  {n:'Bras de drone', d:'Léger et assez résistant. Pense au transport.', reqRes:65, budget:16, target:15},
+  {n:'Longeron ultra-léger', d:'Très résistant et le plus léger possible.', reqRes:80, budget:42, target:20},
+  {n:'Produit « économie circulaire »', d:'Doit être recyclable et sobre en impact.', reqRes:60, budget:18, target:10, mustRecyc:true},
+  {n:'Le grand compromis', d:'Résistant, abordable ET sobre à la fois.', reqRes:75, budget:16, target:8}
+];
+
+var idx=0, score=0, mat=null, opts={alleg:false,recy:false,dura:false,local:false};
+
+function compute(){
+  if(!mat) return null; var m=MATS[mat];
+  var res=m.res, cost=m.cost, co2=m.co2, div=1;
+  if(opts.alleg){ res*=0.85; co2*=0.8; }
+  if(opts.recy){ res*=0.9; co2*=0.6; cost*=0.9; }
+  if(opts.dura){ cost*=1.3; div=1.5; }
+  if(opts.local){ co2-=3; cost+=1; }
+  var eco=(co2 - m.recyc)/div; if(eco<0.5) eco=0.5;
+  return {res:Math.round(res), cost:r1(cost), eco:r1(eco), recyclable:m.recyc>0, col:m.col};
+}
+function renderBrief(){
+  var b=BRIEFS[idx]; el('bName').textContent=b.n; el('bDesc').textContent=b.d;
+  var reqs='<span class="req">Résistance ≥ '+b.reqRes+'</span><span class="req">Coût ≤ '+b.budget+' €</span><span class="req">Éco-score ≤ '+b.target+'</span>';
+  if(b.mustRecyc) reqs+='<span class="req" style="border-color:var(--green);color:var(--green)">♻ recyclable requis</span>';
+  el('bReqs').innerHTML=reqs; el('hI').textContent=(idx+1);
+}
+function renderMats(){
+  var box=el('mats'); box.innerHTML='';
+  Object.keys(MATS).forEach(function(k){ var m=MATS[k]; var b=document.createElement('button'); b.className='mat'+(mat===k?' sel':''); b.style.borderLeftColor=m.col;
+    b.innerHTML='<div class="mn" style="color:'+m.col+'">'+m.n+'</div><div class="ms">'+m.tip+'</div>';
+    b.addEventListener('click',function(){ mat=k; renderMats(); update(); }); box.appendChild(b); });
+}
+function renderOpts(){
+  var box=el('opts'); box.innerHTML='';
+  OPTS.forEach(function(o){ var l=document.createElement('label'); l.className='opt';
+    l.innerHTML='<input type="checkbox" data-id="'+o.id+'"'+(opts[o.id]?' checked':'')+'><span><span class="on">'+o.n+'</span><br><span class="od">'+o.d+'</span></span>';
+    l.querySelector('input').addEventListener('change',function(e){ opts[o.id]=e.target.checked; update(); }); box.appendChild(l); });
+}
+function update(){
+  var b=BRIEFS[idx], c=compute();
+  var prod=el('prod'); prod.innerHTML = c ? ('<svg viewBox="0 0 120 80"><rect x="20" y="26" width="80" height="28" rx="6" fill="'+c.col+'" opacity=".85"/><rect x="20" y="26" width="80" height="28" rx="6" fill="none" stroke="'+c.col+'"/><circle cx="34" cy="40" r="4" fill="#fff"/><circle cx="86" cy="40" r="4" fill="#fff"/></svg>') : '<svg viewBox="0 0 120 80"><rect x="20" y="26" width="80" height="28" rx="6" fill="none" stroke="#d9cfbb" stroke-dasharray="4 4"/></svg>';
+  if(!c){ el('vRes').textContent='—'; el('vCost').textContent='—'; el('vEco').textContent='—'; el('validate').disabled=true; el('ecoFill').style.width='0%'; return; }
+  var okR=c.res>=b.reqRes, okC=c.cost<=b.budget, okE=c.eco<=b.target, okRec=b.mustRecyc?c.recyclable:true;
+  el('tRes').textContent='(≥ '+b.reqRes+')'; el('tCost').textContent='(≤ '+b.budget+' €)'; el('tEco').textContent='(≤ '+b.target+')';
+  el('vRes').textContent=c.res; el('lRes').className='line '+(okR?'ok':'no');
+  el('vCost').textContent=c.cost+' €'; el('lCost').className='line '+(okC?'ok':'no');
+  el('vEco').textContent=c.eco; el('lEco').className='line '+(okE?'ok':'no');
+  var scale=Math.max(b.target*1.8, c.eco*1.1, 10);
+  el('ecoFill').style.width=Math.min(100,c.eco/scale*100)+'%';
+  el('ecoTarget').style.left=Math.min(100,b.target/scale*100)+'%';
+  el('validate').disabled=false;
+  el('fb').textContent = okRec?'' : '♻ ce matériau n\u2019est pas recyclable.'; el('fb').className='fb no';
+}
+el('validate').addEventListener('click',function(){
+  var b=BRIEFS[idx], c=compute(); if(!c) return;
+  var okR=c.res>=b.reqRes, okC=c.cost<=b.budget, okE=c.eco<=b.target, okRec=b.mustRecyc?c.recyclable:true;
+  if(okR&&okC&&okE&&okRec){
+    var pts=100+Math.max(0,Math.round((b.target-c.eco)*8)); score+=pts; el('hS').textContent=score;
+    el('fb').className='fb ok'; el('fb').textContent='✓ Conception validée · +'+pts+' pts';
+    setTimeout(next,900);
+  } else {
+    var miss=[]; if(!okR)miss.push('résistance'); if(!okC)miss.push('coût'); if(!okE)miss.push('éco-score'); if(!okRec)miss.push('recyclabilité');
+    el('fb').className='fb no'; el('fb').textContent='✗ Non conforme : '+miss.join(', ')+'. Ajuste tes choix.';
+  }
+});
+function next(){
+  idx++; if(idx>=BRIEFS.length){ return finish(); }
+  mat=null; opts={alleg:false,recy:false,dura:false,local:false};
+  el('fb').textContent=''; renderBrief(); renderMats(); renderOpts(); update();
+}
+function finish(){
+  el('mScore').textContent=score+' pts';
+  el('mMsg').textContent = score>=520? 'Bureau d\u2019études exemplaire : tu as trouvé les meilleurs compromis !' : (score>=460? 'Bon travail — quelques marges d\u2019optimisation restent.' : 'Rejoue : cherche le plus petit éco-score en respectant le cahier des charges.');
+  el('modal').classList.add('show');
+}
+el('again').addEventListener('click',function(){ idx=0; score=0; mat=null; opts={alleg:false,recy:false,dura:false,local:false}; el('hS').textContent='0'; el('fb').textContent=''; el('modal').classList.remove('show'); renderBrief(); renderMats(); renderOpts(); update(); });
+
+renderBrief(); renderMats(); renderOpts(); update();
+</script>
+</body>
+</html>

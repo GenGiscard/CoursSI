@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Objets connectés &amp; IoT · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px;padding:10px 14px;cursor:pointer;transition:.15s}
+  .chip:hover{background:#eef3f6} .chip.used{opacity:.35;pointer-events:none;text-decoration:line-through}
+  .seq{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px;background:#faf6ec;border:1px dashed var(--line);border-radius:10px;padding:10px}
+  .seq .s{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 11px}
+  .seq .s.ok{border-color:var(--green);background:#eef6f0;color:var(--green)} .seq .s.no{border-color:var(--copper);background:#fbeee9;color:var(--copper)}
+  .seq .arr{color:var(--sub)}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:240px;font-size:15px}
+  .match select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Objets connectés &amp; IoT<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Concevoir un objet connecté</h1>
+      <p class="lede">On équipe une serre de capteurs. À toi de bâtir la chaîne, choisir le réseau, dimensionner l'énergie et préparer la donnée.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Reconstituer la chaîne IoT</h2>
+      <p class="task">🎯 Clique les 5 maillons <b>dans l'ordre</b>, de la mesure au service.</p>
+      <div class="chips" id="chips"></div>
+      <div class="seq" id="seq"><span style="color:#a89e8c;font-family:'JetBrains Mono',monospace;font-size:13px">clique un maillon…</span></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aReset">Recommencer</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>Ordre correct :</b> Objet → Réseau → Passerelle → Cloud → Application.<br>L'objet mesure, le réseau transporte, la passerelle relaie vers Internet, le cloud traite, l'application rend le service.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Le bon réseau pour chaque usage</h2>
+      <p class="task">🎯 Associe à chaque situation le réseau sans fil le mieux adapté.</p>
+      <div class="match" id="match"></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>Capteur d'humidité (champ, 3 km, sur pile)</b> → <b>LoRaWAN</b> (longue portée, très faible conso).<br><b>Caméra HD (maison)</b> → <b>Wi-Fi</b> (gros débit, courte portée).<br><b>Bracelet cardio (au poignet)</b> → <b>Bluetooth/BLE</b> (très courte portée, faible conso).<br><b>Balise GPS (camion sur autoroute)</b> → <b>Cellulaire 4G/5G</b> (couverture large en mobilité).</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Autonomie du capteur</h2>
+      <p class="task">Un capteur est alimenté par une pile de <b>2400 mAh</b> et consomme en moyenne <b>0,05 mA</b>.</p>
+      <div class="row"><span>a) Autonomie :</span><input class="numin" id="cH" inputmode="numeric" placeholder="?"><span class="unit">heures</span></div>
+      <div class="row"><span>b) Soit environ :</span><input class="numin" id="cY" inputmode="decimal" placeholder="?"><span class="unit">années</span></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> autonomie = capacité ÷ courant = 2400 ÷ 0,05 = <b>48 000 h</b>.<br><b>b)</b> 48 000 ÷ 24 ÷ 365 ≈ <b>5,5 ans</b>. C'est ce qui rend possible un capteur « pose-et-oublie » pendant des années.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Numérisation de la mesure</h2>
+      <p class="task">Le capteur code la température sur <b>8 bits</b>, pour une plage de <b>0 à 100 °C</b>.</p>
+      <div class="row"><span>a) Nombre de valeurs possibles :</span><input class="numin" id="dN" inputmode="numeric" placeholder="?"><span class="unit">valeurs</span></div>
+      <div class="row"><span>b) Résolution (par pas) :</span><input class="numin" id="dR" inputmode="decimal" placeholder="?"><span class="unit">°C</span></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> 8 bits → 2⁸ = <b>256 valeurs</b>.<br><b>b)</b> résolution = plage ÷ (256 − 1) = 100 ÷ 255 ≈ <b>0,39 °C</b>. Plus il y a de bits, plus la mesure est fine.</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Sécurité</h2>
+      <p class="task">Un objet connecté envoie ses données par radio, « en l'air ».</p>
+      <p>Pourquoi <b>chiffrer</b> ces données est-il essentiel ?</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">Pour envoyer plus vite</button>
+        <button data-v="1">Pour empêcher qu'un tiers les lise ou les falsifie</button>
+        <button data-v="2">Pour économiser la batterie</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>Pour empêcher qu'un tiers les lise ou les falsifie.</b> Les ondes radio se captent facilement : sans chiffrement, n'importe qui peut espionner les mesures ou injecter de fausses commandes. On ajoute aussi l'<b>authentification</b> (vérifier que l'objet est bien celui qu'il prétend être). Un objet mal sécurisé devient une porte d'entrée dans tout le système.</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- A : chaîne IoT ---- */
+(function(){
+  var correct=['Objet','Réseau','Passerelle','Cloud','Application'];
+  var pool=['Cloud','Objet','Application','Réseau','Passerelle'];
+  var chosen=[]; var chipsBox=el('chips'), seqBox=el('seq');
+  function drawChips(){ chipsBox.innerHTML=''; pool.forEach(function(name){ var c=document.createElement('span'); c.className='chip'+(chosen.indexOf(name)>=0?' used':''); c.textContent=name;
+    c.addEventListener('click',function(){ if(chosen.indexOf(name)>=0)return; chosen.push(name); render(); }); chipsBox.appendChild(c); }); }
+  function render(){ drawChips();
+    if(!chosen.length){ seqBox.innerHTML='<span style="color:#a89e8c;font-family:\'JetBrains Mono\',monospace;font-size:13px">clique un maillon…</span>'; return; }
+    seqBox.innerHTML=''; chosen.forEach(function(n,i){ var s=document.createElement('span'); s.className='s'; s.textContent=n; seqBox.appendChild(s);
+      if(i<chosen.length-1){ var a=document.createElement('span'); a.className='arr'; a.textContent='→'; seqBox.appendChild(a); } }); }
+  el('aCheck').addEventListener('click',function(){
+    if(chosen.length<5){ el('aFb').className='exo-fb no'; el('aFb').textContent='Il manque des maillons ('+chosen.length+'/5).'; return; }
+    var ok=true, spans=seqBox.querySelectorAll('.s'); chosen.forEach(function(n,i){ var good=(n===correct[i]); if(!good)ok=false; spans[i].className='s '+(good?'ok':'no'); });
+    if(ok){ el('aFb').className='exo-fb ok'; el('aFb').textContent='✓ Chaîne correcte, bravo !'; }
+    else { el('aFb').className='exo-fb no'; el('aFb').textContent='✗ L\u2019ordre n\u2019est pas bon. Regarde la correction.'; el('aSol').classList.add('show'); } });
+  el('aReset').addEventListener('click',function(){ chosen=[]; el('aFb').textContent=''; el('aFb').className='exo-fb'; el('aSol').classList.remove('show'); render(); });
+  render();
+})();
+
+/* ---- B : matching réseau ---- */
+(function(){
+  var scen=[
+    {sc:'Capteur d\u2019humidité dans un champ, à 3 km, alimenté par pile', ok:'LoRaWAN'},
+    {sc:'Caméra de vidéosurveillance HD dans la maison', ok:'Wi-Fi'},
+    {sc:'Bracelet cardio porté au poignet', ok:'Bluetooth/BLE'},
+    {sc:'Balise GPS sur un camion, sur l\u2019autoroute', ok:'Cellulaire 4G/5G'}
+  ];
+  var nets=['— choisir —','Wi-Fi','Bluetooth/BLE','LoRaWAN','Cellulaire 4G/5G'];
+  var box=el('match');
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id='m'+i;
+    var opts=nets.map(function(n){ return '<option>'+n+'</option>'; }).join('');
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="sel'+i+'">'+opts+'</select>'; box.appendChild(d); });
+  el('bCheck').addEventListener('click',function(){
+    var all=true; scen.forEach(function(s,i){ var v=el('sel'+i).value; var good=(v===s.ok); if(!good)all=false; el('m'+i).className='m '+(good?'ok':'no'); });
+    el('bFb').className='exo-fb '+(all?'ok':'no'); el('bFb').textContent=all?'✓ Tous les réseaux sont bien choisis !':'✗ Certains ne conviennent pas — voir la correction.'; el('bShow').disabled=false;
+  });
+  el('bShow').addEventListener('click',function(){ if(!el('bShow').disabled) el('bSol').classList.add('show'); });
+})();
+
+/* ---- helper corrections verrouillées ---- */
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+/* ---- C ---- */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var h=numf(el('cH').value), y=numf(el('cY').value);
+  var okH=Math.abs(h-48000)<50, okY=Math.abs(y-5.5)<0.3;
+  if(okH&&okY) return {ok:true,msg:'✓ Parfait : 48 000 h ≈ 5,5 ans.'};
+  return {ok:false,msg:'✗ '+(okH?'a✓':'a✗')+' '+(okY?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- D ---- */
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var n=numf(el('dN').value), r=numf(el('dR').value);
+  var okN=Math.abs(n-256)<0.5, okR=Math.abs(r-0.39)<0.05;
+  if(okN&&okR) return {ok:true,msg:'✓ Exact : 256 valeurs, ≈ 0,39 °C.'};
+  return {ok:false,msg:'✗ '+(okN?'a✓':'a✗')+' '+(okR?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- E ---- */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : confidentialité et intégrité des données.'};
+    return {ok:false,msg:'✗ Non — pense à qui peut capter les ondes. Voir l\u2019explication.'};
+  });
+})();
+</script>
+</body>
+</html>

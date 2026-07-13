@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Matériaux &amp; éco-conception · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+
+  .matrix{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start;margin-top:10px}
+  @media(max-width:760px){.matrix{grid-template-columns:1fr}}
+  table.mx{width:100%;border-collapse:collapse;font-size:14px}
+  table.mx th,table.mx td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:center}
+  table.mx th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub)}
+  table.mx td:first-child,table.mx th:first-child{text-align:left}
+  .crit label{display:block;font-weight:600;font-size:14px;margin:10px 0 2px}
+  .crit .rowc{display:flex;align-items:center;gap:10px}
+  .crit input[type=range]{flex:1}
+  .crit .iv{font-family:'JetBrains Mono',monospace;color:var(--steel);font-weight:700;width:16px;text-align:right}
+  .res{background:#faf6ec;border:1px solid var(--line);border-radius:12px;padding:14px}
+  .res .rr{margin:9px 0}
+  .res .rl{display:flex;justify-content:space-between;font-size:14px;font-family:'JetBrains Mono',monospace}
+  .res .rb{height:12px;background:#eee6d6;border-radius:6px;overflow:hidden;margin-top:3px}
+  .res .rb>i{display:block;height:100%;transition:width .25s}
+  .res .win{margin-top:10px;font-weight:800;color:var(--green)}
+
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Matériaux &amp; éco-conception<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Choisir le bon matériau — et réduire l'impact</h1>
+      <p class="lede">On doit concevoir un bras de drone. À toi de choisir le matériau selon les priorités, puis de mesurer les gains… et l'empreinte.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Matrice de décision multicritère</h2>
+      <p class="task">🎯 Règle l'<b>importance</b> de chaque critère (0 à 3). Le gagnant se met à jour selon <b>tes priorités</b>. Essaie « légèreté au max, reste bas ».</p>
+      <div class="matrix">
+        <div>
+          <table class="mx">
+            <thead><tr><th>Critère</th><th>Acier</th><th>Alu</th><th>Composite</th></tr></thead>
+            <tbody id="mxBody"></tbody>
+          </table>
+          <div class="crit" id="crit"></div>
+        </div>
+        <div class="res">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)">Score pondéré</div>
+          <div class="rr"><div class="rl"><span>Acier</span><span id="vAcier">—</span></div><div class="rb"><i id="bAcier" style="background:var(--steel)"></i></div></div>
+          <div class="rr"><div class="rl"><span>Aluminium</span><span id="vAlu">—</span></div><div class="rb"><i id="bAlu" style="background:var(--green)"></i></div></div>
+          <div class="rr"><div class="rl"><span>Composite</span><span id="vComp">—</span></div><div class="rb"><i id="bComp" style="background:var(--plum)"></i></div></div>
+          <div class="win" id="winner">—</div>
+        </div>
+      </div>
+      <p style="margin-top:14px">Pour un drone (on privilégie fortement la <b>légèreté</b>), quel matériau ressort ?</p>
+      <div class="opt" id="aOpt"><button data-v="0">Acier</button><button data-v="1">Aluminium</button><button data-v="2">Composite</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>Composite.</b> Il domine sur la légèreté (et reste bon en résistance). Mais attention : il est <b>cher</b> et <b>peu recyclable</b> — si le coût ou la fin de vie deviennent prioritaires, l'alu ou l'acier repassent devant. C'est tout l'intérêt de la matrice : <b>le gagnant dépend des priorités</b>.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Gain de masse : acier → aluminium</h2>
+      <p class="task">Le bras a un volume de <b>500 cm³</b>. Masses volumiques : acier <b>7,85 g/cm³</b>, aluminium <b>2,70 g/cm³</b>.</p>
+      <div class="row"><span>a) Masse en acier :</span><input class="numin" id="bAc" inputmode="decimal" placeholder="?"><span class="unit">g</span></div>
+      <div class="row"><span>b) Masse en aluminium :</span><input class="numin" id="bAl" inputmode="decimal" placeholder="?"><span class="unit">g</span></div>
+      <div class="row"><span>c) Gain de masse :</span><input class="numin" id="bG" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>a)</b> m = V × ρ = 500 × 7,85 = <b>3925 g</b>.<br><b>b)</b> m = 500 × 2,70 = <b>1350 g</b>.<br><b>c)</b> gain = (3925 − 1350) ÷ 3925 = 2575 ÷ 3925 ≈ <b>66 %</b>. L'allègement est spectaculaire — utile en mobilité (drone, transport).</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Bilan ACV</h2>
+      <p class="task">Impacts CO₂ (kg) par étape : extraction <b>28</b>, fabrication <b>42</b>, distribution <b>12</b>, usage <b>13</b>, fin de vie <b>5</b>.</p>
+      <div class="row"><span>a) Empreinte totale :</span><input class="numin" id="cT" inputmode="numeric" placeholder="?"><span class="unit">kg CO₂</span></div>
+      <div class="row"><span>b) Part de la fabrication :</span><input class="numin" id="cP" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> total = 28 + 42 + 12 + 13 + 5 = <b>100 kg CO₂</b>.<br><b>b)</b> part = 42 ÷ 100 = <b>42 %</b>. La fabrication est l'étape la plus lourde → c'est là qu'il faut agir en priorité.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">★</span> Comparer deux scénarios</h2>
+      <p class="task">Deux versions du même bras de drone :</p>
+      <ul style="max-width:64ch">
+        <li><b>Produit A</b> : 3925 g d'acier, non démontable, durée de vie 5 ans.</li>
+        <li><b>Produit B</b> (éco-conçu) : 1350 g d'aluminium recyclable, démontable/réparable, durée de vie 8 ans.</li>
+      </ul>
+      <p>Lequel est le plus <b>éco-conçu</b> ?</p>
+      <div class="opt" id="dOpt"><button data-v="0">Produit A</button><button data-v="1">Produit B</button></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>Produit B.</b> Il cumule plusieurs leviers d'éco-conception : <b>moins de matière</b> (plus léger → moins d'impact au transport et à l'usage), matériau <b>recyclable</b>, <b>réparable/démontable</b> (fin de vie facilitée), et <b>durée de vie plus longue</b> (on fabrique moins souvent). <br><span style="color:var(--sub)">Nuance : le composite serait encore plus léger, mais peu recyclable — l'alu offre ici un meilleur compromis global.</span></div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- A : matrice de décision ---- */
+(function(){
+  var crits=['Légèreté','Résistance','Faible coût','Recyclabilité','Mise en œuvre'];
+  // scores /5 par matériau
+  var M={Acier:[1,5,4,5,4], Alu:[4,3,3,4,3], Comp:[5,4,1,1,2]};
+  var imp=[1,1,1,1,1];
+  // tableau des scores
+  var tb=el('mxBody');
+  crits.forEach(function(c,i){ var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+c+'</td><td>'+M.Acier[i]+'</td><td>'+M.Alu[i]+'</td><td>'+M.Comp[i]+'</td>'; tb.appendChild(tr); });
+  // curseurs d'importance
+  var cbox=el('crit');
+  crits.forEach(function(c,i){ var d=document.createElement('div');
+    d.innerHTML='<label>'+c+'</label><div class="rowc"><input type="range" min="0" max="3" value="1" data-i="'+i+'"><span class="iv" id="iv'+i+'">1</span></div>';
+    cbox.appendChild(d); });
+  cbox.querySelectorAll('input').forEach(function(r){ r.addEventListener('input',function(){ var i=+r.dataset.i; imp[i]=+r.value; el('iv'+i).textContent=r.value; render(); }); });
+  function wscore(arr){ var s=0; for(var i=0;i<5;i++) s+=imp[i]*arr[i]; return s; }
+  function render(){
+    var a=wscore(M.Acier), b=wscore(M.Alu), c=wscore(M.Comp);
+    var mx=Math.max(a,b,c,1);
+    el('vAcier').textContent=a; el('bAcier').style.width=(a/mx*100)+'%';
+    el('vAlu').textContent=b; el('bAlu').style.width=(b/mx*100)+'%';
+    el('vComp').textContent=c; el('bComp').style.width=(c/mx*100)+'%';
+    var win = a>=b&&a>=c?'Acier':(b>=a&&b>=c?'Aluminium':'Composite');
+    el('winner').textContent='➜ Gagnant : '+win;
+  }
+  render();
+  // mini-question verrouillée
+  var sel=-1;
+  el('aOpt').querySelectorAll('button').forEach(function(bn){ bn.addEventListener('click',function(){
+    el('aOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); bn.classList.add('sel'); sel=+bn.dataset.v; }); });
+  el('aCheck').addEventListener('click',function(){
+    var ok=(sel===2); el('aFb').className='exo-fb '+(ok?'ok':'no');
+    el('aFb').textContent= sel<0?'Choisis une réponse.' : (ok?'✓ Oui : le composite domine sur la légèreté.':'✗ Regarde le score quand la légèreté est prioritaire.');
+    el('aShow').disabled=false;
+  });
+  el('aShow').addEventListener('click',function(){ if(!el('aShow').disabled) el('aSol').classList.add('show'); });
+})();
+
+/* ---- helper corrections verrouillées ---- */
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* ---- B ---- */
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var a=numf(el('bAc').value), b=numf(el('bAl').value), gg=numf(el('bG').value);
+  var okA=Math.abs(a-3925)<2, okB=Math.abs(b-1350)<2, okG=Math.abs(gg-66)<2;
+  if(okA&&okB&&okG) return {ok:true,msg:'✓ Parfait : 3925 g, 1350 g, ≈66 %.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okG?'c✓':'c✗')+' — voir la correction.'};
+});
+/* ---- C ---- */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var t=numf(el('cT').value), p=numf(el('cP').value);
+  var okT=Math.abs(t-100)<1, okP=Math.abs(p-42)<1;
+  if(okT&&okP) return {ok:true,msg:'✓ Exact : 100 kg, 42 %.'};
+  return {ok:false,msg:'✗ '+(okT?'a✓':'a✗')+' '+(okP?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- D ---- */
+(function(){ var sel=-1;
+  el('dOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('dOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('dCheck','dShow','dSol','dFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : le produit B cumule les leviers d\u2019éco-conception.'};
+    return {ok:false,msg:'✗ Non — compare matière, recyclabilité, durée de vie. Voir l\u2019explication.'};
+  });
+})();
+</script>
+</body>
+</html>
