@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — IA embarquée &amp; traitement d'image · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .lab{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;margin-top:6px}
+  @media(max-width:720px){.lab{grid-template-columns:1fr}}
+  canvas.img{width:100%;max-width:320px;height:auto;display:block;border:1px solid var(--line);border-radius:10px;image-rendering:auto;background:#fff}
+  .flt{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .flt button{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;cursor:pointer}
+  .flt button:hover{border-color:var(--steel)} .flt button.sel{background:#eef3f6;border-color:var(--steel);font-weight:700}
+  .sl label{display:block;font-size:14px;font-weight:600;margin:8px 0 3px} .sl .v{font-family:'JetBrains Mono',monospace;color:var(--steel)}
+  .sl input[type=range]{width:100%}
+  .note{font-size:14px;color:var(--sub);margin-top:8px}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .grid3{display:inline-grid;grid-template-columns:repeat(3,44px);gap:4px;margin:8px 0;vertical-align:middle}
+  .grid3 span{display:flex;align-items:center;justify-content:center;height:40px;border:1px solid var(--line);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:14px;background:#faf6ec}
+  .grid3 span.c{background:#eef3f6;border-color:var(--steel);font-weight:700}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — IA embarquée &amp; image<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Faire « voir » une machine</h1>
+      <p class="lede">On prépare une caméra intelligente. À toi de traiter l'image, de comprendre le filtrage, la décision… et ses limites.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Atelier de filtres</h2>
+      <p class="task">🎯 Applique différents filtres sur l'image. Observe ce que « voit » la machine après chaque traitement.</p>
+      <div class="lab">
+        <canvas id="img" class="img" width="320" height="210"></canvas>
+        <div>
+          <div class="flt" id="flt">
+            <button data-f="orig" class="sel">Original</button>
+            <button data-f="seuil">Seuillage</button>
+            <button data-f="edge">Contours</button>
+            <button data-f="neg">Négatif</button>
+          </div>
+          <div class="sl"><label>Seuil : <span class="v" id="thV">128</span></label><input type="range" id="th" min="0" max="255" value="128"></div>
+          <p class="note" id="fnote">Image d'origine en niveaux de gris. Chaque pixel a une valeur de 0 (noir) à 255 (blanc).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Seuillage à la main</h2>
+      <p class="task">Un pixel devient <b>blanc (255)</b> si sa valeur est ≥ au seuil, sinon <b>noir (0)</b>. Seuil = <b>128</b>.</p>
+      <div class="row"><span>a) Un pixel de valeur 90 devient :</span><input class="numin" id="bA" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><span>b) Parmi {200, 90, 130, 50, 255}, combien deviennent blancs ?</span><input class="numin" id="bB" inputmode="numeric" placeholder="?"><span class="unit">pixels</span></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>a)</b> 90 &lt; 128 → le pixel devient <b>0 (noir)</b>.<br><b>b)</b> ≥ 128 : 200, 130, 255 → <b>3 pixels</b> blancs (90 et 50 restent noirs).</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Convolution : un pixel de sortie</h2>
+      <p class="task">Noyau « contour » : <b>sortie = 4 × centre − (haut + bas + gauche + droite)</b>. Voici le voisinage :</p>
+      <div class="grid3"><span>50</span><span>50</span><span>50</span><span>50</span><span class="c">200</span><span>50</span><span>50</span><span>50</span><span>50</span></div>
+      <div class="row"><span>Valeur du pixel de sortie :</span><input class="numin" id="cV" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>sortie = 4 × 200 − (50 + 50 + 50 + 50) = 800 − 200 = 600</b>.<br>Une valeur élevée signale une forte différence avec le voisinage : c'est un <b>contour</b>.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Décision du modèle</h2>
+      <p class="task">Le modèle sort une probabilité par classe : cercle <b>0,70</b> · triangle <b>0,20</b> · carré <b>?</b> (la somme fait 1).</p>
+      <div class="row"><span>a) Probabilité du carré :</span><input class="numin" id="dP" inputmode="decimal" placeholder="?"></div>
+      <div class="row"><span>b) Classe retenue :</span>
+        <span class="opt" id="dOpt" style="margin:0"><button data-v="0">cercle</button><button data-v="1">triangle</button><button data-v="2">carré</button></span>
+      </div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> 1 − 0,70 − 0,20 = <b>0,10</b>.<br><b>b)</b> On garde la plus forte : <b>cercle</b> (0,70). Le modèle ne donne jamais une certitude absolue, seulement des probabilités.</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Le piège du jeu de données</h2>
+      <p class="task">Un détecteur de panneaux est entraîné <b>presque uniquement avec des photos de jour, par beau temps</b>. La nuit ou sous la pluie, il se trompe souvent.</p>
+      <p>Quelle en est la cause principale ?</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">La caméra est cassée</button>
+        <button data-v="1">Le jeu de données ne couvre pas ces conditions (biais)</button>
+        <button data-v="2">Les panneaux changent de forme la nuit</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>Le jeu de données est biaisé.</b> Un modèle n'apprend que ce qu'on lui montre : sans exemples de nuit/pluie, il ne sait pas les gérer. Pour corriger, il faut un jeu de données <b>représentatif</b> de toutes les conditions réelles d'utilisation.</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- A : atelier de filtres ---- */
+(function(){
+  var cv=el('img'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  // image source (niveaux de gris) : disque + rectangle sur un dégradé
+  var src=new Uint8ClampedArray(W*H);
+  for(var y=0;y<H;y++) for(var x=0;x<W;x++){ var v=205-(y/H)*70;
+    if((x-108)*(x-108)+(y-118)*(y-118) < 60*60) v=45;
+    else if(x>=205&&x<=280&&y>=55&&y<=150) v=120;
+    src[y*W+x]=Math.max(0,Math.min(255,v)); }
+  var filter='orig', seuil=128;
+  var notes={orig:'Image d\u2019origine en niveaux de gris. Chaque pixel a une valeur de 0 (noir) à 255 (blanc).',
+    seuil:'Seuillage : chaque pixel devient blanc (≥ seuil) ou noir. Résultat : une image binaire (2 valeurs).',
+    edge:'Contours : on met en évidence les endroits où la valeur change brusquement (les bords des formes).',
+    neg:'Négatif : chaque pixel vaut 255 − sa valeur. Le clair devient sombre et inversement.'};
+  function render(){
+    var out=g.createImageData(W,H), d=out.data;
+    for(var y=0;y<H;y++) for(var x=0;x<W;x++){ var i=y*W+x, v=src[i], o=v;
+      if(filter==='neg') o=255-v;
+      else if(filter==='seuil') o=(v>=seuil)?255:0;
+      else if(filter==='edge'){ var xl=x>0?src[i-1]:v, xr=x<W-1?src[i+1]:v, yu=y>0?src[i-W]:v, yd=y<H-1?src[i+W]:v;
+        var m=Math.min(255, Math.abs(xr-xl)+Math.abs(yd-yu)); o=255-m; }
+      var p=i*4; d[p]=d[p+1]=d[p+2]=o; d[p+3]=255; }
+    g.putImageData(out,0,0);
+    el('fnote').textContent=notes[filter];
+  }
+  el('flt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('flt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); filter=b.dataset.f; render(); }); });
+  el('th').addEventListener('input',function(e){ seuil=+e.target.value; el('thV').textContent=seuil; if(filter==='seuil') render(); });
+  render();
+})();
+
+/* ---- helper corrections verrouillées ---- */
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+/* ---- B ---- */
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var a=numf(el('bA').value), b=numf(el('bB').value);
+  var okA=Math.abs(a-0)<0.5, okB=Math.abs(b-3)<0.5;
+  if(okA&&okB) return {ok:true,msg:'✓ Parfait : 0 (noir), et 3 pixels blancs.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- C ---- */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var v=numf(el('cV').value);
+  if(Math.abs(v-600)<1) return {ok:true,msg:'✓ Exact : 600 → un contour.'};
+  return {ok:false,msg:'✗ Recalcule : 4 × centre − somme des 4 voisins.'};
+});
+/* ---- D ---- */
+(function(){ var sel=-1;
+  el('dOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('dOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('dCheck','dShow','dSol','dFb',function(){
+    var p=numf(el('dP').value); var okP=Math.abs(p-0.10)<0.02, okC=(sel===0);
+    if(okP&&okC) return {ok:true,msg:'✓ Parfait : 0,10 et classe « cercle ».'};
+    return {ok:false,msg:'✗ '+(okP?'a✓':'a✗')+' '+(okC?'b✓':'b✗')+' — voir la correction.'};
+  });
+})();
+/* ---- E ---- */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : c\u2019est un biais du jeu de données.'};
+    return {ok:false,msg:'✗ Non — pense à ce que le modèle a « vu » à l\u2019entraînement.'};
+  });
+})();
+</script>
+</body>
+</html>
