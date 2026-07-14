@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IA embarquée &amp; traitement d'image — Cours SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.55}
+  .estic-bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .shell{display:flex;padding-top:48px;min-height:100vh}
+  .nav{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);flex:none;width:246px;padding:22px 14px;overflow-y:auto;border-right:1px solid var(--line);background:linear-gradient(var(--cream),#F4EFE4)}
+  .nav .kick{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--copper);text-transform:uppercase;margin:0 8px 12px}
+  .navlink{display:flex;gap:10px;align-items:baseline;padding:9px 10px;border-radius:9px;color:var(--sub);text-decoration:none;cursor:pointer;transition:.15s;font-size:15px}
+  .navlink .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber)}
+  .navlink:hover{background:#EFE8DA;color:var(--ink)}
+  .navlink.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 0 var(--line)}
+  .navlink.on .n{color:var(--copper)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px) 90px}
+  .slide{min-height:calc(100vh - 48px);display:flex;flex-direction:column;justify-content:center;padding:40px 0;scroll-margin-top:60px}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--steel);text-transform:uppercase;margin:0 0 6px}
+  h2{font-size:clamp(30px,4.4vw,50px);line-height:1.05;margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+  .lede{font-size:clamp(19px,2.3vw,23px);color:var(--sub);max-width:62ch;margin:6px 0 18px}
+  p{max-width:64ch}
+  .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);background:var(--paper);color:var(--sub);margin:2px 4px 2px 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:8px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card .h{font-weight:800;font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .card .dot{width:10px;height:10px;border-radius:3px;flex:none}
+  .card small{color:var(--sub)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+  @media(max-width:820px){ .nav{display:none} .two{grid-template-columns:1fr} }
+  figure{margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
+  figure .lab{font-weight:700;color:var(--ink);margin-bottom:8px}
+  .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .cap b{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--steel);flex:none}
+  .cap span{font-size:16px;color:var(--sub)}
+  .keyhint{position:fixed;bottom:12px;right:16px;z-index:15;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  ul.tight{max-width:64ch;padding-left:20px} ul.tight li{margin:6px 0}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">IA embarquée &amp; traitement d'image<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="shell">
+    <nav class="nav" id="nav"><p class="kick">IA embarquée &amp; image</p></nav>
+    <main class="main" id="main">
+
+      <section class="slide" id="s1">
+        <p class="eyebrow">Sciences de l'ingénieur · Première</p>
+        <h2>L'IA dans les objets</h2>
+        <p class="lede">Reconnaître un panneau, un visage, un défaut — <b>directement dans l'objet</b>, sans passer par le cloud.</p>
+        <div class="two">
+          <div>
+            <span class="pill">image</span><span class="pill">apprentissage</span><span class="pill">inférence</span><span class="pill">embarqué</span>
+            <p>Une caméra de voiture lit les panneaux, un smartphone reconnaît un visage, une machine repère une pièce défectueuse. Derrière : une <b>image transformée en nombres</b>, un <b>modèle entraîné</b>, et un <b>calcul embarqué</b> dans le composant.</p>
+          </div>
+          <figure><div class="lab">Voir et décider dans l'objet</div>
+            <svg viewBox="0 0 440 200" style="width:100%;height:auto;display:block" aria-label="Une caméra reconnaît un panneau">
+              <rect x="30" y="70" width="70" height="52" rx="8" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/><circle cx="65" cy="96" r="15" fill="#fff" stroke="#2A2622"/><circle cx="65" cy="96" r="6" fill="#2E6A8E"/>
+              <text x="65" y="140" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">caméra</text>
+              <g stroke="#BD8A2A" stroke-width="2"><path d="M100 96 h60"/><path d="M160 96 l-8 -5 v10 z" fill="#BD8A2A"/></g>
+              <circle cx="210" cy="96" r="30" fill="#fbeee9" stroke="#C0492E" stroke-width="3"/><rect x="203" y="88" width="14" height="4" fill="#C0492E"/>
+              <text x="210" y="146" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">panneau</text>
+              <g stroke="#3D7E5F" stroke-width="2"><path d="M250 96 h60"/><path d="M310 96 l-8 -5 v10 z" fill="#3D7E5F"/></g>
+              <rect x="315" y="70" width="110" height="52" rx="8" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2"/>
+              <text x="370" y="92" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="14" fill="#3D7E5F">« STOP »</text>
+              <text x="370" y="110" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">décision</text>
+            </svg>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="s2">
+        <p class="eyebrow">La matière première</p>
+        <h2>Une image = une matrice de pixels</h2>
+        <p class="lede">Pour la machine, une image n'est qu'un <b>tableau de nombres</b>.</p>
+        <figure><div class="lab">Du visuel aux nombres</div>
+          <svg viewBox="0 0 820 220" style="width:100%;height:auto;display:block" aria-label="Une image zoomée en pixels puis en valeurs">
+            <rect x="30" y="40" width="140" height="140" rx="8" fill="#eef3f6" stroke="#2E6A8E"/>
+            <circle cx="100" cy="110" r="46" fill="#2A2622"/><text x="100" y="200" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#5C544B">image</text>
+            <path d="M175 110 h40" stroke="#5C544B" stroke-width="2"/><path d="M215 110 l-8 -5 v10 z" fill="#5C544B"/>
+            <g>
+              <text x="230" y="30" font-family="JetBrains Mono" font-size="11" fill="#5C544B">grille de pixels</text>
+              <g stroke="#d9cfbb">
+                <!-- petite grille 6x6 -->
+              </g>
+            </g>
+            <g id="pxgrid"></g>
+            <path d="M470 110 h40" stroke="#5C544B" stroke-width="2"/><path d="M510 110 l-8 -5 v10 z" fill="#5C544B"/>
+            <g font-family="JetBrains Mono" font-size="12" fill="#2A2622">
+              <text x="530" y="30" fill="#5C544B" font-size="11">valeurs (0–255)</text>
+              <rect x="530" y="46" width="260" height="128" rx="6" fill="#faf6ec" stroke="#d9cfbb"/>
+              <text x="545" y="72">255 255 240  30  28 255</text>
+              <text x="545" y="96">255 240  28  22  25  30</text>
+              <text x="545" y="120"> 32  26  24  22  26 240</text>
+              <text x="545" y="144">255 255  30  28 240 255</text>
+              <text x="545" y="168" fill="#5C544B" font-size="10">chaque pixel = une intensité</text>
+            </g>
+          </svg>
+        </figure>
+      </section>
+
+      <section class="slide" id="s3">
+        <p class="eyebrow">Traiter</p>
+        <h2>Les filtres (convolution)</h2>
+        <p class="lede">Un petit motif de calcul (le <b>noyau</b>) glisse sur l'image pour révéler une information : contours, flou…</p>
+        <figure><div class="lab">Détection de contours par un noyau 3×3</div>
+          <canvas id="cvConv" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : convolution / détection de contours"></canvas>
+          <div class="cap"><b id="convPh">①</b><span id="convCap">Une image = une grille de pixels (des nombres).</span></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s4">
+        <p class="eyebrow">Apprendre</p>
+        <h2>Apprendre à reconnaître</h2>
+        <p class="lede">On montre au modèle beaucoup d'exemples <b>étiquetés</b> ; il ajuste ses réglages jusqu'à se tromper le moins possible.</p>
+        <figure><div class="lab">Apprentissage supervisé</div>
+          <canvas id="cvTrain" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : apprentissage supervisé"></canvas>
+          <div class="cap"><b id="trPh">①</b><span id="trCap">On rassemble beaucoup d'exemples étiquetés.</span></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s5">
+        <p class="eyebrow">Décider</p>
+        <h2>Classer une image</h2>
+        <p class="lede">Face à une image nouvelle, le modèle calcule une <b>probabilité par classe</b> et choisit la plus forte.</p>
+        <figure><div class="lab">Inférence : de l'image à la classe</div>
+          <canvas id="cvInfer" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : classification d'une image"></canvas>
+          <div class="cap"><b id="inPh">①</b><span id="inCap">Une nouvelle image arrive (jamais vue).</span></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s6">
+        <p class="eyebrow">Dans l'objet</p>
+        <h2>L'inférence embarquée</h2>
+        <p class="lede">Le modèle entraîné tourne <b>dans le composant</b> — pas dans le cloud.</p>
+        <div class="cards">
+          <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Sur place</div><small>Réponse immédiate, sans réseau : utile pour une voiture ou une machine.</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Ressources limitées</div><small>Peu de mémoire et de calcul : on « allège » le modèle (quantification).</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Énergie</div><small>Un objet sur batterie doit inférer sans se vider.</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Vie privée</div><small>L'image ne quitte pas l'objet : moins de données envoyées.</small></div>
+        </div>
+        <p style="margin-top:12px;color:var(--sub)">💡 On distingue l'<b>entraînement</b> (lourd, fait une fois sur un ordinateur) de l'<b>inférence</b> (légère, refaite à chaque image dans l'objet).</p>
+      </section>
+
+      <section class="slide" id="s7">
+        <p class="eyebrow">Regard critique</p>
+        <h2>Les enjeux</h2>
+        <div class="cards">
+          <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Biais des données</div><small>Le modèle apprend ce qu'on lui montre : des exemples déséquilibrés donnent des erreurs injustes.</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Erreurs</div><small>Faux positifs / faux négatifs : jamais 100 % fiable. Quel risque en cas d'erreur ?</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--plum)"></span>Vie privée</div><small>Caméras et reconnaissance : que fait-on des images des personnes ?</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Explicabilité</div><small>Comprendre POURQUOI le modèle a décidé — pas toujours évident.</small></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s8">
+        <p class="eyebrow">Synthèse</p>
+        <h2>À retenir</h2>
+        <ul class="tight" style="font-size:19px">
+          <li>Une image est une <b>matrice de pixels</b> (des nombres).</li>
+          <li>Un <b>filtre</b> (noyau) glisse sur l'image pour en extraire une information (contours, flou).</li>
+          <li>Un modèle <b>apprend</b> sur des exemples étiquetés (apprentissage supervisé).</li>
+          <li>À l'usage, il fait de l'<b>inférence</b> : une probabilité par classe, on garde la plus forte.</li>
+          <li>L'<b>inférence embarquée</b> tourne dans l'objet, sous contraintes (mémoire, énergie).</li>
+          <li>Enjeux : <b>biais, erreurs, vie privée, explicabilité</b>.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+  <div class="keyhint">↑ ↓ pour naviguer</div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var slides=['s1','s2','s3','s4','s5','s6','s7','s8'];
+var titles={s1:'L\u2019IA dans les objets',s2:'Image = pixels',s3:'Les filtres',s4:'Apprendre',s5:'Classer',s6:'Inférence embarquée',s7:'Les enjeux',s8:'À retenir'};
+(function(){ var nav=el('nav'); slides.forEach(function(id,i){ var a=document.createElement('a'); a.className='navlink'; a.dataset.t=id;
+  a.innerHTML='<span class="n">'+('0'+(i+1)).slice(-2)+'</span><span>'+titles[id]+'</span>';
+  a.addEventListener('click',function(){ el(id).scrollIntoView({behavior:'smooth'}); }); nav.appendChild(a); }); })();
+var links={}; document.querySelectorAll('.navlink').forEach(function(a){ links[a.dataset.t]=a; });
+if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){
+  Object.keys(links).forEach(function(k){ links[k].classList.remove('on'); }); if(links[e.target.id]) links[e.target.id].classList.add('on'); }});}, {rootMargin:'-45% 0px -45% 0px'});
+  slides.forEach(function(id){ io.observe(el(id)); }); }
+function cur(){ var c=0,best=1e9; slides.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-60); if(d<best){best=d;c=i;} }); return c; }
+document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='PageDown'){ e.preventDefault(); var n=Math.min(slides.length-1,cur()+1); el(slides[n]).scrollIntoView({behavior:'smooth'}); }
+  else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); var p=Math.max(0,cur()-1); el(slides[p]).scrollIntoView({behavior:'smooth'}); } });
+
+/* petite grille de pixels dans le SVG s2 */
+(function(){
+  var grp=document.getElementById('pxgrid'); if(!grp) return; var ns='http://www.w3.org/2000/svg';
+  var ox=250, oy=46, cell=21, N=6;
+  for(var y=0;y<N;y++) for(var x=0;x<N;x++){
+    var dx=x-2.5, dy=y-2.5, inside=(dx*dx+dy*dy)<6.2;
+    var v=inside?40:230; var r=document.createElementNS(ns,'rect');
+    r.setAttribute('x',ox+x*cell); r.setAttribute('y',oy+y*cell); r.setAttribute('width',cell-1); r.setAttribute('height',cell-1);
+    r.setAttribute('fill','rgb('+v+','+v+','+v+')'); r.setAttribute('stroke','#d9cfbb'); r.setAttribute('stroke-width','0.5'); grp.appendChild(r);
+  }
+})();
+
+/* ---------- ANIM s3 : convolution / contours ---------- */
+(function(){
+  var cv=el('cvConv'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var N=10, cell=24, ox=60, oy=40, ox2=560;
+  var src=[], edge=[];
+  for(var y=0;y<N;y++){ src[y]=[]; edge[y]=[]; for(var x=0;x<N;x++){ var dx=x-4.5,dy=y-4.5; src[y][x]=(dx*dx+dy*dy)<12?40:225; } }
+  for(var y2=0;y2<N;y2++) for(var x2=0;x2<N;x2++){ var v=src[y2][x2],diff=0;
+    [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){ var nx=x2+d[0],ny=y2+d[1]; if(nx>=0&&nx<N&&ny>=0&&ny<N) diff=Math.max(diff,Math.abs(v-src[ny][nx])); });
+    edge[y2][x2]=diff>100?1:0; }
+  var caps=['Une image = une grille de pixels (des nombres, ici clairs/foncés).','Un NOYAU 3×3 glisse sur l\u2019image : un petit calcul par position.','Résultat : on fait ressortir les CONTOURS de la forme.'];
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0; var phase=(T<2.5?0:(T<7?1:2));
+    g.clearRect(0,0,W,H);
+    // image source
+    for(var y=0;y<N;y++) for(var x=0;x<N;x++){ var v=src[y][x]; g.fillStyle='rgb('+v+','+v+','+v+')'; g.fillRect(ox+x*cell,oy+y*cell,cell-1,cell-1); g.strokeStyle='#e7ddc8'; g.strokeRect(ox+x*cell,oy+y*cell,cell-1,cell-1); }
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('image (pixels)',ox+N*cell/2,oy+N*cell+22);
+    // sortie
+    var reveal = phase===0?0:(phase>=2?N*N:Math.floor((T-2.5)/4.5*N*N));
+    for(var yy=0;yy<N;yy++) for(var xx=0;xx<N;xx++){ var idx=yy*N+xx; if(idx>=reveal) continue;
+      var on=edge[yy][xx]; g.fillStyle=on?'#2E6A8E':'#f4efe4'; g.fillRect(ox2+xx*cell,oy+yy*cell,cell-1,cell-1); g.strokeStyle='#e7ddc8'; g.strokeRect(ox2+xx*cell,oy+yy*cell,cell-1,cell-1); }
+    g.fillStyle='#5C544B'; g.fillText('contours détectés',ox2+N*cell/2,oy+N*cell+22);
+    // noyau qui glisse (phase 1)
+    if(phase===1){ var pos=Math.min(N*N-1,reveal); var ky=Math.floor(pos/N), kx=pos%N;
+      g.strokeStyle='#C0492E'; g.lineWidth=3; g.strokeRect(ox+(kx-1)*cell,oy+(ky-1)*cell,cell*3-1,cell*3-1);
+      g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('noyau 3×3',ox+kx*cell,oy-8);
+    }
+    // flèche
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(ox+N*cell+16,oy+N*cell/2); g.lineTo(ox2-16,oy+N*cell/2); g.stroke();
+    g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(ox2-12,oy+N*cell/2); g.lineTo(ox2-20,oy+N*cell/2-5); g.lineTo(ox2-20,oy+N*cell/2+5); g.closePath(); g.fill();
+    el('convCap').textContent=caps[phase]; el('convPh').textContent=['①','②','③'][phase];
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- ANIM s4 : apprentissage ---------- */
+(function(){
+  var cv=el('cvTrain'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var caps=['On rassemble beaucoup d\u2019exemples ÉTIQUETÉS (ex. « ○ » ou « △»).','Le modèle s\u2019ENTRAÎNE : il ajuste ses paramètres à chaque exemple.','L\u2019erreur baisse : le modèle a APPRIS à distinguer les classes.'];
+  var mx=380, my=90, mw=150, mh=110; // boîte modèle
+  var px=560, py=60, pw=280, ph=170; // plot erreur
+  var T=0;
+  function step(){
+    T+=0.03; if(T>11) T=0; var phase=(T<2.5?0:(T<8?1:2));
+    g.clearRect(0,0,W,H);
+    // exemples à gauche
+    var ex=[['○','#2E6A8E'],['△','#C0492E'],['○','#2E6A8E'],['△','#C0492E'],['○','#2E6A8E']];
+    for(var i=0;i<ex.length;i++){ var y=60+i*44; var moving=(phase>=1);
+      var x=80; if(moving){ var u=((T*0.6+i*0.2)%1); x=80+u*(mx-100); }
+      g.fillStyle='#fff'; g.strokeStyle=ex[i][1]; g.lineWidth=2; g.beginPath(); g.rect(x,y,34,34); g.fill(); g.stroke();
+      g.fillStyle=ex[i][1]; g.font='700 18px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(ex[i][0],x+17,y+24);
+    }
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('exemples étiquetés',150,H-16);
+    // modèle
+    g.fillStyle='#eef6f0'; g.strokeStyle='#3D7E5F'; g.lineWidth=2.4; g.beginPath(); g.rect(mx,my,mw,mh); g.fill(); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.fillText('MODÈLE',mx+mw/2,my+40);
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace';
+    g.fillText(phase>=2?'entraîné ✓':'ajuste ses',mx+mw/2,my+66); if(phase<2) g.fillText('paramètres…',mx+mw/2,my+82);
+    // plot erreur
+    g.strokeStyle='#d9cfbb'; g.lineWidth=1; g.beginPath(); g.moveTo(px,py); g.lineTo(px,py+ph); g.lineTo(px+pw,py+ph); g.stroke();
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('erreur',px+6,py+12); g.fillText('temps →',px+pw-60,py+ph+16);
+    var prog = phase===0?0:(phase>=2?1:(T-2.5)/5.5);
+    g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.beginPath();
+    for(var t=0;t<=prog;t+=0.02){ var xx=px+t*pw, err=Math.exp(-3.2*t); var yy=py+ph-err*(ph-10)-4; if(t===0)g.moveTo(xx,yy); else g.lineTo(xx,yy); } g.stroke();
+    if(prog>0){ var ex2=px+prog*pw, ey=py+ph-Math.exp(-3.2*prog)*(ph-10)-4; g.fillStyle='#C0492E'; g.beginPath(); g.arc(ex2,ey,4,0,7); g.fill(); }
+    el('trCap').textContent=caps[phase]; el('trPh').textContent=['①','②','③'][phase];
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- ANIM s5 : inférence / classification ---------- */
+(function(){
+  var cv=el('cvInfer'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var caps=['Une nouvelle image arrive (jamais vue à l\u2019entraînement).','Le modèle calcule une PROBABILITÉ pour chaque classe.','Il garde la classe la plus probable : « cercle ».'];
+  var classes=[['cercle',0.86,'#2E6A8E'],['triangle',0.09,'#C0492E'],['carré',0.05,'#BD8A2A']];
+  var mx=360, my=95, mw=150, mh=100, bx=580, by=70;
+  var T=0;
+  function step(){
+    T+=0.03; if(T>10) T=0; var phase=(T<2.5?0:(T<6.5?1:2));
+    g.clearRect(0,0,W,H);
+    // image entrée
+    g.fillStyle='#eef3f6'; g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.beginPath(); g.rect(80,90,120,120); g.fill(); g.stroke();
+    g.fillStyle='#2A2622'; g.beginPath(); g.arc(140,150,38,0,7); g.fill();
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('image d\u2019entrée',140,228);
+    // flèche 1
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(206,150); g.lineTo(mx-14,150); g.stroke(); g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(mx-10,150); g.lineTo(mx-18,145); g.lineTo(mx-18,155); g.closePath(); g.fill();
+    // modèle
+    g.fillStyle='#eef6f0'; g.strokeStyle='#3D7E5F'; g.lineWidth=2.4; g.beginPath(); g.rect(mx,my,mw,mh); g.fill(); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.fillText('MODÈLE',mx+mw/2,my+42); g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.fillText('entraîné',mx+mw/2,my+64);
+    // flèche 2
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(mx+mw+8,150); g.lineTo(bx-14,150); g.stroke(); g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(bx-10,150); g.lineTo(bx-18,145); g.lineTo(bx-18,155); g.closePath(); g.fill();
+    // barres de proba
+    var grow = phase===0?0:(phase>=2?1:(T-2.5)/4);
+    for(var i=0;i<classes.length;i++){ var c=classes[i]; var y=by+i*52; var full=260*c[1]; var w=full*grow;
+      var win=(phase>=2 && i===0);
+      g.fillStyle=win?c[2]:(phase>=2?'#c9c0b0':c[2]); g.globalAlpha=win?1:(phase>=2?0.6:1);
+      g.fillRect(bx,y,w,30); g.globalAlpha=1;
+      g.fillStyle='#2A2622'; g.font='13px "Bricolage Grotesque",sans-serif'; g.textAlign='left'; g.fillText(c[0],bx,y-6);
+      if(grow>0.5){ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText(Math.round(c[1]*100)+'%',bx+w+8,y+20); }
+      if(win){ g.strokeStyle='#2E6A8E'; g.lineWidth=2.5; g.strokeRect(bx-3,y-3,w+6,36); }
+    }
+    el('inCap').textContent=caps[phase]; el('inPh').textContent=['①','②','③'][phase];
+  }
+  setInterval(step,40); step();
+})();
+</script>
+</body>
+</html>

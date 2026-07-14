@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SIGNAL · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:560px;margin:0 auto;padding:16px}
+  .hud{display:flex;gap:10px;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-bottom:8px}
+  .hud b{color:var(--steel);font-size:18px}
+  .batt{display:flex;align-items:center;gap:7px}
+  .batt .bar{width:120px;height:12px;background:#eee6d6;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .batt .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--copper),var(--green));transition:width .2s}
+  .stagewrap{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fcfaf4;box-shadow:0 8px 26px rgba(90,80,60,.08)}
+  canvas{display:block;width:100%;height:auto}
+  .timer{height:6px;background:#eee6d6}
+  .timer>i{display:block;height:100%;background:var(--amber);width:100%}
+  .ask{text-align:center;font-weight:800;font-size:18px;margin:12px 0 8px}
+  .ask small{display:block;font-weight:400;color:var(--sub);font-size:14px;font-family:'JetBrains Mono',monospace}
+  .nets{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .net{text-align:left;background:#fff;border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:12px;padding:12px 14px;cursor:pointer;transition:.12s}
+  .net:hover{transform:translateY(-2px)} .net:active{transform:none}
+  .net .nn{font-weight:800;font-size:16px}
+  .net .nd{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);margin-top:2px}
+  .net .nk{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);float:right}
+  .net.ok{border-color:var(--green);background:#eef6f0} .net.no{border-color:var(--copper);background:#fbeee9}
+  .hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;font-family:'JetBrains Mono',monospace}
+
+  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(248,244,236,.94);backdrop-filter:blur(2px);padding:26px}
+  .overlay.hide{display:none}
+  .overlay h2{font-size:30px;font-weight:800;margin:0 0 4px}
+  .overlay p{color:var(--sub);max-width:34ch;margin:6px 0 16px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:10px;padding:13px 24px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.06)}
+  .big{font-size:46px;font-weight:800;color:var(--green)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">SIGNAL<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hud">
+      <span>Livrés : <b id="hD">0</b></span>
+      <span>Score : <b id="hS">0</b></span>
+      <div class="batt">🔋<div class="bar"><i id="battBar"></i></div></div>
+    </div>
+    <div class="stagewrap">
+      <canvas id="cv" width="520" height="260" aria-label="Jeu : router les données des capteurs vers le cloud"></canvas>
+      <div class="timer"><i id="timerBar"></i></div>
+      <div class="overlay" id="ovMenu">
+        <h2>SIGNAL</h2>
+        <p>Chaque capteur veut envoyer sa donnée au cloud. Choisis vite le <b>bon réseau</b> selon la <b>portée</b> et la <b>taille des données</b>. Un mauvais choix gaspille la <b>batterie</b> !</p>
+        <button class="btn" id="startBtn">Démarrer le réseau</button>
+      </div>
+      <div class="overlay hide" id="ovOver">
+        <div style="font-family:'JetBrains Mono',monospace;color:var(--copper);letter-spacing:.16em;text-transform:uppercase;font-size:12px">Batterie épuisée</div>
+        <div class="big" id="oScore">0</div>
+        <p id="oMsg"></p>
+        <button class="btn" id="againBtn">Rejouer</button>
+      </div>
+    </div>
+
+    <div class="ask" id="ask">—<small id="askSub"></small></div>
+    <div class="nets" id="nets"></div>
+    <div class="hint">Clique un réseau · ou touches 1 · 2 · 3 · 4</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var cv=el('cv'), g=cv.getContext('2d'), W=cv.width, H=cv.height;
+
+var NETS=[
+  {k:'ble', n:'Bluetooth / BLE', d:'courte portée · petit', dist:'près', data:'petit', cost:3},
+  {k:'wifi', n:'Wi-Fi', d:'courte portée · gros débit', dist:'près', data:'gros', cost:7},
+  {k:'lora', n:'LoRaWAN', d:'longue portée · petit', dist:'loin', data:'petit', cost:3},
+  {k:'cell', n:'Cellulaire 4G/5G', d:'longue portée · gros', dist:'loin', data:'gros', cost:10}
+];
+function correctNet(dist,data){ for(var i=0;i<NETS.length;i++){ if(NETS[i].dist===dist&&NETS[i].data===data) return NETS[i].k; } return 'ble'; }
+
+var st='menu', batt=100, score=0, delivered=0, combo=0, best=0, req=null, reqStart=0, reqDur=3200, flies=[], rings=[], flashT=0, flashCol='#3D7E5F';
+
+function newReq(){
+  var dist=Math.random()<0.5?'près':'loin', data=Math.random()<0.5?'petit':'gros';
+  req={dist:dist,data:data,correct:correctNet(dist,data)};
+  reqStart=performance.now(); reqDur=Math.max(1500, 3200-score*3);
+  el('ask').innerHTML='Distance : <b>'+dist.toUpperCase()+'</b> · Données : <b>'+data.toUpperCase()+'</b><small id="askSub">quel réseau utiliser ?</small>';
+  rings.push({r:14,a:1});
+  clearNetMarks();
+}
+function clearNetMarks(){ document.querySelectorAll('.net').forEach(function(b){ b.classList.remove('ok','no'); }); }
+
+function answer(k){
+  if(st!=='play'||!req) return;
+  var net=null; for(var i=0;i<NETS.length;i++) if(NETS[i].k===k) net=NETS[i];
+  var ok=(k===req.correct);
+  var btn=document.querySelector('.net[data-k="'+k+'"]');
+  if(ok){
+    if(btn) btn.classList.add('ok'); combo++; delivered++;
+    var pts=10+combo*2; score+=pts; batt=Math.max(0,batt-net.cost); flash('#3D7E5F');
+    flies.push({t:0}); // paquet vers le cloud
+    if(delivered%10===0){ batt=Math.min(100,batt+15); } // maintenance
+    el('hD').textContent=delivered; el('hS').textContent=score;
+    setTimeout(newReq,180);
+  } else {
+    if(btn) btn.classList.add('no'); var goodBtn=document.querySelector('.net[data-k="'+req.correct+'"]'); if(goodBtn) goodBtn.classList.add('ok');
+    combo=0; batt=Math.max(0,batt-18); flash('#C0492E'); flashCol='#C0492E';
+    if(batt<=0){ return over(); }
+    setTimeout(newReq,520);
+  }
+  updateBatt();
+}
+function miss(){ // temps écoulé
+  if(st!=='play') return; combo=0; batt=Math.max(0,batt-12); flash('#BD8A2A');
+  var goodBtn=document.querySelector('.net[data-k="'+req.correct+'"]'); if(goodBtn) goodBtn.classList.add('ok');
+  updateBatt(); if(batt<=0){ return over(); } setTimeout(newReq,520);
+  st='wait'; setTimeout(function(){ if(st==='wait') st='play'; },520);
+}
+function updateBatt(){ el('battBar').style.width=batt+'%'; }
+function flash(c){ flashCol=c; flashT=1; }
+
+function over(){ st='over'; if(score>best)best=score; el('oScore').textContent=score;
+  el('oMsg').textContent=delivered+' paquets livrés. Astuce : LoRa & BLE consomment peu — privilégie-les quand c\u2019est possible pour tenir plus longtemps.';
+  el('ovOver').classList.remove('hide'); }
+
+/* rendu */
+function render(){
+  g.clearRect(0,0,W,H);
+  // sol / champ
+  g.fillStyle='#f1ede2'; g.fillRect(0,H-40,W,40);
+  // cloud (haut droite)
+  var cx=430, cy=54;
+  g.fillStyle='#e7eef2'; g.strokeStyle='#2E6A8E'; g.lineWidth=2;
+  g.beginPath(); g.arc(cx-18,cy,16,0,7); g.arc(cx+2,cy-8,20,0,7); g.arc(cx+24,cy,16,0,7); g.fill();
+  g.beginPath(); g.moveTo(cx-30,cy+12); g.lineTo(cx+38,cy+12); g.stroke();
+  g.fillStyle='#2E6A8E'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('cloud',cx+2,cy+30);
+  // capteur (bas gauche), position selon distance
+  var sensorX = req && req.dist==='loin' ? 70 : 140;
+  var sy=H-70;
+  // anneaux de signal
+  for(var i=rings.length-1;i>=0;i--){ var rr=rings[i]; rr.r+=1.6; rr.a-=0.02; if(rr.a<=0){ rings.splice(i,1); continue; }
+    g.strokeStyle='rgba(46,106,142,'+rr.a+')'; g.lineWidth=2; g.beginPath(); g.arc(sensorX,sy,rr.r,-1.0,-0.1); g.stroke(); }
+  // capteur box
+  g.fillStyle='#fff'; g.strokeStyle='#2A2622'; g.lineWidth=2; g.beginPath(); g.rect(sensorX-16,sy-14,32,28); g.fill(); g.stroke();
+  g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(sensorX,sy,4,0,7); g.fill();
+  g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('capteur',sensorX,sy+30);
+  // ligne distance
+  if(req){ g.strokeStyle='#BD8A2A'; g.setLineDash([5,5]); g.lineWidth=1.5; g.beginPath(); g.moveTo(sensorX+16,sy-8); g.lineTo(cx-24,cy+8); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#8a6313'; g.font='700 12px "JetBrains Mono",monospace'; var mx=(sensorX+cx)/2, my=(sy+cy)/2;
+    g.fillText(req.dist==='loin'?'~ plusieurs km':'~ quelques m', mx, my-6);
+    // paquet à envoyer (taille selon data)
+    var ps=req.data==='gros'?12:6; g.fillStyle='#8A5A7A'; g.fillRect(sensorX-ps/2, sy-30, ps, ps); }
+  // paquets qui volent vers le cloud
+  for(var f=flies.length-1;f>=0;f--){ var fl=flies[f]; fl.t+=0.05; if(fl.t>=1){ flies.splice(f,1); continue; }
+    var px=sensorX+(cx-sensorX)*fl.t, py=sy+(cy-sy)*fl.t - Math.sin(fl.t*Math.PI)*30;
+    g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(px,py,5,0,7); g.fill(); }
+  // flash
+  if(flashT>0){ g.fillStyle=flashCol; g.globalAlpha=flashT*0.12; g.fillRect(0,0,W,H); g.globalAlpha=1; flashT-=0.05; }
+  // timer
+  if(st==='play'&&req){ var el2=(performance.now()-reqStart)/reqDur; el('timerBar').style.width=Math.max(0,(1-el2)*100)+'%';
+    if(el2>=1){ miss(); } }
+  requestAnimationFrame(render);
+}
+
+/* boutons réseaux */
+(function(){ var box=el('nets'); NETS.forEach(function(net,i){ var b=document.createElement('button'); b.className='net'; b.dataset.k=net.k; b.style.borderLeftColor=({ble:'#3D7E5F',wifi:'#2E6A8E',lora:'#BD8A2A',cell:'#C0492E'})[net.k];
+  b.innerHTML='<span class="nk">'+(i+1)+'</span><div class="nn">'+net.n+'</div><div class="nd">'+net.d+'</div>';
+  b.addEventListener('click',function(){ answer(net.k); }); box.appendChild(b); }); })();
+
+function start(){ st='play'; batt=100; score=0; delivered=0; combo=0; flies=[]; rings=[]; updateBatt(); el('hD').textContent='0'; el('hS').textContent='0';
+  el('ovMenu').classList.add('hide'); el('ovOver').classList.add('hide'); newReq(); }
+el('startBtn').addEventListener('click',start);
+el('againBtn').addEventListener('click',start);
+document.addEventListener('keydown',function(e){ if(e.key>='1'&&e.key<='4'){ var idx=+e.key-1; if(NETS[idx]) answer(NETS[idx].k); }
+  else if(e.code==='Space'&&(st==='menu'||st==='over')){ e.preventDefault(); start(); } });
+
+updateBatt(); render();
+</script>
+</body>
+</html>
