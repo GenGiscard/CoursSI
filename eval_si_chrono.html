@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Évaluation — La station de contrôle · Chronogrammes · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#1d2b26,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8;position:relative;overflow:hidden}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#5ee39a;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--plum)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--plum);min-width:80px;text-align:right}
+  .game{background:#1d2b26;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#9fd8b6;margin-bottom:8px}
+  .game canvas{width:100%;height:auto;display:block;background:#10241a;border-radius:8px}
+  .gq{font-weight:800;font-size:17px;text-align:center;margin:10px 0 8px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#2c4438;border:1px solid #3d6a52;color:#f2ead8;border-radius:10px;padding:12px 6px;cursor:pointer}
+  .gopts button:hover{background:#35543f}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:18px;color:#9fd8b6}
+  .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
+  .corr.show{display:block}
+  .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
+  .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
+  .corr .sol{color:var(--sub);margin-top:5px}
+  .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
+  .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
+  .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
+  .teacher{margin-top:40px;border-top:1px dashed var(--line);padding-top:16px}
+  .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);cursor:pointer;text-decoration:underline}
+  #dash{display:none;margin-top:14px} #dash.show{display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+  th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub);letter-spacing:.06em}
+  .stat{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:4px 8px 4px 0;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .stat b{color:var(--steel);font-size:18px}
+  .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
+  .barq>i{display:block;height:100%;background:var(--green)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Évaluation — Les chronogrammes<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">Évaluation · Première spé SI · /10</div>
+      <h1>🕹️ La station de contrôle</h1>
+      <p>Tu es l'opérateur de nuit de la station. Quatre pupitres t'attendent : un oscilloscope à décoder, une horloge à ausculter, un défi de lecture rapide et un variateur à régler. Chaque pupitre rapporte des points — bonne garde !</p>
+      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
+    </div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> L'oscilloscope de la machine <span class="pts">3 pts</span></h2>
+      <p class="task">La machine de tri envoie ce signal. La tête de lecture le retrace en boucle ; les instants <b>A</b> et <b>B</b> sont marqués.</p>
+      <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Signal de la machine avec instants A et B"></canvas></div>
+      <div class="qrow" id="q1a"><span class="sc">a) Valeur du signal à l'instant <b>A</b> (t = 5 ms) :</span>
+        <select id="s1a"><option>— choisir —</option><option>0</option><option>1</option></select></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Valeur du signal à l'instant <b>B</b> (t = 8 ms) :</span>
+        <select id="s1b"><option>— choisir —</option><option>0</option><option>1</option></select></div>
+      <div class="qrow" id="q1c"><span class="sc">c) Nombre de <b>fronts montants</b> sur les 20 ms :</span>
+        <input class="numin" id="n1c" inputmode="numeric" placeholder="?"></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> Le cœur de l'horloge <span class="pts">3 pts</span></h2>
+      <p class="task">Cette horloge interne bat régulièrement — regarde son motif pulser. À toi de mesurer son rythme.</p>
+      <div class="chrono"><canvas id="cv2" width="860" height="220" aria-label="Signal d'horloge périodique"></canvas></div>
+      <div class="qrow" id="q2a"><span class="sc">a) Période lue sur le chronogramme : T =</span>
+        <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">ms</span></div>
+      <div class="qrow" id="q2b"><span class="sc">b) Fréquence : f = 1/T =</span>
+        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
+      <div class="qrow" id="q2c"><span class="sc">c) 🫀 Ton cœur bat environ à 1,2 Hz. Cette horloge bat-elle plus vite que ton cœur ?</span>
+        <select id="s2c"><option>— choisir —</option><option>Oui, beaucoup plus vite</option><option>Non, plus lentement</option></select></div>
+      <div class="corr" id="c2"></div>
+    </section>
+
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : la chasse aux fronts <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ Pupitre d'entraînement : <b>6 signaux</b> vont défiler. Pour chacun, réponds à la question posée. <b>Une seule tentative</b> — ton score au défi compte dans la note (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <canvas id="cv3" width="520" height="150" aria-label="Mini-chronogramme du défi"></canvas>
+        <div class="gq" id="gQ">Prêt ? Le défi comporte 6 signaux.</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
+
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> Le variateur PWM <span class="pts">2 pts</span></h2>
+      <p class="task">Ce variateur pilote la LED de la salle par PWM (période T = 8 ms). <b>Manipule le curseur α</b> et observe le signal et la LED, puis réponds.</p>
+      <div class="chrono">
+        <canvas id="cv4" width="860" height="230" aria-label="Signal PWM et LED pilotée"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">α =</span>
+          <input type="range" id="aSlider" min="0" max="100" step="5" value="25">
+          <span class="val" id="aVal">25 %</span>
+        </div>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Quel rapport cyclique α faut-il régler pour que t<sub>H</sub> = 6 ms ? (aide-toi du curseur)</span>
+        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="qrow" id="q4b"><span class="sc">b) À ce réglage, la LED éclaire… qu'à α = 25 % :</span>
+        <select id="s4b"><option>— choisir —</option><option>plus fort</option><option>moins fort</option><option>pareil</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
+    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
+
+    <div class="teacher">
+      <span class="tlink" id="tlink">· Espace enseignant ·</span>
+      <div id="dash">
+        <div id="dashLogin" style="margin-top:8px">
+          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
+          <button class="btn g" id="pwBtn">Ouvrir</button>
+          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
+        </div>
+        <div id="dashData" style="display:none">
+          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
+          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
+          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+var db=null;
+try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
+var NODE='eval_chrono';
+
+/* ---------- traceur commun ---------- */
+function gridT(g,x0,x1,yT,yB,tMax,major,dark){
+  for(var t=0;t<=tMax;t++){ var x=x0+(x1-x0)*t/tMax; var M=(t%major===0);
+    g.strokeStyle= dark ? (M?'#2a4a38':'#1d3a2a') : (M?'#d9cfbb':'#eee6d6'); g.lineWidth=1;
+    g.beginPath(); g.moveTo(x,yT); g.lineTo(x,yB); g.stroke();
+    if(M){ g.fillStyle= dark?'#7fbd9a':'#5C544B'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(t+'',x,yB+15); } }
+}
+function traceSig(g,segs,x0,x1,tMax,yB,hS,color){
+  function X(t){ return x0+(x1-x0)*t/tMax; }
+  g.strokeStyle=color; g.lineWidth=3; g.beginPath();
+  var first=true,lastV=null;
+  segs.forEach(function(s){ var xa=X(s[0]),xb=X(s[1]),y=s[2]?yB-hS:yB;
+    if(first){ g.moveTo(xa,y); first=false; }
+    else if(lastV!==s[2]){ g.lineTo(xa,lastV?yB-hS:yB); g.lineTo(xa,y); }
+    g.lineTo(xb,y); lastV=s[2]; });
+  g.stroke();
+}
+
+/* ============ EX1 : oscilloscope animé ============ */
+var E1_SEGS=[[0,3,0],[3,7,1],[7,10,0],[10,16,1],[16,20,0]]; // fronts montants: t=3 et t=10 → 2 ; A(t=5)=1 ; B(t=8)=0
+(function(){
+  var cv=el('cv1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var x0=70,x1=830,tMax=20,yB=160,hS=76, T=0;
+  function X(t){ return x0+(x1-x0)*t/tMax; }
+  function valAt(t){ for(var i=0;i<E1_SEGS.length;i++){ if(t>=E1_SEGS[i][0]&&t<E1_SEGS[i][1]) return E1_SEGS[i][2]; } return 0; }
+  function step(){
+    T+=0.09; if(T>tMax+3) T=0;
+    g.clearRect(0,0,cv.width,cv.height);
+    gridT(g,x0,x1,44,200,tMax,5,false);
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+    g.textAlign='left'; g.fillText('t (ms)',x1+6,215);
+    var tShow=Math.min(tMax,T);
+    var segs=[]; E1_SEGS.forEach(function(s){ if(s[0]<tShow) segs.push([s[0],Math.min(s[1],tShow),s[2]]); });
+    traceSig(g,segs,x0,x1,tMax,yB,hS,'#2E6A8E');
+    if(tShow<tMax){ g.fillStyle='#C0492E'; g.beginPath(); g.arc(X(tShow), valAt(tShow)?yB-hS:yB, 6,0,7); g.fill(); }
+    // curseurs A et B
+    [['A',5,'#3D7E5F'],['B',8,'#C0492E']].forEach(function(c){
+      var xc=X(c[1]);
+      g.strokeStyle=c[2]; g.lineWidth=2; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,40); g.lineTo(xc,205); g.stroke(); g.setLineDash([]);
+      g.fillStyle=c[2]; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(c[0],xc,30);
+    });
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX2 : horloge qui pulse ============ */
+(function(){
+  var cv=el('cv2'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var x0=70,x1=830,tMax=15,yB=150,hS=70, T=0, TT=5;
+  var segs=[]; for(var k=0;k<3;k++){ segs.push([k*TT,k*TT+TT/2,1]); segs.push([k*TT+TT/2,(k+1)*TT,0]); }
+  function X(t){ return x0+(x1-x0)*t/tMax; }
+  function step(){
+    T+=0.03;
+    g.clearRect(0,0,cv.width,cv.height);
+    gridT(g,x0,x1,40,190,tMax,5,false);
+    // motif courant qui pulse
+    var m=Math.floor(T)%3; var pulse=0.10+0.06*Math.sin(T*6);
+    g.fillStyle='rgba(189,138,42,'+pulse+')'; g.fillRect(X(m*TT),46,X(TT)-X(0),140);
+    traceSig(g,segs,x0,x1,tMax,yB,hS,'#3D7E5F');
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+    g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
+    // petit coeur qui bat au rythme du motif
+    var beat=1+0.15*Math.max(0,Math.sin(T*6));
+    g.save(); g.translate(X(14),58); g.scale(beat,beat);
+    g.fillStyle='#C0492E'; g.beginPath();
+    g.moveTo(0,6); g.bezierCurveTo(-9,-4,-16,4,0,14); g.bezierCurveTo(16,4,9,-4,0,6); g.fill(); g.restore();
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX3 : défi noté ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false};
+function g3Rand(){ // question aléatoire : valeur OU fronts
+  function rnd(){ var lv=[],v=(Math.random()<0.5?0:1); for(var i=0;i<8;i++){ lv.push(v); if(Math.random()<0.42) v=1-v; } return lv; }
+  function edges(lv){ var n=0; for(var i=1;i<lv.length;i++){ if(lv[i-1]===0&&lv[i]===1)n++; } return n; }
+  if(Math.random()<0.5){
+    var lv=rnd(); var k=(Math.random()*8)|0;
+    return {kind:'val', lv:lv, cursor:k+0.5, q:'Valeur du signal à l\u2019instant marqué ?', opts:['0','1'], ok:String(lv[k])};
+  }
+  var lv2,n,guard=0; do{ lv2=rnd(); n=edges(lv2); guard++; }while((n<1||n>4)&&guard<20);
+  var set={}; set[n]=1; var opts=[String(n)];
+  [n-1,n+1,n+2,n-2].forEach(function(d){ if(d>=0&&!set[d]&&opts.length<4){ set[d]=1; opts.push(String(d)); } });
+  var ex=n+3; while(opts.length<4){ if(!set[ex]){ set[ex]=1; opts.push(String(ex)); } ex++; }
+  for(var kk=opts.length-1;kk>0;kk--){ var j=(Math.random()*(kk+1))|0; var t=opts[kk]; opts[kk]=opts[j]; opts[j]=t; }
+  return {kind:'edges', lv:lv2, q:'Combien de fronts MONTANTS ?', opts:opts, ok:String(n)};
+}
+function g3Draw(data){
+  var cv=el('cv3'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  g.clearRect(0,0,cv.width,cv.height);
+  var x0=44,x1=cv.width-16,yB=104,hS=52,tMax=8;
+  function X(t){ return x0+(x1-x0)*t/tMax; }
+  gridT(g,x0,x1,24,yB+12,tMax,2,true);
+  g.fillStyle='#7fbd9a'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='right';
+  g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+  var segs=[]; for(var i=0;i<data.lv.length;i++) segs.push([i,i+1,data.lv[i]]);
+  traceSig(g,segs,x0,x1,tMax,yB,hS,'#5ee39a');
+  if(data.cursor!=null){ var xc=X(data.cursor);
+    g.strokeStyle='#ffd55a'; g.lineWidth=2.5; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,16); g.lineTo(xc,yB+14); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#ffd55a'; g.beginPath(); g.moveTo(xc,16); g.lineTo(xc-6,6); g.lineTo(xc+6,6); g.closePath(); g.fill(); }
+}
+function g3Round(){
+  g3State.cur=g3Rand(); g3State.locked=false;
+  el('gProg').textContent='signal '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  g3Draw(g3State.cur);
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Bien vu !'; }
+  else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était '+g3State.cur.ok+'.';
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='✓ '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='défi terminé';
+      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'⚡ Excellent réflexe !':(g3State.hits>=3?'Pas mal, opérateur.':'Le pupitre te reverra…');
+    } else { g3Round(); }
+  }, 900);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none'; g3Round();
+});
+
+/* ============ EX4 : variateur PWM ============ */
+var alpha=25;
+(function(){
+  var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var x0=70,x1=560,tMax=16,yB=150,hS=64, T=0, TT=8;
+  function X(t){ return x0+(x1-x0)*t/tMax; }
+  el('aSlider').addEventListener('input',function(){ alpha=+this.value; el('aVal').textContent=alpha+' %'; });
+  function step(){
+    T+=0.05;
+    g.clearRect(0,0,cv.width,cv.height);
+    gridT(g,x0,x1,40,190,tMax,4,false);
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+    g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
+    var a=alpha/100, off=T%TT;
+    var segs=[];
+    for(var k=-1;k<4;k++){ var t0=k*TT-off;
+      segs.push([Math.max(0,t0),Math.min(tMax,Math.max(0,t0+TT*a)),1]);
+      segs.push([Math.max(0,Math.min(tMax,t0+TT*a)),Math.min(tMax,t0+TT),0]); }
+    segs=segs.filter(function(s){ return s[1]>s[0]; });
+    traceSig(g,segs,x0,x1,tMax,yB,hS,'#8A5A7A');
+    g.fillStyle='#8A5A7A'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillText('T = 8 ms · t\u2095 = '+String(Math.round(TT*a*10)/10).replace('.',',')+' ms',x0,32);
+    // LED
+    var lx=700, ly=105;
+    g.fillStyle='rgba(189,138,42,'+(0.12+0.78*a)+')'; g.beginPath(); g.arc(lx,ly,42,0,7); g.fill();
+    g.fillStyle='rgba(255,213,90,'+(0.22+0.72*a)+')'; g.beginPath(); g.arc(lx,ly,25,0,7); g.fill();
+    g.strokeStyle='#8a6313'; g.lineWidth=2.5; g.beginPath(); g.arc(lx,ly,25,0,7); g.stroke();
+    g.strokeStyle='#5C544B'; g.lineWidth=3; g.beginPath(); g.moveTo(lx-9,ly+25); g.lineTo(lx-9,ly+50); g.moveTo(lx+9,ly+25); g.lineTo(lx+9,ly+50); g.stroke();
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('LED de la salle',lx,ly+70);
+    // jauge
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('puissance moyenne',636,182);
+    g.fillStyle='#eee6d6'; g.fillRect(636,190,190,13);
+    g.fillStyle='#BD8A2A'; g.fillRect(636,190,190*a,13);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ correction & remise ============ */
+var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
+el('submit').addEventListener('click',function(){
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
+  if(!g3State.done){ alert('Termine d\u2019abord le défi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=(el('s1a').value==='1'), ok1b=(el('s1b').value==='0'), ok1c=Math.abs(numf(el('n1c').value)-2)<0.5;
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol">A (t = 5 ms) → le signal est haut : <b>1</b>. B (t = 8 ms) → bas : <b>0</b>. Fronts montants à t = 3 ms et t = 10 ms → <b>2</b>.</div>';
+  /* EX2 */
+  var ok2a=Math.abs(numf(el('n2a').value)-5)<0.4, ok2b=Math.abs(numf(el('n2b').value)-200)<10, ok2c=(el('s2c').value==='Oui, beaucoup plus vite');
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">Le motif se répète toutes les <b>5 ms</b> → f = 1/0,005 = <b>200 Hz</b>. Ton cœur bat à ~1,2 Hz : l\u2019horloge bat environ <b>170× plus vite</b> !</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">Rappel : front montant = passage 0 → 1 uniquement ; et à chaque instant, le signal se lit haut (1) ou bas (0).</div>';
+  /* EX4 */
+  var ok4a=Math.abs(numf(el('n4a').value)-75)<3, ok4b=(el('s4b').value==='plus fort');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">t\u2095 = 6 ms sur T = 8 ms → α = 6/8 = <b>75 %</b>. Plus α est grand, plus la puissance moyenne est grande : la LED éclaire <b>plus fort</b> qu\u2019à 25 %.</div>';
+  /* total */
+  var score=p1+p2+p3+p4;
+  el('scoreBig').textContent=score+' / 10';
+  el('scoreSt').textContent = score>=8?'Station parfaitement tenue !':(score>=5?'Bonne garde — quelques pupitres à revoir.':'La station a besoin d\u2019un nouvel entraînement.');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin, #aSlider').forEach(function(x){ x.disabled=true; });
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:10, detail:[p1,p2,p3,p4], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
+  else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
+});
+
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2], EX_LAB=['Ex1 oscillo','Ex2 horloge','Ex3 défi','Ex4 PWM'];
+el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
+el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
+el('refresh') && el('refresh').addEventListener('click',loadDash);
+function loadDash(){
+  if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
+  db.ref(NODE).once('value').then(function(snap){
+    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<4) perQ[i]+=d; }); });
+    var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 10</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+    for(var i=0;i<4;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:110px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('perQ').innerHTML=pq;
+    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||10)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+  }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
+}
+</script>
+</body>
+</html>
