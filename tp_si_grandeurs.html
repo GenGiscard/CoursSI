@@ -27,14 +27,17 @@
   .lede{color:var(--sub);max-width:66ch}
   .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
   .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
-  .conv{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center;margin-top:6px}
-  @media(max-width:640px){.conv{grid-template-columns:1fr}}
-  canvas.wheel{width:180px;height:180px;display:block;margin:0 auto}
-  .sl label{display:block;font-size:14px;font-weight:600;margin:6px 0 3px}
-  .sl input[type=range]{width:100%}
-  .read{font-family:'JetBrains Mono',monospace;font-size:15px;margin-top:12px;background:#f4efe4;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-  .read b{color:var(--steel);font-size:20px}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .schema{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .schema svg,.schema canvas{width:100%;height:auto;display:block;max-width:560px;margin:0 auto}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--copper)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--copper);min-width:130px;text-align:right}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
   .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
   .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
   .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -43,78 +46,186 @@
   .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
   .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
   .exo-sol.show{display:block}
-  .given{font-family:'JetBrains Mono',monospace;font-size:14px;background:#f4efe4;border:1px solid var(--line);border-radius:8px;padding:8px 12px;display:inline-block;margin:4px 0}
-  a{color:var(--steel)}
+  /* --- calculatrice flottante --- */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25)}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
   <div class="estic-bar">
     <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">TP — Puissance · couple · vitesse<br>© ESTIC — Tous droits réservés</div>
+    <div class="rt">TP — Puissance, couple, vitesse<br>© ESTIC — Tous droits réservés</div>
   </div>
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">TP · Première spé SI</div>
-      <h1>Jongler avec les grandeurs</h1>
-      <p class="lede">Convertis, calcule, vérifie : d'une vitesse en tr/min à une puissance en watts, puis à une énergie.</p>
+      <div class="k">TP · Première spé SI · Grandeurs mécaniques</div>
+      <h1>Puissance, couple, vitesse</h1>
+      <p class="lede">Perceuse, vélo électrique, treuil de chantier : sept machines à ausculter avec trois formules — ω = 2πN/60, P = C·ω, v = R·ω. La calculatrice 🧮 t'attend en bas à droite.</p>
     </div>
 
     <section class="exo-card" id="a">
-      <h2><span class="num">A</span> Convertisseur tr/min ↔ rad/s</h2>
-      <p class="task">🎯 Fais varier la vitesse et observe la conversion en direct. Formule : ω = 2π·n / 60.</p>
-      <div class="conv">
-        <canvas id="wheel" class="wheel" width="180" height="180"></canvas>
-        <div>
-          <div class="sl"><label>Vitesse n = <span id="nV" style="font-family:'JetBrains Mono',monospace;color:var(--steel)">1500</span> tr/min</label>
-            <input type="range" id="nR" min="0" max="6000" step="50" value="1500"></div>
-          <div class="read">n = <b id="nOut">1500</b> tr/min &nbsp;→&nbsp; ω = 2π × <span id="nEq">1500</span> / 60 = <b id="wOut">157.1</b> rad/s</div>
-          <p style="font-size:14px;color:var(--sub);margin:8px 0 0">Inversement : n = ω × 60 / (2π).</p>
-        </div>
+      <h2><span class="num">A</span> La perceuse 🔩</h2>
+      <p class="task">🎯 Le mandrin tourne à N = 1500 tr/min et délivre un couple C = 2 N·m.</p>
+      <div class="schema">
+        <svg viewBox="0 0 560 170" aria-label="Perceuse : mandrin et flèche de couple">
+          <rect x="60" y="52" width="200" height="66" rx="16" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/>
+          <rect x="118" y="118" width="46" height="34" rx="8" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/>
+          <rect x="260" y="68" width="46" height="34" rx="6" fill="#f3ead6" stroke="#BD8A2A" stroke-width="2.5"/>
+          <path d="M306 85 h74" stroke="#5C544B" stroke-width="7" stroke-linecap="round"/>
+          <path d="M380 85 l30 0" stroke="#5C544B" stroke-width="3.5" stroke-dasharray="6 5"/>
+          <path d="M352 46 a38 38 0 1 1 -38 39" fill="none" stroke="#C0492E" stroke-width="4"/>
+          <path d="M352 46 l12 -9 M352 46 l-3 14" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/>
+          <text x="392" y="42" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">C = 2 N·m</text>
+          <text x="392" y="126" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">N = 1500 tr/min</text>
+          <text x="96" y="90" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">moteur</text>
+        </svg>
       </div>
+      <div class="row"><span>a) Vitesse angulaire : ω = 2π·N/60 =</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">rad/s (arrondi entier)</span></div>
+      <div class="row"><span>b) Puissance : P = C·ω =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>a)</b> ω = 2π×1500/60 = 2π×25 ≈ <b>157 rad/s</b>.<br><b>b)</b> P = C·ω = 2 × 157 ≈ <b>314 W</b>. Toujours convertir les tr/min en rad/s avant P = C·ω !</div>
     </section>
 
     <section class="exo-card" id="b">
-      <h2><span class="num">B</span> P = C · ω</h2>
-      <p class="task">Un moteur fournit un couple de <b>4 N·m</b> à une vitesse angulaire de <b>50 rad/s</b>.</p>
-      <div class="row"><span>a) Puissance mécanique :</span><input class="numin" id="bP" inputmode="numeric" placeholder="?"><span class="unit">W</span></div>
-      <div class="row"><span>b) Autre moteur : P = 600 W à ω = 100 rad/s. Couple ?</span><input class="numin" id="bC" inputmode="numeric" placeholder="?"><span class="unit">N·m</span></div>
+      <h2><span class="num">B</span> Le vélo électrique 🚲</h2>
+      <p class="task">🎯 En France, un VAE est limité à P = 250 W. Le moteur de roue tourne à ω = 25 rad/s à pleine puissance.</p>
+      <div class="schema">
+        <svg viewBox="0 0 560 180" aria-label="Vélo électrique : roue motorisée">
+          <circle cx="150" cy="110" r="56" fill="none" stroke="#2A2622" stroke-width="4"/>
+          <circle cx="390" cy="110" r="56" fill="none" stroke="#2A2622" stroke-width="4"/>
+          <circle cx="390" cy="110" r="24" fill="#f3ead6" stroke="#BD8A2A" stroke-width="3"/>
+          <path d="M150 110 L246 46 L330 96 M246 46 L262 110 M150 110 L262 110 L390 110 M262 110 L246 46" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linecap="round"/>
+          <path d="M240 34 l14 -12 M320 88 l22 -10" stroke="#2E6A8E" stroke-width="4" stroke-linecap="round"/>
+          <path d="M424 76 a48 48 0 0 1 8 52" fill="none" stroke="#C0492E" stroke-width="4"/>
+          <path d="M432 128 l8 -12 M432 128 l-13 -4" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/>
+          <text x="452" y="102" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">ω = 25 rad/s</text>
+          <text x="352" y="118" font-family="JetBrains Mono" font-size="11" fill="#8a6313">moteur</text>
+        </svg>
+      </div>
+      <div class="row"><span>a) Couple délivré par le moteur : C = P/ω =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+      <div class="match" id="bMatch"></div>
       <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="bFb"></div>
-      <div class="exo-sol" id="bSol"><b>a)</b> P = C × ω = 4 × 50 = <b>200 W</b>.<br><b>b)</b> C = P / ω = 600 / 100 = <b>6 N·m</b>.</div>
+      <div class="exo-sol" id="bSol"><b>a)</b> C = P/ω = 250/25 = <b>10 N·m</b>.<br><b>b)</b> Un moteur débridé à 500 W au même régime doublerait le couple (20 N·m)… mais le vélo ne serait <b>plus homologué</b> : au-delà de 250 W, ce n'est plus un vélo mais un cyclomoteur (immatriculation, assurance, casque).</div>
     </section>
 
     <section class="exo-card" id="c">
-      <h2><span class="num">C</span> Conservation dans une transmission</h2>
-      <p class="task">En entrée : <b>ω₁ = 300 rad/s</b>, <b>C₁ = 2 N·m</b>. Un réducteur divise la vitesse par <b>3</b> (transmission idéale).</p>
-      <div class="row"><span>a) Puissance transmise :</span><input class="numin" id="cP" inputmode="numeric" placeholder="?"><span class="unit">W</span></div>
-      <div class="row"><span>b) Vitesse de sortie ω₂ :</span><input class="numin" id="cW" inputmode="numeric" placeholder="?"><span class="unit">rad/s</span></div>
-      <div class="row"><span>c) Couple de sortie C₂ :</span><input class="numin" id="cC" inputmode="numeric" placeholder="?"><span class="unit">N·m</span></div>
+      <h2><span class="num">C</span> ⭐ Le banc moteur</h2>
+      <p class="task">🎯 Mission d'essai : le frein du banc impose un couple C = 3 N·m constant. <b>Règle le régime N</b> pour obtenir exactement <b>P = 300 W</b>, puis relève tes mesures.</p>
+      <div class="schema">
+        <canvas id="cvBanc" width="560" height="210" aria-label="Banc moteur : jauge de puissance"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">N =</span>
+          <input type="range" id="nSlider" min="0" max="2000" step="5" value="0">
+          <span class="val" id="nVal">0 tr/min</span>
+        </div>
+      </div>
+      <div class="row"><span>a) Quelle vitesse ω donne P = 300 W ? ω = P/C =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
+      <div class="row"><span>b) À quel régime N cela correspond-il ? N = 60·ω/(2π) ≈</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">tr/min (±20)</span></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="cFb"></div>
-      <div class="exo-sol" id="cSol"><b>a)</b> P = C₁·ω₁ = 2 × 300 = <b>600 W</b> (conservée).<br><b>b)</b> ω₂ = 300 / 3 = <b>100 rad/s</b>.<br><b>c)</b> C₂ = P / ω₂ = 600 / 100 = <b>6 N·m</b> (couple × 3, comme la vitesse ÷ 3).</div>
+      <div class="exo-sol" id="cSol"><b>a)</b> ω = P/C = 300/3 = <b>100 rad/s</b>.<br><b>b)</b> N = 60×100/(2π) ≈ <b>955 tr/min</b>. Le banc devait afficher « 🎯 objectif atteint » autour de cette valeur !</div>
     </section>
 
     <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Puissance électrique &amp; rendement</h2>
-      <p class="task">Le moteur est alimenté sous <b>U = 48 V</b> et absorbe <b>I = 10 A</b>. Il fournit <b>384 W</b> mécaniques.</p>
-      <div class="row"><span>a) Puissance électrique absorbée (P = U·I) :</span><input class="numin" id="dP" inputmode="numeric" placeholder="?"><span class="unit">W</span></div>
-      <div class="row"><span>b) Rendement η :</span><input class="numin" id="dE" inputmode="decimal" placeholder="?"></div>
+      <h2><span class="num">D</span> Le treuil de chantier 🏗️</h2>
+      <p class="task">🎯 Un treuil enroule son câble sur un tambour de rayon R = 0,2 m. Il soulève une charge de F = 1000 N, tambour tournant à ω = 2 rad/s.</p>
+      <div class="schema">
+        <svg viewBox="0 0 560 210" aria-label="Treuil : tambour, câble et charge">
+          <rect x="120" y="30" width="180" height="24" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/>
+          <circle cx="210" cy="100" r="46" fill="#f3ead6" stroke="#BD8A2A" stroke-width="3"/>
+          <circle cx="210" cy="100" r="8" fill="#8a6313"/>
+          <path d="M210 54 v-0" stroke="#5C544B"/>
+          <path d="M256 100 a46 46 0 0 1 -18 37" fill="none" stroke="#C0492E" stroke-width="4"/>
+          <path d="M238 137 l14 -2 M238 137 l4 -13" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/>
+          <text x="268" y="146" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">ω = 2 rad/s</text>
+          <path d="M210 100 L242 68" stroke="#5C544B" stroke-width="2" stroke-dasharray="4 4"/>
+          <text x="238" y="60" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#5C544B">R = 0,2 m</text>
+          <path d="M164 100 v78" stroke="#5C544B" stroke-width="3"/>
+          <rect x="140" y="178" width="48" height="26" rx="4" fill="#e9e2d2" stroke="#5C544B" stroke-width="2"/>
+          <path d="M164 158 v-4" stroke="#5C544B" stroke-width="3"/>
+          <path d="M164 214 v-4" stroke="#C0492E" stroke-width="4"/>
+          <path d="M154 236 h20 M164 210 v26 M164 236 l-7 -9 M164 236 l7 -9" transform="translate(0,-26)" stroke="#C0492E" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <text x="196" y="196" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">F = 1000 N</text>
+        </svg>
+      </div>
+      <div class="row"><span>a) Couple sur le tambour : C = F·R =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+      <div class="row"><span>b) Puissance du treuil : P = C·ω =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
+      <div class="row"><span>c) Vitesse de montée de la charge : v = R·ω =</span><input class="numin" id="dC" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
       <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="dFb"></div>
-      <div class="exo-sol" id="dSol"><b>a)</b> P = U × I = 48 × 10 = <b>480 W</b>.<br><b>b)</b> η = P<sub>méca</sub>/P<sub>élec</sub> = 384/480 = <b>0,80</b> (80 %).</div>
+      <div class="exo-sol" id="dSol"><b>a)</b> C = F·R = 1000 × 0,2 = <b>200 N·m</b>.<br><b>b)</b> P = C·ω = 200 × 2 = <b>400 W</b>.<br><b>c)</b> v = R·ω = 0,2 × 2 = <b>0,4 m/s</b>. Vérification : P = F·v = 1000 × 0,4 = 400 W — les deux chemins donnent la même puissance !</div>
     </section>
 
     <section class="exo-card" id="e">
-      <h2><span class="num">★</span> Énergie E = P · t</h2>
-      <p class="task">Un radiateur de <b>1500 W</b> fonctionne pendant <b>2 heures</b>.</p>
-      <div class="row"><span>a) Énergie consommée :</span><input class="numin" id="eWh" inputmode="numeric" placeholder="?"><span class="unit">Wh</span></div>
-      <div class="row"><span>b) Soit :</span><input class="numin" id="eKwh" inputmode="decimal" placeholder="?"><span class="unit">kWh</span></div>
+      <h2><span class="num">E</span> Le réducteur ⚙️</h2>
+      <p class="task">🎯 Un réducteur de rapport 1/3 reçoit ω₁ = 300 rad/s et C₁ = 1 N·m.</p>
+      <div class="schema">
+        <svg viewBox="0 0 560 190" aria-label="Réducteur : deux engrenages">
+          <circle cx="180" cy="95" r="38" fill="#e7eef2" stroke="#2E6A8E" stroke-width="3" stroke-dasharray="7 5"/>
+          <circle cx="180" cy="95" r="7" fill="#2E6A8E"/>
+          <circle cx="316" cy="95" r="98" fill="#eef6f0" stroke="#3D7E5F" stroke-width="3" stroke-dasharray="7 5"/>
+          <circle cx="316" cy="95" r="7" fill="#3D7E5F"/>
+          <text x="180" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">ENTRÉE</text>
+          <text x="120" y="160" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">ω₁ = 300 rad/s</text>
+          <text x="120" y="178" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">C₁ = 1 N·m</text>
+          <text x="440" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#3D7E5F">SORTIE</text>
+          <text x="428" y="160" font-family="JetBrains Mono" font-size="12" fill="#3D7E5F">ω₂ = ?</text>
+          <text x="428" y="178" font-family="JetBrains Mono" font-size="12" fill="#3D7E5F">C₂ = ?</text>
+          <text x="252" y="18" font-family="JetBrains Mono" font-size="12" fill="#8a6313">rapport 1/3</text>
+        </svg>
+      </div>
+      <div class="row"><span>a) Vitesse de sortie : ω₂ =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
+      <div class="row"><span>b) Couple de sortie (η = 100 %) : C₂ =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+      <div class="row"><span>c) En réalité η = 0,9. Puissance de sortie : P₂ = η·P₁ =</span><input class="numin" id="eC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
       <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="eFb"></div>
-      <div class="exo-sol" id="eSol"><b>a)</b> E = P × t = 1500 × 2 = <b>3000 Wh</b>.<br><b>b)</b> 3000 Wh = <b>3 kWh</b> (1 kWh = 1000 Wh). C'est l'unité de ta facture d'électricité.</div>
+      <div class="exo-sol" id="eSol"><b>a)</b> ω₂ = 300/3 = <b>100 rad/s</b>.<br><b>b)</b> Sans pertes, P se conserve : C₂ = C₁·ω₁/ω₂ = 300/100 = <b>3 N·m</b> (vitesse ÷3 → couple ×3).<br><b>c)</b> P₁ = 1×300 = 300 W → P₂ = 0,9 × 300 = <b>270 W</b> (le reste part en chaleur dans les dentures).</div>
     </section>
+
+    <section class="exo-card" id="f">
+      <h2><span class="num">F</span> Le podium des machines 🏆</h2>
+      <p class="task">🎯 Récapitule tes mesures des exercices A, B et D… et remets chaque machine à sa place !</p>
+      <div class="match" id="fMatch"></div>
+      <div class="match" id="f2Match" style="margin-top:14px"></div>
+      <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="fFb"></div>
+      <div class="exo-sol" id="fSol"><b>Podium :</b> 🥇 treuil (400 W) · 🥈 perceuse (314 W) · 🥉 vélo (250 W).<br><b>Besoins :</b> la visseuse a besoin de <b>couple</b> (serrer fort, tourner lentement) ; le ventilateur de <b>vitesse</b> (brasser l'air, effort minime) ; le treuil de <b>couple</b> énorme (soulever) — d'où son réducteur intégré.</div>
+    </section>
+
+    <section class="exo-card" id="g">
+      <h2><span class="num">★</span> L'énergie de la pizza 🍕</h2>
+      <p class="task">Le four du foyer (P = 2000 W) chauffe ta part de pizza pendant 90 s.</p>
+      <div class="row"><span>Énergie consommée : E = P·t =</span><input class="numin" id="gA" inputmode="decimal" placeholder="?"><span class="unit">J</span></div>
+      <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="gFb"></div>
+      <div class="exo-sol" id="gSol">E = P·t = 2000 × 90 = <b>180 000 J</b> (180 kJ). La puissance est un débit (des joules par seconde) : le compteur du foyer, lui, facture les joules accumulés.</div>
+    </section>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice">🧮</button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
   </div>
 
 <script>
@@ -122,57 +233,154 @@
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
-/* ---- A : convertisseur + roue ---- */
+/* ---------- calculatrice ---------- */
 (function(){
-  var cv=el('wheel'); var g=cv&&cv.getContext?cv.getContext('2d'):null; var W=180,H=180;
-  var n=1500, ang=0;
-  function update(){ el('nV').textContent=n; el('nOut').textContent=n; el('nEq').textContent=n;
-    var w=2*Math.PI*n/60; el('wOut').textContent=w.toFixed(1); }
-  el('nR').addEventListener('input',function(e){ n=+e.target.value; update(); });
-  update();
-  function draw(){ if(!g){ return; } ang += (n/6000)*0.5; g.clearRect(0,0,W,H);
-    g.save(); g.translate(90,90); g.rotate(ang);
-    g.fillStyle='#eef3f6'; g.strokeStyle='#2E6A8E'; g.lineWidth=3; g.beginPath(); g.arc(0,0,66,0,7); g.fill(); g.stroke();
-    for(var i=0;i<12;i++){ var a=i/12*Math.PI*2; g.strokeStyle='#cfdbe4'; g.lineWidth=2; g.beginPath(); g.moveTo(Math.cos(a)*20,Math.sin(a)*20); g.lineTo(Math.cos(a)*62,Math.sin(a)*62); g.stroke(); }
-    g.fillStyle='#2E6A8E'; g.beginPath(); g.arc(0,0,9,0,7); g.fill();
-    g.fillStyle='#C0492E'; g.beginPath(); g.arc(0,-46,7,0,7); g.fill();
-    g.restore();
-    requestAnimationFrame(draw); }
-  requestAnimationFrame(draw);
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp');
+  function show(){ var s=cur; if(s.length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){
+    a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b;
+    return b;
+  }
+  function clean(x){ if(!isFinite(x)) return 'Err'; var r=Math.round(x*1e9)/1e9; return String(r); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true;
+    }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
 })();
 
-/* ---- helper corrections verrouillées ---- */
+/* ---------- banc moteur (C) ---------- */
+var Nrpm=0;
+(function(){
+  var cv=el('cvBanc'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var C=3, ang=0;
+  el('nSlider').addEventListener('input',function(){ Nrpm=+this.value; el('nVal').textContent=Nrpm+' tr/min'; });
+  function step(){
+    var w=2*Math.PI*Nrpm/60, P=C*w;
+    ang+=w*0.0016;
+    g.clearRect(0,0,W,H);
+    // moteur + arbre + volant
+    g.fillStyle='#e7eef2'; g.strokeStyle='#2E6A8E'; g.lineWidth=2.5; g.beginPath(); g.rect(30,70,110,70); g.fill(); g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('moteur',85,110);
+    g.strokeStyle='#5C544B'; g.lineWidth=7; g.beginPath(); g.moveTo(140,105); g.lineTo(210,105); g.stroke();
+    g.save(); g.translate(250,105); g.rotate(ang);
+    g.fillStyle='#f3ead6'; g.strokeStyle='#BD8A2A'; g.lineWidth=3; g.beginPath(); g.arc(0,0,40,0,7); g.fill(); g.stroke();
+    g.strokeStyle='#BD8A2A'; g.lineWidth=3; g.beginPath(); g.moveTo(0,0); g.lineTo(0,-34); g.stroke(); g.restore();
+    g.fillStyle='#8a6313'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('frein : C = 3 N·m',250,168);
+    // mesures
+    g.fillStyle='#2A2622'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('ω = '+w.toFixed(1).replace('.',',')+' rad/s',340,54);
+    g.fillText('P = C·ω = '+Math.round(P)+' W',340,82);
+    // jauge P avec cible 300
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.fillText('0 W',340,118);
+    g.textAlign='right'; g.fillText('630 W',540,118);
+    g.fillStyle='#eee6d6'; g.fillRect(340,124,200,16);
+    g.fillStyle= Math.abs(P-300)<8 ? '#3D7E5F' : '#2E6A8E';
+    g.fillRect(340,124,Math.min(200,200*P/630),16);
+    var tx=340+200*300/630;
+    g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.setLineDash([4,3]); g.beginPath(); g.moveTo(tx,118); g.lineTo(tx,146); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#C0492E'; g.textAlign='center'; g.fillText('cible 300 W',tx,160);
+    if(Math.abs(P-300)<8){ g.fillStyle='#3D7E5F'; g.font='800 14px "Bricolage Grotesque",sans-serif'; g.textAlign='left'; g.fillText('🎯 objectif atteint !',340,192); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* helpers */
+function buildMatch(boxId, prefix, scen){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
   el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
   el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
 }
-/* ---- B ---- */
+
+/* A */
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  var a=numf(el('aA').value), b=numf(el('aB').value);
+  var okA=Math.abs(a-157)<3, okB=Math.abs(b-314)<8;
+  if(okA&&okB) return {ok:true,msg:'✓ 157 rad/s et 314 W : la perceuse est auscultée.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (ω = 2πN/60)')+' '+(okB?'b✓':'b✗ (P = C·ω, avec ω en rad/s)')};
+});
+
+/* B */
+var B_SCEN=[{sc:'b) Un moteur « débridé » à 500 W au même ω aurait un couple de 20 N·m, mais le vélo serait :', ok:'plus homologué comme vélo (>250 W)', opts:['— choisir —','plus homologué comme vélo (>250 W)','plus léger','plus silencieux']}];
+buildMatch('bMatch','b',B_SCEN);
 lockExo('bCheck','bShow','bSol','bFb',function(){
-  var p=numf(el('bP').value), c=numf(el('bC').value);
-  var okP=Math.abs(p-200)<1, okC=Math.abs(c-6)<0.2;
-  if(okP&&okC) return {ok:true,msg:'✓ Parfait : 200 W et 6 N·m.'};
-  return {ok:false,msg:'✗ '+(okP?'a✓':'a✗')+' '+(okC?'b✓':'b✗')+' — voir la correction.'};
+  var a=numf(el('bA').value); var okA=Math.abs(a-10)<0.5; var okM=checkMatch('b',B_SCEN);
+  if(okA&&okM) return {ok:true,msg:'✓ 10 N·m — et 250 W, c\u2019est la loi !'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (C = P/ω)')+' '+(okM?'b✓':'b✗')};
 });
-/* ---- C ---- */
+
+/* C */
 lockExo('cCheck','cShow','cSol','cFb',function(){
-  var p=numf(el('cP').value), w=numf(el('cW').value), c=numf(el('cC').value);
-  var okP=Math.abs(p-600)<2, okW=Math.abs(w-100)<1, okC=Math.abs(c-6)<0.2;
-  if(okP&&okW&&okC) return {ok:true,msg:'✓ Parfait : 600 W · 100 rad/s · 6 N·m.'};
-  return {ok:false,msg:'✗ '+(okP?'a✓':'a✗')+' '+(okW?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
+  var a=numf(el('cA').value), b=numf(el('cB').value);
+  var okA=Math.abs(a-100)<3, okB=Math.abs(b-955)<20;
+  if(okA&&okB) return {ok:true,msg:'✓ 100 rad/s soit ≈955 tr/min : mission accomplie.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (ω = P/C)')+' '+(okB?'b✓':'b✗ (N = 60ω/2π — vise la jauge verte !)')};
 });
-/* ---- D ---- */
+
+/* D */
 lockExo('dCheck','dShow','dSol','dFb',function(){
-  var p=numf(el('dP').value), e=numf(el('dE').value);
-  var okP=Math.abs(p-480)<1, okE=Math.abs(e-0.8)<0.02;
-  if(okP&&okE) return {ok:true,msg:'✓ Parfait : 480 W et η = 0,80.'};
-  return {ok:false,msg:'✗ '+(okP?'a✓':'a✗')+' '+(okE?'b✓':'b✗')+' — voir la correction.'};
+  var a=numf(el('dA').value), b=numf(el('dB').value), c=numf(el('dC').value);
+  var okA=Math.abs(a-200)<5, okB=Math.abs(b-400)<10, okC=Math.abs(c-0.4)<0.05;
+  if(okA&&okB&&okC) return {ok:true,msg:'✓ 200 N·m, 400 W, 0,4 m/s — et P = F·v recoupe !'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (C = F·R)')+' '+(okB?'b✓':'b✗ (P = C·ω)')+' '+(okC?'c✓':'c✗ (v = R·ω)')};
 });
-/* ---- E ---- */
+
+/* E */
 lockExo('eCheck','eShow','eSol','eFb',function(){
-  var wh=numf(el('eWh').value), k=numf(el('eKwh').value);
-  var okW=Math.abs(wh-3000)<5, okK=Math.abs(k-3)<0.05;
-  if(okW&&okK) return {ok:true,msg:'✓ Parfait : 3000 Wh = 3 kWh.'};
-  return {ok:false,msg:'✗ '+(okW?'a✓':'a✗')+' '+(okK?'b✓':'b✗')+' — voir la correction.'};
+  var a=numf(el('eA').value), b=numf(el('eB').value), c=numf(el('eC').value);
+  var okA=Math.abs(a-100)<3, okB=Math.abs(b-3)<0.2, okC=Math.abs(c-270)<8;
+  if(okA&&okB&&okC) return {ok:true,msg:'✓ 100 rad/s, 3 N·m, 270 W : réducteur maîtrisé.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (÷3)')+' '+(okB?'b✓':'b✗ (P conservée)')+' '+(okC?'c✓':'c✗ (P₂ = 0,9×P₁)')};
+});
+
+/* F */
+var F_SCEN=[
+  {sc:'🥇 La machine la PLUS puissante :', ok:'le treuil (400 W)', opts:['— choisir —','la perceuse (314 W)','le vélo (250 W)','le treuil (400 W)']},
+  {sc:'🥉 La machine la MOINS puissante :', ok:'le vélo (250 W)', opts:['— choisir —','la perceuse (314 W)','le vélo (250 W)','le treuil (400 W)']}
+];
+var F2_SCEN=[
+  {sc:'🔧 La visseuse a surtout besoin de :', ok:'couple (serrer fort, lentement)', opts:['— choisir —','couple (serrer fort, lentement)','vitesse (tourner vite)']},
+  {sc:'🌀 Le ventilateur a surtout besoin de :', ok:'vitesse (brasser l\u2019air)', opts:['— choisir —','couple (effort énorme)','vitesse (brasser l\u2019air)']}
+];
+buildMatch('fMatch','f',F_SCEN);
+buildMatch('f2Match','f2',F2_SCEN);
+lockExo('fCheck','fShow','fSol','fFb',function(){
+  var ok1=checkMatch('f',F_SCEN), ok2=checkMatch('f2',F2_SCEN);
+  if(ok1&&ok2) return {ok:true,msg:'✓ Podium et besoins : tout est à sa place.'};
+  return {ok:false,msg:'✗ '+(ok1?'podium✓':'podium à revoir (tes mesures de A, B, D)')+' · '+(ok2?'besoins✓':'besoins✗ (couple = effort, vitesse = rapidité)')};
+});
+
+/* G */
+lockExo('gCheck','gShow','gSol','gFb',function(){
+  var a=numf(el('gA').value); var okA=Math.abs(a-180000)<2000;
+  if(okA) return {ok:true,msg:'✓ 180 000 J — bon appétit.'};
+  return {ok:false,msg:'✗ E = P·t, avec t en secondes.'};
 });
 </script>
 </body>

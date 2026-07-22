@@ -83,7 +83,7 @@
 <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
-var st='menu', score=0, streak=0, lives=3, best=0, answered=false, cur=null, reqStart=0, reqDur=5000;
+var st='menu', score=0, streak=0, lives=3, best=0, answered=false, cur=null, reqStart=0, reqDur=15000;
 
 function pick(a){ return a[(Math.random()*a.length)|0]; }
 function fmt(v){ if(Math.abs(v-Math.round(v))<1e-9) return String(Math.round(v)); return (Math.round(v*10)/10).toString().replace('.',','); }
@@ -132,7 +132,7 @@ function newRound(){
   var box=el('opts'); box.innerHTML='';
   cur.vals.forEach(function(v,i){ var b=document.createElement('button'); b.className='opt'; b.dataset.i=i;
     b.innerHTML=fmt(v)+' '+cur.unit+'<span class="k">('+(i+1)+')</span>'; b.addEventListener('click',function(){ answer(i); }); box.appendChild(b); });
-  reqStart=performance.now(); reqDur=Math.max(2400, 5000-score*8);
+  reqStart=performance.now(); reqDur=Math.max(7200, 15000-score*8);
 }
 
 function answer(i){
