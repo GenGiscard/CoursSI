@@ -234,6 +234,16 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
   return function(){ return phase; };
 }
 
+/* pointe de flèche orientée par un vecteur direction (dx,dy) */
+function arrowHead(g,x,y,dx,dy,size,color){
+  var L=Math.sqrt(dx*dx+dy*dy)||1; dx/=L; dy/=L;
+  g.fillStyle=color; g.beginPath();
+  g.moveTo(x,y);
+  g.lineTo(x-dx*size-dy*size*0.55, y-dy*size+dx*size*0.55);
+  g.lineTo(x-dx*size+dy*size*0.55, y-dy*size-dx*size*0.55);
+  g.closePath(); g.fill();
+}
+
 /* ---------- ANIM s2 : P = C·ω (◀ ▶) ---------- */
 (function(){
   var cv=el('cvRot'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
@@ -253,7 +263,7 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
     g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(0,0,10,0,7); g.fill(); g.restore();
     // flèche de couple (courbe)
     g.strokeStyle='#2E6A8E'; g.lineWidth=4; g.beginPath(); g.arc(cx,cy,R+16,-1.9,0.6); g.stroke();
-    var ex=cx+Math.cos(0.6)*(R+16), ey=cy+Math.sin(0.6)*(R+16); g.fillStyle='#2E6A8E'; g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex-10,ey-2); g.lineTo(ex-2,ey+9); g.closePath(); g.fill();
+    var ex=cx+Math.cos(0.6)*(R+16), ey=cy+Math.sin(0.6)*(R+16); arrowHead(g,ex,ey,-Math.sin(0.6),Math.cos(0.6),12,'#2E6A8E');
     g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='center';
     g.fillStyle='#2E6A8E'; g.fillText('C = 2 N·m',cx,cy-R-26);
     if(phase>=1){ g.fillStyle='#C0492E'; g.fillText('ω = 100 rad/s',cx+150,cy-40); }

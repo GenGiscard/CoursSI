@@ -226,6 +226,16 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
   return function(){ return phase; };
 }
 
+/* pointe de flèche orientée par un vecteur direction (dx,dy) */
+function arrowHead(g,x,y,dx,dy,size,color){
+  var L=Math.sqrt(dx*dx+dy*dy)||1; dx/=L; dy/=L;
+  g.fillStyle=color; g.beginPath();
+  g.moveTo(x,y);
+  g.lineTo(x-dx*size-dy*size*0.55, y-dy*size+dx*size*0.55);
+  g.lineTo(x-dx*size+dy*size*0.55, y-dy*size-dx*size*0.55);
+  g.closePath(); g.fill();
+}
+
 /* ---------- ANIM s2 : flux d'énergie (◀ ▶) ---------- */
 (function(){
   var cv=el('cvFlow'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
@@ -252,7 +262,7 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
     // ordre de la chaîne d'information vers DISTRIBUER
     var xd=x0+2*(bw+gap)+bw/2;
     g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xd,40); g.lineTo(xd,by); g.stroke(); g.setLineDash([]);
-    g.fillStyle='#2E6A8E'; g.beginPath(); g.moveTo(xd,by); g.lineTo(xd-5,by-8); g.lineTo(xd+5,by-8); g.closePath(); g.fill();
+    arrowHead(g,xd,by,0,1,9,'#2E6A8E');
     g.font='11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('ordre (chaîne d\u2019information)',xd,32);
     // effecteur qui bouge en phase 3
     var ex=x0+5*(bw+gap)+bw/2, ey=by+bh+40;
@@ -322,8 +332,8 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
         var st=stages[i];
         var showLoss = prog*(stages.length) > i;
         if(showLoss){
-          g.strokeStyle='#C0492E'; g.lineWidth=Math.max(2,widthFor(st.loss)); g.beginPath(); g.moveTo(st.x, yc+wcur/2); g.lineTo(st.x, yc+wcur/2+42); g.stroke();
-          g.fillStyle='#C0492E'; g.beginPath(); g.moveTo(st.x, yc+wcur/2+52); g.lineTo(st.x-6, yc+wcur/2+42); g.lineTo(st.x+6, yc+wcur/2+42); g.closePath(); g.fill();
+          var lw=Math.max(3,widthFor(st.loss)*0.7); g.strokeStyle='#C0492E'; g.lineWidth=lw; g.beginPath(); g.moveTo(st.x, yc+wcur/2); g.lineTo(st.x, yc+wcur/2+42); g.stroke();
+          arrowHead(g,st.x,yc+wcur/2+54,0,1,Math.max(10,lw*1.6),'#C0492E');
           g.font='11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('−'+st.loss+' W', st.x, yc+wcur/2+72);
           g.fillStyle='#5C544B'; g.fillText('pertes', st.x, yc+wcur/2+88);
           P-=st.loss;
