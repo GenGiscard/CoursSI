@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CONVERT RUSH · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:540px;margin:0 auto;padding:16px}
+  .hud{display:flex;gap:10px;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-bottom:8px}
+  .hud b{color:var(--steel);font-size:18px}
+  .lives{letter-spacing:2px}
+  .stagewrap{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fcfaf4;box-shadow:0 8px 26px rgba(90,80,60,.08)}
+  .panel{padding:26px 20px 18px;text-align:center;min-height:150px;display:flex;flex-direction:column;justify-content:center}
+  .givens{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--ink)}
+  .givens .g{display:inline-block;background:#eef3f6;border:1px solid var(--line);border-radius:8px;padding:6px 12px;margin:4px}
+  .unknown{font-weight:800;font-size:26px;margin-top:12px;color:var(--copper)}
+  .timer{height:6px;background:#eee6d6}
+  .timer>i{display:block;height:100%;background:var(--amber);width:100%}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+  .opt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;background:#fff;border:1px solid var(--line);border-bottom:3px solid var(--steel);border-radius:12px;padding:14px 8px;cursor:pointer;transition:.1s}
+  .opt:hover{transform:translateY(-2px)} .opt .k{font-size:11px;color:var(--sub);font-weight:400;margin-left:6px}
+  .opt.ok{border-color:var(--green);background:#eef6f0} .opt.no{border-color:var(--copper);background:#fbeee9}
+  .hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;font-family:'JetBrains Mono',monospace}
+  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(248,244,236,.94);backdrop-filter:blur(2px);padding:26px}
+  .overlay.hide{display:none}
+  .overlay h2{font-size:30px;font-weight:800;margin:0 0 4px}
+  .overlay p{color:var(--sub);max-width:34ch;margin:6px 0 16px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:10px;padding:13px 24px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.06)} .big{font-size:46px;font-weight:800;color:var(--green)}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">CONVERT RUSH<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hud">
+      <span>Score : <b id="hS">0</b></span>
+      <span>Série : <b id="hK">×1</b></span>
+      <span class="lives" id="hL">❤❤❤</span>
+    </div>
+    <div class="stagewrap">
+      <div class="panel">
+        <div class="tag" id="pTag">—</div>
+        <div class="givens" id="pGiv"></div>
+        <div class="unknown" id="pUnk">—</div>
+      </div>
+      <div class="timer"><i id="timerBar"></i></div>
+      <div class="overlay" id="ovMenu">
+        <h2>CONVERT RUSH</h2>
+        <p>Calcule ou convertis <b>vite</b> ! P = C·ω, tr/min → rad/s, P = U·I, E = P·t… Choisis la bonne réponse avant la fin du chrono.</p>
+        <button class="btn" id="startBtn">Démarrer</button>
+      </div>
+      <div class="overlay hide" id="ovOver">
+        <div style="font-family:'JetBrains Mono',monospace;color:var(--copper);letter-spacing:.16em;text-transform:uppercase;font-size:12px">Fin de partie</div>
+        <div class="big" id="oScore">0</div>
+        <p id="oMsg"></p>
+        <button class="btn" id="againBtn">Rejouer</button>
+      </div>
+    </div>
+
+    <div class="opts" id="opts"></div>
+    <div class="hint">Clique une réponse · ou touches 1 · 2 · 3 · 4</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var st='menu', score=0, streak=0, lives=3, best=0, answered=false, cur=null, reqStart=0, reqDur=5000;
+
+function pick(a){ return a[(Math.random()*a.length)|0]; }
+function fmt(v){ if(Math.abs(v-Math.round(v))<1e-9) return String(Math.round(v)); return (Math.round(v*10)/10).toString().replace('.',','); }
+
+function makeProblem(){
+  var t=(Math.random()*5)|0, giv='', unk='', ans=0, unit='', tag='';
+  if(t===0){ // P = C·ω
+    var C=pick([2,3,4,5,6]), w=pick([20,30,40,50,100]); ans=C*w; unit='W'; tag='P = C · ω';
+    giv='<span class="g">C = '+C+' N·m</span><span class="g">ω = '+w+' rad/s</span>'; unk='P = ?';
+    var d=[C+w, C*w*2, Math.round(C*w/2)];
+    return build(tag,giv,unk,ans,unit,d);
+  } else if(t===1){ // C = P/ω
+    var C2=pick([2,4,5,6]), w2=pick([20,50,100]); var P=C2*w2; ans=C2; unit='N·m'; tag='C = P / ω';
+    giv='<span class="g">P = '+P+' W</span><span class="g">ω = '+w2+' rad/s</span>'; unk='C = ?';
+    var d1=[P-w2, Math.round(P/w2*2), P+w2];
+    return build(tag,giv,unk,ans,unit,d1);
+  } else if(t===2){ // ω = 2π·n/60
+    var n=pick([300,600,900,1200,1500]); ans=Math.round(2*Math.PI*n/60*10)/10; unit='rad/s'; tag='ω = 2π·n / 60';
+    giv='<span class="g">n = '+n+' tr/min</span>'; unk='ω = ?';
+    var d2=[Math.round(n/60*10)/10, Math.round(2*Math.PI*n*10)/10 % 1000, Math.round(n/6.28*10)/10];
+    return build(tag,giv,unk,ans,unit,d2);
+  } else if(t===3){ // P = U·I
+    var U=pick([12,24,48]), I=pick([2,3,5,10]); ans=U*I; unit='W'; tag='P = U · I';
+    giv='<span class="g">U = '+U+' V</span><span class="g">I = '+I+' A</span>'; unk='P = ?';
+    var d3=[U+I, Math.round(U/I), U*I*2];
+    return build(tag,giv,unk,ans,unit,d3);
+  } else { // E = P·t (kWh)
+    var Pw=pick([500,1000,1500,2000]), h=pick([1,2,3,4]); ans=Pw*h/1000; unit='kWh'; tag='E = P · t';
+    giv='<span class="g">P = '+Pw+' W</span><span class="g">t = '+h+' h</span>'; unk='E = ?  (kWh)';
+    var d4=[Pw*h, Pw*h/100, Pw+h];
+    return build(tag,giv,unk,ans,unit,d4);
+  }
+}
+function build(tag,giv,unk,ans,unit,distr){
+  var vals=[ans]; distr.forEach(function(d){ if(vals.every(function(v){return Math.abs(v-d)>1e-6;}) && d>=0) vals.push(d); });
+  var guard=0; while(vals.length<4 && guard<30){ guard++; var cand=ans*(1+ (Math.random()<0.5?-1:1)*(0.2+Math.random())); cand=Math.round(cand*10)/10; if(cand>=0 && vals.every(function(v){return Math.abs(v-cand)>1e-6;})) vals.push(cand); }
+  // mélange
+  for(var i=vals.length-1;i>0;i--){ var j=(Math.random()*(i+1))|0; var tmp=vals[i]; vals[i]=vals[j]; vals[j]=tmp; }
+  var correct=-1; vals.forEach(function(v,idx){ if(Math.abs(v-ans)<1e-6) correct=idx; });
+  return {tag:tag,giv:giv,unk:unk,ans:ans,unit:unit,vals:vals,correct:correct};
+}
+
+function newRound(){
+  answered=false; cur=makeProblem();
+  el('pTag').textContent=cur.tag; el('pGiv').innerHTML=cur.giv; el('pUnk').textContent=cur.unk;
+  var box=el('opts'); box.innerHTML='';
+  cur.vals.forEach(function(v,i){ var b=document.createElement('button'); b.className='opt'; b.dataset.i=i;
+    b.innerHTML=fmt(v)+' '+cur.unit+'<span class="k">('+(i+1)+')</span>'; b.addEventListener('click',function(){ answer(i); }); box.appendChild(b); });
+  reqStart=performance.now(); reqDur=Math.max(2400, 5000-score*8);
+}
+
+function answer(i){
+  if(st!=='play'||answered) return; answered=true;
+  var ok=(i===cur.correct);
+  var el2=(performance.now()-reqStart)/reqDur, speed=Math.max(0,1-el2);
+  var btn=document.querySelector('.opt[data-i="'+i+'"]');
+  if(ok){ if(btn) btn.classList.add('ok'); streak++; var pts=10+Math.round(speed*10)+streak*2; score+=pts;
+    el('hS').textContent=score; el('hK').textContent='×'+(1+Math.floor(streak/3)); setTimeout(next,420);
+  } else { if(btn) btn.classList.add('no'); var good=document.querySelector('.opt[data-i="'+cur.correct+'"]'); if(good) good.classList.add('ok');
+    streak=0; lives--; el('hK').textContent='×1'; drawLives(); if(lives<=0){ return over(); } setTimeout(next,780); }
+}
+function miss(){ if(st!=='play'||answered) return; answered=true; streak=0; lives--; el('hK').textContent='×1'; drawLives();
+  var good=document.querySelector('.opt[data-i="'+cur.correct+'"]'); if(good) good.classList.add('ok'); if(lives<=0){ return over(); } setTimeout(next,780); }
+function next(){ if(st!=='play') return; newRound(); }
+function drawLives(){ el('hL').textContent='❤❤❤'.slice(0,Math.max(0,lives))+'♡♡♡'.slice(0,Math.max(0,3-lives)); }
+
+function over(){ st='over'; if(score>best)best=score; el('oScore').textContent=score;
+  el('oMsg').textContent='Score '+score+' (record '+best+'). Pense aux unités : ω en rad/s, P en W, E en Wh/kWh !'; el('ovOver').classList.remove('hide'); }
+
+function loop(){ if(st==='play'&&!answered){ var e=(performance.now()-reqStart)/reqDur; el('timerBar').style.width=Math.max(0,(1-e)*100)+'%'; if(e>=1) miss(); }
+  requestAnimationFrame(loop); }
+
+function start(){ st='play'; score=0; streak=0; lives=3; el('hS').textContent='0'; el('hK').textContent='×1'; drawLives();
+  el('ovMenu').classList.add('hide'); el('ovOver').classList.add('hide'); newRound(); }
+el('startBtn').addEventListener('click',start);
+el('againBtn').addEventListener('click',start);
+document.addEventListener('keydown',function(e){ if(e.key>='1'&&e.key<='4'){ var i=+e.key-1; if(cur&&cur.vals[i]!==undefined) answer(i); }
+  else if(e.code==='Space'&&(st==='menu'||st==='over')){ e.preventDefault(); start(); } });
+
+drawLives(); requestAnimationFrame(loop);
+</script>
+</body>
+</html>

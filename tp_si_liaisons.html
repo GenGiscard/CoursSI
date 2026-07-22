@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Les liaisons mécaniques · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chal{font-weight:800;font-size:19px;margin:8px 0 4px}
+  .chal .cnum{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--amber)}
+  .ddlgrid{display:grid;grid-template-columns:repeat(3,minmax(90px,130px));gap:10px;margin:12px 0}
+  .ddlbtn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 8px;cursor:pointer;text-align:center;transition:.12s}
+  .ddlbtn small{display:block;font-weight:400;font-size:11px;color:var(--sub)}
+  .ddlbtn:hover{border-color:var(--steel)}
+  .ddlbtn.sel{border-color:var(--steel);background:#eef3f6}
+  .ddlbtn.good{border-color:var(--green);background:#eef6f0}
+  .ddlbtn.bad{border-color:var(--copper);background:#fbeee9}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  .match select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Les liaisons mécaniques<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Qui bouge, qui bloque ?</h1>
+      <p class="lede">Coche les mouvements autorisés, associe les liaisons à leurs degrés de liberté, et reconnais-les dans les guidages réels.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Coche les mouvements autorisés</h2>
+      <p class="task">🎯 Pour chaque liaison, coche les mouvements <b>autorisés</b> parmi les 6 (translations T et rotations R selon x, y, z), puis vérifie.</p>
+      <div class="chal" id="aTitle">—</div>
+      <div class="ddlgrid" id="aGrid"></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aNext" disabled>Défi suivant ▶</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"></div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Combien de degrés de liberté ?</h2>
+      <p class="task">🎯 Associe chaque liaison à son nombre de ddl.</p>
+      <div class="match" id="bMatch"></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>Encastrement → 0</b> (tout bloqué) · <b>Pivot glissant → 2</b> (1 T + 1 R même axe) · <b>Rotule → 3</b> (3 R) · <b>Appui plan → 3</b> (2 T + 1 R).</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Du guidage réel à la liaison</h2>
+      <p class="task">🎯 Quelle liaison chaque solution technique réalise-t-elle ?</p>
+      <div class="match" id="cMatch"></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>Roulement à billes</b> → pivot · <b>Rail de tiroir</b> → glissière · <b>Système vis-écrou</b> → hélicoïdale · <b>Boule d'attelage</b> → rotule.<br>Le schéma cinématique remplace chaque solution réelle par le symbole de la liaison qu'elle réalise.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Compter les ddl</h2>
+      <p class="task">Un solide libre possède 6 degrés de liberté.</p>
+      <div class="row"><span>a) Combien de mouvements une liaison <b>rotule</b> bloque-t-elle ?</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><span>b) Combien de ddl reste-t-il avec un <b>appui plan</b> ?</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> La rotule autorise 3 rotations → elle bloque 6 − 3 = <b>3 mouvements</b> (les 3 translations).<br><b>b)</b> L'appui plan autorise 2 translations + 1 rotation = <b>3 ddl</b>.</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Choix de conception</h2>
+      <p class="task">Pour monter une porte sur son cadre, on choisit des charnières (liaison <b>pivot</b>) plutôt qu'une <b>rotule</b>.</p>
+      <p>Pourquoi ?</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">La rotule coûte toujours plus cher</button>
+        <button data-v="1">On ne veut qu'UNE rotation : les autres mouvements doivent être bloqués</button>
+        <button data-v="2">La rotule ne peut pas tourner</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>On ne veut qu'une seule rotation.</b> Une porte doit pivoter autour d'un axe vertical, et rien d'autre : une rotule (3 rotations) la laisserait basculer dans tous les sens. On choisit la liaison qui autorise <b>exactement</b> les mouvements utiles — ni plus, ni moins. C'est le cœur du choix d'une liaison.</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---- A : cocher les ddl (3 défis) ---- */
+(function(){
+  var DDL=[{k:'Tx',n:'T',a:'x'},{k:'Ty',n:'T',a:'y'},{k:'Tz',n:'T',a:'z'},{k:'Rx',n:'R',a:'x'},{k:'Ry',n:'R',a:'y'},{k:'Rz',n:'R',a:'z'}];
+  var CH=[
+    {name:'Liaison PIVOT d\u2019axe z', ok:['Rz'], sol:'Le pivot d\u2019axe z n\u2019autorise que la rotation Rz : 1 ddl.'},
+    {name:'Liaison GLISSIÈRE d\u2019axe x', ok:['Tx'], sol:'La glissière d\u2019axe x n\u2019autorise que la translation Tx : 1 ddl.'},
+    {name:'Liaison ROTULE', ok:['Rx','Ry','Rz'], sol:'La rotule autorise les 3 rotations (Rx, Ry, Rz) et aucune translation : 3 ddl.'}
+  ];
+  var idx=0, sel={}, locked=false;
+  function render(){
+    var ch=CH[idx]; locked=false; sel={};
+    el('aTitle').innerHTML='<span class="cnum">Défi '+(idx+1)+'/'+CH.length+'</span> · '+ch.name;
+    var gbox=el('aGrid'); gbox.innerHTML='';
+    DDL.forEach(function(d){ var b=document.createElement('button'); b.className='ddlbtn'; b.dataset.k=d.k;
+      b.innerHTML=d.k+'<small>'+(d.n==='T'?'translation':'rotation')+' '+d.a+'</small>';
+      b.addEventListener('click',function(){ if(locked) return; sel[d.k]=!sel[d.k]; b.classList.toggle('sel',!!sel[d.k]); });
+      gbox.appendChild(b); });
+    el('aFb').textContent=''; el('aFb').className='exo-fb';
+    el('aSol').classList.remove('show'); el('aNext').disabled=true;
+  }
+  el('aCheck').addEventListener('click',function(){
+    if(locked) return; var ch=CH[idx]; var allOk=true;
+    DDL.forEach(function(d){ var b=el('aGrid').querySelector('[data-k="'+d.k+'"]');
+      var should=ch.ok.indexOf(d.k)>=0, did=!!sel[d.k];
+      b.classList.remove('sel');
+      if(should&&did) b.classList.add('good');
+      else if(should&&!did){ b.classList.add('good'); allOk=false; }
+      else if(!should&&did){ b.classList.add('bad'); allOk=false; }
+    });
+    locked=true;
+    el('aFb').className='exo-fb '+(allOk?'ok':'no');
+    el('aFb').textContent=allOk?'✓ Exact !':'✗ Pas tout à fait — les cases vertes sont les bons mouvements.';
+    el('aSol').innerHTML=ch.sol; el('aSol').classList.add('show');
+    el('aNext').disabled=(idx>=CH.length-1);
+    if(idx>=CH.length-1&&allOk){ el('aFb').textContent+=' Défis terminés !'; }
+  });
+  el('aNext').addEventListener('click',function(){ if(idx<CH.length-1){ idx++; render(); } });
+  render();
+})();
+
+/* ---- helper corrections verrouillées ---- */
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+/* ---- B : liaisons → ddl ---- */
+(function(){
+  var scen=[
+    {sc:'Encastrement', ok:'0'},
+    {sc:'Pivot glissant', ok:'2'},
+    {sc:'Rotule (sphérique)', ok:'3'},
+    {sc:'Appui plan', ok:'3'}
+  ];
+  var opts=['— choisir —','0','1','2','3','4','5'];
+  var box=el('bMatch');
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id='bm'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="bsel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select><span style="font-family:\'JetBrains Mono\',monospace;font-size:13px;color:var(--sub)">ddl</span>';
+    box.appendChild(d); });
+  lockExo('bCheck','bShow','bSol','bFb',function(){
+    var all=true; scen.forEach(function(s,i){ var v=el('bsel'+i).value; var good=(v===s.ok); if(!good)all=false; el('bm'+i).className='m '+(good?'ok':'no'); });
+    return all?{ok:true,msg:'✓ Tous les ddl sont corrects !'}:{ok:false,msg:'✗ Certains ddl sont faux — voir la correction.'};
+  });
+})();
+/* ---- C : guidage réel → liaison ---- */
+(function(){
+  var scen=[
+    {sc:'Roulement à billes (arbre dans son palier)', ok:'Pivot'},
+    {sc:'Rail de tiroir', ok:'Glissière'},
+    {sc:'Système vis-écrou', ok:'Hélicoïdale'},
+    {sc:'Boule d\u2019attelage de remorque', ok:'Rotule'}
+  ];
+  var opts=['— choisir —','Pivot','Glissière','Hélicoïdale','Rotule','Encastrement'];
+  var box=el('cMatch');
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id='cm'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="csel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+  lockExo('cCheck','cShow','cSol','cFb',function(){
+    var all=true; scen.forEach(function(s,i){ var v=el('csel'+i).value; var good=(v===s.ok); if(!good)all=false; el('cm'+i).className='m '+(good?'ok':'no'); });
+    return all?{ok:true,msg:'✓ Toutes les liaisons sont reconnues !'}:{ok:false,msg:'✗ Certaines associations sont fausses — voir la correction.'};
+  });
+})();
+/* ---- D ---- */
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var a=numf(el('dA').value), b=numf(el('dB').value);
+  var okA=Math.abs(a-3)<0.5, okB=Math.abs(b-3)<0.5;
+  if(okA&&okB) return {ok:true,msg:'✓ Parfait : 3 mouvements bloqués, 3 ddl restants.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- E ---- */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : on autorise exactement les mouvements utiles.'};
+    return {ok:false,msg:'✗ Non — pense aux mouvements dont la porte a besoin.'};
+  });
+})();
+</script>
+</body>
+</html>

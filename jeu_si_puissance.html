@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>POWER FLOW · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:540px;margin:0 auto;padding:16px}
+  .hud{display:flex;gap:10px;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-bottom:8px}
+  .hud b{color:var(--steel);font-size:18px}
+  .lives{letter-spacing:2px}
+  .stagewrap{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fcfaf4;box-shadow:0 8px 26px rgba(90,80,60,.08)}
+  canvas#sc{display:block;width:100%;height:auto}
+  .timer{height:6px;background:#eee6d6}
+  .timer>i{display:block;height:100%;background:var(--amber);width:100%}
+  .ask{text-align:center;font-weight:800;font-size:17px;margin:12px 0 4px}
+  .ask small{display:block;font-weight:400;color:var(--sub);font-size:14px;font-family:'JetBrains Mono',monospace;margin-top:2px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+  .opt{text-align:center;background:#fff;border:1px solid var(--line);border-bottom:3px solid var(--steel);border-radius:12px;padding:12px 8px;cursor:pointer;transition:.1s}
+  .opt:hover{transform:translateY(-2px)}
+  .opt .z{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px}
+  .opt .k{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub)}
+  .opt.ok{border-color:var(--green);background:#eef6f0} .opt.no{border-color:var(--copper);background:#fbeee9}
+  .hint{text-align:center;color:var(--sub);font-size:13px;margin-top:10px;font-family:'JetBrains Mono',monospace}
+  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(248,244,236,.94);backdrop-filter:blur(2px);padding:26px}
+  .overlay.hide{display:none}
+  .overlay h2{font-size:30px;font-weight:800;margin:0 0 4px}
+  .overlay p{color:var(--sub);max-width:34ch;margin:6px 0 16px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:10px;padding:13px 24px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.06)} .big{font-size:46px;font-weight:800;color:var(--green)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">POWER FLOW<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hud">
+      <span>Score : <b id="hS">0</b></span>
+      <span>Série : <b id="hK">×1</b></span>
+      <span class="lives" id="hL">❤❤❤</span>
+    </div>
+    <div class="stagewrap">
+      <canvas id="sc" width="520" height="220" aria-label="Chaîne : moteur, réducteur, sortie"></canvas>
+      <div class="timer"><i id="timerBar"></i></div>
+      <div class="overlay" id="ovMenu">
+        <h2>POWER FLOW</h2>
+        <p>Le moteur tourne à une vitesse donnée. Choisis vite le bon <b>couple d'engrenages</b> pour obtenir la <b>vitesse de sortie</b> demandée : n<sub>sortie</sub> = n<sub>moteur</sub> × Z₁/Z₂.</p>
+        <button class="btn" id="startBtn">Lancer la chaîne</button>
+      </div>
+      <div class="overlay hide" id="ovOver">
+        <div style="font-family:'JetBrains Mono',monospace;color:var(--copper);letter-spacing:.16em;text-transform:uppercase;font-size:12px">Chaîne à l'arrêt</div>
+        <div class="big" id="oScore">0</div>
+        <p id="oMsg"></p>
+        <button class="btn" id="againBtn">Rejouer</button>
+      </div>
+    </div>
+
+    <div class="ask" id="ask">—<small id="askSub"></small></div>
+    <div class="opts" id="opts"></div>
+    <div class="hint">Clique un réducteur · ou touches 1 · 2 · 3 · 4</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var cv=el('sc'), g=cv.getContext('2d'), W=cv.width, H=cv.height;
+
+var st='menu', score=0, streak=0, lives=3, best=0, answered=false;
+var nMot=3000, target=1000, kCorrect=3, options=[], reqStart=0, reqDur=4500, curRatio=1/3, spin=0;
+
+var NMOTS=[3600,2400,1200,3000,1800];
+function pick(a){ return a[(Math.random()*a.length)|0]; }
+function newRound(){
+  answered=false;
+  nMot=pick(NMOTS);
+  var divs=[2,3,4,6].filter(function(k){ return nMot%k===0; });
+  kCorrect=pick(divs); target=nMot/kCorrect;
+  var ks=[kCorrect]; var pool=[1,2,3,4,5,6].filter(function(k){ return k!==kCorrect; });
+  while(ks.length<4 && pool.length){ var idx=(Math.random()*pool.length)|0; ks.push(pool.splice(idx,1)[0]); }
+  // mélange
+  for(var i=ks.length-1;i>0;i--){ var j=(Math.random()*(i+1))|0; var t=ks[i]; ks[i]=ks[j]; ks[j]=t; }
+  var Z1=12; options=ks.map(function(k){ return {k:k, Z1:Z1, Z2:Z1*k}; });
+  el('ask').innerHTML='Moteur : <b>'+nMot+' tr/min</b> → sortie voulue : <b>'+target+' tr/min</b><small id="askSub">quel réducteur choisir ?</small>';
+  renderOpts(); reqStart=performance.now(); reqDur=Math.max(2200, 4500-score*6);
+}
+function renderOpts(){ var box=el('opts'); box.innerHTML='';
+  options.forEach(function(o,i){ var b=document.createElement('button'); b.className='opt'; b.dataset.i=i;
+    b.innerHTML='<div class="z">Z₁='+o.Z1+' · Z₂='+o.Z2+'</div><div class="k">rapport 1/'+o.k+' <span style="color:#BD8A2A">('+(i+1)+')</span></div>';
+    b.addEventListener('click',function(){ answer(i); }); box.appendChild(b); }); }
+
+function answer(i){
+  if(st!=='play'||answered) return; answered=true;
+  var o=options[i]; var ok=(o.k===kCorrect);
+  var el2=(performance.now()-reqStart)/reqDur; var speed=Math.max(0,1-el2);
+  var btn=document.querySelector('.opt[data-i="'+i+'"]');
+  if(ok){ if(btn) btn.classList.add('ok'); streak++; var pts=10+Math.round(speed*10)+streak*2; score+=pts; curRatio=1/o.k; flash('#3D7E5F');
+    el('hS').textContent=score; el('hK').textContent='×'+(1+Math.floor(streak/3));
+    el('askSub')&&(el('askSub').textContent='✓ sortie '+target+' tr/min · couple ×'+o.k+' !');
+    setTimeout(next,560);
+  } else { if(btn) btn.classList.add('no'); var gi=-1; options.forEach(function(op,idx){ if(op.k===kCorrect) gi=idx; });
+    var good=document.querySelector('.opt[data-i="'+gi+'"]'); if(good) good.classList.add('ok');
+    streak=0; lives--; el('hK').textContent='×1'; drawLives(); flash('#C0492E');
+    if(lives<=0){ return over(); } setTimeout(next,900); }
+}
+function miss(){ if(st!=='play'||answered) return; answered=true; streak=0; lives--; el('hK').textContent='×1'; drawLives(); flash('#BD8A2A');
+  var gi=-1; options.forEach(function(op,idx){ if(op.k===kCorrect) gi=idx; }); var good=document.querySelector('.opt[data-i="'+gi+'"]'); if(good) good.classList.add('ok');
+  if(lives<=0){ return over(); } setTimeout(next,900); }
+function next(){ if(st!=='play') return; newRound(); }
+function drawLives(){ el('hL').textContent='❤❤❤'.slice(0,Math.max(0,lives))+'♡♡♡'.slice(0,Math.max(0,3-lives)); }
+function flash(c){ cv.style.boxShadow='inset 0 0 0 4px '+c; setTimeout(function(){ cv.style.boxShadow='none'; },220); }
+
+function over(){ st='over'; if(score>best)best=score; el('oScore').textContent=score;
+  el('oMsg').textContent='Score '+score+' (record '+best+'). Souviens-toi : plus on réduit la vitesse, plus le couple augmente !'; el('ovOver').classList.remove('hide'); }
+
+/* ---- décor : engrenages ---- */
+function gear(cx,cy,R,teeth,a,color,fill){
+  g.save(); g.translate(cx,cy); g.rotate(a);
+  g.beginPath(); for(var i=0;i<teeth;i++){ var t=i/teeth*Math.PI*2, r1=R, r2=R+9;
+    g.lineTo(Math.cos(t-0.11)*r1,Math.sin(t-0.11)*r1); g.lineTo(Math.cos(t-0.055)*r2,Math.sin(t-0.055)*r2);
+    g.lineTo(Math.cos(t+0.055)*r2,Math.sin(t+0.055)*r2); g.lineTo(Math.cos(t+0.11)*r1,Math.sin(t+0.11)*r1); }
+  g.closePath(); g.fillStyle=fill; g.fill(); g.strokeStyle=color; g.lineWidth=2.2; g.stroke();
+  g.beginPath(); g.arc(0,0,R*0.3,0,7); g.fillStyle='#fff'; g.fill(); g.strokeStyle=color; g.stroke();
+  g.strokeStyle=color; g.lineWidth=2.6; g.beginPath(); g.moveTo(0,0); g.lineTo(0,-R*0.82); g.stroke();
+  g.restore();
+}
+function render(){
+  g.clearRect(0,0,W,H);
+  if(st==='play'||st==='menu'){ spin+=0.05; }
+  // moteur (petite roue, rapide) à gauche
+  gear(150,110,38,10,spin,'#2E6A8E','#eef3f6');
+  // sortie (grande roue, lente) à droite selon curRatio
+  gear(330,112,66,18,-spin*curRatio,'#3D7E5F','#eef6f0');
+  g.textAlign='center'; g.font='700 12px "JetBrains Mono",monospace';
+  g.fillStyle='#2E6A8E'; g.fillText('MOTEUR',150,180); g.fillText(nMot+' tr/min',150,196);
+  g.fillStyle='#3D7E5F'; g.fillText('SORTIE',330,192);
+  // flèche flux
+  g.strokeStyle='#c9bfaa'; g.lineWidth=5; g.beginPath(); g.moveTo(200,110); g.lineTo(250,110); g.stroke();
+  g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.fillText('réducteur',245,90);
+  // timer
+  if(st==='play'&&!answered){ var e=(performance.now()-reqStart)/reqDur; el('timerBar').style.width=Math.max(0,(1-e)*100)+'%'; if(e>=1) miss(); }
+  requestAnimationFrame(render);
+}
+
+function start(){ st='play'; score=0; streak=0; lives=3; curRatio=1/3; el('hS').textContent='0'; el('hK').textContent='×1'; drawLives();
+  el('ovMenu').classList.add('hide'); el('ovOver').classList.add('hide'); newRound(); }
+el('startBtn').addEventListener('click',start);
+el('againBtn').addEventListener('click',start);
+document.addEventListener('keydown',function(e){ if(e.key>='1'&&e.key<='4'){ var i=+e.key-1; if(options[i]) answer(i); }
+  else if(e.code==='Space'&&(st==='menu'||st==='over')){ e.preventDefault(); start(); } });
+
+drawLives(); requestAnimationFrame(render);
+</script>
+</body>
+</html>

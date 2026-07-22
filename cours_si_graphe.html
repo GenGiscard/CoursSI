@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le graphe des liaisons — Cours SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.55}
+  .estic-bar{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .shell{display:flex;padding-top:48px;min-height:100vh}
+  .nav{position:sticky;top:48px;align-self:flex-start;height:calc(100vh - 48px);flex:none;width:250px;padding:22px 14px;overflow-y:auto;border-right:1px solid var(--line);background:linear-gradient(var(--cream),#F4EFE4)}
+  .nav .kick{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--copper);text-transform:uppercase;margin:0 8px 12px}
+  .navlink{display:flex;gap:10px;align-items:baseline;padding:9px 10px;border-radius:9px;color:var(--sub);text-decoration:none;cursor:pointer;transition:.15s;font-size:15px}
+  .navlink .n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber)}
+  .navlink:hover{background:#EFE8DA;color:var(--ink)}
+  .navlink.on{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 0 var(--line)}
+  .navlink.on .n{color:var(--copper)}
+  .main{flex:1 1 auto;min-width:0;padding:0 clamp(20px,4vw,64px) 90px}
+  .slide{min-height:calc(100vh - 48px);display:flex;flex-direction:column;justify-content:center;padding:40px 0;scroll-margin-top:60px}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--steel);text-transform:uppercase;margin:0 0 6px}
+  h2{font-size:clamp(28px,4.2vw,48px);line-height:1.05;margin:0 0 6px;font-weight:800;letter-spacing:-.01em}
+  .lede{font-size:clamp(19px,2.3vw,23px);color:var(--sub);max-width:62ch;margin:6px 0 18px}
+  p{max-width:64ch}
+  .pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--line);background:var(--paper);color:var(--sub);margin:2px 4px 2px 0}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .card .h{font-weight:800;font-size:17px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .card .dot{width:10px;height:10px;border-radius:3px;flex:none}
+  .card small{color:var(--sub)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center}
+  @media(max-width:820px){ .nav{display:none} .two{grid-template-columns:1fr} }
+  figure{margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
+  figure .lab{font-weight:700;color:var(--ink);margin-bottom:8px}
+  .cap{display:flex;gap:11px;align-items:center;margin-top:13px;min-height:42px}
+  .cap b{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--steel);flex:none}
+  .cap span{font-size:16px;color:var(--sub);flex:1}
+  .cap .stepbtn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;flex:none}
+  .cap .stepbtn:hover{border-color:var(--steel)}
+  .cap .stepbtn:disabled{opacity:.35;cursor:default}
+  .keyhint{position:fixed;bottom:12px;right:16px;z-index:15;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  ul.tight{max-width:64ch;padding-left:20px} ul.tight li{margin:6px 0}
+  ol.steps{max-width:64ch;padding-left:22px;font-size:18px} ol.steps li{margin:10px 0}
+  ol.steps b{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Le graphe des liaisons<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="shell">
+    <nav class="nav" id="nav"><p class="kick">Le graphe des liaisons</p></nav>
+    <main class="main" id="main">
+
+      <section class="slide" id="s1">
+        <p class="eyebrow">Sciences de l'ingénieur · Première</p>
+        <h2>Rendre un mécanisme lisible</h2>
+        <p class="lede">Un mécanisme réel compte des dizaines de pièces. Le <b>graphe des liaisons</b> le résume en quelques bulles et quelques traits.</p>
+        <div class="two">
+          <div>
+            <span class="pill">classes d'équivalence</span><span class="pill">graphe</span><span class="pill">schéma cinématique</span>
+            <p>Notre fil rouge : un <b>étau</b>. On tourne la vis → le mors avance et serre la pièce. Derrière ce geste simple : des groupes de pièces reliés par des liaisons. Le graphe va révéler cette structure.</p>
+          </div>
+          <figure><div class="lab">L'étau, notre fil rouge</div>
+            <svg viewBox="0 0 420 200" style="width:100%;height:auto;display:block" aria-label="Un étau : corps, mors mobile, vis">
+              <rect x="30" y="130" width="320" height="34" rx="4" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/>
+              <rect x="30" y="60" width="34" height="74" rx="4" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/>
+              <rect x="150" y="66" width="34" height="66" rx="4" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2"/>
+              <line x1="184" y1="100" x2="330" y2="100" stroke="#C0492E" stroke-width="8"/>
+              <line x1="330" y1="76" x2="330" y2="124" stroke="#C0492E" stroke-width="7" stroke-linecap="round"/>
+              <path d="M104 84 h30 M104 84 l8 -5 M104 84 l8 5" stroke="#BD8A2A" stroke-width="2.5" fill="none"/>
+              <text x="47" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">corps</text>
+              <text x="167" y="56" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D7E5F">mors mobile</text>
+              <text x="300" y="66" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C0492E">vis + poignée</text>
+              <text x="210" y="185" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#5C544B">on tourne la vis → le mors serre</text>
+            </svg>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="s2">
+        <p class="eyebrow">Étape 1</p>
+        <h2>Les classes d'équivalence</h2>
+        <p class="lede">On regroupe les pièces qui <b>n'ont aucun mouvement relatif</b> entre elles : chaque groupe est une <b>classe d'équivalence</b>.</p>
+        <figure><div class="lab">Regrouper les pièces de l'étau</div>
+          <canvas id="cvClasses" width="900" height="290" style="width:100%;height:auto;display:block" aria-label="Animation : classes d'équivalence de l'étau"></canvas>
+          <div class="cap"><button class="stepbtn" id="clPrev" aria-label="Étape précédente">◀</button><b id="clPh">①</b><span id="clCap">Les pièces de l'étau, chacune numérotée.</span><button class="stepbtn" id="clNext" aria-label="Étape suivante">▶</button></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s3">
+        <p class="eyebrow">La règle du jeu</p>
+        <h2>Comment regrouper ?</h2>
+        <div class="cards">
+          <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Même classe</div><small>Deux pièces <b>fixées ensemble</b> (vissées, soudées, emmanchées) : aucun mouvement relatif → même classe.</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Classes différentes</div><small>Deux pièces qui <b>bougent l'une par rapport à l'autre</b> → classes différentes.</small></div>
+          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>À exclure</div><small>Les pièces <b>déformables</b> (ressorts, joints, courroies) ne rentrent dans aucune classe.</small></div>
+        </div>
+        <p style="margin-top:14px;color:var(--sub)">💡 On note souvent les classes <b>{A} = {1, 2}</b> : la classe A contient les pièces 1 et 2. La classe qui ne bouge pas s'appelle le <b>bâti</b>.</p>
+      </section>
+
+      <section class="slide" id="s4">
+        <p class="eyebrow">Étape 2</p>
+        <h2>Tracer le graphe</h2>
+        <p class="lede">Chaque classe devient une <b>bulle</b> ; chaque liaison entre deux classes devient un <b>trait</b> portant le nom de la liaison.</p>
+        <figure><div class="lab">Le graphe des liaisons de l'étau</div>
+          <canvas id="cvGraph" width="900" height="290" style="width:100%;height:auto;display:block" aria-label="Animation : construction du graphe des liaisons"></canvas>
+          <div class="cap"><button class="stepbtn" id="grPrev" aria-label="Étape précédente">◀</button><b id="grPh">①</b><span id="grCap">Une bulle par classe d'équivalence : A, B, C.</span><button class="stepbtn" id="grNext" aria-label="Étape suivante">▶</button></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s5">
+        <p class="eyebrow">Lire le graphe</p>
+        <h2>Chaîne ouverte, chaîne fermée</h2>
+        <div class="two">
+          <div>
+            <div class="cards">
+              <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Chaîne ouverte</div><small>Le graphe est une <b>ligne</b> : bâti → segment → segment (ex. bras de robot). Chaque liaison est souvent motorisée.</small></div>
+              <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Chaîne fermée</div><small>Le graphe forme une <b>boucle</b> (ex. l'étau). Les mouvements des liaisons sont alors <b>dépendants</b> les uns des autres.</small></div>
+            </div>
+            <p style="margin-top:12px;color:var(--sub)">Dans l'étau : tourner la vis <b>impose</b> l'avance du mors — c'est la boucle du graphe qui crée ce couplage.</p>
+          </div>
+          <figure><div class="lab">Deux structures de graphe</div>
+            <svg viewBox="0 0 420 210" style="width:100%;height:auto;display:block" aria-label="Chaîne ouverte en ligne, chaîne fermée en boucle">
+              <g font-family="JetBrains Mono" font-size="12">
+                <circle cx="60" cy="60" r="20" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/><text x="60" y="64" text-anchor="middle">A</text>
+                <line x1="80" y1="60" x2="120" y2="60" stroke="#5C544B" stroke-width="2"/>
+                <circle cx="140" cy="60" r="20" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/><text x="140" y="64" text-anchor="middle">B</text>
+                <line x1="160" y1="60" x2="200" y2="60" stroke="#5C544B" stroke-width="2"/>
+                <circle cx="220" cy="60" r="20" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/><text x="220" y="64" text-anchor="middle">C</text>
+                <text x="140" y="110" text-anchor="middle" fill="#2E6A8E" font-size="11">chaîne OUVERTE (ligne)</text>
+                <circle cx="315" cy="45" r="20" fill="#fbf3e2" stroke="#BD8A2A" stroke-width="2"/><text x="315" y="49" text-anchor="middle">A</text>
+                <circle cx="275" cy="115" r="20" fill="#fbf3e2" stroke="#BD8A2A" stroke-width="2"/><text x="275" y="119" text-anchor="middle">B</text>
+                <circle cx="355" cy="115" r="20" fill="#fbf3e2" stroke="#BD8A2A" stroke-width="2"/><text x="355" y="119" text-anchor="middle">C</text>
+                <line x1="303" y1="62" x2="285" y2="97" stroke="#BD8A2A" stroke-width="2"/>
+                <line x1="327" y1="62" x2="345" y2="97" stroke="#BD8A2A" stroke-width="2"/>
+                <line x1="295" y1="115" x2="335" y2="115" stroke="#BD8A2A" stroke-width="2"/>
+                <text x="315" y="165" text-anchor="middle" fill="#8a6313" font-size="11">chaîne FERMÉE (boucle)</text>
+              </g>
+            </svg>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide" id="s6">
+        <p class="eyebrow">Étape 3</p>
+        <h2>Du graphe au schéma cinématique</h2>
+        <p class="lede">On remplace chaque trait du graphe par le <b>symbole normalisé</b> de sa liaison : le mécanisme s'anime.</p>
+        <figure><div class="lab">Le schéma cinématique de l'étau</div>
+          <canvas id="cvSchema" width="900" height="290" style="width:100%;height:auto;display:block" aria-label="Animation : schéma cinématique de l'étau"></canvas>
+          <div class="cap"><button class="stepbtn" id="scPrev" aria-label="Étape précédente">◀</button><b id="scPh">①</b><span id="scCap">Chaque liaison du graphe est remplacée par son symbole.</span><button class="stepbtn" id="scNext" aria-label="Étape suivante">▶</button></div>
+        </figure>
+      </section>
+
+      <section class="slide" id="s7">
+        <p class="eyebrow">Méthode</p>
+        <h2>La démarche en 4 étapes</h2>
+        <ol class="steps">
+          <li><b>Regrouper</b> les pièces en classes d'équivalence (aucun mouvement relatif) — repérer le <b>bâti</b>.</li>
+          <li><b>Identifier</b> la liaison entre chaque paire de classes en contact (quels mouvements relatifs restent ?).</li>
+          <li><b>Tracer le graphe</b> : une bulle par classe, un trait nommé par liaison. Repérer chaîne ouverte / fermée.</li>
+          <li><b>Dessiner le schéma cinématique</b> avec les symboles normalisés, en respectant la position des axes.</li>
+        </ol>
+        <p style="margin-top:10px;color:var(--sub)">💡 Le graphe est l'étape <b>intermédiaire</b> qui évite les oublis : chaque trait du graphe doit se retrouver sur le schéma.</p>
+      </section>
+
+      <section class="slide" id="s8">
+        <p class="eyebrow">Synthèse</p>
+        <h2>À retenir</h2>
+        <ul class="tight" style="font-size:19px">
+          <li>Une <b>classe d'équivalence</b> = un groupe de pièces sans mouvement relatif.</li>
+          <li>Le <b>graphe des liaisons</b> : bulles = classes, traits = liaisons (avec leur nom).</li>
+          <li>Le <b>bâti</b> est la classe fixe de référence.</li>
+          <li><b>Chaîne ouverte</b> = ligne · <b>chaîne fermée</b> = boucle (mouvements couplés).</li>
+          <li>Le <b>schéma cinématique</b> remplace chaque trait du graphe par le symbole de la liaison.</li>
+          <li>Étau : {corps} — glissière — {mors} — hélicoïdale — {vis} — pivot — {corps} : boucle fermée.</li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+  <div class="keyhint">↑ ↓ pour naviguer</div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var slides=['s1','s2','s3','s4','s5','s6','s7','s8'];
+var titles={s1:'Rendre lisible',s2:'Classes d\u2019équivalence',s3:'Comment regrouper',s4:'Tracer le graphe',s5:'Ouverte / fermée',s6:'Vers le schéma',s7:'La démarche',s8:'À retenir'};
+(function(){ var nav=el('nav'); slides.forEach(function(id,i){ var a=document.createElement('a'); a.className='navlink'; a.dataset.t=id;
+  a.innerHTML='<span class="n">'+('0'+(i+1)).slice(-2)+'</span><span>'+titles[id]+'</span>';
+  a.addEventListener('click',function(){ el(id).scrollIntoView({behavior:'smooth'}); }); nav.appendChild(a); }); })();
+var links={}; document.querySelectorAll('.navlink').forEach(function(a){ links[a.dataset.t]=a; });
+if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){
+  Object.keys(links).forEach(function(k){ links[k].classList.remove('on'); }); if(links[e.target.id]) links[e.target.id].classList.add('on'); }});}, {rootMargin:'-45% 0px -45% 0px'});
+  slides.forEach(function(id){ io.observe(el(id)); }); }
+function cur(){ var c=0,best=1e9; slides.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-60); if(d<best){best=d;c=i;} }); return c; }
+document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='PageDown'){ e.preventDefault(); var n=Math.min(slides.length-1,cur()+1); el(slides[n]).scrollIntoView({behavior:'smooth'}); }
+  else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); var p=Math.max(0,cur()-1); el(slides[p]).scrollIntoView({behavior:'smooth'}); } });
+
+/* helper d'étapes manuelles */
+function stepper(prevId,nextId,phId,capId,caps,onChange){
+  var phase=0, marks=['\u2460','\u2461','\u2462','\u2463','\u2464','\u2465'];
+  function setPhase(p){ phase=Math.max(0,Math.min(caps.length-1,p));
+    el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
+    el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
+    if(onChange) onChange(phase); }
+  el(prevId).addEventListener('click',function(){ setPhase(phase-1); });
+  el(nextId).addEventListener('click',function(){ setPhase(phase+1); });
+  setPhase(0);
+  return function(){ return phase; };
+}
+
+/* ---------- ANIM s2 : classes d'équivalence (◀ ▶) ---------- */
+(function(){
+  var cv=el('cvClasses'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var caps=['Les pièces de l\u2019étau, chacune numérotée (1 à 5).','On regroupe ce qui est FIXÉ ensemble : aucun mouvement relatif.','3 classes d\u2019équivalence : A = {1,2} le bâti, B = {3} le mors, C = {4,5} la vis.'];
+  var getPhase=stepper('clPrev','clNext','clPh','clCap',caps,null);
+  var T=0;
+  var COLS={A:'#2E6A8E', B:'#3D7E5F', C:'#C0492E'};
+  function piece(x,y,w,hh,fill,stroke,num,ny){
+    g.fillStyle=fill; g.strokeStyle=stroke; g.lineWidth=2; g.beginPath(); g.rect(x,y,w,hh); g.fill(); g.stroke();
+    if(num){ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(num,x+w/2,(ny!=null?ny:y+hh/2+5)); }
+  }
+  function step(){
+    T+=0.03; var phase=getPhase();
+    g.clearRect(0,0,W,H);
+    var colA = phase>=2 ? '#e3edf3' : '#f2eee6';
+    var colB = phase>=2 ? '#e6f2ea' : '#f2eee6';
+    var colC = phase>=2 ? '#f9e9e4' : '#f2eee6';
+    var strA = phase>=2 ? COLS.A : '#8a8175';
+    var strB = phase>=2 ? COLS.B : '#8a8175';
+    var strC = phase>=2 ? COLS.C : '#8a8175';
+    var ox=120, base=200;
+    // pièce 1 : base du corps · pièce 2 : mâchoire fixe
+    piece(ox,base,430,36,colA,strA,'1');
+    piece(ox,base-90,40,90,colA,strA,'2');
+    // pièce 3 : mors mobile
+    piece(ox+180,base-80,40,80,colB,strB,'3');
+    // pièce 4 : vis · pièce 5 : poignée
+    g.fillStyle=colC; g.strokeStyle=strC; g.lineWidth=2;
+    g.beginPath(); g.rect(ox+220,base-52,210,14); g.fill(); g.stroke();
+    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('4',ox+330,base-58);
+    g.fillStyle=colC; g.beginPath(); g.rect(ox+430,base-76,12,62); g.fill(); g.stroke();
+    g.fillText('5',ox+455,base-45);
+    // vis à droite de la poignée -> num 5 déjà mis à côté
+    if(phase>=1){
+      // contours pointillés des groupes
+      g.setLineDash([7,6]); g.lineWidth=2.5;
+      g.strokeStyle=COLS.A; g.strokeRect(ox-10,base-100,460,148);
+      g.strokeStyle=COLS.B; g.strokeRect(ox+172,base-88,56,96);
+      g.strokeStyle=COLS.C; g.strokeRect(ox+212,base-84,242,80);
+      g.setLineDash([]);
+    }
+    if(phase>=2){
+      g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+      g.fillStyle=COLS.A; g.fillText('A = {1, 2}  (bâti)', 610, 90);
+      g.fillStyle=COLS.B; g.fillText('B = {3}  (mors)', 610, 122);
+      g.fillStyle=COLS.C; g.fillText('C = {4, 5}  (vis)', 610, 154);
+    } else {
+      g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left';
+      g.fillText('1 base · 2 mâchoire fixe · 3 mors', 610, 100);
+      g.fillText('4 vis · 5 poignée', 610, 122);
+    }
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- ANIM s4 : construction du graphe (◀ ▶) ---------- */
+(function(){
+  var cv=el('cvGraph'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var caps=['Une bulle par classe d\u2019équivalence : A, B, C.','Un trait par liaison, avec son nom : glissière, hélicoïdale, pivot.','Le graphe forme une BOUCLE : c\u2019est une chaîne fermée.'];
+  var getPhase=stepper('grPrev','grNext','grPh','grCap',caps,null);
+  var T=0;
+  var N={A:{x:450,y:70,c:'#2E6A8E',lab:'A (bâti)'}, B:{x:310,y:210,c:'#3D7E5F',lab:'B (mors)'}, C:{x:590,y:210,c:'#C0492E',lab:'C (vis)'}};
+  var E=[{a:'A',b:'B',n:'glissière'},{a:'B',b:'C',n:'hélicoïdale'},{a:'C',b:'A',n:'pivot'}];
+  function step(){
+    T+=0.04; var phase=getPhase();
+    g.clearRect(0,0,W,H);
+    // arcs
+    if(phase>=1){
+      E.forEach(function(e2){ var a=N[e2.a], b=N[e2.b];
+        g.strokeStyle=phase>=2?'#BD8A2A':'#5C544B'; g.lineWidth=phase>=2?4:2.5;
+        g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b.x,b.y); g.stroke();
+        var mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+        g.fillStyle='#FFFDF8'; g.strokeStyle='#E4DCCB'; g.lineWidth=1;
+        var tw=g.measureText(e2.n).width+18;
+        g.beginPath(); g.rect(mx-tw/2,my-13,tw,24); g.fill(); g.stroke();
+        g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(e2.n,mx,my+4);
+      });
+    }
+    // bulles (pulse léger)
+    var pulse=1+0.03*Math.sin(T*2);
+    Object.keys(N).forEach(function(k){ var n=N[k];
+      g.fillStyle='#fff'; g.strokeStyle=n.c; g.lineWidth=3;
+      g.beginPath(); g.arc(n.x,n.y,30*pulse,0,7); g.fill(); g.stroke();
+      g.fillStyle=n.c; g.font='800 20px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(k,n.x,n.y+7);
+      g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.fillText(n.lab,n.x,n.y+52);
+    });
+    if(phase>=2){ g.fillStyle='#8a6313'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+      g.fillText('chaîne FERMÉE → les mouvements sont couplés',450,272); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- ANIM s6 : schéma cinématique (◀ ▶) ---------- */
+(function(){
+  var cv=el('cvSchema'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var caps=['Chaque liaison du graphe est remplacée par son symbole.','On tourne la vis (pivot) : l\u2019hélicoïdale transforme la rotation en avance du mors (glissière).','Le schéma reproduit le graphe : 3 symboles, une boucle, un mécanisme lisible.'];
+  var getPhase=stepper('scPrev','scNext','scPh','scCap',caps,null);
+  var T=0;
+  function hatch(x,y,w){ g.strokeStyle='#a89e8c'; g.lineWidth=1; for(var i=0;i<w;i+=8){ g.beginPath(); g.moveTo(x+i,y); g.lineTo(x+i-8,y+9); g.stroke(); } }
+  function step(){
+    T+=0.035; var phase=getPhase();
+    var anim=(phase>=1);
+    var slide = anim ? Math.sin(T)*34 : 0;
+    g.clearRect(0,0,W,H);
+    var base=210;
+    // bâti : rail + hachures
+    g.strokeStyle='#2A2622'; g.lineWidth=2.5; g.beginPath(); g.moveTo(130,base); g.lineTo(560,base); g.stroke();
+    hatch(130,base,430);
+    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('A (bâti)',180,base+34);
+    // mors B : rectangle en glissière sur le rail
+    var bx=330+slide;
+    g.fillStyle='#e6f2ea'; g.strokeStyle='#3D7E5F'; g.lineWidth=3; g.beginPath(); g.rect(bx-40,base-34,80,28); g.fill(); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('B',bx,base-14);
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.fillText('glissière A/B',bx,base+34);
+    // vis C : ligne horizontale à hauteur du mors + pivot au bâti à droite
+    var vy=base-20;
+    g.strokeStyle='#C0492E'; g.lineWidth=4; g.beginPath(); g.moveTo(bx+40,vy); g.lineTo(660,vy); g.stroke();
+    // symbole pivot au bâti (à droite) : cercle + support hachuré
+    g.strokeStyle='#2A2622'; g.lineWidth=2.5; g.beginPath(); g.arc(660,vy,13,0,7); g.stroke();
+    g.beginPath(); g.moveTo(660,vy+13); g.lineTo(660,base); g.stroke();
+    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.fillText('pivot C/A',700,vy-16);
+    // flèche de rotation de la vis (animée)
+    if(anim){ var a0=T*2;
+      g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.beginPath(); g.arc(610,vy,20,a0,a0+4.2); g.stroke();
+      var pe=[610+Math.cos(a0+4.2)*20, vy+Math.sin(a0+4.2)*20], pb=[610+Math.cos(a0+4.05)*20, vy+Math.sin(a0+4.05)*20];
+      var dx=pe[0]-pb[0], dy=pe[1]-pb[1], nn=Math.sqrt(dx*dx+dy*dy)||1; dx/=nn; dy/=nn;
+      g.fillStyle='#C0492E'; g.beginPath(); g.moveTo(pe[0]+3*dx,pe[1]+3*dy); g.lineTo(pe[0]-7*dx+4*dy,pe[1]-7*dy-4*dx); g.lineTo(pe[0]-7*dx-4*dy,pe[1]-7*dy+4*dx); g.closePath(); g.fill();
+    }
+    // symbole hélicoïdale entre C et B : zigzag sur la vis à l'entrée du mors
+    g.strokeStyle='#8A5A7A'; g.lineWidth=2.5; g.beginPath();
+    var hx=bx+44; g.moveTo(hx,vy-9);
+    for(var i2=0;i2<5;i2++){ g.lineTo(hx+6+i2*10,(i2%2===0)?vy+9:vy-9); }
+    g.stroke();
+    g.fillStyle='#8A5A7A'; g.font='11px "JetBrains Mono",monospace'; g.fillText('hélicoïdale C/B',hx+30,vy-22);
+    g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('C',630,vy+28);
+    // flèche translation du mors
+    if(anim){ g.strokeStyle='#3D7E5F'; g.lineWidth=2.5; g.beginPath(); g.moveTo(bx-64,base-52); g.lineTo(bx+64,base-52); g.stroke();
+      g.fillStyle='#3D7E5F'; g.beginPath(); g.moveTo(bx+64,base-52); g.lineTo(bx+55,base-57); g.lineTo(bx+55,base-47); g.closePath(); g.fill();
+      g.beginPath(); g.moveTo(bx-64,base-52); g.lineTo(bx-55,base-57); g.lineTo(bx-55,base-47); g.closePath(); g.fill(); }
+    if(phase>=2){ g.fillStyle='#2A2622'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+      g.fillText('1 rotation d\u2019entrée (vis) → 1 translation de sortie (mors)',450,272); }
+  }
+  setInterval(step,40); step();
+})();
+</script>
+</body>
+</html>

@@ -42,9 +42,12 @@
   @media(max-width:820px){ .nav{display:none} .two{grid-template-columns:1fr} }
   figure{margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
   figure .lab{font-weight:700;color:var(--ink);margin-bottom:8px}
-  .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .cap{display:flex;gap:11px;align-items:center;margin-top:13px;min-height:42px}
   .cap b{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--steel);flex:none}
-  .cap span{font-size:16px;color:var(--sub)}
+  .cap span{font-size:16px;color:var(--sub);flex:1}
+  .cap .stepbtn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;flex:none}
+  .cap .stepbtn:hover{border-color:var(--steel)}
+  .cap .stepbtn:disabled{opacity:.35;cursor:default}
   .keyhint{position:fixed;bottom:12px;right:16px;z-index:15;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
   ul.tight{max-width:64ch;padding-left:20px} ul.tight li{margin:6px 0}
 </style>
@@ -121,7 +124,7 @@
         <p class="lede">Un petit motif de calcul (le <b>noyau</b>) glisse sur l'image pour révéler une information : contours, flou…</p>
         <figure><div class="lab">Détection de contours par un noyau 3×3</div>
           <canvas id="cvConv" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : convolution / détection de contours"></canvas>
-          <div class="cap"><b id="convPh">①</b><span id="convCap">Une image = une grille de pixels (des nombres).</span></div>
+          <div class="cap"><button class="stepbtn" id="convPrev" aria-label="Étape précédente">◀</button><b id="convPh">①</b><span id="convCap">Une image = une grille de pixels (des nombres).</span><button class="stepbtn" id="convNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -131,7 +134,7 @@
         <p class="lede">On montre au modèle beaucoup d'exemples <b>étiquetés</b> ; il ajuste ses réglages jusqu'à se tromper le moins possible.</p>
         <figure><div class="lab">Apprentissage supervisé</div>
           <canvas id="cvTrain" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : apprentissage supervisé"></canvas>
-          <div class="cap"><b id="trPh">①</b><span id="trCap">On rassemble beaucoup d'exemples étiquetés.</span></div>
+          <div class="cap"><button class="stepbtn" id="trPrev" aria-label="Étape précédente">◀</button><b id="trPh">①</b><span id="trCap">On rassemble beaucoup d'exemples étiquetés.</span><button class="stepbtn" id="trNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -141,7 +144,7 @@
         <p class="lede">Face à une image nouvelle, le modèle calcule une <b>probabilité par classe</b> et choisit la plus forte.</p>
         <figure><div class="lab">Inférence : de l'image à la classe</div>
           <canvas id="cvInfer" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : classification d'une image"></canvas>
-          <div class="cap"><b id="inPh">①</b><span id="inCap">Une nouvelle image arrive (jamais vue).</span></div>
+          <div class="cap"><button class="stepbtn" id="inPrev" aria-label="Étape précédente">◀</button><b id="inPh">①</b><span id="inCap">Une nouvelle image arrive (jamais vue).</span><button class="stepbtn" id="inNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -214,7 +217,20 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
   }
 })();
 
-/* ---------- ANIM s3 : convolution / contours ---------- */
+/* helper d'étapes manuelles */
+function stepper(prevId,nextId,phId,capId,caps,onChange){
+  var phase=0, marks=['\u2460','\u2461','\u2462','\u2463','\u2464','\u2465'];
+  function setPhase(p){ phase=Math.max(0,Math.min(caps.length-1,p));
+    el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
+    el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
+    if(onChange) onChange(phase); }
+  el(prevId).addEventListener('click',function(){ setPhase(phase-1); });
+  el(nextId).addEventListener('click',function(){ setPhase(phase+1); });
+  setPhase(0);
+  return function(){ return phase; };
+}
+
+/* ---------- ANIM s3 : convolution / contours (◀ ▶) ---------- */
 (function(){
   var cv=el('cvConv'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var N=10, cell=24, ox=60, oy=40, ox2=560;
@@ -224,19 +240,21 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
     [[1,0],[-1,0],[0,1],[0,-1]].forEach(function(d){ var nx=x2+d[0],ny=y2+d[1]; if(nx>=0&&nx<N&&ny>=0&&ny<N) diff=Math.max(diff,Math.abs(v-src[ny][nx])); });
     edge[y2][x2]=diff>100?1:0; }
   var caps=['Une image = une grille de pixels (des nombres, ici clairs/foncés).','Un NOYAU 3×3 glisse sur l\u2019image : un petit calcul par position.','Résultat : on fait ressortir les CONTOURS de la forme.'];
+  var getPhase=stepper('convPrev','convNext','convPh','convCap',caps,null);
   var T=0;
   function step(){
-    T+=0.03; if(T>10) T=0; var phase=(T<2.5?0:(T<7?1:2));
+    T+=0.03; if(T>4.5) T=0;
+    var phase=getPhase();
     g.clearRect(0,0,W,H);
     // image source
     for(var y=0;y<N;y++) for(var x=0;x<N;x++){ var v=src[y][x]; g.fillStyle='rgb('+v+','+v+','+v+')'; g.fillRect(ox+x*cell,oy+y*cell,cell-1,cell-1); g.strokeStyle='#e7ddc8'; g.strokeRect(ox+x*cell,oy+y*cell,cell-1,cell-1); }
     g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('image (pixels)',ox+N*cell/2,oy+N*cell+22);
     // sortie
-    var reveal = phase===0?0:(phase>=2?N*N:Math.floor((T-2.5)/4.5*N*N));
+    var reveal = phase===0?0:(phase>=2?N*N:Math.floor(T/4.5*N*N));
     for(var yy=0;yy<N;yy++) for(var xx=0;xx<N;xx++){ var idx=yy*N+xx; if(idx>=reveal) continue;
       var on=edge[yy][xx]; g.fillStyle=on?'#2E6A8E':'#f4efe4'; g.fillRect(ox2+xx*cell,oy+yy*cell,cell-1,cell-1); g.strokeStyle='#e7ddc8'; g.strokeRect(ox2+xx*cell,oy+yy*cell,cell-1,cell-1); }
     g.fillStyle='#5C544B'; g.fillText('contours détectés',ox2+N*cell/2,oy+N*cell+22);
-    // noyau qui glisse (phase 1)
+    // noyau qui glisse (étape 2, en boucle)
     if(phase===1){ var pos=Math.min(N*N-1,reveal); var ky=Math.floor(pos/N), kx=pos%N;
       g.strokeStyle='#C0492E'; g.lineWidth=3; g.strokeRect(ox+(kx-1)*cell,oy+(ky-1)*cell,cell*3-1,cell*3-1);
       g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('noyau 3×3',ox+kx*cell,oy-8);
@@ -244,25 +262,26 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
     // flèche
     g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(ox+N*cell+16,oy+N*cell/2); g.lineTo(ox2-16,oy+N*cell/2); g.stroke();
     g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(ox2-12,oy+N*cell/2); g.lineTo(ox2-20,oy+N*cell/2-5); g.lineTo(ox2-20,oy+N*cell/2+5); g.closePath(); g.fill();
-    el('convCap').textContent=caps[phase]; el('convPh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM s4 : apprentissage ---------- */
+/* ---------- ANIM s4 : apprentissage (◀ ▶) ---------- */
 (function(){
   var cv=el('cvTrain'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var caps=['On rassemble beaucoup d\u2019exemples ÉTIQUETÉS (ex. « ○ » ou « △»).','Le modèle s\u2019ENTRAÎNE : il ajuste ses paramètres à chaque exemple.','L\u2019erreur baisse : le modèle a APPRIS à distinguer les classes.'];
+  var getPhase=stepper('trPrev','trNext','trPh','trCap',caps,null);
   var mx=380, my=90, mw=150, mh=110; // boîte modèle
   var px=560, py=60, pw=280, ph=170; // plot erreur
-  var T=0;
+  var Tm=0, Tp=0; // Tm : mouvement continu · Tp : progression de la courbe (boucle)
   function step(){
-    T+=0.03; if(T>11) T=0; var phase=(T<2.5?0:(T<8?1:2));
+    Tm+=0.03; Tp+=0.03; if(Tp>5.5) Tp=0;
+    var phase=getPhase();
     g.clearRect(0,0,W,H);
     // exemples à gauche
     var ex=[['○','#2E6A8E'],['△','#C0492E'],['○','#2E6A8E'],['△','#C0492E'],['○','#2E6A8E']];
     for(var i=0;i<ex.length;i++){ var y=60+i*44; var moving=(phase>=1);
-      var x=80; if(moving){ var u=((T*0.6+i*0.2)%1); x=80+u*(mx-100); }
+      var x=80; if(moving){ var u=((Tm*0.6+i*0.2)%1); x=80+u*(mx-100); }
       g.fillStyle='#fff'; g.strokeStyle=ex[i][1]; g.lineWidth=2; g.beginPath(); g.rect(x,y,34,34); g.fill(); g.stroke();
       g.fillStyle=ex[i][1]; g.font='700 18px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(ex[i][0],x+17,y+24);
     }
@@ -275,24 +294,25 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
     // plot erreur
     g.strokeStyle='#d9cfbb'; g.lineWidth=1; g.beginPath(); g.moveTo(px,py); g.lineTo(px,py+ph); g.lineTo(px+pw,py+ph); g.stroke();
     g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('erreur',px+6,py+12); g.fillText('temps →',px+pw-60,py+ph+16);
-    var prog = phase===0?0:(phase>=2?1:(T-2.5)/5.5);
+    var prog = phase===0?0:(phase>=2?1:Tp/5.5);
     g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.beginPath();
     for(var t=0;t<=prog;t+=0.02){ var xx=px+t*pw, err=Math.exp(-3.2*t); var yy=py+ph-err*(ph-10)-4; if(t===0)g.moveTo(xx,yy); else g.lineTo(xx,yy); } g.stroke();
     if(prog>0){ var ex2=px+prog*pw, ey=py+ph-Math.exp(-3.2*prog)*(ph-10)-4; g.fillStyle='#C0492E'; g.beginPath(); g.arc(ex2,ey,4,0,7); g.fill(); }
-    el('trCap').textContent=caps[phase]; el('trPh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM s5 : inférence / classification ---------- */
+/* ---------- ANIM s5 : inférence / classification (◀ ▶) ---------- */
 (function(){
   var cv=el('cvInfer'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var caps=['Une nouvelle image arrive (jamais vue à l\u2019entraînement).','Le modèle calcule une PROBABILITÉ pour chaque classe.','Il garde la classe la plus probable : « cercle ».'];
+  var getPhase=stepper('inPrev','inNext','inPh','inCap',caps,null);
   var classes=[['cercle',0.86,'#2E6A8E'],['triangle',0.09,'#C0492E'],['carré',0.05,'#BD8A2A']];
   var mx=360, my=95, mw=150, mh=100, bx=580, by=70;
   var T=0;
   function step(){
-    T+=0.03; if(T>10) T=0; var phase=(T<2.5?0:(T<6.5?1:2));
+    T+=0.03; if(T>4.4) T=0;
+    var phase=getPhase();
     g.clearRect(0,0,W,H);
     // image entrée
     g.fillStyle='#eef3f6'; g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.beginPath(); g.rect(80,90,120,120); g.fill(); g.stroke();
@@ -306,7 +326,7 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
     // flèche 2
     g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(mx+mw+8,150); g.lineTo(bx-14,150); g.stroke(); g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(bx-10,150); g.lineTo(bx-18,145); g.lineTo(bx-18,155); g.closePath(); g.fill();
     // barres de proba
-    var grow = phase===0?0:(phase>=2?1:(T-2.5)/4);
+    var grow = phase===0?0:(phase>=2?1:Math.min(1,T/4));
     for(var i=0;i<classes.length;i++){ var c=classes[i]; var y=by+i*52; var full=260*c[1]; var w=full*grow;
       var win=(phase>=2 && i===0);
       g.fillStyle=win?c[2]:(phase>=2?'#c9c0b0':c[2]); g.globalAlpha=win?1:(phase>=2?0.6:1);
@@ -315,10 +335,10 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
       if(grow>0.5){ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText(Math.round(c[1]*100)+'%',bx+w+8,y+20); }
       if(win){ g.strokeStyle='#2E6A8E'; g.lineWidth=2.5; g.strokeRect(bx-3,y-3,w+6,36); }
     }
-    el('inCap').textContent=caps[phase]; el('inPh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
+
 </script>
 </body>
 </html>

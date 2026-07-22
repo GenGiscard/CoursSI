@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Le graphe des liaisons · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .sysfig{background:#faf6ec;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  .match select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Le graphe des liaisons<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>La benne basculante</h1>
+      <p class="lede">Un vérin hydraulique soulève la benne d'un camion. À toi de constituer les classes d'équivalence, de compléter le graphe et de lire sa structure.</p>
+    </div>
+
+    <div class="sysfig">
+      <svg viewBox="0 0 640 220" style="width:100%;height:auto;display:block" aria-label="Benne basculante : châssis, benne, vérin (corps + tige)">
+        <rect x="30" y="160" width="420" height="26" rx="4" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/>
+        <circle cx="80" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/><circle cx="180" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/>
+        <rect x="40" y="110" width="70" height="50" rx="6" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/>
+        <g transform="rotate(-14 440 160)">
+          <rect x="150" y="112" width="300" height="42" rx="4" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2"/>
+        </g>
+        <circle cx="440" cy="158" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
+        <line x1="250" y1="164" x2="316" y2="98" stroke="#C0492E" stroke-width="10" stroke-linecap="round"/>
+        <line x1="316" y1="98" x2="352" y2="62" stroke="#8A5A7A" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="250" cy="164" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
+        <circle cx="352" cy="62" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
+        <text x="75" y="100" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">cabine</text>
+        <text x="240" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">châssis</text>
+        <text x="330" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D7E5F">benne (levée)</text>
+        <text x="252" y="130" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C0492E">corps du vérin</text>
+        <text x="392" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A5A7A">tige</text>
+        <text x="510" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8a6313">● = articulations</text>
+      </svg>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Constituer les classes</h2>
+      <p class="task">🎯 Range chaque pièce dans sa classe d'équivalence. Rappel : même classe = aucun mouvement relatif.</p>
+      <div class="match" id="aMatch"></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>A (bâti) = {châssis, cabine}</b> — la cabine est boulonnée au châssis.<br><b>B = {benne, axe de basculement}</b> — l'axe est soudé à la benne.<br><b>C = {corps du vérin}</b> · <b>D = {tige du vérin}</b> — la tige coulisse dans le corps : mouvement relatif, donc deux classes.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Compléter le graphe</h2>
+      <p class="task">🎯 Le graphe de la benne a 4 bulles et 4 liaisons. Nomme chaque liaison L1 à L4.</p>
+      <div class="sysfig">
+        <svg viewBox="0 0 560 250" style="width:100%;height:auto;display:block" aria-label="Graphe : A, B, C, D en boucle">
+          <line x1="150" y1="60" x2="410" y2="60" stroke="#5C544B" stroke-width="2"/>
+          <line x1="120" y1="90" x2="120" y2="180" stroke="#5C544B" stroke-width="2"/>
+          <line x1="440" y1="90" x2="440" y2="180" stroke="#5C544B" stroke-width="2"/>
+          <line x1="150" y1="205" x2="410" y2="205" stroke="#5C544B" stroke-width="2"/>
+          <circle cx="120" cy="60" r="26" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2.5"/><text x="120" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">A</text>
+          <circle cx="440" cy="60" r="26" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2.5"/><text x="440" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">B</text>
+          <circle cx="120" cy="205" r="26" fill="#f9e9e4" stroke="#C0492E" stroke-width="2.5"/><text x="120" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">C</text>
+          <circle cx="440" cy="205" r="26" fill="#f3eef6" stroke="#8A5A7A" stroke-width="2.5"/><text x="440" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">D</text>
+          <text x="280" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L1 : A–B</text>
+          <text x="95" y="140" text-anchor="end" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L2 : A–C</text>
+          <text x="465" y="140" text-anchor="start" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L3 : B–D</text>
+          <text x="280" y="232" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L4 : C–D</text>
+          <text x="35" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">bâti</text>
+          <text x="510" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">benne</text>
+          <text x="35" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">corps</text>
+          <text x="510" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">tige</text>
+        </svg>
+      </div>
+      <div class="match" id="bMatch"></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>L1 (A–B) : pivot</b> — la benne bascule autour d'un axe fixé au châssis.<br><b>L2 (A–C) : pivot</b> — le corps du vérin est articulé sur le châssis.<br><b>L3 (B–D) : pivot</b> — la tige est articulée sur la benne.<br><b>L4 (C–D) : pivot glissant</b> — la tige coulisse ET peut tourner dans le corps du vérin.<br>Le graphe forme une <b>boucle</b> : chaîne fermée.</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Ouverte ou fermée ?</h2>
+      <p class="task">🎯 D'après la forme de son graphe, chaque système est-il une chaîne ouverte ou fermée ?</p>
+      <div class="match" id="cMatch"></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>Bras de robot</b> (A–B–C–D en ligne) → <b>ouverte</b> : le graphe est une ligne, chaque articulation est motorisée indépendamment.<br><b>Étau</b> (A–B–C en triangle) → <b>fermée</b> : boucle, mouvements couplés.<br><b>Benne + vérin</b> (A–B–D–C–A) → <b>fermée</b> : la boucle impose que sortir la tige fasse basculer la benne.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Compter</h2>
+      <p class="task">Applique les définitions.</p>
+      <div class="row"><span>a) Un mécanisme a 5 pièces, dont 2 vissées ensemble. Combien de classes d'équivalence ?</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><span>b) Combien de liaisons forment la boucle du graphe de la benne ?</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> Les 2 pièces vissées ne forment qu'une classe : 5 pièces → <b>4 classes</b>.<br><b>b)</b> A–B, A–C, B–D, C–D : <b>4 liaisons</b> dans la boucle.</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> À quoi sert le graphe ?</h2>
+      <p class="task">Avant de dessiner le schéma cinématique, on trace toujours le graphe des liaisons.</p>
+      <p>Quel est son intérêt principal ?</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">Il donne les dimensions des pièces</button>
+        <button data-v="1">Il révèle la structure du mécanisme et évite d'oublier une liaison</button>
+        <button data-v="2">Il calcule la puissance du vérin</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>Il révèle la structure.</b> Le graphe recense toutes les classes et toutes les liaisons : chaque trait devra apparaître sur le schéma cinématique. Il montre aussi immédiatement si la chaîne est ouverte ou fermée — donc si les mouvements sont indépendants ou couplés. Ni dimensions, ni efforts : uniquement la <b>structure</b>.</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+function buildMatch(boxId, prefix, scen, opts){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* ---- A : classes ---- */
+var A_SCEN=[
+  {sc:'Châssis du camion', ok:'A'},
+  {sc:'Cabine (boulonnée au châssis)', ok:'A'},
+  {sc:'Benne', ok:'B'},
+  {sc:'Axe de basculement (soudé à la benne)', ok:'B'},
+  {sc:'Corps du vérin', ok:'C'},
+  {sc:'Tige du vérin', ok:'D'}
+];
+buildMatch('aMatch','a',A_SCEN,['— choisir —','A','B','C','D']);
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  return checkMatch('a',A_SCEN)?{ok:true,msg:'✓ Les 4 classes sont bien constituées !'}:{ok:false,msg:'✗ Certaines pièces sont mal classées — voir la correction.'};
+});
+
+/* ---- B : graphe ---- */
+var B_SCEN=[
+  {sc:'L1 : liaison A–B (benne / châssis)', ok:'Pivot'},
+  {sc:'L2 : liaison A–C (corps du vérin / châssis)', ok:'Pivot'},
+  {sc:'L3 : liaison B–D (tige / benne)', ok:'Pivot'},
+  {sc:'L4 : liaison C–D (tige / corps du vérin)', ok:'Pivot glissant'}
+];
+buildMatch('bMatch','b',B_SCEN,['— choisir —','Pivot','Glissière','Pivot glissant','Rotule','Encastrement']);
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  return checkMatch('b',B_SCEN)?{ok:true,msg:'✓ Graphe complet : 3 pivots + 1 pivot glissant, en boucle !'}:{ok:false,msg:'✗ Certaines liaisons sont fausses — voir la correction.'};
+});
+
+/* ---- C : ouverte / fermée ---- */
+var C_SCEN=[
+  {sc:'Bras de robot : A–B–C–D en ligne', ok:'Chaîne ouverte'},
+  {sc:'Étau : A–B–C en triangle', ok:'Chaîne fermée'},
+  {sc:'Benne + vérin : A–B–D–C–A', ok:'Chaîne fermée'}
+];
+buildMatch('cMatch','c',C_SCEN,['— choisir —','Chaîne ouverte','Chaîne fermée']);
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  return checkMatch('c',C_SCEN)?{ok:true,msg:'✓ Structures bien identifiées !'}:{ok:false,msg:'✗ Regarde si le graphe forme une boucle — voir la correction.'};
+});
+
+/* ---- D ---- */
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var a=numf(el('dA').value), b=numf(el('dB').value);
+  var okA=Math.abs(a-4)<0.5, okB=Math.abs(b-4)<0.5;
+  if(okA&&okB) return {ok:true,msg:'✓ Parfait : 4 classes et 4 liaisons.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' — voir la correction.'};
+});
+/* ---- E ---- */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : le graphe rend la structure visible et exhaustive.'};
+    return {ok:false,msg:'✗ Non — le graphe ne parle ni de dimensions ni d\u2019efforts.'};
+  });
+})();
+</script>
+</body>
+</html>

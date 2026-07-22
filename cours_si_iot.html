@@ -42,9 +42,12 @@
   @media(max-width:820px){ .nav{display:none} .two{grid-template-columns:1fr} }
   figure{margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
   figure .lab{font-weight:700;color:var(--ink);margin-bottom:8px}
-  .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .cap{display:flex;gap:11px;align-items:center;margin-top:13px;min-height:42px}
   .cap b{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--steel);flex:none}
-  .cap span{font-size:16px;color:var(--sub)}
+  .cap span{font-size:16px;color:var(--sub);flex:1}
+  .cap .stepbtn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;flex:none}
+  .cap .stepbtn:hover{border-color:var(--steel)}
+  .cap .stepbtn:disabled{opacity:.35;cursor:default}
   .keyhint{position:fixed;bottom:12px;right:16px;z-index:15;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
   ul.tight{max-width:64ch;padding-left:20px} ul.tight li{margin:6px 0}
 </style>
@@ -110,7 +113,7 @@
         <p class="lede">De la mesure sur le terrain jusqu'au service sur ton écran.</p>
         <figure><div class="lab">Objet → réseau → passerelle → cloud → application</div>
           <canvas id="cvChain" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Animation : la chaîne de l'IoT"></canvas>
-          <div class="cap"><b id="chainPh">①</b><span id="chainCap">L'objet mesure et met en forme la donnée.</span></div>
+          <div class="cap"><button class="stepbtn" id="chainPrev" aria-label="Étape précédente">◀</button><b id="chainPh">①</b><span id="chainCap">L'objet mesure et met en forme la donnée.</span><button class="stepbtn" id="chainNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -133,7 +136,7 @@
         <p class="lede">La donnée <b>monte</b> du capteur jusqu'au service, couche après couche.</p>
         <figure><div class="lab">Perception → Réseau → Traitement → Application</div>
           <canvas id="cvLayers" width="900" height="330" style="width:100%;height:auto;display:block" aria-label="Animation : architecture IoT en couches"></canvas>
-          <div class="cap"><b id="layPh">①</b><span id="layCap">Perception : les capteurs mesurent le monde réel.</span></div>
+          <div class="cap"><button class="stepbtn" id="layPrev" aria-label="Étape précédente">◀</button><b id="layPh">①</b><span id="layCap">Perception : les capteurs mesurent le monde réel.</span><button class="stepbtn" id="layNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -143,7 +146,7 @@
         <p class="lede">Une grandeur physique devient un <b>message numérique</b> prêt à voyager.</p>
         <figure><div class="lab">Mesure → numérisation → trame → envoi</div>
           <canvas id="cvFrame" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : du signal analogique à la trame de données"></canvas>
-          <div class="cap"><b id="frPh">①</b><span id="frCap">Le capteur mesure une grandeur physique (ex. température).</span></div>
+          <div class="cap"><button class="stepbtn" id="frPrev" aria-label="Étape précédente">◀</button><b id="frPh">①</b><span id="frCap">Le capteur mesure une grandeur physique (ex. température).</span><button class="stepbtn" id="frNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -191,14 +194,29 @@ function cur(){ var c=0,best=1e9; slides.forEach(function(id,i){ var r=el(id).ge
 document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==='PageDown'){ e.preventDefault(); var n=Math.min(slides.length-1,cur()+1); el(slides[n]).scrollIntoView({behavior:'smooth'}); }
   else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); var p=Math.max(0,cur()-1); el(slides[p]).scrollIntoView({behavior:'smooth'}); } });
 
-/* ---------- ANIM s3 : chaîne IoT ---------- */
+/* helper d'étapes manuelles */
+function stepper(prevId,nextId,phId,capId,caps,onChange){
+  var phase=0, marks=['\u2460','\u2461','\u2462','\u2463','\u2464','\u2465'];
+  function setPhase(p){ phase=Math.max(0,Math.min(caps.length-1,p));
+    el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
+    el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
+    if(onChange) onChange(phase); }
+  el(prevId).addEventListener('click',function(){ setPhase(phase-1); });
+  el(nextId).addEventListener('click',function(){ setPhase(phase+1); });
+  setPhase(0);
+  return function(){ return phase; };
+}
+
+/* ---------- ANIM s3 : chaîne IoT (◀ ▶) ---------- */
 (function(){
   var cv=el('cvChain'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var steps=[['OBJET','capteur','#2E6A8E'],['RÉSEAU','sans fil','#3D7E5F'],['PASSERELLE','relais','#BD8A2A'],['CLOUD','serveur','#8A5A7A'],['APPLI','service','#C0492E']];
   var caps=['L\u2019objet mesure et met en forme la donnée.','Il l\u2019envoie par un réseau sans fil (Wi-Fi, LoRa…).','Une passerelle relaie vers Internet.','Le cloud stocke et traite les données.','L\u2019application affiche et permet d\u2019agir.'];
-  var n=steps.length, bw=148, gap=(W-40-n*bw)/(n-1), y=90, h=64, T=0, flow=0;
+  var getPhase=stepper('chainPrev','chainNext','chainPh','chainCap',caps,null);
+  var n=steps.length, bw=148, gap=(W-40-n*bw)/(n-1), y=90, h=64, flow=0;
   function bx(i){ return 20+i*(bw+gap); }
-  function step(){ flow+=0.02; if(flow>1) flow-=1; T+=0.03; if(T>12) T=0; var active=Math.min(n-1,Math.floor(T/2.2));
+  function step(){ flow+=0.02; if(flow>1) flow-=1;
+    var active=getPhase();
     g.clearRect(0,0,W,H);
     for(var i=0;i<n;i++){ var on=i<=active, s=steps[i];
       g.fillStyle=on?'#FFFDF8':'#F1EADC'; g.strokeStyle=on?s[2]:'#d9cfbb'; g.lineWidth=on?2.4:1.4; g.beginPath(); g.rect(bx(i),y,bw,h); g.fill(); g.stroke();
@@ -207,20 +225,21 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
       if(i<n-1){ g.strokeStyle='#5C544B'; g.lineWidth=2; var ax=bx(i)+bw, b2=bx(i+1); g.beginPath(); g.moveTo(ax,y+h/2); g.lineTo(b2-6,y+h/2); g.stroke();
         g.fillStyle='#5C544B'; g.beginPath(); g.moveTo(b2,y+h/2); g.lineTo(b2-8,y+h/2-5); g.lineTo(b2-8,y+h/2+5); g.closePath(); g.fill();
         if(i===active-1 || (i===active && active<n-1)){ var px=ax+flow*(b2-6-ax); g.fillStyle=s[2]; g.beginPath(); g.arc(px,y+h/2,5,0,7); g.fill(); } } }
-    el('chainCap').textContent=caps[active]; el('chainPh').textContent=['①','②','③','④','⑤'][active];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM s5 : architecture en couches ---------- */
+/* ---------- ANIM s5 : architecture en couches (◀ ▶) ---------- */
 (function(){
   var cv=el('cvLayers'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var lays=[['Perception','capteurs','#2E6A8E'],['Réseau','transmission','#3D7E5F'],['Traitement','cloud','#8A5A7A'],['Application','services','#C0492E']];
   var caps=['Perception : les capteurs mesurent le monde réel.','Réseau : la donnée est transmise (sans fil).','Traitement : le cloud stocke et analyse.','Application : un service utile pour l\u2019utilisateur.'];
+  var getPhase=stepper('layPrev','layNext','layPh','layCap',caps,null);
   var lw=440, lx=(W-lw)/2, lh=58, top=30, T=0;
   function layY(i){ return top+(3-i)*(lh+8); } // i=0 en bas
   function step(){
-    T+=0.012; if(T>1) T=0; var pk=T; var active=Math.min(3,Math.floor(pk*4));
+    T+=0.012; if(T>1) T=0;
+    var active=getPhase();
     g.clearRect(0,0,W,H);
     for(var i=0;i<4;i++){ var on=(i===active); var y=layY(i), s=lays[i];
       g.fillStyle=on?'#FFFDF8':'#F3ECDE'; g.strokeStyle=s[2]; g.lineWidth=on?3:1.6; g.beginPath(); g.rect(lx,y,lw,lh); g.fill(); g.stroke();
@@ -228,28 +247,29 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
       g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.fillText(s[1],lx+18,y+45);
       g.fillStyle='#a89e8c'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='right'; g.fillText('couche '+(i+1),lx+lw-14,y+26);
     }
-    // paquet qui monte
-    var yTop=layY(3), yBot=layY(0)+lh; var py=yBot-(yBot-yTop-lh)*pk - lh/2 - 6;
+    // paquet qui monte en boucle jusqu'à la couche active
+    var yStart=layY(0)+lh, yEnd=layY(active)+lh/2;
+    var py = yStart + (yEnd-yStart)*T;
     var px=lx+lw+34;
+    g.strokeStyle='#BD8A2A'; g.lineWidth=1.5; g.beginPath(); g.moveTo(px,yStart); g.lineTo(px,py); g.stroke();
     g.fillStyle='#BD8A2A'; g.strokeStyle='#8a6313'; g.lineWidth=1.5; g.fillRect(px-14,py-11,28,22); g.strokeRect(px-14,py-11,28,22);
     g.fillStyle='#fff'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('data',px,py+3);
-    g.strokeStyle='#BD8A2A'; g.lineWidth=1.5; g.beginPath(); g.moveTo(px,yBot); g.lineTo(px,py+12); g.stroke();
     g.fillStyle='#BD8A2A'; g.beginPath(); g.moveTo(px,py-14); g.lineTo(px-4,py-8); g.lineTo(px+4,py-8); g.closePath(); g.fill();
-    // flèche montée
     g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.save(); g.translate(lx-22,H/2); g.rotate(-Math.PI/2); g.textAlign='center'; g.fillText('la donnée monte',0,0); g.restore();
-    el('layCap').textContent=caps[active]; el('layPh').textContent=['①','②','③','④'][active];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM s6 : du capteur au message ---------- */
+/* ---------- ANIM s6 : du capteur au message (◀ ▶) ---------- */
 (function(){
   var cv=el('cvFrame'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var caps=['Le capteur mesure une grandeur physique (ex. température) : signal continu.','On NUMÉRISE : des échantillons réguliers (des valeurs).','On emballe dans une TRAME et on l\u2019envoie au cloud.'];
+  var getPhase=stepper('frPrev','frNext','frPh','frCap',caps,null);
   var x0=70, x1=520, baseY=170, amp=60, T=0;
   function sig(x){ var u=(x-x0)/(x1-x0); return baseY - amp*(0.5+0.5*Math.sin(u*6.28*1.3)) + amp/2; }
   function step(){
-    T+=0.03; if(T>10) T=0; var phase=(T<3.2?0:(T<6.4?1:2));
+    T+=0.03; if(T>3.4) T=0;
+    var phase=getPhase();
     g.clearRect(0,0,W,H);
     // axes
     g.strokeStyle='#d9cfbb'; g.lineWidth=1; g.beginPath(); g.moveTo(x0-10,baseY+amp); g.lineTo(x1+10,baseY+amp); g.stroke();
@@ -262,11 +282,12 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
       for(var k=0;k<=N;k++){ var xx=x0+(x1-x0)*k/N, yy=sig(xx);
         g.beginPath(); g.arc(xx,yy,4,0,7); g.fill();
         g.strokeStyle='rgba(192,73,46,.4)'; g.lineWidth=1; g.beginPath(); g.moveTo(xx,yy); g.lineTo(xx,baseY+amp); g.stroke();
+        g.fillStyle='#C0492E';
       }
       g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('échantillons',(x0+x1)/2,baseY+amp+34);
     }
-    // trame + envoi
-    if(phase>=2){ var u=Math.min(1,(T-6.4)/2.4); var fx=560+u*220;
+    // trame + envoi (boucle dans l'étape)
+    if(phase>=2){ var u=Math.min(1,T/2.4); var fx=560+u*220;
       g.fillStyle='#FFFDF8'; g.strokeStyle='#8A5A7A'; g.lineWidth=2; g.beginPath(); g.rect(fx,120,150,64); g.fill(); g.stroke();
       g.fillStyle='#8A5A7A'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left';
       g.fillText('{ "id":"T1",',fx+10,138); g.fillText('  "temp":21.4,',fx+10,154); g.fillText('  "t":1204 }',fx+10,170);
@@ -275,10 +296,10 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
       g.beginPath(); g.moveTo(800,150); g.arc(812,150,14,0,7); g.fill(); g.stroke();
       g.fillStyle='#2E6A8E'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('cloud',812,178);
     }
-    el('frCap').textContent=caps[phase]; el('frPh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
+
 </script>
 </body>
 </html>

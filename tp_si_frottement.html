@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Frottement et glissement · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .bench{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .bench canvas{width:100%;height:auto;display:block}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--steel)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;color:var(--steel);min-width:88px;text-align:right}
+  .state{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;margin-top:6px;min-height:18px}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  .match select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+  a{color:var(--steel)}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Frottement et glissement<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI</div>
+      <h1>Ça tient… ou ça glisse ?</h1>
+      <p class="lede">Expérimente sur le banc d'essai, puis vérifie par le calcul : lois de Coulomb, angle limite et choix de conception.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Le banc d'essai</h2>
+      <p class="task">🎯 Caisse posée au sol : <b>N = 400 N</b>, <b>µ = 0,30</b>. Augmente la poussée F avec le curseur et observe. Puis règle F sur la <b>force minimale qui fait glisser</b> la caisse et valide.</p>
+      <div class="bench">
+        <canvas id="bench" width="860" height="200" aria-label="Banc d'essai : caisse poussée"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">F =</span>
+          <input type="range" id="fSlider" min="0" max="200" step="5" value="0">
+          <span class="val" id="fVal">0 N</span>
+        </div>
+        <div class="state" id="benchState"></div>
+      </div>
+      <div class="row"><button class="btn" id="aCheck">Valider ma force minimale</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol">La limite d'adhérence vaut T<sub>max</sub> = µ·N = 0,30 × 400 = <b>120 N</b>.<br>Tant que F ≤ 120 N, le frottement T s'adapte et retient la caisse. Dès que F dépasse 120 N, le contact sature : <b>glissement</b>. La bonne réponse était donc le premier cran au-dessus de 120 N (125 N au curseur), ou 120 N tout juste à la limite.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Calculer la limite</h2>
+      <p class="task">Applique T<sub>max</sub> = µ·N (g = 10 N/kg).</p>
+      <div class="row"><span>a) µ = 0,5 et N = 300 N. T<sub>max</sub> = ?</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="row"><span>b) Caisse de 60 kg sur sol horizontal, µ = 0,4. T<sub>max</sub> = ?</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="row"><span>c) On pousse cette caisse de 60 kg avec F = 200 N :</span>
+        <select id="bC" style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff">
+          <option>— choisir —</option><option>Elle adhère (ne bouge pas)</option><option>Elle glisse</option>
+        </select></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>a)</b> T<sub>max</sub> = 0,5 × 300 = <b>150 N</b>.<br><b>b)</b> N = P = 60 × 10 = 600 N, puis T<sub>max</sub> = 0,4 × 600 = <b>240 N</b>.<br><b>c)</b> F = 200 N &lt; 240 N → le frottement s'adapte : <b>la caisse adhère</b>, elle ne bouge pas.</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> Le plan incliné</h2>
+      <p class="task">Un colis est posé sur une rampe : µ = 0,7. Rappel : glissement quand tan α &gt; µ.</p>
+      <div class="row"><span>a) Angle limite d'adhérence (au degré près) :</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">°</span></div>
+      <div class="match" id="cMatch"></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> tan α = µ = 0,7 → α = arctan(0,7) ≈ <b>35°</b>.<br><b>b)</b> α = 20° : tan 20° ≈ 0,36 &lt; 0,7 → <b>adhérence</b>.<br><b>c)</b> α = 40° : tan 40° ≈ 0,84 &gt; 0,7 → <b>glissement</b>.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Concevoir avec µ</h2>
+      <p class="task">🎯 Pour chaque contact, faut-il un µ élevé ou un µ faible ?</p>
+      <div class="match" id="dMatch"></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>Plaquette / disque de frein → µ élevé</b> (on veut freiner fort).<br><b>Palier de guidage d'un arbre → µ faible</b> (limiter pertes et échauffement).<br><b>Pneu / route → µ élevé</b> (adhérence = sécurité).<br><b>Glissière de tiroir → µ faible</b> (coulissement doux).</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Le mythe des pneus larges</h2>
+      <p class="task">D'après les lois de Coulomb, T<sub>max</sub> = µ·N.</p>
+      <p>Si on monte des pneus deux fois plus larges (même voiture, même route), que devient T<sub>max</sub> selon ce modèle ?</p>
+      <div class="opt" id="eOpt">
+        <button data-v="0">Elle double : deux fois plus de surface</button>
+        <button data-v="1">Elle ne change pas : µ et N sont inchangés, l'aire n'intervient pas</button>
+        <button data-v="2">Elle diminue : le pneu est plus lourd</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>Elle ne change pas.</b> Dans le modèle de Coulomb, T<sub>max</sub> = µ·N : ni µ ni N ne dépendent de la largeur du pneu — l'aire de contact n'apparaît pas dans la formule. (En réalité, les pneus larges apportent d'autres avantages : usure, échauffement, comportement de la gomme… mais c'est au-delà du modèle de Coulomb.)</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+function buildMatch(boxId, prefix, scen, opts){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* ---- A : banc d'essai ---- */
+(function(){
+  var cv=el('bench'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var MU=0.30, N=400, TMAX=MU*N; // 120 N
+  var F=0, T=0, slideX=0;
+  el('fSlider').addEventListener('input',function(){ F=+this.value; el('fVal').textContent=F+' N'; });
+  function step(){
+    T+=0.05;
+    var slip = F>TMAX;
+    var near = !slip && F>=TMAX-15 && F>0;
+    if(slip){ slideX+=1.4+(F-TMAX)*0.03; if(slideX>300) slideX=0; } else slideX=0;
+    g.clearRect(0,0,W,H);
+    var ground=150;
+    g.strokeStyle='#2A2622'; g.lineWidth=2.5; g.beginPath(); g.moveTo(40,ground); g.lineTo(820,ground); g.stroke();
+    g.strokeStyle='#a89e8c'; g.lineWidth=1;
+    for(var i=0;i<52;i++){ g.beginPath(); g.moveTo(44+i*15,ground); g.lineTo(36+i*15,ground+9); g.stroke(); }
+    var bx=250+slideX+(near? 1.5*Math.sin(T*9):0), by=ground-40, bw=110, bh=80;
+    g.fillStyle= slip? '#f9e9e4' : (near? '#fbf3e2' : '#e6f2ea');
+    g.strokeStyle= slip? '#C0492E' : (near? '#BD8A2A' : '#3D7E5F'); g.lineWidth=3;
+    g.beginPath(); g.rect(bx-bw/2,by-bh/2,bw,bh); g.fill(); g.stroke();
+    // F
+    if(F>0){ var flen=30+F*0.5;
+      g.strokeStyle='#2E6A8E'; g.lineWidth=4; g.beginPath(); g.moveTo(bx-bw/2-flen,by); g.lineTo(bx-bw/2-6,by); g.stroke();
+      g.fillStyle='#2E6A8E'; g.beginPath(); g.moveTo(bx-bw/2-2,by); g.lineTo(bx-bw/2-14,by-6); g.lineTo(bx-bw/2-14,by+6); g.closePath(); g.fill();
+      g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('F = '+F+' N',bx-bw/2-flen/2,by-14);
+    }
+    // T
+    var Tval = slip? TMAX : Math.min(F,TMAX);
+    if(Tval>0){ var tlen=30+Tval*0.5;
+      g.strokeStyle='#C0492E'; g.lineWidth=4; g.beginPath(); g.moveTo(bx+tlen/2,ground-7); g.lineTo(bx-tlen/2+10,ground-7); g.stroke();
+      g.fillStyle='#C0492E'; g.beginPath(); g.moveTo(bx-tlen/2+4,ground-7); g.lineTo(bx-tlen/2+16,ground-13); g.lineTo(bx-tlen/2+16,ground-1); g.closePath(); g.fill();
+      g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('T = '+Math.round(Tval)+' N',bx,ground+28);
+    }
+    // jauge
+    var gx=580, gy=40, gw=220;
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('T par rapport à µ·N = '+TMAX+' N',gx,gy-8);
+    g.fillStyle='#eee6d6'; g.fillRect(gx,gy,gw,14);
+    g.fillStyle= slip? '#C0492E':'#3D7E5F'; g.fillRect(gx,gy,gw*0.72*(Tval/TMAX),14);
+    g.strokeStyle='#2A2622'; g.lineWidth=2; g.beginPath(); g.moveTo(gx+gw*0.72,gy-5); g.lineTo(gx+gw*0.72,gy+19); g.stroke();
+    var stateEl=el('benchState');
+    if(F===0){ stateEl.textContent='Pousse la caisse avec le curseur…'; stateEl.style.color='#5C544B'; }
+    else if(slip){ stateEl.textContent='GLISSEMENT ! T sature à µ·N = '+TMAX+' N'; stateEl.style.color='#C0492E'; }
+    else if(near){ stateEl.textContent='ADHÉRENCE… mais on approche de la limite !'; stateEl.style.color='#8a6313'; }
+    else { stateEl.textContent='ADHÉRENCE : T = F = '+Math.round(Tval)+' N, la caisse ne bouge pas.'; stateEl.style.color='#3D7E5F'; }
+  }
+  setInterval(step,40); step();
+  lockExo('aCheck','aShow','aSol','aFb',function(){
+    if(F>TMAX && F<=TMAX+10) return {ok:true,msg:'✓ Oui : au-delà de 120 N, la caisse part. T\u2098\u2090\u2093 = µ·N = 120 N.'};
+    if(F===TMAX) return {ok:true,msg:'✓ Exactement à la limite : T\u2098\u2090\u2093 = µ·N = 120 N. Un souffle de plus et elle part !'};
+    if(F<TMAX) return {ok:false,msg:'✗ À '+F+' N, la caisse adhère encore : le frottement s\u2019adapte. Cherche plus haut.'};
+    return {ok:false,msg:'✗ À '+F+' N elle glisse, mais ce n\u2019est pas la force MINIMALE. Redescends vers la limite.'};
+  });
+})();
+
+/* ---- B ---- */
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var a=numf(el('bA').value), b=numf(el('bB').value), c=el('bC').value;
+  var okA=Math.abs(a-150)<3, okB=Math.abs(b-240)<5, okC=(c==='Elle adhère (ne bouge pas)');
+  if(okA&&okB&&okC) return {ok:true,msg:'✓ Parfait : 150 N, 240 N, et 200 N < 240 N → adhérence.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
+});
+
+/* ---- C ---- */
+var C_SCEN=[
+  {sc:'b) Rampe inclinée à α = 20°', ok:'Adhérence'},
+  {sc:'c) Rampe inclinée à α = 40°', ok:'Glissement'}
+];
+buildMatch('cMatch','c',C_SCEN,['— choisir —','Adhérence','Glissement']);
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var a=numf(el('cA').value); var okA=Math.abs(a-35)<=1.5;
+  var okM=checkMatch('c',C_SCEN);
+  if(okA&&okM) return {ok:true,msg:'✓ Angle limite ≈ 35°, et les deux cas sont bien classés !'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (angle limite : tan α = µ)')+' — compare ensuite tan α à µ.'};
+});
+
+/* ---- D ---- */
+var D_SCEN=[
+  {sc:'Plaquette / disque de frein', ok:'µ élevé'},
+  {sc:'Palier de guidage d\u2019un arbre moteur', ok:'µ faible'},
+  {sc:'Pneu / route', ok:'µ élevé'},
+  {sc:'Glissière de tiroir', ok:'µ faible'}
+];
+buildMatch('dMatch','d',D_SCEN,['— choisir —','µ élevé','µ faible']);
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  return checkMatch('d',D_SCEN)?{ok:true,msg:'✓ Bien vu : chaque contact a son objectif !'}:{ok:false,msg:'✗ Demande-toi si le frottement sert ou coûte — voir la correction.'};
+});
+
+/* ---- E ---- */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+    if(sel===1) return {ok:true,msg:'✓ Oui : dans le modèle de Coulomb, l\u2019aire de contact n\u2019intervient pas.'};
+    return {ok:false,msg:'✗ Non — relis la formule T\u2098\u2090\u2093 = µ·N : où est l\u2019aire ?'};
+  });
+})();
+</script>
+</body>
+</html>

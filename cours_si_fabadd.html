@@ -54,9 +54,12 @@
 
   figure{margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden}
   figure .lab{font-weight:700;color:var(--ink);margin-bottom:8px}
-  .cap{display:flex;gap:11px;align-items:flex-start;margin-top:13px;min-height:42px}
+  .cap{display:flex;gap:11px;align-items:center;margin-top:13px;min-height:42px}
   .cap b{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--steel);flex:none}
-  .cap span{font-size:16px;color:var(--sub)}
+  .cap span{font-size:16px;color:var(--sub);flex:1}
+  .cap .stepbtn{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 12px;cursor:pointer;flex:none}
+  .cap .stepbtn:hover{border-color:var(--steel)}
+  .cap .stepbtn:disabled{opacity:.35;cursor:default}
 
   .keyhint{position:fixed;bottom:12px;right:16px;z-index:15;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
   ul.tight{max-width:64ch;padding-left:20px} ul.tight li{margin:6px 0}
@@ -112,7 +115,7 @@
         <p class="lede">Toute impression 3D repose sur une idée simple : <b>découper l'objet en fines tranches</b> horizontales, puis les empiler.</p>
         <figure><div class="lab">Construction d'une pièce, couche par couche</div>
           <canvas id="cvBuild" width="900" height="300" style="width:100%;height:auto;display:block" aria-label="Animation : dépôt de matière couche par couche"></canvas>
-          <div class="cap"><b id="buildPh">①</b><span id="buildCap">Une buse dépose un fil de matière fondue.</span></div>
+          <div class="cap"><button class="stepbtn" id="buildPrev" aria-label="Étape précédente">◀</button><b id="buildPh">①</b><span id="buildCap">Une buse dépose un fil de matière fondue.</span><button class="stepbtn" id="buildNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -134,7 +137,7 @@
         <p class="lede">Entre l'idée et l'objet, une suite d'étapes numériques transforme la <b>géométrie</b> en <b>ordres machine</b>.</p>
         <figure><div class="lab">CAO → STL → trancheur → G-code → imprimante</div>
           <canvas id="cvChain" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Animation : la chaîne numérique de l'impression 3D"></canvas>
-          <div class="cap"><b id="chainPh">①</b><span id="chainCap">On modélise la pièce en CAO (logiciel 3D).</span></div>
+          <div class="cap"><button class="stepbtn" id="chainPrev" aria-label="Étape précédente">◀</button><b id="chainPh">①</b><span id="chainCap">On modélise la pièce en CAO (logiciel 3D).</span><button class="stepbtn" id="chainNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -144,7 +147,7 @@
         <p class="lede">Le <b>trancheur</b> (slicer) découpe la pièce en couches et décide comment la remplir et la tenir.</p>
         <figure><div class="lab">Ce que fait le trancheur</div>
           <canvas id="cvSlice" width="900" height="280" style="width:100%;height:auto;display:block" aria-label="Animation : tranchage, remplissage et supports"></canvas>
-          <div class="cap"><b id="slicePh">①</b><span id="sliceCap">La pièce est découpée en couches horizontales.</span></div>
+          <div class="cap"><button class="stepbtn" id="slicePrev" aria-label="Étape précédente">◀</button><b id="slicePh">①</b><span id="sliceCap">La pièce est découpée en couches horizontales.</span><button class="stepbtn" id="sliceNext" aria-label="Étape suivante">▶</button></div>
         </figure>
       </section>
 
@@ -221,18 +224,32 @@ document.addEventListener('keydown',function(e){
   else if(e.key==='ArrowUp'||e.key==='PageUp'){ e.preventDefault(); var p=Math.max(0,cur()-1); el(slides[p]).scrollIntoView({behavior:'smooth'}); }
 });
 
-/* ---------- ANIM 1 : construction couche par couche ---------- */
+/* helper d'étapes manuelles */
+function stepper(prevId,nextId,phId,capId,caps,onChange){
+  var phase=0, marks=['\u2460','\u2461','\u2462','\u2463','\u2464','\u2465'];
+  function setPhase(p){ phase=Math.max(0,Math.min(caps.length-1,p));
+    el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
+    el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
+    if(onChange) onChange(phase); }
+  el(prevId).addEventListener('click',function(){ setPhase(phase-1); });
+  el(nextId).addEventListener('click',function(){ setPhase(phase+1); });
+  setPhase(0);
+  return function(){ return phase; };
+}
+
+/* ---------- ANIM 1 : construction couche par couche (◀ ▶) ---------- */
 (function(){
   var cv=el('cvBuild'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var baseY=250, plateX=250, plateW=400, nLayers=9, lw=plateW-60, x0=plateX+30;
   var caps=['Une buse dépose un fil de matière fondue sur le plateau.',
             'Couche après couche, l\u2019objet prend forme (chaque tranche a la même épaisseur).',
             'Chaque couche se soude à la précédente : l\u2019objet devient solide — mais plus fragile ENTRE les couches.'];
+  var getPhase=stepper('buildPrev','buildNext','buildPh','buildCap',caps,null);
   var T=0;
   function step(){
-    T+=0.03; if(T>10) T=0;
-    var phase=(T<2?0:(T<6.5?1:2));
-    var prog=phase<1?0:(phase>=2?nLayers:Math.min(nLayers,Math.floor((T-2)/0.5)+1));
+    T+=0.03; if(T>5) T=0;
+    var phase=getPhase();
+    var prog=phase<1?0:(phase>=2?nLayers:Math.min(nLayers,Math.floor(T/0.5)+1));
     g.clearRect(0,0,W,H);
     // plateau
     g.fillStyle='#e9e0cf'; g.fillRect(plateX,baseY,plateW,14); g.strokeStyle='#5C544B'; g.strokeRect(plateX,baseY,plateW,14);
@@ -247,12 +264,11 @@ document.addEventListener('keydown',function(e){
     if(phase<2){ g.fillStyle='#2A2622'; g.beginPath(); g.moveTo(nx-16,ny-40); g.lineTo(nx+16,ny-40); g.lineTo(nx+6,ny); g.lineTo(nx-6,ny); g.closePath(); g.fill();
       g.strokeStyle='#C0492E'; g.lineWidth=2; g.beginPath(); g.moveTo(nx,ny); g.lineTo(nx,ny+8); g.stroke(); }
     if(phase>=2){ g.fillStyle='#2c6147'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('adhérence inter-couches',nx,baseY-6-nLayers*16-24); }
-    el('buildCap').textContent=caps[phase]; el('buildPh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM 2 : chaîne numérique ---------- */
+/* ---------- ANIM 2 : chaîne numérique (◀ ▶) ---------- */
 (function(){
   var cv=el('cvChain'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var steps=[['CAO','logiciel 3D','#2E6A8E'],['STL','maillage','#8A5A7A'],['TRANCHEUR','couches','#3D7E5F'],['G-code','ordres','#BD8A2A'],['IMPRIMANTE','pièce','#C0492E']];
@@ -261,11 +277,12 @@ document.addEventListener('keydown',function(e){
             'Le trancheur découpe en couches et calcule les trajets.',
             'Il génère le G-code : la liste des ordres pour la machine.',
             'L\u2019imprimante exécute le G-code et fabrique la pièce.'];
-  var n=steps.length, bw=150, gap=(W-40-n*bw)/(n-1), y=90, h=64, T=0, flow=0;
+  var getPhase=stepper('chainPrev','chainNext','chainPh','chainCap',caps,null);
+  var n=steps.length, bw=150, gap=(W-40-n*bw)/(n-1), y=90, h=64, flow=0;
   function bx(i){ return 20+i*(bw+gap); }
   function step(){
-    flow+=0.02; if(flow>1) flow-=1; T+=0.03; if(T>12) T=0;
-    var active=Math.min(n-1,Math.floor(T/2.2));
+    flow+=0.02; if(flow>1) flow-=1;
+    var active=getPhase();
     g.clearRect(0,0,W,H);
     for(var i=0;i<n;i++){ var on=i<=active; var s=steps[i];
       g.fillStyle=on?'#FFFDF8':'#F1EADC'; g.strokeStyle=on?s[2]:'#d9cfbb'; g.lineWidth=on?2.4:1.4;
@@ -277,52 +294,41 @@ document.addEventListener('keydown',function(e){
         if(i===active-1 || (i===active && active<n-1)){ var u=((flow)%1); var px=ax+u*(bx2-6-ax); g.fillStyle=s[2]; g.beginPath(); g.arc(px,y+h/2,5,0,7); g.fill(); }
       }
     }
-    el('chainCap').textContent=caps[active]; el('chainPh').textContent=['①','②','③','④','⑤'][active];
   }
   setInterval(step,40); step();
 })();
 
-/* ---------- ANIM 3 : tranchage, remplissage, supports ---------- */
+/* ---------- ANIM 3 : tranchage, remplissage, supports (◀ ▶) ---------- */
 (function(){
   var cv=el('cvSlice'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var cx=280, top=40, bot=240;
   var caps=['La pièce est découpée en fines COUCHES horizontales.',
             'Chaque couche est REMPLIE : contour + motif intérieur (infill).',
             'Sous les surplombs, le trancheur ajoute des SUPPORTS temporaires.'];
-  // silhouette : une pièce en "T" renversé avec un surplomb
-  function shapeTop(x){ return top; }
-  function inShape(x,y){
-    // corps vertical + bras (surplomb) à droite en haut
-    var body = (x>cx-70 && x<cx-10 && y>top && y<bot);
-    var arm  = (x>cx-70 && x<cx+120 && y>top && y<top+52);
-    return body||arm;
-  }
+  var getPhase=stepper('slicePrev','sliceNext','slicePh','sliceCap',caps,null);
   var T=0;
   function step(){
-    T+=0.03; if(T>10) T=0;
-    var phase=(T<2?0:(T<6?1:2));
+    T+=0.03; if(T>2.4) T=0;
+    var phase=getPhase();
     g.clearRect(0,0,W,H);
-    // remplissage / silhouette
-    // dessine la pièce
     function drawPiece(fill){ g.fillStyle=fill; g.beginPath();
       g.moveTo(cx-70,top); g.lineTo(cx+120,top); g.lineTo(cx+120,top+52); g.lineTo(cx-10,top+52); g.lineTo(cx-10,bot); g.lineTo(cx-70,bot); g.closePath(); g.fill();
       g.strokeStyle='#3D7E5F'; g.lineWidth=2; g.stroke(); }
     drawPiece('#eaf1ec');
-    // phase 0 : lignes de couches
-    var nc=12; var revealed = phase===0 ? Math.min(nc,Math.floor((T)/0.16)) : nc;
+    // phase 0 : lignes de couches (révélation en boucle)
+    var nc=12; var revealed = phase===0 ? Math.min(nc,Math.floor(T/0.16)) : nc;
     g.strokeStyle='rgba(46,106,142,.5)'; g.lineWidth=1;
     for(var k=0;k<=revealed;k++){ var y=top+k*(bot-top)/nc; g.beginPath(); g.moveTo(cx-72,y); g.lineTo((y<top+52?cx+122:cx-8),y); g.stroke(); }
-    // phase 1 : remplissage (hachures) sur une couche mise en avant
+    // phase 1 : remplissage (hachures)
     if(phase>=1){ g.save(); g.beginPath();
       g.moveTo(cx-70,top); g.lineTo(cx+120,top); g.lineTo(cx+120,top+52); g.lineTo(cx-10,top+52); g.lineTo(cx-10,bot); g.lineTo(cx-70,bot); g.closePath(); g.clip();
       g.strokeStyle='rgba(61,126,95,.5)'; g.lineWidth=2;
       for(var d=-260;d<300;d+=16){ g.beginPath(); g.moveTo(cx-80+d,top-10); g.lineTo(cx-80+d+260,bot+10); g.stroke(); }
       g.restore();
-      // contour épais
       g.strokeStyle='#3D7E5F'; g.lineWidth=3.5; g.beginPath();
       g.moveTo(cx-70,top); g.lineTo(cx+120,top); g.lineTo(cx+120,top+52); g.lineTo(cx-10,top+52); g.lineTo(cx-10,bot); g.lineTo(cx-70,bot); g.closePath(); g.stroke();
     }
-    // phase 2 : supports sous le surplomb (bras droit, de y=top+52 vers le plateau)
+    // phase 2 : supports sous le surplomb
     if(phase>=2){ g.strokeStyle='#BD8A2A'; g.lineWidth=1.6;
       for(var sx=cx+2;sx<=cx+114;sx+=14){ g.beginPath(); g.moveTo(sx,top+52); g.lineTo(sx,bot); g.stroke(); }
       g.fillStyle='#8a6313'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('supports (à retirer)',cx+56,bot+18);
@@ -334,10 +340,10 @@ document.addEventListener('keydown',function(e){
     g.fillStyle='#2E6A8E'; g.fillText('— couches',560,90);
     g.fillStyle=phase>=1?'#3D7E5F':'#bdb3a1'; g.fillText('— remplissage',560,120);
     g.fillStyle=phase>=2?'#BD8A2A':'#bdb3a1'; g.fillText('— supports',560,150);
-    el('sliceCap').textContent=caps[phase]; el('slicePh').textContent=['①','②','③'][phase];
   }
   setInterval(step,40); step();
 })();
+
 </script>
 </body>
 </html>

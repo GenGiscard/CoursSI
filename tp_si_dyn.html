@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — La dynamique · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .bench{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .bench canvas{width:100%;height:auto;display:block}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--copper)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--copper);min-width:92px;text-align:right}
+  .chk{display:flex;gap:8px;align-items:center;font-size:15px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
+  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — La dynamique<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI · Mouvements &amp; efforts</div>
+      <h1>La dynamique</h1>
+      <p class="lede">ΣF = m·a : au banc d'essai, mesure l'effet d'une force sur un chariot, puis calcule des accélérations, des vitesses, des distances de freinage — et dimensionne un câble d'ascenseur.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Le banc d'essai</h2>
+      <p class="task">🎯 Règle la force F avec le curseur, coche « masse ×2 » pour comparer, et observe a et v. Puis réponds <b>en t'aidant du banc</b>.</p>
+      <div class="bench">
+        <canvas id="cvBench" width="880" height="230" aria-label="Banc d'essai : chariot poussé par une force réglable"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">F =</span>
+          <input type="range" id="fSlider" min="0" max="500" step="25" value="200">
+          <span class="val" id="fVal">200 N</span>
+          <label class="chk"><input type="checkbox" id="mChk"> masse ×2 (100 kg)</label>
+        </div>
+      </div>
+      <div class="match" id="aMatch"></div>
+      <div class="row"><span>c) Quelle force F faut-il pour obtenir a = 6 m/s² (m = 50 kg) ?</span><input class="numin" id="aC" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>a)</b> a = F/m = 200/50 = <b>4 m/s²</b>.<br><b>b)</b> À F constante, masse ×2 → accélération <b>÷2</b> (a = 200/100 = 2 m/s²) : c'est l'inertie.<br><b>c)</b> F = m·a = 50 × 6 = <b>300 N</b>.</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> Appliquer ΣF = m·a</h2>
+      <p class="task">🎯 Deux véhicules, deux calculs directs (on néglige les frottements).</p>
+      <div class="row"><span>a) Une moto de 200 kg doit accélérer à 3 m/s². Force de poussée nécessaire : F =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="row"><span>b) Une voiture de 1200 kg subit une force motrice de 3600 N. Son accélération : a =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>a)</b> F = m·a = 200 × 3 = <b>600 N</b>.<br><b>b)</b> a = F/m = 3600/1200 = <b>3 m/s²</b>. Une équation, deux sens de lecture.</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> De a à v, puis à x</h2>
+      <p class="task">🎯 Un kart part de l'arrêt avec a = 2,5 m/s² constante, pendant t = 4 s.</p>
+      <div class="row"><span>a) Vitesse atteinte : v = a·t =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) Distance parcourue : x = ½·a·t² =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> v = 2,5 × 4 = <b>10 m/s</b> (36 km/h).<br><b>b)</b> x = ½ × 2,5 × 4² = ½ × 2,5 × 16 = <b>20 m</b>. Attention : c'est bien t² dans la formule de la position.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> La distance d'arrêt</h2>
+      <p class="task">🎯 Tu roules à v = 20 m/s (72 km/h). Tes freins décélèrent à a = 5 m/s². Temps de réaction : 1 s.</p>
+      <div class="row"><span>a) Distance de freinage : d = v²/(2·a) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><span>b) Distance TOTALE d'arrêt (réaction + freinage) :</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="match" id="dMatch"></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> d = 20²/(2×5) = 400/10 = <b>40 m</b>.<br><b>b)</b> Pendant 1 s de réaction on parcourt 20 m → total = 20 + 40 = <b>60 m</b>.<br><b>c)</b> À 40 m/s (le double), d = 40²/10 = <b>160 m</b> : la distance de freinage est multipliée par <b>4</b> (elle suit v²).</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">★</span> Dimensionner le câble de l'ascenseur</h2>
+      <p class="task">🎯 Cabine chargée : m = 600 kg (g = 10 N/kg). Le câble doit tenir dans TOUS les cas de mouvement.</p>
+      <div class="row"><span>a) À vitesse constante, tension du câble : T =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="row"><span>b) En accélération vers le haut à a = 1,5 m/s² : T = m·(g+a) =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+      <div class="opt" id="eOpt">
+        <button data-v="0">Le câble se dimensionne pour la vitesse maximale</button>
+        <button data-v="1">Le câble se dimensionne pour l'accélération vers le haut (T maximal)</button>
+        <button data-v="2">Le câble se dimensionne pour la descente (T minimal)</button>
+      </div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>a)</b> a = 0 → T = P = 600 × 10 = <b>6000 N</b>.<br><b>b)</b> T = 600 × (10 + 1,5) = 600 × 11,5 = <b>6900 N</b>.<br><b>c)</b> Le cas dimensionnant est celui où T est <b>maximal</b> : l'<b>accélération vers le haut</b>. La vitesse, elle, ne change rien à la tension (ΣF = m·a, pas m·v) — avec un coefficient de sécurité par-dessus, bien sûr.</div>
+    </section>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---------- A : banc d'essai ---------- */
+var F=200, m2=false;
+(function(){
+  var cv=el('cvBench'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var T=0;
+  el('fSlider').addEventListener('input',function(){ F=+this.value; el('fVal').textContent=F+' N'; T=0; });
+  el('mChk').addEventListener('change',function(){ m2=this.checked; T=0; });
+  function step(){
+    T+=0.04; if(T>3.2) T=0;
+    var m=m2?100:50, a=F/m, v=a*T, x=0.5*a*T*T;
+    g.clearRect(0,0,W,H);
+    // piste graduée (échelle 26 px/m)
+    var y=150, x0=90, sc=26;
+    g.strokeStyle='#d9cfbb'; g.lineWidth=2; g.beginPath(); g.moveTo(20,y+20); g.lineTo(W-20,y+20); g.stroke();
+    g.font='10px "JetBrains Mono",monospace'; g.fillStyle='#a89e8c'; g.textAlign='center';
+    for(var d=0;d<=28;d+=4){ var xx=x0+d*sc; if(xx<W-20){ g.beginPath(); g.strokeStyle='#e4dccb'; g.moveTo(xx,y+14); g.lineTo(xx,y+26); g.stroke(); g.fillText(d+' m',xx,y+40); } }
+    // chariot
+    var cx=x0+x*sc; if(cx>W-190) cx=W-190;
+    var wCart=m2?128:104, hCart=m2?66:54;
+    g.fillStyle=m2?'#f2ecf1':'#eef3f6'; g.strokeStyle=m2?'#8A5A7A':'#2E6A8E'; g.lineWidth=2.5;
+    g.beginPath(); g.rect(cx,y-hCart,wCart,hCart); g.fill(); g.stroke();
+    g.fillStyle=m2?'#8A5A7A':'#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('m = '+m+' kg',cx+wCart/2,y-hCart/2+5);
+    g.fillStyle='#2A2622'; g.beginPath(); g.arc(cx+16,y+8,8,0,7); g.fill(); g.beginPath(); g.arc(cx+wCart-16,y+8,8,0,7); g.fill();
+    // flèche F
+    if(F>0){ var len=30+F/500*70;
+      g.strokeStyle='#C0492E'; g.lineWidth=4.5; g.beginPath(); g.moveTo(cx-len,y-hCart/2); g.lineTo(cx-8,y-hCart/2); g.stroke();
+      g.fillStyle='#C0492E'; g.beginPath(); g.moveTo(cx,y-hCart/2); g.lineTo(cx-13,y-hCart/2-7); g.lineTo(cx-13,y-hCart/2+7); g.closePath(); g.fill();
+      g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='right'; g.fillText('F = '+F+' N',cx-len-8,y-hCart/2+4);
+    }
+    // compteurs
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('a = F / m = '+String(Math.round(a*100)/100).replace('.',',')+' m/s²',560,42);
+    g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('t = '+T.toFixed(1).replace('.',',')+' s   v = '+v.toFixed(1).replace('.',',')+' m/s',560,68);
+    if(F===0){ g.fillStyle='#a89e8c'; g.fillText('F = 0 → a = 0 : le chariot ne bouge pas.',560,94); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* helpers */
+function buildMatch(boxId, prefix, scen, opts){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* A */
+var A_SCEN=[
+  {sc:'a) Avec F = 200 N et m = 50 kg, l\u2019accélération vaut :', ok:'4 m/s²'},
+  {sc:'b) À F constante, si on double la masse, l\u2019accélération est :', ok:'divisée par 2'}
+];
+buildMatch('aMatch','a',A_SCEN.map(function(s,i){ return i===0? {sc:s.sc, ok:s.ok} : s; }),[]);
+// options différentes par ligne → on remplace les selects générés
+(function(){
+  var opts=[['— choisir —','2 m/s²','4 m/s²','8 m/s²','250 m/s²'],
+            ['— choisir —','doublée','inchangée','divisée par 2','nulle']];
+  for(var i=0;i<2;i++){ var s=el('asel'+i); s.innerHTML=opts[i].map(function(o){return '<option>'+o+'</option>';}).join(''); }
+})();
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  var okM=checkMatch('a',A_SCEN);
+  var c=numf(el('aC').value); var okC=Math.abs(c-300)<10;
+  if(okM&&okC) return {ok:true,msg:'✓ Le banc confirme tes calculs : 4 m/s², ÷2, et 300 N.'};
+  return {ok:false,msg:'✗ '+(okM?'a/b✓':'a/b à revoir (manipule le banc !)')+' · '+(okC?'c✓':'c✗ (F = m·a)')};
+});
+
+/* B */
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var a=numf(el('bA').value), b=numf(el('bB').value);
+  var okA=Math.abs(a-600)<15, okB=Math.abs(b-3)<0.2;
+  if(okA&&okB) return {ok:true,msg:'✓ 600 N et 3 m/s² : la loi dans les deux sens.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (F = m·a)')+' '+(okB?'b✓':'b✗ (a = F/m)')};
+});
+
+/* C */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var a=numf(el('cA').value), b=numf(el('cB').value);
+  var okA=Math.abs(a-10)<0.5, okB=Math.abs(b-20)<1;
+  if(okA&&okB) return {ok:true,msg:'✓ v = 10 m/s et x = 20 m.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (v = a·t)')+' '+(okB?'b✓':'b✗ (x = ½·a·t², n\u2019oublie pas le carré)')};
+});
+
+/* D */
+var D_SCEN=[{sc:'c) Si la vitesse double (40 m/s), la distance de freinage est :', ok:'multipliée par 4'}];
+buildMatch('dMatch','d',D_SCEN,['— choisir —','doublée','multipliée par 4','inchangée','divisée par 2']);
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var a=numf(el('dA').value), b=numf(el('dB').value);
+  var okA=Math.abs(a-40)<2, okB=Math.abs(b-60)<3, okM=checkMatch('d',D_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ 40 m, 60 m au total — et ×4 si v double. Prudence !'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (d = v²/(2a))')+' '+(okB?'b✓':'b✗ (ajoute v×1 s)')+' '+(okM?'c✓':'c✗ (pense à v²)')};
+});
+
+/* E */
+(function(){ var sel=-1;
+  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+  lockExo('eCheck','eShow','eSol','eFb',function(){
+    var a=numf(el('eA').value), b=numf(el('eB').value);
+    var okA=Math.abs(a-6000)<100, okB=Math.abs(b-6900)<100, okC=(sel===1);
+    if(sel<0) return {ok:false,msg:'Choisis aussi une réponse en c).'};
+    if(okA&&okB&&okC) return {ok:true,msg:'✓ 6000 N, 6900 N — et on dimensionne pour le T maximal.'};
+    return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (T = P)')+' '+(okB?'b✓':'b✗ (T = m·(g+a))')+' '+(okC?'c✓':'c✗ (quand T est-il le plus grand ?)')};
+  });
+})();
+</script>
+</body>
+</html>
