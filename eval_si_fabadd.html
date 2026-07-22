@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Évaluation — Fabrication additive · SI Première</title>
+<title>Évaluation — L'atelier de prototypage · Fabrication additive · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,42 +18,53 @@
   .estic-bar .who{font-weight:800;font-size:14px}
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
-
-  .wrap{max-width:820px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
-  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:20px}
-  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
-  h1{font-size:clamp(24px,3.6vw,34px);margin:4px 0 6px;font-weight:800}
-  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;outline:none}
-  .idbox input:focus{border-color:var(--steel)}
-
-  .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
-  .q .qh{font-weight:700;margin-bottom:10px}
-  .q .qh .n{font-family:'JetBrains Mono',monospace;color:#fff;background:var(--steel);border-radius:7px;padding:2px 8px;font-size:13px;margin-right:8px}
-  .opts{display:grid;gap:8px}
-  .opts label{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.12s}
-  .opts label:hover{border-color:var(--steel)}
-  .opts input{margin-top:3px}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
-  .unit{color:var(--sub);margin-left:8px}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#1e2c33,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#8fd4e0;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas,.chrono svg{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--steel)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--steel);min-width:80px;text-align:right}
+  .game{background:#1e2c33;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#8fd4e0;margin-bottom:8px}
+  .gq{font-weight:800;font-size:18px;text-align:center;margin:12px 0 10px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#2b3f49;border:1px solid #41626f;color:#f2ead8;border-radius:10px;padding:12px 6px;cursor:pointer}
+  .gopts button:hover{background:#345061}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:18px;color:#8fd4e0}
   .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
   .corr.show{display:block}
   .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
   .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
   .corr .sol{color:var(--sub);margin-top:5px}
-
-  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:9px;padding:12px 20px;cursor:pointer;font-weight:700}
-  .btn:hover{filter:brightness(1.06)} .btn:disabled{opacity:.45;cursor:not-allowed}
-  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
   .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
-  .scorebox.show{display:block}
-  .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
+  .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
   .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
-
   .teacher{margin-top:40px;border-top:1px dashed var(--line);padding-top:16px}
   .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);cursor:pointer;text-decoration:underline}
-  #dash{display:none;margin-top:14px}
-  #dash.show{display:block}
+  #dash{display:none;margin-top:14px} #dash.show{display:block}
   table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
   th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
   th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub);letter-spacing:.06em}
@@ -61,6 +72,18 @@
   .stat b{color:var(--steel);font-size:18px}
   .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
   .barq>i{display:block;height:100%;background:var(--green)}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
@@ -72,23 +95,119 @@
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /8</div>
-      <h1>Fabrication additive</h1>
-      <p style="color:var(--sub);margin:0">Réponds aux 8 questions, puis clique « Terminer ». Ta note et les corrections s'afficheront.</p>
-      <div class="idbox">
-        <input id="nom" placeholder="Nom Prénom" autocomplete="off">
-        <input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px">
+      <div class="k">Évaluation · Première spé SI · /15</div>
+      <h1>🖨️ L'atelier de prototypage</h1>
+      <p>L'atelier t'ouvre ses portes : une imprimante qui construit sa pièce couche par couche, des couches à compter, un défi de procédés, le taux de remplissage à régler… et le grand duel additif contre usinage. La calculatrice est en bas à droite : au boulot, prototypiste !</p>
+      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
+    </div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> La chaîne numérique <span class="pts">3 pts</span></h2>
+      <p class="task">De l'idée à la pièce : regarde les étapes s'allumer pendant que l'imprimante construit, couche après couche.</p>
+      <div class="chrono"><canvas id="cv1" width="860" height="250" aria-label="Chaîne numérique et impression couche par couche"></canvas></div>
+      <div class="qrow" id="q1a"><span class="sc">a) La bonne chaîne numérique est :</span>
+        <select id="s1a"><option>— choisir —</option><option>CAO → STL → tranchage → G-code → impression</option><option>G-code → CAO → impression → STL</option><option>impression → tranchage → CAO → STL</option></select></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Le fichier <b>STL</b> décrit :</span>
+        <select id="s1b"><option>— choisir —</option><option>la géométrie de la pièce en facettes triangulaires</option><option>les trajectoires de la buse</option><option>la température du plateau</option></select></div>
+      <div class="qrow" id="q1c"><span class="sc">c) Le <b>slicer</b> (trancheur) sert à :</span>
+        <select id="s1c"><option>— choisir —</option><option>découper le modèle en couches et générer les trajectoires (G-code)</option><option>dessiner la pièce en 3D</option><option>refroidir la pièce</option></select></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> Le compte des couches <span class="pts">3 pts</span></h2>
+      <p class="task">Le support de téléphone à imprimer mesure h = 30 mm de haut. Hauteur de couche réglée : e = 0,2 mm.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 190" aria-label="Pièce de 30 mm et zoom sur les couches de 0,2 mm">
+          <rect x="140" y="40" width="150" height="110" rx="6" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/>
+          <path d="M110 40 v110" stroke="#5C544B" stroke-width="2"/>
+          <path d="M104 40 h12 M104 150 h12" stroke="#5C544B" stroke-width="2"/>
+          <text x="66" y="100" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#5C544B">h = 30 mm</text>
+          <g stroke="#2E6A8E" stroke-width="1" opacity="0.5">
+            <path d="M140 60 h150 M140 80 h150 M140 100 h150 M140 120 h150 M140 140 h150"/>
+          </g>
+          <circle cx="290" cy="140" r="16" fill="none" stroke="#C0492E" stroke-width="2.5"/>
+          <path d="M304 128 L420 74" stroke="#C0492E" stroke-width="2" stroke-dasharray="5 4"/>
+          <rect x="420" y="44" width="300" height="90" rx="8" fill="#fcf7ea" stroke="#C0492E" stroke-width="2"/>
+          <g stroke="#BD8A2A" stroke-width="6">
+            <path d="M440 118 h260 M440 100 h260 M440 82 h260 M440 64 h260"/>
+          </g>
+          <path d="M726 92 v18" stroke="#5C544B" stroke-width="2"/>
+          <path d="M720 92 h12 M720 110 h12" stroke="#5C544B" stroke-width="2"/>
+          <text x="742" y="106" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">e = 0,2 mm</text>
+          <text x="570" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">zoom : chaque trait = une couche déposée</text>
+        </svg>
       </div>
-    </div>
+      <div class="qrow" id="q2a"><span class="sc">a) Nombre de couches : n = h / e =</span>
+        <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">couches</span></div>
+      <div class="qrow" id="q2b"><span class="sc">b) L'imprimante met 2 min par couche. Durée totale :</span>
+        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">min</span></div>
+      <div class="qrow" id="q2c"><span class="sc">c) 🔬 On passe la couche à e = 0,1 mm. Résultat :</span>
+        <select id="s2c"><option>— choisir —</option><option>2× plus de couches : finition plus fine, mais 2× plus long</option><option>2× moins de couches : plus rapide et plus fin</option><option>aucun changement</option></select></div>
+      <div class="corr" id="c2"></div>
+    </section>
 
-    <div id="quiz"></div>
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : l'imprimante folle <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ <b>6 questions</b> éclair sur les procédés et leurs secrets. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <div class="gq" id="gQ">Prêt ? L'imprimante chauffe…</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
 
-    <div style="margin-top:8px"><button class="btn" id="submit">Terminer &amp; envoyer</button></div>
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> Le taux de remplissage <span class="pts">2 pts</span></h2>
+      <p class="task">La pièce a un volume « plein » de 50 cm³, en PLA (masse volumique 1,25 g/cm³). <b>Règle le remplissage (infill)</b> et observe la masse.</p>
+      <div class="chrono">
+        <canvas id="cv4" width="860" height="210" aria-label="Cube dont le remplissage se densifie + jauge de masse"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">infill =</span>
+          <input type="range" id="inSlider" min="0" max="100" step="5" value="20">
+          <span class="val" id="inVal">20 %</span>
+        </div>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Masse à 20 % : m = 50 × 1,25 × 0,20 =</span>
+        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">g</span></div>
+      <div class="qrow" id="q4b"><span class="sc">b) 💪 Pour une pièce de résistance maximale, on choisit :</span>
+        <select id="s4b"><option>— choisir —</option><option>100 % — mais plus lourde, plus longue et plus chère à imprimer</option><option>0 % — la pièce est plus légère donc plus solide</option><option>le taux ne change rien à la résistance</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
 
-    <div class="scorebox" id="scorebox">
-      <div class="big" id="scoreBig">—</div>
-      <div class="st" id="scoreSt"></div>
-    </div>
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Le bon procédé pour la bonne pièce <span class="pts">2 pts</span></h2>
+      <p class="task">🎯 Deux commandes arrivent à l'atelier. FDM (dépôt de filament fondu) · SLA (résine liquide durcie aux UV) · SLS (poudre frittée au laser). Choisis !</p>
+      <div class="qrow" id="q5a"><span class="sc">a) 🐉 Une figurine ultra-détaillée à la surface parfaitement lisse :</span>
+        <select id="s5a"><option>— choisir —</option><option>SLA (résine : très haute précision, surface lisse)</option><option>FDM (couches visibles)</option><option>SLS (surface granuleuse)</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) ⚙️ Une pièce mécanique complexe qui doit s'imprimer SANS supports :</span>
+        <select id="s5b"><option>— choisir —</option><option>SLS (la poudre non frittée soutient la pièce)</option><option>FDM (il faut des supports partout)</option><option>Aucun procédé ne le permet</option></select></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> Additif ou usinage ? <span class="pts">3 pts</span></h2>
+      <p class="task">🥊 Le duel final. L'usinage ENLÈVE la matière d'un bloc ; l'additif l'AJOUTE couche par couche. À toi d'arbitrer.</p>
+      <div class="qrow" id="q6a"><span class="sc">a) 🌀 Une pièce avec des canaux de refroidissement INTERNES en spirale :</span>
+        <select id="s6a"><option>— choisir —</option><option>Additif : l'outil d'usinage ne peut pas atteindre l'intérieur</option><option>Usinage : c'est toujours plus précis</option><option>Impossible dans les deux cas</option></select></div>
+      <div class="qrow" id="q6b"><span class="sc">b) 🏭 Une série de 100 000 pièces identiques :</span>
+        <select id="s6b"><option>— choisir —</option><option>Injection/usinage : bien plus rapide et rentable en grande série</option><option>Additif : imprimer 100 000 fois est le plus rapide</option><option>À la main, une par une</option></select></div>
+      <div class="qrow" id="q6c"><span class="sc">c) 💰 Coût matière du prototype FDM : 40 g de PLA à 25 €/kg =</span>
+        <input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">€</span></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
+    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
 
     <div class="teacher">
       <span class="tlink" id="tlink">· Espace enseignant ·</span>
@@ -99,8 +218,7 @@
           <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
         </div>
         <div id="dashData" style="display:none">
-          <div id="stats" style="margin:10px 0"></div>
-          <div id="perQ"></div>
+          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
           <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
           <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
           <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
@@ -109,107 +227,270 @@
     </div>
   </div>
 
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
-
-/* ---- Firebase (RTDB seule, sans auth) ---- */
 var db=null;
 try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
 var NODE='eval_fabadd';
 
-/* ---- Questions (énoncés sans formule) ---- */
-var Q=[
- {t:'qcm', q:'La fabrication additive consiste à…', opts:['ajouter la matière couche par couche','retirer la matière d\u2019un bloc','déformer une tôle','couler un métal dans un moule'], c:0,
-   sol:'Elle ajoute la matière là où il en faut, à partir d\u2019un modèle 3D.'},
- {t:'qcm', q:'Quel procédé fond un fil plastique déposé par une buse ?', opts:['SLA (résine)','FDM (dépôt de fil)','SLS (poudre)','Usinage'], c:1,
-   sol:'FDM = dépôt de fil fondu, le procédé le plus répandu.'},
- {t:'qcm', q:'Quel fichier transmet la géométrie de la CAO au trancheur ?', opts:['le G-code','le PDF','le fichier STL','le DXF'], c:2,
-   sol:'Le STL décrit la surface sous forme d\u2019un maillage de triangles.'},
- {t:'qcm', q:'Que produit le trancheur pour piloter la machine ?', opts:['un fichier STL','le G-code','un plan 2D','une photo'], c:1,
-   sol:'Le trancheur génère le G-code : la liste des ordres (déplacements, températures…).'},
- {t:'num', q:'Une pièce de 50 mm de haut est imprimée en couches de 0,25 mm. Combien de couches ?', a:200, tol:1, unit:'couches',
-   sol:'nombre de couches = hauteur ÷ hauteur de couche = 50 ÷ 0,25 = 200.'},
- {t:'num', q:'Le volume de matière est estimé à 20 cm³. Le PLA a une masse volumique de 1,24 g/cm³. Quelle masse de plastique ?', a:24.8, tol:0.2, unit:'g',
-   sol:'masse = volume × masse volumique = 20 × 1,24 = 24,8 g.'},
- {t:'qcm', q:'À quoi servent les supports ?', opts:['décorer la pièce','soutenir les surplombs pendant l\u2019impression','augmenter la vitesse','remplacer le remplissage'], c:1,
-   sol:'Sous un surplomb, la matière n\u2019a rien pour se poser : on ajoute des supports temporaires.'},
- {t:'qcm', q:'Un défaut typique d\u2019une pièce FDM est…', opts:['une résistance identique dans toutes les directions','d\u2019être plus fragile ENTRE les couches (anisotropie)','l\u2019absence totale de couches','d\u2019être toujours transparente'], c:1,
-   sol:'Les couches se décollent plus facilement qu\u2019elles ne cassent : la pièce est anisotrope.'}
-];
-
-/* ---- Rendu ---- */
+/* ---------- calculatrice ---------- */
 (function(){
-  var box=el('quiz');
-  Q.forEach(function(it,i){
-    var d=document.createElement('div'); d.className='q'; d.id='q'+i;
-    var head='<div class="qh"><span class="n">'+(i+1)+'</span>'+it.q+'</div>';
-    var body='';
-    if(it.t==='qcm'){ body='<div class="opts">'+it.opts.map(function(o,j){ return '<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>'; }).join('')+'</div>'; }
-    else { body='<div><input class="numin" id="n'+i+'" inputmode="decimal" placeholder="?"><span class="unit">'+(it.unit||'')+'</span></div>'; }
-    d.innerHTML=head+body+'<div class="corr" id="c'+i+'"></div>';
-    box.appendChild(d);
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
   });
+  show();
 })();
 
-/* ---- Correction & envoi ---- */
+/* ============ EX1 : chaîne numérique + impression ============ */
+(function(){
+  var cv=el('cv1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  var STEPS=['CAO','STL','tranchage','G-code','impression'];
+  function step(){
+    T+=0.02; var cycle=T%6;
+    var active=Math.min(4, Math.floor(cycle/1.1));
+    g.clearRect(0,0,cv.width,cv.height);
+    // chaîne d'étapes
+    for(var i=0;i<5;i++){
+      var x=30+i*104, y=30;
+      var on = i<=active;
+      g.fillStyle= on? '#e7eef2':'#f6f2e8'; g.strokeStyle= on? '#2E6A8E':'#d9cfbb'; g.lineWidth= on?3:1.5;
+      g.beginPath(); g.rect(x,y,92,44); g.fill(); g.stroke();
+      g.fillStyle= on? '#2E6A8E':'#a89e8c'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(STEPS[i],x+46,y+27);
+      if(i<4){ g.strokeStyle= (i<active)? '#2E6A8E':'#d9cfbb'; g.lineWidth=2.5;
+        g.beginPath(); g.moveTo(x+92,y+22); g.lineTo(x+104,y+22); g.stroke();
+        g.fillStyle= (i<active)? '#2E6A8E':'#d9cfbb';
+        g.beginPath(); g.moveTo(x+108,y+22); g.lineTo(x+100,y+17); g.lineTo(x+100,y+27); g.closePath(); g.fill(); }
+    }
+    // imprimante à droite
+    var px=620, py=40, W=200, H=180;
+    g.strokeStyle='#5C544B'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(px,py); g.lineTo(px,py+H); g.moveTo(px+W,py); g.lineTo(px+W,py+H); g.moveTo(px-10,py+H); g.lineTo(px+W+10,py+H); g.moveTo(px,py); g.lineTo(px+W,py); g.stroke();
+    // couches déposées
+    var build=(cycle/6);
+    var layers=Math.floor(build*14);
+    g.fillStyle='#BD8A2A';
+    for(var L=0;L<layers;L++){ g.fillRect(px+46,py+H-8-L*9,108,7); }
+    // buse
+    var bx=px+46+ (0.5+0.5*Math.sin(T*6))*108;
+    var by=py+H-10-layers*9;
+    g.fillStyle='#2E6A8E'; g.beginPath(); g.moveTo(bx-9,by-16); g.lineTo(bx+9,by-16); g.lineTo(bx,by); g.closePath(); g.fill();
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3; g.beginPath(); g.moveTo(px+6,by-22); g.lineTo(px+W-6,by-22); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('couche '+(layers+1),px+W/2,py+H+24);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX3 : défi noté ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false, pool:null};
+var G3_POOL=[
+  {q:'🧵 Le procédé FDM dépose…', ok:'un filament plastique fondu', opts:['un filament plastique fondu','de la résine liquide','de la poudre métallique','de la colle']},
+  {q:'💧 Le procédé SLA durcit…', ok:'une résine liquide avec des UV', opts:['une résine liquide avec des UV','un filament chauffé','du sable','du plâtre']},
+  {q:'✨ Le procédé SLS fusionne…', ok:'une poudre avec un laser', opts:['une poudre avec un laser','un filament avec les UV','une résine au four','du bois']},
+  {q:'🔨 Le fraisage (on ENLÈVE la matière) est un procédé…', ok:'soustractif', opts:['soustractif','additif','chimique','magique']},
+  {q:'🌉 Les SUPPORTS d\u2019impression servent à…', ok:'tenir les parties en surplomb', opts:['tenir les parties en surplomb','décorer la pièce','refroidir la buse','coller au plateau']},
+  {q:'🌽 Le PLA est un plastique…', ok:'biosourcé (amidon de maïs)', opts:['biosourcé (amidon de maïs)','issu du pétrole uniquement','métallique','radioactif']},
+  {q:'📐 Avant impression, le modèle 3D est exporté en…', ok:'STL', opts:['STL','MP3','PDF','JPG']},
+  {q:'🕳️ Grand atout de l\u2019additif : fabriquer…', ok:'des formes internes impossibles à usiner', opts:['des formes internes impossibles à usiner','plus vite que tout','moins cher en grande série','sans machine']}
+];
+function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function g3Next(){
+  var it=g3State.pool[g3State.idx];
+  g3State.cur={q:it.q, ok:it.ok, opts:shuffle(it.opts.slice())};
+  g3State.locked=false;
+  el('gProg').textContent='question '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Couche validée !'; }
+  else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était : '+g3State.cur.ok;
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='✓ '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='défi terminé';
+      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'🖨️ Maître prototypiste !':(g3State.hits>=3?'L\u2019atelier est content.':'Retourne voir les procédés du cours…');
+    } else { g3Next(); }
+  }, 900);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none';
+  g3State.pool=shuffle(G3_POOL.slice()).slice(0,6);
+  g3Next();
+});
+
+/* ============ EX4 : taux de remplissage ============ */
+var infill=20;
+(function(){
+  var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var VOL=50, RHO=1.25;
+  el('inSlider').addEventListener('input',function(){ infill=+this.value; el('inVal').textContent=infill+' %'; });
+  function step(){
+    var m=VOL*RHO*infill/100, mMax=VOL*RHO;
+    g.clearRect(0,0,cv.width,cv.height);
+    // cube en coupe avec remplissage
+    var x=150, y=30, S=150;
+    g.fillStyle='#fcf7ea'; g.strokeStyle='#2E6A8E'; g.lineWidth=3.5;
+    g.beginPath(); g.rect(x,y,S,S); g.fill(); g.stroke();
+    if(infill>0){
+      var sp=Math.max(6, 6+(100-infill)*0.5);
+      g.strokeStyle='#BD8A2A'; g.lineWidth=2.2;
+      for(var d=-S; d<S; d+=sp){
+        g.beginPath(); g.moveTo(x+Math.max(0,d), y+Math.max(0,-d)); g.lineTo(x+Math.min(S,S+d), y+Math.min(S,S-d)); g.stroke();
+        g.beginPath(); g.moveTo(x+Math.max(0,d), y+Math.min(S,S+d)-(d>0?0:0)); g.stroke();
+      }
+      for(var d2=-S; d2<S; d2+=sp){
+        var ax=x+Math.max(0,-d2), ay=y+Math.max(0,d2);
+        var bx2=x+Math.min(S,S-d2), by2=y+Math.min(S,S+d2);
+        g.beginPath(); g.moveTo(ax,ay); g.lineTo(bx2,by2); g.stroke();
+      }
+    }
+    g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('coupe de la pièce · infill '+infill+' %',x+S/2,y+S+28);
+    // jauge de masse
+    var bx=470;
+    g.fillStyle='#2A2622'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('m = 50 × 1,25 × '+String((infill/100).toFixed(2)).replace('.',',')+' = '+String(m.toFixed(1)).replace('.',',')+' g',bx,56);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('0 g',bx,102);
+    g.textAlign='right'; g.fillText(String(mMax.toFixed(1)).replace('.',',')+' g',bx+330,102);
+    g.fillStyle='#eee6d6'; g.fillRect(bx,110,330,20);
+    g.fillStyle='#3D7E5F'; g.fillRect(bx,110,330*m/mMax,20);
+    g.fillStyle='#5C544B'; g.textAlign='left';
+    g.fillText('matière consommée',bx,152);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ correction & remise ============ */
 var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
 el('submit').addEventListener('click',function(){
   if(sent) return;
   var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
   if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
-  var score=0, detail=[];
-  Q.forEach(function(it,i){
-    var ok=false, given='';
-    if(it.t==='qcm'){ var r=document.querySelector('input[name="q'+i+'"]:checked'); given=r?(+r.value):-1; ok=(given===it.c); }
-    else { var v=numf(el('n'+i).value); given=v; ok=(!isNaN(v)&&Math.abs(v-it.a)<it.tol); }
-    if(ok) score++;
-    detail.push(ok?1:0);
-    var c=el('c'+i); c.className='corr show '+(ok?'ok':'no');
-    var right = it.t==='qcm' ? it.opts[it.c] : (String(it.a).replace('.',',')+' '+(it.unit||''));
-    c.innerHTML=(ok?'✓ Correct.':'✗ Réponse attendue : <b>'+right+'</b>')+'<div class="sol">'+it.sol+'</div>';
-  });
-  el('scoreBig').textContent=score+' / '+Q.length;
-  el('scoreSt').textContent = score>=6?'Très bien !':(score>=4?'Correct — à consolider.':'À revoir avec le cours.');
-  el('scorebox').classList.add('show');
-  el('submit').disabled=true; sent=true;
+  if(!g3State.done){ alert('Termine d\u2019abord le défi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=(el('s1a').value==='CAO → STL → tranchage → G-code → impression');
+  var ok1b=(el('s1b').value==='la géométrie de la pièce en facettes triangulaires');
+  var ok1c=(el('s1c').value==='découper le modèle en couches et générer les trajectoires (G-code)');
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol">La chaîne : <b>CAO → STL → tranchage → G-code → impression</b>. Le STL décrit la <b>géométrie en facettes</b> ; le slicer la <b>découpe en couches</b> et écrit les trajectoires que la machine exécutera.</div>';
+  /* EX2 */
+  var ok2a=Math.abs(numf(el('n2a').value)-150)<3, ok2b=Math.abs(numf(el('n2b').value)-300)<10;
+  var ok2c=(el('s2c').value==='2× plus de couches : finition plus fine, mais 2× plus long');
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">n = 30/0,2 = <b>150 couches</b> · 150 × 2 min = <b>300 min</b> (5 h !) · e = 0,1 mm → 300 couches : <b>plus fin mais 2× plus long</b>. Tout réglage est un compromis.</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">FDM = filament fondu · SLA = résine + UV · SLS = poudre + laser · usinage = soustractif · supports = surplombs · PLA = biosourcé.</div>';
+  /* EX4 */
+  var ok4a=Math.abs(numf(el('n4a').value)-12.5)<0.8;
+  var ok4b=(el('s4b').value==='100 % — mais plus lourde, plus longue et plus chère à imprimer');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">m = 50 × 1,25 × 0,20 = <b>12,5 g</b>. Résistance max → <b>100 %</b>, au prix de la masse, du temps et du coût : en pratique 20-40 % suffisent souvent.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='SLA (résine : très haute précision, surface lisse)');
+  var ok5b=(el('s5b').value==='SLS (la poudre non frittée soutient la pièce)');
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">Figurine détaillée → <b>SLA</b> (précision, surface lisse). Pièce sans supports → <b>SLS</b> : la poudre non frittée fait office de support naturel.</div>';
+  /* EX6 */
+  var ok6a=(el('s6a').value==='Additif : l\u2019outil d\u2019usinage ne peut pas atteindre l\u2019intérieur');
+  var ok6b=(el('s6b').value==='Injection/usinage : bien plus rapide et rentable en grande série');
+  var ok6c=Math.abs(numf(el('n6c').value)-1)<0.1;
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">Canaux internes → <b>additif</b> (formes impossibles à usiner). Grande série → <b>injection/usinage</b> (l\u2019additif reste lent à l\u2019unité). Coût : 0,040 kg × 25 €/kg = <b>1 €</b> — prototyper coûte trois fois rien.</div>';
+  /* total */
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'L\u2019atelier t\u2019embauche comme prototypiste !':(score>=8?'Bonne impression — revois les postes en rouge.':'Repasse par le cours avant la prochaine impression.');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin, #inSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
-  // Firebase
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:Q.length, detail:detail, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
     el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
-/* ---- Espace enseignant ---- */
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 chaîne num.','Ex2 couches','Ex3 défi','Ex4 infill','Ex5 procédés','Ex6 duel'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
-el('pwBtn').addEventListener('click',function(){
-  if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); }
-  else { el('pwFb').textContent='Mot de passe incorrect.'; }
-});
+el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
 function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
-    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); });
-    rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    // stats
-    var n=rows.length, sum=0, perQ=new Array(Q.length).fill(0);
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ perQ[i]+=d; }); });
+    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / '+Q.length+'</span>';
-    // taux par question
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par question</h3>';
-    for(var i=0;i<Q.length;i++){ var p=n?Math.round(perQ[i]/n*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:34px">Q'+(i+1)+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:130px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
-    // table
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr');
-      tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||Q.length)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
