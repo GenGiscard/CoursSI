@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Évaluation — Les liaisons mécaniques · SI Première</title>
+<title>Évaluation — La salle des mécanismes · Liaisons · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,29 +18,44 @@
   .estic-bar .who{font-weight:800;font-size:14px}
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
-  .wrap{max-width:820px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
-  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:20px}
-  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
-  h1{font-size:clamp(24px,3.6vw,34px);margin:4px 0 6px;font-weight:800}
-  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;outline:none}
-  .idbox input:focus{border-color:var(--steel)}
-  .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
-  .q .qh{font-weight:700;margin-bottom:10px}
-  .q .qh .n{font-family:'JetBrains Mono',monospace;color:#fff;background:var(--steel);border-radius:7px;padding:2px 8px;font-size:13px;margin-right:8px}
-  .opts{display:grid;gap:8px}
-  .opts label{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.12s}
-  .opts label:hover{border-color:var(--steel)} .opts input{margin-top:3px}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
-  .unit{color:var(--sub);margin-left:8px}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#1f2b22,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#8fe0b0;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas,.chrono svg{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .game{background:#1f2b22;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#8fe0b0;margin-bottom:8px}
+  .gq{font-weight:800;font-size:18px;text-align:center;margin:12px 0 10px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#2c4436;border:1px solid #3f6a52;color:#f2ead8;border-radius:10px;padding:12px 6px;cursor:pointer}
+  .gopts button:hover{background:#365542}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:18px;color:#8fe0b0}
   .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
   .corr.show{display:block}
   .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
   .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
   .corr .sol{color:var(--sub);margin-top:5px}
-  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:9px;padding:12px 20px;cursor:pointer;font-weight:700}
-  .btn:hover{filter:brightness(1.06)} .btn:disabled{opacity:.45;cursor:not-allowed}
-  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
   .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
   .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
   .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
@@ -65,14 +80,114 @@
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /8</div>
-      <h1>Les liaisons mécaniques</h1>
-      <p style="color:var(--sub);margin:0">Réponds aux 8 questions, puis clique « Terminer ». Ta note et les corrections s'afficheront.</p>
+      <div class="k">Évaluation · Première spé SI · /10</div>
+      <h1>⚙️ La salle des mécanismes</h1>
+      <p>Tu entres dans la salle des mécanismes du lycée : trois guidages mystère s'animent sur l'établi, un inventaire de degrés de liberté t'attend, l'atelier des objets teste tes réflexes… et le vieil étau réclame son diagnostic. À toi de jouer, mécanicien !</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
-    <div id="quiz"></div>
-    <div style="margin-top:8px"><button class="btn" id="submit">Terminer &amp; envoyer</button></div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> Le mystère des trois guidages <span class="pts">3 pts</span></h2>
+      <p class="task">Trois mécanismes s'animent sous tes yeux. Observe le MOUVEMENT que chacun autorise, et identifie la liaison.</p>
+      <div class="chrono"><canvas id="cv1" width="860" height="230" aria-label="Trois mécanismes animés : A, B et C"></canvas></div>
+      <div class="qrow" id="q1a"><span class="sc">a) Mécanisme <b>A</b> (il tourne autour d'un axe fixe) :</span>
+        <select id="s1a"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Rotule</option><option>Hélicoïdale</option></select></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Mécanisme <b>B</b> (il coulisse le long d'un rail) :</span>
+        <select id="s1b"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Rotule</option><option>Hélicoïdale</option></select></div>
+      <div class="qrow" id="q1c"><span class="sc">c) Mécanisme <b>C</b> (il s'oriente dans toutes les directions) :</span>
+        <select id="s1c"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Rotule</option><option>Hélicoïdale</option></select></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> L'inventaire des degrés de liberté <span class="pts">3 pts</span></h2>
+      <p class="task">Un solide libre possède 6 degrés de liberté (3 translations Tx Ty Tz + 3 rotations Rx Ry Rz). Chaque liaison en LAISSE certains. Combien pour chacune ?</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 150" aria-label="Repère x y z et les trois liaisons">
+          <g stroke-linecap="round">
+            <path d="M80 110 h60" stroke="#C0492E" stroke-width="3"/><path d="M148 110 l-10 -6 v12 z" fill="#C0492E"/>
+            <path d="M80 110 v-56" stroke="#3D7E5F" stroke-width="3"/><path d="M80 46 l-6 10 h12 z" fill="#3D7E5F"/>
+            <path d="M80 110 l-38 32" stroke="#2E6A8E" stroke-width="3"/><path d="M36 148 l12 -3 -7 -9 z" fill="#2E6A8E"/>
+          </g>
+          <text x="156" y="115" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">x</text>
+          <text x="72" y="38" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#3D7E5F">y</text>
+          <text x="24" y="144" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">z</text>
+          <g font-family="JetBrains Mono" font-size="13" font-weight="700">
+            <rect x="250" y="42" width="150" height="66" rx="10" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2"/>
+            <text x="325" y="70" text-anchor="middle" fill="#2E6A8E">PIVOT</text>
+            <text x="325" y="92" text-anchor="middle" font-size="11" fill="#5C544B">1 rotation autorisée</text>
+            <rect x="440" y="42" width="150" height="66" rx="10" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2"/>
+            <text x="515" y="70" text-anchor="middle" fill="#3D7E5F">GLISSIÈRE</text>
+            <text x="515" y="92" text-anchor="middle" font-size="11" fill="#5C544B">1 translation autorisée</text>
+            <rect x="630" y="42" width="150" height="66" rx="10" fill="#f6eef4" stroke="#8A5A7A" stroke-width="2"/>
+            <text x="705" y="70" text-anchor="middle" fill="#8A5A7A">ROTULE</text>
+            <text x="705" y="92" text-anchor="middle" font-size="11" fill="#5C544B">rotations dans tous les sens</text>
+          </g>
+        </svg>
+      </div>
+      <div class="qrow" id="q2a"><span class="sc">a) Degrés de liberté d'une <b>pivot</b> :</span>
+        <input class="numin" id="n2a" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
+      <div class="qrow" id="q2b"><span class="sc">b) Degrés de liberté d'une <b>glissière</b> :</span>
+        <input class="numin" id="n2b" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
+      <div class="qrow" id="q2c"><span class="sc">c) Degrés de liberté d'une <b>rotule</b> :</span>
+        <input class="numin" id="n2c" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
+      <div class="corr" id="c2"></div>
+    </section>
+
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : l'atelier des objets <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ <b>6 objets du quotidien</b> vont défiler : à chaque fois, quelle liaison se cache dedans ? <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <div class="gq" id="gQ">Prêt ? L'atelier est plein d'objets…</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
+
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> L'étau du poste de travail <span class="pts">2 pts</span></h2>
+      <p class="task">Le vieil étau de l'atelier : la poignée fait tourner la vis, qui fait avancer le mors mobile. Diagnostique ses deux liaisons.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 210" aria-label="Schéma de l'étau : corps, vis, mors mobile">
+          <rect x="90" y="130" width="560" height="46" rx="8" fill="#e9e2d2" stroke="#5C544B" stroke-width="2.5"/>
+          <text x="370" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#5C544B">CORPS (bâti)</text>
+          <rect x="120" y="62" width="60" height="68" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/>
+          <text x="150" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#2E6A8E">mors fixe</text>
+          <rect x="330" y="62" width="60" height="68" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2.5"/>
+          <text x="360" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#3D7E5F">mors mobile</text>
+          <path d="M362 140 h-4 M330 96 h60" stroke="none"/>
+          <path d="M390 96 h250" stroke="#BD8A2A" stroke-width="9"/>
+          <g stroke="#8a6313" stroke-width="2">
+            <path d="M405 90 l10 12 M425 90 l10 12 M445 90 l10 12 M465 90 l10 12 M485 90 l10 12 M505 90 l10 12 M525 90 l10 12 M545 90 l10 12 M565 90 l10 12 M585 90 l10 12 M605 90 l10 12"/>
+          </g>
+          <text x="500" y="76" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#8a6313">VIS</text>
+          <path d="M640 96 h34" stroke="#5C544B" stroke-width="6"/>
+          <path d="M674 66 v60" stroke="#C0492E" stroke-width="8" stroke-linecap="round"/>
+          <text x="700" y="80" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#C0492E">poignée</text>
+          <path d="M700 118 a26 26 0 0 1 -14 26" fill="none" stroke="#C0492E" stroke-width="3"/>
+          <path d="M686 144 l12 -1 M686 144 l6 -11" stroke="#C0492E" stroke-width="3" stroke-linecap="round"/>
+          <path d="M300 186 h120" stroke="#3D7E5F" stroke-width="3" stroke-dasharray="6 5"/>
+          <path d="M428 186 l-11 -6 v12 z" fill="#3D7E5F"/>
+          <text x="360" y="204" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#3D7E5F">le mors avance/recule</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Liaison <b>vis / corps</b> (elle tourne ET avance en même temps — le filetage lie les deux) :</span>
+        <select id="s4a"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Hélicoïdale</option><option>Rotule</option></select></div>
+      <div class="qrow" id="q4b"><span class="sc">b) Liaison <b>mors mobile / corps</b> (il ne peut que coulisser, sans tourner) :</span>
+        <select id="s4b"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Hélicoïdale</option><option>Encastrement</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
     <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
+
     <div class="teacher">
       <span class="tlink" id="tlink">· Espace enseignant ·</span>
       <div id="dash">
@@ -101,51 +216,142 @@ var db=null;
 try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
 var NODE='eval_liaisons';
 
-var Q=[
- {t:'qcm', q:'Combien de degrés de liberté possède un solide libre dans l\u2019espace ?', opts:['3','4','6','8'], c:2,
-   sol:'3 translations + 3 rotations = 6 degrés de liberté.'},
- {t:'qcm', q:'Une liaison mécanique sert à…', opts:['bloquer tous les mouvements, toujours','relier deux pièces en autorisant certains mouvements','créer de l\u2019énergie','mesurer une vitesse'], c:1,
-   sol:'Elle relie deux pièces et ne laisse passer que les mouvements choisis.'},
- {t:'qcm', q:'La liaison PIVOT autorise…', opts:['1 translation','1 rotation','3 rotations','tout'], c:1,
-   sol:'Le pivot n\u2019autorise qu\u2019une rotation autour de son axe : 1 ddl.'},
- {t:'qcm', q:'La liaison GLISSIÈRE autorise…', opts:['1 rotation','1 translation','2 translations','3 rotations'], c:1,
-   sol:'La glissière n\u2019autorise qu\u2019une translation le long de son axe : 1 ddl.'},
- {t:'num', q:'Combien de degrés de liberté possède une liaison ROTULE ?', a:3, tol:0.5, unit:'ddl',
-   sol:'La rotule autorise les 3 rotations (aucune translation) : 3 ddl.'},
- {t:'qcm', q:'Une liaison ENCASTREMENT…', opts:['laisse 1 rotation','bloque tous les mouvements (0 ddl)','laisse 6 ddl','laisse 2 translations'], c:1,
-   sol:'Encastrement = pièces solidaires : 0 degré de liberté.'},
- {t:'num', q:'Un appui plan autorise 2 translations et 1 rotation. Combien de mouvements bloque-t-il ?', a:3, tol:0.5, unit:'mouvements',
-   sol:'6 − 3 autorisés = 3 mouvements bloqués.'},
- {t:'qcm', q:'Un roulement à billes qui guide un arbre réalise une liaison…', opts:['glissière','pivot','rotule','hélicoïdale'], c:1,
-   sol:'Le roulement guide en rotation autour d\u2019un axe : c\u2019est un pivot. Sur le schéma cinématique, on le remplace par le symbole du pivot.'}
+/* ============ EX1 : trois guidages animés ============ */
+(function(){
+  var cv=el('cv1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  function zone(x,label){
+    g.strokeStyle='#e4dccb'; g.lineWidth=1.5; g.beginPath(); g.rect(x,16,262,182); g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left'; g.fillText(label,x+12,40);
+  }
+  function step(){
+    T+=0.035;
+    g.clearRect(0,0,cv.width,cv.height);
+    /* A : pivot */
+    zone(16,'A');
+    var ax=147, ay=118;
+    g.strokeStyle='#d9cfbb'; g.lineWidth=2; g.beginPath(); g.moveTo(ax-70,ay+58); g.lineTo(ax+70,ay+58); g.stroke();
+    g.strokeStyle='#5C544B'; g.lineWidth=5; g.beginPath(); g.moveTo(ax,ay+58); g.lineTo(ax,ay); g.stroke();
+    g.save(); g.translate(ax,ay); g.rotate(T*1.4);
+    g.strokeStyle='#2E6A8E'; g.lineWidth=8; g.lineCap='round'; g.beginPath(); g.moveTo(-52,0); g.lineTo(52,0); g.stroke();
+    g.fillStyle='#C0492E'; g.beginPath(); g.arc(52,0,7,0,7); g.fill(); g.restore();
+    g.fillStyle='#8a6313'; g.beginPath(); g.arc(ax,ay,6,0,7); g.fill();
+    /* B : glissière */
+    zone(299,'B');
+    var bx=430, by=120;
+    g.strokeStyle='#5C544B'; g.lineWidth=4; g.beginPath(); g.moveTo(bx-105,by+26); g.lineTo(bx+105,by+26); g.stroke();
+    g.beginPath(); g.moveTo(bx-105,by-26); g.lineTo(bx+105,by-26); g.stroke();
+    var u=Math.sin(T*1.6)*70;
+    g.fillStyle='#eef6f0'; g.strokeStyle='#3D7E5F'; g.lineWidth=3; g.beginPath(); g.rect(bx-34+u,by-20,68,40); g.fill(); g.stroke();
+    g.strokeStyle='#3D7E5F'; g.lineWidth=2.5; g.beginPath(); g.moveTo(bx-64,by+44); g.lineTo(bx+64,by+44); g.stroke();
+    g.fillStyle='#3D7E5F'; g.beginPath(); g.moveTo(bx+72,by+44); g.lineTo(bx+60,by+38); g.lineTo(bx+60,by+50); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(bx-72,by+44); g.lineTo(bx-60,by+38); g.lineTo(bx-60,by+50); g.closePath(); g.fill();
+    /* C : rotule */
+    zone(582,'C');
+    var cx=713, cy=130;
+    g.fillStyle='#e9e2d2'; g.strokeStyle='#5C544B'; g.lineWidth=2.5; g.beginPath(); g.arc(cx,cy,26,Math.PI*0.15,Math.PI*0.85,false); g.lineTo(cx-20,cy+42); g.lineTo(cx+20,cy+42); g.closePath(); g.fill(); g.stroke();
+    var a1=Math.sin(T*1.2)*0.7, a2=Math.cos(T*0.9)*0.4;
+    g.save(); g.translate(cx,cy); g.rotate(a1);
+    g.strokeStyle='#8A5A7A'; g.lineWidth=8; g.lineCap='round'; g.beginPath(); g.moveTo(0,0); g.lineTo(0,-64*(0.8+0.2*Math.cos(a2))); g.stroke();
+    g.fillStyle='#C0492E'; g.beginPath(); g.arc(0,-64*(0.8+0.2*Math.cos(a2)),8,0,7); g.fill(); g.restore();
+    g.fillStyle='#8A5A7A'; g.beginPath(); g.arc(cx,cy,13,0,7); g.fill();
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX3 : défi noté ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false, pool:null};
+var G3_POOL=[
+  {q:'🚪 La porte et son cadre :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'🗄️ Le tiroir et son meuble :', ok:'Glissière', opts:['Pivot','Glissière','Rotule','Encastrement']},
+  {q:'🕹️ Le joystick et sa base :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'🍾 Le bouchon à vis et sa bouteille :', ok:'Hélicoïdale', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'💉 Le piston et le corps de la seringue :', ok:'Pivot glissant', opts:['Pivot glissant','Rotule','Encastrement','Hélicoïdale']},
+  {q:'🚲 La roue et son axe :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Appui plan']},
+  {q:'📷 La rotule du trépied photo :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'🔩 Une pièce SOUDÉE sur une autre :', ok:'Encastrement (0 ddl)', opts:['Encastrement (0 ddl)','Pivot','Glissière','Rotule']}
 ];
+function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function g3Next(){
+  var it=g3State.pool[g3State.idx];
+  g3State.cur={q:it.q, ok:it.ok, opts:shuffle(it.opts.slice())};
+  g3State.locked=false;
+  el('gProg').textContent='objet '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Objet démonté !'; }
+  else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était : '+g3State.cur.ok;
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='✓ '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='défi terminé';
+      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'⚙️ Mécanicien hors pair !':(g3State.hits>=3?'Bon coup d\u2019œil.':'Repasse démonter quelques objets…');
+    } else { g3Next(); }
+  }, 900);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none';
+  g3State.pool=shuffle(G3_POOL.slice()).slice(0,6);
+  g3Next();
+});
 
-(function(){ var box=el('quiz'); Q.forEach(function(it,i){ var d=document.createElement('div'); d.className='q'; d.id='q'+i;
-  var head='<div class="qh"><span class="n">'+(i+1)+'</span>'+it.q+'</div>'; var body='';
-  if(it.t==='qcm'){ body='<div class="opts">'+it.opts.map(function(o,j){ return '<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>'; }).join('')+'</div>'; }
-  else { body='<div><input class="numin" id="n'+i+'" inputmode="decimal" placeholder="?"><span class="unit">'+(it.unit||'')+'</span></div>'; }
-  d.innerHTML=head+body+'<div class="corr" id="c'+i+'"></div>'; box.appendChild(d); }); })();
-
+/* ============ correction & remise ============ */
 var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
 el('submit').addEventListener('click',function(){
-  if(sent) return; var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
   if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
-  var score=0, detail=[];
-  Q.forEach(function(it,i){ var ok=false;
-    if(it.t==='qcm'){ var r=document.querySelector('input[name="q'+i+'"]:checked'); ok=(r&&(+r.value===it.c)); }
-    else { var v=numf(el('n'+i).value); ok=(!isNaN(v)&&Math.abs(v-it.a)<it.tol); }
-    if(ok) score++; detail.push(ok?1:0);
-    var c=el('c'+i); c.className='corr show '+(ok?'ok':'no');
-    var right = it.t==='qcm' ? it.opts[it.c] : (String(it.a).replace('.',',')+' '+(it.unit||''));
-    c.innerHTML=(ok?'✓ Correct.':'✗ Réponse attendue : <b>'+right+'</b>')+'<div class="sol">'+it.sol+'</div>'; });
-  el('scoreBig').textContent=score+' / '+Q.length;
-  el('scoreSt').textContent = score>=6?'Très bien !':(score>=4?'Correct — à consolider.':'À revoir avec le cours.');
-  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true; el('scorebox').scrollIntoView({behavior:'smooth'});
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:Q.length, detail:detail, ts:Date.now(), date:new Date().toLocaleString('fr-FR') }); el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
+  if(!g3State.done){ alert('Termine d\u2019abord le défi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=(el('s1a').value==='Pivot'), ok1b=(el('s1b').value==='Glissière'), ok1c=(el('s1c').value==='Rotule');
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol">A tourne autour d\u2019un axe fixe → <b>pivot</b>. B coulisse sur son rail → <b>glissière</b>. C s\u2019oriente dans toutes les directions autour d\u2019un point → <b>rotule</b>.</div>';
+  /* EX2 */
+  var ok2a=Math.abs(numf(el('n2a').value)-1)<0.5, ok2b=Math.abs(numf(el('n2b').value)-1)<0.5, ok2c=Math.abs(numf(el('n2c').value)-3)<0.5;
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">Pivot : <b>1 ddl</b> (1 rotation). Glissière : <b>1 ddl</b> (1 translation). Rotule : <b>3 ddl</b> (les 3 rotations). Rappel : un solide libre en a 6.</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">Porte → pivot · tiroir → glissière · joystick/trépied → rotule · bouchon → hélicoïdale · seringue → pivot glissant · soudure → encastrement (0 ddl).</div>';
+  /* EX4 */
+  var ok4a=(el('s4a').value==='Hélicoïdale'), ok4b=(el('s4b').value==='Glissière');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">Vis/corps : rotation et translation LIÉES par le filetage → <b>hélicoïdale</b>. Mors/corps : une seule translation → <b>glissière</b>. C\u2019est ce couple de liaisons qui transforme la rotation de la poignée en serrage.</div>';
+  /* total */
+  var score=p1+p2+p3+p4;
+  el('scoreBig').textContent=score+' / 10';
+  el('scoreSt').textContent = score>=8?'La salle des mécanismes n\u2019a plus de secret !':(score>=5?'Bon diagnostic — revois les mécanismes en rouge.':'Retourne observer les guidages du cours.');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin').forEach(function(x){ x.disabled=true; });
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:10, detail:[p1,p2,p3,p4], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2], EX_LAB=['Ex1 guidages','Ex2 ddl','Ex3 défi','Ex4 étau'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
 el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
@@ -153,16 +359,16 @@ function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
     var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=new Array(Q.length).fill(0);
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ perQ[i]+=d; }); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<4) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / '+Q.length+'</span>';
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par question</h3>';
-    for(var i=0;i<Q.length;i++){ var p=n?Math.round(perQ[i]/n*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:34px">Q'+(i+1)+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 10</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+    for(var i=0;i<4;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||Q.length)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||10)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
