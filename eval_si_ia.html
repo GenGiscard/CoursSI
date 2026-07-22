@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Évaluation — IA embarquée &amp; traitement d'image · SI Première</title>
+<title>Évaluation — Le centre de tri intelligent · IA embarquée · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -18,29 +18,47 @@
   .estic-bar .who{font-weight:800;font-size:14px}
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
-  .wrap{max-width:820px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
-  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:20px}
-  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
-  h1{font-size:clamp(24px,3.6vw,34px);margin:4px 0 6px;font-weight:800}
-  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
-  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;outline:none}
-  .idbox input:focus{border-color:var(--steel)}
-  .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
-  .q .qh{font-weight:700;margin-bottom:10px}
-  .q .qh .n{font-family:'JetBrains Mono',monospace;color:#fff;background:var(--steel);border-radius:7px;padding:2px 8px;font-size:13px;margin-right:8px}
-  .opts{display:grid;gap:8px}
-  .opts label{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 13px;cursor:pointer;transition:.12s}
-  .opts label:hover{border-color:var(--steel)} .opts input{margin-top:3px}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
-  .unit{color:var(--sub);margin-left:8px}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#2c2138,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#d9a6ee;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas,.chrono svg{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--plum)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--plum);min-width:110px;text-align:right}
+  .game{background:#2c2138;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#d9a6ee;margin-bottom:8px}
+  .gq{font-weight:800;font-size:18px;text-align:center;margin:12px 0 10px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#3d3049;border:1px solid #5c4a72;color:#f2ead8;border-radius:10px;padding:12px 6px;cursor:pointer}
+  .gopts button:hover{background:#4a3a5a}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:18px;color:#d9a6ee}
   .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
   .corr.show{display:block}
   .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
   .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
   .corr .sol{color:var(--sub);margin-top:5px}
-  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--green);border:none;border-radius:9px;padding:12px 20px;cursor:pointer;font-weight:700}
-  .btn:hover{filter:brightness(1.06)} .btn:disabled{opacity:.45;cursor:not-allowed}
-  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
   .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
   .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
   .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
@@ -54,25 +72,149 @@
   .stat b{color:var(--steel);font-size:18px}
   .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
   .barq>i{display:block;height:100%;background:var(--green)}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
   <div class="estic-bar">
     <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Évaluation — IA embarquée &amp; image<br>© ESTIC — Tous droits réservés</div>
+    <div class="rt">Évaluation — IA embarquée<br>© ESTIC — Tous droits réservés</div>
   </div>
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /8</div>
-      <h1>IA embarquée &amp; traitement d'image</h1>
-      <p style="color:var(--sub);margin:0">Réponds aux 8 questions, puis clique « Terminer ». Ta note et les corrections s'afficheront.</p>
+      <div class="k">Évaluation · Première spé SI · /15</div>
+      <h1>🤖 Le centre de tri intelligent</h1>
+      <p>Le centre de tri vient d'installer son IA de reconnaissance : à toi de la comprendre, de la tester… et de la soigner. Entraînement, prédictions, précision, biais : tout y passe, du tapis roulant jusqu'au verdict final. Calculatrice en bas à droite pour les pourcentages.</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
-    <div id="quiz"></div>
-    <div style="margin-top:8px"><button class="btn" id="submit">Terminer &amp; envoyer</button></div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> Apprentissage ou inférence ? <span class="pts">3 pts</span></h2>
+      <p class="task">L'écran alterne entre les DEUX vies du réseau de neurones. Observe bien ce qui change.</p>
+      <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Alternance entraînement / inférence"></canvas></div>
+      <div class="qrow" id="q1a"><span class="sc">a) Pendant l'<b>ENTRAÎNEMENT</b>, le réseau :</span>
+        <select id="s1a"><option>— choisir —</option><option>ajuste ses paramètres grâce à des milliers d'exemples étiquetés</option><option>devine sans jamais se corriger</option><option>trie déjà les vrais déchets</option></select></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Pendant l'<b>INFÉRENCE</b>, le réseau :</span>
+        <select id="s1b"><option>— choisir —</option><option>utilise ce qu'il a appris pour prédire, sans plus modifier ses paramètres</option><option>recommence son apprentissage à zéro</option><option>demande la réponse à un humain</option></select></div>
+      <div class="qrow" id="q1c"><span class="sc">c) La courbe d'erreur qui DESCEND pendant l'entraînement signifie :</span>
+        <select id="s1c"><option>— choisir —</option><option>le réseau se trompe de moins en moins sur les exemples</option><option>le réseau devient plus lent</option><option>la batterie se vide</option></select></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> La prédiction du tapis <span class="pts">3 pts</span></h2>
+      <p class="task">Un objet passe sous la caméra. Le réseau affiche ses probabilités de sortie.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 230" aria-label="Tapis roulant, caméra et probabilités de sortie">
+          <path d="M60 170 h370" stroke="#5C544B" stroke-width="5"/>
+          <circle cx="90" cy="182" r="10" fill="#2A2622"/><circle cx="240" cy="182" r="10" fill="#2A2622"/><circle cx="400" cy="182" r="10" fill="#2A2622"/>
+          <rect x="200" y="128" width="66" height="42" rx="8" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/>
+          <text x="233" y="155" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="800" fill="#2E6A8E">?</text>
+          <rect x="206" y="34" width="54" height="30" rx="6" fill="#2c2138" stroke="#8A5A7A" stroke-width="2.5"/>
+          <circle cx="233" cy="49" r="8" fill="#d9a6ee"/>
+          <path d="M218 64 L206 122 M248 64 L260 122" stroke="#8A5A7A" stroke-width="2" stroke-dasharray="5 4"/>
+          <text x="233" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#8A5A7A">caméra + IA</text>
+          <g font-family="JetBrains Mono" font-size="14" font-weight="700">
+            <text x="520" y="66" fill="#2A2622">plastique</text>
+            <rect x="640" y="52" width="164" height="18" rx="4" fill="#eee6d6"/>
+            <rect x="640" y="52" width="134" height="18" rx="4" fill="#3D7E5F"/>
+            <text x="812" y="66" text-anchor="end" fill="#3D7E5F">82 %</text>
+            <text x="520" y="116" fill="#2A2622">métal</text>
+            <rect x="640" y="102" width="164" height="18" rx="4" fill="#eee6d6"/>
+            <rect x="640" y="102" width="20" height="18" rx="4" fill="#BD8A2A"/>
+            <text x="812" y="116" text-anchor="end" fill="#8a6313">12 %</text>
+            <text x="520" y="166" fill="#2A2622">verre</text>
+            <rect x="640" y="152" width="164" height="18" rx="4" fill="#eee6d6"/>
+            <rect x="640" y="152" width="10" height="18" rx="4" fill="#2E6A8E"/>
+            <text x="812" y="166" text-anchor="end" fill="#2E6A8E">6 %</text>
+          </g>
+          <text x="662" y="206" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">les sorties du réseau (probabilités)</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q2a"><span class="sc">a) La classe PRÉDITE par le réseau est :</span>
+        <select id="s2a"><option>— choisir —</option><option>plastique (la probabilité la plus haute)</option><option>verre</option><option>métal</option></select></div>
+      <div class="qrow" id="q2b"><span class="sc">b) Somme des probabilités : 82 + 12 + 6 =</span>
+        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="qrow" id="q2c"><span class="sc">c) 🤔 Si la sortie était 40 / 35 / 25 :</span>
+        <select id="s2c"><option>— choisir —</option><option>l'IA est peu sûre : mieux vaut un contrôle (humain ou capteur en plus)</option><option>l'IA est très confiante</option><option>l'objet n'existe pas</option></select></div>
+      <div class="corr" id="c2"></div>
+    </section>
+
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : l'entraîneur d'IA <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ <b>6 questions</b> éclair du coach. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <div class="gq" id="gQ">Prêt ? Le réseau s'échauffe…</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
+
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> La précision du modèle <span class="pts">2 pts</span></h2>
+      <p class="task">Plus on donne d'images d'entraînement, plus le modèle est précis… mais pas indéfiniment. <b>Fais varier n</b> et suis le point sur la courbe.</p>
+      <div class="chrono">
+        <canvas id="cv4" width="860" height="230" aria-label="Courbe de précision selon le nombre d'images"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">n =</span>
+          <input type="range" id="nSlider" min="100" max="10000" step="100" value="100">
+          <span class="val" id="nVal">100 images</span>
+        </div>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Au test final, le modèle classe bien 90 objets sur 100. Précision = 90/100 =</span>
+        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="qrow" id="q4b"><span class="sc">b) 📈 À 97 % de précision, doubler ENCORE les données apporte :</span>
+        <select id="s4b"><option>— choisir —</option><option>un gain de plus en plus faible (la courbe sature)</option><option>toujours +10 % de précision</option><option>une précision de 200 %</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
+
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Embarqué ou cloud ? <span class="pts">2 pts</span></h2>
+      <p class="task">🧠 IA EMBARQUÉE : le calcul se fait DANS l'objet · CLOUD : le calcul se fait sur de gros serveurs distants. Place chaque tâche au bon endroit.</p>
+      <div class="qrow" id="q5a"><span class="sc">a) 🚪 La sonnette qui doit détecter une personne INSTANTANÉMENT, même sans internet :</span>
+        <select id="s5a"><option>— choisir —</option><option>IA embarquée (rapide, autonome, données privées qui restent chez toi)</option><option>Cloud (tant pis pour les coupures)</option><option>Courrier postal</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) 🏋️ L'ENTRAÎNEMENT du modèle sur des millions d'images :</span>
+        <select id="s5b"><option>— choisir —</option><option>serveurs cloud (une puissance de calcul énorme est nécessaire)</option><option>dans la sonnette elle-même</option><option>sur une calculatrice de collège</option></select></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> L'affaire du biais <span class="pts">3 pts</span></h2>
+      <p class="task">🕵️ Mystère au centre de tri : l'IA a été entraînée avec 95 % de bouteilles TRANSPARENTES… et voilà que les bouteilles OPAQUES partent dans la mauvaise benne.</p>
+      <div class="qrow" id="q6a"><span class="sc">a) La cause du problème :</span>
+        <select id="s6a"><option>— choisir —</option><option>un jeu de données non représentatif : c'est un biais</option><option>la caméra est sale</option><option>les bouteilles opaques trichent</option></select></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Le remède :</span>
+        <select id="s6b"><option>— choisir —</option><option>compléter l'entraînement avec des exemples variés (opaques, colorées, cabossées…)</option><option>interdire les bouteilles opaques</option><option>débrancher l'IA pour toujours</option></select></div>
+      <div class="qrow" id="q6c"><span class="sc">c) Sur 200 bouteilles opaques testées, 140 sont bien classées. Taux de réussite = 140/200 =</span>
+        <input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
     <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
+
     <div class="teacher">
       <span class="tlink" id="tlink">· Espace enseignant ·</span>
       <div id="dash">
@@ -91,6 +233,19 @@
     </div>
   </div>
 
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
@@ -101,51 +256,241 @@ var db=null;
 try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
 var NODE='eval_ia';
 
-var Q=[
- {t:'qcm', q:'Pour une machine, une image est avant tout…', opts:['une matrice de pixels (des nombres)','un fichier son','un texte','une odeur'], c:0,
-   sol:'Chaque pixel est une valeur (par ex. 0 à 255) : l\u2019image est un tableau de nombres.'},
- {t:'qcm', q:'À quoi sert un filtre (noyau) qui glisse sur l\u2019image ?', opts:['à changer le nom du fichier','à extraire une information (contours, flou…)','à envoyer l\u2019image','à recharger la batterie'], c:1,
-   sol:'La convolution applique un petit calcul par zone pour révéler contours, flou, etc.'},
- {t:'qcm', q:'L\u2019apprentissage supervisé utilise…', opts:['aucune donnée','des exemples ÉTIQUETÉS','uniquement du hasard','des images floues'], c:1,
-   sol:'On montre au modèle des exemples associés à leur bonne réponse (étiquette).'},
- {t:'qcm', q:'L\u2019inférence, c\u2019est…', opts:['entraîner le modèle','utiliser le modèle entraîné pour prédire sur une nouvelle image','effacer les données','compresser une vidéo'], c:1,
-   sol:'On distingue l\u2019entraînement (une fois) de l\u2019inférence (à chaque nouvelle image).'},
- {t:'qcm', q:'« Inférence embarquée » signifie que…', opts:['le calcul se fait dans le cloud','le modèle tourne DANS l\u2019objet','on supprime le modèle','il faut Internet en permanence'], c:1,
-   sol:'Le modèle entraîné s\u2019exécute directement dans le composant : réponse immédiate, sans réseau.'},
- {t:'num', q:'Avec un seuil de 128, parmi les pixels {200, 90, 130, 50, 255}, combien deviennent blancs (≥ 128) ?', a:3, tol:0.5, unit:'pixels',
-   sol:'≥ 128 : 200, 130, 255 → 3 pixels blancs.'},
- {t:'num', q:'Le modèle sort : cercle 0,6 · triangle 0,3 · carré ?. La somme des probabilités vaut 1. Quelle est la probabilité du carré ?', a:0.1, tol:0.02, unit:'',
-   sol:'1 − 0,6 − 0,3 = 0,1.'},
- {t:'qcm', q:'Un modèle entraîné sur des données non représentatives risque surtout…', opts:['de consommer moins','de se tromper sur les cas jamais vus (biais)','d\u2019être plus rapide','de changer de couleur'], c:1,
-   sol:'Le modèle n\u2019apprend que ce qu\u2019on lui montre : des données biaisées donnent des erreurs.'}
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ============ EX1 : entraînement / inférence en alternance ============ */
+(function(){
+  var cv=el('cv1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  var LABELS=['plastique','métal','verre'];
+  var COLS=['#3D7E5F','#BD8A2A','#2E6A8E'];
+  function step(){
+    T+=0.02; var phase=(T%8)<4 ? 0 : 1; var u=(T%4)/4;
+    g.clearRect(0,0,cv.width,cv.height);
+    if(phase===0){
+      g.fillStyle='#8A5A7A'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+      g.fillText('PHASE 1 · ENTRAÎNEMENT',30,36);
+      // vignettes étiquetées qui défilent
+      for(var i=0;i<5;i++){
+        var x=30+((u*420+i*96)%480), y=70;
+        var li=i%3;
+        g.fillStyle='#f6f2e8'; g.strokeStyle=COLS[li]; g.lineWidth=2.5;
+        g.beginPath(); g.rect(x,y,72,54); g.fill(); g.stroke();
+        g.fillStyle=COLS[li]; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+        g.fillText(LABELS[li],x+36,y+70);
+        g.fillText('img',x+36,y+30);
+      }
+      g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+      g.fillText('des milliers d\u2019exemples ÉTIQUETÉS',30,168);
+      // courbe d'erreur qui descend
+      var bx=580, by=60, W=240, H=130;
+      g.strokeStyle='#d9cfbb'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
+      g.strokeStyle='#C0492E'; g.lineWidth=3; g.beginPath();
+      for(var k=0;k<=100;k++){ var xx=bx+W*k/100; var prog=Math.min(1,(k/100)*(0.3+u*0.9));
+        var yy=by+8+ (H-22)*(1-Math.exp(-3*prog))*0 + (H-22)*Math.exp(-3.2*prog);
+        if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
+      g.stroke();
+      g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
+      g.fillText('erreur ↓',bx+8,by+14);
+      g.fillStyle='#5C544B'; g.fillText('époques →',bx+W-84,by+H+20);
+    } else {
+      g.fillStyle='#2E6A8E'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+      g.fillText('PHASE 2 · INFÉRENCE',30,36);
+      // objet inconnu
+      g.fillStyle='#f6f2e8'; g.strokeStyle='#5C544B'; g.lineWidth=2.5;
+      g.beginPath(); g.rect(60,80,100,80); g.fill(); g.stroke();
+      g.fillStyle='#5C544B'; g.font='800 34px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+      g.fillText('?',110,132);
+      g.font='700 12px "JetBrains Mono",monospace'; g.fillText('objet jamais vu',110,182);
+      g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath(); g.moveTo(170,120); g.lineTo(300,120); g.stroke();
+      g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(308,120); g.lineTo(296,113); g.lineTo(296,127); g.closePath(); g.fill();
+      g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('réseau entraîné',240,104);
+      // barres de probabilité qui poussent
+      var probs=[0.86,0.09,0.05];
+      for(var j=0;j<3;j++){
+        var by2=76+j*46;
+        g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
+        g.fillText(LABELS[j],340,by2+14);
+        g.fillStyle='#eee6d6'; g.fillRect(460,by2,300,20);
+        g.fillStyle=COLS[j]; g.fillRect(460,by2,300*probs[j]*Math.min(1,u*2.2),20);
+        g.fillText(Math.round(probs[j]*100*Math.min(1,u*2.2))+' %',772,by2+15);
+      }
+      g.fillStyle='#5C544B'; g.textAlign='left'; g.fillText('prédiction sans ré-apprentissage',340,214);
+    }
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX3 : défi noté ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false, pool:null};
+var G3_POOL=[
+  {q:'🏷️ Pour apprendre, le réseau a besoin de données…', ok:'étiquetées (image + bonne réponse)', opts:['étiquetées (image + bonne réponse)','sans aucune réponse','effacées','aléatoires']},
+  {q:'🧪 Le JEU DE TEST contient des données…', ok:'jamais vues à l\u2019entraînement, pour vérifier', opts:['jamais vues à l\u2019entraînement, pour vérifier','déjà apprises par cœur','inventées par le réseau','sans étiquettes ni images']},
+  {q:'⚖️ Un BIAIS apparaît quand les données d\u2019entraînement sont…', ok:'non représentatives de la réalité', opts:['non representatives de la réalité'.replace('representatives','représentatives'),'trop nombreuses','trop variées','parfaites']},
+  {q:'📦 Une IA EMBARQUÉE calcule…', ok:'localement, dans l\u2019objet lui-même', opts:['localement, dans l\u2019objet lui-même','toujours sur internet','dans une autre ville','sur papier']},
+  {q:'🚀 Atout du calcul LOCAL (embarqué) :', ok:'rapide, marche sans réseau, données privées', opts:['rapide, marche sans réseau, données privées','plus lent mais joli','consomme plus','aucun']},
+  {q:'🧠 Un neurone artificiel fait essentiellement…', ok:'une somme pondérée suivie d\u2019une décision', opts:['une somme pondérée suivie d\u2019une décision','une photo','un café','une addition de textes']},
+  {q:'📚 Pour mieux GÉNÉRALISER, il faut des données…', ok:'nombreuses ET variées', opts:['nombreuses ET variées','identiques entre elles','les plus rares possibles','sans rapport avec la tâche']},
+  {q:'🔁 L\u2019ordre des deux vies du réseau :', ok:'entraînement d\u2019abord, inférence ensuite', opts:['entraînement d\u2019abord, inférence ensuite','inférence d\u2019abord','les deux en même temps toujours','ni l\u2019un ni l\u2019autre']}
 ];
+function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function g3Next(){
+  var it=g3State.pool[g3State.idx];
+  g3State.cur={q:it.q, ok:it.ok, opts:shuffle(it.opts.slice())};
+  g3State.locked=false;
+  el('gProg').textContent='question '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Le réseau apprend vite… toi aussi !'; }
+  else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était : '+g3State.cur.ok;
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='✓ '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='défi terminé';
+      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'🤖 Coach d\u2019IA certifié !':(g3State.hits>=3?'Le réseau te remercie.':'Une petite ré-période d\u2019entraînement s\u2019impose…');
+    } else { g3Next(); }
+  }, 900);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none';
+  g3State.pool=shuffle(G3_POOL.slice()).slice(0,6);
+  g3Next();
+});
 
-(function(){ var box=el('quiz'); Q.forEach(function(it,i){ var d=document.createElement('div'); d.className='q'; d.id='q'+i;
-  var head='<div class="qh"><span class="n">'+(i+1)+'</span>'+it.q+'</div>'; var body='';
-  if(it.t==='qcm'){ body='<div class="opts">'+it.opts.map(function(o,j){ return '<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+o+'</span></label>'; }).join('')+'</div>'; }
-  else { body='<div><input class="numin" id="n'+i+'" inputmode="decimal" placeholder="?"><span class="unit">'+(it.unit||'')+'</span></div>'; }
-  d.innerHTML=head+body+'<div class="corr" id="c'+i+'"></div>'; box.appendChild(d); }); })();
+/* ============ EX4 : courbe de précision ============ */
+var nImg=100;
+(function(){
+  var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  function acc(n){ return 98 - 4000/(n+50); }
+  el('nSlider').addEventListener('input',function(){ nImg=+this.value; el('nVal').textContent=nImg+' images'; });
+  function step(){
+    g.clearRect(0,0,cv.width,cv.height);
+    var bx=90, by=30, W=560, H=150;
+    // axes
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('100 %',bx-8,by+8); g.fillText('60 %',bx-8,by+H);
+    g.textAlign='center'; g.fillText('n (images d\u2019entraînement) →',bx+W/2,by+H+26);
+    // courbe
+    g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath();
+    for(var k=0;k<=100;k++){ var n=100+ (10000-100)*k/100;
+      var a=acc(n); var xx=bx+W*k/100, yy=by+H-(a-60)/40*H;
+      if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
+    g.stroke();
+    // point courant
+    var a0=acc(nImg), px=bx+W*(nImg-100)/9900, py=by+H-(a0-60)/40*H;
+    g.fillStyle='#C0492E'; g.beginPath(); g.arc(px,py,8,0,7); g.fill();
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('précision ≈ '+a0.toFixed(1).replace('.',',')+' %',680,64);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText(nImg<1000?'la courbe grimpe vite…':'…puis elle SATURE',680,94);
+  }
+  setInterval(step,40); step();
+})();
 
+/* ============ correction & remise ============ */
 var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
 el('submit').addEventListener('click',function(){
-  if(sent) return; var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
   if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
-  var score=0, detail=[];
-  Q.forEach(function(it,i){ var ok=false;
-    if(it.t==='qcm'){ var r=document.querySelector('input[name="q'+i+'"]:checked'); ok=(r&&(+r.value===it.c)); }
-    else { var v=numf(el('n'+i).value); ok=(!isNaN(v)&&Math.abs(v-it.a)<it.tol); }
-    if(ok) score++; detail.push(ok?1:0);
-    var c=el('c'+i); c.className='corr show '+(ok?'ok':'no');
-    var right = it.t==='qcm' ? it.opts[it.c] : (String(it.a).replace('.',',')+' '+(it.unit||''));
-    c.innerHTML=(ok?'✓ Correct.':'✗ Réponse attendue : <b>'+right+'</b>')+'<div class="sol">'+it.sol+'</div>'; });
-  el('scoreBig').textContent=score+' / '+Q.length;
-  el('scoreSt').textContent = score>=6?'Très bien !':(score>=4?'Correct — à consolider.':'À revoir avec le cours.');
-  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true; el('scorebox').scrollIntoView({behavior:'smooth'});
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:Q.length, detail:detail, ts:Date.now(), date:new Date().toLocaleString('fr-FR') }); el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
+  if(!g3State.done){ alert('Termine d\u2019abord le défi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=(el('s1a').value==='ajuste ses paramètres grâce à des milliers d\u2019exemples étiquetés');
+  var ok1b=(el('s1b').value==='utilise ce qu\u2019il a appris pour prédire, sans plus modifier ses paramètres');
+  var ok1c=(el('s1c').value==='le réseau se trompe de moins en moins sur les exemples');
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol"><b>Entraînement</b> : le réseau ajuste ses paramètres sur des exemples étiquetés, et son erreur descend. <b>Inférence</b> : il applique ce qu\u2019il sait, figé, sur du jamais-vu — c\u2019est ce qui tourne sur le tapis du centre de tri.</div>';
+  /* EX2 */
+  var ok2a=(el('s2a').value==='plastique (la probabilité la plus haute)');
+  var ok2b=Math.abs(numf(el('n2b').value)-100)<0.5;
+  var ok2c=(el('s2c').value==='l\u2019IA est peu sûre : mieux vaut un contrôle (humain ou capteur en plus)');
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">Classe prédite = <b>plastique</b> (82 %, le max). Les sorties somment à <b>100 %</b>. Un 40/35/25, c\u2019est une IA qui hausse les épaules : on prévoit un <b>contrôle</b> pour ces cas douteux.</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">Données étiquetées pour apprendre · jeu de test jamais vu pour vérifier · biais = données non représentatives · embarqué = calcul local (rapide, hors-ligne, privé).</div>';
+  /* EX4 */
+  var ok4a=Math.abs(numf(el('n4a').value)-90)<1;
+  var ok4b=(el('s4b').value==='un gain de plus en plus faible (la courbe sature)');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">90/100 = <b>90 %</b> de précision. Et comme tu l\u2019as vu au curseur : la courbe grimpe vite au début puis <b>sature</b> — les dernières décimales de précision coûtent très cher en données.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='IA embarquée (rapide, autonome, données privées qui restent chez toi)');
+  var ok5b=(el('s5b').value==='serveurs cloud (une puissance de calcul énorme est nécessaire)');
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">Détection instantanée → <b>embarqué</b> (latence minimale, marche hors-ligne, images qui ne quittent pas la maison). Entraînement massif → <b>cloud</b>. Le duo classique : on entraîne au chaud, on infère sur place.</div>';
+  /* EX6 */
+  var ok6a=(el('s6a').value==='un jeu de données non représentatif : c\u2019est un biais');
+  var ok6b=(el('s6b').value==='compléter l\u2019entraînement avec des exemples variés (opaques, colorées, cabossées…)');
+  var ok6c=Math.abs(numf(el('n6c').value)-70)<1;
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">Cause : <b>biais</b> du jeu de données (95 % de transparentes → l\u2019IA n\u2019a presque jamais vu d\u2019opaques). Remède : <b>varier les exemples</b>. Constat chiffré : 140/200 = <b>70 %</b> seulement, contre ~97 % sur les transparentes — le biais se mesure.</div>';
+  /* total */
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'Le centre de tri te nomme responsable IA !':(score>=8?'Bon diagnostic — revois les postes en rouge.':'Reviens t\u2019entraîner (toi aussi tu as besoin d\u2019époques).');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin, #nSlider').forEach(function(x){ x.disabled=true; });
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 deux vies','Ex2 prédiction','Ex3 défi','Ex4 précision','Ex5 edge/cloud','Ex6 biais'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
 el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
@@ -153,16 +498,16 @@ function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
     var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=new Array(Q.length).fill(0);
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ perQ[i]+=d; }); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / '+Q.length+'</span>';
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par question</h3>';
-    for(var i=0;i<Q.length;i++){ var p=n?Math.round(perQ[i]/n*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:34px">Q'+(i+1)+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:130px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||Q.length)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
