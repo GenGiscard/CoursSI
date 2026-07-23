@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TP — IA embarquée &amp; traitement d'image · SI Première</title>
+<title>TP — IA embarquée · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,118 +19,161 @@
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
   .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
-  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
-  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  .hero{background:linear-gradient(135deg,#f4eef8,#eae2f0);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--plum);text-transform:uppercase}
   h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
   h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
   h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
   .lede{color:var(--sub);max-width:66ch}
   .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
   .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
-  .lab{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;margin-top:6px}
-  @media(max-width:720px){.lab{grid-template-columns:1fr}}
-  canvas.img{width:100%;max-width:320px;height:auto;display:block;border:1px solid var(--line);border-radius:10px;image-rendering:auto;background:#fff}
-  .flt{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-  .flt button{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:9px 13px;cursor:pointer}
-  .flt button:hover{border-color:var(--steel)} .flt button.sel{background:#eef3f6;border-color:var(--steel);font-weight:700}
-  .sl label{display:block;font-size:14px;font-weight:600;margin:8px 0 3px} .sl .v{font-family:'JetBrains Mono',monospace;color:var(--steel)}
-  .sl input[type=range]{width:100%}
-  .note{font-size:14px;color:var(--sub);margin-top:8px}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .schema{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .schema svg,.schema canvas{width:100%;height:auto;display:block;max-width:640px;margin:0 auto}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--plum)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--plum);min-width:90px;text-align:right}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
   .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
   .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
   .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
   .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
-  .grid3{display:inline-grid;grid-template-columns:repeat(3,44px);gap:4px;margin:8px 0;vertical-align:middle}
-  .grid3 span{display:flex;align-items:center;justify-content:center;height:40px;border:1px solid var(--line);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:14px;background:#faf6ec}
-  .grid3 span.c{background:#eef3f6;border-color:var(--steel);font-weight:700}
   .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
   .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
   .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
   .exo-sol.show{display:block}
-  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
-  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
-  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
-  a{color:var(--steel)}
+  table.mx{border-collapse:collapse;margin:8px auto;font-size:15px}
+  table.mx th,table.mx td{border:1px solid var(--line);padding:8px 14px;text-align:center}
+  table.mx th{font-family:'JetBrains Mono',monospace;font-size:12px;background:#faf6ec;color:var(--sub)}
+  table.mx td.good{background:#eef6f0;color:var(--green);font-weight:700}
+  table.mx td.bad{background:#fbeee9;color:var(--copper);font-weight:700}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
   <div class="estic-bar">
     <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">TP — IA embarquée &amp; image<br>© ESTIC — Tous droits réservés</div>
+    <div class="rt">TP — IA embarquée<br>© ESTIC — Tous droits réservés</div>
   </div>
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">TP · Première spé SI</div>
-      <h1>Faire « voir » une machine</h1>
-      <p class="lede">On prépare une caméra intelligente. À toi de traiter l'image, de comprendre le filtrage, la décision… et ses limites.</p>
+      <div class="k">TP · Première spé SI · IA embarquée</div>
+      <h1>Le robot désherbeur</h1>
+      <p class="lede">Un robot autonome sillonne le potager : sa caméra scanne chaque plante et son IA embarquée décide — salade ou mauvaise herbe ? Aujourd'hui tu prépares ses données, tu règles son seuil de décision (attention aux salades !), tu audites sa qualité… et tu questionnes ses limites. La calculatrice t'attend en bas à droite.</p>
     </div>
 
     <section class="exo-card" id="a">
-      <h2><span class="num">A</span> Atelier de filtres</h2>
-      <p class="task">🎯 Applique différents filtres sur l'image. Observe ce que « voit » la machine après chaque traitement.</p>
-      <div class="lab">
-        <canvas id="img" class="img" width="320" height="210"></canvas>
-        <div>
-          <div class="flt" id="flt">
-            <button data-f="orig" class="sel">Original</button>
-            <button data-f="seuil">Seuillage</button>
-            <button data-f="edge">Contours</button>
-            <button data-f="neg">Négatif</button>
-          </div>
-          <div class="sl"><label>Seuil : <span class="v" id="thV">128</span></label><input type="range" id="th" min="0" max="255" value="128"></div>
-          <p class="note" id="fnote">Image d'origine en niveaux de gris. Chaque pixel a une valeur de 0 (noir) à 255 (blanc).</p>
-        </div>
-      </div>
+      <h2><span class="num">A</span> Les deux vies du réseau 🧠</h2>
+      <p class="task">🎯 Le réseau de neurones du robot vit deux périodes très différentes. Remets chacune à sa place.</p>
+      <div class="match" id="aMatch"></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>Entraînement</b> (au labo) : le réseau ajuste ses paramètres sur des milliers de photos étiquetées · <b>inférence</b> (dans le champ) : il applique ce qu\u2019il sait, figé, sur des plantes jamais vues · et toujours dans cet ordre : on apprend AVANT de décider.</div>
     </section>
 
     <section class="exo-card" id="b">
-      <h2><span class="num">B</span> Seuillage à la main</h2>
-      <p class="task">Un pixel devient <b>blanc (255)</b> si sa valeur est ≥ au seuil, sinon <b>noir (0)</b>. Seuil = <b>128</b>.</p>
-      <div class="row"><span>a) Un pixel de valeur 90 devient :</span><input class="numin" id="bA" inputmode="numeric" placeholder="?"></div>
-      <div class="row"><span>b) Parmi {200, 90, 130, 50, 255}, combien deviennent blancs ?</span><input class="numin" id="bB" inputmode="numeric" placeholder="?"><span class="unit">pixels</span></div>
+      <h2><span class="num">B</span> Le jeu de données 📸</h2>
+      <p class="task">🎯 Le club a photographié et étiqueté 2000 plantes. Règle d'or : 80 % pour entraîner, 20 % mis de côté pour tester.</p>
+      <div class="row"><span>a) Photos d'entraînement : 2000 × 0,8 =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
+      <div class="row"><span>b) Photos de test : 2000 × 0,2 =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
+      <div class="match" id="bMatch"></div>
       <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="bFb"></div>
-      <div class="exo-sol" id="bSol"><b>a)</b> 90 &lt; 128 → le pixel devient <b>0 (noir)</b>.<br><b>b)</b> ≥ 128 : 200, 130, 255 → <b>3 pixels</b> blancs (90 et 50 restent noirs).</div>
+      <div class="exo-sol" id="bSol"><b>a)</b> <b>1600</b> pour apprendre. <b>b)</b> <b>400</b> gardées sous clé pour le contrôle final : le réseau ne doit JAMAIS les voir pendant l\u2019entraînement — sinon c\u2019est réciter par cœur, pas comprendre.</div>
     </section>
 
     <section class="exo-card" id="c">
-      <h2><span class="num">C</span> Convolution : un pixel de sortie</h2>
-      <p class="task">Noyau « contour » : <b>sortie = 4 × centre − (haut + bas + gauche + droite)</b>. Voici le voisinage :</p>
-      <div class="grid3"><span>50</span><span>50</span><span>50</span><span>50</span><span class="c">200</span><span>50</span><span>50</span><span>50</span><span>50</span></div>
-      <div class="row"><span>Valeur du pixel de sortie :</span><input class="numin" id="cV" inputmode="numeric" placeholder="?"></div>
+      <h2><span class="num">C</span> ⭐ L'entraîneur de seuil</h2>
+      <p class="task">🎯 Pour chaque plante, le réseau sort un « score mauvaise herbe » de 0 à 100. Au-dessus du seuil → le robot désherbe. Mission : <b>protège TOUTES les salades (0 arrachée) en manquant le MOINS d'herbes possible</b>. Déplace le seuil et regarde les croix rouges…</p>
+      <div class="schema">
+        <canvas id="cvSeuil" width="640" height="260" aria-label="Scores des salades et mauvaises herbes avec seuil de décision réglable"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">seuil =</span>
+          <input type="range" id="sSlider" min="0" max="100" step="1" value="30">
+          <span class="val" id="sVal">30</span>
+        </div>
+      </div>
+      <div class="row"><span>a) Au réglage 🎯, combien d'herbes sont manquées ?</span><input class="numin" id="cA" inputmode="numeric" placeholder="?"><span class="unit">herbes</span></div>
+      <div class="row"><span>b) Pour faire mieux que ce compromis, il faudrait :</span>
+        <select id="cSel"><option>— choisir —</option><option>améliorer le MODÈLE (plus de photos, meilleur réseau) — le seuil ne peut pas tout</option><option>pousser le seuil à 0</option><option>pousser le seuil à 100</option></select></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="cFb"></div>
-      <div class="exo-sol" id="cSol"><b>sortie = 4 × 200 − (50 + 50 + 50 + 50) = 800 − 200 = 600</b>.<br>Une valeur élevée signale une forte différence avec le voisinage : c'est un <b>contour</b>.</div>
+      <div class="exo-sol" id="cSol"><b>a)</b> Dès que le seuil dépasse 48 (la salade la plus « suspecte »), plus aucune salade n\u2019est arrachée… mais les herbes à 42 et 46 passent entre les mailles : <b>2 herbes manquées</b>, incompressibles.<br><b>b)</b> Les scores se CHEVAUCHENT (zone 42–48) : aucun seuil ne peut les séparer parfaitement. La seule issue : <b>améliorer le modèle</b>. Le seuil arbitre, il ne corrige pas.</div>
     </section>
 
     <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Décision du modèle</h2>
-      <p class="task">Le modèle sort une probabilité par classe : cercle <b>0,70</b> · triangle <b>0,20</b> · carré <b>?</b> (la somme fait 1).</p>
-      <div class="row"><span>a) Probabilité du carré :</span><input class="numin" id="dP" inputmode="decimal" placeholder="?"></div>
-      <div class="row"><span>b) Classe retenue :</span>
-        <span class="opt" id="dOpt" style="margin:0"><button data-v="0">cercle</button><button data-v="1">triangle</button><button data-v="2">carré</button></span>
-      </div>
+      <h2><span class="num">D</span> La prédiction en direct 🌿</h2>
+      <p class="task">🎯 Le robot scanne deux plantes coup sur coup. Sortie n°1 : salade 8 % · mauvaise herbe 92 %. Sortie n°2 : salade 49 % · mauvaise herbe 51 %.</p>
+      <div class="match" id="dMatch"></div>
       <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="dFb"></div>
-      <div class="exo-sol" id="dSol"><b>a)</b> 1 − 0,70 − 0,20 = <b>0,10</b>.<br><b>b)</b> On garde la plus forte : <b>cercle</b> (0,70). Le modèle ne donne jamais une certitude absolue, seulement des probabilités.</div>
+      <div class="exo-sol" id="dSol">92 % : le réseau est sûr de lui → <b>désherber</b> · 51/49 : il hausse les épaules → dans le doute, <b>laisser passer</b> : une herbe de plus repoussera, une salade arrachée est perdue. Les bons systèmes d\u2019IA savent dire « je ne sais pas ».</div>
     </section>
 
     <section class="exo-card" id="e">
-      <h2><span class="num">★</span> Le piège du jeu de données</h2>
-      <p class="task">Un détecteur de panneaux est entraîné <b>presque uniquement avec des photos de jour, par beau temps</b>. La nuit ou sous la pluie, il se trompe souvent.</p>
-      <p>Quelle en est la cause principale ?</p>
-      <div class="opt" id="eOpt">
-        <button data-v="0">La caméra est cassée</button>
-        <button data-v="1">Le jeu de données ne couvre pas ces conditions (biais)</button>
-        <button data-v="2">Les panneaux changent de forme la nuit</button>
-      </div>
-      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <h2><span class="num">E</span> Embarqué dans le champ 🔋</h2>
+      <p class="task">🎯 L'IA tourne DANS le robot (embarquée), pas sur un serveur distant. Justifie… puis mesure sa cadence : 2 plantes analysées par seconde, 5 heures de travail par jour.</p>
+      <div class="match" id="eMatch"></div>
+      <div class="row"><span>c) Plantes analysées par jour : 2 × 3600 × 5 =</span><input class="numin" id="eC" inputmode="decimal" placeholder="?"><span class="unit">plantes</span></div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="eFb"></div>
-      <div class="exo-sol" id="eSol"><b>Le jeu de données est biaisé.</b> Un modèle n'apprend que ce qu'on lui montre : sans exemples de nuit/pluie, il ne sait pas les gérer. Pour corriger, il faut un jeu de données <b>représentatif</b> de toutes les conditions réelles d'utilisation.</div>
+      <div class="exo-sol" id="eSol">Au fond du champ, <b>pas de réseau fiable</b> → le calcul doit être local · décider en 0,1 s exige une <b>latence minimale</b> (l\u2019aller-retour vers un serveur serait trop lent) · et <b>c)</b> 2 × 3600 × 5 = <b>36 000 plantes/jour</b> — aucun humain ne suit cette cadence.</div>
     </section>
+
+    <section class="exo-card" id="f">
+      <h2><span class="num">F</span> L'enquête qualité 🔍</h2>
+      <p class="task">🎯 Contrôle sur les 200 plantes du jeu de test. Voici les résultats du robot :</p>
+      <table class="mx">
+        <tr><th></th><th>décidé : garder</th><th>décidé : désherber</th></tr>
+        <tr><th>vraie salade</th><td class="good">90 ✓</td><td class="bad">10 ⚠</td></tr>
+        <tr><th>vraie herbe</th><td class="bad">5 ⚠</td><td class="good">95 ✓</td></tr>
+      </table>
+      <div class="row"><span>a) Taux de bonnes décisions : (90 + 95) / 200 =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
+      <div class="match" id="fMatch"></div>
+      <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="fFb"></div>
+      <div class="exo-sol" id="fSol"><b>a)</b> 185/200 = <b>92,5 %</b> — honorable, mais… <b>b)</b> les <b>10 salades arrachées</b> sont l\u2019erreur GRAVE : c\u2019est de la récolte détruite, quand les 5 herbes manquées ne coûtent qu\u2019un coup de binette. Toutes les erreurs ne se valent pas : on re-règle le seuil côté prudence — exactement ce que tu as fait à l\u2019exercice C.</div>
+    </section>
+
+    <section class="exo-card" id="g">
+      <h2><span class="num">★</span> IA et responsabilité 🌍</h2>
+      <p class="task">Le robot, entraîné uniquement avec des photos d'été en plein soleil, se met à massacrer le potager en octobre sous la pluie…</p>
+      <div class="match" id="gMatch"></div>
+      <div class="row"><span>b) Ré-entraînement : il faut étiqueter 500 nouvelles photos, à 30 s chacune : 500 × 30 / 60 =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">min</span></div>
+      <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="gFb"></div>
+      <div class="exo-sol" id="gSol"><b>a)</b> Le jeu de données n\u2019était <b>pas représentatif</b> (que l\u2019été, que le soleil) : c\u2019est un <b>biais</b> — l\u2019IA ne sait que ce qu\u2019on lui a montré. Remède : compléter avec des photos variées (saisons, météo, heures).<br><b>b)</b> 500 × 30 = 15 000 s = <b>250 min</b> (plus de 4 h d\u2019étiquetage !). La vraie richesse d\u2019une IA, ce sont ses données — et elles se paient en travail humain.</div>
+    </section>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
   </div>
 
 <script>
@@ -138,75 +181,190 @@
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
-/* ---- A : atelier de filtres ---- */
+/* ---------- calculatrice ---------- */
 (function(){
-  var cv=el('img'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-  // image source (niveaux de gris) : disque + rectangle sur un dégradé
-  var src=new Uint8ClampedArray(W*H);
-  for(var y=0;y<H;y++) for(var x=0;x<W;x++){ var v=205-(y/H)*70;
-    if((x-108)*(x-108)+(y-118)*(y-118) < 60*60) v=45;
-    else if(x>=205&&x<=280&&y>=55&&y<=150) v=120;
-    src[y*W+x]=Math.max(0,Math.min(255,v)); }
-  var filter='orig', seuil=128;
-  var notes={orig:'Image d\u2019origine en niveaux de gris. Chaque pixel a une valeur de 0 (noir) à 255 (blanc).',
-    seuil:'Seuillage : chaque pixel devient blanc (≥ seuil) ou noir. Résultat : une image binaire (2 valeurs).',
-    edge:'Contours : on met en évidence les endroits où la valeur change brusquement (les bords des formes).',
-    neg:'Négatif : chaque pixel vaut 255 − sa valeur. Le clair devient sombre et inversement.'};
-  function render(){
-    var out=g.createImageData(W,H), d=out.data;
-    for(var y=0;y<H;y++) for(var x=0;x<W;x++){ var i=y*W+x, v=src[i], o=v;
-      if(filter==='neg') o=255-v;
-      else if(filter==='seuil') o=(v>=seuil)?255:0;
-      else if(filter==='edge'){ var xl=x>0?src[i-1]:v, xr=x<W-1?src[i+1]:v, yu=y>0?src[i-W]:v, yd=y<H-1?src[i+W]:v;
-        var m=Math.min(255, Math.abs(xr-xl)+Math.abs(yd-yu)); o=255-m; }
-      var p=i*4; d[p]=d[p+1]=d[p+2]=o; d[p+3]=255; }
-    g.putImageData(out,0,0);
-    el('fnote').textContent=notes[filter];
-  }
-  el('flt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
-    el('flt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); filter=b.dataset.f; render(); }); });
-  el('th').addEventListener('input',function(e){ seuil=+e.target.value; el('thV').textContent=seuil; if(filter==='seuil') render(); });
-  render();
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
 })();
 
-/* ---- helper corrections verrouillées ---- */
+/* ---------- entraîneur de seuil (C) ---------- */
+var SAL=[10,15,20,24,28,32,36,40,44,48];
+var HRB=[42,46,55,60,66,72,78,84,90,96];
+var seuil=30;
+(function(){
+  var cv=el('cvSeuil'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  el('sSlider').addEventListener('input',function(){ seuil=+this.value; el('sVal').textContent=String(seuil); });
+  function sx(score){ return 40+score/100*560; }
+  function step(){
+    var arr=SAL.filter(function(s){return s>=seuil;}).length;
+    var man=HRB.filter(function(s){return s<seuil;}).length;
+    var win=(arr===0&&man===2);
+    g.clearRect(0,0,cv.width,cv.height);
+    // zone désherbage (droite du seuil)
+    g.fillStyle='rgba(189,138,42,.10)';
+    g.fillRect(sx(seuil),30,640-sx(seuil)-2,150);
+    // axe
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(40,180); g.lineTo(600,180); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAnchor='middle'; g.textAlign='center';
+    [0,25,50,75,100].forEach(function(v){ g.fillText(String(v),sx(v),198);
+      g.beginPath(); g.moveTo(sx(v),176); g.lineTo(sx(v),184); g.stroke(); });
+    g.fillText('score « mauvaise herbe »',320,216);
+    // salades (rang bas)
+    SAL.forEach(function(s){
+      var x=sx(s), y=140, bad=(s>=seuil);
+      g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(x,y,8,0,7); g.fill();
+      if(bad){ g.strokeStyle='#C0492E'; g.lineWidth=3;
+        g.beginPath(); g.moveTo(x-7,y-7); g.lineTo(x+7,y+7); g.moveTo(x+7,y-7); g.lineTo(x-7,y+7); g.stroke(); }
+    });
+    // herbes (rang haut)
+    HRB.forEach(function(s){
+      var x=sx(s), y=70, bad=(s<seuil);
+      g.fillStyle='#BD8A2A';
+      g.beginPath(); g.moveTo(x,y-9); g.lineTo(x+8,y+7); g.lineTo(x-8,y+7); g.closePath(); g.fill();
+      if(bad){ g.strokeStyle='#C0492E'; g.lineWidth=3;
+        g.beginPath(); g.moveTo(x-7,y-8); g.lineTo(x+7,y+8); g.moveTo(x+7,y-8); g.lineTo(x-7,y+8); g.stroke(); }
+    });
+    g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('● salades',44,150-24);
+    g.fillStyle='#8a6313'; g.fillText('▲ mauvaises herbes',44,46);
+    // ligne seuil
+    g.strokeStyle='#8A5A7A'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(sx(seuil),30); g.lineTo(sx(seuil),184); g.stroke();
+    g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('seuil '+seuil,sx(seuil),24);
+    g.textAlign='left'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('→ désherber',Math.min(sx(seuil)+8,540),40);
+    // compteurs
+    g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillStyle= arr===0? '#3D7E5F':'#C0492E';
+    g.fillText('salades arrachées : '+arr+(arr>0?' 🥬💥':' ✓'),40,244);
+    g.fillStyle= man<=2? '#3D7E5F':'#C0492E';
+    g.fillText('herbes manquées : '+man,320,244);
+    if(win){ g.fillStyle='#3D7E5F'; g.fillText('🎯 réglage optimal !',520,244); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* helpers */
+function buildMatch(boxId, prefix, scen){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
   el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
   el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
 }
-/* ---- B ---- */
+
+/* A */
+var A_SCEN=[
+  {sc:'🏋️ L\u2019ENTRAÎNEMENT, c\u2019est :', ok:'ajuster les paramètres du réseau sur des photos étiquetées', opts:['— choisir —','ajuster les paramètres du réseau sur des photos étiquetées','désherber en vrai dans le champ','recharger la batterie']},
+  {sc:'🌿 L\u2019INFÉRENCE, c\u2019est :', ok:'prédire sur des plantes jamais vues, sans plus apprendre', opts:['— choisir —','prédire sur des plantes jamais vues, sans plus apprendre','effacer tout ce qui a été appris','photographier le potager']},
+  {sc:'🔁 L\u2019ordre des deux vies :', ok:'entraînement d\u2019abord, inférence ensuite', opts:['— choisir —','entraînement d\u2019abord, inférence ensuite','inférence d\u2019abord','les deux en permanence, dès le premier jour']}
+];
+buildMatch('aMatch','a',A_SCEN);
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  var ok=checkMatch('a',A_SCEN);
+  if(ok) return {ok:true,msg:'✓ Le réseau apprend au labo, décide au potager.'};
+  return {ok:false,msg:'✗ Qui apprend ? Qui décide ? Dans quel ordre ?'};
+});
+
+/* B */
+var B_SCEN=[
+  {sc:'c) 🧪 Les 400 photos de test servent à :', ok:'vérifier le réseau sur des images qu\u2019il n\u2019a JAMAIS vues', opts:['— choisir —','vérifier le réseau sur des images qu\u2019il n\u2019a JAMAIS vues','entraîner une deuxième fois','décorer le rapport']}
+];
+buildMatch('bMatch','b',B_SCEN);
 lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
-  var okA=Math.abs(a-0)<0.5, okB=Math.abs(b-3)<0.5;
-  if(okA&&okB) return {ok:true,msg:'✓ Parfait : 0 (noir), et 3 pixels blancs.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' — voir la correction.'};
+  var okA=Math.abs(a-1600)<10, okB=Math.abs(b-400)<5, okM=checkMatch('b',B_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ 1600 pour apprendre, 400 sous scellés pour juger.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (×0,8)')+' '+(okB?'b✓':'b✗ (×0,2)')+' '+(okM?'c✓':'c✗')};
 });
-/* ---- C ---- */
+
+/* C */
 lockExo('cCheck','cShow','cSol','cFb',function(){
-  var v=numf(el('cV').value);
-  if(Math.abs(v-600)<1) return {ok:true,msg:'✓ Exact : 600 → un contour.'};
-  return {ok:false,msg:'✗ Recalcule : 4 × centre − somme des 4 voisins.'};
+  var a=numf(el('cA').value);
+  var okA=Math.abs(a-2)<0.5;
+  var okS=(el('cSel').value==='améliorer le MODÈLE (plus de photos, meilleur réseau) — le seuil ne peut pas tout');
+  if(okA&&okS) return {ok:true,msg:'✓ 0 salade sacrifiée, 2 herbes tolérées : le compromis d\u2019un vrai ingénieur.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (monte le seuil jusqu\u2019à 0 arrachée, puis lis le compteur)')+' '+(okS?'b✓':'b✗')};
 });
-/* ---- D ---- */
-(function(){ var sel=-1;
-  el('dOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
-    el('dOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
-  lockExo('dCheck','dShow','dSol','dFb',function(){
-    var p=numf(el('dP').value); var okP=Math.abs(p-0.10)<0.02, okC=(sel===0);
-    if(okP&&okC) return {ok:true,msg:'✓ Parfait : 0,10 et classe « cercle ».'};
-    return {ok:false,msg:'✗ '+(okP?'a✓':'a✗')+' '+(okC?'b✓':'b✗')+' — voir la correction.'};
-  });
-})();
-/* ---- E ---- */
-(function(){ var sel=-1;
-  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
-    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
-  lockExo('eCheck','eShow','eSol','eFb',function(){
-    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
-    if(sel===1) return {ok:true,msg:'✓ Oui : c\u2019est un biais du jeu de données.'};
-    return {ok:false,msg:'✗ Non — pense à ce que le modèle a « vu » à l\u2019entraînement.'};
-  });
-})();
+
+/* D */
+var D_SCEN=[
+  {sc:'🌿 Plante n°1 — herbe à 92 % :', ok:'désherber : le réseau est très confiant', opts:['— choisir —','désherber : le réseau est très confiant','garder : 92 % c\u2019est trop peu','éteindre le robot']},
+  {sc:'🤔 Plante n°2 — 51 % / 49 % :', ok:'laisser passer : dans le doute, on protège la récolte', opts:['— choisir —','laisser passer : dans le doute, on protège la récolte','désherber quand même : 51 > 49 !','relancer la pièce']}
+];
+buildMatch('dMatch','d',D_SCEN);
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var ok=checkMatch('d',D_SCEN);
+  if(ok) return {ok:true,msg:'✓ Confiance haute → agir · doute → prudence. Le robot est bien élevé.'};
+  return {ok:false,msg:'✗ Que coûte chaque erreur ? Une herbe repousse… pas une salade.'};
+});
+
+/* E */
+var E_SCEN=[
+  {sc:'📵 Au fond du champ, l\u2019IA doit être embarquée car :', ok:'il n\u2019y a pas de réseau fiable pour joindre un serveur', opts:['— choisir —','il n\u2019y a pas de réseau fiable pour joindre un serveur','les serveurs n\u2019aiment pas les légumes','c\u2019est plus joli']},
+  {sc:'⚡ Décider en 0,1 s exige :', ok:'une latence minimale : le calcul local est imbattable', opts:['— choisir —','une latence minimale : le calcul local est imbattable','d\u2019attendre la réponse du cloud','de ralentir le robot']}
+];
+buildMatch('eMatch','e',E_SCEN);
+lockExo('eCheck','eShow','eSol','eFb',function(){
+  var okM=checkMatch('e',E_SCEN);
+  var c=numf(el('eC').value); var okC=Math.abs(c-36000)<500;
+  if(okM&&okC) return {ok:true,msg:'✓ 36 000 décisions par jour, sans internet : voilà l\u2019IA embarquée.'};
+  return {ok:false,msg:'✗ '+(okM?'a-b✓':'a-b✗')+' '+(okC?'c✓':'c✗ (2 × 3600 s × 5 h)')};
+});
+
+/* F */
+var F_SCEN=[
+  {sc:'b) ⚠️ L\u2019erreur la plus GRAVE pour le potager :', ok:'les 10 salades arrachées : de la récolte détruite', opts:['— choisir —','les 10 salades arrachées : de la récolte détruite','les 5 herbes manquées','aucune, 92,5 % suffit']}
+];
+buildMatch('fMatch','f',F_SCEN);
+lockExo('fCheck','fShow','fSol','fFb',function(){
+  var a=numf(el('fA').value); var okA=Math.abs(a-92.5)<0.5; var okM=checkMatch('f',F_SCEN);
+  if(okA&&okM) return {ok:true,msg:'✓ 92,5 % global… mais l\u2019audit regarde D\u2019ABORD les salades perdues.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ ((90+95)/200, en %)')+' '+(okM?'b✓':'b✗')};
+});
+
+/* G */
+var G_SCEN=[
+  {sc:'a) 🍂 La cause du massacre d\u2019octobre :', ok:'un biais : le jeu de données ne couvrait qu\u2019une seule situation', opts:['— choisir —','un biais : le jeu de données ne couvrait qu\u2019une seule situation','la pluie a mouillé le processeur','les mauvaises herbes ont muté']}
+];
+buildMatch('gMatch','g',G_SCEN);
+lockExo('gCheck','gShow','gSol','gFb',function(){
+  var okM=checkMatch('g',G_SCEN);
+  var b=numf(el('gB').value); var okB=Math.abs(b-250)<5;
+  if(okM&&okB) return {ok:true,msg:'✓ Biais diagnostiqué, 250 min d\u2019étiquetage au programme : la donnée se mérite.'};
+  return {ok:false,msg:'✗ '+(okM?'a✓':'a✗ (qu\u2019a-t-on montré au réseau… et jamais montré ?)')+' '+(okB?'b✓':'b✗ (500 × 30 s, en minutes)')};
+});
 </script>
 </body>
 </html>
