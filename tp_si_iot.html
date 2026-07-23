@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TP — Objets connectés &amp; IoT · SI Première</title>
+<title>TP — Objets connectés (IoT) · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,27 +19,25 @@
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
   .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
-  .hero{background:linear-gradient(135deg,#fff8ea,#f3ead6);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
-  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--copper);text-transform:uppercase}
+  .hero{background:linear-gradient(135deg,#edf1fa,#e2e6f2);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--plum);text-transform:uppercase}
   h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
   h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
   h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
   .lede{color:var(--sub);max-width:66ch}
   .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
   .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
-  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
-  .chip{font-family:'JetBrains Mono',monospace;font-size:14px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px;padding:10px 14px;cursor:pointer;transition:.15s}
-  .chip:hover{background:#eef3f6} .chip.used{opacity:.35;pointer-events:none;text-decoration:line-through}
-  .seq{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px;background:#faf6ec;border:1px dashed var(--line);border-radius:10px;padding:10px}
-  .seq .s{font-family:'JetBrains Mono',monospace;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:7px;padding:7px 11px}
-  .seq .s.ok{border-color:var(--green);background:#eef6f0;color:var(--green)} .seq .s.no{border-color:var(--copper);background:#fbeee9;color:var(--copper)}
-  .seq .arr{color:var(--sub)}
+  .schema{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .schema svg,.schema canvas{width:100%;height:auto;display:block;max-width:640px;margin:0 auto}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--plum)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--plum);min-width:120px;text-align:right}
   .match{display:grid;gap:10px;margin-top:6px}
   .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
-  .match .m .sc{flex:1;min-width:240px;font-size:15px}
-  .match select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
   .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
-  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
   .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
   .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
   .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
@@ -48,78 +46,166 @@
   .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
   .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
   .exo-sol.show{display:block}
-  .opt{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
-  .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
-  .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
-  a{color:var(--steel)}
+  .json{font-family:'JetBrains Mono',monospace;font-size:16px;background:#2a2436;color:#f2ead8;border-radius:10px;padding:14px 16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .json .k2{color:#8fd4e0}
+  .json select{font-family:'JetBrains Mono',monospace;font-size:15px;background:#3d3049;color:#f2ead8;border:1px solid #5c4a72}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
   <div class="estic-bar">
     <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">TP — Objets connectés &amp; IoT<br>© ESTIC — Tous droits réservés</div>
+    <div class="rt">TP — Objets connectés (IoT)<br>© ESTIC — Tous droits réservés</div>
   </div>
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">TP · Première spé SI</div>
-      <h1>Concevoir un objet connecté</h1>
-      <p class="lede">On équipe une serre de capteurs. À toi de bâtir la chaîne, choisir le réseau, dimensionner l'énergie et préparer la donnée.</p>
+      <div class="k">TP · Première spé SI · Objets connectés</div>
+      <h1>La serre connectée du lycée</h1>
+      <p class="lede">Le club jardin veut une serre qui se surveille toute seule : à toi de disséquer le capteur, d'écrire sa trame, de planifier son énergie pour tenir tout le trimestre, de choisir ses réseaux… et de programmer l'arrosage. La calculatrice t'attend en bas à droite.</p>
     </div>
 
     <section class="exo-card" id="a">
-      <h2><span class="num">A</span> Reconstituer la chaîne IoT</h2>
-      <p class="task">🎯 Clique les 5 maillons <b>dans l'ordre</b>, de la mesure au service.</p>
-      <div class="chips" id="chips"></div>
-      <div class="seq" id="seq"><span style="color:#a89e8c;font-family:'JetBrains Mono',monospace;font-size:13px">clique un maillon…</span></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aReset">Recommencer</button></div>
+      <h2><span class="num">A</span> L'anatomie de l'objet connecté 🔬</h2>
+      <p class="task">🎯 On a ouvert le boîtier du capteur de la serre : quatre organes. Associe chacun à son rôle.</p>
+      <div class="schema">
+        <svg viewBox="0 0 640 190" aria-label="Vue éclatée du capteur connecté : capteur, microcontrôleur, radio, batterie">
+          <rect x="30" y="40" width="580" height="110" rx="14" fill="none" stroke="#5C544B" stroke-width="2" stroke-dasharray="8 6"/>
+          <text x="320" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#5C544B">le boîtier, ouvert</text>
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" text-anchor="middle">
+            <rect x="52" y="62" width="118" height="66" rx="9" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2.5"/>
+            <text x="111" y="90" fill="#3D7E5F">🌡️ capteur</text>
+            <text x="111" y="108" fill="#3D7E5F">temp/hum</text>
+            <rect x="196" y="62" width="118" height="66" rx="9" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/>
+            <text x="255" y="90" fill="#2E6A8E">🧠 micro-</text>
+            <text x="255" y="108" fill="#2E6A8E">contrôleur</text>
+            <rect x="340" y="62" width="118" height="66" rx="9" fill="#f6eef4" stroke="#8A5A7A" stroke-width="2.5"/>
+            <text x="399" y="90" fill="#8A5A7A">📡 module</text>
+            <text x="399" y="108" fill="#8A5A7A">radio</text>
+            <rect x="484" y="62" width="104" height="66" rx="9" fill="#f6f1e6" stroke="#BD8A2A" stroke-width="2.5"/>
+            <text x="536" y="90" fill="#8a6313">🔋 batterie</text>
+            <text x="536" y="108" fill="#8a6313">3000 mAh</text>
+          </g>
+        </svg>
+      </div>
+      <div class="match" id="aMatch"></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="aFb"></div>
-      <div class="exo-sol" id="aSol"><b>Ordre correct :</b> Objet → Réseau → Passerelle → Cloud → Application.<br>L'objet mesure, le réseau transporte, la passerelle relaie vers Internet, le cloud traite, l'application rend le service.</div>
+      <div class="exo-sol" id="aSol">Le <b>capteur</b> traduit la grandeur physique en signal électrique · le <b>microcontrôleur</b> lit, met en forme et décide · le <b>module radio</b> expédie la trame sur le réseau. Et la batterie nourrit tout ce petit monde — tu vas t\u2019en occuper à l\u2019exercice C.</div>
     </section>
 
     <section class="exo-card" id="b">
-      <h2><span class="num">B</span> Le bon réseau pour chaque usage</h2>
-      <p class="task">🎯 Associe à chaque situation le réseau sans fil le mieux adapté.</p>
-      <div class="match" id="match"></div>
+      <h2><span class="num">B</span> Le constructeur de trame 📋</h2>
+      <p class="task">🎯 Ce matin la serre n°2 affiche 21,5 °C et 65 % d'humidité. Complète la trame JSON que le capteur doit envoyer.</p>
+      <div class="json">
+        <span>{</span>
+        <span class="k2">"serre"</span><span>:</span><select id="bS1"><option>?</option><option>2</option><option>65</option><option>21.5</option></select><span>,</span>
+        <span class="k2">"temp"</span><span>:</span><select id="bS2"><option>?</option><option>2</option><option>65</option><option>21.5</option></select><span>,</span>
+        <span class="k2">"hum"</span><span>:</span><select id="bS3"><option>?</option><option>2</option><option>65</option><option>21.5</option></select>
+        <span>}</span>
+      </div>
+      <div class="match" id="bMatch"></div>
       <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="bFb"></div>
-      <div class="exo-sol" id="bSol"><b>Capteur d'humidité (champ, 3 km, sur pile)</b> → <b>LoRaWAN</b> (longue portée, très faible conso).<br><b>Caméra HD (maison)</b> → <b>Wi-Fi</b> (gros débit, courte portée).<br><b>Bracelet cardio (au poignet)</b> → <b>Bluetooth/BLE</b> (très courte portée, faible conso).<br><b>Balise GPS (camion sur autoroute)</b> → <b>Cellulaire 4G/5G</b> (couverture large en mobilité).</div>
+      <div class="exo-sol" id="bSol">{"serre": <b>2</b>, "temp": <b>21.5</b>, "hum": <b>65</b>} — chaque valeur derrière SA clé. Le JSON organise tout en <b>paires clé : valeur</b>, lisibles autant par le cloud que par toi.</div>
     </section>
 
     <section class="exo-card" id="c">
-      <h2><span class="num">C</span> Autonomie du capteur</h2>
-      <p class="task">Un capteur est alimenté par une pile de <b>2400 mAh</b> et consomme en moyenne <b>0,05 mA</b>.</p>
-      <div class="row"><span>a) Autonomie :</span><input class="numin" id="cH" inputmode="numeric" placeholder="?"><span class="unit">heures</span></div>
-      <div class="row"><span>b) Soit environ :</span><input class="numin" id="cY" inputmode="decimal" placeholder="?"><span class="unit">années</span></div>
+      <h2><span class="num">C</span> ⭐ Le planificateur d'énergie</h2>
+      <p class="task">🎯 Mission : la serre doit mesurer <b>au moins 4 fois par heure</b> ET tenir <b>au moins 60 jours</b> sur sa batterie de 3000 mAh. Consommation : I = 1 + 0,25 × n (mA, avec n mesures/heure). <b>Trouve le réglage qui satisfait les DEUX contraintes</b>, puis relève tes valeurs.</p>
+      <div class="schema">
+        <canvas id="cvNrj" width="640" height="250" aria-label="Serre, cadence de mesure et autonomie calculée"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">n =</span>
+          <input type="range" id="nSlider" min="1" max="60" step="1" value="12">
+          <span class="val" id="nVal">12 mesures/h</span>
+        </div>
+      </div>
+      <div class="row"><span>a) Au réglage gagnant : I = 1 + 0,25 × 4 =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">mA</span></div>
+      <div class="row"><span>b) Autonomie : 3000 / 2 =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">h</span></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="cFb"></div>
-      <div class="exo-sol" id="cSol"><b>a)</b> autonomie = capacité ÷ courant = 2400 ÷ 0,05 = <b>48 000 h</b>.<br><b>b)</b> 48 000 ÷ 24 ÷ 365 ≈ <b>5,5 ans</b>. C'est ce qui rend possible un capteur « pose-et-oublie » pendant des années.</div>
+      <div class="exo-sol" id="cSol"><b>a)</b> I = 1 + 0,25×4 = <b>2 mA</b>.<br><b>b)</b> 3000/2 = <b>1500 h</b> ≈ 62,5 jours ✓. Le seul réglage qui coche les deux cases est n = 4 : une mesure de plus par heure et l\u2019autonomie tombait sous les 60 jours. Concevoir un objet connecté, c\u2019est arbitrer données ↔ énergie.</div>
     </section>
 
     <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Numérisation de la mesure</h2>
-      <p class="task">Le capteur code la température sur <b>8 bits</b>, pour une plage de <b>0 à 100 °C</b>.</p>
-      <div class="row"><span>a) Nombre de valeurs possibles :</span><input class="numin" id="dN" inputmode="numeric" placeholder="?"><span class="unit">valeurs</span></div>
-      <div class="row"><span>b) Résolution (par pas) :</span><input class="numin" id="dR" inputmode="decimal" placeholder="?"><span class="unit">°C</span></div>
+      <h2><span class="num">D</span> Le match des réseaux 📶</h2>
+      <p class="task">🎯 Trois profils très différents. Compare-les sur le schéma, puis affecte le bon réseau à chaque objet du jardin.</p>
+      <div class="schema">
+        <svg viewBox="0 0 640 210" aria-label="Comparatif portée, débit, consommation : WiFi, Bluetooth, LoRa">
+          <g font-family="JetBrains Mono" font-size="11.5" font-weight="700">
+            <text x="30" y="52" fill="#5C544B">portée</text>
+            <text x="30" y="102" fill="#5C544B">débit</text>
+            <text x="30" y="152" fill="#5C544B">conso</text>
+            <text x="196" y="26" fill="#2E6A8E" text-anchor="middle">WiFi</text>
+            <text x="376" y="26" fill="#8A5A7A" text-anchor="middle">Bluetooth</text>
+            <text x="556" y="26" fill="#3D7E5F" text-anchor="middle">LoRa</text>
+          </g>
+          <g fill="#2E6A8E"><rect x="126" y="40" width="60" height="14" rx="4"/><rect x="126" y="90" width="140" height="14" rx="4"/><rect x="126" y="140" width="130" height="14" rx="4"/></g>
+          <g fill="#8A5A7A"><rect x="306" y="40" width="26" height="14" rx="4"/><rect x="306" y="90" width="70" height="14" rx="4"/><rect x="306" y="140" width="44" height="14" rx="4"/></g>
+          <g fill="#3D7E5F"><rect x="486" y="40" width="140" height="14" rx="4"/><rect x="486" y="90" width="14" height="14" rx="4"/><rect x="486" y="140" width="10" height="14" rx="4"/></g>
+          <text x="320" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">LoRa : des kilomètres avec trois miettes d'énergie… mais de tout petits messages</text>
+        </svg>
+      </div>
+      <div class="match" id="dMatch"></div>
       <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="dFb"></div>
-      <div class="exo-sol" id="dSol"><b>a)</b> 8 bits → 2⁸ = <b>256 valeurs</b>.<br><b>b)</b> résolution = plage ÷ (256 − 1) = 100 ÷ 255 ≈ <b>0,39 °C</b>. Plus il y a de bits, plus la mesure est fine.</div>
+      <div class="exo-sol" id="dSol">Caméra + images = débit → <b>WiFi</b> (le routeur est à 10 m) · capteur au fond du parc, loin et sobre → <b>LoRa</b> · casque du jardinier → <b>Bluetooth</b>. Le bon réseau = celui du BESOIN, jamais « le plus puissant ».</div>
     </section>
 
     <section class="exo-card" id="e">
-      <h2><span class="num">★</span> Sécurité</h2>
-      <p class="task">Un objet connecté envoie ses données par radio, « en l'air ».</p>
-      <p>Pourquoi <b>chiffrer</b> ces données est-il essentiel ?</p>
-      <div class="opt" id="eOpt">
-        <button data-v="0">Pour envoyer plus vite</button>
-        <button data-v="1">Pour empêcher qu'un tiers les lise ou les falsifie</button>
-        <button data-v="2">Pour économiser la batterie</button>
-      </div>
-      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
+      <h2><span class="num">E</span> Le volume de données 💾</h2>
+      <p class="task">🎯 La serre envoie une trame de 40 octets toutes les 15 minutes, jour et nuit.</p>
+      <div class="row"><span>a) Trames par jour : 24 × 4 =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">trames</span></div>
+      <div class="row"><span>b) Volume quotidien : 96 × 40 =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">octets</span></div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="eFb"></div>
-      <div class="exo-sol" id="eSol"><b>Pour empêcher qu'un tiers les lise ou les falsifie.</b> Les ondes radio se captent facilement : sans chiffrement, n'importe qui peut espionner les mesures ou injecter de fausses commandes. On ajoute aussi l'<b>authentification</b> (vérifier que l'objet est bien celui qu'il prétend être). Un objet mal sécurisé devient une porte d'entrée dans tout le système.</div>
+      <div class="exo-sol" id="eSol"><b>a)</b> 4 trames/heure × 24 h = <b>96 trames</b>. <b>b)</b> 96 × 40 = <b>3840 octets</b> ≈ 3,8 ko par jour — moins qu\u2019une seule photo ! Les objets connectés bien conçus sont d\u2019une sobriété redoutable.</div>
     </section>
+
+    <section class="exo-card" id="f">
+      <h2><span class="num">F</span> La serre sous clé 🔐</h2>
+      <p class="task">🎯 Un objet connecté est une porte d'entrée sur le réseau du lycée. Associe chaque geste de sécurité à ce qu'il protège.</p>
+      <div class="match" id="fMatch"></div>
+      <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="fFb"></div>
+      <div class="exo-sol" id="fSol">Changer le <b>mot de passe par défaut</b> (admin/admin est dans tous les dictionnaires de pirates) · <b>mettre à jour le firmware</b> pour boucher les failles connues · <b>chiffrer</b> les trames : interceptées, elles restent illisibles. Trois gestes, trois murailles.</div>
+    </section>
+
+    <section class="exo-card" id="g">
+      <h2><span class="num">★</span> L'algorithme d'arrosage 🌱</h2>
+      <p class="task">La serre devient autonome : « SI humidité &lt; 40 % ALORS ouvrir la vanne pendant 30 s ». La vanne débite 2 L/min ; en plein été, le sol repasse sous 40 % six fois par jour.</p>
+      <div class="match" id="gMatch"></div>
+      <div class="row"><span>b) Eau utilisée par jour : 6 arrosages × 1 L =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">L</span></div>
+      <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="gFb"></div>
+      <div class="exo-sol" id="gSol"><b>a)</b> C\u2019est la boucle complète <b>capteur → traitement (seuil) → actionneur</b> : l\u2019objet ne fait plus que mesurer, il AGIT.<br><b>b)</b> 30 s à 2 L/min = 1 L par arrosage → 6 × 1 = <b>6 L/jour</b>, livrés pile quand la terre a soif. L\u2019IoT au service du jardin (et de la facture d\u2019eau).</div>
+    </section>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
   </div>
 
 <script>
@@ -127,75 +213,185 @@
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
-/* ---- A : chaîne IoT ---- */
+/* ---------- calculatrice ---------- */
 (function(){
-  var correct=['Objet','Réseau','Passerelle','Cloud','Application'];
-  var pool=['Cloud','Objet','Application','Réseau','Passerelle'];
-  var chosen=[]; var chipsBox=el('chips'), seqBox=el('seq');
-  function drawChips(){ chipsBox.innerHTML=''; pool.forEach(function(name){ var c=document.createElement('span'); c.className='chip'+(chosen.indexOf(name)>=0?' used':''); c.textContent=name;
-    c.addEventListener('click',function(){ if(chosen.indexOf(name)>=0)return; chosen.push(name); render(); }); chipsBox.appendChild(c); }); }
-  function render(){ drawChips();
-    if(!chosen.length){ seqBox.innerHTML='<span style="color:#a89e8c;font-family:\'JetBrains Mono\',monospace;font-size:13px">clique un maillon…</span>'; return; }
-    seqBox.innerHTML=''; chosen.forEach(function(n,i){ var s=document.createElement('span'); s.className='s'; s.textContent=n; seqBox.appendChild(s);
-      if(i<chosen.length-1){ var a=document.createElement('span'); a.className='arr'; a.textContent='→'; seqBox.appendChild(a); } }); }
-  el('aCheck').addEventListener('click',function(){
-    if(chosen.length<5){ el('aFb').className='exo-fb no'; el('aFb').textContent='Il manque des maillons ('+chosen.length+'/5).'; return; }
-    var ok=true, spans=seqBox.querySelectorAll('.s'); chosen.forEach(function(n,i){ var good=(n===correct[i]); if(!good)ok=false; spans[i].className='s '+(good?'ok':'no'); });
-    if(ok){ el('aFb').className='exo-fb ok'; el('aFb').textContent='✓ Chaîne correcte, bravo !'; }
-    else { el('aFb').className='exo-fb no'; el('aFb').textContent='✗ L\u2019ordre n\u2019est pas bon. Regarde la correction.'; el('aSol').classList.add('show'); } });
-  el('aReset').addEventListener('click',function(){ chosen=[]; el('aFb').textContent=''; el('aFb').className='exo-fb'; el('aSol').classList.remove('show'); render(); });
-  render();
-})();
-
-/* ---- B : matching réseau ---- */
-(function(){
-  var scen=[
-    {sc:'Capteur d\u2019humidité dans un champ, à 3 km, alimenté par pile', ok:'LoRaWAN'},
-    {sc:'Caméra de vidéosurveillance HD dans la maison', ok:'Wi-Fi'},
-    {sc:'Bracelet cardio porté au poignet', ok:'Bluetooth/BLE'},
-    {sc:'Balise GPS sur un camion, sur l\u2019autoroute', ok:'Cellulaire 4G/5G'}
-  ];
-  var nets=['— choisir —','Wi-Fi','Bluetooth/BLE','LoRaWAN','Cellulaire 4G/5G'];
-  var box=el('match');
-  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id='m'+i;
-    var opts=nets.map(function(n){ return '<option>'+n+'</option>'; }).join('');
-    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="sel'+i+'">'+opts+'</select>'; box.appendChild(d); });
-  el('bCheck').addEventListener('click',function(){
-    var all=true; scen.forEach(function(s,i){ var v=el('sel'+i).value; var good=(v===s.ok); if(!good)all=false; el('m'+i).className='m '+(good?'ok':'no'); });
-    el('bFb').className='exo-fb '+(all?'ok':'no'); el('bFb').textContent=all?'✓ Tous les réseaux sont bien choisis !':'✗ Certains ne conviennent pas — voir la correction.'; el('bShow').disabled=false;
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
   });
-  el('bShow').addEventListener('click',function(){ if(!el('bShow').disabled) el('bSol').classList.add('show'); });
+  show();
 })();
 
-/* ---- helper corrections verrouillées ---- */
+/* ---------- planificateur d'énergie (C) ---------- */
+var nCur=12;
+(function(){
+  var cv=el('cvNrj'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var CLK=0;
+  el('nSlider').addEventListener('input',function(){ nCur=+this.value; el('nVal').textContent=nCur+' mesures/h'; });
+  function step(){
+    CLK+=0.04;
+    var I=1+0.25*nCur, H=3000/I, J=H/24;
+    var okN=nCur>=4, okJ=J>=60, win=okN&&okJ;
+    g.clearRect(0,0,cv.width,cv.height);
+    // serre
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3; g.fillStyle='#eef6f0';
+    g.beginPath(); g.moveTo(50,200); g.lineTo(50,120); g.lineTo(130,74); g.lineTo(210,120); g.lineTo(210,200); g.closePath(); g.fill(); g.stroke();
+    g.strokeStyle='#3D7E5F'; g.lineWidth=1.6;
+    g.beginPath(); g.moveTo(130,74); g.lineTo(130,200); g.moveTo(90,97); g.lineTo(90,200); g.moveTo(170,97); g.lineTo(170,200); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('la serre',130,224);
+    // capteur + pulses de mesure à la cadence n
+    g.fillStyle='#8A5A7A'; g.beginPath(); g.arc(130,150,8,0,7); g.fill();
+    var rate=0.5*Math.sqrt(nCur);
+    var ph=(CLK*rate)%1;
+    if(ph<0.55){
+      g.strokeStyle='rgba(138,90,122,'+(0.9-ph*1.2)+')'; g.lineWidth=3;
+      g.beginPath(); g.arc(130,150,10+ph*46,-1.1,1.1); g.stroke();
+    }
+    // panneau
+    var bx=290;
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('I = 1 + 0,25×'+nCur+' = '+String(I.toFixed(2)).replace('.',',')+' mA',bx,46);
+    g.fillText('autonomie = 3000/I ≈ '+Math.round(H)+' h',bx,76);
+    g.fillStyle= okJ? '#3D7E5F':'#C0492E';
+    g.fillText('≈ '+String(J.toFixed(1)).replace('.',',')+' jours',bx,106);
+    // contraintes
+    g.font='700 13px "JetBrains Mono",monospace';
+    g.fillStyle= okN? '#3D7E5F':'#C0492E';
+    g.fillText((okN?'✓':'✗')+' au moins 4 mesures/h',bx,140);
+    g.fillStyle= okJ? '#3D7E5F':'#C0492E';
+    g.fillText((okJ?'✓':'✗')+' au moins 60 jours',bx,164);
+    // jauge jours 0-100 avec cible 60
+    g.fillStyle='#eee6d6'; g.fillRect(bx,180,320,16);
+    g.fillStyle= okJ? '#3D7E5F':'#C0492E';
+    g.fillRect(bx,180,320*Math.min(1,J/100),16);
+    var lim=bx+320*0.6;
+    g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.setLineDash([4,3]);
+    g.beginPath(); g.moveTo(lim,174); g.lineTo(lim,202); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#C0492E'; g.textAlign='center'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('60 j',lim,216);
+    g.textAlign='left';
+    if(win){ g.fillStyle='#3D7E5F'; g.font='800 14px "Bricolage Grotesque",sans-serif';
+      g.fillText('🎯 les deux contraintes sont satisfaites !',bx,240); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* helpers */
+function buildMatch(boxId, prefix, scen){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
   el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
   el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
 }
-/* ---- C ---- */
+
+/* A */
+var A_SCEN=[
+  {sc:'🌡️ Le capteur :', ok:'traduit la grandeur physique en signal électrique', opts:['— choisir —','traduit la grandeur physique en signal électrique','stocke les données pour dix ans','arrose les plantes']},
+  {sc:'🧠 Le microcontrôleur :', ok:'lit le capteur, met en forme et décide quand envoyer', opts:['— choisir —','lit le capteur, met en forme et décide quand envoyer','capte l\u2019humidité directement','remplace la batterie']},
+  {sc:'📡 Le module radio :', ok:'expédie la trame sur le réseau sans fil', opts:['— choisir —','expédie la trame sur le réseau sans fil','refroidit le boîtier','mesure la température']}
+];
+buildMatch('aMatch','a',A_SCEN);
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  var ok=checkMatch('a',A_SCEN);
+  if(ok) return {ok:true,msg:'✓ Dissection réussie : tu connais ton patient.'};
+  return {ok:false,msg:'✗ Qui MESURE, qui RÉFLÉCHIT, qui PARLE ? Reprends organe par organe.'};
+});
+
+/* B */
+var B_SCEN=[
+  {sc:'✍️ Le JSON organise les données en :', ok:'paires clé : valeur séparées par des virgules', opts:['— choisir —','paires clé : valeur séparées par des virgules','phrases complètes en français','une image scannée']}
+];
+buildMatch('bMatch','b',B_SCEN);
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var ok1=(el('bS1').value==='2'), ok2=(el('bS2').value==='21.5'), ok3=(el('bS3').value==='65');
+  var okM=checkMatch('b',B_SCEN);
+  var okAll=ok1&&ok2&&ok3&&okM;
+  if(okAll) return {ok:true,msg:'✓ Trame valide : le cloud va adorer.'};
+  return {ok:false,msg:'✗ '+(ok1?'serre✓':'serre✗')+' '+(ok2?'temp✓':'temp✗')+' '+(ok3?'hum✓':'hum✗')+' — chaque valeur derrière SA clé !'};
+});
+
+/* C */
 lockExo('cCheck','cShow','cSol','cFb',function(){
-  var h=numf(el('cH').value), y=numf(el('cY').value);
-  var okH=Math.abs(h-48000)<50, okY=Math.abs(y-5.5)<0.3;
-  if(okH&&okY) return {ok:true,msg:'✓ Parfait : 48 000 h ≈ 5,5 ans.'};
-  return {ok:false,msg:'✗ '+(okH?'a✓':'a✗')+' '+(okY?'b✓':'b✗')+' — voir la correction.'};
+  var a=numf(el('cA').value), b=numf(el('cB').value);
+  var okA=Math.abs(a-2)<0.1, okB=Math.abs(b-1500)<30;
+  if(okA&&okB) return {ok:true,msg:'✓ n = 4 : la serre mesure assez ET passe le trimestre. Arbitrage gagné.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (trouve d\u2019abord le n qui allume le 🎯 !)')+' '+(okB?'b✓':'b✗ (capacité / courant)')};
 });
-/* ---- D ---- */
+
+/* D */
+var D_SCEN=[
+  {sc:'📹 La caméra qui envoie des images de la serre (routeur à 10 m) :', ok:'WiFi', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
+  {sc:'🌳 Le capteur de sol au fond du parc, à 800 m :', ok:'LoRa', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
+  {sc:'🎧 Le casque audio du jardinier :', ok:'Bluetooth', opts:['— choisir —','WiFi','Bluetooth','LoRa']}
+];
+buildMatch('dMatch','d',D_SCEN);
 lockExo('dCheck','dShow','dSol','dFb',function(){
-  var n=numf(el('dN').value), r=numf(el('dR').value);
-  var okN=Math.abs(n-256)<0.5, okR=Math.abs(r-0.39)<0.05;
-  if(okN&&okR) return {ok:true,msg:'✓ Exact : 256 valeurs, ≈ 0,39 °C.'};
-  return {ok:false,msg:'✗ '+(okN?'a✓':'a✗')+' '+(okR?'b✓':'b✗')+' — voir la correction.'};
+  var ok=checkMatch('d',D_SCEN);
+  if(ok) return {ok:true,msg:'✓ Trois objets, trois réseaux : le jardin communique.'};
+  return {ok:false,msg:'✗ Relis les barres du schéma : portée ? débit ? consommation ?'};
 });
-/* ---- E ---- */
-(function(){ var sel=-1;
-  el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
-    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
-  lockExo('eCheck','eShow','eSol','eFb',function(){
-    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
-    if(sel===1) return {ok:true,msg:'✓ Oui : confidentialité et intégrité des données.'};
-    return {ok:false,msg:'✗ Non — pense à qui peut capter les ondes. Voir l\u2019explication.'};
-  });
-})();
+
+/* E */
+lockExo('eCheck','eShow','eSol','eFb',function(){
+  var a=numf(el('eA').value), b=numf(el('eB').value);
+  var okA=Math.abs(a-96)<1, okB=Math.abs(b-3840)<50;
+  if(okA&&okB) return {ok:true,msg:'✓ 3,8 ko par jour : la sobriété numérique en chiffres.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (4 par heure × 24 h)')+' '+(okB?'b✓':'b✗ (trames × octets)')};
+});
+
+/* F */
+var F_SCEN=[
+  {sc:'🔑 Changer le mot de passe par défaut :', ok:'ferme la porte que TOUS les pirates essaient en premier', opts:['— choisir —','ferme la porte que TOUS les pirates essaient en premier','rend le WiFi plus rapide','économise la batterie']},
+  {sc:'⬆️ Mettre à jour le firmware :', ok:'bouche les failles de sécurité découvertes', opts:['— choisir —','bouche les failles de sécurité découvertes','change la couleur du boîtier','efface les mesures']},
+  {sc:'🔒 Chiffrer les trames :', ok:'les rend illisibles même si elles sont interceptées', opts:['— choisir —','les rend illisibles même si elles sont interceptées','les rend plus lourdes donc inutiles','les envoie deux fois']}
+];
+buildMatch('fMatch','f',F_SCEN);
+lockExo('fCheck','fShow','fSol','fFb',function(){
+  var ok=checkMatch('f',F_SCEN);
+  if(ok) return {ok:true,msg:'✓ Serre blindée : le réseau du lycée peut dormir tranquille.'};
+  return {ok:false,msg:'✗ Pense : porte d\u2019entrée, failles connues, messages interceptés.'};
+});
+
+/* G */
+var G_SCEN=[
+  {sc:'a) 🔁 « SI humidité < 40 % ALORS ouvrir la vanne 30 s », c\u2019est :', ok:'la boucle capteur → traitement (seuil) → actionneur', opts:['— choisir —','la boucle capteur → traitement (seuil) → actionneur','un simple affichage de données','un bug du programme']}
+];
+buildMatch('gMatch','g',G_SCEN);
+lockExo('gCheck','gShow','gSol','gFb',function(){
+  var okM=checkMatch('g',G_SCEN);
+  var b=numf(el('gB').value); var okB=Math.abs(b-6)<0.3;
+  if(okM&&okB) return {ok:true,msg:'✓ 6 L pile quand il faut : la serre est officiellement autonome.'};
+  return {ok:false,msg:'✗ '+(okM?'a✓':'a✗')+' '+(okB?'b✓':'b✗ (2 L/min pendant 30 s, six fois)')};
+});
 </script>
 </body>
 </html>
