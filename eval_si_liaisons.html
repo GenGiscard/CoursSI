@@ -80,7 +80,7 @@
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /10</div>
+      <div class="k">Évaluation · Première spé SI · /15</div>
       <h1>⚙️ La salle des mécanismes</h1>
       <p>Tu entres dans la salle des mécanismes du lycée : trois guidages mystère s'animent sur l'établi, un inventaire de degrés de liberté t'attend, l'atelier des objets teste tes réflexes… et le vieil étau réclame son diagnostic. À toi de jouer, mécanicien !</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
@@ -185,6 +185,47 @@
       <div class="corr" id="c4"></div>
     </section>
 
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2>
+      <p class="task">🕵️ Le stagiaire de l'atelier a étiqueté trois objets… mais UNE étiquette est fausse. Débusque-la.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 200" aria-label="Trois objets étiquetés, une étiquette fausse">
+          <g font-family="Bricolage Grotesque" font-size="16" font-weight="800" text-anchor="middle">
+            <rect x="60" y="34" width="200" height="92" rx="12" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/>
+            <text x="160" y="72" fill="#2E6A8E">🚪 la porte</text>
+            <text x="160" y="102" font-size="13" font-family="JetBrains Mono" fill="#3D7E5F">étiquette : pivot ✓?</text>
+            <rect x="330" y="34" width="200" height="92" rx="12" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <text x="430" y="72" fill="#C0492E">🗄️ le tiroir</text>
+            <text x="430" y="102" font-size="13" font-family="JetBrains Mono" fill="#C0492E">étiquette : rotule ✓?</text>
+            <rect x="600" y="34" width="200" height="92" rx="12" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2.5"/>
+            <text x="700" y="72" fill="#3D7E5F">🚗 le volant</text>
+            <text x="700" y="102" font-size="13" font-family="JetBrains Mono" fill="#3D7E5F">étiquette : pivot ✓?</text>
+          </g>
+          <text x="430" y="170" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#5C544B">une seule de ces trois étiquettes est FAUSSE…</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q5a"><span class="sc">a) L'étiquette FAUSSE est celle :</span>
+        <select id="s5a"><option>— choisir —</option><option>du tiroir (il ne fait que coulisser !)</option><option>de la porte</option><option>du volant</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) La bonne liaison du tiroir avec son meuble est :</span>
+        <select id="s5b"><option>— choisir —</option><option>Glissière</option><option>Rotule</option><option>Hélicoïdale</option><option>Encastrement</option></select></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> Le siège de bureau <span class="pts">3 pts</span></h2>
+      <p class="task">🪑 La star méconnue des liaisons : l'assise du siège TOURNE et MONTE/DESCEND sur sa colonne, les deux indépendamment. Regarde-la faire.</p>
+      <div class="chrono"><canvas id="cv6" width="860" height="240" aria-label="Siège de bureau animé : rotation et translation"></canvas></div>
+      <div class="qrow" id="q6a"><span class="sc">a) La liaison assise / colonne (rotation + translation INDÉPENDANTES sur le même axe) est :</span>
+        <select id="s6a"><option>— choisir —</option><option>Pivot glissant</option><option>Pivot</option><option>Glissière</option><option>Hélicoïdale</option></select></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Degrés de liberté de cette liaison :</span>
+        <input class="numin" id="n6b" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
+      <div class="qrow" id="q6c"><span class="sc">c) 🛞 Chaque roulette qui tourne sur son axe, c'est une liaison :</span>
+        <select id="s6c"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Rotule</option><option>Appui plan</option></select></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
     <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
     <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
 
@@ -255,6 +296,59 @@ var NODE='eval_liaisons';
     g.strokeStyle='#8A5A7A'; g.lineWidth=8; g.lineCap='round'; g.beginPath(); g.moveTo(0,0); g.lineTo(0,-64*(0.8+0.2*Math.cos(a2))); g.stroke();
     g.fillStyle='#C0492E'; g.beginPath(); g.arc(0,-64*(0.8+0.2*Math.cos(a2)),8,0,7); g.fill(); g.restore();
     g.fillStyle='#8A5A7A'; g.beginPath(); g.arc(cx,cy,13,0,7); g.fill();
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX6 : siège de bureau animé ============ */
+(function(){
+  var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  function step(){
+    T+=0.03;
+    g.clearRect(0,0,cv.width,cv.height);
+    var cx=300, base=210;
+    var lift=26*Math.sin(T*0.8);        // translation verticale
+    var spin=T*1.5;                      // rotation (représentée par la flèche + le dossier qui oscille en largeur)
+    var seatY=118-lift;
+    // pied étoile + roulettes
+    g.strokeStyle='#5C544B'; g.lineWidth=5; g.lineCap='round';
+    [[-86,0],[-40,10],[40,10],[86,0]].forEach(function(p){
+      g.beginPath(); g.moveTo(cx,base-18); g.lineTo(cx+p[0],base+p[1]); g.stroke();
+      g.fillStyle='#2A2622'; g.beginPath(); g.arc(cx+p[0],base+p[1]+8,7,0,7); g.fill();
+    });
+    // colonne (fixe)
+    g.strokeStyle='#2E6A8E'; g.lineWidth=13; g.beginPath(); g.moveTo(cx,base-18); g.lineTo(cx,132); g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('colonne',cx+16,190);
+    // tige mobile + assise
+    g.strokeStyle='#8A5A7A'; g.lineWidth=8; g.beginPath(); g.moveTo(cx,140); g.lineTo(cx,seatY+8); g.stroke();
+    var w=96+14*Math.sin(spin);         // effet de rotation vu de côté
+    g.fillStyle='#f6eef4'; g.strokeStyle='#8A5A7A'; g.lineWidth=3;
+    g.beginPath(); g.rect(cx-w/2,seatY-10,w,18); g.fill(); g.stroke();
+    g.beginPath(); g.rect(cx+w/2-16,seatY-72,14,64); g.fill(); g.stroke();
+    g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('assise',cx-w/2-34,seatY+2);
+    // flèche de rotation au-dessus
+    g.strokeStyle='#C0492E'; g.lineWidth=3.5;
+    g.beginPath(); g.arc(cx,seatY-88,26,0.4+0.6*Math.sin(T),3.4+0.6*Math.sin(T)); g.stroke();
+    var ae=3.4+0.6*Math.sin(T);
+    g.fillStyle='#C0492E'; g.beginPath();
+    g.moveTo(cx+30*Math.cos(ae),seatY-88+30*Math.sin(ae));
+    g.lineTo(cx+18*Math.cos(ae-0.25),seatY-88+18*Math.sin(ae-0.25));
+    g.lineTo(cx+30*Math.cos(ae-0.5),seatY-88+30*Math.sin(ae-0.5));
+    g.closePath(); g.fill();
+    // flèche de translation
+    g.strokeStyle='#3D7E5F'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(cx-120,90); g.lineTo(cx-120,150); g.stroke();
+    g.fillStyle='#3D7E5F';
+    g.beginPath(); g.moveTo(cx-120,82); g.lineTo(cx-127,94); g.lineTo(cx-113,94); g.closePath(); g.fill();
+    g.beginPath(); g.moveTo(cx-120,158); g.lineTo(cx-127,146); g.lineTo(cx-113,146); g.closePath(); g.fill();
+    // légendes
+    g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('elle TOURNE (autour de l\u2019axe)',480,84);
+    g.fillStyle='#3D7E5F'; g.fillText('et elle MONTE/DESCEND (le long du même axe)',480,114);
+    g.fillStyle='#5C544B'; g.fillText('… les deux mouvements sont indépendants',480,144);
   }
   setInterval(step,40); step();
 })();
@@ -337,21 +431,36 @@ el('submit').addEventListener('click',function(){
   var p4=(ok4a?1:0)+(ok4b?1:0);
   var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
   c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">Vis/corps : rotation et translation LIÉES par le filetage → <b>hélicoïdale</b>. Mors/corps : une seule translation → <b>glissière</b>. C\u2019est ce couple de liaisons qui transforme la rotation de la poignée en serrage.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='du tiroir (il ne fait que coulisser !)');
+  var ok5b=(el('s5b').value==='Glissière');
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">La porte tourne (pivot ✓), le volant tourne (pivot ✓)… mais le tiroir ne fait que COULISSER : c\u2019est une <b>glissière</b>, pas une rotule. Étiquette démasquée !</div>';
+  /* EX6 */
+  var ok6a=(el('s6a').value==='Pivot glissant');
+  var ok6b=Math.abs(numf(el('n6b').value)-2)<0.5;
+  var ok6c=(el('s6c').value==='Pivot');
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">Rotation ET translation indépendantes sur le même axe = <b>pivot glissant</b> → <b>2 ddl</b> (1 R + 1 T). Chaque roulette sur son axe = <b>pivot</b>. Tu ne regarderas plus jamais ton siège pareil.</div>';
   /* total */
-  var score=p1+p2+p3+p4;
-  el('scoreBig').textContent=score+' / 10';
-  el('scoreSt').textContent = score>=8?'La salle des mécanismes n\u2019a plus de secret !':(score>=5?'Bon diagnostic — revois les mécanismes en rouge.':'Retourne observer les guidages du cours.');
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'La salle des mécanismes n\u2019a plus de secret !':(score>=8?'Bon diagnostic — revois les mécanismes en rouge.':'Retourne observer les guidages du cours.');
   el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
   document.querySelectorAll('select, .numin').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:10, detail:[p1,p2,p3,p4], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
     el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
 /* ============ espace enseignant ============ */
-var EX_MAX=[3,3,2,2], EX_LAB=['Ex1 guidages','Ex2 ddl','Ex3 défi','Ex4 étau'];
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 guidages','Ex2 ddl','Ex3 défi','Ex4 étau','Ex5 erreur','Ex6 siège'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
 el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
@@ -359,16 +468,16 @@ function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
     var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<4) perQ[i]+=d; }); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 10</span>';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
     var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
-    for(var i=0;i<4;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
       pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||10)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
