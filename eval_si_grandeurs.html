@@ -73,7 +73,7 @@
   .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
   .barq>i{display:block;height:100%;background:var(--green)}
   /* calculatrice */
-  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25)}
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
   #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
   #calc.show{display:block}
   #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
@@ -95,9 +95,9 @@
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /10</div>
+      <div class="k">Évaluation · Première spé SI · /15</div>
       <h1>🔧 L'atelier des machines</h1>
-      <p>Technicien de maintenance, c'est ta tournée : un moteur au banc, la grue du port, la salle des machines et la ventilation à régler. Relève les mesures, calcule, tranche — la calculatrice 🧮 est dans ta poche (en bas à droite).</p>
+      <p>Technicien de maintenance, c'est ta tournée : un moteur au banc, la grue du port, la salle des machines et la ventilation à régler. Relève les mesures, calcule, tranche — la calculatrice est dans ta poche (en bas à droite).</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
 
@@ -162,6 +162,42 @@
       <div class="corr" id="c4"></div>
     </section>
 
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2>
+      <p class="task">🕵️ Le stagiaire de l'atelier calcule : « N = 3000 tr/min, C = 2 N·m, donc P = C × N = 6000 W. Facile ! » Son moteur de 6 kW tiendrait dans une main…</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 170" aria-label="Note erronée du stagiaire : P = C fois N">
+          <rect x="70" y="36" width="300 " height="96" rx="12" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/>
+          <text x="220" y="74" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#2E6A8E">N = 3000 tr/min</text>
+          <text x="220" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#2E6A8E">C = 2 N·m</text>
+          <rect x="460" y="36" width="330" height="96" rx="12" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/>
+          <text x="625" y="74" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">« P = C × N</text>
+          <text x="625" y="104" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">= 6000 W » ⚠</text>
+          <text x="430" y="158" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">indice : dans quelle unité P = C·ω exige-t-elle la vitesse ?</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q5a"><span class="sc">a) L'erreur du stagiaire :</span>
+        <select id="s5a"><option>— choisir —</option><option>P = C·ω exige ω en rad/s : il faut d'abord convertir les tr/min</option><option>il fallait diviser C par 2</option><option>il n'y a pas d'erreur</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) La vraie puissance : ω = 2π×3000/60 = 314 rad/s → P = 2 × 314 ≈</span>
+        <input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">W (±15)</span></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> L'éolienne du lycée <span class="pts">3 pts</span></h2>
+      <p class="task">🌬️ Le rotor de la petite éolienne tourne LENTEMENT mais FORT : ω = 4 rad/s, C = 500 N·m. Un multiplicateur (×25) accélère tout ça pour la génératrice. Regarde les deux axes tourner.</p>
+      <div class="chrono"><canvas id="cv6" width="860" height="240" aria-label="Éolienne avec multiplicateur : axe lent et axe rapide"></canvas></div>
+      <div class="qrow" id="q6a"><span class="sc">a) Puissance captée par le rotor : P = C·ω = 500 × 4 =</span>
+        <input class="numin" id="n6a" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Après le multiplicateur (×25) : ω₂ = 100 rad/s. À puissance conservée, C₂ = P/ω₂ =</span>
+        <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+      <div class="qrow" id="q6c"><span class="sc">c) L'éolienne utilise un MULTIPLICATEUR (l'inverse du réducteur) parce que la génératrice a besoin :</span>
+        <select id="s6c"><option>— choisir —</option><option>de tourner VITE (le rotor est lent et fort, elle veut de la vitesse)</option><option>de plus de couple</option><option>de tourner à l'envers</option></select></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
     <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
     <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
 
@@ -183,7 +219,7 @@
     </div>
   </div>
 
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice">🧮</button>
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
   <div id="calc" role="dialog" aria-label="Calculatrice">
     <div class="disp" id="calcDisp">0</div>
     <div class="keys">
@@ -287,6 +323,59 @@ var NODE='eval_grandeurs';
     g.fillText('ω = 1,5 rad/s',600,70);
     g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
     g.fillText('C = ?   P = ?',600,100);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX6 : éolienne + multiplicateur ============ */
+(function(){
+  var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  function step(){
+    T+=0.033;
+    g.clearRect(0,0,cv.width,cv.height);
+    // sol + mât
+    g.strokeStyle='#d9cfbb'; g.lineWidth=3; g.beginPath(); g.moveTo(30,214); g.lineTo(830,214); g.stroke();
+    g.strokeStyle='#5C544B'; g.lineWidth=7; g.beginPath(); g.moveTo(170,214); g.lineTo(170,96); g.stroke();
+    // rotor lent (ω=4 rad/s à l'échelle 0,25)
+    var a1=T*1.0;
+    g.save(); g.translate(170,92);
+    for(var i=0;i<3;i++){ g.rotate(Math.PI*2/3);
+      g.save(); g.rotate(a1*0); g.restore();
+    }
+    g.rotate(a1);
+    for(var k=0;k<3;k++){ g.rotate(Math.PI*2/3);
+      g.fillStyle='#eef3f6'; g.strokeStyle='#2E6A8E'; g.lineWidth=2.5;
+      g.beginPath(); g.ellipse(0,-42,9,40,0,0,7); g.fill(); g.stroke(); }
+    g.fillStyle='#5C544B'; g.beginPath(); g.arc(0,0,10,0,7); g.fill();
+    g.restore();
+    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('rotor : ω = 4 rad/s · C = 500 N·m',170,196);
+    // axe lent → multiplicateur
+    g.strokeStyle='#5C544B'; g.lineWidth=6; g.beginPath(); g.moveTo(232,92); g.lineTo(380,92); g.stroke();
+    // repère tournant lent sur l'axe
+    g.save(); g.translate(306,92); g.rotate(a1);
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.5; g.beginPath(); g.moveTo(0,-13); g.lineTo(0,13); g.stroke(); g.restore();
+    // multiplicateur
+    g.fillStyle='#f6f1e6'; g.strokeStyle='#BD8A2A'; g.lineWidth=3;
+    g.beginPath(); g.rect(380,56,150,72); g.fill(); g.stroke();
+    g.fillStyle='#8a6313'; g.font='800 14px "Bricolage Grotesque",sans-serif';
+    g.fillText('multiplicateur',455,86); g.fillText('× 25',455,108);
+    // axe rapide → génératrice
+    g.strokeStyle='#5C544B'; g.lineWidth=5; g.beginPath(); g.moveTo(530,92); g.lineTo(660,92); g.stroke();
+    var a2=T*6.5; // visuellement bien plus vite
+    g.save(); g.translate(595,92); g.rotate(a2);
+    g.strokeStyle='#C0492E'; g.lineWidth=3.5; g.beginPath(); g.moveTo(0,-11); g.lineTo(0,11); g.stroke(); g.restore();
+    g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('ω₂ = 100 rad/s · C₂ = ?',595,140);
+    // génératrice
+    g.fillStyle='#eef6f0'; g.strokeStyle='#3D7E5F'; g.lineWidth=3;
+    g.beginPath(); g.rect(660,58,140,68); g.fill(); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='800 14px "Bricolage Grotesque",sans-serif';
+    g.fillText('génératrice ⚡',730,88);
+    g.font='700 12px "JetBrains Mono",monospace'; g.fillText('P = ?',730,110);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('lent et fort → rapide et doux : la puissance, elle, se conserve',430,232);
   }
   setInterval(step,40); step();
 })();
@@ -419,21 +508,36 @@ el('submit').addEventListener('click',function(){
   var p4=(ok4a?1:0)+(ok4b?1:0);
   var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
   c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">ω_max = P/C = 150/2 = <b>75 rad/s</b>. Avec C = 4 N·m : ω_max = 150/4 = 37,5 rad/s, soit <b>divisée par 2</b>.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='P = C·ω exige ω en rad/s : il faut d\u2019abord convertir les tr/min');
+  var ok5b=Math.abs(numf(el('n5b').value)-628)<15;
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">P = C·ω veut ω en <b>rad/s</b> : ω = 2π×3000/60 ≈ 314 rad/s → P = 2×314 ≈ <b>628 W</b>, presque 10 fois moins que les « 6000 W » du stagiaire. La conversion d\u2019abord, TOUJOURS.</div>';
+  /* EX6 */
+  var ok6a=Math.abs(numf(el('n6a').value)-2000)<50;
+  var ok6b=Math.abs(numf(el('n6b').value)-20)<1;
+  var ok6c=(el('s6c').value==='de tourner VITE (le rotor est lent et fort, elle veut de la vitesse)');
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">P = 500×4 = <b>2000 W</b> · après ×25 : C₂ = 2000/100 = <b>20 N·m</b> (vitesse ×25 → couple ÷25, P conservée) · la génératrice veut de la <b>vitesse</b> : le multiplicateur troque le couple du rotor contre les tours dont elle a besoin. La balance C↔ω, en vrai, dans le paysage.</div>';
   /* total */
-  var score=p1+p2+p3+p4;
-  el('scoreBig').textContent=score+' / 10';
-  el('scoreSt').textContent = score>=8?'Tournée de maintenance parfaite !':(score>=5?'Bonne tournée — repasse voir les machines en rouge.':'L\u2019atelier te réclame pour une session de révision.');
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'Tournée de maintenance parfaite !':(score>=8?'Bonne tournée — repasse voir les machines en rouge.':'L\u2019atelier te réclame pour une session de révision.');
   el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
   document.querySelectorAll('select, .numin, #wSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:10, detail:[p1,p2,p3,p4], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
     el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
 /* ============ espace enseignant ============ */
-var EX_MAX=[3,3,2,2], EX_LAB=['Ex1 moteur','Ex2 grue','Ex3 défi','Ex4 variateur'];
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 moteur','Ex2 grue','Ex3 défi','Ex4 variateur','Ex5 erreur','Ex6 éolienne'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
 el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
@@ -441,16 +545,16 @@ function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
     var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<4) perQ[i]+=d; }); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 10</span>';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
     var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
-    for(var i=0;i<4;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
       pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||10)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
