@@ -73,6 +73,18 @@
   .stat b{color:var(--steel);font-size:18px}
   .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
   .barq>i{display:block;height:100%;background:var(--green)}
+  /* --- calculatrice flottante --- */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
@@ -84,7 +96,7 @@
 
   <div class="wrap">
     <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /10</div>
+      <div class="k">Évaluation · Première spé SI · /15</div>
       <h1>🕹️ La station de contrôle</h1>
       <p>Tu es l'opérateur de nuit de la station. Quatre pupitres t'attendent : un oscilloscope à décoder, une horloge à ausculter, un défi de lecture rapide et un variateur à régler. Chaque pupitre rapporte des points — bonne garde !</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
@@ -152,6 +164,44 @@
       <div class="corr" id="c4"></div>
     </section>
 
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2>
+      <p class="task">🕵️ Le stagiaire a mesuré un signal et note fièrement sur son rapport : « T = 2 ms, donc f = 2000 Hz ». Quelque chose cloche…</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 190" aria-label="Signal de période 2 ms et note erronée du stagiaire">
+          <g stroke="#2E6A8E" stroke-width="4" fill="none" stroke-linejoin="round">
+            <path d="M60 130 h50 v-70 h50 v70 h50 v-70 h50 v70 h50 v-70 h50 v70 h50"/>
+          </g>
+          <path d="M110 150 h100" stroke="#5C544B" stroke-width="2"/>
+          <path d="M110 144 v12 M210 144 v12" stroke="#5C544B" stroke-width="2"/>
+          <text x="160" y="176" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#5C544B">T = 2 ms</text>
+          <rect x="480" y="44" width="320" height="92" rx="14" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/>
+          <text x="640" y="82" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">« T = 2 ms</text>
+          <text x="640" y="110" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">donc f = 2000 Hz » ⚠</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q5a"><span class="sc">a) L'erreur du stagiaire :</span>
+        <select id="s5a"><option>— choisir —</option><option>il a oublié de convertir : f = 1/T avec T en SECONDES (0,002 s)</option><option>il a lu le mauvais axe</option><option>il n'y a pas d'erreur</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) La vraie fréquence : f = 1/0,002 =</span>
+        <input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> Le capteur de la chaîne de production <span class="pts">3 pts</span></h2>
+      <p class="task">🏭 Un capteur optique surveille le tapis : chaque pièce qui passe devant lui génère une impulsion. Regarde le chronogramme s'écrire en direct sur une fenêtre de 10 s.</p>
+      <div class="chrono"><canvas id="cv6" width="860" height="250" aria-label="Tapis de production et chronogramme du capteur en direct"></canvas></div>
+      <div class="qrow" id="q6a"><span class="sc">a) Nombre de pièces détectées sur la fenêtre de 10 s (compte les fronts MONTANTS) :</span>
+        <input class="numin" id="n6a" inputmode="numeric" placeholder="?"><span class="unit">pièces</span></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Cadence de production : 5 pièces / 10 s × 60 =</span>
+        <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">pièces/min</span></div>
+      <div class="qrow" id="q6c"><span class="sc">c) Pour COMPTER les pièces, le microcontrôleur détecte :</span>
+        <select id="s6c"><option>— choisir —</option><option>les fronts montants du signal</option><option>la couleur des pièces</option><option>le niveau 0 en continu</option></select></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
     <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
     <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
 
@@ -173,11 +223,52 @@
     </div>
   </div>
 
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=document.getElementById('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  document.getElementById('calcToggle').addEventListener('click',function(){ document.getElementById('calc').classList.toggle('show'); });
+  document.getElementById('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 var db=null;
 try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
@@ -251,6 +342,67 @@ var E1_SEGS=[[0,3,0],[3,7,1],[7,10,0],[10,16,1],[16,20,0]]; // fronts montants: 
     g.save(); g.translate(X(14),58); g.scale(beat,beat);
     g.fillStyle='#C0492E'; g.beginPath();
     g.moveTo(0,6); g.bezierCurveTo(-9,-4,-16,4,0,14); g.bezierCurveTo(16,4,9,-4,0,6); g.fill(); g.restore();
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX6 : capteur de chaîne de production ============ */
+(function(){
+  var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0;
+  var WIN=10, PER=2, PW=0.5; // fenêtre 10 s, une pièce toutes les 2 s, impulsion 0,5 s
+  function sig(t){ return (t%PER)<PW ? 1 : 0; }
+  function step(){
+    T+=0.033; var t=(T%12);
+    var tw=Math.min(WIN,t); // temps couvert par le tracé
+    g.clearRect(0,0,cv.width,cv.height);
+    // tapis + pièces + capteur
+    var beltY=56;
+    g.strokeStyle='#5C544B'; g.lineWidth=4; g.beginPath(); g.moveTo(50,beltY); g.lineTo(810,beltY); g.stroke();
+    // capteur fixe au milieu
+    var sx=430;
+    g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(sx-10,beltY-52); g.lineTo(sx+10,beltY-52); g.lineTo(sx,beltY-34); g.closePath(); g.fill();
+    g.fillStyle='#8A5A7A'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('capteur',sx,beltY-60);
+    // pièces : passent devant le capteur toutes les 2 s (vitesse 90 px/s, impulsion quand |x-sx|<22 → 44 px / 90 ≈ 0,5 s)
+    var v=90;
+    for(var k=-2;k<9;k++){
+      var px= sx + (k*PER - (t%PER) - 0)*v + (PW/2)*v;
+      var offset= sx + ((k*PER) - t)*v + (PW*v)/2;
+      var x= sx + (k*PER - t)*v + (PW*v)/2;
+      if(x>30 && x<830){
+        var over= Math.abs(x-sx)<(PW*v)/2;
+        g.fillStyle= over? '#fbeee9':'#eef3f6'; g.strokeStyle= over? '#C0492E':'#2E6A8E'; g.lineWidth=2.5;
+        g.beginPath(); g.rect(x-16,beltY-26,32,24); g.fill(); g.stroke();
+      }
+    }
+    // détection courante
+    var on=sig(t);
+    if(on&&t<WIN){ g.fillStyle='#C0492E'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+      g.fillText('● pièce détectée !',640,40); }
+    // chronogramme
+    var gx=70, gy0=210, gy1=140, gw=720;
+    g.strokeStyle='#e4dccb'; g.lineWidth=1.5;
+    for(var s2=0;s2<=WIN;s2++){ var xx=gx+gw*s2/WIN;
+      g.beginPath(); g.moveTo(xx,gy1-14); g.lineTo(xx,gy0+8); g.stroke();
+      g.fillStyle='#a89e8c'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(s2+' s',xx,gy0+22); }
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('1',gx-10,gy1+4); g.fillText('0',gx-10,gy0+4);
+    // tracé progressif
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.5; g.lineJoin='round'; g.beginPath();
+    var first=true;
+    for(var tt=0;tt<=tw;tt+=0.02){
+      var y= sig(tt)? gy1 : gy0;
+      var xx2=gx+gw*tt/WIN;
+      if(first){ g.moveTo(xx2,y); first=false; } else { g.lineTo(xx2,y); }
+    }
+    g.stroke();
+    // curseur
+    if(t<WIN){ var cx2=gx+gw*t/WIN;
+      g.strokeStyle='#BD8A2A'; g.lineWidth=2; g.setLineDash([4,4]);
+      g.beginPath(); g.moveTo(cx2,gy1-16); g.lineTo(cx2,gy0+8); g.stroke(); g.setLineDash([]); }
+    else { g.fillStyle='#3D7E5F'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+      g.fillText('fenêtre complète : à toi de compter les fronts ↗',gx,128); }
   }
   setInterval(step,40); step();
 })();
@@ -385,21 +537,36 @@ el('submit').addEventListener('click',function(){
   var p4=(ok4a?1:0)+(ok4b?1:0);
   var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
   c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">t\u2095 = 6 ms sur T = 8 ms → α = 6/8 = <b>75 %</b>. Plus α est grand, plus la puissance moyenne est grande : la LED éclaire <b>plus fort</b> qu\u2019à 25 %.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='il a oublié de convertir : f = 1/T avec T en SECONDES (0,002 s)');
+  var ok5b=Math.abs(numf(el('n5b').value)-500)<10;
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">f = 1/T exige T en <b>secondes</b> : f = 1/0,002 = <b>500 Hz</b>, pas 2000. Le piège classique des millisecondes — le stagiaire s\u2019en souviendra.</div>';
+  /* EX6 */
+  var ok6a=Math.abs(numf(el('n6a').value)-5)<0.5;
+  var ok6b=Math.abs(numf(el('n6b').value)-30)<1;
+  var ok6c=(el('s6c').value==='les fronts montants du signal');
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol"><b>5 fronts montants</b> = 5 pièces en 10 s → 0,5 pièce/s × 60 = <b>30 pièces/min</b>. Le µC compte les <b>fronts montants</b> : c\u2019est exactement ainsi que les usines comptent leur production.</div>';
   /* total */
-  var score=p1+p2+p3+p4;
-  el('scoreBig').textContent=score+' / 10';
-  el('scoreSt').textContent = score>=8?'Station parfaitement tenue !':(score>=5?'Bonne garde — quelques pupitres à revoir.':'La station a besoin d\u2019un nouvel entraînement.');
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'Station parfaitement tenue !':(score>=8?'Bonne garde — quelques pupitres à revoir.':'La station a besoin d\u2019un nouvel entraînement.');
   el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
   document.querySelectorAll('select, .numin, #aSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
-  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:10, detail:[p1,p2,p3,p4], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
     el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
   catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
   else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
 });
 
 /* ============ espace enseignant ============ */
-var EX_MAX=[3,3,2,2], EX_LAB=['Ex1 oscillo','Ex2 horloge','Ex3 défi','Ex4 PWM'];
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 oscillo','Ex2 horloge','Ex3 défi','Ex4 PWM','Ex5 erreur','Ex6 capteur'];
 el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
 el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
 el('refresh') && el('refresh').addEventListener('click',loadDash);
@@ -407,16 +574,16 @@ function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
     var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<4) perQ[i]+=d; }); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
     var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 10</span>';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
     var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
-    for(var i=0;i<4;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
       pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:110px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
     el('perQ').innerHTML=pq;
     var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||10)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
     if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
