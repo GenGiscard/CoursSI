@@ -76,19 +76,19 @@
       <section class="slide" id="s1">
         <div class="k">Cours · Première spé SI · Cinématique</div>
         <h1>Dérivées &amp; primitives :<br>le langage du mouvement</h1>
-        <p class="lede">Position x(t), vitesse v(t), accélération a(t) : trois courbes qui racontent LA MÊME histoire. Les maths de cette année — dériver, et bientôt intégrer — sont exactement l\u2019outil qui permet de passer de l\u2019une à l\u2019autre. Aujourd\u2019hui, les dérivées cessent d\u2019être abstraites.</p>
+        <p class="lede">Position x(t), vitesse v(t), accélération a(t) : trois courbes qui racontent LA MÊME histoire. Les maths de cette année — dériver, et bientôt intégrer — sont exactement l’outil qui permet de passer de l’une à l’autre. Aujourd’hui, les dérivées cessent d’être abstraites.</p>
         <div>
           <span class="tag">x(t) — où je suis (m)</span>
           <span class="tag">v(t) — à quelle allure (m/s)</span>
           <span class="tag">a(t) — comment ça change (m/s²)</span>
         </div>
-        <div class="hint">🚄 Tout le GPS de ton téléphone, tout l\u2019ordinateur de bord d\u2019un TGV, toute la balistique d\u2019un jeu vidéo : trois fonctions, deux dérivées.</div>
+        <div class="hint">🚄 Tout le GPS de ton téléphone, tout l’ordinateur de bord d’un TGV, toute la balistique d’un jeu vidéo : trois fonctions, deux dérivées.</div>
       </section>
 
       <section class="slide" id="s2">
         <div class="k">Slide 2 · Définition</div>
-        <h2>La vitesse, c\u2019est une pente</h2>
-        <p class="lede">La vitesse moyenne, tu la connais : Δx/Δt. La vitesse INSTANTANÉE, c\u2019est la même idée… avec un Δt qu\u2019on rétrécit jusqu\u2019à zéro. La sécante devient tangente : voilà la dérivée.</p>
+        <h2>La vitesse, c’est une pente</h2>
+        <p class="lede">La vitesse moyenne, tu la connais : Δx/Δt. La vitesse INSTANTANÉE, c’est la même idée… avec un Δt qu’on rétrécit jusqu’à zéro. La sécante devient tangente : voilà la dérivée.</p>
         <div class="big">v(t) = dx/dt = pente de la tangente à x(t)<small>« d » comme « différence devenue minuscule » : la dérivée est une vitesse de variation.</small></div>
         <div class="anim">
           <canvas id="cvSec" width="860" height="300" aria-label="Sécante qui devient tangente sur la courbe x de t"></canvas>
@@ -98,7 +98,7 @@
 
       <section class="slide" id="s3">
         <div class="k">Slide 3 · Construction</div>
-        <h2>Dériver x(t), c\u2019est fabriquer v(t)</h2>
+        <h2>Dériver x(t), c’est fabriquer v(t)</h2>
         <p class="lede">Fais glisser la tangente le long de x(t) et note sa pente à chaque instant : tu viens de tracer v(t). Là où x(t) grimpe fort, v est grande. Et au sommet de x(t)… la tangente est horizontale : v = 0.</p>
         <div class="anim">
           <canvas id="cvDer" width="860" height="360" aria-label="Construction de v(t) par la tangente glissante sur x(t)"></canvas>
@@ -109,8 +109,8 @@
 
       <section class="slide" id="s4">
         <div class="k">Slide 4 · Structure</div>
-        <h2>L\u2019escalier des dérivées</h2>
-        <p class="lede">On peut dériver encore : la pente de v(t), c\u2019est l\u2019accélération. Chaque marche descendue = une dérivation, et l\u2019unité gagne un « /s ».</p>
+        <h2>L’escalier des dérivées</h2>
+        <p class="lede">On peut dériver encore : la pente de v(t), c’est l’accélération. Chaque marche descendue = une dérivation, et l’unité gagne un « /s ».</p>
         <div class="anim">
           <svg viewBox="0 0 860 260" aria-label="Escalier position vitesse accélération relié par des dérivations">
             <g font-family="JetBrains Mono" font-weight="700">
@@ -138,7 +138,7 @@
             </g>
           </svg>
         </div>
-        <div class="big">a(t) = dv/dt = d²x/dt²<small>Deux dérivations d\u2019affilée : l\u2019accélération est la « dérivée seconde » de la position — d\u2019où le petit ² de m/s².</small></div>
+        <div class="big">a(t) = dv/dt = d²x/dt²<small>Deux dérivations d’affilée : l’accélération est la « dérivée seconde » de la position — d’où le petit ² de m/s².</small></div>
         <table class="units">
           <tr><th>grandeur</th><th>lecture graphique</th><th>unité</th></tr>
           <tr><td><b>x(t)</b></td><td>où est le mobile</td><td><b>m</b></td></tr>
@@ -150,7 +150,7 @@
       <section class="slide" id="s5">
         <div class="k">Slide 5 · Le cas roi</div>
         <h2>Le MRUA, vérifié à la tangente</h2>
-        <p class="lede">Accélération constante (démarrage de métro, chute libre, catapulte) : les formules que tu utilises depuis le début de l\u2019année SONT des dérivées l\u2019une de l\u2019autre. La preuve en image.</p>
+        <p class="lede">Accélération constante (démarrage de métro, chute libre, catapulte) : les formules que tu utilises depuis le début de l’année SONT des dérivées l’une de l’autre. La preuve en image.</p>
         <div class="big">x(t) = ½·a·t² + v₀·t + x₀   →   v(t) = a·t + v₀   →   a(t) = a<small>Dérive x(t) terme à terme (½·a·t² donne a·t, v₀·t donne v₀, x₀ donne 0) : tu retombes exactement sur v(t). Les formules du MRUA ne sont pas à apprendre séparément — la deuxième est la dérivée de la première.</small></div>
         <div class="anim">
           <canvas id="cvMru" width="860" height="330" aria-label="Parabole x(t) et droite v(t) : la pente de la première égale la valeur de la seconde"></canvas>
@@ -160,19 +160,19 @@
 
       <section class="slide" id="s6">
         <div class="k">Slide 6 · Le chemin inverse</div>
-        <h2>Intégrer : remonter l\u2019escalier</h2>
-        <p class="lede">Et si on connaît v(t) et qu\u2019on veut la distance ? On fait le chemin INVERSE de la dérivation : chercher la primitive. Graphiquement, c\u2019est limpide : <b>la distance parcourue, c\u2019est l\u2019aire sous la courbe v(t)</b>.</p>
+        <h2>Intégrer : remonter l’escalier</h2>
+        <p class="lede">Et si on connaît v(t) et qu’on veut la distance ? On fait le chemin INVERSE de la dérivation : chercher la primitive. Graphiquement, c’est limpide : <b>la distance parcourue, c’est l’aire sous la courbe v(t)</b>.</p>
         <div class="anim">
           <canvas id="cvAire" width="860" height="320" aria-label="Aire sous la courbe de vitesse égale distance parcourue"></canvas>
           <div class="ctrl"><button id="airPrev">◀</button><button id="airNext">▶</button><div class="leg" id="airLeg"></div></div>
         </div>
-        <div class="hint">⚠️ En remontant, il manque toujours une information : la constante (position de départ x₀, vitesse initiale v₀). La dérivée les avait effacées — c\u2019est à toi de les remettre avec les conditions initiales.</div>
+        <div class="hint">⚠️ En remontant, il manque toujours une information : la constante (position de départ x₀, vitesse initiale v₀). La dérivée les avait effacées — c’est à toi de les remettre avec les conditions initiales.</div>
       </section>
 
       <section class="slide" id="s7">
         <div class="k">Slide 7 · Lecture experte</div>
-        <h2>Le trio synchronisé de l\u2019ascenseur</h2>
-        <p class="lede">Un ascenseur démarre (a = +1 m/s² pendant 2 s), croise en palier (4 s à 2 m/s), puis freine (a = −1 m/s² pendant 2 s). Regarde les trois courbes se construire l\u2019une à partir de l\u2019autre — puis le curseur les lire ENSEMBLE.</p>
+        <h2>Le trio synchronisé de l’ascenseur</h2>
+        <p class="lede">Un ascenseur démarre (a = +1 m/s² pendant 2 s), croise en palier (4 s à 2 m/s), puis freine (a = −1 m/s² pendant 2 s). Regarde les trois courbes se construire l’une à partir de l’autre — puis le curseur les lire ENSEMBLE.</p>
         <div class="anim">
           <canvas id="cvTrio" width="860" height="430" aria-label="Courbes synchronisées accélération, vitesse, position de l'ascenseur"></canvas>
           <div class="ctrl"><button id="triPrev">◀</button><button id="triNext">▶</button><div class="leg" id="triLeg"></div></div>
@@ -182,15 +182,15 @@
       <section class="slide" id="s8">
         <div class="k">Slide 8 · Synthèse</div>
         <h2>À retenir</h2>
-        <div class="big">x(t)  ⇄  v(t)  ⇄  a(t)<small>Vers la droite : DÉRIVER (prendre la pente). Vers la gauche : INTÉGRER (prendre l\u2019aire, puis ajouter la condition initiale).</small></div>
+        <div class="big">x(t)  ⇄  v(t)  ⇄  a(t)<small>Vers la droite : DÉRIVER (prendre la pente). Vers la gauche : INTÉGRER (prendre l’aire, puis ajouter la condition initiale).</small></div>
         <div class="cols c3">
           <div class="panel"><h3>📐 Réflexe pente</h3><p>v est la pente de x, a est la pente de v. Courbe qui monte → dérivée positive ; qui descend → négative.</p></div>
-          <div class="panel"><h3>⛰️ Réflexe sommet</h3><p>Extremum de x(t) → v = 0. Extremum de v(t) → a = 0. La tangente horizontale trahit toujours l\u2019instant clé.</p></div>
-          <div class="panel"><h3>📊 Réflexe aire</h3><p>La distance parcourue = aire sous v(t). Rectangle si v constante, triangle si MRUA depuis l\u2019arrêt, trapèze sinon.</p></div>
+          <div class="panel"><h3>⛰️ Réflexe sommet</h3><p>Extremum de x(t) → v = 0. Extremum de v(t) → a = 0. La tangente horizontale trahit toujours l’instant clé.</p></div>
+          <div class="panel"><h3>📊 Réflexe aire</h3><p>La distance parcourue = aire sous v(t). Rectangle si v constante, triangle si MRUA depuis l’arrêt, trapèze sinon.</p></div>
         </div>
         <div class="cols c2" style="margin-top:14px">
-          <div class="panel"><h3>Unités, toujours</h3><p>m → m/s → m/s² : chaque dérivation ajoute un « /s ». Une réponse à l\u2019unité fausse est une réponse fausse.</p></div>
-          <div class="panel"><h3>La suite</h3><p>Au TP : radars, drones et une rampe à régler au simulateur. À l\u2019évaluation : le centre d\u2019analyse du mouvement t\u2019attend.</p></div>
+          <div class="panel"><h3>Unités, toujours</h3><p>m → m/s → m/s² : chaque dérivation ajoute un « /s ». Une réponse à l’unité fausse est une réponse fausse.</p></div>
+          <div class="panel"><h3>La suite</h3><p>Au TP : radars, drones et une rampe à régler au simulateur. À l’évaluation : le centre d’analyse du mouvement t’attend.</p></div>
         </div>
       </section>
 
@@ -319,12 +319,13 @@ function axes(g,x0,y0,w,h,xl,yl){
     g.strokeStyle='#2E6A8E'; g.lineWidth=3.2; g.beginPath();
     for(var k=0;k<=120;k++){ var tt=T*k/120; if(k===0)g.moveTo(pxu(tt),py1(f(tt))); else g.lineTo(pxu(tt),py1(f(tt))); }
     g.stroke();
-    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('x(t)',X0+8,Y1-H1+4);
+    g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('x(t)',X0+W-56,Y1-H1+16);
   }
   function bottomAxis(g){
     g.strokeStyle='#5C544B'; g.lineWidth=2;
     g.beginPath(); g.moveTo(X0,Y2-H2/2-8); g.lineTo(X0,Y2+H2/2); g.moveTo(X0,Y2); g.lineTo(X0+W,Y2); g.stroke();
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('v(t)  (0 au milieu)',X0+8,Y2-H2/2+6);
+    g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('v(t) en m/s',X0+W-120,Y2-H2/2+8);
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.fillText('0',X0-14,Y2+4);
   }
   function tangAt(g,tc){
     var m=fp(tc), xA=pxu(tc), yA=py1(f(tc));
