@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TP — Dérivées &amp; primitives en mécanique · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#e9eef6,#e0e7f0);border:1px solid var(--line);border-radius:18px;padding:22px 24px;margin-bottom:22px}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:var(--steel);text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  h2{font-size:22px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  .lede{color:var(--sub);max-width:66ch}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .schema{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .schema svg,.schema canvas{width:100%;height:auto;display:block;max-width:640px;margin:0 auto}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--steel)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--steel);min-width:110px;text-align:right}
+  .match{display:grid;gap:10px;margin-top:6px}
+  .match .m{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+  .match .m .sc{flex:1;min-width:220px;font-size:15px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .match .m.ok{border-color:var(--green);background:#eef6f0} .match .m.no{border-color:var(--copper);background:#fbeee9}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn.g{background:none;color:var(--sub);border:1px solid var(--line)} .btn.g:hover{color:var(--ink)} .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .exo-fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:18px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
+  .exo-sol.show{display:block}
+  .formula{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;background:#faf6ec;border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:8px;padding:10px 14px;margin:10px 0}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">TP — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">TP · Première spé SI · Dérivées &amp; primitives</div>
+      <h1>La pente, le sommet et l’aire</h1>
+      <p class="lede">Radar tronçon, métro à garer au millimètre, balle au sommet de sa trajectoire, tram à mesurer à l’aire : sept situations où dériver et intégrer ne sont plus des exercices de maths mais des outils d’ingénieur. La calculatrice t’attend en bas à droite.</p>
+    </div>
+
+    <section class="exo-card" id="a">
+      <h2><span class="num">A</span> Le radar tronçon 📸</h2>
+      <p class="task">🎯 Sur l’autoroute, un tronçon de 3000 m est chronométré : une voiture le parcourt en 90 s.</p>
+      <div class="row"><span>a) Vitesse moyenne : v = Δx/Δt = 3000/90 ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) En km/h : 33,3 × 3,6 =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">km/h</span></div>
+      <div class="match" id="aMatch"></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="aFb"></div>
+      <div class="exo-sol" id="aSol"><b>a)</b> 3000/90 ≈ <b>33,3 m/s</b>. <b>b)</b> ≈ <b>120 km/h</b>.<br><b>c)</b> Le radar tronçon calcule Δx/Δt : une vitesse <b>MOYENNE</b> — c’est la sécante du cours. Une pointe brève à 150 peut lui échapper si le reste compense… mais pas au radar classique, qui mesure la vitesse <b>instantanée</b> (la tangente !).</div>
+    </section>
+
+    <section class="exo-card" id="b">
+      <h2><span class="num">B</span> La pente sur le graphe 📐</h2>
+      <p class="task">🎯 Voici la position x(t) d’un chariot d’atelier. Trois segments de droite = trois vitesses constantes à lire À LA PENTE.</p>
+      <div class="schema">
+        <svg viewBox="0 0 640 250" aria-label="Graphe x(t) en trois segments : montée, palier, descente">
+          <g stroke="#5C544B" stroke-width="2">
+            <path d="M70 210 v-180 M70 210 h540"/>
+          </g>
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
+            <text x="76" y="42">x (m)</text>
+            <text x="590" y="230">t (s)</text>
+            <text x="56" y="215">0</text>
+            <text x="46" y="78">20</text>
+            <text x="52" y="160">8</text>
+            <text x="266" y="230">4</text>
+            <text x="366" y="230">6</text>
+            <text x="566" y="230">10</text>
+          </g>
+          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4">
+            <path d="M70 74 h500 M270 74 v136 M370 74 v136 M570 154 v56"/>
+          </g>
+          <g stroke-width="4" fill="none" stroke-linejoin="round">
+            <path d="M70 210 L270 74" stroke="#3D7E5F"/>
+            <path d="M270 74 L370 74" stroke="#BD8A2A"/>
+            <path d="M370 74 L570 154" stroke="#C0492E"/>
+          </g>
+          <g font-family="JetBrains Mono" font-size="12" font-weight="700">
+            <text x="120" y="130" fill="#3D7E5F">segment ①</text>
+            <text x="284" y="60" fill="#8a6313">segment ②</text>
+            <text x="440" y="100" fill="#C0492E">segment ③</text>
+          </g>
+        </svg>
+      </div>
+      <div class="row"><span>a) Segment ① (de x=0 à x=20 m en 4 s) : v = 20/4 =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) Segment ② (palier) : v =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="match" id="bMatch"></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="bFb"></div>
+      <div class="exo-sol" id="bSol"><b>a)</b> pente = (20−0)/(4−0) = <b>5 m/s</b>. <b>b)</b> palier horizontal : <b>0 m/s</b>, le chariot est à l’arrêt.<br><b>c)</b> Segment ③ : x DESCEND de 20 à 8 m → pente (8−20)/(10−6) = <b>−3 m/s</b> : vitesse négative, le chariot <b>recule</b>. La dérivée a un signe, et ce signe raconte le sens du mouvement.</div>
+    </section>
+
+    <section class="exo-card" id="c">
+      <h2><span class="num">C</span> ⭐ L’architecte du freinage</h2>
+      <p class="task">🎯 Mission : le métro entre en station à v₀ = 16 m/s et doit s’arrêter <b>pile au bout du quai de 64 m</b> (heurtoir juste derrière !). Distance d’arrêt : d = v₀²/(2a). <b>Règle la décélération a</b>, regarde la rame rejouer son freinage… et l’aire du triangle se remplir.</p>
+      <div class="schema">
+        <canvas id="cvFrein" width="640" height="300" aria-label="Métro qui freine le long du quai avec courbe de vitesse et aire"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">a =</span>
+          <input type="range" id="aSlider" min="0.5" max="4" step="0.25" value="1">
+          <span class="val" id="aVal">1,00 m/s²</span>
+        </div>
+      </div>
+      <div class="row"><span>a) Décélération pour 64 m pile : a = 256/(2×64) =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="row"><span>b) Durée du freinage : t = v₀/a = 16/2 =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
+      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="cFb"></div>
+      <div class="exo-sol" id="cSol"><b>a)</b> d = v₀²/(2a) → a = 256/128 = <b>2 m/s²</b>.<br><b>b)</b> t = 16/2 = <b>8 s</b>. Et regarde le triangle : aire = ½ × 8 × 16 = <b>64 m</b> — la distance d’arrêt EST l’aire sous v(t). Trop mou → 💥 heurtoir ; trop fort → les passagers valdinguent. Le bon freinage est une primitive bien choisie.</div>
+    </section>
+
+    <section class="exo-card" id="d">
+      <h2><span class="num">D</span> Dériver les formules ✍️</h2>
+      <p class="task">🎯 Un chariot suit la loi horaire ci-dessous (x en m, t en s). Dérive terme à terme, comme en maths.</p>
+      <div class="formula">x(t) = 5t² + 3t + 2</div>
+      <div class="row"><span>a) v(t) = 10t + 3 → à t = 2 s : v(2) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) a(t) = dérivée de 10t + 3 =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="match" id="dMatch"></div>
+      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="dFb"></div>
+      <div class="exo-sol" id="dSol"><b>a)</b> v(t) = 10t + 3 → v(2) = <b>23 m/s</b>. <b>b)</b> a = <b>10 m/s²</b>, constante : c’est un MRUA.<br><b>c)</b> Le « + 2 » (position initiale) a <b>disparu</b> en dérivant : une constante a une pente nulle. C’est exactement pour ça qu’en intégrant, il faudra la remettre (exercice ★).</div>
+    </section>
+
+    <section class="exo-card" id="e">
+      <h2><span class="num">E</span> Le sommet de la balle 🏐</h2>
+      <p class="task">🎯 Une balle est lancée verticalement : h(t) = 30t − 5t² (h en m). Sa vitesse : v(t) = 30 − 10t.</p>
+      <div class="row"><span>a) Au sommet, v = 0 : 30 − 10t = 0 → t =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
+      <div class="row"><span>b) Hauteur maximale : h(3) = 90 − 45 =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="match" id="eMatch"></div>
+      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="eFb"></div>
+      <div class="exo-sol" id="eSol"><b>a)</b> t = <b>3 s</b>. <b>b)</b> h_max = <b>45 m</b>.<br><b>c)</b> Au sommet la VITESSE est nulle… mais pas l’accélération : la pesanteur tire toujours (a = −10 m/s², c’est d’ailleurs elle, la dérivée de v). Réflexe sommet du cours : <b>extremum de h ⇔ v = 0</b>, et c’est ainsi qu’on trouve tous les maximums en SI.</div>
+    </section>
+
+    <section class="exo-card" id="f">
+      <h2><span class="num">F</span> L’aire du trapèze 🚋</h2>
+      <p class="task">🎯 Le tram de la ligne 1 : il accélère de 0 à 10 m/s en 5 s, roule 10 s en palier, puis freine en 5 s. Voici v(t) — la distance se lit À L’AIRE.</p>
+      <div class="schema">
+        <svg viewBox="0 0 640 240" aria-label="Courbe de vitesse en trapèze du tram">
+          <g stroke="#5C544B" stroke-width="2"><path d="M70 200 v-160 M70 200 h540"/></g>
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
+            <text x="76" y="52">v (m/s)</text>
+            <text x="592" y="220">t (s)</text>
+            <text x="40" y="105">10</text>
+            <text x="190" y="220">5</text>
+            <text x="440" y="220">15</text>
+            <text x="562" y="220">20</text>
+          </g>
+          <path d="M70 200 L195 100 L445 100 L570 200 Z" fill="rgba(46,106,142,.16)" stroke="none"/>
+          <path d="M70 200 L195 100 L445 100 L570 200" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
+          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4"><path d="M195 100 v100 M445 100 v100"/></g>
+          <g font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#2E6A8E">
+            <text x="105" y="180">△ montée</text>
+            <text x="280" y="160">▭ palier</text>
+            <text x="465" y="180">△ freinage</text>
+          </g>
+        </svg>
+      </div>
+      <div class="row"><span>a) Aire de la montée : ½ × 5 × 10 =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><span>b) Distance totale (montée + palier + freinage) : 25 + 100 + 25 =</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="fFb"></div>
+      <div class="exo-sol" id="fSol"><b>a)</b> ½ × 5 × 10 = <b>25 m</b>. <b>b)</b> palier = 10 × 10 = 100 m → total = <b>150 m</b> : l’aire du trapèze, ½(20+10)×10, donne la même chose d’un coup. Intégrer graphiquement = découper en rectangles et triangles. La géométrie de collège au service du tram.</div>
+    </section>
+
+    <section class="exo-card" id="g">
+      <h2><span class="num">★</span> La constante perdue 🔍</h2>
+      <p class="task">Un robot roule à v = 4 m/s, constante, depuis dix secondes. Question piège : OÙ est-il à t = 10 s ?</p>
+      <div class="match" id="gMatch"></div>
+      <div class="row"><span>b) Si on t’apprend que x₀ = 15 m : x(10) = 15 + 4 × 10 =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
+      <div class="exo-fb" id="gFb"></div>
+      <div class="exo-sol" id="gSol"><b>a)</b> <b>Impossible sans x₀</b> : la vitesse dit comment la position CHANGE, pas d’où elle part. C’est la constante que la dérivée avait effacée (exercice D !) — en intégrant, elle réapparaît sous forme d’inconnue.<br><b>b)</b> Avec x₀ = 15 m : x(10) = <b>55 m</b>. Primitive + condition initiale = trajectoire complète. C’est la routine quotidienne des GPS et des centrales inertielles.</div>
+    </section>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ---------- architecte du freinage (C) ---------- */
+var aDec=1;
+(function(){
+  var cv=el('cvFrein'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var V0=16, QUAI=64, T=0;
+  el('aSlider').addEventListener('input',function(){ aDec=+this.value;
+    el('aVal').textContent=String(aDec.toFixed(2)).replace('.',',')+' m/s²'; T=0; });
+  function step(){
+    T+=0.033;
+    var tStop=V0/aDec, dStop=V0*V0/(2*aDec);
+    var cyc=tStop+1.4, tc=(T*2.2)%cyc, tt=Math.min(tc,tStop);
+    var xm=V0*tt-0.5*aDec*tt*tt;
+    var vm=Math.max(0,V0-aDec*tt);
+    g.clearRect(0,0,cv.width,cv.height);
+    /* --- vue du quai (0..90 m) --- */
+    var X0=30, SC=(640-60)/90;
+    g.strokeStyle='#5C544B'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(X0,96); g.lineTo(X0+90*SC,96); g.stroke();
+    // quai 0..64
+    g.fillStyle='#efe8d8'; g.fillRect(X0,96,QUAI*SC,10);
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('0 m',X0,122); g.fillText('64 m — bout du quai',X0+QUAI*SC,122);
+    // heurtoir
+    g.fillStyle='#C0492E'; g.fillRect(X0+(QUAI+2)*SC-3,66,6,30);
+    // repère cible
+    g.strokeStyle='#C0492E'; g.lineWidth=2; g.setLineDash([4,4]);
+    g.beginPath(); g.moveTo(X0+QUAI*SC,60); g.lineTo(X0+QUAI*SC,96); g.stroke(); g.setLineDash([]);
+    // rame
+    var xr=Math.min(xm,88);
+    g.fillStyle='#e7eef2'; g.strokeStyle='#2E6A8E'; g.lineWidth=2.5;
+    g.beginPath(); g.rect(X0+xr*SC-46,66,46,24); g.fill(); g.stroke();
+    g.fillStyle='#2E6A8E'; g.beginPath(); g.arc(X0+xr*SC-34,94,5,0,7); g.fill(); g.beginPath(); g.arc(X0+xr*SC-12,94,5,0,7); g.fill();
+    // verdict
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    if(dStop>QUAI+1){ g.fillStyle='#C0492E'; g.fillText('💥 '+String(dStop.toFixed(1)).replace('.',',')+' m : heurtoir percuté !',360,36); }
+    else if(dStop<QUAI-1){ g.fillStyle='#BD8A2A'; g.fillText(String(dStop.toFixed(1)).replace('.',',')+' m : arrêt trop brutal, trop court',330,36); }
+    else { g.fillStyle='#3D7E5F'; g.fillText('🎯 64 m pile : arrêt parfait au quai !',360,36); }
+    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('d = 16²/(2×'+String(aDec.toFixed(2)).replace('.',',')+') = '+String(dStop.toFixed(1)).replace('.',',')+' m',30,36);
+    /* --- courbe v(t) + aire --- */
+    var gx=70, gy=272, gw=420, gh=110, tMax=10;
+    g.strokeStyle='#5C544B'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(gx,gy-gh); g.lineTo(gx,gy); g.lineTo(gx+gw,gy); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('v (m/s)',gx+6,gy-gh+12); g.textAlign='right'; g.fillText('t (s)',gx+gw,gy+16); g.textAlign='left';
+    g.fillText('16',gx-24,gy-16*(gh/18)+4);
+    function PX(t2){ return gx+t2/tMax*gw; }
+    function PY(v2){ return gy-v2*(gh/18); }
+    // aire remplie jusqu'à tt
+    g.fillStyle='rgba(46,106,142,.20)';
+    g.beginPath(); g.moveTo(PX(0),PY(V0));
+    for(var k=0;k<=60;k++){ var t2=tt*k/60; g.lineTo(PX(t2),PY(Math.max(0,V0-aDec*t2))); }
+    g.lineTo(PX(tt),gy); g.lineTo(PX(0),gy); g.closePath(); g.fill();
+    // droite v(t)
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(PX(0),PY(V0)); g.lineTo(PX(Math.min(tStop,tMax)),PY(Math.max(0,V0-aDec*Math.min(tStop,tMax)))); g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('aire = distance = '+String((V0*tt-0.5*aDec*tt*tt).toFixed(1)).replace('.',',')+' m',gx+150,gy-gh+14);
+    g.fillText('t arrêt = '+String(tStop.toFixed(1)).replace('.',',')+' s',520,gy-40);
+  }
+  setInterval(step,40); step();
+})();
+
+/* helpers */
+function buildMatch(boxId, prefix, scen){
+  var box=el(boxId);
+  scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
+    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+    box.appendChild(d); });
+}
+function checkMatch(prefix, scen){
+  var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
+    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+  return all;
+}
+function lockExo(checkBtn, showBtn, solId, fbId, validator){
+  el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
+  el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
+}
+
+/* A */
+var A_SCEN=[
+  {sc:'c) 🚗 Le radar tronçon mesure la vitesse…', ok:'MOYENNE (Δx/Δt) : une pointe brève peut lui échapper', opts:['— choisir —','MOYENNE (Δx/Δt) : une pointe brève peut lui échapper','instantanée à chaque milliseconde','du véhicule le plus lent']}
+];
+buildMatch('aMatch','a',A_SCEN);
+lockExo('aCheck','aShow','aSol','aFb',function(){
+  var a=numf(el('aA').value), b=numf(el('aB').value);
+  var okA=Math.abs(a-33.3)<0.6, okB=Math.abs(b-120)<2, okM=checkMatch('a',A_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ 120 km/h de moyenne : la sécante du cours, en vrai sur l\u2019A31.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (Δx/Δt)')+' '+(okB?'b✓':'b✗ (×3,6)')+' '+(okM?'c✓':'c✗')};
+});
+
+/* B */
+var B_SCEN=[
+  {sc:'c) ➡️ Segment ③ : x descend de 20 à 8 m entre 6 et 10 s. Donc v = −3 m/s, ce qui signifie…', ok:'le chariot RECULE : vitesse négative = sens inverse', opts:['— choisir —','le chariot RECULE : vitesse négative = sens inverse','le chariot accélère très fort','le graphique est faux']}
+];
+buildMatch('bMatch','b',B_SCEN);
+lockExo('bCheck','bShow','bSol','bFb',function(){
+  var a=numf(el('bA').value), b=numf(el('bB').value);
+  var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-0)<0.3, okM=checkMatch('b',B_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ 5, 0, −3 : trois pentes, trois vies du chariot.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (Δx/Δt)')+' '+(okB?'b✓':'b✗ (palier !)')+' '+(okM?'c✓':'c✗')};
+});
+
+/* C */
+lockExo('cCheck','cShow','cSol','cFb',function(){
+  var a=numf(el('cA').value), b=numf(el('cB').value);
+  var okA=Math.abs(a-2)<0.15, okB=Math.abs(b-8)<0.4;
+  if(okA&&okB) return {ok:true,msg:'✓ a = 2 m/s², 8 s de freinage : la RATP t\u2019embauche.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (cherche le 🎯 au simulateur !)')+' '+(okB?'b✓':'b✗ (v\u2080/a)')};
+});
+
+/* D */
+var D_SCEN=[
+  {sc:'c) 🫥 En dérivant x(t) = 5t² + 3t + 2, le « + 2 » a…', ok:'disparu : une constante a une pente nulle', opts:['— choisir —','disparu : une constante a une pente nulle','doublé','changé de signe']}
+];
+buildMatch('dMatch','d',D_SCEN);
+lockExo('dCheck','dShow','dSol','dFb',function(){
+  var a=numf(el('dA').value), b=numf(el('dB').value);
+  var okA=Math.abs(a-23)<0.5, okB=Math.abs(b-10)<0.5, okM=checkMatch('d',D_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ 23 m/s, 10 m/s² : dérivation terme à terme maîtrisée.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (10×2+3)')+' '+(okB?'b✓':'b✗ (pente de 10t+3)')+' '+(okM?'c✓':'c✗')};
+});
+
+/* E */
+var E_SCEN=[
+  {sc:'c) ⛰️ Au sommet de la trajectoire…', ok:'v = 0 mais a ≠ 0 : la pesanteur tire toujours', opts:['— choisir —','v = 0 mais a ≠ 0 : la pesanteur tire toujours','v et a sont nulles toutes les deux','la balle flotte une seconde']}
+];
+buildMatch('eMatch','e',E_SCEN);
+lockExo('eCheck','eShow','eSol','eFb',function(){
+  var a=numf(el('eA').value), b=numf(el('eB').value);
+  var okA=Math.abs(a-3)<0.2, okB=Math.abs(b-45)<1, okM=checkMatch('e',E_SCEN);
+  if(okA&&okB&&okM) return {ok:true,msg:'✓ Sommet à 3 s et 45 m, trouvé en annulant la dérivée. Comme un pro.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (résous 30−10t = 0)')+' '+(okB?'b✓':'b✗ (30×3−5×9)')+' '+(okM?'c✓':'c✗')};
+});
+
+/* F */
+lockExo('fCheck','fShow','fSol','fFb',function(){
+  var a=numf(el('fA').value), b=numf(el('fB').value);
+  var okA=Math.abs(a-25)<1, okB=Math.abs(b-150)<3;
+  if(okA&&okB) return {ok:true,msg:'✓ 150 m d\u2019arrêt à arrêt : mesurés sans chronomètre, juste à l\u2019aire.'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (demi-base × hauteur)')+' '+(okB?'b✓':'b✗ (palier = 10 s × 10 m/s)')};
+});
+
+/* G */
+var G_SCEN=[
+  {sc:'a) 🤷 Avec v = 4 m/s (constante) et RIEN d\u2019autre, x(10) vaut…', ok:'impossible à dire : il manque la position initiale x\u2080', opts:['— choisir —','impossible à dire : il manque la position initiale x\u2080','forcément 40 m','forcément 0 m']}
+];
+buildMatch('gMatch','g',G_SCEN);
+lockExo('gCheck','gShow','gSol','gFb',function(){
+  var okM=checkMatch('g',G_SCEN);
+  var b=numf(el('gB').value); var okB=Math.abs(b-55)<1;
+  if(okM&&okB) return {ok:true,msg:'✓ Primitive + condition initiale = position complète. La boucle est bouclée.'};
+  return {ok:false,msg:'✗ '+(okM?'a✓':'a✗ (que sait-on du point de départ ?)')+' '+(okB?'b✓':'b✗ (x\u2080 + v·t)')};
+});
+</script>
+</body>
+</html>
