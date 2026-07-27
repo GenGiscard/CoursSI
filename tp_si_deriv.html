@@ -47,6 +47,11 @@
   .exo-sol{display:none;margin-top:12px;background:#F1F5F1;border:1px solid #cfe0d3;border-radius:10px;padding:12px 15px;font-size:15px}
   .exo-sol.show{display:block}
   .formula{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;background:#faf6ec;border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:8px;padding:10px 14px;margin:10px 0}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
   /* calculatrice */
   #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
   #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
@@ -78,10 +83,11 @@
     <section class="exo-card" id="a">
       <h2><span class="num">A</span> Le radar tronçon 📸</h2>
       <p class="task">🎯 Sur l’autoroute, un tronçon de 3000 m est chronométré : une voiture le parcourt en 90 s.</p>
-      <div class="row"><span>a) Vitesse moyenne : v = Δx/Δt = 3000/90 ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) En km/h : 33,3 × 3,6 =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">km/h</span></div>
+      <div class="row"><span>a) Vitesse moyenne de la voiture sur le tronçon : v ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) Cette vitesse, convertie en km/h :</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">km/h</span></div>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>a)</b> 3000/90 ≈ <b>33,3 m/s</b>. <b>b)</b> ≈ <b>120 km/h</b>.<br><b>c)</b> Le radar tronçon calcule Δx/Δt : une vitesse <b>MOYENNE</b> — c’est la sécante du cours. Une pointe brève à 150 peut lui échapper si le reste compense… mais pas au radar classique, qui mesure la vitesse <b>instantanée</b> (la tangente !).</div>
     </section>
@@ -119,10 +125,11 @@
           </g>
         </svg>
       </div>
-      <div class="row"><span>a) Segment ① (de x=0 à x=20 m en 4 s) : v = 20/4 =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) Segment ② (palier) : v =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>a) Vitesse du chariot sur le segment ① : v =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) Vitesse sur le segment ② : v =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> pente = (20−0)/(4−0) = <b>5 m/s</b>. <b>b)</b> palier horizontal : <b>0 m/s</b>, le chariot est à l’arrêt.<br><b>c)</b> Segment ③ : x DESCEND de 20 à 8 m → pente (8−20)/(10−6) = <b>−3 m/s</b> : vitesse négative, le chariot <b>recule</b>. La dérivée a un signe, et ce signe raconte le sens du mouvement.</div>
     </section>
@@ -138,8 +145,8 @@
           <span class="val" id="aVal">1,00 m/s²</span>
         </div>
       </div>
-      <div class="row"><span>a) Décélération pour 64 m pile : a = 256/(2×64) =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
-      <div class="row"><span>b) Durée du freinage : t = v₀/a = 16/2 =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
+      <div class="row"><span>a) Décélération nécessaire pour s’arrêter à 64 m pile : a =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="row"><span>b) Durée de ce freinage : t =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="cFb"></div>
       <div class="exo-sol" id="cSol"><b>a)</b> d = v₀²/(2a) → a = 256/128 = <b>2 m/s²</b>.<br><b>b)</b> t = 16/2 = <b>8 s</b>. Et regarde le triangle : aire = ½ × 8 × 16 = <b>64 m</b> — la distance d’arrêt EST l’aire sous v(t). Trop mou → 💥 heurtoir ; trop fort → les passagers valdinguent. Le bon freinage est une primitive bien choisie.</div>
@@ -149,8 +156,8 @@
       <h2><span class="num">D</span> Dériver les formules ✍️</h2>
       <p class="task">🎯 Un chariot suit la loi horaire ci-dessous (x en m, t en s). Dérive terme à terme, comme en maths.</p>
       <div class="formula">x(t) = 5t² + 3t + 2</div>
-      <div class="row"><span>a) v(t) = 10t + 3 → à t = 2 s : v(2) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) a(t) = dérivée de 10t + 3 =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="row"><span>a) Dérive x(t) pour obtenir v(t), puis calcule v(2) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="row"><span>b) Dérive encore : a =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
       <div class="match" id="dMatch"></div>
       <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="dFb"></div>
@@ -159,9 +166,9 @@
 
     <section class="exo-card" id="e">
       <h2><span class="num">E</span> Le sommet de la balle 🏐</h2>
-      <p class="task">🎯 Une balle est lancée verticalement : h(t) = 30t − 5t² (h en m). Sa vitesse : v(t) = 30 − 10t.</p>
-      <div class="row"><span>a) Au sommet, v = 0 : 30 − 10t = 0 → t =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
-      <div class="row"><span>b) Hauteur maximale : h(3) = 90 − 45 =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <p class="task">🎯 Une balle est lancée verticalement : h(t) = 30t − 5t² (h en m, t en s). À toi de dériver.</p>
+      <div class="row"><span>a) Dérive h(t), puis trouve l’instant du sommet (v = 0) : t =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
+      <div class="row"><span>b) Hauteur maximale atteinte : h_max =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
       <div class="match" id="eMatch"></div>
       <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="eFb"></div>
@@ -192,8 +199,8 @@
           </g>
         </svg>
       </div>
-      <div class="row"><span>a) Aire de la montée : ½ × 5 × 10 =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="row"><span>b) Distance totale (montée + palier + freinage) : 25 + 100 + 25 =</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><span>a) Distance parcourue pendant la montée (0 → 5 s) :</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><span>b) Distance totale du trajet, d’arrêt à arrêt :</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
       <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="fFb"></div>
       <div class="exo-sol" id="fSol"><b>a)</b> ½ × 5 × 10 = <b>25 m</b>. <b>b)</b> palier = 10 × 10 = 100 m → total = <b>150 m</b> : l’aire du trapèze, ½(20+10)×10, donne la même chose d’un coup. Intégrer graphiquement = découper en rectangles et triangles. La géométrie de collège au service du tram.</div>
@@ -203,7 +210,7 @@
       <h2><span class="num">★</span> La constante perdue 🔍</h2>
       <p class="task">Un robot roule à v = 4 m/s, constante, depuis dix secondes. Question piège : OÙ est-il à t = 10 s ?</p>
       <div class="match" id="gMatch"></div>
-      <div class="row"><span>b) Si on t’apprend que x₀ = 15 m : x(10) = 15 + 4 × 10 =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="row"><span>b) On t’apprend enfin que x₀ = 15 m. Calcule x(10) =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
       <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="gFb"></div>
       <div class="exo-sol" id="gSol"><b>a)</b> <b>Impossible sans x₀</b> : la vitesse dit comment la position CHANGE, pas d’où elle part. C’est la constante que la dérivée avait effacée (exercice D !) — en intégrant, elle réapparaît sous forme d’inconnue.<br><b>b)</b> Avec x₀ = 15 m : x(10) = <b>55 m</b>. Primitive + condition initiale = trajectoire complète. C’est la routine quotidienne des GPS et des centrales inertielles.</div>
@@ -319,6 +326,32 @@ var aDec=1;
   setInterval(step,40); step();
 })();
 
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='🪜 Étape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='✔ Résolution complète'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Repère les données de l\u2019énoncé : longueur du tronçon Δx = 3000 m, durée Δt = 90 s.',
+  'La vitesse moyenne est le rapport <b>v = Δx / Δt</b> — la « pente » entre l\u2019entrée et la sortie du tronçon.',
+  'v = 3000 / 90 ≈ <b>33,3 m/s</b>.',
+  'Conversion : 1 m/s = 3,6 km/h → 33,3 × 3,6 ≈ <b>120 km/h</b>.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Sur un graphe x(t), la vitesse est la <b>pente</b> du segment : v = Δx / Δt entre ses deux extrémités.',
+  'Segment ① — lis les coordonnées sur le graphe : départ (0 s ; 0 m), arrivée (4 s ; 20 m).',
+  'v₁ = (20 − 0) / (4 − 0) = <b>5 m/s</b>.',
+  'Segment ② — horizontal : Δx = 0, donc v₂ = <b>0 m/s</b> : le chariot est à l\u2019arrêt.',
+  'Segment ③ — de (6 s ; 20 m) à (10 s ; 8 m) : v₃ = (8 − 20) / 4 = <b>−3 m/s</b>. Le signe − raconte le sens : il recule.'
+]);
+
 /* helpers */
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
@@ -345,19 +378,21 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
   var a=numf(el('aA').value), b=numf(el('aB').value);
   var okA=Math.abs(a-33.3)<0.6, okB=Math.abs(b-120)<2, okM=checkMatch('a',A_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 120 km/h de moyenne : la sécante du cours, en vrai sur l\u2019A31.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (Δx/Δt)')+' '+(okB?'b✓':'b✗ (×3,6)')+' '+(okM?'c✓':'c✗')};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* B */
 var B_SCEN=[
-  {sc:'c) ➡️ Segment ③ : x descend de 20 à 8 m entre 6 et 10 s. Donc v = −3 m/s, ce qui signifie…', ok:'le chariot RECULE : vitesse négative = sens inverse', opts:['— choisir —','le chariot RECULE : vitesse négative = sens inverse','le chariot accélère très fort','le graphique est faux']}
+  {sc:'c) 🔎 Observe la pente du segment ③ : sur ce tronçon, la vitesse est…', ok:'négative : le chariot recule', opts:['— choisir —','négative : le chariot recule','positive : il avance encore plus vite','nulle : il est à l\u2019arrêt']}
 ];
 buildMatch('bMatch','b',B_SCEN);
 lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-0)<0.3, okM=checkMatch('b',B_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 5, 0, −3 : trois pentes, trois vies du chariot.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (Δx/Δt)')+' '+(okB?'b✓':'b✗ (palier !)')+' '+(okM?'c✓':'c✗')};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* C */
@@ -377,7 +412,7 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
   var a=numf(el('dA').value), b=numf(el('dB').value);
   var okA=Math.abs(a-23)<0.5, okB=Math.abs(b-10)<0.5, okM=checkMatch('d',D_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 23 m/s, 10 m/s² : dérivation terme à terme maîtrisée.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (10×2+3)')+' '+(okB?'b✓':'b✗ (pente de 10t+3)')+' '+(okM?'c✓':'c✗')};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (t² se dérive en 2t…)')+' '+(okB?'b✓':'b✗ (dérive TA v(t))')+' '+(okM?'c✓':'c✗')};
 });
 
 /* E */
@@ -389,7 +424,7 @@ lockExo('eCheck','eShow','eSol','eFb',function(){
   var a=numf(el('eA').value), b=numf(el('eB').value);
   var okA=Math.abs(a-3)<0.2, okB=Math.abs(b-45)<1, okM=checkMatch('e',E_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ Sommet à 3 s et 45 m, trouvé en annulant la dérivée. Comme un pro.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (résous 30−10t = 0)')+' '+(okB?'b✓':'b✗ (30×3−5×9)')+' '+(okM?'c✓':'c✗')};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (annule la dérivée de h)')+' '+(okB?'b✓':'b✗ (remplace t dans h)')+' '+(okM?'c✓':'c✗')};
 });
 
 /* F */
@@ -397,7 +432,7 @@ lockExo('fCheck','fShow','fSol','fFb',function(){
   var a=numf(el('fA').value), b=numf(el('fB').value);
   var okA=Math.abs(a-25)<1, okB=Math.abs(b-150)<3;
   if(okA&&okB) return {ok:true,msg:'✓ 150 m d\u2019arrêt à arrêt : mesurés sans chronomètre, juste à l\u2019aire.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (demi-base × hauteur)')+' '+(okB?'b✓':'b✗ (palier = 10 s × 10 m/s)')};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (aire du triangle)')+' '+(okB?'b✓':'b✗ (ajoute les trois aires)')};
 });
 
 /* G */
