@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cours — Dérivées &amp; primitives en mécanique · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .layout{display:flex;max-width:1200px;margin:0 auto}
+  .snav{position:sticky;top:64px;align-self:flex-start;width:210px;flex:none;padding:26px 8px 26px 18px;display:none}
+  @media(min-width:980px){ .snav{display:block} }
+  .snav a{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);text-decoration:none;padding:7px 10px;border-left:2px solid var(--line);line-height:1.35}
+  .snav a.on{color:var(--steel);border-left-color:var(--steel);font-weight:700;background:#fdfaf2}
+  .slides{flex:1;min-width:0;padding:10px clamp(14px,3vw,34px) 120px}
+  .slide{min-height:92vh;padding:44px 0 26px;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;justify-content:center}
+  .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--copper);text-transform:uppercase;margin-bottom:8px}
+  h1{font-size:clamp(30px,4.6vw,52px);margin:0 0 12px;font-weight:800;line-height:1.12}
+  h2{font-size:clamp(24px,3.4vw,36px);margin:0 0 14px;font-weight:800}
+  .lede{font-size:clamp(18px,2vw,22px);color:var(--sub);max-width:62ch}
+  .cols{display:grid;gap:18px;margin-top:16px}
+  @media(min-width:760px){ .cols.c2{grid-template-columns:1fr 1fr} .cols.c3{grid-template-columns:1fr 1fr 1fr} }
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .panel h3{margin:0 0 6px;font-size:18px;font-weight:800}
+  .panel p{margin:6px 0;font-size:16px;color:var(--sub)}
+  .big{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(19px,2.6vw,26px);background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:10px;padding:14px 18px;margin:14px 0;overflow-x:auto}
+  .big small{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:400;font-size:15px;color:var(--sub);margin-top:6px}
+  .anim{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+  .anim canvas{width:100%;height:auto;display:block}
+  .anim .ctrl{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .anim .ctrl button{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;background:var(--steel);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer}
+  .anim .ctrl button:disabled{opacity:.35;cursor:not-allowed}
+  .anim .leg{flex:1;min-width:220px;font-size:15px;color:var(--sub)}
+  .anim .leg b{color:var(--steel)}
+  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;background:#f1ece0;border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin:3px 4px 3px 0;color:var(--sub)}
+  table.units{border-collapse:collapse;margin-top:10px;font-size:16px;width:100%}
+  table.units th,table.units td{border:1px solid var(--line);padding:9px 12px;text-align:center}
+  table.units th{font-family:'JetBrains Mono',monospace;font-size:12px;background:#faf6ec;color:var(--sub)}
+  table.units td b{font-family:'JetBrains Mono',monospace}
+  .hint{background:#fdf6e6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:16px}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Cours — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="layout">
+    <nav class="snav" id="snav">
+      <a href="#s1">1 · Trois récits, un mouvement</a>
+      <a href="#s2">2 · La vitesse est une pente</a>
+      <a href="#s3">3 · Dériver x(t) → v(t)</a>
+      <a href="#s4">4 · L'escalier des dérivées</a>
+      <a href="#s5">5 · Le MRUA vérifié</a>
+      <a href="#s6">6 · Le chemin inverse</a>
+      <a href="#s7">7 · Le trio de l'ascenseur</a>
+      <a href="#s8">8 · À retenir</a>
+    </nav>
+
+    <main class="slides">
+
+      <section class="slide" id="s1">
+        <div class="k">Cours · Première spé SI · Cinématique</div>
+        <h1>Dérivées &amp; primitives :<br>le langage du mouvement</h1>
+        <p class="lede">Position x(t), vitesse v(t), accélération a(t) : trois courbes qui racontent LA MÊME histoire. Les maths de cette année — dériver, et bientôt intégrer — sont exactement l\u2019outil qui permet de passer de l\u2019une à l\u2019autre. Aujourd\u2019hui, les dérivées cessent d\u2019être abstraites.</p>
+        <div>
+          <span class="tag">x(t) — où je suis (m)</span>
+          <span class="tag">v(t) — à quelle allure (m/s)</span>
+          <span class="tag">a(t) — comment ça change (m/s²)</span>
+        </div>
+        <div class="hint">🚄 Tout le GPS de ton téléphone, tout l\u2019ordinateur de bord d\u2019un TGV, toute la balistique d\u2019un jeu vidéo : trois fonctions, deux dérivées.</div>
+      </section>
+
+      <section class="slide" id="s2">
+        <div class="k">Slide 2 · Définition</div>
+        <h2>La vitesse, c\u2019est une pente</h2>
+        <p class="lede">La vitesse moyenne, tu la connais : Δx/Δt. La vitesse INSTANTANÉE, c\u2019est la même idée… avec un Δt qu\u2019on rétrécit jusqu\u2019à zéro. La sécante devient tangente : voilà la dérivée.</p>
+        <div class="big">v(t) = dx/dt = pente de la tangente à x(t)<small>« d » comme « différence devenue minuscule » : la dérivée est une vitesse de variation.</small></div>
+        <div class="anim">
+          <canvas id="cvSec" width="860" height="300" aria-label="Sécante qui devient tangente sur la courbe x de t"></canvas>
+          <div class="ctrl"><button id="secPrev">◀</button><button id="secNext">▶</button><div class="leg" id="secLeg"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s3">
+        <div class="k">Slide 3 · Construction</div>
+        <h2>Dériver x(t), c\u2019est fabriquer v(t)</h2>
+        <p class="lede">Fais glisser la tangente le long de x(t) et note sa pente à chaque instant : tu viens de tracer v(t). Là où x(t) grimpe fort, v est grande. Et au sommet de x(t)… la tangente est horizontale : v = 0.</p>
+        <div class="anim">
+          <canvas id="cvDer" width="860" height="360" aria-label="Construction de v(t) par la tangente glissante sur x(t)"></canvas>
+          <div class="ctrl"><button id="derPrev">◀</button><button id="derNext">▶</button><div class="leg" id="derLeg"></div></div>
+        </div>
+        <div class="hint">🎯 Réflexe n°1 : <b>sommet ou creux de x(t) → v = 0</b>. Le drone qui atteint son altitude max a, à cet instant précis, une vitesse verticale nulle.</div>
+      </section>
+
+      <section class="slide" id="s4">
+        <div class="k">Slide 4 · Structure</div>
+        <h2>L\u2019escalier des dérivées</h2>
+        <p class="lede">On peut dériver encore : la pente de v(t), c\u2019est l\u2019accélération. Chaque marche descendue = une dérivation, et l\u2019unité gagne un « /s ».</p>
+        <div class="anim">
+          <svg viewBox="0 0 860 260" aria-label="Escalier position vitesse accélération relié par des dérivations">
+            <g font-family="JetBrains Mono" font-weight="700">
+              <rect x="60" y="30" width="220" height="64" rx="12" fill="#e7eef2" stroke="#2E6A8E" stroke-width="3"/>
+              <text x="170" y="58" text-anchor="middle" font-size="20" fill="#2E6A8E">x(t)</text>
+              <text x="170" y="80" text-anchor="middle" font-size="13" fill="#2E6A8E">position · m</text>
+              <rect x="320" y="106" width="220" height="64" rx="12" fill="#eef6f0" stroke="#3D7E5F" stroke-width="3"/>
+              <text x="430" y="134" text-anchor="middle" font-size="20" fill="#3D7E5F">v(t)</text>
+              <text x="430" y="156" text-anchor="middle" font-size="13" fill="#3D7E5F">vitesse · m/s</text>
+              <rect x="580" y="182" width="220" height="64" rx="12" fill="#fdf3e3" stroke="#BD8A2A" stroke-width="3"/>
+              <text x="690" y="210" text-anchor="middle" font-size="20" fill="#8a6313">a(t)</text>
+              <text x="690" y="232" text-anchor="middle" font-size="13" fill="#8a6313">accélération · m/s²</text>
+            </g>
+            <g stroke="#C0492E" stroke-width="3.5" fill="none">
+              <path d="M240 100 C 280 130 290 130 316 136"/>
+              <path d="M500 176 C 540 206 550 206 576 212"/>
+            </g>
+            <g fill="#C0492E">
+              <path d="M322 138 l-14 -2 8 -12 z"/>
+              <path d="M582 214 l-14 -2 8 -12 z"/>
+            </g>
+            <g font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#C0492E">
+              <text x="228" y="146">dériver d/dt</text>
+              <text x="488" y="222">dériver d/dt</text>
+            </g>
+          </svg>
+        </div>
+        <div class="big">a(t) = dv/dt = d²x/dt²<small>Deux dérivations d\u2019affilée : l\u2019accélération est la « dérivée seconde » de la position — d\u2019où le petit ² de m/s².</small></div>
+        <table class="units">
+          <tr><th>grandeur</th><th>lecture graphique</th><th>unité</th></tr>
+          <tr><td><b>x(t)</b></td><td>où est le mobile</td><td><b>m</b></td></tr>
+          <tr><td><b>v(t)</b> = x'(t)</td><td>pente de x(t)</td><td><b>m/s</b></td></tr>
+          <tr><td><b>a(t)</b> = v'(t)</td><td>pente de v(t)</td><td><b>m/s²</b></td></tr>
+        </table>
+      </section>
+
+      <section class="slide" id="s5">
+        <div class="k">Slide 5 · Le cas roi</div>
+        <h2>Le MRUA, vérifié à la tangente</h2>
+        <p class="lede">Accélération constante (démarrage de métro, chute libre, catapulte) : les formules que tu utilises depuis le début de l\u2019année SONT des dérivées l\u2019une de l\u2019autre. La preuve en image.</p>
+        <div class="big">x(t) = ½·a·t² + v₀·t + x₀   →   v(t) = a·t + v₀   →   a(t) = a<small>Dérive x(t) terme à terme (½·a·t² donne a·t, v₀·t donne v₀, x₀ donne 0) : tu retombes exactement sur v(t). Les formules du MRUA ne sont pas à apprendre séparément — la deuxième est la dérivée de la première.</small></div>
+        <div class="anim">
+          <canvas id="cvMru" width="860" height="330" aria-label="Parabole x(t) et droite v(t) : la pente de la première égale la valeur de la seconde"></canvas>
+          <div class="ctrl"><button id="mruPrev">◀</button><button id="mruNext">▶</button><div class="leg" id="mruLeg"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s6">
+        <div class="k">Slide 6 · Le chemin inverse</div>
+        <h2>Intégrer : remonter l\u2019escalier</h2>
+        <p class="lede">Et si on connaît v(t) et qu\u2019on veut la distance ? On fait le chemin INVERSE de la dérivation : chercher la primitive. Graphiquement, c\u2019est limpide : <b>la distance parcourue, c\u2019est l\u2019aire sous la courbe v(t)</b>.</p>
+        <div class="anim">
+          <canvas id="cvAire" width="860" height="320" aria-label="Aire sous la courbe de vitesse égale distance parcourue"></canvas>
+          <div class="ctrl"><button id="airPrev">◀</button><button id="airNext">▶</button><div class="leg" id="airLeg"></div></div>
+        </div>
+        <div class="hint">⚠️ En remontant, il manque toujours une information : la constante (position de départ x₀, vitesse initiale v₀). La dérivée les avait effacées — c\u2019est à toi de les remettre avec les conditions initiales.</div>
+      </section>
+
+      <section class="slide" id="s7">
+        <div class="k">Slide 7 · Lecture experte</div>
+        <h2>Le trio synchronisé de l\u2019ascenseur</h2>
+        <p class="lede">Un ascenseur démarre (a = +1 m/s² pendant 2 s), croise en palier (4 s à 2 m/s), puis freine (a = −1 m/s² pendant 2 s). Regarde les trois courbes se construire l\u2019une à partir de l\u2019autre — puis le curseur les lire ENSEMBLE.</p>
+        <div class="anim">
+          <canvas id="cvTrio" width="860" height="430" aria-label="Courbes synchronisées accélération, vitesse, position de l'ascenseur"></canvas>
+          <div class="ctrl"><button id="triPrev">◀</button><button id="triNext">▶</button><div class="leg" id="triLeg"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s8">
+        <div class="k">Slide 8 · Synthèse</div>
+        <h2>À retenir</h2>
+        <div class="big">x(t)  ⇄  v(t)  ⇄  a(t)<small>Vers la droite : DÉRIVER (prendre la pente). Vers la gauche : INTÉGRER (prendre l\u2019aire, puis ajouter la condition initiale).</small></div>
+        <div class="cols c3">
+          <div class="panel"><h3>📐 Réflexe pente</h3><p>v est la pente de x, a est la pente de v. Courbe qui monte → dérivée positive ; qui descend → négative.</p></div>
+          <div class="panel"><h3>⛰️ Réflexe sommet</h3><p>Extremum de x(t) → v = 0. Extremum de v(t) → a = 0. La tangente horizontale trahit toujours l\u2019instant clé.</p></div>
+          <div class="panel"><h3>📊 Réflexe aire</h3><p>La distance parcourue = aire sous v(t). Rectangle si v constante, triangle si MRUA depuis l\u2019arrêt, trapèze sinon.</p></div>
+        </div>
+        <div class="cols c2" style="margin-top:14px">
+          <div class="panel"><h3>Unités, toujours</h3><p>m → m/s → m/s² : chaque dérivation ajoute un « /s ». Une réponse à l\u2019unité fausse est une réponse fausse.</p></div>
+          <div class="panel"><h3>La suite</h3><p>Au TP : radars, drones et une rampe à régler au simulateur. À l\u2019évaluation : le centre d\u2019analyse du mouvement t\u2019attend.</p></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+
+/* ---------- nav latérale : activation au scroll ---------- */
+(function(){
+  var links=document.querySelectorAll('#snav a');
+  var map={};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
+        var a=map[en.target.id]; if(a) a.classList.add('on'); }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  document.querySelectorAll('.slide').forEach(function(s){ obs.observe(s); });
+})();
+
+/* ---------- navigation clavier ↑ ↓ ---------- */
+(function(){
+  var ids=['s1','s2','s3','s4','s5','s6','s7','s8'];
+  function current(){
+    var best=0, bd=1e9;
+    ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect();
+      var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
+    return best;
+  }
+  document.addEventListener('keydown',function(ev){
+    if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault();
+      var i=Math.min(ids.length-1,current()+1); el(ids[i]).scrollIntoView({behavior:'smooth'}); }
+    if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault();
+      var j=Math.max(0,current()-1); el(ids[j]).scrollIntoView({behavior:'smooth'}); }
+  });
+})();
+
+/* ---------- helper stepper : phases à contrôles manuels ---------- */
+function stepper(cvId, prevId, nextId, legId, phases){
+  var cv=el(cvId); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), idx=0, t=0;
+  function show(){ t=0;
+    el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
+    el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
+  el(prevId).addEventListener('click',function(){ if(idx>0){ idx--; show(); } });
+  el(nextId).addEventListener('click',function(){ if(idx<phases.length-1){ idx++; show(); } });
+  setInterval(function(){ t+=0.033; g.clearRect(0,0,cv.width,cv.height); phases[idx].draw(g,t); },40);
+  show();
+}
+
+/* ---------- outils de tracé ---------- */
+function axes(g,x0,y0,w,h,xl,yl){
+  g.strokeStyle='#5C544B'; g.lineWidth=2;
+  g.beginPath(); g.moveTo(x0,y0-h); g.lineTo(x0,y0); g.lineTo(x0+w,y0); g.stroke();
+  g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+  g.textAlign='left'; g.fillText(yl,x0+6,y0-h+14);
+  g.textAlign='right'; g.fillText(xl,x0+w,y0+18);
+  g.textAlign='left';
+}
+
+/* ============ s2 : sécante → tangente sur x(t)=t² ============ */
+(function(){
+  var X0=90, Y0=260, W=560, H=210;
+  var SX=W/6, SY=H/40;               // t: 0..6 s, x: 0..40 m
+  function px(tt){ return X0+tt*SX; }
+  function py(xx){ return Y0-xx*SY; }
+  function f(tt){ return tt*tt; }
+  function curve(g){
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.5; g.beginPath();
+    for(var k=0;k<=100;k++){ var tt=6*k/100; var X=px(tt),Y=py(f(tt));
+      if(k===0)g.moveTo(X,Y); else g.lineTo(X,Y); }
+    g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('x(t) = t²',px(5.1),py(f(5.6)));
+  }
+  function secante(g,t1,t2,col,lab){
+    var xA=px(t1),yA=py(f(t1)),xB=px(t2),yB=py(f(t2));
+    var m=(f(t2)-f(t1))/(t2-t1);
+    g.strokeStyle=col; g.lineWidth=3;
+    var dx=(xB-xA),dy=(yB-yA),L=Math.sqrt(dx*dx+dy*dy);
+    var ux=dx/L,uy=dy/L, ext=60;
+    g.beginPath(); g.moveTo(xA-ux*ext,yA-uy*ext); g.lineTo(xB+ux*ext,yB+uy*ext); g.stroke();
+    g.fillStyle=col;
+    [ [xA,yA],[xB,yB] ].forEach(function(p){ g.beginPath(); g.arc(p[0],p[1],6,0,7); g.fill(); });
+    g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillText(lab+' = '+String(m.toFixed(1)).replace('.',',')+' m/s',560,60);
+  }
+  function tangente(g,t1){
+    var m=2*t1;
+    var xA=px(t1),yA=py(f(t1));
+    var dx=SX, dy=-m*SY, L=Math.sqrt(dx*dx+dy*dy), ux=dx/L, uy=dy/L, ext=170;
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.5;
+    g.beginPath(); g.moveTo(xA-ux*ext,yA-uy*ext); g.lineTo(xA+ux*ext,yA+uy*ext); g.stroke();
+    g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(xA,yA,7,0,7); g.fill();
+    g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillText('v(2) = pente = 4 m/s',560,60);
+    g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('tangente en t = 2 s',560,84);
+  }
+  stepper('cvSec','secPrev','secNext','secLeg',[
+    {leg:'Vitesse MOYENNE entre t = 2 s et t = 4 s : la sécante relie deux points. Pente = Δx/Δt = (16−4)/2 = <b>6 m/s</b>.',
+     draw:function(g,t){ axes(g,90,260,560,210,'t (s)','x (m)'); curve(g); secante(g,2,4,'#BD8A2A','Δx/Δt'); }},
+    {leg:'On resserre : Δt = 1 s. La sécante colle déjà mieux à la courbe. Pente = (9−4)/1 = <b>5 m/s</b>. On sent qu\u2019elle vise une limite…',
+     draw:function(g,t){ axes(g,90,260,560,210,'t (s)','x (m)'); curve(g); secante(g,2,3,'#8A5A7A','Δx/Δt'); }},
+    {leg:'Δt → 0 : la sécante est devenue TANGENTE. Sa pente est la vitesse instantanée : v(2) = 2×2 = <b>4 m/s</b>. C\u2019est la définition même de la dérivée.',
+     draw:function(g,t){ axes(g,90,260,560,210,'t (s)','x (m)'); curve(g); tangente(g,2); }}
+  ]);
+})();
+
+/* ============ s3 : construction de v(t) sous x(t) ============ */
+(function(){
+  var X0=90, W=640;
+  var Y1=150, H1=110;   // repère x(t)
+  var Y2=330, H2=110;   // repère v(t)
+  var T=10, SX=W/T;
+  function f(tt){ return 40*Math.sin(Math.PI*tt/10); }         // 0..40 m
+  function fp(tt){ return 4*Math.PI*Math.cos(Math.PI*tt/10); } // ±12,6 m/s
+  function pxu(tt){ return X0+tt*SX; }
+  function py1(xx){ return Y1-xx*(H1/44); }
+  function py2(vv){ return Y2-vv*(H2/2/14); }
+  function topCurve(g){
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.2; g.beginPath();
+    for(var k=0;k<=120;k++){ var tt=T*k/120; if(k===0)g.moveTo(pxu(tt),py1(f(tt))); else g.lineTo(pxu(tt),py1(f(tt))); }
+    g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('x(t)',X0+8,Y1-H1+4);
+  }
+  function bottomAxis(g){
+    g.strokeStyle='#5C544B'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(X0,Y2-H2/2-8); g.lineTo(X0,Y2+H2/2); g.moveTo(X0,Y2); g.lineTo(X0+W,Y2); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('v(t)  (0 au milieu)',X0+8,Y2-H2/2+6);
+  }
+  function tangAt(g,tc){
+    var m=fp(tc), xA=pxu(tc), yA=py1(f(tc));
+    var dx=SX, dy=-m*(H1/44), L=Math.sqrt(dx*dx+dy*dy), ux=dx/L, uy=dy/L, ext=80;
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(xA-ux*ext,yA-uy*ext); g.lineTo(xA+ux*ext,yA+uy*ext); g.stroke();
+    g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(xA,yA,6,0,7); g.fill();
+  }
+  function vTrace(g,upTo){
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.2; g.beginPath();
+    var n=Math.max(2,Math.floor(120*upTo/T));
+    for(var k=0;k<=n;k++){ var tt=T*k/120; if(tt>upTo) break;
+      if(k===0)g.moveTo(pxu(tt),py2(fp(tt))); else g.lineTo(pxu(tt),py2(fp(tt))); }
+    g.stroke();
+  }
+  stepper('cvDer','derPrev','derNext','derLeg',[
+    {leg:'La tangente GLISSE le long de x(t). Regarde sa pente : forte au départ, de plus en plus faible en approchant du sommet.',
+     draw:function(g,t){ var tc=(t*1.1)%T; axes(g,X0,Y1,W,H1+10,'t (s)','x (m)'); topCurve(g); tangAt(g,tc); }},
+    {leg:'À chaque instant, on REPORTE la pente en dessous : point par point, la courbe v(t) se dessine. Dériver, c\u2019est fabriquer cette deuxième courbe.',
+     draw:function(g,t){ var tc=Math.min(T,t*1.4);
+       axes(g,X0,Y1,W,H1+10,'t (s)','x (m)'); topCurve(g); if(tc<T) tangAt(g,tc);
+       bottomAxis(g); vTrace(g,tc);
+       if(tc<T){ g.fillStyle='#3D7E5F'; g.beginPath(); g.arc(pxu(tc),py2(fp(tc)),6,0,7); g.fill(); } }},
+    {leg:'Lecture clé : au SOMMET de x(t) (t = 5 s), la tangente est horizontale → <b>v(5) = 0</b>. Ensuite x redescend → v devient négative : le mobile recule.',
+     draw:function(g,t){ axes(g,X0,Y1,W,H1+10,'t (s)','x (m)'); topCurve(g); tangAt(g,5);
+       bottomAxis(g); vTrace(g,10);
+       g.fillStyle='#C0492E'; g.beginPath(); g.arc(pxu(5),py2(0),7,0,7); g.fill();
+       g.font='800 14px "Bricolage Grotesque",sans-serif'; g.fillStyle='#C0492E';
+       g.fillText('sommet → v = 0',pxu(5)+12,py2(0)-10);
+       g.strokeStyle='#C0492E'; g.lineWidth=1.5; g.setLineDash([5,4]);
+       g.beginPath(); g.moveTo(pxu(5),py1(f(5))); g.lineTo(pxu(5),py2(0)); g.stroke(); g.setLineDash([]); }}
+  ]);
+})();
+
+/* ============ s5 : MRUA — pente de x(t)=t² vs valeur de v(t)=2t ============ */
+(function(){
+  var X0=90, W=300, GAP=110;
+  var Y0=280, H=210, T=6;
+  var SX=W/T;
+  function fx(tt){ return tt*tt; }         // 0..36
+  function fv(tt){ return 2*tt; }          // 0..12
+  function pxL(tt){ return X0+tt*SX; }
+  function pyL(xx){ return Y0-xx*(H/40); }
+  function pxR(tt){ return X0+W+GAP+tt*SX; }
+  function pyR(vv){ return Y0-vv*(H/14); }
+  function both(g){
+    axes(g,X0,Y0,W,H,'t (s)','x (m)');
+    axes(g,X0+W+GAP,Y0,W,H,'t (s)','v (m/s)');
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.2; g.beginPath();
+    for(var k=0;k<=80;k++){ var tt=T*k/80; if(k===0)g.moveTo(pxL(tt),pyL(fx(tt))); else g.lineTo(pxL(tt),pyL(fx(tt))); }
+    g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('x = t²',pxL(0.4),pyL(30));
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.2;
+    g.beginPath(); g.moveTo(pxR(0),pyR(0)); g.lineTo(pxR(6),pyR(12)); g.stroke();
+    g.fillStyle='#3D7E5F'; g.fillText('v = 2t',pxR(0.4),pyR(11));
+  }
+  function link(g,tc){
+    var m=fv(tc);
+    var xA=pxL(tc), yA=pyL(fx(tc));
+    var dx=SX, dy=-m*(H/40), L=Math.sqrt(dx*dx+dy*dy), ux=dx/L, uy=dy/L, ext=70;
+    g.strokeStyle='#C0492E'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(xA-ux*ext,yA-uy*ext); g.lineTo(xA+ux*ext,yA+uy*ext); g.stroke();
+    g.fillStyle='#C0492E'; g.beginPath(); g.arc(xA,yA,6,0,7); g.fill();
+    var xB=pxR(tc), yB=pyR(fv(tc));
+    g.beginPath(); g.arc(xB,yB,7,0,7); g.fill();
+    g.setLineDash([5,4]); g.lineWidth=1.6;
+    g.beginPath(); g.moveTo(xA,yA); g.lineTo(xB,yB); g.stroke(); g.setLineDash([]);
+    g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillText('t = '+tc.toFixed(1).replace('.',',')+' s : pente de x = '+String(m.toFixed(1)).replace('.',',')+' = valeur de v ✓',110,42);
+  }
+  stepper('cvMru','mruPrev','mruNext','mruLeg',[
+    {leg:'À gauche, la position x(t) = t² (parabole). À droite, la vitesse v(t) = 2t (droite). Deux formules du MRUA (a = 2 m/s², départ arrêté).',
+     draw:function(g,t){ both(g); }},
+    {leg:'La tangente rouge glisse sur la parabole… et à CHAQUE instant, sa pente est exactement la hauteur du point rouge sur la droite v(t). Les deux courbes sont dérivée l\u2019une de l\u2019autre.',
+     draw:function(g,t){ both(g); link(g,0.5+((t*0.9)%5.0)); }},
+    {leg:'Arrêt sur image à t = 3 s : pente de x = 6 m/s = v(3) = 2×3. La formule v = a·t n\u2019est pas un nouveau savoir : c\u2019est x(t) dérivée.',
+     draw:function(g,t){ both(g); link(g,3); }}
+  ]);
+})();
+
+/* ============ s6 : aire sous v(t) = distance ============ */
+(function(){
+  var X0=110, Y0=270, W=560, H=190, T=5;
+  var SX=W/T, SY=H/10;
+  function pxu(tt){ return X0+tt*SX; }
+  function pyv(vv){ return Y0-vv*SY; }
+  function rectPhase(g,t){
+    axes(g,X0,Y0,W,H,'t (s)','v (m/s)');
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.5;
+    g.beginPath(); g.moveTo(pxu(0),pyv(3)); g.lineTo(pxu(4.6),pyv(3)); g.stroke();
+    g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('v = 3 m/s (constante)',pxu(0.2),pyv(3)-10);
+    var upTo=Math.min(4,t*1.3);
+    g.fillStyle='rgba(46,106,142,.22)';
+    g.fillRect(pxu(0),pyv(3),upTo*SX,3*SY);
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+    g.fillText('aire = 3 × '+upTo.toFixed(1).replace('.',',')+' = '+(3*upTo).toFixed(1).replace('.',',')+' m',430,60);
+    if(upTo>=4){ g.fillStyle='#3D7E5F'; g.fillText('en 4 s → 12 m parcourus',430,88); }
+  }
+  function triPhase(g,t){
+    axes(g,X0,Y0,W,H,'t (s)','v (m/s)');
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.5;
+    g.beginPath(); g.moveTo(pxu(0),pyv(0)); g.lineTo(pxu(4.6),pyv(9.2)); g.stroke();
+    g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace'; g.fillText('v = 2t (MRUA)',pxu(3.4),pyv(8.6));
+    var upTo=Math.min(4,t*1.3);
+    g.fillStyle='rgba(61,126,95,.22)';
+    g.beginPath(); g.moveTo(pxu(0),pyv(0));
+    for(var k=0;k<=40;k++){ var tt=upTo*k/40; g.lineTo(pxu(tt),pyv(2*tt)); }
+    g.lineTo(pxu(upTo),pyv(0)); g.closePath(); g.fill();
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+    g.fillText('aire = ½ × '+upTo.toFixed(1).replace('.',',')+' × '+(2*upTo).toFixed(1).replace('.',',')+' = '+(upTo*upTo).toFixed(1).replace('.',',')+' m',380,60);
+    if(upTo>=4){ g.fillStyle='#3D7E5F'; g.fillText('en 4 s → 16 m (½ × 4 × 8)',380,88); }
+  }
+  stepper('cvAire','airPrev','airNext','airLeg',[
+    {leg:'Vitesse constante 3 m/s : la distance se cumule uniformément. L\u2019aire est un RECTANGLE : d = v × t = 3 × 4 = <b>12 m</b>. (C\u2019est ta formule d = v·t… vue comme une aire !)',
+     draw:rectPhase},
+    {leg:'MRUA v = 2t : la vitesse grandit, la distance se cumule de plus en plus vite. L\u2019aire est un TRIANGLE : d = ½ × t × v(t) = ½ × 4 × 8 = <b>16 m</b>. Et ½·t·(2t) = t² : on retrouve x(t) = t², la primitive !',
+     draw:triPhase},
+    {leg:'Moralité : intégrer v(t), c\u2019est accumuler l\u2019aire sous la courbe. Rectangle, triangle, trapèze… la géométrie du collège suffit pour les cas du MRUA.',
+     draw:function(g,t){ rectPhase(g,99); g.fillStyle='#8A5A7A'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+       g.fillText('distance = AIRE sous v(t)',130,60); }}
+  ]);
+})();
+
+/* ============ s7 : trio synchronisé de l'ascenseur ============ */
+(function(){
+  var X0=110, W=620, T=8, SX=W/T;
+  var YA=110, HA=64;      // a(t) : ±1
+  var YV=240, HV=80;      // v(t) : 0..2
+  var YX=410, HX=110;     // x(t) : 0..12
+  function pxu(tt){ return X0+tt*SX; }
+  function fa(tt){ return tt<2?1:(tt<6?0:-1); }
+  function fv(tt){ return tt<2?tt:(tt<6?2:(2-(tt-6))); }
+  function fx(tt){
+    if(tt<2) return 0.5*tt*tt;
+    if(tt<6) return 2+2*(tt-2);
+    var u=tt-6; return 10+2*u-0.5*u*u;
+  }
+  function pya(v){ return YA-v*(HA/1.4); }
+  function pyv(v){ return YV-v*(HV/2.4); }
+  function pyx(v){ return YX-v*(HX/13); }
+  function bandAxes(g){
+    [[YA,HA+22,'a (m/s²)'],[YV,HV+14,'v (m/s)'],[YX,HX+12,'x (m)']].forEach(function(b){
+      g.strokeStyle='#5C544B'; g.lineWidth=2;
+      g.beginPath(); g.moveTo(X0,b[0]-b[1]); g.lineTo(X0,b[0]+ (b[2]==='a (m/s²)'?52:6)); g.stroke();
+      g.beginPath(); g.moveTo(X0,b[0]); g.lineTo(X0+W,b[0]); g.stroke();
+      g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+      g.fillText(b[2],X0+8,b[0]-b[1]+12);
+    });
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+    for(var s=0;s<=8;s+=2){ g.fillText(s+' s',pxu(s)-8,YX+26); }
+  }
+  function drawA(g,upTo){
+    g.strokeStyle='#BD8A2A'; g.lineWidth=3.2; g.beginPath();
+    var first=true;
+    for(var k=0;k<=200;k++){ var tt=T*k/200; if(tt>upTo)break;
+      var Y=pya(fa(tt)); if(first){g.moveTo(pxu(tt),Y);first=false;} else g.lineTo(pxu(tt),Y); }
+    g.stroke();
+  }
+  function drawV(g,upTo){
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.2; g.beginPath();
+    var first=true;
+    for(var k=0;k<=200;k++){ var tt=T*k/200; if(tt>upTo)break;
+      if(first){g.moveTo(pxu(tt),pyv(fv(tt)));first=false;} else g.lineTo(pxu(tt),pyv(fv(tt))); }
+    g.stroke();
+  }
+  function drawX(g,upTo){
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.2; g.beginPath();
+    var first=true;
+    for(var k=0;k<=200;k++){ var tt=T*k/200; if(tt>upTo)break;
+      if(first){g.moveTo(pxu(tt),pyx(fx(tt)));first=false;} else g.lineTo(pxu(tt),pyx(fx(tt))); }
+    g.stroke();
+  }
+  function cursor(g,tc){
+    g.strokeStyle='#C0492E'; g.lineWidth=2; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(pxu(tc),YA-HA-14); g.lineTo(pxu(tc),YX+8); g.stroke(); g.setLineDash([]);
+    [[pya(fa(tc)),'#BD8A2A'],[pyv(fv(tc)),'#3D7E5F'],[pyx(fx(tc)),'#2E6A8E']].forEach(function(p){
+      g.fillStyle=p[1]; g.beginPath(); g.arc(pxu(tc),p[0],6,0,7); g.fill(); });
+    g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('t = '+tc.toFixed(1).replace('.',',')+' s',pxu(Math.min(tc,6.6))+8,YA-HA-2);
+  }
+  stepper('cvTrio','triPrev','triNext','triLeg',[
+    {leg:'Le programme du variateur : a = +1 m/s² (2 s), puis 0 (palier), puis −1 m/s² (freinage). Trois créneaux, rien de plus.',
+     draw:function(g,t){ bandAxes(g); drawA(g,Math.min(T,t*2.2)); }},
+    {leg:'On INTÈGRE a → v : montée en pente +1, plateau à 2 m/s, descente en pente −1. Le trapèze de vitesse est l\u2019aire cumulée des créneaux.',
+     draw:function(g,t){ bandAxes(g); drawA(g,T); drawV(g,Math.min(T,t*2.2)); }},
+    {leg:'On intègre encore v → x : parabole (départ doux), droite (palier), parabole inversée (arrivée douce). La cabine parcourt x(8) = <b>12 m</b> — l\u2019aire du trapèze de v.',
+     draw:function(g,t){ bandAxes(g); drawA(g,T); drawV(g,T); drawX(g,Math.min(T,t*2.2)); }},
+    {leg:'Le curseur lit les TROIS courbes ensemble : quand a change, la PENTE de v change ; quand v est constante, x file en ligne droite. Un seul mouvement, trois points de vue.',
+     draw:function(g,t){ bandAxes(g); drawA(g,T); drawV(g,T); drawX(g,T); cursor(g,(t*0.9)%T); }}
+  ]);
+})();
+</script>
+</body>
+</html>
