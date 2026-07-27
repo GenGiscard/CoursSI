@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Évaluation — Le centre de contrôle de mission · Dérivées &amp; primitives · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#1a2238,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#8fd4e0;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas,.chrono svg{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:110px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)} .unit{color:var(--sub);margin-left:6px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--steel)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--steel);min-width:110px;text-align:right}
+  .game{background:#1a2238;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#8fd4e0;margin-bottom:8px}
+  .gq{font-weight:800;font-size:18px;text-align:center;margin:12px 0 10px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#252f4a;border:1px solid #3c4a72;color:#f2ead8;border-radius:10px;padding:12px 6px;cursor:pointer}
+  .gopts button:hover{background:#2e3a5a}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:18px;color:#8fd4e0}
+  .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
+  .corr.show{display:block}
+  .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
+  .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
+  .corr .sol{color:var(--sub);margin-top:5px}
+  .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
+  .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
+  .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
+  .teacher{margin-top:40px;border-top:1px dashed var(--line);padding-top:16px}
+  .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);cursor:pointer;text-decoration:underline}
+  #dash{display:none;margin-top:14px} #dash.show{display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+  th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub);letter-spacing:.06em}
+  .stat{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:4px 8px 4px 0;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .stat b{color:var(--steel);font-size:18px}
+  .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
+  .barq>i{display:block;height:100%;background:var(--green)}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Évaluation — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">Évaluation · Première spé SI · /15</div>
+      <h1>🛰️ Le centre de contrôle de mission</h1>
+      <p>La fusée-sonde météo du lycée décolle ce matin et c’est toi l’ingénieur télémesure : ascension à décoder, parachute à analyser, poussée à régler, et le rapport de mission à signer. Toutes les réponses sont dans les pentes et les aires — la calculatrice t’attend en bas à droite.</p>
+      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
+    </div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> La télémesure de l’ascension <span class="pts">3 pts</span></h2>
+      <p class="task">Phase propulsée : les capteurs tracent v(t) et h(t) en direct pendant que la fusée grimpe, jusqu’à la coupure moteur.</p>
+      <div class="chrono"><canvas id="cv1" width="860" height="270" aria-label="Fusée en ascension avec courbes de vitesse et d'altitude tracées en direct"></canvas></div>
+      <div class="qrow" id="q1a"><span class="sc">a) Pendant la propulsion, v(t) est une DROITE parce que :</span>
+        <select id="s1a"><option>— choisir —</option><option>l’accélération est constante : la pente de v ne change pas</option><option>la fusée vole en ligne droite</option><option>le capteur est linéaire</option></select></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Coupure moteur à t = 8 s avec v = 200 m/s. L’accélération vaut :</span>
+        <input class="numin" id="n1b" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="qrow" id="q1c"><span class="sc">c) h(t) est une PARABOLE parce que :</span>
+        <select id="s1c"><option>— choisir —</option><option>c’est la primitive d’une droite : l’aire sous v s’accumule de plus en plus vite</option><option>la fusée tourne sur elle-même</option><option>toutes les courbes de physique sont des paraboles</option></select></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> Le graphe du parachute <span class="pts">3 pts</span></h2>
+      <p class="task">À la descente, le parachute s’ouvre : voici la télémesure v(t) (vitesse de chute, comptée positive).</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 250" aria-label="Vitesse de descente : freinage de 40 à 8 m/s puis palier">
+          <g stroke="#5C544B" stroke-width="2"><path d="M80 210 v-170 M80 210 h720"/></g>
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
+            <text x="86" y="52">v (m/s)</text><text x="782" y="230">t (s)</text>
+            <text x="48" y="72">40</text><text x="56" y="180">8</text>
+            <text x="238" y="230">4</text><text x="638" y="230">14</text>
+          </g>
+          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4">
+            <path d="M80 176 h560 M240 68 v142 M640 176 v34"/>
+          </g>
+          <path d="M80 68 L240 176 L640 176" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
+          <g font-family="JetBrains Mono" font-size="12" font-weight="700">
+            <text x="110" y="110" fill="#C0492E">ouverture : gros freinage</text>
+            <text x="380" y="164" fill="#3D7E5F">descente stabilisée</text>
+          </g>
+          <text x="700" y="120" font-family="JetBrains Mono" font-size="26" fill="#8A5A7A">🪂</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q2a"><span class="sc">a) Accélération pendant le freinage (avec son signe) :</span>
+        <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
+      <div class="qrow" id="q2b"><span class="sc">b) Distance descendue pendant 10 s de palier :</span>
+        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="qrow" id="q2c"><span class="sc">c) Pendant le freinage, l’altitude h(t) descend…</span>
+        <select id="s2c"><option>— choisir —</option><option>de moins en moins vite : sa pente s’adoucit</option><option>de plus en plus vite</option><option>à vitesse constante</option></select></div>
+      <div class="corr" id="c2"></div>
+    </section>
+
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : l’ingénieur télémesure <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ <b>6 lectures</b> éclair de la salle de contrôle. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <div class="gq" id="gQ">Prêt ? Les écrans s’allument…</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
+
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> La poussée réglable <span class="pts">2 pts</span></h2>
+      <p class="task">Banc d’essai : le moteur pousse pendant exactement 6 s avec une accélération a réglable. <b>Fais varier a</b> et observe v = a·t et h (l’aire du triangle).</p>
+      <div class="chrono">
+        <canvas id="cv4" width="860" height="230" aria-label="Fusée au banc avec jauges vitesse et altitude selon l'accélération"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">a =</span>
+          <input type="range" id="pSlider" min="5" max="40" step="1" value="10">
+          <span class="val" id="pVal">10 m/s²</span>
+        </div>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Avec a = 25 m/s², vitesse atteinte après les 6 s de poussée :</span>
+        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="qrow" id="q4b"><span class="sc">b) 📈 Si on DOUBLE l’accélération (durée de poussée inchangée) :</span>
+        <select id="s4b"><option>— choisir —</option><option>la vitesse finale ET l’altitude doublent toutes les deux</option><option>seule la vitesse double, l’altitude quadruple</option><option>rien ne change</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
+
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Chasse à l’erreur <span class="pts">2 pts</span></h2>
+      <p class="task">🕵️ Le stagiaire du centre de contrôle annote la courbe d’altitude… et écrit une énormité.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 240" aria-label="Courbe d'altitude en cloche avec annotation erronée au sommet">
+          <g stroke="#5C544B" stroke-width="2"><path d="M70 200 v-160 M70 200 h640"/></g>
+          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
+            <text x="76" y="52">h (m)</text><text x="694" y="220">t (s)</text><text x="426" y="220">12</text>
+          </g>
+          <path d="M70 200 Q 430 -80 710 200" fill="none" stroke="#2E6A8E" stroke-width="4"/>
+          <circle cx="432" cy="61" r="7" fill="#C0492E"/>
+          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4"><path d="M432 61 v139"/></g>
+          <rect x="500" y="34" width="330" height="74" rx="12" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/>
+          <text x="665" y="64" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#C0492E">« au sommet, la vitesse</text>
+          <text x="665" y="90" text-anchor="middle" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#C0492E">est MAXIMALE » ⚠</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q5a"><span class="sc">a) L’erreur du stagiaire :</span>
+        <select id="s5a"><option>— choisir —</option><option>au sommet la tangente est horizontale : v = 0 ; le max de vitesse est atteint à la coupure moteur</option><option>il n’y a pas d’erreur</option><option>le sommet est à t = 11 s, pas 12</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) Vitesse verticale de la fusée à t = 12 s :</span>
+        <input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> Le rapport de mission <span class="pts">3 pts</span></h2>
+      <p class="task">Le vol complet : poussée a = +20 m/s² pendant 5 s, puis vol balistique (a = −10 m/s²). Regarde v(t) s’écrire, la fusée monter… et le curseur relire toute la mission. À toi de chiffrer le rapport.</p>
+      <div class="chrono"><canvas id="cv6" width="860" height="330" aria-label="Vol complet : courbe de vitesse et fusée synchronisées avec curseur"></canvas></div>
+      <div class="qrow" id="q6a"><span class="sc">a) Vitesse à la coupure moteur (t = 5 s) :</span>
+        <input class="numin" id="n6a" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Instant où la fusée atteint son sommet (v = 0) :</span>
+        <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
+      <div class="qrow" id="q6c"><span class="sc">c) Altitude maximale (somme des DEUX aires sous v) :</span>
+        <input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
+    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
+
+    <div class="teacher">
+      <span class="tlink" id="tlink">· Espace enseignant ·</span>
+      <div id="dash">
+        <div id="dashLogin" style="margin-top:8px">
+          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
+          <button class="btn g" id="pwBtn">Ouvrir</button>
+          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
+        </div>
+        <div id="dashData" style="display:none">
+          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
+          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
+          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+var db=null;
+try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
+var NODE='eval_deriv';
+
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ============ EX1 : ascension télémétrée ============ */
+(function(){
+  var cv=el('cv1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0, DUR=8;
+  function step(){
+    T+=0.033; var tc=Math.min(DUR,(T*1.6)%(DUR+2.5));
+    g.clearRect(0,0,cv.width,cv.height);
+    // fusée à gauche (h = 12.5 t², max 800 → échelle)
+    var hx=90, ground=240, hh=12.5*tc*tc;
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(40,ground); g.lineTo(150,ground); g.stroke();
+    var fy=ground-18-hh*(190/800);
+    g.fillStyle='#8A5A7A';
+    g.beginPath(); g.moveTo(hx,fy-16); g.lineTo(hx-8,fy+8); g.lineTo(hx+8,fy+8); g.closePath(); g.fill();
+    g.fillRect(hx-6,fy+8,12,16);
+    if(tc<DUR){ g.fillStyle='#BD8A2A'; g.beginPath(); g.moveTo(hx-5,fy+24); g.lineTo(hx,fy+34+4*Math.sin(T*20)); g.lineTo(hx+5,fy+24); g.closePath(); g.fill(); }
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('h = '+Math.round(hh)+' m',95,ground+18);
+    // courbes v(t) et h(t)
+    var X0=230, W=580, YV=110, HV=76, YH=240, HH2=86, TM=8;
+    function PX(t2){ return X0+W*t2/TM; }
+    g.strokeStyle='#5C544B'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(X0,YV-HV); g.lineTo(X0,YV); g.lineTo(X0+W,YV); g.stroke();
+    g.beginPath(); g.moveTo(X0,YH-HH2); g.lineTo(X0,YH); g.lineTo(X0+W,YH); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('v (m/s)',X0+6,YV-HV+12); g.fillText('h (m)',X0+6,YH-HH2+12);
+    g.textAlign='right'; g.fillText('200',X0-8,YV-HV+10); g.fillText('800',X0-8,YH-HH2+10); g.textAlign='left';
+    // v = 25t
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.2; g.beginPath();
+    g.moveTo(PX(0),YV);
+    g.lineTo(PX(tc),YV-(25*tc)*(HV/200)); g.stroke();
+    // h = 12.5 t²
+    g.strokeStyle='#2E6A8E'; g.lineWidth=3.2; g.beginPath();
+    for(var k=0;k<=60;k++){ var t3=tc*k/60; var y=YH-(12.5*t3*t3)*(HH2/800);
+      if(k===0)g.moveTo(PX(t3),y); else g.lineTo(PX(t3),y); }
+    g.stroke();
+    if(tc>=DUR){ g.fillStyle='#C0492E'; g.font='800 13px "Bricolage Grotesque",sans-serif';
+      g.fillText('✂ coupure moteur : t = 8 s · v = 200 m/s · h = 800 m',X0+90,34); }
+    else { g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+      g.fillText('t = '+tc.toFixed(1).replace('.',',')+' s',X0+250,34); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX3 : défi noté ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false};
+function g3Rand(){
+  function pick(arr){ return arr[(Math.random()*arr.length)|0]; }
+  function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+  var r=Math.random();
+  if(r<0.35){
+    var dt=pick([2,4,5]), v=pick([-3,-2,2,3,4,5]);
+    var x1= v>0? pick([0,5,10]) : pick([30,35,40]);
+    var x2=x1+v*dt;
+    var set={}; set[v]=1; var opts=[v+' m/s'];
+    [-v, x2-x1, v*2].forEach(function(d){ if(!set[d]&&opts.length<4){ set[d]=1; opts.push(d+' m/s'); } });
+    var ex=v+3; while(opts.length<4){ if(!set[ex]){ set[ex]=1; opts.push(ex+' m/s'); } ex++; }
+    return {q:'x passe de '+x1+' m à '+x2+' m en '+dt+' s  →  v = ?', opts:shuffle(opts), ok:v+' m/s',
+      why:'('+x2+'−'+x1+')/'+dt+' = '+v+' m/s'};
+  }
+  if(r<0.6){
+    var vv=pick([3,4,5,6]), T=pick([4,5,6,10]), d=vv*T;
+    var s2={}; s2[d]=1; var o2=[d+' m'];
+    [vv+T, d*2, Math.round(d/2)].forEach(function(x){ if(x>0&&!s2[x]&&o2.length<4){ s2[x]=1; o2.push(x+' m'); } });
+    var e2=d+7; while(o2.length<4){ if(!s2[e2]){ s2[e2]=1; o2.push(e2+' m'); } e2+=3; }
+    return {q:'v = '+vv+' m/s constant pendant '+T+' s  →  distance ?', opts:shuffle(o2), ok:d+' m',
+      why:'aire du rectangle : '+vv+'×'+T+' = '+d+' m'};
+  }
+  if(r<0.82){
+    var a=pick([2,3,4]), b=pick([1,3,5,7]);
+    var okS=(2*a)+'t + '+b;
+    var s3={}; s3[okS]=1; var o3=[okS];
+    [a+'t + '+b,(2*a)+'t + '+(b+2),a+'t² + '+b].forEach(function(s){ if(!s3[s]&&o3.length<4){ s3[s]=1; o3.push(s); } });
+    return {q:'x(t) = '+a+'t² + '+b+'t  →  v(t) = ?', opts:shuffle(o3), ok:okS,
+      why:a+'t² → '+(2*a)+'t, et '+b+'t → '+b};
+  }
+  var qs=[
+    {q:'Au SOMMET d\u2019une trajectoire, la vitesse vaut…', ok:'0 (tangente horizontale)', opts:['0 (tangente horizontale)','sa valeur maximale','−10 m/s','l\u2019altitude']},
+    {q:'L\u2019unité de l\u2019accélération :', ok:'m/s²', opts:['m/s²','m/s','m²/s','s/m']},
+    {q:'a(t) est la dérivée…', ok:'seconde de la position x(t)', opts:['seconde de la position x(t)','de l\u2019altitude par la masse','du temps','de rien du tout']},
+    {q:'La distance parcourue se lit sur v(t) comme…', ok:'l\u2019aire sous la courbe', opts:['l\u2019aire sous la courbe','la pente au départ','le point le plus haut','la longueur du trait']}
+  ];
+  var it=qs[(Math.random()*qs.length)|0];
+  var o4=it.opts.slice(); for(var k2=o4.length-1;k2>0;k2--){ var j=(Math.random()*(k2+1))|0; var t2=o4[k2]; o4[k2]=o4[j]; o4[j]=t2; }
+  return {q:it.q, opts:o4, ok:it.ok, why:''};
+}
+function g3Round(){
+  g3State.cur=g3Rand(); g3State.locked=false;
+  el('gProg').textContent='lecture '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ '+(g3State.cur.why||'Télémesure confirmée !'); }
+  else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était : '+g3State.cur.ok+(g3State.cur.why?' ('+g3State.cur.why+')':'');
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='✓ '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='défi terminé';
+      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'🛰️ Ingénieur télémesure confirmé !':(g3State.hits>=3?'La salle de contrôle tient bon.':'Retourne réviser tes pentes…');
+    } else { g3Round(); }
+  }, 1000);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none'; g3Round();
+});
+
+/* ============ EX4 : poussée réglable ============ */
+var aPousse=10;
+(function(){
+  var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0, BURN=6;
+  el('pSlider').addEventListener('input',function(){ aPousse=+this.value; el('pVal').textContent=aPousse+' m/s²'; });
+  function step(){
+    T+=0.033;
+    var vf=BURN*aPousse, hf=0.5*aPousse*BURN*BURN;
+    var tc=(T*1.8)%(BURN+1.6), tt=Math.min(BURN,tc);
+    var hh=0.5*aPousse*tt*tt;
+    g.clearRect(0,0,cv.width,cv.height);
+    // fusée
+    var hx=110, ground=200;
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(50,ground); g.lineTo(180,ground); g.stroke();
+    var fy=ground-16-hh*(160/720);
+    g.fillStyle='#2E6A8E';
+    g.beginPath(); g.moveTo(hx,fy-16); g.lineTo(hx-8,fy+8); g.lineTo(hx+8,fy+8); g.closePath(); g.fill();
+    g.fillRect(hx-6,fy+8,12,16);
+    if(tt<BURN){ g.fillStyle='#BD8A2A'; g.beginPath(); g.moveTo(hx-5,fy+24); g.lineTo(hx,fy+32+3*Math.sin(T*22)); g.lineTo(hx+5,fy+24); g.closePath(); g.fill(); }
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('banc d\u2019essai',115,ground+20);
+    // valeurs + jauges
+    var bx=280;
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('v finale = a × 6 = '+vf+' m/s',bx,44);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('la pente de v, c\u2019est a',bx,64);
+    g.fillStyle='#eee6d6'; g.fillRect(bx,74,320,16);
+    g.fillStyle='#3D7E5F'; g.fillRect(bx,74,320*Math.min(1,vf/240),16);
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+    g.fillText('h finale = ½ × a × 6² = '+hf+' m',bx,128);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('l\u2019aire du triangle sous v',bx,148);
+    g.fillStyle='#eee6d6'; g.fillRect(bx,158,320,16);
+    g.fillStyle='#2E6A8E'; g.fillRect(bx,158,320*Math.min(1,hf/720),16);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ EX6 : rapport de mission (vol complet) ============ */
+(function(){
+  var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var T=0, TM=20;
+  function fv(t){ return t<5? 20*t : Math.max(-999,100-10*(t-5)); }
+  function fh(t){ if(t<5) return 10*t*t; var u=t-5; return 250+100*u-5*u*u; }
+  function step(){
+    T+=0.033; var tc=(T*2.2)%(TM+2), tt=Math.min(TM,tc);
+    g.clearRect(0,0,cv.width,cv.height);
+    // bande v(t)
+    var X0=180, W=620, Y0=190, H=140;
+    function PX(t2){ return X0+W*t2/TM; }
+    function PYv(v2){ return Y0 - (v2+40)*(H/150); }
+    g.strokeStyle='#5C544B'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(X0,Y0-H); g.lineTo(X0,Y0); g.stroke();
+    g.beginPath(); g.moveTo(X0,PYv(0)); g.lineTo(X0+W,PYv(0)); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('v (m/s)',X0+6,Y0-H+12);
+    g.textAlign='right'; g.fillText('100',X0-8,PYv(100)+4); g.fillText('0',X0-8,PYv(0)+4); g.textAlign='left';
+    for(var s=0;s<=20;s+=5){ g.fillStyle='#a89e8c'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(s+' s',PX(s),PYv(0)+16); }
+    g.textAlign='left';
+    // aires
+    if(tt>0){
+      g.fillStyle='rgba(61,126,95,.16)';
+      g.beginPath(); g.moveTo(PX(0),PYv(0));
+      for(var k=0;k<=80;k++){ var t3=Math.min(tt,5)*k/80; g.lineTo(PX(t3),PYv(fv(t3))); }
+      g.lineTo(PX(Math.min(tt,5)),PYv(0)); g.closePath(); g.fill();
+      if(tt>5){
+        var t15=Math.min(tt,15);
+        g.fillStyle='rgba(46,106,142,.16)';
+        g.beginPath(); g.moveTo(PX(5),PYv(0));
+        for(var k2=0;k2<=80;k2++){ var t4=5+(t15-5)*k2/80; g.lineTo(PX(t4),PYv(fv(t4))); }
+        g.lineTo(PX(t15),PYv(0)); g.closePath(); g.fill();
+      }
+    }
+    // courbe v
+    g.strokeStyle='#3D7E5F'; g.lineWidth=3.2; g.beginPath();
+    for(var k3=0;k3<=200;k3++){ var t5=TM*k3/200; if(t5>tt)break;
+      var y=PYv(fv(t5)); if(k3===0)g.moveTo(PX(t5),y); else g.lineTo(PX(t5),y); }
+    g.stroke();
+    // repères
+    if(tt>=5){ g.fillStyle='#C0492E'; g.beginPath(); g.arc(PX(5),PYv(100),6,0,7); g.fill();
+      g.font='700 11px "JetBrains Mono",monospace'; g.fillText('✂ coupure',PX(5)-28,PYv(100)-12); }
+    if(tt>=15){ g.fillStyle='#BD8A2A'; g.beginPath(); g.arc(PX(15),PYv(0),6,0,7); g.fill();
+      g.fillText('sommet : v = 0',PX(15)-40,PYv(0)-12); }
+    // curseur
+    g.strokeStyle='#C0492E'; g.lineWidth=1.6; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(PX(tt),Y0-H); g.lineTo(PX(tt),Y0+8); g.stroke(); g.setLineDash([]);
+    // fusée à gauche (h)
+    var ground=300, hx=80;
+    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(30,ground); g.lineTo(140,ground); g.stroke();
+    var hh=Math.max(0,fh(tt));
+    var fy=ground-16-hh*(250/760);
+    g.fillStyle= tt<5? '#8A5A7A':'#2E6A8E';
+    g.beginPath(); g.moveTo(hx,fy-16); g.lineTo(hx-8,fy+8); g.lineTo(hx+8,fy+8); g.closePath(); g.fill();
+    g.fillRect(hx-6,fy+8,12,16);
+    if(tt<5){ g.fillStyle='#BD8A2A'; g.beginPath(); g.moveTo(hx-5,fy+24); g.lineTo(hx,fy+32); g.lineTo(hx+5,fy+24); g.closePath(); g.fill(); }
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('h = '+Math.round(hh)+' m',85,ground+18);
+    g.textAlign='left';
+    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('t = '+tt.toFixed(1).replace('.',',')+' s',X0+270,306);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ============ correction & remise ============ */
+var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
+el('submit').addEventListener('click',function(){
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
+  if(!g3State.done){ alert('Termine d\u2019abord le défi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=(el('s1a').value==='l\u2019accélération est constante : la pente de v ne change pas');
+  var ok1b=Math.abs(numf(el('n1b').value)-25)<1;
+  var ok1c=(el('s1c').value==='c\u2019est la primitive d\u2019une droite : l\u2019aire sous v s\u2019accumule de plus en plus vite');
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol">a constante → v(t) droite (pente fixe) → a = 200/8 = <b>25 m/s²</b>. Et h(t) est la primitive de cette droite : une <b>parabole</b>, l\u2019aire qui s\u2019accumule de plus en plus vite. L\u2019escalier du cours, en vol.</div>';
+  /* EX2 */
+  var v2a=numf(el('n2a').value);
+  var ok2a=Math.abs(v2a-(-8))<0.5;
+  var ok2b=Math.abs(numf(el('n2b').value)-80)<3;
+  var ok2c=(el('s2c').value==='de moins en moins vite : sa pente s\u2019adoucit');
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">a = (8−40)/4 = <b>−8 m/s²</b> (le signe − dit que v diminue). Palier : aire = 8×10 = <b>80 m</b>. Et h descend <b>de moins en moins vite</b> : sa pente, c\u2019est v, qui passe de 40 à 8.</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">Pente = Δx/Δt · distance = aire sous v · at² se dérive en 2at · sommet ⇔ v = 0 · a en m/s².</div>';
+  /* EX4 */
+  var ok4a=Math.abs(numf(el('n4a').value)-150)<3;
+  var ok4b=(el('s4b').value==='la vitesse finale ET l\u2019altitude doublent toutes les deux');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">v = 25×6 = <b>150 m/s</b>. Et v = 6a comme h = 18a sont <b>proportionnelles à a</b> : doubler la poussée double les deux — tu l\u2019as vu aux jauges.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='au sommet la tangente est horizontale : v = 0 ; le max de vitesse est atteint à la coupure moteur');
+  var ok5b=Math.abs(numf(el('n5b').value)-0)<0.5;
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">Sommet de h(t) → tangente horizontale → <b>v = 0</b>. La vitesse MAXIMALE, elle, est atteinte à la <b>coupure moteur</b>, jamais au sommet. Le réflexe n°2 du cours vient de sauver le rapport.</div>';
+  /* EX6 */
+  var ok6a=Math.abs(numf(el('n6a').value)-100)<3;
+  var ok6b=Math.abs(numf(el('n6b').value)-15)<0.5;
+  var ok6c=Math.abs(numf(el('n6c').value)-750)<20;
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">v(5) = 20×5 = <b>100 m/s</b> · le sommet quand v = 0 : 5 + 100/10 = <b>15 s</b> · altitude = aire du triangle vert (½×5×100 = 250) + aire du triangle bleu (½×10×100 = 500) = <b>750 m</b>. Mission chiffrée de bout en bout, aux pentes et aux aires.</div>';
+  /* total */
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'Le centre de contrôle te confie la prochaine mission !':(score>=8?'Bonne télémesure — revois les postes en rouge.':'Retourne t\u2019entraîner au simulateur du cours.');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin, #pSlider').forEach(function(x){ x.disabled=true; });
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
+  else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
+});
+
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 ascension','Ex2 parachute','Ex3 défi','Ex4 poussée','Ex5 erreur','Ex6 rapport'];
+el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
+el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
+el('refresh') && el('refresh').addEventListener('click',loadDash);
+function loadDash(){
+  if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
+  db.ref(NODE).once('value').then(function(snap){
+    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
+    var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:130px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('perQ').innerHTML=pq;
+    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+  }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
+}
+</script>
+</body>
+</html>
