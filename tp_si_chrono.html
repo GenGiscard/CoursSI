@@ -14,7 +14,7 @@
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
   .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
-  .estic-bar .logo{width:30px;height:30px;flex:none}
+  .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
   .estic-bar .who{font-weight:800;font-size:14px}
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
@@ -56,11 +56,23 @@
   .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
   .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
   a{color:var(--steel)}
+  /* --- calculatrice flottante --- */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
   <div class="estic-bar">
-    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C0492E" stroke-width="2.5"/><path d="M20 8 v6 M20 26 v6 M8 20 h6 M26 20 h6 M11.5 11.5 l4 4 M24.5 24.5 l4 4 M28.5 11.5 l-4 4 M15.5 24.5 l-4 4" stroke="#2E6A8E" stroke-width="2.4" stroke-linecap="round"/><circle cx="20" cy="20" r="5" fill="#BD8A2A"/></svg>
+    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
     <div class="rt">TP — Lire un chronogramme<br>© ESTIC — Tous droits réservés</div>
   </div>
@@ -137,9 +149,50 @@
     </section>
   </div>
 
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
 <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=document.getElementById('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  document.getElementById('calcToggle').addEventListener('click',function(){ document.getElementById('calc').classList.toggle('show'); });
+  document.getElementById('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
 /* ---------- traceur de chronogrammes ---------- */
