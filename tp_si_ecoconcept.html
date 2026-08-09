@@ -58,6 +58,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -103,7 +108,8 @@
         </svg>
       </div>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol">Extraire, c’est <b>prélever des ressources</b> (souvent non renouvelables) · pour un produit qui consomme de l’énergie, l’<b>utilisation</b> pèse souvent le plus lourd sur la vie entière · la fin de vie idéale <b>reboucle</b> : recycler plutôt qu’enfouir.</div>
     </section>
@@ -111,9 +117,10 @@
     <section class="exo-card" id="b">
       <h2><span class="num">B</span> La pesée des matériaux ⚖️</h2>
       <p class="task">🎯 Le support à concevoir occupe un volume de 0,001 m³ (1 litre). Masses volumiques : acier 7800 kg/m³ · aluminium 2700 kg/m³.</p>
-      <div class="row"><span>a) En acier : m = 7800 × 0,001 =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
-      <div class="row"><span>b) En aluminium : m = 2700 × 0,001 =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><span>a) Masse du support s’il est en acier : m =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
+      <div class="row"><span>b) Et s’il est en aluminium : m =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> 7800 × 0,001 = <b>7,8 kg</b>. <b>b)</b> 2700 × 0,001 = <b>2,7 kg</b> — près de <b>3 fois plus léger</b> à volume égal. C’est cette équerre alu que tu vas alléger encore à l’exercice suivant.</div>
     </section>
@@ -279,6 +286,30 @@ var evCur=0;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Suis la matière dans l\u2019ordre du cycle : tout commence par l\u2019<b>extraction</b> des matières premières, souvent non renouvelables.',
+  'Viennent la fabrication et le transport… puis l\u2019<b>utilisation</b> : pour un produit qui consomme de l\u2019énergie, c\u2019est souvent LA phase la plus impactante (des années de consommation cumulées).',
+  'En fin de vie, la meilleure option referme la boucle : <b>recycler</b> la matière pour repartir au début du cycle.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Repère les données : volume V = 0,001 m³ (1 litre) ; masses volumiques ρ : acier 7800 kg/m³, aluminium 2700 kg/m³.',
+  'La masse se calcule par <b>m = ρ × V</b> : des kg/m³ multipliés par des m³ donnent des kg.',
+  'Acier : m = 7800 × 0,001 = <b>7,8 kg</b>.',
+  'Aluminium : m = 2700 × 0,001 = <b>2,7 kg</b> — près de 3 fois plus léger, à volume identique.'
+]);
+
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -305,7 +336,8 @@ buildMatch('aMatch','a',A_SCEN);
 lockExo('aCheck','aShow','aSol','aFb',function(){
   var ok=checkMatch('a',A_SCEN);
   if(ok) return {ok:true,msg:'✓ Cycle de vie cartographié — la boucle est bouclée.'};
-  return {ok:false,msg:'✗ Repense chaque phase : d\u2019où vient la matière, où part le produit ?'};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Repense chaque phase — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* B */
@@ -313,7 +345,8 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-7.8)<0.2, okB=Math.abs(b-2.7)<0.15;
   if(okA&&okB) return {ok:true,msg:'✓ 7,8 kg contre 2,7 kg : l\u2019alu part favori.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (m = ρ × V)')+' '+(okB?'b✓':'b✗ (m = ρ × V)')};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (m = ρ × V)')+' '+(okB?'b✓':'b✗ (m = ρ × V)')+' — pas à pas débloqué 🪜'};
 });
 
 /* C */

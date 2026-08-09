@@ -58,6 +58,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -78,7 +83,8 @@
       <h2><span class="num">A</span> Les 4 fonctions d'une perceuse</h2>
       <p class="task">🎯 Associe chaque composant à la fonction qu'il assure dans la chaîne de puissance.</p>
       <div class="match" id="match"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>Batterie 18 V</b> → <b>Alimenter</b> · <b>Gâchette + variateur</b> → <b>Distribuer</b> · <b>Moteur électrique</b> → <b>Convertir</b> · <b>Réducteur (engrenages)</b> → <b>Transmettre</b>.<br>L'ordre part de la gâchette (chaîne d'information) ; le variateur module l'énergie de la batterie vers le moteur.</div>
     </section>
@@ -89,7 +95,8 @@
       <div class="row"><span>a) Rapport de réduction (Z₁/Z₂) :</span><input class="numin" id="bR" inputmode="decimal" placeholder="?"></div>
       <div class="row"><span>b) Vitesse de sortie :</span><input class="numin" id="bN" inputmode="numeric" placeholder="?"><span class="unit">tr/min</span></div>
       <div class="row"><span>c) Couple de sortie :</span><input class="numin" id="bC" inputmode="numeric" placeholder="?"><span class="unit">N·m</span></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> Z₁/Z₂ = 15/45 = <b>1/3 ≈ 0,33</b>.<br><b>b)</b> vitesse sortie = 3000 × 1/3 = <b>1000 tr/min</b> (ça tourne moins vite).<br><b>c)</b> couple sortie = 2 × (Z₂/Z₁) = 2 × 3 = <b>6 N·m</b> (le couple augmente : vitesse ↓, couple ↑).</div>
     </section>
@@ -190,12 +197,38 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
     d.innerHTML='<span class="sc">'+s.sc+'</span><select id="sel'+i+'">'+opts+'</select>'; box.appendChild(d); });
   el('aCheck').addEventListener('click',function(){
     var all=true; scen.forEach(function(s,i){ var v=el('sel'+i).value; var good=(v===s.ok); if(!good)all=false; el('m'+i).className='m '+(good?'ok':'no'); });
-    el('aFb').className='exo-fb '+(all?'ok':'no'); el('aFb').textContent=all?'✓ Toutes les fonctions sont bien identifiées !':'✗ Certaines associations sont fausses — voir la correction.'; el('aShow').disabled=false;
+    el('aFb').className='exo-fb '+(all?'ok':'no'); el('aFb').textContent=all?'✓ Toutes les fonctions sont bien identifiées !':'✗ Certaines associations sont fausses — la résolution pas à pas est débloquée 🪜'; el('aShow').disabled=false; if(!all) el('aStepBtn').disabled=false;
   });
   el('aShow').addEventListener('click',function(){ if(!el('aShow').disabled) el('aSol').classList.add('show'); });
 })();
 
 /* ---- helper corrections verrouillées ---- */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Suis l\u2019énergie dans son ordre de marche : elle entre par la batterie 18 V, qui <b>ALIMENTE</b> la chaîne.',
+  'La gâchette et son variateur <b>DISTRIBUENT</b> : ils dosent l\u2019énergie envoyée au moteur.',
+  'Le moteur électrique <b>CONVERTIT</b> l\u2019énergie électrique en énergie mécanique de rotation.',
+  'Le réducteur <b>TRANSMET</b> cette rotation en l\u2019adaptant (moins vite, plus de couple) jusqu\u2019au mandrin.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Données : Z₁ = 15 dents (entrée), Z₂ = 45 dents (sortie), N₁ = 3000 tr/min, C₁ = 2 N·m.',
+  'Rapport de réduction : <b>r = Z₁/Z₂</b> = 15/45 = 1/3.',
+  'La sortie tourne r fois la vitesse d\u2019entrée : N₂ = 3000 × 1/3 = <b>1000 tr/min</b>.',
+  'Le couple fait le chemin inverse : C₂ = C₁ × 3 = <b>6 N·m</b>.',
+  'Vitesse ÷3, couple ×3 : la puissance se conserve (idéalement) — c\u2019est tout l\u2019intérêt du réducteur.'
+]);
+
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
   el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
   el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
@@ -205,7 +238,7 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var r=numf(el('bR').value), n=numf(el('bN').value), c=numf(el('bC').value);
   var okR=Math.abs(r-1/3)<0.03, okN=Math.abs(n-1000)<10, okC=Math.abs(c-6)<0.2;
   if(okR&&okN&&okC) return {ok:true,msg:'✓ Parfait : 1/3 · 1000 tr/min · 6 N·m.'};
-  return {ok:false,msg:'✗ '+(okR?'a✓':'a✗')+' '+(okN?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
+  el('bStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okR?'a✓':'a✗')+' '+(okN?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
 });
 /* ---- C ---- */
 lockExo('cCheck','cShow','cSol','cFb',function(){

@@ -63,6 +63,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -83,7 +88,8 @@
       <h2><span class="num">A</span> Les deux vies du réseau 🧠</h2>
       <p class="task">🎯 Le réseau de neurones du robot vit deux périodes très différentes. Remets chacune à sa place.</p>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>Entraînement</b> (au labo) : le réseau ajuste ses paramètres sur des milliers de photos étiquetées · <b>inférence</b> (dans le champ) : il applique ce qu’il sait, figé, sur des plantes jamais vues · et toujours dans cet ordre : on apprend AVANT de décider.</div>
     </section>
@@ -91,10 +97,11 @@
     <section class="exo-card" id="b">
       <h2><span class="num">B</span> Le jeu de données 📸</h2>
       <p class="task">🎯 Le club a photographié et étiqueté 2000 plantes. Règle d'or : 80 % pour entraîner, 20 % mis de côté pour tester.</p>
-      <div class="row"><span>a) Photos d'entraînement : 2000 × 0,8 =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
-      <div class="row"><span>b) Photos de test : 2000 × 0,2 =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
+      <div class="row"><span>a) Combien de photos pour l’entraînement ?</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
+      <div class="row"><span>b) Combien de photos pour le test ?</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> <b>1600</b> pour apprendre. <b>b)</b> <b>400</b> gardées sous clé pour le contrôle final : le réseau ne doit JAMAIS les voir pendant l’entraînement — sinon c’est réciter par cœur, pas comprendre.</div>
     </section>
@@ -268,6 +275,30 @@ var seuil=30;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Repère la période d\u2019apprentissage : l\u2019<b>ENTRAÎNEMENT</b> ajuste les paramètres du réseau sur des photos déjà étiquetées (au labo).',
+  'Repère la période d\u2019usage : l\u2019<b>INFÉRENCE</b> prédit sur des plantes jamais vues, sans plus rien apprendre (au potager).',
+  'L\u2019ordre est immuable : entraînement d\u2019abord, inférence ensuite — on n\u2019envoie pas un réseau vierge au champ.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Repère les données : 2000 photos étiquetées, règle de partage 80 % / 20 %.',
+  'Entraînement : 80 % du total → 2000 × 0,8 = <b>1600 photos</b>.',
+  'Test : les 20 % restants → 2000 × 0,2 = <b>400 photos</b>.',
+  'Pourquoi séparer ? Les 400 photos de test n\u2019ont JAMAIS servi à apprendre : elles jugent le réseau sans tricherie possible.'
+]);
+
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -294,7 +325,8 @@ buildMatch('aMatch','a',A_SCEN);
 lockExo('aCheck','aShow','aSol','aFb',function(){
   var ok=checkMatch('a',A_SCEN);
   if(ok) return {ok:true,msg:'✓ Le réseau apprend au labo, décide au potager.'};
-  return {ok:false,msg:'✗ Qui apprend ? Qui décide ? Dans quel ordre ?'};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Qui apprend ? Qui décide ? — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* B */
@@ -306,7 +338,8 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-1600)<10, okB=Math.abs(b-400)<5, okM=checkMatch('b',B_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 1600 pour apprendre, 400 sous scellés pour juger.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (×0,8)')+' '+(okB?'b✓':'b✗ (×0,2)')+' '+(okM?'c✓':'c✗')};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (80 % du total)')+' '+(okB?'b✓':'b✗ (le reste)')+' '+(okM?'c✓':'c✗')+' — pas à pas débloqué 🪜'};
 });
 
 /* C */

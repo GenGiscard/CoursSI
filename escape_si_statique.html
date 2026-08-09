@@ -1,0 +1,2553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LE CHANTIER SCELLÉ — escape game statique · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A;
+    --night:#0e1219; --panel:#1a212e; --panel2:#212a3a; --edge:#33405a;
+    --neonA:#f0b558; --neonC:#7fd6e8; --neonG:#6ee3a0; --neonR:#e87060; --txt:#e9e4d8; --dim:#98a1b8; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--night);color:var(--txt);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55;
+       background-image:radial-gradient(ellipse at 50% -10%, #1c2433 0%, #0e1219 62%);min-height:100vh}
+  /* grain + vignette d'ambiance */
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:60;
+    background:radial-gradient(ellipse at center, transparent 52%, rgba(0,0,0,.55) 100%);}
+  #grain{position:fixed;inset:0;pointer-events:none;z-index:59;opacity:.055;mix-blend-mode:overlay}
+
+  .estic-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line);color:var(--ink)}
+  .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:960px;margin:0 auto;padding:16px clamp(12px,4vw,28px) 90px;position:relative;z-index:2}
+
+  /* ---------- cinématique plein écran ---------- */
+  #cine{position:fixed;inset:0;z-index:70;background:#05070b;display:none;flex-direction:column;align-items:center;justify-content:center;padding:16px}
+  #cine.on{display:flex}
+  #cine .frame{width:100%;max-width:940px;border:1px solid #26314a;border-radius:14px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.75);background:#05070b}
+  #cine canvas{width:100%;height:auto;display:block}
+  #cine .sub{width:100%;max-width:940px;min-height:74px;margin-top:14px;font-size:clamp(16px,2.1vw,20px);color:#dfd8c8;line-height:1.5}
+  #cine .sub .cur{color:var(--neonA)}
+  #cine .bar{width:100%;max-width:940px;height:3px;background:#1b2334;border-radius:3px;margin-top:10px;overflow:hidden}
+  #cine .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--neonA),var(--neonC))}
+  #cine .ctl{width:100%;max-width:940px;display:flex;gap:10px;margin-top:12px}
+  #cine .ctl .sp{margin-left:auto}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;
+       color:#0e1219;background:var(--neonC);border:none;border-radius:9px;padding:11px 17px;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)}
+  .btn:disabled{opacity:.35;cursor:not-allowed}
+  .btn.ghost{background:none;color:var(--dim);border:1px solid var(--edge)}
+  .btn.ghost:hover{color:var(--txt);border-color:var(--neonA)}
+  .btn.big{background:linear-gradient(90deg,var(--neonG),var(--neonC));font-size:15px;padding:15px 28px}
+
+  /* ---------- HUD ---------- */
+  .hud{position:sticky;top:49px;z-index:25;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+       background:rgba(20,26,38,.93);border:1px solid var(--edge);border-radius:14px;padding:9px 13px;margin-bottom:14px;backdrop-filter:blur(7px)}
+  .hud .lab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+  .rooms{display:flex;gap:6px}
+  .rooms .r{width:29px;height:29px;border-radius:8px;border:1px solid var(--edge);background:#161d29;display:flex;align-items:center;justify-content:center;
+            font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#59637d}
+  .rooms .r.cur{border-color:var(--neonA);color:var(--neonA);box-shadow:0 0 12px rgba(240,181,88,.3)}
+  .rooms .r.done{border-color:var(--neonG);color:var(--neonG);background:#16281f}
+  .hud .frags{display:flex;gap:5px;margin-left:auto;align-items:center}
+  .frags .f{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;width:29px;height:29px;border-radius:8px;
+            border:1px dashed var(--edge);color:#4d566e;display:flex;align-items:center;justify-content:center}
+  .frags .f.got{border:1px solid var(--neonC);color:var(--neonC);background:#152833;box-shadow:0 0 10px rgba(127,214,232,.22)}
+  .hud .hints{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+  .hud .hints b{color:var(--neonA)}
+
+  /* ---------- décor de salle ---------- */
+  .room{display:none} .room.on{display:block}
+  .decor{position:relative;border:1px solid #2a3550;border-radius:16px;overflow:hidden;margin-bottom:6px;box-shadow:inset 0 0 60px rgba(0,0,0,.6), 0 10px 30px rgba(0,0,0,.5)}
+  .decor canvas{width:100%;height:auto;display:block}
+  .decor .plaque{position:absolute;left:14px;bottom:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+                 color:#cbb994;text-transform:uppercase;background:rgba(10,14,20,.55);border:1px solid #3a4763;border-radius:20px;padding:5px 12px}
+  .narrbar{background:#141a26;border:1px solid var(--edge);border-left:3px solid var(--neonC);border-radius:0 10px 10px 0;
+           padding:11px 16px;margin:0 0 16px;font-size:16px;color:#cfd6e4;min-height:52px}
+  .narrbar .cur{color:var(--neonA)}
+
+  .roomhead{background:linear-gradient(135deg,#1a2231,#241f2e);border:1px solid var(--edge);border-radius:16px;padding:18px 22px;margin:14px 0;position:relative;overflow:hidden}
+  .roomhead::after{content:'';position:absolute;right:-60px;top:-90px;width:250px;height:250px;border-radius:50%;
+                   background:radial-gradient(circle,rgba(240,181,88,.16),transparent 68%)}
+  .roomhead .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--neonA);text-transform:uppercase}
+  .roomhead h2{font-size:clamp(22px,3.6vw,32px);margin:6px 0 6px;font-weight:800}
+  .roomhead p{color:#c3bcae;max-width:66ch;margin:0;position:relative}
+
+  .puz{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--edge);border-radius:16px;padding:18px 20px;margin:16px 0;position:relative}
+  .puz::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;border-radius:16px 16px 0 0;
+               background:linear-gradient(90deg,transparent,rgba(240,181,88,.5),transparent)}
+  .puz.solved{border-color:var(--neonG)} .puz.solved::before{background:linear-gradient(90deg,transparent,rgba(110,227,160,.6),transparent)}
+  .puz h3{font-size:19px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .puz h3 .n{font-family:'JetBrains Mono',monospace;font-size:13px;color:#0e1219;background:var(--neonA);border-radius:7px;padding:3px 9px}
+  .puz h3 .st{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--dim)}
+  .puz h3 .st.ok{color:var(--neonG)}
+  .brief{background:#161d2a;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:16px;color:#d8d2c4}
+  .scene{background:#0f141d;border:1px solid #2a3550;border-radius:12px;padding:10px;margin:10px 0}
+  .scene canvas,.scene svg{width:100%;height:auto;display:block;max-width:700px;margin:0 auto}
+  .slider-row{display:flex;gap:12px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .slider-row label{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)}
+  .slider-row input[type=range]{flex:1;min-width:180px;accent-color:var(--neonA)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;color:var(--neonA);min-width:106px;text-align:right}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:120px;padding:9px 11px;border:1px solid var(--edge);border-radius:8px;text-align:right;background:#111722;color:var(--txt);outline:none}
+  .numin:focus{border-color:var(--neonC)}
+  .unit{color:var(--dim);margin-left:4px}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--edge);border-radius:8px;background:#111722;color:var(--txt);max-width:100%}
+  .fb{font-family:'JetBrains Mono',monospace;font-size:14px;margin-top:10px;min-height:20px;color:var(--dim)}
+  .fb.ok{color:var(--neonG)} .fb.no{color:var(--neonR)}
+  .hintbox{display:none;margin-top:10px} .hintbox.show{display:block}
+  .hintline{background:#241d30;border:1px solid #453a5c;border-left:3px solid var(--plum);border-radius:9px;padding:10px 14px;margin:7px 0;font-size:15px;color:#ded3ea}
+  .hintline .hn{font-family:'JetBrains Mono',monospace;font-size:11px;color:#b79ad0;letter-spacing:.1em;display:block;margin-bottom:2px}
+  .frag{display:none;margin-top:12px;background:#132630;border:1px solid var(--neonC);border-radius:12px;padding:12px 18px;text-align:center}
+  .frag.show{display:block;animation:fragIn .7s ease}
+  @keyframes fragIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+  .frag .t{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--neonC);text-transform:uppercase}
+  .frag .d{font-family:'JetBrains Mono',monospace;font-size:44px;font-weight:700;color:var(--neonC);line-height:1.15;text-shadow:0 0 20px rgba(127,214,232,.55)}
+  .frag .w{font-size:14px;color:#a9c4cf}
+
+  .lock{background:linear-gradient(160deg,#1e2636,#2a2130);border:1px solid var(--edge);border-radius:18px;padding:20px;margin:22px 0;text-align:center;position:relative;overflow:hidden}
+  .lock h3{font-size:20px;margin:0 0 6px;font-weight:800}
+  .lock p{color:var(--dim);font-size:15px;margin:0 0 14px}
+  .dials{display:flex;gap:12px;justify-content:center;margin-bottom:12px}
+  .dials input{width:62px;height:76px;font-family:'JetBrains Mono',monospace;font-size:33px;font-weight:700;text-align:center;
+               background:#101622;color:var(--neonA);border:2px solid var(--edge);border-radius:12px;outline:none}
+  .dials input:focus{border-color:var(--neonA);box-shadow:0 0 14px rgba(240,181,88,.28)}
+  .lock.open .dials input{border-color:var(--neonG);color:var(--neonG)}
+  .door{display:none;margin-top:14px} .door.show{display:block}
+  .sealed{background:#141a26;border:1px dashed var(--edge);border-radius:14px;padding:16px 18px;margin:12px 0;color:#6f7a94;font-size:15px;display:flex;gap:14px;align-items:center}
+  .sealed .ic{font-size:26px;flex:none;opacity:.7}
+  .sealed b{color:#93a0bd;display:block;font-size:16px}
+
+  /* incident de chantier */
+  @keyframes shakeIt{
+    0%{transform:translate(0,0)} 12%{transform:translate(-7px,3px)} 25%{transform:translate(6px,-4px)}
+    38%{transform:translate(-5px,-2px)} 52%{transform:translate(4px,4px)} 68%{transform:translate(-3px,1px)}
+    84%{transform:translate(2px,-1px)} 100%{transform:translate(0,0)} }
+  body.shake{animation:shakeIt .62s ease-in-out}
+  #blackout{position:fixed;inset:0;z-index:58;pointer-events:none;background:#05070b;opacity:0;transition:opacity .12s linear}
+  #blackout.on{opacity:.92}
+  #blackout.half{opacity:.55}
+  .scaretoggle{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    background:#161d29;border:1px solid var(--edge);color:var(--dim);border-radius:20px;padding:5px 11px;cursor:pointer}
+  .scaretoggle.on{border-color:var(--neonR);color:var(--neonR)}
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--edge);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.6);padding:10px;display:none;color:var(--ink)}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;color:var(--ink)}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+  <canvas id="grain" width="180" height="180" aria-hidden="true"></canvas>
+  <div id="blackout" aria-hidden="true"></div>
+
+  <div class="estic-bar">
+    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAABACAYAAABVy1Q8AAALHklEQVR42u1aWXAc1RU9973unp7FGsuSsSUWmcVAXECB2UwIyGYNYBxSYexYmH1NsNkJBOPIsiHGUGFzPlIkgbiMsZECBEwgVIUYhWI3S7GGIgkEW8SWrW00mtF093s3Hz1jy9JskkeQAl6VPjQ10/1O33PPPfe+pvEnzGOM0iIALoBqAtZEGWOI4GU+L/vSDBG2Ybieh9EG5BLAo4ZkByD2PBhENKqACADRgH9G9WYEga/ZMvKBlVKW5aExAIMAkn6kyhUoVqo0QATA0xqd8UTZAIEAlwFPoGyiIMPhDJcLACIiuK6HidWVuO3KeWW5sQYQJKDOAmwAelcuyuyD8Dxse3wdVKIPJKX/eW5AgOspVI+twII5M/+vc6Xz2b9CxXuBQakxlHLkU871PJRTAWU5LpKJEDvOTlEpSRQMKTGakr5LlCsgWF872f5m1KFSllIaDB6dHCICCfHlApJSfL0i9PAz69HW3gnLNMHMBetQCIyzbEYABF2osBKBXQdWbS2ixx/rV2UaZUDZe9yz+km89fZHEKEgtNYFnUIlAVPHAlEq4hSEgO5LoOK70zKAOKcbGJUIVVZEEK6MIlIEULYfMqO+p0MxQKbh25qvQhQ8peApVRCQB8AjgBXAhMIywgxWCpznet9I2f4W0Ne2sBLRTn9FW/BhFOFsLkGzn3iDzanS5QfkuB7SjgvTMIqqnCOGcStmkGH4fU4ee0FBmVfORwxoQlUl9qrZDaFgAKy5IKBx0CDdUxoYy0L/xk3Y/MBDmRaBdq6CRGCloBN9vj0aVNSHDSh7+dW3XwetuSS773V1o+3am6BS/UM6zCGATBNu+1Zsa3liYBM/qFQTZDgE5PB7I46QbVml16ygPWRrxShnRKPlGZIMp9cqusVMhFSemxcVhS9X5VCacyyggt/WodGMUKGWYRAvS/vuMBu8sudQSTTKfMc0jGGBYc+DSqYKSm1Jg8bhrHhfEp5ShYFlRaEnjpKCRAR2XVi1NYhOPy5HP+RLNiuFrmeeg+5LDpHuETd45yz8Fd744BOEQ8GCdt8DMA6M30sHY4SAx1y4Y3UcBGprMH7u2QX30fPCi1C9icKT0+Gsnt4+bOuOo99xi1ofEMDj5LAot93LiRxebriDxpLUxJAwDaOolwMAc7jmlMh/8pQbUKFB4y6p3MC/QhQdtTPPctahUS2Wu3DtEQNyPQ9SivICy9Qf3oVzXzECrgEAqqJRJHsSUFrBKMPQkaQElIKXSECOjX65EWJmPLT4KjQuOBcEQmc8ASkEhBhBtIQAhICKx0GmiYnzL0fN/Mv8BzeC6xkjzZ3KiggWX96A2ad8D4t/swZ/Wv8qDCkRCQWhtC5udzL00skkGEDFySdgt3lzEKiZ+NV5Oa0ZU/beC83Lb8JTra+h6YG1eOujfyEaCcMyjbxtA0kJdlx4qV7YUw7Ebuc3oGLqoRmPpkG7QOG8gJTWkCJ/0hMRpCRoZoCBWfVH4+Rph+H+Netwz+onsbUrjnEVYQgQwHoHvZjh9cRhjq9C9UXzUHXmaRBSAlpn6o8onsMFnInI95vsCZ5ShaeYgghCEJTWCAYs3HTBj/DyQ8sx74zpSCT7kUimYBgSJCV0MgntOBg78/vY+/67MP6smTvACFFUrjkL2rbzOgUZnHTw4p2AGBJdvQl0xntx+Hf2QzgY2F48C0m0IMo8PI2qsRX44YxpmHbwAfjoszZs+rwNDcJB5SEHoeaGqzB+1umQoZBPL0HF604WiBBwO7uw+XcrkfrwH74yDpyfWAaosn5uTqhd8QQm19Vi4cUxnD/zRJ+GSkOI4h2ozjwAKQRcpbCq+WmcGLZQN+u0nTZYFAhzRu0EWGt0/Pk5dKx9DF77VohIePBNQWEbVFk/N+eRjSElkuk0Uv1pnHT0oWi6ogHTDj5gO7BSDryyeTjkaZdwOjdQHBLvvIstKx9B6v0PIYNBkGUNbfA0A2GbKXr8XBaAAg0d6/n5IdDd2wfLMnDRD07CLRfGMLG6Mv+Gc+awhiCUdsw4ALCzpR1bHn4U8b+1ApohwyE/j4bmD7NibUZsKasOnHqNR0ZIey4TkR4oFJyhTzBgQQqB1jffx2PPvwTbMnHYgftCCgGldWbcS3ltWSk0HUgv7brY9sQ6fHH3Cj8qoRDIMnOqGzMUgUWFaQo3Eu6SF1760zVbu7qDnuYjPYaA0oqIdnrHKFskx4SC6E2m8Pj617B+w3vYu3YC9tl94nY1JEHDf52GGazZjx4Rel7fgLY770XPc8/7pSEU8oEMigoDDM06YhhS2JanqipXBGadOo+y2j3z6qXHv//ppiXxVLredRwI1h6IjJz1RwjE+5IgIpxzej0WXTIHdTW7lUzDgTKcpWH/pja0r1qL+N9fgiABke2EcwFhVhZgBINB9NuBv+gJtbfsv/wXb/s9GDOBZgugRZlS4Mjzb7j0880di/rS3p7a6YcQQiHH2FwKAWZGZzyBmupKXH/uWZg/5wxYpuk3fEQQ+WiW3SQRVKof2x5/Eh1PrAPHE5BjIn7/lJ9ecqxtoz9of87V1Qv3vWfZw1AKHItJNDfveDcqFovJlpYWDYB/uWJl1eoX37ils7vv6pTrSnieIn93Ipcapl0X8UQSRx20PxZfPhenHXu4P09QGnJg/gzIEwDoefFltK9ai/S/P4OMhEGGkXM8xYCGZq6wTJmSst+sqr7Pvu6Ku2v226+9ERCLGxtBTU069+gzFpNoaVEE4Jyb7zr6lY/+uSSeTJ/i7KChHPy7LA17kylorXH2Scei8bIfY/+63XfQMGt9AKQ+/QztKx9B7yuvQ5gmhG0XpJcthGEGAlCRyFPGQfsu2vOaa94FAI7FJLW0qFxt/+DYEqZPl2ht9UwpcNQFNza0belcGk85+yg3DQHKLfOZDXfFE6iKjsFVDWfi2oZZCAdtH1iiD+2PPoaup58FJ/shI2FfcHLYGGYoAZbRgI1UwPxA7lG7eNLyJX+EZqyvrzemv/CCIiLON8fIuRobG0VTUxMA6A0bNkR/ct/qWzZu6VrQ76oglKOJBPLR0PU8dPf24ZDJdVgy/zzMgIP/PrgK7sYvIMdE/M40Z56wBjMqLEukLTMha2vvte9aekcNUR8DAgPoVWgwU3hlaAgAsetvn/Le523LOrr7ZjmOB2LlUR4aGkKgK5nCOGKsizLGSAm2bSB3njCYVUhKg0wTKhJeEzjmsKY9LrnkY59ezZJaZhc9khhG2WBCbLZAS4syCDjqwhtnfdHevay3353iOf05aUgAlCBUA1gbJVQQ5xw0MkMZYBmxbaRt6005eb+ldbf+7MlsnqClWROopOHR8HvcxkaBHTQMnbf8oQVdvcmf9zsqqt209ttwn4sD3yRpjgIVg16NYbBmzRQ1LUoHrA45oXpZx9133H8Ekdsci8kPpkzhpgL0Kg+gHDQ8b+Gd+77x8X+WdsSTcx3HAbRSRH5jkAsQAGbNOiylZDsAEa34g3vw5F9MvvLKjfnUa/QBZX9fXy/R2upJADOuWHTqJxs335ZIO0d4jgMJKJcgBwJywZ4FMsK2jXTIftXYfY+b97ptYSsYWF9fb8xobVW7Mpssz1DNpyEBUMwsD2u4ev7WrsStKUdVp700JgjitVFwFCzGBGwkpWgzqqqb6lYsf5CIVDMgY8w6lwx/NSd4Ps8VYjFJROqdNfffN+ekw6dOmlD5YMCylCKioCBh2YF0alx0BU47Y+qkX9/5WyJSzbGYnA2ocoAZtUEu6usNZAzgMfMbTzh85sXvvTbv0rfal999XPZL6+sbjdG4+f8AiqspSbEV7VUAAAAASUVORK5CYII=" alt="Logo ESTIC">
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Escape game — Statique<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <!-- ============== CINÉMATIQUE ============== -->
+  <div id="cine">
+    <div class="frame"><canvas id="cvCine" width="940" height="460"></canvas></div>
+    <div class="sub" id="cineSub"></div>
+    <div class="bar"><i id="cineBar"></i></div>
+    <div class="ctl">
+      <button class="btn ghost" id="cineSkip">⏭ Passer</button>
+      <button class="btn sp" id="cineNext">Suivant ▸</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hud">
+      <span class="lab">Salles</span>
+      <div class="rooms">
+        <div class="r cur" id="r1">1</div><div class="r" id="r2">2</div><div class="r" id="r3">3</div><div class="r" id="r4">4</div><div class="r" id="r5">5</div>
+      </div>
+      <span class="hints">indices : <b id="hintCount">0</b></span>
+      <button class="scaretoggle on" id="scareBtn" title="Coupe les incidents de chantier (secousses, coupures de courant, grondements)">⚡ incidents : on</button>
+      <button class="scaretoggle" id="bonusBtn" title="Défi bonus, débloqué en sortant de la fosse" disabled>🌙 quart de nuit</button>
+      <div class="frags">
+        <span class="lab">code</span>
+        <div class="f" id="f1">?</div><div class="f" id="f2">?</div><div class="f" id="f3">?</div>
+      </div>
+    </div>
+
+    <!-- ==================== SALLE 1 ==================== -->
+    <section class="room on" id="room1">
+      <div class="decor">
+        <canvas id="cvDecor" width="940" height="330" aria-label="Le sas de pesée : mur de béton, poutre d'acier, flaque d'eau et lampe baladeuse"></canvas>
+        <div class="plaque">Sas de pesée · niveau −1 · 23 h 41</div>
+      </div>
+      <div class="narrbar" id="narr">La porte s’est refermée derrière toi. Quelque part au-dessus, l’eau s’infiltre goutte à goutte.</div>
+
+      <div class="roomhead">
+        <div class="k">Salle 1 sur 5 · Le chantier scellé</div>
+        <h2>⚖️ Le sas de pesée</h2>
+        <p>Sur le mur de béton, à la craie grasse : <b>« Rien ne bouge ici sans raison. Si un objet reste immobile, c’est que la somme de toutes les forces qu’il subit est NULLE. Prouve-le trois fois et le sas s’ouvrira. »</b> Trois fragments à graver, trois molettes à tourner.</p>
+      </div>
+
+      <!-- ---- énigme 1.1 ---- -->
+      <div class="puz" id="p11">
+        <h3><span class="n">1.1</span> La charge sans étiquette <span class="st" id="s11">non résolu</span></h3>
+        <p class="brief">🔩 La palette de blocs béton pend au crochet, juste devant toi. L’étiquette de masse tient encore : <b>320 kg</b>. Mais le manuel du palan, lui, ne parle qu’en newtons. On prendra <b>g = 10 N/kg</b>.</p>
+        <div class="row"><span>Poids de la palette : P =</span><input class="numin" id="n11" inputmode="decimal" placeholder="?"><span class="unit">N</span>
+          <button class="btn" id="b11">Vérifier</button><button class="btn ghost" id="h11">💡 Indice</button></div>
+        <div class="fb" id="fb11"></div>
+        <div class="hintbox" id="hb11"></div>
+        <div class="frag" id="fr11"><div class="t">Gravure révélée sous le crochet</div><div class="d">7</div><div class="w">première molette</div></div>
+      </div>
+
+      <!-- ---- énigme 1.2 ---- -->
+      <div class="puz" id="p12">
+        <h3><span class="n">1.2</span> Le treuil déréglé <span class="st" id="s12">non résolu</span></h3>
+        <p class="brief">🪝 Le treuil s’emballe : la palette monte, redescend, cogne. <b>Règle la tension du câble</b> pour l’immobiliser — le verrou magnétique du mur ne lâchera qu’à l’équilibre parfait.</p>
+        <div class="scene">
+          <canvas id="cvTreuil" width="700" height="330" aria-label="Palette suspendue dans le sas, équilibre selon la tension du câble"></canvas>
+          <div class="slider-row"><label>tension T</label><input type="range" id="sT" min="2000" max="4400" step="100" value="2400"><span class="val" id="vT">2400 N</span></div>
+        </div>
+        <div class="row"><span>Tension d’équilibre : T =</span><input class="numin" id="n12" inputmode="decimal" placeholder="?"><span class="unit">N</span>
+          <button class="btn" id="b12">Vérifier</button><button class="btn ghost" id="h12">💡 Indice</button></div>
+        <div class="fb" id="fb12"></div>
+        <div class="hintbox" id="hb12"></div>
+        <div class="frag" id="fr12"><div class="t">Gravure sur le tambour du treuil</div><div class="d">1</div><div class="w">deuxième molette</div></div>
+      </div>
+
+      <!-- ---- énigme 1.3 ---- -->
+      <div class="puz" id="p13">
+        <h3><span class="n">1.3</span> Le mouflage du palan <span class="st" id="s13">non résolu</span></h3>
+        <p class="brief">⛓️ Au fond du sas, dans l’eau jusqu’aux chevilles, un palan reprend la même palette de 3200 N — mais avec <b>4 brins</b> tendus à l’identique. Le manuel exige la tension d’UN brin avant tout levage.</p>
+        <div class="scene">
+          <canvas id="cvPalan" width="700" height="290" aria-label="Palan à quatre brins portant la palette au-dessus de l'eau"></canvas>
+        </div>
+        <div class="row"><span>Tension dans UN brin : T =</span><input class="numin" id="n13" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+        <div class="row"><span>L’ouvrier qui tire le brin libre développe donc une force…</span>
+          <select id="q13"><option>— choisir —</option><option>4 fois plus petite que la charge</option><option>égale à la charge</option><option>4 fois plus grande que la charge</option></select></div>
+        <div class="row"><button class="btn" id="b13">Vérifier</button><button class="btn ghost" id="h13">💡 Indice</button></div>
+        <div class="fb" id="fb13"></div>
+        <div class="hintbox" id="hb13"></div>
+        <div class="frag" id="fr13"><div class="t">Gravure sur la joue de poulie</div><div class="d">4</div><div class="w">troisième molette</div></div>
+      </div>
+
+      <div class="lock" id="lock1">
+        <h3>🔒 Le cadenas du sas</h3>
+        <p>Trois molettes rouillées. Trois fragments, dans l’ordre où tu les as arrachés au béton.</p>
+        <div class="dials">
+          <input id="d1" inputmode="numeric" maxlength="1" aria-label="molette 1">
+          <input id="d2" inputmode="numeric" maxlength="1" aria-label="molette 2">
+          <input id="d3" inputmode="numeric" maxlength="1" aria-label="molette 3">
+        </div>
+        <button class="btn" id="bLock">Tourner les molettes</button>
+        <div class="fb" id="fbLock"></div>
+        <div class="door" id="door1"><button class="btn big" id="goRoom2">Franchir la porte →</button></div>
+      </div>
+
+      <div class="sealed"><span class="ic">🔐</span><div><b>Salle 2 · L’atelier des leviers</b>Scellée. Le sas doit d’abord s’ouvrir.</div></div>
+    </section>
+
+    <!-- ==================== SALLE 2 ==================== -->
+    <section class="room" id="room2">
+      <div class="decor">
+        <canvas id="cvDecor2" width="940" height="330" aria-label="L’atelier des leviers : établi, panneau d’outils, néons grésillants et flaque d’huile"></canvas>
+        <div class="plaque">Atelier des leviers · niveau −2 · 00 h 07</div>
+      </div>
+      <div class="narrbar" id="narr2">Les néons se rallument un par un. Sur l’établi, une clé plate, un boulon récalcitrant… et trois nouvelles molettes.</div>
+
+      <div class="roomhead">
+        <div class="k">Salle 2 sur 5 · Le chantier scellé</div>
+        <h2>🔧 L’atelier des leviers</h2>
+        <p>Une seconde phrase à la craie, plus nerveuse : <b>« Ici, une force ne suffit plus. Ce qui compte, c’est où tu l’appliques : M = F × d. Et pour qu’un solide ne tourne pas, la somme des MOMENTS doit être nulle. »</b> Trois nouvelles preuves, trois nouveaux fragments.</p>
+      </div>
+
+      <!-- ---- énigme 2.1 ---- -->
+      <div class="puz" id="p21">
+        <h3><span class="n">2.1</span> Le boulon récalcitrant <span class="st" id="s21">non résolu</span></h3>
+        <p class="brief">🔩 Le boulon de l’armoire à outils est bloqué : il faut lui appliquer un couple de <b>240 N·m</b> pour le desserrer. Tu ne peux pousser qu’avec <b>300 N</b> au bout de la clé. <b>Choisis la longueur de clé</b> — l’atelier en propose plusieurs, de la clé de poche à la barre de rallonge.</p>
+        <div class="scene">
+          <canvas id="cvCle" width="700" height="290" aria-label="Clé sur un boulon avec une force appliquée au bout du bras"></canvas>
+          <div class="slider-row"><label>longueur d</label><input type="range" id="sCle" min="0.2" max="1.2" step="0.1" value="0.3"><span class="val" id="vCle">0,30 m</span></div>
+        </div>
+        <div class="row"><span>Longueur MINIMALE de clé qui débloque le boulon : d =</span><input class="numin" id="n21" inputmode="decimal" placeholder="?"><span class="unit">m</span>
+          <button class="btn" id="b21">Vérifier</button><button class="btn ghost" id="h21">💡 Indice</button></div>
+        <div class="fb" id="fb21"></div>
+        <div class="hintbox" id="hb21"></div>
+        <div class="frag" id="fr21"><div class="t">Gravure au fond de la douille</div><div class="d">3</div><div class="w">première molette</div></div>
+      </div>
+
+      <!-- ---- énigme 2.2 ---- -->
+      <div class="puz" id="p22">
+        <h3><span class="n">2.2</span> La balance de chantier <span class="st" id="s22">non résolu</span></h3>
+        <p class="brief">⚖️ Un fléau repose sur un couteau. À gauche, une gueuse de fonte de <b>900 N</b> pendue à <b>0,40 m</b> de l’axe. À droite, un bac à gravier réglable, accroché à <b>1,20 m</b>. <b>Remplis le bac</b> jusqu’à ce que le fléau redevienne horizontal : le contact électrique qui libère le fragment ne se ferme qu’à l’équilibre.</p>
+        <div class="scene">
+          <canvas id="cvFleau" width="700" height="300" aria-label="Fléau en équilibre entre une gueuse et un bac à gravier réglable"></canvas>
+          <div class="slider-row"><label>poids du bac</label><input type="range" id="sBac" min="100" max="800" step="25" value="150"><span class="val" id="vBac">150 N</span></div>
+        </div>
+        <div class="row"><span>Poids du bac à l’équilibre : P =</span><input class="numin" id="n22" inputmode="decimal" placeholder="?"><span class="unit">N</span>
+          <button class="btn" id="b22">Vérifier</button><button class="btn ghost" id="h22">💡 Indice</button></div>
+        <div class="fb" id="fb22"></div>
+        <div class="hintbox" id="hb22"></div>
+        <div class="frag" id="fr22"><div class="t">Gravure sous le couteau du fléau</div><div class="d">6</div><div class="w">deuxième molette</div></div>
+      </div>
+
+      <!-- ---- énigme 2.3 ---- -->
+      <div class="puz" id="p23">
+        <h3><span class="n">2.3</span> La grue qui penche <span class="st" id="s23">non résolu</span></h3>
+        <p class="brief">🏗️ La maquette de la grue du chantier est là, sur son rail. Sa flèche porte <b>5000 N à 12 m</b> de l’axe de rotation. Le contrepoids, lui, est à <b>4 m</b> de l’autre côté. <b>Charge le contrepoids</b> : trop léger, la grue bascule ; c’est la valeur limite qui ouvre la trappe.</p>
+        <div class="scene">
+          <canvas id="cvGrue" width="700" height="320" aria-label="Grue avec charge sur la flèche et contrepoids réglable"></canvas>
+          <div class="slider-row"><label>contrepoids</label><input type="range" id="sCp" min="5000" max="25000" step="1000" value="8000"><span class="val" id="vCp">8000 N</span></div>
+        </div>
+        <div class="row"><span>Moment de la charge sur la flèche : M =</span><input class="numin" id="n23a" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+        <div class="row"><span>Contrepoids minimal pour ne pas basculer : P =</span><input class="numin" id="n23b" inputmode="decimal" placeholder="?"><span class="unit">N</span>
+          <button class="btn" id="b23">Vérifier</button><button class="btn ghost" id="h23">💡 Indice</button></div>
+        <div class="fb" id="fb23"></div>
+        <div class="hintbox" id="hb23"></div>
+        <div class="frag" id="fr23"><div class="t">Gravure sur le lest de la grue</div><div class="d">0</div><div class="w">troisième molette</div></div>
+      </div>
+
+      <div class="lock" id="lock2">
+        <h3>🔒 Le cadenas de l’atelier</h3>
+        <p>Trois molettes graisseuses. Les mêmes gestes, un cran plus loin.</p>
+        <div class="dials">
+          <input id="e1" inputmode="numeric" maxlength="1" aria-label="molette 1">
+          <input id="e2" inputmode="numeric" maxlength="1" aria-label="molette 2">
+          <input id="e3" inputmode="numeric" maxlength="1" aria-label="molette 3">
+        </div>
+        <button class="btn" id="bLock2">Tourner les molettes</button>
+        <div class="fb" id="fbLock2"></div>
+        <div class="door" id="door2"><button class="btn big" id="goRoom3">Descendre vers la fosse →</button></div>
+      </div>
+
+      <div class="sealed"><span class="ic">🔐</span><div><b>Salle 3 · La fosse aux appuis</b>Scellée. L’atelier doit d’abord livrer ses trois fragments.</div></div>
+      <div class="row"><button class="btn ghost" id="backRoom1">← Remonter au sas</button></div>
+    </section>
+
+    <!-- ==================== SALLE 3 ==================== -->
+    <section class="room" id="room3">
+      <div class="decor">
+        <canvas id="cvDecor3" width="940" height="330" aria-label="La fosse aux appuis : eau noire, projecteur immergé, passerelle sur deux appuis"></canvas>
+        <div class="plaque">Fosse aux appuis · niveau −3 · 00 h 52</div>
+      </div>
+      <div class="narrbar" id="narr3">L’eau clapote contre le béton. Un projecteur immergé éclaire la fosse par en dessous, et des reflets courent sur les murs.</div>
+
+      <div class="roomhead">
+        <div class="k">Salle 3 sur 5 · Le chantier scellé</div>
+        <h2>🕳️ La fosse aux appuis</h2>
+        <p>Une passerelle de <b>6 m</b> franchit la fosse, posée sur deux appuis : <b>A</b> à gauche, <b>B</b> à droite. Au marqueur rouge, sur le garde-corps : <b>« Ce qui te porte a une limite. Avant de poser le pied, calcule ce que chaque appui encaisse. »</b> Trois fragments. L’eau, elle, ne t’attendra pas.</p>
+      </div>
+
+      <!-- ---- énigme 3.1 ---- -->
+      <div class="puz" id="p31">
+        <h3><span class="n">3.1</span> Le partage du fardeau <span class="st" id="s31">non résolu</span></h3>
+        <p class="brief">🧰 Une caisse de matériel de <b>1200 N</b> est posée pile au <b>milieu</b> de la passerelle (on néglige le poids de la passerelle elle-même). Les deux appuis se partagent la charge — encore faut-il chiffrer la part de chacun.</p>
+        <div class="scene">
+          <canvas id="cvPont1" width="700" height="280" aria-label="Passerelle sur deux appuis avec une caisse au centre"></canvas>
+        </div>
+        <div class="row"><span>Réaction de l’appui A : R<sub>A</sub> =</span><input class="numin" id="n31a" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+        <div class="row"><span>Réaction de l’appui B : R<sub>B</sub> =</span><input class="numin" id="n31b" inputmode="decimal" placeholder="?"><span class="unit">N</span>
+          <button class="btn" id="b31">Vérifier</button><button class="btn ghost" id="h31">💡 Indice</button></div>
+        <div class="fb" id="fb31"></div>
+        <div class="hintbox" id="hb31"></div>
+        <div class="frag" id="fr31"><div class="t">Gravure sur la semelle de l’appui A</div><div class="d">5</div><div class="w">première molette</div></div>
+      </div>
+
+      <!-- ---- énigme 3.2 ---- -->
+      <div class="puz" id="p32">
+        <h3><span class="n">3.2</span> ⭐ L’appui fissuré <span class="st" id="s32">non résolu</span></h3>
+        <p class="brief">🩹 Mauvaise nouvelle : <b>l’appui B est fissuré</b>. Le carnet de chantier est formel : au-delà de <b>400 N</b>, il lâche. <b>Fais glisser la caisse</b> le long de la passerelle et trouve la position la plus éloignée de A où l’on peut encore la poser sans condamner B.</p>
+        <div class="scene">
+          <canvas id="cvPont2" width="700" height="300" aria-label="Passerelle avec caisse mobile et jauges de réaction aux deux appuis"></canvas>
+          <div class="slider-row"><label>position x</label><input type="range" id="sPos" min="0.5" max="5.5" step="0.5" value="3"><span class="val" id="vPos">3,0 m</span></div>
+        </div>
+        <div class="row"><span>Position limite mesurée depuis A : x =</span><input class="numin" id="n32" inputmode="decimal" placeholder="?"><span class="unit">m</span>
+          <button class="btn" id="b32">Vérifier</button><button class="btn ghost" id="h32">💡 Indice</button></div>
+        <div class="fb" id="fb32"></div>
+        <div class="hintbox" id="hb32"></div>
+        <div class="frag" id="fr32"><div class="t">Gravure sur la fissure de l’appui B</div><div class="d">2</div><div class="w">deuxième molette</div></div>
+      </div>
+
+      <!-- ---- énigme 3.3 ---- -->
+      <div class="puz" id="p33">
+        <h3><span class="n">3.3</span> Le porte-à-faux <span class="st" id="s33">non résolu</span></h3>
+        <p class="brief">🪤 Au fond de la fosse, une seconde passerelle <b>dépasse de 2 m au-delà de l’appui B</b> (appuis toujours distants de 6 m). Le treuil de secours, <b>900 N</b>, est accroché tout au bout du porte-à-faux. Avant de t’y suspendre, vérifie ce que devient l’appui A…</p>
+        <div class="scene">
+          <canvas id="cvPorte" width="700" height="300" aria-label="Passerelle en porte-à-faux avec charge au bout et soulèvement côté A"></canvas>
+        </div>
+        <div class="row"><span>Réaction de l’appui B : R<sub>B</sub> =</span><input class="numin" id="n33a" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+        <div class="row"><span>Et l’appui A doit alors…</span>
+          <select id="q33"><option>— choisir —</option><option>RETENIR la passerelle vers le bas : elle se soulève de ce côté</option><option>pousser encore plus fort vers le haut</option><option>ne rien faire : il ne sert plus à rien</option></select></div>
+        <div class="row"><button class="btn" id="b33">Vérifier</button><button class="btn ghost" id="h33">💡 Indice</button></div>
+        <div class="fb" id="fb33"></div>
+        <div class="hintbox" id="hb33"></div>
+        <div class="frag" id="fr33"><div class="t">Gravure sur le crochet d’ancrage</div><div class="d">8</div><div class="w">troisième molette</div></div>
+      </div>
+
+      <div class="lock" id="lock3">
+        <h3>🔒 Le cadenas de la fosse</h3>
+        <p>Trois molettes couvertes de calcaire. L’eau t’arrive aux mollets.</p>
+        <div class="dials">
+          <input id="g1" inputmode="numeric" maxlength="1" aria-label="molette 1">
+          <input id="g2" inputmode="numeric" maxlength="1" aria-label="molette 2">
+          <input id="g3" inputmode="numeric" maxlength="1" aria-label="molette 3">
+        </div>
+        <button class="btn" id="bLock3">Tourner les molettes</button>
+        <div class="fb" id="fbLock3"></div>
+        <div class="door" id="door3"><button class="btn big" id="goRoom4">Emprunter la passerelle →</button></div>
+      </div>
+
+      <div class="sealed"><span class="ic">🔐</span><div><b>Salle 4 · La halle aux treillis</b>Scellée. La fosse garde encore ses fragments.</div></div>
+      <div class="row"><button class="btn ghost" id="backRoom2">← Remonter à l’atelier</button></div>
+    </section>
+
+    <!-- ==================== BONUS : LE QUART DE NUIT ==================== -->
+    <section class="room" id="roomB">
+      <div class="decor">
+        <canvas id="cvQuart" width="940" height="360" aria-label="Grue de chantier penchée à redresser par des calculs de statique"></canvas>
+        <div class="plaque">Défi bonus · le quart de nuit · 03 h 10</div>
+      </div>
+      <div class="narrbar" id="narrB">Le contremaître de nuit t’a laissé les commandes. La grue penche. À chaque calcul juste, elle se redresse.</div>
+
+      <div class="roomhead">
+        <div class="k">Bonus · pour ceux qui sont sortis vite</div>
+        <h2>🌙 Le quart de nuit</h2>
+        <p>Pas de cadenas ici, pas de chrono non plus : juste toi, la grue et douze décisions à prendre. <b>Chaque bonne réponse ajoute du lest et redresse la flèche</b> ; chaque erreur l’incline davantage. Trois erreurs et la grue verse dans la fosse. Réponses justes d’affilée = combo, et le score grimpe.</p>
+      </div>
+
+      <div class="puz" id="pB">
+        <h3><span class="n">⚙</span> Poste de commande <span class="st" id="sB">grue à 3 crans du basculement</span></h3>
+        <div class="row" style="gap:16px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">score <b style="color:var(--neonA);font-size:17px" id="qScore">0</b></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">combo <b style="color:var(--neonC);font-size:17px" id="qCombo">×1</b></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">stabilisée <b style="color:var(--neonG);font-size:17px" id="qDone">0</b> / 12</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">marge <b style="color:var(--neonR);font-size:17px" id="qLives">❚❚❚</b></span>
+        </div>
+        <div class="brief" id="qTxt" style="font-size:17px;font-weight:700">Prêt à prendre le quart ?</div>
+        <div class="gopts" id="qOpts" style="display:grid;grid-template-columns:1fr 1fr;gap:9px"></div>
+        <div class="fb" id="qFb"></div>
+        <div class="row"><button class="btn big" id="qStart">▶ Prendre le quart</button><button class="btn ghost" id="qBack">← Retourner au chantier</button></div>
+      </div>
+    </section>
+
+    <!-- ==================== SALLE 4 ==================== -->
+    <section class="room" id="room4">
+      <div class="roomhead">
+        <div class="k">Salle 4 sur 5</div>
+        <h2>🔺 La halle aux treillis</h2>
+        <p>Une charpente entière au-dessus de ta tête. Chaque barre tire ou pousse — et il va falloir dire laquelle fait quoi.</p>
+      </div>
+      <div class="sealed"><span class="ic">🚧</span><div><b>Salle en cours de construction</b>Reviens à la prochaine mise à jour.</div></div>
+      <div class="row"><button class="btn ghost" id="backRoom3">← Redescendre à la fosse</button></div>
+    </section>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ================= outils de rendu ================= */
+function rng(seed){ var s=seed>>>0; return function(){ s=(s*1664525+1013904223)>>>0; return s/4294967296; }; }
+
+/* grain de pellicule animé */
+(function(){
+  var c=el('grain'); if(!c||!c.getContext) return; var g=c.getContext('2d');
+  function paint(){
+    var im=g.createImageData(c.width,c.height), d=im.data;
+    for(var i=0;i<d.length;i+=4){ var v=(Math.random()*255)|0; d[i]=v; d[i+1]=v; d[i+2]=v; d[i+3]=255; }
+    g.putImageData(im,0,0);
+  }
+  paint(); setInterval(paint,110);
+})();
+
+/* --- textures réutilisables --- */
+function betonTexture(w,h,seed){
+  var c=document.createElement('canvas'); c.width=w; c.height=h; var g=c.getContext('2d');
+  var R=rng(seed);
+  var base=g.createLinearGradient(0,0,0,h);
+  base.addColorStop(0,'#39404c'); base.addColorStop(0.55,'#2c333e'); base.addColorStop(1,'#232932');
+  g.fillStyle=base; g.fillRect(0,0,w,h);
+  /* taches d'humidité */
+  for(var i=0;i<70;i++){
+    var x=R()*w, y=R()*h, rx=12+R()*70, ry=8+R()*40;
+    g.fillStyle='rgba('+(30+R()*26|0)+','+(36+R()*26|0)+','+(44+R()*30|0)+','+(0.10+R()*0.20).toFixed(3)+')';
+    g.beginPath(); g.ellipse(x,y,rx,ry,R()*3,0,7); g.fill();
+  }
+  /* coulures verticales */
+  for(var k=0;k<16;k++){
+    var cx=R()*w, cw=3+R()*16, ch=40+R()*(h*0.8);
+    var gr=g.createLinearGradient(0,0,0,ch);
+    gr.addColorStop(0,'rgba(18,22,28,.30)'); gr.addColorStop(1,'rgba(18,22,28,0)');
+    g.fillStyle=gr; g.fillRect(cx,0,cw,ch);
+  }
+  /* fissures ramifiées */
+  function crack(x,y,ang,len,wd,depth){
+    if(len<6||depth>3) return;
+    var x2=x+Math.cos(ang)*len, y2=y+Math.sin(ang)*len;
+    g.strokeStyle='rgba(16,19,25,'+(0.5-depth*0.1)+')'; g.lineWidth=wd;
+    g.beginPath(); g.moveTo(x,y); g.lineTo(x2,y2); g.stroke();
+    g.strokeStyle='rgba(120,128,142,.10)'; g.lineWidth=wd*0.6;
+    g.beginPath(); g.moveTo(x+1,y+1); g.lineTo(x2+1,y2+1); g.stroke();
+    crack(x2,y2,ang+(R()-0.5)*0.9,len*(0.55+R()*0.3),Math.max(0.5,wd*0.7),depth+1);
+    if(R()<0.5) crack(x2,y2,ang+(R()-0.5)*2.2,len*(0.4+R()*0.3),Math.max(0.4,wd*0.5),depth+1);
+  }
+  for(var f=0;f<5;f++){ crack(R()*w,R()*h*0.8,R()*6.28,20+R()*46,1.6,0); }
+  /* joints de banche */
+  g.strokeStyle='rgba(14,18,24,.35)'; g.lineWidth=2;
+  for(var j=1;j<4;j++){ g.beginPath(); g.moveTo(0,h*j/4); g.lineTo(w,h*j/4); g.stroke(); }
+  /* trous de banche */
+  for(var t=0;t<10;t++){
+    var tx=40+R()*(w-80), ty=20+R()*(h-40);
+    g.fillStyle='rgba(14,17,23,.55)'; g.beginPath(); g.arc(tx,ty,3.4,0,7); g.fill();
+    g.strokeStyle='rgba(140,148,160,.14)'; g.lineWidth=1; g.beginPath(); g.arc(tx,ty,4.6,0,7); g.stroke();
+  }
+  /* grain fin */
+  for(var n=0;n<w*h/26;n++){
+    var px=R()*w, py=R()*h, a=R()*0.10;
+    g.fillStyle=(R()<0.5?'rgba(255,255,255,':'rgba(0,0,0,')+a.toFixed(3)+')';
+    g.fillRect(px,py,1,1);
+  }
+  return c;
+}
+function poutreAcier(g,x,y,w,h){
+  var gr=g.createLinearGradient(0,y,0,y+h);
+  gr.addColorStop(0,'#59647a'); gr.addColorStop(0.35,'#3d4759'); gr.addColorStop(0.62,'#2b3342'); gr.addColorStop(1,'#4a5468');
+  g.fillStyle=gr; g.fillRect(x,y,w,h);
+  g.fillStyle='rgba(255,255,255,.07)'; g.fillRect(x,y+2,w,2);
+  g.fillStyle='rgba(0,0,0,.35)'; g.fillRect(x,y+h-3,w,3);
+  for(var rx=x+16;rx<x+w-8;rx+=34){
+    g.fillStyle='#6a748a'; g.beginPath(); g.arc(rx,y+h/2,4,0,7); g.fill();
+    g.fillStyle='rgba(255,255,255,.28)'; g.beginPath(); g.arc(rx-1.2,y+h/2-1.2,1.5,0,7); g.fill();
+    g.fillStyle='rgba(0,0,0,.35)'; g.beginPath(); g.arc(rx+1.4,y+h/2+1.4,1.6,0,7); g.fill();
+  }
+  /* coulure de rouille */
+  var ru=g.createLinearGradient(0,y+h,0,y+h+26);
+  ru.addColorStop(0,'rgba(150,78,42,.42)'); ru.addColorStop(1,'rgba(150,78,42,0)');
+  g.fillStyle=ru; g.fillRect(x+w*0.28,y+h,10,26); g.fillRect(x+w*0.63,y+h,6,20);
+}
+function palette(g,cx,cy,ang){
+  g.save(); g.translate(cx,cy); g.rotate(ang);
+  g.fillStyle='rgba(0,0,0,.35)'; g.fillRect(-52,4,108,58);
+  var gr=g.createLinearGradient(-52,0,56,0);
+  gr.addColorStop(0,'#4a5162'); gr.addColorStop(0.45,'#5c6272'); gr.addColorStop(1,'#3c4353');
+  g.fillStyle=gr; g.fillRect(-52,0,108,58);
+  g.strokeStyle='#f0b558'; g.lineWidth=2.4; g.strokeRect(-52,0,108,58);
+  g.strokeStyle='rgba(20,24,32,.55)'; g.lineWidth=1.6;
+  for(var i=1;i<3;i++){ g.beginPath(); g.moveTo(-52,i*19); g.lineTo(56,i*19); g.stroke(); }
+  for(var j=1;j<3;j++){ g.beginPath(); g.moveTo(-52+j*36,0); g.lineTo(-52+j*36,58); g.stroke(); }
+  g.fillStyle='rgba(255,255,255,.05)'; g.fillRect(-52,0,108,7);
+  g.restore();
+}
+function arrow(g,x0,y0,x1,y1,col,lab,lx){
+  g.strokeStyle=col; g.fillStyle=col; g.lineWidth=3.4;
+  g.beginPath(); g.moveTo(x0,y0); g.lineTo(x1,y1); g.stroke();
+  var a=Math.atan2(y1-y0,x1-x0);
+  g.beginPath(); g.moveTo(x1,y1);
+  g.lineTo(x1-12*Math.cos(a-0.4),y1-12*Math.sin(a-0.4));
+  g.lineTo(x1-12*Math.cos(a+0.4),y1-12*Math.sin(a+0.4));
+  g.closePath(); g.fill();
+  if(lab){ g.font='700 13px "JetBrains Mono",monospace'; g.fillText(lab,(lx||x1+10),y1+4); }
+}
+
+/* ================= CINÉMATIQUES ================= */
+var CINE={ frames:[], idx:0, t:0, timer:null, sub:'', subI:0, subTimer:null, onEnd:null, running:false };
+function typewrite(text){
+  clearInterval(CINE.subTimer); CINE.sub=text; CINE.subI=0;
+  CINE.subTimer=setInterval(function(){
+    CINE.subI++;
+    var s=text.slice(0,CINE.subI);
+    el('cineSub').innerHTML=s+'<span class="cur">▌</span>';
+    if(CINE.subI>=text.length){ clearInterval(CINE.subTimer); el('cineSub').innerHTML=text; }
+  },18);
+}
+function cinePlay(frames,onEnd){
+  CINE.frames=frames; CINE.idx=0; CINE.t=0; CINE.onEnd=onEnd||null; CINE.running=true;
+  el('cine').classList.add('on');
+  typewrite(frames[0].text);
+  if(CINE.timer) clearInterval(CINE.timer);
+  var cv=el('cvCine'), g=cv.getContext('2d');
+  CINE.timer=setInterval(function(){
+    if(!CINE.running) return;
+    CINE.t+=0.04;
+    var fr=CINE.frames[CINE.idx];
+    g.clearRect(0,0,cv.width,cv.height);
+    g.fillStyle='#05070b'; g.fillRect(0,0,cv.width,cv.height);
+    fr.draw(g,CINE.t);
+    /* fondu d'entrée / sortie */
+    var fade=0;
+    if(CINE.t<0.5) fade=1-CINE.t/0.5;
+    if(CINE.t>fr.dur-0.4) fade=Math.min(1,(CINE.t-(fr.dur-0.4))/0.4);
+    if(fade>0){ g.fillStyle='rgba(5,7,11,'+fade+')'; g.fillRect(0,0,cv.width,cv.height); }
+    el('cineBar').style.width=Math.min(100,CINE.t/fr.dur*100)+'%';
+    if(CINE.t>=fr.dur) cineNext();
+  },40);
+}
+function cineNext(){
+  CINE.idx++;
+  if(CINE.idx>=CINE.frames.length){ cineStop(); return; }
+  CINE.t=0; typewrite(CINE.frames[CINE.idx].text);
+}
+function cineStop(){
+  CINE.running=false;
+  if(CINE.timer){ clearInterval(CINE.timer); CINE.timer=null; }
+  clearInterval(CINE.subTimer);
+  el('cine').classList.remove('on');
+  if(CINE.onEnd){ var f=CINE.onEnd; CINE.onEnd=null; f(); }
+}
+el('cineNext').addEventListener('click',cineNext);
+el('cineSkip').addEventListener('click',cineStop);
+
+/* --- décors de cinématique --- */
+var CINE_BETON=null;
+function pluie(g,t,W,H,n,alpha){
+  g.strokeStyle='rgba(175,200,225,'+alpha+')'; g.lineWidth=1.2;
+  for(var i=0;i<n;i++){
+    var sp=260+((i*37)%160);
+    var x=((i*127)%W)+((t*40)%40)-20;
+    var y=((i*83+t*sp)%(H+80))-40;
+    g.beginPath(); g.moveTo(x,y); g.lineTo(x-5,y+16); g.stroke();
+  }
+}
+var FRAMES_INTRO=[
+  { dur:6.4, text:"23 h 12. Le pont de la Marne doit être inauguré demain matin. Mais l\u2019ingénieur en chef a disparu \u2014 et avec lui, les calculs de stabilité de l\u2019ouvrage.",
+    draw:function(g,t){
+      var W=940,H=460;
+      var sky=g.createLinearGradient(0,0,0,H); sky.addColorStop(0,'#0b1220'); sky.addColorStop(0.65,'#131c2c'); sky.addColorStop(1,'#0a0f18');
+      g.fillStyle=sky; g.fillRect(0,0,W,H);
+      /* éclair */
+      var flash=(Math.sin(t*1.7)>0.985)||(t>2.1&&t<2.22);
+      if(flash){ g.fillStyle='rgba(180,200,235,.22)'; g.fillRect(0,0,W,H); }
+      /* eau */
+      g.fillStyle='#0c141f'; g.fillRect(0,320,W,H-320);
+      for(var i=0;i<70;i++){
+        var yy=326+ (i*i)%130;
+        var amp=6+ (i%7)*3;
+        g.strokeStyle='rgba(120,160,200,'+(0.03+((i*13)%9)/160)+')'; g.lineWidth=1.4;
+        g.beginPath();
+        for(var x=0;x<=W;x+=26){ var y2=yy+Math.sin((x*0.02)+t*1.3+i)*1.6; if(x===0)g.moveTo(x,y2); else g.lineTo(x,y2); }
+        g.stroke();
+      }
+      /* pont : tablier + arches + piles */
+      g.fillStyle='#161d2a';
+      for(var a=0;a<4;a++){
+        var cx=140+a*230;
+        g.beginPath(); g.moveTo(cx-96,320); g.quadraticCurveTo(cx,214,cx+96,320); g.lineTo(cx+96,320); g.closePath();
+        g.strokeStyle='#1e2736'; g.lineWidth=16; g.stroke();
+      }
+      g.fillStyle='#1b2331'; g.fillRect(0,286,W,26);
+      g.fillStyle='#232c3d'; g.fillRect(0,282,W,6);
+      for(var p=0;p<5;p++){ g.fillStyle='#151c28'; g.fillRect(36+p*230,300,26,30); }
+      /* lampadaires + reflets */
+      for(var L=0;L<5;L++){
+        var lx=90+L*196;
+        g.strokeStyle='#2b3546'; g.lineWidth=3; g.beginPath(); g.moveTo(lx,282); g.lineTo(lx,246); g.stroke();
+        var glow=g.createRadialGradient(lx,242,2,lx,242,46);
+        glow.addColorStop(0,'rgba(240,181,88,.75)'); glow.addColorStop(1,'rgba(240,181,88,0)');
+        g.fillStyle=glow; g.beginPath(); g.arc(lx,242,46,0,7); g.fill();
+        var rf=g.createLinearGradient(0,322,0,430);
+        rf.addColorStop(0,'rgba(240,181,88,.20)'); rf.addColorStop(1,'rgba(240,181,88,0)');
+        g.fillStyle=rf; g.fillRect(lx-9+Math.sin(t*2+L)*3,322,18,108);
+      }
+      pluie(g,t,W,H,150,0.34);
+      if(flash){ g.strokeStyle='rgba(220,235,255,.8)'; g.lineWidth=2.4;
+        g.beginPath(); g.moveTo(700,0); g.lineTo(676,86); g.lineTo(706,96); g.lineTo(668,190); g.stroke(); }
+    }},
+  { dur:5.6, text:"Tu descends au niveau −1. Les scellés du chantier claquent dans le vent. Une seule porte reste ouverte : le sas de pesée.",
+    draw:function(g,t){
+      var W=940,H=460;
+      g.fillStyle='#0b0f16'; g.fillRect(0,0,W,H);
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      var z=1+t*0.045;                    /* travelling avant */
+      g.save(); g.translate(W/2,H/2); g.scale(z,z); g.translate(-W/2,-H/2);
+      g.globalAlpha=0.92; g.drawImage(CINE_BETON,0,0); g.globalAlpha=1;
+      /* couloir : encadrement sombre */
+      g.fillStyle='rgba(5,7,11,.86)';
+      g.beginPath(); g.moveTo(0,0); g.lineTo(W,0); g.lineTo(W,H); g.lineTo(0,H); g.closePath();
+      g.moveTo(300,120); g.lineTo(640,120); g.lineTo(640,400); g.lineTo(300,400); g.closePath();
+      g.fill('evenodd');
+      /* porte du sas au fond */
+      g.fillStyle='#1d2532'; g.fillRect(392,168,156,232);
+      poutreAcier(g,392,168,156,20);
+      g.fillStyle='#141a24'; g.fillRect(404,196,132,196);
+      var lamp=g.createRadialGradient(470,150,4,470,150,150);
+      lamp.addColorStop(0,'rgba(240,181,88,.55)'); lamp.addColorStop(1,'rgba(240,181,88,0)');
+      g.fillStyle=lamp; g.beginPath(); g.arc(470,150,150,0,7); g.fill();
+      /* panneau danger */
+      g.fillStyle='#c8a13a'; g.beginPath(); g.moveTo(600,300); g.lineTo(628,348); g.lineTo(572,348); g.closePath(); g.fill();
+      g.fillStyle='#141a24'; g.font='700 22px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('!',600,344); g.textAlign='left';
+      g.restore();
+      /* gouttes du plafond */
+      g.strokeStyle='rgba(160,190,215,.5)'; g.lineWidth=1.4;
+      for(var i=0;i<10;i++){ var x=120+i*74, y=((t*120+i*57)%H);
+        g.beginPath(); g.moveTo(x,y); g.lineTo(x,y+11); g.stroke(); }
+    }},
+  { dur:5.2, text:"Derrière toi, la porte blindée retombe. CLAC. Le sas est scellé \u2014 et tu es à l\u2019intérieur.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      var lamp=g.createRadialGradient(470,60,10,470,60,320);
+      lamp.addColorStop(0,'rgba(240,181,88,.35)'); lamp.addColorStop(1,'rgba(240,181,88,0)');
+      g.fillStyle=lamp; g.fillRect(0,0,W,H);
+      /* porte qui descend */
+      var prog=Math.min(1,t/2.0), dy=-460+prog*460;
+      g.save(); g.translate(0,dy);
+      var dr=g.createLinearGradient(0,0,0,460);
+      dr.addColorStop(0,'#3c4557'); dr.addColorStop(0.5,'#2a3240'); dr.addColorStop(1,'#232a36');
+      g.fillStyle=dr; g.fillRect(150,0,640,460);
+      for(var b=0;b<7;b++){ poutreAcier(g,150,26+b*62,640,22); }
+      g.fillStyle='rgba(0,0,0,.45)'; g.fillRect(150,440,640,20);
+      g.restore();
+      /* étincelles à l'impact */
+      if(t>1.9&&t<3.2){
+        var R=rng(99);
+        for(var i=0;i<70;i++){
+          var a=R()*3.14, sp=(R()*160)*(t-1.9);
+          var x=470+Math.cos(a)*sp*(R()<0.5?-1:1), y=(dy+460)+Math.sin(a)*sp*0.5;
+          g.fillStyle='rgba('+(255)+','+(180+R()*60|0)+',80,'+Math.max(0,1-(t-1.9)/1.3).toFixed(2)+')';
+          g.fillRect(x,y,2.2,2.2);
+        }
+        g.fillStyle='rgba(255,210,120,'+Math.max(0,0.35-(t-1.9)*0.3)+')'; g.fillRect(0,0,W,H);
+      }
+      /* poussière qui retombe */
+      var R2=rng(5);
+      for(var d=0;d<120;d++){
+        var px=R2()*W, py=((R2()*H)+t*26)%H;
+        g.fillStyle='rgba(200,190,170,'+(0.04+R2()*0.08).toFixed(3)+')';
+        g.fillRect(px,py,1.6,1.6);
+      }
+    }},
+  { dur:6.0, text:"Sur le mur, un cadenas à trois molettes. Et une phrase à la craie : « Rien ne bouge ici sans raison. » \u2014 Trois preuves d\u2019équilibre, et le sas s\u2019ouvre.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      g.fillStyle='rgba(5,8,13,.55)'; g.fillRect(0,0,W,H);
+      var lamp=g.createRadialGradient(470,190,20,470,190,300);
+      lamp.addColorStop(0,'rgba(240,181,88,.45)'); lamp.addColorStop(1,'rgba(240,181,88,0)');
+      g.fillStyle=lamp; g.fillRect(0,0,W,H);
+      /* gros plan cadenas */
+      var cx=470, cy=250, br=1+Math.sin(t*2.4)*0.006;
+      g.save(); g.translate(cx,cy); g.scale(br,br); g.translate(-cx,-cy);
+      g.strokeStyle='#7c8699'; g.lineWidth=17; g.lineCap='round';
+      g.beginPath(); g.arc(cx,cy-66,46,Math.PI,0); g.stroke();
+      var bd=g.createLinearGradient(cx-120,cy-40,cx+120,cy+90);
+      bd.addColorStop(0,'#5a6376'); bd.addColorStop(0.5,'#3d4557'); bd.addColorStop(1,'#2b3240');
+      g.fillStyle=bd; g.beginPath();
+      if(typeof g.roundRect==='function'){ g.roundRect(cx-120,cy-40,240,130,14); } else { g.rect(cx-120,cy-40,240,130); }
+      g.fill();
+      g.strokeStyle='rgba(0,0,0,.5)'; g.lineWidth=2; g.stroke();
+      for(var i=0;i<3;i++){
+        var dx=cx-72+i*72;
+        g.fillStyle='#151b26'; g.fillRect(dx-26,cy-16,52,74);
+        g.strokeStyle='#6c7688'; g.lineWidth=2; g.strokeRect(dx-26,cy-16,52,74);
+        g.fillStyle='#f0b558'; g.font='700 34px "JetBrains Mono",monospace'; g.textAlign='center';
+        var ch=['?','?','?'][i];
+        if(t>2.4+i*0.5) ch='?';
+        g.fillText(ch,dx,cy+30);
+        g.strokeStyle='rgba(255,255,255,.10)'; g.lineWidth=1;
+        for(var s=0;s<5;s++){ g.beginPath(); g.moveTo(dx-26,cy-6+s*16); g.lineTo(dx+26,cy-6+s*16); g.stroke(); }
+      }
+      g.textAlign='left'; g.restore();
+      /* craie */
+      if(t>3.0){
+        g.save(); g.globalAlpha=Math.min(1,(t-3.0)/1.2); g.rotate(-0.03);
+        g.fillStyle='rgba(232,226,206,.82)'; g.font='700 21px "Bricolage Grotesque",sans-serif';
+        g.fillText('\u03a3 F = 0', 92, 128);
+        g.font='400 17px "Bricolage Grotesque",sans-serif'; g.fillStyle='rgba(220,214,196,.62)';
+        g.fillText('rien ne bouge ici sans raison', 92, 158);
+        g.restore();
+      }
+    }}
+];
+
+/* ================= DÉCOR VIVANT DE LA SALLE 1 ================= */
+var DEC={ event:null, evT:0 };
+(function(){
+  var cv=el('cvDecor'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var bg=betonTexture(W,H,42);
+  /* mobilier statique dessiné une fois par-dessus le béton */
+  var deco=document.createElement('canvas'); deco.width=W; deco.height=H;
+  (function(){
+    var d=deco.getContext('2d');
+    d.drawImage(bg,0,0);
+    poutreAcier(d,0,24,W,26);                     /* poutre du plafond */
+    d.fillStyle='#1b222e'; d.fillRect(0,H-46,W,46);      /* sol */
+    d.fillStyle='rgba(255,255,255,.03)'; d.fillRect(0,H-46,W,3);
+    /* armoire électrique */
+    d.fillStyle='#2b3342'; d.fillRect(58,150,96,132);
+    d.strokeStyle='#48536a'; d.lineWidth=2; d.strokeRect(58,150,96,132);
+    d.fillStyle='#c8a13a'; d.beginPath(); d.moveTo(106,168); d.lineTo(122,198); d.lineTo(90,198); d.closePath(); d.fill();
+    d.fillStyle='#141a24'; d.font='700 15px "JetBrains Mono",monospace'; d.textAlign='center'; d.fillText('!',106,195);
+    d.fillStyle='#7fd6e8'; d.font='700 10px "JetBrains Mono",monospace'; d.fillText('HAUTE TENSION',106,224); d.textAlign='left';
+    /* verrou magnétique */
+    d.fillStyle='#39424f'; d.fillRect(792,152,86,58);
+    d.strokeStyle='#5b6678'; d.lineWidth=2; d.strokeRect(792,152,86,58);
+    d.fillStyle='#98a1b8'; d.font='700 9px "JetBrains Mono",monospace'; d.textAlign='center'; d.fillText('VERROU',835,146); d.textAlign='left';
+    /* graffiti à la craie */
+    d.save(); d.rotate(-0.02);
+    d.fillStyle='rgba(232,226,206,.5)'; d.font='700 17px "Bricolage Grotesque",sans-serif';
+    d.fillText('\u03a3 F = 0', 236, 122);
+    d.restore();
+    /* seau et planches */
+    d.fillStyle='#4a4034'; d.fillRect(690,H-84,40,38);
+    d.fillStyle='#3a3228'; d.fillRect(690,H-84,40,6);
+    d.save(); d.translate(180,H-58); d.rotate(-0.22);
+    d.fillStyle='#4d4335'; d.fillRect(0,0,120,10); d.fillRect(-6,12,120,9);
+    d.restore();
+  })();
+  /* gouttes & ondes */
+  var drops=[], waves=[];
+  for(var i=0;i<5;i++) drops.push({x:220+i*140, y:-Math.random()*260, v:2.4+Math.random()*1.6});
+  var dust=[]; var Rd=rng(11);
+  for(var k=0;k<46;k++) dust.push({x:Rd()*W, y:Rd()*H, vx:(Rd()-0.5)*0.20, vy:-0.06-Rd()*0.12, r:0.7+Rd()*1.5, a:0.05+Rd()*0.16});
+  var t=0, flick=1;
+  var POOL_Y=H-30;
+  function step(){
+    t+=0.04;
+    if(DEC.event){ DEC.evT+=0.04; if(DEC.evT>DEC.event.dur){ DEC.event=null; } }
+    g.clearRect(0,0,W,H);
+    g.drawImage(deco,0,0);
+    /* --- flaque d'eau --- */
+    g.save();
+    g.beginPath(); g.ellipse(470,POOL_Y+6,330,24,0,0,7); g.clip();
+    g.fillStyle='#0d1420'; g.fillRect(0,POOL_Y-24,W,60);
+    for(var w=0;w<12;w++){
+      var yy=POOL_Y-14+w*4;
+      g.strokeStyle='rgba(127,214,232,'+(0.05+0.05*Math.sin(t*1.6+w)).toFixed(3)+')'; g.lineWidth=1.3;
+      g.beginPath();
+      for(var x=140;x<=800;x+=20){ var y2=yy+Math.sin(x*0.045+t*2.1+w*0.6)*1.5; if(x===140)g.moveTo(x,y2); else g.lineTo(x,y2); }
+      g.stroke();
+    }
+    /* ondes concentriques des impacts */
+    for(var oi=waves.length-1;oi>=0;oi--){
+      var o=waves[oi]; o.r+=1.5; o.a-=0.014;
+      if(o.a<=0){ waves.splice(oi,1); continue; }
+      g.strokeStyle='rgba(170,220,240,'+o.a.toFixed(3)+')'; g.lineWidth=1.4;
+      g.beginPath(); g.ellipse(o.x,POOL_Y+6,o.r,o.r*0.28,0,0,7); g.stroke();
+    }
+    g.restore();
+    /* --- lampe baladeuse : oscillation + halo mobile --- */
+    var ang=Math.sin(t*0.85)*0.30 + Math.sin(t*0.37)*0.08;
+    var ax=470, ay=50, L=118;
+    var lx=ax+Math.sin(ang)*L, ly=ay+Math.cos(ang)*L;
+    if(Math.random()<0.012) flick=0.45+Math.random()*0.3;
+    flick+=(1-flick)*0.10;
+    var halo=g.createRadialGradient(lx,ly,6,lx,ly,300);
+    halo.addColorStop(0,'rgba(255,214,140,'+(0.30*flick).toFixed(3)+')');
+    halo.addColorStop(0.45,'rgba(240,181,88,'+(0.10*flick).toFixed(3)+')');
+    halo.addColorStop(1,'rgba(240,181,88,0)');
+    g.fillStyle=halo; g.fillRect(0,0,W,H);
+    /* reflet du halo dans la flaque */
+    var rfl=g.createRadialGradient(lx,POOL_Y+6,4,lx,POOL_Y+6,150);
+    rfl.addColorStop(0,'rgba(255,214,140,'+(0.14*flick).toFixed(3)+')'); rfl.addColorStop(1,'rgba(255,214,140,0)');
+    g.save(); g.beginPath(); g.ellipse(470,POOL_Y+6,330,24,0,0,7); g.clip(); g.fillStyle=rfl; g.fillRect(0,POOL_Y-30,W,64); g.restore();
+    /* fil + douille + ampoule */
+    g.strokeStyle='#4d566b'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(ax,ay-14); g.lineTo(lx,ly-10); g.stroke();
+    g.fillStyle='#39424f'; g.fillRect(lx-8,ly-12,16,12);
+    g.fillStyle='rgba(255,222,160,'+(0.95*flick)+')';
+    g.beginPath(); g.arc(lx,ly+4,9,0,7); g.fill();
+    g.strokeStyle='rgba(255,240,200,.5)'; g.lineWidth=1.2; g.beginPath(); g.arc(lx,ly+4,13,0,7); g.stroke();
+    /* --- palette suspendue qui oscille --- */
+    var pang=Math.sin(t*0.7)*0.035;
+    var pcx=470+Math.sin(t*0.7)*7, pcy=150;
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
+    g.beginPath(); g.moveTo(470,50); g.lineTo(pcx,pcy-4); g.stroke();
+    palette(g,pcx,pcy,pang);
+    /* --- gouttes --- */
+    g.strokeStyle='rgba(170,205,230,.65)'; g.lineWidth=1.5;
+    drops.forEach(function(d){
+      d.y+=d.v; d.v+=0.06;
+      if(d.y>=POOL_Y){ waves.push({x:d.x,r:2,a:0.42}); d.y=-20-Math.random()*180; d.v=2.2+Math.random()*1.4; }
+      g.beginPath(); g.moveTo(d.x,d.y); g.lineTo(d.x,d.y+9); g.stroke();
+    });
+    /* --- poussière dans le halo --- */
+    dust.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.y<-4){ p.y=H+4; p.x=Math.random()*W; }
+      var d2=Math.hypot(p.x-lx,p.y-ly);
+      var vis=Math.max(0,1-d2/300);
+      if(vis<=0) return;
+      g.fillStyle='rgba(255,228,180,'+(p.a*vis*flick).toFixed(3)+')';
+      g.beginPath(); g.arc(p.x,p.y,p.r,0,7); g.fill();
+    });
+    /* --- événements scénarisés --- */
+    if(DEC.event){
+      var e=DEC.event, k2=DEC.evT/e.dur;
+      if(e.kind==='gravure'){
+        var gx=470, gy=110, pulse=0.5+0.5*Math.sin(DEC.evT*6);
+        var gl=g.createRadialGradient(gx,gy,2,gx,gy,60);
+        gl.addColorStop(0,'rgba(127,214,232,'+(0.55*(1-k2)+0.25*pulse*(1-k2))+')'); gl.addColorStop(1,'rgba(127,214,232,0)');
+        g.fillStyle=gl; g.beginPath(); g.arc(gx,gy,60,0,7); g.fill();
+        g.fillStyle='rgba(190,240,255,'+(0.9*(1-k2*0.5))+')'; g.font='700 26px "JetBrains Mono",monospace'; g.textAlign='center';
+        g.fillText('7',gx,gy+9); g.textAlign='left';
+      }
+      if(e.kind==='verrou'){
+        var vx=835, vy=181;
+        var Rv=rng(31);
+        for(var s=0;s<44;s++){
+          var a2=Rv()*6.28, sp=Rv()*90*DEC.evT;
+          g.fillStyle='rgba(255,'+(170+Rv()*70|0)+',90,'+Math.max(0,1-k2).toFixed(2)+')';
+          g.fillRect(vx+Math.cos(a2)*sp, vy+Math.sin(a2)*sp*0.7, 2.2,2.2);
+        }
+        g.fillStyle='rgba(110,227,160,'+Math.max(0,0.5-k2*0.5)+')'; g.fillRect(792,152,86,58);
+        g.fillStyle='rgba(230,255,240,'+(1-k2)+')'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+        g.fillText('DÉVERROUILLÉ',835,186); g.textAlign='left';
+      }
+      if(e.kind==='coupure'||e.kind==='silhouette'){
+        var kk=DEC.evT;
+        /* l'ampoule meurt puis revient en toussant */
+        var back= kk<0.9? 0 : Math.min(1,(kk-0.9)/0.7)*(0.55+0.45*Math.abs(Math.sin(kk*11)));
+        g.fillStyle='rgba(5,7,11,'+(0.86*(1-back)).toFixed(3)+')'; g.fillRect(0,0,W,H);
+        /* poussi\u00e8re qui tombe de la poutre */
+        var Rp=rng(53);
+        for(var dd=0;dd<70;dd++){
+          var dx2=Rp()*W, dy2=(Rp()*90)+DEC.evT*130;
+          g.fillStyle='rgba(210,200,180,'+(0.18*Math.max(0,1-kk/e.dur)).toFixed(3)+')';
+          g.fillRect(dx2,dy2%H,1.8,4.5);
+        }
+        if(e.kind==='silhouette'&&kk>1.0&&kk<2.6){
+          var prog2=(kk-1.0)/1.6, sx2=W*(1.05-prog2*1.15);
+          g.save(); g.globalAlpha=0.55*Math.sin(prog2*3.14);
+          g.fillStyle='#05070b';
+          g.beginPath(); g.ellipse(sx2,132,15,20,0,0,7); g.fill();          /* t\u00eate */
+          g.beginPath(); g.moveTo(sx2-26,158); g.quadraticCurveTo(sx2,146,sx2+26,158);
+          g.lineTo(sx2+20,268); g.lineTo(sx2-20,268); g.closePath(); g.fill();
+          g.beginPath(); g.ellipse(sx2,120,20,9,0,0,7); g.fill();            /* casque */
+          g.restore();
+        }
+      }
+      if(e.kind==='porte'){
+        var op=Math.min(1,DEC.evT/2.2);
+        g.fillStyle='#232a36'; g.fillRect(150,-460*op,640,460);
+        for(var b2=0;b2<7;b2++){ poutreAcier(g,150,-460*op+26+b2*62,640,22); }
+        var lightIn=g.createLinearGradient(0,H,0,H-260*op);
+        lightIn.addColorStop(0,'rgba(255,225,170,'+(0.30*op)+')'); lightIn.addColorStop(1,'rgba(255,225,170,0)');
+        g.fillStyle=lightIn; g.fillRect(150,H-260*op,640,260*op);
+        var Rs=rng(77);
+        for(var v2=0;v2<60;v2++){
+          var sx=170+Rs()*600, sy=H-Rs()*180*op;
+          g.fillStyle='rgba(220,230,240,'+(0.05+Rs()*0.08).toFixed(3)+')';
+          g.beginPath(); g.arc(sx,sy,4+Rs()*14,0,7); g.fill();
+        }
+      }
+    }
+    /* vignette interne */
+    var vg=g.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,H*1.05);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.62)');
+    g.fillStyle=vg; g.fillRect(0,0,W,H);
+  }
+  setInterval(step,40); step();
+})();
+
+/* bandeau narratif animé */
+var NARR={timer:null};
+function narrate(text){
+  clearInterval(NARR.timer);
+  var i=0, box=el('narr');
+  NARR.timer=setInterval(function(){
+    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">▌</span>':'');
+    if(i>=text.length) clearInterval(NARR.timer);
+  },16);
+}
+function sceneEvent(kind,dur){ DEC.event={kind:kind,dur:dur}; DEC.evT=0; }
+
+/* ================= incidents de chantier (sursauts) ================= */
+var SCARE={ on:true, errs:0, actx:null };
+el('scareBtn').addEventListener('click',function(){
+  SCARE.on=!SCARE.on;
+  this.classList.toggle('on',SCARE.on);
+  this.textContent= SCARE.on? '\u26a1 incidents : on' : '\u26a1 incidents : off';
+});
+function boom(intensity){
+  /* grondement grave g\u00e9n\u00e9r\u00e9 (pas de fichier audio) : basse + souffle filtr\u00e9 */
+  try{
+    if(!SCARE.actx){ var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return; SCARE.actx=new AC(); }
+    var ac=SCARE.actx, t0=ac.currentTime, vol=0.10+0.10*intensity;
+    var osc=ac.createOscillator(), og=ac.createGain();
+    osc.type='sine'; osc.frequency.setValueAtTime(64,t0); osc.frequency.exponentialRampToValueAtTime(28,t0+1.1);
+    og.gain.setValueAtTime(0.0001,t0); og.gain.exponentialRampToValueAtTime(vol,t0+0.05);
+    og.gain.exponentialRampToValueAtTime(0.0001,t0+1.4);
+    osc.connect(og); og.connect(ac.destination); osc.start(t0); osc.stop(t0+1.5);
+    var len=ac.sampleRate*0.7, buf=ac.createBuffer(1,len,ac.sampleRate), dat=buf.getChannelData(0);
+    for(var i=0;i<len;i++){ dat[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.4); }
+    var src=ac.createBufferSource(); src.buffer=buf;
+    var flt=ac.createBiquadFilter(); flt.type='lowpass'; flt.frequency.value=420;
+    var ng=ac.createGain(); ng.gain.value=vol*0.55;
+    src.connect(flt); flt.connect(ng); ng.connect(ac.destination); src.start(t0);
+  }catch(e){ /* audio indisponible : l'incident reste visuel */ }
+}
+function incident(){
+  if(!SCARE.on) return;
+  SCARE.errs++;
+  var lvl=Math.min(3,SCARE.errs);
+  document.body.classList.remove('shake');
+  void document.body.offsetWidth;
+  document.body.classList.add('shake');
+  setTimeout(function(){ document.body.classList.remove('shake'); },700);
+  var bo=el('blackout');
+  bo.className= lvl>=2? 'on':'half';
+  setTimeout(function(){ bo.className=''; }, lvl>=2? 420:200);
+  boom(lvl/3);
+  var kind=lvl>=3?'silhouette':'coupure', dur=lvl>=3?3.4:2.4;
+  if(GAME.room===3 && typeof sceneEvent3==='function'){ sceneEvent3(kind,dur); DEC3.eau=Math.min(1,DEC3.eau+0.22); }
+  else if(GAME.room===2 && typeof sceneEvent2==='function'){ sceneEvent2(kind,dur); }
+  else { sceneEvent(kind,dur); }
+  var lignes=[
+    'Quelque part dans la structure, une charge ripe. La poussi\u00e8re tombe du plafond.',
+    'La lumi\u00e8re s\u2019\u00e9teint une seconde. Dans le noir, le c\u00e2ble du treuil grince \u2014 le sas n\u2019aime pas les erreurs.',
+    'Coupure. Quand l\u2019ampoule revient, une silhouette vient de traverser le halo. Il n\u2019y a personne. Recompte tes forces.'
+  ];
+  var lignes3=[
+    'La pompe tousse et cale une seconde. Le niveau gagne un cr\u00e9neau sur la jauge.',
+    'Coupure. Dans le noir, l\u2019eau gonfle en remous concentriques \u2014 et remonte encore.',
+    'Le projecteur clignote. Une silhouette passe derri\u00e8re la passerelle. L\u2019eau, elle, ne s\u2019arr\u00eate pas.'
+  ];
+  if(GAME.room===3 && typeof narrate3==='function'){ narrate3(lignes3[lvl-1]); }
+  else if(GAME.room===2 && typeof narrate2==='function'){ narrate2(lignes[lvl-1]); }
+  else { narrate(lignes[lvl-1]); }
+}
+
+/* ================= moteur d'énigmes ================= */
+var GAME={ hints:0, solved:{}, frags:{}, room:1 };
+function setupHint(btnId, boxId, texts){
+  el(btnId).addEventListener('click',function(){
+    var box=el(boxId), shown=box.querySelectorAll('.hintline').length;
+    if(shown>=texts.length){ this.disabled=true; this.textContent='plus d\u2019indice'; return; }
+    GAME.hints++; el('hintCount').textContent=GAME.hints;
+    var d=document.createElement('div'); d.className='hintline';
+    d.innerHTML='<span class="hn">indice '+(shown+1)+' / '+texts.length+'</span>'+texts[shown];
+    box.appendChild(d); box.classList.add('show');
+  });
+}
+function solve(puzId, stateId, fragId, slot, digit){
+  if(GAME.solved[puzId]) return;
+  SCARE.errs=0;   /* le chantier se calme quand on avance */
+  GAME.solved[puzId]=true;
+  el(puzId).classList.add('solved');
+  el(stateId).textContent='r\u00e9solu \u2713'; el(stateId).classList.add('ok');
+  el(fragId).classList.add('show');
+  GAME.frags[slot]=digit;
+  var f=el('f'+slot); f.textContent=digit; f.classList.add('got');
+}
+function goRoom(n){
+  GAME.room=n;
+  if(n==='B'){
+    document.querySelectorAll('.room').forEach(function(r){ r.classList.remove('on'); });
+    el('roomB').classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+    return;
+  }
+  document.querySelectorAll('.room').forEach(function(r){ r.classList.remove('on'); });
+  var t=el('room'+n); if(t) t.classList.add('on');
+  for(var i=1;i<=5;i++){
+    var b=el('r'+i); if(!b) continue;
+    b.classList.remove('cur');
+    if(i<n) b.classList.add('done');
+    if(i===n) b.classList.add('cur');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ================= SALLE 1 : énigmes ================= */
+var P_PALETTE=320*10;   /* 3200 N */
+
+setupHint('h11','hb11',[
+  'Le poids et la masse ne sont pas la m\u00eame chose : la masse se mesure en kg, le poids est une FORCE, en newtons.',
+  'La relation est <b>P = m \u00d7 g</b>. Avec m = 320 kg et g = 10 N/kg, le r\u00e9sultat se compte en milliers de newtons.'
+]);
+el('b11').addEventListener('click',function(){
+  var v=numf(el('n11').value);
+  if(Math.abs(v-P_PALETTE)<20){
+    el('fb11').className='fb ok'; el('fb11').textContent='\u2713 3200 N.';
+    solve('p11','s11','fr11',1,7);
+    sceneEvent('gravure',4.2);
+    narrate('Tu essuies le b\u00e9ton sous le crochet : un chiffre appara\u00eet, grav\u00e9 au burin. Quelqu\u2019un a laiss\u00e9 ce message pour toi.');
+  } else if(Math.abs(v-320)<1){
+    el('fb11').className='fb no'; el('fb11').textContent='\u2717 320, c\u2019est la MASSE en kg. Le manuel r\u00e9clame une force, en newtons.'; incident();
+  } else {
+    el('fb11').className='fb no'; el('fb11').textContent='\u2717 Le crochet ne bronche pas. Reprends la relation entre masse et poids.'; incident();
+  }
+});
+
+/* --- 1.2 treuil : scène béton + équilibre --- */
+(function(){
+  var cv=el('cvTreuil'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var bg=betonTexture(W,H,17);
+  var wall=document.createElement('canvas'); wall.width=W; wall.height=H;
+  (function(){ var d=wall.getContext('2d'); d.drawImage(bg,0,0);
+    poutreAcier(d,0,18,W,24);
+    d.fillStyle='#1b222e'; d.fillRect(0,H-38,W,38);
+    d.fillStyle='rgba(255,255,255,.03)'; d.fillRect(0,H-38,W,3);
+    /* règle graduée murale */
+    d.strokeStyle='rgba(200,208,224,.30)'; d.lineWidth=2;
+    d.beginPath(); d.moveTo(64,60); d.lineTo(64,H-42); d.stroke();
+    for(var i=0;i<12;i++){ var y=64+i*20; d.beginPath(); d.moveTo(64,y); d.lineTo(i%2?72:80,y); d.stroke(); }
+  })();
+  var T=2400, t=0, y=0, v=0, waves=[], drops=[{x:600,y:-40,v:2.6}];
+  el('sT').addEventListener('input',function(){ T=+this.value; el('vT').textContent=T+' N'; });
+  function step(){
+    t+=0.04;
+    var net=(T-P_PALETTE)/400;
+    if(Math.abs(T-P_PALETTE)<1){ v*=0.90; y+=v; y*=0.985; }
+    else { v+=net*0.05; v*=0.97; y+=v; }
+    if(y>58){ y=58; v=0; } if(y<-58){ y=-58; v=0; }
+    g.clearRect(0,0,W,H); g.drawImage(wall,0,0);
+    var cx=300, top=30, by=168-y;
+    /* halo d'atelier */
+    var hal=g.createRadialGradient(cx,90,10,cx,90,260);
+    hal.addColorStop(0,'rgba(255,214,140,.16)'); hal.addColorStop(1,'rgba(255,214,140,0)');
+    g.fillStyle=hal; g.fillRect(0,0,W,H);
+    /* flaque */
+    g.save(); g.beginPath(); g.ellipse(360,H-24,250,16,0,0,7); g.clip();
+    g.fillStyle='#0d1420'; g.fillRect(0,H-44,W,44);
+    for(var w=0;w<7;w++){
+      g.strokeStyle='rgba(127,214,232,'+(0.05+0.04*Math.sin(t*1.7+w)).toFixed(3)+')'; g.lineWidth=1.2;
+      g.beginPath();
+      for(var x=120;x<=600;x+=22){ var yy=H-34+w*4+Math.sin(x*0.05+t*2+w)*1.4; if(x===120)g.moveTo(x,yy); else g.lineTo(x,yy); }
+      g.stroke();
+    }
+    for(var oi=waves.length-1;oi>=0;oi--){ var o=waves[oi]; o.r+=1.4; o.a-=0.016;
+      if(o.a<=0){ waves.splice(oi,1); continue; }
+      g.strokeStyle='rgba(170,220,240,'+o.a.toFixed(3)+')'; g.lineWidth=1.3;
+      g.beginPath(); g.ellipse(o.x,H-24,o.r,o.r*0.26,0,0,7); g.stroke(); }
+    g.restore();
+    drops.forEach(function(d){ d.y+=d.v; d.v+=0.06;
+      if(d.y>=H-24){ waves.push({x:d.x,r:2,a:0.4}); d.y=-30-Math.random()*120; d.v=2.4; }
+      g.strokeStyle='rgba(170,205,230,.6)'; g.lineWidth=1.4;
+      g.beginPath(); g.moveTo(d.x,d.y); g.lineTo(d.x,d.y+9); g.stroke(); });
+    /* treuil (tambour) */
+    g.fillStyle='#39424f'; g.fillRect(cx-34,6,68,26);
+    g.strokeStyle='#5b6678'; g.lineWidth=2; g.strokeRect(cx-34,6,68,26);
+    g.save(); g.translate(cx,19); g.rotate(y*0.05);
+    g.strokeStyle='#7d8798'; g.lineWidth=2;
+    for(var s=0;s<4;s++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(s*1.57)*9,Math.sin(s*1.57)*9); g.stroke(); }
+    g.restore();
+    /* câble vibrant */
+    var wob=Math.abs(T-P_PALETTE)>1? Math.sin(t*15)*1.8 : 0;
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
+    g.beginPath(); g.moveTo(cx,top); g.lineTo(cx+wob,by-6); g.stroke();
+    palette(g,cx+wob,by,0);
+    /* vecteurs */
+    var scT=T/42, scP=P_PALETTE/42;
+    arrow(g,cx-92,by+28,cx-92,by+28-scT,'#7fd6e8','T = '+T+' N',cx-176);
+    arrow(g,cx+106,by+28,cx+106,by+28+scP,'#e87060','P = 3200 N');
+    /* verdict */
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(T>P_PALETTE+1){ g.fillStyle='#f0b558'; g.fillText('\u2191 T > P \u00b7 la palette MONTE et cogne la poutre',W/2,H-10); }
+    else if(T<P_PALETTE-1){ g.fillStyle='#e87060'; g.fillText('\u2193 T < P \u00b7 la palette DESCEND vers l\u2019eau',W/2,H-10); }
+    else { g.fillStyle='#6ee3a0'; g.fillText('\ud83c\udfaf T = P \u00b7 \u00c9QUILIBRE : la somme des forces est nulle',W/2,H-10); }
+    g.textAlign='left';
+    g.fillStyle='#98a1b8'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('\u00e9cart T \u2212 P = '+(T-P_PALETTE)+' N',470,52);
+  }
+  setInterval(step,40); step();
+})();
+setupHint('h12','hb12',[
+  'Un solide soumis \u00e0 DEUX forces est en \u00e9quilibre si elles ont la m\u00eame droite d\u2019action, des sens oppos\u00e9s et la M\u00caME intensit\u00e9.',
+  'La seule force qui tire vers le bas est le poids trouv\u00e9 en 1.1. Le c\u00e2ble doit exactement le compenser : cherche l\u2019\u00e9cart nul \u00e0 l\u2019\u00e9cran.'
+]);
+el('b12').addEventListener('click',function(){
+  var v=numf(el('n12').value);
+  if(Math.abs(v-P_PALETTE)<20){
+    el('fb12').className='fb ok'; el('fb12').textContent='\u2713 T = P = 3200 N : la palette flotte, immobile.';
+    solve('p12','s12','fr12',2,1);
+    sceneEvent('verrou',3.6);
+    narrate('Le verrou magn\u00e9tique cr\u00e9pite, l\u00e2che dans une gerbe d\u2019\u00e9tincelles, et le tambour du treuil s\u2019immobilise : un second chiffre est frapp\u00e9 dans l\u2019acier.');
+  } else {
+    el('fb12').className='fb no'; el('fb12').textContent='\u2717 \u00c7a bouge encore. Cherche la valeur qui annule l\u2019\u00e9cart affich\u00e9.'; incident();
+  }
+});
+
+/* --- 1.3 palan : scène animée --- */
+(function(){
+  var cv=el('cvPalan'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var bg=betonTexture(W,H,23);
+  var wall=document.createElement('canvas'); wall.width=W; wall.height=H;
+  (function(){ var d=wall.getContext('2d'); d.drawImage(bg,0,0); poutreAcier(d,0,16,W,22); })();
+  var t=0, waves=[];
+  function poulie(gg,x,y,r,rot,col){
+    gg.fillStyle='#2b3342'; gg.beginPath(); gg.arc(x,y,r,0,7); gg.fill();
+    gg.strokeStyle=col; gg.lineWidth=2.6; gg.stroke();
+    gg.save(); gg.translate(x,y); gg.rotate(rot);
+    gg.strokeStyle='rgba(160,170,190,.55)'; gg.lineWidth=1.8;
+    for(var s=0;s<4;s++){ gg.beginPath(); gg.moveTo(0,0); gg.lineTo(Math.cos(s*1.57)*(r-4),Math.sin(s*1.57)*(r-4)); gg.stroke(); }
+    gg.restore();
+    gg.fillStyle='#8b95a8'; gg.beginPath(); gg.arc(x,y,3,0,7); gg.fill();
+  }
+  function step(){
+    t+=0.04;
+    var sw=Math.sin(t*0.6)*4;
+    g.clearRect(0,0,W,H); g.drawImage(wall,0,0);
+    var hal=g.createRadialGradient(350,60,10,350,60,300);
+    hal.addColorStop(0,'rgba(255,214,140,.13)'); hal.addColorStop(1,'rgba(255,214,140,0)');
+    g.fillStyle=hal; g.fillRect(0,0,W,H);
+    /* eau au sol (le fond du sas est inondé) */
+    g.save(); g.beginPath(); g.rect(0,H-52,W,52); g.clip();
+    g.fillStyle='#0c1420'; g.fillRect(0,H-52,W,52);
+    for(var w=0;w<9;w++){
+      g.strokeStyle='rgba(127,214,232,'+(0.05+0.05*Math.sin(t*1.5+w)).toFixed(3)+')'; g.lineWidth=1.2;
+      g.beginPath();
+      for(var x=0;x<=W;x+=20){ var yy=H-46+w*5+Math.sin(x*0.05+t*1.9+w)*1.6; if(x===0)g.moveTo(x,yy); else g.lineTo(x,yy); }
+      g.stroke();
+    }
+    for(var oi=waves.length-1;oi>=0;oi--){ var o=waves[oi]; o.r+=1.3; o.a-=0.015;
+      if(o.a<=0){ waves.splice(oi,1); continue; }
+      g.strokeStyle='rgba(170,220,240,'+o.a.toFixed(3)+')'; g.lineWidth=1.3;
+      g.beginPath(); g.ellipse(o.x,H-26,o.r,o.r*0.25,0,0,7); g.stroke(); }
+    if(Math.random()<0.03) waves.push({x:100+Math.random()*500,r:2,a:0.35});
+    g.restore();
+    /* poulies fixes et mobiles */
+    var ty=52, my=160+sw*0.5;
+    poulie(g,280,ty,17,t*0.5,'#9aa3ba'); poulie(g,420,ty,17,-t*0.5,'#9aa3ba');
+    poulie(g,320+sw,my,17,t*0.7,'#f0b558'); poulie(g,380+sw,my,17,-t*0.7,'#f0b558');
+    /* brins */
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
+    [[263,303],[297,337],[403,363],[437,397]].forEach(function(p,i){
+      g.beginPath(); g.moveTo(p[0],ty); g.lineTo(p[1]+sw,my); g.stroke();
+    });
+    /* brin libre tiré par l'ouvrier */
+    g.beginPath(); g.moveTo(437,ty); g.lineTo(520,ty); g.lineTo(560,H-70); g.stroke();
+    g.fillStyle='#4d566b'; g.beginPath(); g.arc(560,H-64,7,0,7); g.fill();
+    /* moufle + charge */
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
+    g.beginPath(); g.moveTo(320+sw,my+16); g.quadraticCurveTo(350+sw,my+34,380+sw,my+16); g.stroke();
+    palette(g,350+sw,my+30,0);
+    g.fillStyle='#f0b558'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('3200 N',350+sw,my+64); g.textAlign='left';
+    /* étiquettes T sur les brins */
+    g.fillStyle='#7fd6e8'; g.font='700 12px "JetBrains Mono",monospace';
+    [275,315,395,435].forEach(function(x){ g.fillText('T',x-4,110); });
+    g.fillStyle='#98a1b8'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('4 brins portants \u00b7 m\u00eame tension',470,150);
+    g.fillText('brin libre \u2192 effort de l\u2019ouvrier',470,170);
+  }
+  setInterval(step,40); step();
+})();
+setupHint('h13','hb13',[
+  'Les 4 brins portent ensemble la m\u00eame charge et sont tendus \u00e0 l\u2019identique : la charge se PARTAGE entre eux.',
+  '\u00c9quilibre de la moufle : 4 \u00d7 T = P. Isole T \u2014 c\u2019est tout l\u2019int\u00e9r\u00eat du palan : moins d\u2019effort\u2026 mais plus de c\u00e2ble \u00e0 tirer.'
+]);
+el('b13').addEventListener('click',function(){
+  var v=numf(el('n13').value);
+  var okN=Math.abs(v-800)<10;
+  var okQ=(el('q13').value==='4 fois plus petite que la charge');
+  if(okN&&okQ){
+    el('fb13').className='fb ok'; el('fb13').textContent='\u2713 800 N par brin : la moufle divise l\u2019effort par 4.';
+    solve('p13','s13','fr13',3,4);
+    narrate('Sur la joue de poulie, sous une couche de graisse noire, le dernier chiffre. Les trois molettes du cadenas t\u2019attendent.');
+  } else if(Math.abs(v-3200)<10){
+    el('fb13').className='fb no'; el('fb13').textContent='\u2717 3200 N, c\u2019est la charge ENTI\u00c8RE. Un brin n\u2019en supporte qu\u2019une part.'; incident();
+  } else {
+    el('fb13').className='fb no'; el('fb13').textContent='\u2717 '+(okN?'valeur \u2713':'valeur \u2717')+' \u00b7 '+(okQ?'conclusion \u2713':'conclusion \u2717'); incident();
+  }
+});
+
+/* --- cadenas + cinématique de porte --- */
+['d1','d2','d3'].forEach(function(id,i){
+  el(id).addEventListener('input',function(){
+    this.value=this.value.replace(/[^0-9]/g,'').slice(0,1);
+    if(this.value && i<2) el('d'+(i+2)).focus();
+  });
+});
+el('bLock').addEventListener('click',function(){
+  var code=(el('d1').value||'')+(el('d2').value||'')+(el('d3').value||'');
+  if(code.length<3){ el('fbLock').className='fb no'; el('fbLock').textContent='\u2717 Les trois molettes doivent \u00eatre positionn\u00e9es.'; return; }
+  if(code==='714'){
+    el('fbLock').className='fb ok'; el('fbLock').textContent='\u2713 CLAC. Les trois p\u00eanes se r\u00e9tractent.';
+    el('lock1').classList.add('open'); el('bLock').disabled=true;
+    sceneEvent('porte',4.5);
+    narrate('La porte blind\u00e9e se soul\u00e8ve dans un nuage de vapeur. Derri\u00e8re, un couloir descend vers l\u2019atelier \u2014 et un tag \u00e0 la bombe : \u00ab les forces, c\u2019est facile\u2026 attends de voir les MOMENTS. \u00bb');
+    setTimeout(function(){ el('door1').classList.add('show'); el('door1').scrollIntoView({behavior:'smooth',block:'center'}); },1400);
+  } else {
+    el('fbLock').className='fb no';
+    var n=Object.keys(GAME.frags).length;
+    el('fbLock').textContent='\u2717 Les molettes se rebloquent. '+(n<3? 'Il te manque '+(3-n)+' fragment(s).' : 'Les trois fragments sont trouv\u00e9s : lis-les dans l\u2019ordre 1, 2, 3.');
+    if(n>=3) incident();
+  }
+});
+el('goRoom2').addEventListener('click',function(){
+  cinePlay(FRAMES_S2,function(){
+    goRoom(2); resetFrags(); SCARE.errs=0;
+    narrate2('Les n\u00e9ons se rallument un par un. Sur l\u2019\u00e9tabli, une cl\u00e9 plate, un boulon r\u00e9calcitrant\u2026 et trois nouvelles molettes.');
+  });
+});
+document.querySelectorAll('[id="backRoom1"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(1); }); });
+
+
+/* ================================================================
+   ============ SALLE 2 : L'ATELIER DES LEVIERS ===================
+   ================================================================ */
+var CINE_ATELIER=null;
+var FRAMES_S2=[
+  { dur:5.4, text:"Le couloir descend. Ta lampe accroche des \u00e9tiquettes de banche, des armatures qui d\u00e9passent, l\u2019odeur d\u2019huile de coupe qui monte de l\u2019atelier.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      g.fillStyle='rgba(4,6,10,.82)'; g.fillRect(0,0,W,H);
+      /* cone de lampe torche balay\u00e9 */
+      var lx=470+Math.sin(t*0.9)*150, ly=250+Math.cos(t*0.7)*40;
+      var cone=g.createRadialGradient(lx,ly,10,lx,ly,230);
+      cone.addColorStop(0,'rgba(255,226,170,.42)'); cone.addColorStop(1,'rgba(255,226,170,0)');
+      g.fillStyle=cone; g.fillRect(0,0,W,H);
+      /* marches */
+      for(var s=0;s<7;s++){
+        var y=250+s*26, x0=330-s*24, x1=610+s*24;
+        g.fillStyle='rgba(50,58,72,'+(0.5-s*0.05)+')'; g.fillRect(x0,y,x1-x0,14);
+        g.fillStyle='rgba(12,16,22,.5)'; g.fillRect(x0,y+14,x1-x0,7);
+      }
+      /* armatures qui d\u00e9passent */
+      g.strokeStyle='rgba(150,96,52,.55)'; g.lineWidth=3;
+      for(var a=0;a<6;a++){ var ax=90+a*150;
+        g.beginPath(); g.moveTo(ax,120); g.lineTo(ax+14,148+Math.sin(a)*10); g.stroke(); }
+      pluie(g,t,W,H,26,0.10);
+    }},
+  { dur:5.0, text:"Tu pousses la porte. Les n\u00e9ons s\u2019allument un par un, en gr\u00e9sillant \u2014 et l\u2019atelier appara\u00eet.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_ATELIER) CINE_ATELIER=betonTexture(940,460,88);
+      g.drawImage(CINE_ATELIER,0,0);
+      g.fillStyle='rgba(5,7,11,.88)'; g.fillRect(0,0,W,H);
+      /* trois n\u00e9ons qui s'amorcent en cascade */
+      for(var i=0;i<3;i++){
+        var on = t> 0.8+i*1.05;
+        var flick = on? (t<1.3+i*1.05? (Math.random()<0.45?0.25:1) : 1) : 0;
+        var nx=180+i*300;
+        g.fillStyle='rgba(210,225,235,'+(0.85*flick)+')'; g.fillRect(nx-84,66,168,9);
+        var gl=g.createRadialGradient(nx,72,10,nx,72,260);
+        gl.addColorStop(0,'rgba(198,222,235,'+(0.30*flick)+')'); gl.addColorStop(1,'rgba(198,222,235,0)');
+        g.fillStyle=gl; g.fillRect(0,0,W,H);
+      }
+      /* \u00e9tabli + \u00e9tau en ombre chinoise */
+      g.fillStyle='rgba(28,34,44,.92)'; g.fillRect(120,300,420,26); g.fillRect(146,326,20,110); g.fillRect(496,326,20,110);
+      g.fillStyle='rgba(40,48,60,.95)'; g.fillRect(300,262,64,40);
+      /* panneau d'outils */
+      g.fillStyle='rgba(30,38,50,.9)'; g.fillRect(640,150,220,150);
+      g.strokeStyle='rgba(120,132,152,.35)'; g.lineWidth=2;
+      for(var k=0;k<5;k++){ g.beginPath(); g.moveTo(660+k*44,158); g.lineTo(660+k*44,158+50+((k*37)%50)); g.stroke(); }
+    }},
+  { dur:5.6, text:"Sur le mur, au marqueur : \u00ab une force ne suffit plus. Ce qui compte, c\u2019est O\u00d9 tu l\u2019appliques. \u00bb Trois molettes graisseuses attendent.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_ATELIER) CINE_ATELIER=betonTexture(940,460,88);
+      g.drawImage(CINE_ATELIER,0,0);
+      g.fillStyle='rgba(5,8,13,.45)'; g.fillRect(0,0,W,H);
+      var gl=g.createRadialGradient(470,120,20,470,120,340);
+      gl.addColorStop(0,'rgba(198,222,235,.30)'); gl.addColorStop(1,'rgba(198,222,235,0)');
+      g.fillStyle=gl; g.fillRect(0,0,W,H);
+      /* cl\u00e9 g\u00e9ante en gros plan, qui pivote lentement */
+      g.save(); g.translate(470,270); g.rotate(-0.5+Math.sin(t*0.7)*0.10);
+      var mg=g.createLinearGradient(-220,0,220,0);
+      mg.addColorStop(0,'#59647a'); mg.addColorStop(0.5,'#8b95a8'); mg.addColorStop(1,'#3d4759');
+      g.fillStyle=mg; g.fillRect(-40,-15,300,30);
+      g.beginPath(); g.arc(-40,0,44,0,7); g.fill();
+      g.fillStyle='#0e1219'; g.beginPath(); g.arc(-40,0,25,0,7); g.fill();
+      g.fillStyle=mg; g.beginPath(); g.arc(272,0,26,0,7); g.fill();
+      g.fillStyle='#0e1219'; g.beginPath(); g.arc(272,0,14,0,7); g.fill();
+      g.restore();
+      /* fl\u00e8che de moment */
+      if(t>2.2){
+        g.save(); g.globalAlpha=Math.min(1,(t-2.2)/0.8);
+        g.strokeStyle='#f0b558'; g.lineWidth=4;
+        g.beginPath(); g.arc(430,270,88,-2.5,-0.5); g.stroke();
+        g.fillStyle='#f0b558'; g.beginPath(); g.moveTo(510,232); g.lineTo(494,206); g.lineTo(524,212); g.closePath(); g.fill();
+        g.font='700 22px "JetBrains Mono",monospace'; g.fillText('M = F \u00d7 d',540,196);
+        g.restore();
+      }
+      if(t>3.4){
+        g.save(); g.globalAlpha=Math.min(1,(t-3.4)/1.0); g.rotate(0.02);
+        g.fillStyle='rgba(232,226,206,.75)'; g.font='700 20px "Bricolage Grotesque",sans-serif';
+        g.fillText('\u03a3 M = 0', 96, 118);
+        g.restore();
+      }
+    }}
+];
+
+var DEC2={ event:null, evT:0 };
+function sceneEvent2(kind,dur){ DEC2.event={kind:kind,dur:dur}; DEC2.evT=0; }
+
+/* ---------- décor vivant de l'atelier ---------- */
+(function(){
+  var cv=el('cvDecor2'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var bg=betonTexture(W,H,88);
+  var deco=document.createElement('canvas'); deco.width=W; deco.height=H;
+  (function(){
+    var d=deco.getContext('2d'); d.drawImage(bg,0,0);
+    /* sol + copeaux */
+    d.fillStyle='#1c232f'; d.fillRect(0,H-52,W,52);
+    d.fillStyle='rgba(255,255,255,.03)'; d.fillRect(0,H-52,W,3);
+    var R=rng(66);
+    for(var c=0;c<80;c++){
+      var cx=R()*W, cy=H-50+R()*46;
+      d.strokeStyle='rgba(170,180,198,'+(0.10+R()*0.22).toFixed(3)+')'; d.lineWidth=1.2;
+      d.beginPath(); d.arc(cx,cy,2+R()*5,R()*6,R()*6+2.2); d.stroke();
+    }
+    /* panneau d'outils avec silhouettes peintes */
+    d.fillStyle='#232b39'; d.fillRect(636,96,262,150);
+    d.strokeStyle='#48536a'; d.lineWidth=2; d.strokeRect(636,96,262,150);
+    for(var px=0;px<9;px++){ for(var py=0;py<5;py++){
+      d.fillStyle='rgba(10,14,20,.5)'; d.beginPath(); d.arc(652+px*29,110+py*29,2,0,7); d.fill(); } }
+    /* silhouettes d'outils peintes en blanc + outils accrochés */
+    d.strokeStyle='rgba(220,226,236,.16)'; d.lineWidth=8; d.lineCap='round';
+    [[668,124,668,196],[706,124,706,180],[744,124,744,204],[784,124,784,170]].forEach(function(s){
+      d.beginPath(); d.moveTo(s[0],s[1]); d.lineTo(s[2],s[3]); d.stroke(); });
+    d.strokeStyle='#8b95a8'; d.lineWidth=6;
+    [[668,124,668,196],[744,124,744,204]].forEach(function(s){
+      d.beginPath(); d.moveTo(s[0],s[1]); d.lineTo(s[2],s[3]); d.stroke(); });
+    d.fillStyle='#8b95a8';
+    d.beginPath(); d.arc(668,124,9,0,7); d.fill(); d.beginPath(); d.arc(744,124,9,0,7); d.fill();
+    d.fillStyle='#0e1219'; d.beginPath(); d.arc(668,124,4.5,0,7); d.fill(); d.beginPath(); d.arc(744,124,4.5,0,7); d.fill();
+    /* établi massif + étau */
+    d.fillStyle='#40372b'; d.fillRect(96,214,380,22);
+    d.fillStyle='#4d4335'; d.fillRect(96,214,380,7);
+    d.fillStyle='#2f2a22'; d.fillRect(120,236,20,96); d.fillRect(432,236,20,96);
+    /* étau */
+    d.fillStyle='#59647a'; d.fillRect(300,178,70,38);
+    d.fillStyle='#3d4759'; d.fillRect(310,168,50,14);
+    d.fillStyle='#8b95a8'; d.fillRect(366,190,44,10);
+    d.beginPath(); d.arc(414,195,9,0,7); d.fill();
+    /* bidons d'huile */
+    d.fillStyle='#2f4a3a'; d.fillRect(520,268,42,64); d.fillStyle='#263b2f'; d.fillRect(520,268,42,10);
+    d.fillStyle='#4a3a2a'; d.fillRect(570,286,34,46);
+    /* bras de grue démonté contre le mur */
+    d.save(); d.translate(180,H-58); d.rotate(-0.42);
+    var gr2=d.createLinearGradient(0,0,260,0); gr2.addColorStop(0,'#4a5364'); gr2.addColorStop(1,'#2c3442');
+    d.fillStyle=gr2; d.fillRect(0,-12,260,24);
+    d.strokeStyle='#5b6678'; d.lineWidth=2;
+    for(var t2=0;t2<9;t2++){ d.beginPath(); d.moveTo(t2*29,-12); d.lineTo(t2*29+29,12); d.stroke();
+      d.beginPath(); d.moveTo(t2*29,12); d.lineTo(t2*29+29,-12); d.stroke(); }
+    d.restore();
+    /* craie */
+    d.save(); d.rotate(-0.015);
+    d.fillStyle='rgba(232,226,206,.44)'; d.font='700 16px "Bricolage Grotesque",sans-serif';
+    d.fillText('\u03a3 M = 0', 500, 128);
+    d.font='400 13px "Bricolage Grotesque",sans-serif'; d.fillStyle='rgba(220,214,196,.3)';
+    d.fillText('o\u00f9 tu l\u2019appliques compte autant', 500, 150);
+    d.restore();
+  })();
+  /* flaque d'huile irisée + ventilateur + néons */
+  var t=0, nf=[1,1,1], waves=[];
+  var dust=[]; var Rd=rng(21);
+  for(var k=0;k<38;k++) dust.push({x:Rd()*W,y:Rd()*H,vx:(Rd()-0.5)*0.3,vy:-0.05-Rd()*0.1,r:0.7+Rd()*1.4,a:0.05+Rd()*0.14});
+  function step(){
+    t+=0.04;
+    if(DEC2.event){ DEC2.evT+=0.04; if(DEC2.evT>DEC2.event.dur) DEC2.event=null; }
+    g.clearRect(0,0,W,H); g.drawImage(deco,0,0);
+    /* néons */
+    for(var i=0;i<3;i++){
+      if(Math.random()<0.006) nf[i]=0.3+Math.random()*0.4;
+      nf[i]+=(1-nf[i])*0.09;
+      var nx=180+i*300;
+      g.fillStyle='rgba(214,230,240,'+(0.8*nf[i])+')'; g.fillRect(nx-80,26,160,8);
+      g.fillStyle='#39424f'; g.fillRect(nx-88,20,10,14); g.fillRect(nx+78,20,10,14);
+      var gl=g.createRadialGradient(nx,34,12,nx,34,250);
+      gl.addColorStop(0,'rgba(198,222,235,'+(0.20*nf[i])+')'); gl.addColorStop(1,'rgba(198,222,235,0)');
+      g.fillStyle=gl; g.fillRect(0,0,W,H);
+    }
+    /* flaque d'huile irisée au sol */
+    g.save(); g.beginPath(); g.ellipse(620,H-22,180,18,0,0,7); g.clip();
+    g.fillStyle='#0b0f16'; g.fillRect(400,H-46,460,46);
+    for(var w=0;w<9;w++){
+      var hue=(t*14+w*30)%360;
+      g.strokeStyle='hsla('+hue+',60%,60%,0.05)'; g.lineWidth=2.4;
+      g.beginPath();
+      for(var x=440;x<=800;x+=18){ var yy=H-34+w*4+Math.sin(x*0.05+t*1.3+w)*1.5; if(x===440)g.moveTo(x,yy); else g.lineTo(x,yy); }
+      g.stroke();
+    }
+    for(var oi=waves.length-1;oi>=0;oi--){ var o=waves[oi]; o.r+=1.2; o.a-=0.014;
+      if(o.a<=0){ waves.splice(oi,1); continue; }
+      g.strokeStyle='rgba(200,190,230,'+o.a.toFixed(3)+')'; g.lineWidth=1.2;
+      g.beginPath(); g.ellipse(o.x,H-22,o.r,o.r*0.22,0,0,7); g.stroke(); }
+    if(Math.random()<0.02) waves.push({x:560+Math.random()*130,r:2,a:0.30});
+    g.restore();
+    /* ventilateur mural qui tourne */
+    var vx=858, vy=282;
+    g.fillStyle='#242c3a'; g.beginPath(); g.arc(vx,vy,30,0,7); g.fill();
+    g.save(); g.translate(vx,vy); g.rotate(t*2.1);
+    g.fillStyle='rgba(140,150,170,.75)';
+    for(var b=0;b<3;b++){ g.rotate(2.09);
+      g.beginPath(); g.ellipse(13,0,15,7,0,0,7); g.fill(); }
+    g.restore();
+    g.strokeStyle='rgba(150,160,180,.35)'; g.lineWidth=1.4;
+    for(var r2=8;r2<=28;r2+=7){ g.beginPath(); g.arc(vx,vy,r2,0,7); g.stroke(); }
+    /* poussière */
+    dust.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy; if(p.y<-4){ p.y=H+4; p.x=Math.random()*W; }
+      g.fillStyle='rgba(220,230,240,'+p.a.toFixed(3)+')';
+      g.beginPath(); g.arc(p.x,p.y,p.r,0,7); g.fill();
+    });
+    /* événements */
+    if(DEC2.event){
+      var e=DEC2.event, k2=DEC2.evT/e.dur;
+      if(e.kind==='gravure'){
+        var gx=336, gy=196, pulse=0.5+0.5*Math.sin(DEC2.evT*6);
+        var g2=g.createRadialGradient(gx,gy,2,gx,gy,56);
+        g2.addColorStop(0,'rgba(127,214,232,'+(0.5*(1-k2)+0.25*pulse*(1-k2))+')'); g2.addColorStop(1,'rgba(127,214,232,0)');
+        g.fillStyle=g2; g.beginPath(); g.arc(gx,gy,56,0,7); g.fill();
+      }
+      if(e.kind==='coupure'||e.kind==='silhouette'){
+        var back= DEC2.evT<0.9? 0 : Math.min(1,(DEC2.evT-0.9)/0.7)*(0.55+0.45*Math.abs(Math.sin(DEC2.evT*11)));
+        g.fillStyle='rgba(5,7,11,'+(0.86*(1-back)).toFixed(3)+')'; g.fillRect(0,0,W,H);
+        var Rp=rng(53);
+        for(var dd=0;dd<60;dd++){
+          var dx2=Rp()*W, dy2=(Rp()*80)+DEC2.evT*130;
+          g.fillStyle='rgba(210,200,180,'+(0.16*Math.max(0,1-k2)).toFixed(3)+')';
+          g.fillRect(dx2,dy2%H,1.7,4.2);
+        }
+        if(e.kind==='silhouette'&&DEC2.evT>1.0&&DEC2.evT<2.6){
+          var pr=(DEC2.evT-1.0)/1.6, sx2=W*(1.05-pr*1.15);
+          g.save(); g.globalAlpha=0.5*Math.sin(pr*3.14); g.fillStyle='#05070b';
+          g.beginPath(); g.ellipse(sx2,150,14,19,0,0,7); g.fill();
+          g.beginPath(); g.moveTo(sx2-25,174); g.quadraticCurveTo(sx2,162,sx2+25,174);
+          g.lineTo(sx2+19,278); g.lineTo(sx2-19,278); g.closePath(); g.fill();
+          g.beginPath(); g.ellipse(sx2,138,19,8,0,0,7); g.fill();
+          g.restore();
+        }
+      }
+      if(e.kind==='trappe'){
+        var op=Math.min(1,DEC2.evT/1.8);
+        g.fillStyle='#0a0e15'; g.fillRect(300,H-16-op*90,300,op*90+16);
+        var li=g.createLinearGradient(0,H-op*90,0,H);
+        li.addColorStop(0,'rgba(127,214,232,'+(0.22*op)+')'); li.addColorStop(1,'rgba(127,214,232,0)');
+        g.fillStyle=li; g.fillRect(300,H-op*90,300,op*90);
+        var Rs=rng(91);
+        for(var v2=0;v2<40;v2++){
+          g.fillStyle='rgba(200,220,235,'+(0.05+Rs()*0.07).toFixed(3)+')';
+          g.beginPath(); g.arc(320+Rs()*260, H-Rs()*120*op, 3+Rs()*12,0,7); g.fill();
+        }
+      }
+    }
+    var vg=g.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,H*1.05);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.6)');
+    g.fillStyle=vg; g.fillRect(0,0,W,H);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- 2.1 : la clé et le couple ---------- */
+var COUPLE_MINI=240, F_OUVRIER=300;   /* d mini = 240/300 = 0,8 m */
+(function(){
+  var cv=el('cvCle'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, d=0.3, t=0, rot=0, freed=false;
+  var bgw=betonTexture(W,H,131);
+  el('sCle').addEventListener('input',function(){
+    d=+this.value; el('vCle').textContent=String(d.toFixed(2)).replace('.',',')+' m';
+    if(F_OUVRIER*d < COUPLE_MINI-0.001){ freed=false; rot=0; }
+  });
+  function step(){
+    t+=0.04;
+    var M=F_OUVRIER*d;
+    var ok=M>=COUPLE_MINI-0.001;
+    if(ok){ freed=true; rot+=0.035; }
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    g.fillStyle='rgba(6,9,14,.35)'; g.fillRect(0,0,W,H);
+    var gl=g.createRadialGradient(300,60,10,300,60,300);
+    gl.addColorStop(0,'rgba(198,222,235,.16)'); gl.addColorStop(1,'rgba(198,222,235,0)');
+    g.fillStyle=gl; g.fillRect(0,0,W,H);
+    /* platine + boulon */
+    var bx=180, by=170;
+    g.fillStyle='#39424f'; g.fillRect(bx-70,by-70,140,140);
+    g.strokeStyle='#525d72'; g.lineWidth=2; g.strokeRect(bx-70,by-70,140,140);
+    /* écrou hexagonal qui tourne */
+    g.save(); g.translate(bx,by); g.rotate(rot);
+    g.fillStyle='#8b95a8'; g.beginPath();
+    for(var i=0;i<6;i++){ var a=i*Math.PI/3; if(i===0)g.moveTo(Math.cos(a)*30,Math.sin(a)*30); else g.lineTo(Math.cos(a)*30,Math.sin(a)*30); }
+    g.closePath(); g.fill();
+    g.strokeStyle='#59647a'; g.lineWidth=2; g.stroke();
+    g.fillStyle='#2b3342'; g.beginPath(); g.arc(0,0,13,0,7); g.fill();
+    g.restore();
+    /* clé : longueur proportionnelle (1 m = 300 px) */
+    var Lpx=d*300, flex=ok?0:Math.sin(t*9)*2.2;
+    g.save(); g.translate(bx,by); g.rotate(rot+flex*0.006);
+    var mg=g.createLinearGradient(0,-14,0,14);
+    mg.addColorStop(0,'#7d8798'); mg.addColorStop(0.5,'#59647a'); mg.addColorStop(1,'#3d4759');
+    g.fillStyle=mg; g.fillRect(20,-11,Lpx,22);
+    g.beginPath(); g.arc(20,0,26,0,7); g.fill();
+    g.fillStyle='#2b3342'; g.beginPath(); g.arc(20,0,15,0,7); g.fill();
+    g.fillStyle=mg; g.beginPath(); g.arc(20+Lpx,0,15,0,7); g.fill();
+    g.restore();
+    /* force au bout : main + flèche */
+    var hx=bx+Math.cos(rot)*(20+Lpx), hy=by+Math.sin(rot)*(20+Lpx);
+    arrow(g,hx,hy-16,hx,hy-16-72,'#e87060','F = 300 N',hx+12);
+    /* cotation du bras */
+    g.strokeStyle='rgba(240,181,88,.75)'; g.lineWidth=1.6; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(bx,by+66); g.lineTo(hx,by+66); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#f0b558'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('d = '+String(d.toFixed(2)).replace('.',',')+' m',(bx+hx)/2,by+86); g.textAlign='left';
+    /* jauge de couple */
+    var gx=470, gy=90, gw=190;
+    g.fillStyle='#1b2230'; g.fillRect(gx,gy,gw,20);
+    g.fillStyle= ok?'#6ee3a0':'#e87060';
+    g.fillRect(gx,gy,Math.min(1,M/400)*gw,20);
+    g.strokeStyle='#f0b558'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(gx+COUPLE_MINI/400*gw,gy-6); g.lineTo(gx+COUPLE_MINI/400*gw,gy+26); g.stroke();
+    g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('seuil 240 N\u00b7m',gx+COUPLE_MINI/400*gw-40,gy-12);
+    g.fillStyle='#e9e4d8'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+    g.fillText('M = F \u00d7 d = 300 \u00d7 '+String(d.toFixed(2)).replace('.',',')+' = '+Math.round(M)+' N\u00b7m',gx,gy+46);
+    g.font='700 13px "JetBrains Mono",monospace';
+    if(ok){ g.fillStyle='#6ee3a0'; g.fillText('\ud83c\udfaf le boulon c\u00e8de et se desserre',gx,gy+72); }
+    else { g.fillStyle='#e87060'; g.fillText('la cl\u00e9 fl\u00e9chit \u2014 il manque '+Math.round(COUPLE_MINI-M)+' N\u00b7m',gx,gy+72); }
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- 2.2 : le fléau ---------- */
+var GUEUSE=900, D_G=0.4, D_B=1.2;     /* équilibre : 900×0,4 = P×1,2 → P = 300 N */
+(function(){
+  var cv=el('cvFleau'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, P=150, ang=0, t=0;
+  var bgw=betonTexture(W,H,57);
+  el('sBac').addEventListener('input',function(){ P=+this.value; el('vBac').textContent=P+' N'; });
+  function step(){
+    t+=0.04;
+    var Mg=GUEUSE*D_G, Mb=P*D_B, target=Math.max(-0.2,Math.min(0.2,(Mg-Mb)/2600));
+    ang+=(target-ang)*0.08;
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    g.fillStyle='rgba(6,9,14,.35)'; g.fillRect(0,0,W,H);
+    var gl=g.createRadialGradient(350,50,10,350,50,300);
+    gl.addColorStop(0,'rgba(198,222,235,.15)'); gl.addColorStop(1,'rgba(198,222,235,0)');
+    g.fillStyle=gl; g.fillRect(0,0,W,H);
+    var cx=350, cy=150, SC=150;   /* 1 m = 150 px */
+    /* bâti + couteau */
+    g.fillStyle='#39424f'; g.beginPath(); g.moveTo(cx-40,H-40); g.lineTo(cx+40,H-40); g.lineTo(cx+12,cy+10); g.lineTo(cx-12,cy+10); g.closePath(); g.fill();
+    g.strokeStyle='#5b6678'; g.lineWidth=2; g.stroke();
+    g.fillStyle='#8b95a8'; g.beginPath(); g.moveTo(cx-11,cy+8); g.lineTo(cx+11,cy+8); g.lineTo(cx,cy-4); g.closePath(); g.fill();
+    /* fléau */
+    g.save(); g.translate(cx,cy); g.rotate(ang);
+    var bg2=g.createLinearGradient(0,-8,0,8);
+    bg2.addColorStop(0,'#7d8798'); bg2.addColorStop(1,'#3d4759');
+    g.fillStyle=bg2; g.fillRect(-D_B*SC-24,-8,(D_B+D_G)*SC+48,16);
+    for(var r=-1;r<=1;r+=2){ g.fillStyle='#5b6678'; g.beginPath(); g.arc(r*20,0,4,0,7); g.fill(); }
+    /* accroches */
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.4;
+    g.beginPath(); g.moveTo(D_G*SC,6); g.lineTo(D_G*SC,44); g.stroke();
+    g.beginPath(); g.moveTo(-D_B*SC,6); g.lineTo(-D_B*SC,44); g.stroke();
+    /* gueuse (droite du dessin = distance 0,4) */
+    g.fillStyle='#4a5162'; g.fillRect(D_G*SC-24,44,48,40);
+    g.strokeStyle='#f0b558'; g.lineWidth=2; g.strokeRect(D_G*SC-24,44,48,40);
+    g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('900 N',D_G*SC,68);
+    /* bac à gravier : hauteur de remplissage proportionnelle */
+    var hb=10+ (P/800)*44;
+    g.fillStyle='#3a4453'; g.fillRect(-D_B*SC-30,44,60,54);
+    g.fillStyle='#6b6250'; g.fillRect(-D_B*SC-27,44+54-hb,54,hb);
+    g.strokeStyle='#8b95a8'; g.lineWidth=2; g.strokeRect(-D_B*SC-30,44,60,54);
+    g.fillStyle='#e9e4d8'; g.fillText(P+' N',-D_B*SC,40+54+16);
+    g.textAlign='left';
+    g.restore();
+    /* cotations */
+    g.strokeStyle='rgba(240,181,88,.7)'; g.lineWidth=1.5; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(cx,cy-46); g.lineTo(cx+D_G*SC,cy-46); g.stroke();
+    g.beginPath(); g.moveTo(cx,cy-72); g.lineTo(cx-D_B*SC,cy-72); g.stroke();
+    g.setLineDash([]);
+    g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('0,40 m',cx+D_G*SC/2,cy-52); g.fillText('1,20 m',cx-D_B*SC/2,cy-78); g.textAlign='left';
+    /* moments */
+    g.font='700 13px "JetBrains Mono",monospace';
+    g.fillStyle='#e87060'; g.fillText('M gueuse = 900 \u00d7 0,40 = '+Math.round(Mg)+' N\u00b7m',30,H-58);
+    g.fillStyle='#7fd6e8'; g.fillText('M bac = '+P+' \u00d7 1,20 = '+Math.round(Mb)+' N\u00b7m',30,H-38);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(Math.abs(Mg-Mb)<1){ g.fillStyle='#6ee3a0'; g.fillText('\ud83c\udfaf \u03a3M = 0 \u00b7 le fl\u00e9au est horizontal, le contact se ferme',W/2,H-12); }
+    else if(Mg>Mb){ g.fillStyle='#e87060'; g.fillText('la gueuse l\u2019emporte \u00b7 il manque '+Math.round(Mg-Mb)+' N\u00b7m \u00e0 droite',W/2,H-12); }
+    else { g.fillStyle='#f0b558'; g.fillText('le bac est trop lourd \u00b7 exc\u00e8s de '+Math.round(Mb-Mg)+' N\u00b7m',W/2,H-12); }
+    g.textAlign='left';
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- 2.3 : la grue ---------- */
+var CHARGE_G=5000, BRAS_G=12, BRAS_CP=4;   /* 5000×12 = 60000 ; P = 60000/4 = 15000 N */
+(function(){
+  var cv=el('cvGrue'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, CP=8000, tilt=0, t=0;
+  var bgw=betonTexture(W,H,203);
+  el('sCp').addEventListener('input',function(){ CP=+this.value; el('vCp').textContent=CP+' N'; });
+  function step(){
+    t+=0.04;
+    var Mc=CHARGE_G*BRAS_G, Mcp=CP*BRAS_CP;
+    var target= Mcp>=Mc? 0 : Math.min(0.34,(Mc-Mcp)/240000);
+    tilt+=(target-tilt)*0.06;
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    g.fillStyle='rgba(6,9,14,.4)'; g.fillRect(0,0,W,H);
+    var gl=g.createRadialGradient(350,40,10,350,40,320);
+    gl.addColorStop(0,'rgba(198,222,235,.14)'); gl.addColorStop(1,'rgba(198,222,235,0)');
+    g.fillStyle=gl; g.fillRect(0,0,W,H);
+    /* rail au sol */
+    g.fillStyle='#1c232f'; g.fillRect(0,H-40,W,40);
+    g.fillStyle='#59647a'; g.fillRect(150,H-44,400,7);
+    var px=350, py=H-44, SC=17;   /* 1 m = 17 px */
+    g.save(); g.translate(px,py); g.rotate(tilt);
+    /* mât */
+    var mg=g.createLinearGradient(-14,0,14,0);
+    mg.addColorStop(0,'#4a5364'); mg.addColorStop(1,'#2c3442');
+    g.fillStyle=mg; g.fillRect(-14,-150,28,150);
+    g.strokeStyle='#5b6678'; g.lineWidth=1.6;
+    for(var k=0;k<9;k++){ g.beginPath(); g.moveTo(-14,-16-k*16); g.lineTo(14,-32-k*16); g.stroke(); }
+    /* flèche + contre-flèche */
+    g.fillStyle='#59647a'; g.fillRect(-BRAS_CP*SC-14,-166,(BRAS_G+BRAS_CP)*SC+28,14);
+    g.strokeStyle='#7d8798'; g.lineWidth=1.4;
+    for(var f=0;f<14;f++){ var fx=-BRAS_CP*SC+f*17;
+      g.beginPath(); g.moveTo(fx,-166); g.lineTo(fx+17,-152); g.stroke(); }
+    /* charge suspendue au bout */
+    var swing=Math.sin(t*1.3)*0.05;
+    g.save(); g.translate(BRAS_G*SC,-152); g.rotate(swing);
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.2; g.beginPath(); g.moveTo(0,0); g.lineTo(0,54); g.stroke();
+    g.fillStyle='#4a5162'; g.fillRect(-22,54,44,30);
+    g.strokeStyle='#f0b558'; g.lineWidth=2; g.strokeRect(-22,54,44,30);
+    g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('5000 N',0,74);
+    g.restore();
+    /* contrepoids : bloc dont la taille suit la valeur */
+    var hcp=16+ (CP/25000)*40;
+    g.fillStyle='#3a4453'; g.fillRect(-BRAS_CP*SC-26,-152,52,hcp);
+    g.strokeStyle='#8b95a8'; g.lineWidth=2; g.strokeRect(-BRAS_CP*SC-26,-152,52,hcp);
+    g.fillStyle='#e9e4d8'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText(CP+' N',-BRAS_CP*SC,-152+hcp+13); g.textAlign='left';
+    g.restore();
+    /* cotations */
+    g.strokeStyle='rgba(240,181,88,.7)'; g.lineWidth=1.5; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(px,py-210); g.lineTo(px+BRAS_G*SC,py-210); g.stroke();
+    g.beginPath(); g.moveTo(px,py-232); g.lineTo(px-BRAS_CP*SC,py-232); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('12 m',px+BRAS_G*SC/2,py-216); g.fillText('4 m',px-BRAS_CP*SC/2,py-238); g.textAlign='left';
+    /* bilan des moments */
+    g.font='700 13px "JetBrains Mono",monospace';
+    g.fillStyle='#e87060'; g.fillText('M charge = 5000 \u00d7 12 = '+Mc+' N\u00b7m',24,44);
+    g.fillStyle='#7fd6e8'; g.fillText('M contrepoids = '+CP+' \u00d7 4 = '+Mcp+' N\u00b7m',24,64);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(Mcp>=Mc){ g.fillStyle='#6ee3a0'; g.fillText(Mcp===Mc? '\ud83c\udfaf \u00e9quilibre limite : la grue tient, tout juste':'la grue tient largement',W/2,H-12); }
+    else { g.fillStyle='#e87060'; g.fillText('\u26a0 basculement : il manque '+(Mc-Mcp)+' N\u00b7m c\u00f4t\u00e9 contrepoids',W/2,H-12); }
+    g.textAlign='left';
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- énigmes, indices, cadenas de la salle 2 ---------- */
+var NARR2={timer:null};
+function narrate2(text){
+  clearInterval(NARR2.timer);
+  var i=0, box=el('narr2');
+  NARR2.timer=setInterval(function(){
+    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
+    if(i>=text.length) clearInterval(NARR2.timer);
+  },16);
+}
+function resetFrags(){
+  GAME.frags={};
+  [1,2,3].forEach(function(s){ var f=el('f'+s); f.textContent='?'; f.classList.remove('got'); });
+}
+
+setupHint('h21','hb21',[
+  'Le boulon ne conna\u00eet pas ta force, il conna\u00eet ton MOMENT : M = F \u00d7 d, avec d mesur\u00e9 depuis l\u2019axe du boulon.',
+  'Tu cherches la plus petite longueur telle que 300 \u00d7 d atteigne 240 N\u00b7m : c\u2019est une division.'
+]);
+el('b21').addEventListener('click',function(){
+  var v=numf(el('n21').value);
+  if(Math.abs(v-0.8)<0.03){
+    el('fb21').className='fb ok'; el('fb21').textContent='\u2713 0,80 m : 300 \u00d7 0,8 = 240 N\u00b7m, le boulon c\u00e8de.';
+    solve('p21','s21','fr21',1,3);
+    sceneEvent2('gravure',4.0);
+    narrate2('L\u2019\u00e9crou se d\u00e9visse enfin. Au fond de la douille, un chiffre a \u00e9t\u00e9 frapp\u00e9 au poin\u00e7on.');
+  } else if(Math.abs(v-240)<1||Math.abs(v-300)<1){
+    el('fb21').className='fb no'; el('fb21').textContent='\u2717 On te demande une LONGUEUR, en m\u00e8tres \u2014 pas un couple ni une force.'; incident();
+  } else {
+    el('fb21').className='fb no'; el('fb21').textContent='\u2717 La cl\u00e9 fl\u00e9chit, le boulon tient bon. Essaie au simulateur.'; incident();
+  }
+});
+
+setupHint('h22','hb22',[
+  'Un fl\u00e9au ne bascule pas si les moments des deux c\u00f4t\u00e9s de l\u2019axe se compensent : \u03a3M = 0.',
+  'Moment \u00e0 gauche = moment \u00e0 droite : 900 \u00d7 0,40 doit \u00e9galer P \u00d7 1,20. Isole P.'
+]);
+el('b22').addEventListener('click',function(){
+  var v=numf(el('n22').value);
+  if(Math.abs(v-300)<10){
+    el('fb22').className='fb ok'; el('fb22').textContent='\u2713 300 N : 360 N\u00b7m de chaque c\u00f4t\u00e9, le fl\u00e9au est horizontal.';
+    solve('p22','s22','fr22',2,6);
+    narrate2('Le contact se ferme dans un claquement sec. Sous le couteau du fl\u00e9au, un second chiffre grav\u00e9 appara\u00eet.');
+  } else if(Math.abs(v-900)<10){
+    el('fb22').className='fb no'; el('fb22').textContent='\u2717 Pas 900 : le bac est trois fois plus loin de l\u2019axe, il n\u2019a pas besoin d\u2019\u00eatre aussi lourd.'; incident();
+  } else {
+    el('fb22').className='fb no'; el('fb22').textContent='\u2717 Le fl\u00e9au penche encore. Compare les deux moments \u00e0 l\u2019\u00e9cran.'; incident();
+  }
+});
+
+setupHint('h23','hb23',[
+  'Une grue bascule autour du bord de sa base : tout se joue entre le moment de la charge et celui du contrepoids.',
+  'Moment de la charge : 5000 \u00d7 12. \u00c0 la limite du basculement, le contrepoids produit le M\u00caME moment, mais il n\u2019est qu\u2019\u00e0 4 m.'
+]);
+el('b23').addEventListener('click',function(){
+  var a=numf(el('n23a').value), b=numf(el('n23b').value);
+  var okA=Math.abs(a-60000)<100, okB=Math.abs(b-15000)<200;
+  if(okA&&okB){
+    el('fb23').className='fb ok'; el('fb23').textContent='\u2713 60 000 N\u00b7m \u00e0 compenser \u2192 15 000 N \u00e0 4 m. La grue tient.';
+    solve('p23','s23','fr23',3,0);
+    narrate2('Le lest bascule dans son logement et la trappe du sol se d\u00e9verrouille. Un dernier chiffre luit sur la fonte.');
+  } else {
+    el('fb23').className='fb no';
+    el('fb23').textContent='\u2717 '+(okA?'moment \u2713':'moment \u2717 (force \u00d7 distance)')+' \u00b7 '+(okB?'contrepoids \u2713':'contrepoids \u2717 (m\u00eame moment, bras plus court)');
+    incident();
+  }
+});
+
+['e1','e2','e3'].forEach(function(id,i){
+  el(id).addEventListener('input',function(){
+    this.value=this.value.replace(/[^0-9]/g,'').slice(0,1);
+    if(this.value && i<2) el('e'+(i+2)).focus();
+  });
+});
+el('bLock2').addEventListener('click',function(){
+  var code=(el('e1').value||'')+(el('e2').value||'')+(el('e3').value||'');
+  if(code.length<3){ el('fbLock2').className='fb no'; el('fbLock2').textContent='\u2717 Les trois molettes doivent \u00eatre positionn\u00e9es.'; return; }
+  if(code==='360'){
+    el('fbLock2').className='fb ok'; el('fbLock2').textContent='\u2713 CLAC. La trappe du sol s\u2019ouvre sur un escalier noy\u00e9.';
+    el('lock2').classList.add('open'); el('bLock2').disabled=true;
+    sceneEvent2('trappe',4.2);
+    narrate2('Sous l\u2019\u00e9tabli, la trappe se soul\u00e8ve. En dessous, on entend l\u2019eau clapoter contre du b\u00e9ton \u2014 la fosse aux appuis t\u2019attend.');
+    setTimeout(function(){ el('door2').classList.add('show'); el('door2').scrollIntoView({behavior:'smooth',block:'center'}); },1400);
+  } else {
+    el('fbLock2').className='fb no';
+    var n=Object.keys(GAME.frags).length;
+    el('fbLock2').textContent='\u2717 Les molettes se rebloquent. '+(n<3? 'Il te manque '+(3-n)+' fragment(s).' : 'Les trois fragments sont trouv\u00e9s : lis-les dans l\u2019ordre 1, 2, 3.');
+    if(n>=3) incident();
+  }
+});
+el('goRoom3').addEventListener('click',function(){
+  cinePlay(FRAMES_S3,function(){
+    goRoom(3); resetFrags(); SCARE.errs=0;
+    narrate3('L\u2019eau clapote contre le b\u00e9ton. Un projecteur immerg\u00e9 \u00e9claire la fosse par en dessous, et des reflets courent sur les murs.');
+  });
+});
+el('backRoom2') && el('backRoom2').addEventListener('click',function(){ goRoom(2); });
+
+
+/* ================================================================
+   ============ SALLE 3 : LA FOSSE AUX APPUIS =====================
+   ================================================================ */
+var DEC3={ event:null, evT:0, eau:0 };     /* eau : 0 → 1, monte à chaque incident */
+function sceneEvent3(kind,dur){ DEC3.event={kind:kind,dur:dur}; DEC3.evT=0; }
+var NARR3={timer:null};
+function narrate3(text){
+  clearInterval(NARR3.timer);
+  var i=0, box=el('narr3'); if(!box) return;
+  NARR3.timer=setInterval(function(){
+    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
+    if(i>=text.length) clearInterval(NARR3.timer);
+  },16);
+}
+/* caustiques : lignes lumineuses ondulantes projetées par l'eau sur le béton */
+function caustiques(g,t,x0,y0,w,h,alpha){
+  for(var i=0;i<9;i++){
+    var yy=y0+i*(h/9);
+    g.strokeStyle='rgba(150,215,235,'+(alpha*(0.4+0.6*Math.abs(Math.sin(t*1.1+i)))).toFixed(3)+')';
+    g.lineWidth=1+Math.abs(Math.sin(t*0.9+i))*1.8;
+    g.beginPath();
+    for(var x=x0;x<=x0+w;x+=14){
+      var y2=yy+Math.sin(x*0.035+t*1.7+i*0.8)*5+Math.sin(x*0.011-t*1.1)*4;
+      if(x===x0)g.moveTo(x,y2); else g.lineTo(x,y2);
+    }
+    g.stroke();
+  }
+}
+var FRAMES_S3=[
+  { dur:5.2, text:"Tu descends l\u2019\u00e9chelle. Les barreaux sont gluants. En bas, l\u2019eau noire attend, et quelque chose de bleu brille sous la surface.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      g.fillStyle='rgba(4,6,10,.80)'; g.fillRect(0,0,W,H);
+      /* \u00e9chelle qui d\u00e9file vers le haut */
+      var off=(t*70)%64;
+      g.strokeStyle='rgba(120,132,152,.55)'; g.lineWidth=7;
+      g.beginPath(); g.moveTo(400,0); g.lineTo(400,H); g.moveTo(540,0); g.lineTo(540,H); g.stroke();
+      g.lineWidth=6;
+      for(var r=-1;r<9;r++){ var y=r*64+off; g.beginPath(); g.moveTo(400,y); g.lineTo(540,y); g.stroke(); }
+      /* lueur bleue du fond */
+      var gl=g.createRadialGradient(470,430,10,470,430,300);
+      gl.addColorStop(0,'rgba(90,190,220,'+(0.10+t*0.05).toFixed(3)+')'); gl.addColorStop(1,'rgba(90,190,220,0)');
+      g.fillStyle=gl; g.fillRect(0,0,W,H);
+      caustiques(g,t,80,300,780,150,0.10);
+      /* gouttes */
+      g.strokeStyle='rgba(170,205,230,.5)'; g.lineWidth=1.4;
+      for(var i=0;i<12;i++){ var x=90+i*66, y=((t*150+i*61)%H); g.beginPath(); g.moveTo(x,y); g.lineTo(x,y+12); g.stroke(); }
+    }},
+  { dur:5.4, text:"Le projecteur immerg\u00e9 s\u2019allume. La fosse enti\u00e8re appara\u00eet \u2014 et la passerelle qui la franchit, pos\u00e9e sur deux appuis fatigu\u00e9s.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      var up=Math.min(1,t/1.4);
+      g.fillStyle='rgba(4,6,10,'+(0.82-0.35*up)+')'; g.fillRect(0,0,W,H);
+      /* eau */
+      var wl=300;
+      g.fillStyle='rgba(10,26,38,.92)'; g.fillRect(0,wl,W,H-wl);
+      var gl=g.createRadialGradient(470,H-40,10,470,H-40,340);
+      gl.addColorStop(0,'rgba(110,210,235,'+(0.42*up)+')'); gl.addColorStop(1,'rgba(110,210,235,0)');
+      g.fillStyle=gl; g.fillRect(0,wl,W,H-wl);
+      caustiques(g,t,60,110,820,170,0.16*up);
+      /* surface */
+      g.strokeStyle='rgba(160,220,240,.35)'; g.lineWidth=2;
+      g.beginPath();
+      for(var x=0;x<=W;x+=16){ var y=wl+Math.sin(x*0.03+t*2)*3; if(x===0)g.moveTo(x,y); else g.lineTo(x,y); }
+      g.stroke();
+      /* passerelle + appuis */
+      g.fillStyle='#4a5364'; g.fillRect(160,236,620,16);
+      poutreAcier(g,160,236,620,16);
+      g.fillStyle='#39424f'; g.fillRect(178,252,44,54); g.fillRect(718,252,44,54);
+      g.fillStyle='#f0b558'; g.font='700 15px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText('A',200,296); g.fillText('B',740,296); g.textAlign='left';
+      /* bulles */
+      for(var b=0;b<16;b++){
+        var bx=200+((b*97)%540), by=H-((t*40+b*33)%(H-wl));
+        g.strokeStyle='rgba(190,230,245,.30)'; g.lineWidth=1.2;
+        g.beginPath(); g.arc(bx,by,2+((b*7)%4),0,7); g.stroke();
+      }
+    }},
+  { dur:5.0, text:"Au marqueur rouge sur le garde-corps : \u00ab ce qui te porte a une limite \u00bb. Trois molettes encore, et l\u2019eau qui grignote le b\u00e9ton.",
+    draw:function(g,t){
+      var W=940,H=460;
+      if(!CINE_BETON) CINE_BETON=betonTexture(940,460,7);
+      g.drawImage(CINE_BETON,0,0);
+      g.fillStyle='rgba(6,12,18,.55)'; g.fillRect(0,0,W,H);
+      caustiques(g,t,40,60,860,360,0.13);
+      /* gros plan appui fissur\u00e9 */
+      g.save(); g.translate(470,250); g.scale(1.5,1.5);
+      g.fillStyle='#4a5364'; g.fillRect(-150,-90,300,26);
+      poutreAcier(g,-150,-90,300,26);
+      g.fillStyle='#39424f'; g.fillRect(-34,-64,68,90);
+      g.strokeStyle='#5b6678'; g.lineWidth=2; g.strokeRect(-34,-64,68,90);
+      /* fissure qui s'ouvre */
+      var op=Math.min(1,Math.max(0,(t-1.4)/2.2));
+      g.strokeStyle='rgba(10,12,18,'+(0.5+0.4*op)+')'; g.lineWidth=1.4+2.4*op;
+      g.beginPath(); g.moveTo(-14,-64); g.lineTo(-4,-38); g.lineTo(-16,-14); g.lineTo(-2,10); g.lineTo(-10,26); g.stroke();
+      if(op>0.2){ g.fillStyle='rgba(232,112,96,'+(op*0.8)+')'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('400 N max',44,-16); }
+      g.restore();
+      if(t>2.6){
+        g.save(); g.globalAlpha=Math.min(1,(t-2.6)/1.1); g.rotate(-0.02);
+        g.strokeStyle='rgba(232,90,80,.85)'; g.lineWidth=3; g.lineCap='round';
+        g.font='700 19px "Bricolage Grotesque",sans-serif'; g.fillStyle='rgba(232,90,80,.85)';
+        g.fillText('ce qui te porte a une limite', 96, 118);
+        g.restore();
+      }
+    }}
+];
+
+/* ---------- décor vivant de la fosse ---------- */
+(function(){
+  var cv=el('cvDecor3'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height;
+  var bg=betonTexture(W,H,309);
+  var deco=document.createElement('canvas'); deco.width=W; deco.height=H;
+  (function(){
+    var d=deco.getContext('2d'); d.drawImage(bg,0,0);
+    /* \u00e9chelle m\u00e9tallique \u00e0 gauche */
+    d.strokeStyle='#66707f'; d.lineWidth=6;
+    d.beginPath(); d.moveTo(70,0); d.lineTo(70,H); d.moveTo(126,0); d.lineTo(126,H); d.stroke();
+    d.lineWidth=5;
+    for(var r=0;r<9;r++){ d.beginPath(); d.moveTo(70,20+r*36); d.lineTo(126,20+r*36); d.stroke(); }
+    /* passerelle sur deux appuis */
+    poutreAcier(d,220,150,520,18);
+    d.fillStyle='#39424f'; d.fillRect(238,168,40,60); d.fillRect(690,168,40,60);
+    d.strokeStyle='#5b6678'; d.lineWidth=2; d.strokeRect(238,168,40,60); d.strokeRect(690,168,40,60);
+    d.fillStyle='#f0b558'; d.font='700 13px "JetBrains Mono",monospace'; d.textAlign='center';
+    d.fillText('A',258,246); d.fillText('B',710,246); d.textAlign='left';
+    /* garde-corps + marqueur rouge */
+    d.strokeStyle='#5b6678'; d.lineWidth=3;
+    d.beginPath(); d.moveTo(220,150); d.lineTo(220,108); d.lineTo(740,108); d.lineTo(740,150); d.stroke();
+    d.save(); d.rotate(-0.02);
+    d.fillStyle='rgba(232,90,80,.62)'; d.font='700 14px "Bricolage Grotesque",sans-serif';
+    d.fillText('ce qui te porte a une limite', 300, 96);
+    d.restore();
+    /* tuyaux suintants */
+    d.fillStyle='#3c4453'; d.fillRect(820,0,26,120);
+    d.fillStyle='#2f3644'; d.fillRect(816,116,34,14);
+    /* vanne */
+    d.strokeStyle='#7d8798'; d.lineWidth=4; d.beginPath(); d.arc(880,64,20,0,7); d.stroke();
+    d.beginPath(); d.moveTo(860,64); d.lineTo(900,64); d.moveTo(880,44); d.lineTo(880,84); d.stroke();
+  })();
+  var t=0, bubbles=[], Rb=rng(404);
+  for(var b=0;b<22;b++) bubbles.push({x:Rb()*W, y:Rb()*H, v:0.4+Rb()*0.8, r:1.4+Rb()*2.6});
+  function step(){
+    t+=0.04;
+    if(DEC3.event){ DEC3.evT+=0.04; if(DEC3.evT>DEC3.event.dur) DEC3.event=null; }
+    g.clearRect(0,0,W,H); g.drawImage(deco,0,0);
+    /* niveau d'eau : monte d'un cran à chaque incident */
+    var WL=250-DEC3.eau*54;
+    /* projecteur immergé + caustiques sur le mur */
+    var gl=g.createRadialGradient(470,H-30,12,470,H-30,330);
+    gl.addColorStop(0,'rgba(110,210,235,.30)'); gl.addColorStop(1,'rgba(110,210,235,0)');
+    g.fillStyle=gl; g.fillRect(0,0,W,H);
+    caustiques(g,t,150,40,660,110,0.10);
+    /* eau */
+    g.fillStyle='rgba(10,26,38,.90)'; g.fillRect(0,WL,W,H-WL);
+    var gl2=g.createLinearGradient(0,WL,0,H);
+    gl2.addColorStop(0,'rgba(120,205,230,.16)'); gl2.addColorStop(1,'rgba(40,120,150,.05)');
+    g.fillStyle=gl2; g.fillRect(0,WL,W,H-WL);
+    caustiques(g,t*1.3,60,WL+16,820,H-WL-20,0.13);
+    /* surface ondulante + reflet du garde-corps */
+    g.strokeStyle='rgba(170,225,245,.40)'; g.lineWidth=2;
+    g.beginPath();
+    for(var x=0;x<=W;x+=14){ var y=WL+Math.sin(x*0.035+t*2.1)*3.2+Math.sin(x*0.012-t*1.3)*1.8; if(x===0)g.moveTo(x,y); else g.lineTo(x,y); }
+    g.stroke();
+    /* bulles qui remontent */
+    bubbles.forEach(function(p){
+      p.y-=p.v; if(p.y<WL){ p.y=H+6; p.x=40+Math.random()*(W-80); }
+      g.strokeStyle='rgba(190,230,245,.34)'; g.lineWidth=1.2;
+      g.beginPath(); g.arc(p.x+Math.sin(t*2+p.y*0.05)*3,p.y,p.r,0,7); g.stroke();
+    });
+    /* projecteur immergé (source visible) */
+    g.fillStyle='#2b3342'; g.fillRect(452,H-26,36,20);
+    g.fillStyle='rgba(160,230,250,.9)'; g.fillRect(456,H-22,28,12);
+    /* jauge de niveau */
+    g.fillStyle='rgba(20,26,38,.75)'; g.fillRect(W-58,60,34,180);
+    g.strokeStyle='#5b6678'; g.lineWidth=2; g.strokeRect(W-58,60,34,180);
+    g.fillStyle='rgba(110,205,235,.7)'; g.fillRect(W-56,240-DEC3.eau*176-4,30,DEC3.eau*176+4);
+    g.fillStyle='#98a1b8'; g.font='700 9px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('NIVEAU',W-41,52); g.textAlign='left';
+    /* événements */
+    if(DEC3.event){
+      var e=DEC3.event, k2=DEC3.evT/e.dur;
+      if(e.kind==='gravure'){
+        var gx=258, gy=210, pulse=0.5+0.5*Math.sin(DEC3.evT*6);
+        var g2=g.createRadialGradient(gx,gy,2,gx,gy,54);
+        g2.addColorStop(0,'rgba(127,214,232,'+(0.5*(1-k2)+0.25*pulse*(1-k2))+')'); g2.addColorStop(1,'rgba(127,214,232,0)');
+        g.fillStyle=g2; g.beginPath(); g.arc(gx,gy,54,0,7); g.fill();
+      }
+      if(e.kind==='coupure'||e.kind==='silhouette'){
+        var back= DEC3.evT<0.9? 0 : Math.min(1,(DEC3.evT-0.9)/0.7)*(0.55+0.45*Math.abs(Math.sin(DEC3.evT*11)));
+        g.fillStyle='rgba(3,6,10,'+(0.88*(1-back)).toFixed(3)+')'; g.fillRect(0,0,W,H);
+        /* remous : la pompe a cal\u00e9 */
+        g.strokeStyle='rgba(150,215,235,'+(0.30*Math.max(0,1-k2))+')'; g.lineWidth=2;
+        for(var w2=0;w2<4;w2++){
+          g.beginPath(); g.ellipse(470,WL+6,40+DEC3.evT*90+w2*26,10+DEC3.evT*18,0,0,7); g.stroke();
+        }
+        if(e.kind==='silhouette'&&DEC3.evT>1.0&&DEC3.evT<2.6){
+          var pr=(DEC3.evT-1.0)/1.6, sx2=W*(1.05-pr*1.15);
+          g.save(); g.globalAlpha=0.5*Math.sin(pr*3.14); g.fillStyle='#03060a';
+          g.beginPath(); g.ellipse(sx2,120,13,18,0,0,7); g.fill();
+          g.beginPath(); g.moveTo(sx2-24,142); g.quadraticCurveTo(sx2,130,sx2+24,142);
+          g.lineTo(sx2+18,WL); g.lineTo(sx2-18,WL); g.closePath(); g.fill();
+          g.restore();
+        }
+      }
+      if(e.kind==='vanne'){
+        var op=Math.min(1,DEC3.evT/1.6);
+        g.save(); g.translate(880,64); g.rotate(op*6.3); g.strokeStyle='#9aa6bb'; g.lineWidth=4;
+        g.beginPath(); g.moveTo(-20,0); g.lineTo(20,0); g.moveTo(0,-20); g.lineTo(0,20); g.stroke(); g.restore();
+        g.fillStyle='rgba(120,210,235,'+(0.5*op)+')';
+        for(var v3=0;v3<26;v3++){ var vy=(DEC3.evT*160+v3*22)%(H-130);
+          g.fillRect(826,130+vy,14,10); }
+        g.fillStyle='rgba(150,225,245,'+(0.28*op)+')'; g.fillRect(0,WL,W,H-WL);
+      }
+    }
+    var vg=g.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,H*1.05);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.62)');
+    g.fillStyle=vg; g.fillRect(0,0,W,H);
+  }
+  setInterval(step,40); step();
+})();
+
+/* ---------- moteur commun de passerelle ---------- */
+var L_PONT=6, P_CAISSE=1200;        /* RA = P(L-x)/L ; RB = P·x/L */
+function dessinePont(g,W,H,opt){
+  var x0=110, x1=590, SC=(x1-x0)/L_PONT, yb=150;
+  g.fillStyle='rgba(6,10,16,.45)'; g.fillRect(0,0,W,H);
+  var gl=g.createRadialGradient(350,H-20,10,350,H-20,300);
+  gl.addColorStop(0,'rgba(110,210,235,.22)'); gl.addColorStop(1,'rgba(110,210,235,0)');
+  g.fillStyle=gl; g.fillRect(0,0,W,H);
+  /* eau au fond */
+  var WL=H-60;
+  g.fillStyle='rgba(10,26,38,.9)'; g.fillRect(0,WL,W,H-WL);
+  caustiques(g,opt.t,20,WL+8,W-40,H-WL-14,0.12);
+  g.strokeStyle='rgba(170,225,245,.35)'; g.lineWidth=2; g.beginPath();
+  for(var x=0;x<=W;x+=14){ var y=WL+Math.sin(x*0.04+opt.t*2)*2.6; if(x===0)g.moveTo(x,y); else g.lineTo(x,y); }
+  g.stroke();
+  /* poutre (avec porte-\u00e0-faux \u00e9ventuel) */
+  var xEnd = x1 + (opt.porteAFaux? 2*SC : 0);
+  poutreAcier(g,x0-26,yb,xEnd-x0+52,16);
+  /* appuis */
+  function appui(px,lab,col){
+    g.fillStyle='#39424f'; g.beginPath(); g.moveTo(px,yb+16); g.lineTo(px-20,yb+58); g.lineTo(px+20,yb+58); g.closePath(); g.fill();
+    g.strokeStyle=col||'#5b6678'; g.lineWidth=2.4; g.stroke();
+    g.fillStyle='#2b3342'; g.fillRect(px-26,yb+58,52,10);
+    g.fillStyle='#f0b558'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText(lab,px,yb+84); g.textAlign='left';
+  }
+  appui(x0,'A'); appui(x1,'B', opt.fissureB? '#e87060':null);
+  if(opt.fissureB){
+    g.strokeStyle='rgba(232,112,96,.9)'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(x1-6,yb+22); g.lineTo(x1+4,yb+34); g.lineTo(x1-6,yb+46); g.lineTo(x1+2,yb+56); g.stroke();
+  }
+  /* cotation L */
+  g.strokeStyle='rgba(240,181,88,.6)'; g.lineWidth=1.4; g.setLineDash([5,4]);
+  g.beginPath(); g.moveTo(x0,yb-52); g.lineTo(x1,yb-52); g.stroke(); g.setLineDash([]);
+  g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+  g.fillText('6,00 m',(x0+x1)/2,yb-58); g.textAlign='left';
+  return {x0:x0,x1:x1,SC:SC,yb:yb};
+}
+function caisse(g,cx,cy,lab){
+  g.fillStyle='#4a5162'; g.fillRect(cx-30,cy-42,60,42);
+  g.strokeStyle='#f0b558'; g.lineWidth=2.2; g.strokeRect(cx-30,cy-42,60,42);
+  g.strokeStyle='rgba(20,24,32,.5)'; g.lineWidth=1.4;
+  g.beginPath(); g.moveTo(cx-30,cy-24); g.lineTo(cx+30,cy-24); g.stroke();
+  g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+  g.fillText(lab,cx,cy-16); g.textAlign='left';
+}
+
+/* ---------- 3.1 : charge centrée ---------- */
+(function(){
+  var cv=el('cvPont1'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, t=0, bgw=betonTexture(W,H,411);
+  function step(){
+    t+=0.04;
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    var P=dessinePont(g,W,H,{t:t});
+    var cx=(P.x0+P.x1)/2;
+    caisse(g,cx,P.yb,'1200 N');
+    arrow(g,cx,P.yb+2,cx,P.yb+2+52,'#e87060','P = 1200 N',cx+14);
+    arrow(g,P.x0,P.yb+50,P.x0,P.yb-6,'#7fd6e8','R_A',P.x0-64);
+    arrow(g,P.x1,P.yb+50,P.x1,P.yb-6,'#7fd6e8','R_B',P.x1+14);
+    g.fillStyle='#98a1b8'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('sym\u00e9trie parfaite : la caisse est \u00e0 3,00 m de chaque appui',150,H-16);
+  }
+  setInterval(step,40); step();
+})();
+setupHint('h31','hb31',[
+  'Deux conditions gouvernent la passerelle : la somme des forces verticales est nulle, et la somme des moments aussi.',
+  'La caisse est pile au milieu : les deux appuis jouent exactement le m\u00eame r\u00f4le. Ils se partagent donc les 1200 N \u00e0 parts \u00e9gales.'
+]);
+el('b31').addEventListener('click',function(){
+  var a=numf(el('n31a').value), b=numf(el('n31b').value);
+  if(Math.abs(a-600)<10&&Math.abs(b-600)<10){
+    el('fb31').className='fb ok'; el('fb31').textContent='\u2713 600 N chacun : 600 + 600 = 1200 N, l\u2019\u00e9quilibre est v\u00e9rifi\u00e9.';
+    solve('p31','s31','fr31',1,5);
+    sceneEvent3('gravure',4.0);
+    narrate3('Sous la semelle de l\u2019appui A, l\u2019eau a d\u00e9gag\u00e9 une gravure : un premier chiffre.');
+  } else if(Math.abs(a-1200)<10||Math.abs(b-1200)<10){
+    el('fb31').className='fb no'; el('fb31').textContent='\u2717 1200 N, c\u2019est la charge TOTALE. Un seul appui n\u2019en reprend qu\u2019une part.'; incident();
+  } else {
+    el('fb31').className='fb no'; el('fb31').textContent='\u2717 La passerelle grince. Reprends l\u2019\u00e9quilibre vertical.'; incident();
+  }
+});
+
+/* ---------- 3.2 : appui fissuré (⭐) ---------- */
+(function(){
+  var cv=el('cvPont2'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, t=0, x=3, bgw=betonTexture(W,H,412);
+  el('sPos').addEventListener('input',function(){
+    x=+this.value; el('vPos').textContent=String(x.toFixed(1)).replace('.',',')+' m';
+  });
+  function step(){
+    t+=0.04;
+    var RB=P_CAISSE*x/L_PONT, RA=P_CAISSE-RB;
+    var over=RB>400.001;
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    var P=dessinePont(g,W,H,{t:t,fissureB:true});
+    var cx=P.x0+x*P.SC;
+    caisse(g,cx,P.yb+(over?Math.sin(t*18)*1.5:0),'1200 N');
+    arrow(g,cx,P.yb+2,cx,P.yb+2+46,'#e87060','',0);
+    /* cotation x */
+    g.strokeStyle='rgba(240,181,88,.8)'; g.lineWidth=1.5; g.setLineDash([4,4]);
+    g.beginPath(); g.moveTo(P.x0,P.yb+96); g.lineTo(cx,P.yb+96); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('x = '+String(x.toFixed(1)).replace('.',',')+' m',(P.x0+cx)/2,P.yb+114); g.textAlign='left';
+    /* jauges des r\u00e9actions */
+    function jauge(px,val,lim,lab){
+      var gh=70, gy=40;
+      g.fillStyle='#1b2230'; g.fillRect(px-16,gy,32,gh);
+      var f=Math.min(1,val/1200);
+      g.fillStyle= (lim&&val>lim+0.001)? '#e87060':'#6ee3a0';
+      g.fillRect(px-16,gy+gh-f*gh,32,f*gh);
+      g.strokeStyle='#5b6678'; g.lineWidth=1.6; g.strokeRect(px-16,gy,32,gh);
+      if(lim){ var ly=gy+gh-(lim/1200)*gh;
+        g.strokeStyle='#f0b558'; g.lineWidth=2; g.beginPath(); g.moveTo(px-22,ly); g.lineTo(px+22,ly); g.stroke();
+        g.fillStyle='#f0b558'; g.font='700 9px "JetBrains Mono",monospace'; g.fillText('400',px+26,ly+3); }
+      g.fillStyle='#e9e4d8'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(lab+' = '+Math.round(val)+' N',px,gy-8); g.textAlign='left';
+    }
+    jauge(P.x0,RA,null,'R_A'); jauge(P.x1,RB,400,'R_B');
+    /* verdict */
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(over){ g.fillStyle='#e87060'; g.fillText('\u26a0 R_B = '+Math.round(RB)+' N > 400 N \u00b7 la fissure s\u2019ouvre !',W/2,H-14); }
+    else if(Math.abs(RB-400)<0.5){ g.fillStyle='#6ee3a0'; g.fillText('\ud83c\udfaf R_B = 400 N pile \u00b7 la position limite, pas un centim\u00e8tre de plus',W/2,H-14); }
+    else { g.fillStyle='#98a1b8'; g.fillText('R_B = '+Math.round(RB)+' N \u00b7 marge restante : '+Math.round(400-RB)+' N',W/2,H-14); }
+    g.textAlign='left';
+  }
+  setInterval(step,40); step();
+})();
+setupHint('h32','hb32',[
+  'Plus la caisse s\u2019\u00e9loigne de A, plus l\u2019appui B en reprend : sa r\u00e9action grandit proportionnellement \u00e0 la distance parcourue.',
+  '\u00c9cris l\u2019\u00e9quilibre des moments autour de A : R_B \u00d7 6 = 1200 \u00d7 x. Puis cherche le x qui donne exactement 400 N.'
+]);
+el('b32').addEventListener('click',function(){
+  var v=numf(el('n32').value);
+  if(Math.abs(v-2)<0.06){
+    el('fb32').className='fb ok'; el('fb32').textContent='\u2713 x = 2,00 m : R_B = 1200 \u00d7 2/6 = 400 N tout juste.';
+    solve('p32','s32','fr32',2,2);
+    narrate3('Tu poses la caisse pile \u00e0 la limite. La fissure ne bouge plus \u2014 et un chiffre appara\u00eet dedans, grav\u00e9 dans le b\u00e9ton.');
+  } else if(Math.abs(v-400)<1){
+    el('fb32').className='fb no'; el('fb32').textContent='\u2717 400, c\u2019est la r\u00e9action limite en newtons. On te demande une POSITION, en m\u00e8tres.'; incident();
+  } else {
+    el('fb32').className='fb no'; el('fb32').textContent='\u2717 La fissure travaille encore. Surveille la jauge de R_B au simulateur.'; incident();
+  }
+});
+
+/* ---------- 3.3 : porte-à-faux ---------- */
+(function(){
+  var cv=el('cvPorte'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, t=0, bgw=betonTexture(W,H,413);
+  function step(){
+    t+=0.04;
+    g.clearRect(0,0,W,H); g.drawImage(bgw,0,0);
+    var P=dessinePont(g,W,H,{t:t,porteAFaux:true});
+    var xC=P.x1+2*P.SC;
+    /* treuil suspendu au bout */
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.4;
+    var sw=Math.sin(t*1.2)*4;
+    g.beginPath(); g.moveTo(xC,P.yb+16); g.lineTo(xC+sw,P.yb+52); g.stroke();
+    g.fillStyle='#4a5162'; g.fillRect(xC+sw-24,P.yb+52,48,34);
+    g.strokeStyle='#f0b558'; g.lineWidth=2; g.strokeRect(xC+sw-24,P.yb+52,48,34);
+    g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('900 N',xC+sw,P.yb+74); g.textAlign='left';
+    /* cotation du porte-\u00e0-faux */
+    g.strokeStyle='rgba(240,181,88,.6)'; g.lineWidth=1.4; g.setLineDash([4,4]);
+    g.beginPath(); g.moveTo(P.x1,P.yb-30); g.lineTo(xC,P.yb-30); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('2,00 m',(P.x1+xC)/2,P.yb-36); g.textAlign='left';
+    /* r\u00e9actions : A tire vers le BAS */
+    arrow(g,P.x1,P.yb+52,P.x1,P.yb-30,'#7fd6e8','R_B = 1200 N',P.x1+16);
+    arrow(g,P.x0,P.yb-4,P.x0,P.yb+56,'#e87060','R_A = \u2212300 N',P.x0-40);
+    /* crochet d'ancrage c\u00f4t\u00e9 A */
+    g.strokeStyle='#8b95a8'; g.lineWidth=4;
+    g.beginPath(); g.arc(P.x0,P.yb+66,10,0,3.4); g.stroke();
+    /* soul\u00e8vement figur\u00e9 */
+    g.fillStyle='rgba(232,112,96,.85)'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('\u2191 sans ancrage, la passerelle se SOUL\u00c8VE ici',P.x0-46,P.yb+128);
+    g.fillStyle='#98a1b8';
+    g.fillText('\u03a3M/A : R_B \u00d7 6 = 900 \u00d7 8',430,60);
+  }
+  setInterval(step,40); step();
+})();
+setupHint('h33','hb33',[
+  'La charge n\u2019est plus ENTRE les appuis : elle est au-del\u00e0 de B, \u00e0 8 m de A. Le bras de levier se mesure toujours depuis le point choisi.',
+  'Moments autour de A : R_B \u00d7 6 = 900 \u00d7 8. Une fois R_B connue, l\u2019\u00e9quilibre vertical R_A + R_B = 900 donne un R_A\u2026 n\u00e9gatif. Un appui qui \u00ab tire \u00bb, c\u2019est un ancrage.'
+]);
+el('b33').addEventListener('click',function(){
+  var a=numf(el('n33a').value);
+  var okA=Math.abs(a-1200)<20;
+  var okQ=(el('q33').value==='RETENIR la passerelle vers le bas : elle se soul\u00e8ve de ce c\u00f4t\u00e9');
+  if(okA&&okQ){
+    el('fb33').className='fb ok'; el('fb33').textContent='\u2713 R_B = 7200/6 = 1200 N, donc R_A = 900 \u2212 1200 = \u2212300 N : un ancrage, pas un appui.';
+    solve('p33','s33','fr33',3,8);
+    narrate3('Tu boulonnes le crochet d\u2019ancrage. La passerelle se plaque au b\u00e9ton \u2014 et le dernier chiffre appara\u00eet sur le crochet.');
+  } else if(Math.abs(a-900)<20){
+    el('fb33').className='fb no'; el('fb33').textContent='\u2717 900 N, c\u2019est la charge. B en reprend DAVANTAGE, parce que A tire dans l\u2019autre sens.'; incident();
+  } else {
+    el('fb33').className='fb no';
+    el('fb33').textContent='\u2717 '+(okA?'R_B \u2713':'R_B \u2717 (moments autour de A)')+' \u00b7 '+(okQ?'r\u00f4le de A \u2713':'r\u00f4le de A \u2717');
+    incident();
+  }
+});
+
+/* ---------- cadenas de la fosse ---------- */
+['g1','g2','g3'].forEach(function(id,i){
+  el(id).addEventListener('input',function(){
+    this.value=this.value.replace(/[^0-9]/g,'').slice(0,1);
+    if(this.value && i<2) el('g'+(i+2)).focus();
+  });
+});
+el('bLock3').addEventListener('click',function(){
+  var code=(el('g1').value||'')+(el('g2').value||'')+(el('g3').value||'');
+  if(code.length<3){ el('fbLock3').className='fb no'; el('fbLock3').textContent='\u2717 Les trois molettes doivent \u00eatre positionn\u00e9es.'; return; }
+  if(code==='528'){
+    el('fbLock3').className='fb ok'; el('fbLock3').textContent='\u2713 CLAC. La vanne d\u2019\u00e9vacuation s\u2019ouvre en grand.';
+    el('lock3').classList.add('open'); el('bLock3').disabled=true;
+    sceneEvent3('vanne',4.4);
+    var bb=el('bonusBtn'); bb.disabled=false; bb.classList.add('on'); bb.title='D\u00e9fi bonus d\u00e9bloqu\u00e9 !';
+    narrate3('La vanne c\u00e8de et l\u2019eau se rue dans la conduite. Le niveau baisse, la passerelle \u00e9merge : la halle aux treillis est de l\u2019autre c\u00f4t\u00e9.');
+    setTimeout(function(){ el('door3').classList.add('show'); el('door3').scrollIntoView({behavior:'smooth',block:'center'}); },1500);
+  } else {
+    el('fbLock3').className='fb no';
+    var n=Object.keys(GAME.frags).length;
+    el('fbLock3').textContent='\u2717 Les molettes se rebloquent. '+(n<3? 'Il te manque '+(3-n)+' fragment(s).' : 'Les trois fragments sont trouv\u00e9s : lis-les dans l\u2019ordre 1, 2, 3.');
+    if(n>=3) incident();
+  }
+});
+el('goRoom4').addEventListener('click',function(){ goRoom(4); });
+document.querySelectorAll('[id="backRoom3"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(3); }); });
+
+
+/* ================================================================
+   ============ BONUS : LE QUART DE NUIT ==========================
+   ================================================================ */
+var QUART={ on:false, score:0, combo:1, done:0, errs:0, cur:null, lock:false, tilt:0.30, best:0 };
+function qPick(a){ return a[(Math.random()*a.length)|0]; }
+function qShuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function qUnique(ok,cands,fmt){
+  var seen={}, opts=[fmt(ok)]; seen[fmt(ok)]=1;
+  for(var i=0;i<cands.length&&opts.length<4;i++){
+    var s=fmt(cands[i]);
+    if(!seen[s]&&isFinite(cands[i])&&cands[i]>0){ seen[s]=1; opts.push(s); }
+  }
+  var ex=ok*1.5+7;
+  while(opts.length<4){ var s2=fmt(Math.round(ex)); if(!seen[s2]){ seen[s2]=1; opts.push(s2); } ex+=ok*0.35+5; }
+  return qShuffle(opts);
+}
+function qGen(){
+  var r=Math.random();
+  if(r<0.20){                                   /* poids */
+    var m=qPick([80,120,250,320,450,600]);
+    var P=m*10;
+    return {q:'Une charge de '+m+' kg pend au crochet. Son poids (g = 10 N/kg) ?',
+      ok:P+' N', opts:qUnique(P,[m,P*2,P/2,P+100],function(v){return Math.round(v)+' N';}),
+      why:'P = m \u00d7 g = '+m+' \u00d7 10 = '+P+' N'};
+  }
+  if(r<0.42){                                   /* moment */
+    var F=qPick([150,200,250,300,400]), d=qPick([0.4,0.5,0.8,1.2,1.5]);
+    var M=Math.round(F*d);
+    return {q:'Tu pousses avec '+F+' N au bout d\u2019un bras de '+String(d).replace('.',',')+' m. Moment obtenu ?',
+      ok:M+' N\u00b7m', opts:qUnique(M,[Math.round(F/d),F,Math.round(M/2),Math.round(M*2)],function(v){return Math.round(v)+' N\u00b7m';}),
+      why:'M = F \u00d7 d = '+F+' \u00d7 '+String(d).replace('.',',')+' = '+M+' N\u00b7m'};
+  }
+  if(r<0.60){                                   /* bras mini */
+    var Mc=qPick([120,180,240,300,360]), Fo=qPick([200,300,400]);
+    var dm=Math.round(Mc/Fo*100)/100;
+    var fmtM=function(v){ return String(Math.round(v*100)/100).replace('.',',')+' m'; };
+    var cands=[Fo/Mc, dm*2, dm/2, dm+0.5, dm*1.5, dm+0.25, dm*3];
+    var seenM={}, optsM=[fmtM(dm)]; seenM[fmtM(dm)]=1;
+    for(var ci=0;ci<cands.length&&optsM.length<4;ci++){
+      var sM=fmtM(cands[ci]);
+      if(!seenM[sM]&&cands[ci]>0.01){ seenM[sM]=1; optsM.push(sM); }
+    }
+    var exM=dm+0.75;
+    while(optsM.length<4){ var s3=fmtM(exM); if(!seenM[s3]){ seenM[s3]=1; optsM.push(s3); } exM+=0.35; }
+    return {q:'Il faut '+Mc+' N\u00b7m pour d\u00e9bloquer un \u00e9crou et tu pousses \u00e0 '+Fo+' N. Longueur de cl\u00e9 minimale ?',
+      ok:fmtM(dm), opts:qShuffle(optsM),
+      why:'d = M / F = '+Mc+' / '+Fo+' = '+fmtM(dm)};
+  }
+  if(r<0.80){                                   /* réactions d'appui */
+    var L=qPick([4,6,8]), P2=qPick([600,900,1200,1500]);
+    var xs=[]; for(var k=1;k<L;k++) xs.push(k);
+    var x=qPick(xs);
+    var RB=Math.round(P2*x/L), RA=P2-RB;
+    return {q:'Passerelle de '+L+' m sur appuis A et B. Charge de '+P2+' N \u00e0 '+x+' m de A. R\u00e9action en B ?',
+      ok:RB+' N', opts:qUnique(RB,[RA,P2,Math.round(P2/2),Math.round(RB*1.5)],function(v){return Math.round(v)+' N';}),
+      why:'R_B \u00d7 '+L+' = '+P2+' \u00d7 '+x+' \u2192 R_B = '+RB+' N'};
+  }
+  var n=qPick([2,3,4,5]), Pm=qPick([1200,1800,2400,3000]);   /* mouflage */
+  var T=Math.round(Pm/n);
+  return {q:'Un palan \u00e0 '+n+' brins porte '+Pm+' N. Tension dans un brin ?',
+    ok:T+' N', opts:qUnique(T,[Pm,Math.round(Pm/(n+1)),Math.round(T*2),Math.round(Pm*n/10)],function(v){return Math.round(v)+' N';}),
+    why:'T = P / '+n+' = '+Pm+' / '+n+' = '+T+' N'};
+}
+function qRound(){
+  QUART.cur=qGen(); QUART.lock=false;
+  el('qTxt').textContent=QUART.cur.q;
+  el('qFb').textContent='';
+  var box=el('qOpts'); box.innerHTML='';
+  QUART.cur.opts.forEach(function(o){
+    var b=document.createElement('button');
+    b.className='btn ghost'; b.style.padding='13px 8px'; b.style.fontSize='15px'; b.textContent=o;
+    b.addEventListener('click',function(){ qAnswer(b,o); });
+    box.appendChild(b);
+  });
+}
+function qHud(){
+  el('qScore').textContent=QUART.score;
+  el('qCombo').textContent='\u00d7'+QUART.combo;
+  el('qDone').textContent=QUART.done;
+  el('qLives').textContent='\u275a\u275a\u275a'.slice(0,Math.max(0,3-QUART.errs));
+  el('sB').textContent = QUART.done>=12? 'grue stabilis\u00e9e \u2713' : ('grue \u00e0 '+Math.max(0,3-QUART.errs)+' cran(s) du basculement');
+}
+function qAnswer(btn,o){
+  if(QUART.lock||!QUART.on) return; QUART.lock=true;
+  if(o===QUART.cur.ok){
+    btn.style.borderColor='#6ee3a0'; btn.style.color='#6ee3a0';
+    QUART.done++; QUART.score+=100*QUART.combo; QUART.combo=Math.min(8,QUART.combo+1);
+    QUART.tilt=Math.max(0,QUART.tilt-0.30/12*1.0);
+    el('qFb').className='fb ok'; el('qFb').textContent='\u2713 '+QUART.cur.why+' \u2014 la fl\u00e8che se redresse.';
+  } else {
+    btn.style.borderColor='#e87060'; btn.style.color='#e87060';
+    QUART.errs++; QUART.combo=1; QUART.tilt=Math.min(0.62,QUART.tilt+0.11);
+    el('qFb').className='fb no'; el('qFb').textContent='\u2717 '+QUART.cur.why+' \u2014 la grue penche un peu plus.';
+    if(SCARE.on){ boom(0.5); }
+  }
+  qHud();
+  setTimeout(function(){
+    if(QUART.done>=12){ qEnd(true); }
+    else if(QUART.errs>=3){ qEnd(false); }
+    else { qRound(); }
+  },1100);
+}
+function qEnd(win){
+  QUART.on=false;
+  if(QUART.score>QUART.best) QUART.best=QUART.score;
+  el('qOpts').innerHTML='';
+  el('qTxt').textContent = win? '\ud83c\udfaf Grue parfaitement d\u2019aplomb. Le contremaître te doit un caf\u00e9.'
+                              : '\u26a0 La fl\u00e8che a vers\u00e9 dans la fosse. Le quart s\u2019arr\u00eate l\u00e0.';
+  el('qFb').className='fb '+(win?'ok':'no');
+  el('qFb').textContent='Score : '+QUART.score+' \u00b7 meilleur de la session : '+QUART.best+' \u00b7 stabilis\u00e9es : '+QUART.done+'/12';
+  el('qStart').style.display='';
+  el('qStart').textContent='\u21bb Reprendre un quart';
+  if(win) QUART.tilt=0;
+}
+el('qStart').addEventListener('click',function(){
+  QUART.on=true; QUART.score=0; QUART.combo=1; QUART.done=0; QUART.errs=0; QUART.tilt=0.30;
+  this.style.display='none';
+  qHud(); qRound();
+});
+el('qBack').addEventListener('click',function(){ goRoom(GAME.lastRoom||3); });
+el('bonusBtn').addEventListener('click',function(){
+  if(this.disabled) return;
+  GAME.lastRoom=GAME.room;
+  goRoom('B');
+  narrateB('Le contrema\u00eetre de nuit te laisse les commandes. La grue penche de 18\u00b0. \u00c0 toi de la redresser.');
+});
+var NARRB={timer:null};
+function narrateB(text){
+  clearInterval(NARRB.timer);
+  var i=0, box=el('narrB'); if(!box) return;
+  NARRB.timer=setInterval(function(){
+    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
+    if(i>=text.length) clearInterval(NARRB.timer);
+  },16);
+}
+
+/* --- décor du quart de nuit : la grue qui se redresse --- */
+(function(){
+  var cv=el('cvQuart'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var W=cv.width, H=cv.height, t=0, ang=0.30;
+  var bgw=betonTexture(W,H,777);
+  var stars=[]; var Rs=rng(313);
+  for(var s=0;s<70;s++) stars.push({x:Rs()*W, y:Rs()*150, a:0.2+Rs()*0.7, p:Rs()*6});
+  function step(){
+    t+=0.04;
+    ang+=(QUART.tilt-ang)*0.05;
+    g.clearRect(0,0,W,H);
+    /* ciel de nuit + \u00e9toiles + lune */
+    var sky=g.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#0a1020'); sky.addColorStop(0.6,'#121a2a'); sky.addColorStop(1,'#0c1119');
+    g.fillStyle=sky; g.fillRect(0,0,W,H);
+    stars.forEach(function(st){
+      g.fillStyle='rgba(220,232,255,'+(st.a*(0.55+0.45*Math.sin(t*1.3+st.p))).toFixed(3)+')';
+      g.fillRect(st.x,st.y,1.7,1.7);
+    });
+    var moon=g.createRadialGradient(820,70,6,820,70,90);
+    moon.addColorStop(0,'rgba(230,238,255,.85)'); moon.addColorStop(1,'rgba(230,238,255,0)');
+    g.fillStyle=moon; g.beginPath(); g.arc(820,70,90,0,7); g.fill();
+    /* skyline du chantier au loin */
+    g.globalAlpha=0.55; g.drawImage(bgw,0,H-150,W,150); g.globalAlpha=1;
+    g.fillStyle='#0b1018';
+    for(var b=0;b<9;b++){ var bw=60+((b*53)%70), bh=40+((b*97)%110);
+      g.fillRect(b*108,H-116-bh,bw,bh+40); }
+    /* sol + fosse */
+    g.fillStyle='#141a24'; g.fillRect(0,H-70,W,70);
+    g.fillStyle='#0a0f16'; g.fillRect(560,H-70,230,70);
+    g.fillStyle='rgba(110,205,235,.10)'; g.fillRect(560,H-40,230,40);
+    /* grue */
+    var px=430, py=H-70, SC=15;
+    g.save(); g.translate(px,py); g.rotate(ang);
+    var mg=g.createLinearGradient(-16,0,16,0); mg.addColorStop(0,'#4a5364'); mg.addColorStop(1,'#2c3442');
+    g.fillStyle=mg; g.fillRect(-16,-190,32,190);
+    g.strokeStyle='#5b6678'; g.lineWidth=1.6;
+    for(var k=0;k<11;k++){ g.beginPath(); g.moveTo(-16,-18-k*17); g.lineTo(16,-35-k*17); g.stroke(); }
+    g.fillStyle='#59647a'; g.fillRect(-5*SC-16,-208,17*SC,15);
+    g.strokeStyle='#7d8798'; g.lineWidth=1.3;
+    for(var f=0;f<15;f++){ var fx=-5*SC+f*17; g.beginPath(); g.moveTo(fx,-208); g.lineTo(fx+17,-193); g.stroke(); }
+    /* cabine + lest (le lest grossit avec les réussites) */
+    g.fillStyle='#3a4453'; g.fillRect(-22,-236,44,28);
+    g.fillStyle='rgba(240,214,150,.75)'; g.fillRect(-14,-230,28,14);
+    var lest=18+QUART.done*3.2;
+    g.fillStyle='#39424f'; g.fillRect(-5*SC-26,-208+15,52,lest);
+    g.strokeStyle='#8b95a8'; g.lineWidth=2; g.strokeRect(-5*SC-26,-208+15,52,lest);
+    /* c\u00e2ble + charge qui se balance */
+    var sw=Math.sin(t*1.1)*0.06;
+    g.save(); g.translate(11*SC,-193); g.rotate(sw);
+    g.strokeStyle='#7fd6e8'; g.lineWidth=2.2; g.beginPath(); g.moveTo(0,0); g.lineTo(0,70); g.stroke();
+    g.fillStyle='#4a5162'; g.fillRect(-20,70,40,28);
+    g.strokeStyle='#f0b558'; g.lineWidth=2; g.strokeRect(-20,70,40,28);
+    g.restore();
+    g.restore();
+    /* fil \u00e0 plomb de r\u00e9f\u00e9rence + angle */
+    g.strokeStyle='rgba(240,181,88,.5)'; g.lineWidth=1.5; g.setLineDash([5,5]);
+    g.beginPath(); g.moveTo(px,py); g.lineTo(px,py-210); g.stroke(); g.setLineDash([]);
+    g.fillStyle= ang<0.03? '#6ee3a0' : (ang>0.45?'#e87060':'#f0b558');
+    g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText('inclinaison : '+Math.round(ang*180/Math.PI)+'\u00b0',30,36);
+    g.fillStyle='#98a1b8'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('lest embarqu\u00e9 : '+QUART.done+' / 12 blocs',30,58);
+    if(ang<0.03){ g.fillStyle='#6ee3a0'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+      g.fillText('\ud83c\udfaf grue d\u2019aplomb',30,84); }
+    if(ang>0.55){ g.fillStyle='#e87060'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+      g.fillText('\u26a0 basculement imminent',30,84); }
+    var vg=g.createRadialGradient(W/2,H/2,H*0.34,W/2,H/2,H*1.05);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.6)');
+    g.fillStyle=vg; g.fillRect(0,0,W,H);
+  }
+  setInterval(step,40); step();
+})();
+
+/* lancement de la cinématique d'intro */
+cinePlay(FRAMES_INTRO,function(){ narrate('La porte s\u2019est referm\u00e9e derri\u00e8re toi. Quelque part au-dessus, l\u2019eau s\u2019infiltre goutte \u00e0 goutte. Trois preuves d\u2019\u00e9quilibre, et le sas s\u2019ouvre.'); });
+</script>
+</body>
+</html>

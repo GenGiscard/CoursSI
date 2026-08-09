@@ -68,6 +68,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -97,7 +102,8 @@
       </div>
       <div class="match" id="aMatch"></div>
       <div class="row"><span>c) Combien de <b>fronts montants</b> (passages 0 → 1) sur ces 20 ms ?</span><input class="numin" id="aC" inputmode="numeric" placeholder="?"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>a)</b> À t = 3 ms le signal est à <b>1</b> (il est haut de 2 à 5 ms).<br><b>b)</b> À t = 7 ms il est à <b>0</b> (bas de 5 à 9 ms).<br><b>c)</b> Fronts montants à t = 2 ms et t = 9 ms → <b>2 fronts montants</b>. (Les passages 1 → 0 sont des fronts <i>descendants</i>.)</div>
     </section>
@@ -108,7 +114,8 @@
       <div class="chrono"><canvas id="cvB" width="880" height="190" aria-label="Signal périodique"></canvas></div>
       <div class="row"><span>a) Période T =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">ms</span></div>
       <div class="row"><span>b) Fréquence f = 1/T =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> Le motif se répète toutes les <b>4 ms</b> (2 ms haut + 2 ms bas) : T = 4 ms.<br><b>b)</b> f = 1/T = 1/0,004 s = <b>250 Hz</b>. Attention à convertir les ms en secondes avant de calculer !</div>
     </section>
@@ -245,6 +252,30 @@ var A_SEGS=[[0,2,0],[2,5,1],[5,9,0],[9,15,1],[15,20,0]];
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Place le curseur sur l\u2019instant demandé et lis la HAUTEUR du trait : en haut = 1, en bas = 0.',
+  'À t = 3 ms, le signal est au niveau haut → <b>1</b>. À t = 7 ms, il est redescendu → <b>0</b>.',
+  'Un front MONTANT est une marche qui monte (passage 0 → 1). Balaie de gauche à droite et compte-les : il y en a <b>2</b>. Les descentes (1 → 0) ne comptent pas.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'La période T est la durée d\u2019UN motif complet : mesure l\u2019écart entre deux fronts montants consécutifs.',
+  'Le motif se répète toutes les 4 ms → <b>T = 4 ms</b>.',
+  'La fréquence est le nombre de motifs par seconde : <b>f = 1/T</b>, avec T en SECONDES.',
+  'T = 4 ms = 0,004 s → f = 1/0,004 = <b>250 Hz</b>.'
+]);
+
 function buildMatch(boxId, prefix, scen, opts){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -271,7 +302,7 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
   var okM=checkMatch('a',A_SCEN);
   var c=numf(el('aC').value); var okC=Math.abs(c-2)<0.5;
   if(okM&&okC) return {ok:true,msg:'✓ Lecture parfaite : 1, 0, et 2 fronts montants.'};
-  return {ok:false,msg:'✗ '+(okM?'a/b✓':'a/b à revoir')+' · '+(okC?'c✓':'c✗ (compte les passages 0→1 uniquement)')};
+  el('aStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okM?'a/b✓':'a/b à revoir')+' · '+(okC?'c✓':'c✗ (compte les passages 0→1 uniquement)')};
 });
 
 /* ---------- B : périodique ---------- */
@@ -292,7 +323,7 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-4)<0.3, okB=Math.abs(b-250)<10;
   if(okA&&okB) return {ok:true,msg:'✓ T = 4 ms et f = 250 Hz : parfait.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗ (convertis les ms en s : 4 ms = 0,004 s)')};
+  el('bStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗ (convertis les ms en s : 4 ms = 0,004 s)')};
 });
 
 /* ---------- C : PWM ---------- */

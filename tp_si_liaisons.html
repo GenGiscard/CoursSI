@@ -54,6 +54,11 @@
   .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
   .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
   a{color:var(--steel)}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -75,7 +80,8 @@
       <p class="task">🎯 Pour chaque liaison, coche les mouvements <b>autorisés</b> parmi les 6 (translations T et rotations R selon x, y, z), puis vérifie.</p>
       <div class="chal" id="aTitle">—</div>
       <div class="ddlgrid" id="aGrid"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aNext" disabled>Défi suivant ▶</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aNext" disabled>Défi suivant ▶</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"></div>
     </section>
@@ -84,7 +90,8 @@
       <h2><span class="num">B</span> Combien de degrés de liberté ?</h2>
       <p class="task">🎯 Associe chaque liaison à son nombre de ddl.</p>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>Encastrement → 0</b> (tout bloqué) · <b>Pivot glissant → 2</b> (1 T + 1 R même axe) · <b>Rotule → 3</b> (3 R) · <b>Appui plan → 3</b> (2 T + 1 R).</div>
     </section>
@@ -158,6 +165,7 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
       else if(!should&&did){ b.classList.add('bad'); allOk=false; }
     });
     locked=true;
+    if(!allOk) el('aStepBtn').disabled=false;
     el('aFb').className='exo-fb '+(allOk?'ok':'no');
     el('aFb').textContent=allOk?'✓ Exact !':'✗ Pas tout à fait — les cases vertes sont les bons mouvements.';
     el('aSol').innerHTML=ch.sol; el('aSol').classList.add('show');
@@ -169,6 +177,31 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 })();
 
 /* ---- helper corrections verrouillées ---- */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Méthode : prends la pièce en imagination et teste les 6 mouvements un par un — Tx, Ty, Tz puis Rx, Ry, Rz. Coche uniquement ceux qui restent possibles.',
+  'PIVOT d\u2019axe z : tout est bloqué sauf tourner autour de z → une seule case : <b>Rz</b> (1 ddl).',
+  'GLISSIÈRE d\u2019axe x : tout est bloqué sauf coulisser le long de x → une seule case : <b>Tx</b> (1 ddl).',
+  'ROTULE : le centre est fixe (aucune translation) mais elle s\u2019oriente dans tous les sens → <b>Rx, Ry, Rz</b> (3 ddl).'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Le nombre de ddl = combien de mouvements INDÉPENDANTS restent possibles (translations + rotations confondues).',
+  'Encastrement : tout est bloqué → <b>0 ddl</b>. C\u2019est la liaison des pièces vissées ou soudées.',
+  'Pivot glissant : coulisse ET tourne sur le même axe → 1T + 1R = <b>2 ddl</b>.',
+  'Rotule : 3 rotations → <b>3 ddl</b>. Appui plan : glisse dans le plan (2T) et pivote autour de la normale (1R) → <b>3 ddl</b> aussi — mais pas les mêmes !'
+]);
+
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
   el(checkBtn).addEventListener('click',function(){ var r=validator(); el(fbId).className='exo-fb '+(r.ok?'ok':'no'); el(fbId).textContent=r.msg; el(showBtn).disabled=false; });
   el(showBtn).addEventListener('click',function(){ if(!el(showBtn).disabled) el(solId).classList.add('show'); });
@@ -188,7 +221,9 @@ function lockExo(checkBtn, showBtn, solId, fbId, validator){
     box.appendChild(d); });
   lockExo('bCheck','bShow','bSol','bFb',function(){
     var all=true; scen.forEach(function(s,i){ var v=el('bsel'+i).value; var good=(v===s.ok); if(!good)all=false; el('bm'+i).className='m '+(good?'ok':'no'); });
-    return all?{ok:true,msg:'✓ Tous les ddl sont corrects !'}:{ok:false,msg:'✗ Certains ddl sont faux — voir la correction.'};
+    if(all) return {ok:true,msg:'✓ Tous les ddl sont corrects !'};
+    el('bStepBtn').disabled=false;
+    return {ok:false,msg:'✗ Certains ddl sont faux — la résolution pas à pas est débloquée 🪜'};
   });
 })();
 /* ---- C : guidage réel → liaison ---- */

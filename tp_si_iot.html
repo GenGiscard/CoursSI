@@ -61,6 +61,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -101,7 +106,8 @@
         </svg>
       </div>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol">Le <b>capteur</b> traduit la grandeur physique en signal électrique · le <b>microcontrôleur</b> lit, met en forme et décide · le <b>module radio</b> expédie la trame sur le réseau. Et la batterie nourrit tout ce petit monde — tu vas t’en occuper à l’exercice C.</div>
     </section>
@@ -117,7 +123,8 @@
         <span>}</span>
       </div>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol">{"serre": <b>2</b>, "temp": <b>21.5</b>, "hum": <b>65</b>} — chaque valeur derrière SA clé. Le JSON organise tout en <b>paires clé : valeur</b>, lisibles autant par le cloud que par toi.</div>
     </section>
@@ -297,6 +304,31 @@ var nCur=12;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Demande-toi qui MESURE : le <b>capteur</b> traduit la grandeur physique (température, humidité…) en signal électrique.',
+  'Qui RÉFLÉCHIT : le <b>microcontrôleur</b> lit le capteur, met la donnée en forme et décide quand l\u2019envoyer.',
+  'Qui PARLE : le <b>module radio</b> expédie la trame sur le réseau sans fil.',
+  'Et qui NOURRIT tout ce petit monde : la <b>batterie</b> — c\u2019est elle qui limitera l\u2019autonomie (exercice ⭐).'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Une trame JSON est une liste de paires « "clé": valeur » entre accolades — l\u2019essentiel est d\u2019associer chaque valeur à SA clé.',
+  'L\u2019énoncé dit : serre n°2 → la clé "serre" reçoit la valeur <b>2</b>.',
+  '21,5 °C → la clé "temp" reçoit <b>21.5</b> — en JSON, le séparateur décimal est le POINT.',
+  '65 % d\u2019humidité → la clé "hum" reçoit <b>65</b>. La trame est prête à partir vers le cloud.'
+]);
+
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -323,7 +355,8 @@ buildMatch('aMatch','a',A_SCEN);
 lockExo('aCheck','aShow','aSol','aFb',function(){
   var ok=checkMatch('a',A_SCEN);
   if(ok) return {ok:true,msg:'✓ Dissection réussie : tu connais ton patient.'};
-  return {ok:false,msg:'✗ Qui MESURE, qui RÉFLÉCHIT, qui PARLE ? Reprends organe par organe.'};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Qui MESURE, qui RÉFLÉCHIT, qui PARLE ? — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* B */
@@ -336,7 +369,8 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var okM=checkMatch('b',B_SCEN);
   var okAll=ok1&&ok2&&ok3&&okM;
   if(okAll) return {ok:true,msg:'✓ Trame valide : le cloud va adorer.'};
-  return {ok:false,msg:'✗ '+(ok1?'serre✓':'serre✗')+' '+(ok2?'temp✓':'temp✗')+' '+(ok3?'hum✓':'hum✗')+' — chaque valeur derrière SA clé !'};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(ok1?'serre✓':'serre✗')+' '+(ok2?'temp✓':'temp✗')+' '+(ok3?'hum✓':'hum✗')+' — pas à pas débloqué 🪜'};
 });
 
 /* C */

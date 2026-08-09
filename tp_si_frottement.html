@@ -63,6 +63,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -91,7 +96,8 @@
         </div>
         <div class="state" id="benchState"></div>
       </div>
-      <div class="row"><button class="btn" id="aCheck">Valider ma force minimale</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Valider ma force minimale</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol">La limite d'adhérence vaut T<sub>max</sub> = µ·N = 0,30 × 400 = <b>120 N</b>.<br>Tant que F ≤ 120 N, le frottement T s'adapte et retient la caisse. Dès que F dépasse 120 N, le contact sature : <b>glissement</b>. La bonne réponse était donc le premier cran au-dessus de 120 N (125 N au curseur), ou 120 N tout juste à la limite.</div>
     </section>
@@ -105,7 +111,8 @@
         <select id="bC" style="font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff">
           <option>— choisir —</option><option>Elle adhère (ne bouge pas)</option><option>Elle glisse</option>
         </select></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> T<sub>max</sub> = 0,5 × 300 = <b>150 N</b>.<br><b>b)</b> N = P = 60 × 10 = 600 N, puis T<sub>max</sub> = 0,4 × 600 = <b>240 N</b>.<br><b>c)</b> F = 200 N &lt; 240 N → le frottement s'adapte : <b>la caisse adhère</b>, elle ne bouge pas.</div>
     </section>
@@ -190,6 +197,31 @@ var el=function(id){return document.getElementById(id);};
 
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'La caisse appuie sur le sol : N = 400 N. Le sol peut la retenir jusqu\u2019à un seuil — pas au-delà.',
+  'Ce seuil est <b>Tmax = µ × N</b> = 0,30 × 400 = 120 N.',
+  'Tant que F ≤ 120 N, le frottement s\u2019adapte et la caisse ADHÈRE. Dès que F dépasse 120 N, elle glisse.',
+  'Règle donc le curseur juste AU-DESSUS de 120 N : c\u2019est la force minimale qui la fait partir.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Cas a — application directe : <b>Tmax = µ × N</b> = 0,5 × 300 = 150 N.',
+  'Cas b — il faut d\u2019abord N : poids P = m × g = 60 × 10 = 600 N ; sur sol horizontal, N = P = 600 N.',
+  'Puis Tmax = 0,4 × 600 = <b>240 N</b>.',
+  'Cas c — on COMPARE : F = 200 N < Tmax = 240 N → la caisse adhère, elle ne bouge pas.'
+]);
+
 function buildMatch(boxId, prefix, scen, opts){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -255,8 +287,8 @@ function lockExo(checkBtn, showBtn, solId, fbId, validator){
   lockExo('aCheck','aShow','aSol','aFb',function(){
     if(F>TMAX && F<=TMAX+10) return {ok:true,msg:'✓ Oui : au-delà de 120 N, la caisse part. T\u2098\u2090\u2093 = µ·N = 120 N.'};
     if(F===TMAX) return {ok:true,msg:'✓ Exactement à la limite : T\u2098\u2090\u2093 = µ·N = 120 N. Un souffle de plus et elle part !'};
-    if(F<TMAX) return {ok:false,msg:'✗ À '+F+' N, la caisse adhère encore : le frottement s\u2019adapte. Cherche plus haut.'};
-    return {ok:false,msg:'✗ À '+F+' N elle glisse, mais ce n\u2019est pas la force MINIMALE. Redescends vers la limite.'};
+    if(F<TMAX){ el('aStepBtn').disabled=false; return {ok:false,msg:'✗ À '+F+' N, la caisse adhère encore : le frottement s\u2019adapte. Cherche plus haut.'}; }
+    el('aStepBtn').disabled=false; return {ok:false,msg:'✗ À '+F+' N elle glisse, mais ce n\u2019est pas la force MINIMALE. Redescends vers la limite.'};
   });
 })();
 
@@ -265,7 +297,7 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value), c=el('bC').value;
   var okA=Math.abs(a-150)<3, okB=Math.abs(b-240)<5, okC=(c==='Elle adhère (ne bouge pas)');
   if(okA&&okB&&okC) return {ok:true,msg:'✓ Parfait : 150 N, 240 N, et 200 N < 240 N → adhérence.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
+  el('bStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okC?'c✓':'c✗')+' — voir la correction.'};
 });
 
 /* ---- C ---- */

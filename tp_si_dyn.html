@@ -62,6 +62,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -92,7 +97,8 @@
       </div>
       <div class="match" id="aMatch"></div>
       <div class="row"><span>c) Quelle force F faut-il pour obtenir a = 6 m/s² (m = 50 kg) ?</span><input class="numin" id="aC" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>a)</b> a = F/m = 200/50 = <b>4 m/s²</b>.<br><b>b)</b> À F constante, masse ×2 → accélération <b>÷2</b> (a = 200/100 = 2 m/s²) : c'est l'inertie.<br><b>c)</b> F = m·a = 50 × 6 = <b>300 N</b>.</div>
     </section>
@@ -102,7 +108,8 @@
       <p class="task">🎯 Deux véhicules, deux calculs directs (on néglige les frottements).</p>
       <div class="row"><span>a) Une moto de 200 kg doit accélérer à 3 m/s². Force de poussée nécessaire : F =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
       <div class="row"><span>b) Une voiture de 1200 kg subit une force motrice de 3600 N. Son accélération : a =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> F = m·a = 200 × 3 = <b>600 N</b>.<br><b>b)</b> a = F/m = 3600/1200 = <b>3 m/s²</b>. Une équation, deux sens de lecture.</div>
     </section>
@@ -230,6 +237,30 @@ var F=200, m2=false;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Le banc obéit à UNE loi : <b>a = F/m</b>. Applique F = 200 N avec m = 50 kg et lis : a = 200/50 = 4 m/s².',
+  'Coche « masse ×2 » sans toucher F : m passe à 100 kg → a = 200/100 = 2 m/s² — l\u2019accélération est divisée par 2.',
+  'Question c, on inverse la loi : pour a = 6 m/s² avec m = 50 kg, <b>F = m × a</b> = 50 × 6 = 300 N. Vérifie au curseur !'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Repère les données : moto m = 200 kg à accélérer à 3 m/s² · voiture m = 1200 kg poussée par F = 3600 N.',
+  'Sens direct (on cherche la force) : <b>F = m × a</b> = 200 × 3 = 600 N.',
+  'Sens inverse (on cherche l\u2019accélération) : <b>a = F/m</b> = 3600/1200 = 3 m/s².',
+  'Une seule loi, deux lectures : ΣF = m·a se retourne comme un gant.'
+]);
+
 function buildMatch(boxId, prefix, scen, opts){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -262,7 +293,7 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
   var okM=checkMatch('a',A_SCEN);
   var c=numf(el('aC').value); var okC=Math.abs(c-300)<10;
   if(okM&&okC) return {ok:true,msg:'✓ Le banc confirme tes calculs : 4 m/s², ÷2, et 300 N.'};
-  return {ok:false,msg:'✗ '+(okM?'a/b✓':'a/b à revoir (manipule le banc !)')+' · '+(okC?'c✓':'c✗ (F = m·a)')};
+  el('aStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okM?'a/b✓':'a/b à revoir (manipule le banc !)')+' · '+(okC?'c✓':'c✗ (F = m·a)')};
 });
 
 /* B */
@@ -270,7 +301,7 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-600)<15, okB=Math.abs(b-3)<0.2;
   if(okA&&okB) return {ok:true,msg:'✓ 600 N et 3 m/s² : la loi dans les deux sens.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (F = m·a)')+' '+(okB?'b✓':'b✗ (a = F/m)')};
+  el('bStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (F = m·a)')+' '+(okB?'b✓':'b✗ (a = F/m)')};
 });
 
 /* C */

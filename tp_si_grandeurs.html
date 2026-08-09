@@ -58,6 +58,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -91,9 +96,10 @@
           <text x="96" y="90" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">moteur</text>
         </svg>
       </div>
-      <div class="row"><span>a) Vitesse angulaire : ω = 2π·N/60 =</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">rad/s (arrondi entier)</span></div>
-      <div class="row"><span>b) Puissance : P = C·ω =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><span>a) Vitesse angulaire du mandrin : ω =</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">rad/s (arrondi entier)</span></div>
+      <div class="row"><span>b) Puissance délivrée : P =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>a)</b> ω = 2π×1500/60 = 2π×25 ≈ <b>157 rad/s</b>.<br><b>b)</b> P = C·ω = 2 × 157 ≈ <b>314 W</b>. Toujours convertir les tr/min en rad/s avant P = C·ω !</div>
     </section>
@@ -114,9 +120,10 @@
           <text x="352" y="118" font-family="JetBrains Mono" font-size="11" fill="#8a6313">moteur</text>
         </svg>
       </div>
-      <div class="row"><span>a) Couple délivré par le moteur : C = P/ω =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
+      <div class="row"><span>a) Couple délivré par le moteur : C =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> C = P/ω = 250/25 = <b>10 N·m</b>.<br><b>b)</b> Un moteur débridé à 500 W au même régime doublerait le couple (20 N·m)… mais le vélo ne serait <b>plus homologué</b> : au-delà de 250 W, ce n'est plus un vélo mais un cyclomoteur (immatriculation, assurance, casque).</div>
     </section>
@@ -132,8 +139,8 @@
           <span class="val" id="nVal">0 tr/min</span>
         </div>
       </div>
-      <div class="row"><span>a) Quelle vitesse ω donne P = 300 W ? ω = P/C =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
-      <div class="row"><span>b) À quel régime N cela correspond-il ? N = 60·ω/(2π) ≈</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">tr/min (±20)</span></div>
+      <div class="row"><span>a) Quelle vitesse ω donne P = 300 W ? ω =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
+      <div class="row"><span>b) À quel régime N cela correspond-il ? N ≈</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">tr/min (±20)</span></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="cFb"></div>
       <div class="exo-sol" id="cSol"><b>a)</b> ω = P/C = 300/3 = <b>100 rad/s</b>.<br><b>b)</b> N = 60×100/(2π) ≈ <b>955 tr/min</b>. Le banc devait afficher « 🎯 objectif atteint » autour de cette valeur !</div>
@@ -302,6 +309,30 @@ var Nrpm=0;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Données : N = 1500 tr/min, C = 2 N·m. Attention : les watts exigent des rad/s, pas des tr/min !',
+  'Conversion : 1 tour = 2π rad et 1 min = 60 s → <b>ω = 2π × N / 60</b>.',
+  'ω = 2π × 1500 / 60 ≈ <b>157 rad/s</b>.',
+  'La puissance mécanique : <b>P = C × ω</b> = 2 × 157 ≈ 314 W.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Données : P = 250 W (la limite légale du VAE), ω = 25 rad/s.',
+  'On cherche C : retourne la formule P = C × ω → <b>C = P / ω</b>.',
+  'C = 250 / 25 = <b>10 N·m</b>. C\u2019est ce couple qui pousse dans les côtes — la loi plafonne la puissance, pas le couple.'
+]);
+
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -323,7 +354,7 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
   var a=numf(el('aA').value), b=numf(el('aB').value);
   var okA=Math.abs(a-157)<3, okB=Math.abs(b-314)<8;
   if(okA&&okB) return {ok:true,msg:'✓ 157 rad/s et 314 W : la perceuse est auscultée.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (ω = 2πN/60)')+' '+(okB?'b✓':'b✗ (P = C·ω, avec ω en rad/s)')};
+  el('aStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (ω = 2πN/60)')+' '+(okB?'b✓':'b✗ (P = C·ω, avec ω en rad/s)')};
 });
 
 /* B */
@@ -332,7 +363,7 @@ buildMatch('bMatch','b',B_SCEN);
 lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value); var okA=Math.abs(a-10)<0.5; var okM=checkMatch('b',B_SCEN);
   if(okA&&okM) return {ok:true,msg:'✓ 10 N·m — et 250 W, c\u2019est la loi !'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (C = P/ω)')+' '+(okM?'b✓':'b✗')};
+  el('bStepBtn').disabled=false; return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (C = P/ω)')+' '+(okM?'b✓':'b✗')};
 });
 
 /* C */

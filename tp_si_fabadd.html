@@ -58,6 +58,11 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -100,7 +105,8 @@
         </svg>
       </div>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol">Le <b>STL</b> exporte la géométrie en <b>facettes triangulaires</b> · le <b>slicer</b> la découpe en <b>couches</b> et écrit les trajectoires · le <b>G-code</b> est la <b>liste d’instructions</b> (déplacements, températures) que la machine exécute ligne par ligne.</div>
     </section>
@@ -108,9 +114,10 @@
     <section class="exo-card" id="b">
       <h2><span class="num">B</span> Le compte des couches 🔢</h2>
       <p class="task">🎯 Le boîtier du club robotique mesure h = 24 mm de haut. Hauteur de couche réglée : e = 0,3 mm ; l'imprimante passe 90 s sur chaque couche.</p>
-      <div class="row"><span>a) Nombre de couches : n = h/e =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">couches</span></div>
-      <div class="row"><span>b) Durée totale : 80 × 90 s =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">min</span></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><span>a) Combien de couches l’imprimante va-t-elle déposer ? n =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">couches</span></div>
+      <div class="row"><span>b) Durée totale de l’impression :</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">min</span></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>a)</b> n = 24/0,3 = <b>80 couches</b>.<br><b>b)</b> 80 × 90 = 7200 s = <b>120 min</b> (2 h). L’impression 3D, c’est patient !</div>
     </section>
@@ -301,6 +308,32 @@ var eCur=0.2;
 })();
 
 /* helpers */
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'Pars du début de la chaîne : tout commence par un dessin 3D dans le logiciel de CAO.',
+  'Ce dessin est exporté en fichier <b>STL</b> : la forme y est décrite par des milliers de facettes triangulaires.',
+  'Le <b>slicer</b> (trancheur) découpe ce volume en couches horizontales et calcule les trajectoires : il produit le G-code.',
+  'Le <b>G-code</b> est la liste d\u2019instructions (déplacements, températures) que la machine exécute ligne à ligne. Chaîne complète : CAO → STL → slicer → G-code → impression.'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Repère les données : hauteur de la pièce h = 24 mm, hauteur d\u2019une couche e = 0,3 mm, 90 s par couche.',
+  'Le nombre de couches est le quotient <b>n = h / e</b> — combien de fois 0,3 mm entre dans 24 mm.',
+  'n = 24 / 0,3 = <b>80 couches</b>.',
+  'Chaque couche prend 90 s : durée = 80 × 90 = 7200 s.',
+  'Convertis : 7200 / 60 = <b>120 min</b>, soit 2 h d\u2019impression.'
+]);
+
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -327,7 +360,8 @@ buildMatch('aMatch','a',A_SCEN);
 lockExo('aCheck','aShow','aSol','aFb',function(){
   var ok=checkMatch('a',A_SCEN);
   if(ok) return {ok:true,msg:'✓ Chaîne numérique maîtrisée de bout en bout.'};
-  return {ok:false,msg:'✗ Revois le rôle de chaque maillon (cours, slide 3).'};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Revois le rôle de chaque maillon — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* B */
@@ -335,7 +369,8 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var a=numf(el('bA').value), b=numf(el('bB').value);
   var okA=Math.abs(a-80)<1, okB=Math.abs(b-120)<3;
   if(okA&&okB) return {ok:true,msg:'✓ 80 couches en 2 h : le boîtier sera prêt.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (n = h/e)')+' '+(okB?'b✓':'b✗ (80×90 s, puis en minutes)')};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (n = h/e)')+' '+(okB?'b✓':'b✗ (temps par couche × nombre de couches)')+' — pas à pas débloqué 🪜'};
 });
 
 /* C */

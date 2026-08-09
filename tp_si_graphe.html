@@ -46,6 +46,11 @@
   .opt button{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer}
   .opt button:hover{border-color:var(--steel)} .opt button.sel{border-color:var(--steel);background:#eef3f6}
   a{color:var(--steel)}
+  .btn.step{background:var(--plum)}
+  .steps{display:none;margin-top:12px}
+  .steps.show{display:block}
+  .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
+  .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
 </style>
 </head>
 <body>
@@ -88,7 +93,8 @@
       <h2><span class="num">A</span> Constituer les classes</h2>
       <p class="task">🎯 Range chaque pièce dans sa classe d'équivalence. Rappel : même classe = aucun mouvement relatif.</p>
       <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="aSteps"></div>
       <div class="exo-fb" id="aFb"></div>
       <div class="exo-sol" id="aSol"><b>A (bâti) = {châssis, cabine}</b> — la cabine est boulonnée au châssis.<br><b>B = {benne, axe de basculement}</b> — l'axe est soudé à la benne.<br><b>C = {corps du vérin}</b> · <b>D = {tige du vérin}</b> — la tige coulisse dans le corps : mouvement relatif, donc deux classes.</div>
     </section>
@@ -117,7 +123,8 @@
         </svg>
       </div>
       <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
+      <div class="steps" id="bSteps"></div>
       <div class="exo-fb" id="bFb"></div>
       <div class="exo-sol" id="bSol"><b>L1 (A–B) : pivot</b> — la benne bascule autour d'un axe fixé au châssis.<br><b>L2 (A–C) : pivot</b> — le corps du vérin est articulé sur le châssis.<br><b>L3 (B–D) : pivot</b> — la tige est articulée sur la benne.<br><b>L4 (C–D) : pivot glissant</b> — la tige coulisse ET peut tourner dans le corps du vérin.<br>Le graphe forme une <b>boucle</b> : chaîne fermée.</div>
     </section>
@@ -161,6 +168,31 @@
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
+/* résolution pas à pas (débloquée par une réponse fausse) */
+function setupSteps(btnId, boxId, steps){
+  var i=0, btn=el(btnId), box=el(boxId);
+  btn.addEventListener('click',function(){
+    if(btn.disabled||i>=steps.length) return;
+    var d=document.createElement('div'); d.className='stepline';
+    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+    box.appendChild(d); box.classList.add('show'); i++;
+    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+  });
+}
+setupSteps('aStepBtn','aSteps',[
+  'La règle unique : même classe d\u2019équivalence = AUCUN mouvement relatif. Vissé, soudé, boulonné = même classe.',
+  'Le châssis et la cabine boulonnée dessus vivent ensemble → classe <b>A</b> tous les deux.',
+  'La benne et son axe soudé basculent d\u2019un seul bloc → classe <b>B</b>.',
+  'Le vérin, lui, se déplie : sa tige COULISSE dans son corps → mouvement relatif → deux classes distinctes, <b>C</b> (corps) et <b>D</b> (tige).'
+]);
+setupSteps('bStepBtn','bSteps',[
+  'Pour chaque trait du graphe, demande-toi : quel mouvement relatif reste possible entre les deux classes ?',
+  'L1 (benne / châssis) : la benne bascule autour de son axe → une rotation → <b>PIVOT</b>.',
+  'L2 (corps du vérin / châssis) et L3 (tige / benne) : les deux articulations du vérin tournent aussi → encore des <b>PIVOTS</b>.',
+  'L4 (tige / corps) : la tige coulisse ET peut tourner autour de son axe → <b>PIVOT GLISSANT</b>. Trois pivots + un pivot glissant, en boucle fermée : le mécanisme est complet.'
+]);
+
 function buildMatch(boxId, prefix, scen, opts){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
@@ -188,7 +220,9 @@ var A_SCEN=[
 ];
 buildMatch('aMatch','a',A_SCEN,['— choisir —','A','B','C','D']);
 lockExo('aCheck','aShow','aSol','aFb',function(){
-  return checkMatch('a',A_SCEN)?{ok:true,msg:'✓ Les 4 classes sont bien constituées !'}:{ok:false,msg:'✗ Certaines pièces sont mal classées — voir la correction.'};
+  if(checkMatch('a',A_SCEN)) return {ok:true,msg:'✓ Les 4 classes sont bien constituées !'};
+  el('aStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Certaines pièces sont mal classées — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* ---- B : graphe ---- */
@@ -200,7 +234,9 @@ var B_SCEN=[
 ];
 buildMatch('bMatch','b',B_SCEN,['— choisir —','Pivot','Glissière','Pivot glissant','Rotule','Encastrement']);
 lockExo('bCheck','bShow','bSol','bFb',function(){
-  return checkMatch('b',B_SCEN)?{ok:true,msg:'✓ Graphe complet : 3 pivots + 1 pivot glissant, en boucle !'}:{ok:false,msg:'✗ Certaines liaisons sont fausses — voir la correction.'};
+  if(checkMatch('b',B_SCEN)) return {ok:true,msg:'✓ Graphe complet : 3 pivots + 1 pivot glissant, en boucle !'};
+  el('bStepBtn').disabled=false;
+  return {ok:false,msg:'✗ Certaines liaisons sont fausses — la résolution pas à pas est débloquée 🪜'};
 });
 
 /* ---- C : ouverte / fermée ---- */
