@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cours — Changement de base · Projeter d’un repère vers un autre · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .layout{display:flex;max-width:1200px;margin:0 auto}
+  .snav{position:sticky;top:64px;align-self:flex-start;width:224px;flex:none;padding:26px 8px 26px 18px;display:none}
+  @media(min-width:980px){ .snav{display:block} }
+  .snav a{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);text-decoration:none;padding:7px 10px;border-left:2px solid var(--line);line-height:1.35}
+  .snav a.on{color:var(--steel);border-left-color:var(--steel);font-weight:700;background:#fdfaf2}
+  .slides{flex:1;min-width:0;padding:10px clamp(14px,3vw,34px) 120px}
+  .slide{min-height:92vh;padding:44px 0 26px;border-bottom:1px dashed var(--line);display:flex;flex-direction:column;justify-content:center}
+  .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--copper);text-transform:uppercase;margin-bottom:8px}
+  h1{font-size:clamp(30px,4.6vw,50px);margin:0 0 12px;font-weight:800;line-height:1.12}
+  h2{font-size:clamp(24px,3.4vw,36px);margin:0 0 14px;font-weight:800}
+  .lede{font-size:clamp(18px,2vw,22px);color:var(--sub);max-width:62ch}
+  .cols{display:grid;gap:18px;margin-top:16px}
+  @media(min-width:760px){ .cols.c2{grid-template-columns:1fr 1fr} .cols.c3{grid-template-columns:1fr 1fr 1fr} }
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .panel h3{margin:0 0 6px;font-size:18px;font-weight:800}
+  .panel p{margin:6px 0;font-size:16px;color:var(--sub)}
+  .big{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(17px,2.3vw,23px);background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:10px;padding:14px 18px;margin:14px 0;overflow-x:auto}
+  .big small{display:block;font-family:'Bricolage Grotesque',sans-serif;font-weight:400;font-size:15px;color:var(--sub);margin-top:6px}
+  .anim{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:14px}
+  .anim canvas{width:100%;height:auto;display:block}
+  .anim .ctrl{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .anim .ctrl button{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700;background:var(--steel);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer}
+  .anim .ctrl button:disabled{opacity:.35;cursor:not-allowed}
+  .anim .leg{flex:1;min-width:230px;font-size:15px;color:var(--sub)}
+  .anim .leg b{color:var(--steel)}
+  .tag{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;background:#f1ece0;border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin:3px 4px 3px 0;color:var(--sub)}
+  .hint{background:#fdf6e6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:16px}
+  .warn{background:#fbeee9;border-left:3px solid var(--copper);border-radius:8px;padding:10px 14px;margin-top:12px;font-size:16px}
+  table.mat{border-collapse:collapse;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:16px}
+  table.mat th,table.mat td{border:1px solid var(--line);padding:10px 16px;text-align:center}
+  table.mat th{background:#faf6ec;color:var(--sub);font-size:13px}
+  table.mat td.diag{background:#eef3f6;color:var(--steel);font-weight:700}
+  table.mat caption{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;color:var(--sub);margin-bottom:6px;text-align:left}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Cours — Changement de base<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="layout">
+    <nav class="snav" id="snav">
+      <a href="#s1">1 · Un repère par solide</a>
+      <a href="#s2">2 · La figure de calcul</a>
+      <a href="#s3">3 · Les quatre formules</a>
+      <a href="#s4">4 · Le tableau de passage</a>
+      <a href="#s5">5 · Projeter un vecteur</a>
+      <a href="#s6">6 · Enchaîner deux repères</a>
+      <a href="#s7">7 · Les angles s’ajoutent</a>
+      <a href="#s8">8 · À retenir</a>
+    </nav>
+
+    <main class="slides">
+
+      <section class="slide" id="s1">
+        <div class="k">Cours · Première spé SI · Niveau 2</div>
+        <h1>Changement de base :<br>projeter d’un repère vers un autre</h1>
+        <p class="lede">Au niveau 1, tu projetais une force sur DES axes. Ici, chaque pièce d’un mécanisme apporte <b>son propre repère</b> — et il tourne avec elle. Un bras de robot à deux axes, c’est trois repères emboîtés. Pour additionner des vecteurs qui n’habitent pas le même repère, il faut d’abord <b>les ramener tous dans le même</b>.</p>
+        <div>
+          <span class="tag">B₀ : le bâti, il ne bouge pas</span>
+          <span class="tag">B₁ : le premier bras, tourné de θ</span>
+          <span class="tag">B₂ : le second bras, tourné de φ</span>
+        </div>
+        <div class="anim">
+          <canvas id="cvIntro" width="860" height="320" aria-label="Bras à deux axes avec ses trois repères qui tournent"></canvas>
+          <div class="ctrl"><button id="inPrev">◀</button><button id="inNext">▶</button><div class="leg" id="inLeg"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s2">
+        <div class="k">Slide 2 · L’outil</div>
+        <h2>La figure plane de changement de base</h2>
+        <p class="lede">On ne retient jamais les formules par cœur : <b>on les LIT sur une petite figure</b> qu’on redessine à chaque fois, en trois traits. C’est le geste le plus rentable de toute la statique.</p>
+        <div class="anim">
+          <canvas id="cvFig" width="860" height="360" aria-label="Construction pas à pas de la figure de changement de base"></canvas>
+          <div class="ctrl"><button id="fgPrev">◀</button><button id="fgNext">▶</button><div class="leg" id="fgLeg"></div></div>
+        </div>
+        <div class="hint">✍️ Le rituel : axe de rotation (z₀ = z₁) au centre, les deux axes de départ, les deux axes d’arrivée tournés de θ, et l’angle marqué DEUX fois — entre les x et entre les y.</div>
+      </section>
+
+      <section class="slide" id="s3">
+        <div class="k">Slide 3 · Les formules</div>
+        <h2>Quatre relations, une seule figure</h2>
+        <p class="lede">Sur la figure, chaque vecteur unitaire se projette comme n’importe quel vecteur : composante adjacente en cosinus, composante opposée en sinus. Le seul point délicat, c’est <b>le signe</b>.</p>
+        <div class="big">x₁ = cos θ · x₀ + sin θ · y₀<br>y₁ = − sin θ · x₀ + cos θ · y₀<small>Sens direct (de B₀ vers B₁). Le signe moins vient de la figure : pour atteindre y₁, on recule sur x₀.</small></div>
+        <div class="big" style="border-left-color:var(--green)">x₀ = cos θ · x₁ − sin θ · y₁<br>y₀ = sin θ · x₁ + cos θ · y₁<small>Sens inverse (de B₁ vers B₀) : on retrouve les mêmes cosinus, et le moins a changé de ligne. Inverser un changement de base, c’est tourner de −θ.</small></div>
+        <div class="anim">
+          <canvas id="cvForm" width="860" height="330" aria-label="Lecture des quatre formules sur la figure"></canvas>
+          <div class="ctrl"><button id="foPrev">◀</button><button id="foNext">▶</button><div class="leg" id="foLeg"></div></div>
+        </div>
+      </section>
+
+      <section class="slide" id="s4">
+        <div class="k">Slide 4 · L’outil des pros</div>
+        <h2>Le tableau de passage</h2>
+        <p class="lede">Les quatre relations se rangent dans un tableau à double entrée. En SI, on l’appelle <b>matrice de passage</b> — et on le lit comme une table de multiplication.</p>
+        <table class="mat">
+          <caption>Passage de B₀ vers B₁ (rotation de θ autour de z₀ = z₁)</caption>
+          <tr><th></th><th>x₀</th><th>y₀</th><th>z₀</th></tr>
+          <tr><th>x₁</th><td>cos θ</td><td>sin θ</td><td>0</td></tr>
+          <tr><th>y₁</th><td>− sin θ</td><td>cos θ</td><td>0</td></tr>
+          <tr><th>z₁</th><td>0</td><td>0</td><td class="diag">1</td></tr>
+        </table>
+        <div class="cols c2">
+          <div class="panel"><h3>📖 Comment le lire</h3><p>Une <b>ligne</b> donne un vecteur de B₁ exprimé dans B₀. Exemple : la ligne x₁ se lit « x₁ = cos θ·x₀ + sin θ·y₀ ».</p></div>
+          <div class="panel"><h3>🔄 Le sens inverse</h3><p>Pour aller de B₁ vers B₀, on lit le tableau <b>en colonnes</b> au lieu des lignes. C’est tout — pas besoin de recalculer quoi que ce soit.</p></div>
+        </div>
+        <div class="hint">🧭 La colonne et la ligne de z valent 0 partout sauf 1 au croisement : <b>l’axe de rotation ne bouge pas</b>. C’est lui qui rend le problème plan, donc simple.</div>
+      </section>
+
+      <section class="slide" id="s5">
+        <div class="k">Slide 5 · Application</div>
+        <h2>Projeter un vecteur d’un repère à l’autre</h2>
+        <p class="lede">Un vérin pousse le long du bras : son effort s’écrit naturellement <b>dans le repère du bras</b>. Mais l’équilibre du bâti, lui, s’écrit dans B₀. Il faut donc traduire.</p>
+        <div class="anim">
+          <canvas id="cvProj" width="860" height="340" aria-label="Vecteur exprimé dans B1 puis traduit dans B0"></canvas>
+          <div class="ctrl"><button id="prPrev">◀</button><button id="prNext">▶</button><div class="leg" id="prLeg"></div></div>
+        </div>
+        <div class="big">F = 100 · x₁   →   F = 86,6 · x₀ + 50 · y₀   (θ = 30°)<small>Deux écritures, un seul vecteur. Vérification systématique : √(86,6² + 50²) = 100 N — <b>changer de repère ne change jamais la norme</b>.</small></div>
+      </section>
+
+      <section class="slide" id="s6">
+        <div class="k">Slide 6 · Le vrai sujet</div>
+        <h2>Enchaîner : B₂ → B₁ → B₀</h2>
+        <p class="lede">Dans un bras à deux axes, l’effort du second segment s’écrit dans B₂. Pour le ramener au bâti, on ne saute pas d’étape : <b>on descend la chaîne, un repère à la fois</b>.</p>
+        <div class="anim">
+          <canvas id="cvChain" width="860" height="360" aria-label="Double changement de base sur un bras à deux segments"></canvas>
+          <div class="ctrl"><button id="chPrev">◀</button><button id="chNext">▶</button><div class="leg" id="chLeg"></div></div>
+        </div>
+        <div class="big">x₂ = cos φ · x₁ + sin φ · y₁     puis     x₁ = cos θ · x₀ + sin θ · y₀<small>On substitue la seconde relation dans la première, on développe, et on regroupe les termes en x₀ et en y₀. La double projection n’est rien d’autre que cela.</small></div>
+      </section>
+
+      <section class="slide" id="s7">
+        <div class="k">Slide 7 · Le raccourci démontré</div>
+        <h2>Quand les angles s’additionnent</h2>
+        <p class="lede">Développe la substitution précédente et regarde ce qui apparaît : les formules d’addition de la trigonométrie. Résultat : quand les <b>deux rotations partagent le même axe</b>, il suffit d’ajouter les angles.</p>
+        <div class="anim">
+          <canvas id="cvSum" width="860" height="340" aria-label="Démonstration que les angles s'additionnent pour deux rotations coaxiales"></canvas>
+          <div class="ctrl"><button id="suPrev">◀</button><button id="suNext">▶</button><div class="leg" id="suLeg"></div></div>
+        </div>
+        <div class="big">x₂ = cos(θ + φ) · x₀ + sin(θ + φ) · y₀<small>Uniquement si les deux rotations se font autour du même axe (ici z). Sinon — rotation autour de z puis autour de y₁, par exemple — il faut enchaîner les tableaux, sans raccourci.</small></div>
+        <div class="warn">⚠️ Piège classique : additionner les angles <b>sans vérifier qu’ils tournent dans le même sens</b>. Si φ est compté dans l’autre sens, c’est θ − φ. La figure de calcul tranche en deux secondes ; la mémoire, jamais.</div>
+      </section>
+
+      <section class="slide" id="s8">
+        <div class="k">Slide 8 · Synthèse</div>
+        <h2>À retenir</h2>
+        <div class="big">B₂ → B₁ → B₀ : on descend la chaîne, un repère à la fois<small>Jamais de saut direct sans vérification. Chaque étape a sa figure de calcul.</small></div>
+        <div class="cols c3">
+          <div class="panel"><h3>✍️ Toujours la figure</h3><p>Trois traits, l’angle marqué deux fois. On lit les formules dessus au lieu de les réciter — et les signes tombent juste.</p></div>
+          <div class="panel"><h3>🔄 Un tableau, deux sens</h3><p>Lignes pour aller de B₀ à B₁, colonnes pour revenir. Inverser une rotation, c’est tourner de −θ.</p></div>
+          <div class="panel"><h3>📏 La norme témoigne</h3><p>Un changement de base ne change ni la longueur d’un vecteur ni les angles entre vecteurs. C’est ton contrôle gratuit.</p></div>
+        </div>
+        <div class="hint">🤖 Au TP : figure de calcul, tableau de passage, bras de robot à piloter au simulateur — puis les derniers exercices en <b>double projection</b>, de B₂ jusqu’à B₀.</div>
+      </section>
+
+    </main>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var D2R=Math.PI/180;
+var fr=function(x){ return String(x).replace('.',','); };
+
+/* ---------- nav ---------- */
+(function(){
+  var links=document.querySelectorAll('#snav a'), map={};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
+        var a=map[en.target.id]; if(a) a.classList.add('on'); }
+    });
+  },{rootMargin:'-40% 0px -50% 0px'});
+  document.querySelectorAll('.slide').forEach(function(s){ obs.observe(s); });
+})();
+(function(){
+  var ids=['s1','s2','s3','s4','s5','s6','s7','s8'];
+  function current(){ var best=0,bd=1e9;
+    ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
+    return best; }
+  document.addEventListener('keydown',function(ev){
+    if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault(); el(ids[Math.min(ids.length-1,current()+1)]).scrollIntoView({behavior:'smooth'}); }
+    if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault(); el(ids[Math.max(0,current()-1)]).scrollIntoView({behavior:'smooth'}); }
+  });
+})();
+
+/* ---------- helpers ---------- */
+function stepper(cvId, prevId, nextId, legId, phases){
+  var cv=el(cvId); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), idx=0, t=0;
+  function show(){ t=0;
+    el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
+    el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
+  el(prevId).addEventListener('click',function(){ if(idx>0){ idx--; show(); } });
+  el(nextId).addEventListener('click',function(){ if(idx<phases.length-1){ idx++; show(); } });
+  setInterval(function(){ t+=0.033; g.clearRect(0,0,cv.width,cv.height); phases[idx].draw(g,t); },40);
+  show();
+}
+function vec(g,ox,oy,dx,dy,col,lab,w,ldx,ldy){
+  g.strokeStyle=col; g.fillStyle=col; g.lineWidth=w||3.4;
+  var x1=ox+dx, y1=oy+dy;
+  g.beginPath(); g.moveTo(ox,oy); g.lineTo(x1,y1); g.stroke();
+  var a=Math.atan2(dy,dx), L=11+(w||3.4);
+  g.beginPath(); g.moveTo(x1,y1);
+  g.lineTo(x1-L*Math.cos(a-0.4),y1-L*Math.sin(a-0.4));
+  g.lineTo(x1-L*Math.cos(a+0.4),y1-L*Math.sin(a+0.4));
+  g.closePath(); g.fill();
+  if(lab){ g.font='700 14px "JetBrains Mono",monospace'; g.fillText(lab,x1+(ldx===undefined?10:ldx),y1+(ldy===undefined?5:ldy)); }
+}
+function arcA(g,cx,cy,r,a0,a1,col,lab){
+  g.strokeStyle=col; g.lineWidth=2.2;
+  g.beginPath(); g.arc(cx,cy,r,a0,a1,a1<a0); g.stroke();
+  if(lab){ var am=(a0+a1)/2; g.fillStyle=col; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText(lab,cx+Math.cos(am)*(r+20)-8,cy+Math.sin(am)*(r+20)+5); }
+}
+function axeZ(g,cx,cy){
+  g.fillStyle='#5C544B'; g.beginPath(); g.arc(cx,cy,5,0,7); g.fill();
+  g.beginPath(); g.arc(cx,cy,10,0,7); g.strokeStyle='#5C544B'; g.lineWidth=1.6; g.stroke();
+  g.font='700 12px "JetBrains Mono",monospace';
+  g.fillText('z\u2080 = z\u2081',cx-58,cy+26);
+}
+
+/* ============ s1 : un repère par solide ============ */
+(function(){
+  var ox=250, oy=230, L1=130, L2=95;
+  function bras(g,th,ph,showB0,showB1,showB2){
+    var a1=-th*D2R, a2=-(th+ph)*D2R;
+    var jx=ox+L1*Math.cos(a1), jy=oy+L1*Math.sin(a1);
+    var ex=jx+L2*Math.cos(a2), ey=jy+L2*Math.sin(a2);
+    /* bâti */
+    g.fillStyle='#e6ded0'; g.fillRect(ox-56,oy+16,112,26);
+    g.strokeStyle='#b9b1a2'; g.lineWidth=2; g.strokeRect(ox-56,oy+16,112,26);
+    /* segments */
+    g.strokeStyle='#5C544B'; g.lineWidth=13; g.lineCap='round';
+    g.beginPath(); g.moveTo(ox,oy); g.lineTo(jx,jy); g.stroke();
+    g.strokeStyle='#7d7466'; g.lineWidth=10;
+    g.beginPath(); g.moveTo(jx,jy); g.lineTo(ex,ey); g.stroke();
+    g.fillStyle='#BD8A2A'; g.beginPath(); g.arc(ox,oy,9,0,7); g.fill();
+    g.beginPath(); g.arc(jx,jy,7,0,7); g.fill();
+    g.fillStyle='#C0492E'; g.beginPath(); g.arc(ex,ey,6,0,7); g.fill();
+    if(showB0){ vec(g,ox,oy,70,0,'#2E6A8E','x\u2080',3,6,16); vec(g,ox,oy,0,-70,'#2E6A8E','y\u2080',3,6,0); }
+    if(showB1){ vec(g,ox,oy,62*Math.cos(a1),62*Math.sin(a1),'#3D7E5F','x\u2081',3,6,-6);
+                vec(g,ox,oy,62*Math.cos(a1-Math.PI/2),62*Math.sin(a1-Math.PI/2),'#3D7E5F','y\u2081',3,4,0); }
+    if(showB2){ vec(g,jx,jy,58*Math.cos(a2),58*Math.sin(a2),'#8A5A7A','x\u2082',3,6,-4);
+                vec(g,jx,jy,58*Math.cos(a2-Math.PI/2),58*Math.sin(a2-Math.PI/2),'#8A5A7A','y\u2082',3,4,0); }
+    return {jx:jx,jy:jy,ex:ex,ey:ey};
+  }
+  stepper('cvIntro','inPrev','inNext','inLeg',[
+    {leg:'Le bâti porte le repère <b>B₀ (x₀, y₀, z₀)</b>. Il est fixe : c\u2019est notre référence absolue, celle dans laquelle on écrira l\u2019équilibre final.',
+     draw:function(g,t){ bras(g,35,40,true,false,false);
+       g.fillStyle='#2E6A8E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+       g.fillText('B\u2080 : le b\u00e2ti, il ne bouge jamais',540,120); }},
+    {leg:'Le premier bras tourne de <b>θ</b> et emporte son propre repère <b>B₁</b>. Pour le vérin monté dessus, c\u2019est B₁ qui est « naturel ».',
+     draw:function(g,t){ var th=25+20*Math.sin(t*0.6); bras(g,th,40,true,true,false);
+       arcA(g,ox,oy,44,-th*D2R,0,'#3D7E5F','\u03b8');
+       g.fillStyle='#3D7E5F'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+       g.fillText('B\u2081 : tourn\u00e9 de \u03b8 par rapport \u00e0 B\u2080',540,120); }},
+    {leg:'Le second bras tourne de <b>φ</b> par rapport au premier : voici <b>B₂</b>. Trois repères emboîtés, et un effort exprimé dans B₂ qu\u2019il faudra bien ramener jusqu\u2019à B₀.',
+     draw:function(g,t){ var th=30, ph=20+25*Math.sin(t*0.7); var p=bras(g,th,ph,true,true,true);
+       arcA(g,ox,oy,44,-th*D2R,0,'#3D7E5F','\u03b8');
+       arcA(g,p.jx,p.jy,40,-(th+ph)*D2R,-th*D2R,'#8A5A7A','\u03c6');
+       g.fillStyle='#8A5A7A'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+       g.fillText('B\u2082 : tourn\u00e9 de \u03c6 par rapport \u00e0 B\u2081',540,120);
+       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('effort de l\u2019outil : \u00e9crit dans B\u2082\u2026',540,152);
+       g.fillText('\u2026\u00e0 ramener dans B\u2080',540,174); }}
+  ]);
+})();
+
+/* ============ s2 : la figure de calcul ============ */
+(function(){
+  var cx=300, cy=200, R=118, TH=32;
+  function base(g){ axeZ(g,cx,cy); }
+  stepper('cvFig','fgPrev','fgNext','fgLeg',[
+    {leg:'On commence TOUJOURS par l\u2019axe de rotation, vu de face : ici <b>z₀ = z₁</b>, il sort de la feuille. C\u2019est lui qui ne bouge pas.',
+     draw:function(g,t){ base(g); }},
+    {leg:'On place les deux axes du repère de départ : <b>x₀ à droite, y₀ vers le haut</b>. Rien de plus.',
+     draw:function(g,t){ base(g);
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',3.6,8,16); vec(g,cx,cy,0,-R,'#2E6A8E','y\u2080',3.6,8,0); }},
+    {leg:'On dessine les axes d\u2019arrivée <b>tournés de θ</b> dans le sens positif : x₁ décolle de x₀, et y₁ décolle de y₀ du même angle.',
+     draw:function(g,t){ base(g);
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',3,8,16); vec(g,cx,cy,0,-R,'#2E6A8E','y\u2080',3,8,0);
+       var a=-TH*D2R;
+       vec(g,cx,cy,R*Math.cos(a),R*Math.sin(a),'#3D7E5F','x\u2081',3.6,8,-4);
+       vec(g,cx,cy,R*Math.cos(a-Math.PI/2),R*Math.sin(a-Math.PI/2),'#3D7E5F','y\u2081',3.6,-6,-8); }},
+    {leg:'Point capital : on marque l\u2019angle θ <b>DEUX fois</b> — entre x₀ et x₁, et entre y₀ et y₁. C\u2019est le même angle, et c\u2019est là que se lisent tous les cosinus et sinus.',
+     draw:function(g,t){ base(g);
+       var a=-TH*D2R;
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',3,8,16); vec(g,cx,cy,0,-R,'#2E6A8E','y\u2080',3,8,0);
+       vec(g,cx,cy,R*Math.cos(a),R*Math.sin(a),'#3D7E5F','x\u2081',3,8,-4);
+       vec(g,cx,cy,R*Math.cos(a-Math.PI/2),R*Math.sin(a-Math.PI/2),'#3D7E5F','y\u2081',3,-6,-8);
+       arcA(g,cx,cy,54,a,0,'#8A5A7A','\u03b8');
+       arcA(g,cx,cy,72,-Math.PI/2,a-Math.PI/2,'#8A5A7A','\u03b8');
+       g.fillStyle='#8A5A7A'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('le m\u00eame angle appara\u00eet deux fois',560,120); }},
+    {leg:'La figure est finie — et elle contient déjà tout. Projette x₁ sur les axes de départ : sa composante sur x₀ vaut <b>cos θ</b>, sa composante sur y₀ vaut <b>sin θ</b>.',
+     draw:function(g,t){ base(g);
+       var a=-TH*D2R, ex=cx+R*Math.cos(a), ey=cy+R*Math.sin(a);
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',2.6,8,16); vec(g,cx,cy,0,-R,'#2E6A8E','y\u2080',2.6,8,0);
+       vec(g,cx,cy,R*Math.cos(a-Math.PI/2),R*Math.sin(a-Math.PI/2),'#3D7E5F','y\u2081',2.6,-6,-8);
+       g.strokeStyle='#d9cfbb'; g.lineWidth=1.8; g.setLineDash([5,4]);
+       g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex,cy); g.moveTo(ex,ey); g.lineTo(cx,ey); g.stroke(); g.setLineDash([]);
+       vec(g,cx,cy,R*Math.cos(a),0,'#BD8A2A','',3.4);
+       vec(g,cx,cy,0,R*Math.sin(a),'#BD8A2A','',3.4);
+       vec(g,cx,cy,R*Math.cos(a),R*Math.sin(a),'#3D7E5F','x\u2081',3.8,8,-4);
+       g.fillStyle='#BD8A2A'; g.font='700 14px "JetBrains Mono",monospace';
+       g.fillText('cos \u03b8',cx+R*Math.cos(a)/2-22,cy+24);
+       g.fillText('sin \u03b8',cx-52,cy+R*Math.sin(a)/2);
+       g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+       g.fillText('x\u2081 = cos \u03b8 \u00b7 x\u2080 + sin \u03b8 \u00b7 y\u2080',540,150); }}
+  ]);
+})();
+
+/* ============ s3 : les quatre formules ============ */
+(function(){
+  var cx=280, cy=180, R=112, TH=32;
+  function fig(g,hi){
+    axeZ(g,cx,cy);
+    var a=-TH*D2R;
+    vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',2.6,8,16); vec(g,cx,cy,0,-R,'#2E6A8E','y\u2080',2.6,8,0);
+    vec(g,cx,cy,R*Math.cos(a),R*Math.sin(a),hi==='x1'?'#3D7E5F':'#9fb0a6','x\u2081',hi==='x1'?4:2.4,8,-4);
+    vec(g,cx,cy,R*Math.cos(a-Math.PI/2),R*Math.sin(a-Math.PI/2),hi==='y1'?'#3D7E5F':'#9fb0a6','y\u2081',hi==='y1'?4:2.4,-6,-8);
+    arcA(g,cx,cy,50,a,0,'#8A5A7A','\u03b8');
+    return a;
+  }
+  stepper('cvForm','foPrev','foNext','foLeg',[
+    {leg:'<b>Première ligne.</b> x₁ penche « vers le haut » : ses deux composantes sont positives → <b>x₁ = cos θ·x₀ + sin θ·y₀</b>.',
+     draw:function(g,t){ var a=fig(g,'x1');
+       var ex=cx+R*Math.cos(a), ey=cy+R*Math.sin(a);
+       g.strokeStyle='#d9cfbb'; g.lineWidth=1.8; g.setLineDash([5,4]);
+       g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex,cy); g.moveTo(ex,ey); g.lineTo(cx,ey); g.stroke(); g.setLineDash([]);
+       vec(g,cx,cy,R*Math.cos(a),0,'#BD8A2A','',3.2); vec(g,cx,cy,0,R*Math.sin(a),'#BD8A2A','',3.2);
+       g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('x\u2081 = cos \u03b8 \u00b7 x\u2080 + sin \u03b8 \u00b7 y\u2080',470,150);
+       g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('les deux composantes sont positives',470,180); }},
+    {leg:'<b>Deuxième ligne, le point délicat.</b> Pour rejoindre y₁, il faut <b>reculer</b> sur x₀ : la composante est négative → <b>y₁ = − sin θ·x₀ + cos θ·y₀</b>. Le signe se LIT sur la figure, il ne s\u2019apprend pas.',
+     draw:function(g,t){ var a=fig(g,'y1');
+       var b=a-Math.PI/2, ex=cx+R*Math.cos(b), ey=cy+R*Math.sin(b);
+       g.strokeStyle='#d9cfbb'; g.lineWidth=1.8; g.setLineDash([5,4]);
+       g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex,cy); g.moveTo(ex,ey); g.lineTo(cx,ey); g.stroke(); g.setLineDash([]);
+       vec(g,cx,cy,R*Math.cos(b),0,'#C0492E','',3.2); vec(g,cx,cy,0,R*Math.sin(b),'#BD8A2A','',3.2);
+       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('on recule \u2192 signe \u2212',cx+R*Math.cos(b)-30,cy+26);
+       g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('y\u2081 = \u2212 sin \u03b8 \u00b7 x\u2080 + cos \u03b8 \u00b7 y\u2080',470,150); }},
+    {leg:'<b>Le sens inverse.</b> Revenir de B₁ vers B₀, c\u2019est tourner de −θ : les cosinus ne bougent pas (cos(−θ) = cos θ) mais les sinus changent de signe. Le « moins » saute simplement de ligne.',
+     draw:function(g,t){ fig(g,null);
+       g.fillStyle='#5C544B'; g.font='700 15px "JetBrains Mono",monospace';
+       g.fillText('B\u2080 \u2192 B\u2081 :',470,110);
+       g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+       g.fillText('x\u2081 = cos \u03b8 x\u2080 + sin \u03b8 y\u2080',470,136);
+       g.fillText('y\u2081 = \u2212sin \u03b8 x\u2080 + cos \u03b8 y\u2080',470,160);
+       g.fillStyle='#5C544B'; g.fillText('B\u2081 \u2192 B\u2080 :',470,206);
+       g.fillStyle='#3D7E5F';
+       g.fillText('x\u2080 = cos \u03b8 x\u2081 \u2212 sin \u03b8 y\u2081',470,232);
+       g.fillText('y\u2080 = sin \u03b8 x\u2081 + cos \u03b8 y\u2081',470,256);
+       g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('le \u00ab \u2212 \u00bb a chang\u00e9 de ligne',470,284); }}
+  ]);
+})();
+
+/* ============ s5 : projeter un vecteur ============ */
+(function(){
+  var cx=300, cy=250, TH=30, SC=1.9;
+  stepper('cvProj','prPrev','prNext','prLeg',[
+    {leg:'Le vérin pousse le long du bras avec 100 N. Dans le repère du bras, son écriture est immédiate : <b>F = 100 · x₁</b> — pas de composante sur y₁.',
+     draw:function(g,t){
+       var a=-TH*D2R;
+       g.strokeStyle='#c8bfae'; g.lineWidth=12; g.lineCap='round';
+       g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+150*Math.cos(a),cy+150*Math.sin(a)); g.stroke();
+       vec(g,cx,cy,90*Math.cos(a),90*Math.sin(a),'#3D7E5F','x\u2081',2.6,8,-6);
+       vec(g,cx,cy,100*SC*Math.cos(a),100*SC*Math.sin(a),'#C0492E','F = 100 N',4.4,10,-8);
+       g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('F = 100 \u00b7 x\u2081',560,120); }},
+    {leg:'Mais l\u2019équilibre du bâti s\u2019écrit dans B₀. On applique donc la première ligne du tableau : <b>x₁ = cos 30°·x₀ + sin 30°·y₀</b>.',
+     draw:function(g,t){
+       var a=-TH*D2R;
+       vec(g,cx,cy,120,0,'#2E6A8E','x\u2080',2.4,8,16); vec(g,cx,cy,0,-120,'#2E6A8E','y\u2080',2.4,8,0);
+       vec(g,cx,cy,100*SC*Math.cos(a),100*SC*Math.sin(a),'#C0492E','F',4.4,10,-8);
+       arcA(g,cx,cy,52,a,0,'#8A5A7A','30\u00b0');
+       g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+       g.fillText('F = 100 \u00b7 (cos 30\u00b0 x\u2080 + sin 30\u00b0 y\u2080)',480,130); }},
+    {leg:'On développe : <b>F = 86,6 · x₀ + 50 · y₀</b>. Le vecteur n\u2019a pas bougé d\u2019un millimètre — c\u2019est son écriture qui a changé de langue.',
+     draw:function(g,t){
+       var a=-TH*D2R, fx=100*Math.cos(TH*D2R), fy=100*Math.sin(TH*D2R);
+       vec(g,cx,cy,120,0,'#2E6A8E','x\u2080',2.4,8,16); vec(g,cx,cy,0,-120,'#2E6A8E','y\u2080',2.4,8,0);
+       g.strokeStyle='#d9cfbb'; g.lineWidth=1.8; g.setLineDash([5,4]);
+       g.beginPath(); g.moveTo(cx+fx*SC,cy-fy*SC); g.lineTo(cx+fx*SC,cy); g.moveTo(cx+fx*SC,cy-fy*SC); g.lineTo(cx,cy-fy*SC); g.stroke(); g.setLineDash([]);
+       vec(g,cx,cy,fx*SC,0,'#BD8A2A','86,6',3.4,-20,24);
+       vec(g,cx,cy,0,-fy*SC,'#BD8A2A','50',3.4,-46,0);
+       vec(g,cx,cy,100*SC*Math.cos(a),100*SC*Math.sin(a),'#C0492E','F',4.4,10,-8);
+       g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('F = 86,6 x\u2080 + 50 y\u2080',480,120); }},
+    {leg:'<b>Le contrôle gratuit :</b> √(86,6² + 50²) = 100 N. Un changement de base ne change jamais la norme d\u2019un vecteur. Si ta vérification ne tombe pas juste, l\u2019erreur est dans la projection.',
+     draw:function(g,t){
+       var a=-TH*D2R, fx=100*Math.cos(TH*D2R), fy=100*Math.sin(TH*D2R);
+       vec(g,cx,cy,120,0,'#2E6A8E','x\u2080',2.2,8,16); vec(g,cx,cy,0,-120,'#2E6A8E','y\u2080',2.2,8,0);
+       vec(g,cx,cy,100*SC*Math.cos(a),100*SC*Math.sin(a),'#C0492E','F',4.4,10,-8);
+       var pulse=1+0.04*Math.sin(t*4);
+       g.strokeStyle='rgba(61,126,95,'+(0.5+0.3*Math.sin(t*4))+')'; g.lineWidth=2.4;
+       g.beginPath(); g.arc(cx,cy,100*SC*pulse,-Math.PI/2,0); g.stroke();
+       g.fillStyle='#3D7E5F'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('\u221a(86,6\u00b2 + 50\u00b2) = 100 N \u2713',470,120);
+       g.font='700 13px "JetBrains Mono",monospace'; g.fillStyle='#5C544B';
+       g.fillText('la norme se conserve : ton contr\u00f4le gratuit',470,150); }}
+  ]);
+})();
+
+/* ============ s6 : la chaîne B2 → B1 → B0 ============ */
+(function(){
+  var ox=250, oy=250, L1=120, L2=90, TH=30, PH=45;
+  function bras(g){
+    var a1=-TH*D2R, a2=-(TH+PH)*D2R;
+    var jx=ox+L1*Math.cos(a1), jy=oy+L1*Math.sin(a1);
+    var ex=jx+L2*Math.cos(a2), ey=jy+L2*Math.sin(a2);
+    g.fillStyle='#e6ded0'; g.fillRect(ox-50,oy+14,100,24);
+    g.strokeStyle='#5C544B'; g.lineWidth=12; g.lineCap='round';
+    g.beginPath(); g.moveTo(ox,oy); g.lineTo(jx,jy); g.stroke();
+    g.strokeStyle='#7d7466'; g.lineWidth=9;
+    g.beginPath(); g.moveTo(jx,jy); g.lineTo(ex,ey); g.stroke();
+    g.fillStyle='#BD8A2A'; g.beginPath(); g.arc(ox,oy,8,0,7); g.fill();
+    g.beginPath(); g.arc(jx,jy,6,0,7); g.fill();
+    return {jx:jx,jy:jy,ex:ex,ey:ey,a1:a1,a2:a2};
+  }
+  stepper('cvChain','chPrev','chNext','chLeg',[
+    {leg:'L\u2019outil pousse au bout du second bras : son effort est naturellement écrit dans <b>B₂</b>. Mais B₂ tourne avec DEUX articulations à la fois.',
+     draw:function(g,t){ var p=bras(g);
+       vec(g,p.jx,p.jy,70*Math.cos(p.a2),70*Math.sin(p.a2),'#8A5A7A','x\u2082',3.4,8,-4);
+       vec(g,p.ex,p.ey,80*Math.cos(p.a2),80*Math.sin(p.a2),'#C0492E','F = 50 N',4,-40,26);
+       g.fillStyle='#8A5A7A'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+       g.fillText('F = 50 \u00b7 x\u2082',560,110); }},
+    {leg:'<b>Première marche : B₂ → B₁.</b> On dessine la figure de la seconde articulation (rotation φ) et on lit : <b>x₂ = cos φ·x₁ + sin φ·y₁</b>.',
+     draw:function(g,t){ var p=bras(g);
+       vec(g,p.jx,p.jy,70*Math.cos(p.a1),70*Math.sin(p.a1),'#3D7E5F','x\u2081',2.6,8,-4);
+       vec(g,p.jx,p.jy,70*Math.cos(p.a2),70*Math.sin(p.a2),'#8A5A7A','x\u2082',3.4,8,-4);
+       arcA(g,p.jx,p.jy,46,p.a2,p.a1,'#8A5A7A','\u03c6 = 45\u00b0');
+       g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+       g.fillText('x\u2082 = cos 45\u00b0 x\u2081 + sin 45\u00b0 y\u2081',500,120);
+       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('F = 50 (cos 45\u00b0 x\u2081 + sin 45\u00b0 y\u2081)',500,148);
+       g.fillText('  = 35,4 x\u2081 + 35,4 y\u2081',500,170); }},
+    {leg:'<b>Deuxième marche : B₁ → B₀.</b> Nouvelle figure, rotation θ cette fois. On remplace x₁ et y₁ par leurs expressions dans B₀, puis on regroupe.',
+     draw:function(g,t){ var p=bras(g);
+       vec(g,ox,oy,90,0,'#2E6A8E','x\u2080',2.6,8,16); vec(g,ox,oy,0,-90,'#2E6A8E','y\u2080',2.6,8,0);
+       vec(g,ox,oy,90*Math.cos(p.a1),90*Math.sin(p.a1),'#3D7E5F','x\u2081',3.4,8,-4);
+       arcA(g,ox,oy,46,p.a1,0,'#3D7E5F','\u03b8 = 30\u00b0');
+       g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+       g.fillText('x\u2081 = cos 30\u00b0 x\u2080 + sin 30\u00b0 y\u2080',480,110);
+       g.fillText('y\u2081 = \u2212sin 30\u00b0 x\u2080 + cos 30\u00b0 y\u2080',480,134);
+       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('on substitue dans 35,4 x\u2081 + 35,4 y\u2081\u2026',480,168); }},
+    {leg:'On développe et on regroupe : <b>F = 12,9 · x₀ + 48,3 · y₀</b>. Contrôle : √(12,9² + 48,3²) = 50 N ✓. L\u2019effort de l\u2019outil est enfin exprimé dans le repère du bâti.',
+     draw:function(g,t){ var p=bras(g);
+       var F=50, tot=(TH+PH)*D2R;
+       vec(g,ox,oy,90,0,'#2E6A8E','x\u2080',2.4,8,16); vec(g,ox,oy,0,-90,'#2E6A8E','y\u2080',2.4,8,0);
+       vec(g,p.ex,p.ey,80*Math.cos(p.a2),80*Math.sin(p.a2),'#C0492E','F',4,10,-6);
+       g.fillStyle='#C0492E'; g.font='800 17px "JetBrains Mono",monospace';
+       g.fillText('F = 12,9 x\u2080 + 48,3 y\u2080',470,116);
+       g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('\u221a(12,9\u00b2 + 48,3\u00b2) = 50 N \u2713',470,146);
+       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('m\u00eame vecteur, troisi\u00e8me \u00e9criture',470,172); }}
+  ]);
+})();
+
+/* ============ s7 : les angles s'additionnent ============ */
+(function(){
+  var cx=290, cy=210, R=125, TH=30, PH=45;
+  stepper('cvSum','suPrev','suNext','suLeg',[
+    {leg:'Superposons les trois repères sur une seule figure : x₀, puis x₁ tourné de θ = 30°, puis x₂ tourné de φ = 45° de plus.',
+     draw:function(g,t){ axeZ(g,cx,cy);
+       var a1=-TH*D2R, a2=-(TH+PH)*D2R;
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',3,8,16);
+       vec(g,cx,cy,R*Math.cos(a1),R*Math.sin(a1),'#3D7E5F','x\u2081',3,8,-4);
+       vec(g,cx,cy,R*Math.cos(a2),R*Math.sin(a2),'#8A5A7A','x\u2082',3.6,8,-4);
+       arcA(g,cx,cy,50,a1,0,'#3D7E5F','\u03b8');
+       arcA(g,cx,cy,74,a2,a1,'#8A5A7A','\u03c6'); }},
+    {leg:'Sur la figure, ça saute aux yeux : l\u2019angle entre x₀ et x₂ vaut <b>θ + φ = 75°</b>. Mais attention — c\u2019est vrai <b>parce que les deux rotations se font autour du même axe z</b>.',
+     draw:function(g,t){ axeZ(g,cx,cy);
+       var a2=-(TH+PH)*D2R;
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',3,8,16);
+       vec(g,cx,cy,R*Math.cos(a2),R*Math.sin(a2),'#8A5A7A','x\u2082',3.8,8,-4);
+       arcA(g,cx,cy,58,a2,0,'#C0492E','\u03b8 + \u03c6 = 75\u00b0');
+       g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+       g.fillText('rotations coaxiales \u2192 les angles s\u2019ajoutent',470,150); }},
+    {leg:'La preuve par le calcul : en substituant puis en regroupant, les coefficients de x₀ donnent <b>cos θ·cos φ − sin θ·sin φ</b>… qui n\u2019est autre que <b>cos(θ + φ)</b>. La trigonométrie de Première fait le travail.',
+     draw:function(g,t){ axeZ(g,cx,cy);
+       var a2=-(TH+PH)*D2R;
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',2.6,8,16);
+       vec(g,cx,cy,R*Math.cos(a2),R*Math.sin(a2),'#8A5A7A','x\u2082',3.4,8,-4);
+       g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+       g.fillText('coef. de x\u2080 : cos\u03b8\u00b7cos\u03c6 \u2212 sin\u03b8\u00b7sin\u03c6 = cos(\u03b8+\u03c6)',450,110);
+       g.fillText('coef. de y\u2080 : sin\u03b8\u00b7cos\u03c6 + cos\u03b8\u00b7sin\u03c6 = sin(\u03b8+\u03c6)',450,136);
+       g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('v\u00e9rification : cos 75\u00b0 = 0,259',450,176);
+       g.fillText('cos30\u00b7cos45 \u2212 sin30\u00b7sin45 = 0,259 \u2713',450,198); }},
+    {leg:'<b>Le contre-exemple à retenir.</b> Si la seconde rotation se fait autour d\u2019un AUTRE axe (y₁ au lieu de z₁), les angles ne s\u2019additionnent plus du tout : il faut enchaîner les deux tableaux, sans raccourci.',
+     draw:function(g,t){ axeZ(g,cx,cy);
+       var a2=-(TH+PH)*D2R;
+       vec(g,cx,cy,R,0,'#2E6A8E','x\u2080',2.4,8,16);
+       vec(g,cx,cy,R*Math.cos(a2),R*Math.sin(a2),'#c9bcd2','x\u2082',2.4,8,-4);
+       g.strokeStyle='#C0492E'; g.lineWidth=3; g.setLineDash([7,5]);
+       g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx+R*0.8,cy-R*0.45); g.stroke(); g.setLineDash([]);
+       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('rotation autour de y\u2081 :',450,120);
+       g.fillText('l\u2019addition des angles ne marche plus',450,144);
+       g.font='800 15px "Bricolage Grotesque",sans-serif';
+       g.fillText('\u2192 on enchaîne les tableaux, un par un',450,180); }}
+  ]);
+})();
+</script>
+</body>
+</html>
