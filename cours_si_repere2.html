@@ -51,6 +51,19 @@
   table.mat th,table.mat td{border:1px solid var(--line);padding:10px 16px;text-align:center}
   table.mat th{background:#faf6ec;color:var(--sub);font-size:13px}
   table.mat td.diag{background:#eef3f6;color:var(--steel);font-weight:700}
+  .astuce{background:#f1f6f2;border:1px solid #cfe0d3;border-left:4px solid var(--green);border-radius:10px;padding:11px 15px;margin-top:12px;font-size:16px}
+  .astuce .lab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:3px}
+  .astuces{display:grid;gap:14px;margin-top:16px}
+  @media(min-width:760px){ .astuces{grid-template-columns:1fr 1fr} }
+  .astuces .a{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:15px 17px;position:relative;padding-left:56px}
+  .astuces .a .n{position:absolute;left:15px;top:15px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--green);border-radius:8px;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+  .astuces .a h3{margin:0 0 4px;font-size:17px;font-weight:800}
+  .astuces .a p{margin:4px 0 0;font-size:15px;color:var(--sub)}
+  .astuces .a code{font-family:'JetBrains Mono',monospace;font-size:14px;background:#f6f2e8;border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  table.val{border-collapse:collapse;width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;margin-top:12px}
+  table.val th,table.val td{border:1px solid var(--line);padding:8px 10px;text-align:center}
+  table.val th{background:#faf6ec;color:var(--sub);font-size:12px}
+  table.val td.hi{background:#eef3f6;color:var(--steel);font-weight:700}
   table.mat caption{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;color:var(--sub);margin-bottom:6px;text-align:left}
 </style>
 </head>
@@ -70,7 +83,8 @@
       <a href="#s5">5 · Projeter un vecteur</a>
       <a href="#s6">6 · Enchaîner deux repères</a>
       <a href="#s7">7 · Les angles s’ajoutent</a>
-      <a href="#s8">8 · À retenir</a>
+      <a href="#s8">8 · Les astuces</a>
+      <a href="#s9">9 · À retenir</a>
     </nav>
 
     <main class="slides">
@@ -98,6 +112,7 @@
           <canvas id="cvFig" width="860" height="360" aria-label="Construction pas à pas de la figure de changement de base"></canvas>
           <div class="ctrl"><button id="fgPrev">◀</button><button id="fgNext">▶</button><div class="leg" id="fgLeg"></div></div>
         </div>
+        <div class="astuce"><span class="lab">astuce de vitesse</span>Dessine la figure <b>petite, dans la marge</b> — 3 cm suffisent. L’erreur classique n’est pas de mal calculer, c’est de ne pas dessiner du tout « pour gagner du temps ».</div>
         <div class="hint">✍️ Le rituel : axe de rotation (z₀ = z₁) au centre, les deux axes de départ, les deux axes d’arrivée tournés de θ, et l’angle marqué DEUX fois — entre les x et entre les y.</div>
       </section>
 
@@ -107,6 +122,7 @@
         <p class="lede">Sur la figure, chaque vecteur unitaire se projette comme n’importe quel vecteur : composante adjacente en cosinus, composante opposée en sinus. Le seul point délicat, c’est <b>le signe</b>.</p>
         <div class="big">x₁ = cos θ · x₀ + sin θ · y₀<br>y₁ = − sin θ · x₀ + cos θ · y₀<small>Sens direct (de B₀ vers B₁). Le signe moins vient de la figure : pour atteindre y₁, on recule sur x₀.</small></div>
         <div class="big" style="border-left-color:var(--green)">x₀ = cos θ · x₁ − sin θ · y₁<br>y₀ = sin θ · x₁ + cos θ · y₁<small>Sens inverse (de B₁ vers B₀) : on retrouve les mêmes cosinus, et le moins a changé de ligne. Inverser un changement de base, c’est tourner de −θ.</small></div>
+        <div class="astuce"><span class="lab">astuce anti-signe</span>Retiens la forme du tableau plutôt que les quatre lignes : <b>un seul « − », toujours devant le sinus de la deuxième ligne</b>. Et pour le sens inverse, il change simplement de ligne.</div>
         <div class="anim">
           <canvas id="cvForm" width="860" height="330" aria-label="Lecture des quatre formules sur la figure"></canvas>
           <div class="ctrl"><button id="foPrev">◀</button><button id="foNext">▶</button><div class="leg" id="foLeg"></div></div>
@@ -162,11 +178,45 @@
           <div class="ctrl"><button id="suPrev">◀</button><button id="suNext">▶</button><div class="leg" id="suLeg"></div></div>
         </div>
         <div class="big">x₂ = cos(θ + φ) · x₀ + sin(θ + φ) · y₀<small>Uniquement si les deux rotations se font autour du même axe (ici z). Sinon — rotation autour de z puis autour de y₁, par exemple — il faut enchaîner les tableaux, sans raccourci.</small></div>
+        <div class="astuce"><span class="lab">astuce de rapidité</span>Rotations coaxiales : <b>additionne les angles AVANT de projeter</b>. Une seule projection au lieu de deux substitutions — c’est la différence entre trois lignes et une demi-page.</div>
         <div class="warn">⚠️ Piège classique : additionner les angles <b>sans vérifier qu’ils tournent dans le même sens</b>. Si φ est compté dans l’autre sens, c’est θ − φ. La figure de calcul tranche en deux secondes ; la mémoire, jamais.</div>
       </section>
 
       <section class="slide" id="s8">
-        <div class="k">Slide 8 · Synthèse</div>
+        <div class="k">Slide 8 · Boîte à malices</div>
+        <h2>Six astuces pour ne plus se tromper</h2>
+        <p class="lede">Tout ce qui suit sert à aller vite <b>sans</b> augmenter le risque d’erreur. La première est celle des professionnels : elle donne les coefficients <b>et leurs signes</b>, sans jamais réfléchir au « on avance ou on recule ».</p>
+
+        <div class="anim">
+          <canvas id="cvAstuce" width="860" height="330" aria-label="L'astuce du cosinus de l'angle entre deux vecteurs"></canvas>
+          <div class="ctrl"><button id="asPrev">◀</button><button id="asNext">▶</button><div class="leg" id="asLeg"></div></div>
+        </div>
+
+        <div class="astuces">
+          <div class="a"><span class="n">1</span><h3>🥇 Chaque case est un cosinus</h3>
+            <p>Le coefficient qui relie deux vecteurs unitaires, c’est <b>le cosinus de l’angle entre eux</b> — signe compris. Angle de 90°+θ ? <code>cos(90+θ) = −sin θ</code>, et le moins tombe tout seul. Plus jamais de « j’avance ou je recule ».</p></div>
+          <div class="a"><span class="n">2</span><h3>➖ Un seul moins, et il est en bas à gauche</h3>
+            <p>Dans le tableau B₀ → B₁, il n’y a <b>qu’un seul signe négatif</b>, sur la ligne du y, devant le sinus : <code>[cos θ, sin θ ; −sin θ, cos θ]</code>. Si tu en comptes deux, tu t’es trompé.</p></div>
+          <div class="a"><span class="n">3</span><h3>🧪 Le test à 0° et 90°</h3>
+            <p>Remplace θ par 0 : tu dois retomber sur l’identité (x₁ = x₀). Puis par 90° : tu dois obtenir <code>x₁ = y₀</code> et <code>y₁ = −x₀</code>. Deux secondes, et toute formule fausse se trahit.</p></div>
+          <div class="a"><span class="n">4</span><h3>🔤 Même lettre → cos, lettres croisées → sin</h3>
+            <p>x₁ avec x₀ : <b>cosinus</b>. x₁ avec y₀ : <b>sinus</b>. Le cosinus relie toujours les axes « de même nom », le sinus les axes croisés. Reste à trouver le signe (astuce 1 ou 2).</p></div>
+          <div class="a"><span class="n">5</span><h3>⚡ Coaxial : additionne d’abord</h3>
+            <p>Deux rotations autour du même axe ? N’enchaîne pas deux substitutions : <b>additionne les angles, puis projette une seule fois</b>. Trois lignes de calcul au lieu de dix, et autant d’erreurs en moins.</p></div>
+          <div class="a"><span class="n">6</span><h3>📏 Deux contrôles gratuits</h3>
+            <p>La norme du vecteur ne change jamais. Et dans le tableau, <b>la somme des carrés de chaque ligne vaut 1</b> (cos²+sin²). Deux vérifications qui ne coûtent rien.</p></div>
+        </div>
+
+        <table class="val">
+          <tr><th>angle</th><th>0°</th><th>30°</th><th>45°</th><th>60°</th><th>90°</th></tr>
+          <tr><th>cos</th><td class="hi">1</td><td>0,866</td><td>0,707</td><td class="hi">0,5</td><td class="hi">0</td></tr>
+          <tr><th>sin</th><td class="hi">0</td><td class="hi">0,5</td><td>0,707</td><td>0,866</td><td class="hi">1</td></tr>
+        </table>
+        <div class="astuce"><span class="lab">à savoir par cœur</span>Les cases bleues sont les valeurs à connaître sans calculatrice. Et un ordre de grandeur qui sauve : <b>à 45°, les deux composantes sont égales</b> ; en dessous de 45°, la composante en cosinus est la plus grande ; au-dessus, c’est celle en sinus. Un simple coup d’œil sur ta figure te dit si ton résultat est plausible.</div>
+      </section>
+
+      <section class="slide" id="s9">
+        <div class="k">Slide 9 · Synthèse</div>
         <h2>À retenir</h2>
         <div class="big">B₂ → B₁ → B₀ : on descend la chaîne, un repère à la fois<small>Jamais de saut direct sans vérification. Chaque étape a sa figure de calcul.</small></div>
         <div class="cols c3">
@@ -199,7 +249,7 @@ var fr=function(x){ return String(x).replace('.',','); };
   document.querySelectorAll('.slide').forEach(function(s){ obs.observe(s); });
 })();
 (function(){
-  var ids=['s1','s2','s3','s4','s5','s6','s7','s8'];
+  var ids=['s1','s2','s3','s4','s5','s6','s7','s8','s9'];
   function current(){ var best=0,bd=1e9;
     ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
     return best; }
@@ -486,6 +536,50 @@ function axeZ(g,cx,cy){
        g.fillText('\u221a(12,9\u00b2 + 48,3\u00b2) = 50 N \u2713',470,146);
        g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
        g.fillText('m\u00eame vecteur, troisi\u00e8me \u00e9criture',470,172); }}
+  ]);
+})();
+
+/* ============ s8 : l'astuce du cosinus ============ */
+(function(){
+  var cx=300, cy=185, R=118, TH=35;
+  function fig(g,v1,v2,lab,ang,expr,res){
+    /* axe z */
+    g.fillStyle='#5C544B'; g.beginPath(); g.arc(cx,cy,5,0,7); g.fill();
+    g.strokeStyle='#5C544B'; g.lineWidth=1.6; g.beginPath(); g.arc(cx,cy,10,0,7); g.stroke();
+    var a=-TH*D2R;
+    var dirs={ 'x0':[1,0], 'y0':[0,-1], 'x1':[Math.cos(a),Math.sin(a)], 'y1':[Math.cos(a-Math.PI/2),Math.sin(a-Math.PI/2)] };
+    /* tous les axes en gris clair */
+    ['x0','y0','x1','y1'].forEach(function(k){
+      var d=dirs[k];
+      vec(g,cx,cy,d[0]*R,d[1]*R,'#ded6c6',null,2);
+    });
+    /* les deux vecteurs concernés */
+    var d1=dirs[v1], d2=dirs[v2];
+    vec(g,cx,cy,d1[0]*R,d1[1]*R,'#2E6A8E',v1==='x0'?'x\u2080':(v1==='y0'?'y\u2080':(v1==='x1'?'x\u2081':'y\u2081')),3.8,8,4);
+    vec(g,cx,cy,d2[0]*R,d2[1]*R,'#3D7E5F',v2==='x0'?'x\u2080':(v2==='y0'?'y\u2080':(v2==='x1'?'x\u2081':'y\u2081')),3.8,8,4);
+    /* arc entre les deux */
+    var a1=Math.atan2(d1[1],d1[0]), a2=Math.atan2(d2[1],d2[0]);
+    g.strokeStyle='#C0492E'; g.lineWidth=2.6;
+    g.beginPath(); g.arc(cx,cy,62,Math.min(a1,a2),Math.max(a1,a2)); g.stroke();
+    var am=(a1+a2)/2;
+    g.fillStyle='#C0492E'; g.font='800 15px "JetBrains Mono",monospace';
+    g.fillText(lab,cx+Math.cos(am)*84-14,cy+Math.sin(am)*84+5);
+    /* encart */
+    g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+    g.fillText('angle entre les deux : '+ang,470,120);
+    g.fillStyle='#8A5A7A'; g.fillText(expr,470,150);
+    g.fillStyle='#3D7E5F'; g.font='800 18px "JetBrains Mono",monospace';
+    g.fillText(res,470,184);
+  }
+  stepper('cvAstuce','asPrev','asNext','asLeg',[
+    {leg:'<b>L\u2019astuce.</b> Chaque coefficient du tableau est simplement le <b>cosinus de l\u2019angle entre les deux vecteurs concernés</b>. Commençons par x\u2081 et x\u2080 : ils sont séparés de θ.',
+     draw:function(g,t){ fig(g,'x0','x1','\u03b8','\u03b8','cos \u03b8','coefficient = cos \u03b8'); }},
+    {leg:'x\u2081 et y\u2080 : sur la figure, ils sont séparés de <b>90° − θ</b>. Or cos(90° − θ) = sin θ. Le sinus apparaît tout seul, sans réfléchir.',
+     draw:function(g,t){ fig(g,'y0','x1','90\u00b0\u2212\u03b8','90\u00b0 \u2212 \u03b8','cos(90\u00b0 \u2212 \u03b8) = sin \u03b8','coefficient = + sin \u03b8'); }},
+    {leg:'<b>Le cas qui fait peur, réglé.</b> y\u2081 et x\u2080 sont séparés de <b>90° + θ</b>. Et cos(90° + θ) = <b>− sin θ</b> : le signe négatif sort du calcul, tu n\u2019as plus à te demander si « on recule ».',
+     draw:function(g,t){ fig(g,'x0','y1','90\u00b0+\u03b8','90\u00b0 + \u03b8','cos(90\u00b0 + \u03b8) = \u2212 sin \u03b8','coefficient = \u2212 sin \u03b8'); }},
+    {leg:'Enfin y\u2081 et y\u2080 : encore θ, donc encore cos θ. Le tableau est rempli — <b>quatre angles lus sur la figure, quatre cosinus, zéro hésitation sur les signes.</b>',
+     draw:function(g,t){ fig(g,'y0','y1','\u03b8','\u03b8','cos \u03b8','coefficient = cos \u03b8'); }}
   ]);
 })();
 
