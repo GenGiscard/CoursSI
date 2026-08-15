@@ -222,12 +222,12 @@
   var EXOS=[
     { anim:'beam', tag:'Exercice 1 · 10 pts', title:'R\u00e9actions d\u2019appui d\u2019une poutre',
       ctx:'Une poutre horizontale repose sur deux appuis A et B. Une charge F est appliqu\u00e9e \u00e0 la distance a de A. On cherche les r\u00e9actions des appuis.',
-      data:[['Longueur L','4 m'],['Charge F','600 N'],['Distance a (de A)','1 m']],
+      data:[['Longueur Poutre','4 m'],['Charge F','600 N'],['Distance a (de A)','1 m']],
       parts:[
-        {q:'Moment de la charge par rapport \u00e0 A ? (N\u00b7m)', a:600, tol:1, pts:2, unit:'N\u00b7m', sol:'M = 600 \u00d7 1 = 600 N\u00b7m'},
-        {q:'\u00c9quilibre des moments en A : r\u00e9action en B, R_B ? (N)', a:150, tol:2, pts:3, unit:'N', sol:'R_B = 600\u00d71/4 = 150 N'},
-        {q:'\u00c9quilibre des forces verticales : R_A ? (N)', a:450, tol:2, pts:3, unit:'N', sol:'R_A = 600 \u2212 150 = 450 N'},
-        {q:'V\u00e9rification : R_A + R_B ? (doit valoir F) (N)', a:600, tol:2, pts:2, unit:'N', sol:'450 + 150 = 600 N = F \u2713'}
+        {q:'Moment de la charge par rapport \u00e0 A, avec son signe ? (N\u00b7m)', a:-600, tol:1, pts:2, unit:'N\u00b7m', sol:'La charge fait tourner la poutre dans le sens HORAIRE autour de A : le moment est n\u00e9gatif. M = \u2212 600 \u00d7 1 = \u2212600 N\u00b7m (le sens positif est le sens trigonom\u00e9trique, anti-horaire).'},
+        {q:'Calculer R_B (N)', a:150, tol:2, pts:3, unit:'N', sol:'\u00c9quilibre des moments en A : R_B \u00d7 4 = 600 \u00d7 1, donc R_B = 150 N'},
+        {q:'Calculer R_A (N)', a:450, tol:2, pts:3, unit:'N', sol:'\u00c9quilibre des forces verticales : R_A = 600 \u2212 150 = 450 N'},
+        {q:'V\u00e9rification : R_A + R_B ? (N)', a:600, tol:2, pts:2, unit:'N', sol:'450 + 150 = 600 N, soit exactement F \u2713'}
       ] },
     { anim:'lever', tag:'Exercice 2 · 7 pts', title:'Le moment de serrage',
       ctx:'On serre un boulon avec une cl\u00e9. La force appliqu\u00e9e cr\u00e9e un moment autour de l\u2019axe du boulon. Rappel : M = F \u00d7 d.',
@@ -241,7 +241,7 @@
       ctx:'Un point est en \u00e9quilibre sous trois forces : le poids P (vertical), une force horizontale H, et la tension du c\u00e2ble T. Elles forment un triangle rectangle.',
       data:[['Poids P','300 N'],['Force horizontale H','400 N']],
       parts:[
-        {q:'Tension du c\u00e2ble (hypot\u00e9nuse) : T ? (N)', a:500, tol:3, pts:3, unit:'N', sol:'T = \u221a(300\u00d7300 + 400\u00d7400) = \u221a250000 = 500 N'},
+        {q:'Tension du c\u00e2ble : T ? (N)', a:500, tol:3, pts:3, unit:'N', sol:'T = \u221a(300\u00d7300 + 400\u00d7400) = \u221a250000 = 500 N'},
         {q:'Inversement, si P = 300 N et T = 500 N : H ? (N)', a:400, tol:3, pts:3, unit:'N', sol:'H = \u221a(500\u00d7500 \u2212 300\u00d7300) = \u221a160000 = 400 N'},
         {q:'Si le poids double (P = 600 N, H = 800 N) : T ? (N)', a:1000, tol:5, pts:1, unit:'N', sol:'T = \u221a(600\u00d7600 + 800\u00d7800) = 1000 N'}
       ] }
@@ -382,28 +382,31 @@
   function drawBeam(){
     var o=ctxOf('cv_beam'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
     var xA=120,xB=510,oy=96, L=4,a=1; var xF=xA+(a/L)*(xB-xA);
-    var pulse=0.5+0.5*Math.sin(phase*1.3);
+    var pulse=0;   /* schema fixe : ni les fleches ni les textes ne bougent */
     // beam
     g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(xA,oy);g.lineTo(xB,oy);g.stroke();g.lineCap='butt';
     function support(x,roller){
-      g.fillStyle='#7a7064';g.beginPath();g.moveTo(x,oy+4);g.lineTo(x-13,oy+28);g.lineTo(x+13,oy+28);g.closePath();g.fill();
-      if(roller){g.fillStyle='#7a7064';g.beginPath();g.arc(x-7,oy+32,3.5,0,7);g.fill();g.beginPath();g.arc(x+7,oy+32,3.5,0,7);g.fill();}
-      g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;var gy=oy+(roller?36:28);
+      g.fillStyle='#7a7064';g.beginPath();g.moveTo(x,oy+60);g.lineTo(x-13,oy+84);g.lineTo(x+13,oy+84);g.closePath();g.fill();
+      if(roller){g.fillStyle='#7a7064';g.beginPath();g.arc(x-7,oy+88,3.5,0,7);g.fill();g.beginPath();g.arc(x+7,oy+88,3.5,0,7);g.fill();}
+      g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;var gy=oy+(roller?92:84);
       g.beginPath();g.moveTo(x-20,gy);g.lineTo(x+20,gy);g.stroke();
       for(var hx=x-16;hx<x+20;hx+=8){g.beginPath();g.moveTo(hx,gy);g.lineTo(hx-5,gy+6);g.stroke();}
     }
     support(xA,false); support(xB,true);
     g.fillStyle='#2A2622';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
-    g.fillText('A',xA,oy+58);g.fillText('B',xB,oy+58);
-    // charge F (vers le bas) sur la poutre
-    arrow(g,xF,oy-44+8*pulse,xF,oy-4,'#C0492E',5);
-    g.fillStyle='#C0492E';g.font='700 12px "JetBrains Mono",monospace';g.fillText('F = 600 N',xF,oy-20-22*pulse);
-    // réactions (vers le haut), longueur ∝ R
-    var s=0.6+0.4*pulse;
-    arrow(g,xA,oy+78,xA,oy+78-(20+450*0.07)*s,'#3D7E5F',4);
-    arrow(g,xB,oy+78,xB,oy+78-(20+150*0.07)*s,'#3D7E5F',4);
-    g.fillStyle='#2c6147';g.font='11px "JetBrains Mono",monospace';
-    g.fillText('R_A',xA,oy+92);g.fillText('R_B',xB,oy+92);
+    g.fillText('A',xA-22,oy+18);g.fillText('B',xB+22,oy+18);
+    // charge F : la pointe touche la poutre, le libelle est decale a droite
+    arrow(g,xF,oy-56,xF,oy-4,'#C0492E',5);
+    g.fillStyle='#C0492E';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
+    g.fillText('F = 600 N',xF+14,oy-30);
+    g.textAlign='center';
+    // reactions : la POINTE arrive au contact de la poutre (oy+6), longueur proportionnelle a R
+    var lA=(18+450*0.09), lB=(18+150*0.09);
+    arrow(g,xA,oy+6+lA,xA,oy+6,'#3D7E5F',4);
+    arrow(g,xB,oy+6+lB,xB,oy+6,'#3D7E5F',4);
+    g.fillStyle='#2c6147';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+    g.fillText('R_A',xA+10,oy+6+lA-6);g.fillText('R_B',xB+10,oy+6+lB-6);
+    g.textAlign='center';
     // cote a
     g.strokeStyle='#235877';g.lineWidth=1;g.beginPath();g.moveTo(xA,oy-2);g.lineTo(xA,oy-46);g.moveTo(xF,oy-2);g.lineTo(xF,oy-46);g.stroke();
     g.beginPath();g.moveTo(xA,oy-44);g.lineTo(xF,oy-44);g.stroke();
@@ -434,7 +437,7 @@
     // moment
     g.strokeStyle='#3D7E5F';g.lineWidth=2.4;g.beginPath();g.arc(ox,oy,38,-0.5,1.0);g.stroke();
     arrow(g,ox+38*Math.cos(1.0),oy+38*Math.sin(1.0),ox+38*Math.cos(1.18),oy+38*Math.sin(1.18),'#3D7E5F',2.4);
-    g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('M = F \u00d7 d = 20 N\u00b7m',ox+54,oy-28);
+    g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('sens de rotation',ox+54,oy-28);
     g.textAlign='left';
   }
 
