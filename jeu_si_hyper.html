@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ISOSTATIC — jeu · Hyperstatisme · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A;
+    --dark:#141a22; --dark2:#1c2430; --neonB:#8fd4e0; --neonG:#6ee3a0; --neonY:#f0d08a; --neonR:#e87060; --neonP:#d9a6ee; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:840px;margin:0 auto;padding:22px clamp(14px,4vw,30px) 80px}
+  .cab{background:linear-gradient(160deg,var(--dark),#22202e 130%);border-radius:20px;padding:20px clamp(14px,3vw,26px) 26px;color:#f2ead8;box-shadow:0 16px 44px rgba(30,25,45,.35)}
+  .cab .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.26em;color:var(--neonP);text-transform:uppercase;text-align:center}
+  h1{font-size:clamp(30px,5.4vw,52px);margin:6px 0 4px;font-weight:800;text-align:center;
+     background:linear-gradient(90deg,var(--neonB),var(--neonG),var(--neonY));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:#b9b0c8;text-align:center;max-width:58ch;margin:0 auto;font-size:16px}
+  .hud{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 12px}
+  .hud .h{font-family:'JetBrains Mono',monospace;font-size:13px;background:#252d3c;border:1px solid #3a4458;border-radius:10px;padding:7px 13px;color:#d8d2e6}
+  .hud .h b{color:var(--neonY);font-size:16px}
+  .stage{background:var(--dark2);border:1px solid #313d50;border-radius:14px;padding:16px}
+  .qtag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--neonP);margin-bottom:8px}
+  .qtxt{font-weight:800;font-size:clamp(16px,2.4vw,21px);margin:4px 0 8px;color:#f2ead8}
+  .qsub{font-family:'JetBrains Mono',monospace;font-size:14px;color:#8f9ab5;margin-bottom:12px;min-height:20px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){ .opts{grid-template-columns:1fr} }
+  .opts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;background:#252d3c;border:1px solid #3a4458;color:#e9e2f2;border-radius:11px;padding:14px 10px;cursor:pointer}
+  .opts button:hover{background:#2e3748;border-color:var(--neonB)}
+  .opts button.ok{background:#1f4d38;border-color:var(--neonG);color:#c9f4dd}
+  .opts button.no{background:#54262b;border-color:var(--neonR);color:#f4c9c9}
+  .fb{font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center;min-height:36px;margin-top:10px;color:var(--neonP)}
+  .screen{text-align:center;padding:30px 8px}
+  .screen .bigscore{font-size:54px;font-weight:800;color:var(--neonY);font-family:'JetBrains Mono',monospace}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#101018;background:linear-gradient(90deg,var(--neonG),var(--neonB));border:none;border-radius:12px;padding:15px 30px;cursor:pointer;font-weight:800;margin-top:16px}
+  .btn:hover{filter:brightness(1.1)}
+  .rules{display:grid;gap:10px;margin:18px auto 0;max-width:560px;text-align:left}
+  .rules .r{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#c9c2d8}
+  .rules .r span:first-child{flex:none}
+  .memo{font-family:'JetBrains Mono',monospace;font-size:12px;color:#7f8aa5;text-align:center;margin-top:12px;border-top:1px solid #2b3444;padding-top:10px}
+  .hidden{display:none}
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);padding:10px;display:none;color:var(--ink)}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;color:var(--ink)}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Jeu — Hyperstatisme<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="cab">
+      <div class="k">· Arcade SI · Chasse aux contraintes ·</div>
+      <h1>ISOSTATIC</h1>
+      <p class="sub">Le bureau d’études tourne à plein régime et les dossiers s’empilent. Cycles à compter, degrés de liberté à retrouver, h à calculer, montages à corriger : tu valides ou tu bloques la production.</p>
+
+      <div id="scrTitle" class="screen">
+        <div class="rules">
+          <div class="r"><span>🕸️</span><span><b>Cycles</b> : γ = L − n + 1, avec le bâti compté dans n.</span></div>
+          <div class="r"><span>🔗</span><span><b>Degrés de liberté</b> : les liaisons usuelles, de la pivot (1) à la ponctuelle (5).</span></div>
+          <div class="r"><span>🧮</span><span><b>Calcul de h</b> et <b>verdict</b> : isostatique, hyperstatique, ou mobilité parasite.</span></div>
+          <div class="r"><span>🔧</span><span><b>Le correctif</b> : quelle liaison substituer pour ramener h à zéro.</span></div>
+          <div class="r"><span>💔</span><span>Trois erreurs et le bureau ferme. Pas de chrono : compte à ton rythme.</span></div>
+        </div>
+        <button class="btn" id="btnStart">▶ Ouvrir le bureau</button>
+      </div>
+
+      <div id="scrGame" class="hidden">
+        <div class="hud">
+          <div class="h">Score <b id="hScore">0</b></div>
+          <div class="h">Vies <b id="hLives">❤❤❤</b></div>
+          <div class="h">Combo <b id="hCombo">×1</b></div>
+          <div class="h">Niveau <b id="hLvl">1</b></div>
+        </div>
+        <div class="stage">
+          <div class="qtag" id="qTag">—</div>
+          <div class="qtxt" id="qTxt">…</div>
+          <div class="qsub" id="qSub"></div>
+          <div class="opts" id="opts"></div>
+          <div class="fb" id="fb"></div>
+          <div class="memo">γ = L − n + 1 · E<sub>c</sub> = 6γ (espace) ou 3γ (plan) · h = m + E<sub>c</sub> − I<sub>c</sub></div>
+        </div>
+      </div>
+
+      <div id="scrOver" class="screen hidden">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--neonP);letter-spacing:.2em">BUREAU FERMÉ</div>
+        <div class="bigscore" id="finalScore">0</div>
+        <div id="bestLine" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9c2d8;margin-top:4px"></div>
+        <div id="verdict" style="margin-top:10px;color:#e9e2f2;font-weight:700"></div>
+        <button class="btn" id="btnAgain">↻ Rouvrir</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">pour les additions un peu longues</div>
+  </div>
+
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+function pick(a){ return a[(Math.random()*a.length)|0]; }
+function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function uniq4(okStr, cands){
+  var seen={}, out=[okStr]; seen[okStr]=1;
+  for(var i=0;i<cands.length&&out.length<4;i++){
+    var s=cands[i];
+    if(s!==null&&s!==undefined&&!seen[s]){ seen[s]=1; out.push(s); }
+  }
+  return out;
+}
+
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ================= générateurs ================= */
+var LIAISONS=[
+  {n:'pivot',d:1},{n:'glissi\u00e8re',d:1},{n:'h\u00e9lico\u00efdale',d:1},
+  {n:'pivot glissant',d:2},{n:'sph\u00e9rique \u00e0 doigt',d:2},
+  {n:'rotule',d:3},{n:'appui plan',d:3},
+  {n:'lin\u00e9aire annulaire',d:4},{n:'ponctuelle',d:5}
+];
+
+/* 1. cycles */
+function qGamma(){
+  var n=pick([2,3,4,5,6]);
+  var L=n-1+pick([1,1,2,2,3]);
+  var g=L-n+1;
+  var opts=uniq4(String(g),[String(L-n),String(g+1),String(L+n-1),String(Math.max(1,g+2)),String(L)]);
+  return {tag:'cycles', q:'Un m\u00e9canisme compte '+n+' solides (b\u00e2ti compris) et '+L+' liaisons. Combien de cycles ind\u00e9pendants ?',
+    sub:'\u03b3 = L \u2212 n + 1', opts:shuffle(opts), ok:String(g),
+    why:'\u03b3 = '+L+' \u2212 '+n+' + 1 = '+g};
+}
+/* 2. ddl */
+function qDdl(){
+  var it=pick(LIAISONS);
+  var opts=uniq4(String(it.d),['1','2','3','4','5','6'].filter(function(x){ return x!==String(it.d); }));
+  return {tag:'degr\u00e9s de libert\u00e9', q:'Combien de degr\u00e9s de libert\u00e9 pour une liaison <b>'+it.n+'</b> ?',
+    sub:'', opts:shuffle(opts), ok:String(it.d),
+    why:'la liaison '+it.n+' laisse '+it.d+' mouvement'+(it.d>1?'s':'')+' possible'+(it.d>1?'s':'')};
+}
+/* 3. verdict */
+function qDiag(){
+  var h=pick([-2,-1,0,0,1,2,3,5]);
+  var ok, why;
+  if(h===0){ ok='isostatique : aucune contrainte g\u00e9om\u00e9trique en trop'; why='h = 0 \u2192 le montage se fait sans forcer'; }
+  else if(h>0){ ok='hyperstatique : '+h+' contrainte'+(h>1?'s':'')+' g\u00e9om\u00e9trique'+(h>1?'s':'')+' \u00e0 garantir'; why='h = '+h+' \u2192 usinage pr\u00e9cis exig\u00e9, mais montage plus rigide'; }
+  else { ok='mobilit\u00e9 parasite : une pi\u00e8ce bouge alors qu\u2019elle ne devrait pas'; why='h = '+h+' \u2192 le guidage est incomplet, ce n\u2019est pas de l\u2019hyperstatisme'; }
+  var pool=['isostatique : aucune contrainte g\u00e9om\u00e9trique en trop',
+            'hyperstatique : '+Math.abs(h===0?2:h)+' contrainte'+(Math.abs(h)>1?'s':'')+' g\u00e9om\u00e9trique'+(Math.abs(h)>1?'s':'')+' \u00e0 garantir',
+            'mobilit\u00e9 parasite : une pi\u00e8ce bouge alors qu\u2019elle ne devrait pas',
+            'le calcul est forc\u00e9ment faux'];
+  var opts=uniq4(ok,pool.concat(['montage impossible \u00e0 r\u00e9aliser']));
+  return {tag:'le verdict', q:'Le calcul donne <b>h = '+h+'</b>. Que conclus-tu ?', sub:'', opts:shuffle(opts), ok:ok, why:why};
+}
+/* 4. calcul de h */
+function qH(){
+  var g=pick([1,1,2]), m=pick([1,1,2]), dim=pick([3,6,6]);
+  var Ec=dim*g;
+  var Ic=Ec+m-pick([0,1,2,3]);
+  if(Ic<2) Ic=2;
+  var h=m+Ec-Ic;
+  var opts=uniq4(String(h),[String(Ec-Ic),String(h+1),String(h-1),String(m+Ic-Ec),String(h+2)]);
+  return {tag:'calcul de h',
+    q:'\u03b3 = '+g+' \u00b7 I<sub>c</sub> = '+Ic+' \u00b7 m = '+m+' \u00b7 \u00e9tude dans '+(dim===6?'l\u2019espace':'le plan')+'. Combien vaut h ?',
+    sub:'h = m + E_c \u2212 I_c    avec E_c = '+dim+'\u03b3',
+    opts:shuffle(opts), ok:String(h),
+    why:'E_c = '+dim+' \u00d7 '+g+' = '+Ec+', donc h = '+m+' + '+Ec+' \u2212 '+Ic+' = '+h};
+}
+/* 5. le correctif */
+function qFix(){
+  var Ic=pick([2,3,4,5]);        /* montage actuel, γ=1, m=1, espace */
+  var h=7-Ic;                     /* > 0 */
+  var besoin=h;                   /* ddl à gagner */
+  var base=pick([1,1,2]);         /* ddl de la liaison qu'on remplace */
+  var cible=base+besoin;
+  var noms={1:'pivot',2:'pivot glissant',3:'rotule',4:'lin\u00e9aire annulaire',5:'ponctuelle',6:null};
+  if(!noms[cible]) return qGamma();
+  var opts=uniq4(noms[cible],[noms[Math.max(1,cible-1)],noms[Math.min(5,cible+1)],noms[base],'glissi\u00e8re']);
+  return {tag:'le correctif',
+    q:'Un guidage donne <b>h = '+h+'</b> (\u03b3 = 1, m = 1, espace, I<sub>c</sub> = '+Ic+'). Par quelle liaison remplacer une <b>'+noms[base]+'</b> ('+base+' ddl) pour obtenir h = 0 ?',
+    sub:'il faut gagner exactement '+besoin+' degr\u00e9'+(besoin>1?'s':'')+' de libert\u00e9',
+    opts:shuffle(opts), ok:noms[cible],
+    why:'il faut I_c = 7 : on passe de '+base+' \u00e0 '+cible+' ddl avec une '+noms[cible]};
+}
+
+var GENS=[
+  {lvl:1, g:qDdl},
+  {lvl:1, g:qGamma},
+  {lvl:2, g:qDiag},
+  {lvl:2, g:qH},
+  {lvl:3, g:qFix},
+  {lvl:3, g:qH}
+];
+
+/* ================= boucle ================= */
+var S={ playing:false, score:0, lives:3, combo:1, good:0, lvl:1, cur:null, locked:false, best:0 };
+function updHud(){
+  el('hScore').textContent=S.score;
+  el('hLives').textContent='\u2764\u2764\u2764'.slice(0,S.lives) || '\u2014';
+  el('hCombo').textContent='\u00d7'+S.combo;
+  el('hLvl').textContent=S.lvl;
+}
+function nextQ(){
+  S.lvl=1+Math.floor(S.good/5);
+  var pool=GENS.filter(function(x){return x.lvl<=S.lvl;});
+  S.cur=pick(pool).g();
+  S.locked=false;
+  el('qTag').textContent=S.cur.tag;
+  el('qTxt').innerHTML=S.cur.q;
+  el('qSub').innerHTML=S.cur.sub||'';
+  el('fb').textContent='';
+  var box=el('opts'); box.innerHTML='';
+  S.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ answer(b,o); });
+    box.appendChild(b);
+  });
+  updHud();
+}
+function answer(btn,o){
+  if(S.locked||!S.playing) return; S.locked=true;
+  if(o===S.cur.ok){
+    btn.classList.add('ok');
+    S.score+=100*S.combo; S.combo=Math.min(8,S.combo+1); S.good++;
+    el('fb').textContent='\u2713 '+S.cur.why;
+    updHud(); setTimeout(nextQ,1500);
+  } else {
+    btn.classList.add('no');
+    el('opts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===S.cur.ok) b2.classList.add('ok'); });
+    S.combo=1; S.lives--;
+    el('fb').textContent='\u2717 '+S.cur.why;
+    updHud();
+    if(S.lives<=0){ setTimeout(gameOver,1900); } else { setTimeout(nextQ,2100); }
+  }
+}
+function gameOver(){
+  S.playing=false;
+  if(S.score>S.best) S.best=S.score;
+  el('scrGame').classList.add('hidden');
+  el('scrOver').classList.remove('hidden');
+  el('finalScore').textContent=S.score;
+  el('bestLine').textContent='meilleur score de la session : '+S.best;
+  el('verdict').textContent = S.score>=2500?'\ud83c\udfc6 Chef du bureau d\u2019\u00e9tudes : aucun montage ne te r\u00e9siste.'
+    :(S.score>=1200?'\ud83d\udd29 Bon technicien \u2014 encore quelques dossiers \u00e0 ma\u00eetriser.'
+    :'Les contraintes gagnent. Retourne au TP et reviens.');
+}
+function start(){
+  S.playing=true; S.score=0; S.lives=3; S.combo=1; S.good=0; S.lvl=1;
+  el('scrTitle').classList.add('hidden'); el('scrOver').classList.add('hidden');
+  el('scrGame').classList.remove('hidden');
+  nextQ();
+}
+el('btnStart').addEventListener('click',start);
+el('btnAgain').addEventListener('click',start);
+</script>
+</body>
+</html>
