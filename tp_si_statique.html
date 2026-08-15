@@ -182,6 +182,19 @@
   @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
   @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:60;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.28);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:60;width:206px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.24);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:var(--mono);font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:var(--mono);font-size:14px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;color:var(--ink)}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.fn{background:#f3eef6;color:#8A5A7A;font-weight:700;font-size:12px}
+  #calc button.eq{background:#3D7E5F;color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:#C0492E}
+  #calc .tt{font-family:var(--mono);font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
 </style>
 </head>
 <body>
@@ -241,7 +254,7 @@
           <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
             <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/>
             <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
-            <path d="M38 79 L38 112 L72 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M32 79 L32 114 L74 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
             <rect x="150" y="44" width="15" height="26" fill="#B85C2E"/>
             <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/>
             <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/>
@@ -414,7 +427,7 @@
       <div class="game">
         <div class="roundpill" id="d5round">Manche 1 / 4</div>
         <canvas id="cvTri" width="640" height="240"></canvas>
-        <div class="hint" style="margin:10px 0 6px">Quelle force F₃ (composantes en x ; y) ferme le triangle ?</div>
+        <div class="hint" style="margin:10px 0 6px">Quelle force F₃ ferme le triangle ? <b>Composantes ( x ; y ) en newtons, y positif vers le haut.</b></div>
         <div class="opts" id="d5opts"></div>
         <div class="msg" id="d5msg"></div>
       </div>
@@ -651,20 +664,30 @@
   // ===== D5 — ferme le triangle =====
   (function(){
     var cv=el('cvTri'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+    /* composantes en convention PHYSIQUE : y positif vers le HAUT.
+       Le dessin convertit (y ecran = -y physique). */
     var ROUNDS=[
-      {F1:{x:60,y:-20},F2:{x:-30,y:50}},
-      {F1:{x:50,y:30},F2:{x:20,y:-60}},
-      {F1:{x:-40,y:-40},F2:{x:70,y:10}},
-      {F1:{x:0,y:-70},F2:{x:55,y:30}}
+      {F1:{x:60,y:20},F2:{x:-30,y:-50}},
+      {F1:{x:50,y:-30},F2:{x:20,y:60}},
+      {F1:{x:-40,y:40},F2:{x:70,y:-10}},
+      {F1:{x:0,y:70},F2:{x:55,y:-30}}
     ];
     var ri=0, locked=false, opts=el('d5opts'), msg=el('d5msg'), CHOSEN=null;
     function sum(c){return {x:c.F1.x+c.F2.x, y:c.F1.y+c.F2.y};}
     function draw(extra){
       g.clearRect(0,0,W,H); var c=ROUNDS[ri];
-      var sx=190, sy=70, sc=1.4;
-      // chaîne F1 puis F2
-      var A={x:sx+c.F1.x*sc, y:sy+c.F1.y*sc};
-      var B={x:A.x+c.F2.x*sc, y:A.y+c.F2.y*sc};
+      var sc=1.4;
+      /* sommets relatifs, y ecran = -y physique */
+      var p0={x:0,y:0};
+      var p1={x:c.F1.x*sc, y:-c.F1.y*sc};
+      var p2={x:p1.x+c.F2.x*sc, y:p1.y-c.F2.y*sc};
+      /* recentrage automatique du triangle dans le canvas */
+      var xs=[p0.x,p1.x,p2.x], ys=[p0.y,p1.y,p2.y];
+      var minx=Math.min.apply(null,xs), maxx=Math.max.apply(null,xs);
+      var miny=Math.min.apply(null,ys), maxy=Math.max.apply(null,ys);
+      var sx=W/2-(minx+maxx)/2, sy=H/2-(miny+maxy)/2+8;
+      var A={x:sx+p1.x, y:sy+p1.y};
+      var B={x:sx+p2.x, y:sy+p2.y};
       arrow(g,sx,sy,A.x,A.y,'#C0492E',5); 
       g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('F₁',(sx+A.x)/2+8,(sy+A.y)/2-6);
       arrow(g,A.x,A.y,B.x,B.y,'#2E6A8E',5);
@@ -695,7 +718,7 @@
       if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*25); msg.className='msg ok';
         if(ri<3){ msg.textContent='✓ Triangle fermé ! Manche suivante…'; setTimeout(function(){ri++;setRound();},1100); }
         else { msg.textContent='🏆 Les 4 triangles fermés — défi complet ! +100 pts'; }
-      } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ramène pas au point de départ. Pense à F₃ = −(F₁+F₂).'; setTimeout(function(){b.classList.remove('no');},500); }
+      } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ram\u00e8ne pas au point de d\u00e9part. Pense \u00e0 F\u2083 = \u2212(F\u2081+F\u2082), composante par composante.'; setTimeout(function(){b.classList.remove('no');},500); }
     });
     setRound();
   })();
@@ -754,7 +777,7 @@
     ];
     var TARGET=12;
     var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
-    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+    var lane=0, gateY=-gateH, speed=1.15, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
     var loop=null, startBtn=el('d7start'), msg=el('d7msg');
     function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
     function draw(){
@@ -866,6 +889,53 @@
   })();
 
   refresh();
+</script>
+
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice">
+  <div class="disp" id="calcDisp">0</div>
+  <div class="keys">
+    <button class="cl" data-act="C">C</button><button class="fn" data-act="sin">sin</button><button class="fn" data-act="cos">cos</button><button class="fn" data-act="tan">tan</button>
+    <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="div">&divide;</button>
+    <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="mul">&times;</button>
+    <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="sub">&minus;</button>
+    <button data-act="0">0</button><button data-act=".">,</button><button class="fn" data-act="sqrt">&radic;</button><button class="op" data-act="add">+</button>
+    <button class="fn" data-act="atan">atan</button><button class="fn" data-act="sq">x&sup2;</button><button class="op" data-act="neg">&plusmn;</button><button class="eq" data-act="eq">=</button>
+  </div>
+  <div class="tt">angles en degr&eacute;s</div>
+</div>
+<script>
+(function(){
+  var D2R=Math.PI/180;
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=document.getElementById('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  document.getElementById('calcToggle').addEventListener('click',function(){ document.getElementById('calc').classList.toggle('show'); });
+  document.getElementById('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act, v=parseFloat(cur);
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-v); }
+    else if(a==='sq'){ cur=clean(v*v); fresh=true; }
+    else if(a==='sqrt'){ cur=clean(v<0? NaN : Math.sqrt(v)); fresh=true; }
+    else if(a==='sin'){ cur=clean(Math.sin(v*D2R)); fresh=true; }
+    else if(a==='cos'){ cur=clean(Math.cos(v*D2R)); fresh=true; }
+    else if(a==='tan'){ cur=clean(Math.tan(v*D2R)); fresh=true; }
+    else if(a==='atan'){ cur=clean(Math.atan(v)/D2R); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
 </script>
 </body>
 </html>

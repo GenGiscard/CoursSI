@@ -68,6 +68,13 @@
   figcaption{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:10px;text-align:center}
   .cap{font-family:var(--mono);font-size:13px;color:var(--ink);background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.28);border-radius:10px;padding:11px 15px;margin-top:12px;min-height:42px;display:flex;align-items:center;gap:10px}
   .cap .ph{font-weight:700;color:var(--steel);flex:0 0 auto}
+    .animctrl{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+    .animctrl button{font-family:var(--mono);font-size:15px;font-weight:700;background:var(--steel);color:#fff;border:none;border-radius:9px;padding:8px 18px;cursor:pointer}
+    .animctrl button:hover{filter:brightness(1.1)}
+    .animctrl button:disabled{opacity:.35;cursor:not-allowed}
+    .animctrl .stepn{font-family:var(--mono);font-size:13px;color:var(--sub);letter-spacing:.05em}
+    .volontaire{background:#fdf6e6;border:1px solid #e8dcc0;border-left:4px solid var(--amber);border-radius:12px;padding:14px 18px;margin:14px 0;font-size:16px}
+    .volontaire b{color:#8a6313}
 
   table.t{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13.5px;margin:10px 0}
   table.t th,table.t td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -188,6 +195,7 @@
       <figure>
         <canvas id="cvMoment" width="640" height="250"></canvas>
         <div class="cap" id="capMoment"><span class="ph">—</span><span id="capMomentTxt">…</span></div>
+        <div class="animctrl"><button id="moPrev">◀ Précédent</button><button id="moNext">Suivant ▶</button><span class="stepn" id="moStep">étape 1 / 4</span></div>
       </figure>
       <div class="eqcard"><div class="eq">M = F × d&nbsp;&nbsp;(N·m)</div><div class="leg"><b>d</b> = le <b>bras de levier</b>&nbsp;: la distance perpendiculaire entre l'axe et la droite d'action de la force.</div></div>
     </section>
@@ -209,6 +217,7 @@
         <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Équilibre : la somme des forces est nulle</div>
         <canvas id="cvpfs" width="900" height="240" aria-label="Principe fondamental : une force déplace le solide, la force opposée rétablit l'équilibre" style="width:100%;height:auto;display:block"></canvas>
         <div class="cap"><b id="pfsphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="pfscap">Un solide au repos.</span></div>
+        <div class="animctrl"><button id="pfPrev">◀ Précédent</button><button id="pfNext">Suivant ▶</button><span class="stepn" id="pfStep">étape 1 / 4</span></div>
       </figure>
     </section>
 
@@ -226,10 +235,10 @@
             <line x1="150" y1="10" x2="150" y2="230" stroke="#235877" stroke-width="1.2" stroke-dasharray="6 5"/>
             <line x1="120" y1="30" x2="180" y2="30" stroke="#7a7064" stroke-width="6"/>
             <line x1="150" y1="115" x2="150" y2="30" stroke="#2E6A8E" stroke-width="3.5" marker-end="url(#aT)"/>
-            <text x="158" y="80" font-family="JetBrains Mono,monospace" font-size="12" fill="#2E6A8E" font-weight="700">T (câble)</text>
+            <text x="170" y="66" font-family="JetBrains Mono,monospace" font-size="12" fill="#2E6A8E" font-weight="700">T (câble)</text>
             <rect x="125" y="150" width="50" height="40" rx="4" fill="#3D7E5F"/>
             <line x1="150" y1="190" x2="150" y2="225" stroke="#C0492E" stroke-width="3.5" marker-end="url(#aP)"/>
-            <text x="158" y="216" font-family="JetBrains Mono,monospace" font-size="12" fill="#C0492E" font-weight="700">P (poids)</text>
+            <text x="170" y="202" font-family="JetBrains Mono,monospace" font-size="12" fill="#C0492E" font-weight="700">P (poids)</text>
             <defs>
               <marker id="aT" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#2E6A8E"/></marker>
               <marker id="aP" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill="#C0492E"/></marker>
@@ -247,8 +256,10 @@
       <figure>
         <canvas id="cvForces" width="640" height="250"></canvas>
         <div class="cap" id="capForces"><span class="ph">—</span><span id="capForcesTxt">…</span></div>
+        <div class="animctrl"><button id="foPrev">◀ Précédent</button><button id="foNext">Suivant ▶</button><span class="stepn" id="foStep">étape 1 / 4</span></div>
       </figure>
       <div class="eqcard"><div class="eq">droites concourantes&nbsp;&nbsp;+&nbsp;&nbsp;Σ <span class="vec">F</span> = <span class="vec">0</span></div><div class="leg">Les <b>trois droites d'action</b> se croisent en un même point, et placées bout à bout les vecteurs forment un <b>triangle fermé</b>.</div></div>
+      <div class="volontaire">🙋 <b>À vous de jouer.</b> Un volontaire vient au tableau et choisit un objet de la salle soumis à trois forces : une trousse retenue par deux ficelles, un cartable posé contre le mur, une règle appuyée sur le rebord du bureau… Il place le point de concours des trois droites d’action, puis trace le triangle des forces à main levée. La classe vérifie deux choses : <b>les droites se croisent-elles bien en un seul point ?</b> et <b>le triangle se ferme-t-il ?</b> Si l’un des deux échoue, c’est qu’une force a été oubliée — le plus souvent le frottement ou la réaction du support.</div>
     </section>
 
 
@@ -290,71 +301,81 @@
     e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
 
+  /* La BASE du triangle est posee au bout du trait, la pointe depasse. */
   function arrow(g,x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w||3;
     g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
-    var a=Math.atan2(y2-y1,x2-x1),L=9;g.beginPath();g.moveTo(x2,y2);
-    g.lineTo(x2-L*Math.cos(a-0.4),y2-L*Math.sin(a-0.4));g.lineTo(x2-L*Math.cos(a+0.4),y2-L*Math.sin(a+0.4));g.closePath();g.fill();}
+    var a=Math.atan2(y2-y1,x2-x1),L=12,hw=(w||3)*1.25+2;
+    var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
+    var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
+    g.beginPath();g.moveTo(tx,ty);
+    g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();}
 
-  // ===== Animation : moment / bras de levier =====
+  // ===== Animation : moment / bras de levier (pilotage manuel) =====
   (function(){
     var cv=document.getElementById('cvMoment'); if(!cv||!cv.getContext)return;
+    cv.width=760; cv.height=320;
     var g=cv.getContext('2d'), W=cv.width, H=cv.height;
     var capP=document.querySelector('#capMoment .ph'), capT=document.getElementById('capMomentTxt');
     var CAPS=[
       ['1','Voici un solide qui peut tourner autour de l\u2019axe O (le pivot).'],
       ['2','On applique une force F \u00e0 la distance d de l\u2019axe : d est le bras de levier.'],
       ['3','La force cr\u00e9e un moment M = F \u00d7 d : le solide se met \u00e0 tourner.'],
-      ['4','Plus le bras de levier d est grand, plus le moment est grand.']
+      ['4','Plus le bras de levier d est grand, plus le moment est grand \u2014 m\u00eame force, effet doubl\u00e9.']
     ];
-    var p=0, F=50;
-    function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    var idx=0, t=0, F=50;
+    function ease(u){return u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;}
+    function show(){ t=0;
+      document.getElementById('moStep').textContent='\u00e9tape '+(idx+1)+' / 4';
+      document.getElementById('moPrev').disabled=(idx===0);
+      document.getElementById('moNext').disabled=(idx===3);
+      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1]; }
+    document.getElementById('moPrev').addEventListener('click',function(){ if(idx>0){idx--;show();} });
+    document.getElementById('moNext').addEventListener('click',function(){ if(idx<3){idx++;show();} });
     function draw(){
-      var idx=Math.floor(p)%4, frac=p-Math.floor(p);
       g.clearRect(0,0,W,H);
-      var ox=130, oy=H/2;             // pivot O
-      var d = (idx>=3)? 230 : 150;    // bras de levier en px
-      var dm = (idx>=3)? 0.8 : 0.5;   // valeur en m
-      var ang = 0;
-      if(idx===2) ang = 0.32*ease(frac);
-      else if(idx===3) ang = 0.5;
-      // sol / hachures
+      var ox=120, oy=118;                 // pivot O, haut de la zone
+      var d  = (idx>=3)? 300 : 150;       // bras de levier (px)
+      var dm = (idx>=3)? 0.8 : 0.4;       // valeur en m
+      var ang = (idx===2)? 0.30*ease(Math.min(1,t)) : (idx===3? 0.30 : 0);
+      // sol
       g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;
-      g.beginPath();g.moveTo(40,oy+54);g.lineTo(W-40,oy+54);g.stroke();
-      for(var hx=50;hx<W-40;hx+=16){g.beginPath();g.moveTo(hx,oy+54);g.lineTo(hx-7,oy+62);g.stroke();}
-      // support pivot
-      g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-13,oy+54);g.lineTo(ox+13,oy+54);g.closePath();g.fill();
-      // barre (tourne de -ang)
-      var ex=ox+Math.cos(ang)* (d+40), ey=oy+Math.sin(ang)*(d+40);
+      g.beginPath();g.moveTo(40,oy+64);g.lineTo(W-30,oy+64);g.stroke();
+      for(var hx=50;hx<W-30;hx+=16){g.beginPath();g.moveTo(hx,oy+64);g.lineTo(hx-7,oy+72);g.stroke();}
+      // support
+      g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-14,oy+64);g.lineTo(ox+14,oy+64);g.closePath();g.fill();
+      // barre
+      var ex=ox+Math.cos(ang)*(d+34), ey=oy+Math.sin(ang)*(d+34);
       g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';
       g.beginPath();g.moveTo(ox,oy);g.lineTo(ex,ey);g.stroke();g.lineCap='butt';
-      // pivot point
       g.fillStyle='#fff';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(ox,oy,6,0,7);g.fill();g.stroke();
-      g.fillStyle='#2A2622';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('O',ox,oy-12);
-      // point d'application sur la barre à distance d
+      g.fillStyle='#2A2622';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('O',ox,oy-14);
       var fx=ox+Math.cos(ang)*d, fy=oy+Math.sin(ang)*d;
       if(idx>=1){
-        // bras de levier (segment O -> projection)
         g.strokeStyle='#2E6A8E';g.lineWidth=1.6;g.setLineDash([4,4]);
-        g.beginPath();g.moveTo(ox,oy+30);g.lineTo(fx,oy+30);g.stroke();g.setLineDash([]);
-        g.fillStyle='#2E6A8E';g.font='12px "JetBrains Mono",monospace';g.fillText('d = '+String(dm).replace('.',',')+' m',(ox+fx)/2,oy+46);
-        // force F vers le bas
-        arrow(g,fx,fy,fx,fy+62,'#C0492E',5);
-        g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F = 50 N',fx+34,fy+40);
+        g.beginPath();g.moveTo(ox,oy-40);g.lineTo(fx,oy-40);g.stroke();
+        g.beginPath();g.moveTo(fx,oy-40);g.lineTo(fx,fy);g.stroke();g.setLineDash([]);
+        g.fillStyle='#2E6A8E';g.font='700 12px "JetBrains Mono",monospace';
+        g.fillText('d = '+String(dm).replace('.',',')+' m',(ox+fx)/2,oy-48);
+        arrow(g,fx,fy,fx,fy+72,'#C0492E',5);
+        g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';
+        g.fillText('F = 50 N',fx+14,fy+52);
       }
       if(idx>=2){
-        // flèche de rotation autour de O
-        g.strokeStyle='#3D7E5F';g.lineWidth=2.4;g.beginPath();g.arc(ox,oy,40,-0.5,0.9);g.stroke();
-        var aa=0.9;arrow(g,ox+40*Math.cos(aa),oy+40*Math.sin(aa),ox+40*Math.cos(aa+0.18),oy+40*Math.sin(aa+0.18),'#3D7E5F',2.4);
-        g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';
-        g.fillText('M = F \u00d7 d = '+Math.round(F*dm)+' N\u00b7m',ox+60,oy-30);
+        g.strokeStyle='#3D7E5F';g.lineWidth=2.4;g.beginPath();g.arc(ox,oy,44,-0.45,0.95);g.stroke();
+        var aa=0.95;arrow(g,ox+44*Math.cos(aa-0.16),oy+44*Math.sin(aa-0.16),ox+44*Math.cos(aa),oy+44*Math.sin(aa),'#3D7E5F',2.4);
+        g.fillStyle='#235877';g.font='800 15px "JetBrains Mono",monospace';g.textAlign='left';
+        g.fillText('M = F \u00d7 d = '+String(F*dm).replace('.',',')+' N\u00b7m',ox+66,oy-70);
+      }
+      if(idx===3){
+        g.fillStyle='#8a6313';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
+        g.fillText('bras de levier doubl\u00e9 \u2192 moment doubl\u00e9',ox+66,oy-46);
       }
       g.textAlign='left';
-      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1];
     }
-    setInterval(function(){ p=(p+0.012)% 4; draw(); }, 40); draw();
+    setInterval(function(){ t+=0.05; draw(); },40); show(); draw();
   })();
 
-  // ===== Animation : 3 forces + triangle =====
+  // ===== Animation : 3 forces + triangle (pilotage manuel) =====
   (function(){
     var cv=document.getElementById('cvForces'); if(!cv||!cv.getContext)return;
     var g=cv.getContext('2d'), W=cv.width, H=cv.height;
@@ -363,101 +384,130 @@
       ['1','Trois forces s\u2019appliquent sur le solide en un m\u00eame point.'],
       ['2','Leurs droites d\u2019action sont concourantes : elles se croisent en un point.'],
       ['3','On place les trois vecteurs bout \u00e0 bout\u2026'],
-      ['4','\u2026 le triangle se ferme : Σ F = 0 \u2192 le solide est en \u00e9quilibre.']
+      ['4','\u2026 le triangle se ferme : \u03a3 F = 0 \u2192 le solide est en \u00e9quilibre.']
     ];
-    var N={x:175,y:135};
-    var V=[{x:78,y:-26},{x:-30,y:64},{x:-48,y:-38}]; // somme = (0,0)
-    var T0={x:430,y:80};
+    var N={x:150,y:135};
+    var V=[{x:78,y:-26},{x:-30,y:64},{x:-48,y:-38}];
+    var T0={x:420,y:80};
     var starts=[{x:T0.x,y:T0.y}];
     starts.push({x:starts[0].x+V[0].x,y:starts[0].y+V[0].y});
     starts.push({x:starts[1].x+V[1].x,y:starts[1].y+V[1].y});
     var COL=['#C0492E','#2E6A8E','#3D7E5F'];
-    var p=0;
-    function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+    var idx=0, t=0;
+    function ease(u){return u<0.5?2*u*u:1-Math.pow(-2*u+2,2)/2;}
+    function show(){ t=0;
+      document.getElementById('foStep').textContent='\u00e9tape '+(idx+1)+' / 4';
+      document.getElementById('foPrev').disabled=(idx===0);
+      document.getElementById('foNext').disabled=(idx===3);
+      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1]; }
+    document.getElementById('foPrev').addEventListener('click',function(){ if(idx>0){idx--;show();} });
+    document.getElementById('foNext').addEventListener('click',function(){ if(idx<3){idx++;show();} });
     function draw(){
-      var idx=Math.floor(p)%4, frac=p-Math.floor(p);
       g.clearRect(0,0,W,H);
-      // noeud / solide
-      if(idx<2 || idx===1){}
-      // lignes d'action concourantes (phase 2)
       if(idx===1){ g.strokeStyle='rgba(35,88,119,.4)';g.lineWidth=1;g.setLineDash([5,5]);
-        for(var k=0;k<3;k++){var vx=V[k].x,vy=V[k].y,nrm=Math.hypot(vx,vy);
+        for(var k=0;k<3;k++){var vx=V[k].x,vy=V[k].y,nrm=Math.sqrt(vx*vx+vy*vy);
           g.beginPath();g.moveTo(N.x-vx/nrm*120,N.y-vy/nrm*120);g.lineTo(N.x+vx/nrm*120,N.y+vy/nrm*120);g.stroke();}
         g.setLineDash([]);
       }
-      // noeud
       g.fillStyle='#2A2622';g.beginPath();g.arc(N.x,N.y,6,0,7);g.fill();
       g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';
-      if(idx<2) g.fillText('point d\u2019application',N.x,N.y+24);
+      if(idx<2) g.fillText('point d\u2019application',N.x,N.y+26);
       if(idx<2){
-        // 3 forces depuis le noeud
-        for(var i=0;i<3;i++){ arrow(g,N.x,N.y,N.x+V[i].x,N.y+V[i].y,COL[i],5);
-          g.fillStyle=COL[i];g.font='700 13px "JetBrains Mono",monospace';
-          g.fillText('F'+(i+1),N.x+V[i].x*1.18,N.y+V[i].y*1.18); }
+        for(var i2=0;i2<3;i2++){ arrow(g,N.x,N.y,N.x+V[i2].x,N.y+V[i2].y,COL[i2],5);
+          g.fillStyle=COL[i2];g.font='700 13px "JetBrains Mono",monospace';
+          g.fillText('F'+(i2+1),N.x+V[i2].x*1.42,N.y+V[i2].y*1.42); }
       } else {
-        // chaîne bout à bout (interpolée en phase 3, complète en phase 4)
-        var u = (idx===2)? ease(frac) : 1;
-        for(var j=0;j<3;j++){
-          var sx=N.x+(starts[j].x-N.x)*u, sy=N.y+(starts[j].y-N.y)*u;
-          arrow(g,sx,sy,sx+V[j].x,sy+V[j].y,COL[j],5);
-          g.fillStyle=COL[j];g.font='700 12px "JetBrains Mono",monospace';
-          g.fillText('F'+(j+1),sx+V[j].x*0.5,sy+V[j].y*0.5-6);
+        var u=(idx===2)? ease(Math.min(1,t)) : 1;
+        for(var j2=0;j2<3;j2++){
+          var sx=N.x+(starts[j2].x-N.x)*u, sy=N.y+(starts[j2].y-N.y)*u;
+          arrow(g,sx,sy,sx+V[j2].x,sy+V[j2].y,COL[j2],5);
+          g.fillStyle=COL[j2];g.font='700 12px "JetBrains Mono",monospace';
+          g.fillText('F'+(j2+1),sx+V[j2].x*0.5,sy+V[j2].y*0.5-8);
         }
-        if(idx===3){ g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
-          g.fillText('triangle ferm\u00e9', T0.x-4, T0.y-14); }
+        if(idx===3){ g.fillStyle='#235877';g.font='800 14px "JetBrains Mono",monospace';g.textAlign='center';
+          g.fillText('triangle ferm\u00e9 : \u03a3F = 0', T0.x-4, T0.y-22); }
       }
       g.textAlign='left';
-      capP.textContent=CAPS[idx][0]; capT.textContent=CAPS[idx][1];
     }
-    setInterval(function(){ p=(p+0.011)%4; draw(); }, 40); draw();
+    setInterval(function(){ t+=0.05; draw(); },40); show(); draw();
   })();
 </script>
 <script>
 (function(){
   var cv=document.getElementById('cvpfs'); if(!cv||!cv.getContext) return;
-  var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=W/2, gy=176, bw=92, bh=60;
-  function arrow(x1,y1,x2,y2,col,w){g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w;g.lineCap='round';
-    var a=Math.atan2(y2-y1,x2-x1),L=13,bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
-    g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
-    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();g.lineCap='butt';}
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=W/2, gy=186, bw=96, bh=62;
+  /* base du triangle au bout du trait, pointe au-dela */
+  function arw(x1,y1,x2,y2,col,w){
+    g.strokeStyle=col;g.fillStyle=col;g.lineWidth=w;g.lineCap='round';
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();g.lineCap='butt';
+    var a=Math.atan2(y2-y1,x2-x1),L=14,hw=w*1.3+2;
+    var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
+    var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
+    g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();
+  }
   var caps=[
-    'Un solide au repos, avec une SEULE force appliqu\u00e9e.',
-    'Une force non \u00e9quilibr\u00e9e \u2192 le solide se met en MOUVEMENT.',
-    'On ajoute la force oppos\u00e9e (m\u00eame intensit\u00e9) : \u03a3F = 0 \u2192 le solide reste en \u00c9QUILIBRE.'
+    'Un solide POS\u00c9 sur le sol : son poids P est d\u00e9j\u00e0 \u00e9quilibr\u00e9 par la r\u00e9action R du support. \u03a3F = 0, il ne bouge pas.',
+    'On ajoute une force horizontale F, que rien ne compense : la somme des forces n\u2019est plus nulle.',
+    'R\u00e9sultat imm\u00e9diat : le solide se met en MOUVEMENT. Une force non compens\u00e9e interdit l\u2019\u00e9quilibre.',
+    'On ajoute enfin la force oppos\u00e9e F\u2032 : les quatre forces se compensent deux \u00e0 deux, \u03a3F = 0 \u2192 \u00c9QUILIBRE r\u00e9tabli.'
   ];
-  var T=0;
-  function step(){
-    T+=0.03; if(T>10) T=0;
-    var phase=(T<2?0:(T<5?1:2));
+  var idx=0, t=0;
+  function show(){ t=0;
+    document.getElementById('pfStep').textContent='\u00e9tape '+(idx+1)+' / 4';
+    document.getElementById('pfPrev').disabled=(idx===0);
+    document.getElementById('pfNext').disabled=(idx===3);
+    var cap=document.getElementById('pfscap'), ph=document.getElementById('pfsphase');
+    if(cap) cap.textContent=caps[idx];
+    if(ph) ph.textContent=['\u2460','\u2461','\u2462','\u2463'][idx];
+  }
+  document.getElementById('pfPrev').addEventListener('click',function(){ if(idx>0){idx--;show();} });
+  document.getElementById('pfNext').addEventListener('click',function(){ if(idx<3){idx++;show();} });
+  function draw(){
     var bx;
-    if(phase===1){var pr=(T-2)/3; bx=cx-bw/2-40+pr*210;}
-    else if(phase===2){bx=cx-bw/2;}
-    else {bx=cx-bw/2-40;}
+    if(idx===2){ bx=cx-bw/2-40+Math.min(1,t*0.5)*200; }
+    else if(idx===3){ bx=cx-bw/2; }
+    else { bx=cx-bw/2-40; }
     g.clearRect(0,0,W,H);
-    // sol hachuré
-    g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(80,gy);g.lineTo(W-80,gy);g.stroke();
-    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;for(var x=90;x<W-80;x+=22){g.beginPath();g.moveTo(x,gy);g.lineTo(x-9,gy+10);g.stroke();}
-    // lignes de vitesse (phase 1)
-    if(phase===1){g.strokeStyle='rgba(46,106,142,.4)';g.lineWidth=2;for(var s=0;s<3;s++){var lx=bx-14-s*12;g.beginPath();g.moveTo(lx,gy-bh*0.7);g.lineTo(lx-14,gy-bh*0.7);g.stroke();}}
-    // solide
+    g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(70,gy);g.lineTo(W-70,gy);g.stroke();
+    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;
+    for(var x=80;x<W-70;x+=22){g.beginPath();g.moveTo(x,gy);g.lineTo(x-9,gy+10);g.stroke();}
+    if(idx===2){ g.strokeStyle='rgba(46,106,142,.45)';g.lineWidth=2;
+      for(var s=0;s<3;s++){var lx=bx-16-s*13;g.beginPath();g.moveTo(lx,gy-bh*0.65);g.lineTo(lx-16,gy-bh*0.65);g.stroke();} }
     var byT=gy-bh, mcx=bx+bw/2, mcy=gy-bh/2;
     g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(bx,byT,bw,bh);g.fill();g.stroke();
     g.fillStyle='#235877';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('solide',mcx,mcy+4);
-    // force appliquée (droite, rouge)
-    arrow(bx+bw,mcy,bx+bw+70,mcy,'#C0492E',5);
-    g.fillStyle='#C0492E';g.font='700 14px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('F',bx+bw+74,mcy-8);
-    // phase 2 : force opposée + équilibre
-    if(phase===2){
-      arrow(bx,mcy,bx-70,mcy,'#2E6A8E',5);
-      g.fillStyle='#235877';g.textAlign='right';g.fillText('F\u2032',bx-74,mcy-8);
-      g.fillStyle='#2c6147';g.font='800 22px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u03a3F = 0',cx,gy+42);
-      g.strokeStyle='#3D7E5F';g.lineWidth=2.5;g.beginPath();g.arc(mcx,byT-26,13,0,7);g.moveTo(mcx-6,byT-26);g.lineTo(mcx-1,byT-21);g.lineTo(mcx+7,byT-32);g.stroke();
+    /* poids et reaction : toujours presents */
+    arw(mcx,mcy,mcx,mcy+58,'#C0492E',4);
+    g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';
+    g.fillText('P (poids)',mcx+12,mcy+48);
+    arw(mcx,mcy,mcx,mcy-58,'#3D7E5F',4);
+    g.fillStyle='#2c6147';g.textAlign='right';
+    g.fillText('R (r\u00e9action du sol)',mcx-12,mcy-46);
+    if(idx===0){
+      g.fillStyle='#2c6147';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+      g.fillText('P + R = 0  \u2192  \u03a3F = 0',cx,gy+44);
     }
-    var cap=document.getElementById('pfscap'), ph=document.getElementById('pfsphase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+    if(idx>=1){
+      arw(bx+bw,mcy,bx+bw+72,mcy,'#BD8A2A',5);
+      g.fillStyle='#8a6313';g.font='700 14px "Bricolage Grotesque",sans-serif';g.textAlign='left';
+      g.fillText('F',bx+bw+92,mcy-8);
+    }
+    if(idx===1||idx===2){
+      g.fillStyle='#C0492E';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+      g.fillText('\u03a3F \u2260 0  \u2192  \u00e9quilibre impossible',cx,gy+44);
+    }
+    if(idx===3){
+      arw(bx,mcy,bx-72,mcy,'#2E6A8E',5);
+      g.fillStyle='#235877';g.font='700 14px "Bricolage Grotesque",sans-serif';g.textAlign='right';
+      g.fillText('F\u2032',bx-92,mcy-8);
+      g.fillStyle='#2c6147';g.font='800 20px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+      g.fillText('P + R + F + F\u2032 = 0  \u2192  \u00c9QUILIBRE',cx,gy+46);
+      g.strokeStyle='#3D7E5F';g.lineWidth=2.5;g.beginPath();g.arc(mcx,byT-72,13,0,7);
+      g.moveTo(mcx-6,byT-72);g.lineTo(mcx-1,byT-67);g.lineTo(mcx+7,byT-78);g.stroke();
+    }
+    g.textAlign='left';
   }
-  setInterval(step,40); step();
+  setInterval(function(){ t+=0.04; draw(); },40); show(); draw();
 })();
 </script>
 </body>
