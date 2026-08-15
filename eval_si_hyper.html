@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Évaluation — La revue de conception · Hyperstatisme · SI Première</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
+  .estic-bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line)}
+  .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
+  .estic-bar .who{font-weight:800;font-size:14px}
+  .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
+  .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
+  .wrap{max-width:900px;margin:0 auto;padding:22px clamp(16px,4vw,30px) 90px}
+  .hero{background:linear-gradient(135deg,#242a30,#2A2622);border-radius:18px;padding:24px 26px;margin-bottom:22px;color:#f2ead8}
+  .hero .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;color:#8fd4e0;text-transform:uppercase}
+  h1{font-size:clamp(26px,4vw,38px);margin:4px 0 6px;font-weight:800}
+  .hero p{color:#cfc6b4;max-width:64ch;margin:0}
+  .idbox{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+  .idbox input{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;padding:10px 12px;border:1px solid #4a463e;border-radius:9px;background:#FFFDF8;outline:none}
+  .exo-card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:18px 0}
+  h2{font-size:21px;margin:0 0 4px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  h2 .num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#fff;background:var(--steel);border-radius:8px;padding:3px 9px}
+  h2 .pts{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);margin-left:auto}
+  .task{background:#F6F1E6;border-left:3px solid var(--amber);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:16px}
+  .memo{background:#eef3f6;border-left:3px solid var(--steel);border-radius:8px;padding:10px 14px;margin:12px 0;font-size:15px;font-family:'JetBrains Mono',monospace;color:var(--sub)}
+  .chrono{background:#fcfaf4;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0}
+  .chrono canvas,.chrono svg{width:100%;height:auto;display:block}
+  .qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#faf6ec;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}
+  .qrow .sc{flex:1;min-width:230px;font-size:15px}
+  .qrow.ok{border-color:var(--green);background:#eef6f0} .qrow.no{border-color:var(--copper);background:#fbeee9}
+  select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;max-width:100%}
+  .numin{font-family:'JetBrains Mono',monospace;font-size:16px;width:100px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .numin:focus{border-color:var(--steel)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--steel);border:none;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:700}
+  .btn:hover{filter:brightness(1.08)} .btn:disabled{opacity:.45;cursor:not-allowed}
+  .btn.go{background:var(--green);font-size:14px;padding:14px 24px}
+  .btn.g{background:none;color:var(--sub);border:1px solid var(--line)}
+  .slider-row{display:flex;gap:14px;align-items:center;margin-top:8px;flex-wrap:wrap}
+  .slider-row input[type=range]{flex:1;min-width:200px;accent-color:var(--steel)}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;color:var(--steel);min-width:110px;text-align:right}
+  .game{background:#242a30;border-radius:12px;padding:14px;margin:10px 0;color:#f2ead8}
+  .game .ghead{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:13px;color:#8fd4e0;margin-bottom:8px}
+  .gq{font-weight:800;font-size:17px;text-align:center;margin:12px 0 10px}
+  .gopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  @media(max-width:560px){ .gopts{grid-template-columns:1fr} }
+  .gopts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;background:#333c46;border:1px solid #4a5562;color:#f2ead8;border-radius:10px;padding:12px 8px;cursor:pointer}
+  .gopts button:hover{background:#3d4752}
+  .gopts button.ok{background:#3D7E5F;border-color:#5ee39a}
+  .gopts button.no{background:#7e3d3d;border-color:#e35e5e}
+  .gmsg{text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:8px;min-height:32px;color:#8fd4e0}
+  .corr{display:none;margin-top:10px;border-radius:9px;padding:10px 13px;font-size:15px}
+  .corr.show{display:block}
+  .corr.ok{background:#eef6f0;border:1px solid #cfe0d3;color:var(--green)}
+  .corr.no{background:#fbeee9;border:1px solid #ecccbf;color:var(--copper)}
+  .corr .sol{color:var(--sub);margin-top:5px}
+  .scorebox{display:none;margin-top:16px;background:var(--paper);border:2px solid var(--green);border-radius:16px;padding:18px 22px;text-align:center}
+  .scorebox.show{display:block} .scorebox .big{font-size:44px;font-weight:800;color:var(--green)}
+  .scorebox .st{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub);margin-top:6px}
+  .teacher{margin-top:40px;border-top:1px dashed var(--line);padding-top:16px}
+  .tlink{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub);cursor:pointer;text-decoration:underline}
+  #dash{display:none;margin-top:14px} #dash.show{display:block}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line)}
+  th{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:var(--sub);letter-spacing:.06em}
+  .stat{display:inline-block;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 14px;margin:4px 8px 4px 0;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .stat b{color:var(--steel);font-size:18px}
+  .barq{height:7px;background:#eee6d6;border-radius:4px;overflow:hidden;min-width:80px;display:inline-block;vertical-align:middle}
+  .barq>i{display:block;height:100%;background:var(--green)}
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.25);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.22);padding:10px;display:none}
+  #calc.show{display:block}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer}
+  #calc button:hover{border-color:var(--steel)}
+  #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.eq{background:var(--green);color:#fff;font-weight:700}
+  #calc button.cl{background:#fbeee9;color:var(--copper)}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+</style>
+</head>
+<body>
+  <div class="estic-bar">
+    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
+    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
+    <div class="rt">Évaluation — Hyperstatisme<br>© ESTIC — Tous droits réservés</div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <div class="k">Évaluation · Première spé SI · /15</div>
+      <h1>⚙️ La revue de conception</h1>
+      <p>Vendredi, 9 h. Quatre dossiers doivent être validés avant le lancement en production lundi. Ton rôle : <b>calculer le degré d’hyperstatisme de chaque mécanisme</b> et dire ce qu’il faudra exiger de l’atelier. Un h mal évalué, et ce sont des milliers de pièces qui ne se monteront pas.</p>
+      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
+    </div>
+
+    <div class="memo">γ = L − n + 1 &nbsp;·&nbsp; E<sub>c</sub> = 6γ (espace) ou 3γ (plan) &nbsp;·&nbsp; h = m + E<sub>c</sub> − I<sub>c</sub><br>ddl : pivot 1 · glissière 1 · pivot glissant 2 · rotule 3 · appui plan 3 · linéaire annulaire 4 · ponctuelle 5</div>
+
+    <!-- ============ EX 1 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">1</span> Lire le graphe <span class="pts">3 pts</span></h2>
+      <p class="task">Premier dossier : on te transmet directement le graphe des liaisons d’un mécanisme d’ouverture. Compte, sans rien interpréter d’autre.</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 250" aria-label="Graphe des liaisons à quatre solides et cinq liaisons">
+          <g stroke="#2E6A8E" stroke-width="3">
+            <path d="M240 190 L330 80"/><path d="M330 80 L530 80"/><path d="M530 80 L620 190"/><path d="M620 190 L240 190"/>
+          </g>
+          <path d="M330 80 L620 190" stroke="#BD8A2A" stroke-width="3" stroke-dasharray="7 4"/>
+          <g fill="#FFFDF8" stroke="#5C544B" stroke-width="2.6">
+            <circle cx="240" cy="190" r="24"/><circle cx="330" cy="80" r="24"/><circle cx="530" cy="80" r="24"/><circle cx="620" cy="190" r="24"/>
+          </g>
+          <g font-family="JetBrains Mono" font-size="16" font-weight="700" fill="#2A2622" text-anchor="middle">
+            <text x="240" y="196">0</text><text x="330" y="86">1</text><text x="530" y="86">2</text><text x="620" y="196">3</text>
+          </g>
+          <g font-family="JetBrains Mono" font-size="11" fill="#5C544B" text-anchor="middle">
+            <text x="240" y="228">bâti</text><text x="330" y="52">bras 1</text><text x="530" y="52">bras 2</text><text x="620" y="228">chariot</text>
+          </g>
+          <g font-family="JetBrains Mono" font-size="10" fill="#8c8578">
+            <text x="700" y="120">5 traits au total</text><text x="700" y="140">(dont un en pointillé)</text>
+          </g>
+        </svg>
+      </div>
+      <div class="qrow" id="q1a"><span class="sc">a) Nombre de solides n =</span><input class="numin" id="n1a" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q1b"><span class="sc">b) Nombre de liaisons L =</span><input class="numin" id="n1b" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q1c"><span class="sc">c) Nombre de cycles indépendants γ =</span><input class="numin" id="n1c" inputmode="numeric" placeholder="?"></div>
+      <div class="corr" id="c1"></div>
+    </section>
+
+    <!-- ============ EX 2 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">2</span> Le guidage à valider <span class="pts">3 pts</span></h2>
+      <p class="task">Deuxième dossier : un arbre guidé par <b>une liaison pivot</b> d’un côté et <b>une rotule</b> de l’autre. Étude <b>dans l’espace</b>, l’arbre tourne (m = 1).</p>
+      <div class="qrow" id="q2a"><span class="sc">a) Somme des degrés de liberté : I<sub>c</sub> =</span><input class="numin" id="n2a" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q2b"><span class="sc">b) Degré d’hyperstatisme : h =</span><input class="numin" id="n2b" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q2c"><span class="sc">c) Ce que tu écris dans le rapport :</span>
+        <select id="s2c"><option>— choisir —</option><option>3 conditions géométriques à garantir : montage précis exigé</option><option>montage isostatique, aucune précision particulière</option><option>mécanisme impossible à assembler</option></select></div>
+      <div class="corr" id="c2"></div>
+    </section>
+
+    <!-- ============ EX 3 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">3</span> Défi : la revue express <span class="pts">2 pts</span></h2>
+      <p class="task">⚡ <b>6 contrôles rapides</b> avant la pause. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <div class="game">
+        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
+        <div class="gq" id="gQ">Prêt ? Les dossiers arrivent…</div>
+        <div class="gopts" id="gOpts"></div>
+        <div class="gmsg" id="gMsg"></div>
+        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
+      </div>
+      <div class="corr" id="c3"></div>
+    </section>
+
+    <!-- ============ EX 4 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">4</span> Le curseur des liaisons <span class="pts">2 pts</span></h2>
+      <p class="task">Sur le banc d’essai du bureau : un arbre, deux paliers, γ = 1 et m = 1. <b>Fais varier la somme des degrés de liberté</b> des deux liaisons et observe le comportement au montage.</p>
+      <div class="chrono">
+        <canvas id="cv4" width="860" height="270" aria-label="Banc d'essai : comportement de l'arbre selon la somme des degrés de liberté"></canvas>
+        <div class="slider-row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">I<sub>c</sub> =</span>
+          <input type="range" id="pSlider" min="2" max="9" step="1" value="4">
+          <span class="val" id="pVal">I_c = 4</span>
+        </div>
+      </div>
+      <div class="qrow" id="q4a"><span class="sc">a) Valeur de I<sub>c</sub> qui donne h = 0 :</span><input class="numin" id="n4a" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q4b"><span class="sc">b) 📉 Que signale un h négatif ?</span>
+        <select id="s4b"><option>— choisir —</option><option>une mobilité parasite : l’arbre bouge alors qu’il ne devrait pas</option><option>un montage encore meilleur que h = 0</option><option>une erreur de calcul systématique</option></select></div>
+      <div class="corr" id="c4"></div>
+    </section>
+
+    <!-- ============ EX 5 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">5</span> Chasse à l’erreur <span class="pts">2 pts</span></h2>
+      <p class="task">🕵️ Un stagiaire a traité le dossier « arbre sur deux paliers pivot » (n = 2, L = 2, m = 1, guidage en trois dimensions) :</p>
+      <div class="chrono">
+        <svg viewBox="0 0 860 160" aria-label="Note de calcul erronée sur le modèle utilisé">
+          <rect x="70" y="14" width="720" height="130" rx="10" fill="#fffdf6" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="8 5"/>
+          <g font-family="JetBrains Mono" font-size="16" fill="#2A2622">
+            <text x="100" y="52">« γ = 2 − 2 + 1 = 1  ·  E_c = 3 × 1 = 3  ·  I_c = 1 + 1 = 2</text>
+            <text x="100" y="84">  h = 1 + 3 − 2 = 2 → deux contraintes seulement, c’est acceptable. »</text>
+          </g>
+          <text x="100" y="122" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">⚠ le chef de projet a barré la deuxième ligne</text>
+        </svg>
+      </div>
+      <div class="qrow" id="q5a"><span class="sc">a) L’erreur commise :</span>
+        <select id="s5a"><option>— choisir —</option><option>il a pris E_c = 3γ (modèle plan) alors que le guidage est spatial</option><option>il a mal compté les liaisons</option><option>il a oublié la mobilité m</option></select></div>
+      <div class="qrow" id="q5b"><span class="sc">b) Valeur correcte de h :</span><input class="numin" id="n5b" inputmode="numeric" placeholder="?"></div>
+      <div class="corr" id="c5"></div>
+    </section>
+
+    <!-- ============ EX 6 ============ -->
+    <section class="exo-card">
+      <h2><span class="num">6</span> Le rapport de validation <span class="pts">3 pts</span></h2>
+      <p class="task">Dernier dossier, le plus lourd : une <b>table élévatrice à ciseaux</b>. Elle comporte <b>5 solides</b> (bâti compris) et <b>6 liaisons</b> : deux pivots, deux pivots glissants, une rotule et une linéaire annulaire. Étude <b>dans l’espace</b>, la table monte et descend (m = 1).</p>
+      <div class="chrono"><canvas id="cv6" width="860" height="300" aria-label="Table élévatrice à ciseaux animée avec son graphe à deux boucles"></canvas></div>
+      <div class="qrow" id="q6a"><span class="sc">a) Nombre de cycles : γ =</span><input class="numin" id="n6a" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q6b"><span class="sc">b) Somme des degrés de liberté : I<sub>c</sub> =</span><input class="numin" id="n6b" inputmode="numeric" placeholder="?"></div>
+      <div class="qrow" id="q6c"><span class="sc">c) Degré d’hyperstatisme : h =</span><input class="numin" id="n6c" inputmode="numeric" placeholder="?"></div>
+      <div class="corr" id="c6"></div>
+    </section>
+
+    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
+    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
+
+    <div class="teacher">
+      <span class="tlink" id="tlink">· Espace enseignant ·</span>
+      <div id="dash">
+        <div id="dashLogin" style="margin-top:8px">
+          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
+          <button class="btn g" id="pwBtn">Ouvrir</button>
+          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
+        </div>
+        <div id="dashData" style="display:none">
+          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
+          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
+          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
+          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice">
+    <div class="disp" id="calcDisp">0</div>
+    <div class="keys">
+      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+    </div>
+    <div class="tt">pour les additions un peu longues</div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+"use strict";
+var el=function(id){return document.getElementById(id);};
+var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+var db=null;
+try{ if(typeof firebase!=='undefined'){ firebase.initializeApp({ databaseURL:"https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app" }); db=firebase.database(); } }catch(e){ db=null; }
+var NODE='eval_hyper';
+
+/* ---------- calculatrice ---------- */
+(function(){
+  var acc=null, op=null, cur='0', fresh=true;
+  var disp=el('calcDisp'); if(!disp) return;
+  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
+  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
+    if(o==='add') return a+b; if(o==='sub') return a-b;
+    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
+  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
+  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
+  el('calc').addEventListener('click',function(ev){
+    var b=ev.target.closest('button'); if(!b) return;
+    var a=b.dataset.act;
+    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
+    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
+    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
+    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
+    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
+    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
+    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
+      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
+      acc=cur; op=a; fresh=true; }
+    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
+    show();
+  });
+  show();
+})();
+
+/* ---------- valeurs de référence ---------- */
+var EX1={n:4,L:5,g:2};
+var EX2={Ic:1+3, h:1+6-(1+3)};                 /* 4 → h = 3 */
+var EX5={h:1+6-2};                              /* 5 */
+var EX6={g:6-5+1, Ic:1+1+2+2+3+4, h:0};         /* γ=2, Ic=13, h = 1+12−13 = 0 */
+EX6.h=1+6*EX6.g-EX6.Ic;
+
+/* ============ EX3 : défi ============ */
+var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false};
+function g3Rand(){
+  function pk(a){ return a[(Math.random()*a.length)|0]; }
+  function sh(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+  function u4(ok,c){ var s={}, o=[ok]; s[ok]=1;
+    for(var i=0;i<c.length&&o.length<4;i++){ if(c[i]!==null&&!s[c[i]]){ s[c[i]]=1; o.push(c[i]); } } return o; }
+  var r=Math.random();
+  if(r<0.28){
+    var n=pk([2,3,4,5]), L=n-1+pk([1,2,3]);
+    var g=L-n+1;
+    return {q:n+' solides (b\u00e2ti compris) et '+L+' liaisons : \u03b3 = ?',
+      opts:sh(u4(String(g),[String(L-n),String(g+1),String(L),String(g+2)])), ok:String(g),
+      why:'\u03b3 = '+L+' \u2212 '+n+' + 1 = '+g};
+  }
+  if(r<0.52){
+    var li=pk([{n:'pivot',d:1},{n:'pivot glissant',d:2},{n:'rotule',d:3},{n:'appui plan',d:3},{n:'lin\u00e9aire annulaire',d:4},{n:'ponctuelle',d:5}]);
+    return {q:'Degr\u00e9s de libert\u00e9 d\u2019une liaison '+li.n+' ?',
+      opts:sh(u4(String(li.d),['1','2','3','4','5','6'].filter(function(x){return x!==String(li.d);}))), ok:String(li.d),
+      why:'la liaison '+li.n+' laisse '+li.d+' mouvement'+(li.d>1?'s':'')+' possible'+(li.d>1?'s':'')};
+  }
+  if(r<0.80){
+    var g2=pk([1,1,2]), m=pk([1,1,2]), dim=pk([3,6,6]);
+    var Ec=dim*g2, Ic=Math.max(2,Ec+m-pk([0,1,2,3]));
+    var h=m+Ec-Ic;
+    return {q:'\u03b3 = '+g2+', I_c = '+Ic+', m = '+m+', dans '+(dim===6?'l\u2019espace':'le plan')+' : h = ?',
+      opts:sh(u4(String(h),[String(Ec-Ic),String(h+1),String(h-1),String(h+2)])), ok:String(h),
+      why:'E_c = '+dim+'\u00d7'+g2+' = '+Ec+', h = '+m+' + '+Ec+' \u2212 '+Ic+' = '+h};
+  }
+  var hv=pk([-1,0,0,2,4]);
+  var ok,why;
+  if(hv===0){ ok='isostatique'; why='h = 0 : montage sans contrainte'; }
+  else if(hv>0){ ok='hyperstatique'; why='h = '+hv+' : '+hv+' condition'+(hv>1?'s':'')+' g\u00e9om\u00e9trique'+(hv>1?'s':'')+' \u00e0 garantir'; }
+  else { ok='mobilit\u00e9 parasite'; why='h < 0 : une pi\u00e8ce bouge alors qu\u2019elle ne devrait pas'; }
+  return {q:'Le calcul donne h = '+hv+'. Verdict ?',
+    opts:sh(['isostatique','hyperstatique','mobilit\u00e9 parasite','calcul impossible']), ok:ok, why:why};
+}
+function g3Round(){
+  g3State.cur=g3Rand(); g3State.locked=false;
+  el('gProg').textContent='contr\u00f4le '+(g3State.idx+1)+' / 6';
+  el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
+  var box=el('gOpts'); box.innerHTML='';
+  g3State.cur.opts.forEach(function(o){
+    var b=document.createElement('button'); b.textContent=o;
+    b.addEventListener('click',function(){ g3Answer(b,o); });
+    box.appendChild(b);
+  });
+}
+function g3Answer(btn,o){
+  if(g3State.locked||g3State.done) return; g3State.locked=true;
+  var good=(o===g3State.cur.ok);
+  if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='\u2713 '+g3State.cur.why; }
+  else { btn.classList.add('no'); el('gMsg').textContent='\u2717 C\u2019\u00e9tait : '+g3State.cur.ok+' \u00b7 '+g3State.cur.why;
+    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+  el('gScore').textContent='\u2713 '+g3State.hits;
+  g3State.idx++;
+  setTimeout(function(){
+    if(g3State.idx>=6){ g3State.done=true;
+      el('gProg').textContent='d\u00e9fi termin\u00e9';
+      el('gQ').textContent='Score au d\u00e9fi : '+g3State.hits+' / 6';
+      el('gOpts').innerHTML='';
+      el('gMsg').textContent= g3State.hits>=5?'\u2699\ufe0f Revue men\u00e9e de main de ma\u00eetre !':(g3State.hits>=3?'Les dossiers avancent.':'Trop d\u2019erreurs sont pass\u00e9es\u2026');
+    } else { g3Round(); }
+  }, 1150);
+}
+el('gStart').addEventListener('click',function(){
+  if(g3State.started) return; g3State.started=true; this.style.display='none'; g3Round();
+});
+
+/* ============ EX4 : curseur des liaisons ============ */
+var IcSel=4;
+(function(){
+  var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var t=0;
+  el('pSlider').addEventListener('input',function(){ IcSel=+this.value; el('pVal').textContent='I_c = '+IcSel; });
+  function step(){
+    t+=0.04;
+    var h=1+6-IcSel;
+    var col= h===0? '#3D7E5F' : (h<0? '#8A5A7A' : '#C0492E');
+    g.clearRect(0,0,cv.width,cv.height);
+    /* bâti */
+    g.fillStyle='#d9d2c4'; g.fillRect(150,190,560,14);
+    g.strokeStyle='#8c8578'; g.lineWidth=1.5;
+    for(var i=0;i<560;i+=12){ g.beginPath(); g.moveTo(150+i,204); g.lineTo(150+i-8,214); g.stroke(); }
+    /* paliers */
+    var dz=8;
+    [[260,150],[600,150-dz]].forEach(function(p){
+      g.fillStyle='#e7eef2'; g.strokeStyle=col; g.lineWidth=2.6;
+      g.beginPath(); g.rect(p[0]-26,p[1]-30,52,60); g.fill(); g.stroke();
+      g.fillStyle='#fff'; g.beginPath(); g.arc(p[0],p[1],15,0,7); g.fill();
+      g.strokeStyle=col; g.stroke();
+    });
+    /* arbre */
+    var slide=(h<0)? Math.sin(t*1.5)*18 : 0;
+    var flex=(h>0)? -dz*1.3 : 0;
+    g.strokeStyle=col; g.lineWidth=13; g.lineCap='round';
+    g.beginPath();
+    if(h>0){ g.moveTo(210+slide,150); g.quadraticCurveTo(430,150+flex,650+slide,150-dz); }
+    else { g.moveTo(210+slide,150); g.lineTo(650+slide,150-dz); }
+    g.stroke();
+    g.save(); g.translate(430,150-dz/2); g.rotate(t*2);
+    g.strokeStyle='rgba(189,138,42,.85)'; g.lineWidth=3;
+    for(var k=0;k<4;k++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(k*1.57)*16,Math.sin(k*1.57)*16); g.stroke(); }
+    g.restore();
+    /* calcul */
+    g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText('h = m + E_c \u2212 I_c = 1 + 6 \u2212 '+IcSel,60,40);
+    g.fillStyle=col; g.font='800 30px "JetBrains Mono",monospace';
+    g.fillText('h = '+h,60,84);
+    g.font='800 15px "Bricolage Grotesque",sans-serif';
+    if(h>0){ g.fillStyle='#C0492E'; g.fillText('\u26a0 l\u2019arbre se tord : '+h+' contrainte'+(h>1?'s':'')+' \u00e0 garantir',300,50); }
+    else if(h===0){ g.fillStyle='#3D7E5F'; g.fillText('\ud83c\udfaf isostatique : le d\u00e9faut est absorb\u00e9',300,50); }
+    else { g.fillStyle='#8A5A7A'; g.fillText('\u26a0 mobilit\u00e9 parasite : l\u2019arbre coulisse',300,50); }
+    g.strokeStyle='#8c8578'; g.lineWidth=1.4; g.setLineDash([4,4]);
+    g.beginPath(); g.moveTo(180,150); g.lineTo(700,150); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('palier de droite d\u00e9salign\u00e9',600,250); g.textAlign='left';
+  }
+  setInterval(step,50); step();
+})();
+
+/* ============ EX6 : table élévatrice ============ */
+(function(){
+  var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var t=0;
+  function step(){
+    t+=0.03;
+    var hgt=60+55*(0.5+0.5*Math.sin(t*0.9));
+    g.clearRect(0,0,cv.width,cv.height);
+    /* sol */
+    g.fillStyle='#d9d2c4'; g.fillRect(90,236,420,14);
+    g.strokeStyle='#8c8578'; g.lineWidth=1.5;
+    for(var i=0;i<420;i+=12){ g.beginPath(); g.moveTo(90+i,250); g.lineTo(90+i-8,262); g.stroke(); }
+    /* ciseaux */
+    var x0=140, x1=460, yb=236, yt=236-hgt;
+    g.strokeStyle='#5C544B'; g.lineWidth=10; g.lineCap='round';
+    g.beginPath(); g.moveTo(x0,yb); g.lineTo(x1,yt); g.stroke();
+    g.beginPath(); g.moveTo(x1,yb); g.lineTo(x0,yt); g.stroke();
+    g.fillStyle='#BD8A2A';
+    [[x0,yb],[x1,yb],[x0,yt],[x1,yt],[(x0+x1)/2,(yb+yt)/2]].forEach(function(p){
+      g.beginPath(); g.arc(p[0],p[1],7,0,7); g.fill(); });
+    /* plateau */
+    g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.6;
+    g.beginPath(); g.rect(110,yt-18,440,18); g.fill(); g.stroke();
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('table \u00e9l\u00e9vatrice \u00e0 ciseaux',300,282); g.textAlign='left';
+    /* graphe à deux boucles */
+    var gx=620, gy=110, R=52;
+    var N=[[gx,gy+R],[gx-R,gy],[gx+R,gy],[gx,gy-R],[gx+R+40,gy+R]];
+    g.strokeStyle='#2E6A8E'; g.lineWidth=2.4;
+    [[0,1],[1,3],[3,2],[2,0],[1,2],[0,4]].forEach(function(e){
+      g.beginPath(); g.moveTo(N[e[0]][0],N[e[0]][1]); g.lineTo(N[e[1]][0],N[e[1]][1]); g.stroke(); });
+    N.forEach(function(p,i){
+      g.fillStyle='#FFFDF8'; g.strokeStyle='#5C544B'; g.lineWidth=2;
+      g.beginPath(); g.arc(p[0],p[1],15,0,7); g.fill(); g.stroke();
+      g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(String(i),p[0],p[1]+4); g.textAlign='left';
+    });
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('5 solides \u00b7 6 liaisons',gx+20,gy+R+52);
+    g.fillText('2 boucles ferm\u00e9es',gx+20,gy+R+70); g.textAlign='left';
+    /* liste des liaisons */
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('liaisons : 2 pivots \u00b7 2 pivots glissants \u00b7 1 rotule \u00b7 1 lin. annulaire',90,36);
+    g.fillStyle='#8A5A7A';
+    g.fillText('\u00e9tude dans l\u2019espace \u00b7 m = 1',90,58);
+  }
+  setInterval(step,50); step();
+})();
+
+/* ============ correction & remise ============ */
+var sent=false;
+function mark(id,good){ el(id).className='qrow '+(good?'ok':'no'); }
+el('submit').addEventListener('click',function(){
+  if(sent) return;
+  var nom=(el('nom').value||'').trim(), classe=(el('classe').value||'').trim();
+  if(!nom){ alert('Indique ton nom avant d\u2019envoyer.'); el('nom').focus(); return; }
+  if(!g3State.done){ alert('Termine d\u2019abord le d\u00e9fi de l\u2019exercice 3 (une seule tentative) !'); return; }
+  /* EX1 */
+  var ok1a=numf(el('n1a').value)===EX1.n, ok1b=numf(el('n1b').value)===EX1.L, ok1c=numf(el('n1c').value)===EX1.g;
+  mark('q1a',ok1a); mark('q1b',ok1b); mark('q1c',ok1c);
+  var p1=(ok1a?1:0)+(ok1b?1:0)+(ok1c?1:0);
+  var c1=el('c1'); c1.className='corr show '+(p1===3?'ok':'no');
+  c1.innerHTML='<b>'+p1+' / 3</b><div class="sol">n = <b>4</b> (les quatre ronds, bâti compris) · L = <b>5</b> (cinq traits, celui en pointillé compte comme les autres) · γ = 5 − 4 + 1 = <b>2</b>. Deux boucles fermées : le graphe en contient bien une de plus grâce au trait diagonal.</div>';
+  /* EX2 */
+  var ok2a=numf(el('n2a').value)===EX2.Ic, ok2b=numf(el('n2b').value)===EX2.h;
+  var ok2c=(el('s2c').value==='3 conditions géométriques à garantir : montage précis exigé');
+  mark('q2a',ok2a); mark('q2b',ok2b); mark('q2c',ok2c);
+  var p2=(ok2a?1:0)+(ok2b?1:0)+(ok2c?1:0);
+  var c2=el('c2'); c2.className='corr show '+(p2===3?'ok':'no');
+  c2.innerHTML='<b>'+p2+' / 3</b><div class="sol">I<sub>c</sub> = 1 (pivot) + 3 (rotule) = <b>4</b> · γ = 2 − 2 + 1 = 1, E<sub>c</sub> = 6 · h = 1 + 6 − 4 = <b>3</b>.<br>Trois contraintes : c’est mieux que les 5 du montage à deux pivots, mais il reste du travail — la rotule seule ne suffit pas à absorber le défaut axial. C’est la <b>linéaire annulaire</b> (4 ddl) qui aurait amené h à 0.</div>';
+  /* EX3 */
+  var p3 = g3State.hits>=5?2:(g3State.hits>=3?1:0);
+  var c3=el('c3'); c3.className='corr show '+(p3===2?'ok':'no');
+  c3.innerHTML='<b>'+p3+' / 2</b> (défi : '+g3State.hits+'/6)<div class="sol">γ = L − n + 1 avec le bâti · les ddl des liaisons usuelles · h = m + E<sub>c</sub> − I<sub>c</sub> · et le verdict, signe compris.</div>';
+  /* EX4 */
+  var ok4a=numf(el('n4a').value)===7;
+  var ok4b=(el('s4b').value==='une mobilité parasite : l’arbre bouge alors qu’il ne devrait pas');
+  mark('q4a',ok4a); mark('q4b',ok4b);
+  var p4=(ok4a?1:0)+(ok4b?1:0);
+  var c4=el('c4'); c4.className='corr show '+(p4===2?'ok':'no');
+  c4.innerHTML='<b>'+p4+' / 2</b><div class="sol">h = 1 + 6 − I<sub>c</sub> = 7 − I<sub>c</sub>, donc h = 0 pour <b>I<sub>c</sub> = 7</b> (rotule + linéaire annulaire).<br>Au-delà, h devient négatif : ce n’est pas « encore mieux », c’est une <b>mobilité parasite</b> — il manque une liaison, et l’arbre coulisse librement. Le bon guidage se situe exactement à h = 0.</div>';
+  /* EX5 */
+  var ok5a=(el('s5a').value==='il a pris E_c = 3γ (modèle plan) alors que le guidage est spatial');
+  var ok5b=numf(el('n5b').value)===EX5.h;
+  mark('q5a',ok5a); mark('q5b',ok5b);
+  var p5=(ok5a?1:0)+(ok5b?1:0);
+  var c5=el('c5'); c5.className='corr show '+(p5===2?'ok':'no');
+  c5.innerHTML='<b>'+p5+' / 2</b><div class="sol">Un guidage d’arbre se traite <b>dans l’espace</b> : E<sub>c</sub> = 6γ = 6, et non 3. D’où h = 1 + 6 − 2 = <b>5</b>, et non 2.<br>La conséquence est industrielle : le stagiaire aurait laissé partir en production un montage exigeant <b>cinq</b> conditions de coaxialité en n’en annonçant que deux. <b>Le modèle s’annonce avant de calculer</b> — c’est la première ligne de toute étude.</div>';
+  /* EX6 */
+  var ok6a=numf(el('n6a').value)===EX6.g, ok6b=numf(el('n6b').value)===EX6.Ic, ok6c=numf(el('n6c').value)===EX6.h;
+  mark('q6a',ok6a); mark('q6b',ok6b); mark('q6c',ok6c);
+  var p6=(ok6a?1:0)+(ok6b?1:0)+(ok6c?1:0);
+  var c6=el('c6'); c6.className='corr show '+(p6===3?'ok':'no');
+  c6.innerHTML='<b>'+p6+' / 3</b><div class="sol">γ = 6 − 5 + 1 = <b>2</b> → E<sub>c</sub> = 6 × 2 = 12 · I<sub>c</sub> = 1+1+2+2+3+4 = <b>13</b> · h = 1 + 12 − 13 = <b>0</b>.<br><b>Dossier validé sans réserve :</b> cette table est isostatique. Le concepteur a délibérément mis une rotule et une linéaire annulaire là où deux pivots supplémentaires auraient été « naturels » — c’est exactement le raisonnement que tu viens de refaire, et c’est ce qui permettra de monter la série sans ajustement.</div>';
+  /* total */
+  var score=p1+p2+p3+p4+p5+p6;
+  el('scoreBig').textContent=score+' / 15';
+  el('scoreSt').textContent = score>=12?'Revue de conception validée : le bureau te confie les dossiers critiques !':(score>=8?'Bonne revue — revois les postes en rouge.':'Reprends le TP : la méthode en 5 temps s\u2019entra\u00eene.');
+  el('scorebox').classList.add('show'); el('submit').disabled=true; sent=true;
+  document.querySelectorAll('select, .numin, #pSlider').forEach(function(x){ x.disabled=true; });
+  el('scorebox').scrollIntoView({behavior:'smooth'});
+  if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
+    el('scoreSt').textContent+='  \u00b7  r\u00e9sultat envoy\u00e9 au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='  \u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; } }
+  else { el('scoreSt').textContent+='  \u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; }
+});
+
+/* ============ espace enseignant ============ */
+var EX_MAX=[3,3,2,2,2,3], EX_LAB=['Ex1 graphe','Ex2 guidage','Ex3 d\u00e9fi','Ex4 curseur','Ex5 erreur','Ex6 rapport'];
+el('tlink').addEventListener('click',function(){ el('dash').classList.toggle('show'); });
+el('pwBtn').addEventListener('click',function(){ if(el('pw').value==='Agostini2025'){ el('dashLogin').style.display='none'; el('dashData').style.display='block'; loadDash(); } else { el('pwFb').textContent='Mot de passe incorrect.'; } });
+el('refresh') && el('refresh').addEventListener('click',loadDash);
+function loadDash(){
+  if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
+  db.ref(NODE).once('value').then(function(snap){
+    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
+    var moy = n? (sum/n).toFixed(2).replace('.',',') : '\u2014';
+    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+    var pq='<h3 style="margin:14px 0 4px;font-size:16px">R\u00e9ussite par exercice</h3>';
+    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+    el('perQ').innerHTML=pq;
+    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+  }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (r\u00e8gles/connexion).</span>'; });
+}
+</script>
+</body>
+</html>
