@@ -166,6 +166,27 @@
   .endcard .endtxt h2{margin:6px 0 8px;font-size:28px;color:#eaf3ee}
   .endcard .endtxt p{color:#cfd6e6;font-size:16px;margin:8px 0}
   .endcard .endtxt b{color:#6ee3a0}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -456,7 +477,7 @@
         <h3><span class="n">4.1</span> Tirée ou poussée ? <span class="st" id="s41">non résolu</span></h3>
         <div class="stake"><canvas id="stk41" width="560" height="150" aria-label="Barres en traction et en compression"></canvas>
           <div class="why"><span class="lab">pourquoi ça compte</span>Les câbles de sécurité ne peuvent être accrochés que sur des barres <b>tendues</b> : une barre comprimée flamberait sous l’ancrage. Avant de te longer, tu dois savoir <b>quelles barres tirent</b>.</div></div>
-        <p class="brief">🔺 Un treillis simple : deux barres inclinées à 45° soutiennent un nœud auquel pend une charge de <b>1400 N</b>. Les jauges de contrainte sont mortes, mais le raisonnement suffit. Observe la déformation exagérée sur l’écran de contrôle, puis réponds.</p>
+        <p class="brief">🔺 Une console murale de charpente : <b>deux barres partent du mur et se rejoignent en un seul nœud</b>, celui auquel pend la charge de <b>1400 N</b>. En haut, une barre <b>horizontale</b> ; en dessous, une barre <b>inclinée à 45°</b> qui remonte du pied du mur jusqu’au même nœud. Les jauges de contrainte sont mortes, mais le raisonnement suffit : observe la déformation exagérée sur l’écran, puis réponds.</p>
         <div class="scene">
           <canvas id="cvTreillis" width="700" height="300" aria-label="Treillis à deux barres avec charge suspendue et déformation exagérée"></canvas>
         </div>
@@ -475,7 +496,7 @@
         <h3><span class="n">4.2</span> L’équilibre du nœud <span class="st" id="s42">non résolu</span></h3>
         <div class="stake"><canvas id="stk42" width="560" height="150" aria-label="Isolement d'un nœud du treillis"></canvas>
           <div class="why"><span class="lab">pourquoi ça compte</span>La passerelle de sortie est boulonnée sur ce nœud précis. S’il lâche, le seul chemin part avec. Tu dois <b>chiffrer l’effort dans la barre inclinée</b> avant de charger quoi que ce soit.</div></div>
-        <p class="brief">🔧 On isole le nœud du bas. Trois forces s’y croisent : la charge <b>P = 1400 N</b> vers le bas, l’effort <b>N</b> de la barre inclinée à <b>45°</b>, et l’effort horizontal de la barre du haut. Projette, puis résous. <b>Commence par l’équation qui ne contient qu’une seule inconnue.</b></p>
+        <p class="brief">🔧 On isole le nœud de la console — celui où les deux barres se rejoignent. Trois forces s’y croisent : la charge <b>P = 1400 N</b> vers le bas, l’effort <b>N</b> de la barre inclinée à <b>45°</b> qui <b>pousse</b> le nœud (elle est comprimée), et l’effort <b>H</b> de la barre horizontale qui <b>tire</b> vers le mur (elle est tendue). Projette, puis résous. <b>Commence par l’équation qui ne contient qu’une seule inconnue.</b></p>
         <div class="scene">
           <canvas id="cvNoeud4" width="700" height="300" aria-label="Nœud isolé avec les trois forces et leurs projections"></canvas>
         </div>
@@ -615,16 +636,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -634,30 +657,145 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ================= outils de rendu ================= */
@@ -2554,106 +2692,126 @@ var H42=N42*Math.cos(A4);           /* 1400 N   */
   setInterval(step,45); step();
 })();
 
-/* --- 4.1 : traction / compression, déformation exagérée --- */
+/* --- 4.1 : traction / compression sur une console murale --- */
 (function(){
   var cv=el('cvTreillis'); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
   function step(){
     t+=0.035;
-    var d=6+6*Math.sin(t*1.1);          /* deformation exageree */
+    var d=5+5*Math.sin(t*1.1);            /* deformation exageree */
     g.clearRect(0,0,W,H);
-    var A={x:120,y:70}, B={x:520,y:70}, C={x:520,y:225};
-    /* appuis */
-    g.fillStyle='#8b95a8';
-    [[A.x,A.y],[B.x,B.y]].forEach(function(p){ g.beginPath(); g.arc(p[0],p[1],7,0,7); g.fill(); });
-    g.fillStyle='#6c7686'; g.fillRect(96,40,20,200);
-    /* barre horizontale (tendue : elle s'allonge) */
+    /* le mur, a gauche */
+    g.fillStyle='#39414f'; g.fillRect(70,30,34,230);
+    g.strokeStyle='rgba(139,149,168,.55)'; g.lineWidth=1.4;
+    for(var y=44;y<255;y+=22){ g.beginPath(); g.moveTo(70,y); g.lineTo(104,y); g.stroke(); }
+    /* points d'ancrage : A en haut, E en bas */
+    var A={x:104,y:78}, E={x:104,y:232};
+    /* le noeud charge D, a droite, a la meme hauteur que A */
+    var D={x:404,y:78};
+    /* barre HORIZONTALE A-D : elle s'allonge (le noeud part vers la droite) */
+    var Dx=D.x+d;
     g.strokeStyle='#6ee3a0'; g.lineWidth=9; g.lineCap='round';
-    g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(B.x+d,B.y); g.stroke();
-    /* barre inclinee (comprimee : elle se raccourcit et flambe legerement) */
+    g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(Dx,D.y); g.stroke();
+    /* barre INCLINEE E-D : elle se raccourcit et flambe */
     g.strokeStyle='#e87060'; g.lineWidth=9;
-    g.beginPath(); g.moveTo(A.x,A.y+2);
-    g.quadraticCurveTo((A.x+C.x)/2-d*0.8,(A.y+C.y)/2+d*0.8,C.x+d*0.4,C.y-d*0.4);
+    g.beginPath(); g.moveTo(E.x,E.y);
+    g.quadraticCurveTo((E.x+Dx)/2+d*0.9,(E.y+D.y)/2+d*0.9,Dx,D.y+2);
     g.stroke(); g.lineCap='butt';
-    /* noeud + charge */
-    g.fillStyle='#f0b558'; g.beginPath(); g.arc(C.x+d*0.4,C.y-d*0.4,9,0,7); g.fill();
+    /* goussets */
+    g.fillStyle='#8b95a8';
+    [[A.x,A.y],[E.x,E.y]].forEach(function(p){ g.beginPath(); g.arc(p[0],p[1],7,0,7); g.fill(); });
+    /* le noeud charge : les DEUX barres s'y rejoignent */
+    g.fillStyle='#f0b558'; g.beginPath(); g.arc(Dx,D.y,10,0,7); g.fill();
+    g.strokeStyle='rgba(240,181,88,.5)'; g.lineWidth=2;
+    g.beginPath(); g.arc(Dx,D.y,10+3*Math.abs(Math.sin(t*2)),0,7); g.stroke();
+    /* la charge, suspendue AU NOEUD */
     g.strokeStyle='#f0b558'; g.lineWidth=4;
-    g.beginPath(); g.moveTo(C.x+d*0.4,C.y-d*0.4); g.lineTo(C.x+d*0.4,C.y+48); g.stroke();
-    g.fillStyle='#8a6a3c'; g.fillRect(C.x+d*0.4-30,C.y+48,60,30);
+    g.beginPath(); g.moveTo(Dx,D.y+8); g.lineTo(Dx,D.y+92); g.stroke();
+    g.fillStyle='#8a6a3c'; g.fillRect(Dx-32,D.y+92,64,32);
     g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('1400 N',C.x+d*0.4,C.y+68);
+    g.fillText('1400 N',Dx,D.y+113);
+    g.fillText('n\u0153ud charg\u00e9',Dx+2,D.y-22);
     /* etiquettes */
     g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
-    g.fillStyle='#6ee3a0'; g.fillText('barre horizontale : elle s\u2019ALLONGE',300,50);
-    g.fillStyle='#e87060'; g.fillText('barre inclin\u00e9e : elle se RACCOURCIT',210,272);
-    /* fleches de deformation */
+    g.fillStyle='#6ee3a0'; g.fillText('barre horizontale : elle S\u2019ALLONGE',150,54);
+    g.fillStyle='#e87060'; g.fillText('barre inclin\u00e9e 45\u00b0 : elle se RACCOURCIT',150,268);
+    g.fillStyle='rgba(207,214,230,.75)'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('les deux barres tiennent le M\u00caME n\u0153ud',470,150);
+    g.fillText('\u2192 c\u2019est \u00e0 deux qu\u2019elles \u00e9quilibrent la charge',470,172);
+    /* fleche d'allongement */
     g.strokeStyle='#6ee3a0'; g.lineWidth=2;
-    g.beginPath(); g.moveTo(B.x+d+8,B.y); g.lineTo(B.x+d+26,B.y); g.stroke();
-    g.beginPath(); g.moveTo(B.x+d+26,B.y); g.lineTo(B.x+d+20,B.y-4); g.moveTo(B.x+d+26,B.y); g.lineTo(B.x+d+20,B.y+4); g.stroke();
+    g.beginPath(); g.moveTo(Dx+16,D.y-30); g.lineTo(Dx+38,D.y-30); g.stroke();
+    g.beginPath(); g.moveTo(Dx+38,D.y-30); g.lineTo(Dx+31,D.y-34);
+    g.moveTo(Dx+38,D.y-30); g.lineTo(Dx+31,D.y-26); g.stroke();
     g.textAlign='center';
   }
   setInterval(step,45); step();
 })();
 
 setupHint('h41','hb41',[
-  'Une barre TENDUE s\u2019allonge : ses deux extr\u00e9mit\u00e9s s\u2019\u00e9cartent. Une barre COMPRIM\u00c9E se raccourcit et a tendance \u00e0 flamber.',
-  'Regarde l\u2019\u00e9cran : la barre du haut s\u2019\u00e9tire vers la droite, la barre inclin\u00e9e se courbe en se tassant.',
-  'La charge tire le n\u0153ud vers le bas : la barre inclin\u00e9e la repousse (compression), la barre horizontale retient (traction).'
+  'Les DEUX barres arrivent sur le m\u00eame n\u0153ud : c\u2019est ensemble qu\u2019elles \u00e9quilibrent la charge. Une seule n\u2019y suffirait pas.',
+  'Isole ce n\u0153ud. La charge tire vers le BAS : seule la barre inclin\u00e9e, qui remonte du pied du mur, peut fournir une composante vers le HAUT \u2014 en POUSSANT le n\u0153ud. Elle est donc comprim\u00e9e, et elle se raccourcit.',
+  'En poussant, cette barre inclin\u00e9e chasse aussi le n\u0153ud vers la droite, loin du mur. Quelque chose doit le retenir : c\u2019est la barre horizontale, qui TIRE vers le mur. Elle est tendue, donc elle s\u2019allonge.'
 ]);
 el('b41').addEventListener('click',function(){
   var okA=(el('q41a').value==='TENDUE : elle s\u2019allonge, elle tire sur ses n\u0153uds');
   var okB=(el('q41b').value==='COMPRIM\u00c9E : elle se raccourcit, elle pousse sur ses n\u0153uds');
   if(okA&&okB){
     el('fb41').className='fb ok';
-    el('fb41').textContent='\u2713 Horizontale TENDUE, inclin\u00e9e COMPRIM\u00c9E. Un poin\u00e7on appara\u00eet sur le gousset.';
+    el('fb41').textContent='\u2713 Inclin\u00e9e COMPRIM\u00c9E (elle seule peut pousser le n\u0153ud vers le haut), horizontale TENDUE (elle retient le n\u0153ud contre le mur). Un poin\u00e7on appara\u00eet sur le gousset.';
     solve('p41','s41','fr41',1,'6');
     narrate4('Tu passes la main sur le gousset : un chiffre y est poin\u00e7onn\u00e9, encore gras de graisse.');
   } else {
     el('fb41').className='fb no';
-    el('fb41').textContent='\u2717 Regarde d\u2019abord ce qui S\u2019ALLONGE et ce qui se RACCOURCIT sur l\u2019\u00e9cran.';
+    el('fb41').textContent='\u2717 Isole le n\u0153ud o\u00f9 les deux barres se rejoignent : laquelle peut pousser vers le HAUT pour tenir la charge ?';
     incident();
   }
 });
 
-/* --- 4.2 : isolement du nœud --- */
+/* --- 4.2 : isolement du nœud de la console --- */
 (function(){
   var cv=el('cvNoeud4'); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  function arw4(x1,y1,x2,y2,col,lab,lx,ly){
+    g.strokeStyle=col;g.fillStyle=col;g.lineWidth=4;
+    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+    var a=Math.atan2(y2-y1,x2-x1),L=16,hw=7;
+    var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
+    var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
+    g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();
+    g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(lab,lx,ly);
+  }
   function step(){
     t+=0.035;
     g.clearRect(0,0,W,H);
     var Nd={x:330,y:150};
+    /* mur + barres esquissees, dans la geometrie de 4.1 */
+    g.fillStyle='rgba(57,65,79,.55)'; g.fillRect(60,40,26,220);
+    g.strokeStyle='rgba(139,149,168,.45)'; g.lineWidth=7;
+    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(86,Nd.y); g.stroke();           /* horizontale vers le mur */
+    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(86,Nd.y+120); g.stroke();       /* inclinee vers le pied du mur */
+    g.fillStyle='rgba(207,214,230,.55)'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('mur',73,32);
     /* cercle d'isolement */
     g.strokeStyle='rgba(232,112,96,.75)'; g.lineWidth=2.4; g.setLineDash([7,5]);
-    g.beginPath(); g.arc(Nd.x,Nd.y,88+Math.sin(t*2)*2,0,7); g.stroke(); g.setLineDash([]);
-    /* barres esquissees */
-    g.strokeStyle='rgba(139,149,168,.5)'; g.lineWidth=7;
-    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(Nd.x-190,Nd.y); g.stroke();
-    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(Nd.x-150,Nd.y-150); g.stroke();
-    /* forces */
-    function arw4(x1,y1,x2,y2,col,lab,lx,ly){
-      g.strokeStyle=col;g.fillStyle=col;g.lineWidth=4;
-      g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
-      var a=Math.atan2(y2-y1,x2-x1),L=16,hw=7;
-      var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
-      var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
-      g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();
-      g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(lab,lx,ly);
-    }
-    arw4(Nd.x,Nd.y,Nd.x,Nd.y+80,'#f0b558','P = 1400 N',Nd.x+16,Nd.y+62);
-    arw4(Nd.x,Nd.y,Nd.x-110,Nd.y-110,'#e87060','N (barre \u00e0 45\u00b0)',Nd.x-250,Nd.y-124);
-    arw4(Nd.x,Nd.y,Nd.x-120,Nd.y,'#6ee3a0','H (barre horizontale)',Nd.x-260,Nd.y-14);
-    /* angle */
+    g.beginPath(); g.arc(Nd.x,Nd.y,86+Math.sin(t*2)*2,0,7); g.stroke(); g.setLineDash([]);
+    /* les trois forces SUR le noeud */
+    arw4(Nd.x,Nd.y,Nd.x,Nd.y+76,'#f0b558','P = 1400 N',Nd.x+16,Nd.y+58);
+    arw4(Nd.x,Nd.y,Nd.x+76,Nd.y-76,'#e87060','N : la barre inclin\u00e9e POUSSE',Nd.x+66,Nd.y-92);
+    arw4(Nd.x,Nd.y,Nd.x-110,Nd.y,'#6ee3a0','H : l\u2019horizontale TIRE',Nd.x-250,Nd.y-16);
+    /* angle 45 */
     g.strokeStyle='#8fd4e0'; g.lineWidth=2;
-    g.beginPath(); g.arc(Nd.x,Nd.y,44,Math.PI,Math.PI+0.785,false); g.stroke();
+    g.beginPath(); g.arc(Nd.x,Nd.y,44,-Math.PI/4,0,false); g.stroke();
     g.fillStyle='#8fd4e0'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('45\u00b0',Nd.x-62,Nd.y-24);
+    g.fillText('45\u00b0',Nd.x+62,Nd.y-14);
+    /* noeud */
+    g.fillStyle='#f0b558'; g.beginPath(); g.arc(Nd.x,Nd.y,7,0,7); g.fill();
     /* aide projection */
     g.fillStyle='#cfd6e6'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
-    g.fillText('projection sur y :  N\u00b7sin 45\u00b0 \u2212 1400 = 0',430,110);
-    g.fillText('projection sur x :  H \u2212 N\u00b7cos 45\u00b0 = 0',430,138);
+    g.fillText('projection sur y :  N\u00b7sin 45\u00b0 \u2212 1400 = 0',420,222);
+    g.fillText('projection sur x :  N\u00b7cos 45\u00b0 \u2212 H = 0',420,250);
     g.fillStyle='rgba(143,212,224,.7)'; g.font='700 11px "JetBrains Mono",monospace';
-    g.fillText('commence par celle qui n\u2019a qu\u2019UNE inconnue',430,168);
+    g.fillText('commence par celle qui n\u2019a qu\u2019UNE inconnue',420,278);
     g.textAlign='center';
   }
   setInterval(step,45); step();
@@ -2661,8 +2819,8 @@ el('b41').addEventListener('click',function(){
 
 setupHint('h42','hb42',[
   'Isole le n\u0153ud : trois forces concourantes, donc \u03a3F = 0 sur x ET sur y.',
-  'La projection verticale ne contient que N : N \u00d7 sin 45\u00b0 = 1400.',
-  'sin 45\u00b0 \u2248 0,707, donc N = 1400 / 0,707. Ensuite H = N \u00d7 cos 45\u00b0.'
+  'H est horizontale : elle ne compte pas dans la projection verticale, qui ne contient donc que N : N \u00d7 sin 45\u00b0 = 1400.',
+  'sin 45\u00b0 \u2248 0,707, donc N = 1400 / 0,707 \u2248 1980 N. Ensuite, sur l\u2019horizontale : H = N \u00d7 cos 45\u00b0.'
 ]);
 el('b42').addEventListener('click',function(){
   var a=numf(el('n42a').value), b=numf(el('n42b').value);
