@@ -80,6 +80,27 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -92,7 +113,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">TP · Première spé SI · Hyperstatisme</div>
-      <h1>🔩 Le compteur de contraintes</h1>
+      <h1>Le compteur de contraintes</h1>
       <p class="lede">Le bureau d’études te confie six mécanismes. Pour chacun, une seule question : <b>combien de contraintes géométriques faudra-t-il garantir à l’atelier ?</b> Tu ne résoudras aucune équation — tu vas seulement compter, dans le bon ordre. Et à la fin, tu régleras toi-même un banc de montage jusqu’à obtenir h = 0.</p>
       <div class="plan">
         <div class="p"><div class="t">Acte 1 · ≈ 45 min</div><b>🕸️ Compter</b><span>Graphe des liaisons, cycles, somme des degrés de liberté.</span></div>
@@ -110,8 +131,8 @@
     <div class="acte"><span class="n">ACTE 1</span><h2>Compter</h2><span class="d">≈ 45 min</span></div>
 
     <section class="exo-card" id="a">
-      <h3 class="ex"><span class="num">A</span> Le graphe du bielle-manivelle 🕸️</h3>
-      <p class="task">🎯 Le compresseur de l’atelier : un bâti (0), une manivelle (1), une bielle (2), un piston (3). Trois pivots et une glissière. <b>Compte</b>, sans rien calculer d’autre.</p>
+      <h3 class="ex"><span class="num">A</span> Le graphe du bielle-manivelle</h3>
+      <p class="task">Le compresseur de l’atelier : un bâti (0), une manivelle (1), une bielle (2), un piston (3). Trois pivots et une glissière. <b>Compte</b>, sans rien calculer d’autre.</p>
       <div class="schema">
         <svg viewBox="0 0 700 250" aria-label="Système bielle-manivelle et son graphe des liaisons">
           <rect x="20" y="20" width="300" height="210" rx="10" fill="#fdfaf2" stroke="#E4DCCB" stroke-width="2"/>
@@ -153,8 +174,8 @@
     </section>
 
     <section class="exo-card" id="b">
-      <h3 class="ex"><span class="num">B</span> Deux boucles valent mieux qu’une 🔁</h3>
-      <p class="task">🎯 Une table élévatrice à ciseaux, modélisée par <b>5 solides</b> (bâti compris) reliés par <b>6 liaisons</b>. Ce mécanisme a deux boucles fermées.</p>
+      <h3 class="ex"><span class="num">B</span> Deux boucles valent mieux qu’une</h3>
+      <p class="task">Une table élévatrice à ciseaux, modélisée par <b>5 solides</b> (bâti compris) reliés par <b>6 liaisons</b>. Ce mécanisme a deux boucles fermées.</p>
       <div class="ligne" id="bL1"><span class="lb">a) Nombre de cycles : γ =</span><input class="numin" id="bA" inputmode="numeric" placeholder="?"></div>
       <div class="ligne" id="bL2"><span class="lb">b) Équations disponibles dans l’espace : E<sub>c</sub> =</span><input class="numin" id="bB" inputmode="numeric" placeholder="?"></div>
       <div class="match" id="bMatch"></div>
@@ -164,8 +185,8 @@
     </section>
 
     <section class="exo-card" id="c">
-      <h3 class="ex"><span class="num">C</span> La somme des libertés 📋</h3>
-      <p class="task">🎯 Un mécanisme comporte les cinq liaisons ci-dessous. <b>Attribue son nombre de degrés de liberté</b> à chacune, puis fais la somme.</p>
+      <h3 class="ex"><span class="num">C</span> La somme des libertés</h3>
+      <p class="task">Un mécanisme comporte les cinq liaisons ci-dessous. <b>Attribue son nombre de degrés de liberté</b> à chacune, puis fais la somme.</p>
       <div class="match" id="cMatch"></div>
       <div class="row"><span>Somme des degrés de liberté : I<sub>c</sub> =</span><input class="numin" id="cS" inputmode="numeric" placeholder="?"></div>
       <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
@@ -176,8 +197,8 @@
     <div class="acte"><span class="n">ACTE 2</span><h2>Calculer h</h2><span class="d">≈ 55 min</span></div>
 
     <section class="exo-card" id="d">
-      <h3 class="ex"><span class="num">D</span> L’arbre sur deux paliers 🧮</h3>
-      <p class="task">🎯 Le cas d’école, à dérouler entièrement : un arbre guidé par <b>deux liaisons pivot</b>, étude <b>dans l’espace</b>. L’arbre tourne : m = 1.</p>
+      <h3 class="ex"><span class="num">D</span> L’arbre sur deux paliers</h3>
+      <p class="task">Le cas d’école, à dérouler entièrement : un arbre guidé par <b>deux liaisons pivot</b>, étude <b>dans l’espace</b>. L’arbre tourne : m = 1.</p>
       <div class="ligne" id="dL1"><span class="lb">a) γ =</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div>
       <div class="ligne" id="dL2"><span class="lb">b) E<sub>c</sub> =</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div>
       <div class="ligne" id="dL3"><span class="lb">c) I<sub>c</sub> =</span><input class="numin" id="dC" inputmode="numeric" placeholder="?"></div>
@@ -190,8 +211,8 @@
     </section>
 
     <section class="exo-card" id="e">
-      <h3 class="ex"><span class="num">★</span> ⭐ Le banc de montage</h3>
-      <p class="task">🎯 Même arbre, mêmes paliers, mais <b>c’est toi qui choisis le modèle de chaque liaison</b>. Le banc simule ensuite le montage avec un palier légèrement désaligné. <b>Trouve la combinaison qui donne h = 0</b> 🎯 — en gardant un guidage correct.</p>
+      <h3 class="ex"><span class="num">★</span> Le banc de montage</h3>
+      <p class="task">Même arbre, mêmes paliers, mais <b>c’est toi qui choisis le modèle de chaque liaison</b>. Le banc simule ensuite le montage avec un palier légèrement désaligné. <b>Trouve la combinaison qui donne h = 0</b> — en gardant un guidage correct.</p>
       <div class="schema">
         <canvas id="cvBanc" width="700" height="330" aria-label="Banc de montage : deux liaisons à choisir, arbre qui se déforme ou non"></canvas>
         <div class="selrow">
@@ -209,33 +230,30 @@
     </section>
 
     <section class="exo-card" id="f">
-      <h3 class="ex"><span class="num">F</span> Le même mécanisme, deux réponses 🧭</h3>
-      <p class="task">🎯 Reprends le quatre-barres du portail automatique : 4 solides, 4 liaisons pivot, m = 1. Calcule h <b>dans les deux modèles</b>.</p>
-      <div class="ligne" id="fL1"><span class="lb">a) Dans le plan (E<sub>c</sub> = 3γ) : h =</span><input class="numin" id="fA" inputmode="numeric" placeholder="?"></div>
-      <div class="ligne" id="fL2"><span class="lb">b) Dans l’espace (E<sub>c</sub> = 6γ) : h =</span><input class="numin" id="fB" inputmode="numeric" placeholder="?"></div>
+      <h3 class="ex"><span class="num">F</span> Le même mécanisme, deux réponses</h3>
+      <p class="task">Reprends le quatre-barres du portail automatique : 4 solides, 4 liaisons pivot, m = 1. Ici γ = 4 − 4 + 1 = <b>1</b>, donc E<sub>c</sub> vaut <b>3 × 1 = 3</b> dans le modèle plan et <b>6 × 1 = 6</b> dans le modèle spatial. Calcule h <b>dans les deux modèles</b>.</p>
+      <div class="ligne" id="fL1"><span class="lb">a) Dans le plan (E<sub>c</sub> = 3γ, et ici γ = 1 donc E<sub>c</sub> = 3) : h =</span><input class="numin" id="fA" inputmode="numeric" placeholder="?"></div>
+      <div class="ligne" id="fL2"><span class="lb">b) Dans l’espace (E<sub>c</sub> = 6γ, et ici γ = 1 donc E<sub>c</sub> = 6) : h =</span><input class="numin" id="fB" inputmode="numeric" placeholder="?"></div>
       <div class="match" id="fMatch"></div>
       <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="fFb"></div>
-      <div class="exo-sol" id="fSol"><b>a)</b> h = 1 + 3 − 4 = <b>0</b> · <b>b)</b> h = 1 + 6 − 4 = <b>3</b>.<br><b>c)</b> Les deux réponses sont justes : ce sont deux modèles différents. Les 3 contraintes du modèle spatial correspondent au <b>parallélisme des quatre axes de pivot</b> — une exigence bien réelle en fabrication, mais que le modèle plan ne peut pas voir. D’où la règle : <b>on annonce toujours son modèle avant de calculer</b>.</div>
+      <div class="exo-sol" id="fSol"><b>a)</b> h = 1 + 3 − 4 = <b>0</b> · <b>b)</b> h = 1 + 6 − 4 = <b>3</b>.<br><b>c)</b> Les deux réponses sont justes : ce sont deux <b>modèles</b> différents, c’est-à-dire deux façons de simplifier le réel — et un modèle n’est jamais « vrai », il est <b>utile ou non selon la question posée</b>.
+<div style="margin-top:10px;padding:10px 14px;background:#fdfaf2;border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:8px">
+<b style="color:var(--steel)">À quoi sert le modèle SPATIAL ?</b><br>Il répond à la question du <b>fabricant</b> : « qu’est-ce que je dois garantir à l’atelier ? » Les 3 contraintes trouvées sont les <b>conditions de parallélisme des quatre axes de pivot</b>. Si les axes ne sont pas rigoureusement parallèles, le mécanisme se bride et s’use. C’est ce modèle qui chiffre le <b>coût de fabrication</b>.
+</div>
+<div style="margin-top:8px;padding:10px 14px;background:#f1f6f2;border:1px solid #cfe0d3;border-left:3px solid var(--green);border-radius:8px">
+<b style="color:var(--green)">Et à quoi sert le modèle PLAN, alors ?</b><br>Il répond à une <b>tout autre question</b>, celle du <b>concepteur du mouvement</b> : « ce mécanisme a-t-il assez de liaisons pour être guidé, et pas trop pour bouger ? » Trouver <b>h = 0 dans le plan</b>, c’est vérifier que <b>l’architecture même du mécanisme est saine</b> — qu’il n’y a ni liaison manquante ni liaison inutile dans le principe.<br><br>C’est le modèle qu’on utilise <b>en premier, au stade du croquis</b>, quand les axes ne sont pas encore dessinés : il se calcule en trois lignes et il élimine tout de suite les architectures aberrantes. Et surtout, il correspond à la réalité de fabrication dès qu’on <b>garantit le parallélisme des axes par la fabrication elle-même</b> — un carter percé en une seule opération, deux flasques usinées ensemble. Dans ce cas, les 3 contraintes spatiales sont satisfaites d’office, et c’est bien h = 0 que voit le monteur.
+</div>
+<div style="margin-top:8px">D’où la règle : <b>on annonce toujours son modèle avant de calculer</b>, et l’on choisit celui qui répond à la question qu’on se pose — architecture du mécanisme (plan) ou exigences de fabrication (espace).</div></div>
     </section>
 
     <div class="acte"><span class="n">ACTE 3</span><h2>Interpréter</h2><span class="d">≈ 45 min</span></div>
 
     <section class="exo-card" id="g">
-      <h3 class="ex"><span class="num">G</span> La table qui bancale 🪑</h3>
-      <p class="task">🎯 Une table posée sur un sol plan. Chaque pied est modélisé par une <b>liaison ponctuelle</b> (5 ddl). La table peut glisser dans le plan et pivoter : <b>m = 3</b>. Compare trois pieds et quatre pieds, dans l’espace.</p>
+      <h3 class="ex"><span class="num">G</span> La table qui bancale</h3>
+      <p class="task">Une table posée sur un sol plan. Chaque pied est modélisé par une <b>liaison ponctuelle</b> (5 ddl). La table peut glisser dans le plan et pivoter : <b>m = 3</b>. Compare trois pieds et quatre pieds, dans l’espace.</p>
       <div class="schema">
-        <svg viewBox="0 0 700 220" aria-label="Table à trois pieds et table à quatre pieds">
-          <g stroke="#8c8578" stroke-width="3"><path d="M30 180 h300 M370 180 h300"/></g>
-          <rect x="70" y="72" width="220" height="14" rx="4" fill="#BD8A2A"/>
-          <g stroke="#5C544B" stroke-width="7" stroke-linecap="round"><path d="M100 86 v92"/><path d="M180 86 v92"/><path d="M262 86 v92"/></g>
-          <text x="180" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#3D7E5F">3 pieds</text>
-          <rect x="410" y="72" width="220" height="14" rx="4" fill="#BD8A2A"/>
-          <g stroke="#5C544B" stroke-width="7" stroke-linecap="round"><path d="M430 86 v92"/><path d="M496 86 v92"/><path d="M562 86 v92"/><path d="M624 86 v88"/></g>
-          <text x="520" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">4 pieds</text>
-          <path d="M614 176 l20 -6" stroke="#C0492E" stroke-width="2.4"/>
-          <text x="640" y="196" font-family="JetBrains Mono" font-size="11" fill="#C0492E">ne touche pas</text>
-        </svg>
+        <canvas id="cvTable" width="700" height="330" aria-label="Vue en perspective : table à trois pieds stable et table à quatre pieds qui bascule"></canvas>
       </div>
       <div class="ligne" id="gL1"><span class="lb">a) Table à 3 pieds (n = 2, L = 3) : h =</span><input class="numin" id="gA" inputmode="numeric" placeholder="?"></div>
       <div class="ligne" id="gL2"><span class="lb">b) Table à 4 pieds (n = 2, L = 4) : h =</span><input class="numin" id="gB" inputmode="numeric" placeholder="?"></div>
@@ -246,8 +264,8 @@
     </section>
 
     <section class="exo-card" id="h">
-      <h3 class="ex"><span class="num">H</span> La décision du bureau d’études 🧾</h3>
-      <p class="task">🎯 Ton chef de projet te demande un avis sur trois dossiers. Tranche.</p>
+      <h3 class="ex"><span class="num">H</span> La décision du bureau d’études</h3>
+      <p class="task">Ton chef de projet te demande un avis sur trois dossiers. Tranche.</p>
       <div class="match" id="hMatch"></div>
       <div class="row"><button class="btn" id="hCheck">Vérifier</button><button class="btn g" id="hShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="hFb"></div>
@@ -255,7 +273,7 @@
     </section>
 
     <section class="exo-card" id="i">
-      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur 🕵️</h3>
+      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur</h3>
       <p class="task">Copie d’un camarade sur l’arbre à deux pivots : <i>« Il y a un seul solide mobile, donc n = 1. Deux liaisons, donc γ = 2 − 1 + 1 = 2, et E<sub>c</sub> = 12. Avec I<sub>c</sub> = 2 et m = 1 : h = 1 + 12 − 2 = 11. »</i></p>
       <div class="match" id="iMatch"></div>
       <div class="row"><span>b) Valeur correcte de h :</span><input class="numin" id="iB" inputmode="numeric" placeholder="?"></div>
@@ -267,16 +285,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">π · x² pour les carrés</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -286,30 +306,145 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ---------- helpers ---------- */
@@ -343,72 +478,145 @@ function setupSteps(btnId, boxId, steps){
 (function(){
   var cv=el('cvBanc'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
   var NOMS={1:'pivot',2:'pivot glissant',3:'rotule',4:'lin. annulaire'};
-  var t=0;
+  var t=0, R=13;                       /* R = rayon de l'arbre */
+
+  /* Vue de COTE : l'axe de l'arbre est horizontal, dans le plan de l'ecran.
+     Les liaisons sont donc represent\u00e9es par leur symbole en coupe longitudinale. */
   function palier(gg,cx,cy,ddl,col,lab){
-    gg.fillStyle='#e7eef2'; gg.strokeStyle=col; gg.lineWidth=2.6;
-    gg.beginPath(); gg.rect(cx-28,cy-32,56,64); gg.fill(); gg.stroke();
-    if(ddl===3){
-      gg.fillStyle='#fff'; gg.beginPath(); gg.arc(cx,cy,17,0,7); gg.fill();
-      gg.strokeStyle=col; gg.lineWidth=2.4; gg.stroke();
-      gg.lineWidth=1.4; gg.beginPath(); gg.ellipse(cx,cy,17,7,0,0,7); gg.stroke();
-    } else if(ddl===4){
-      gg.fillStyle='#fff'; gg.beginPath(); gg.arc(cx,cy,16,0,7); gg.fill();
-      gg.strokeStyle=col; gg.lineWidth=4; gg.stroke();
+    gg.save();
+    /* socle sur le b\u00e2ti */
+    gg.fillStyle='#cfc7b6'; gg.strokeStyle='#8c8578'; gg.lineWidth=1.6;
+    gg.beginPath(); gg.rect(cx-30,cy+R+6,60,208-(cy+R+6)+14); gg.fill(); gg.stroke();
+    if(ddl===1||ddl===2){
+      /* coussinet : deux demi-corps au-dessus et au-dessous de l'arbre */
+      gg.fillStyle='#e7eef2'; gg.strokeStyle=col; gg.lineWidth=2.6;
+      gg.beginPath(); gg.rect(cx-26,cy-R-16,52,16); gg.fill(); gg.stroke();
+      gg.beginPath(); gg.rect(cx-26,cy+R,52,16); gg.fill(); gg.stroke();
+      if(ddl===1){
+        /* pivot : deux \u00e9paulements bloquent la translation axiale */
+        gg.fillStyle=col;
+        gg.fillRect(cx-30,cy-R-4,5,2*R+8);
+        gg.fillRect(cx+25,cy-R-4,5,2*R+8);
+      } else {
+        /* pivot glissant : jeu axial libre, mat\u00e9rialis\u00e9 par des fl\u00e8ches */
+        gg.strokeStyle=col; gg.lineWidth=1.6; gg.setLineDash([3,3]);
+        gg.beginPath(); gg.moveTo(cx-40,cy-R-22); gg.lineTo(cx+40,cy-R-22); gg.stroke();
+        gg.setLineDash([]);
+        gg.beginPath(); gg.moveTo(cx-40,cy-R-22); gg.lineTo(cx-33,cy-R-26);
+        gg.moveTo(cx-40,cy-R-22); gg.lineTo(cx-33,cy-R-18);
+        gg.moveTo(cx+40,cy-R-22); gg.lineTo(cx+33,cy-R-26);
+        gg.moveTo(cx+40,cy-R-22); gg.lineTo(cx+33,cy-R-18); gg.stroke();
+      }
     } else {
-      gg.fillStyle='#fff'; gg.beginPath(); gg.arc(cx,cy,15,0,7); gg.fill();
-      gg.strokeStyle=col; gg.lineWidth=2.4; gg.stroke();
-      if(ddl===2){ gg.lineWidth=1.6; gg.setLineDash([3,3]);
-        gg.beginPath(); gg.moveTo(cx-24,cy); gg.lineTo(cx+24,cy); gg.stroke(); gg.setLineDash([]); }
+      /* rotule et lin\u00e9aire annulaire : sph\u00e8re dans son logement */
+      var sr=R+6;
+      gg.fillStyle='#e7eef2'; gg.strokeStyle=col; gg.lineWidth=2.6;
+      if(ddl===3){
+        /* rotule : la cage \u00e9pouse la sph\u00e8re (pas de jeu axial) */
+        gg.beginPath(); gg.arc(cx,cy,sr+7,Math.PI*0.15,Math.PI*0.85); gg.stroke();
+        gg.beginPath(); gg.arc(cx,cy,sr+7,Math.PI*1.15,Math.PI*1.85); gg.stroke();
+        gg.beginPath(); gg.moveTo(cx-sr-7,cy-4); gg.lineTo(cx-sr-7,cy+4); gg.stroke();
+        gg.beginPath(); gg.moveTo(cx+sr+7,cy-4); gg.lineTo(cx+sr+7,cy+4); gg.stroke();
+      } else {
+        /* lin\u00e9aire annulaire : bague courte, la sph\u00e8re peut coulisser */
+        gg.beginPath(); gg.rect(cx-9,cy-sr-9,18,2*sr+18); gg.fill(); gg.stroke();
+        gg.strokeStyle=col; gg.lineWidth=1.6; gg.setLineDash([3,3]);
+        gg.beginPath(); gg.moveTo(cx-42,cy-sr-18); gg.lineTo(cx+42,cy-sr-18); gg.stroke();
+        gg.setLineDash([]);
+      }
+      /* la sph\u00e8re, solidaire de l'arbre */
+      var sg=gg.createRadialGradient(cx-5,cy-6,2,cx,cy,sr);
+      sg.addColorStop(0,'#ffffff'); sg.addColorStop(1,'#b9c6d1');
+      gg.fillStyle=sg; gg.strokeStyle='#5C544B'; gg.lineWidth=1.8;
+      gg.beginPath(); gg.arc(cx,cy,sr,0,7); gg.fill(); gg.stroke();
     }
     gg.fillStyle=col; gg.font='700 11px "JetBrains Mono",monospace'; gg.textAlign='center';
-    gg.fillText(lab+' ('+ddl+')',cx,cy+54); gg.textAlign='left';
+    gg.fillText(lab+' ('+ddl+')',cx,cy+R+46);
+    gg.restore(); gg.textAlign='left';
   }
+
+  /* rotation AUTOUR DE L'AXE HORIZONTAL : cercle vu en perspective (ellipse tr\u00e8s aplatie)
+     + rep\u00e8re qui parcourt cette ellipse, comme une rainure de clavette. */
+  function rotation(gg,cx,cy,col){
+    gg.save();
+    gg.strokeStyle='rgba(189,138,42,.55)'; gg.lineWidth=1.8;
+    gg.beginPath(); gg.ellipse(cx,cy,7,R+7,0,0,7); gg.stroke();
+    var an=t*2.2;
+    var px=cx+7*Math.cos(an), py=cy+(R+7)*Math.sin(an);
+    var front=(Math.cos(an)>0);
+    gg.fillStyle= front? '#BD8A2A' : 'rgba(189,138,42,.30)';
+    gg.beginPath(); gg.arc(px,py,4.5,0,7); gg.fill();
+    /* pointe de fl\u00e8che sur l'ellipse, c\u00f4t\u00e9 visible */
+    gg.strokeStyle='#BD8A2A'; gg.lineWidth=2.2;
+    gg.beginPath(); gg.moveTo(cx+7,cy-4); gg.lineTo(cx+2,cy-11); gg.moveTo(cx+7,cy-4); gg.lineTo(cx+9,cy-13); gg.stroke();
+    gg.fillStyle='rgba(189,138,42,.9)'; gg.font='700 10px "JetBrains Mono",monospace'; gg.textAlign='center';
+    gg.fillText('rotation autour de l\u2019axe',cx,cy+R+34);
+    gg.restore(); gg.textAlign='left';
+  }
+
   function step(){
     t+=0.04;
     var a=+el('selA').value, b=+el('selB').value;
     var Ic=a+b, h=1+6-Ic;
     var col= h===0? '#3D7E5F' : (h<0? '#8A5A7A' : '#C0492E');
     g.clearRect(0,0,cv.width,cv.height);
-    g.fillStyle='#d9d2c4'; g.fillRect(90,208,520,14);
+    /* b\u00e2ti */
+    g.fillStyle='#d9d2c4'; g.fillRect(80,208,540,14);
     g.strokeStyle='#8c8578'; g.lineWidth=1.5;
-    for(var i=0;i<520;i+=12){ g.beginPath(); g.moveTo(90+i,222); g.lineTo(90+i-8,232); g.stroke(); }
-    var dz=8;
-    palier(g,200,160,a,col,NOMS[a]);
-    palier(g,470,160-dz,b,col,NOMS[b]);
-    var slide=(h<0)? Math.sin(t*1.5)*16 : 0;
-    var flex=(h>0)? -dz*1.3 : 0;
-    g.strokeStyle=col; g.lineWidth=13; g.lineCap='round';
+    for(var i=0;i<540;i+=12){ g.beginPath(); g.moveTo(80+i,222); g.lineTo(80+i-8,232); g.stroke(); }
+    var dz=8, yA=150, yB=150-dz;
+    var slide=(h<0)? Math.sin(t*1.5)*17 : 0;
+    /* axe de rotation, en trait d'axe */
+    g.strokeStyle='rgba(92,84,75,.55)'; g.lineWidth=1.4; g.setLineDash([12,4,3,4]);
+    g.beginPath(); g.moveTo(110,yA); g.lineTo(600,yB); g.stroke(); g.setLineDash([]);
+    /* l'arbre, dessin\u00e9 comme un cylindre vu de c\u00f4t\u00e9 */
+    var x1=130+slide, x2=545+slide;
+    var lg=g.createLinearGradient(0,yA-R,0,yA+R);
+    lg.addColorStop(0,'#b9c6d1'); lg.addColorStop(0.35,'#eef3f7'); lg.addColorStop(1,'#8f9aa8');
+    g.save();
     g.beginPath();
-    if(h>0){ g.moveTo(150+slide,160); g.quadraticCurveTo(335,160+flex,520+slide,160-dz); }
-    else { g.moveTo(150+slide,160); g.lineTo(520+slide,160-dz); }
-    g.stroke();
-    g.save(); g.translate(335,160-dz/2); g.rotate(t*2);
-    g.strokeStyle='rgba(189,138,42,.85)'; g.lineWidth=3;
-    for(var k=0;k<4;k++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(k*1.57)*17,Math.sin(k*1.57)*17); g.stroke(); }
+    if(h>0){   /* arbre tordu : les deux g\u00e9n\u00e9ratrices se courbent */
+      var fl=-dz*1.25;
+      g.moveTo(x1,yA-R); g.quadraticCurveTo((x1+x2)/2,yA+fl-R,x2,yB-R);
+      g.lineTo(x2,yB+R); g.quadraticCurveTo((x1+x2)/2,yA+fl+R,x1,yA+R);
+    } else {
+      g.moveTo(x1,yA-R); g.lineTo(x2,yB-R); g.lineTo(x2,yB+R); g.lineTo(x1,yA+R);
+    }
+    g.closePath(); g.fillStyle=lg; g.fill();
+    g.strokeStyle=col; g.lineWidth=2.2; g.stroke();
     g.restore();
+    /* bouts d'arbre : ellipses (sections droites) */
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=2;
+    g.beginPath(); g.ellipse(x1,yA,5,R,0,0,7); g.fill(); g.stroke();
+    g.beginPath(); g.ellipse(x2,yB,5,R,0,0,7); g.fill(); g.stroke();
+    /* paliers */
+    palier(g,200,yA,a,col,NOMS[a]);
+    palier(g,470,yB,b,col,NOMS[b]);
+    /* rotation propre de l'arbre, entre les deux paliers */
+    rotation(g,335+slide,152-dz/2,col);
+    /* lectures */
     g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
-    g.fillText('I_c = '+a+' + '+b+' = '+Ic,90,42);
-    g.fillText('h = 1 + 6 \u2212 '+Ic,90,66);
+    g.fillText('I_c = '+a+' + '+b+' = '+Ic,80,40);
+    g.fillText('h = 1 + 6 \u2212 '+Ic,80,64);
     g.fillStyle=col; g.font='800 26px "JetBrains Mono",monospace';
-    g.fillText('h = '+h,90,102);
+    g.fillText('h = '+h,80,100);
     g.font='800 15px "Bricolage Grotesque",sans-serif';
     if(h>0){ g.fillStyle='#C0492E';
-      g.fillText('\u26a0 l\u2019arbre se tord au montage',300,52);
+      g.fillText('\u26a0 l\u2019arbre se tord au montage',290,50);
       g.font='700 13px "JetBrains Mono",monospace';
-      g.fillText(h+' contrainte'+(h>1?'s':'')+' g\u00e9om\u00e9trique'+(h>1?'s':'')+' \u00e0 garantir',300,76); }
+      g.fillText(h+' contrainte'+(h>1?'s':'')+' g\u00e9om\u00e9trique'+(h>1?'s':'')+' \u00e0 garantir',290,74); }
     else if(h===0){ g.fillStyle='#3D7E5F';
-      g.fillText('\ud83c\udfaf h = 0 : le d\u00e9faut est absorb\u00e9',300,52);
+      g.fillText('\ud83c\udfaf h = 0 : le d\u00e9faut est absorb\u00e9',290,50);
       g.font='700 13px "JetBrains Mono",monospace';
-      g.fillText('le montage se fait sans forcer',300,76); }
+      g.fillText('le montage se fait sans forcer',290,74); }
     else { g.fillStyle='#8A5A7A';
-      g.fillText('\u26a0 mobilit\u00e9 parasite',300,52);
+      g.fillText('\u26a0 mobilit\u00e9 parasite',290,50);
       g.font='700 13px "JetBrains Mono",monospace';
-      g.fillText('l\u2019arbre coulisse : guidage rat\u00e9',300,76); }
-    g.strokeStyle='#8c8578'; g.lineWidth=1.4; g.setLineDash([4,4]);
-    g.beginPath(); g.moveTo(120,160); g.lineTo(620,160); g.stroke(); g.setLineDash([]);
+      g.fillText('l\u2019arbre coulisse : guidage rat\u00e9',290,74); }
     g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
     g.fillText('palier B d\u00e9salign\u00e9 de 0,2 mm',470,290); g.textAlign='left';
   }
+  ['selA','selB'].forEach(function(id){ el(id).addEventListener('change',function(){}); });
   setInterval(step,50); step();
 })();
 
@@ -491,15 +699,92 @@ lockExo('eCheck','eShow','eSol','eFb',function(){
 });
 
 /* ---------- F ---------- */
-var F_SCEN=[{sc:'c) \ud83e\udded Comment concilier ces deux r\u00e9sultats ?', ok:'les deux sont justes : ce sont deux mod\u00e8les diff\u00e9rents, \u00e0 annoncer avant de calculer', opts:['\u2014 choisir \u2014','les deux sont justes : ce sont deux mod\u00e8les diff\u00e9rents, \u00e0 annoncer avant de calculer','seul le mod\u00e8le plan est valable','il y a forc\u00e9ment une erreur de calcul']}];
+var F_SCEN=[{sc:'c) \ud83e\udded \u00c0 quoi sert le mod\u00e8le PLAN, puisque le mod\u00e8le spatial est plus complet ?', ok:'\u00e0 v\u00e9rifier l\u2019architecture du m\u00e9canisme d\u00e8s le croquis : ni liaison manquante, ni liaison inutile', opts:['\u2014 choisir \u2014','\u00e0 v\u00e9rifier l\u2019architecture du m\u00e9canisme d\u00e8s le croquis : ni liaison manquante, ni liaison inutile','\u00e0 rien : il donne un r\u00e9sultat faux','\u00e0 calculer les tol\u00e9rances d\u2019usinage \u00e0 exiger de l\u2019atelier']}];
 buildMatch('fMatch','f',F_SCEN);
 lockExo('fCheck','fShow','fSol','fFb',function(){
   var a=numf(el('fA').value), b=numf(el('fB').value);
   var ok=[a===0,b===3]; var okM=checkMatch('f',F_SCEN);
   ['fL1','fL2'].forEach(function(id,i){ el(id).className='ligne '+(ok[i]?'ok':'no'); });
-  if(ok[0]&&ok[1]&&okM) return {ok:true,msg:'\u2713 h = 0 dans le plan, h = 3 dans l\u2019espace \u2014 et les deux sont vrais.'};
+  if(ok[0]&&ok[1]&&okM) return {ok:true,msg:'\u2713 h = 0 dans le plan (architecture saine), h = 3 dans l\u2019espace (3 conditions \u00e0 garantir \u00e0 l\u2019atelier).'};
   return {ok:false,msg:'\u2717 '+(ok[0]?'a\u2713':'a\u2717 (E_c = 3\u03b3)')+' '+(ok[1]?'b\u2713':'b\u2717 (E_c = 6\u03b3)')+' '+(okM?'c\u2713':'c\u2717')};
 });
+
+/* ---------- G : les deux tables en perspective ---------- */
+(function(){
+  var cv=el('cvTable'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
+  var t=0;
+  var COS=Math.cos(0.52), SIN=Math.sin(0.52);   /* projection isom\u00e9trique ~30\u00b0 */
+  function P(ox,oy,x,y,z,s){ return {x:ox+(x-y)*COS*s, y:oy+(x+y)*SIN*s-z*s}; }
+  function quad(a,b,c,d,fill,stroke){
+    g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b.x,b.y); g.lineTo(c.x,c.y); g.lineTo(d.x,d.y); g.closePath();
+    if(fill){ g.fillStyle=fill; g.fill(); }
+    if(stroke){ g.strokeStyle=stroke; g.lineWidth=2; g.stroke(); }
+  }
+  function sol(ox,oy,s){
+    var A=P(ox,oy,-30,-30,0,s), B=P(ox,oy,150,-30,0,s), C=P(ox,oy,150,150,0,s), D=P(ox,oy,-30,150,0,s);
+    quad(A,B,C,D,'#efe8d8','#d9d2c4');
+    g.strokeStyle='rgba(140,133,120,.35)'; g.lineWidth=1;
+    for(var u=0;u<=180;u+=30){
+      var p1=P(ox,oy,-30+u,-30,0,s), p2=P(ox,oy,-30+u,150,0,s);
+      g.beginPath(); g.moveTo(p1.x,p1.y); g.lineTo(p2.x,p2.y); g.stroke();
+      var p3=P(ox,oy,-30,-30+u,0,s), p4=P(ox,oy,150,-30+u,0,s);
+      g.beginPath(); g.moveTo(p3.x,p3.y); g.lineTo(p4.x,p4.y); g.stroke();
+    }
+  }
+  function table(ox,oy,s,pieds,tilt,col){
+    var Hp=54;
+    /* pieds : (x,y) au sol, hauteur Hp ; tilt = inclinaison du plateau */
+    function zTop(x,y){ return Hp + tilt*(x+y-120)*0.5; }
+    pieds.forEach(function(p){
+      var b=P(ox,oy,p[0],p[1],0,s), h2=P(ox,oy,p[0],p[1],zTop(p[0],p[1])-(p[2]||0),s);
+      g.strokeStyle=col; g.lineWidth=7; g.lineCap='round';
+      g.beginPath(); g.moveTo(b.x,b.y-(p[2]||0)*s); g.lineTo(h2.x,h2.y); g.stroke(); g.lineCap='butt';
+      /* contact au sol ou pas */
+      if((p[2]||0)>0.4){
+        g.strokeStyle='#C0492E'; g.lineWidth=1.6; g.setLineDash([3,3]);
+        g.beginPath(); g.moveTo(b.x,b.y); g.lineTo(b.x,b.y-(p[2]||0)*s); g.stroke(); g.setLineDash([]);
+        g.fillStyle='#C0492E'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+        g.fillText('ne touche pas',b.x,b.y+16);
+      } else {
+        g.fillStyle=col; g.beginPath(); g.ellipse(b.x,b.y,5,2.6,0,0,7); g.fill();
+      }
+    });
+    /* plateau */
+    var c=[[0,0],[120,0],[120,120],[0,120]].map(function(q){ return P(ox,oy,q[0],q[1],zTop(q[0],q[1]),s); });
+    quad(c[0],c[1],c[2],c[3],'rgba(220,207,174,.92)',col);
+  }
+  function step(){
+    t+=0.03;
+    g.clearRect(0,0,cv.width,cv.height);
+    /* ---- table 3 pieds : stable ---- */
+    sol(180,190,1.05);
+    table(180,190,1.05,[[0,0,0],[120,0,0],[60,120,0]],0,'#3D7E5F');
+    g.fillStyle='#3D7E5F'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    g.fillText('3 pieds \u00b7 h = 0',180,42);
+    g.font='700 11px "JetBrains Mono",monospace'; g.fillStyle='#5C544B';
+    g.fillText('isostatique : les 3 pieds touchent toujours',180,62);
+    g.fillText('(3 points d\u00e9finissent un plan)',180,78);
+    /* ---- table 4 pieds : elle bascule ---- */
+    var rock=Math.sin(t*1.1);
+    var gap=Math.max(0,rock)*3.2, gap2=Math.max(0,-rock)*3.2;
+    sol(520,190,1.05);
+    table(520,190,1.05,[[0,0,gap],[120,0,0],[120,120,gap2],[0,120,0]],rock*0.055,'#C0492E');
+    g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    g.fillText('4 pieds \u00b7 h = 1',520,42);
+    g.font='700 11px "JetBrains Mono",monospace'; g.fillStyle='#5C544B';
+    g.fillText('hyperstatique : elle bascule d\u2019un pied sur l\u2019autre',520,62);
+    g.fillText('(il faudrait les 4 bouts RIGOUREUSEMENT coplanaires)',520,78);
+    /* fl\u00e8che de bascule */
+    g.strokeStyle='#C0492E'; g.lineWidth=2;
+    g.beginPath(); g.arc(520,268,26,Math.PI*1.15,Math.PI*1.85); g.stroke();
+    var aa=Math.PI*1.85;
+    g.beginPath(); g.moveTo(520+26*Math.cos(aa),268+26*Math.sin(aa));
+    g.lineTo(520+26*Math.cos(aa)-7,268+26*Math.sin(aa)-2);
+    g.lineTo(520+26*Math.cos(aa)-2,268+26*Math.sin(aa)-8); g.closePath(); g.fillStyle='#C0492E'; g.fill();
+    g.textAlign='left';
+  }
+  setInterval(step,50); step();
+})();
 
 /* ---------- G ---------- */
 var G_SCEN=[{sc:'c) \ud83e\ude91 Ce r\u00e9sultat explique un ph\u00e9nom\u00e8ne bien connu :', ok:'la table \u00e0 quatre pieds bancale, le tr\u00e9pied jamais', opts:['\u2014 choisir \u2014','la table \u00e0 quatre pieds bancale, le tr\u00e9pied jamais','quatre pieds portent mieux la charge','trois pieds, c\u2019est moins solide']}];

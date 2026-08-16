@@ -73,6 +73,27 @@
   .steps.show{display:block}
   .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
   .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -91,7 +112,7 @@
 
     <section class="exo-card" id="a">
       <h2><span class="num">A</span> Lire un signal de capteur</h2>
-      <p class="task">🎯 Voici le signal d'un capteur de présence pendant 20 ms. Déplace le <b>curseur de lecture</b> pour t'aider, puis réponds.</p>
+      <p class="task">Voici le signal d'un capteur de présence pendant 20 ms. Déplace le <b>curseur de lecture</b> pour t'aider, puis réponds.</p>
       <div class="chrono">
         <canvas id="cvA" width="880" height="230" aria-label="Chronogramme du capteur sur 20 ms"></canvas>
         <div class="slider-row">
@@ -110,7 +131,7 @@
 
     <section class="exo-card" id="b">
       <h2><span class="num">B</span> Période et fréquence</h2>
-      <p class="task">🎯 Ce signal d'horloge est périodique. Lis sa période sur le chronogramme, puis calcule sa fréquence.</p>
+      <p class="task">Ce signal d'horloge est périodique. Lis sa période sur le chronogramme, puis calcule sa fréquence.</p>
       <div class="chrono"><canvas id="cvB" width="880" height="190" aria-label="Signal périodique"></canvas></div>
       <div class="row"><span>a) Période T =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">ms</span></div>
       <div class="row"><span>b) Fréquence f = 1/T =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
@@ -122,7 +143,7 @@
 
     <section class="exo-card" id="c">
       <h2><span class="num">C</span> Rapport cyclique (PWM)</h2>
-      <p class="task">🎯 Ce signal PWM pilote un moteur. Sur chaque période, il est haut pendant t<sub>H</sub>. Le rapport cyclique vaut α = t<sub>H</sub> / T.</p>
+      <p class="task">Ce signal PWM pilote un moteur. Sur chaque période, il est haut pendant t<sub>H</sub>. Le rapport cyclique vaut α = t<sub>H</sub> / T.</p>
       <div class="chrono"><canvas id="cvC" width="880" height="190" aria-label="Signal PWM"></canvas></div>
       <div class="row"><span>a) α = t<sub>H</sub>/T =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
       <div class="row"><span>b) Si on augmente α à 75 %, le moteur tourne :</span>
@@ -134,7 +155,7 @@
 
     <section class="exo-card" id="d">
       <h2><span class="num">D</span> Combiner deux signaux : S = a ET b</h2>
-      <p class="task">🎯 Une presse ne démarre que si les DEUX boutons a et b sont appuyés : S = a ET b. Complète la valeur de S sur chacun des 8 intervalles de 1 ms.</p>
+      <p class="task">Une presse ne démarre que si les DEUX boutons a et b sont appuyés : S = a ET b. Complète la valeur de S sur chacun des 8 intervalles de 1 ms.</p>
       <div class="chrono"><canvas id="cvD" width="880" height="300" aria-label="Signaux a, b et sortie S"></canvas></div>
       <div class="sgrid" id="dGrid"></div>
       <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
@@ -157,16 +178,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -174,30 +197,145 @@
 var el=function(id){return document.getElementById(id);};
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=document.getElementById('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  document.getElementById('calcToggle').addEventListener('click',function(){ document.getElementById('calc').classList.toggle('show'); });
-  document.getElementById('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};

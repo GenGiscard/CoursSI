@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GRAPH ATTACK — jeu · Dérivées &amp; primitives · SI Première</title>
+<title>TRAQUE-ERREUR — jeu · Application numérique · SI Première</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
     --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A;
-    --dark:#161a26; --dark2:#1c2030; --neonB:#8fd4e0; --neonG:#5ee39a; --neonY:#f0d08a; --neonR:#e05e5e; --neonP:#d9a6ee; }
+    --dark:#141824; --dark2:#1b2030; --neonB:#8fd4e0; --neonG:#6ee3a0; --neonY:#f0d08a; --neonR:#e87060; --neonP:#d9a6ee; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.5}
@@ -19,42 +19,50 @@
   .estic-bar .who{font-weight:800;font-size:14px}
   .estic-bar .meta{font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace}
   .estic-bar .rt{margin-left:auto;font-size:11px;color:var(--sub);font-family:'JetBrains Mono',monospace;text-align:right;line-height:1.3}
-  .wrap{max-width:820px;margin:0 auto;padding:22px clamp(14px,4vw,30px) 80px}
-  .cab{background:linear-gradient(160deg,var(--dark),#221a2e 130%);border-radius:20px;padding:20px clamp(14px,3vw,26px) 26px;color:#f2ead8;box-shadow:0 16px 44px rgba(30,25,45,.35)}
+  .wrap{max-width:840px;margin:0 auto;padding:22px clamp(14px,4vw,30px) 80px}
+  .cab{background:linear-gradient(160deg,var(--dark),#241d2e 130%);border-radius:20px;padding:20px clamp(14px,3vw,26px) 26px;color:#f2ead8;box-shadow:0 16px 44px rgba(30,25,45,.35)}
   .cab .k{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.26em;color:var(--neonP);text-transform:uppercase;text-align:center}
-  h1{font-size:clamp(30px,5.4vw,52px);margin:6px 0 4px;font-weight:800;text-align:center;
+  h1{font-size:clamp(28px,5.2vw,50px);margin:6px 0 4px;font-weight:800;text-align:center;
      background:linear-gradient(90deg,var(--neonB),var(--neonG),var(--neonY));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{color:#b9b0c8;text-align:center;max-width:56ch;margin:0 auto;font-size:16px}
-  .hud{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 10px}
+  .sub{color:#b9b0c8;text-align:center;max-width:58ch;margin:0 auto;font-size:16px}
+  .hud{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 12px}
   .hud .h{font-family:'JetBrains Mono',monospace;font-size:13px;background:#252a3c;border:1px solid #3a4058;border-radius:10px;padding:7px 13px;color:#d8d2e6}
   .hud .h b{color:var(--neonY);font-size:16px}
-  .stage{background:var(--dark2);border:1px solid #313850;border-radius:14px;padding:12px}
-  .stage canvas{width:100%;height:auto;display:block}
-  .qtxt{font-weight:800;font-size:clamp(17px,2.6vw,21px);text-align:center;margin:14px 0 10px;color:#f2ead8}
-  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .stage{background:var(--dark2);border:1px solid #313850;border-radius:14px;padding:16px}
+  .qtag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--neonP);margin-bottom:8px}
+  .qtxt{font-weight:800;font-size:clamp(16px,2.4vw,20px);margin:4px 0 12px;color:#f2ead8}
+  .copie{background:#0f131d;border:1px solid #313850;border-radius:11px;padding:10px 12px;margin-bottom:12px}
+  .copie .ln{display:flex;gap:10px;align-items:center;font-family:'JetBrains Mono',monospace;font-size:15px;
+             border:1px solid transparent;border-radius:8px;padding:8px 10px;margin:3px 0;color:#d5cdbe}
+  .copie .ln .nu{font-size:11px;color:#6d759a;width:20px;flex:none}
+  .copie .ln.pick{cursor:pointer}
+  .copie .ln.pick:hover{border-color:var(--neonB);background:#1a2233}
+  .copie .ln.bad{border-color:var(--neonR);background:#3a2026;color:#f4c9c9;font-weight:700}
+  .copie .ln.ok{border-color:var(--neonG);background:#16281f}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
   @media(max-width:560px){ .opts{grid-template-columns:1fr} }
-  .opts button{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;background:#252a3c;border:1px solid #3a4058;color:#e9e2f2;border-radius:12px;padding:14px 8px;cursor:pointer}
+  .opts button{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;background:#252a3c;border:1px solid #3a4058;color:#e9e2f2;border-radius:11px;padding:13px 10px;cursor:pointer;text-align:left}
   .opts button:hover{background:#2e3448;border-color:var(--neonB)}
   .opts button.ok{background:#1f4d38;border-color:var(--neonG);color:#c9f4dd}
   .opts button.no{background:#54262b;border-color:var(--neonR);color:#f4c9c9}
-  .fb{font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center;min-height:20px;margin-top:10px;color:var(--neonP)}
-  .screen{text-align:center;padding:34px 8px}
-  .screen .bigscore{font-size:56px;font-weight:800;color:var(--neonY);font-family:'JetBrains Mono',monospace}
+  .fb{font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center;min-height:34px;margin-top:10px;color:var(--neonP)}
+  .screen{text-align:center;padding:30px 8px}
+  .screen .bigscore{font-size:54px;font-weight:800;color:var(--neonY);font-family:'JetBrains Mono',monospace}
   .btn{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:#101018;background:linear-gradient(90deg,var(--neonG),var(--neonB));border:none;border-radius:12px;padding:15px 30px;cursor:pointer;font-weight:800;margin-top:16px}
   .btn:hover{filter:brightness(1.1)}
   .rules{display:grid;gap:10px;margin:18px auto 0;max-width:560px;text-align:left}
   .rules .r{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#c9c2d8}
   .rules .r span:first-child{flex:none}
   .hidden{display:none}
-  /* calculatrice */
-  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 18px rgba(40,35,25,.35);display:flex;align-items:center;justify-content:center}
-  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:200px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(40,35,25,.32);padding:10px;display:none}
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:40;width:54px;height:54px;border-radius:50%;border:1px solid var(--line);background:var(--steel);color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
+  #calc{position:fixed;right:16px;bottom:80px;z-index:40;width:212px;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);padding:10px;display:none;color:var(--ink)}
   #calc.show{display:block}
-  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap;color:var(--ink)}
+  #calc .disp{font-family:'JetBrains Mono',monospace;font-size:20px;text-align:right;background:#F6F1E6;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-bottom:8px;min-height:40px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-  #calc button{font-family:'JetBrains Mono',monospace;font-size:15px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;color:var(--ink)}
+  #calc button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid var(--line);border-radius:7px;background:#fff;cursor:pointer;color:var(--ink)}
   #calc button:hover{border-color:var(--steel)}
   #calc button.op{background:#eef3f6;color:var(--steel);font-weight:700}
+  #calc button.fn{background:#f3eef6;color:var(--plum);font-weight:700;font-size:12px}
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
@@ -85,27 +93,25 @@
   <div class="estic-bar">
     <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
     <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Jeu — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div>
+    <div class="rt">Jeu — Application numérique<br>© ESTIC — Tous droits réservés</div>
   </div>
 
   <div class="wrap">
     <div class="cab">
-      <div class="k">· Arcade SI · Dérivées &amp; primitives ·</div>
-      <h1>GRAPH ATTACK</h1>
-      <p class="sub">Des courbes surgissent : lis la pente, trouve le sommet, calcule l’aire. Prends ton temps — mais pas le droit à l’erreur : trois vies, des combos, et des graphes de plus en plus vicieux.</p>
+      <div class="k">· Arcade SI · Chasse aux étourderies ·</div>
+      <h1>TRAQUE-ERREUR</h1>
+      <p class="sub">Tu es correcteur pour la soirée. Des copies défilent, des résultats s’affichent : à toi de repérer la ligne qui déraille, le chiffre invraisemblable, la formule qui n’a même pas les bonnes unités.</p>
 
-      <!-- écran titre -->
       <div id="scrTitle" class="screen">
         <div class="rules">
-          <div class="r"><span>📐</span><span>La VITESSE, c’est la pente. Le SOMMET, c’est v = 0. La DISTANCE, c’est l’aire sous v(t).</span></div>
-          <div class="r"><span>📈</span><span>Toutes les 5 bonnes réponses : niveau suivant, avec de nouveaux types de graphes.</span></div>
-          <div class="r"><span>🔥</span><span>Combo : chaque bonne réponse d’affilée multiplie tes points (+100 × combo).</span></div>
-          <div class="r"><span>💔</span><span>Erreur ou temps écoulé : une vie en moins. Trois erreurs et l’arcade s’éteint.</span></div>
+          <div class="r"><span>🔍</span><span><b>Ligne fautive</b> : une copie s’affiche, clique la ligne où l’erreur apparaît pour la première fois.</span></div>
+          <div class="r"><span>🤨</span><span><b>Plausible ?</b> : juge un résultat annoncé — unité, signe, ordre de grandeur.</span></div>
+          <div class="r"><span>🔬</span><span><b>Homogénéité</b> et <b>conversion éclair</b> : les deux réflexes qui sauvent le plus de points.</span></div>
+          <div class="r"><span>💔</span><span>Trois erreurs et l’audit s’arrête. Pas de chrono : prends le temps de vérifier, c’est tout l’objet du jeu.</span></div>
         </div>
-        <button class="btn" id="btnStart">▶ Insert coin</button>
+        <button class="btn" id="btnStart">▶ Commencer l’audit</button>
       </div>
 
-      <!-- écran jeu -->
       <div id="scrGame" class="hidden">
         <div class="hud">
           <div class="h">Score <b id="hScore">0</b></div>
@@ -113,25 +119,27 @@
           <div class="h">Combo <b id="hCombo">×1</b></div>
           <div class="h">Niveau <b id="hLvl">1</b></div>
         </div>
-        <div class="stage"><canvas id="cvQ" width="640" height="260" aria-label="Graphe de la question en cours"></canvas></div>
-        <div class="qtxt" id="qTxt">…</div>
-        <div class="opts" id="opts"></div>
-        <div class="fb" id="fb"></div>
+        <div class="stage">
+          <div class="qtag" id="qTag">—</div>
+          <div class="qtxt" id="qTxt">…</div>
+          <div class="copie hidden" id="copie"></div>
+          <div class="opts" id="opts"></div>
+          <div class="fb" id="fb"></div>
+        </div>
       </div>
 
-      <!-- écran game over -->
       <div id="scrOver" class="screen hidden">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--neonP);letter-spacing:.2em">GAME OVER</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--neonP);letter-spacing:.2em">AUDIT TERMINÉ</div>
         <div class="bigscore" id="finalScore">0</div>
         <div id="bestLine" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#c9c2d8;margin-top:4px"></div>
         <div id="verdict" style="margin-top:10px;color:#e9e2f2;font-weight:700"></div>
-        <button class="btn" id="btnAgain">↻ Rejouer</button>
+        <button class="btn" id="btnAgain">↻ Nouvel audit</button>
       </div>
     </div>
   </div>
 
-<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-<div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
     <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
       <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
@@ -148,6 +156,11 @@
 <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
+var D2R=Math.PI/180;
+function pick(a){ return a[(Math.random()*a.length)|0]; }
+function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
+function fr(x){ return String(x).replace('.',','); }
+function r1(x){ return Math.round(x*10)/10; }
 
 /* ---------- calculatrice ---------- */
 (function(){
@@ -292,198 +305,150 @@ var el=function(id){return document.getElementById(id);};
   render();
 })();
 
-function pick(a){ return a[(Math.random()*a.length)|0]; }
-function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
-function fr(x){ return String(x).replace('.',','); }
-
-/* ================= dessin de graphes (fond sombre) ================= */
-var cv=el('cvQ'), G=cv.getContext('2d');
-var GX=70, GY=210, GW=520, GH=160;
-function clearQ(){ G.clearRect(0,0,cv.width,cv.height); }
-function axesQ(xl,yl,tMax,xMax,yZero){
-  var y0 = yZero? GY-GH/2 : GY;
-  G.strokeStyle='#4a5270'; G.lineWidth=2;
-  G.beginPath(); G.moveTo(GX,GY-GH); G.lineTo(GX,GY); G.stroke();
-  G.beginPath(); G.moveTo(GX,y0); G.lineTo(GX+GW,y0); G.stroke();
-  G.fillStyle='#8f97b5'; G.font='700 12px "JetBrains Mono",monospace'; G.textAlign='left';
-  G.fillText(yl,GX+6,GY-GH+14);
-  G.textAlign='right'; G.fillText(xl,GX+GW,y0+18); G.textAlign='left';
-  // graduations t
-  for(var s=0;s<=tMax;s++){ var xx=GX+GW*s/tMax;
-    G.strokeStyle='#2c3350'; G.beginPath(); G.moveTo(xx,y0-4); G.lineTo(xx,y0+4); G.stroke();
-    if(s%1===0){ G.fillStyle='#6d759a'; G.font='700 10px "JetBrains Mono",monospace'; G.textAlign='center'; G.fillText(String(s),xx,y0+18); } }
-  G.textAlign='left';
-  return y0;
-}
-function PXt(tt,tMax){ return GX+GW*tt/tMax; }
-
 /* ================= générateurs ================= */
-function qPente(){
-  var dt=pick([2,4,5]), v=pick([-4,-3,-2,2,3,4,5]);
-  var x1= v>0? pick([0,5]) : pick([25,30,35]);
-  var x2=x1+v*dt;
-  var tMax=dt+ (dt<5?2:1);
-  var set={}; set[v]=1; var opts=[fr(v)+' m/s'];
-  [-v, x2-x1, v*2, v+1].forEach(function(d){ if(!set[d]&&opts.length<4){ set[d]=1; opts.push(fr(d)+' m/s'); } });
-  var ex=v+3; while(opts.length<4){ if(!set[ex]){ set[ex]=1; opts.push(fr(ex)+' m/s'); } ex++; }
-  return {
-    q:'Vitesse du mobile sur ce segment ?',
-    opts:shuffle(opts), ok:fr(v)+' m/s',
-    why:'v = Δx/Δt = ('+x2+'−'+x1+')/'+dt+' = '+fr(v)+' m/s',
-    draw:function(){
-      clearQ(); axesQ('t (s)','x (m)',tMax,40,false);
-      function PY(xx){ return GY-xx*(GH/42); }
-      G.strokeStyle='#8fd4e0'; G.lineWidth=4; G.lineCap='round';
-      G.beginPath(); G.moveTo(PXt(0,tMax),PY(x1)); G.lineTo(PXt(dt,tMax),PY(x2)); G.stroke();
-      G.fillStyle='#8fd4e0';
-      [[0,x1],[dt,x2]].forEach(function(p){ G.beginPath(); G.arc(PXt(p[0],tMax),PY(p[1]),6,0,7); G.fill(); });
-      G.font='700 12px "JetBrains Mono",monospace';
-      G.fillText('('+0+' s ; '+x1+' m)',PXt(0,tMax)+10,PY(x1)-10);
-      G.fillText('('+dt+' s ; '+x2+' m)',PXt(dt,tMax)-40,PY(x2)+(v>0?-12:20));
-    }
-  };
-}
-var ALLURES=['v constante et positive','v nulle (mobile à l\u2019arrêt)','v qui augmente régulièrement','v positive puis négative'];
-function qAllure(){
-  var kind=pick([0,1,2,3]);
-  return {
-    q:'Voici x(t). Quelle est l\u2019allure de v(t) ?',
-    opts:shuffle(ALLURES.slice()), ok:ALLURES[kind],
-    why:['droite montante → pente constante','palier → pente nulle','parabole → pente qui grandit','cloche → pente + puis −'][kind],
-    draw:function(){
-      clearQ(); axesQ('t (s)','x (m)',8,40,false);
-      function PY(xx){ return GY-xx*(GH/42); }
-      G.strokeStyle='#5ee39a'; G.lineWidth=4; G.beginPath();
-      if(kind===0){ G.moveTo(PXt(0,8),PY(4)); G.lineTo(PXt(8,8),PY(36)); }
-      else if(kind===1){ G.moveTo(PXt(0,8),PY(22)); G.lineTo(PXt(8,8),PY(22)); }
-      else if(kind===2){ for(var k=0;k<=60;k++){ var tt=8*k/60; var xx=0.6*tt*tt;
-        if(k===0)G.moveTo(PXt(tt,8),PY(xx)); else G.lineTo(PXt(tt,8),PY(xx)); } }
-      else { for(var k2=0;k2<=60;k2++){ var t2=8*k2/60; var x3=38*Math.sin(Math.PI*t2/8);
-        if(k2===0)G.moveTo(PXt(t2,8),PY(x3)); else G.lineTo(PXt(t2,8),PY(x3)); } }
-      G.stroke();
-    }
-  };
-}
-function qSommet(){
-  var ts=pick([2,3,4,5,6]);
-  var set={}; set[ts]=1; var opts=['t = '+ts+' s'];
-  [ts-1,ts+1,ts+2,ts-2,0,8].forEach(function(d){ if(d>=0&&d<=8&&!set[d]&&opts.length<4){ set[d]=1; opts.push('t = '+d+' s'); } });
-  return {
-    q:'À quel instant la vitesse s\u2019annule-t-elle ?',
-    opts:shuffle(opts), ok:'t = '+ts+' s',
-    why:'sommet de x(t) → tangente horizontale → v = 0 à t = '+ts+' s',
-    draw:function(){
-      clearQ(); axesQ('t (s)','x (m)',8,40,false);
-      function PY(xx){ return GY-xx*(GH/42); }
-      G.strokeStyle='#f0d08a'; G.lineWidth=4; G.beginPath();
-      for(var k=0;k<=80;k++){ var tt=8*k/80;
-        var xx=Math.max(0,36-2.2*(tt-ts)*(tt-ts));
-        if(k===0)G.moveTo(PXt(tt,8),PY(xx)); else G.lineTo(PXt(tt,8),PY(xx)); }
-      G.stroke();
-    }
-  };
-}
-function qAire(tri){
-  if(!tri){
-    var v=pick([2,3,4,5]), T=pick([3,4,5,6]), d=v*T;
-    var set={}; set[d]=1; var opts=[d+' m'];
-    [v+T, d*2, Math.round(d/2), d+5].forEach(function(x){ if(x>0&&!set[x]&&opts.length<4){ set[x]=1; opts.push(x+' m'); } });
-    var ex=d+7; while(opts.length<4){ if(!set[ex]){ set[ex]=1; opts.push(ex+' m'); } ex+=3; }
-    return {
-      q:'Distance parcourue en '+T+' s ?',
-      opts:shuffle(opts), ok:d+' m',
-      why:'aire du rectangle = v × t = '+v+' × '+T+' = '+d+' m',
-      draw:function(){
-        clearQ(); axesQ('t (s)','v (m/s)',T+2,12,false);
-        function PY(vv){ return GY-vv*(GH/12); }
-        G.fillStyle='rgba(143,212,224,.18)'; G.fillRect(PXt(0,T+2),PY(v),PXt(T,T+2)-PXt(0,T+2),GY-PY(v));
-        G.strokeStyle='#8fd4e0'; G.lineWidth=4;
-        G.beginPath(); G.moveTo(PXt(0,T+2),PY(v)); G.lineTo(PXt(T,T+2),PY(v)); G.stroke();
-        G.strokeStyle='#4a5270'; G.setLineDash([4,4]);
-        G.beginPath(); G.moveTo(PXt(T,T+2),PY(v)); G.lineTo(PXt(T,T+2),GY); G.stroke(); G.setLineDash([]);
-        G.fillStyle='#8fd4e0'; G.font='700 12px "JetBrains Mono",monospace';
-        G.fillText('v = '+v+' m/s',PXt(0,T+2)+8,PY(v)-8);
-      }
-    };
+
+/* --- 1. LIGNE FAUTIVE --- */
+function qLigne(){
+  var kind=pick(['conv','recopie','signe','rendement']);
+  var lines, bad, why;
+  if(kind==='conv'){
+    var C=pick([5,8,12,15]), N=pick([600,900,1200,1500]);
+    var w=2*Math.PI*N/60;
+    lines=['C = '+C+' N\u00b7m  \u00b7  N = '+N+' tr/min',
+           '\u03c9 = '+N+' rad/s',
+           'P = C \u00d7 \u03c9',
+           'P = '+C+' \u00d7 '+N+' = '+(C*N)+' W'];
+    bad=1; why='les tr/min n\u2019ont pas \u00e9t\u00e9 convertis : \u03c9 = 2\u03c0N/60 \u2248 '+fr(r1(w))+' rad/s, donc P \u2248 '+fr(Math.round(C*w))+' W';
+  } else if(kind==='recopie'){
+    var P=pick([1250,1800,2400,3200]), eta=pick([0.85,0.90,0.92]);
+    var faux=P-50;
+    lines=['P entr\u00e9e = '+P+' W',
+           'rendement \u03b7 = '+fr(eta),
+           'P utile = '+fr(eta)+' \u00d7 '+faux,
+           'P utile = '+Math.round(eta*faux)+' W'];
+    bad=2; why='\u00e0 la ligne 3, '+P+' a \u00e9t\u00e9 recopi\u00e9 en '+faux+' : le vrai r\u00e9sultat est '+Math.round(eta*P)+' W';
+  } else if(kind==='signe'){
+    var f1=pick([400,500,600]), f2=pick([250,350,450]), f3=pick([100,150,200]);
+    lines=['F\u2081 = +'+f1+' N',
+           'F\u2082 = \u2212'+f2+' N',
+           'F\u2083 = +'+f3+' N',
+           'R = '+f1+' + '+f2+' + '+f3+' = '+(f1+f2+f3)+' N'];
+    bad=3; why='le signe \u2212 de F\u2082 a disparu : R = '+f1+' \u2212 '+f2+' + '+f3+' = '+(f1-f2+f3)+' N';
+  } else {
+    var Pe=pick([2000,2500,3000]), e2=pick([0.8,0.85,0.9]);
+    lines=['P absorb\u00e9e = '+Pe+' W',
+           'rendement \u03b7 = '+fr(e2),
+           'P utile = '+Pe+' / '+fr(e2),
+           'P utile = '+Math.round(Pe/e2)+' W'];
+    bad=2; why='on MULTIPLIE par le rendement, on ne divise pas : P utile = '+Math.round(Pe*e2)+' W (une sortie ne peut pas d\u00e9passer l\u2019entr\u00e9e)';
   }
-  var vm=pick([4,6,8,10]), T2=pick([4,5,6]), d2=vm*T2/2;
-  var set2={}; set2[d2]=1; var o2=[d2+' m'];
-  [vm*T2, vm+T2, d2*2===vm*T2? d2+4 : d2*2, Math.round(d2/2)].forEach(function(x){ if(x>0&&!set2[x]&&o2.length<4){ set2[x]=1; o2.push(x+' m'); } });
-  var e2=d2+7; while(o2.length<4){ if(!set2[e2]){ set2[e2]=1; o2.push(e2+' m'); } e2+=3; }
-  return {
-    q:'Départ arrêté, v atteint '+vm+' m/s en '+T2+' s. Distance ?',
-    opts:shuffle(o2), ok:d2+' m',
-    why:'aire du triangle = ½ × '+T2+' × '+vm+' = '+fr(d2)+' m',
-    draw:function(){
-      clearQ(); axesQ('t (s)','v (m/s)',T2+2,12,false);
-      function PY(vv){ return GY-vv*(GH/12); }
-      G.fillStyle='rgba(94,227,154,.18)';
-      G.beginPath(); G.moveTo(PXt(0,T2+2),GY); G.lineTo(PXt(T2,T2+2),PY(vm)); G.lineTo(PXt(T2,T2+2),GY); G.closePath(); G.fill();
-      G.strokeStyle='#5ee39a'; G.lineWidth=4;
-      G.beginPath(); G.moveTo(PXt(0,T2+2),GY); G.lineTo(PXt(T2,T2+2),PY(vm)); G.stroke();
-      G.fillStyle='#5ee39a'; G.font='700 12px "JetBrains Mono",monospace';
-      G.fillText(vm+' m/s',PXt(T2,T2+2)+6,PY(vm)+4);
-    }
-  };
+  return {tag:'ligne fautive', q:'Clique la ligne o\u00f9 l\u2019erreur appara\u00eet pour la premi\u00e8re fois :',
+    lines:lines, bad:bad, why:why};
 }
-function qFormule(){
-  var a=pick([1,2,3]), b=pick([2,3,4,5]);
-  var c=pick([1,6,7,8].filter(function(x){return x!==b;}));
-  var okS=(2*a)+'t + '+b;
-  var set={}; set[okS]=1; var opts=[okS];
-  [a+'t + '+b, (2*a)+'t + '+c, a+'t² + '+b].forEach(function(s){ if(!set[s]&&opts.length<4){ set[s]=1; opts.push(s); } });
-  while(opts.length<4){ var s2=(2*a+1)+'t + '+b; if(!set[s2]){ set[s2]=1; opts.push(s2); } else { opts.push((2*a)+'t + '+(b+1)); break; } }
-  return {
-    q:'x(t) = '+a+'t² + '+b+'t + '+c+'  →  v(t) = ?',
-    opts:shuffle(opts), ok:okS,
-    why:a+'t² se dérive en '+(2*a)+'t · '+b+'t donne '+b+' · la constante '+c+' disparaît',
-    draw:function(){
-      clearQ();
-      G.fillStyle='#f2ead8'; G.font='800 30px "JetBrains Mono",monospace'; G.textAlign='center';
-      G.fillText('x(t) = '+a+'t² + '+b+'t + '+c,320,120);
-      G.fillStyle='#8f97b5'; G.font='700 14px "JetBrains Mono",monospace';
-      G.fillText('dérive terme à terme…',320,170);
-      G.textAlign='left';
-    }
-  };
+
+/* --- 2. PLAUSIBLE OU NON --- */
+var PLAUS=[
+  {s:'Effort n\u00e9cessaire pour retenir une caisse de 80 kg sur une pente : <b>3 N</b>', ok:'absurde : ordre de grandeur',
+   why:'80 kg p\u00e8sent 800 N ; 3 N, c\u2019est le poids d\u2019une pomme'},
+  {s:'Couple d\u2019un moteur de perceuse : <b>12 N\u00b7m</b>', ok:'plausible',
+   why:'ordre de grandeur classique pour ce type de machine'},
+  {s:'Vitesse d\u2019un ascenseur d\u2019immeuble : <b>4000 km/h</b>', ok:'absurde : ordre de grandeur',
+   why:'un ascenseur monte \u00e0 environ 1 \u00e0 2 m/s, soit quelques km/h'},
+  {s:'Masse d\u2019une poutre m\u00e9tallique de 3 m : <b>0,002 kg</b>', ok:'absurde : ordre de grandeur',
+   why:'2 grammes pour une poutre : une conversion a saut\u00e9 (probablement des tonnes lues en kg)'},
+  {s:'Distance d\u2019arr\u00eat calcul\u00e9e : <b>\u221215 m</b>', ok:'absurde : signe',
+   why:'une distance ne peut pas \u00eatre n\u00e9gative'},
+  {s:'Puissance d\u2019un moteur : <b>1500 N\u00b7m</b>', ok:'absurde : unit\u00e9',
+   why:'les N\u00b7m sont des couples ou des \u00e9nergies, pas des puissances (W)'},
+  {s:'Rendement global d\u2019une cha\u00eene : <b>1,15</b>', ok:'absurde : ordre de grandeur',
+   why:'un rendement ne d\u00e9passe jamais 1 : on ne cr\u00e9e pas d\u2019\u00e9nergie'},
+  {s:'Tension dans un c\u00e2ble portant 500 N : <b>520 N</b>', ok:'plausible',
+   why:'l\u00e9g\u00e8rement sup\u00e9rieure \u00e0 la charge : coh\u00e9rent pour un c\u00e2ble un peu inclin\u00e9'},
+  {s:'Acc\u00e9l\u00e9ration d\u2019un train au freinage : <b>\u22120,8 m/s\u00b2</b>', ok:'plausible',
+   why:'le signe n\u00e9gatif est normal : le train ralentit'},
+  {s:'\u00c9nergie d\u2019une batterie de v\u00e9lo : <b>360 W</b>', ok:'absurde : unit\u00e9',
+   why:'une \u00e9nergie se compte en Wh ou en J, pas en W'}
+];
+function qPlaus(){
+  var it=pick(PLAUS);
+  return {tag:'plausible ?', q:it.s, opts:shuffle(['plausible','absurde : ordre de grandeur','absurde : unit\u00e9','absurde : signe']),
+    ok:it.ok, why:it.why};
 }
-function qSigne(){
-  var kind=pick([0,1,2]);
-  var OKS=['il avance (v > 0)','il recule (v < 0)','il est à l\u2019arrêt (v = 0)'];
-  return {
-    q:'Que fait le mobile ?',
-    opts:shuffle([OKS[0],OKS[1],OKS[2],'impossible à dire']),
-    ok:OKS[kind],
-    why:['pente positive → avance','pente négative → recule','pente nulle → arrêt'][kind],
-    draw:function(){
-      clearQ(); axesQ('t (s)','x (m)',8,40,false);
-      function PY(xx){ return GY-xx*(GH/42); }
-      G.strokeStyle='#d9a6ee'; G.lineWidth=4;
-      G.beginPath();
-      if(kind===0){ G.moveTo(PXt(0,8),PY(6)); G.lineTo(PXt(8,8),PY(34)); }
-      else if(kind===1){ G.moveTo(PXt(0,8),PY(34)); G.lineTo(PXt(8,8),PY(6)); }
-      else { G.moveTo(PXt(0,8),PY(20)); G.lineTo(PXt(8,8),PY(20)); }
-      G.stroke();
-    }
-  };
+
+/* --- 3. HOMOGÉNÉITÉ --- */
+var HOMO=[
+  {ok:'P = F \u00b7 v', bad:['P = F / v','P = F \u00b7 v\u00b2','P = F + v'], why:'N \u00d7 m/s = J/s = W \u2713'},
+  {ok:'P = C \u00b7 \u03c9', bad:['P = C / \u03c9','P = C \u00b7 \u03c9\u00b2','P = C + \u03c9'], why:'N\u00b7m \u00d7 rad/s = W \u2713 (le radian est sans dimension)'},
+  {ok:'E = \u00bd \u00b7 m \u00b7 v\u00b2', bad:['E = \u00bd \u00b7 m \u00b7 v','E = \u00bd \u00b7 m\u00b2 \u00b7 v','E = m / v\u00b2'], why:'kg \u00d7 m\u00b2/s\u00b2 = J \u2713'},
+  {ok:'M = F \u00b7 d', bad:['M = F / d','M = F + d','M = F \u00b7 d\u00b2'], why:'N \u00d7 m = N\u00b7m \u2713'},
+  {ok:'v = d / t', bad:['v = d \u00b7 t','v = t / d','v = d + t'], why:'m / s = m/s \u2713'},
+  {ok:'a = \u0394v / \u0394t', bad:['a = \u0394v \u00b7 \u0394t','a = \u0394t / \u0394v','a = \u0394v\u00b2 / \u0394t'], why:'(m/s)/s = m/s\u00b2 \u2713'},
+  {ok:'\u03c9 = 2\u03c0N / 60', bad:['\u03c9 = 60N / 2\u03c0','\u03c9 = N / 60','\u03c9 = 2\u03c0N \u00b7 60'], why:'tr/min \u2192 rad/s : on multiplie par 2\u03c0 et on divise par 60 \u2713'}
+];
+function qHomo(){
+  var it=pick(HOMO);
+  return {tag:'homog\u00e9n\u00e9it\u00e9', q:'Une seule de ces \u00e9critures est correcte. Laquelle ?',
+    opts:shuffle([it.ok].concat(it.bad)), ok:it.ok, why:it.why};
+}
+
+/* --- 4. CONVERSION ÉCLAIR --- */
+function qConv(){
+  var kind=pick(['rpm','kn','mm','kmh','kwh','g']);
+  var q,ok,opts,why;
+  if(kind==='rpm'){
+    var N=pick([600,900,1200,1500,1800]);
+    var w=Math.round(2*Math.PI*N/60*10)/10;
+    q=N+' tr/min = ?  (rad/s)'; ok=fr(w)+' rad/s';
+    opts=[ok, N+' rad/s', fr(Math.round(N/60*10)/10)+' rad/s', fr(Math.round(N*60/(2*Math.PI)*10)/10)+' rad/s'];
+    why='\u03c9 = 2\u03c0 \u00d7 '+N+' / 60 \u2248 '+fr(w)+' rad/s';
+  } else if(kind==='kn'){
+    var k=pick([4,8,12,25]);
+    q=k+' kN = ?  (N)'; ok=(k*1000)+' N';
+    opts=[ok, k+' N', (k*100)+' N', (k/1000)+' N'];
+    why='kilo = \u00d71000';
+  } else if(kind==='mm'){
+    var mm=pick([25,45,120,350]);
+    q=mm+' mm = ?  (m)'; ok=fr(mm/1000)+' m';
+    opts=[ok, fr(mm/100)+' m', fr(mm*1000)+' m', fr(mm/10)+' m'];
+    why='milli = \u00f71000';
+  } else if(kind==='kmh'){
+    var v=pick([18,36,54,72,90]);
+    q=v+' km/h = ?  (m/s)'; ok=fr(v/3.6)+' m/s';
+    opts=[ok, fr(v*3.6)+' m/s', fr(Math.round(v/6*10)/10)+' m/s', v+' m/s'];
+    why='on divise par 3,6';
+  } else if(kind==='kwh'){
+    var e=pick([1,2,2.5,5]);
+    q=fr(e)+' kWh = ?  (MJ)'; ok=fr(Math.round(e*3.6*100)/100)+' MJ';
+    opts=[ok, fr(e)+' MJ', fr(Math.round(e/3.6*100)/100)+' MJ', fr(e*1000)+' MJ'];
+    why='1 kWh = 3,6 MJ';
+  } else {
+    var gg=pick([250,300,750,1500]);
+    q=gg+' g = ?  (kg)'; ok=fr(gg/1000)+' kg';
+    opts=[ok, fr(gg*1000)+' kg', fr(gg/100)+' kg', gg+' kg'];
+    why='1000 g = 1 kg';
+  }
+  /* dédoublonnage */
+  var seen={}, out=[];
+  opts.forEach(function(o){ if(!seen[o]){ seen[o]=1; out.push(o); } });
+  var extra=1;
+  while(out.length<4){ var cand='autre valeur ('+extra+')'; if(!seen[cand]){ seen[cand]=1; out.push(cand); } extra++; }
+  return {tag:'conversion \u00e9clair', q:q, opts:shuffle(out), ok:ok, why:why};
 }
 
 var GENS=[
-  {lvl:1, g:function(){ return qPente(); }},
-  {lvl:1, g:function(){ return qSigne(); }},
-  {lvl:1, g:function(){ return qAire(false); }},
-  {lvl:2, g:function(){ return qAllure(); }},
-  {lvl:2, g:function(){ return qSommet(); }},
-  {lvl:3, g:function(){ return qFormule(); }},
-  {lvl:3, g:function(){ return qAire(true); }}
+  {lvl:1, g:qConv},
+  {lvl:1, g:qPlaus},
+  {lvl:2, g:qHomo},
+  {lvl:2, g:qLigne},
+  {lvl:3, g:qLigne}
 ];
 
-/* ================= boucle de jeu ================= */
+/* ================= boucle ================= */
 var S={ playing:false, score:0, lives:3, combo:1, good:0, lvl:1, cur:null, locked:false, best:0 };
 function updHud(){
   el('hScore').textContent=S.score;
-  el('hLives').textContent='❤❤❤'.slice(0,S.lives*1) || '—';
-  el('hCombo').textContent='×'+S.combo;
+  el('hLives').textContent='\u2764\u2764\u2764'.slice(0,S.lives) || '\u2014';
+  el('hCombo').textContent='\u00d7'+S.combo;
   el('hLvl').textContent=S.lvl;
 }
 function nextQ(){
@@ -491,37 +456,54 @@ function nextQ(){
   var pool=GENS.filter(function(x){return x.lvl<=S.lvl;});
   S.cur=pick(pool).g();
   S.locked=false;
-  el('qTxt').textContent=S.cur.q; el('fb').textContent='';
+  el('qTag').textContent=S.cur.tag;
+  el('qTxt').innerHTML=S.cur.q;
+  el('fb').textContent='';
   var box=el('opts'); box.innerHTML='';
-  S.cur.opts.forEach(function(o){
-    var b=document.createElement('button'); b.textContent=o;
-    b.addEventListener('click',function(){ answer(b,o); });
-    box.appendChild(b);
-  });
-  S.cur.draw();
-  updHud();
-}
-function answer(btn,o){
-  if(S.locked||!S.playing) return; S.locked=true;
-  var good=(o===S.cur.ok);
-  if(good){
-    btn.classList.add('ok');
-    S.score+=100*S.combo; S.combo=Math.min(8,S.combo+1); S.good++;
-    el('fb').textContent='✓ '+S.cur.why;
-    setTimeout(nextQ,950);
+  var cop=el('copie');
+  if(S.cur.lines){
+    cop.classList.remove('hidden'); cop.innerHTML='';
+    S.cur.lines.forEach(function(l,i){
+      var d=document.createElement('div'); d.className='ln pick'; d.id='ln'+i;
+      d.innerHTML='<span class="nu">'+(i+1)+'</span><span>'+l+'</span>';
+      d.addEventListener('click',function(){ answerLine(i); });
+      cop.appendChild(d);
+    });
   } else {
-    btn.classList.add('no');
-    el('opts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===S.cur.ok) b2.classList.add('ok'); });
-    miss('✗ '+S.cur.why);
+    cop.classList.add('hidden'); cop.innerHTML='';
+    S.cur.opts.forEach(function(o){
+      var b=document.createElement('button'); b.innerHTML=o;
+      b.addEventListener('click',function(){ answer(b,o); });
+      box.appendChild(b);
+    });
   }
   updHud();
 }
-function miss(msg){
-  S.locked=true; S.combo=1; S.lives--;
-  el('fb').textContent=msg;
+function win(msg){
+  S.score+=100*S.combo; S.combo=Math.min(8,S.combo+1); S.good++;
+  el('fb').innerHTML='\u2713 '+msg;
+  updHud(); setTimeout(nextQ,1500);
+}
+function lose(msg){
+  S.combo=1; S.lives--;
+  el('fb').innerHTML='\u2717 '+msg;
   updHud();
-  if(S.lives<=0){ setTimeout(gameOver,1200); }
-  else { setTimeout(nextQ,1400); }
+  if(S.lives<=0){ setTimeout(gameOver,1900); } else { setTimeout(nextQ,2100); }
+}
+function answer(btn,o){
+  if(S.locked||!S.playing) return; S.locked=true;
+  if(o===S.cur.ok){ btn.classList.add('ok'); win(S.cur.why); }
+  else {
+    btn.classList.add('no');
+    el('opts').querySelectorAll('button').forEach(function(b2){ if(b2.innerHTML===S.cur.ok) b2.classList.add('ok'); });
+    lose('c\u2019\u00e9tait \u00ab '+S.cur.ok+' \u00bb \u00b7 '+S.cur.why);
+  }
+}
+function answerLine(i){
+  if(S.locked||!S.playing) return; S.locked=true;
+  el('ln'+S.cur.bad).className='ln bad';
+  if(i===S.cur.bad){ win('ligne '+(S.cur.bad+1)+' \u00b7 '+S.cur.why); }
+  else { el('ln'+i).className='ln no'; lose('c\u2019\u00e9tait la ligne '+(S.cur.bad+1)+' \u00b7 '+S.cur.why); }
 }
 function gameOver(){
   S.playing=false;
@@ -530,7 +512,9 @@ function gameOver(){
   el('scrOver').classList.remove('hidden');
   el('finalScore').textContent=S.score;
   el('bestLine').textContent='meilleur score de la session : '+S.best;
-  el('verdict').textContent = S.score>=2500?'🏆 Maître des tangentes !':(S.score>=1200?'📐 Solide lecteur de courbes.':'La pente était raide… retourne au cours et reviens !');
+  el('verdict').textContent = S.score>=2500?'\ud83c\udfc6 \u0152il de correcteur : rien ne t\u2019\u00e9chappe.'
+    :(S.score>=1200?'\ud83d\udd0d Bon auditeur \u2014 encore quelques pi\u00e8ges \u00e0 apprivoiser.'
+    :'Les \u00e9tourderies gagnent encore. Retourne au TP et reviens.');
 }
 function start(){
   S.playing=true; S.score=0; S.lives=3; S.combo=1; S.good=0; S.lvl=1;

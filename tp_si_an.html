@@ -94,6 +94,27 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -106,7 +127,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">TP de méthode · Première spé SI · Application numérique</div>
-      <h1>🔗 La chaîne sans maillon faible</h1>
+      <h1>La chaîne sans maillon faible</h1>
       <p class="lede">Aujourd’hui, aucune formule nouvelle. Que des calculs longs — le genre où l’on enchaîne cinq étapes et où <b>une seule étourderie fait tout dérailler jusqu’au bout</b>. Tu vas convertir, poser en lettres, estimer, calculer, relire. Et surtout : tu vas apprendre à <b>repérer l’erreur dans une copie</b>, y compris la tienne.</p>
       <div class="plan">
         <div class="p"><div class="t">Acte 1 · ≈ 45 min</div><b>🧰 Les réflexes</b><span>Conversions, homogénéité, parenthèses : les trois gardes du corps.</span></div>
@@ -121,8 +142,8 @@
     <div class="acte"><span class="n">ACTE 1</span><h2>Les réflexes</h2><span class="d">≈ 45 min</span></div>
 
     <section class="exo-card" id="a">
-      <h3 class="ex"><span class="num">A</span> La ligne de données converties 🧰</h3>
-      <p class="task">🎯 Avant toute chose : l’énoncé du TP donne ces six valeurs « telles qu’on les trouve sur une plaque signalétique ». Convertis-les toutes en unités du système international — c’est la ligne que tu écriras désormais en tête de chaque exercice.</p>
+      <h3 class="ex"><span class="num">A</span> La ligne de données converties</h3>
+      <p class="task">Avant toute chose : l’énoncé du TP donne ces six valeurs « telles qu’on les trouve sur une plaque signalétique ». Convertis-les toutes en unités du système international — c’est la ligne que tu écriras désormais en tête de chaque exercice.</p>
       <div class="conv-grid" id="convGrid"></div>
       <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="aFb"></div>
@@ -130,8 +151,8 @@
     </section>
 
     <section class="exo-card" id="b">
-      <h3 class="ex"><span class="num">B</span> Le filtre de l’homogénéité 🔬</h3>
-      <p class="task">🎯 Trois camarades proposent trois formules pour la puissance d’un vérin (F en N, v en m/s). <b>Sans calculer</b>, élimine par les unités.</p>
+      <h3 class="ex"><span class="num">B</span> Le filtre de l’homogénéité</h3>
+      <p class="task">Trois camarades proposent trois formules pour la puissance d’un vérin (F en N, v en m/s). <b>Sans calculer</b>, élimine par les unités.</p>
       <div class="match" id="bMatch"></div>
       <div class="row"><span>b) Avec F = 2500 N et v = 0,4 m/s, la puissance vaut :</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
       <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
@@ -140,8 +161,8 @@
     </section>
 
     <section class="exo-card" id="c">
-      <h3 class="ex"><span class="num">C</span> Le piège des parenthèses ⌨️</h3>
-      <p class="task">🎯 Une charge de <b>800 N</b> est reprise par deux élingues faisant 40° avec la verticale : T = 800 / (2 × cos 40°). <b>Tape les deux saisies</b> sur l’écran ci-dessous et compare.</p>
+      <h3 class="ex"><span class="num">C</span> Le piège des parenthèses</h3>
+      <p class="task">Une charge de <b>800 N</b> est reprise par deux élingues faisant 40° avec la verticale : T = 800 / (2 × cos 40°). <b>Tape les deux saisies</b> sur l’écran ci-dessous et compare.</p>
       <div class="schema">
         <canvas id="cvCalc" width="700" height="250" aria-label="Deux saisies de calculatrice comparées"></canvas>
         <div class="row" style="justify-content:center">
@@ -160,8 +181,8 @@
     <div class="acte"><span class="n">ACTE 2</span><h2>Le long calcul</h2><span class="d">≈ 60 min</span></div>
 
     <section class="exo-card" id="d">
-      <h3 class="ex"><span class="num">D</span> Bilan de puissance d’un motoréducteur ⛓️</h3>
-      <p class="task">🎯 Le convoyeur de l’atelier. Moteur : <b>N₁ = 1500 tr/min</b>, couple <b>C₁ = 12 N·m</b>. Réducteur : rapport <b>1/4</b>, rendement <b>η = 0,92</b>. Cinq étapes s’enchaînent — <b>remplis-les dans l’ordre</b>, chacune nourrit la suivante.</p>
+      <h3 class="ex"><span class="num">D</span> Bilan de puissance d’un motoréducteur</h3>
+      <p class="task">Le convoyeur de l’atelier. Moteur : <b>N₁ = 1500 tr/min</b>, couple <b>C₁ = 12 N·m</b>. Réducteur : rapport <b>1/4</b>, rendement <b>η = 0,92</b>. Cinq étapes s’enchaînent — <b>remplis-les dans l’ordre</b>, chacune nourrit la suivante.</p>
       <div class="schema">
         <canvas id="cvChaine" width="700" height="220" aria-label="Chaîne moteur réducteur avec puissances d'entrée et de sortie"></canvas>
       </div>
@@ -178,8 +199,8 @@
     </section>
 
     <section class="exo-card" id="e">
-      <h3 class="ex"><span class="num">★</span> ⭐ Le détecteur d’étourderie</h3>
-      <p class="task">🎯 Trois copies te sont soumises. Chacune contient <b>exactement une ligne fautive</b> — les autres sont impeccables. <b>Clique sur la ligne où l’erreur apparaît pour la première fois</b>, puis donne le résultat correct. Attention : l’erreur peut être un signe, un facteur oublié, une conversion, une recopie.</p>
+      <h3 class="ex"><span class="num">★</span> Le détecteur d’étourderie</h3>
+      <p class="task">Trois copies te sont soumises. Chacune contient <b>exactement une ligne fautive</b> — les autres sont impeccables. <b>Clique sur la ligne où l’erreur apparaît pour la première fois</b>, puis donne le résultat correct. Attention : l’erreur peut être un signe, un facteur oublié, une conversion, une recopie.</p>
       <div class="copie" id="copieBox"></div>
       <div class="row"><span>Résultat correct de cette copie :</span><input class="numin" id="eRes" inputmode="decimal" placeholder="?"><span class="unit" id="eUnit"></span>
         <button class="btn" id="eCheck">Valider</button><span class="score">copies traitées : <b id="eScore">0</b> / 3</span></div>
@@ -191,8 +212,8 @@
     <div class="acte"><span class="n">ACTE 3</span><h2>La relecture</h2><span class="d">≈ 55 min</span></div>
 
     <section class="exo-card" id="f">
-      <h3 class="ex"><span class="num">F</span> La chaîne d’énergie du vélo électrique 🚲</h3>
-      <p class="task">🎯 Le VAE du lycée. Batterie : <b>36 V</b>, <b>10 Ah</b>, elle débite <b>8 A</b> en usage soutenu. Chaîne : variateur <b>η₁ = 0,95</b>, moteur <b>η₂ = 0,85</b>, transmission <b>η₃ = 0,92</b>. Quatre étapes, dont deux conversions cachées.</p>
+      <h3 class="ex"><span class="num">F</span> La chaîne d’énergie du vélo électrique</h3>
+      <p class="task">Le VAE du lycée. Batterie : <b>36 V</b>, <b>10 Ah</b>, elle débite <b>8 A</b> en usage soutenu. Chaîne : variateur <b>η₁ = 0,95</b>, moteur <b>η₂ = 0,85</b>, transmission <b>η₃ = 0,92</b>. Quatre étapes, dont deux conversions cachées.</p>
       <div class="row"><span>a) Puissance fournie par la batterie : P = U·I =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
       <div class="row"><span>b) Rendement global de la chaîne :</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"></div>
       <div class="row"><span>c) Puissance utile à la roue :</span><input class="numin" id="fC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
@@ -204,8 +225,8 @@
     </section>
 
     <section class="exo-card" id="g">
-      <h3 class="ex"><span class="num">G</span> Le contrôle par les extrêmes 🧪</h3>
-      <p class="task">🎯 Reprends le rendement global de l’exercice F. Sans refaire le calcul complet, réponds à ces contrôles de cohérence — ce sont exactement ceux qu’un ingénieur fait avant de signer.</p>
+      <h3 class="ex"><span class="num">G</span> Le contrôle par les extrêmes</h3>
+      <p class="task">Reprends le rendement global de l’exercice F. Sans refaire le calcul complet, réponds à ces contrôles de cohérence — ce sont exactement ceux qu’un ingénieur fait avant de signer.</p>
       <div class="match" id="gMatch"></div>
       <div class="row"><span>c) Si les trois rendements valaient 1 (chaîne parfaite), la puissance utile serait :</span><input class="numin" id="gC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
       <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
@@ -214,8 +235,8 @@
     </section>
 
     <section class="exo-card" id="h">
-      <h3 class="ex"><span class="num">H</span> La relecture en 5 contrôles 🔍</h3>
-      <p class="task">🎯 Un camarade rend cette réponse pour le couple de sortie du convoyeur (exercice D) : <i>« C₂ = −44 »</i>. Applique la grille de relecture : combien de contrôles cette réponse échoue-t-elle, et lesquels ?</p>
+      <h3 class="ex"><span class="num">H</span> La relecture en 5 contrôles</h3>
+      <p class="task">Un camarade rend cette réponse pour le couple de sortie du convoyeur (exercice D) : <i>« C₂ = −44 »</i>. Applique la grille de relecture : combien de contrôles cette réponse échoue-t-elle, et lesquels ?</p>
       <div class="match" id="hMatch"></div>
       <div class="row"><button class="btn" id="hCheck">Vérifier</button><button class="btn g" id="hShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="hFb"></div>
@@ -223,7 +244,7 @@
     </section>
 
     <section class="exo-card" id="i">
-      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur finale 🕵️</h3>
+      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur finale</h3>
       <p class="task">Note de calcul d’un stagiaire, pour une pompe : <i>« Le moteur développe C = 8 N·m à N = 1200 tr/min. Sa puissance vaut donc P = C × N = 8 × 1200 = 9600 W, soit près de 10 kW. »</i> Le chef de projet a bondi en lisant la conclusion.</p>
       <div class="match" id="iMatch"></div>
       <div class="row"><span>b) Puissance réelle du moteur :</span><input class="numin" id="iB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
@@ -235,17 +256,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="fn" data-act="sin">sin</button><button class="fn" data-act="cos">cos</button><button class="fn" data-act="pi">π</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="div">÷</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="mul">×</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="sub">−</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="fn" data-act="sqrt">√</button><button class="op" data-act="add">+</button>
-      <button class="fn" data-act="mem">M+</button><button class="fn" data-act="rcl">RM</button><button class="op" data-act="neg">±</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">angles en degrés · M+ mémorise, RM rappelle</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -257,34 +279,145 @@ var fr=function(x){ return String(x).replace('.',','); };
 
 /* ---------- calculatrice avec mémoire ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true, mem=0;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(9); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act, v=parseFloat(cur);
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-v); }
-    else if(a==='sqrt'){ cur=clean(v<0? NaN : Math.sqrt(v)); fresh=true; }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='sin'){ cur=clean(Math.sin(v*D2R)); fresh=true; }
-    else if(a==='cos'){ cur=clean(Math.cos(v*D2R)); fresh=true; }
-    else if(a==='mem'){ mem=v; fresh=true; }
-    else if(a==='rcl'){ cur=clean(mem); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    var a=b.dataset.act;
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ---------- helpers ---------- */

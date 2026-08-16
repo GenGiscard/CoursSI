@@ -66,6 +66,27 @@
   .steps.show{display:block}
   .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
   .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -83,8 +104,8 @@
     </div>
 
     <section class="exo-card" id="a">
-      <h2><span class="num">A</span> L'anatomie de l'objet connecté 🔬</h2>
-      <p class="task">🎯 On a ouvert le boîtier du capteur de la serre : quatre organes. Associe chacun à son rôle.</p>
+      <h2><span class="num">A</span> L'anatomie de l'objet connecté</h2>
+      <p class="task">On a ouvert le boîtier du capteur de la serre : quatre organes. Associe chacun à son rôle.</p>
       <div class="schema">
         <svg viewBox="0 0 640 190" aria-label="Vue éclatée du capteur connecté : capteur, microcontrôleur, radio, batterie">
           <rect x="30" y="40" width="580" height="110" rx="14" fill="none" stroke="#5C544B" stroke-width="2" stroke-dasharray="8 6"/>
@@ -113,8 +134,8 @@
     </section>
 
     <section class="exo-card" id="b">
-      <h2><span class="num">B</span> Le constructeur de trame 📋</h2>
-      <p class="task">🎯 Ce matin la serre n°2 affiche 21,5 °C et 65 % d'humidité. Complète la trame JSON que le capteur doit envoyer.</p>
+      <h2><span class="num">B</span> Le constructeur de trame</h2>
+      <p class="task">Ce matin la serre n°2 affiche 21,5 °C et 65 % d'humidité. Complète la trame JSON que le capteur doit envoyer.</p>
       <div class="json">
         <span>{</span>
         <span class="k2">"serre"</span><span>:</span><select id="bS1"><option>?</option><option>2</option><option>65</option><option>21.5</option></select><span>,</span>
@@ -130,8 +151,8 @@
     </section>
 
     <section class="exo-card" id="c">
-      <h2><span class="num">C</span> ⭐ Le planificateur d'énergie</h2>
-      <p class="task">🎯 Mission : la serre doit mesurer <b>au moins 4 fois par heure</b> ET tenir <b>au moins 60 jours</b> sur sa batterie de 3000 mAh. Consommation : I = 1 + 0,25 × n (mA, avec n mesures/heure). <b>Trouve le réglage qui satisfait les DEUX contraintes</b>, puis relève tes valeurs.</p>
+      <h2><span class="num">C</span> Le planificateur d'énergie</h2>
+      <p class="task">Mission : la serre doit mesurer <b>au moins 4 fois par heure</b> ET tenir <b>au moins 60 jours</b> sur sa batterie de 3000 mAh. Consommation : I = 1 + 0,25 × n (mA, avec n mesures/heure). <b>Trouve le réglage qui satisfait les DEUX contraintes</b>, puis relève tes valeurs.</p>
       <div class="schema">
         <canvas id="cvNrj" width="640" height="250" aria-label="Serre, cadence de mesure et autonomie calculée"></canvas>
         <div class="slider-row">
@@ -148,8 +169,8 @@
     </section>
 
     <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Le match des réseaux 📶</h2>
-      <p class="task">🎯 Trois profils très différents. Compare-les sur le schéma, puis affecte le bon réseau à chaque objet du jardin.</p>
+      <h2><span class="num">D</span> Le match des réseaux</h2>
+      <p class="task">Trois profils très différents. Compare-les sur le schéma, puis affecte le bon réseau à chaque objet du jardin.</p>
       <div class="schema">
         <svg viewBox="0 0 640 210" aria-label="Comparatif portée, débit, consommation : WiFi, Bluetooth, LoRa">
           <g font-family="JetBrains Mono" font-size="11.5" font-weight="700">
@@ -173,8 +194,8 @@
     </section>
 
     <section class="exo-card" id="e">
-      <h2><span class="num">E</span> Le volume de données 💾</h2>
-      <p class="task">🎯 La serre envoie une trame de 40 octets toutes les 15 minutes, jour et nuit.</p>
+      <h2><span class="num">E</span> Le volume de données</h2>
+      <p class="task">La serre envoie une trame de 40 octets toutes les 15 minutes, jour et nuit.</p>
       <div class="row"><span>a) Trames par jour : 24 × 4 =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">trames</span></div>
       <div class="row"><span>b) Volume quotidien : 96 × 40 =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">octets</span></div>
       <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
@@ -183,8 +204,8 @@
     </section>
 
     <section class="exo-card" id="f">
-      <h2><span class="num">F</span> La serre sous clé 🔐</h2>
-      <p class="task">🎯 Un objet connecté est une porte d'entrée sur le réseau du lycée. Associe chaque geste de sécurité à ce qu'il protège.</p>
+      <h2><span class="num">F</span> La serre sous clé</h2>
+      <p class="task">Un objet connecté est une porte d'entrée sur le réseau du lycée. Associe chaque geste de sécurité à ce qu'il protège.</p>
       <div class="match" id="fMatch"></div>
       <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="fFb"></div>
@@ -192,7 +213,7 @@
     </section>
 
     <section class="exo-card" id="g">
-      <h2><span class="num">★</span> L'algorithme d'arrosage 🌱</h2>
+      <h2><span class="num">★</span> L'algorithme d'arrosage</h2>
       <p class="task">La serre devient autonome : « SI humidité &lt; 40 % ALORS ouvrir la vanne pendant 30 s ». La vanne débite 2 L/min ; en plein été, le sol repasse sous 40 % six fois par jour.</p>
       <div class="match" id="gMatch"></div>
       <div class="row"><span>b) Eau utilisée par jour : 6 arrosages × 1 L =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">L</span></div>
@@ -203,16 +224,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -222,30 +245,145 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ---------- planificateur d'énergie (C) ---------- */
@@ -347,9 +485,9 @@ function lockExo(checkBtn, showBtn, solId, fbId, validator){
 
 /* A */
 var A_SCEN=[
-  {sc:'🌡️ Le capteur :', ok:'traduit la grandeur physique en signal électrique', opts:['— choisir —','traduit la grandeur physique en signal électrique','stocke les données pour dix ans','arrose les plantes']},
-  {sc:'🧠 Le microcontrôleur :', ok:'lit le capteur, met en forme et décide quand envoyer', opts:['— choisir —','lit le capteur, met en forme et décide quand envoyer','capte l\u2019humidité directement','remplace la batterie']},
-  {sc:'📡 Le module radio :', ok:'expédie la trame sur le réseau sans fil', opts:['— choisir —','expédie la trame sur le réseau sans fil','refroidit le boîtier','mesure la température']}
+  {sc:'Le capteur :', ok:'traduit la grandeur physique en signal électrique', opts:['— choisir —','traduit la grandeur physique en signal électrique','stocke les données pour dix ans','arrose les plantes']},
+  {sc:'Le microcontrôleur :', ok:'lit le capteur, met en forme et décide quand envoyer', opts:['— choisir —','lit le capteur, met en forme et décide quand envoyer','capte l\u2019humidité directement','remplace la batterie']},
+  {sc:'Le module radio :', ok:'expédie la trame sur le réseau sans fil', opts:['— choisir —','expédie la trame sur le réseau sans fil','refroidit le boîtier','mesure la température']}
 ];
 buildMatch('aMatch','a',A_SCEN);
 lockExo('aCheck','aShow','aSol','aFb',function(){
@@ -361,7 +499,7 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
 
 /* B */
 var B_SCEN=[
-  {sc:'✍️ Le JSON organise les données en :', ok:'paires clé : valeur séparées par des virgules', opts:['— choisir —','paires clé : valeur séparées par des virgules','phrases complètes en français','une image scannée']}
+  {sc:'Le JSON organise les données en :', ok:'paires clé : valeur séparées par des virgules', opts:['— choisir —','paires clé : valeur séparées par des virgules','phrases complètes en français','une image scannée']}
 ];
 buildMatch('bMatch','b',B_SCEN);
 lockExo('bCheck','bShow','bSol','bFb',function(){
@@ -383,9 +521,9 @@ lockExo('cCheck','cShow','cSol','cFb',function(){
 
 /* D */
 var D_SCEN=[
-  {sc:'📹 La caméra qui envoie des images de la serre (routeur à 10 m) :', ok:'WiFi', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
-  {sc:'🌳 Le capteur de sol au fond du parc, à 800 m :', ok:'LoRa', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
-  {sc:'🎧 Le casque audio du jardinier :', ok:'Bluetooth', opts:['— choisir —','WiFi','Bluetooth','LoRa']}
+  {sc:'La caméra qui envoie des images de la serre (routeur à 10 m) :', ok:'WiFi', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
+  {sc:'Le capteur de sol au fond du parc, à 800 m :', ok:'LoRa', opts:['— choisir —','WiFi','Bluetooth','LoRa']},
+  {sc:'Le casque audio du jardinier :', ok:'Bluetooth', opts:['— choisir —','WiFi','Bluetooth','LoRa']}
 ];
 buildMatch('dMatch','d',D_SCEN);
 lockExo('dCheck','dShow','dSol','dFb',function(){
@@ -404,9 +542,9 @@ lockExo('eCheck','eShow','eSol','eFb',function(){
 
 /* F */
 var F_SCEN=[
-  {sc:'🔑 Changer le mot de passe par défaut :', ok:'ferme la porte que TOUS les pirates essaient en premier', opts:['— choisir —','ferme la porte que TOUS les pirates essaient en premier','rend le WiFi plus rapide','économise la batterie']},
-  {sc:'⬆️ Mettre à jour le firmware :', ok:'bouche les failles de sécurité découvertes', opts:['— choisir —','bouche les failles de sécurité découvertes','change la couleur du boîtier','efface les mesures']},
-  {sc:'🔒 Chiffrer les trames :', ok:'les rend illisibles même si elles sont interceptées', opts:['— choisir —','les rend illisibles même si elles sont interceptées','les rend plus lourdes donc inutiles','les envoie deux fois']}
+  {sc:'Changer le mot de passe par défaut :', ok:'ferme la porte que TOUS les pirates essaient en premier', opts:['— choisir —','ferme la porte que TOUS les pirates essaient en premier','rend le WiFi plus rapide','économise la batterie']},
+  {sc:'Mettre à jour le firmware :', ok:'bouche les failles de sécurité découvertes', opts:['— choisir —','bouche les failles de sécurité découvertes','change la couleur du boîtier','efface les mesures']},
+  {sc:'Chiffrer les trames :', ok:'les rend illisibles même si elles sont interceptées', opts:['— choisir —','les rend illisibles même si elles sont interceptées','les rend plus lourdes donc inutiles','les envoie deux fois']}
 ];
 buildMatch('fMatch','f',F_SCEN);
 lockExo('fCheck','fShow','fSol','fFb',function(){
@@ -417,7 +555,7 @@ lockExo('fCheck','fShow','fSol','fFb',function(){
 
 /* G */
 var G_SCEN=[
-  {sc:'a) 🔁 « SI humidité < 40 % ALORS ouvrir la vanne 30 s », c\u2019est :', ok:'la boucle capteur → traitement (seuil) → actionneur', opts:['— choisir —','la boucle capteur → traitement (seuil) → actionneur','un simple affichage de données','un bug du programme']}
+  {sc:'a) « SI humidité < 40 % ALORS ouvrir la vanne 30 s », c\u2019est :', ok:'la boucle capteur → traitement (seuil) → actionneur', opts:['— choisir —','la boucle capteur → traitement (seuil) → actionneur','un simple affichage de données','un bug du programme']}
 ];
 buildMatch('gMatch','g',G_SCEN);
 lockExo('gCheck','gShow','gSol','gFb',function(){

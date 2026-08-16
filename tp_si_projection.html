@@ -79,6 +79,27 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -91,7 +112,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">TP de séance · 3 heures · Première spé SI · Statique</div>
-      <h1>📐 Projeter pour résoudre</h1>
+      <h1>Projeter pour résoudre</h1>
       <p class="lede">Une force penchée ne se laisse pas calculer directement : il faut la <b>projeter</b>. Et souvent, le secret n’est pas de calculer plus fort — c’est de <b>choisir le bon repère</b>. Élingues de levage, caisse sur plan incliné, nœud de potence, grue de façade : quatre situations où le même geste change tout. Calculatrice trigonométrique en bas à droite.</p>
       <div class="plan">
         <div class="p"><div class="t">Acte 1 · ≈ 55 min</div><b>✂️ Décomposer</b><span>Passer d’une force à ses deux composantes… et revenir.</span></div>
@@ -106,8 +127,8 @@
     <div class="acte"><span class="n">ACTE 1</span><h2>Décomposer une force</h2><span class="d">≈ 55 min</span></div>
 
     <section class="exo-card" id="a">
-      <h3 class="ex"><span class="num">A</span> Le hauban du panneau ✂️</h3>
-      <p class="task">🎯 Un hauban tire sur un panneau publicitaire avec une force de <b>200 N</b>, inclinée de <b>30°</b> au-dessus de l’horizontale. Le bureau d’études veut savoir ce qui tire <i>horizontalement</i> (arrachement) et ce qui tire <i>verticalement</i> (soulèvement). <b>Fais tourner le curseur</b> pour voir les deux composantes vivre, puis réponds pour 30°.</p>
+      <h3 class="ex"><span class="num">A</span> Le hauban du panneau</h3>
+      <p class="task">Un hauban tire sur un panneau publicitaire avec une force de <b>200 N</b>, inclinée de <b>30°</b> au-dessus de l’horizontale. Le bureau d’études veut savoir ce qui tire <i>horizontalement</i> (arrachement) et ce qui tire <i>verticalement</i> (soulèvement). <b>Fais tourner le curseur</b> pour voir les deux composantes vivre, puis réponds pour 30°.</p>
       <div class="schema">
         <canvas id="cvDeco" width="700" height="300" aria-label="Force inclinée et ses deux projections sur les axes"></canvas>
         <div class="slider-row"><label>angle α</label><input type="range" id="sAng" min="0" max="90" step="5" value="30"><span class="val" id="vAng">30°</span></div>
@@ -122,8 +143,8 @@
     </section>
 
     <section class="exo-card" id="b">
-      <h3 class="ex"><span class="num">B</span> Le chemin inverse 🔄</h3>
-      <p class="task">🎯 Un capteur d’effort à deux voies équipe la même attache. Il ne mesure PAS la force : il mesure ses deux composantes. Ce matin il affiche <b>F<sub>x</sub> = 60 N</b> et <b>F<sub>y</sub> = 80 N</b>. Reconstitue la force réelle et son inclinaison.</p>
+      <h3 class="ex"><span class="num">B</span> Le chemin inverse</h3>
+      <p class="task">Un capteur d’effort à deux voies équipe la même attache. Il ne mesure PAS la force : il mesure ses deux composantes. Ce matin il affiche <b>F<sub>x</sub> = 60 N</b> et <b>F<sub>y</sub> = 80 N</b>. Reconstitue la force réelle et son inclinaison.</p>
       <div class="schema">
         <svg viewBox="0 0 700 260" aria-label="Deux composantes mesurées et la force résultante à reconstituer">
           <g stroke="#5C544B" stroke-width="2"><path d="M120 210 h420 M120 210 v-170"/></g>
@@ -161,8 +182,8 @@
     <div class="acte"><span class="n">ACTE 2</span><h2>Choisir le bon repère</h2><span class="d">≈ 65 min</span></div>
 
     <section class="exo-card" id="c">
-      <h3 class="ex"><span class="num">C</span> ⭐ L’élingue qui s’écarte</h3>
-      <p class="task">🎯 Une charge de <b>1000 N</b> est levée par <b>deux brins d’élingue symétriques</b>, chacun faisant un angle θ avec la verticale. Beaucoup pensent que chaque brin porte 500 N… <b>Écarte les brins au curseur</b> et regarde la vérité s’afficher. Mission : trouve l’angle où <b>chaque brin est tendu à 1000 N</b>, autant que si un seul câble portait toute la charge 🎯.</p>
+      <h3 class="ex"><span class="num">C</span> L’élingue qui s’écarte</h3>
+      <p class="task">Une charge de <b>1000 N</b> est levée par <b>deux brins d’élingue symétriques</b>, chacun faisant un angle θ avec la verticale. Beaucoup pensent que chaque brin porte 500 N… <b>Écarte les brins au curseur</b> et regarde la vérité s’afficher. Mission : trouve l’angle où <b>chaque brin est tendu à 1000 N</b>, autant que si un seul câble portait toute la charge .</p>
       <div class="schema">
         <canvas id="cvEling" width="700" height="330" aria-label="Charge levée par deux brins d'élingue avec tension variable selon l'angle"></canvas>
         <div class="slider-row"><label>angle θ</label><input type="range" id="sTheta" min="0" max="75" step="5" value="20"><span class="val" id="vTheta">20°</span></div>
@@ -176,8 +197,8 @@
     </section>
 
     <section class="exo-card" id="d">
-      <h3 class="ex"><span class="num">D</span> Le plan incliné, vu de deux repères 🧭</h3>
-      <p class="task">🎯 Une caisse de <b>500 N</b> repose sur une rampe de livraison inclinée à <b>30°</b>. Le poids, lui, reste vertical — c’est le REPÈRE qu’on va faire tourner. Le canvas affiche les <b>deux repères en même temps</b> : en gris le repère horizontal/vertical, en couleur le repère lié à la pente. Regarde laquelle des deux décompositions te donne directement ce qui fait glisser la caisse.</p>
+      <h3 class="ex"><span class="num">D</span> Le plan incliné, vu de deux repères</h3>
+      <p class="task">Une caisse de <b>500 N</b> repose sur une rampe de livraison inclinée à <b>30°</b>. Le poids, lui, reste vertical — c’est le REPÈRE qu’on va faire tourner. Le canvas affiche les <b>deux repères en même temps</b>: en gris le repère horizontal/vertical, en couleur le repère lié à la pente. Regarde laquelle des deux décompositions te donne directement ce qui fait glisser la caisse.</p>
       <div class="schema">
         <canvas id="cvPlan" width="700" height="330" aria-label="Caisse sur plan incliné avec les deux repères et les projections du poids"></canvas>
         <div class="slider-row"><label>pente α</label><input type="range" id="sPente" min="0" max="45" step="5" value="30"><span class="val" id="vPente">30°</span></div>
@@ -192,8 +213,8 @@
     </section>
 
     <section class="exo-card" id="e">
-      <h3 class="ex"><span class="num">E</span> Pourquoi ce repère-là ? 🤔</h3>
-      <p class="task">🎯 Reprends la caisse de l’exercice D. Un camarade décide de tout projeter dans le repère horizontal/vertical classique, un autre dans le repère de la pente. Les deux ont mathématiquement le droit. Mais l’un va passer trois fois plus de temps que l’autre — et la question suivante t’explique pourquoi.</p>
+      <h3 class="ex"><span class="num">E</span> Pourquoi ce repère-là ?</h3>
+      <p class="task">Reprends la caisse de l’exercice D. Un camarade décide de tout projeter dans le repère horizontal/vertical classique, un autre dans le repère de la pente. Les deux ont mathématiquement le droit. Mais l’un va passer trois fois plus de temps que l’autre — et la question suivante t’explique pourquoi.</p>
       <div class="match" id="eMatch"></div>
       <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
       <div class="exo-fb" id="eFb"></div>
@@ -204,8 +225,8 @@
     <div class="acte"><span class="n">ACTE 3</span><h2>Résoudre par projection</h2><span class="d">≈ 60 min</span></div>
 
     <section class="exo-card" id="f">
-      <h3 class="ex"><span class="num">F</span> Le nœud de la potence ⚖️</h3>
-      <p class="task">🎯 Une potence murale porte une charge de <b>600 N</b> suspendue au point A. Le câble AC monte vers le mur en faisant <b>30°</b> avec l’horizontale ; la barre AB, horizontale, pousse le nœud. Au point A, trois forces se croisent et s’équilibrent. Écris les deux projections et résous.</p>
+      <h3 class="ex"><span class="num">F</span> Le nœud de la potence</h3>
+      <p class="task">Une potence murale porte une charge de <b>600 N</b> suspendue au point A. Le câble AC monte vers le mur en faisant <b>30°</b> avec l’horizontale ; la barre AB, horizontale, pousse le nœud. Au point A, trois forces se croisent et s’équilibrent. Écris les deux projections et résous.</p>
       <div class="schema">
         <canvas id="cvNoeud" width="700" height="310" aria-label="Nœud de potence avec câble incliné, barre horizontale et charge suspendue"></canvas>
       </div>
@@ -218,8 +239,8 @@
     </section>
 
     <section class="exo-card" id="g">
-      <h3 class="ex"><span class="num">G</span> Le contrôle du bureau d’études 🧾</h3>
-      <p class="task">🎯 Dernière ligne droite : on te transmet trois forces qui s’appliquent en un même point d’une ferrure de façade, et on te demande de <b>vérifier l’équilibre</b>. F₁ = 300 N horizontale vers la droite · F₂ = 400 N verticale vers le haut · F₃ = 500 N inclinée vers le bas à gauche, à 53° sous l’horizontale.</p>
+      <h3 class="ex"><span class="num">G</span> Le contrôle du bureau d’études</h3>
+      <p class="task">Dernière ligne droite : on te transmet trois forces qui s’appliquent en un même point d’une ferrure de façade, et on te demande de <b>vérifier l’équilibre</b>. F₁ = 300 N horizontale vers la droite · F₂ = 400 N verticale vers le haut · F₃ = 500 N inclinée vers le bas à gauche, à 53° sous l’horizontale.</p>
       <div class="schema">
         <canvas id="cvFerrure" width="700" height="300" aria-label="Trois forces concourantes sur une ferrure de façade"></canvas>
       </div>
@@ -232,8 +253,8 @@
     </section>
 
     <section class="exo-card" id="h">
-      <h3 class="ex"><span class="num">H</span> La fiche mémo de l’atelier 🗂️</h3>
-      <p class="task">🎯 Remplis la fiche que tu colleras dans ton classeur : pour chaque situation, quelle est la bonne expression ?</p>
+      <h3 class="ex"><span class="num">H</span> La fiche mémo de l’atelier</h3>
+      <p class="task">Remplis la fiche que tu colleras dans ton classeur : pour chaque situation, quelle est la bonne expression ?</p>
       <table class="rep">
         <tr><th>situation</th><th>ce qu’on cherche</th><th>expression</th></tr>
         <tr><td>force F à α de l’axe x</td><td>composante SUR l’axe x</td><td><b>F·cos α</b></td></tr>
@@ -248,7 +269,7 @@
     </section>
 
     <section class="exo-card" id="i">
-      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur 🕵️</h3>
+      <h3 class="ex"><span class="num">★</span> La chasse à l’erreur</h3>
       <p class="task">Un stagiaire rend cette note de calcul pour la rampe d’accès d’un quai (caisse de 800 N, pente à 20°) : <i>« La composante du poids parallèle à la pente vaut P·cos α = 800 × cos 20° = 752 N. Il faut donc retenir la caisse avec 752 N. »</i> Le chef de projet a entouré la ligne en rouge.</p>
       <div class="match" id="iMatch"></div>
       <div class="row"><span>b) Valeur correcte de l’effort à retenir :</span><input class="numin" id="iB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
@@ -259,17 +280,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="fn" data-act="sin">sin</button><button class="fn" data-act="cos">cos</button><button class="fn" data-act="tan">tan</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="div">÷</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="mul">×</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="sub">−</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="fn" data-act="sqrt">√</button><button class="op" data-act="add">+</button>
-      <button class="fn" data-act="atan">atan</button><button class="fn" data-act="sq">x²</button><button class="op" data-act="neg">±</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">angles en degrés · atan → angle</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script>
@@ -281,34 +303,145 @@ var fr=function(x){ return String(x).replace('.',','); };
 
 /* ---------- calculatrice trigonométrique (degrés) ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act, v=parseFloat(cur);
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-v); }
-    else if(a==='sq'){ cur=clean(v*v); fresh=true; }
-    else if(a==='sqrt'){ cur=clean(v<0? NaN : Math.sqrt(v)); fresh=true; }
-    else if(a==='sin'){ cur=clean(Math.sin(v*D2R)); fresh=true; }
-    else if(a==='cos'){ cur=clean(Math.cos(v*D2R)); fresh=true; }
-    else if(a==='tan'){ cur=clean(Math.tan(v*D2R)); fresh=true; }
-    else if(a==='atan'){ cur=clean(Math.atan(v)/D2R); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    var a=b.dataset.act;
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ---------- outil : flèche vectorielle ---------- */
