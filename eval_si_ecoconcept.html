@@ -84,6 +84,27 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -96,7 +117,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>🌱 Le bureau d'éco-conception</h1>
+      <h1>Le bureau d'éco-conception</h1>
       <p>Ta mission d'ingénieur du jour : suivre un produit sur tout son cycle de vie, peser trois matériaux candidats, répondre à la salve de l'expert, faire fondre un nuage de CO₂… et trancher la grande affaire de la gourde. La planète (et la calculatrice, en bas à droite) comptent sur toi.</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
@@ -110,7 +131,7 @@
         <select id="s1a"><option>— choisir —</option><option>extraction → fabrication → transport → usage → fin de vie</option><option>usage → extraction → fin de vie → fabrication</option><option>fabrication → extraction → usage → transport</option></select></div>
       <div class="qrow" id="q1b"><span class="sc">b) La flèche verte du recyclage :</span>
         <select id="s1b"><option>— choisir —</option><option>renvoie la matière vers la fabrication et évite de nouvelles extractions</option><option>renvoie le produit au magasin</option><option>supprime la fin de vie</option></select></div>
-      <div class="qrow" id="q1c"><span class="sc">c) 🚗 Pour une voiture THERMIQUE, la phase qui émet le plus de CO₂ est :</span>
+      <div class="qrow" id="q1c"><span class="sc">c) Pour une voiture THERMIQUE, la phase qui émet le plus de CO₂ est :</span>
         <select id="s1c"><option>— choisir —</option><option>l'usage (des années de carburant brûlé)</option><option>le transport en bateau</option><option>l'emballage</option></select></div>
       <div class="corr" id="c1"></div>
     </section>
@@ -142,7 +163,7 @@
         <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
       <div class="qrow" id="q2b"><span class="sc">b) Masse de la pièce en ALU : m = 2700 × 0,002 =</span>
         <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">kg</span></div>
-      <div class="qrow" id="q2c"><span class="sc">c) 🍃 Remplacer l'acier par l'alu sur un véhicule permet surtout :</span>
+      <div class="qrow" id="q2c"><span class="sc">c) Remplacer l'acier par l'alu sur un véhicule permet surtout :</span>
         <select id="s2c"><option>— choisir —</option><option>de l'alléger, donc de réduire sa consommation à l'usage</option><option>de le rendre plus lourd et stable</option><option>de le rendre plus rouillé</option></select></div>
       <div class="corr" id="c2"></div>
     </section>
@@ -150,7 +171,7 @@
     <!-- ============ EX 3 ============ -->
     <section class="exo-card">
       <h2><span class="num">3</span> Défi : l'expert matériaux <span class="pts">2 pts</span></h2>
-      <p class="task">⚡ <b>6 questions</b> éclair de l'expert. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <p class="task"><b>6 questions</b> éclair de l'expert. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
       <div class="game">
         <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
         <div class="gq" id="gQ">Prêt ? L'expert ajuste ses lunettes…</div>
@@ -175,7 +196,7 @@
       </div>
       <div class="qrow" id="q4a"><span class="sc">a) Avec 100 % d'alu recyclé : CO₂ = 5,4 × 0,5 =</span>
         <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">kg CO₂</span></div>
-      <div class="qrow" id="q4b"><span class="sc">b) ♻️ Recycler l'aluminium plutôt que d'en produire du neuf économise environ :</span>
+      <div class="qrow" id="q4b"><span class="sc">b) Recycler l'aluminium plutôt que d'en produire du neuf économise environ :</span>
         <select id="s4b"><option>— choisir —</option><option>95 % de l'énergie</option><option>5 % de l'énergie</option><option>rien du tout</option></select></div>
       <div class="corr" id="c4"></div>
     </section>
@@ -183,10 +204,10 @@
     <!-- ============ EX 5 ============ -->
     <section class="exo-card">
       <h2><span class="num">5</span> Les gestes d'éco-conception <span class="pts">2 pts</span></h2>
-      <p class="task">🛠️ Deux produits passent sur ton bureau. Diagnostique-les en éco-concepteur.</p>
-      <div class="qrow" id="q5a"><span class="sc">a) 😱 Le produit CAUCHEMAR du recycleur :</span>
+      <p class="task">Deux produits passent sur ton bureau. Diagnostique-les en éco-concepteur.</p>
+      <div class="qrow" id="q5a"><span class="sc">a) Le produit CAUCHEMAR du recycleur :</span>
         <select id="s5a"><option>— choisir —</option><option>multi-matériaux collés, impossibles à séparer</option><option>mono-matériau vissé</option><option>tout en aluminium</option></select></div>
-      <div class="qrow" id="q5b"><span class="sc">b) 😍 Le produit RÊVE du réparateur :</span>
+      <div class="qrow" id="q5b"><span class="sc">b) Le produit RÊVE du réparateur :</span>
         <select id="s5b"><option>— choisir —</option><option>pièces démontables et standard, disponibles 10 ans</option><option>coque soudée par ultrasons</option><option>batterie collée à la colle époxy</option></select></div>
       <div class="corr" id="c5"></div>
     </section>
@@ -194,12 +215,12 @@
     <!-- ============ EX 6 ============ -->
     <section class="exo-card">
       <h2><span class="num">6</span> L'affaire de la gourde <span class="pts">3 pts</span></h2>
-      <p class="task">🍶 Fabriquer ta gourde en inox a émis 3 kg de CO₂. Chaque bouteille en plastique jetable : 0,1 kg de CO₂. Le grand débat de la cantine se règle par le calcul.</p>
+      <p class="task">Fabriquer ta gourde en inox a émis 3 kg de CO₂. Chaque bouteille en plastique jetable : 0,1 kg de CO₂. Le grand débat de la cantine se règle par le calcul.</p>
       <div class="qrow" id="q6a"><span class="sc">a) CO₂ de 100 bouteilles jetables : 100 × 0,1 =</span>
         <input class="numin" id="n6a" inputmode="decimal" placeholder="?"><span class="unit">kg CO₂</span></div>
       <div class="qrow" id="q6b"><span class="sc">b) À partir de combien de bouteilles ÉVITÉES la gourde est-elle « remboursée » en CO₂ ? n = 3 / 0,1 =</span>
         <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">bouteilles</span></div>
-      <div class="qrow" id="q6c"><span class="sc">c) 🏆 Conclusion d'éco-concepteur :</span>
+      <div class="qrow" id="q6c"><span class="sc">c) Conclusion d'éco-concepteur :</span>
         <select id="s6c"><option>— choisir —</option><option>le réutilisable bat le jetable dès quelques dizaines d'usages</option><option>le jetable est toujours meilleur</option><option>fabriquer la gourde ne compte pas</option></select></div>
       <div class="corr" id="c6"></div>
     </section>
@@ -226,16 +247,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">π = 3,14159… · x² pour les carrés</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -250,30 +273,145 @@ var NODE='eval_ecoconcept';
 
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ============ EX1 : cycle de vie animé ============ */
@@ -313,14 +451,14 @@ var NODE='eval_ecoconcept';
 /* ============ EX3 : défi noté ============ */
 var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false, pool:null};
 var G3_POOL=[
-  {q:'🔩 L\u2019acier appartient à la famille des…', ok:'métaux', opts:['métaux','polymères','céramiques','composites']},
-  {q:'🧴 Le PLA et l\u2019ABS appartiennent aux…', ok:'polymères (plastiques)', opts:['polymères (plastiques)','métaux','céramiques','textiles']},
-  {q:'🏺 Le verre et la porcelaine sont des…', ok:'céramiques', opts:['céramiques','métaux','polymères','mousses']},
-  {q:'🚴 Fibres de carbone + résine = un matériau…', ok:'composite', opts:['composite','pur','céramique','métallique']},
-  {q:'♻️ Le champion du recyclage à l\u2019infini sans perte de qualité :', ok:'les métaux (alu, acier)', opts:['les métaux (alu, acier)','les plastiques mélangés','le carton mouillé','les composites']},
-  {q:'🧲 Pour trier l\u2019acier dans les déchets, on utilise…', ok:'un aimant', opts:['un aimant','un ventilateur','de l\u2019eau chaude','la couleur']},
-  {q:'🌍 L\u2019ACV (analyse du cycle de vie) mesure les impacts…', ok:'de l\u2019extraction jusqu\u2019à la fin de vie', opts:['de l\u2019extraction jusqu\u2019à la fin de vie','seulement à l\u2019usine','seulement au magasin','du recyclage seul']},
-  {q:'🪶 Premier réflexe d\u2019éco-conception :', ok:'alléger et simplifier le produit', opts:['alléger et simplifier le produit','ajouter des options','coller tous les composants','doubler l\u2019emballage']}
+  {q:'L\u2019acier appartient à la famille des…', ok:'métaux', opts:['métaux','polymères','céramiques','composites']},
+  {q:'Le PLA et l\u2019ABS appartiennent aux…', ok:'polymères (plastiques)', opts:['polymères (plastiques)','métaux','céramiques','textiles']},
+  {q:'Le verre et la porcelaine sont des…', ok:'céramiques', opts:['céramiques','métaux','polymères','mousses']},
+  {q:'Fibres de carbone + résine = un matériau…', ok:'composite', opts:['composite','pur','céramique','métallique']},
+  {q:'Le champion du recyclage à l\u2019infini sans perte de qualité :', ok:'les métaux (alu, acier)', opts:['les métaux (alu, acier)','les plastiques mélangés','le carton mouillé','les composites']},
+  {q:'Pour trier l\u2019acier dans les déchets, on utilise…', ok:'un aimant', opts:['un aimant','un ventilateur','de l\u2019eau chaude','la couleur']},
+  {q:'L\u2019ACV (analyse du cycle de vie) mesure les impacts…', ok:'de l\u2019extraction jusqu\u2019à la fin de vie', opts:['de l\u2019extraction jusqu\u2019à la fin de vie','seulement à l\u2019usine','seulement au magasin','du recyclage seul']},
+  {q:'Premier réflexe d\u2019éco-conception :', ok:'alléger et simplifier le produit', opts:['alléger et simplifier le produit','ajouter des options','coller tous les composants','doubler l\u2019emballage']}
 ];
 function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
 function g3Next(){

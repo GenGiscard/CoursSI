@@ -141,8 +141,8 @@
           <tr><th>z₁</th><td>0</td><td>0</td><td class="diag">1</td></tr>
         </table>
         <div class="cols c2">
-          <div class="panel"><h3>📖 Comment le lire</h3><p>Une <b>ligne</b> donne un vecteur de B₁ exprimé dans B₀. Exemple : la ligne x₁ se lit « x₁ = cos θ·x₀ + sin θ·y₀ ».</p></div>
-          <div class="panel"><h3>🔄 Le sens inverse</h3><p>Pour aller de B₁ vers B₀, on lit le tableau <b>en colonnes</b> au lieu des lignes. C’est tout — pas besoin de recalculer quoi que ce soit.</p></div>
+          <div class="panel"><h3>Comment le lire</h3><p>Une <b>ligne</b> donne un vecteur de B₁ exprimé dans B₀. Exemple : la ligne x₁ se lit « x₁ = cos θ·x₀ + sin θ·y₀ ».</p></div>
+          <div class="panel"><h3>Le sens inverse</h3><p>Pour aller de B₁ vers B₀, on lit le tableau <b>en colonnes</b> au lieu des lignes. C’est tout — pas besoin de recalculer quoi que ce soit.</p></div>
         </div>
         <div class="hint">🧭 La colonne et la ligne de z valent 0 partout sauf 1 au croisement : <b>l’axe de rotation ne bouge pas</b>. C’est lui qui rend le problème plan, donc simple.</div>
       </section>
@@ -160,7 +160,7 @@
 
       <section class="slide" id="s6">
         <div class="k">Slide 6 · Le vrai sujet</div>
-        <h2>Enchaîner : B₂ → B₁ → B₀</h2>
+        <h2>Enchaîner : B₂ B₁ B₀</h2>
         <p class="lede">Dans un bras à deux axes, l’effort du second segment s’écrit dans B₂. Pour le ramener au bâti, on ne saute pas d’étape : <b>on descend la chaîne, un repère à la fois</b>.</p>
         <div class="anim">
           <canvas id="cvChain" width="860" height="360" aria-label="Double changement de base sur un bras à deux segments"></canvas>
@@ -193,17 +193,17 @@
         </div>
 
         <div class="astuces">
-          <div class="a"><span class="n">1</span><h3>🥇 Chaque case est un cosinus</h3>
+          <div class="a"><span class="n">1</span><h3>Chaque case est un cosinus</h3>
             <p>Le coefficient qui relie deux vecteurs unitaires, c’est <b>le cosinus de l’angle entre eux</b> — signe compris. Angle de 90°+θ ? <code>cos(90+θ) = −sin θ</code>, et le moins tombe tout seul. Plus jamais de « j’avance ou je recule ».</p></div>
-          <div class="a"><span class="n">2</span><h3>➖ Un seul moins, et il est en bas à gauche</h3>
+          <div class="a"><span class="n">2</span><h3>Un seul moins, et il est en bas à gauche</h3>
             <p>Dans le tableau B₀ → B₁, il n’y a <b>qu’un seul signe négatif</b>, sur la ligne du y, devant le sinus : <code>[cos θ, sin θ ; −sin θ, cos θ]</code>. Si tu en comptes deux, tu t’es trompé.</p></div>
-          <div class="a"><span class="n">3</span><h3>🧪 Le test à 0° et 90°</h3>
+          <div class="a"><span class="n">3</span><h3>Le test à 0° et 90°</h3>
             <p>Remplace θ par 0 : tu dois retomber sur l’identité (x₁ = x₀). Puis par 90° : tu dois obtenir <code>x₁ = y₀</code> et <code>y₁ = −x₀</code>. Deux secondes, et toute formule fausse se trahit.</p></div>
-          <div class="a"><span class="n">4</span><h3>🔤 Même lettre → cos, lettres croisées → sin</h3>
+          <div class="a"><span class="n">4</span><h3>Même lettre cos, lettres croisées sin</h3>
             <p>x₁ avec x₀ : <b>cosinus</b>. x₁ avec y₀ : <b>sinus</b>. Le cosinus relie toujours les axes « de même nom », le sinus les axes croisés. Reste à trouver le signe (astuce 1 ou 2).</p></div>
-          <div class="a"><span class="n">5</span><h3>⚡ Coaxial : additionne d’abord</h3>
+          <div class="a"><span class="n">5</span><h3>Coaxial : additionne d’abord</h3>
             <p>Deux rotations autour du même axe ? N’enchaîne pas deux substitutions : <b>additionne les angles, puis projette une seule fois</b>. Trois lignes de calcul au lieu de dix, et autant d’erreurs en moins.</p></div>
-          <div class="a"><span class="n">6</span><h3>📏 Deux contrôles gratuits</h3>
+          <div class="a"><span class="n">6</span><h3>Deux contrôles gratuits</h3>
             <p>La norme du vecteur ne change jamais. Et dans le tableau, <b>la somme des carrés de chaque ligne vaut 1</b> (cos²+sin²). Deux vérifications qui ne coûtent rien.</p></div>
         </div>
 
@@ -220,9 +220,9 @@
         <h2>À retenir</h2>
         <div class="big">B₂ → B₁ → B₀ : on descend la chaîne, un repère à la fois<small>Jamais de saut direct sans vérification. Chaque étape a sa figure de calcul.</small></div>
         <div class="cols c3">
-          <div class="panel"><h3>✍️ Toujours la figure</h3><p>Trois traits, l’angle marqué deux fois. On lit les formules dessus au lieu de les réciter — et les signes tombent juste.</p></div>
-          <div class="panel"><h3>🔄 Un tableau, deux sens</h3><p>Lignes pour aller de B₀ à B₁, colonnes pour revenir. Inverser une rotation, c’est tourner de −θ.</p></div>
-          <div class="panel"><h3>📏 La norme témoigne</h3><p>Un changement de base ne change ni la longueur d’un vecteur ni les angles entre vecteurs. C’est ton contrôle gratuit.</p></div>
+          <div class="panel"><h3>Toujours la figure</h3><p>Trois traits, l’angle marqué deux fois. On lit les formules dessus au lieu de les réciter — et les signes tombent juste.</p></div>
+          <div class="panel"><h3>Un tableau, deux sens</h3><p>Lignes pour aller de B₀ à B₁, colonnes pour revenir. Inverser une rotation, c’est tourner de −θ.</p></div>
+          <div class="panel"><h3>La norme témoigne</h3><p>Un changement de base ne change ni la longueur d’un vecteur ni les angles entre vecteurs. C’est ton contrôle gratuit.</p></div>
         </div>
         <div class="hint">🤖 Au TP : figure de calcul, tableau de passage, bras de robot à piloter au simulateur — puis les derniers exercices en <b>double projection</b>, de B₂ jusqu’à B₀.</div>
       </section>

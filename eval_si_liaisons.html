@@ -81,7 +81,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>⚙️ La salle des mécanismes</h1>
+      <h1>La salle des mécanismes</h1>
       <p>Tu entres dans la salle des mécanismes du lycée : trois guidages mystère s'animent sur l'établi, un inventaire de degrés de liberté t'attend, l'atelier des objets teste tes réflexes… et le vieil étau réclame son diagnostic. À toi de jouer, mécanicien !</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
@@ -127,11 +127,11 @@
           </g>
         </svg>
       </div>
-      <div class="qrow" id="q2a"><span class="sc">a) Degrés de liberté d'une <b>pivot</b> :</span>
+      <div class="qrow" id="q2a"><span class="sc">a) Degrés de liberté d'une <b>pivot</b>:</span>
         <input class="numin" id="n2a" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
-      <div class="qrow" id="q2b"><span class="sc">b) Degrés de liberté d'une <b>glissière</b> :</span>
+      <div class="qrow" id="q2b"><span class="sc">b) Degrés de liberté d'une <b>glissière</b>:</span>
         <input class="numin" id="n2b" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
-      <div class="qrow" id="q2c"><span class="sc">c) Degrés de liberté d'une <b>rotule</b> :</span>
+      <div class="qrow" id="q2c"><span class="sc">c) Degrés de liberté d'une <b>rotule</b>:</span>
         <input class="numin" id="n2c" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
       <div class="corr" id="c2"></div>
     </section>
@@ -139,7 +139,7 @@
     <!-- ============ EX 3 ============ -->
     <section class="exo-card">
       <h2><span class="num">3</span> Défi : l'atelier des objets <span class="pts">2 pts</span></h2>
-      <p class="task">⚡ <b>6 objets du quotidien</b> vont défiler : à chaque fois, quelle liaison se cache dedans ? <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <p class="task"><b>6 objets du quotidien</b> vont défiler : à chaque fois, quelle liaison se cache dedans ? <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
       <div class="game">
         <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
         <div class="gq" id="gQ">Prêt ? L'atelier est plein d'objets…</div>
@@ -188,7 +188,7 @@
     <!-- ============ EX 5 ============ -->
     <section class="exo-card">
       <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2>
-      <p class="task">🕵️ Le stagiaire de l'atelier a étiqueté trois objets… mais UNE étiquette est fausse. Débusque-la.</p>
+      <p class="task">Le stagiaire de l'atelier a étiqueté trois objets… mais UNE étiquette est fausse. Débusque-la.</p>
       <div class="chrono">
         <svg viewBox="0 0 860 200" aria-label="Trois objets étiquetés, une étiquette fausse">
           <g font-family="Bricolage Grotesque" font-size="16" font-weight="800" text-anchor="middle">
@@ -215,13 +215,13 @@
     <!-- ============ EX 6 ============ -->
     <section class="exo-card">
       <h2><span class="num">6</span> Le siège de bureau <span class="pts">3 pts</span></h2>
-      <p class="task">🪑 La star méconnue des liaisons : l'assise du siège TOURNE et MONTE/DESCEND sur sa colonne, les deux indépendamment. Regarde-la faire.</p>
+      <p class="task">La star méconnue des liaisons : l'assise du siège TOURNE et MONTE/DESCEND sur sa colonne, les deux indépendamment. Regarde-la faire.</p>
       <div class="chrono"><canvas id="cv6" width="860" height="240" aria-label="Siège de bureau animé : rotation et translation"></canvas></div>
       <div class="qrow" id="q6a"><span class="sc">a) La liaison assise / colonne (rotation + translation INDÉPENDANTES sur le même axe) est :</span>
         <select id="s6a"><option>— choisir —</option><option>Pivot glissant</option><option>Pivot</option><option>Glissière</option><option>Hélicoïdale</option></select></div>
       <div class="qrow" id="q6b"><span class="sc">b) Degrés de liberté de cette liaison :</span>
         <input class="numin" id="n6b" inputmode="numeric" placeholder="?"><span class="unit">ddl</span></div>
-      <div class="qrow" id="q6c"><span class="sc">c) 🛞 Chaque roulette qui tourne sur son axe, c'est une liaison :</span>
+      <div class="qrow" id="q6c"><span class="sc">c) Chaque roulette qui tourne sur son axe, c'est une liaison :</span>
         <select id="s6c"><option>— choisir —</option><option>Pivot</option><option>Glissière</option><option>Rotule</option><option>Appui plan</option></select></div>
       <div class="corr" id="c6"></div>
     </section>
@@ -356,14 +356,14 @@ var NODE='eval_liaisons';
 /* ============ EX3 : défi noté ============ */
 var g3State={started:false, done:false, idx:0, hits:0, cur:null, locked:false, pool:null};
 var G3_POOL=[
-  {q:'🚪 La porte et son cadre :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
-  {q:'🗄️ Le tiroir et son meuble :', ok:'Glissière', opts:['Pivot','Glissière','Rotule','Encastrement']},
-  {q:'🕹️ Le joystick et sa base :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
-  {q:'🍾 Le bouchon à vis et sa bouteille :', ok:'Hélicoïdale', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
-  {q:'💉 Le piston et le corps de la seringue :', ok:'Pivot glissant', opts:['Pivot glissant','Rotule','Encastrement','Hélicoïdale']},
-  {q:'🚲 La roue et son axe :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Appui plan']},
-  {q:'📷 La rotule du trépied photo :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
-  {q:'🔩 Une pièce SOUDÉE sur une autre :', ok:'Encastrement (0 ddl)', opts:['Encastrement (0 ddl)','Pivot','Glissière','Rotule']}
+  {q:'La porte et son cadre :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'Le tiroir et son meuble :', ok:'Glissière', opts:['Pivot','Glissière','Rotule','Encastrement']},
+  {q:'Le joystick et sa base :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'Le bouchon à vis et sa bouteille :', ok:'Hélicoïdale', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'Le piston et le corps de la seringue :', ok:'Pivot glissant', opts:['Pivot glissant','Rotule','Encastrement','Hélicoïdale']},
+  {q:'La roue et son axe :', ok:'Pivot', opts:['Pivot','Glissière','Rotule','Appui plan']},
+  {q:'La rotule du trépied photo :', ok:'Rotule', opts:['Pivot','Glissière','Rotule','Hélicoïdale']},
+  {q:'Une pièce SOUDÉE sur une autre :', ok:'Encastrement (0 ddl)', opts:['Encastrement (0 ddl)','Pivot','Glissière','Rotule']}
 ];
 function shuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
 function g3Next(){

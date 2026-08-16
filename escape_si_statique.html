@@ -455,7 +455,7 @@
         <div class="door" id="door3"><button class="btn big" id="goRoom4">Emprunter la passerelle →</button></div>
       </div>
 
-      <div class="sealed"><span class="ic">🔐</span><div><b>Salle 4 · La halle aux treillis</b>Scellée. La fosse garde encore ses fragments.</div></div>
+      
       <div class="row"><button class="btn ghost" id="backRoom2">← Remonter à l’atelier</button></div>
     </section>
 
@@ -483,7 +483,7 @@
         </div>
         <div class="row"><span>La barre supérieure horizontale est :</span>
           <select id="q41a"><option>— choisir —</option><option>TENDUE : elle s’allonge, elle tire sur ses nœuds</option><option>COMPRIMÉE : elle se raccourcit, elle pousse sur ses nœuds</option><option>ni l’un ni l’autre : elle ne travaille pas</option></select></div>
-        <div class="row"><span>La barre inclinée qui descend vers l’appui est :</span>
+        <div class="row"><span>La barre inclinée qui rejoint le pied du mur est :</span>
           <select id="q41b"><option>— choisir —</option><option>COMPRIMÉE : elle se raccourcit, elle pousse sur ses nœuds</option><option>TENDUE : elle s’allonge, elle tire sur ses nœuds</option><option>ni l’un ni l’autre : elle ne travaille pas</option></select></div>
         <div class="row"><button class="btn" id="b41">Vérifier</button><button class="btn ghost" id="h41">💡 Indice</button></div>
         <div class="fb" id="fb41"></div>
@@ -594,9 +594,9 @@
         <h3><span class="n">5.3</span> ⭐ La dernière manœuvre <span class="st" id="s53">non résolu</span></h3>
         <div class="stake"><canvas id="stk53" width="560" height="150" aria-label="Console de commande et séquence de manœuvre"></canvas>
           <div class="why"><span class="lab">pourquoi ça compte</span>La dernière commande. Un ordre dans le mauvais sens et la flèche balaie la nacelle contre le pylône. <b>Il faut avoir tout compris</b> : le poids, le moment, les appuis.</div></div>
-        <p class="brief">🎛️ La console demande une <b>séquence de trois ordres</b>. Chacun repose sur une notion vue depuis le sas. Réponds aux trois, dans l’ordre, et la grue dégagera la sortie.</p>
-        <div class="row"><span>① Pour dégager la sortie, la flèche doit pivoter. Que faut-il vérifier d’abord ?</span>
-          <select id="q53a"><option>— choisir —</option><option>que la somme des moments reste nulle pendant tout le mouvement</option><option>que la charge est la plus lourde possible</option><option>rien : la grue est électrique, elle gère seule</option></select></div>
+        <p class="brief">🎛️ La console demande une <b>séquence de trois ordres</b> : <b>① faire pivoter la flèche</b> pour dégager la sortie, <b>② descendre la nacelle</b> jusqu’au sol, <b>③ la poser sur ses patins</b>. Chaque ordre met en jeu une notion vue depuis le sas — les moments, l’équilibre, les appuis. Valide les trois et la grue libère le passage.</p>
+        <div class="row"><span>① La flèche va pivoter <b>en restant chargée</b>. Avant de lancer la rotation, que faut-il vérifier ?</span>
+          <select id="q53a"><option>— choisir —</option><option>que le moment de la charge reste compensé par celui du contrepoids, quelle que soit l’orientation de la flèche</option><option>que la charge est la plus lourde possible pour stabiliser la grue</option><option>rien : une fois la grue d’aplomb, elle le reste quoi qu’il arrive</option></select></div>
         <div class="row"><span>② La nacelle doit descendre à vitesse constante. Que vaut alors la somme des forces sur elle ?</span>
           <select id="q53b"><option>— choisir —</option><option>zéro : vitesse constante signifie équilibre, même en mouvement</option><option>elle est dirigée vers le bas, sinon la nacelle ne descendrait pas</option><option>elle augmente avec la vitesse</option></select></div>
         <div class="row"><span>③ Au sol, la nacelle repose sur trois patins. Pourquoi trois et non quatre ?</span>
@@ -1346,7 +1346,8 @@ function incident(){
   var kind=lvl>=3?'silhouette':'coupure', dur=lvl>=3?3.4:2.4;
   if(GAME.room===3 && typeof sceneEvent3==='function'){ sceneEvent3(kind,dur); DEC3.eau=Math.min(1,DEC3.eau+0.22); }
   else if(GAME.room===2 && typeof sceneEvent2==='function'){ sceneEvent2(kind,dur); }
-  else { sceneEvent(kind,dur); }
+  else if(GAME.room===1){ sceneEvent(kind,dur); }
+  /* salles 4 et 5 : pas de calque d\u2019incident sur le d\u00e9cor, seuls la secousse et le grondement jouent */
   var lignes=[
     'Quelque part dans la structure, une charge ripe. La poussi\u00e8re tombe du plafond.',
     'La lumi\u00e8re s\u2019\u00e9teint une seconde. Dans le noir, le c\u00e2ble du treuil grince \u2014 le sas n\u2019aime pas les erreurs.',
@@ -2624,7 +2625,10 @@ el('bLock3').addEventListener('click',function(){
     if(n>=3) incident();
   }
 });
-el('goRoom4').addEventListener('click',function(){ goRoom(4); });
+el('goRoom4').addEventListener('click',function(){
+  goRoom(4); resetFrags(); SCARE.errs=0;
+  narrate4('La passerelle grince sous tes pas. De l\u2019autre c\u00f4t\u00e9, la halle : une charpente enti\u00e8re au-dessus de ta t\u00eate, et trois nouveaux fragments \u00e0 trouver.');
+});
 document.querySelectorAll('[id="backRoom3"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(3); }); });
 
 
@@ -2928,7 +2932,10 @@ el('bLock4').addEventListener('click',function(){
     incident();
   }
 });
-el('goRoom5').addEventListener('click',function(){ goRoom(5); });
+el('goRoom5').addEventListener('click',function(){
+  goRoom(5); resetFrags(); SCARE.errs=0;
+  narrate5('L\u2019escalier m\u00e9tallique r\u00e9sonne \u00e0 chaque marche. En haut, le poste de commande \u2014 et le chantier tout entier derri\u00e8re la vitre.');
+});
 document.querySelectorAll('[id="backRoom3"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(3); }); });
 
 /* ================================================================
@@ -3135,17 +3142,17 @@ el('b52').addEventListener('click',function(){
 
 /* --- 5.3 ⭐ : la dernière manœuvre --- */
 setupHint('h53','hb53',[
-  'Ces trois questions reprennent les trois id\u00e9es du jeu : les moments, l\u2019\u00e9quilibre en mouvement, les appuis.',
-  'Un solide qui se d\u00e9place \u00e0 vitesse CONSTANTE est en \u00e9quilibre : \u03a3F = 0 aussi.',
-  'Trois appuis d\u00e9finissent toujours un plan : c\u2019est pour \u00e7a qu\u2019un tr\u00e9pied ne bancale jamais.'
+  '\u2460 En 5.1 tu as \u00e9quilibr\u00e9 la grue dans UNE position. En pivotant, la fl\u00e8che change d\u2019orientation \u2014 mais la charge reste au m\u00eame rayon, donc son moment de basculement garde la m\u00eame valeur, dans une direction qui tourne. C\u2019est cela qu\u2019il faut v\u00e9rifier : que le contrepoids le compense TOUJOURS.',
+  '\u2461 Attention au r\u00e9flexe : \u00ab \u00e7a bouge, donc ce n\u2019est pas en \u00e9quilibre \u00bb est FAUX. Un solide qui descend \u00e0 vitesse CONSTANTE n\u2019acc\u00e9l\u00e8re pas : le c\u00e2ble le retient exactement autant que le poids le tire, donc \u03a3F = 0.',
+  '\u2462 Trois points d\u00e9finissent toujours un plan : un tr\u00e9pied se pose \u00e0 plat sur n\u2019importe quel sol. Avec quatre patins, il faudrait qu\u2019ils soient rigoureusement coplanaires \u2014 sinon \u00e7a bancale.'
 ]);
 el('b53').addEventListener('click',function(){
-  var a=(el('q53a').value==='que la somme des moments reste nulle pendant tout le mouvement');
+  var a=(el('q53a').value==='que le moment de la charge reste compens\u00e9 par celui du contrepoids, quelle que soit l\u2019orientation de la fl\u00e8che');
   var b=(el('q53b').value==='z\u00e9ro : vitesse constante signifie \u00e9quilibre, m\u00eame en mouvement');
   var c=(el('q53c').value==='trois appuis suffisent et se posent toujours \u00e0 plat, sans bancaler');
   if(a&&b&&c){
     el('fb53').className='fb ok';
-    el('fb53').textContent='\u2713 S\u00e9quence accept\u00e9e. La fl\u00e8che pivote lentement et lib\u00e8re la sortie.';
+    el('fb53').innerHTML='\u2713 S\u00e9quence accept\u00e9e. <b>\u2460</b> le contrepoids compense le moment de la charge dans toutes les orientations \u2192 pas de basculement. <b>\u2461</b> vitesse constante = \u03a3F = 0, m\u00eame en mouvement. <b>\u2462</b> trois appuis se posent toujours \u00e0 plat. La fl\u00e8che pivote et lib\u00e8re la sortie.';
     solve('p53','s53','fr53',3,'5');
     narrate5('La grue s\u2019\u00e9branle. Trente secondes plus tard, la sortie est d\u00e9gag\u00e9e et un code s\u2019affiche en grand sur la console.');
   } else {

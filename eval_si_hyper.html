@@ -85,6 +85,27 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+                 min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
 <body>
@@ -97,7 +118,7 @@
   <div class="wrap">
     <div class="hero">
       <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>⚙️ La revue de conception</h1>
+      <h1>La revue de conception</h1>
       <p>Vendredi, 9 h. Quatre dossiers doivent être validés avant le lancement en production lundi. Ton rôle : <b>calculer le degré d’hyperstatisme de chaque mécanisme</b> et dire ce qu’il faudra exiger de l’atelier. Un h mal évalué, et ce sont des milliers de pièces qui ne se monteront pas.</p>
       <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
     </div>
@@ -148,7 +169,7 @@
     <!-- ============ EX 3 ============ -->
     <section class="exo-card">
       <h2><span class="num">3</span> Défi : la revue express <span class="pts">2 pts</span></h2>
-      <p class="task">⚡ <b>6 contrôles rapides</b> avant la pause. <b>Une seule tentative</b> (5-6 ✓ → 2 pts · 3-4 ✓ → 1 pt).</p>
+      <p class="task"><b>6 contrôles rapides</b> avant la pause. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
       <div class="game">
         <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
         <div class="gq" id="gQ">Prêt ? Les dossiers arrivent…</div>
@@ -172,7 +193,7 @@
         </div>
       </div>
       <div class="qrow" id="q4a"><span class="sc">a) Valeur de I<sub>c</sub> qui donne h = 0 :</span><input class="numin" id="n4a" inputmode="numeric" placeholder="?"></div>
-      <div class="qrow" id="q4b"><span class="sc">b) 📉 Que signale un h négatif ?</span>
+      <div class="qrow" id="q4b"><span class="sc">b) Que signale un h négatif ?</span>
         <select id="s4b"><option>— choisir —</option><option>une mobilité parasite : l’arbre bouge alors qu’il ne devrait pas</option><option>un montage encore meilleur que h = 0</option><option>une erreur de calcul systématique</option></select></div>
       <div class="corr" id="c4"></div>
     </section>
@@ -180,7 +201,7 @@
     <!-- ============ EX 5 ============ -->
     <section class="exo-card">
       <h2><span class="num">5</span> Chasse à l’erreur <span class="pts">2 pts</span></h2>
-      <p class="task">🕵️ Un stagiaire a traité le dossier « arbre sur deux paliers pivot » (n = 2, L = 2, m = 1, guidage en trois dimensions) :</p>
+      <p class="task">Un stagiaire a traité le dossier « arbre sur deux paliers pivot » (n = 2, L = 2, m = 1, guidage en trois dimensions) :</p>
       <div class="chrono">
         <svg viewBox="0 0 860 160" aria-label="Note de calcul erronée sur le modèle utilisé">
           <rect x="70" y="14" width="720" height="130" rx="10" fill="#fffdf6" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="8 5"/>
@@ -200,7 +221,7 @@
     <!-- ============ EX 6 ============ -->
     <section class="exo-card">
       <h2><span class="num">6</span> Le rapport de validation <span class="pts">3 pts</span></h2>
-      <p class="task">Dernier dossier, le plus lourd : une <b>table élévatrice à ciseaux</b>. Elle comporte <b>5 solides</b> (bâti compris) et <b>6 liaisons</b> : deux pivots, deux pivots glissants, une rotule et une linéaire annulaire. Étude <b>dans l’espace</b>, la table monte et descend (m = 1).</p>
+      <p class="task">Dernier dossier, le plus lourd : une <b>table élévatrice à ciseaux</b>. Elle comporte <b>5 solides</b> (bâti compris) et <b>6 liaisons</b>: deux pivots, deux pivots glissants, une rotule et une linéaire annulaire. Étude <b>dans l’espace</b>, la table monte et descend (m = 1).</p>
       <div class="chrono"><canvas id="cv6" width="860" height="300" aria-label="Table élévatrice à ciseaux animée avec son graphe à deux boucles"></canvas></div>
       <div class="qrow" id="q6a"><span class="sc">a) Nombre de cycles : γ =</span><input class="numin" id="n6a" inputmode="numeric" placeholder="?"></div>
       <div class="qrow" id="q6b"><span class="sc">b) Somme des degrés de liberté : I<sub>c</sub> =</span><input class="numin" id="n6b" inputmode="numeric" placeholder="?"></div>
@@ -230,16 +251,18 @@
   </div>
 
   <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice">
-    <div class="disp" id="calcDisp">0</div>
+  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
+    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
     <div class="keys">
-      <button class="cl" data-act="C">C</button><button class="op" data-act="neg">±</button><button class="op" data-act="sq">x²</button><button class="op" data-act="div">÷</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="op" data-act="mul">×</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="op" data-act="sub">−</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="op" data-act="add">+</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="pi">π</button><button class="eq" data-act="eq">=</button>
+      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
+      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
+      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
+      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
+      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
+      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
+      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
     </div>
-    <div class="tt">pour les additions un peu longues</div>
+    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -254,30 +277,145 @@ var NODE='eval_hyper';
 
 /* ---------- calculatrice ---------- */
 (function(){
-  var acc=null, op=null, cur='0', fresh=true;
-  var disp=el('calcDisp'); if(!disp) return;
-  function show(){ var s=cur; if(String(s).length>13) s=parseFloat(s).toPrecision(8); disp.textContent=String(s).replace('.',','); }
-  function compute(a,b,o){ a=parseFloat(a); b=parseFloat(b);
-    if(o==='add') return a+b; if(o==='sub') return a-b;
-    if(o==='mul') return a*b; if(o==='div') return b===0? NaN : a/b; return b; }
-  function clean(x){ if(!isFinite(x)) return 'Err'; return String(Math.round(x*1e9)/1e9); }
-  el('calcToggle').addEventListener('click',function(){ el('calc').classList.toggle('show'); });
-  el('calc').addEventListener('click',function(ev){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+    if(x===null||x===undefined||!isFinite(x)) return 'Err';
+    var r=Math.round(x*1e10)/1e10;
+    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+    return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+    var T=[], i=0;
+    while(i<s.length){
+      var c=s[i];
+      if(c===' '){ i++; continue; }
+      if(c>='0'&&c<='9'||c==='.'){
+        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+      }
+      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+      var got=null;
+      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+      throw new Error('car');
+    }
+    return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+    var p=0;
+    function peek(){ return T[p]; }
+    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+    function expression(){
+      var v=term();
+      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+        var op=T[p].t; p++;
+        var r=term(); v=(op==='+')? v+r : v-r;
+      }
+      return v;
+    }
+    function term(){
+      var v=power();
+      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+        var op=T[p].t; p++;
+        var r=power();
+        if(op==='/'&&r===0) throw new Error('div0');
+        v=(op==='*')? v*r : v/r;
+      }
+      return v;
+    }
+    function power(){
+      var b=unary();
+      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+      return b;
+    }
+    function unary(){
+      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+      return primary();
+    }
+    function primary(){
+      var t=T[p];
+      if(!t) throw new Error('fin');
+      if(t.t==='num'){ p++; return t.v; }
+      if(t.t==='fn'){
+        p++;
+        if(!eat('(')) throw new Error('par');
+        var a=expression();
+        if(!eat(')')) throw new Error('par');
+        return applyFn(t.v,a);
+      }
+      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+      throw new Error('tok');
+    }
+    var res=expression();
+    if(p<T.length) throw new Error('reste');
+    return res;
+  }
+  function applyFn(f,a){
+    switch(f){
+      case 'sin': return Math.sin(deg? a*D2R : a);
+      case 'cos': return Math.cos(deg? a*D2R : a);
+      case 'tan': return Math.tan(deg? a*D2R : a);
+      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+      case 'abs': return Math.abs(a);
+    }
+    throw new Error('fn');
+  }
+  function evaluate(s){
+    if(!s.trim()) return null;
+    /* fermeture automatique des parenthèses ouvertes */
+    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+    var full=s+')'.repeat(Math.max(0,o-c));
+    return parse(tok(full));
+  }
+  function pretty(s){
+    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+    dE.textContent = expr? pretty(expr) : '\u00a0';
+    var out='';
+    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+    catch(e){ out=last||'\u00a0'; }
+    dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
     var b=ev.target.closest('button'); if(!b) return;
     var a=b.dataset.act;
-    if(a>='0'&&a<='9'){ if(fresh){ cur=a; fresh=false; } else { cur=(cur==='0'?a:cur+a); } }
-    else if(a==='.'){ if(fresh){ cur='0.'; fresh=false; } else if(cur.indexOf('.')<0){ cur+='.'; } }
-    else if(a==='pi'){ cur=String(Math.PI); fresh=true; }
-    else if(a==='C'){ acc=null; op=null; cur='0'; fresh=true; }
-    else if(a==='neg'){ cur=clean(-parseFloat(cur)); }
-    else if(a==='sq'){ cur=clean(parseFloat(cur)*parseFloat(cur)); fresh=true; }
-    else if(a==='add'||a==='sub'||a==='mul'||a==='div'){
-      if(op!==null && !fresh){ cur=clean(compute(acc,cur,op)); }
-      acc=cur; op=a; fresh=true; }
-    else if(a==='eq'){ if(op!==null){ cur=clean(compute(acc,cur,op)); acc=null; op=null; fresh=true; } }
-    show();
+    if(a==='C'){ expr=''; last=''; render(); return; }
+    if(a==='del'){ 
+      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+      render(); return; }
+    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+    if(a==='eq'){
+      try{ var v=evaluate(expr); if(v===null) return;
+        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+      catch(e){ dR.textContent='Err'; }
+      return; }
+    if(a==='neg'){
+      var mm=expr.match(/(\d+\.?\d*)$/);
+      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+      else { expr+='(-'; }
+      render(); return; }
+    ins(a);
   });
-  show();
+  render();
 })();
 
 /* ---------- valeurs de référence ---------- */
@@ -360,50 +498,66 @@ el('gStart').addEventListener('click',function(){
 var IcSel=4;
 (function(){
   var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
-  var t=0;
+  var t=0, R=13;
   el('pSlider').addEventListener('input',function(){ IcSel=+this.value; el('pVal').textContent='I_c = '+IcSel; });
+  /* vue de COTE : axe de l'arbre horizontal, dans le plan de l'ecran */
+  function palier(cx,cy,col){
+    g.fillStyle='#cfc7b6'; g.strokeStyle='#8c8578'; g.lineWidth=1.6;
+    g.beginPath(); g.rect(cx-30,cy+R+6,60,190-(cy+R+6)+14); g.fill(); g.stroke();
+    g.fillStyle='#e7eef2'; g.strokeStyle=col; g.lineWidth=2.6;
+    g.beginPath(); g.rect(cx-26,cy-R-16,52,16); g.fill(); g.stroke();
+    g.beginPath(); g.rect(cx-26,cy+R,52,16); g.fill(); g.stroke();
+    g.fillStyle=col; g.fillRect(cx-30,cy-R-4,5,2*R+8); g.fillRect(cx+25,cy-R-4,5,2*R+8);
+  }
   function step(){
     t+=0.04;
     var h=1+6-IcSel;
     var col= h===0? '#3D7E5F' : (h<0? '#8A5A7A' : '#C0492E');
     g.clearRect(0,0,cv.width,cv.height);
-    /* bâti */
-    g.fillStyle='#d9d2c4'; g.fillRect(150,190,560,14);
+    g.fillStyle='#d9d2c4'; g.fillRect(140,190,580,14);
     g.strokeStyle='#8c8578'; g.lineWidth=1.5;
-    for(var i=0;i<560;i+=12){ g.beginPath(); g.moveTo(150+i,204); g.lineTo(150+i-8,214); g.stroke(); }
-    /* paliers */
-    var dz=8;
-    [[260,150],[600,150-dz]].forEach(function(p){
-      g.fillStyle='#e7eef2'; g.strokeStyle=col; g.lineWidth=2.6;
-      g.beginPath(); g.rect(p[0]-26,p[1]-30,52,60); g.fill(); g.stroke();
-      g.fillStyle='#fff'; g.beginPath(); g.arc(p[0],p[1],15,0,7); g.fill();
-      g.strokeStyle=col; g.stroke();
-    });
-    /* arbre */
+    for(var i=0;i<580;i+=12){ g.beginPath(); g.moveTo(140+i,204); g.lineTo(140+i-8,214); g.stroke(); }
+    var dz=8, yA=140, yB=140-dz;
     var slide=(h<0)? Math.sin(t*1.5)*18 : 0;
-    var flex=(h>0)? -dz*1.3 : 0;
-    g.strokeStyle=col; g.lineWidth=13; g.lineCap='round';
+    /* trait d'axe */
+    g.strokeStyle='rgba(92,84,75,.5)'; g.lineWidth=1.4; g.setLineDash([12,4,3,4]);
+    g.beginPath(); g.moveTo(180,yA); g.lineTo(700,yB); g.stroke(); g.setLineDash([]);
+    /* arbre en cylindre */
+    var x1=200+slide, x2=660+slide;
+    var lg=g.createLinearGradient(0,yA-R,0,yA+R);
+    lg.addColorStop(0,'#b9c6d1'); lg.addColorStop(0.35,'#eef3f7'); lg.addColorStop(1,'#8f9aa8');
     g.beginPath();
-    if(h>0){ g.moveTo(210+slide,150); g.quadraticCurveTo(430,150+flex,650+slide,150-dz); }
-    else { g.moveTo(210+slide,150); g.lineTo(650+slide,150-dz); }
-    g.stroke();
-    g.save(); g.translate(430,150-dz/2); g.rotate(t*2);
-    g.strokeStyle='rgba(189,138,42,.85)'; g.lineWidth=3;
-    for(var k=0;k<4;k++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(k*1.57)*16,Math.sin(k*1.57)*16); g.stroke(); }
-    g.restore();
-    /* calcul */
-    g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
-    g.fillText('h = m + E_c \u2212 I_c = 1 + 6 \u2212 '+IcSel,60,40);
+    if(h>0){ var fl=-dz*1.25;
+      g.moveTo(x1,yA-R); g.quadraticCurveTo((x1+x2)/2,yA+fl-R,x2,yB-R);
+      g.lineTo(x2,yB+R); g.quadraticCurveTo((x1+x2)/2,yA+fl+R,x1,yA+R);
+    } else {
+      g.moveTo(x1,yA-R); g.lineTo(x2,yB-R); g.lineTo(x2,yB+R); g.lineTo(x1,yA+R);
+    }
+    g.closePath(); g.fillStyle=lg; g.fill(); g.strokeStyle=col; g.lineWidth=2.2; g.stroke();
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=2;
+    g.beginPath(); g.ellipse(x1,yA,5,R,0,0,7); g.fill(); g.stroke();
+    g.beginPath(); g.ellipse(x2,yB,5,R,0,0,7); g.fill(); g.stroke();
+    palier(290,yA,col); palier(580,yB,col);
+    /* rotation autour de l'axe horizontal */
+    var mx=435+slide, my=142-dz/2;
+    g.strokeStyle='rgba(189,138,42,.55)'; g.lineWidth=1.8;
+    g.beginPath(); g.ellipse(mx,my,7,R+7,0,0,7); g.stroke();
+    var an=t*2.2, px=mx+7*Math.cos(an), py=my+(R+7)*Math.sin(an);
+    g.fillStyle=(Math.cos(an)>0)? '#BD8A2A' : 'rgba(189,138,42,.3)';
+    g.beginPath(); g.arc(px,py,4.5,0,7); g.fill();
+    g.strokeStyle='#BD8A2A'; g.lineWidth=2.2;
+    g.beginPath(); g.moveTo(mx+7,my-4); g.lineTo(mx+2,my-11); g.moveTo(mx+7,my-4); g.lineTo(mx+9,my-13); g.stroke();
+    /* lectures */
+    g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('h = m + E_c \u2212 I_c = 1 + 6 \u2212 '+IcSel,50,40);
     g.fillStyle=col; g.font='800 30px "JetBrains Mono",monospace';
-    g.fillText('h = '+h,60,84);
+    g.fillText('h = '+h,50,84);
     g.font='800 15px "Bricolage Grotesque",sans-serif';
-    if(h>0){ g.fillStyle='#C0492E'; g.fillText('\u26a0 l\u2019arbre se tord : '+h+' contrainte'+(h>1?'s':'')+' \u00e0 garantir',300,50); }
-    else if(h===0){ g.fillStyle='#3D7E5F'; g.fillText('\ud83c\udfaf isostatique : le d\u00e9faut est absorb\u00e9',300,50); }
-    else { g.fillStyle='#8A5A7A'; g.fillText('\u26a0 mobilit\u00e9 parasite : l\u2019arbre coulisse',300,50); }
-    g.strokeStyle='#8c8578'; g.lineWidth=1.4; g.setLineDash([4,4]);
-    g.beginPath(); g.moveTo(180,150); g.lineTo(700,150); g.stroke(); g.setLineDash([]);
+    if(h>0){ g.fillStyle='#C0492E'; g.fillText('\u26a0 l\u2019arbre se tord : '+h+' contrainte'+(h>1?'s':'')+' \u00e0 garantir',290,50); }
+    else if(h===0){ g.fillStyle='#3D7E5F'; g.fillText('\ud83c\udfaf isostatique : le d\u00e9faut est absorb\u00e9',290,50); }
+    else { g.fillStyle='#8A5A7A'; g.fillText('\u26a0 mobilit\u00e9 parasite : l\u2019arbre coulisse',290,50); }
     g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('palier de droite d\u00e9salign\u00e9',600,250); g.textAlign='left';
+    g.fillText('palier de droite d\u00e9salign\u00e9',580,242); g.textAlign='left';
   }
   setInterval(step,50); step();
 })();
