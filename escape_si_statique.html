@@ -148,6 +148,24 @@
   #calc button.eq{background:var(--green);color:#fff;font-weight:700}
   #calc button.cl{background:#fbeee9;color:var(--copper)}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
+
+  .stake{display:flex;gap:14px;align-items:center;background:rgba(20,26,36,.55);border:1px solid rgba(143,212,224,.22);
+         border-left:3px solid #f0b558;border-radius:12px;padding:10px 14px;margin:10px 0 12px;flex-wrap:wrap}
+  .stake canvas{width:280px;max-width:100%;height:auto;display:block;border-radius:8px;background:rgba(0,0,0,.28);flex:none}
+  .stake .why{flex:1;min-width:230px;font-size:14.5px;color:#cfd6e6;line-height:1.5}
+  .stake .why b{color:#f0b558}
+  .stake .why .lab{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+                   text-transform:uppercase;color:#8fd4e0;margin-bottom:3px}
+
+  .endcard{display:none;margin:18px 0;border:1px solid rgba(110,227,160,.35);border-radius:16px;overflow:hidden;
+           background:linear-gradient(160deg,rgba(20,30,26,.9),rgba(16,22,30,.9))}
+  .endcard.show{display:block}
+  .endcard canvas{width:100%;height:auto;display:block}
+  .endcard .endtxt{padding:18px 22px 22px}
+  .endcard .endtxt .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#6ee3a0;text-transform:uppercase}
+  .endcard .endtxt h2{margin:6px 0 8px;font-size:28px;color:#eaf3ee}
+  .endcard .endtxt p{color:#cfd6e6;font-size:16px;margin:8px 0}
+  .endcard .endtxt b{color:#6ee3a0}
 </style>
 </head>
 <body>
@@ -179,7 +197,6 @@
       </div>
       <span class="hints">indices : <b id="hintCount">0</b></span>
       <button class="scaretoggle on" id="scareBtn" title="Coupe les incidents de chantier (secousses, coupures de courant, grondements)">⚡ incidents : on</button>
-      <button class="scaretoggle" id="bonusBtn" title="Défi bonus, débloqué en sortant de la fosse" disabled>🌙 quart de nuit</button>
       <div class="frags">
         <span class="lab">code</span>
         <div class="f" id="f1">?</div><div class="f" id="f2">?</div><div class="f" id="f3">?</div>
@@ -203,6 +220,7 @@
       <!-- ---- énigme 1.1 ---- -->
       <div class="puz" id="p11">
         <h3><span class="n">1.1</span> La charge sans étiquette <span class="st" id="s11">non résolu</span></h3>
+        <div class="stake"><canvas id="stk11" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>La palette pend juste au-dessus de l’unique sortie du sas. Tant que tu ignores <b>ce qu’elle pèse en newtons</b>, impossible de savoir si le palan tiendra le temps de passer dessous. Le chiffre gravé sous le crochet n’apparaît qu’une fois le poids calculé.</div></div>
         <p class="brief">🔩 La palette de blocs béton pend au crochet, juste devant toi. L’étiquette de masse tient encore : <b>320 kg</b>. Mais le manuel du palan, lui, ne parle qu’en newtons. On prendra <b>g = 10 N/kg</b>.</p>
         <div class="row"><span>Poids de la palette : P =</span><input class="numin" id="n11" inputmode="decimal" placeholder="?"><span class="unit">N</span>
           <button class="btn" id="b11">Vérifier</button><button class="btn ghost" id="h11">💡 Indice</button></div>
@@ -214,6 +232,7 @@
       <!-- ---- énigme 1.2 ---- -->
       <div class="puz" id="p12">
         <h3><span class="n">1.2</span> Le treuil déréglé <span class="st" id="s12">non résolu</span></h3>
+        <div class="stake"><canvas id="stk12" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>Le verrou magnétique de la porte est câblé sur le capteur de tension du treuil : il ne lâche <b>qu’à l’équilibre exact</b>. Trop peu de tension, la palette tombe ; trop, le câble force. Un seul réglage ouvre.</div></div>
         <p class="brief">🪝 Le treuil s’emballe : la palette monte, redescend, cogne. <b>Règle la tension du câble</b> pour l’immobiliser — le verrou magnétique du mur ne lâchera qu’à l’équilibre parfait.</p>
         <div class="scene">
           <canvas id="cvTreuil" width="700" height="330" aria-label="Palette suspendue dans le sas, équilibre selon la tension du câble"></canvas>
@@ -229,6 +248,7 @@
       <!-- ---- énigme 1.3 ---- -->
       <div class="puz" id="p13">
         <h3><span class="n">1.3</span> Le mouflage du palan <span class="st" id="s13">non résolu</span></h3>
+        <div class="stake"><canvas id="stk13" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>La grille du sas pèse trop lourd pour un brin unique : il casserait. En <b>répartissant l’effort sur plusieurs brins</b>, tu passes sous la charge de rupture — et tu peux enfin la hisser.</div></div>
         <p class="brief">⛓️ Au fond du sas, dans l’eau jusqu’aux chevilles, un palan reprend la même palette de 3200 N — mais avec <b>4 brins</b> tendus à l’identique. Le manuel exige la tension d’UN brin avant tout levage.</p>
         <div class="scene">
           <canvas id="cvPalan" width="700" height="290" aria-label="Palan à quatre brins portant la palette au-dessus de l'eau"></canvas>
@@ -275,6 +295,7 @@
       <!-- ---- énigme 2.1 ---- -->
       <div class="puz" id="p21">
         <h3><span class="n">2.1</span> Le boulon récalcitrant <span class="st" id="s21">non résolu</span></h3>
+        <div class="stake"><canvas id="stk21" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>Le boulon qui bloque la porte de l’atelier ne cède qu’à un couple précis. Ta main ne peut pas pousser plus fort : c’est <b>la longueur de la clé</b> qui fera la différence.</div></div>
         <p class="brief">🔩 Le boulon de l’armoire à outils est bloqué : il faut lui appliquer un couple de <b>240 N·m</b> pour le desserrer. Tu ne peux pousser qu’avec <b>300 N</b> au bout de la clé. <b>Choisis la longueur de clé</b> — l’atelier en propose plusieurs, de la clé de poche à la barre de rallonge.</p>
         <div class="scene">
           <canvas id="cvCle" width="700" height="290" aria-label="Clé sur un boulon avec une force appliquée au bout du bras"></canvas>
@@ -290,6 +311,7 @@
       <!-- ---- énigme 2.2 ---- -->
       <div class="puz" id="p22">
         <h3><span class="n">2.2</span> La balance de chantier <span class="st" id="s22">non résolu</span></h3>
+        <div class="stake"><canvas id="stk22" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>Le fléau commande directement la trappe : elle ne s’ouvre que si la balance est <b>parfaitement équilibrée</b>. Chaque contrepoids mal placé la referme.</div></div>
         <p class="brief">⚖️ Un fléau repose sur un couteau. À gauche, une gueuse de fonte de <b>900 N</b> pendue à <b>0,40 m</b> de l’axe. À droite, un bac à gravier réglable, accroché à <b>1,20 m</b>. <b>Remplis le bac</b> jusqu’à ce que le fléau redevienne horizontal : le contact électrique qui libère le fragment ne se ferme qu’à l’équilibre.</p>
         <div class="scene">
           <canvas id="cvFleau" width="700" height="300" aria-label="Fléau en équilibre entre une gueuse et un bac à gravier réglable"></canvas>
@@ -305,6 +327,7 @@
       <!-- ---- énigme 2.3 ---- -->
       <div class="puz" id="p23">
         <h3><span class="n">2.3</span> La grue qui penche <span class="st" id="s23">non résolu</span></h3>
+        <div class="stake"><canvas id="stk23" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>La dalle bloque l’escalier. La grue peut la lever, mais <b>au-delà d’une certaine charge elle bascule</b> — et t’écrase l’issue. Calcule avant de commander la montée.</div></div>
         <p class="brief">🏗️ La maquette de la grue du chantier est là, sur son rail. Sa flèche porte <b>5000 N à 12 m</b> de l’axe de rotation. Le contrepoids, lui, est à <b>4 m</b> de l’autre côté. <b>Charge le contrepoids</b> : trop léger, la grue bascule ; c’est la valeur limite qui ouvre la trappe.</p>
         <div class="scene">
           <canvas id="cvGrue" width="700" height="320" aria-label="Grue avec charge sur la flèche et contrepoids réglable"></canvas>
@@ -352,6 +375,7 @@
       <!-- ---- énigme 3.1 ---- -->
       <div class="puz" id="p31">
         <h3><span class="n">3.1</span> Le partage du fardeau <span class="st" id="s31">non résolu</span></h3>
+        <div class="stake"><canvas id="stk31" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>La passerelle immergée est ton seul chemin. Elle repose sur deux appuis fatigués : tu dois savoir <b>ce que chacun encaisse</b> avant d’y poser le pied.</div></div>
         <p class="brief">🧰 Une caisse de matériel de <b>1200 N</b> est posée pile au <b>milieu</b> de la passerelle (on néglige le poids de la passerelle elle-même). Les deux appuis se partagent la charge — encore faut-il chiffrer la part de chacun.</p>
         <div class="scene">
           <canvas id="cvPont1" width="700" height="280" aria-label="Passerelle sur deux appuis avec une caisse au centre"></canvas>
@@ -367,6 +391,7 @@
       <!-- ---- énigme 3.2 ---- -->
       <div class="puz" id="p32">
         <h3><span class="n">3.2</span> ⭐ L’appui fissuré <span class="st" id="s32">non résolu</span></h3>
+        <div class="stake"><canvas id="stk32" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>Un des deux appuis est fissuré. Il tiendra — à condition que la charge soit posée <b>exactement au bon endroit</b> pour ne pas dépasser sa limite. Un mètre trop loin et il cède.</div></div>
         <p class="brief">🩹 Mauvaise nouvelle : <b>l’appui B est fissuré</b>. Le carnet de chantier est formel : au-delà de <b>400 N</b>, il lâche. <b>Fais glisser la caisse</b> le long de la passerelle et trouve la position la plus éloignée de A où l’on peut encore la poser sans condamner B.</p>
         <div class="scene">
           <canvas id="cvPont2" width="700" height="300" aria-label="Passerelle avec caisse mobile et jauges de réaction aux deux appuis"></canvas>
@@ -382,13 +407,14 @@
       <!-- ---- énigme 3.3 ---- -->
       <div class="puz" id="p33">
         <h3><span class="n">3.3</span> Le porte-à-faux <span class="st" id="s33">non résolu</span></h3>
+        <div class="stake"><canvas id="stk33" width="560" height="150" aria-label="Ce que cette étape change pour ton évasion"></canvas><div class="why"><span class="lab">pourquoi ça compte</span>Le dernier tronçon est en porte-à-faux au-dessus du vide. Sans ancrage côté A, <b>la passerelle bascule et s’écroule</b> dès que tu t’avances au bout.</div></div>
         <p class="brief">🪤 Au fond de la fosse, une seconde passerelle <b>dépasse de 2 m au-delà de l’appui B</b> (appuis toujours distants de 6 m). Le treuil de secours, <b>900 N</b>, est accroché tout au bout du porte-à-faux. Avant de t’y suspendre, vérifie ce que devient l’appui A…</p>
         <div class="scene">
-          <canvas id="cvPorte" width="700" height="300" aria-label="Passerelle en porte-à-faux avec charge au bout et soulèvement côté A"></canvas>
+          <canvas id="cvPorte" width="700" height="300" aria-label="Passerelle en porte-à-faux avec charge au bout et basculement côté A"></canvas>
         </div>
         <div class="row"><span>Réaction de l’appui B : R<sub>B</sub> =</span><input class="numin" id="n33a" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
         <div class="row"><span>Et l’appui A doit alors…</span>
-          <select id="q33"><option>— choisir —</option><option>RETENIR la passerelle vers le bas : elle se soulève de ce côté</option><option>pousser encore plus fort vers le haut</option><option>ne rien faire : il ne sert plus à rien</option></select></div>
+          <select id="q33"><option>— choisir —</option><option>RETENIR la passerelle vers le bas : sans cela elle bascule et s’écroule</option><option>pousser encore plus fort vers le haut</option><option>ne rien faire : il ne sert plus à rien</option></select></div>
         <div class="row"><button class="btn" id="b33">Vérifier</button><button class="btn ghost" id="h33">💡 Indice</button></div>
         <div class="fb" id="fb33"></div>
         <div class="hintbox" id="hb33"></div>
@@ -412,44 +438,179 @@
       <div class="row"><button class="btn ghost" id="backRoom2">← Remonter à l’atelier</button></div>
     </section>
 
-    <!-- ==================== BONUS : LE QUART DE NUIT ==================== -->
-    <section class="room" id="roomB">
+    <section class="room" id="room4">
       <div class="decor">
-        <canvas id="cvQuart" width="940" height="360" aria-label="Grue de chantier penchée à redresser par des calculs de statique"></canvas>
-        <div class="plaque">Défi bonus · le quart de nuit · 03 h 10</div>
+        <canvas id="cvDecor4" width="940" height="330" aria-label="La halle aux treillis : charpente métallique, projecteurs, poussière en suspension"></canvas>
+        <div class="plaque">Halle aux treillis · niveau 0 · 01 h 12</div>
       </div>
-      <div class="narrbar" id="narrB">Le contremaître de nuit t’a laissé les commandes. La grue penche. À chaque calcul juste, elle se redresse.</div>
+      <div class="narrbar" id="narr4">Au-dessus de toi, une charpente entière. Chaque barre travaille — mais laquelle tire, laquelle pousse ?</div>
 
       <div class="roomhead">
-        <div class="k">Bonus · pour ceux qui sont sortis vite</div>
-        <h2>🌙 Le quart de nuit</h2>
-        <p>Pas de cadenas ici, pas de chrono non plus : juste toi, la grue et douze décisions à prendre. <b>Chaque bonne réponse ajoute du lest et redresse la flèche</b> ; chaque erreur l’incline davantage. Trois erreurs et la grue verse dans la fosse. Réponses justes d’affilée = combo, et le score grimpe.</p>
+        <div class="k">Salle 4 sur 5 · Le chantier scellé</div>
+        <h2>🔺 La halle aux treillis</h2>
+        <p>Le tag à la bombe disait vrai. Ici, plus de poutre unique : une <b>charpente triangulée</b> qui porte le toit — et la seule passerelle de sortie est suspendue à l’un de ses nœuds. Trois relevés à faire avant de s’y engager. <b>« Une barre tirée s’allonge, une barre poussée se raccourcit. Sache dire laquelle fait quoi, ou n’avance pas. »</b></p>
       </div>
 
-      <div class="puz" id="pB">
-        <h3><span class="n">⚙</span> Poste de commande <span class="st" id="sB">grue à 3 crans du basculement</span></h3>
-        <div class="row" style="gap:16px">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">score <b style="color:var(--neonA);font-size:17px" id="qScore">0</b></span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">combo <b style="color:var(--neonC);font-size:17px" id="qCombo">×1</b></span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">stabilisée <b style="color:var(--neonG);font-size:17px" id="qDone">0</b> / 12</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--dim)">marge <b style="color:var(--neonR);font-size:17px" id="qLives">❚❚❚</b></span>
+      <!-- ---- énigme 4.1 ---- -->
+      <div class="puz" id="p41">
+        <h3><span class="n">4.1</span> Tirée ou poussée ? <span class="st" id="s41">non résolu</span></h3>
+        <div class="stake"><canvas id="stk41" width="560" height="150" aria-label="Barres en traction et en compression"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>Les câbles de sécurité ne peuvent être accrochés que sur des barres <b>tendues</b> : une barre comprimée flamberait sous l’ancrage. Avant de te longer, tu dois savoir <b>quelles barres tirent</b>.</div></div>
+        <p class="brief">🔺 Un treillis simple : deux barres inclinées à 45° soutiennent un nœud auquel pend une charge de <b>1400 N</b>. Les jauges de contrainte sont mortes, mais le raisonnement suffit. Observe la déformation exagérée sur l’écran de contrôle, puis réponds.</p>
+        <div class="scene">
+          <canvas id="cvTreillis" width="700" height="300" aria-label="Treillis à deux barres avec charge suspendue et déformation exagérée"></canvas>
         </div>
-        <div class="brief" id="qTxt" style="font-size:17px;font-weight:700">Prêt à prendre le quart ?</div>
-        <div class="gopts" id="qOpts" style="display:grid;grid-template-columns:1fr 1fr;gap:9px"></div>
-        <div class="fb" id="qFb"></div>
-        <div class="row"><button class="btn big" id="qStart">▶ Prendre le quart</button><button class="btn ghost" id="qBack">← Retourner au chantier</button></div>
+        <div class="row"><span>La barre supérieure horizontale est :</span>
+          <select id="q41a"><option>— choisir —</option><option>TENDUE : elle s’allonge, elle tire sur ses nœuds</option><option>COMPRIMÉE : elle se raccourcit, elle pousse sur ses nœuds</option><option>ni l’un ni l’autre : elle ne travaille pas</option></select></div>
+        <div class="row"><span>La barre inclinée qui descend vers l’appui est :</span>
+          <select id="q41b"><option>— choisir —</option><option>COMPRIMÉE : elle se raccourcit, elle pousse sur ses nœuds</option><option>TENDUE : elle s’allonge, elle tire sur ses nœuds</option><option>ni l’un ni l’autre : elle ne travaille pas</option></select></div>
+        <div class="row"><button class="btn" id="b41">Vérifier</button><button class="btn ghost" id="h41">💡 Indice</button></div>
+        <div class="fb" id="fb41"></div>
+        <div class="hintbox" id="hb41"></div>
+        <div class="frag" id="fr41"><div class="t">Chiffre poinçonné sur le gousset</div><div class="d">6</div><div class="w">première molette</div></div>
       </div>
+
+      <!-- ---- énigme 4.2 ---- -->
+      <div class="puz" id="p42">
+        <h3><span class="n">4.2</span> L’équilibre du nœud <span class="st" id="s42">non résolu</span></h3>
+        <div class="stake"><canvas id="stk42" width="560" height="150" aria-label="Isolement d'un nœud du treillis"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>La passerelle de sortie est boulonnée sur ce nœud précis. S’il lâche, le seul chemin part avec. Tu dois <b>chiffrer l’effort dans la barre inclinée</b> avant de charger quoi que ce soit.</div></div>
+        <p class="brief">🔧 On isole le nœud du bas. Trois forces s’y croisent : la charge <b>P = 1400 N</b> vers le bas, l’effort <b>N</b> de la barre inclinée à <b>45°</b>, et l’effort horizontal de la barre du haut. Projette, puis résous. <b>Commence par l’équation qui ne contient qu’une seule inconnue.</b></p>
+        <div class="scene">
+          <canvas id="cvNoeud4" width="700" height="300" aria-label="Nœud isolé avec les trois forces et leurs projections"></canvas>
+        </div>
+        <div class="row"><span>Effort dans la barre inclinée : N =</span><input class="numin" id="n42a" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+        <div class="row"><span>Effort dans la barre horizontale : H =</span><input class="numin" id="n42b" inputmode="decimal" placeholder="?"><span class="unit">N</span></div>
+        <div class="row"><button class="btn" id="b42">Vérifier</button><button class="btn ghost" id="h42">💡 Indice</button></div>
+        <div class="fb" id="fb42"></div>
+        <div class="hintbox" id="hb42"></div>
+        <div class="frag" id="fr42"><div class="t">Gravure sous le boulon d’ancrage</div><div class="d">1</div><div class="w">deuxième molette</div></div>
+      </div>
+
+      <!-- ---- énigme 4.3 ---- -->
+      <div class="puz" id="p43">
+        <h3><span class="n">4.3</span> ⭐ La barre de trop <span class="st" id="s43">non résolu</span></h3>
+        <div class="stake"><canvas id="stk43" width="560" height="150" aria-label="Charpente dont une barre est retirée"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>Une barre de la charpente est fissurée : il faut la déposer pour passer. Mais en retirer une <b>mauvaise</b> et tout s’effondre. Le curseur te laisse tester avant de couper — une seule barre peut partir sans danger.</div></div>
+        <p class="brief">⚙️ La charpente comporte <b>cinq barres</b> numérotées. Fais glisser le curseur pour retirer chacune d’elles et observe ce que devient la structure. <b>Trouve la seule barre dont la dépose laisse la charpente stable</b> 🎯 — c’est celle qui ne travaille pas.</p>
+        <div class="scene">
+          <canvas id="cvCharpente" width="700" height="320" aria-label="Charpente à cinq barres, dépose d'une barre au choix"></canvas>
+          <div class="slider-row"><label>barre retirée</label><input type="range" id="s43sl" min="0" max="5" step="1" value="0"><span class="val" id="v43">aucune</span></div>
+        </div>
+        <div class="row"><span>Numéro de la barre qui peut être déposée :</span><input class="numin" id="n43" inputmode="numeric" placeholder="?"></div>
+        <div class="row"><button class="btn" id="b43">Vérifier</button><button class="btn ghost" id="h43">💡 Indice</button></div>
+        <div class="fb" id="fb43"></div>
+        <div class="hintbox" id="hb43"></div>
+        <div class="frag" id="fr43"><div class="t">Numéro estampé sur la barre déposée</div><div class="d">4</div><div class="w">troisième molette</div></div>
+      </div>
+
+      <div class="lock" id="lock4">
+        <h3>🔒 Le cadenas de la halle</h3>
+        <p>Trois molettes graisseuses sur la chaîne du portail de charpente.</p>
+        <div class="dials">
+          <input id="k1" inputmode="numeric" maxlength="1" aria-label="molette 1">
+          <input id="k2" inputmode="numeric" maxlength="1" aria-label="molette 2">
+          <input id="k3" inputmode="numeric" maxlength="1" aria-label="molette 3">
+        </div>
+        <button class="btn" id="bLock4">Tourner les molettes</button>
+        <div class="fb" id="fbLock4"></div>
+        <div class="door" id="door4"><button class="btn big" id="goRoom5">Monter vers le poste de commande →</button></div>
+      </div>
+
+      <div class="row"><button class="btn ghost" id="backRoom3">← Redescendre à la fosse</button></div>
     </section>
 
-    <!-- ==================== SALLE 4 ==================== -->
-    <section class="room" id="room4">
-      <div class="roomhead">
-        <div class="k">Salle 4 sur 5</div>
-        <h2>🔺 La halle aux treillis</h2>
-        <p>Une charpente entière au-dessus de ta tête. Chaque barre tire ou pousse — et il va falloir dire laquelle fait quoi.</p>
+    <!-- ==================== SALLE 5 ==================== -->
+    <section class="room" id="room5">
+      <div class="decor">
+        <canvas id="cvDecor5" width="940" height="330" aria-label="Le poste de commande : baies vitrées, écrans de contrôle, grue immobile dans la nuit"></canvas>
+        <div class="plaque">Poste de commande · niveau +4 · 02 h 47</div>
       </div>
-      <div class="sealed"><span class="ic">🚧</span><div><b>Salle en cours de construction</b>Reviens à la prochaine mise à jour.</div></div>
-      <div class="row"><button class="btn ghost" id="backRoom3">← Redescendre à la fosse</button></div>
+      <div class="narrbar" id="narr5">Derrière la vitre, le chantier tout entier. Et sur la console, un message qui clignote depuis des heures.</div>
+
+      <div class="roomhead">
+        <div class="k">Salle 5 sur 5 · Le chantier scellé</div>
+        <h2>🎛️ Le poste de commande</h2>
+        <p>Tu y es. Sur l’écran principal, une seule ligne clignote : <b>« ÉVACUATION IMPOSSIBLE — LA GRUE BLOQUE LA SORTIE. »</b> Le contremaître a laissé la manœuvre à moitié faite : la flèche est chargée, le lest mal placé, et la nacelle de sortie pend au-dessus du vide. Trois manœuvres, dans l’ordre. <b>Tout ce que tu as appris depuis le sas va servir en même temps.</b></p>
+      </div>
+
+      <!-- ---- énigme 5.1 ---- -->
+      <div class="puz" id="p51">
+        <h3><span class="n">5.1</span> Le lest du contrepoids <span class="st" id="s51">non résolu</span></h3>
+        <div class="stake"><canvas id="stk51" width="560" height="150" aria-label="Grue en déséquilibre à rééquilibrer par le lest"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>Tant que la grue penche, la console refuse toute manœuvre : le verrou de sécurité est mécanique, pas informatique. <b>Rééquilibre les moments</b> et la commande se déverrouille.</div></div>
+        <p class="brief">⚖️ La flèche porte une charge de <b>1500 N</b> à <b>8 m</b> de l’axe. De l’autre côté, le contrepoids de <b>4000 N</b> peut coulisser. <b>Fais glisser le lest</b> jusqu’à l’équilibre parfait des moments 🎯, puis note la distance lue sur la règle.</p>
+        <div class="scene">
+          <canvas id="cvGrue5" width="700" height="330" aria-label="Grue à contrepoids coulissant, équilibre des moments"></canvas>
+          <div class="slider-row"><label>position du lest</label><input type="range" id="s51sl" min="1" max="6" step="0.5" value="1.5"><span class="val" id="v51">1,5 m</span></div>
+        </div>
+        <div class="row"><span>Distance d’équilibre du lest : d =</span><input class="numin" id="n51" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
+        <div class="row"><button class="btn" id="b51">Vérifier</button><button class="btn ghost" id="h51">💡 Indice</button></div>
+        <div class="fb" id="fb51"></div>
+        <div class="hintbox" id="hb51"></div>
+        <div class="frag" id="fr51"><div class="t">Afficheur du verrou de sécurité</div><div class="d">3</div><div class="w">première molette</div></div>
+      </div>
+
+      <!-- ---- énigme 5.2 ---- -->
+      <div class="puz" id="p52">
+        <h3><span class="n">5.2</span> Les deux élingues de la nacelle <span class="st" id="s52">non résolu</span></h3>
+        <div class="stake"><canvas id="stk52" width="560" height="150" aria-label="Nacelle suspendue à deux élingues qui s'écartent"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>C’est <b>toi</b> qui vas monter dans cette nacelle. Les élingues sont marquées « 900 N maxi par brin ». Si l’angle est trop ouvert, elles cèdent — avec toi dedans.</div></div>
+        <p class="brief">🪢 La nacelle et son occupant pèsent <b>1200 N</b>. Elle pend à <b>deux brins symétriques</b> faisant un angle θ avec la verticale. <b>Écarte les brins au curseur</b> et surveille la tension. Puis réponds : jusqu’à quel angle peux-tu monter sans dépasser les 900 N par brin ?</p>
+        <div class="scene">
+          <canvas id="cvNacelle" width="700" height="320" aria-label="Nacelle suspendue à deux élingues, tension selon l'angle"></canvas>
+          <div class="slider-row"><label>angle θ</label><input type="range" id="s52sl" min="0" max="75" step="5" value="20"><span class="val" id="v52">20°</span></div>
+        </div>
+        <div class="row"><span>Angle maximal admissible : θ =</span><input class="numin" id="n52" inputmode="decimal" placeholder="?"><span class="unit">°</span></div>
+        <div class="row"><button class="btn" id="b52">Vérifier</button><button class="btn ghost" id="h52">💡 Indice</button></div>
+        <div class="fb" id="fb52"></div>
+        <div class="hintbox" id="hb52"></div>
+        <div class="frag" id="fr52"><div class="t">Plaque de charge de l’élingue</div><div class="d">0</div><div class="w">deuxième molette</div></div>
+      </div>
+
+      <!-- ---- énigme 5.3 ---- -->
+      <div class="puz" id="p53">
+        <h3><span class="n">5.3</span> ⭐ La dernière manœuvre <span class="st" id="s53">non résolu</span></h3>
+        <div class="stake"><canvas id="stk53" width="560" height="150" aria-label="Console de commande et séquence de manœuvre"></canvas>
+          <div class="why"><span class="lab">pourquoi ça compte</span>La dernière commande. Un ordre dans le mauvais sens et la flèche balaie la nacelle contre le pylône. <b>Il faut avoir tout compris</b> : le poids, le moment, les appuis.</div></div>
+        <p class="brief">🎛️ La console demande une <b>séquence de trois ordres</b>. Chacun repose sur une notion vue depuis le sas. Réponds aux trois, dans l’ordre, et la grue dégagera la sortie.</p>
+        <div class="row"><span>① Pour dégager la sortie, la flèche doit pivoter. Que faut-il vérifier d’abord ?</span>
+          <select id="q53a"><option>— choisir —</option><option>que la somme des moments reste nulle pendant tout le mouvement</option><option>que la charge est la plus lourde possible</option><option>rien : la grue est électrique, elle gère seule</option></select></div>
+        <div class="row"><span>② La nacelle doit descendre à vitesse constante. Que vaut alors la somme des forces sur elle ?</span>
+          <select id="q53b"><option>— choisir —</option><option>zéro : vitesse constante signifie équilibre, même en mouvement</option><option>elle est dirigée vers le bas, sinon la nacelle ne descendrait pas</option><option>elle augmente avec la vitesse</option></select></div>
+        <div class="row"><span>③ Au sol, la nacelle repose sur trois patins. Pourquoi trois et non quatre ?</span>
+          <select id="q53c"><option>— choisir —</option><option>trois appuis suffisent et se posent toujours à plat, sans bancaler</option><option>parce que le quatrième coûterait trop cher</option><option>parce que quatre patins seraient plus solides</option></select></div>
+        <div class="row"><button class="btn" id="b53">Lancer la séquence</button><button class="btn ghost" id="h53">💡 Indice</button></div>
+        <div class="fb" id="fb53"></div>
+        <div class="hintbox" id="hb53"></div>
+        <div class="frag" id="fr53"><div class="t">Code d’évacuation affiché sur la console</div><div class="d">5</div><div class="w">troisième molette</div></div>
+      </div>
+
+      <div class="lock" id="lock5">
+        <h3>🔒 Le portail d’évacuation</h3>
+        <p>Trois molettes chromées, propres celles-là. La dernière porte du chantier.</p>
+        <div class="dials">
+          <input id="m1" inputmode="numeric" maxlength="1" aria-label="molette 1">
+          <input id="m2" inputmode="numeric" maxlength="1" aria-label="molette 2">
+          <input id="m3" inputmode="numeric" maxlength="1" aria-label="molette 3">
+        </div>
+        <button class="btn" id="bLock5">Tourner les molettes</button>
+        <div class="fb" id="fbLock5"></div>
+        <div class="door" id="door5"><button class="btn big" id="goEnd">Sortir du chantier →</button></div>
+      </div>
+
+      <div class="endcard" id="endCard">
+        <canvas id="cvEnd" width="940" height="300" aria-label="Sortie du chantier au petit matin"></canvas>
+        <div class="endtxt">
+          <div class="k">Fin · Le chantier scellé</div>
+          <h2>🌅 Dehors</h2>
+          <p id="endStats">…</p>
+          <p>La grille se referme derrière toi. Sur le trottoir, l’air est froid et le ciel commence à peine à pâlir. Tu emportes cinq codes, une lampe morte — et cette idée qui ne te quittera plus : <b>tout ce qui tient debout tient parce que quelqu’un a fait la somme des forces et la somme des moments, et qu’il a trouvé zéro.</b></p>
+          <div class="row"><button class="btn ghost" id="backRoom4">← Revenir à la halle</button></div>
+        </div>
+      </div>
+
+      <div class="row"><button class="btn ghost" id="backRoom4b">← Redescendre à la halle</button></div>
     </section>
   </div>
 
@@ -1087,12 +1248,6 @@ function solve(puzId, stateId, fragId, slot, digit){
 }
 function goRoom(n){
   GAME.room=n;
-  if(n==='B'){
-    document.querySelectorAll('.room').forEach(function(r){ r.classList.remove('on'); });
-    el('roomB').classList.add('on');
-    window.scrollTo({top:0,behavior:'smooth'});
-    return;
-  }
   document.querySelectorAll('.room').forEach(function(r){ r.classList.remove('on'); });
   var t=el('room'+n); if(t) t.classList.add('on');
   for(var i=1;i<=5;i++){
@@ -2281,7 +2436,7 @@ el('b32').addEventListener('click',function(){
     g.beginPath(); g.arc(P.x0,P.yb+66,10,0,3.4); g.stroke();
     /* soul\u00e8vement figur\u00e9 */
     g.fillStyle='rgba(232,112,96,.85)'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('\u2191 sans ancrage, la passerelle se SOUL\u00c8VE ici',P.x0-46,P.yb+128);
+    g.fillText('sans ancrage, la passerelle BASCULE et s\u2019\u00c9CROULE',P.x0-46,P.yb+112);
     g.fillStyle='#98a1b8';
     g.fillText('\u03a3M/A : R_B \u00d7 6 = 900 \u00d7 8',430,60);
   }
@@ -2294,7 +2449,7 @@ setupHint('h33','hb33',[
 el('b33').addEventListener('click',function(){
   var a=numf(el('n33a').value);
   var okA=Math.abs(a-1200)<20;
-  var okQ=(el('q33').value==='RETENIR la passerelle vers le bas : elle se soul\u00e8ve de ce c\u00f4t\u00e9');
+  var okQ=(el('q33').value==='RETENIR la passerelle vers le bas : sans cela elle bascule et s\u2019\u00e9croule');
   if(okA&&okQ){
     el('fb33').className='fb ok'; el('fb33').textContent='\u2713 R_B = 7200/6 = 1200 N, donc R_A = 900 \u2212 1200 = \u2212300 N : un ancrage, pas un appui.';
     solve('p33','s33','fr33',3,8);
@@ -2322,7 +2477,6 @@ el('bLock3').addEventListener('click',function(){
     el('fbLock3').className='fb ok'; el('fbLock3').textContent='\u2713 CLAC. La vanne d\u2019\u00e9vacuation s\u2019ouvre en grand.';
     el('lock3').classList.add('open'); el('bLock3').disabled=true;
     sceneEvent3('vanne',4.4);
-    var bb=el('bonusBtn'); bb.disabled=false; bb.classList.add('on'); bb.title='D\u00e9fi bonus d\u00e9bloqu\u00e9 !';
     narrate3('La vanne c\u00e8de et l\u2019eau se rue dans la conduite. Le niveau baisse, la passerelle \u00e9merge : la halle aux treillis est de l\u2019autre c\u00f4t\u00e9.');
     setTimeout(function(){ el('door3').classList.add('show'); el('door3').scrollIntoView({behavior:'smooth',block:'center'}); },1500);
   } else {
@@ -2336,214 +2490,795 @@ el('goRoom4').addEventListener('click',function(){ goRoom(4); });
 document.querySelectorAll('[id="backRoom3"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(3); }); });
 
 
+
 /* ================================================================
-   ============ BONUS : LE QUART DE NUIT ==========================
+   ==================== SALLE 4 : LA HALLE AUX TREILLIS ===========
    ================================================================ */
-var QUART={ on:false, score:0, combo:1, done:0, errs:0, cur:null, lock:false, tilt:0.30, best:0 };
-function qPick(a){ return a[(Math.random()*a.length)|0]; }
-function qShuffle(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
-function qUnique(ok,cands,fmt){
-  var seen={}, opts=[fmt(ok)]; seen[fmt(ok)]=1;
-  for(var i=0;i<cands.length&&opts.length<4;i++){
-    var s=fmt(cands[i]);
-    if(!seen[s]&&isFinite(cands[i])&&cands[i]>0){ seen[s]=1; opts.push(s); }
-  }
-  var ex=ok*1.5+7;
-  while(opts.length<4){ var s2=fmt(Math.round(ex)); if(!seen[s2]){ seen[s2]=1; opts.push(s2); } ex+=ok*0.35+5; }
-  return qShuffle(opts);
-}
-function qGen(){
-  var r=Math.random();
-  if(r<0.20){                                   /* poids */
-    var m=qPick([80,120,250,320,450,600]);
-    var P=m*10;
-    return {q:'Une charge de '+m+' kg pend au crochet. Son poids (g = 10 N/kg) ?',
-      ok:P+' N', opts:qUnique(P,[m,P*2,P/2,P+100],function(v){return Math.round(v)+' N';}),
-      why:'P = m \u00d7 g = '+m+' \u00d7 10 = '+P+' N'};
-  }
-  if(r<0.42){                                   /* moment */
-    var F=qPick([150,200,250,300,400]), d=qPick([0.4,0.5,0.8,1.2,1.5]);
-    var M=Math.round(F*d);
-    return {q:'Tu pousses avec '+F+' N au bout d\u2019un bras de '+String(d).replace('.',',')+' m. Moment obtenu ?',
-      ok:M+' N\u00b7m', opts:qUnique(M,[Math.round(F/d),F,Math.round(M/2),Math.round(M*2)],function(v){return Math.round(v)+' N\u00b7m';}),
-      why:'M = F \u00d7 d = '+F+' \u00d7 '+String(d).replace('.',',')+' = '+M+' N\u00b7m'};
-  }
-  if(r<0.60){                                   /* bras mini */
-    var Mc=qPick([120,180,240,300,360]), Fo=qPick([200,300,400]);
-    var dm=Math.round(Mc/Fo*100)/100;
-    var fmtM=function(v){ return String(Math.round(v*100)/100).replace('.',',')+' m'; };
-    var cands=[Fo/Mc, dm*2, dm/2, dm+0.5, dm*1.5, dm+0.25, dm*3];
-    var seenM={}, optsM=[fmtM(dm)]; seenM[fmtM(dm)]=1;
-    for(var ci=0;ci<cands.length&&optsM.length<4;ci++){
-      var sM=fmtM(cands[ci]);
-      if(!seenM[sM]&&cands[ci]>0.01){ seenM[sM]=1; optsM.push(sM); }
-    }
-    var exM=dm+0.75;
-    while(optsM.length<4){ var s3=fmtM(exM); if(!seenM[s3]){ seenM[s3]=1; optsM.push(s3); } exM+=0.35; }
-    return {q:'Il faut '+Mc+' N\u00b7m pour d\u00e9bloquer un \u00e9crou et tu pousses \u00e0 '+Fo+' N. Longueur de cl\u00e9 minimale ?',
-      ok:fmtM(dm), opts:qShuffle(optsM),
-      why:'d = M / F = '+Mc+' / '+Fo+' = '+fmtM(dm)};
-  }
-  if(r<0.80){                                   /* réactions d'appui */
-    var L=qPick([4,6,8]), P2=qPick([600,900,1200,1500]);
-    var xs=[]; for(var k=1;k<L;k++) xs.push(k);
-    var x=qPick(xs);
-    var RB=Math.round(P2*x/L), RA=P2-RB;
-    return {q:'Passerelle de '+L+' m sur appuis A et B. Charge de '+P2+' N \u00e0 '+x+' m de A. R\u00e9action en B ?',
-      ok:RB+' N', opts:qUnique(RB,[RA,P2,Math.round(P2/2),Math.round(RB*1.5)],function(v){return Math.round(v)+' N';}),
-      why:'R_B \u00d7 '+L+' = '+P2+' \u00d7 '+x+' \u2192 R_B = '+RB+' N'};
-  }
-  var n=qPick([2,3,4,5]), Pm=qPick([1200,1800,2400,3000]);   /* mouflage */
-  var T=Math.round(Pm/n);
-  return {q:'Un palan \u00e0 '+n+' brins porte '+Pm+' N. Tension dans un brin ?',
-    ok:T+' N', opts:qUnique(T,[Pm,Math.round(Pm/(n+1)),Math.round(T*2),Math.round(Pm*n/10)],function(v){return Math.round(v)+' N';}),
-    why:'T = P / '+n+' = '+Pm+' / '+n+' = '+T+' N'};
-}
-function qRound(){
-  QUART.cur=qGen(); QUART.lock=false;
-  el('qTxt').textContent=QUART.cur.q;
-  el('qFb').textContent='';
-  var box=el('qOpts'); box.innerHTML='';
-  QUART.cur.opts.forEach(function(o){
-    var b=document.createElement('button');
-    b.className='btn ghost'; b.style.padding='13px 8px'; b.style.fontSize='15px'; b.textContent=o;
-    b.addEventListener('click',function(){ qAnswer(b,o); });
-    box.appendChild(b);
-  });
-}
-function qHud(){
-  el('qScore').textContent=QUART.score;
-  el('qCombo').textContent='\u00d7'+QUART.combo;
-  el('qDone').textContent=QUART.done;
-  el('qLives').textContent='\u275a\u275a\u275a'.slice(0,Math.max(0,3-QUART.errs));
-  el('sB').textContent = QUART.done>=12? 'grue stabilis\u00e9e \u2713' : ('grue \u00e0 '+Math.max(0,3-QUART.errs)+' cran(s) du basculement');
-}
-function qAnswer(btn,o){
-  if(QUART.lock||!QUART.on) return; QUART.lock=true;
-  if(o===QUART.cur.ok){
-    btn.style.borderColor='#6ee3a0'; btn.style.color='#6ee3a0';
-    QUART.done++; QUART.score+=100*QUART.combo; QUART.combo=Math.min(8,QUART.combo+1);
-    QUART.tilt=Math.max(0,QUART.tilt-0.30/12*1.0);
-    el('qFb').className='fb ok'; el('qFb').textContent='\u2713 '+QUART.cur.why+' \u2014 la fl\u00e8che se redresse.';
-  } else {
-    btn.style.borderColor='#e87060'; btn.style.color='#e87060';
-    QUART.errs++; QUART.combo=1; QUART.tilt=Math.min(0.62,QUART.tilt+0.11);
-    el('qFb').className='fb no'; el('qFb').textContent='\u2717 '+QUART.cur.why+' \u2014 la grue penche un peu plus.';
-    if(SCARE.on){ boom(0.5); }
-  }
-  qHud();
-  setTimeout(function(){
-    if(QUART.done>=12){ qEnd(true); }
-    else if(QUART.errs>=3){ qEnd(false); }
-    else { qRound(); }
-  },1100);
-}
-function qEnd(win){
-  QUART.on=false;
-  if(QUART.score>QUART.best) QUART.best=QUART.score;
-  el('qOpts').innerHTML='';
-  el('qTxt').textContent = win? '\ud83c\udfaf Grue parfaitement d\u2019aplomb. Le contremaître te doit un caf\u00e9.'
-                              : '\u26a0 La fl\u00e8che a vers\u00e9 dans la fosse. Le quart s\u2019arr\u00eate l\u00e0.';
-  el('qFb').className='fb '+(win?'ok':'no');
-  el('qFb').textContent='Score : '+QUART.score+' \u00b7 meilleur de la session : '+QUART.best+' \u00b7 stabilis\u00e9es : '+QUART.done+'/12';
-  el('qStart').style.display='';
-  el('qStart').textContent='\u21bb Reprendre un quart';
-  if(win) QUART.tilt=0;
-}
-el('qStart').addEventListener('click',function(){
-  QUART.on=true; QUART.score=0; QUART.combo=1; QUART.done=0; QUART.errs=0; QUART.tilt=0.30;
-  this.style.display='none';
-  qHud(); qRound();
-});
-el('qBack').addEventListener('click',function(){ goRoom(GAME.lastRoom||3); });
-el('bonusBtn').addEventListener('click',function(){
-  if(this.disabled) return;
-  GAME.lastRoom=GAME.room;
-  goRoom('B');
-  narrateB('Le contrema\u00eetre de nuit te laisse les commandes. La grue penche de 18\u00b0. \u00c0 toi de la redresser.');
-});
-var NARRB={timer:null};
-function narrateB(text){
-  clearInterval(NARRB.timer);
-  var i=0, box=el('narrB'); if(!box) return;
-  NARRB.timer=setInterval(function(){
+var NARR4={timer:null};
+function narrate4(text){
+  clearInterval(NARR4.timer);
+  var i=0, box=el('narr4'); if(!box) return;
+  NARR4.timer=setInterval(function(){
     i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
-    if(i>=text.length) clearInterval(NARRB.timer);
+    if(i>=text.length) clearInterval(NARR4.timer);
   },16);
 }
+var P4=1400, A4=45*Math.PI/180;
+var N42=P4/Math.sin(A4);            /* 1979,9 N */
+var H42=N42*Math.cos(A4);           /* 1400 N   */
 
-/* --- décor du quart de nuit : la grue qui se redresse --- */
+/* --- décor vivant : la charpente au-dessus de la tête --- */
 (function(){
-  var cv=el('cvQuart'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
-  var W=cv.width, H=cv.height, t=0, ang=0.30;
-  var bgw=betonTexture(W,H,777);
-  var stars=[]; var Rs=rng(313);
-  for(var s=0;s<70;s++) stars.push({x:Rs()*W, y:Rs()*150, a:0.2+Rs()*0.7, p:Rs()*6});
+  var cv=el('cvDecor4'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  var mot=[]; for(var i=0;i<70;i++) mot.push({x:Math.random()*W,y:Math.random()*H,s:0.2+Math.random()*0.5,r:0.6+Math.random()*1.6});
+  function step(){
+    t+=0.02;
+    var bg=g.createLinearGradient(0,0,0,H);
+    bg.addColorStop(0,'#0f141c'); bg.addColorStop(1,'#1a222e');
+    g.fillStyle=bg; g.fillRect(0,0,W,H);
+    /* fermes de charpente en enfilade */
+    for(var k=0;k<5;k++){
+      var x=60+k*195, sc=1-k*0.06, al=0.5-k*0.07;
+      g.strokeStyle='rgba(143,212,224,'+al+')'; g.lineWidth=5-k*0.5;
+      var top=54+k*8, bot=176+k*6, half=78*sc;
+      g.beginPath(); g.moveTo(x-half,bot); g.lineTo(x,top); g.lineTo(x+half,bot); g.closePath(); g.stroke();
+      g.beginPath(); g.moveTo(x-half,bot); g.lineTo(x+half,bot); g.stroke();
+      g.beginPath(); g.moveTo(x,top); g.lineTo(x,bot); g.stroke();
+      g.beginPath(); g.moveTo(x-half/2,(top+bot)/2); g.lineTo(x,bot); g.stroke();
+      g.beginPath(); g.moveTo(x+half/2,(top+bot)/2); g.lineTo(x,bot); g.stroke();
+    }
+    /* projecteurs suspendus */
+    [220,470,720].forEach(function(px,pi){
+      var fl=0.75+0.25*Math.sin(t*(2+pi)+pi);
+      g.strokeStyle='rgba(139,149,168,.7)'; g.lineWidth=2;
+      g.beginPath(); g.moveTo(px,0); g.lineTo(px,84); g.stroke();
+      var lg=g.createRadialGradient(px,92,4,px,92,120);
+      lg.addColorStop(0,'rgba(240,181,88,'+(0.5*fl)+')'); lg.addColorStop(1,'rgba(240,181,88,0)');
+      g.fillStyle=lg; g.beginPath(); g.arc(px,92,120,0,7); g.fill();
+      g.fillStyle='rgba(240,181,88,'+fl+')'; g.beginPath(); g.arc(px,90,7,0,7); g.fill();
+    });
+    /* sol + passerelle de sortie */
+    g.fillStyle='#161d27'; g.fillRect(0,H-70,W,70);
+    g.strokeStyle='rgba(110,227,160,.35)'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(W-260,H-52); g.lineTo(W-30,H-52); g.stroke();
+    g.fillStyle='rgba(110,227,160,.55)'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('passerelle de sortie', W-250, H-62);
+    /* poussière */
+    mot.forEach(function(m){ m.y+=m.s*0.35; if(m.y>H) { m.y=-4; m.x=Math.random()*W; }
+      g.fillStyle='rgba(207,214,230,.30)'; g.beginPath(); g.arc(m.x,m.y,m.r,0,7); g.fill(); });
+    var vg=g.createRadialGradient(W/2,H/2,H*0.34,W/2,H/2,H*1.05);
+    vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.62)');
+    g.fillStyle=vg; g.fillRect(0,0,W,H);
+  }
+  setInterval(step,45); step();
+})();
+
+/* --- 4.1 : traction / compression, déformation exagérée --- */
+(function(){
+  var cv=el('cvTreillis'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  function step(){
+    t+=0.035;
+    var d=6+6*Math.sin(t*1.1);          /* deformation exageree */
+    g.clearRect(0,0,W,H);
+    var A={x:120,y:70}, B={x:520,y:70}, C={x:520,y:225};
+    /* appuis */
+    g.fillStyle='#8b95a8';
+    [[A.x,A.y],[B.x,B.y]].forEach(function(p){ g.beginPath(); g.arc(p[0],p[1],7,0,7); g.fill(); });
+    g.fillStyle='#6c7686'; g.fillRect(96,40,20,200);
+    /* barre horizontale (tendue : elle s'allonge) */
+    g.strokeStyle='#6ee3a0'; g.lineWidth=9; g.lineCap='round';
+    g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(B.x+d,B.y); g.stroke();
+    /* barre inclinee (comprimee : elle se raccourcit et flambe legerement) */
+    g.strokeStyle='#e87060'; g.lineWidth=9;
+    g.beginPath(); g.moveTo(A.x,A.y+2);
+    g.quadraticCurveTo((A.x+C.x)/2-d*0.8,(A.y+C.y)/2+d*0.8,C.x+d*0.4,C.y-d*0.4);
+    g.stroke(); g.lineCap='butt';
+    /* noeud + charge */
+    g.fillStyle='#f0b558'; g.beginPath(); g.arc(C.x+d*0.4,C.y-d*0.4,9,0,7); g.fill();
+    g.strokeStyle='#f0b558'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(C.x+d*0.4,C.y-d*0.4); g.lineTo(C.x+d*0.4,C.y+48); g.stroke();
+    g.fillStyle='#8a6a3c'; g.fillRect(C.x+d*0.4-30,C.y+48,60,30);
+    g.fillStyle='#f0b558'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('1400 N',C.x+d*0.4,C.y+68);
+    /* etiquettes */
+    g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillStyle='#6ee3a0'; g.fillText('barre horizontale : elle s\u2019ALLONGE',300,50);
+    g.fillStyle='#e87060'; g.fillText('barre inclin\u00e9e : elle se RACCOURCIT',210,272);
+    /* fleches de deformation */
+    g.strokeStyle='#6ee3a0'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(B.x+d+8,B.y); g.lineTo(B.x+d+26,B.y); g.stroke();
+    g.beginPath(); g.moveTo(B.x+d+26,B.y); g.lineTo(B.x+d+20,B.y-4); g.moveTo(B.x+d+26,B.y); g.lineTo(B.x+d+20,B.y+4); g.stroke();
+    g.textAlign='center';
+  }
+  setInterval(step,45); step();
+})();
+
+setupHint('h41','hb41',[
+  'Une barre TENDUE s\u2019allonge : ses deux extr\u00e9mit\u00e9s s\u2019\u00e9cartent. Une barre COMPRIM\u00c9E se raccourcit et a tendance \u00e0 flamber.',
+  'Regarde l\u2019\u00e9cran : la barre du haut s\u2019\u00e9tire vers la droite, la barre inclin\u00e9e se courbe en se tassant.',
+  'La charge tire le n\u0153ud vers le bas : la barre inclin\u00e9e la repousse (compression), la barre horizontale retient (traction).'
+]);
+el('b41').addEventListener('click',function(){
+  var okA=(el('q41a').value==='TENDUE : elle s\u2019allonge, elle tire sur ses n\u0153uds');
+  var okB=(el('q41b').value==='COMPRIM\u00c9E : elle se raccourcit, elle pousse sur ses n\u0153uds');
+  if(okA&&okB){
+    el('fb41').className='fb ok';
+    el('fb41').textContent='\u2713 Horizontale TENDUE, inclin\u00e9e COMPRIM\u00c9E. Un poin\u00e7on appara\u00eet sur le gousset.';
+    solve('p41','s41','fr41',1,'6');
+    narrate4('Tu passes la main sur le gousset : un chiffre y est poin\u00e7onn\u00e9, encore gras de graisse.');
+  } else {
+    el('fb41').className='fb no';
+    el('fb41').textContent='\u2717 Regarde d\u2019abord ce qui S\u2019ALLONGE et ce qui se RACCOURCIT sur l\u2019\u00e9cran.';
+    incident();
+  }
+});
+
+/* --- 4.2 : isolement du nœud --- */
+(function(){
+  var cv=el('cvNoeud4'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  function step(){
+    t+=0.035;
+    g.clearRect(0,0,W,H);
+    var Nd={x:330,y:150};
+    /* cercle d'isolement */
+    g.strokeStyle='rgba(232,112,96,.75)'; g.lineWidth=2.4; g.setLineDash([7,5]);
+    g.beginPath(); g.arc(Nd.x,Nd.y,88+Math.sin(t*2)*2,0,7); g.stroke(); g.setLineDash([]);
+    /* barres esquissees */
+    g.strokeStyle='rgba(139,149,168,.5)'; g.lineWidth=7;
+    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(Nd.x-190,Nd.y); g.stroke();
+    g.beginPath(); g.moveTo(Nd.x,Nd.y); g.lineTo(Nd.x-150,Nd.y-150); g.stroke();
+    /* forces */
+    function arw4(x1,y1,x2,y2,col,lab,lx,ly){
+      g.strokeStyle=col;g.fillStyle=col;g.lineWidth=4;
+      g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+      var a=Math.atan2(y2-y1,x2-x1),L=16,hw=7;
+      var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
+      var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
+      g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();
+      g.font='700 13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(lab,lx,ly);
+    }
+    arw4(Nd.x,Nd.y,Nd.x,Nd.y+80,'#f0b558','P = 1400 N',Nd.x+16,Nd.y+62);
+    arw4(Nd.x,Nd.y,Nd.x-110,Nd.y-110,'#e87060','N (barre \u00e0 45\u00b0)',Nd.x-250,Nd.y-124);
+    arw4(Nd.x,Nd.y,Nd.x-120,Nd.y,'#6ee3a0','H (barre horizontale)',Nd.x-260,Nd.y-14);
+    /* angle */
+    g.strokeStyle='#8fd4e0'; g.lineWidth=2;
+    g.beginPath(); g.arc(Nd.x,Nd.y,44,Math.PI,Math.PI+0.785,false); g.stroke();
+    g.fillStyle='#8fd4e0'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('45\u00b0',Nd.x-62,Nd.y-24);
+    /* aide projection */
+    g.fillStyle='#cfd6e6'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('projection sur y :  N\u00b7sin 45\u00b0 \u2212 1400 = 0',430,110);
+    g.fillText('projection sur x :  H \u2212 N\u00b7cos 45\u00b0 = 0',430,138);
+    g.fillStyle='rgba(143,212,224,.7)'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('commence par celle qui n\u2019a qu\u2019UNE inconnue',430,168);
+    g.textAlign='center';
+  }
+  setInterval(step,45); step();
+})();
+
+setupHint('h42','hb42',[
+  'Isole le n\u0153ud : trois forces concourantes, donc \u03a3F = 0 sur x ET sur y.',
+  'La projection verticale ne contient que N : N \u00d7 sin 45\u00b0 = 1400.',
+  'sin 45\u00b0 \u2248 0,707, donc N = 1400 / 0,707. Ensuite H = N \u00d7 cos 45\u00b0.'
+]);
+el('b42').addEventListener('click',function(){
+  var a=numf(el('n42a').value), b=numf(el('n42b').value);
+  var okA=Math.abs(a-N42)<30, okB=Math.abs(b-H42)<25;
+  if(okA&&okB){
+    el('fb42').className='fb ok';
+    el('fb42').textContent='\u2713 N \u2248 1980 N et H = 1400 N. Le boulon d\u2019ancrage se d\u00e9visse d\u2019un quart de tour : une gravure appara\u00eet.';
+    solve('p42','s42','fr42',2,'1');
+    narrate4('Sous le boulon, une gravure fra\u00eeche. Quelqu\u2019un est pass\u00e9 ici avant toi \u2014 et a pris le temps de calculer.');
+  } else {
+    el('fb42').className='fb no';
+    el('fb42').textContent='\u2717 '+(okA?'N \u2713':'N \u2717 (projette sur la verticale)')+' \u00b7 '+(okB?'H \u2713':'H \u2717 (puis sur l\u2019horizontale)');
+    incident();
+  }
+});
+
+/* --- 4.3 ⭐ : la barre de trop --- */
+var BARRE_OK=4;
+(function(){
+  var cv=el('cvCharpente'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0, sel=0;
+  var NOMS=['aucune','1','2','3','4','5'];
+  el('s43sl').addEventListener('input',function(){ sel=+this.value; el('v43').textContent=NOMS[sel]==='aucune'?'aucune':('barre '+NOMS[sel]); });
+  /* geometrie : A(gauche bas) B(droite bas) C(sommet) D(milieu bas) */
+  var A={x:120,y:230}, B={x:580,y:230}, C={x:350,y:80}, D={x:350,y:230};
+  var BARRES=[
+    {n:1,p:[A,C],col:'#e87060',lab:'arbal\u00e9trier gauche'},
+    {n:2,p:[C,B],col:'#e87060',lab:'arbal\u00e9trier droit'},
+    {n:3,p:[A,D],col:'#6ee3a0',lab:'entrait gauche'},
+    {n:4,p:[C,D],col:'#8fd4e0',lab:'poin\u00e7on central'},
+    {n:5,p:[D,B],col:'#6ee3a0',lab:'entrait droit'}
+  ];
   function step(){
     t+=0.04;
-    ang+=(QUART.tilt-ang)*0.05;
+    var fall=(sel!==0 && sel!==BARRE_OK)? Math.min(1,(t%4)/2.2) : 0;
     g.clearRect(0,0,W,H);
-    /* ciel de nuit + \u00e9toiles + lune */
-    var sky=g.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,'#0a1020'); sky.addColorStop(0.6,'#121a2a'); sky.addColorStop(1,'#0c1119');
-    g.fillStyle=sky; g.fillRect(0,0,W,H);
-    stars.forEach(function(st){
-      g.fillStyle='rgba(220,232,255,'+(st.a*(0.55+0.45*Math.sin(t*1.3+st.p))).toFixed(3)+')';
-      g.fillRect(st.x,st.y,1.7,1.7);
+    g.fillStyle='#6c7686'; g.fillRect(A.x-26,A.y,32,18); g.fillRect(B.x-6,B.y,32,18);
+    g.save();
+    if(fall>0){ g.translate(0,fall*fall*36); g.rotate(fall*0.06); }
+    BARRES.forEach(function(b){
+      if(b.n===sel) return;
+      g.strokeStyle=(fall>0)?'#e87060':b.col; g.lineWidth=(b.n===4?6:8); g.lineCap='round';
+      g.beginPath(); g.moveTo(b.p[0].x,b.p[0].y); g.lineTo(b.p[1].x,b.p[1].y); g.stroke();
+      var mx=(b.p[0].x+b.p[1].x)/2, my=(b.p[0].y+b.p[1].y)/2;
+      g.fillStyle='#0f141c'; g.beginPath(); g.arc(mx,my,11,0,7); g.fill();
+      g.fillStyle=(fall>0)?'#e87060':b.col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(String(b.n),mx,my+4);
     });
-    var moon=g.createRadialGradient(820,70,6,820,70,90);
-    moon.addColorStop(0,'rgba(230,238,255,.85)'); moon.addColorStop(1,'rgba(230,238,255,0)');
-    g.fillStyle=moon; g.beginPath(); g.arc(820,70,90,0,7); g.fill();
-    /* skyline du chantier au loin */
-    g.globalAlpha=0.55; g.drawImage(bgw,0,H-150,W,150); g.globalAlpha=1;
-    g.fillStyle='#0b1018';
-    for(var b=0;b<9;b++){ var bw=60+((b*53)%70), bh=40+((b*97)%110);
-      g.fillRect(b*108,H-116-bh,bw,bh+40); }
-    /* sol + fosse */
-    g.fillStyle='#141a24'; g.fillRect(0,H-70,W,70);
-    g.fillStyle='#0a0f16'; g.fillRect(560,H-70,230,70);
-    g.fillStyle='rgba(110,205,235,.10)'; g.fillRect(560,H-40,230,40);
-    /* grue */
-    var px=430, py=H-70, SC=15;
-    g.save(); g.translate(px,py); g.rotate(ang);
-    var mg=g.createLinearGradient(-16,0,16,0); mg.addColorStop(0,'#4a5364'); mg.addColorStop(1,'#2c3442');
-    g.fillStyle=mg; g.fillRect(-16,-190,32,190);
-    g.strokeStyle='#5b6678'; g.lineWidth=1.6;
-    for(var k=0;k<11;k++){ g.beginPath(); g.moveTo(-16,-18-k*17); g.lineTo(16,-35-k*17); g.stroke(); }
-    g.fillStyle='#59647a'; g.fillRect(-5*SC-16,-208,17*SC,15);
-    g.strokeStyle='#7d8798'; g.lineWidth=1.3;
-    for(var f=0;f<15;f++){ var fx=-5*SC+f*17; g.beginPath(); g.moveTo(fx,-208); g.lineTo(fx+17,-193); g.stroke(); }
-    /* cabine + lest (le lest grossit avec les réussites) */
-    g.fillStyle='#3a4453'; g.fillRect(-22,-236,44,28);
-    g.fillStyle='rgba(240,214,150,.75)'; g.fillRect(-14,-230,28,14);
-    var lest=18+QUART.done*3.2;
-    g.fillStyle='#39424f'; g.fillRect(-5*SC-26,-208+15,52,lest);
-    g.strokeStyle='#8b95a8'; g.lineWidth=2; g.strokeRect(-5*SC-26,-208+15,52,lest);
-    /* c\u00e2ble + charge qui se balance */
-    var sw=Math.sin(t*1.1)*0.06;
-    g.save(); g.translate(11*SC,-193); g.rotate(sw);
-    g.strokeStyle='#7fd6e8'; g.lineWidth=2.2; g.beginPath(); g.moveTo(0,0); g.lineTo(0,70); g.stroke();
-    g.fillStyle='#4a5162'; g.fillRect(-20,70,40,28);
-    g.strokeStyle='#f0b558'; g.lineWidth=2; g.strokeRect(-20,70,40,28);
+    /* barre retiree en pointille */
+    if(sel!==0){ var rb=BARRES[sel-1];
+      g.strokeStyle='rgba(139,149,168,.45)'; g.lineWidth=3; g.setLineDash([7,6]);
+      g.beginPath(); g.moveTo(rb.p[0].x,rb.p[0].y); g.lineTo(rb.p[1].x,rb.p[1].y); g.stroke(); g.setLineDash([]); }
+    /* charge en sommet */
+    g.strokeStyle='#f0b558'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(C.x,C.y); g.lineTo(C.x,C.y-40); g.stroke();
+    g.fillStyle='#8a6a3c'; g.fillRect(C.x-26,C.y-70,52,30);
     g.restore();
-    g.restore();
-    /* fil \u00e0 plomb de r\u00e9f\u00e9rence + angle */
-    g.strokeStyle='rgba(240,181,88,.5)'; g.lineWidth=1.5; g.setLineDash([5,5]);
-    g.beginPath(); g.moveTo(px,py); g.lineTo(px,py-210); g.stroke(); g.setLineDash([]);
-    g.fillStyle= ang<0.03? '#6ee3a0' : (ang>0.45?'#e87060':'#f0b558');
-    g.font='700 14px "JetBrains Mono",monospace';
-    g.fillText('inclinaison : '+Math.round(ang*180/Math.PI)+'\u00b0',30,36);
-    g.fillStyle='#98a1b8'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('lest embarqu\u00e9 : '+QUART.done+' / 12 blocs',30,58);
-    if(ang<0.03){ g.fillStyle='#6ee3a0'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-      g.fillText('\ud83c\udfaf grue d\u2019aplomb',30,84); }
-    if(ang>0.55){ g.fillStyle='#e87060'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-      g.fillText('\u26a0 basculement imminent',30,84); }
-    var vg=g.createRadialGradient(W/2,H/2,H*0.34,W/2,H/2,H*1.05);
+    g.lineCap='butt';
+    /* verdict */
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(sel===0){ g.fillStyle='#cfd6e6'; g.fillText('charpente compl\u00e8te \u00b7 fais glisser le curseur',W/2,H-26); }
+    else if(sel===BARRE_OK){ g.fillStyle='#6ee3a0';
+      g.fillText('\ud83c\udfaf barre '+sel+' d\u00e9pos\u00e9e : la charpente tient toujours',W/2,H-26);
+      g.font='700 11px "JetBrains Mono",monospace';
+      g.fillText('cette barre ne transmettait aucun effort',W/2,H-8); }
+    else { g.fillStyle='#e87060';
+      g.fillText('\u26a0 barre '+sel+' d\u00e9pos\u00e9e : la charpente s\u2019affaisse',W/2,H-26);
+      g.font='700 11px "JetBrains Mono",monospace';
+      g.fillText('elle travaillait \u2014 impossible de la retirer',W/2,H-8); }
+  }
+  setInterval(step,45); step();
+})();
+
+setupHint('h43','hb43',[
+  'Teste les cinq barres au curseur : quatre font s\u2019affaisser la charpente, une seule ne change rien.',
+  'Une barre \u00ab qui ne travaille pas \u00bb ne transmet aucun effort : la retirer ne modifie donc rien \u00e0 l\u2019\u00e9quilibre.',
+  'Ici, la charge descend sym\u00e9triquement par les deux arbal\u00e9triers ; la barre verticale centrale ne re\u00e7oit rien.'
+]);
+el('b43').addEventListener('click',function(){
+  var v=numf(el('n43').value);
+  if(v===BARRE_OK){
+    el('fb43').className='fb ok';
+    el('fb43').textContent='\u2713 La barre 4 ne travaille pas : tu la d\u00e9poses sans risque et le passage s\u2019ouvre.';
+    solve('p43','s43','fr43',3,'4');
+    narrate4('La barre glisse de son gousset dans un raclement m\u00e9tallique. Rien ne bouge d\u2019autre. Le passage est libre.');
+  } else {
+    el('fb43').className='fb no';
+    el('fb43').textContent='\u2717 Celle-l\u00e0 travaille : la charpente s\u2019affaisserait. Reprends le curseur.';
+    incident();
+  }
+});
+
+/* --- cadenas de la halle : 614 --- */
+el('bLock4').addEventListener('click',function(){
+  var code=(el('k1').value||'')+(el('k2').value||'')+(el('k3').value||'');
+  if(code.length<3){ el('fbLock4').className='fb no'; el('fbLock4').textContent='\u2717 Les trois molettes doivent \u00eatre positionn\u00e9es.'; return; }
+  if(code==='614'){
+    el('fbLock4').className='fb ok'; el('fbLock4').textContent='\u2713 CLAC. La cha\u00eene du portail de charpente se d\u00e9roule.';
+    el('lock4').classList.add('open'); el('bLock4').disabled=true;
+    narrate4('Le portail s\u2019entrouvre sur un escalier m\u00e9tallique. Tout en haut, une vitre \u00e9clair\u00e9e : le poste de commande du chantier.');
+    setTimeout(function(){ el('door4').classList.add('show'); el('door4').scrollIntoView({behavior:'smooth',block:'center'}); },1200);
+  } else {
+    el('fbLock4').className='fb no';
+    el('fbLock4').textContent='\u2717 Les molettes se rebloquent. Relis les trois fragments dans l\u2019ordre 1, 2, 3.';
+    incident();
+  }
+});
+el('goRoom5').addEventListener('click',function(){ goRoom(5); });
+document.querySelectorAll('[id="backRoom3"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(3); }); });
+
+/* ================================================================
+   ==================== SALLE 5 : LE POSTE DE COMMANDE ============
+   ================================================================ */
+var NARR5={timer:null};
+function narrate5(text){
+  clearInterval(NARR5.timer);
+  var i=0, box=el('narr5'); if(!box) return;
+  NARR5.timer=setInterval(function(){
+    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
+    if(i>=text.length) clearInterval(NARR5.timer);
+  },16);
+}
+var D51=1500*8/4000;          /* 3 m */
+var TH52=45;                  /* angle maxi : 1200/(2cos45) = 848 N <= 900 */
+
+/* --- décor : le poste de commande, vue sur le chantier --- */
+(function(){
+  var cv=el('cvDecor5'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  var stars=[]; for(var i=0;i<60;i++) stars.push({x:Math.random()*W,y:Math.random()*H*0.45,r:Math.random()*1.2+0.3,p:Math.random()*6});
+  function step(){
+    t+=0.02;
+    var sky=g.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#0b1018'); sky.addColorStop(0.55,'#121a26'); sky.addColorStop(1,'#0d131b');
+    g.fillStyle=sky; g.fillRect(0,0,W,H);
+    stars.forEach(function(s){ g.fillStyle='rgba(207,214,230,'+(0.25+0.25*Math.sin(t*2+s.p))+')';
+      g.beginPath(); g.arc(s.x,s.y,s.r,0,7); g.fill(); });
+    /* silhouette de la ville */
+    g.fillStyle='#0a0f16';
+    for(var b=0;b<14;b++){ var bx=b*70+((b*37)%23), bh=40+((b*53)%70);
+      g.fillRect(bx,H*0.52-bh,58,bh+40);
+      for(var wy=0;wy<3;wy++){ if((b+wy)%3===0){ g.fillStyle='rgba(240,181,88,.25)'; g.fillRect(bx+10+wy*16,H*0.52-bh+12,7,9); g.fillStyle='#0a0f16'; } } }
+    /* la grue, immobile */
+    var gx=690, gy=H*0.52;
+    g.strokeStyle='rgba(232,112,96,.75)'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(gx,gy); g.lineTo(gx,gy-150); g.stroke();
+    g.beginPath(); g.moveTo(gx-70,gy-150); g.lineTo(gx+170,gy-150); g.stroke();
+    g.strokeStyle='rgba(139,149,168,.6)'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(gx+120,gy-150); g.lineTo(gx+120,gy-70); g.stroke();
+    g.fillStyle='rgba(240,181,88,'+(0.55+0.45*Math.sin(t*3))+')';
+    g.beginPath(); g.arc(gx,gy-158,4,0,7); g.fill();
+    /* montants de la baie vitrée, au premier plan */
+    g.fillStyle='#161d27'; g.fillRect(0,0,26,H); g.fillRect(W-26,0,26,H);
+    g.fillRect(0,H-58,W,58);
+    g.fillStyle='#1d2634'; g.fillRect(W/2-9,0,18,H-58);
+    /* reflets sur la vitre */
+    g.strokeStyle='rgba(143,212,224,.07)'; g.lineWidth=26;
+    g.beginPath(); g.moveTo(-40,H*0.75); g.lineTo(W*0.5,-40); g.stroke();
+    /* console : bandeau d'écrans */
+    for(var k=0;k<5;k++){
+      var sx=60+k*170, on=(Math.sin(t*2+k)>-0.4);
+      g.fillStyle='#0e1620'; g.fillRect(sx,H-50,140,34);
+      g.strokeStyle=on?'rgba(110,227,160,.5)':'rgba(232,112,96,.5)'; g.lineWidth=1.5;
+      g.strokeRect(sx,H-50,140,34);
+      g.fillStyle=on?'rgba(110,227,160,.75)':'rgba(232,112,96,.75)';
+      g.font='700 9px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(k===2?'\u00c9VACUATION BLOQU\u00c9E':'ligne '+(k+1)+' \u00b7 ok',sx+70,H-30);
+    }
+    g.textAlign='center';
+    var vg=g.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,H*1.05);
     vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,.6)');
     g.fillStyle=vg; g.fillRect(0,0,W,H);
   }
-  setInterval(step,40); step();
+  setInterval(step,45); step();
+})();
+
+/* --- 5.1 : le lest du contrepoids --- */
+(function(){
+  var cv=el('cvGrue5'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0, d=1.5;
+  el('s51sl').addEventListener('input',function(){ d=+this.value;
+    el('v51').textContent=String(d).replace('.',',')+' m'; });
+  function step(){
+    t+=0.04;
+    var Mc=1500*8, Ml=4000*d, ecart=(Ml-Mc)/Mc;
+    var ok=Math.abs(Ml-Mc)<250;
+    var tilt=Math.max(-0.13,Math.min(0.13,-ecart*0.30));
+    g.clearRect(0,0,W,H);
+    var px=W/2, py=250, SC=22;
+    /* mât */
+    g.strokeStyle='#8b95a8'; g.lineWidth=9;
+    g.beginPath(); g.moveTo(px,py); g.lineTo(px,py-120); g.stroke();
+    g.fillStyle='#6c7686'; g.fillRect(px-34,py,68,16);
+    g.save(); g.translate(px,py-120); g.rotate(tilt);
+    /* flèche */
+    g.strokeStyle= ok? '#6ee3a0' : '#f0b558'; g.lineWidth=8; g.lineCap='round';
+    g.beginPath(); g.moveTo(-6.5*SC,0); g.lineTo(8*SC,0); g.stroke(); g.lineCap='butt';
+    /* charge */
+    g.strokeStyle='#f0b558'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(8*SC,0); g.lineTo(8*SC,44); g.stroke();
+    g.fillStyle='#8a6a3c'; g.fillRect(8*SC-24,44,48,26);
+    g.fillStyle='#f0b558'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('1500 N',8*SC,62);
+    g.fillText('8 m',8*SC,-12);
+    /* lest coulissant */
+    g.fillStyle='#5f6b7d'; g.strokeStyle='#cfd6e6'; g.lineWidth=2;
+    g.beginPath(); g.rect(-d*SC-22,-16,44,34); g.fill(); g.stroke();
+    g.fillStyle='#cfd6e6'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('4000 N',-d*SC,6);
+    g.fillText(String(d).replace('.',',')+' m',-d*SC,-26);
+    /* règle graduée */
+    g.strokeStyle='rgba(143,212,224,.45)'; g.lineWidth=1.5;
+    g.beginPath(); g.moveTo(-6.5*SC,26); g.lineTo(0,26); g.stroke();
+    for(var m=1;m<=6;m++){ g.beginPath(); g.moveTo(-m*SC,22); g.lineTo(-m*SC,30); g.stroke(); }
+    g.restore();
+    /* lecture des moments */
+    g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillStyle='#f0b558'; g.fillText('moment charge : 1500 \u00d7 8 = 12000 N\u00b7m',30,32);
+    g.fillStyle='#cfd6e6'; g.fillText('moment lest : 4000 \u00d7 '+String(d).replace('.',',')+' = '+Ml+' N\u00b7m',30,56);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(ok){ g.fillStyle='#6ee3a0'; g.fillText('\ud83c\udfaf moments \u00e9gaux : la grue est d\u2019aplomb, verrou d\u00e9bloqu\u00e9',W/2,H-14); }
+    else if(Ml<Mc){ g.fillStyle='#e87060'; g.fillText('\u26a0 la fl\u00e8che l\u2019emporte : \u00e9loigne le lest',W/2,H-14); }
+    else { g.fillStyle='#e87060'; g.fillText('\u26a0 le lest l\u2019emporte : rapproche-le',W/2,H-14); }
+  }
+  setInterval(step,45); step();
+})();
+
+setupHint('h51','hb51',[
+  '\u00c0 l\u2019\u00e9quilibre, les deux moments par rapport \u00e0 l\u2019axe se compensent exactement.',
+  'Moment de la charge : 1500 \u00d7 8. Moment du lest : 4000 \u00d7 d.',
+  '1500 \u00d7 8 = 12000, donc d = 12000 / 4000.'
+]);
+el('b51').addEventListener('click',function(){
+  var v=numf(el('n51').value);
+  if(Math.abs(v-D51)<0.2){
+    el('fb51').className='fb ok';
+    el('fb51').textContent='\u2713 d = 12000/4000 = 3 m. Le verrou de s\u00e9curit\u00e9 lib\u00e8re la console.';
+    solve('p51','s51','fr51',1,'3');
+    narrate5('Un d\u00e9clic sec dans la console. L\u2019afficheur du verrou passe au vert et r\u00e9v\u00e8le un chiffre.');
+  } else {
+    el('fb51').className='fb no';
+    el('fb51').textContent='\u2717 \u00c9galise les deux moments : 1500 \u00d7 8 d\u2019un c\u00f4t\u00e9, 4000 \u00d7 d de l\u2019autre.';
+    incident();
+  }
+});
+
+/* --- 5.2 : les deux élingues de la nacelle --- */
+(function(){
+  var cv=el('cvNacelle'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0, th=20;
+  el('s52sl').addEventListener('input',function(){ th=+this.value; el('v52').textContent=th+'\u00b0'; });
+  function step(){
+    t+=0.04;
+    var r=th*Math.PI/180, T=1200/(2*Math.cos(r)), ok=(T<=900);
+    g.clearRect(0,0,W,H);
+    var cx=350, cy=54, L=150;
+    var bx=cx+Math.sin(r)*L, by=cy+Math.cos(r)*L;
+    g.strokeStyle='#8b95a8'; g.lineWidth=6; g.lineCap='round';
+    g.beginPath(); g.moveTo(cx,10); g.lineTo(cx,cy-8); g.stroke();
+    g.fillStyle='#8b95a8'; g.beginPath(); g.arc(cx,cy-2,7,0,7); g.fill();
+    var stress=Math.min(1,Math.max(0,(T-600)/500));
+    var col='rgb('+Math.round(110+stress*130)+','+Math.round(227-stress*115)+','+Math.round(160-stress*64)+')';
+    g.strokeStyle=col; g.lineWidth=4+stress*3;
+    g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx-(bx-cx),by); g.stroke();
+    g.beginPath(); g.moveTo(cx,cy); g.lineTo(bx,by); g.stroke();
+    g.lineCap='butt';
+    /* nacelle */
+    g.fillStyle='#2b3547'; g.strokeStyle=col; g.lineWidth=2.5;
+    g.beginPath(); g.rect(cx-(bx-cx)-8,by,2*(bx-cx)+16,54); g.fill(); g.stroke();
+    g.fillStyle='#cfd6e6'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('1200 N',cx,by+32);
+    /* angle */
+    g.strokeStyle='rgba(143,212,224,.6)'; g.lineWidth=1.6; g.setLineDash([5,4]);
+    g.beginPath(); g.moveTo(cx,cy); g.lineTo(cx,by+20); g.stroke(); g.setLineDash([]);
+    g.strokeStyle='#8fd4e0'; g.lineWidth=2.2;
+    g.beginPath(); g.arc(cx,cy,50,Math.PI/2-r,Math.PI/2); g.stroke();
+    g.fillStyle='#8fd4e0'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('\u03b8 = '+th+'\u00b0',cx+40,cy+66);
+    /* lecture */
+    g.textAlign='left'; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillStyle='#cfd6e6'; g.fillText('T = 1200 / (2 \u00d7 cos '+th+'\u00b0) = '+T.toFixed(0)+' N par brin',30,28);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    if(ok){ g.fillStyle='#6ee3a0'; g.fillText('\u2713 sous les 900 N : montage s\u00fbr',W/2,H-14); }
+    else { g.fillStyle='#e87060'; g.fillText('\u26a0 '+T.toFixed(0)+' N > 900 N : l\u2019\u00e9lingue est en surcharge',W/2,H-14); }
+    /* repere de la limite */
+    g.strokeStyle='rgba(232,112,96,.5)'; g.lineWidth=1.5; g.setLineDash([4,4]);
+    g.beginPath(); g.moveTo(30,44); g.lineTo(W-30,44); g.stroke(); g.setLineDash([]);
+    g.fillStyle='rgba(232,112,96,.75)'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('limite \u00e9lingue : 900 N par brin',30,58);
+  }
+  setInterval(step,45); step();
+})();
+
+setupHint('h52','hb52',[
+  'Chaque brin ne reprend que sa composante verticale : 2 \u00d7 T \u00d7 cos \u03b8 = 1200.',
+  'Donc T = 1200 / (2 cos \u03b8). Plus \u03b8 augmente, plus T grimpe.',
+  'Fais varier le curseur de 5\u00b0 en 5\u00b0 et rel\u00e8ve le dernier angle o\u00f9 T reste sous 900 N.'
+]);
+el('b52').addEventListener('click',function(){
+  var v=numf(el('n52').value);
+  if(Math.abs(v-TH52)<3){
+    el('fb52').className='fb ok';
+    el('fb52').textContent='\u2713 \u00c0 45\u00b0, T = 848 N : c\u2019est le dernier cran s\u00fbr. \u00c0 50\u00b0, on serait \u00e0 933 N.';
+    solve('p52','s52','fr52',2,'0');
+    narrate5('Tu resserres les brins jusqu\u2019\u00e0 45\u00b0. La plaque de charge, d\u00e9gag\u00e9e de sa gangue de graisse, laisse lire un chiffre.');
+  } else {
+    el('fb52').className='fb no';
+    el('fb52').textContent='\u2717 Cherche le DERNIER angle du curseur o\u00f9 la tension reste sous 900 N.';
+    incident();
+  }
+});
+
+/* --- 5.3 ⭐ : la dernière manœuvre --- */
+setupHint('h53','hb53',[
+  'Ces trois questions reprennent les trois id\u00e9es du jeu : les moments, l\u2019\u00e9quilibre en mouvement, les appuis.',
+  'Un solide qui se d\u00e9place \u00e0 vitesse CONSTANTE est en \u00e9quilibre : \u03a3F = 0 aussi.',
+  'Trois appuis d\u00e9finissent toujours un plan : c\u2019est pour \u00e7a qu\u2019un tr\u00e9pied ne bancale jamais.'
+]);
+el('b53').addEventListener('click',function(){
+  var a=(el('q53a').value==='que la somme des moments reste nulle pendant tout le mouvement');
+  var b=(el('q53b').value==='z\u00e9ro : vitesse constante signifie \u00e9quilibre, m\u00eame en mouvement');
+  var c=(el('q53c').value==='trois appuis suffisent et se posent toujours \u00e0 plat, sans bancaler');
+  if(a&&b&&c){
+    el('fb53').className='fb ok';
+    el('fb53').textContent='\u2713 S\u00e9quence accept\u00e9e. La fl\u00e8che pivote lentement et lib\u00e8re la sortie.';
+    solve('p53','s53','fr53',3,'5');
+    narrate5('La grue s\u2019\u00e9branle. Trente secondes plus tard, la sortie est d\u00e9gag\u00e9e et un code s\u2019affiche en grand sur la console.');
+  } else {
+    el('fb53').className='fb no';
+    el('fb53').textContent='\u2717 '+(a?'\u2460\u2713':'\u2460\u2717')+' '+(b?'\u2461\u2713':'\u2461\u2717')+' '+(c?'\u2462\u2713':'\u2462\u2717')+' \u2014 la console refuse la manœuvre.';
+    incident();
+  }
+});
+
+/* --- cadenas final : 305 --- */
+el('bLock5').addEventListener('click',function(){
+  var code=(el('m1').value||'')+(el('m2').value||'')+(el('m3').value||'');
+  if(code.length<3){ el('fbLock5').className='fb no'; el('fbLock5').textContent='\u2717 Les trois molettes doivent \u00eatre positionn\u00e9es.'; return; }
+  if(code==='305'){
+    el('fbLock5').className='fb ok'; el('fbLock5').textContent='\u2713 CLAC. Le portail d\u2019\u00e9vacuation s\u2019ouvre sur la rue.';
+    el('lock5').classList.add('open'); el('bLock5').disabled=true;
+    var nh=(GAME.hints||0);
+    el('endStats').innerHTML='Cinq salles, quinze \u00e9nigmes, cinq cadenas. Indices consult\u00e9s : <b>'+nh+'</b>.';
+    narrate5('Le pêne recule. Derri\u00e8re la porte, l\u2019air froid du dehors.');
+    setTimeout(function(){ el('endCard').classList.add('show'); el('endCard').scrollIntoView({behavior:'smooth',block:'center'}); },900);
+  } else {
+    el('fbLock5').className='fb no';
+    el('fbLock5').textContent='\u2717 Les molettes se rebloquent. Relis les trois fragments dans l\u2019ordre 1, 2, 3.';
+    incident();
+  }
+});
+el('goEnd').addEventListener('click',function(){
+  el('endCard').classList.add('show'); el('endCard').scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.querySelectorAll('[id="backRoom4"],[id="backRoom4b"]').forEach(function(b){ b.addEventListener('click',function(){ goRoom(4); }); });
+
+/* --- image de fin : le petit matin --- */
+(function(){
+  var cv=el('cvEnd'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0;
+  function step(){
+    t+=0.015;
+    var sky=g.createLinearGradient(0,0,0,H);
+    sky.addColorStop(0,'#1b2436'); sky.addColorStop(0.55,'#4a4258'); sky.addColorStop(0.8,'#c98a5e'); sky.addColorStop(1,'#f0b558');
+    g.fillStyle=sky; g.fillRect(0,0,W,H);
+    var sun=H*0.82+Math.sin(t*0.4)*2;
+    var sg=g.createRadialGradient(W*0.72,sun,6,W*0.72,sun,150);
+    sg.addColorStop(0,'rgba(255,232,180,.95)'); sg.addColorStop(1,'rgba(240,181,88,0)');
+    g.fillStyle=sg; g.beginPath(); g.arc(W*0.72,sun,150,0,7); g.fill();
+    /* grille du chantier, entrouverte */
+    g.fillStyle='rgba(12,16,22,.92)';
+    g.fillRect(0,H-120,W,120);
+    g.strokeStyle='rgba(12,16,22,.9)'; g.lineWidth=6;
+    for(var x=40;x<W*0.45;x+=26){ g.beginPath(); g.moveTo(x,H-150); g.lineTo(x,H-40); g.stroke(); }
+    for(var x2=W*0.62;x2<W-30;x2+=26){ g.beginPath(); g.moveTo(x2,H-150); g.lineTo(x2,H-40); g.stroke(); }
+    /* silhouette qui s'éloigne */
+    var px=W*0.53+Math.min(60,t*6);
+    g.fillStyle='rgba(12,16,22,.95)';
+    g.beginPath(); g.ellipse(px,H-92,7,15,0,0,7); g.fill();
+    g.beginPath(); g.arc(px,H-114,7,0,7); g.fill();
+    g.fillRect(px-3,H-78,6,26); g.fillRect(px+2,H-78,6,26);
+    /* grue au loin */
+    g.strokeStyle='rgba(12,16,22,.8)'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(W*0.18,H-150); g.lineTo(W*0.18,H-250); g.stroke();
+    g.beginPath(); g.moveTo(W*0.11,H-250); g.lineTo(W*0.30,H-250); g.stroke();
+  }
+  setInterval(step,55); step();
+})();
+
+/* ================= vignettes « pourquoi ça compte » ================= */
+(function(){
+  var SC={
+    stk11:function(g,W,H,t){                       /* palette au-dessus de la sortie */
+      var y=54+Math.sin(t*1.6)*4;
+      g.strokeStyle='#8b95a8';g.lineWidth=3;g.beginPath();g.moveTo(W/2,8);g.lineTo(W/2,y);g.stroke();
+      g.fillStyle='#8a6a3c';g.strokeStyle='#f0b558';g.lineWidth=2;
+      g.beginPath();g.rect(W/2-52,y,104,34);g.fill();g.stroke();
+      g.fillStyle='#f0b558';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('320 kg = ? N',W/2,y+22);
+      g.fillStyle='#2b3547';g.fillRect(W/2-34,H-46,68,46);
+      g.strokeStyle='#6ee3a0';g.lineWidth=2;g.strokeRect(W/2-34,H-46,68,46);
+      g.fillStyle='#6ee3a0';g.font='700 10px "JetBrains Mono",monospace';g.fillText('SORTIE',W/2,H-22);
+      g.fillStyle='#e87060';g.font='700 11px "JetBrains Mono",monospace';
+      g.fillText('passer dessous ?',W/2,y+56);
+    },
+    stk12:function(g,W,H,t){                       /* verrou piloté par la tension */
+      var eq=(Math.sin(t*0.9)>0);
+      g.strokeStyle=eq?'#6ee3a0':'#e87060';g.lineWidth=3;
+      g.beginPath();g.moveTo(70,20);g.lineTo(70,70+(eq?0:12));g.stroke();
+      g.fillStyle='#8a6a3c';g.fillRect(46,70+(eq?0:12),48,28);
+      g.strokeStyle='#8b95a8';g.lineWidth=2;g.setLineDash([4,4]);
+      g.beginPath();g.moveTo(94,84);g.lineTo(W-96,84);g.stroke();g.setLineDash([]);
+      g.fillStyle='#2b3547';g.fillRect(W-96,44,74,74);
+      g.strokeStyle=eq?'#6ee3a0':'#e87060';g.lineWidth=2.4;g.strokeRect(W-96,44,74,74);
+      g.fillStyle=eq?'#6ee3a0':'#e87060';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText(eq?'VERROU OFF':'VERROU ON',W-59,86);
+      g.fillText(eq?'\u00e9quilibre':'d\u00e9s\u00e9quilibre',W-59,132);
+      g.fillStyle='#8fd4e0';g.fillText('capteur de tension',W/2-8,30);
+    },
+    stk13:function(g,W,H,t){                       /* mouflage : 1 brin vs 4 brins */
+      g.fillStyle='#e87060';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('1 brin',W*0.24,20);
+      g.strokeStyle='#e87060';g.lineWidth=5;g.beginPath();g.moveTo(W*0.24,26);g.lineTo(W*0.24,96);g.stroke();
+      if(Math.sin(t*2)>0.6){ g.strokeStyle='#e87060';g.lineWidth=2;
+        g.beginPath();g.moveTo(W*0.20,60);g.lineTo(W*0.28,66);g.stroke(); }
+      g.fillStyle='#6ee3a0';g.fillText('4 brins',W*0.68,20);
+      for(var k=0;k<4;k++){ g.strokeStyle='#6ee3a0';g.lineWidth=2;
+        g.beginPath();g.moveTo(W*0.60+k*14,26);g.lineTo(W*0.60+k*14,96);g.stroke(); }
+      [0.24,0.68].forEach(function(f,i2){
+        g.fillStyle='#8a6a3c';g.strokeStyle=i2?'#6ee3a0':'#e87060';g.lineWidth=2;
+        g.beginPath();g.rect(W*f-34+(i2?21:0),96,68,26);g.fill();g.stroke(); });
+      g.fillStyle='#cfd6e6';g.font='700 10px "JetBrains Mono",monospace';
+      g.fillText('rupture',W*0.24,140); g.fillText('\u00e7a passe',W*0.68,140);
+    },
+    stk21:function(g,W,H,t){                       /* clé courte / clé longue */
+      var lng=(Math.sin(t*0.8)>0);
+      g.fillStyle='#8b95a8';g.beginPath();g.arc(80,H/2,15,0,7);g.fill();
+      g.strokeStyle=lng?'#6ee3a0':'#e87060';g.lineWidth=11;g.lineCap='round';
+      g.beginPath();g.moveTo(80,H/2);g.lineTo(80+(lng?300:130),H/2);g.stroke();g.lineCap='butt';
+      g.strokeStyle='#f0b558';g.lineWidth=3;
+      var fx=80+(lng?300:130);
+      g.beginPath();g.moveTo(fx,H/2);g.lineTo(fx,H/2+30);g.stroke();
+      g.fillStyle='#f0b558';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('m\u00eame force',fx,H/2+46);
+      g.fillStyle=lng?'#6ee3a0':'#e87060';
+      g.fillText(lng?'le boulon c\u00e8de':'le boulon r\u00e9siste',W/2,24);
+    },
+    stk22:function(g,W,H,t){                       /* fléau qui commande la trappe */
+      var a=Math.sin(t*1.1)*0.16, eq=Math.abs(a)<0.03;
+      g.strokeStyle='#8b95a8';g.lineWidth=3;g.beginPath();g.moveTo(W/2,H-30);g.lineTo(W/2,60);g.stroke();
+      g.save();g.translate(W/2,60);g.rotate(a);
+      g.strokeStyle=eq?'#6ee3a0':'#f0b558';g.lineWidth=6;
+      g.beginPath();g.moveTo(-130,0);g.lineTo(130,0);g.stroke();
+      g.fillStyle='#8a6a3c';g.fillRect(-150,0,40,22);g.fillRect(110,0,40,22);
+      g.restore();
+      g.fillStyle=eq?'#6ee3a0':'#8b95a8';g.fillRect(W/2-30,H-24,60,10);
+      g.fillStyle=eq?'#6ee3a0':'#e87060';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText(eq?'trappe OUVERTE':'trappe ferm\u00e9e',W/2,22);
+    },
+    stk23:function(g,W,H,t){                       /* grue qui bascule */
+      var tilt=Math.max(0,Math.sin(t*0.7))*0.20;
+      g.save();g.translate(90,H-24);g.rotate(-tilt);
+      g.strokeStyle=tilt>0.12?'#e87060':'#6ee3a0';g.lineWidth=7;
+      g.beginPath();g.moveTo(0,0);g.lineTo(0,-96);g.stroke();
+      g.beginPath();g.moveTo(0,-96);g.lineTo(230,-96);g.stroke();
+      g.strokeStyle='#8b95a8';g.lineWidth=2;
+      g.beginPath();g.moveTo(200,-96);g.lineTo(200,-52);g.stroke();
+      g.fillStyle='#8a6a3c';g.fillRect(178,-52,44,24);
+      g.restore();
+      g.fillStyle='#8b95a8';g.fillRect(60,H-24,60,14);
+      g.fillStyle=tilt>0.12?'#e87060':'#6ee3a0';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText(tilt>0.12?'\u26a0 elle bascule sur l\u2019issue':'charge ma\u00eetris\u00e9e',W/2+40,22);
+      g.fillStyle='#8a6a3c';g.fillRect(W-90,H-40,64,30);
+      g.fillStyle='#cfd6e6';g.font='700 10px "JetBrains Mono",monospace';g.fillText('dalle',W-58,H-20);
+    },
+    stk31:function(g,W,H,t){                       /* deux appuis fatigués */
+      var y=70;
+      g.strokeStyle='#8fd4e0';g.lineWidth=8;g.beginPath();g.moveTo(70,y);g.lineTo(W-70,y);g.stroke();
+      [70,W-70].forEach(function(x){
+        g.fillStyle='#8b95a8';g.beginPath();g.moveTo(x,y+6);g.lineTo(x-14,y+34);g.lineTo(x+14,y+34);g.closePath();g.fill(); });
+      var px=W/2+Math.sin(t*0.9)*70;
+      g.fillStyle='#f0b558';g.beginPath();g.arc(px,y-16,11,0,7);g.fill();
+      g.strokeStyle='#f0b558';g.lineWidth=2;g.beginPath();g.moveTo(px,y-5);g.lineTo(px,y-1);g.stroke();
+      g.fillStyle='#cfd6e6';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('A',70,y+50);g.fillText('B',W-70,y+50);
+      g.fillStyle='#8fd4e0';g.fillText('combien encaisse chaque appui ?',W/2,H-14);
+    },
+    stk32:function(g,W,H,t){                       /* appui fissuré */
+      var y=70, px=90+((t*40)%(W-180));
+      g.strokeStyle='#8fd4e0';g.lineWidth=8;g.beginPath();g.moveTo(70,y);g.lineTo(W-70,y);g.stroke();
+      g.fillStyle='#8b95a8';g.beginPath();g.moveTo(70,y+6);g.lineTo(56,y+34);g.lineTo(84,y+34);g.closePath();g.fill();
+      var over=(px>W*0.62);
+      g.fillStyle=over?'#e87060':'#8b95a8';
+      g.beginPath();g.moveTo(W-70,y+6);g.lineTo(W-84,y+34);g.lineTo(W-56,y+34);g.closePath();g.fill();
+      g.strokeStyle='#e87060';g.lineWidth=2;
+      g.beginPath();g.moveTo(W-72,y+12);g.lineTo(W-66,y+22);g.lineTo(W-74,y+30);g.stroke();
+      g.fillStyle='#f0b558';g.fillRect(px-16,y-26,32,22);
+      g.fillStyle=over?'#e87060':'#6ee3a0';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText(over?'\u26a0 appui fissur\u00e9 en surcharge':'charge bien plac\u00e9e',W/2,22);
+      g.fillStyle='#cfd6e6';g.font='700 10px "JetBrains Mono",monospace';
+      g.fillText('appui fissur\u00e9',W-70,y+50);
+    },
+    stk51:function(g,W,H,t){                       /* grue en desequilibre */
+      var ok=(Math.sin(t*0.7)>0), tilt=ok?0:0.12;
+      g.save();g.translate(W*0.42,110);g.rotate(tilt);
+      g.strokeStyle=ok?'#6ee3a0':'#e87060';g.lineWidth=6;g.lineCap='round';
+      g.beginPath();g.moveTo(-110,0);g.lineTo(140,0);g.stroke();g.lineCap='butt';
+      g.fillStyle='#5f6b7d';g.fillRect(ok?-86:-46,-12,30,24);
+      g.fillStyle='#8a6a3c';g.fillRect(122,4,36,20);
+      g.restore();
+      g.strokeStyle='#8b95a8';g.lineWidth=6;
+      g.beginPath();g.moveTo(W*0.42,110);g.lineTo(W*0.42,140);g.stroke();
+      g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillStyle=ok?'#6ee3a0':'#e87060';
+      g.fillText(ok?'moments \u00e9gaux \u2192 console d\u00e9verrouill\u00e9e':'la grue penche \u2192 tout est bloqu\u00e9',300,40);
+      g.fillStyle='#cfd6e6';g.fillText('le lest coulisse',300,66);
+      g.textAlign='center';
+    },
+    stk52:function(g,W,H,t){                       /* elingues qui s ecartent */
+      var th=(0.25+0.35*(0.5+0.5*Math.sin(t*0.8)));
+      var cx=W*0.30, cy=26, L=74;
+      var bx=cx+Math.sin(th)*L, by=cy+Math.cos(th)*L;
+      var T=1200/(2*Math.cos(th)), bad=(T>900);
+      g.strokeStyle=bad?'#e87060':'#6ee3a0';g.lineWidth=bad?5:3;
+      g.beginPath();g.moveTo(cx,cy);g.lineTo(cx-(bx-cx),by);g.stroke();
+      g.beginPath();g.moveTo(cx,cy);g.lineTo(bx,by);g.stroke();
+      g.fillStyle='#2b3547';g.strokeStyle=bad?'#e87060':'#6ee3a0';g.lineWidth=2;
+      g.beginPath();g.rect(cx-(bx-cx)-6,by,2*(bx-cx)+12,30);g.fill();g.stroke();
+      g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillStyle=bad?'#e87060':'#6ee3a0';
+      g.fillText(bad?'\u26a0 '+T.toFixed(0)+' N > 900 N : rupture':T.toFixed(0)+' N par brin : \u00e7a tient',300,50);
+      g.fillStyle='#cfd6e6';g.fillText('et c\u2019est toi qui montes dedans',300,78);
+      g.textAlign='center';
+    },
+    stk53:function(g,W,H,t){                       /* console : sequence */
+      var n=Math.floor(t*0.8)%4;
+      for(var k=0;k<3;k++){
+        var on=(k<n);
+        g.fillStyle='#0e1620';g.fillRect(50+k*90,44,74,44);
+        g.strokeStyle=on?'#6ee3a0':'rgba(139,149,168,.5)';g.lineWidth=2;
+        g.strokeRect(50+k*90,44,74,44);
+        g.fillStyle=on?'#6ee3a0':'rgba(139,149,168,.6)';
+        g.font='700 16px "JetBrains Mono",monospace';g.textAlign='center';
+        g.fillText(['\u2460','\u2461','\u2462'][k],87+k*90,74);
+      }
+      g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillStyle='#f0b558';g.fillText('trois ordres, dans l\u2019ordre',330,54);
+      g.fillStyle='#cfd6e6';g.fillText('moments \u00b7 \u00e9quilibre \u00b7 appuis',330,80);
+      g.fillStyle='rgba(232,112,96,.85)';g.fillText('une erreur = la nacelle contre le pyl\u00f4ne',330,106);
+      g.textAlign='center';
+    },
+    stk41:function(g,W,H,t){                       /* tendue vs comprimee */
+      var d=4+4*Math.sin(t*1.4);
+      g.strokeStyle='#6ee3a0';g.lineWidth=8;g.lineCap='round';
+      g.beginPath();g.moveTo(60,48);g.lineTo(250+d,48);g.stroke();
+      g.fillStyle='#6ee3a0';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillText('TENDUE : s\u2019allonge \u2192 ancrage possible',60,28);
+      g.strokeStyle='#e87060';g.lineWidth=8;
+      g.beginPath();g.moveTo(60,110);
+      g.quadraticCurveTo(160,110-d*1.6,250-d,110);g.stroke();g.lineCap='butt';
+      g.fillStyle='#e87060';g.fillText('COMPRIM\u00c9E : se raccourcit \u2192 flambe',60,140);
+      g.textAlign='center';
+    },
+    stk42:function(g,W,H,t){                       /* noeud isole */
+      var cx=W*0.34, cy=H*0.52;
+      g.strokeStyle='rgba(232,112,96,.8)';g.lineWidth=2;g.setLineDash([6,4]);
+      g.beginPath();g.arc(cx,cy,42+Math.sin(t*2)*1.5,0,7);g.stroke();g.setLineDash([]);
+      g.strokeStyle='#8b95a8';g.lineWidth=5;
+      g.beginPath();g.moveTo(cx,cy);g.lineTo(cx-64,cy);g.stroke();
+      g.beginPath();g.moveTo(cx,cy);g.lineTo(cx-46,cy-46);g.stroke();
+      g.strokeStyle='#f0b558';g.lineWidth=4;
+      g.beginPath();g.moveTo(cx,cy);g.lineTo(cx,cy+44);g.stroke();
+      g.fillStyle='#f0b558';g.beginPath();g.arc(cx,cy,6,0,7);g.fill();
+      g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillStyle='#cfd6e6';g.fillText('la passerelle est boulonn\u00e9e ICI',W*0.52,cy-14);
+      g.fillStyle='#8fd4e0';g.fillText('\u03a3F = 0 sur x et sur y',W*0.52,cy+12);
+      g.textAlign='center';
+    },
+    stk43:function(g,W,H,t){                       /* barre retiree : ca tient ou pas */
+      var ok=(Math.sin(t*0.7)>0);
+      var A={x:70,y:112}, B={x:250,y:112}, C={x:160,y:34}, D={x:160,y:112};
+      var fall=ok?0:Math.abs(Math.sin(t*0.7))*8;
+      g.save();g.translate(0,fall);
+      g.strokeStyle=ok?'#6ee3a0':'#e87060';g.lineWidth=6;g.lineCap='round';
+      [[A,C],[C,B],[A,D],[D,B]].forEach(function(s){
+        g.beginPath();g.moveTo(s[0].x,s[0].y);g.lineTo(s[1].x,s[1].y);g.stroke(); });
+      if(!ok){ g.strokeStyle='rgba(139,149,168,.4)';g.lineWidth=3;g.setLineDash([5,4]);
+        g.beginPath();g.moveTo(A.x,A.y);g.lineTo(C.x,C.y);g.stroke();g.setLineDash([]); }
+      else { g.strokeStyle='rgba(139,149,168,.4)';g.lineWidth=3;g.setLineDash([5,4]);
+        g.beginPath();g.moveTo(C.x,C.y);g.lineTo(D.x,D.y);g.stroke();g.setLineDash([]); }
+      g.restore();g.lineCap='butt';
+      g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
+      g.fillStyle=ok?'#6ee3a0':'#e87060';
+      g.fillText(ok?'bonne barre : \u00e7a tient':'mauvaise barre : tout s\u2019affaisse',300,60);
+      g.fillStyle='#cfd6e6';g.fillText('une seule peut partir',300,88);
+      g.textAlign='center';
+    },
+    stk33:function(g,W,H,t){                       /* porte-à-faux : bascule */
+      var w=Math.max(0,Math.sin(t*0.8))*0.22;
+      g.save();g.translate(W*0.34,74);g.rotate(w);
+      g.strokeStyle=w>0.08?'#e87060':'#8fd4e0';g.lineWidth=8;
+      g.beginPath();g.moveTo(-180,0);g.lineTo(200,0);g.stroke();
+      g.fillStyle='#f0b558';g.fillRect(170,-24,34,22);
+      g.restore();
+      g.fillStyle='#8b95a8';g.beginPath();g.moveTo(W*0.34,80);g.lineTo(W*0.34-14,108);g.lineTo(W*0.34+14,108);g.closePath();g.fill();
+      g.fillStyle='#cfd6e6';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
+      g.fillText('B',W*0.34,124); g.fillText('A',W*0.34-170,124);
+      g.fillStyle=w>0.08?'#e87060':'#6ee3a0';g.font='700 11px "JetBrains Mono",monospace';
+      g.fillText(w>0.08?'\u26a0 sans ancrage : elle s\u2019\u00e9croule':'ancrage en A : \u00e7a tient',W/2,22);
+    }
+  };
+  Object.keys(SC).forEach(function(id){
+    var cv=document.getElementById(id); if(!cv||!cv.getContext) return;
+    var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0, fn=SC[id];
+    setInterval(function(){ t+=0.04; g.clearRect(0,0,W,H); g.textAlign='center'; fn(g,W,H,t); },50);
+  });
 })();
 
 /* lancement de la cinématique d'intro */
