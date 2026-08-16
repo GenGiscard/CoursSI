@@ -134,6 +134,16 @@
         <h2>Trouver la mobilité m</h2>
         <p class="lede">Dans la formule, trois nombres se comptent sur le graphe — mais <b>m ne se compte pas, il s’observe</b>. C’est la seule grandeur qui demande de regarder le mécanisme fonctionner, et c’est pour cela qu’on l’oublie.</p>
         <div class="big">m = nombre de mouvements indépendants du mécanisme<small>Autrement dit : combien de paramètres faut-il imposer pour que <b>tout</b> le mécanisme soit figé ? Chaque paramètre indépendant compte pour 1.</small></div>
+        <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">D’où vient m — et d’où vient la formule</h3>
+        <p class="lede">Les deux se démontrent ensemble. Fermer un cycle du graphe, c’est écrire que si l’on part d’un solide et qu’on en fait le tour, on doit revenir exactement au point de départ : cela donne des <b>équations</b>. Les <b>inconnues</b>, ce sont les degrés de liberté des liaisons.</p>
+        <div class="anim">
+          <canvas id="cvOrig" width="860" height="330" aria-label="Origine de la formule : équations, inconnues et rang du système"></canvas>
+          <div class="ctrl"><button id="orPrev">◀</button><button id="orNext">▶</button><div class="leg" id="orLeg"></div></div>
+        </div>
+        <div class="big">m = I<sub>c</sub> − r<sub>c</sub>        h = E<sub>c</sub> − r<sub>c</sub><small><b>r<sub>c</sub></b> est le <b>rang</b> du système : le nombre d’équations réellement indépendantes. Les inconnues que ces équations ne fixent pas restent libres — ce sont les mouvements, donc <b>m</b>. Les équations en trop, celles qui répètent ce que les autres disent déjà, sont les contraintes redondantes — donc <b>h</b>.</small></div>
+        <div class="big" style="border-left-color:var(--green)">m − h = I<sub>c</sub> − E<sub>c</sub>   ⟺   h = m + E<sub>c</sub> − I<sub>c</sub><small>On soustrait les deux lignes précédentes : <b>r<sub>c</sub> disparaît</b>. C’est tout l’intérêt de la formule — elle permet de se passer du rang, qu’on ne sait pas calculer à la main en Première.</small></div>
+        <div class="warn">⚠️ <b>Le piège de circularité.</b> La formule contient <b>deux</b> inconnues, m et h. Elle ne peut donc pas les donner toutes les deux : il faut en déterminer une <b>par ailleurs</b>. Et c’est toujours m, parce que m s’observe sur le mécanisme, alors que h ne se voit pas. <b>On ne calcule jamais m avec la formule</b> — sinon on tourne en rond.</div>
+        <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">Comment le trouver en pratique</h3>
         <div class="anim">
           <canvas id="cvMob" width="860" height="330" aria-label="Comment déterminer la mobilité d'un mécanisme"></canvas>
           <div class="ctrl"><button id="mbPrev">◀</button><button id="mbNext">▶</button><div class="leg" id="mbLeg"></div></div>
@@ -380,6 +390,67 @@ function rotAxe(g,cx,cy,t){
        g.fillText('cinq conditions g\u00e9om\u00e9triques \u00e0 garantir',290,96);
        g.fillStyle='#3D7E5F';
        g.fillText('\u2192 on va voir comment ramener h \u00e0 0',300,122); }}
+  ]);
+})();
+
+/* ============ s5 bis : d'où vient m (rang du système) ============ */
+(function(){
+  /* exemple support : arbre sur deux pivots — Ic = 2, Ec = 6, rc = 1 → m = 1, h = 5 */
+  function grille(g,x0,y0,n,cols,col,fill,lab){
+    var s=26, k=0;
+    for(var i=0;i<n;i++){
+      var cx=x0+(i%cols)*s, cy=y0+Math.floor(i/cols)*s;
+      g.fillStyle=fill; g.strokeStyle=col; g.lineWidth=2;
+      g.beginPath(); g.rect(cx,cy,s-6,s-6); g.fill(); g.stroke();
+      k++;
+    }
+    g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText(lab,x0,y0-10);
+  }
+  stepper('cvOrig','orPrev','orNext','orLeg',[
+    {leg:'Prenons l\u2019arbre sur deux pivots. Les <b>inconnues</b> du probl\u00e8me cin\u00e9matique, ce sont les degr\u00e9s de libert\u00e9 des liaisons : 1 par pivot, soit <b>I<sub>c</sub> = 2</b>.',
+     draw:function(g,t){
+       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues (les ddl des liaisons)');
+       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('une inconnue = une vitesse que la liaison autorise',120,190); }},
+    {leg:'Le graphe a un cycle. Le refermer dans l\u2019espace impose <b>6 \u00e9quations</b> (3 de translation, 3 de rotation) : <b>E<sub>c</sub> = 6</b>.',
+     draw:function(g,t){
+       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
+       grille(g,120,190,6,6,'#2E6A8E','#e7eef2','E_c = 6 \u00e9quations (fermeture du cycle)');
+       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('6 \u00e9quations pour 2 inconnues : le syst\u00e8me est tr\u00e8s surcharg\u00e9',120,290); }},
+    {leg:'Mais ces 6 \u00e9quations ne disent pas 6 choses diff\u00e9rentes : beaucoup r\u00e9p\u00e8tent ce que d\u2019autres affirment d\u00e9j\u00e0. Le nombre d\u2019\u00e9quations <b>r\u00e9ellement ind\u00e9pendantes</b> s\u2019appelle le <b>rang r<sub>c</sub></b> : ici r<sub>c</sub> = 1.',
+     draw:function(g,t){
+       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
+       var s=26;
+       for(var i=0;i<6;i++){
+         var cx=120+i*s, indep=(i===0);
+         g.fillStyle= indep? '#e7eef2':'#f3efe6';
+         g.strokeStyle= indep? '#2E6A8E':'#c8bfae'; g.lineWidth=2;
+         g.beginPath(); g.rect(cx,190,s-6,s-6); g.fill(); g.stroke();
+         if(!indep){ g.strokeStyle='#C0492E'; g.lineWidth=1.8;
+           g.beginPath(); g.moveTo(cx+3,193); g.lineTo(cx+17,207); g.moveTo(cx+17,193); g.lineTo(cx+3,207); g.stroke(); }
+       }
+       g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('E_c = 6 \u00e9quations, dont r_c = 1 ind\u00e9pendante',120,180);
+       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+       g.fillText('les 5 autres sont redondantes \u2192 elles deviennent des CONTRAINTES',120,290); }},
+    {leg:'On lit alors tout : les inconnues que les \u00e9quations ne fixent pas restent <b>libres</b> \u2192 <b>m = I<sub>c</sub> \u2212 r<sub>c</sub> = 1</b> (l\u2019arbre tourne). Les \u00e9quations en trop \u2192 <b>h = E<sub>c</sub> \u2212 r<sub>c</sub> = 5</b>.',
+     draw:function(g,t){
+       g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='left';
+       g.fillText('m = I_c \u2212 r_c = 2 \u2212 1 = 1',120,90);
+       g.fillStyle='#C0492E';
+       g.fillText('h = E_c \u2212 r_c = 6 \u2212 1 = 5',120,124);
+       g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
+       g.beginPath(); g.moveTo(110,146); g.lineTo(560,146); g.stroke();
+       g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+       g.fillText('on soustrait :  m \u2212 h = I_c \u2212 E_c',120,178);
+       g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('le rang r_c dispara\u00eet des deux c\u00f4t\u00e9s',120,204);
+       g.fillStyle='#2E6A8E'; g.font='800 22px "JetBrains Mono",monospace';
+       g.fillText('h = m + E_c \u2212 I_c',120,254);
+       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('v\u00e9rification : 1 + 6 \u2212 2 = 5 \u2713',120,286); }}
   ]);
 })();
 
