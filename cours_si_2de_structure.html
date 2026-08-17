@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -71,11 +70,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -96,244 +95,91 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_structure.html">← Séquence : structure</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>Ça tient debout ?</h1><p>Cours · Option SI 2de</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
-      <a href="#s2" class="navlink"><span>02</span>Quels efforts ?</a>
-      <a href="#s3" class="navlink"><span>03</span>Traction, compression, flexion</a>
-      <a href="#s4" class="navlink"><span>04</span>La forme compte</a>
-      <a href="#s5" class="navlink"><span>05</span>Comparer les matériaux</a>
-      <a href="#s6" class="navlink"><span>06</span>Transmettre l'effort au sol</a>
-      <a href="#s7" class="navlink"><span>07</span>Tester une structure</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">Ça tient debout ? · problématique</span>
-      <h2>Pourquoi une structure ne s'effondre-t-elle pas ?</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un pont, une tour, une étagère : toutes ces structures supportent des <b>efforts</b> sans s'effondrer.</p>
-          <p>Une structure tient debout si elle peut <b>transmettre tous les efforts jusqu'au sol</b>, sans se déformer de façon excessive.</p>
-          <div class="chips"><span class="chip s">effort</span><span class="chip s">structure</span><span class="chip s">sol</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-            <line x1="30" y1="170" x2="330" y2="170" stroke="#5C544B" stroke-width="3"/>
-            <line x1="90" y1="170" x2="90" y2="60" stroke="#2E6A8E" stroke-width="6"/>
-            <line x1="270" y1="170" x2="270" y2="60" stroke="#2E6A8E" stroke-width="6"/>
-            <line x1="90" y1="70" x2="270" y2="70" stroke="#B85C2E" stroke-width="8"/>
-            <line x1="90" y1="170" x2="270" y2="70" stroke="#8A5A7A" stroke-width="3" opacity="0.6"/>
-            <line x1="270" y1="170" x2="90" y2="70" stroke="#8A5A7A" stroke-width="3" opacity="0.6"/>
-            <path d="M170 40 L170 62" stroke="#C0492E" stroke-width="4" marker-end="url(#af)"/>
-            <defs><marker id="af" markerWidth="9" markerHeight="9" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 z" fill="#C0492E"/></marker></defs>
-            <text x="170" y="30" font-family="JetBrains Mono,monospace" font-size="10" fill="#a4321f" text-anchor="middle">charge</text>
-          </svg>
-          <figcaption>Un pont : la charge redescend jusqu'aux piles, puis au sol.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Une structure tient si elle peut <b>transmettre les efforts jusqu'au sol</b>.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Analyser</span>
-      <h2>Quels efforts subit une structure ?</h2>
-      <p class="lede">Une structure doit résister à <b>plusieurs efforts</b> en même temps, pas un seul.</p>
-      <table class="t">
-        <thead><tr><th>Effort</th><th>Exemple</th></tr></thead>
-        <tbody>
-          <tr><td><b>Poids propre</b></td><td>le poids de la structure elle-même</td></tr>
-          <tr><td><b>Charge utile</b></td><td>les personnes, les voitures, la neige</td></tr>
-          <tr><td><b>Vent</b></td><td>un effort horizontal, parfois violent</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> On ne conçoit jamais une structure pour un seul effort : il faut penser à tous les cas.</div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Vocabulaire</span>
-      <h2>Traction, compression, flexion</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Selon comment on le sollicite, un élément travaille différemment.</p>
-          <div class="chips"><span class="chip">traction</span><span class="chip">compression</span><span class="chip">flexion</span></div>
-        </div>
-        <div>
-          <div class="eqcard"><div class="eq">tirer sur un câble &rarr; traction</div><div class="leg">Le câble s'<b>allonge</b> légèrement.</div></div>
-          <div class="eqcard"><div class="eq">empiler des briques &rarr; compression</div><div class="leg">La brique du bas est <b>écrasée</b>.</div></div>
-          <div class="eqcard"><div class="eq">plier une planche &rarr; flexion</div><div class="leg">La planche se <b>courbe</b>.</div></div>
-        </div>
-      </div>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Les trois sollicitations d'une pièce</div>
-        <canvas id="cvsolli" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Traction, compression et flexion d'une pièce"></canvas>
-        <div class="cap"><b id="sophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="socap">Traction.</span></div>
-      </figure>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Modéliser</span>
-      <h2>La forme compte</h2>
-      <p class="lede">Un carré se déforme facilement sous un effort latéral. Un <b>triangle</b>, non.</p>
-      <figure>
-        <canvas id="cvRigidity" width="640" height="250"></canvas>
-        <div class="cap" id="capRig"><span class="ph">—</span><span id="capRigTxt">…</span></div>
-      </figure>
-      <p>C'est pourquoi on <b>triangule</b> les structures : ponts, pylônes, grues, charpentes.</p>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Choisir</span>
-      <h2>Comparer les matériaux</h2>
-      <p class="lede">Chaque matériau a ses points forts et ses limites.</p>
-      <table class="t">
-        <thead><tr><th>Matériau</th><th>Point fort</th><th>Limite</th></tr></thead>
-        <tbody>
-          <tr><td><b>Acier</b></td><td>très résistant</td><td>lourd, coûteux</td></tr>
-          <tr><td><b>Bois</b></td><td>léger, renouvelable</td><td>moins résistant</td></tr>
-          <tr><td><b>Béton</b></td><td>résiste bien en compression</td><td>résiste mal en traction</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> On combine souvent les matériaux : le béton armé associe béton (compression) et acier (traction).</div>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · Expérimenter</span>
-      <h2>Transmettre l'effort jusqu'au sol</h2>
-      <p class="lede">Une charge appliquée en haut d'une structure descend, étage par étage, jusqu'aux <b>fondations</b>.</p>
-      <figure>
-        <canvas id="cvForceChain" width="640" height="250"></canvas>
-        <div class="cap" id="capChn"><span class="ph">—</span><span id="capChnTxt">…</span></div>
-      </figure>
-      <p>Si un seul maillon de cette chaîne cède, toute la structure est en danger.</p>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Vérifier</span>
-      <h2>Tester une structure</h2>
-      <p class="lede">Avant de construire en vrai, on <b>teste</b> la structure de plusieurs façons.</p>
-      <div class="chips"><span class="chip">🏗️ maquette</span><span class="chip">💻 simulation</span><span class="chip">🧮 calcul</span></div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Maquette réduite, simulation numérique, calcul de résistance : trois façons de <b>vérifier avant de construire</b>.</div></div>
-    </section>
-
-    <section id="s8">
-      <span class="kicker">08 · Synthèse</span>
-      <h2>L'essentiel</h2>
-      <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Une structure tient si elle <b>transmet les efforts au sol</b>, grâce à une bonne <b>forme</b> et des <b>matériaux</b> adaptés.</div></div>
-      <table class="t">
-        <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead>
-        <tbody>
-          <tr><td><b>Effort</b></td><td>une force appliquée à la structure</td></tr>
-          <tr><td><b>Traction / compression</b></td><td>un élément étiré / écrasé</td></tr>
-          <tr><td><b>Triangulation</b></td><td>ajout de diagonales pour rigidifier</td></tr>
-          <tr><td><b>Fondation</b></td><td>l'élément qui transmet l'effort au sol</td></tr>
-        </tbody>
-      </table>
-      <a class="cta" href="hub_si_2de_structure.html">Passer aux activités →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_structure.html">← Séquence : structure</a> <div class="brand"><div class="mark">C</div> <div><h1>Ça tient debout ?</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Problématique</a> <a href="#s2" class="navlink"><span>02</span>Quels efforts ?</a> <a href="#s3" class="navlink"><span>03</span>Traction, compression, flexion</a> <a href="#s4" class="navlink"><span>04</span>La forme compte</a> <a href="#s5" class="navlink"><span>05</span>Comparer les matériaux</a> <a href="#s6" class="navlink"><span>06</span>Transmettre l'effort au sol</a> <a href="#s7" class="navlink"><span>07</span>Tester une structure</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Ça tient debout ? · problématique</span> <h2>Pourquoi une structure ne s'effondre-t-elle pas ?</h2> <div class="twocol"><div><p class="lede">Un pont, une tour, une étagère : toutes ces structures supportent des <b>efforts</b> sans s'effondrer.</p> <p>Une structure tient debout si elle peut <b>transmettre tous les efforts jusqu'au sol</b>, sans se déformer de façon excessive.</p> <div class="chips"><span class="chip s">effort</span><span class="chip s">structure</span><span class="chip s">sol</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <line x1="30" y1="170" x2="330" y2="170" stroke="#5C544B" stroke-width="3"/> <line x1="90" y1="170" x2="90" y2="60" stroke="#2E6A8E" stroke-width="6"/> <line x1="270" y1="170" x2="270" y2="60" stroke="#2E6A8E" stroke-width="6"/> <line x1="90" y1="70" x2="270" y2="70" stroke="#B85C2E" stroke-width="8"/> <line x1="90" y1="170" x2="270" y2="70" stroke="#8A5A7A" stroke-width="3" opacity="0.6"/> <line x1="270" y1="170" x2="90" y2="70" stroke="#8A5A7A" stroke-width="3" opacity="0.6"/> <path d="M170 40 L170 62" stroke="#C0492E" stroke-width="4" marker-end="url(#af)"/><defs><marker id="af" markerWidth="9" markerHeight="9" refX="4" refY="8" orient="auto"><path d="M0,0 L8,0 L4,8 z" fill="#C0492E"/></marker></defs> <text x="170" y="30" font-family="JetBrains Mono,monospace" font-size="10" fill="#a4321f" text-anchor="middle">charge</text> </svg> <figcaption>Un pont : la charge redescend jusqu'aux piles, puis au sol.</figcaption> </figure></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Une structure tient si elle peut <b>transmettre les efforts jusqu'au sol</b>.</div></div> </section> <section id="s2"> <span class="kicker">02 · Analyser</span> <h2>Quels efforts subit une structure ?</h2> <p class="lede">Une structure doit résister à <b>plusieurs efforts</b> en même temps, pas un seul.</p> <table class="t"> <thead><tr><th>Effort</th><th>Exemple</th></tr></thead> <tbody> <tr><td><b>Poids propre</b></td><td>le poids de la structure elle-même</td></tr> <tr><td><b>Charge utile</b></td><td>les personnes, les voitures, la neige</td></tr> <tr><td><b>Vent</b></td><td>un effort horizontal, parfois violent</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> On ne conçoit jamais une structure pour un seul effort : il faut penser à tous les cas.</div> </section> <section id="s3"> <span class="kicker">03 · Vocabulaire</span> <h2>Traction, compression, flexion</h2> <div class="twocol"><div><p class="lede">Selon comment on le sollicite, un élément travaille différemment.</p> <div class="chips"><span class="chip">traction</span><span class="chip">compression</span><span class="chip">flexion</span></div></div> <div><div class="eqcard"><div class="eq">tirer sur un câble &rarr; traction</div><div class="leg">Le câble s'<b>allonge</b> légèrement.</div></div> <div class="eqcard"><div class="eq">empiler des briques &rarr; compression</div><div class="leg">La brique du bas est <b>écrasée</b>.</div></div> <div class="eqcard"><div class="eq">plier une planche &rarr; flexion</div><div class="leg">La planche se <b>courbe</b>.</div></div></div></div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Les trois sollicitations d'une pièce</div> <canvas id="cvsolli" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Traction, compression et flexion d'une pièce"></canvas> <div class="cap"><b id="sophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="socap">Traction.</span></div> </figure> </section> <section id="s4"> <span class="kicker">04 · Modéliser</span> <h2>La forme compte</h2> <p class="lede">Un carré se déforme facilement sous un effort latéral. Un <b>triangle</b>, non.</p> <figure> <canvas id="cvRigidity" width="640" height="250"></canvas> <div class="cap" id="capRig"><span class="ph">—</span><span id="capRigTxt">…</span></div> </figure> <p>C'est pourquoi on <b>triangule</b> les structures : ponts, pylônes, grues, charpentes.</p> </section> <section id="s5"> <span class="kicker">05 · Choisir</span> <h2>Comparer les matériaux</h2> <p class="lede">Chaque matériau a ses points forts et ses limites.</p> <table class="t"> <thead><tr><th>Matériau</th><th>Point fort</th><th>Limite</th></tr></thead> <tbody> <tr><td><b>Acier</b></td><td>très résistant</td><td>lourd, coûteux</td></tr> <tr><td><b>Bois</b></td><td>léger, renouvelable</td><td>moins résistant</td></tr> <tr><td><b>Béton</b></td><td>résiste bien en compression</td><td>résiste mal en traction</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> On combine souvent les matériaux : le béton armé associe béton (compression) et acier (traction).</div> </section> <section id="s6"> <span class="kicker">06 · Expérimenter</span> <h2>Transmettre l'effort jusqu'au sol</h2> <p class="lede">Une charge appliquée en haut d'une structure descend, étage par étage, jusqu'aux <b>fondations</b>.</p> <figure> <canvas id="cvForceChain" width="640" height="250"></canvas> <div class="cap" id="capChn"><span class="ph">—</span><span id="capChnTxt">…</span></div> </figure> <p>Si un seul maillon de cette chaîne cède, toute la structure est en danger.</p> </section> <section id="s7"> <span class="kicker">07 · Vérifier</span> <h2>Tester une structure</h2> <p class="lede">Avant de construire en vrai, on <b>teste</b> la structure de plusieurs façons.</p> <div class="chips"><span class="chip">maquette</span><span class="chip">simulation</span><span class="chip">calcul</span></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Maquette réduite, simulation numérique, calcul de résistance : trois façons de <b>vérifier avant de construire</b>.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Une structure tient si elle <b>transmet les efforts au sol</b>, grâce à une bonne <b>forme</b> et des <b>matériaux</b> adaptés.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Effort</b></td><td>une force appliquée à la structure</td></tr> <tr><td><b>Traction / compression</b></td><td>un élément étiré / écrasé</td></tr> <tr><td><b>Triangulation</b></td><td>ajout de diagonales pour rigidifier</td></tr> <tr><td><b>Fondation</b></td><td>l'élément qui transmet l'effort au sol</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_structure.html">Passer aux activités →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : rigidité (triangle vs carré) =====
   (function(){
-    var cv=document.getElementById('cvRigidity'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capRig .ph').textContent=n;document.getElementById('capRigTxt').textContent=t;}
-    var ph=0;
-    function frame(x0,y0,size,skew,braced,worked){
-      var xTL=x0+skew, xTR=x0+size+skew, xBL=x0, xBR=x0+size, yT=y0, yB=y0+size;
-      g.strokeStyle='#2A2622';g.lineWidth=4;g.lineCap='round';
-      g.beginPath();g.moveTo(xBL,yB);g.lineTo(xTL,yT);g.moveTo(xBR,yB);g.lineTo(xTR,yT);g.moveTo(xTL,yT);g.lineTo(xTR,yT);g.moveTo(xBL,yB);g.lineTo(xBR,yB);g.stroke();
-      if(braced){g.strokeStyle=worked?'#C0492E':'#8A5A7A';g.lineWidth=worked?4:3;g.beginPath();g.moveTo(xBL,yB);g.lineTo(xTR,yT);g.stroke();}
-    }
-    function draw(){
-      var seg=ph%9;
-      var forceOn = seg>=2;
-      var forceFactor = Math.max(0,Math.min(1,(seg-2)/2));
-      g.clearRect(0,0,W,H);
-      g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('deux structures, une charge latérale',W/2,20);
-      // sol
-      g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(60,190);g.lineTo(250,190);g.moveTo(400,190);g.lineTo(590,190);g.stroke();
-      for(var i=0;i<10;i++){g.beginPath();g.moveTo(60+i*21,190);g.lineTo(60+i*21-8,202);g.stroke();g.beginPath();g.moveTo(400+i*21,190);g.lineTo(400+i*21-8,202);g.stroke();}
-      // carré (sans diagonale) — se déforme
-      frame(110,80,100,forceFactor*34,false,false);
-      // triangle (avec diagonale) — reste rigide
-      frame(400,80,100,0,true,forceOn);
-      if(forceOn){
-        g.fillStyle='#C0492E';g.beginPath();g.moveTo(90,50);g.lineTo(90,72);g.lineTo(84,66);g.moveTo(90,72);g.lineTo(96,66);g.stroke();
-        g.strokeStyle='#C0492E';g.lineWidth=3;g.beginPath();g.moveTo(75,60);g.lineTo(108,60);g.stroke();
-        g.beginPath();g.moveTo(108,60);g.lineTo(100,55);g.moveTo(108,60);g.lineTo(100,65);g.stroke();
-        g.beginPath();g.moveTo(365,60);g.lineTo(398,60);g.stroke();
-        g.beginPath();g.moveTo(398,60);g.lineTo(390,55);g.moveTo(398,60);g.lineTo(390,65);g.stroke();
-      }
-      g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';
-      g.fillText('Carré (sans diagonale)',160,222);
-      g.fillText('Triangulé (avec diagonale)',450,222);
-      var st = seg<2?0:(seg<4?1:2);
-      var CAPS=['Deux structures identiques, prêtes à recevoir un effort latéral.','On applique une force horizontale (comme le vent) en haut des deux structures.','Le carré se déforme ; le triangle, grâce à sa diagonale, reste rigide.'];
-      setCap(String(st+1),CAPS[st]);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvRigidity'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capRig .ph').textContent=n;document.getElementById('capRigTxt').textContent=t;}
+ var ph=0;
+ function frame(x0,y0,size,skew,braced,worked){
+ var xTL=x0+skew, xTR=x0+size+skew, xBL=x0, xBR=x0+size, yT=y0, yB=y0+size;
+ g.strokeStyle='#2A2622';g.lineWidth=4;g.lineCap='round';
+ g.beginPath();g.moveTo(xBL,yB);g.lineTo(xTL,yT);g.moveTo(xBR,yB);g.lineTo(xTR,yT);g.moveTo(xTL,yT);g.lineTo(xTR,yT);g.moveTo(xBL,yB);g.lineTo(xBR,yB);g.stroke();
+ if(braced){g.strokeStyle=worked?'#C0492E':'#8A5A7A';g.lineWidth=worked?4:3;g.beginPath();g.moveTo(xBL,yB);g.lineTo(xTR,yT);g.stroke();}
+ }
+ function draw(){
+ var seg=ph%9;
+ var forceOn = seg>=2;
+ var forceFactor = Math.max(0,Math.min(1,(seg-2)/2));
+ g.clearRect(0,0,W,H);
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('deux structures, une charge latérale',W/2,20);
+ // sol
+ g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(60,190);g.lineTo(250,190);g.moveTo(400,190);g.lineTo(590,190);g.stroke();
+ for(var i=0;i<10;i++){g.beginPath();g.moveTo(60+i*21,190);g.lineTo(60+i*21-8,202);g.stroke();g.beginPath();g.moveTo(400+i*21,190);g.lineTo(400+i*21-8,202);g.stroke();}
+ // carré (sans diagonale) — se déforme
+ frame(110,80,100,forceFactor*34,false,false);
+ // triangle (avec diagonale) — reste rigide
+ frame(400,80,100,0,true,forceOn);
+ if(forceOn){
+ g.fillStyle='#C0492E';g.beginPath();g.moveTo(90,50);g.lineTo(90,72);g.lineTo(84,66);g.moveTo(90,72);g.lineTo(96,66);g.stroke();
+ g.strokeStyle='#C0492E';g.lineWidth=3;g.beginPath();g.moveTo(75,60);g.lineTo(108,60);g.stroke();
+ g.beginPath();g.moveTo(108,60);g.lineTo(100,55);g.moveTo(108,60);g.lineTo(100,65);g.stroke();
+ g.beginPath();g.moveTo(365,60);g.lineTo(398,60);g.stroke();
+ g.beginPath();g.moveTo(398,60);g.lineTo(390,55);g.moveTo(398,60);g.lineTo(390,65);g.stroke();
+ }
+ g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+ g.fillText('Carré (sans diagonale)',160,222);
+ g.fillText('Triangulé (avec diagonale)',450,222);
+ var st = seg<2?0:(seg<4?1:2);
+ var CAPS=['Deux structures identiques, prêtes à recevoir un effort latéral.','On applique une force horizontale (comme le vent) en haut des deux structures.','Le carré se déforme ; le triangle, grâce à sa diagonale, reste rigide.'];
+ setCap(String(st+1),CAPS[st]);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 
   // ===== Animation : transmettre l'effort au sol =====
   (function(){
-    var cv=document.getElementById('cvForceChain'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capChn .ph').textContent=n;document.getElementById('capChnTxt').textContent=t;}
-    var STAGES=[{t:'Charge',s:'appliquée en haut',c:'#B85C2E'},{t:'Poutre',s:'la transmet horizontalement',c:'#2E6A8E'},{t:'Pilier',s:'la transmet verticalement',c:'#3D7E5F'},{t:'Fondation',s:'la transmet au sol',c:'#8A5A7A'}];
-    var CAPS=['La charge est appliquée en haut de la structure.','La poutre transmet l\u2019effort jusqu\u2019aux piliers.','Le pilier transmet l\u2019effort vers le bas.','La fondation transmet enfin l\u2019effort au sol.'];
-    var cx=320, w=220, hh=42, cy=[46,102,158,214];
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%9)/1.6)%4;
-      g.clearRect(0,0,W,H);
-      for(var i=0;i<3;i++){var ya=cy[i]+hh/2, yb=cy[i+1]-hh/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(cx,ya);g.lineTo(cx,yb-6);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(cx,yb);g.lineTo(cx-4,yb-8);g.lineTo(cx+4,yb-8);g.closePath();g.fill();}
-      for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j],y=cy[j];
-        g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx-w/2,y-hh/2,w,hh,10);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx,y+5);}
-      g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('L\u2019effort descend jusqu\u2019au sol',W/2,16);
-      setCap(String(active+1),CAPS[active]);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvForceChain'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capChn .ph').textContent=n;document.getElementById('capChnTxt').textContent=t;}
+ var STAGES=[{t:'Charge',s:'appliquée en haut',c:'#B85C2E'},{t:'Poutre',s:'la transmet horizontalement',c:'#2E6A8E'},{t:'Pilier',s:'la transmet verticalement',c:'#3D7E5F'},{t:'Fondation',s:'la transmet au sol',c:'#8A5A7A'}];
+ var CAPS=['La charge est appliquée en haut de la structure.','La poutre transmet l\u2019effort jusqu\u2019aux piliers.','Le pilier transmet l\u2019effort vers le bas.','La fondation transmet enfin l\u2019effort au sol.'];
+ var cx=320, w=220, hh=42, cy=[46,102,158,214];
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%9)/1.6)%4;
+ g.clearRect(0,0,W,H);
+ for(var i=0;i<3;i++){var ya=cy[i]+hh/2, yb=cy[i+1]-hh/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(cx,ya);g.lineTo(cx,yb-6);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(cx,yb);g.lineTo(cx-4,yb-8);g.lineTo(cx+4,yb-8);g.closePath();g.fill();}
+ for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j],y=cy[j];
+ g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx-w/2,y-hh/2,w,hh,10);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx,y+5);}
+ g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('L\u2019effort descend jusqu\u2019au sol',W/2,16);
+ setCap(String(active+1),CAPS[active]);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -341,46 +187,45 @@
   var cv=document.getElementById('cvsolli'); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=450, midY=105;
   function arrow(x1,y1,x2,y2){g.strokeStyle='#C0492E';g.fillStyle='#C0492E';g.lineWidth=4;g.lineCap='round';
-    var a=Math.atan2(y2-y1,x2-x1),L=13,bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
-    g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
-    g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();g.lineCap='butt';}
+ var a=Math.atan2(y2-y1,x2-x1),L=13,bx=x2-L*Math.cos(a),by=y2-L*Math.sin(a);
+ g.beginPath();g.moveTo(x1,y1);g.lineTo(bx,by);g.stroke();
+ g.beginPath();g.moveTo(x2,y2);g.lineTo(x2-L*Math.cos(a-0.42),y2-L*Math.sin(a-0.42));g.lineTo(x2-L*Math.cos(a+0.42),y2-L*Math.sin(a+0.42));g.closePath();g.fill();g.lineCap='butt';}
   var caps=[
-    'TRACTION : deux forces tirent \u2014 la pi\u00e8ce s\u2019allonge.',
-    'COMPRESSION : deux forces poussent \u2014 la pi\u00e8ce se raccourcit.',
-    'FLEXION : une charge fait PLIER la pi\u00e8ce.'
-  ];
+ 'TRACTION : deux forces tirent \u2014 la pi\u00e8ce s\u2019allonge.',
+ 'COMPRESSION : deux forces poussent \u2014 la pi\u00e8ce se raccourcit.',
+ 'FLEXION : une charge fait PLIER la pi\u00e8ce.'];
   var T=0, half=140;
   function step(){
-    T+=0.03; if(T>10.5) T=0;
-    var phase=(T<3.4?0:(T<6.8?1:2)), tp=(phase===0?T:(phase===1?T-3.4:T-6.8)), s=Math.min(1,tp/1.6);
-    g.clearRect(0,0,W,H);
-    g.fillStyle='#2A2622';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';
-    if(phase===0){
-      var ext=s*24;
-      g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half-ext,midY-16,(half+ext)*2,32);g.fill();g.stroke();
-      arrow(cx-half-ext-8,midY,cx-half-ext-70,midY); arrow(cx+half+ext+8,midY,cx+half+ext+70,midY);
-      g.fillStyle='#235877';g.fillText('TRACTION',cx,midY+70);
-    } else if(phase===1){
-      var comp=s*20;
-      g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half+comp,midY-18-comp*0.4,(half-comp)*2,36+comp*0.8);g.fill();g.stroke();
-      arrow(cx-half+comp-70,midY,cx-half+comp-8,midY); arrow(cx+half-comp+70,midY,cx+half-comp+8,midY);
-      g.fillStyle='#235877';g.fillText('COMPRESSION',cx,midY+70);
-    } else {
-      var sag=s*34;
-      // supports
-      g.fillStyle='#7a7064';g.beginPath();g.moveTo(cx-half,midY+12);g.lineTo(cx-half-12,midY+34);g.lineTo(cx-half+12,midY+34);g.closePath();g.fill();
-      g.beginPath();g.moveTo(cx+half,midY+12);g.lineTo(cx+half-12,midY+34);g.lineTo(cx+half+12,midY+34);g.closePath();g.fill();
-      // poutre courbée
-      g.strokeStyle='#2E6A8E';g.lineWidth=10;g.lineCap='round';g.beginPath();
-      for(var x=cx-half;x<=cx+half;x+=6){var yy=midY + sag*(1-Math.pow((x-cx)/half,2));if(x===cx-half)g.moveTo(x,yy);else g.lineTo(x,yy);}
-      g.stroke();g.lineCap='butt';
-      // charge
-      arrow(cx,midY-58,cx,midY+sag-8);
-      g.fillStyle='#235877';g.fillText('FLEXION',cx,midY+80);
-    }
-    var cap=document.getElementById('socap'), ph=document.getElementById('sophase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ T+=0.03; if(T>10.5) T=0;
+ var phase=(T<3.4?0:(T<6.8?1:2)), tp=(phase===0?T:(phase===1?T-3.4:T-6.8)), s=Math.min(1,tp/1.6);
+ g.clearRect(0,0,W,H);
+ g.fillStyle='#2A2622';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+ if(phase===0){
+ var ext=s*24;
+ g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half-ext,midY-16,(half+ext)*2,32);g.fill();g.stroke();
+ arrow(cx-half-ext-8,midY,cx-half-ext-70,midY); arrow(cx+half+ext+8,midY,cx+half+ext+70,midY);
+ g.fillStyle='#235877';g.fillText('TRACTION',cx,midY+70);
+ } else if(phase===1){
+ var comp=s*20;
+ g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2;g.beginPath();g.rect(cx-half+comp,midY-18-comp*0.4,(half-comp)*2,36+comp*0.8);g.fill();g.stroke();
+ arrow(cx-half+comp-70,midY,cx-half+comp-8,midY); arrow(cx+half-comp+70,midY,cx+half-comp+8,midY);
+ g.fillStyle='#235877';g.fillText('COMPRESSION',cx,midY+70);
+ } else {
+ var sag=s*34;
+ // supports
+ g.fillStyle='#7a7064';g.beginPath();g.moveTo(cx-half,midY+12);g.lineTo(cx-half-12,midY+34);g.lineTo(cx-half+12,midY+34);g.closePath();g.fill();
+ g.beginPath();g.moveTo(cx+half,midY+12);g.lineTo(cx+half-12,midY+34);g.lineTo(cx+half+12,midY+34);g.closePath();g.fill();
+ // poutre courbée
+ g.strokeStyle='#2E6A8E';g.lineWidth=10;g.lineCap='round';g.beginPath();
+ for(var x=cx-half;x<=cx+half;x+=6){var yy=midY + sag*(1-Math.pow((x-cx)/half,2));if(x===cx-half)g.moveTo(x,yy);else g.lineTo(x,yy);}
+ g.stroke();g.lineCap='butt';
+ // charge
+ arrow(cx,midY-58,cx,midY+sag-8);
+ g.fillStyle='#235877';g.fillText('FLEXION',cx,midY+80);
+ }
+ var cap=document.getElementById('socap'), ph=document.getElementById('sophase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();

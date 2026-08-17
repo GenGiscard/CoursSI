@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -71,11 +70,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -96,232 +95,80 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>Notre innovation</h1><p>Cours · Option SI 2de</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Le défi</a>
-      <a href="#s2" class="navlink"><span>02</span>Innover = un besoin</a>
-      <a href="#s3" class="navlink"><span>03</span>Le cahier des charges</a>
-      <a href="#s4" class="navlink"><span>04</span>La démarche de projet</a>
-      <a href="#s5" class="navlink"><span>05</span>Trouver des idées</a>
-      <a href="#s6" class="navlink"><span>06</span>Du besoin au prototype</a>
-      <a href="#s7" class="navlink"><span>07</span>Présenter son projet</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">Notre innovation · le défi</span>
-      <h2>Imaginer un objet qui rend service</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">C'est votre grand défi&nbsp;: <b>imaginer</b>, concevoir et <b>présenter</b> un objet innovant qui répond à un vrai besoin.</p>
-          <p>Vous allez réunir tout ce que vous avez appris cette année : besoin, fonctions, énergie, structure, automatisme… au service d'une seule idée.</p>
-          <div class="chips"><span class="chip s">imaginer</span><span class="chip s">concevoir</span><span class="chip s">présenter</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="180" cy="80" r="34" fill="none" stroke="#BD8A2A" stroke-width="4"/>
-            <path d="M180 80 L180 52 M180 80 L200 92 M180 80 L160 92" stroke="#BD8A2A" stroke-width="3"/>
-            <path d="M164 44 Q180 22 196 44" fill="none" stroke="#B85C2E" stroke-width="4"/>
-            <line x1="180" y1="18" x2="180" y2="30" stroke="#B85C2E" stroke-width="3"/>
-            <line x1="150" y1="26" x2="156" y2="36" stroke="#B85C2E" stroke-width="3"/>
-            <line x1="210" y1="26" x2="204" y2="36" stroke="#B85C2E" stroke-width="3"/>
-            <rect x="120" y="140" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2"/>
-            <text x="180" y="162" font-family="JetBrains Mono,monospace" font-size="11" fill="#2c6147" text-anchor="middle">votre idée</text>
-          </svg>
-          <figcaption>Une idée qui naît, puis prend forme.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Le défi</div><div class="v">Concevoir un objet innovant, du <b>besoin</b> jusqu'à la <b>présentation</b> devant la classe.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Innover</span>
-      <h2>Innover, c'est répondre à un besoin</h2>
-      <p class="lede">Une innovation n'est pas forcément high-tech : c'est une idée qui rend un <b>service utile</b>, mieux qu'avant.</p>
-      <table class="t">
-        <thead><tr><th>Objet</th><th>Besoin auquel il répond</th></tr></thead>
-        <tbody>
-          <tr><td>Gourde filtrante</td><td>boire une eau saine partout</td></tr>
-          <tr><td>Sac à dos solaire</td><td>recharger son téléphone en marchant</td></tr>
-          <tr><td>Canne connectée</td><td>sécuriser les déplacements d'une personne âgée</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> On part toujours d'un <b>besoin réel</b>, pas d'une technologie que l'on cherche à caser.</div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Cadrer</span>
-      <h2>Le cahier des charges</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Avant de construire, on écrit ce que l'objet <b>doit faire</b> et les <b>contraintes</b> à respecter.</p>
-          <div class="chips"><span class="chip">fonctions</span><span class="chip">contraintes</span><span class="chip">critères</span></div>
-        </div>
-        <div>
-          <div class="eqcard"><div class="eq">« l'objet doit… » &rarr; fonction</div><div class="leg">Ce que l'utilisateur attend.</div></div>
-          <div class="eqcard"><div class="eq">« sans dépasser… » &rarr; contrainte</div><div class="leg">Prix, taille, poids, sécurité…</div></div>
-          <div class="eqcard"><div class="eq">« mesuré par… » &rarr; critère</div><div class="leg">Comment vérifier que c'est réussi.</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Innover</span>
-      <h2>La démarche de projet</h2>
-      <p class="lede">Un projet suit un cycle : imaginer, concevoir, réaliser, tester… et recommencer pour améliorer.</p>
-      <figure>
-        <canvas id="cvDemarche" width="640" height="250"></canvas>
-        <div class="cap" id="capDem"><span class="ph">—</span><span id="capDemTxt">…</span></div>
-      </figure>
-      <p>On ne réussit presque jamais du premier coup : on <b>itère</b>, on corrige, on recommence.</p>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Créer</span>
-      <h2>Trouver des idées</h2>
-      <p class="lede">Pour faire naître des idées, on utilise des techniques simples de <b>créativité</b>.</p>
-      <table class="t">
-        <thead><tr><th>Technique</th><th>Principe</th></tr></thead>
-        <tbody>
-          <tr><td><b>Brainstorming</b></td><td>lancer plein d'idées sans se censurer</td></tr>
-          <tr><td><b>Carte mentale</b></td><td>relier les idées autour du besoin</td></tr>
-          <tr><td><b>Croquis</b></td><td>dessiner vite pour visualiser</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> Au début, aucune idée n'est mauvaise : la sélection vient <b>ensuite</b>.</div>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Diverger, puis converger</div>
-        <canvas id="cvidee" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Créativité : produire beaucoup d'idées puis retenir la meilleure"></canvas>
-        <div class="cap"><b id="idphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="idcap">On part d'un besoin.</span></div>
-      </figure>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · Réaliser</span>
-      <h2>Du besoin au prototype</h2>
-      <p class="lede">L'idée devient concrète étape par étape, jusqu'à un <b>prototype</b> que l'on peut tester.</p>
-      <figure>
-        <canvas id="cvProto" width="640" height="250"></canvas>
-        <div class="cap" id="capPro"><span class="ph">—</span><span id="capProTxt">…</span></div>
-      </figure>
-      <p>Le prototype n'a pas besoin d'être parfait : il sert à <b>vérifier l'idée</b> et à convaincre.</p>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Communiquer</span>
-      <h2>Présenter son projet</h2>
-      <p class="lede">Un bon projet doit être bien <b>présenté</b>: sans communication, la meilleure idée reste invisible.</p>
-      <div class="chips"><span class="chip">🎤 pitch clair</span><span class="chip">🖼️ visuel</span><span class="chip">🛠️ prototype</span><span class="chip">✅ démonstration</span></div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Expliquer <b>le besoin</b>, montrer <b>la solution</b>, prouver <b>que ça marche</b> : voilà une bonne présentation.</div></div>
-    </section>
-
-    <section id="s8">
-      <span class="kicker">08 · Synthèse</span>
-      <h2>L'essentiel</h2>
-      <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Innover, c'est partir d'un <b>besoin</b>, imaginer une <b>solution</b>, la <b>prototyper</b>, la <b>tester</b> et la <b>présenter</b>.</div></div>
-      <table class="t">
-        <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead>
-        <tbody>
-          <tr><td><b>Innovation</b></td><td>une idée utile qui améliore l'existant</td></tr>
-          <tr><td><b>Cahier des charges</b></td><td>ce que l'objet doit faire, et ses contraintes</td></tr>
-          <tr><td><b>Prototype</b></td><td>une première version pour tester l'idée</td></tr>
-          <tr><td><b>Itérer</b></td><td>améliorer en recommençant plusieurs fois</td></tr>
-        </tbody>
-      </table>
-      <a class="cta" href="hub_si_2de_projet.html">Passer aux activités →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a> <div class="brand"><div class="mark">C</div> <div><h1>Notre innovation</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Le défi</a> <a href="#s2" class="navlink"><span>02</span>Innover = un besoin</a> <a href="#s3" class="navlink"><span>03</span>Le cahier des charges</a> <a href="#s4" class="navlink"><span>04</span>La démarche de projet</a> <a href="#s5" class="navlink"><span>05</span>Trouver des idées</a> <a href="#s6" class="navlink"><span>06</span>Du besoin au prototype</a> <a href="#s7" class="navlink"><span>07</span>Présenter son projet</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Notre innovation · le défi</span> <h2>Imaginer un objet qui rend service</h2> <div class="twocol"><div><p class="lede">C'est votre grand défi&nbsp;: <b>imaginer</b>, concevoir et <b>présenter</b> un objet innovant qui répond à un vrai besoin.</p> <p>Vous allez réunir tout ce que vous avez appris cette année : besoin, fonctions, énergie, structure, automatisme… au service d'une seule idée.</p> <div class="chips"><span class="chip s">imaginer</span><span class="chip s">concevoir</span><span class="chip s">présenter</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <circle cx="180" cy="80" r="34" fill="none" stroke="#BD8A2A" stroke-width="4"/> <path d="M180 80 L180 52 M180 80 L200 92 M180 80 L160 92" stroke="#BD8A2A" stroke-width="3"/><path d="M164 44 Q180 22 196 44" fill="none" stroke="#B85C2E" stroke-width="4"/><line x1="180" y1="18" x2="180" y2="30" stroke="#B85C2E" stroke-width="3"/> <line x1="150" y1="26" x2="156" y2="36" stroke="#B85C2E" stroke-width="3"/> <line x1="210" y1="26" x2="204" y2="36" stroke="#B85C2E" stroke-width="3"/> <rect x="120" y="140" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2"/> <text x="180" y="162" font-family="JetBrains Mono,monospace" font-size="11" fill="#2c6147" text-anchor="middle">votre idée</text> </svg> <figcaption>Une idée qui naît, puis prend forme.</figcaption> </figure></div> <div class="big-idea"><div class="t">Le défi</div><div class="v">Concevoir un objet innovant, du <b>besoin</b> jusqu'à la <b>présentation</b> devant la classe.</div></div> </section> <section id="s2"> <span class="kicker">02 · Innover</span> <h2>Innover, c'est répondre à un besoin</h2> <p class="lede">Une innovation n'est pas forcément high-tech : c'est une idée qui rend un <b>service utile</b>, mieux qu'avant.</p> <table class="t"> <thead><tr><th>Objet</th><th>Besoin auquel il répond</th></tr></thead> <tbody> <tr><td>Gourde filtrante</td><td>boire une eau saine partout</td></tr> <tr><td>Sac à dos solaire</td><td>recharger son téléphone en marchant</td></tr> <tr><td>Canne connectée</td><td>sécuriser les déplacements d'une personne âgée</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> On part toujours d'un <b>besoin réel</b>, pas d'une technologie que l'on cherche à caser.</div> </section> <section id="s3"> <span class="kicker">03 · Cadrer</span> <h2>Le cahier des charges</h2> <div class="twocol"><div><p class="lede">Avant de construire, on écrit ce que l'objet <b>doit faire</b> et les <b>contraintes</b> à respecter.</p> <div class="chips"><span class="chip">fonctions</span><span class="chip">contraintes</span><span class="chip">critères</span></div></div> <div><div class="eqcard"><div class="eq">« l'objet doit… » &rarr; fonction</div><div class="leg">Ce que l'utilisateur attend.</div></div> <div class="eqcard"><div class="eq">« sans dépasser… » &rarr; contrainte</div><div class="leg">Prix, taille, poids, sécurité…</div></div> <div class="eqcard"><div class="eq">« mesuré par… » &rarr; critère</div><div class="leg">Comment vérifier que c'est réussi.</div></div></div></div> </section> <section id="s4"> <span class="kicker">04 · Innover</span> <h2>La démarche de projet</h2> <p class="lede">Un projet suit un cycle : imaginer, concevoir, réaliser, tester… et recommencer pour améliorer.</p> <figure> <canvas id="cvDemarche" width="640" height="250"></canvas> <div class="cap" id="capDem"><span class="ph">—</span><span id="capDemTxt">…</span></div> </figure> <p>On ne réussit presque jamais du premier coup : on <b>itère</b>, on corrige, on recommence.</p> </section> <section id="s5"> <span class="kicker">05 · Créer</span> <h2>Trouver des idées</h2> <p class="lede">Pour faire naître des idées, on utilise des techniques simples de <b>créativité</b>.</p> <table class="t"> <thead><tr><th>Technique</th><th>Principe</th></tr></thead> <tbody> <tr><td><b>Brainstorming</b></td><td>lancer plein d'idées sans se censurer</td></tr> <tr><td><b>Carte mentale</b></td><td>relier les idées autour du besoin</td></tr> <tr><td><b>Croquis</b></td><td>dessiner vite pour visualiser</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> Au début, aucune idée n'est mauvaise : la sélection vient <b>ensuite</b>.</div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Diverger, puis converger</div> <canvas id="cvidee" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Créativité : produire beaucoup d'idées puis retenir la meilleure"></canvas> <div class="cap"><b id="idphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="idcap">On part d'un besoin.</span></div> </figure> </section> <section id="s6"> <span class="kicker">06 · Réaliser</span> <h2>Du besoin au prototype</h2> <p class="lede">L'idée devient concrète étape par étape, jusqu'à un <b>prototype</b> que l'on peut tester.</p> <figure> <canvas id="cvProto" width="640" height="250"></canvas> <div class="cap" id="capPro"><span class="ph">—</span><span id="capProTxt">…</span></div> </figure> <p>Le prototype n'a pas besoin d'être parfait : il sert à <b>vérifier l'idée</b> et à convaincre.</p> </section> <section id="s7"> <span class="kicker">07 · Communiquer</span> <h2>Présenter son projet</h2> <p class="lede">Un bon projet doit être bien <b>présenté</b>: sans communication, la meilleure idée reste invisible.</p> <div class="chips"><span class="chip">pitch clair</span><span class="chip">visuel</span><span class="chip">prototype</span><span class="chip">démonstration</span></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Expliquer <b>le besoin</b>, montrer <b>la solution</b>, prouver <b>que ça marche</b> : voilà une bonne présentation.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Innover, c'est partir d'un <b>besoin</b>, imaginer une <b>solution</b>, la <b>prototyper</b>, la <b>tester</b> et la <b>présenter</b>.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Innovation</b></td><td>une idée utile qui améliore l'existant</td></tr> <tr><td><b>Cahier des charges</b></td><td>ce que l'objet doit faire, et ses contraintes</td></tr> <tr><td><b>Prototype</b></td><td>une première version pour tester l'idée</td></tr> <tr><td><b>Itérer</b></td><td>améliorer en recommençant plusieurs fois</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_projet.html">Passer aux activités →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : la démarche de projet =====
   (function(){
-    var cv=document.getElementById('cvDemarche'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capDem .ph').textContent=n;document.getElementById('capDemTxt').textContent=t;}
-    var STEPS=[
-      {n:'Imaginer',cap:'On imagine des idées à partir d\u2019un besoin.'},
-      {n:'Concevoir',cap:'On choisit une solution et on la dessine.'},
-      {n:'Réaliser',cap:'On fabrique un prototype de l\u2019objet.'},
-      {n:'Tester',cap:'On teste, puis on recommence pour améliorer.'}
-    ];
-    var cx=W/2, cy=125, R=92, N=STEPS.length, pts=[];
-    for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N;pts.push({x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});}
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%8)/1.4)%N;
-      g.clearRect(0,0,W,H);
-      g.strokeStyle='rgba(189,138,42,.30)';g.lineWidth=2;g.beginPath();g.arc(cx,cy,R,0,2*Math.PI);g.stroke();
-      var na=-Math.PI/2+(active+0.5)*2*Math.PI/N;
-      g.strokeStyle='#BD8A2A';g.lineWidth=3;g.beginPath();g.arc(cx,cy,R,-Math.PI/2+active*2*Math.PI/N,na);g.stroke();
-      g.beginPath();g.moveTo(cx+R*Math.cos(na),cy+R*Math.sin(na));g.lineTo(cx+R*Math.cos(na)-7*Math.cos(na-0.5),cy+R*Math.sin(na)-7*Math.sin(na-0.5));g.stroke();
-      g.fillStyle='#8a6313';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('on',cx,cy-5);g.fillText('itère',cx,cy+9);
-      for(var j=0;j<N;j++){var p=pts[j],on=(j===active),w=112,hh=40;
-        g.fillStyle=on?'#BD8A2A':'#FFFDF8';g.strokeStyle='#BD8A2A';g.lineWidth=on?3:2;rrect(g,p.x-w/2,p.y-hh/2,w,hh,10);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':'#8a6313';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText((j+1)+'. '+STEPS[j].n,p.x,p.y+5);}
-      setCap(String(active+1),STEPS[active].cap);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvDemarche'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capDem .ph').textContent=n;document.getElementById('capDemTxt').textContent=t;}
+ var STEPS=[
+ {n:'Imaginer',cap:'On imagine des idées à partir d\u2019un besoin.'},
+ {n:'Concevoir',cap:'On choisit une solution et on la dessine.'},
+ {n:'Réaliser',cap:'On fabrique un prototype de l\u2019objet.'},
+ {n:'Tester',cap:'On teste, puis on recommence pour améliorer.'}
+ ];
+ var cx=W/2, cy=125, R=92, N=STEPS.length, pts=[];
+ for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N;pts.push({x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});}
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%8)/1.4)%N;
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='rgba(189,138,42,.30)';g.lineWidth=2;g.beginPath();g.arc(cx,cy,R,0,2*Math.PI);g.stroke();
+ var na=-Math.PI/2+(active+0.5)*2*Math.PI/N;
+ g.strokeStyle='#BD8A2A';g.lineWidth=3;g.beginPath();g.arc(cx,cy,R,-Math.PI/2+active*2*Math.PI/N,na);g.stroke();
+ g.beginPath();g.moveTo(cx+R*Math.cos(na),cy+R*Math.sin(na));g.lineTo(cx+R*Math.cos(na)-7*Math.cos(na-0.5),cy+R*Math.sin(na)-7*Math.sin(na-0.5));g.stroke();
+ g.fillStyle='#8a6313';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('on',cx,cy-5);g.fillText('itère',cx,cy+9);
+ for(var j=0;j<N;j++){var p=pts[j],on=(j===active),w=112,hh=40;
+ g.fillStyle=on?'#BD8A2A':'#FFFDF8';g.strokeStyle='#BD8A2A';g.lineWidth=on?3:2;rrect(g,p.x-w/2,p.y-hh/2,w,hh,10);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':'#8a6313';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText((j+1)+'. '+STEPS[j].n,p.x,p.y+5);}
+ setCap(String(active+1),STEPS[active].cap);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 
   // ===== Animation : du besoin au prototype =====
   (function(){
-    var cv=document.getElementById('cvProto'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capPro .ph').textContent=n;document.getElementById('capProTxt').textContent=t;}
-    var STAGES=[{t:'Besoin',s:'un problème à résoudre',c:'#B85C2E'},{t:'Idée',s:'une solution imaginée',c:'#BD8A2A'},{t:'Croquis',s:'on la dessine',c:'#2E6A8E'},{t:'Prototype',s:'on la teste',c:'#3D7E5F'}];
-    var CAPS=['Tout part d\u2019un besoin : un problème concret à résoudre.','On imagine une idée de solution.','On dessine un croquis pour la préciser.','On fabrique un prototype pour la tester.'];
-    var cx=[92,248,404,556], cy=132, w=132, hh=72;
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%9)/1.6)%4;
-      g.clearRect(0,0,W,H);
-      for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
-      for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
-        g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
-        g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
-      g.fillStyle='#8a6313';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Du besoin au prototype',W/2,18);
-      setCap(String(active+1),CAPS[active]);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvProto'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capPro .ph').textContent=n;document.getElementById('capProTxt').textContent=t;}
+ var STAGES=[{t:'Besoin',s:'un problème à résoudre',c:'#B85C2E'},{t:'Idée',s:'une solution imaginée',c:'#BD8A2A'},{t:'Croquis',s:'on la dessine',c:'#2E6A8E'},{t:'Prototype',s:'on la teste',c:'#3D7E5F'}];
+ var CAPS=['Tout part d\u2019un besoin : un problème concret à résoudre.','On imagine une idée de solution.','On dessine un croquis pour la préciser.','On fabrique un prototype pour la tester.'];
+ var cx=[92,248,404,556], cy=132, w=132, hh=72;
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%9)/1.6)%4;
+ g.clearRect(0,0,W,H);
+ for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
+ for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
+ g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
+ g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
+ g.fillStyle='#8a6313';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Du besoin au prototype',W/2,18);
+ setCap(String(active+1),CAPS[active]);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -330,34 +177,33 @@
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, cx=450, cy=112, N=9, chosen=4;
   var pos=[]; for(var k=0;k<N;k++){var a=-Math.PI/2+k*2*Math.PI/N; pos.push([cx+180*Math.cos(a), cy+86*Math.sin(a)]);}
   var caps=[
-    'On part d\u2019un besoin \u00e0 r\u00e9soudre.',
-    'On cherche BEAUCOUP d\u2019id\u00e9es, sans se censurer : c\u2019est la cr\u00e9ativit\u00e9.',
-    'Puis on trie et on retient la MEILLEURE id\u00e9e \u00e0 d\u00e9velopper.'
-  ];
+ 'On part d\u2019un besoin \u00e0 r\u00e9soudre.',
+ 'On cherche BEAUCOUP d\u2019id\u00e9es, sans se censurer : c\u2019est la cr\u00e9ativit\u00e9.',
+ 'Puis on trie et on retient la MEILLEURE id\u00e9e \u00e0 d\u00e9velopper.'];
   function bulb(x,y,r,col){g.fillStyle=col;g.beginPath();g.arc(x,y,r,0,7);g.fill();g.strokeStyle='#fff';g.lineWidth=1.5;g.stroke();
-    g.fillStyle='#fff';g.font='700 '+(r*0.8)+'px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u25cb',x,y+r*0.28);}
+ g.fillStyle='#fff';g.font='700 '+(r*0.8)+'px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u25cb',x,y+r*0.28);}
   var T=0;
   function step(){
-    T+=0.03; if(T>9.5) T=0;
-    var phase=(T<2?0:(T<5.5?1:2));
-    var shown=phase<1?0:(phase>=2?N:Math.min(N,Math.floor((T-2)/0.35)+1));
-    g.clearRect(0,0,W,H);
-    // liens
-    for(var k=0;k<N;k++){ if(k>=shown) continue; var isC=(phase>=2&&k===chosen), dim=(phase>=2&&k!==chosen);
-      g.strokeStyle=isC?'rgba(61,126,95,.6)':(dim?'rgba(42,38,34,.1)':'rgba(189,138,42,.4)');g.lineWidth=isC?2.5:1.4;
-      g.beginPath();g.moveTo(cx,cy);g.lineTo(pos[k][0],pos[k][1]);g.stroke();
-    }
-    // idées
-    for(var k=0;k<N;k++){ if(k>=shown) continue; var isC=(phase>=2&&k===chosen), dim=(phase>=2&&k!==chosen);
-      g.globalAlpha=dim?0.3:1; bulb(pos[k][0],pos[k][1], isC?24:15, isC?'#3D7E5F':'#BD8A2A'); g.globalAlpha=1;
-      if(isC){g.fillStyle='#2c6147';g.font='800 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('retenue',pos[k][0],pos[k][1]+40);}
-    }
-    // besoin (centre)
-    g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2.4;g.beginPath();g.arc(cx,cy,34,0,7);g.fill();g.stroke();
-    g.fillStyle='#235877';g.font='700 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('BESOIN',cx,cy+4);
-    var cap=document.getElementById('idcap'), ph=document.getElementById('idphase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ T+=0.03; if(T>9.5) T=0;
+ var phase=(T<2?0:(T<5.5?1:2));
+ var shown=phase<1?0:(phase>=2?N:Math.min(N,Math.floor((T-2)/0.35)+1));
+ g.clearRect(0,0,W,H);
+ // liens
+ for(var k=0;k<N;k++){ if(k>=shown) continue; var isC=(phase>=2&&k===chosen), dim=(phase>=2&&k!==chosen);
+ g.strokeStyle=isC?'rgba(61,126,95,.6)':(dim?'rgba(42,38,34,.1)':'rgba(189,138,42,.4)');g.lineWidth=isC?2.5:1.4;
+ g.beginPath();g.moveTo(cx,cy);g.lineTo(pos[k][0],pos[k][1]);g.stroke();
+ }
+ // idées
+ for(var k=0;k<N;k++){ if(k>=shown) continue; var isC=(phase>=2&&k===chosen), dim=(phase>=2&&k!==chosen);
+ g.globalAlpha=dim?0.3:1; bulb(pos[k][0],pos[k][1], isC?24:15, isC?'#3D7E5F':'#BD8A2A'); g.globalAlpha=1;
+ if(isC){g.fillStyle='#2c6147';g.font='800 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('retenue',pos[k][0],pos[k][1]+40);}
+ }
+ // besoin (centre)
+ g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=2.4;g.beginPath();g.arc(cx,cy,34,0,7);g.fill();g.stroke();
+ g.fillStyle='#235877';g.font='700 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('BESOIN',cx,cy+4);
+ var cap=document.getElementById('idcap'), ph=document.getElementById('idphase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();

@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -71,11 +70,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -96,243 +95,82 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_mobilite.html">← Séquence : rouler propre</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>Rouler propre</h1><p>Cours · Option SI 2de</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
-      <a href="#s2" class="navlink"><span>02</span>D'où vient l'énergie ?</a>
-      <a href="#s3" class="navlink"><span>03</span>La chaîne d'énergie</a>
-      <a href="#s4" class="navlink"><span>04</span>Comparer les véhicules</a>
-      <a href="#s5" class="navlink"><span>05</span>Le CO₂ par km</a>
-      <a href="#s6" class="navlink"><span>06</span>Le rendement</a>
-      <a href="#s7" class="navlink"><span>07</span>Choisir selon l'usage</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">Rouler propre · problématique</span>
-      <h2>Se déplacer en polluant moins</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Chaque trajet consomme de l'<b>énergie</b> et peut rejeter du <b>CO₂</b>, un gaz qui réchauffe le climat.</p>
-          <p>Comment se déplacer en dépensant <b>moins d'énergie</b> et en émettant <b>moins de CO₂</b> ? C'est l'enjeu de la mobilité décarbonée.</p>
-          <div class="chips"><span class="chip s">énergie</span><span class="chip s">CO₂</span><span class="chip s">mobilité</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="86" cy="150" r="20" fill="none" stroke="#2E6A8E" stroke-width="4"/><circle cx="166" cy="150" r="20" fill="none" stroke="#2E6A8E" stroke-width="4"/>
-            <path d="M70 150 L110 110 L150 110 L166 150" fill="none" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="110" y1="110" x2="126" y2="86" stroke="#2E6A8E" stroke-width="4"/><line x1="100" y1="86" x2="150" y2="86" stroke="#2E6A8E" stroke-width="4"/>
-            <text x="126" y="50" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#3D7E5F" text-anchor="middle">0 g CO₂</text>
-            <rect x="244" y="120" width="70" height="40" rx="6" fill="#FFFDF8" stroke="#C0492E" stroke-width="2"/>
-            <circle cx="262" cy="166" r="9" fill="none" stroke="#C0492E" stroke-width="3"/><circle cx="300" cy="166" r="9" fill="none" stroke="#C0492E" stroke-width="3"/>
-            <path d="M286 120 q6 -22 18 -10" fill="none" stroke="#C0492E" stroke-width="2"/><circle cx="308" cy="104" r="4" fill="#C0492E" opacity="0.5"/><circle cx="318" cy="94" r="5" fill="#C0492E" opacity="0.35"/>
-            <text x="280" y="52" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#C0492E" text-anchor="middle">CO₂</text>
-          </svg>
-          <figcaption>Même trajet, deux bilans très différents selon le véhicule.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Bien choisir son mode de déplacement, c'est réduire l'<b>énergie</b> dépensée et le <b>CO₂</b> émis.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Sources</span>
-      <h2>D'où vient l'énergie ?</h2>
-      <p class="lede">Un véhicule puise son énergie d'une <b>source</b>. Toutes ne se valent pas pour le climat.</p>
-      <table class="t">
-        <thead><tr><th>Source</th><th>Exemple</th><th>Type</th></tr></thead>
-        <tbody>
-          <tr><td>Carburant</td><td>essence, diesel</td><td><b>fossile</b> (émet du CO₂)</td></tr>
-          <tr><td>Électricité</td><td>batterie rechargée</td><td>dépend de sa <b>production</b></td></tr>
-          <tr><td>Musculaire</td><td>le cycliste pédale</td><td><b>renouvelable</b> (0 CO₂)</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> Brûler un carburant fossile rejette du CO₂. L'électricité est propre… si elle est produite proprement.</div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Expérimenter</span>
-      <h2>La chaîne d'énergie</h2>
-      <p class="lede">Dans un véhicule, l'énergie suit une <b>chaîne</b>: on la stocke, on la convertit, on la transmet, et elle produit le mouvement.</p>
-      <figure>
-        <canvas id="cvEnergyChain" width="640" height="250"></canvas>
-        <div class="cap" id="capEner"><span class="ph">—</span><span id="capEnerTxt">…</span></div>
-      </figure>
-      <p>À chaque maillon, une partie de l'énergie est <b>perdue</b> (chaleur, frottements) : c'est le problème du rendement.</p>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Comparer</span>
-      <h2>Comparer les véhicules</h2>
-      <p class="lede">Pour choisir, on compare plusieurs <b>critères</b>: l'énergie utilisée, le CO₂, l'autonomie, le nombre de personnes transportées.</p>
-      <table class="t">
-        <thead><tr><th>Véhicule</th><th>Énergie</th><th>CO₂ / km</th><th>Personnes</th></tr></thead>
-        <tbody>
-          <tr><td><b>Vélo</b></td><td>musculaire</td><td>0</td><td>1</td></tr>
-          <tr><td><b>Trottinette élec.</b></td><td>électrique</td><td>très faible</td><td>1</td></tr>
-          <tr><td><b>Voiture élec.</b></td><td>électrique</td><td>faible</td><td>5</td></tr>
-          <tr><td><b>Bus</b></td><td>diesel / élec.</td><td>faible / personne</td><td>50+</td></tr>
-          <tr><td><b>Voiture thermique</b></td><td>essence</td><td>élevé</td><td>5</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Le climat</span>
-      <h2>Le CO₂ par kilomètre</h2>
-      <p class="lede">À distance égale, les modes de transport n'émettent pas la même quantité de <b>CO₂</b>. L'écart est énorme.</p>
-      <figure>
-        <canvas id="cvCO2" width="640" height="250"></canvas>
-        <div class="cap" id="capCO2"><span class="ph">—</span><span id="capCO2Txt">…</span></div>
-      </figure>
-      <p>Ces valeurs sont des <b>ordres de grandeur</b> : le vélo est imbattable, la voiture thermique de loin la plus émettrice.</p>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · Rendement</span>
-      <h2>Toute l'énergie n'arrive pas aux roues</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Le <b>rendement</b>, c'est la part de l'énergie de départ qui sert vraiment à avancer. Le reste est perdu en <b>chaleur</b>.</p>
-          <p>Un moteur électrique est bien plus efficace qu'un moteur à essence.</p>
-          <div class="chips"><span class="chip">essence ≈ 25 %</span><span class="chip">électrique ≈ 75 %</span></div>
-        </div>
-        <div>
-          <div class="eqcard"><div class="eq">moteur thermique&nbsp;: 100 d'énergie &rarr; ~25 aux roues</div><div class="leg">Les 3/4 partent en <b>chaleur</b> : un mauvais rendement.</div></div>
-          <div class="eqcard"><div class="eq">moteur électrique&nbsp;: 100 d'énergie &rarr; ~75 aux roues</div><div class="leg">Beaucoup moins de pertes : un <b>bon rendement</b>.</div></div>
-        </div>
-      </div>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">De l'énergie de départ à l'énergie aux roues</div>
-        <canvas id="cvroues" width="900" height="260" style="width:100%;height:auto;display:block" aria-label="Chaîne d'énergie d'un véhicule avec pertes au moteur et à la transmission"></canvas>
-        <div class="cap"><b id="rophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="rocap">L'énergie part du réservoir.</span></div>
-      </figure>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Choisir</span>
-      <h2>Choisir selon l'usage</h2>
-      <p class="lede">Il n'y a pas <b>un</b> meilleur véhicule : le bon choix dépend de la <b>situation</b>.</p>
-      <table class="t">
-        <thead><tr><th>Trajet</th><th>Bon choix souvent</th></tr></thead>
-        <tbody>
-          <tr><td>Court, en ville (&lt; 5 km)</td><td><b>vélo</b>, trottinette, marche</td></tr>
-          <tr><td>Moyen, plusieurs personnes</td><td><b>bus</b>, voiture partagée</td></tr>
-          <tr><td>Long, entre villes</td><td><b>train</b></td></tr>
-        </tbody>
-      </table>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Le meilleur véhicule, c'est celui qui est <b>adapté au trajet</b> tout en émettant le moins de CO₂.</div></div>
-    </section>
-
-    <section id="s8">
-      <span class="kicker">08 · Synthèse</span>
-      <h2>L'essentiel</h2>
-      <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Rouler propre, c'est choisir une <b>source d'énergie</b> peu émettrice, un bon <b>rendement</b>, et un véhicule <b>adapté au trajet</b>.</div></div>
-      <table class="t">
-        <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead>
-        <tbody>
-          <tr><td><b>Énergie fossile</b></td><td>carburant qui émet du CO₂ en brûlant</td></tr>
-          <tr><td><b>CO₂</b></td><td>gaz qui réchauffe le climat</td></tr>
-          <tr><td><b>Chaîne d'énergie</b></td><td>stocker → convertir → transmettre → mouvoir</td></tr>
-          <tr><td><b>Rendement</b></td><td>part de l'énergie qui sert à avancer</td></tr>
-          <tr><td><b>Décarboner</b></td><td>réduire les émissions de CO₂</td></tr>
-        </tbody>
-      </table>
-      <a class="cta" href="hub_si_2de_mobilite.html">Passer aux activités →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_mobilite.html">← Séquence : rouler propre</a> <div class="brand"><div class="mark">C</div> <div><h1>Rouler propre</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Problématique</a> <a href="#s2" class="navlink"><span>02</span>D'où vient l'énergie ?</a> <a href="#s3" class="navlink"><span>03</span>La chaîne d'énergie</a> <a href="#s4" class="navlink"><span>04</span>Comparer les véhicules</a> <a href="#s5" class="navlink"><span>05</span>Le CO₂ par km</a> <a href="#s6" class="navlink"><span>06</span>Le rendement</a> <a href="#s7" class="navlink"><span>07</span>Choisir selon l'usage</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Rouler propre · problématique</span> <h2>Se déplacer en polluant moins</h2> <div class="twocol"><div><p class="lede">Chaque trajet consomme de l'<b>énergie</b> et peut rejeter du <b>CO₂</b>, un gaz qui réchauffe le climat.</p> <p>Comment se déplacer en dépensant <b>moins d'énergie</b> et en émettant <b>moins de CO₂</b> ? C'est l'enjeu de la mobilité décarbonée.</p> <div class="chips"><span class="chip s">énergie</span><span class="chip s">CO₂</span><span class="chip s">mobilité</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <circle cx="86" cy="150" r="20" fill="none" stroke="#2E6A8E" stroke-width="4"/><circle cx="166" cy="150" r="20" fill="none" stroke="#2E6A8E" stroke-width="4"/> <path d="M70 150 L110 110 L150 110 L166 150" fill="none" stroke="#2E6A8E" stroke-width="4"/><line x1="110" y1="110" x2="126" y2="86" stroke="#2E6A8E" stroke-width="4"/><line x1="100" y1="86" x2="150" y2="86" stroke="#2E6A8E" stroke-width="4"/> <text x="126" y="50" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#3D7E5F" text-anchor="middle">0 g CO₂</text> <rect x="244" y="120" width="70" height="40" rx="6" fill="#FFFDF8" stroke="#C0492E" stroke-width="2"/> <circle cx="262" cy="166" r="9" fill="none" stroke="#C0492E" stroke-width="3"/><circle cx="300" cy="166" r="9" fill="none" stroke="#C0492E" stroke-width="3"/> <path d="M286 120 q6 -22 18 -10" fill="none" stroke="#C0492E" stroke-width="2"/><circle cx="308" cy="104" r="4" fill="#C0492E" opacity="0.5"/><circle cx="318" cy="94" r="5" fill="#C0492E" opacity="0.35"/> <text x="280" y="52" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#C0492E" text-anchor="middle">CO₂</text> </svg> <figcaption>Même trajet, deux bilans très différents selon le véhicule.</figcaption> </figure></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Bien choisir son mode de déplacement, c'est réduire l'<b>énergie</b> dépensée et le <b>CO₂</b> émis.</div></div> </section> <section id="s2"> <span class="kicker">02 · Sources</span> <h2>D'où vient l'énergie ?</h2> <p class="lede">Un véhicule puise son énergie d'une <b>source</b>. Toutes ne se valent pas pour le climat.</p> <table class="t"> <thead><tr><th>Source</th><th>Exemple</th><th>Type</th></tr></thead> <tbody> <tr><td>Carburant</td><td>essence, diesel</td><td><b>fossile</b> (émet du CO₂)</td></tr> <tr><td>Électricité</td><td>batterie rechargée</td><td>dépend de sa <b>production</b></td></tr> <tr><td>Musculaire</td><td>le cycliste pédale</td><td><b>renouvelable</b> (0 CO₂)</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> Brûler un carburant fossile rejette du CO₂. L'électricité est propre… si elle est produite proprement.</div> </section> <section id="s3"> <span class="kicker">03 · Expérimenter</span> <h2>La chaîne d'énergie</h2> <p class="lede">Dans un véhicule, l'énergie suit une <b>chaîne</b>: on la stocke, on la convertit, on la transmet, et elle produit le mouvement.</p> <figure> <canvas id="cvEnergyChain" width="640" height="250"></canvas> <div class="cap" id="capEner"><span class="ph">—</span><span id="capEnerTxt">…</span></div> </figure> <p>À chaque maillon, une partie de l'énergie est <b>perdue</b> (chaleur, frottements) : c'est le problème du rendement.</p> </section> <section id="s4"> <span class="kicker">04 · Comparer</span> <h2>Comparer les véhicules</h2> <p class="lede">Pour choisir, on compare plusieurs <b>critères</b>: l'énergie utilisée, le CO₂, l'autonomie, le nombre de personnes transportées.</p> <table class="t"> <thead><tr><th>Véhicule</th><th>Énergie</th><th>CO₂ / km</th><th>Personnes</th></tr></thead> <tbody> <tr><td><b>Vélo</b></td><td>musculaire</td><td>0</td><td>1</td></tr> <tr><td><b>Trottinette élec.</b></td><td>électrique</td><td>très faible</td><td>1</td></tr> <tr><td><b>Voiture élec.</b></td><td>électrique</td><td>faible</td><td>5</td></tr> <tr><td><b>Bus</b></td><td>diesel / élec.</td><td>faible / personne</td><td>50+</td></tr> <tr><td><b>Voiture thermique</b></td><td>essence</td><td>élevé</td><td>5</td></tr> </tbody> </table> </section> <section id="s5"> <span class="kicker">05 · Le climat</span> <h2>Le CO₂ par kilomètre</h2> <p class="lede">À distance égale, les modes de transport n'émettent pas la même quantité de <b>CO₂</b>. L'écart est énorme.</p> <figure> <canvas id="cvCO2" width="640" height="250"></canvas> <div class="cap" id="capCO2"><span class="ph">—</span><span id="capCO2Txt">…</span></div> </figure> <p>Ces valeurs sont des <b>ordres de grandeur</b> : le vélo est imbattable, la voiture thermique de loin la plus émettrice.</p> </section> <section id="s6"> <span class="kicker">06 · Rendement</span> <h2>Toute l'énergie n'arrive pas aux roues</h2> <div class="twocol"><div><p class="lede">Le <b>rendement</b>, c'est la part de l'énergie de départ qui sert vraiment à avancer. Le reste est perdu en <b>chaleur</b>.</p> <p>Un moteur électrique est bien plus efficace qu'un moteur à essence.</p> <div class="chips"><span class="chip">essence ≈ 25 %</span><span class="chip">électrique ≈ 75 %</span></div></div> <div><div class="eqcard"><div class="eq">moteur thermique&nbsp;: 100 d'énergie &rarr; ~25 aux roues</div><div class="leg">Les 3/4 partent en <b>chaleur</b> : un mauvais rendement.</div></div> <div class="eqcard"><div class="eq">moteur électrique&nbsp;: 100 d'énergie &rarr; ~75 aux roues</div><div class="leg">Beaucoup moins de pertes : un <b>bon rendement</b>.</div></div></div></div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">De l'énergie de départ à l'énergie aux roues</div> <canvas id="cvroues" width="900" height="260" style="width:100%;height:auto;display:block" aria-label="Chaîne d'énergie d'un véhicule avec pertes au moteur et à la transmission"></canvas> <div class="cap"><b id="rophase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="rocap">L'énergie part du réservoir.</span></div> </figure> </section> <section id="s7"> <span class="kicker">07 · Choisir</span> <h2>Choisir selon l'usage</h2> <p class="lede">Il n'y a pas <b>un</b> meilleur véhicule : le bon choix dépend de la <b>situation</b>.</p> <table class="t"> <thead><tr><th>Trajet</th><th>Bon choix souvent</th></tr></thead> <tbody> <tr><td>Court, en ville (&lt; 5 km)</td><td><b>vélo</b>, trottinette, marche</td></tr> <tr><td>Moyen, plusieurs personnes</td><td><b>bus</b>, voiture partagée</td></tr> <tr><td>Long, entre villes</td><td><b>train</b></td></tr> </tbody> </table> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Le meilleur véhicule, c'est celui qui est <b>adapté au trajet</b> tout en émettant le moins de CO₂.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Rouler propre, c'est choisir une <b>source d'énergie</b> peu émettrice, un bon <b>rendement</b>, et un véhicule <b>adapté au trajet</b>.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Énergie fossile</b></td><td>carburant qui émet du CO₂ en brûlant</td></tr> <tr><td><b>CO₂</b></td><td>gaz qui réchauffe le climat</td></tr> <tr><td><b>Chaîne d'énergie</b></td><td>stocker → convertir → transmettre → mouvoir</td></tr> <tr><td><b>Rendement</b></td><td>part de l'énergie qui sert à avancer</td></tr> <tr><td><b>Décarboner</b></td><td>réduire les émissions de CO₂</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_mobilite.html">Passer aux activités →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : chaine d'energie =====
   (function(){
-    var cv=document.getElementById('cvEnergyChain'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capEner .ph').textContent=n;document.getElementById('capEnerTxt').textContent=t;}
-    var STAGES=[{t:'Stocker',s:'batterie / réservoir',c:'#2E6A8E'},{t:'Convertir',s:'le moteur',c:'#3D7E5F'},{t:'Transmettre',s:'la transmission',c:'#BD8A2A'},{t:'Mouvoir',s:'les roues',c:'#8A5A7A'}];
-    var CAPS=['L\u2019énergie est stockée : batterie ou réservoir de carburant.','Le moteur convertit cette énergie en mouvement.','La transmission porte le mouvement jusqu\u2019aux roues.','Les roues mettent le véhicule en mouvement.'];
-    var cx=[92,248,404,556], cy=132, w=132, hh=72;
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%9)/1.6)%4;
-      g.clearRect(0,0,W,H);
-      for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
-      for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
-        g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
-        g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
-      g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('La cha\u00eene d\u2019énergie',W/2,18);
-      setCap(String(active+1),CAPS[active]);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvEnergyChain'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capEner .ph').textContent=n;document.getElementById('capEnerTxt').textContent=t;}
+ var STAGES=[{t:'Stocker',s:'batterie / réservoir',c:'#2E6A8E'},{t:'Convertir',s:'le moteur',c:'#3D7E5F'},{t:'Transmettre',s:'la transmission',c:'#BD8A2A'},{t:'Mouvoir',s:'les roues',c:'#8A5A7A'}];
+ var CAPS=['L\u2019énergie est stockée : batterie ou réservoir de carburant.','Le moteur convertit cette énergie en mouvement.','La transmission porte le mouvement jusqu\u2019aux roues.','Les roues mettent le véhicule en mouvement.'];
+ var cx=[92,248,404,556], cy=132, w=132, hh=72;
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%9)/1.6)%4;
+ g.clearRect(0,0,W,H);
+ for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
+ for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
+ g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
+ g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
+ g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('La cha\u00eene d\u2019énergie',W/2,18);
+ setCap(String(active+1),CAPS[active]);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 
   // ===== Animation : CO2 par km =====
   (function(){
-    var cv=document.getElementById('cvCO2'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capCO2 .ph').textContent=n;document.getElementById('capCO2Txt').textContent=t;}
-    var items=[{n:'Vélo',v:0,c:'#3D7E5F'},{n:'Train',v:5,c:'#2E6A8E'},{n:'V. élec.',v:20,c:'#2E6A8E'},{n:'Bus',v:30,c:'#2E6A8E'},{n:'V. therm.',v:120,c:'#C0492E'}];
-    var maxV=130, baseY=196, topY=46, n=items.length;
-    var x0=70, x1=W-30, slot=(x1-x0)/n, bw=46;
-    function bx(i){return x0+slot*i+slot/2;}
-    function bh(v){return v/maxV*(baseY-topY);}
-    var ph=0;
-    function draw(){
-      var seg=ph%11, shown=Math.max(0,Math.min(n,Math.floor(seg/1.3)));
-      g.clearRect(0,0,W,H);
-      g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=1.5;g.beginPath();g.moveTo(x0-6,baseY);g.lineTo(x1,baseY);g.stroke();
-      g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('g CO\u2082 / km (ordre de grandeur)',x0-6,topY-16);
-      for(var i=0;i<n;i++){var it=items[i],x=bx(i);
-        if(i<shown){
-          if(it.v>0){g.fillStyle=it.c;rrect(g,x-bw/2,baseY-bh(it.v),bw,bh(it.v),5);g.fill();}
-          g.fillStyle=it.v>0?it.c:'#3D7E5F';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(it.v),x,it.v>0?baseY-bh(it.v)-6:baseY-8);
-          g.fillStyle='#2A2622';g.font='700 11px "Bricolage Grotesque",sans-serif';g.fillText(it.n,x,baseY+16);
-        }
-      }
-      if(shown>=n){
-        g.fillStyle='#2c6147';g.font='800 11px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('le plus propre',bx(0),baseY+32);
-        g.fillStyle='#a4321f';g.fillText('le plus émetteur',bx(n-1),baseY+32);
-      }
-      setCap(shown>=n?'✓':String(shown),shown>=n?'Le vélo émet 0, la voiture thermique de loin le plus.':'Comparaison des émissions\u2026 ('+shown+'/'+n+')');
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvCO2'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capCO2 .ph').textContent=n;document.getElementById('capCO2Txt').textContent=t;}
+ var items=[{n:'Vélo',v:0,c:'#3D7E5F'},{n:'Train',v:5,c:'#2E6A8E'},{n:'V. élec.',v:20,c:'#2E6A8E'},{n:'Bus',v:30,c:'#2E6A8E'},{n:'V. therm.',v:120,c:'#C0492E'}];
+ var maxV=130, baseY=196, topY=46, n=items.length;
+ var x0=70, x1=W-30, slot=(x1-x0)/n, bw=46;
+ function bx(i){return x0+slot*i+slot/2;}
+ function bh(v){return v/maxV*(baseY-topY);}
+ var ph=0;
+ function draw(){
+ var seg=ph%11, shown=Math.max(0,Math.min(n,Math.floor(seg/1.3)));
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=1.5;g.beginPath();g.moveTo(x0-6,baseY);g.lineTo(x1,baseY);g.stroke();
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('g CO\u2082 / km (ordre de grandeur)',x0-6,topY-16);
+ for(var i=0;i<n;i++){var it=items[i],x=bx(i);
+ if(i<shown){
+ if(it.v>0){g.fillStyle=it.c;rrect(g,x-bw/2,baseY-bh(it.v),bw,bh(it.v),5);g.fill();}
+ g.fillStyle=it.v>0?it.c:'#3D7E5F';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(it.v),x,it.v>0?baseY-bh(it.v)-6:baseY-8);
+ g.fillStyle='#2A2622';g.font='700 11px "Bricolage Grotesque",sans-serif';g.fillText(it.n,x,baseY+16);
+ }
+ }
+ if(shown>=n){
+ g.fillStyle='#2c6147';g.font='800 11px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('le plus propre',bx(0),baseY+32);
+ g.fillStyle='#a4321f';g.fillText('le plus émetteur',bx(n-1),baseY+32);
+ }
+ setCap(shown>=n?'✓':String(shown),shown>=n?'Le vélo émet 0, la voiture thermique de loin le plus.':'Comparaison des émissions\u2026 ('+shown+'/'+n+')');
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -340,34 +178,33 @@
   var cv=document.getElementById('cvroues'); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, midY=112, maxH=58;
   var caps=[
-    'L\u2019\u00e9nergie part du r\u00e9servoir et doit atteindre les roues.',
-    '\u00c0 chaque \u00e9tage, une partie est perdue : chaleur (moteur), frottements (transmission).',
-    'Seule ~25 % de l\u2019\u00e9nergie arrive aux roues : c\u2019est le rendement global.'
-  ];
+ 'L\u2019\u00e9nergie part du r\u00e9servoir et doit atteindre les roues.',
+ '\u00c0 chaque \u00e9tage, une partie est perdue : chaleur (moteur), frottements (transmission).',
+ 'Seule ~25 % de l\u2019\u00e9nergie arrive aux roues : c\u2019est le rendement global.'];
   function block(x1,x2,lab){g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.rect(x1,midY-34,x2-x1,68);g.fill();g.stroke();g.fillStyle='#2A2622';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(lab,(x1+x2)/2,midY+4);}
   function seg(x1,x2,frac,flow,phase){var hh=maxH*frac;g.fillStyle='rgba(61,126,95,.32)';g.fillRect(x1,midY-hh/2,x2-x1,hh);
-    if(phase>=1){g.fillStyle='#3D7E5F';for(var i=0;i<5;i++){var u=((flow+i/5)%1);g.globalAlpha=0.8;g.beginPath();g.arc(x1+u*(x2-x1),midY,Math.max(2,hh/6),0,7);g.fill();}g.globalAlpha=1;}}
+ if(phase>=1){g.fillStyle='#3D7E5F';for(var i=0;i<5;i++){var u=((flow+i/5)%1);g.globalAlpha=0.8;g.beginPath();g.arc(x1+u*(x2-x1),midY,Math.max(2,hh/6),0,7);g.fill();}g.globalAlpha=1;}}
   function loss(x,w,lab,phase){if(phase<1)return;g.fillStyle='rgba(192,73,46,.32)';g.fillRect(x-w/2,midY+34,w,60);g.fillStyle='#a44a26';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,x,midY+110);}
   var flow=0,T=0;
   function step(){
-    flow+=0.02; if(flow>1) flow-=1;
-    T+=0.03; if(T>10) T=0;
-    var phase=(T<2?0:(T<6?1:2));
-    g.clearRect(0,0,W,H);
-    // segments d'énergie
-    seg(140,250,1.0,flow,phase); seg(360,490,0.30,flow,phase); seg(600,700,0.25,flow,phase);
-    // pertes
-    loss(305,42,'chaleur \u221270%',phase); loss(545,12,'frott. \u22125%',phase);
-    // blocs
-    block(40,140,'r\u00e9servoir'); block(250,360,'moteur'); block(490,600,'transmission'); block(700,800,'roues');
-    // pourcentages
-    g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
-    g.fillStyle='#2c6147';g.fillText('100%',195,midY-40); g.fillText('30%',425,midY-30); g.fillText('25%',650,midY-28); g.fillText('25%',750,midY-44);
-    // rendement (phase 2)
-    if(phase>=2){g.fillStyle='#235877';g.font='800 20px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('rendement global \u2248 25 %',W/2,244);}
-    var cap=document.getElementById('rocap'), ph=document.getElementById('rophase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ flow+=0.02; if(flow>1) flow-=1;
+ T+=0.03; if(T>10) T=0;
+ var phase=(T<2?0:(T<6?1:2));
+ g.clearRect(0,0,W,H);
+ // segments d'énergie
+ seg(140,250,1.0,flow,phase); seg(360,490,0.30,flow,phase); seg(600,700,0.25,flow,phase);
+ // pertes
+ loss(305,42,'chaleur \u221270%',phase); loss(545,12,'frott. \u22125%',phase);
+ // blocs
+ block(40,140,'r\u00e9servoir'); block(250,360,'moteur'); block(490,600,'transmission'); block(700,800,'roues');
+ // pourcentages
+ g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillStyle='#2c6147';g.fillText('100%',195,midY-40); g.fillText('30%',425,midY-30); g.fillText('25%',650,midY-28); g.fillText('25%',750,midY-44);
+ // rendement (phase 2)
+ if(phase>=2){g.fillStyle='#235877';g.font='800 20px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('rendement global \u2248 25 %',W/2,244);}
+ var cap=document.getElementById('rocap'), ph=document.getElementById('rophase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();

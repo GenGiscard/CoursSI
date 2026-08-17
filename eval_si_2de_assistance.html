@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -116,154 +115,58 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABQCAYAAABGfRh7AAAMsUlEQVR42u2ce3Bc1X3HP+ecu+9dvSXLsnjUZkiMeZqQpIlbexIeNpi4NthYMhYppanBaZnMUEjTB4aGTmLayaMT6kBDMClYxA4QIGATD2SIDQ6JCzgkpjSm02IaLD9Wj13t695z+sfdXcl4Jd1d7drNzN6Z9Whmr3fv+Z7v7/f7fn/nJ4mOT19vOAWXAuJGcFvYsC4Eg0agTvIzGK2RsQhWNmdzqkDIGrBzBiyBMWBOAQjYOSwhxCkBQRRexX9OxUMIEAJJ/aqDAGBNzRhR03AY+6GGgWdM5SAYY9Ba1+zxHCMwjgFH1DArmnHJp0wQDOD3WSglpwKy4uqQMWAFDSJQI0KY/OIdjXGc8kBQSjI4nORfvnQzVy64GNvRKFn99KGBmDDEhKC9FhxwHKRlEd/5Ioe+8zBWQ0NJMCZkgjaG9uYmutpbT5puqFnia2gAbSrLCTnbxhiD42ikktVOVy5ba5gXjeMglMLYduWJUQhRfMkaVImaS6S8GJpKjNV1Qh2EOgh1EOog1EGowEBNqvi0RkrJK/v2s/6r9xMJBd1GhUf0R4zgs0HN6iAMmzJ2RAiwbbpv/wKB07pBa5iGop0WCAUNNpxM8dqbbxOORtCTaPQPKsSkgYMRQy4kSRnjXTUKicllMenMqWdC8UOkJBgOEQkFPLvOQnvNHzKIkECWyQRjqap1pKoCgsmHhtYGrb1ZToEr5402rpMqx6kK3BCoJ8Z6daiDUAehDsL/Q7F0HJrjeg9eE7wEhJhGA9MYt0pog1tiPqjmDAg9vW6zZ+VoDOlsFp/PV5ZOyBmDHZBU2lwTgYCrFOVEmsp9Q/h8kwJRFRCCAT9nzOokGg6VBcKwETToBNqkKavPZAxCKX77rfuRkXB+gaLEbQYhBbmBI8hweEJJPy0QCh3oT14wl/3bvlXsG3q6HAcsiyMPPcLw1sexGhsnbYuXUo3Jfb/yJJqEz0L4/ROyoSpMUFISCvjLj2ch8Fmq4nMXGQ55/65ah0OBemXdX+gET+dkp0rSuWoglH1mWUYlqeuEOgh1EH73FGPZiXGKjO0prUjpSV4YfZKqQ7lJTlhWUW5XetnJJDh6cm1uXMUog4Ha6oRsLkcilXaB8Li7RmuEUqQy2Yoqi3EcZvT14pvRkW+0itLeQUqSb/ySwR+/iAqHSqrGaYHgaHdu4eU39nPdF+8lGgmXJZuHDHxeZviTSJhBxynPQWhN48IF+GfN9HCvQ/xHOyASrh0TcrbDkcFhMjm7LBAGDaSiAhGWFY3rOMmkK7W1KckE42iEkuhUprJxnXLzgc+y8FlWWSBYBqTQ00qMQinXLk9w7iCUKh0qtaoOhZen+6Ems1B1nVAH4RSDIIRAypNshqSs2glUVUDI5nKkUxkspWrvDIXIZ/xUeU2YWoEghMAYw5zuLi6adzaHjsZxHI2lajOQV5hEs+NDhM6bh9XWWmzOnDIQXMkrOPuMLnY/+BW+cusNBIM+jg4NI6Ws3gBonvr20BAyFqPz1pv5vXv/Hl9Ls6fptJqHg6uUDaGAnztuuIbd393I2qWLSIymGBlNTS9EhEAohU6OYnI5WpYtZfY3N9J29RKkVFWrsVUTS+4RgGbOrE4e2vAF1ixZxIZNW3h533/QEA4R8Puwy4hhoRQ6k8HJZAjPP5+OvjVEz/nwmO+oYmKsoot0Z6J1XjBd9rGLWHTx+Wza9hz3Pvw4Bw8dpbkhihQCZxJVKaTEaI09NISvq4sZvdfScsWlrmPW2mVHlees5VQq0CmzmSmFQEmJozU+S/Hnq5fyykMbWXftFaQzWYaTo6VDJL84J5nEaE3rqhXM/ua9tF5xKcIwNpJT7u7rqU+g5GQABAK+4oLKbZooKTGA42hmdbRx31/dwo777mLBRedwZHCYbM52q0g+7k02i50YIXLJxZzxT/cw808/i68x5lpfQfkzSYWmjZTgs5jMoanQmedtKNWLkFLym3f/lzndM5nT3YkQAtvRCCk8nxW5n+OWUW0MZ87s4Ialn6J7RhtvvHWAgYFjfDKk+Eg6gT1rFl3rP0fnjWvxt7QU2+migsUbbVxzJSVDP/s5Rx7b5s43fZBFxiADfkTzwh4zEa2TqTRCCq6/chF/c9MqTu/sOK6PUO6ltUYIiRBwND7EXz+4jY5du7hjxWX4r1mOLxw6fgfLNXGFhAmk3z3IwMP9jOzajVAK4T+xs2S0RjVEJgaBPBswhmPDCbraW7itbzm3rLwSv8/C0bri6XfH0aj8rw4kE0ki0chY/FaS9AqLEwInleLwD37IsSeewYwkkLHohCdQRRBaFvVMGe6WUmRyOYaTo3z83A9x55/1sPgT890+n6NRsvyDlILtllIWs37ZSc8Yt6GSB3Twpy9z+HtbyLzz36hoBGFZk0prozWqMYpo+sPVxrIUjqOn1AJKSkZGU2itWXX5Au783GrOOq1rWiFijKlMTI1jTeqd/+LQ5n4Se15F+ixkMD9U6iGZy0gQ0f6pNeboUILmhigw9QiezH9xfDhBW1OUW3s/w629nyESDBb/b00d5TjW2CMjHP7+4ww+sx09mkZFI95a+fkwd4ZH8J/Whdrz/NMb4iNJ9u4/gNaaYMA/abuvQONoKEjWdnh2115+tOsXdLY2M3f2aQghcBydf84qgjEuYRohiO98gfc2fp3Ey68i/QFkIDD1SHFBho+m0LZN05JLmfkX6xAmnxGeeulV7v72FvbuP0BjNIzfN7XMLYRIIpUmZ9ssW/hRNqzr5dw5Z5yQAKe9+3kGJt96m0ObH2F07+vIQH7xHuS4UAqdzaJTKULnzaOjbzWxCy9w33McbcBNUKlMln/uf5qv/dtTDMQHaW6IIfLxPjm7BAJBfCRJQzTE+pVLuG3tChpjEXT+1+ErCpFxi8/GBzm8ZStD23dislmX+tor9TXOSAKro4PW1Stou2qxW0oLMrzAhPGJ7Z333ufuB/rp3/FTMNAQCXtSjZaS5GzN4EiCubO7+dubrqNn8cIiK6TXKjKO+lobjj23gyP927DfH0DFoiDk1LMJBRmeSIJP0XTFZbT3rMTf2nwCwEUQCt/taI2Vp/DOn73GnZv6eWXfW0TDIYIenKAAlFKMpjOkMlkWf2I+d93cy0fmnuUtRBxdLHmJfW9yaPOjpPa9iQqFEH6/d+pnMuhMhsj8C2nv6xlzoPmziOPuNyW2t+AElZTYjsOmbc+xcbN3J1hQnFK6IRIKBLhp+WV88Y+vpaO5Mb/RulhpPrgzmYHDDDzyGMM7fwLaoCJhTyWv4ECdRAL/rJm09q6k5fLjHWgpLVIShLFNGQuR9waOcM93trL5mRewbU1j1FuIKCVxHE18OMns7hl86caV3LjsUreKaO3OMuZjV9s2R556lmNbn8A+egwVjboP7YX6QuAkk4hggKarFtNx3TVYDTFPMnxSEAqHJG7f0P2Q3a//mr/b9Cgv/vyXREJBQgG/p2aJpRSpTIZkKsOiS87j7nW9LLjwnOL7I794jUObHyG9/21UJIzw+aamvgAhFTqdRudyRD92CR19PYTPmn2Cl5j0Y4xHj1xwgq5FNnz3yZ38w4NbOXDwfZobosUd91JShxJJLCm5Yfnl3L7kD/Bt30H8hZeQQiILJ8dTUb/QdE0mCZx5Ou3Xr6Z54YITBJUnt2vKbBSMd4KH40N89aFt3P/E86TTORpjYYx2wZqq1yC05nAixe1Nis/7bIZCEZQX6ud3VicSyGiE5mVX0XbtH2GF80OdhinPHqcNQiknuHf/b7hz06M8t/vfCQX8hIMBHO1MupkKGBaS20KaW8KSuKMnP5rPlzydSmMcm9iC36ejr5fg6d3Tc6DTAaEYItoUwdiy/SW+/K/9/PqdgzTFoljWxCHi/p0luD1sWB8SxM3EE85CKUwuh5McJXD2HNr7emj6+Ecron7VQRgfIuR7C0OJJP/4vSe57/vPMpRI0hyLYkoYM08g5I2OTiSQTY20XLOMtuVXo/z+qiy+qiCUCpFfHfgfNnx7C0/+ZA8+SxENhY4rqZOCUKD+6CgGQWzRAjrXrsY/s3Pa1K85CGMdalMsqU++uIe7HniM1986QGM0gt9nYedHc0qBcJzRmfdh2vvW0DD/gposvmYgjIWIoWDMRtMZvvHoU3xjy9Mcjg+7JRU46ugxEIREGeManfZWWletoPXqJUilqkr9kwpCKdV54N3fctf9rjGzpMAOhfjLfHU4mkiilKLp8k/TvmYV/rbWmu7+SQWh2ArUY/ni+T2vcc8D/by07z+5o9nHeitH+vxzmbm2h+i8uRMand9pEEoaM9thw8NPYG3fwR19y/EvvdJNjE5+JvEkTsD/H/USMayikj2kAAAAAElFTkSuQmCC"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="wrap">
-  <div class="topbar">
-    <div class="mark">SI</div>
-    <div><h1>Évaluation — Un coup de main</h1><p>Option Sciences de l'ingénieur · Seconde</p></div>
-    <a class="back" href="hub_si_2de_assistance.html">← Séquence</a>
-  </div>
-
-  <section id="screen-home">
-    <div class="card">
-      <h2>Avant de commencer</h2>
-      <p class="lede">Cette évaluation comporte <b>deux parties</b>&nbsp;: <b>3 exercices</b> appuyés sur des schémas animés (avec <b>calculatrice</b>), puis un <b>questionnaire (QCM)</b>. Note finale sur 20.</p>
-      <label for="inNom">Nom et prénom</label>
-      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
-      <label for="inClasse">Classe</label>
-      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
-      <label for="inCode">Code d'accès</label>
-      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
-      <div class="err" id="homeErr"></div>
-      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
-    </div>
-    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
-  </section>
-
-  <section id="screen-exam" hidden>
-    <div class="pbar"><span class="lab" id="progLab">0 / 17 questions</span><div class="track"><i id="progBar"></i></div></div>
-    <div class="exam-grid">
-      <div id="exoCol"></div>
-      <div class="calc-side">
-        <div class="calc">
-          <div class="ct">🧮 Calculatrice</div>
-          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
-          <div class="keys" id="calcKeys">
-            <button class="key clr" data-k="C">C</button>
-            <button class="key clr" data-k="back">⌫</button>
-            <button class="key op" data-k="(">(</button>
-            <button class="key op" data-k=")">)</button>
-            <button class="key" data-k="7">7</button>
-            <button class="key" data-k="8">8</button>
-            <button class="key" data-k="9">9</button>
-            <button class="key op" data-k="/">÷</button>
-            <button class="key" data-k="4">4</button>
-            <button class="key" data-k="5">5</button>
-            <button class="key" data-k="6">6</button>
-            <button class="key op" data-k="*">×</button>
-            <button class="key" data-k="1">1</button>
-            <button class="key" data-k="2">2</button>
-            <button class="key" data-k="3">3</button>
-            <button class="key op" data-k="-">−</button>
-            <button class="key" data-k="0">0</button>
-            <button class="key" data-k=".">.</button>
-            <button class="key fn" data-k="pi">π</button>
-            <button class="key op" data-k="+">+</button>
-            <button class="key fn" data-k="sqrt">√</button>
-            <button class="key eq" data-k="=">=</button>
-          </div>
-          <div class="chint">+ − × ÷ pour tes calculs</div>
-        </div>
-        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
-        <div class="err" id="examErr" style="text-align:center"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="screen-result" hidden>
-    <div class="card">
-      <h2>Résultat</h2>
-      <div class="scorebig" id="scoreBig">0 / 20</div>
-      <div class="scoresub" id="scoreSub"></div>
-      <div><span class="rankpill" id="rankPill"></span></div>
-      <div class="recap" id="recap"></div>
-      <div class="sync" id="syncMsg"></div>
-    </div>
-  </section>
-
-  <section id="screen-prof" hidden>
-    <div class="card">
-      <h2>Espace enseignant</h2>
-      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
-      <div id="profGate">
-        <label for="inPass">Mot de passe</label>
-        <input type="password" id="inPass" autocomplete="off">
-        <div class="err" id="profErr"></div>
-        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
-          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
-      </div>
-      <div id="profData" hidden>
-        <div id="profTable"></div>
-        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
-          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<script>
-  var EVAL_CODE='ASSISTANCE2026';
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="wrap"><div class="topbar"><div class="mark">SI</div> <div><h1>Évaluation — Un coup de main</h1><p>Option Sciences de l'ingénieur · Seconde</p></div> <a class="back" href="hub_si_2de_assistance.html">← Séquence</a></div> <section id="screen-home"> <div class="card"><h2>Avant de commencer</h2> <p class="lede">Cette évaluation comporte <b>deux parties</b>&nbsp;: <b>3 exercices</b> appuyés sur des schémas animés (avec <b>calculatrice</b>), puis un <b>questionnaire (QCM)</b>. Note finale sur 20.</p> <label for="inNom">Nom et prénom</label> <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off"> <label for="inClasse">Classe</label> <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off"> <label for="inCode">Code d'accès</label> <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off"> <div class="err" id="homeErr"></div> <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div></div> <div class="footlink"><a id="profLink">Espace enseignant</a></div> </section> <section id="screen-exam" hidden> <div class="pbar"><span class="lab" id="progLab">0 / 17 questions</span><div class="track"><i id="progBar"></i></div></div> <div class="exam-grid"><div id="exoCol"></div> <div class="calc-side"><div class="calc"><div class="ct">Calculatrice</div> <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div> <div class="keys" id="calcKeys"><button class="key clr" data-k="C">C</button> <button class="key clr" data-k="back">⌫</button> <button class="key op" data-k="(">(</button> <button class="key op" data-k=")">)</button> <button class="key" data-k="7">7</button> <button class="key" data-k="8">8</button> <button class="key" data-k="9">9</button> <button class="key op" data-k="/">÷</button> <button class="key" data-k="4">4</button> <button class="key" data-k="5">5</button> <button class="key" data-k="6">6</button> <button class="key op" data-k="*">×</button> <button class="key" data-k="1">1</button> <button class="key" data-k="2">2</button> <button class="key" data-k="3">3</button> <button class="key op" data-k="-">−</button> <button class="key" data-k="0">0</button> <button class="key" data-k=".">.</button> <button class="key fn" data-k="pi">π</button> <button class="key op" data-k="+">+</button> <button class="key fn" data-k="sqrt">√</button> <button class="key eq" data-k="=">=</button></div> <div class="chint">+ − × ÷ pour tes calculs</div></div> <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div> <div class="err" id="examErr" style="text-align:center"></div></div></div> </section> <section id="screen-result" hidden> <div class="card"><h2>Résultat</h2> <div class="scorebig" id="scoreBig">0 / 20</div> <div class="scoresub" id="scoreSub"></div> <div><span class="rankpill" id="rankPill"></span></div> <div class="recap" id="recap"></div> <div class="sync" id="syncMsg"></div></div> </section> <section id="screen-prof" hidden> <div class="card"><h2>Espace enseignant</h2> <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p> <div id="profGate"><label for="inPass">Mot de passe</label> <input type="password" id="inPass" autocomplete="off"> <div class="err" id="profErr"></div> <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button> <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div></div> <div id="profData" hidden><div id="profTable"></div> <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button> <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div></div></div> </section></div> <script> var EVAL_CODE='ASSISTANCE2026';
   var PROF_PASS='Agostini2025';
   var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
   var FB_NODE='resultats_si_2de_assistance';
 
   var EXOS=[
-    { anim:'cycle', tag:'Exercice 1 \u00b7 8 pts', title:'Le cycle d\u2019une porte automatique',
-      ctx:'Une porte automatique répète un cycle : ouverture (2 s), attente (6 s), puis fermeture (2 s). Observe la frise du cycle qui se déroule.',
-      data:[['Ouverture','2 s'],['Attente','6 s'],['Fermeture','2 s']],
-      parts:[
-        {q:'Dur\u00e9e totale d\u2019un cycle ?', a:10, tol:0.1, pts:3, unit:'s', sol:'2 + 6 + 2 = 10 s'},
-        {q:'Nombre de cycles complets en 60 s ?', a:6, tol:0.1, pts:3, unit:'', sol:'60 / 10 = 6 cycles'},
-        {q:'Combien d\u2019étapes compte la boucle de commande (ordre, traiter, agir, vérifier) ?', a:4, tol:0.1, pts:2, unit:'', sol:'4 étapes'}
-      ] },
-    { anim:'energie', tag:'Exercice 2 \u00b7 8 pts', title:'Des économies domotiques',
-      ctx:'Une maison remplace 5 ampoules de 60 W par des LED de 10 W. Compare la puissance avant et après.',
-      data:[['Nombre d\u2019ampoules','5'],['Ancienne (chacune)','60 W'],['LED (chacune)','10 W']],
-      parts:[
-        {q:'Puissance \u00e9conomis\u00e9e par ampoule ?', a:50, tol:0.1, pts:2, unit:'W', sol:'60 \u2212 10 = 50 W'},
-        {q:'Puissance totale AVANT (les 5) ?', a:300, tol:1, pts:3, unit:'W', sol:'60 \u00d7 5 = 300 W'},
-        {q:'\u00c9conomie totale pour les 5 ampoules ?', a:250, tol:1, pts:3, unit:'W', sol:'50 \u00d7 5 = 250 W'}
-      ] },
-    { anim:'rampe', tag:'Exercice 3 \u00b7 8 pts', title:'Rendre l\u2019entrée accessible',
-      ctx:'Pour rendre une entrée accessible en fauteuil, on remplace 3 marches de 15 cm par une rampe de 900 cm de long.',
-      data:[['Marches','3 \u00d7 15 cm'],['Longueur de rampe','900 cm'],['Pente maxi conseillée','6 %']],
-      parts:[
-        {q:'Hauteur totale \u00e0 franchir ?', a:45, tol:0.1, pts:3, unit:'cm', sol:'3 \u00d7 15 = 45 cm'},
-        {q:'Pente de la rampe ? (%)', a:5, tol:0.2, pts:3, unit:'%', sol:'45 / 900 \u00d7 100 = 5 %'},
-        {q:'Cette pente (5 %) respecte-t-elle la limite de 6 % ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:2, unit:'', sol:'5 \u2264 6 \u2192 oui \u2192 1'}
-      ] }
+ { anim:'cycle', tag:'Exercice 1 \u00b7 8 pts', title:'Le cycle d\u2019une porte automatique',
+ ctx:'Une porte automatique répète un cycle : ouverture (2 s), attente (6 s), puis fermeture (2 s). Observe la frise du cycle qui se déroule.',
+ data:[['Ouverture','2 s'],['Attente','6 s'],['Fermeture','2 s']],
+ parts:[
+ {q:'Dur\u00e9e totale d\u2019un cycle ?', a:10, tol:0.1, pts:3, unit:'s', sol:'2 + 6 + 2 = 10 s'},
+ {q:'Nombre de cycles complets en 60 s ?', a:6, tol:0.1, pts:3, unit:'', sol:'60 / 10 = 6 cycles'},
+ {q:'Combien d\u2019étapes compte la boucle de commande (ordre, traiter, agir, vérifier) ?', a:4, tol:0.1, pts:2, unit:'', sol:'4 étapes'}
+ ] },
+ { anim:'energie', tag:'Exercice 2 \u00b7 8 pts', title:'Des économies domotiques',
+ ctx:'Une maison remplace 5 ampoules de 60 W par des LED de 10 W. Compare la puissance avant et après.',
+ data:[['Nombre d\u2019ampoules','5'],['Ancienne (chacune)','60 W'],['LED (chacune)','10 W']],
+ parts:[
+ {q:'Puissance \u00e9conomis\u00e9e par ampoule ?', a:50, tol:0.1, pts:2, unit:'W', sol:'60 \u2212 10 = 50 W'},
+ {q:'Puissance totale AVANT (les 5) ?', a:300, tol:1, pts:3, unit:'W', sol:'60 \u00d7 5 = 300 W'},
+ {q:'\u00c9conomie totale pour les 5 ampoules ?', a:250, tol:1, pts:3, unit:'W', sol:'50 \u00d7 5 = 250 W'}
+ ] },
+ { anim:'rampe', tag:'Exercice 3 \u00b7 8 pts', title:'Rendre l\u2019entrée accessible',
+ ctx:'Pour rendre une entrée accessible en fauteuil, on remplace 3 marches de 15 cm par une rampe de 900 cm de long.',
+ data:[['Marches','3 \u00d7 15 cm'],['Longueur de rampe','900 cm'],['Pente maxi conseillée','6 %']],
+ parts:[
+ {q:'Hauteur totale \u00e0 franchir ?', a:45, tol:0.1, pts:3, unit:'cm', sol:'3 \u00d7 15 = 45 cm'},
+ {q:'Pente de la rampe ? (%)', a:5, tol:0.2, pts:3, unit:'%', sol:'45 / 900 \u00d7 100 = 5 %'},
+ {q:'Cette pente (5 %) respecte-t-elle la limite de 6 % ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:2, unit:'', sol:'5 \u2264 6 \u2192 oui \u2192 1'}
+ ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
   var QB=[
-    {q:'Un système automatisé suit le principe\u2026', opts:['action \u2192 ordre \u2192 traitement','ordre \u2192 traitement \u2192 action','traitement \u2192 action \u2192 ordre'], correct:1, pts:2},
-    {q:'Un capteur sert à\u2026', opts:['exécuter l\u2019action','détecter l\u2019ordre ou l\u2019événement','décorer le système'], correct:1, pts:2},
-    {q:'Un actionneur est\u2026', opts:['l\u2019élément qui exécute l\u2019action (moteur, lumière\u2026)','le bouton d\u2019allumage','la notice d\u2019emploi'], correct:0, pts:2},
-    {q:'La boucle de commande\u2026', opts:['ne s\u2019exécute qu\u2019une seule fois','se répète en continu','n\u2019existe pas'], correct:1, pts:2},
-    {q:'L\u2019accessibilité, c\u2019est\u2026', opts:['rendre un lieu utilisable par tous','réserver un lieu à quelques-uns','cacher un lieu'], correct:0, pts:2},
-    {q:'Un thermostat programmable permet surtout\u2026', opts:['d\u2019augmenter la facture','d\u2019économiser l\u2019énergie automatiquement','d\u2019éteindre Internet'], correct:1, pts:2},
-    {q:'Un bon système d\u2019assistance\u2026', opts:['reste totalement silencieux et invisible','informe l\u2019utilisateur (voyant, bip\u2026)','fonctionne au hasard'], correct:1, pts:2},
-    {q:'La domotique regroupe\u2026', opts:['les automatismes de la maison','les outils de jardinage','les meubles anciens'], correct:0, pts:2}
+ {q:'Un système automatisé suit le principe\u2026', opts:['action \u2192 ordre \u2192 traitement','ordre \u2192 traitement \u2192 action','traitement \u2192 action \u2192 ordre'], correct:1, pts:2},
+ {q:'Un capteur sert à\u2026', opts:['exécuter l\u2019action','détecter l\u2019ordre ou l\u2019événement','décorer le système'], correct:1, pts:2},
+ {q:'Un actionneur est\u2026', opts:['l\u2019élément qui exécute l\u2019action (moteur, lumière\u2026)','le bouton d\u2019allumage','la notice d\u2019emploi'], correct:0, pts:2},
+ {q:'La boucle de commande\u2026', opts:['ne s\u2019exécute qu\u2019une seule fois','se répète en continu','n\u2019existe pas'], correct:1, pts:2},
+ {q:'L\u2019accessibilité, c\u2019est\u2026', opts:['rendre un lieu utilisable par tous','réserver un lieu à quelques-uns','cacher un lieu'], correct:0, pts:2},
+ {q:'Un thermostat programmable permet surtout\u2026', opts:['d\u2019augmenter la facture','d\u2019économiser l\u2019énergie automatiquement','d\u2019éteindre Internet'], correct:1, pts:2},
+ {q:'Un bon système d\u2019assistance\u2026', opts:['reste totalement silencieux et invisible','informe l\u2019utilisateur (voyant, bip\u2026)','fonctionne au hasard'], correct:1, pts:2},
+ {q:'La domotique regroupe\u2026', opts:['les automatismes de la maison','les outils de jardinage','les meubles anciens'], correct:0, pts:2}
   ];
   var qbSel={};
   var MAXB=0; QB.forEach(function(q){ MAXB+=q.pts; }); MAXPTS+=MAXB; NQ+=QB.length;
   function buildQB(){
-    var h='<div class="exo qbexo"><div class="etag">Partie B \u00b7 QCM \u00b7 '+MAXB+' pts</div><h3>Questionnaire</h3><p class="ctx">Choisis la bonne r\u00e9ponse pour chaque question (sans calculatrice).</p>';
-    QB.forEach(function(q,qi){
-      h+='<div class="qb"><div class="pq"><span class="pn">'+(qi+1)+'.</span><span>'+q.q+'</span><span class="pts">'+q.pts+' pts</span></div><div class="qopts">'+
-        q.opts.map(function(o,oi){return '<button type="button" class="qopt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>';}).join('')+'</div></div>';
-    });
-    return h+'</div>';
+ var h='<div class="exo qbexo"><div class="etag">Partie B \u00b7 QCM \u00b7 '+MAXB+' pts</div><h3>Questionnaire</h3><p class="ctx">Choisis la bonne r\u00e9ponse pour chaque question (sans calculatrice).</p>';
+ QB.forEach(function(q,qi){
+ h+='<div class="qb"><div class="pq"><span class="pn">'+(qi+1)+'.</span><span>'+q.q+'</span><span class="pts">'+q.pts+' pts</span></div><div class="qopts">'+
+ q.opts.map(function(o,oi){return '<button type="button" class="qopt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>';}).join('')+'</div></div>';
+ });
+ return h+'</div>';
   }
 
   var student={nom:'',classe:''};
@@ -271,130 +174,130 @@
   function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
 
   document.getElementById('startBtn').addEventListener('click',function(){
-    var nom=document.getElementById('inNom').value.trim();
-    var cls=document.getElementById('inClasse').value.trim();
-    var code=document.getElementById('inCode').value.trim();
-    var err=document.getElementById('homeErr');
-    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
-    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
-    err.textContent=''; student.nom=nom; student.classe=cls;
-    buildExam(); show('screen-exam'); startAnim();
+ var nom=document.getElementById('inNom').value.trim();
+ var cls=document.getElementById('inClasse').value.trim();
+ var code=document.getElementById('inCode').value.trim();
+ var err=document.getElementById('homeErr');
+ if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+ if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+ err.textContent=''; student.nom=nom; student.classe=cls;
+ buildExam(); show('screen-exam'); startAnim();
   });
   document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
 
   function buildExam(){
-    var col=document.getElementById('exoCol'); var html='';
-    EXOS.forEach(function(ex,ei){
-      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
-      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
-      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
-      ex.parts.forEach(function(p,pi){
-        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
-          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
-      });
-      html+='</div>';
-    });
-    html+=buildQB();
-    col.innerHTML=html;
-    col.addEventListener('input',updateProgress);
-    col.addEventListener('click',function(ev){ var b=ev.target.closest('.qopt'); if(!b)return; var qi=b.getAttribute('data-q'), oi=parseInt(b.getAttribute('data-o'),10); qbSel[qi]=oi; var box=b.parentNode; Array.prototype.forEach.call(box.querySelectorAll('.qopt'),function(x){x.classList.remove('sel');}); b.classList.add('sel'); updateProgress(); });
-    updateProgress();
+ var col=document.getElementById('exoCol'); var html='';
+ EXOS.forEach(function(ex,ei){
+ html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+ html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+ html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+ ex.parts.forEach(function(p,pi){
+ html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+ '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
+ });
+ html+='</div>';
+ });
+ html+=buildQB();
+ col.innerHTML=html;
+ col.addEventListener('input',updateProgress);
+ col.addEventListener('click',function(ev){ var b=ev.target.closest('.qopt'); if(!b)return; var qi=b.getAttribute('data-q'), oi=parseInt(b.getAttribute('data-o'),10); qbSel[qi]=oi; var box=b.parentNode; Array.prototype.forEach.call(box.querySelectorAll('.qopt'),function(x){x.classList.remove('sel');}); b.classList.add('sel'); updateProgress(); });
+ updateProgress();
   }
   function readAll(){
-    var vals={};
-    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
-    return vals;
+ var vals={};
+ document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
+ return vals;
   }
   function updateProgress(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
-    n+=Object.keys(qbSel).length;
-    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
-    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+ n+=Object.keys(qbSel).length;
+ document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+ document.getElementById('progBar').style.width=(n/NQ*100)+'%';
   }
 
   var warned=false;
   document.getElementById('submitBtn').addEventListener('click',function(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
-    n+=Object.keys(qbSel).length;
-    var err=document.getElementById('examErr');
-    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
-    err.textContent=''; grade(vals);
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+ n+=Object.keys(qbSel).length;
+ var err=document.getElementById('examErr');
+ if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+ err.textContent=''; grade(vals);
   });
 
   function grade(vals){
-    var pts=0, recapHtml='';
-    EXOS.forEach(function(ex,ei){
-      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
-      ex.parts.forEach(function(p,pi){
-        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
-        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
-        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
-        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
-      });
-      recapHtml+='</div>';
-    });
-      recapHtml+='<div class="rexo"><div class="rh">Partie B · QCM</div>';
-      QB.forEach(function(q,qi){
-        var sel=qbSel[qi]; var good=(sel===q.correct); if(good)pts+=q.pts;
-        var shown=(sel==null)?'\u2014 (vide)':q.opts[sel];
-        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(qi+1)+'. '+q.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 Bonne r\u00e9ponse : '+q.opts[q.correct])+'</div></div></div>';
-      });
-      recapHtml+='</div>';
-    var pct=Math.round(pts/MAXPTS*100);
-    var note=Math.round(pts/MAXPTS*20*10)/10;
-    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
-    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
-    document.getElementById('rankPill').textContent=rank;
-    document.getElementById('recap').innerHTML=recapHtml;
-    show('screen-result'); animateScore(note); sendResult(pts,pct,note);
+ var pts=0, recapHtml='';
+ EXOS.forEach(function(ex,ei){
+ recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+ ex.parts.forEach(function(p,pi){
+ var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+ var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+ var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+ recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+ });
+ recapHtml+='</div>';
+ });
+ recapHtml+='<div class="rexo"><div class="rh">Partie B · QCM</div>';
+ QB.forEach(function(q,qi){
+ var sel=qbSel[qi]; var good=(sel===q.correct); if(good)pts+=q.pts;
+ var shown=(sel==null)?'\u2014 (vide)':q.opts[sel];
+ recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(qi+1)+'. '+q.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 Bonne r\u00e9ponse : '+q.opts[q.correct])+'</div></div></div>';
+ });
+ recapHtml+='</div>';
+ var pct=Math.round(pts/MAXPTS*100);
+ var note=Math.round(pts/MAXPTS*20*10)/10;
+ var rank = pct>=90?' Expert\u00b7e':pct>=70?' Ma\u00eetrise':pct>=50?' En progr\u00e8s':' \u00c0 retravailler';
+ document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+ document.getElementById('rankPill').textContent=rank;
+ document.getElementById('recap').innerHTML=recapHtml;
+ show('screen-result'); animateScore(note); sendResult(pts,pct,note);
   }
   function animateScore(note){
-    var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
-    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
+ var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
+ var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
   }
   function sendResult(pts,pct,note){
-    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
-    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
-    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
-      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+ var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+ var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+ fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+ .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+ .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+ .catch(function(){ msg.textContent=' Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
   }
 
   // ===== Calculatrice =====
   (function(){
-    var expr='', justEval=false;
-    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
-    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
-    function evaluate(){
-      try{
-        var s=expr, i=0;
-        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
-        function factor(){
-          if(s[i]==='-'){ i++; return -factor(); }
-          if(s[i]==='+'){ i++; return factor(); }
-          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
-          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
-          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
-          return number();
-        }
-        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
-        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
-        var res=expr2();
-        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
-        var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
-      }catch(e){ resEl.textContent='Erreur'; return null; }
-    }
-    function press(k){
-      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
-      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
-      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
-      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
-      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
-      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
-      expr+=k; disp();
-    }
-    document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
+ var expr='', justEval=false;
+ var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+ function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+ function evaluate(){
+ try{
+ var s=expr, i=0;
+ function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+ function factor(){
+ if(s[i]==='-'){ i++; return -factor(); }
+ if(s[i]==='+'){ i++; return factor(); }
+ if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+ if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+ if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+ return number();
+ }
+ function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+ function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+ var res=expr2();
+ if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+ var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
+ }catch(e){ resEl.textContent='Erreur'; return null; }
+ }
+ function press(k){
+ if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+ if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+ if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+ if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+ if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+ if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+ expr+=k; disp();
+ }
+ document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
   })();
 
   // ===== Animations =====
@@ -405,66 +308,66 @@
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   function drawCycle(){
-    var o=ctxOf('cv_cycle'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var ph=[{n:'Ouverture',d:2,c:'#3D7E5F'},{n:'Attente',d:6,c:'#2E6A8E'},{n:'Fermeture',d:2,c:'#B85C2E'}];
-    var total=10, x0=56,x1=W-34, y=84, barH=46;
-    var frac=(phase%9)/9, cursorT=frac*total, acc=0, activeI=0;
-    for(var i=0;i<ph.length;i++){ if(cursorT>=acc && cursorT<acc+ph[i].d)activeI=i; acc+=ph[i].d; }
-    acc=0;
-    for(var j=0;j<ph.length;j++){
-      var w=ph[j].d/total*(x1-x0), x=x0+acc/total*(x1-x0), on=(j===activeI);
-      g.fillStyle=on?ph[j].c:'#FFFDF8';g.strokeStyle=ph[j].c;g.lineWidth=on?3:2;rrect(g,x,y,w,barH,7);g.fill();g.stroke();
-      g.fillStyle=on?'#fff':ph[j].c;g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(ph[j].n,x+w/2,y+barH/2-2);
-      g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(ph[j].d+' s',x+w/2,y+barH/2+15);
-      acc+=ph[j].d;
-    }
-    var cx=x0+frac*(x1-x0);
-    g.strokeStyle='#C0492E';g.lineWidth=2;g.beginPath();g.moveTo(cx,y-10);g.lineTo(cx,y+barH+10);g.stroke();
-    g.fillStyle='#C0492E';g.beginPath();g.moveTo(cx,y-10);g.lineTo(cx-4,y-16);g.lineTo(cx+4,y-16);g.closePath();g.fill();
-    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('la frise se déroule dans le temps',x0,y-22);
-    g.fillStyle='#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('1 cycle = 10 s',W/2,180);
-    g.textAlign='left';
+ var o=ctxOf('cv_cycle'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var ph=[{n:'Ouverture',d:2,c:'#3D7E5F'},{n:'Attente',d:6,c:'#2E6A8E'},{n:'Fermeture',d:2,c:'#B85C2E'}];
+ var total=10, x0=56,x1=W-34, y=84, barH=46;
+ var frac=(phase%9)/9, cursorT=frac*total, acc=0, activeI=0;
+ for(var i=0;i<ph.length;i++){ if(cursorT>=acc && cursorT<acc+ph[i].d)activeI=i; acc+=ph[i].d; }
+ acc=0;
+ for(var j=0;j<ph.length;j++){
+ var w=ph[j].d/total*(x1-x0), x=x0+acc/total*(x1-x0), on=(j===activeI);
+ g.fillStyle=on?ph[j].c:'#FFFDF8';g.strokeStyle=ph[j].c;g.lineWidth=on?3:2;rrect(g,x,y,w,barH,7);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':ph[j].c;g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(ph[j].n,x+w/2,y+barH/2-2);
+ g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(ph[j].d+' s',x+w/2,y+barH/2+15);
+ acc+=ph[j].d;
+ }
+ var cx=x0+frac*(x1-x0);
+ g.strokeStyle='#C0492E';g.lineWidth=2;g.beginPath();g.moveTo(cx,y-10);g.lineTo(cx,y+barH+10);g.stroke();
+ g.fillStyle='#C0492E';g.beginPath();g.moveTo(cx,y-10);g.lineTo(cx-4,y-16);g.lineTo(cx+4,y-16);g.closePath();g.fill();
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('la frise se déroule dans le temps',x0,y-22);
+ g.fillStyle='#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('1 cycle = 10 s',W/2,180);
+ g.textAlign='left';
   }
 
   function drawEnergie(){
-    var o=ctxOf('cv_energie'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var maxV=320, x0=130,x1=W-40;
-    function bw(v){return v/maxV*(x1-x0);}
-    var seg=phase%9, shown=Math.max(0,Math.min(2,Math.floor(seg/2.5)+1));
-    var rows=[{n:'Avant (5 \u00d7 60 W)',v:300,c:'#C0492E'},{n:'Après (5 \u00d7 10 W)',v:50,c:'#3D7E5F'}];
-    for(var i=0;i<2;i++){var y=54+i*54;
-      g.fillStyle='#5C544B';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='right';g.fillText(rows[i].n,x0-10,y+22);
-      g.fillStyle='rgba(42,38,34,.06)';rrect(g,x0,y,x1-x0,34,7);g.fill();
-      if(i<shown){g.fillStyle=rows[i].c;rrect(g,x0,y,Math.max(4,bw(rows[i].v)),34,7);g.fill();
-        g.fillStyle='#fff';g.font='700 12px "JetBrains Mono",monospace';g.textAlign=bw(rows[i].v)>60?'right':'left';g.fillText(rows[i].v+' W',x0+bw(rows[i].v)+(bw(rows[i].v)>60?-8:8),y+22);}
-    }
-    if(shown>=2){g.fillStyle='#2c6147';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u00c9conomie : 300 \u2212 50 = 250 W',W/2,180);}
-    g.textAlign='left';
+ var o=ctxOf('cv_energie'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var maxV=320, x0=130,x1=W-40;
+ function bw(v){return v/maxV*(x1-x0);}
+ var seg=phase%9, shown=Math.max(0,Math.min(2,Math.floor(seg/2.5)+1));
+ var rows=[{n:'Avant (5 \u00d7 60 W)',v:300,c:'#C0492E'},{n:'Après (5 \u00d7 10 W)',v:50,c:'#3D7E5F'}];
+ for(var i=0;i<2;i++){var y=54+i*54;
+ g.fillStyle='#5C544B';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='right';g.fillText(rows[i].n,x0-10,y+22);
+ g.fillStyle='rgba(42,38,34,.06)';rrect(g,x0,y,x1-x0,34,7);g.fill();
+ if(i<shown){g.fillStyle=rows[i].c;rrect(g,x0,y,Math.max(4,bw(rows[i].v)),34,7);g.fill();
+ g.fillStyle='#fff';g.font='700 12px "JetBrains Mono",monospace';g.textAlign=bw(rows[i].v)>60?'right':'left';g.fillText(rows[i].v+' W',x0+bw(rows[i].v)+(bw(rows[i].v)>60?-8:8),y+22);}
+ }
+ if(shown>=2){g.fillStyle='#2c6147';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('\u00c9conomie : 300 \u2212 50 = 250 W',W/2,180);}
+ g.textAlign='left';
   }
 
   function drawRampe(){
-    var o=ctxOf('cv_rampe'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var groundY=180, baseX=150, stepW=42, stepH=28, steps=3;
-    g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=2;g.beginPath();g.moveTo(60,groundY);g.lineTo(W-40,groundY);g.stroke();
-    // escalier (gris)
-    g.fillStyle='rgba(42,38,34,.10)';g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=1.5;
-    g.beginPath();g.moveTo(baseX,groundY);var cx=baseX,cy=groundY;
-    for(var i=0;i<steps;i++){cy-=stepH;g.lineTo(cx,cy);cx+=stepW;g.lineTo(cx,cy);}
-    g.lineTo(cx,groundY);g.closePath();g.fill();g.stroke();
-    var topX=baseX+steps*stepW, topY=groundY-steps*stepH;
-    // rampe (verte)
-    var seg=phase%9, prog=Math.max(0,Math.min(1,seg/6));
-    g.strokeStyle='#3D7E5F';g.lineWidth=5;g.lineCap='round';g.beginPath();g.moveTo(baseX-10,groundY);g.lineTo(topX,topY);g.stroke();g.lineCap='butt';
-    // fauteuil qui monte
-    var fx=(baseX-10)+prog*(topX-(baseX-10)), fy=groundY+prog*(topY-groundY);
-    g.strokeStyle='#B85C2E';g.fillStyle='#B85C2E';g.lineWidth=2.5;
-    g.beginPath();g.arc(fx,fy-12,9,0,7);g.stroke();
-    g.beginPath();g.arc(fx-3,fy-26,5,0,7);g.fill();
-    g.fillStyle='#5C544B';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
-    g.fillText('3 \u00d7 15 = 45 cm',baseX+stepW,groundY+16);
-    g.fillStyle='#2c6147';g.font='800 12px "Bricolage Grotesque",sans-serif';g.fillText('rampe : pente douce 5 %',topX-20,topY-12);
-    g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('La rampe rend l\u2019entrée accessible',W/2,20);
-    g.textAlign='left';
+ var o=ctxOf('cv_rampe'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var groundY=180, baseX=150, stepW=42, stepH=28, steps=3;
+ g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=2;g.beginPath();g.moveTo(60,groundY);g.lineTo(W-40,groundY);g.stroke();
+ // escalier (gris)
+ g.fillStyle='rgba(42,38,34,.10)';g.strokeStyle='rgba(42,38,34,.4)';g.lineWidth=1.5;
+ g.beginPath();g.moveTo(baseX,groundY);var cx=baseX,cy=groundY;
+ for(var i=0;i<steps;i++){cy-=stepH;g.lineTo(cx,cy);cx+=stepW;g.lineTo(cx,cy);}
+ g.lineTo(cx,groundY);g.closePath();g.fill();g.stroke();
+ var topX=baseX+steps*stepW, topY=groundY-steps*stepH;
+ // rampe (verte)
+ var seg=phase%9, prog=Math.max(0,Math.min(1,seg/6));
+ g.strokeStyle='#3D7E5F';g.lineWidth=5;g.lineCap='round';g.beginPath();g.moveTo(baseX-10,groundY);g.lineTo(topX,topY);g.stroke();g.lineCap='butt';
+ // fauteuil qui monte
+ var fx=(baseX-10)+prog*(topX-(baseX-10)), fy=groundY+prog*(topY-groundY);
+ g.strokeStyle='#B85C2E';g.fillStyle='#B85C2E';g.lineWidth=2.5;
+ g.beginPath();g.arc(fx,fy-12,9,0,7);g.stroke();
+ g.beginPath();g.arc(fx-3,fy-26,5,0,7);g.fill();
+ g.fillStyle='#5C544B';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillText('3 \u00d7 15 = 45 cm',baseX+stepW,groundY+16);
+ g.fillStyle='#2c6147';g.font='800 12px "Bricolage Grotesque",sans-serif';g.fillText('rampe : pente douce 5 %',topX-20,topY-12);
+ g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('La rampe rend l\u2019entrée accessible',W/2,20);
+ g.textAlign='left';
   }
 
   // ===== Prof =====
@@ -472,27 +375,27 @@
   document.getElementById('profBack').addEventListener('click',backHome);
   document.getElementById('profBack2').addEventListener('click',backHome);
   document.getElementById('profBtn').addEventListener('click',function(){
-    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
-    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
-    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+ var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
+ if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+ err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
   });
   document.getElementById('profRefresh').addEventListener('click',loadResults);
   function loadResults(){
-    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
-    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
-      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
-      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
-      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
-      rows.forEach(function(r){
-        var d=r.date?new Date(r.date):null;
-        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
-        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
-        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
-      });
-      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
-      box.innerHTML=html;
-    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+ var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+ fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+ if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+ var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+ rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+ var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+ rows.forEach(function(r){
+ var d=r.date?new Date(r.date):null;
+ var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+ var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+ html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+ });
+ html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+ box.innerHTML=html;
+ }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
 </body>

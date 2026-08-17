@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
@@ -86,16 +85,16 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -107,169 +106,7 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAABACAYAAABVy1Q8AAALHklEQVR42u1aWXAc1RU9973unp7FGsuSsSUWmcVAXECB2UwIyGYNYBxSYexYmH1NsNkJBOPIsiHGUGFzPlIkgbiMsZECBEwgVIUYhWI3S7GGIgkEW8SWrW00mtF093s3Hz1jy9JskkeQAl6VPjQ10/1O33PPPfe+pvEnzGOM0iIALoBqAtZEGWOI4GU+L/vSDBG2Ybieh9EG5BLAo4ZkByD2PBhENKqACADRgH9G9WYEga/ZMvKBlVKW5aExAIMAkn6kyhUoVqo0QATA0xqd8UTZAIEAlwFPoGyiIMPhDJcLACIiuK6HidWVuO3KeWW5sQYQJKDOAmwAelcuyuyD8Dxse3wdVKIPJKX/eW5AgOspVI+twII5M/+vc6Xz2b9CxXuBQakxlHLkU871PJRTAWU5LpKJEDvOTlEpSRQMKTGakr5LlCsgWF872f5m1KFSllIaDB6dHCICCfHlApJSfL0i9PAz69HW3gnLNMHMBetQCIyzbEYABF2osBKBXQdWbS2ixx/rV2UaZUDZe9yz+km89fZHEKEgtNYFnUIlAVPHAlEq4hSEgO5LoOK70zKAOKcbGJUIVVZEEK6MIlIEULYfMqO+p0MxQKbh25qvQhQ8peApVRCQB8AjgBXAhMIywgxWCpznet9I2f4W0Ne2sBLRTn9FW/BhFOFsLkGzn3iDzanS5QfkuB7SjgvTMIqqnCOGcStmkGH4fU4ee0FBmVfORwxoQlUl9qrZDaFgAKy5IKBx0CDdUxoYy0L/xk3Y/MBDmRaBdq6CRGCloBN9vj0aVNSHDSh7+dW3XwetuSS773V1o+3am6BS/UM6zCGATBNu+1Zsa3liYBM/qFQTZDgE5PB7I46QbVml16ygPWRrxShnRKPlGZIMp9cqusVMhFSemxcVhS9X5VCacyyggt/WodGMUKGWYRAvS/vuMBu8sudQSTTKfMc0jGGBYc+DSqYKSm1Jg8bhrHhfEp5ShYFlRaEnjpKCRAR2XVi1NYhOPy5HP+RLNiuFrmeeg+5LDpHuETd45yz8Fd744BOEQ8GCdt8DMA6M30sHY4SAx1y4Y3UcBGprMH7u2QX30fPCi1C9icKT0+Gsnt4+bOuOo99xi1ofEMDj5LAot93LiRxebriDxpLUxJAwDaOolwMAc7jmlMh/8pQbUKFB4y6p3MC/QhQdtTPPctahUS2Wu3DtEQNyPQ9SivICy9Qf3oVzXzECrgEAqqJRJHsSUFrBKMPQkaQElIKXSECOjX65EWJmPLT4KjQuOBcEQmc8ASkEhBhBtIQAhICKx0GmiYnzL0fN/Mv8BzeC6xkjzZ3KiggWX96A2ad8D4t/swZ/Wv8qDCkRCQWhtC5udzL00skkGEDFySdgt3lzEKiZ+NV5Oa0ZU/beC83Lb8JTra+h6YG1eOujfyEaCcMyjbxtA0kJdlx4qV7YUw7Ebuc3oGLqoRmPpkG7QOG8gJTWkCJ/0hMRpCRoZoCBWfVH4+Rph+H+Netwz+onsbUrjnEVYQgQwHoHvZjh9cRhjq9C9UXzUHXmaRBSAlpn6o8onsMFnInI95vsCZ5ShaeYgghCEJTWCAYs3HTBj/DyQ8sx74zpSCT7kUimYBgSJCV0MgntOBg78/vY+/67MP6smTvACFFUrjkL2rbzOgUZnHTw4p2AGBJdvQl0xntx+Hf2QzgY2F48C0m0IMo8PI2qsRX44YxpmHbwAfjoszZs+rwNDcJB5SEHoeaGqzB+1umQoZBPL0HF604WiBBwO7uw+XcrkfrwH74yDpyfWAaosn5uTqhd8QQm19Vi4cUxnD/zRJ+GSkOI4h2ozjwAKQRcpbCq+WmcGLZQN+u0nTZYFAhzRu0EWGt0/Pk5dKx9DF77VohIePBNQWEbVFk/N+eRjSElkuk0Uv1pnHT0oWi6ogHTDj5gO7BSDryyeTjkaZdwOjdQHBLvvIstKx9B6v0PIYNBkGUNbfA0A2GbKXr8XBaAAg0d6/n5IdDd2wfLMnDRD07CLRfGMLG6Mv+Gc+awhiCUdsw4ALCzpR1bHn4U8b+1ApohwyE/j4bmD7NibUZsKasOnHqNR0ZIey4TkR4oFJyhTzBgQQqB1jffx2PPvwTbMnHYgftCCgGldWbcS3ltWSk0HUgv7brY9sQ6fHH3Cj8qoRDIMnOqGzMUgUWFaQo3Eu6SF1760zVbu7qDnuYjPYaA0oqIdnrHKFskx4SC6E2m8Pj617B+w3vYu3YC9tl94nY1JEHDf52GGazZjx4Rel7fgLY770XPc8/7pSEU8oEMigoDDM06YhhS2JanqipXBGadOo+y2j3z6qXHv//ppiXxVLredRwI1h6IjJz1RwjE+5IgIpxzej0WXTIHdTW7lUzDgTKcpWH/pja0r1qL+N9fgiABke2EcwFhVhZgBINB9NuBv+gJtbfsv/wXb/s9GDOBZgugRZlS4Mjzb7j0880di/rS3p7a6YcQQiHH2FwKAWZGZzyBmupKXH/uWZg/5wxYpuk3fEQQ+WiW3SQRVKof2x5/Eh1PrAPHE5BjIn7/lJ9ecqxtoz9of87V1Qv3vWfZw1AKHItJNDfveDcqFovJlpYWDYB/uWJl1eoX37ils7vv6pTrSnieIn93Ipcapl0X8UQSRx20PxZfPhenHXu4P09QGnJg/gzIEwDoefFltK9ai/S/P4OMhEGGkXM8xYCGZq6wTJmSst+sqr7Pvu6Ku2v226+9ERCLGxtBTU069+gzFpNoaVEE4Jyb7zr6lY/+uSSeTJ/i7KChHPy7LA17kylorXH2Scei8bIfY/+63XfQMGt9AKQ+/QztKx9B7yuvQ5gmhG0XpJcthGEGAlCRyFPGQfsu2vOaa94FAI7FJLW0qFxt/+DYEqZPl2ht9UwpcNQFNza0belcGk85+yg3DQHKLfOZDXfFE6iKjsFVDWfi2oZZCAdtH1iiD+2PPoaup58FJ/shI2FfcHLYGGYoAZbRgI1UwPxA7lG7eNLyJX+EZqyvrzemv/CCIiLON8fIuRobG0VTUxMA6A0bNkR/ct/qWzZu6VrQ76oglKOJBPLR0PU8dPf24ZDJdVgy/zzMgIP/PrgK7sYvIMdE/M40Z56wBjMqLEukLTMha2vvte9aekcNUR8DAgPoVWgwU3hlaAgAsetvn/Le523LOrr7ZjmOB2LlUR4aGkKgK5nCOGKsizLGSAm2bSB3njCYVUhKg0wTKhJeEzjmsKY9LrnkY59ezZJaZhc9khhG2WBCbLZAS4syCDjqwhtnfdHevay3353iOf05aUgAlCBUA1gbJVQQ5xw0MkMZYBmxbaRt6005eb+ldbf+7MlsnqClWROopOHR8HvcxkaBHTQMnbf8oQVdvcmf9zsqqt209ttwn4sD3yRpjgIVg16NYbBmzRQ1LUoHrA45oXpZx9133H8Ekdsci8kPpkzhpgL0Kg+gHDQ8b+Gd+77x8X+WdsSTcx3HAbRSRH5jkAsQAGbNOiylZDsAEa34g3vw5F9MvvLKjfnUa/QBZX9fXy/R2upJADOuWHTqJxs335ZIO0d4jgMJKJcgBwJywZ4FMsK2jXTIftXYfY+b97ptYSsYWF9fb8xobVW7Mpssz1DNpyEBUMwsD2u4ev7WrsStKUdVp700JgjitVFwFCzGBGwkpWgzqqqb6lYsf5CIVDMgY8w6lwx/NSd4Ps8VYjFJROqdNfffN+ekw6dOmlD5YMCylCKioCBh2YF0alx0BU47Y+qkX9/5WyJSzbGYnA2ocoAZtUEu6usNZAzgMfMbTzh85sXvvTbv0rfal999XPZL6+sbjdG4+f8AiqspSbEV7VUAAAAASUVORK5CYII=" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Évaluation — IA embarquée<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>Le centre de tri intelligent</h1>
-      <p>Le centre de tri vient d'installer son IA de reconnaissance : à toi de la comprendre, de la tester… et de la soigner. Entraînement, prédictions, précision, biais : tout y passe, du tapis roulant jusqu'au verdict final. Calculatrice en bas à droite pour les pourcentages.</p>
-      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
-    </div>
-
-    <!-- ============ EX 1 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">1</span> Apprentissage ou inférence ? <span class="pts">3 pts</span></h2>
-      <p class="task">L'écran alterne entre les DEUX vies du réseau de neurones. Observe bien ce qui change.</p>
-      <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Alternance entraînement / inférence"></canvas></div>
-      <div class="qrow" id="q1a"><span class="sc">a) Pendant l'<b>ENTRAÎNEMENT</b>, le réseau :</span>
-        <select id="s1a"><option>— choisir —</option><option>ajuste ses paramètres grâce à des milliers d'exemples étiquetés</option><option>devine sans jamais se corriger</option><option>trie déjà les vrais déchets</option></select></div>
-      <div class="qrow" id="q1b"><span class="sc">b) Pendant l'<b>INFÉRENCE</b>, le réseau :</span>
-        <select id="s1b"><option>— choisir —</option><option>utilise ce qu'il a appris pour prédire, sans plus modifier ses paramètres</option><option>recommence son apprentissage à zéro</option><option>demande la réponse à un humain</option></select></div>
-      <div class="qrow" id="q1c"><span class="sc">c) La courbe d'erreur qui DESCEND pendant l'entraînement signifie :</span>
-        <select id="s1c"><option>— choisir —</option><option>le réseau se trompe de moins en moins sur les exemples</option><option>le réseau devient plus lent</option><option>la batterie se vide</option></select></div>
-      <div class="corr" id="c1"></div>
-    </section>
-
-    <!-- ============ EX 2 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">2</span> La prédiction du tapis <span class="pts">3 pts</span></h2>
-      <p class="task">Un objet passe sous la caméra. Le réseau affiche ses probabilités de sortie.</p>
-      <div class="chrono">
-        <svg viewBox="0 0 860 230" aria-label="Tapis roulant, caméra et probabilités de sortie">
-          <path d="M60 170 h370" stroke="#5C544B" stroke-width="5"/>
-          <circle cx="90" cy="182" r="10" fill="#2A2622"/><circle cx="240" cy="182" r="10" fill="#2A2622"/><circle cx="400" cy="182" r="10" fill="#2A2622"/>
-          <rect x="200" y="128" width="66" height="42" rx="8" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/>
-          <text x="233" y="155" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="800" fill="#2E6A8E">?</text>
-          <rect x="206" y="34" width="54" height="30" rx="6" fill="#2c2138" stroke="#8A5A7A" stroke-width="2.5"/>
-          <circle cx="233" cy="49" r="8" fill="#d9a6ee"/>
-          <path d="M218 64 L206 122 M248 64 L260 122" stroke="#8A5A7A" stroke-width="2" stroke-dasharray="5 4"/>
-          <text x="233" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#8A5A7A">caméra + IA</text>
-          <g font-family="JetBrains Mono" font-size="14" font-weight="700">
-            <text x="520" y="66" fill="#2A2622">plastique</text>
-            <rect x="640" y="52" width="164" height="18" rx="4" fill="#eee6d6"/>
-            <rect x="640" y="52" width="134" height="18" rx="4" fill="#3D7E5F"/>
-            <text x="812" y="66" text-anchor="end" fill="#3D7E5F">82 %</text>
-            <text x="520" y="116" fill="#2A2622">métal</text>
-            <rect x="640" y="102" width="164" height="18" rx="4" fill="#eee6d6"/>
-            <rect x="640" y="102" width="20" height="18" rx="4" fill="#BD8A2A"/>
-            <text x="812" y="116" text-anchor="end" fill="#8a6313">12 %</text>
-            <text x="520" y="166" fill="#2A2622">verre</text>
-            <rect x="640" y="152" width="164" height="18" rx="4" fill="#eee6d6"/>
-            <rect x="640" y="152" width="10" height="18" rx="4" fill="#2E6A8E"/>
-            <text x="812" y="166" text-anchor="end" fill="#2E6A8E">6 %</text>
-          </g>
-          <text x="662" y="206" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">les sorties du réseau (probabilités)</text>
-        </svg>
-      </div>
-      <div class="qrow" id="q2a"><span class="sc">a) La classe PRÉDITE par le réseau est :</span>
-        <select id="s2a"><option>— choisir —</option><option>plastique (la probabilité la plus haute)</option><option>verre</option><option>métal</option></select></div>
-      <div class="qrow" id="q2b"><span class="sc">b) Somme des probabilités : 82 + 12 + 6 =</span>
-        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
-      <div class="qrow" id="q2c"><span class="sc">c) Si la sortie était 40 / 35 / 25 :</span>
-        <select id="s2c"><option>— choisir —</option><option>l'IA est peu sûre : mieux vaut un contrôle (humain ou capteur en plus)</option><option>l'IA est très confiante</option><option>l'objet n'existe pas</option></select></div>
-      <div class="corr" id="c2"></div>
-    </section>
-
-    <!-- ============ EX 3 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">3</span> Défi : l'entraîneur d'IA <span class="pts">2 pts</span></h2>
-      <p class="task"><b>6 questions</b> éclair du coach. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
-      <div class="game">
-        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
-        <div class="gq" id="gQ">Prêt ? Le réseau s'échauffe…</div>
-        <div class="gopts" id="gOpts"></div>
-        <div class="gmsg" id="gMsg"></div>
-        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
-      </div>
-      <div class="corr" id="c3"></div>
-    </section>
-
-    <!-- ============ EX 4 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">4</span> La précision du modèle <span class="pts">2 pts</span></h2>
-      <p class="task">Plus on donne d'images d'entraînement, plus le modèle est précis… mais pas indéfiniment. <b>Fais varier n</b> et suis le point sur la courbe.</p>
-      <div class="chrono">
-        <canvas id="cv4" width="860" height="230" aria-label="Courbe de précision selon le nombre d'images"></canvas>
-        <div class="slider-row">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">n =</span>
-          <input type="range" id="nSlider" min="100" max="10000" step="100" value="100">
-          <span class="val" id="nVal">100 images</span>
-        </div>
-      </div>
-      <div class="qrow" id="q4a"><span class="sc">a) Au test final, le modèle classe bien 90 objets sur 100. Précision = 90/100 =</span>
-        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
-      <div class="qrow" id="q4b"><span class="sc">b) À 97 % de précision, doubler ENCORE les données apporte :</span>
-        <select id="s4b"><option>— choisir —</option><option>un gain de plus en plus faible (la courbe sature)</option><option>toujours +10 % de précision</option><option>une précision de 200 %</option></select></div>
-      <div class="corr" id="c4"></div>
-    </section>
-
-    <!-- ============ EX 5 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">5</span> Embarqué ou cloud ? <span class="pts">2 pts</span></h2>
-      <p class="task">IA EMBARQUÉE : le calcul se fait DANS l'objet · CLOUD : le calcul se fait sur de gros serveurs distants. Place chaque tâche au bon endroit.</p>
-      <div class="qrow" id="q5a"><span class="sc">a) La sonnette qui doit détecter une personne INSTANTANÉMENT, même sans internet :</span>
-        <select id="s5a"><option>— choisir —</option><option>IA embarquée (rapide, autonome, données privées qui restent chez toi)</option><option>Cloud (tant pis pour les coupures)</option><option>Courrier postal</option></select></div>
-      <div class="qrow" id="q5b"><span class="sc">b) L'ENTRAÎNEMENT du modèle sur des millions d'images :</span>
-        <select id="s5b"><option>— choisir —</option><option>serveurs cloud (une puissance de calcul énorme est nécessaire)</option><option>dans la sonnette elle-même</option><option>sur une calculatrice de collège</option></select></div>
-      <div class="corr" id="c5"></div>
-    </section>
-
-    <!-- ============ EX 6 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">6</span> L'affaire du biais <span class="pts">3 pts</span></h2>
-      <p class="task">Mystère au centre de tri : l'IA a été entraînée avec 95 % de bouteilles TRANSPARENTES… et voilà que les bouteilles OPAQUES partent dans la mauvaise benne.</p>
-      <div class="qrow" id="q6a"><span class="sc">a) La cause du problème :</span>
-        <select id="s6a"><option>— choisir —</option><option>un jeu de données non représentatif : c'est un biais</option><option>la caméra est sale</option><option>les bouteilles opaques trichent</option></select></div>
-      <div class="qrow" id="q6b"><span class="sc">b) Le remède :</span>
-        <select id="s6b"><option>— choisir —</option><option>compléter l'entraînement avec des exemples variés (opaques, colorées, cabossées…)</option><option>interdire les bouteilles opaques</option><option>débrancher l'IA pour toujours</option></select></div>
-      <div class="qrow" id="q6c"><span class="sc">c) Sur 200 bouteilles opaques testées, 140 sont bien classées. Taux de réussite = 140/200 =</span>
-        <input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
-      <div class="corr" id="c6"></div>
-    </section>
-
-    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
-    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
-
-    <div class="teacher">
-      <span class="tlink" id="tlink">· Espace enseignant ·</span>
-      <div id="dash">
-        <div id="dashLogin" style="margin-top:8px">
-          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
-          <button class="btn g" id="pwBtn">Ouvrir</button>
-          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
-        </div>
-        <div id="dashData" style="display:none">
-          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
-          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
-          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
-          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAABACAYAAABVy1Q8AAALHklEQVR42u1aWXAc1RU9973unp7FGsuSsSUWmcVAXECB2UwIyGYNYBxSYexYmH1NsNkJBOPIsiHGUGFzPlIkgbiMsZECBEwgVIUYhWI3S7GGIgkEW8SWrW00mtF093s3Hz1jy9JskkeQAl6VPjQ10/1O33PPPfe+pvEnzGOM0iIALoBqAtZEGWOI4GU+L/vSDBG2Ybieh9EG5BLAo4ZkByD2PBhENKqACADRgH9G9WYEga/ZMvKBlVKW5aExAIMAkn6kyhUoVqo0QATA0xqd8UTZAIEAlwFPoGyiIMPhDJcLACIiuK6HidWVuO3KeWW5sQYQJKDOAmwAelcuyuyD8Dxse3wdVKIPJKX/eW5AgOspVI+twII5M/+vc6Xz2b9CxXuBQakxlHLkU871PJRTAWU5LpKJEDvOTlEpSRQMKTGakr5LlCsgWF872f5m1KFSllIaDB6dHCICCfHlApJSfL0i9PAz69HW3gnLNMHMBetQCIyzbEYABF2osBKBXQdWbS2ixx/rV2UaZUDZe9yz+km89fZHEKEgtNYFnUIlAVPHAlEq4hSEgO5LoOK70zKAOKcbGJUIVVZEEK6MIlIEULYfMqO+p0MxQKbh25qvQhQ8peApVRCQB8AjgBXAhMIywgxWCpznet9I2f4W0Ne2sBLRTn9FW/BhFOFsLkGzn3iDzanS5QfkuB7SjgvTMIqqnCOGcStmkGH4fU4ee0FBmVfORwxoQlUl9qrZDaFgAKy5IKBx0CDdUxoYy0L/xk3Y/MBDmRaBdq6CRGCloBN9vj0aVNSHDSh7+dW3XwetuSS773V1o+3am6BS/UM6zCGATBNu+1Zsa3liYBM/qFQTZDgE5PB7I46QbVml16ygPWRrxShnRKPlGZIMp9cqusVMhFSemxcVhS9X5VCacyyggt/WodGMUKGWYRAvS/vuMBu8sudQSTTKfMc0jGGBYc+DSqYKSm1Jg8bhrHhfEp5ShYFlRaEnjpKCRAR2XVi1NYhOPy5HP+RLNiuFrmeeg+5LDpHuETd45yz8Fd744BOEQ8GCdt8DMA6M30sHY4SAx1y4Y3UcBGprMH7u2QX30fPCi1C9icKT0+Gsnt4+bOuOo99xi1ofEMDj5LAot93LiRxebriDxpLUxJAwDaOolwMAc7jmlMh/8pQbUKFB4y6p3MC/QhQdtTPPctahUS2Wu3DtEQNyPQ9SivICy9Qf3oVzXzECrgEAqqJRJHsSUFrBKMPQkaQElIKXSECOjX65EWJmPLT4KjQuOBcEQmc8ASkEhBhBtIQAhICKx0GmiYnzL0fN/Mv8BzeC6xkjzZ3KiggWX96A2ad8D4t/swZ/Wv8qDCkRCQWhtC5udzL00skkGEDFySdgt3lzEKiZ+NV5Oa0ZU/beC83Lb8JTra+h6YG1eOujfyEaCcMyjbxtA0kJdlx4qV7YUw7Ebuc3oGLqoRmPpkG7QOG8gJTWkCJ/0hMRpCRoZoCBWfVH4+Rph+H+Netwz+onsbUrjnEVYQgQwHoHvZjh9cRhjq9C9UXzUHXmaRBSAlpn6o8onsMFnInI95vsCZ5ShaeYgghCEJTWCAYs3HTBj/DyQ8sx74zpSCT7kUimYBgSJCV0MgntOBg78/vY+/67MP6smTvACFFUrjkL2rbzOgUZnHTw4p2AGBJdvQl0xntx+Hf2QzgY2F48C0m0IMo8PI2qsRX44YxpmHbwAfjoszZs+rwNDcJB5SEHoeaGqzB+1umQoZBPL0HF604WiBBwO7uw+XcrkfrwH74yDpyfWAaosn5uTqhd8QQm19Vi4cUxnD/zRJ+GSkOI4h2ozjwAKQRcpbCq+WmcGLZQN+u0nTZYFAhzRu0EWGt0/Pk5dKx9DF77VohIePBNQWEbVFk/N+eRjSElkuk0Uv1pnHT0oWi6ogHTDj5gO7BSDryyeTjkaZdwOjdQHBLvvIstKx9B6v0PIYNBkGUNbfA0A2GbKXr8XBaAAg0d6/n5IdDd2wfLMnDRD07CLRfGMLG6Mv+Gc+awhiCUdsw4ALCzpR1bHn4U8b+1ApohwyE/j4bmD7NibUZsKasOnHqNR0ZIey4TkR4oFJyhTzBgQQqB1jffx2PPvwTbMnHYgftCCgGldWbcS3ltWSk0HUgv7brY9sQ6fHH3Cj8qoRDIMnOqGzMUgUWFaQo3Eu6SF1760zVbu7qDnuYjPYaA0oqIdnrHKFskx4SC6E2m8Pj617B+w3vYu3YC9tl94nY1JEHDf52GGazZjx4Rel7fgLY770XPc8/7pSEU8oEMigoDDM06YhhS2JanqipXBGadOo+y2j3z6qXHv//ppiXxVLredRwI1h6IjJz1RwjE+5IgIpxzej0WXTIHdTW7lUzDgTKcpWH/pja0r1qL+N9fgiABke2EcwFhVhZgBINB9NuBv+gJtbfsv/wXb/s9GDOBZgugRZlS4Mjzb7j0880di/rS3p7a6YcQQiHH2FwKAWZGZzyBmupKXH/uWZg/5wxYpuk3fEQQ+WiW3SQRVKof2x5/Eh1PrAPHE5BjIn7/lJ9ecqxtoz9of87V1Qv3vWfZw1AKHItJNDfveDcqFovJlpYWDYB/uWJl1eoX37ils7vv6pTrSnieIn93Ipcapl0X8UQSRx20PxZfPhenHXu4P09QGnJg/gzIEwDoefFltK9ai/S/P4OMhEGGkXM8xYCGZq6wTJmSst+sqr7Pvu6Ku2v226+9ERCLGxtBTU069+gzFpNoaVEE4Jyb7zr6lY/+uSSeTJ/i7KChHPy7LA17kylorXH2Scei8bIfY/+63XfQMGt9AKQ+/QztKx9B7yuvQ5gmhG0XpJcthGEGAlCRyFPGQfsu2vOaa94FAI7FJLW0qFxt/+DYEqZPl2ht9UwpcNQFNza0belcGk85+yg3DQHKLfOZDXfFE6iKjsFVDWfi2oZZCAdtH1iiD+2PPoaup58FJ/shI2FfcHLYGGYoAZbRgI1UwPxA7lG7eNLyJX+EZqyvrzemv/CCIiLON8fIuRobG0VTUxMA6A0bNkR/ct/qWzZu6VrQ76oglKOJBPLR0PU8dPf24ZDJdVgy/zzMgIP/PrgK7sYvIMdE/M40Z56wBjMqLEukLTMha2vvte9aekcNUR8DAgPoVWgwU3hlaAgAsetvn/Le523LOrr7ZjmOB2LlUR4aGkKgK5nCOGKsizLGSAm2bSB3njCYVUhKg0wTKhJeEzjmsKY9LrnkY59ezZJaZhc9khhG2WBCbLZAS4syCDjqwhtnfdHevay3353iOf05aUgAlCBUA1gbJVQQ5xw0MkMZYBmxbaRt6005eb+ldbf+7MlsnqClWROopOHR8HvcxkaBHTQMnbf8oQVdvcmf9zsqqt209ttwn4sD3yRpjgIVg16NYbBmzRQ1LUoHrA45oXpZx9133H8Ekdsci8kPpkzhpgL0Kg+gHDQ8b+Gd+77x8X+WdsSTcx3HAbRSRH5jkAsQAGbNOiylZDsAEa34g3vw5F9MvvLKjfnUa/QBZX9fXy/R2upJADOuWHTqJxs335ZIO0d4jgMJKJcgBwJywZ4FMsK2jXTIftXYfY+b97ptYSsYWF9fb8xobVW7Mpssz1DNpyEBUMwsD2u4ev7WrsStKUdVp700JgjitVFwFCzGBGwkpWgzqqqb6lYsf5CIVDMgY8w6lwx/NSd4Ps8VYjFJROqdNfffN+ekw6dOmlD5YMCylCKioCBh2YF0alx0BU47Y+qkX9/5WyJSzbGYnA2ocoAZtUEu6usNZAzgMfMbTzh85sXvvTbv0rfal999XPZL6+sbjdG4+f8AiqspSbEV7VUAAAAASUVORK5CYII=" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Évaluation — IA embarquée<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">Évaluation · Première spé SI · /15</div> <h1>Le centre de tri intelligent</h1> <p>Le centre de tri vient d'installer son IA de reconnaissance : à toi de la comprendre, de la tester… et de la soigner. Entraînement, prédictions, précision, biais : tout y passe, du tapis roulant jusqu'au verdict final. Calculatrice en bas à droite pour les pourcentages.</p> <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div></div> <!-- ============ EX 1 ============ --> <section class="exo-card"> <h2><span class="num">1</span> Apprentissage ou inférence ? <span class="pts">3 pts</span></h2> <p class="task">L'écran alterne entre les DEUX vies du réseau de neurones. Observe bien ce qui change.</p> <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Alternance entraînement / inférence"></canvas></div> <div class="qrow" id="q1a"><span class="sc">a) Pendant l'<b>ENTRAÎNEMENT</b>, le réseau :</span> <select id="s1a"><option>— choisir —</option><option>ajuste ses paramètres grâce à des milliers d'exemples étiquetés</option><option>devine sans jamais se corriger</option><option>trie déjà les vrais déchets</option></select></div> <div class="qrow" id="q1b"><span class="sc">b) Pendant l'<b>INFÉRENCE</b>, le réseau :</span> <select id="s1b"><option>— choisir —</option><option>utilise ce qu'il a appris pour prédire, sans plus modifier ses paramètres</option><option>recommence son apprentissage à zéro</option><option>demande la réponse à un humain</option></select></div> <div class="qrow" id="q1c"><span class="sc">c) La courbe d'erreur qui DESCEND pendant l'entraînement signifie :</span> <select id="s1c"><option>— choisir —</option><option>le réseau se trompe de moins en moins sur les exemples</option><option>le réseau devient plus lent</option><option>la batterie se vide</option></select></div> <div class="corr" id="c1"></div> </section> <!-- ============ EX 2 ============ --> <section class="exo-card"> <h2><span class="num">2</span> La prédiction du tapis <span class="pts">3 pts</span></h2> <p class="task">Un objet passe sous la caméra. Le réseau affiche ses probabilités de sortie.</p> <div class="chrono"><svg viewBox="0 0 860 230" aria-label="Tapis roulant, caméra et probabilités de sortie"> <path d="M60 170 h370" stroke="#5C544B" stroke-width="5"/><circle cx="90" cy="182" r="10" fill="#2A2622"/><circle cx="240" cy="182" r="10" fill="#2A2622"/><circle cx="400" cy="182" r="10" fill="#2A2622"/> <rect x="200" y="128" width="66" height="42" rx="8" fill="#eef3f6" stroke="#2E6A8E" stroke-width="2.5"/> <text x="233" y="155" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="800" fill="#2E6A8E">?</text> <rect x="206" y="34" width="54" height="30" rx="6" fill="#2c2138" stroke="#8A5A7A" stroke-width="2.5"/> <circle cx="233" cy="49" r="8" fill="#d9a6ee"/> <path d="M218 64 L206 122 M248 64 L260 122" stroke="#8A5A7A" stroke-width="2" stroke-dasharray="5 4"/><text x="233" y="24" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#8A5A7A">caméra + IA</text> <g font-family="JetBrains Mono" font-size="14" font-weight="700"> <text x="520" y="66" fill="#2A2622">plastique</text> <rect x="640" y="52" width="164" height="18" rx="4" fill="#eee6d6"/> <rect x="640" y="52" width="134" height="18" rx="4" fill="#3D7E5F"/> <text x="812" y="66" text-anchor="end" fill="#3D7E5F">82 %</text> <text x="520" y="116" fill="#2A2622">métal</text> <rect x="640" y="102" width="164" height="18" rx="4" fill="#eee6d6"/> <rect x="640" y="102" width="20" height="18" rx="4" fill="#BD8A2A"/> <text x="812" y="116" text-anchor="end" fill="#8a6313">12 %</text> <text x="520" y="166" fill="#2A2622">verre</text> <rect x="640" y="152" width="164" height="18" rx="4" fill="#eee6d6"/> <rect x="640" y="152" width="10" height="18" rx="4" fill="#2E6A8E"/> <text x="812" y="166" text-anchor="end" fill="#2E6A8E">6 %</text> </g> <text x="662" y="206" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">les sorties du réseau (probabilités)</text> </svg></div> <div class="qrow" id="q2a"><span class="sc">a) La classe PRÉDITE par le réseau est :</span> <select id="s2a"><option>— choisir —</option><option>plastique (la probabilité la plus haute)</option><option>verre</option><option>métal</option></select></div> <div class="qrow" id="q2b"><span class="sc">b) Somme des probabilités : 82 + 12 + 6 =</span> <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">%</span></div> <div class="qrow" id="q2c"><span class="sc">c) Si la sortie était 40 / 35 / 25 :</span> <select id="s2c"><option>— choisir —</option><option>l'IA est peu sûre : mieux vaut un contrôle (humain ou capteur en plus)</option><option>l'IA est très confiante</option><option>l'objet n'existe pas</option></select></div> <div class="corr" id="c2"></div> </section> <!-- ============ EX 3 ============ --> <section class="exo-card"> <h2><span class="num">3</span> Défi : l'entraîneur d'IA <span class="pts">2 pts</span></h2> <p class="task"><b>6 questions</b> éclair du coach. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p> <div class="game"><div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div> <div class="gq" id="gQ">Prêt ? Le réseau s'échauffe…</div> <div class="gopts" id="gOpts"></div> <div class="gmsg" id="gMsg"></div> <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div></div> <div class="corr" id="c3"></div> </section> <!-- ============ EX 4 ============ --> <section class="exo-card"> <h2><span class="num">4</span> La précision du modèle <span class="pts">2 pts</span></h2> <p class="task">Plus on donne d'images d'entraînement, plus le modèle est précis… mais pas indéfiniment. <b>Fais varier n</b> et suis le point sur la courbe.</p> <div class="chrono"><canvas id="cv4" width="860" height="230" aria-label="Courbe de précision selon le nombre d'images"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">n =</span> <input type="range" id="nSlider" min="100" max="10000" step="100" value="100"> <span class="val" id="nVal">100 images</span></div></div> <div class="qrow" id="q4a"><span class="sc">a) Au test final, le modèle classe bien 90 objets sur 100. Précision = 90/100 =</span> <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div> <div class="qrow" id="q4b"><span class="sc">b) À 97 % de précision, doubler ENCORE les données apporte :</span> <select id="s4b"><option>— choisir —</option><option>un gain de plus en plus faible (la courbe sature)</option><option>toujours +10 % de précision</option><option>une précision de 200 %</option></select></div> <div class="corr" id="c4"></div> </section> <!-- ============ EX 5 ============ --> <section class="exo-card"> <h2><span class="num">5</span> Embarqué ou cloud ? <span class="pts">2 pts</span></h2> <p class="task">IA EMBARQUÉE : le calcul se fait DANS l'objet · CLOUD : le calcul se fait sur de gros serveurs distants. Place chaque tâche au bon endroit.</p> <div class="qrow" id="q5a"><span class="sc">a) La sonnette qui doit détecter une personne INSTANTANÉMENT, même sans internet :</span> <select id="s5a"><option>— choisir —</option><option>IA embarquée (rapide, autonome, données privées qui restent chez toi)</option><option>Cloud (tant pis pour les coupures)</option><option>Courrier postal</option></select></div> <div class="qrow" id="q5b"><span class="sc">b) L'ENTRAÎNEMENT du modèle sur des millions d'images :</span> <select id="s5b"><option>— choisir —</option><option>serveurs cloud (une puissance de calcul énorme est nécessaire)</option><option>dans la sonnette elle-même</option><option>sur une calculatrice de collège</option></select></div> <div class="corr" id="c5"></div> </section> <!-- ============ EX 6 ============ --> <section class="exo-card"> <h2><span class="num">6</span> L'affaire du biais <span class="pts">3 pts</span></h2> <p class="task">Mystère au centre de tri : l'IA a été entraînée avec 95 % de bouteilles TRANSPARENTES… et voilà que les bouteilles OPAQUES partent dans la mauvaise benne.</p> <div class="qrow" id="q6a"><span class="sc">a) La cause du problème :</span> <select id="s6a"><option>— choisir —</option><option>un jeu de données non représentatif : c'est un biais</option><option>la caméra est sale</option><option>les bouteilles opaques trichent</option></select></div> <div class="qrow" id="q6b"><span class="sc">b) Le remède :</span> <select id="s6b"><option>— choisir —</option><option>compléter l'entraînement avec des exemples variés (opaques, colorées, cabossées…)</option><option>interdire les bouteilles opaques</option><option>débrancher l'IA pour toujours</option></select></div> <div class="qrow" id="q6c"><span class="sc">c) Sur 200 bouteilles opaques testées, 140 sont bien classées. Taux de réussite = 140/200 =</span> <input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">%</span></div> <div class="corr" id="c6"></div> </section> <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div> <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div> <div class="teacher"><span class="tlink" id="tlink">· Espace enseignant ·</span> <div id="dash"><div id="dashLogin" style="margin-top:8px"><input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none"> <button class="btn g" id="pwBtn">Ouvrir</button> <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span></div> <div id="dashData" style="display:none"><div id="stats" style="margin:10px 0"></div><div id="perQ"></div> <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3> <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div> <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div></div></div></div></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
@@ -286,138 +123,138 @@ var NODE='eval_ia';
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
 })();
@@ -429,58 +266,58 @@ var NODE='eval_ia';
   var LABELS=['plastique','métal','verre'];
   var COLS=['#3D7E5F','#BD8A2A','#2E6A8E'];
   function step(){
-    T+=0.02; var phase=(T%8)<4 ? 0 : 1; var u=(T%4)/4;
-    g.clearRect(0,0,cv.width,cv.height);
-    if(phase===0){
-      g.fillStyle='#8A5A7A'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-      g.fillText('PHASE 1 · ENTRAÎNEMENT',30,36);
-      // vignettes étiquetées qui défilent
-      for(var i=0;i<5;i++){
-        var x=30+((u*420+i*96)%480), y=70;
-        var li=i%3;
-        g.fillStyle='#f6f2e8'; g.strokeStyle=COLS[li]; g.lineWidth=2.5;
-        g.beginPath(); g.rect(x,y,72,54); g.fill(); g.stroke();
-        g.fillStyle=COLS[li]; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
-        g.fillText(LABELS[li],x+36,y+70);
-        g.fillText('img',x+36,y+30);
-      }
-      g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
-      g.fillText('des milliers d\u2019exemples ÉTIQUETÉS',30,168);
-      // courbe d'erreur qui descend
-      var bx=580, by=60, W=240, H=130;
-      g.strokeStyle='#d9cfbb'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
-      g.strokeStyle='#C0492E'; g.lineWidth=3; g.beginPath();
-      for(var k=0;k<=100;k++){ var xx=bx+W*k/100; var prog=Math.min(1,(k/100)*(0.3+u*0.9));
-        var yy=by+8+ (H-22)*(1-Math.exp(-3*prog))*0 + (H-22)*Math.exp(-3.2*prog);
-        if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
-      g.stroke();
-      g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
-      g.fillText('erreur ↓',bx+8,by+14);
-      g.fillStyle='#5C544B'; g.fillText('époques →',bx+W-84,by+H+20);
-    } else {
-      g.fillStyle='#2E6A8E'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-      g.fillText('PHASE 2 · INFÉRENCE',30,36);
-      // objet inconnu
-      g.fillStyle='#f6f2e8'; g.strokeStyle='#5C544B'; g.lineWidth=2.5;
-      g.beginPath(); g.rect(60,80,100,80); g.fill(); g.stroke();
-      g.fillStyle='#5C544B'; g.font='800 34px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
-      g.fillText('?',110,132);
-      g.font='700 12px "JetBrains Mono",monospace'; g.fillText('objet jamais vu',110,182);
-      g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath(); g.moveTo(170,120); g.lineTo(300,120); g.stroke();
-      g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(308,120); g.lineTo(296,113); g.lineTo(296,127); g.closePath(); g.fill();
-      g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('réseau entraîné',240,104);
-      // barres de probabilité qui poussent
-      var probs=[0.86,0.09,0.05];
-      for(var j=0;j<3;j++){
-        var by2=76+j*46;
-        g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
-        g.fillText(LABELS[j],340,by2+14);
-        g.fillStyle='#eee6d6'; g.fillRect(460,by2,300,20);
-        g.fillStyle=COLS[j]; g.fillRect(460,by2,300*probs[j]*Math.min(1,u*2.2),20);
-        g.fillText(Math.round(probs[j]*100*Math.min(1,u*2.2))+' %',772,by2+15);
-      }
-      g.fillStyle='#5C544B'; g.textAlign='left'; g.fillText('prédiction sans ré-apprentissage',340,214);
-    }
+ T+=0.02; var phase=(T%8)<4 ? 0 : 1; var u=(T%4)/4;
+ g.clearRect(0,0,cv.width,cv.height);
+ if(phase===0){
+ g.fillStyle='#8A5A7A'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ g.fillText('PHASE 1 · ENTRAÎNEMENT',30,36);
+ // vignettes étiquetées qui défilent
+ for(var i=0;i<5;i++){
+ var x=30+((u*420+i*96)%480), y=70;
+ var li=i%3;
+ g.fillStyle='#f6f2e8'; g.strokeStyle=COLS[li]; g.lineWidth=2.5;
+ g.beginPath(); g.rect(x,y,72,54); g.fill(); g.stroke();
+ g.fillStyle=COLS[li]; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText(LABELS[li],x+36,y+70);
+ g.fillText('img',x+36,y+30);
+ }
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+ g.fillText('des milliers d\u2019exemples ÉTIQUETÉS',30,168);
+ // courbe d'erreur qui descend
+ var bx=580, by=60, W=240, H=130;
+ g.strokeStyle='#d9cfbb'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
+ g.strokeStyle='#C0492E'; g.lineWidth=3; g.beginPath();
+ for(var k=0;k<=100;k++){ var xx=bx+W*k/100; var prog=Math.min(1,(k/100)*(0.3+u*0.9));
+ var yy=by+8+ (H-22)*(1-Math.exp(-3*prog))*0 + (H-22)*Math.exp(-3.2*prog);
+ if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
+ g.stroke();
+ g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('erreur ↓',bx+8,by+14);
+ g.fillStyle='#5C544B'; g.fillText('époques →',bx+W-84,by+H+20);
+ } else {
+ g.fillStyle='#2E6A8E'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ g.fillText('PHASE 2 · INFÉRENCE',30,36);
+ // objet inconnu
+ g.fillStyle='#f6f2e8'; g.strokeStyle='#5C544B'; g.lineWidth=2.5;
+ g.beginPath(); g.rect(60,80,100,80); g.fill(); g.stroke();
+ g.fillStyle='#5C544B'; g.font='800 34px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+ g.fillText('?',110,132);
+ g.font='700 12px "JetBrains Mono",monospace'; g.fillText('objet jamais vu',110,182);
+ g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath(); g.moveTo(170,120); g.lineTo(300,120); g.stroke();
+ g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(308,120); g.lineTo(296,113); g.lineTo(296,127); g.closePath(); g.fill();
+ g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('réseau entraîné',240,104);
+ // barres de probabilité qui poussent
+ var probs=[0.86,0.09,0.05];
+ for(var j=0;j<3;j++){
+ var by2=76+j*46;
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
+ g.fillText(LABELS[j],340,by2+14);
+ g.fillStyle='#eee6d6'; g.fillRect(460,by2,300,20);
+ g.fillStyle=COLS[j]; g.fillRect(460,by2,300*probs[j]*Math.min(1,u*2.2),20);
+ g.fillText(Math.round(probs[j]*100*Math.min(1,u*2.2))+' %',772,by2+15);
+ }
+ g.fillStyle='#5C544B'; g.textAlign='left'; g.fillText('prédiction sans ré-apprentissage',340,214);
+ }
   }
   setInterval(step,40); step();
 })();
@@ -506,9 +343,9 @@ function g3Next(){
   el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
   var box=el('gOpts'); box.innerHTML='';
   g3State.cur.opts.forEach(function(o){
-    var b=document.createElement('button'); b.textContent=o;
-    b.addEventListener('click',function(){ g3Answer(b,o); });
-    box.appendChild(b);
+ var b=document.createElement('button'); b.textContent=o;
+ b.addEventListener('click',function(){ g3Answer(b,o); });
+ box.appendChild(b);
   });
 }
 function g3Answer(btn,o){
@@ -516,15 +353,15 @@ function g3Answer(btn,o){
   var good=(o===g3State.cur.ok);
   if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Le réseau apprend vite… toi aussi !'; }
   else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était : '+g3State.cur.ok;
-    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+ el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
   el('gScore').textContent='✓ '+g3State.hits;
   g3State.idx++;
   setTimeout(function(){
-    if(g3State.idx>=6){ g3State.done=true;
-      el('gProg').textContent='défi terminé';
-      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
-      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'🤖 Coach d\u2019IA certifié !':(g3State.hits>=3?'Le réseau te remercie.':'Une petite ré-période d\u2019entraînement s\u2019impose…');
-    } else { g3Next(); }
+ if(g3State.idx>=6){ g3State.done=true;
+ el('gProg').textContent='défi terminé';
+ el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+ el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?' Coach d\u2019IA certifié !':(g3State.hits>=3?'Le réseau te remercie.':'Une petite ré-période d\u2019entraînement s\u2019impose…');
+ } else { g3Next(); }
   }, 900);
 }
 el('gStart').addEventListener('click',function(){
@@ -540,26 +377,26 @@ var nImg=100;
   function acc(n){ return 98 - 4000/(n+50); }
   el('nSlider').addEventListener('input',function(){ nImg=+this.value; el('nVal').textContent=nImg+' images'; });
   function step(){
-    g.clearRect(0,0,cv.width,cv.height);
-    var bx=90, by=30, W=560, H=150;
-    // axes
-    g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
-    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
-    g.fillText('100 %',bx-8,by+8); g.fillText('60 %',bx-8,by+H);
-    g.textAlign='center'; g.fillText('n (images d\u2019entraînement) →',bx+W/2,by+H+26);
-    // courbe
-    g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath();
-    for(var k=0;k<=100;k++){ var n=100+ (10000-100)*k/100;
-      var a=acc(n); var xx=bx+W*k/100, yy=by+H-(a-60)/40*H;
-      if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
-    g.stroke();
-    // point courant
-    var a0=acc(nImg), px=bx+W*(nImg-100)/9900, py=by+H-(a0-60)/40*H;
-    g.fillStyle='#C0492E'; g.beginPath(); g.arc(px,py,8,0,7); g.fill();
-    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-    g.fillText('précision ≈ '+a0.toFixed(1).replace('.',',')+' %',680,64);
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText(nImg<1000?'la courbe grimpe vite…':'…puis elle SATURE',680,94);
+ g.clearRect(0,0,cv.width,cv.height);
+ var bx=90, by=30, W=560, H=150;
+ // axes
+ g.strokeStyle='#5C544B'; g.lineWidth=2; g.beginPath(); g.moveTo(bx,by); g.lineTo(bx,by+H); g.lineTo(bx+W,by+H); g.stroke();
+ g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+ g.fillText('100 %',bx-8,by+8); g.fillText('60 %',bx-8,by+H);
+ g.textAlign='center'; g.fillText('n (images d\u2019entraînement) →',bx+W/2,by+H+26);
+ // courbe
+ g.strokeStyle='#8A5A7A'; g.lineWidth=3; g.beginPath();
+ for(var k=0;k<=100;k++){ var n=100+ (10000-100)*k/100;
+ var a=acc(n); var xx=bx+W*k/100, yy=by+H-(a-60)/40*H;
+ if(k===0) g.moveTo(xx,yy); else g.lineTo(xx,yy); }
+ g.stroke();
+ // point courant
+ var a0=acc(nImg), px=bx+W*(nImg-100)/9900, py=by+H-(a0-60)/40*H;
+ g.fillStyle='#C0492E'; g.beginPath(); g.arc(px,py,8,0,7); g.fill();
+ g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ g.fillText('précision ≈ '+a0.toFixed(1).replace('.',',')+' %',680,64);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText(nImg<1000?'la courbe grimpe vite…':'…puis elle SATURE',680,94);
   }
   setInterval(step,40); step();
 })();
@@ -622,9 +459,9 @@ el('submit').addEventListener('click',function(){
   document.querySelectorAll('select, .numin, #nSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
   if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
-    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
-  catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
-  else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
+ el('scoreSt').textContent+='·  résultat envoyé au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='·  (hors-ligne : résultat non envoyé).'; } }
+  else { el('scoreSt').textContent+='·  (hors-ligne : résultat non envoyé).'; }
 });
 
 /* ============ espace enseignant ============ */
@@ -635,18 +472,18 @@ el('refresh') && el('refresh').addEventListener('click',loadDash);
 function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
-    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
-    var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
-    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:130px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
-    el('perQ').innerHTML=pq;
-    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
-    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+ var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+ var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+ rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
+ var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
+ el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+ var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+ for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+ pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:130px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+ el('perQ').innerHTML=pq;
+ var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+ rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+ if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
 </script>

@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:18px;line-height:1.55}
@@ -55,124 +54,7 @@
   .good{color:var(--green);font-weight:600} .warn{color:var(--copper);font-weight:600}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Matériaux &amp; éco-conception<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="shell">
-    <nav class="nav" id="nav"><p class="kick">Matériaux &amp; éco-conception</p></nav>
-    <main class="main" id="main">
-
-      <section class="slide" id="s1">
-        <p class="eyebrow">Sciences de l'ingénieur · Première</p>
-        <h2>Choisir un matériau</h2>
-        <p class="lede">Derrière chaque objet, des choix de matériaux. Aujourd'hui, on choisit aussi selon leur <b>impact sur la planète</b>.</p>
-        <div class="two">
-          <div>
-            <span class="pill">propriétés</span><span class="pill">coût</span><span class="pill">impact environnemental</span>
-            <p>Un même objet peut être en métal, en plastique ou en composite. Le bon choix dépend du <b>besoin</b> (résistance, masse, prix…) et, de plus en plus, de son <b>empreinte écologique</b>.</p>
-          </div>
-          <figure><div class="lab">Un objet = des matériaux choisis</div>
-            <svg viewBox="0 0 440 200" style="width:100%;height:auto;display:block" aria-label="Un vélo et ses matériaux">
-              <circle cx="130" cy="140" r="42" fill="none" stroke="#2A2622" stroke-width="4"/><circle cx="320" cy="140" r="42" fill="none" stroke="#2A2622" stroke-width="4"/>
-              <path d="M130 140 L210 140 L250 80 L320 140 M210 140 L250 80 M250 80 L200 80" fill="none" stroke="#2E6A8E" stroke-width="5"/>
-              <path d="M195 76 h20" stroke="#2A2622" stroke-width="5"/>
-              <text x="250" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#2E6A8E">cadre : alu / acier / carbone ?</text>
-              <text x="130" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">pneu : élastomère</text>
-              <text x="330" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">jante : alliage</text>
-            </svg>
-          </figure>
-        </div>
-      </section>
-
-      <section class="slide" id="s2">
-        <p class="eyebrow">Panorama</p>
-        <h2>Les grandes familles</h2>
-        <p class="lede">Quatre familles, quatre comportements.</p>
-        <div class="cards">
-          <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Métaux &amp; alliages</div><small>Acier, aluminium… Résistants, rigides, conducteurs, recyclables — mais souvent lourds.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--plum)"></span>Polymères</div><small>Plastiques, élastomères. Légers, peu chers, mis en forme facilement — recyclage plus délicat.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Céramiques &amp; verres</div><small>Très durs, résistants à la chaleur — mais fragiles (cassants).</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Composites</div><small>Fibres + matrice (carbone, verre). Très légers ET résistants — chers et difficiles à recycler.</small></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s3">
-        <p class="eyebrow">Critères</p>
-        <h2>Les propriétés qui guident le choix</h2>
-        <p class="lede">On ne regarde jamais un seul critère.</p>
-        <div class="cards">
-          <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Mécaniques</div><small>Résistance, rigidité, dureté, ténacité.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Masse volumique</div><small>Décisive pour l'allègement (transport, mobilité).</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Coût &amp; mise en œuvre</div><small>Prix matière + facilité de fabrication.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Recyclabilité &amp; durabilité</div><small>Fin de vie, longévité, réparabilité.</small></div>
-        </div>
-        <p style="margin-top:12px;color:var(--sub)">💡 Un matériau « meilleur » n'existe pas dans l'absolu : tout dépend de la fonction visée.</p>
-      </section>
-
-      <section class="slide" id="s4">
-        <p class="eyebrow">Décider</p>
-        <h2>Un compromis multicritère</h2>
-        <p class="lede">Comparer plusieurs matériaux sur les <b>mêmes critères</b>: aucun ne gagne partout.</p>
-        <figure><div class="lab">Profil de 3 matériaux sur 5 critères</div>
-          <canvas id="cvRadar" width="900" height="360" style="width:100%;height:auto;display:block" aria-label="Radar multicritère acier / aluminium / composite"></canvas>
-          <div class="cap"><button class="stepbtn" id="radPrev" aria-label="Étape précédente">◀</button><b id="radPh">①</b><span id="radCap">Chaque matériau a un profil sur plusieurs critères.</span><button class="stepbtn" id="radNext" aria-label="Étape suivante">▶</button></div>
-        </figure>
-      </section>
-
-      <section class="slide" id="s5">
-        <p class="eyebrow">Penser le produit</p>
-        <h2>Le cycle de vie</h2>
-        <p class="lede">Un produit vit en plusieurs étapes — « du berceau à la tombe », et parfois retour au berceau.</p>
-        <figure><div class="lab">Les 5 étapes de la vie d'un produit</div>
-          <canvas id="cvLife" width="900" height="330" style="width:100%;height:auto;display:block" aria-label="Cycle de vie d'un produit en 5 étapes"></canvas>
-          <div class="cap"><button class="stepbtn" id="lifePrev" aria-label="Étape précédente">◀</button><b id="lifePh">①</b><span id="lifeCap">Extraction : on prélève les matières premières.</span><button class="stepbtn" id="lifeNext" aria-label="Étape suivante">▶</button></div>
-        </figure>
-      </section>
-
-      <section class="slide" id="s6">
-        <p class="eyebrow">Mesurer</p>
-        <h2>L'analyse du cycle de vie (ACV)</h2>
-        <p class="lede">L'ACV chiffre l'<b>impact environnemental</b> de chaque étape (énergie, CO₂, eau…) pour agir là où ça compte.</p>
-        <figure><div class="lab">Impact CO₂ par étape (exemple)</div>
-          <canvas id="cvAcv" width="900" height="330" style="width:100%;height:auto;display:block" aria-label="Analyse du cycle de vie : impact par étape"></canvas>
-          <div class="cap"><button class="stepbtn" id="acvPrev" aria-label="Étape précédente">◀</button><b id="acvPh">①</b><span id="acvCap">On mesure l'impact de chaque étape.</span><button class="stepbtn" id="acvNext" aria-label="Étape suivante">▶</button></div>
-        </figure>
-      </section>
-
-      <section class="slide" id="s7">
-        <p class="eyebrow">Agir</p>
-        <h2>L'éco-conception</h2>
-        <p class="lede">Concevoir dès le départ pour <b>réduire l'impact</b> sur tout le cycle de vie.</p>
-        <div class="cards">
-          <div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Moins de matière</div><small>Alléger, optimiser les formes, éviter le superflu.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Matière recyclée / recyclable</div><small>Boucler le cycle, choisir des matériaux réutilisables.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Durabilité &amp; réparabilité</div><small>Faire durer, permettre la réparation et le démontage.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--plum)"></span>Sobriété d'usage</div><small>Réduire la consommation d'énergie pendant l'utilisation.</small></div>
-          <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Circuits courts</div><small>Limiter les transports, produire plus près.</small></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s8">
-        <p class="eyebrow">Synthèse</p>
-        <h2>À retenir</h2>
-        <ul class="tight" style="font-size:19px">
-          <li>4 familles : <b>métaux, polymères, céramiques, composites</b>.</li>
-          <li>Le choix est un <b>compromis multicritère</b> : propriétés, coût, masse, recyclabilité…</li>
-          <li>Un produit a un <b>cycle de vie</b> : extraction → fabrication → distribution → usage → fin de vie.</li>
-          <li>L'<b>ACV</b> chiffre l'impact de chaque étape et repère la plus lourde.</li>
-          <li>L'<b>éco-conception</b> réduit l'impact dès la conception (matière, durabilité, fin de vie).</li>
-        </ul>
-      </section>
-
-    </main>
-  </div>
-  <div class="keyhint">↑ ↓ pour naviguer</div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Matériaux &amp; éco-conception<br>© ESTIC — Tous droits réservés</div></div> <div class="shell"><nav class="nav" id="nav"><p class="kick">Matériaux &amp; éco-conception</p></nav> <main class="main" id="main"> <section class="slide" id="s1"> <p class="eyebrow">Sciences de l'ingénieur · Première</p> <h2>Choisir un matériau</h2> <p class="lede">Derrière chaque objet, des choix de matériaux. Aujourd'hui, on choisit aussi selon leur <b>impact sur la planète</b>.</p> <div class="two"><div><span class="pill">propriétés</span><span class="pill">coût</span><span class="pill">impact environnemental</span> <p>Un même objet peut être en métal, en plastique ou en composite. Le bon choix dépend du <b>besoin</b> (résistance, masse, prix…) et, de plus en plus, de son <b>empreinte écologique</b>.</p></div> <figure><div class="lab">Un objet = des matériaux choisis</div> <svg viewBox="0 0 440 200" style="width:100%;height:auto;display:block" aria-label="Un vélo et ses matériaux"> <circle cx="130" cy="140" r="42" fill="none" stroke="#2A2622" stroke-width="4"/><circle cx="320" cy="140" r="42" fill="none" stroke="#2A2622" stroke-width="4"/> <path d="M130 140 L210 140 L250 80 L320 140 M210 140 L250 80 M250 80 L200 80" fill="none" stroke="#2E6A8E" stroke-width="5"/><path d="M195 76 h20" stroke="#2A2622" stroke-width="5"/><text x="250" y="52" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="#2E6A8E">cadre : alu / acier / carbone ?</text> <text x="130" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">pneu : élastomère</text> <text x="330" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">jante : alliage</text> </svg> </figure></div> </section> <section class="slide" id="s2"> <p class="eyebrow">Panorama</p> <h2>Les grandes familles</h2> <p class="lede">Quatre familles, quatre comportements.</p> <div class="cards"><div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Métaux &amp; alliages</div><small>Acier, aluminium… Résistants, rigides, conducteurs, recyclables — mais souvent lourds.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--plum)"></span>Polymères</div><small>Plastiques, élastomères. Légers, peu chers, mis en forme facilement — recyclage plus délicat.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Céramiques &amp; verres</div><small>Très durs, résistants à la chaleur — mais fragiles (cassants).</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Composites</div><small>Fibres + matrice (carbone, verre). Très légers ET résistants — chers et difficiles à recycler.</small></div></div> </section> <section class="slide" id="s3"> <p class="eyebrow">Critères</p> <h2>Les propriétés qui guident le choix</h2> <p class="lede">On ne regarde jamais un seul critère.</p> <div class="cards"><div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Mécaniques</div><small>Résistance, rigidité, dureté, ténacité.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Masse volumique</div><small>Décisive pour l'allègement (transport, mobilité).</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Coût &amp; mise en œuvre</div><small>Prix matière + facilité de fabrication.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Recyclabilité &amp; durabilité</div><small>Fin de vie, longévité, réparabilité.</small></div></div> <p style="margin-top:12px;color:var(--sub)">Un matériau « meilleur » n'existe pas dans l'absolu : tout dépend de la fonction visée.</p> </section> <section class="slide" id="s4"> <p class="eyebrow">Décider</p> <h2>Un compromis multicritère</h2> <p class="lede">Comparer plusieurs matériaux sur les <b>mêmes critères</b>: aucun ne gagne partout.</p> <figure><div class="lab">Profil de 3 matériaux sur 5 critères</div> <canvas id="cvRadar" width="900" height="360" style="width:100%;height:auto;display:block" aria-label="Radar multicritère acier / aluminium / composite"></canvas> <div class="cap"><button class="stepbtn" id="radPrev" aria-label="Étape précédente">◀</button><b id="radPh">①</b><span id="radCap">Chaque matériau a un profil sur plusieurs critères.</span><button class="stepbtn" id="radNext" aria-label="Étape suivante">▶</button></div> </figure> </section> <section class="slide" id="s5"> <p class="eyebrow">Penser le produit</p> <h2>Le cycle de vie</h2> <p class="lede">Un produit vit en plusieurs étapes — « du berceau à la tombe », et parfois retour au berceau.</p> <figure><div class="lab">Les 5 étapes de la vie d'un produit</div> <canvas id="cvLife" width="900" height="330" style="width:100%;height:auto;display:block" aria-label="Cycle de vie d'un produit en 5 étapes"></canvas> <div class="cap"><button class="stepbtn" id="lifePrev" aria-label="Étape précédente">◀</button><b id="lifePh">①</b><span id="lifeCap">Extraction : on prélève les matières premières.</span><button class="stepbtn" id="lifeNext" aria-label="Étape suivante">▶</button></div> </figure> </section> <section class="slide" id="s6"> <p class="eyebrow">Mesurer</p> <h2>L'analyse du cycle de vie (ACV)</h2> <p class="lede">L'ACV chiffre l'<b>impact environnemental</b> de chaque étape (énergie, CO₂, eau…) pour agir là où ça compte.</p> <figure><div class="lab">Impact CO₂ par étape (exemple)</div> <canvas id="cvAcv" width="900" height="330" style="width:100%;height:auto;display:block" aria-label="Analyse du cycle de vie : impact par étape"></canvas> <div class="cap"><button class="stepbtn" id="acvPrev" aria-label="Étape précédente">◀</button><b id="acvPh">①</b><span id="acvCap">On mesure l'impact de chaque étape.</span><button class="stepbtn" id="acvNext" aria-label="Étape suivante">▶</button></div> </figure> </section> <section class="slide" id="s7"> <p class="eyebrow">Agir</p> <h2>L'éco-conception</h2> <p class="lede">Concevoir dès le départ pour <b>réduire l'impact</b> sur tout le cycle de vie.</p> <div class="cards"><div class="card"><div class="h"><span class="dot" style="background:var(--steel)"></span>Moins de matière</div><small>Alléger, optimiser les formes, éviter le superflu.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--green)"></span>Matière recyclée / recyclable</div><small>Boucler le cycle, choisir des matériaux réutilisables.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--amber)"></span>Durabilité &amp; réparabilité</div><small>Faire durer, permettre la réparation et le démontage.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--plum)"></span>Sobriété d'usage</div><small>Réduire la consommation d'énergie pendant l'utilisation.</small></div> <div class="card"><div class="h"><span class="dot" style="background:var(--copper)"></span>Circuits courts</div><small>Limiter les transports, produire plus près.</small></div></div> </section> <section class="slide" id="s8"> <p class="eyebrow">Synthèse</p> <h2>À retenir</h2> <ul class="tight" style="font-size:19px"> <li>4 familles : <b>métaux, polymères, céramiques, composites</b>.</li> <li>Le choix est un <b>compromis multicritère</b> : propriétés, coût, masse, recyclabilité…</li> <li>Un produit a un <b>cycle de vie</b> : extraction → fabrication → distribution → usage → fin de vie.</li> <li>L'<b>ACV</b> chiffre l'impact de chaque étape et repère la plus lourde.</li> <li>L'<b>éco-conception</b> réduit l'impact dès la conception (matière, durabilité, fin de vie).</li> </ul> </section> </main></div> <div class="keyhint">↑ ↓ pour naviguer</div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var slides=['s1','s2','s3','s4','s5','s6','s7','s8'];
@@ -192,9 +74,9 @@ document.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'||e.key==
 function stepper(prevId,nextId,phId,capId,caps,onChange){
   var phase=0, marks=['\u2460','\u2461','\u2462','\u2463','\u2464','\u2465'];
   function setPhase(p){ phase=Math.max(0,Math.min(caps.length-1,p));
-    el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
-    el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
-    if(onChange) onChange(phase); }
+ el(capId).textContent=caps[phase]; el(phId).textContent=marks[phase];
+ el(prevId).disabled=(phase===0); el(nextId).disabled=(phase===caps.length-1);
+ if(onChange) onChange(phase); }
   el(prevId).addEventListener('click',function(){ setPhase(phase-1); });
   el(nextId).addEventListener('click',function(){ setPhase(phase+1); });
   setPhase(0);
@@ -208,40 +90,40 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
   var axes=['Légèreté','Résistance','Faible coût','Recyclabilité','Mise en œuvre'];
   var mats=[{n:'Acier',c:'#2E6A8E',v:[0.2,0.9,0.8,0.9,0.8]},{n:'Aluminium',c:'#3D7E5F',v:[0.7,0.6,0.5,0.8,0.6]},{n:'Composite carbone',c:'#8A5A7A',v:[0.9,0.8,0.2,0.2,0.4]}];
   var caps=['Chaque matériau a un profil : fort sur certains critères, faible sur d\u2019autres.',
-            'On compare les matériaux sur les MÊMES 5 critères (ici acier, alu, composite).',
-            'Aucun ne gagne partout : le bon choix est un COMPROMIS selon le besoin.'];
+ 'On compare les matériaux sur les MÊMES 5 critères (ici acier, alu, composite).',
+ 'Aucun ne gagne partout : le bon choix est un COMPROMIS selon le besoin.'];
   var getPhase=stepper('radPrev','radNext','radPh','radCap',caps,null);
   function pt(i,val){ var a=-Math.PI/2 + i*2*Math.PI/5; return [cx+Math.cos(a)*R*val, cy+Math.sin(a)*R*val]; }
   function lerp(a,b,t){ return a+(b-a)*t; }
   var T=0;
   function poly(vals,col){ g.beginPath(); for(var i=0;i<5;i++){ var p=pt(i,vals[i]); if(i===0)g.moveTo(p[0],p[1]); else g.lineTo(p[0],p[1]); } g.closePath();
-    g.strokeStyle=col; g.lineWidth=2.5; g.stroke(); }
+ g.strokeStyle=col; g.lineWidth=2.5; g.stroke(); }
   function polyFill(vals,col,alpha){ g.save(); g.beginPath(); for(var i=0;i<5;i++){ var p=pt(i,vals[i]); if(i===0)g.moveTo(p[0],p[1]); else g.lineTo(p[0],p[1]); } g.closePath();
-    g.globalAlpha=alpha; g.fillStyle=col; g.fill(); g.globalAlpha=1; g.restore(); poly(vals,col); }
+ g.globalAlpha=alpha; g.fillStyle=col; g.fill(); g.globalAlpha=1; g.restore(); poly(vals,col); }
   function step(){
-    T+=0.03; if(T>6.5) T=0;
-    var phase=getPhase();
-    g.clearRect(0,0,W,H);
-    // toile
-    g.strokeStyle='#E4DCCB'; g.lineWidth=1;
-    for(var r=1;r<=4;r++){ g.beginPath(); for(var i=0;i<5;i++){ var p=pt(i,r/4); if(i===0)g.moveTo(p[0],p[1]); else g.lineTo(p[0],p[1]); } g.closePath(); g.stroke(); }
-    g.strokeStyle='#d9cfbb'; for(var j=0;j<5;j++){ var e=pt(j,1); g.beginPath(); g.moveTo(cx,cy); g.lineTo(e[0],e[1]); g.stroke(); }
-    // labels
-    g.fillStyle='#5C544B'; g.font='13px "JetBrains Mono",monospace'; g.textAlign='center';
-    for(var k=0;k<5;k++){ var lp=pt(k,1.18); g.fillText(axes[k],lp[0],lp[1]+4); }
-    var cur, name, col;
-    if(phase===0){ cur=mats[0].v; name=mats[0].n; col=mats[0].c; polyFill(cur,col,0.16); }
-    else if(phase===1){ var u=T/6.5*3; var idx=Math.floor(u)%3, fr=u-Math.floor(u); var m0=mats[idx], m1=mats[(idx+1)%3];
-      cur=m0.v.map(function(v,ii){return lerp(v,m1.v[ii],fr);}); name=fr<0.5?m0.n:m1.n; col=fr<0.5?m0.c:m1.c;
-      polyFill(cur,col,0.16);
-    } else {
-      mats.forEach(function(m){ polyFill(m.v,m.c,0.12); }); name='compromis'; col='#2A2622';
-    }
-    // légende
-    g.textAlign='left'; g.font='700 15px "Bricolage Grotesque",sans-serif';
-    if(phase<2){ g.fillStyle=col; g.fillText(name, 560, 70); }
-    g.font='13px "JetBrains Mono",monospace';
-    mats.forEach(function(m,i){ g.fillStyle=m.c; g.fillRect(560,100+i*26,14,14); g.fillStyle='#2A2622'; g.fillText(m.n,582,112+i*26); });
+ T+=0.03; if(T>6.5) T=0;
+ var phase=getPhase();
+ g.clearRect(0,0,W,H);
+ // toile
+ g.strokeStyle='#E4DCCB'; g.lineWidth=1;
+ for(var r=1;r<=4;r++){ g.beginPath(); for(var i=0;i<5;i++){ var p=pt(i,r/4); if(i===0)g.moveTo(p[0],p[1]); else g.lineTo(p[0],p[1]); } g.closePath(); g.stroke(); }
+ g.strokeStyle='#d9cfbb'; for(var j=0;j<5;j++){ var e=pt(j,1); g.beginPath(); g.moveTo(cx,cy); g.lineTo(e[0],e[1]); g.stroke(); }
+ // labels
+ g.fillStyle='#5C544B'; g.font='13px "JetBrains Mono",monospace'; g.textAlign='center';
+ for(var k=0;k<5;k++){ var lp=pt(k,1.18); g.fillText(axes[k],lp[0],lp[1]+4); }
+ var cur, name, col;
+ if(phase===0){ cur=mats[0].v; name=mats[0].n; col=mats[0].c; polyFill(cur,col,0.16); }
+ else if(phase===1){ var u=T/6.5*3; var idx=Math.floor(u)%3, fr=u-Math.floor(u); var m0=mats[idx], m1=mats[(idx+1)%3];
+ cur=m0.v.map(function(v,ii){return lerp(v,m1.v[ii],fr);}); name=fr<0.5?m0.n:m1.n; col=fr<0.5?m0.c:m1.c;
+ polyFill(cur,col,0.16);
+ } else {
+ mats.forEach(function(m){ polyFill(m.v,m.c,0.12); }); name='compromis'; col='#2A2622';
+ }
+ // légende
+ g.textAlign='left'; g.font='700 15px "Bricolage Grotesque",sans-serif';
+ if(phase<2){ g.fillStyle=col; g.fillText(name, 560, 70); }
+ g.font='13px "JetBrains Mono",monospace';
+ mats.forEach(function(m,i){ g.fillStyle=m.c; g.fillRect(560,100+i*26,14,14); g.fillStyle='#2A2622'; g.fillText(m.n,582,112+i*26); });
   }
   setInterval(step,40); step();
 })();
@@ -252,29 +134,29 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
   var cx=450, cy=165, R=118;
   var stg=[['Extraction','#8A5A7A'],['Fabrication','#2E6A8E'],['Distribution','#BD8A2A'],['Usage','#3D7E5F'],['Fin de vie','#C0492E']];
   var caps=['Extraction : on prélève les matières premières (minerai, pétrole, bois…).',
-            'Fabrication : on transforme la matière en pièces puis en produit.',
-            'Distribution : on emballe et on transporte le produit.',
-            'Usage : le produit est utilisé (parfois en consommant de l\u2019énergie).',
-            'Fin de vie : recyclage, réemploi ou déchet — la boucle peut se refermer.'];
+ 'Fabrication : on transforme la matière en pièces puis en produit.',
+ 'Distribution : on emballe et on transporte le produit.',
+ 'Usage : le produit est utilisé (parfois en consommant de l\u2019énergie).',
+ 'Fin de vie : recyclage, réemploi ou déchet — la boucle peut se refermer.'];
   var getPhase=stepper('lifePrev','lifeNext','lifePh','lifeCap',caps,null);
   function pos(i){ var a=-Math.PI/2 + i*2*Math.PI/5; return [cx+Math.cos(a)*R, cy+Math.sin(a)*R]; }
   var tick=0;
   function step(){
-    tick+=1; if(tick>42) tick=0;
-    var active=getPhase();
-    g.clearRect(0,0,W,H);
-    g.strokeStyle='#E4DCCB'; g.lineWidth=8; g.beginPath(); g.arc(cx,cy,R,0,7); g.stroke();
-    var da=(tick/42); var ang=-Math.PI/2 + (active+da)*2*Math.PI/5;
-    for(var i=0;i<5;i++){ var p=pos(i); var on=(i===active);
-      g.fillStyle=on?stg[i][1]:'#FFFDF8'; g.strokeStyle=stg[i][1]; g.lineWidth=on?3:2;
-      g.beginPath(); g.arc(p[0],p[1],on?30:24,0,7); g.fill(); g.stroke();
-      g.fillStyle=on?'#fff':stg[i][1]; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-      g.fillText((i+1)+'', p[0], p[1]+4);
-      g.fillStyle='#2A2622'; g.font='700 14px "Bricolage Grotesque",sans-serif';
-      var lp=[cx+(p[0]-cx)*1.42, cy+(p[1]-cy)*1.42]; g.fillText(stg[i][0], lp[0], lp[1]+4);
-    }
-    var jp=[cx+Math.cos(ang)*R, cy+Math.sin(ang)*R]; g.fillStyle='#2A2622'; g.beginPath(); g.arc(jp[0],jp[1],6,0,7); g.fill();
-    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('boucle',cx,cy-4); g.fillText('produit',cx,cy+12);
+ tick+=1; if(tick>42) tick=0;
+ var active=getPhase();
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='#E4DCCB'; g.lineWidth=8; g.beginPath(); g.arc(cx,cy,R,0,7); g.stroke();
+ var da=(tick/42); var ang=-Math.PI/2 + (active+da)*2*Math.PI/5;
+ for(var i=0;i<5;i++){ var p=pos(i); var on=(i===active);
+ g.fillStyle=on?stg[i][1]:'#FFFDF8'; g.strokeStyle=stg[i][1]; g.lineWidth=on?3:2;
+ g.beginPath(); g.arc(p[0],p[1],on?30:24,0,7); g.fill(); g.stroke();
+ g.fillStyle=on?'#fff':stg[i][1]; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText((i+1)+'', p[0], p[1]+4);
+ g.fillStyle='#2A2622'; g.font='700 14px "Bricolage Grotesque",sans-serif';
+ var lp=[cx+(p[0]-cx)*1.42, cy+(p[1]-cy)*1.42]; g.fillText(stg[i][0], lp[0], lp[1]+4);
+ }
+ var jp=[cx+Math.cos(ang)*R, cy+Math.sin(ang)*R]; g.fillStyle='#2A2622'; g.beginPath(); g.arc(jp[0],jp[1],6,0,7); g.fill();
+ g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('boucle',cx,cy-4); g.fillText('produit',cx,cy+12);
   }
   setInterval(step,40); step();
 })();
@@ -286,29 +168,29 @@ function stepper(prevId,nextId,phId,capId,caps,onChange){
   var vals=[28,42,12,13,5]; var cols=['#8A5A7A','#2E6A8E','#BD8A2A','#3D7E5F','#C0492E'];
   var maxV=45, x0=120, bw=110, gap=40, base=250;
   var caps=['On mesure l\u2019impact de chaque étape (énergie, CO₂, eau…).',
-            'On additionne : voilà l\u2019empreinte totale du produit.',
-            'On repère l\u2019étape la plus impactante pour agir en PRIORITÉ.'];
+ 'On additionne : voilà l\u2019empreinte totale du produit.',
+ 'On repère l\u2019étape la plus impactante pour agir en PRIORITÉ.'];
   var getPhase=stepper('acvPrev','acvNext','acvPh','acvCap',caps,null);
   var T=0;
   function step(){
-    T+=0.03; if(T>4.4) T=0;
-    var phase=getPhase();
-    g.clearRect(0,0,W,H);
-    g.strokeStyle='#d9cfbb'; g.lineWidth=1; g.beginPath(); g.moveTo(x0-20,base); g.lineTo(x0+5*(bw+gap),base); g.stroke();
-    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left'; g.save(); g.translate(40,150); g.rotate(-Math.PI/2); g.textAlign='center'; g.fillText('impact CO₂ (relatif)',0,0); g.restore();
-    var reveal = phase===0 ? Math.min(5, (T/0.7)) : 5;
-    var maxIdx=1; // fabrication
-    for(var i=0;i<5;i++){ var grow=Math.max(0,Math.min(1, reveal-i)); var h=vals[i]/maxV*(base-70)*grow;
-      var bx=x0+i*(bw+gap);
-      g.fillStyle=cols[i]; if(phase>=2 && i!==maxIdx) g.globalAlpha=0.35;
-      g.fillRect(bx,base-h,bw,h); g.globalAlpha=1;
-      g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
-      if(grow>0.5) g.fillText(vals[i]+'', bx+bw/2, base-h-8);
-      g.fillStyle='#5C544B'; g.font='12px "Bricolage Grotesque",sans-serif'; g.fillText(names[i], bx+bw/2, base+18);
-      if(phase>=2 && i===maxIdx){ g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.strokeRect(bx-3,base-h-3,bw+6,h+3);
-        g.fillStyle='#C0492E'; g.font='700 13px "Bricolage Grotesque",sans-serif'; g.fillText('à traiter en priorité', bx+bw/2, base-h-26); }
-    }
-    if(phase>=1){ var tot=vals.reduce(function(a,b){return a+b;},0); g.fillStyle='#2A2622'; g.font='700 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left'; g.fillText('Total ≈ '+tot+' (empreinte du produit)', x0, 40); }
+ T+=0.03; if(T>4.4) T=0;
+ var phase=getPhase();
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='#d9cfbb'; g.lineWidth=1; g.beginPath(); g.moveTo(x0-20,base); g.lineTo(x0+5*(bw+gap),base); g.stroke();
+ g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='left'; g.save(); g.translate(40,150); g.rotate(-Math.PI/2); g.textAlign='center'; g.fillText('impact CO₂ (relatif)',0,0); g.restore();
+ var reveal = phase===0 ? Math.min(5, (T/0.7)) : 5;
+ var maxIdx=1; // fabrication
+ for(var i=0;i<5;i++){ var grow=Math.max(0,Math.min(1, reveal-i)); var h=vals[i]/maxV*(base-70)*grow;
+ var bx=x0+i*(bw+gap);
+ g.fillStyle=cols[i]; if(phase>=2 && i!==maxIdx) g.globalAlpha=0.35;
+ g.fillRect(bx,base-h,bw,h); g.globalAlpha=1;
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+ if(grow>0.5) g.fillText(vals[i]+'', bx+bw/2, base-h-8);
+ g.fillStyle='#5C544B'; g.font='12px "Bricolage Grotesque",sans-serif'; g.fillText(names[i], bx+bw/2, base+18);
+ if(phase>=2 && i===maxIdx){ g.strokeStyle='#C0492E'; g.lineWidth=2.5; g.strokeRect(bx-3,base-h-3,bw+6,h+3);
+ g.fillStyle='#C0492E'; g.font='700 13px "Bricolage Grotesque",sans-serif'; g.fillText('à traiter en priorité', bx+bw/2, base-h-26); }
+ }
+ if(phase>=1){ var tot=vals.reduce(function(a,b){return a+b;},0); g.fillStyle='#2A2622'; g.font='700 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left'; g.fillText('Total ≈ '+tot+' (empreinte du produit)', x0, 40); }
   }
   setInterval(step,40); step();
 })();

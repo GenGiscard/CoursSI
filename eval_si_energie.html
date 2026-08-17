@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -117,138 +116,38 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="wrap">
-  <div class="topbar">
-    <div class="mark">SI</div>
-    <div><h1>Évaluation — Énergie</h1><p>Spé Sciences de l'ingénieur · Première</p></div>
-    <a class="back" href="hub_si_energie.html">← Séquence</a>
-  </div>
-
-  <!-- ACCUEIL -->
-  <section id="screen-home">
-    <div class="card">
-      <h2>Avant de commencer</h2>
-      <p class="lede">Cette évaluation comporte <b>3 exercices</b> appuyés sur des schémas animés&nbsp;: tu lis les données sur le schéma et tu calcules. Une <b>calculatrice</b> est à ta disposition sur le côté. Note finale sur 20.</p>
-      <label for="inNom">Nom et prénom</label>
-      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
-      <label for="inClasse">Classe</label>
-      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
-      <label for="inCode">Code d'accès</label>
-      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
-      <div class="err" id="homeErr"></div>
-      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
-    </div>
-    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
-  </section>
-
-  <!-- EXAM -->
-  <section id="screen-exam" hidden>
-    <div class="pbar"><span class="lab" id="progLab">0 / 10 questions</span><div class="track"><i id="progBar"></i></div></div>
-    <div class="exam-grid">
-      <div id="exoCol"></div>
-      <div class="calc-side">
-        <div class="calc">
-          <div class="ct">🧮 Calculatrice</div>
-          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
-          <div class="keys" id="calcKeys">
-            <button class="key clr" data-k="C">C</button>
-            <button class="key clr" data-k="back">⌫</button>
-            <button class="key op" data-k="(">(</button>
-            <button class="key op" data-k=")">)</button>
-            <button class="key" data-k="7">7</button>
-            <button class="key" data-k="8">8</button>
-            <button class="key" data-k="9">9</button>
-            <button class="key op" data-k="/">÷</button>
-            <button class="key" data-k="4">4</button>
-            <button class="key" data-k="5">5</button>
-            <button class="key" data-k="6">6</button>
-            <button class="key op" data-k="*">×</button>
-            <button class="key" data-k="1">1</button>
-            <button class="key" data-k="2">2</button>
-            <button class="key" data-k="3">3</button>
-            <button class="key op" data-k="-">−</button>
-            <button class="key" data-k="0">0</button>
-            <button class="key" data-k=".">.</button>
-            <button class="key fn" data-k="pi">π</button>
-            <button class="key op" data-k="+">+</button>
-            <button class="key fn" data-k="sqrt">√</button>
-            <button class="key eq" data-k="=">=</button>
-          </div>
-          <div class="chint">× et ÷ pour multiplier/diviser · π disponible · √( pour une racine</div>
-        </div>
-        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
-        <div class="err" id="examErr" style="text-align:center"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESULTAT -->
-  <section id="screen-result" hidden>
-    <div class="card">
-      <h2>Résultat</h2>
-      <div class="scorebig" id="scoreBig">0 / 20</div>
-      <div class="scoresub" id="scoreSub"></div>
-      <div><span class="rankpill" id="rankPill"></span></div>
-      <div class="recap" id="recap"></div>
-      <div class="sync" id="syncMsg"></div>
-    </div>
-  </section>
-
-  <!-- PROF -->
-  <section id="screen-prof" hidden>
-    <div class="card">
-      <h2>Espace enseignant</h2>
-      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
-      <div id="profGate">
-        <label for="inPass">Mot de passe</label>
-        <input type="password" id="inPass" autocomplete="off">
-        <div class="err" id="profErr"></div>
-        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
-          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
-      </div>
-      <div id="profData" hidden>
-        <div id="profTable"></div>
-        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
-          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<script>
-  var EVAL_CODE='ENERGIE2026';
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="wrap"><div class="topbar"><div class="mark">SI</div> <div><h1>Évaluation — Énergie</h1><p>Spé Sciences de l'ingénieur · Première</p></div> <a class="back" href="hub_si_energie.html">← Séquence</a></div> <!-- ACCUEIL --> <section id="screen-home"> <div class="card"><h2>Avant de commencer</h2> <p class="lede">Cette évaluation comporte <b>3 exercices</b> appuyés sur des schémas animés&nbsp;: tu lis les données sur le schéma et tu calcules. Une <b>calculatrice</b> est à ta disposition sur le côté. Note finale sur 20.</p> <label for="inNom">Nom et prénom</label> <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off"> <label for="inClasse">Classe</label> <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off"> <label for="inCode">Code d'accès</label> <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off"> <div class="err" id="homeErr"></div> <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div></div> <div class="footlink"><a id="profLink">Espace enseignant</a></div> </section> <!-- EXAM --> <section id="screen-exam" hidden> <div class="pbar"><span class="lab" id="progLab">0 / 10 questions</span><div class="track"><i id="progBar"></i></div></div> <div class="exam-grid"><div id="exoCol"></div> <div class="calc-side"><div class="calc"><div class="ct">Calculatrice</div> <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div> <div class="keys" id="calcKeys"><button class="key clr" data-k="C">C</button> <button class="key clr" data-k="back">⌫</button> <button class="key op" data-k="(">(</button> <button class="key op" data-k=")">)</button> <button class="key" data-k="7">7</button> <button class="key" data-k="8">8</button> <button class="key" data-k="9">9</button> <button class="key op" data-k="/">÷</button> <button class="key" data-k="4">4</button> <button class="key" data-k="5">5</button> <button class="key" data-k="6">6</button> <button class="key op" data-k="*">×</button> <button class="key" data-k="1">1</button> <button class="key" data-k="2">2</button> <button class="key" data-k="3">3</button> <button class="key op" data-k="-">−</button> <button class="key" data-k="0">0</button> <button class="key" data-k=".">.</button> <button class="key fn" data-k="pi">π</button> <button class="key op" data-k="+">+</button> <button class="key fn" data-k="sqrt">√</button> <button class="key eq" data-k="=">=</button></div> <div class="chint">× et ÷ pour multiplier/diviser · π disponible · √( pour une racine</div></div> <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div> <div class="err" id="examErr" style="text-align:center"></div></div></div> </section> <!-- RESULTAT --> <section id="screen-result" hidden> <div class="card"><h2>Résultat</h2> <div class="scorebig" id="scoreBig">0 / 20</div> <div class="scoresub" id="scoreSub"></div> <div><span class="rankpill" id="rankPill"></span></div> <div class="recap" id="recap"></div> <div class="sync" id="syncMsg"></div></div> </section> <!-- PROF --> <section id="screen-prof" hidden> <div class="card"><h2>Espace enseignant</h2> <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p> <div id="profGate"><label for="inPass">Mot de passe</label> <input type="password" id="inPass" autocomplete="off"> <div class="err" id="profErr"></div> <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button> <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div></div> <div id="profData" hidden><div id="profTable"></div> <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button> <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div></div></div> </section></div> <script> var EVAL_CODE='ENERGIE2026';
   var PROF_PASS='Agostini2025';
   var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
   var FB_NODE='resultats_si_energie';
 
   var EXOS=[
-    { anim:'motor', tag:'Exercice 1 · 10 pts', title:'La chaîne de puissance du VAE',
-      ctx:'Le moteur d\u2019un v\u00e9lo \u00e0 assistance \u00e9lectrique re\u00e7oit de la puissance \u00e9lectrique et fournit de la puissance m\u00e9canique. Lis les valeurs sur le sch\u00e9ma.',
-      data:[['Tension U','36 V'],['Intensit\u00e9 I','5 A'],['Couple moteur C','8 N\u00b7m'],['Vitesse \u03c9','20 rad/s']],
-      parts:[
-        {q:'Puissance \u00e9lectrique absorb\u00e9e ?', a:180, tol:1, pts:2, unit:'W', sol:'P_a = 36 \u00d7 5 = 180 W'},
-        {q:'Puissance m\u00e9canique utile ?', a:160, tol:1, pts:2, unit:'W', sol:'P_u = 8 \u00d7 20 = 160 W'},
-        {q:'Rendement du moteur ? (sans unit\u00e9)', a:0.89, tol:0.02, pts:3, unit:'', sol:'\u03b7 = 160/180 \u2248 0,89'},
-        {q:'Puissance perdue ?', a:20, tol:1, pts:3, unit:'W', sol:'P_pertes = 180 \u2212 160 = 20 W'}
-      ] },
-    { anim:'batt', tag:'Exercice 2 · 8 pts', title:'L\u2019autonomie de la batterie',
-      ctx:'La batterie du VAE stocke une \u00e9nergie ; le moteur la consomme \u00e0 une puissance moyenne. Rappel : E = P\u00b7\u0394t.',
-      data:[['Capacit\u00e9 batterie','500 Wh'],['Puissance moyenne P','250 W'],['Vitesse v','25 km/h']],
-      parts:[
-        {q:'Autonomie en temps ?', a:2, tol:0.1, pts:2, unit:'h', sol:'t = 500 / 250 = 2 h'},
-        {q:'Distance parcourue ?', a:50, tol:1, pts:3, unit:'km', sol:'d = 25 \u00d7 2 = 50 km'},
-        {q:'\u00c9nergie pour un trajet de 30 km ?', a:300, tol:10, pts:3, unit:'Wh', sol:'E = 250 \u00d7 (30/25) = 300 Wh'}
-      ] },
-    { anim:'flow', tag:'Exercice 3 · 7 pts', title:'Le rendement de la cha\u00eene compl\u00e8te',
-      ctx:'La puissance traverse trois \u00e9tages, chacun avec son rendement. Le rendement global est le produit des rendements.',
-      data:[['P absorb\u00e9e','250 W'],['Variateur \u03b7\u2081','0,95'],['Moteur \u03b7\u2082','0,85'],['R\u00e9ducteur \u03b7\u2083','0,92']],
-      parts:[
-        {q:'Rendement global ? (sans unit\u00e9)', a:0.743, tol:0.012, pts:3, unit:'', sol:'\u03b7 = 0,95 \u00d7 0,85 \u00d7 0,92 \u2248 0,743'},
-        {q:'Puissance utile en sortie ?', a:185.7, tol:3, pts:2, unit:'W', sol:'P_u = 250 \u00d7 0,743 \u2248 185,7 W'},
-        {q:'Puissance totale perdue ?', a:64.3, tol:3, pts:2, unit:'W', sol:'P_pertes = 250 \u2212 185,7 \u2248 64,3 W'}
-      ] }
+ { anim:'motor', tag:'Exercice 1 · 10 pts', title:'La chaîne de puissance du VAE',
+ ctx:'Le moteur d\u2019un v\u00e9lo \u00e0 assistance \u00e9lectrique re\u00e7oit de la puissance \u00e9lectrique et fournit de la puissance m\u00e9canique. Lis les valeurs sur le sch\u00e9ma.',
+ data:[['Tension U','36 V'],['Intensit\u00e9 I','5 A'],['Couple moteur C','8 N\u00b7m'],['Vitesse \u03c9','20 rad/s']],
+ parts:[
+ {q:'Puissance \u00e9lectrique absorb\u00e9e ?', a:180, tol:1, pts:2, unit:'W', sol:'P_a = 36 \u00d7 5 = 180 W'},
+ {q:'Puissance m\u00e9canique utile ?', a:160, tol:1, pts:2, unit:'W', sol:'P_u = 8 \u00d7 20 = 160 W'},
+ {q:'Rendement du moteur ? (sans unit\u00e9)', a:0.89, tol:0.02, pts:3, unit:'', sol:'\u03b7 = 160/180 \u2248 0,89'},
+ {q:'Puissance perdue ?', a:20, tol:1, pts:3, unit:'W', sol:'P_pertes = 180 \u2212 160 = 20 W'}
+ ] },
+ { anim:'batt', tag:'Exercice 2 · 8 pts', title:'L\u2019autonomie de la batterie',
+ ctx:'La batterie du VAE stocke une \u00e9nergie ; le moteur la consomme \u00e0 une puissance moyenne. Rappel : E = P\u00b7\u0394t.',
+ data:[['Capacit\u00e9 batterie','500 Wh'],['Puissance moyenne P','250 W'],['Vitesse v','25 km/h']],
+ parts:[
+ {q:'Autonomie en temps ?', a:2, tol:0.1, pts:2, unit:'h', sol:'t = 500 / 250 = 2 h'},
+ {q:'Distance parcourue ?', a:50, tol:1, pts:3, unit:'km', sol:'d = 25 \u00d7 2 = 50 km'},
+ {q:'\u00c9nergie pour un trajet de 30 km ?', a:300, tol:10, pts:3, unit:'Wh', sol:'E = 250 \u00d7 (30/25) = 300 Wh'}
+ ] },
+ { anim:'flow', tag:'Exercice 3 · 7 pts', title:'Le rendement de la cha\u00eene compl\u00e8te',
+ ctx:'La puissance traverse trois \u00e9tages, chacun avec son rendement. Le rendement global est le produit des rendements.',
+ data:[['P absorb\u00e9e','250 W'],['Variateur \u03b7\u2081','0,95'],['Moteur \u03b7\u2082','0,85'],['R\u00e9ducteur \u03b7\u2083','0,92']],
+ parts:[
+ {q:'Rendement global ? (sans unit\u00e9)', a:0.743, tol:0.012, pts:3, unit:'', sol:'\u03b7 = 0,95 \u00d7 0,85 \u00d7 0,92 \u2248 0,743'},
+ {q:'Puissance utile en sortie ?', a:185.7, tol:3, pts:2, unit:'W', sol:'P_u = 250 \u00d7 0,743 \u2248 185,7 W'},
+ {q:'Puissance totale perdue ?', a:64.3, tol:3, pts:2, unit:'W', sol:'P_pertes = 250 \u2212 185,7 \u2248 64,3 W'}
+ ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
 
@@ -257,119 +156,119 @@
   function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
 
   document.getElementById('startBtn').addEventListener('click',function(){
-    var nom=document.getElementById('inNom').value.trim();
-    var cls=document.getElementById('inClasse').value.trim();
-    var code=document.getElementById('inCode').value.trim();
-    var err=document.getElementById('homeErr');
-    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
-    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
-    err.textContent=''; student.nom=nom; student.classe=cls;
-    buildExam(); show('screen-exam'); startAnim();
+ var nom=document.getElementById('inNom').value.trim();
+ var cls=document.getElementById('inClasse').value.trim();
+ var code=document.getElementById('inCode').value.trim();
+ var err=document.getElementById('homeErr');
+ if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+ if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+ err.textContent=''; student.nom=nom; student.classe=cls;
+ buildExam(); show('screen-exam'); startAnim();
   });
   document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
 
   function buildExam(){
-    var col=document.getElementById('exoCol'); var html='';
-    EXOS.forEach(function(ex,ei){
-      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
-      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
-      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
-      ex.parts.forEach(function(p,pi){
-        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
-          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
-      });
-      html+='</div>';
-    });
-    col.innerHTML=html;
-    col.addEventListener('input',updateProgress);
-    updateProgress();
+ var col=document.getElementById('exoCol'); var html='';
+ EXOS.forEach(function(ex,ei){
+ html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+ html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+ html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+ ex.parts.forEach(function(p,pi){
+ html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+ '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
+ });
+ html+='</div>';
+ });
+ col.innerHTML=html;
+ col.addEventListener('input',updateProgress);
+ updateProgress();
   }
   function readAll(){
-    var vals={};
-    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
-    return vals;
+ var vals={};
+ document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
+ return vals;
   }
   function updateProgress(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
-    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
-    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+ document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+ document.getElementById('progBar').style.width=(n/NQ*100)+'%';
   }
 
   var warned=false;
   document.getElementById('submitBtn').addEventListener('click',function(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
-    var err=document.getElementById('examErr');
-    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
-    err.textContent=''; grade(vals);
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+ var err=document.getElementById('examErr');
+ if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+ err.textContent=''; grade(vals);
   });
 
   function grade(vals){
-    var pts=0, recapHtml='';
-    EXOS.forEach(function(ex,ei){
-      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
-      ex.parts.forEach(function(p,pi){
-        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
-        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
-        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
-        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
-      });
-      recapHtml+='</div>';
-    });
-    var pct=Math.round(pts/MAXPTS*100);
-    var note=Math.round(pts/MAXPTS*20*10)/10;
-    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
-    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
-    document.getElementById('rankPill').textContent=rank;
-    document.getElementById('recap').innerHTML=recapHtml;
-    show('screen-result'); animateScore(note); sendResult(pts,pct,note);
+ var pts=0, recapHtml='';
+ EXOS.forEach(function(ex,ei){
+ recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+ ex.parts.forEach(function(p,pi){
+ var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+ var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+ var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+ recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+ });
+ recapHtml+='</div>';
+ });
+ var pct=Math.round(pts/MAXPTS*100);
+ var note=Math.round(pts/MAXPTS*20*10)/10;
+ var rank = pct>=90?' Expert\u00b7e':pct>=70?' Ma\u00eetrise':pct>=50?' En progr\u00e8s':' \u00c0 retravailler';
+ document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+ document.getElementById('rankPill').textContent=rank;
+ document.getElementById('recap').innerHTML=recapHtml;
+ show('screen-result'); animateScore(note); sendResult(pts,pct,note);
   }
   function animateScore(note){
-    var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
-    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
+ var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
+ var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
   }
   function sendResult(pts,pct,note){
-    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
-    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
-    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
-      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+ var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+ var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+ fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+ .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+ .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+ .catch(function(){ msg.textContent=' Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
   }
 
   // ===== Calculatrice =====
   (function(){
-    var expr='', justEval=false;
-    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
-    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
-    function evaluate(){
-      try{
-        var s=expr, i=0;
-        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
-        function factor(){
-          if(s[i]==='-'){ i++; return -factor(); }
-          if(s[i]==='+'){ i++; return factor(); }
-          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
-          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
-          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
-          return number();
-        }
-        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
-        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
-        var res=expr2();
-        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
-        var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
-      }catch(e){ resEl.textContent='Erreur'; return null; }
-    }
-    function press(k){
-      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
-      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
-      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
-      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
-      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
-      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
-      expr+=k; disp();
-    }
-    document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
+ var expr='', justEval=false;
+ var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+ function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+ function evaluate(){
+ try{
+ var s=expr, i=0;
+ function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+ function factor(){
+ if(s[i]==='-'){ i++; return -factor(); }
+ if(s[i]==='+'){ i++; return factor(); }
+ if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+ if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+ if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+ return number();
+ }
+ function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+ function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+ var res=expr2();
+ if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+ var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
+ }catch(e){ resEl.textContent='Erreur'; return null; }
+ }
+ function press(k){
+ if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+ if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+ if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+ if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+ if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+ if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+ expr+=k; disp();
+ }
+ document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
   })();
 
   // ===== Animations =====
@@ -379,61 +278,61 @@
   function ctxOf(id){ var c=document.getElementById(id); return c&&c.getContext?{x:c.getContext('2d'),W:c.width,H:c.height}:null; }
 
   function drawMotor(){
-    var o=ctxOf('cv_motor'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var bx=W/2-62, by=H/2-46, bw=124, bh=92;
-    var wy1=H/2-22, wy2=H/2+22;
-    g.strokeStyle='#2E6A8E';g.lineWidth=3;
-    g.beginPath();g.moveTo(38,wy1);g.lineTo(bx,wy1);g.moveTo(38,wy2);g.lineTo(bx,wy2);g.stroke();
-    g.fillStyle='#2E6A8E';
-    for(var i=0;i<4;i++){ var t=((phase*0.4+i/4)%1); g.beginPath();g.arc(38+t*(bx-38),wy1,3.5,0,7);g.fill(); g.beginPath();g.arc(bx-t*(bx-38),wy2,3.5,0,7);g.fill(); }
-    g.fillStyle='#EDE4D4';g.fillRect(bx,by,bw,bh);g.strokeStyle='#5C544B';g.lineWidth=2.5;g.strokeRect(bx,by,bw,bh);
-    g.fillStyle='#2A2622';g.font='800 17px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('MOTEUR',W/2,H/2+6);
-    var sx=bx+bw, scy=H/2;
-    g.strokeStyle='#5C544B';g.lineWidth=6;g.beginPath();g.moveTo(sx,scy);g.lineTo(sx+34,scy);g.stroke();
-    g.save();g.translate(sx+56,scy);g.rotate(phase*2.2);g.strokeStyle='#B85C2E';g.lineWidth=4;
-    for(var k=0;k<4;k++){ g.rotate(Math.PI/2); g.beginPath();g.moveTo(0,0);g.lineTo(22,0);g.stroke(); } g.restore();
-    g.fillStyle='#2E6A8E';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
-    g.fillText('U = 36 V',44,wy1-9);g.fillText('I = 5 A',44,wy2+19);
-    g.fillStyle='#5C544B';g.fillText('P\u00e9lec \u2192',44,H-14);
-    g.fillStyle='#B85C2E';g.textAlign='right';g.fillText('C = 8 N\u00b7m',W-18,scy-26);g.fillText('\u03c9 = 20 rad/s',W-18,scy+34);
-    g.fillStyle='#5C544B';g.fillText('\u2192 Pm\u00e9ca',W-18,H-14);
+ var o=ctxOf('cv_motor'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var bx=W/2-62, by=H/2-46, bw=124, bh=92;
+ var wy1=H/2-22, wy2=H/2+22;
+ g.strokeStyle='#2E6A8E';g.lineWidth=3;
+ g.beginPath();g.moveTo(38,wy1);g.lineTo(bx,wy1);g.moveTo(38,wy2);g.lineTo(bx,wy2);g.stroke();
+ g.fillStyle='#2E6A8E';
+ for(var i=0;i<4;i++){ var t=((phase*0.4+i/4)%1); g.beginPath();g.arc(38+t*(bx-38),wy1,3.5,0,7);g.fill(); g.beginPath();g.arc(bx-t*(bx-38),wy2,3.5,0,7);g.fill(); }
+ g.fillStyle='#EDE4D4';g.fillRect(bx,by,bw,bh);g.strokeStyle='#5C544B';g.lineWidth=2.5;g.strokeRect(bx,by,bw,bh);
+ g.fillStyle='#2A2622';g.font='800 17px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('MOTEUR',W/2,H/2+6);
+ var sx=bx+bw, scy=H/2;
+ g.strokeStyle='#5C544B';g.lineWidth=6;g.beginPath();g.moveTo(sx,scy);g.lineTo(sx+34,scy);g.stroke();
+ g.save();g.translate(sx+56,scy);g.rotate(phase*2.2);g.strokeStyle='#B85C2E';g.lineWidth=4;
+ for(var k=0;k<4;k++){ g.rotate(Math.PI/2); g.beginPath();g.moveTo(0,0);g.lineTo(22,0);g.stroke(); } g.restore();
+ g.fillStyle='#2E6A8E';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
+ g.fillText('U = 36 V',44,wy1-9);g.fillText('I = 5 A',44,wy2+19);
+ g.fillStyle='#5C544B';g.fillText('P\u00e9lec \u2192',44,H-14);
+ g.fillStyle='#B85C2E';g.textAlign='right';g.fillText('C = 8 N\u00b7m',W-18,scy-26);g.fillText('\u03c9 = 20 rad/s',W-18,scy+34);
+ g.fillStyle='#5C544B';g.fillText('\u2192 Pm\u00e9ca',W-18,H-14);
   }
 
   function drawBatt(){
-    var o=ctxOf('cv_batt'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var bx=44, by=46, bw=120, bh=66;
-    g.strokeStyle='#5C544B';g.lineWidth=2.5;g.strokeRect(bx,by,bw,bh);
-    g.fillStyle='#5C544B';g.fillRect(bx+bw,by+18,7,bh-36);
-    var lvl=1-((phase*0.12)%1);
-    g.fillStyle= lvl>0.5?'#3D7E5F':(lvl>0.2?'#BD8A2A':'#C0492E');
-    g.fillRect(bx+4,by+4,(bw-8)*lvl,bh-8);
-    g.fillStyle='#2A2622';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(Math.round(lvl*500)+' Wh',bx+bw/2,by+bh+18);
-    g.fillStyle='#5C544B';g.font='800 13px "Bricolage Grotesque",sans-serif';g.fillText('Batterie 500 Wh',bx+bw/2,by-12);
-    var roadY=H-34;g.fillStyle='#ECE4D5';g.fillRect(210,roadY,W-230,22);
-    var tt=((phase*0.16)%1); var px=220+tt*(W-270);
-    g.strokeStyle='#B85C2E';g.lineWidth=2.5;g.fillStyle='#B85C2E';
-    g.beginPath();g.arc(px-13,roadY-6,9,0,7);g.stroke();g.beginPath();g.arc(px+15,roadY-6,9,0,7);g.stroke();
-    g.lineWidth=2;g.strokeStyle='#2A2622';g.beginPath();g.moveTo(px-13,roadY-6);g.lineTo(px+1,roadY-22);g.lineTo(px+15,roadY-6);g.moveTo(px+1,roadY-22);g.lineTo(px+9,roadY-32);g.stroke();
-    g.strokeStyle='#C0492E';g.lineWidth=2;g.setLineDash([5,4]);g.beginPath();g.moveTo(bx+bw+12,H/2+6);g.lineTo(205,H/2+6);g.stroke();g.setLineDash([]);
-    g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('P = 250 W  \u00b7  v = 25 km/h',210,28);
+ var o=ctxOf('cv_batt'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var bx=44, by=46, bw=120, bh=66;
+ g.strokeStyle='#5C544B';g.lineWidth=2.5;g.strokeRect(bx,by,bw,bh);
+ g.fillStyle='#5C544B';g.fillRect(bx+bw,by+18,7,bh-36);
+ var lvl=1-((phase*0.12)%1);
+ g.fillStyle= lvl>0.5?'#3D7E5F':(lvl>0.2?'#BD8A2A':'#C0492E');
+ g.fillRect(bx+4,by+4,(bw-8)*lvl,bh-8);
+ g.fillStyle='#2A2622';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(Math.round(lvl*500)+' Wh',bx+bw/2,by+bh+18);
+ g.fillStyle='#5C544B';g.font='800 13px "Bricolage Grotesque",sans-serif';g.fillText('Batterie 500 Wh',bx+bw/2,by-12);
+ var roadY=H-34;g.fillStyle='#ECE4D5';g.fillRect(210,roadY,W-230,22);
+ var tt=((phase*0.16)%1); var px=220+tt*(W-270);
+ g.strokeStyle='#B85C2E';g.lineWidth=2.5;g.fillStyle='#B85C2E';
+ g.beginPath();g.arc(px-13,roadY-6,9,0,7);g.stroke();g.beginPath();g.arc(px+15,roadY-6,9,0,7);g.stroke();
+ g.lineWidth=2;g.strokeStyle='#2A2622';g.beginPath();g.moveTo(px-13,roadY-6);g.lineTo(px+1,roadY-22);g.lineTo(px+15,roadY-6);g.moveTo(px+1,roadY-22);g.lineTo(px+9,roadY-32);g.stroke();
+ g.strokeStyle='#C0492E';g.lineWidth=2;g.setLineDash([5,4]);g.beginPath();g.moveTo(bx+bw+12,H/2+6);g.lineTo(205,H/2+6);g.stroke();g.setLineDash([]);
+ g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('P = 250 W  \u00b7  v = 25 km/h',210,28);
   }
 
   function drawFlow(){
-    var o=ctxOf('cv_flow'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var cy=H/2-2, x0=30, x1=W-30, seg=(x1-x0)/4;
-    var powers=[250,237.5,201.9,185.7], sc=46/250;
-    for(var s=0;s<4;s++){ var xa=x0+s*seg, xb=x0+(s+1)*seg, h=powers[s]*sc;
-      g.fillStyle='rgba(189,138,42,'+(0.28+0.10*(3-s))+')'; g.fillRect(xa,cy-h/2,xb-xa,h); }
-    g.fillStyle='#B85C2E';
-    for(var i=0;i<11;i++){ var t=((phase*0.22+i/11)%1); var px=x0+t*(x1-x0); var si=Math.min(3,Math.floor((px-x0)/seg)); var h2=powers[si]*sc; var py=cy+Math.sin(i*1.7+phase)*h2*0.32; g.beginPath();g.arc(px,py,2.6,0,7);g.fill(); }
-    var stages=[['Variateur','0,95'],['Moteur','0,85'],['R\u00e9ducteur','0,92']];
-    for(var k=0;k<3;k++){ var bxp=x0+(k+1)*seg;
-      g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.fillRect(bxp-36,cy-20,72,40);g.strokeRect(bxp-36,cy-20,72,40);
-      g.fillStyle='#2A2622';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(stages[k][0],bxp,cy-4);
-      g.fillStyle='#8a6313';g.fillText('\u03b7='+stages[k][1],bxp,cy+12);
-      g.strokeStyle='rgba(192,73,46,.55)';g.lineWidth=1.5;var hy=((phase*26)%16);g.beginPath();g.moveTo(bxp,cy+22);g.lineTo(bxp,cy+30+hy*0.25);g.stroke(); }
-    g.fillStyle='#2c6147';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('P_a = 250 W \u2192',x0,H-12);
-    g.textAlign='right';g.fillStyle='#8f3a24';g.fillText('pertes en chaleur \u2193  \u2192 P_u = ?',x1,H-12);
+ var o=ctxOf('cv_flow'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var cy=H/2-2, x0=30, x1=W-30, seg=(x1-x0)/4;
+ var powers=[250,237.5,201.9,185.7], sc=46/250;
+ for(var s=0;s<4;s++){ var xa=x0+s*seg, xb=x0+(s+1)*seg, h=powers[s]*sc;
+ g.fillStyle='rgba(189,138,42,'+(0.28+0.10*(3-s))+')'; g.fillRect(xa,cy-h/2,xb-xa,h); }
+ g.fillStyle='#B85C2E';
+ for(var i=0;i<11;i++){ var t=((phase*0.22+i/11)%1); var px=x0+t*(x1-x0); var si=Math.min(3,Math.floor((px-x0)/seg)); var h2=powers[si]*sc; var py=cy+Math.sin(i*1.7+phase)*h2*0.32; g.beginPath();g.arc(px,py,2.6,0,7);g.fill(); }
+ var stages=[['Variateur','0,95'],['Moteur','0,85'],['R\u00e9ducteur','0,92']];
+ for(var k=0;k<3;k++){ var bxp=x0+(k+1)*seg;
+ g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.fillRect(bxp-36,cy-20,72,40);g.strokeRect(bxp-36,cy-20,72,40);
+ g.fillStyle='#2A2622';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(stages[k][0],bxp,cy-4);
+ g.fillStyle='#8a6313';g.fillText('\u03b7='+stages[k][1],bxp,cy+12);
+ g.strokeStyle='rgba(192,73,46,.55)';g.lineWidth=1.5;var hy=((phase*26)%16);g.beginPath();g.moveTo(bxp,cy+22);g.lineTo(bxp,cy+30+hy*0.25);g.stroke(); }
+ g.fillStyle='#2c6147';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('P_a = 250 W \u2192',x0,H-12);
+ g.textAlign='right';g.fillStyle='#8f3a24';g.fillText('pertes en chaleur \u2193  \u2192 P_u = ?',x1,H-12);
   }
 
   // ===== Prof =====
@@ -441,27 +340,27 @@
   document.getElementById('profBack').addEventListener('click',backHome);
   document.getElementById('profBack2').addEventListener('click',backHome);
   document.getElementById('profBtn').addEventListener('click',function(){
-    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
-    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
-    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+ var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
+ if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+ err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
   });
   document.getElementById('profRefresh').addEventListener('click',loadResults);
   function loadResults(){
-    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
-    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
-      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
-      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
-      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
-      rows.forEach(function(r){
-        var d=r.date?new Date(r.date):null;
-        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
-        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
-        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
-      });
-      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
-      box.innerHTML=html;
-    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+ var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+ fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+ if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+ var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+ rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+ var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+ rows.forEach(function(r){
+ var d=r.date?new Date(r.date):null;
+ var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+ var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+ html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+ });
+ html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+ box.innerHTML=html;
+ }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
 </body>

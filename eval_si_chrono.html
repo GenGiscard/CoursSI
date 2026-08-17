@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
@@ -87,16 +86,16 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -108,158 +107,7 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Évaluation — Les chronogrammes<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>La station de contrôle</h1>
-      <p>Tu es l'opérateur de nuit de la station. Quatre pupitres t'attendent : un oscilloscope à décoder, une horloge à ausculter, un défi de lecture rapide et un variateur à régler. Chaque pupitre rapporte des points — bonne garde !</p>
-      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
-    </div>
-
-    <!-- ============ EX 1 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">1</span> L'oscilloscope de la machine <span class="pts">3 pts</span></h2>
-      <p class="task">La machine de tri envoie ce signal. La tête de lecture le retrace en boucle ; les instants <b>A</b> et <b>B</b> sont marqués.</p>
-      <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Signal de la machine avec instants A et B"></canvas></div>
-      <div class="qrow" id="q1a"><span class="sc">a) Valeur du signal à l'instant <b>A</b> (t = 5 ms) :</span>
-        <select id="s1a"><option>— choisir —</option><option>0</option><option>1</option></select></div>
-      <div class="qrow" id="q1b"><span class="sc">b) Valeur du signal à l'instant <b>B</b> (t = 8 ms) :</span>
-        <select id="s1b"><option>— choisir —</option><option>0</option><option>1</option></select></div>
-      <div class="qrow" id="q1c"><span class="sc">c) Nombre de <b>fronts montants</b> sur les 20 ms :</span>
-        <input class="numin" id="n1c" inputmode="numeric" placeholder="?"></div>
-      <div class="corr" id="c1"></div>
-    </section>
-
-    <!-- ============ EX 2 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">2</span> Le cœur de l'horloge <span class="pts">3 pts</span></h2>
-      <p class="task">Cette horloge interne bat régulièrement — regarde son motif pulser. À toi de mesurer son rythme.</p>
-      <div class="chrono"><canvas id="cv2" width="860" height="220" aria-label="Signal d'horloge périodique"></canvas></div>
-      <div class="qrow" id="q2a"><span class="sc">a) Période lue sur le chronogramme : T =</span>
-        <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">ms</span></div>
-      <div class="qrow" id="q2b"><span class="sc">b) Fréquence : f = 1/T =</span>
-        <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
-      <div class="qrow" id="q2c"><span class="sc">c) Ton cœur bat environ à 1,2 Hz. Cette horloge bat-elle plus vite que ton cœur ?</span>
-        <select id="s2c"><option>— choisir —</option><option>Oui, beaucoup plus vite</option><option>Non, plus lentement</option></select></div>
-      <div class="corr" id="c2"></div>
-    </section>
-
-    <!-- ============ EX 3 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">3</span> Défi : la chasse aux fronts <span class="pts">2 pts</span></h2>
-      <p class="task">Pupitre d'entraînement : <b>6 signaux</b> vont défiler. Pour chacun, réponds à la question posée. <b>Une seule tentative</b> — ton score au défi compte dans la note (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
-      <div class="game">
-        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
-        <canvas id="cv3" width="520" height="150" aria-label="Mini-chronogramme du défi"></canvas>
-        <div class="gq" id="gQ">Prêt ? Le défi comporte 6 signaux.</div>
-        <div class="gopts" id="gOpts"></div>
-        <div class="gmsg" id="gMsg"></div>
-        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
-      </div>
-      <div class="corr" id="c3"></div>
-    </section>
-
-    <!-- ============ EX 4 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">4</span> Le variateur PWM <span class="pts">2 pts</span></h2>
-      <p class="task">Ce variateur pilote la LED de la salle par PWM (période T = 8 ms). <b>Manipule le curseur α</b> et observe le signal et la LED, puis réponds.</p>
-      <div class="chrono">
-        <canvas id="cv4" width="860" height="230" aria-label="Signal PWM et LED pilotée"></canvas>
-        <div class="slider-row">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">α =</span>
-          <input type="range" id="aSlider" min="0" max="100" step="5" value="25">
-          <span class="val" id="aVal">25 %</span>
-        </div>
-      </div>
-      <div class="qrow" id="q4a"><span class="sc">a) Quel rapport cyclique α faut-il régler pour que t<sub>H</sub> = 6 ms ? (aide-toi du curseur)</span>
-        <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div>
-      <div class="qrow" id="q4b"><span class="sc">b) À ce réglage, la LED éclaire… qu'à α = 25 % :</span>
-        <select id="s4b"><option>— choisir —</option><option>plus fort</option><option>moins fort</option><option>pareil</option></select></div>
-      <div class="corr" id="c4"></div>
-    </section>
-
-    <!-- ============ EX 5 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2>
-      <p class="task">Le stagiaire a mesuré un signal et note fièrement sur son rapport : « T = 2 ms, donc f = 2000 Hz ». Quelque chose cloche…</p>
-      <div class="chrono">
-        <svg viewBox="0 0 860 190" aria-label="Signal de période 2 ms et note erronée du stagiaire">
-          <g stroke="#2E6A8E" stroke-width="4" fill="none" stroke-linejoin="round">
-            <path d="M60 130 h50 v-70 h50 v70 h50 v-70 h50 v70 h50 v-70 h50 v70 h50"/>
-          </g>
-          <path d="M110 150 h100" stroke="#5C544B" stroke-width="2"/>
-          <path d="M110 144 v12 M210 144 v12" stroke="#5C544B" stroke-width="2"/>
-          <text x="160" y="176" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#5C544B">T = 2 ms</text>
-          <rect x="480" y="44" width="320" height="92" rx="14" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/>
-          <text x="640" y="82" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">« T = 2 ms</text>
-          <text x="640" y="110" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">donc f = 2000 Hz » ⚠</text>
-        </svg>
-      </div>
-      <div class="qrow" id="q5a"><span class="sc">a) L'erreur du stagiaire :</span>
-        <select id="s5a"><option>— choisir —</option><option>il a oublié de convertir : f = 1/T avec T en SECONDES (0,002 s)</option><option>il a lu le mauvais axe</option><option>il n'y a pas d'erreur</option></select></div>
-      <div class="qrow" id="q5b"><span class="sc">b) La vraie fréquence : f = 1/0,002 =</span>
-        <input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div>
-      <div class="corr" id="c5"></div>
-    </section>
-
-    <!-- ============ EX 6 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">6</span> Le capteur de la chaîne de production <span class="pts">3 pts</span></h2>
-      <p class="task">Un capteur optique surveille le tapis : chaque pièce qui passe devant lui génère une impulsion. Regarde le chronogramme s'écrire en direct sur une fenêtre de 10 s.</p>
-      <div class="chrono"><canvas id="cv6" width="860" height="250" aria-label="Tapis de production et chronogramme du capteur en direct"></canvas></div>
-      <div class="qrow" id="q6a"><span class="sc">a) Nombre de pièces détectées sur la fenêtre de 10 s (compte les fronts MONTANTS) :</span>
-        <input class="numin" id="n6a" inputmode="numeric" placeholder="?"><span class="unit">pièces</span></div>
-      <div class="qrow" id="q6b"><span class="sc">b) Cadence de production : 5 pièces / 10 s × 60 =</span>
-        <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">pièces/min</span></div>
-      <div class="qrow" id="q6c"><span class="sc">c) Pour COMPTER les pièces, le microcontrôleur détecte :</span>
-        <select id="s6c"><option>— choisir —</option><option>les fronts montants du signal</option><option>la couleur des pièces</option><option>le niveau 0 en continu</option></select></div>
-      <div class="corr" id="c6"></div>
-    </section>
-
-    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
-    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
-
-    <div class="teacher">
-      <span class="tlink" id="tlink">· Espace enseignant ·</span>
-      <div id="dash">
-        <div id="dashLogin" style="margin-top:8px">
-          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
-          <button class="btn g" id="pwBtn">Ouvrir</button>
-          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
-        </div>
-        <div id="dashData" style="display:none">
-          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
-          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
-          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
-          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAABACAYAAABVy1Q8AAALHklEQVR42u1aWXAc1RU9973unp7FGsuSsSUWmcVAXECB2UwIyGYNYBxSYexYmH1NsNkJBOPIsiHGUGFzPlIkgbiMsZECBEwgVIUYhWI3S7GGIgkEW8SWrW00mtF093s3Hz1jy9JskkeQAl6VPjQ10/1O33PPPfe+pvEnzGOM0iIALoBqAtZEGWOI4GU+L/vSDBG2Ybieh9EG5BLAo4ZkByD2PBhENKqACADRgH9G9WYEga/ZMvKBlVKW5aExAIMAkn6kyhUoVqo0QATA0xqd8UTZAIEAlwFPoGyiIMPhDJcLACIiuK6HidWVuO3KeWW5sQYQJKDOAmwAelcuyuyD8Dxse3wdVKIPJKX/eW5AgOspVI+twII5M/+vc6Xz2b9CxXuBQakxlHLkU871PJRTAWU5LpKJEDvOTlEpSRQMKTGakr5LlCsgWF872f5m1KFSllIaDB6dHCICCfHlApJSfL0i9PAz69HW3gnLNMHMBetQCIyzbEYABF2osBKBXQdWbS2ixx/rV2UaZUDZe9yz+km89fZHEKEgtNYFnUIlAVPHAlEq4hSEgO5LoOK70zKAOKcbGJUIVVZEEK6MIlIEULYfMqO+p0MxQKbh25qvQhQ8peApVRCQB8AjgBXAhMIywgxWCpznet9I2f4W0Ne2sBLRTn9FW/BhFOFsLkGzn3iDzanS5QfkuB7SjgvTMIqqnCOGcStmkGH4fU4ee0FBmVfORwxoQlUl9qrZDaFgAKy5IKBx0CDdUxoYy0L/xk3Y/MBDmRaBdq6CRGCloBN9vj0aVNSHDSh7+dW3XwetuSS773V1o+3am6BS/UM6zCGATBNu+1Zsa3liYBM/qFQTZDgE5PB7I46QbVml16ygPWRrxShnRKPlGZIMp9cqusVMhFSemxcVhS9X5VCacyyggt/WodGMUKGWYRAvS/vuMBu8sudQSTTKfMc0jGGBYc+DSqYKSm1Jg8bhrHhfEp5ShYFlRaEnjpKCRAR2XVi1NYhOPy5HP+RLNiuFrmeeg+5LDpHuETd45yz8Fd744BOEQ8GCdt8DMA6M30sHY4SAx1y4Y3UcBGprMH7u2QX30fPCi1C9icKT0+Gsnt4+bOuOo99xi1ofEMDj5LAot93LiRxebriDxpLUxJAwDaOolwMAc7jmlMh/8pQbUKFB4y6p3MC/QhQdtTPPctahUS2Wu3DtEQNyPQ9SivICy9Qf3oVzXzECrgEAqqJRJHsSUFrBKMPQkaQElIKXSECOjX65EWJmPLT4KjQuOBcEQmc8ASkEhBhBtIQAhICKx0GmiYnzL0fN/Mv8BzeC6xkjzZ3KiggWX96A2ad8D4t/swZ/Wv8qDCkRCQWhtC5udzL00skkGEDFySdgt3lzEKiZ+NV5Oa0ZU/beC83Lb8JTra+h6YG1eOujfyEaCcMyjbxtA0kJdlx4qV7YUw7Ebuc3oGLqoRmPpkG7QOG8gJTWkCJ/0hMRpCRoZoCBWfVH4+Rph+H+Netwz+onsbUrjnEVYQgQwHoHvZjh9cRhjq9C9UXzUHXmaRBSAlpn6o8onsMFnInI95vsCZ5ShaeYgghCEJTWCAYs3HTBj/DyQ8sx74zpSCT7kUimYBgSJCV0MgntOBg78/vY+/67MP6smTvACFFUrjkL2rbzOgUZnHTw4p2AGBJdvQl0xntx+Hf2QzgY2F48C0m0IMo8PI2qsRX44YxpmHbwAfjoszZs+rwNDcJB5SEHoeaGqzB+1umQoZBPL0HF604WiBBwO7uw+XcrkfrwH74yDpyfWAaosn5uTqhd8QQm19Vi4cUxnD/zRJ+GSkOI4h2ozjwAKQRcpbCq+WmcGLZQN+u0nTZYFAhzRu0EWGt0/Pk5dKx9DF77VohIePBNQWEbVFk/N+eRjSElkuk0Uv1pnHT0oWi6ogHTDj5gO7BSDryyeTjkaZdwOjdQHBLvvIstKx9B6v0PIYNBkGUNbfA0A2GbKXr8XBaAAg0d6/n5IdDd2wfLMnDRD07CLRfGMLG6Mv+Gc+awhiCUdsw4ALCzpR1bHn4U8b+1ApohwyE/j4bmD7NibUZsKasOnHqNR0ZIey4TkR4oFJyhTzBgQQqB1jffx2PPvwTbMnHYgftCCgGldWbcS3ltWSk0HUgv7brY9sQ6fHH3Cj8qoRDIMnOqGzMUgUWFaQo3Eu6SF1760zVbu7qDnuYjPYaA0oqIdnrHKFskx4SC6E2m8Pj617B+w3vYu3YC9tl94nY1JEHDf52GGazZjx4Rel7fgLY770XPc8/7pSEU8oEMigoDDM06YhhS2JanqipXBGadOo+y2j3z6qXHv//ppiXxVLredRwI1h6IjJz1RwjE+5IgIpxzej0WXTIHdTW7lUzDgTKcpWH/pja0r1qL+N9fgiABke2EcwFhVhZgBINB9NuBv+gJtbfsv/wXb/s9GDOBZgugRZlS4Mjzb7j0880di/rS3p7a6YcQQiHH2FwKAWZGZzyBmupKXH/uWZg/5wxYpuk3fEQQ+WiW3SQRVKof2x5/Eh1PrAPHE5BjIn7/lJ9ecqxtoz9of87V1Qv3vWfZw1AKHItJNDfveDcqFovJlpYWDYB/uWJl1eoX37ils7vv6pTrSnieIn93Ipcapl0X8UQSRx20PxZfPhenHXu4P09QGnJg/gzIEwDoefFltK9ai/S/P4OMhEGGkXM8xYCGZq6wTJmSst+sqr7Pvu6Ku2v226+9ERCLGxtBTU069+gzFpNoaVEE4Jyb7zr6lY/+uSSeTJ/i7KChHPy7LA17kylorXH2Scei8bIfY/+63XfQMGt9AKQ+/QztKx9B7yuvQ5gmhG0XpJcthGEGAlCRyFPGQfsu2vOaa94FAI7FJLW0qFxt/+DYEqZPl2ht9UwpcNQFNza0belcGk85+yg3DQHKLfOZDXfFE6iKjsFVDWfi2oZZCAdtH1iiD+2PPoaup58FJ/shI2FfcHLYGGYoAZbRgI1UwPxA7lG7eNLyJX+EZqyvrzemv/CCIiLON8fIuRobG0VTUxMA6A0bNkR/ct/qWzZu6VrQ76oglKOJBPLR0PU8dPf24ZDJdVgy/zzMgIP/PrgK7sYvIMdE/M40Z56wBjMqLEukLTMha2vvte9aekcNUR8DAgPoVWgwU3hlaAgAsetvn/Le523LOrr7ZjmOB2LlUR4aGkKgK5nCOGKsizLGSAm2bSB3njCYVUhKg0wTKhJeEzjmsKY9LrnkY59ezZJaZhc9khhG2WBCbLZAS4syCDjqwhtnfdHevay3353iOf05aUgAlCBUA1gbJVQQ5xw0MkMZYBmxbaRt6005eb+ldbf+7MlsnqClWROopOHR8HvcxkaBHTQMnbf8oQVdvcmf9zsqqt209ttwn4sD3yRpjgIVg16NYbBmzRQ1LUoHrA45oXpZx9133H8Ekdsci8kPpkzhpgL0Kg+gHDQ8b+Gd+77x8X+WdsSTcx3HAbRSRH5jkAsQAGbNOiylZDsAEa34g3vw5F9MvvLKjfnUa/QBZX9fXy/R2upJADOuWHTqJxs335ZIO0d4jgMJKJcgBwJywZ4FMsK2jXTIftXYfY+b97ptYSsYWF9fb8xobVW7Mpssz1DNpyEBUMwsD2u4ev7WrsStKUdVp700JgjitVFwFCzGBGwkpWgzqqqb6lYsf5CIVDMgY8w6lwx/NSd4Ps8VYjFJROqdNfffN+ekw6dOmlD5YMCylCKioCBh2YF0alx0BU47Y+qkX9/5WyJSzbGYnA2ocoAZtUEu6usNZAzgMfMbTzh85sXvvTbv0rfal999XPZL6+sbjdG4+f8AiqspSbEV7VUAAAAASUVORK5CYII=" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Évaluation — Les chronogrammes<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">Évaluation · Première spé SI · /15</div> <h1>La station de contrôle</h1> <p>Tu es l'opérateur de nuit de la station. Quatre pupitres t'attendent : un oscilloscope à décoder, une horloge à ausculter, un défi de lecture rapide et un variateur à régler. Chaque pupitre rapporte des points — bonne garde !</p> <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div></div> <!-- ============ EX 1 ============ --> <section class="exo-card"> <h2><span class="num">1</span> L'oscilloscope de la machine <span class="pts">3 pts</span></h2> <p class="task">La machine de tri envoie ce signal. La tête de lecture le retrace en boucle ; les instants <b>A</b> et <b>B</b> sont marqués.</p> <div class="chrono"><canvas id="cv1" width="860" height="240" aria-label="Signal de la machine avec instants A et B"></canvas></div> <div class="qrow" id="q1a"><span class="sc">a) Valeur du signal à l'instant <b>A</b> (t = 5 ms) :</span> <select id="s1a"><option>— choisir —</option><option>0</option><option>1</option></select></div> <div class="qrow" id="q1b"><span class="sc">b) Valeur du signal à l'instant <b>B</b> (t = 8 ms) :</span> <select id="s1b"><option>— choisir —</option><option>0</option><option>1</option></select></div> <div class="qrow" id="q1c"><span class="sc">c) Nombre de <b>fronts montants</b> sur les 20 ms :</span> <input class="numin" id="n1c" inputmode="numeric" placeholder="?"></div> <div class="corr" id="c1"></div> </section> <!-- ============ EX 2 ============ --> <section class="exo-card"> <h2><span class="num">2</span> Le cœur de l'horloge <span class="pts">3 pts</span></h2> <p class="task">Cette horloge interne bat régulièrement — regarde son motif pulser. À toi de mesurer son rythme.</p> <div class="chrono"><canvas id="cv2" width="860" height="220" aria-label="Signal d'horloge périodique"></canvas></div> <div class="qrow" id="q2a"><span class="sc">a) Période lue sur le chronogramme : T =</span> <input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">ms</span></div> <div class="qrow" id="q2b"><span class="sc">b) Fréquence : f = 1/T =</span> <input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div> <div class="qrow" id="q2c"><span class="sc">c) Ton cœur bat environ à 1,2 Hz. Cette horloge bat-elle plus vite que ton cœur ?</span> <select id="s2c"><option>— choisir —</option><option>Oui, beaucoup plus vite</option><option>Non, plus lentement</option></select></div> <div class="corr" id="c2"></div> </section> <!-- ============ EX 3 ============ --> <section class="exo-card"> <h2><span class="num">3</span> Défi : la chasse aux fronts <span class="pts">2 pts</span></h2> <p class="task">Pupitre d'entraînement : <b>6 signaux</b> vont défiler. Pour chacun, réponds à la question posée. <b>Une seule tentative</b> — ton score au défi compte dans la note (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p> <div class="game"><div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div> <canvas id="cv3" width="520" height="150" aria-label="Mini-chronogramme du défi"></canvas> <div class="gq" id="gQ">Prêt ? Le défi comporte 6 signaux.</div> <div class="gopts" id="gOpts"></div> <div class="gmsg" id="gMsg"></div> <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div></div> <div class="corr" id="c3"></div> </section> <!-- ============ EX 4 ============ --> <section class="exo-card"> <h2><span class="num">4</span> Le variateur PWM <span class="pts">2 pts</span></h2> <p class="task">Ce variateur pilote la LED de la salle par PWM (période T = 8 ms). <b>Manipule le curseur α</b> et observe le signal et la LED, puis réponds.</p> <div class="chrono"><canvas id="cv4" width="860" height="230" aria-label="Signal PWM et LED pilotée"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">α =</span> <input type="range" id="aSlider" min="0" max="100" step="5" value="25"> <span class="val" id="aVal">25 %</span></div></div> <div class="qrow" id="q4a"><span class="sc">a) Quel rapport cyclique α faut-il régler pour que t<sub>H</sub> = 6 ms ? (aide-toi du curseur)</span> <input class="numin" id="n4a" inputmode="decimal" placeholder="?"><span class="unit">%</span></div> <div class="qrow" id="q4b"><span class="sc">b) À ce réglage, la LED éclaire… qu'à α = 25 % :</span> <select id="s4b"><option>— choisir —</option><option>plus fort</option><option>moins fort</option><option>pareil</option></select></div> <div class="corr" id="c4"></div> </section> <!-- ============ EX 5 ============ --> <section class="exo-card"> <h2><span class="num">5</span> Chasse à l'erreur <span class="pts">2 pts</span></h2> <p class="task">Le stagiaire a mesuré un signal et note fièrement sur son rapport : « T = 2 ms, donc f = 2000 Hz ». Quelque chose cloche…</p> <div class="chrono"><svg viewBox="0 0 860 190" aria-label="Signal de période 2 ms et note erronée du stagiaire"> <g stroke="#2E6A8E" stroke-width="4" fill="none" stroke-linejoin="round"> <path d="M60 130 h50 v-70 h50 v70 h50 v-70 h50 v70 h50 v-70 h50 v70 h50"/></g> <path d="M110 150 h100" stroke="#5C544B" stroke-width="2"/><path d="M110 144 v12 M210 144 v12" stroke="#5C544B" stroke-width="2"/><text x="160" y="176" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#5C544B">T = 2 ms</text> <rect x="480" y="44" width="320" height="92" rx="14" fill="#fbeee9" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="7 5"/> <text x="640" y="82" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">« T = 2 ms</text> <text x="640" y="110" text-anchor="middle" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">donc f = 2000 Hz » </text> </svg></div> <div class="qrow" id="q5a"><span class="sc">a) L'erreur du stagiaire :</span> <select id="s5a"><option>— choisir —</option><option>il a oublié de convertir : f = 1/T avec T en SECONDES (0,002 s)</option><option>il a lu le mauvais axe</option><option>il n'y a pas d'erreur</option></select></div> <div class="qrow" id="q5b"><span class="sc">b) La vraie fréquence : f = 1/0,002 =</span> <input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">Hz</span></div> <div class="corr" id="c5"></div> </section> <!-- ============ EX 6 ============ --> <section class="exo-card"> <h2><span class="num">6</span> Le capteur de la chaîne de production <span class="pts">3 pts</span></h2> <p class="task">Un capteur optique surveille le tapis : chaque pièce qui passe devant lui génère une impulsion. Regarde le chronogramme s'écrire en direct sur une fenêtre de 10 s.</p> <div class="chrono"><canvas id="cv6" width="860" height="250" aria-label="Tapis de production et chronogramme du capteur en direct"></canvas></div> <div class="qrow" id="q6a"><span class="sc">a) Nombre de pièces détectées sur la fenêtre de 10 s (compte les fronts MONTANTS) :</span> <input class="numin" id="n6a" inputmode="numeric" placeholder="?"><span class="unit">pièces</span></div> <div class="qrow" id="q6b"><span class="sc">b) Cadence de production : 5 pièces / 10 s × 60 =</span> <input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">pièces/min</span></div> <div class="qrow" id="q6c"><span class="sc">c) Pour COMPTER les pièces, le microcontrôleur détecte :</span> <select id="s6c"><option>— choisir —</option><option>les fronts montants du signal</option><option>la couleur des pièces</option><option>le niveau 0 en continu</option></select></div> <div class="corr" id="c6"></div> </section> <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div> <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div> <div class="teacher"><span class="tlink" id="tlink">· Espace enseignant ·</span> <div id="dash"><div id="dashLogin" style="margin-top:8px"><input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none"> <button class="btn g" id="pwBtn">Ouvrir</button> <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span></div> <div id="dashData" style="display:none"><div id="stats" style="margin:10px 0"></div><div id="perQ"></div> <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3> <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div> <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div></div></div></div></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
@@ -271,138 +119,138 @@ var el=function(id){return document.getElementById(id);};
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
 })();
@@ -415,18 +263,18 @@ var NODE='eval_chrono';
 /* ---------- traceur commun ---------- */
 function gridT(g,x0,x1,yT,yB,tMax,major,dark){
   for(var t=0;t<=tMax;t++){ var x=x0+(x1-x0)*t/tMax; var M=(t%major===0);
-    g.strokeStyle= dark ? (M?'#2a4a38':'#1d3a2a') : (M?'#d9cfbb':'#eee6d6'); g.lineWidth=1;
-    g.beginPath(); g.moveTo(x,yT); g.lineTo(x,yB); g.stroke();
-    if(M){ g.fillStyle= dark?'#7fbd9a':'#5C544B'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(t+'',x,yB+15); } }
+ g.strokeStyle= dark ? (M?'#2a4a38':'#1d3a2a') : (M?'#d9cfbb':'#eee6d6'); g.lineWidth=1;
+ g.beginPath(); g.moveTo(x,yT); g.lineTo(x,yB); g.stroke();
+ if(M){ g.fillStyle= dark?'#7fbd9a':'#5C544B'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(t+'',x,yB+15); } }
 }
 function traceSig(g,segs,x0,x1,tMax,yB,hS,color){
   function X(t){ return x0+(x1-x0)*t/tMax; }
   g.strokeStyle=color; g.lineWidth=3; g.beginPath();
   var first=true,lastV=null;
   segs.forEach(function(s){ var xa=X(s[0]),xb=X(s[1]),y=s[2]?yB-hS:yB;
-    if(first){ g.moveTo(xa,y); first=false; }
-    else if(lastV!==s[2]){ g.lineTo(xa,lastV?yB-hS:yB); g.lineTo(xa,y); }
-    g.lineTo(xb,y); lastV=s[2]; });
+ if(first){ g.moveTo(xa,y); first=false; }
+ else if(lastV!==s[2]){ g.lineTo(xa,lastV?yB-hS:yB); g.lineTo(xa,y); }
+ g.lineTo(xb,y); lastV=s[2]; });
   g.stroke();
 }
 
@@ -438,22 +286,22 @@ var E1_SEGS=[[0,3,0],[3,7,1],[7,10,0],[10,16,1],[16,20,0]]; // fronts montants: 
   function X(t){ return x0+(x1-x0)*t/tMax; }
   function valAt(t){ for(var i=0;i<E1_SEGS.length;i++){ if(t>=E1_SEGS[i][0]&&t<E1_SEGS[i][1]) return E1_SEGS[i][2]; } return 0; }
   function step(){
-    T+=0.09; if(T>tMax+3) T=0;
-    g.clearRect(0,0,cv.width,cv.height);
-    gridT(g,x0,x1,44,200,tMax,5,false);
-    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
-    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
-    g.textAlign='left'; g.fillText('t (ms)',x1+6,215);
-    var tShow=Math.min(tMax,T);
-    var segs=[]; E1_SEGS.forEach(function(s){ if(s[0]<tShow) segs.push([s[0],Math.min(s[1],tShow),s[2]]); });
-    traceSig(g,segs,x0,x1,tMax,yB,hS,'#2E6A8E');
-    if(tShow<tMax){ g.fillStyle='#C0492E'; g.beginPath(); g.arc(X(tShow), valAt(tShow)?yB-hS:yB, 6,0,7); g.fill(); }
-    // curseurs A et B
-    [['A',5,'#3D7E5F'],['B',8,'#C0492E']].forEach(function(c){
-      var xc=X(c[1]);
-      g.strokeStyle=c[2]; g.lineWidth=2; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,40); g.lineTo(xc,205); g.stroke(); g.setLineDash([]);
-      g.fillStyle=c[2]; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(c[0],xc,30);
-    });
+ T+=0.09; if(T>tMax+3) T=0;
+ g.clearRect(0,0,cv.width,cv.height);
+ gridT(g,x0,x1,44,200,tMax,5,false);
+ g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+ g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+ g.textAlign='left'; g.fillText('t (ms)',x1+6,215);
+ var tShow=Math.min(tMax,T);
+ var segs=[]; E1_SEGS.forEach(function(s){ if(s[0]<tShow) segs.push([s[0],Math.min(s[1],tShow),s[2]]); });
+ traceSig(g,segs,x0,x1,tMax,yB,hS,'#2E6A8E');
+ if(tShow<tMax){ g.fillStyle='#C0492E'; g.beginPath(); g.arc(X(tShow), valAt(tShow)?yB-hS:yB, 6,0,7); g.fill(); }
+ // curseurs A et B
+ [['A',5,'#3D7E5F'],['B',8,'#C0492E']].forEach(function(c){
+ var xc=X(c[1]);
+ g.strokeStyle=c[2]; g.lineWidth=2; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,40); g.lineTo(xc,205); g.stroke(); g.setLineDash([]);
+ g.fillStyle=c[2]; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center'; g.fillText(c[0],xc,30);
+ });
   }
   setInterval(step,40); step();
 })();
@@ -465,21 +313,21 @@ var E1_SEGS=[[0,3,0],[3,7,1],[7,10,0],[10,16,1],[16,20,0]]; // fronts montants: 
   var segs=[]; for(var k=0;k<3;k++){ segs.push([k*TT,k*TT+TT/2,1]); segs.push([k*TT+TT/2,(k+1)*TT,0]); }
   function X(t){ return x0+(x1-x0)*t/tMax; }
   function step(){
-    T+=0.03;
-    g.clearRect(0,0,cv.width,cv.height);
-    gridT(g,x0,x1,40,190,tMax,5,false);
-    // motif courant qui pulse
-    var m=Math.floor(T)%3; var pulse=0.10+0.06*Math.sin(T*6);
-    g.fillStyle='rgba(189,138,42,'+pulse+')'; g.fillRect(X(m*TT),46,X(TT)-X(0),140);
-    traceSig(g,segs,x0,x1,tMax,yB,hS,'#3D7E5F');
-    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
-    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
-    g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
-    // petit coeur qui bat au rythme du motif
-    var beat=1+0.15*Math.max(0,Math.sin(T*6));
-    g.save(); g.translate(X(14),58); g.scale(beat,beat);
-    g.fillStyle='#C0492E'; g.beginPath();
-    g.moveTo(0,6); g.bezierCurveTo(-9,-4,-16,4,0,14); g.bezierCurveTo(16,4,9,-4,0,6); g.fill(); g.restore();
+ T+=0.03;
+ g.clearRect(0,0,cv.width,cv.height);
+ gridT(g,x0,x1,40,190,tMax,5,false);
+ // motif courant qui pulse
+ var m=Math.floor(T)%3; var pulse=0.10+0.06*Math.sin(T*6);
+ g.fillStyle='rgba(189,138,42,'+pulse+')'; g.fillRect(X(m*TT),46,X(TT)-X(0),140);
+ traceSig(g,segs,x0,x1,tMax,yB,hS,'#3D7E5F');
+ g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+ g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+ g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
+ // petit coeur qui bat au rythme du motif
+ var beat=1+0.15*Math.max(0,Math.sin(T*6));
+ g.save(); g.translate(X(14),58); g.scale(beat,beat);
+ g.fillStyle='#C0492E'; g.beginPath();
+ g.moveTo(0,6); g.bezierCurveTo(-9,-4,-16,4,0,14); g.bezierCurveTo(16,4,9,-4,0,6); g.fill(); g.restore();
   }
   setInterval(step,40); step();
 })();
@@ -491,56 +339,56 @@ var E1_SEGS=[[0,3,0],[3,7,1],[7,10,0],[10,16,1],[16,20,0]]; // fronts montants: 
   var WIN=10, PER=2, PW=0.5; // fenêtre 10 s, une pièce toutes les 2 s, impulsion 0,5 s
   function sig(t){ return (t%PER)<PW ? 1 : 0; }
   function step(){
-    T+=0.033; var t=(T%12);
-    var tw=Math.min(WIN,t); // temps couvert par le tracé
-    g.clearRect(0,0,cv.width,cv.height);
-    // tapis + pièces + capteur
-    var beltY=56;
-    g.strokeStyle='#5C544B'; g.lineWidth=4; g.beginPath(); g.moveTo(50,beltY); g.lineTo(810,beltY); g.stroke();
-    // capteur fixe au milieu
-    var sx=430;
-    g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(sx-10,beltY-52); g.lineTo(sx+10,beltY-52); g.lineTo(sx,beltY-34); g.closePath(); g.fill();
-    g.fillStyle='#8A5A7A'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('capteur',sx,beltY-60);
-    // pièces : passent devant le capteur toutes les 2 s (vitesse 90 px/s, impulsion quand |x-sx|<22 → 44 px / 90 ≈ 0,5 s)
-    var v=90;
-    for(var k=-2;k<9;k++){
-      var px= sx + (k*PER - (t%PER) - 0)*v + (PW/2)*v;
-      var offset= sx + ((k*PER) - t)*v + (PW*v)/2;
-      var x= sx + (k*PER - t)*v + (PW*v)/2;
-      if(x>30 && x<830){
-        var over= Math.abs(x-sx)<(PW*v)/2;
-        g.fillStyle= over? '#fbeee9':'#eef3f6'; g.strokeStyle= over? '#C0492E':'#2E6A8E'; g.lineWidth=2.5;
-        g.beginPath(); g.rect(x-16,beltY-26,32,24); g.fill(); g.stroke();
-      }
-    }
-    // détection courante
-    var on=sig(t);
-    if(on&&t<WIN){ g.fillStyle='#C0492E'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-      g.fillText('● pièce détectée !',640,40); }
-    // chronogramme
-    var gx=70, gy0=210, gy1=140, gw=720;
-    g.strokeStyle='#e4dccb'; g.lineWidth=1.5;
-    for(var s2=0;s2<=WIN;s2++){ var xx=gx+gw*s2/WIN;
-      g.beginPath(); g.moveTo(xx,gy1-14); g.lineTo(xx,gy0+8); g.stroke();
-      g.fillStyle='#a89e8c'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(s2+' s',xx,gy0+22); }
-    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
-    g.fillText('1',gx-10,gy1+4); g.fillText('0',gx-10,gy0+4);
-    // tracé progressif
-    g.strokeStyle='#2E6A8E'; g.lineWidth=3.5; g.lineJoin='round'; g.beginPath();
-    var first=true;
-    for(var tt=0;tt<=tw;tt+=0.02){
-      var y= sig(tt)? gy1 : gy0;
-      var xx2=gx+gw*tt/WIN;
-      if(first){ g.moveTo(xx2,y); first=false; } else { g.lineTo(xx2,y); }
-    }
-    g.stroke();
-    // curseur
-    if(t<WIN){ var cx2=gx+gw*t/WIN;
-      g.strokeStyle='#BD8A2A'; g.lineWidth=2; g.setLineDash([4,4]);
-      g.beginPath(); g.moveTo(cx2,gy1-16); g.lineTo(cx2,gy0+8); g.stroke(); g.setLineDash([]); }
-    else { g.fillStyle='#3D7E5F'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-      g.fillText('fenêtre complète : à toi de compter les fronts ↗',gx,128); }
+ T+=0.033; var t=(T%12);
+ var tw=Math.min(WIN,t); // temps couvert par le tracé
+ g.clearRect(0,0,cv.width,cv.height);
+ // tapis + pièces + capteur
+ var beltY=56;
+ g.strokeStyle='#5C544B'; g.lineWidth=4; g.beginPath(); g.moveTo(50,beltY); g.lineTo(810,beltY); g.stroke();
+ // capteur fixe au milieu
+ var sx=430;
+ g.fillStyle='#8A5A7A'; g.beginPath(); g.moveTo(sx-10,beltY-52); g.lineTo(sx+10,beltY-52); g.lineTo(sx,beltY-34); g.closePath(); g.fill();
+ g.fillStyle='#8A5A7A'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('capteur',sx,beltY-60);
+ // pièces : passent devant le capteur toutes les 2 s (vitesse 90 px/s, impulsion quand |x-sx|<22 → 44 px / 90 ≈ 0,5 s)
+ var v=90;
+ for(var k=-2;k<9;k++){
+ var px= sx + (k*PER - (t%PER) - 0)*v + (PW/2)*v;
+ var offset= sx + ((k*PER) - t)*v + (PW*v)/2;
+ var x= sx + (k*PER - t)*v + (PW*v)/2;
+ if(x>30 && x<830){
+ var over= Math.abs(x-sx)<(PW*v)/2;
+ g.fillStyle= over? '#fbeee9':'#eef3f6'; g.strokeStyle= over? '#C0492E':'#2E6A8E'; g.lineWidth=2.5;
+ g.beginPath(); g.rect(x-16,beltY-26,32,24); g.fill(); g.stroke();
+ }
+ }
+ // détection courante
+ var on=sig(t);
+ if(on&&t<WIN){ g.fillStyle='#C0492E'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ g.fillText('● pièce détectée !',640,40); }
+ // chronogramme
+ var gx=70, gy0=210, gy1=140, gw=720;
+ g.strokeStyle='#e4dccb'; g.lineWidth=1.5;
+ for(var s2=0;s2<=WIN;s2++){ var xx=gx+gw*s2/WIN;
+ g.beginPath(); g.moveTo(xx,gy1-14); g.lineTo(xx,gy0+8); g.stroke();
+ g.fillStyle='#a89e8c'; g.font='10px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText(s2+' s',xx,gy0+22); }
+ g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+ g.fillText('1',gx-10,gy1+4); g.fillText('0',gx-10,gy0+4);
+ // tracé progressif
+ g.strokeStyle='#2E6A8E'; g.lineWidth=3.5; g.lineJoin='round'; g.beginPath();
+ var first=true;
+ for(var tt=0;tt<=tw;tt+=0.02){
+ var y= sig(tt)? gy1 : gy0;
+ var xx2=gx+gw*tt/WIN;
+ if(first){ g.moveTo(xx2,y); first=false; } else { g.lineTo(xx2,y); }
+ }
+ g.stroke();
+ // curseur
+ if(t<WIN){ var cx2=gx+gw*t/WIN;
+ g.strokeStyle='#BD8A2A'; g.lineWidth=2; g.setLineDash([4,4]);
+ g.beginPath(); g.moveTo(cx2,gy1-16); g.lineTo(cx2,gy0+8); g.stroke(); g.setLineDash([]); }
+ else { g.fillStyle='#3D7E5F'; g.font='800 13px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ g.fillText('fenêtre complète : à toi de compter les fronts ↗',gx,128); }
   }
   setInterval(step,40); step();
 })();
@@ -551,8 +399,8 @@ function g3Rand(){ // question aléatoire : valeur OU fronts
   function rnd(){ var lv=[],v=(Math.random()<0.5?0:1); for(var i=0;i<8;i++){ lv.push(v); if(Math.random()<0.42) v=1-v; } return lv; }
   function edges(lv){ var n=0; for(var i=1;i<lv.length;i++){ if(lv[i-1]===0&&lv[i]===1)n++; } return n; }
   if(Math.random()<0.5){
-    var lv=rnd(); var k=(Math.random()*8)|0;
-    return {kind:'val', lv:lv, cursor:k+0.5, q:'Valeur du signal à l\u2019instant marqué ?', opts:['0','1'], ok:String(lv[k])};
+ var lv=rnd(); var k=(Math.random()*8)|0;
+ return {kind:'val', lv:lv, cursor:k+0.5, q:'Valeur du signal à l\u2019instant marqué ?', opts:['0','1'], ok:String(lv[k])};
   }
   var lv2,n,guard=0; do{ lv2=rnd(); n=edges(lv2); guard++; }while((n<1||n>4)&&guard<20);
   var set={}; set[n]=1; var opts=[String(n)];
@@ -572,8 +420,8 @@ function g3Draw(data){
   var segs=[]; for(var i=0;i<data.lv.length;i++) segs.push([i,i+1,data.lv[i]]);
   traceSig(g,segs,x0,x1,tMax,yB,hS,'#5ee39a');
   if(data.cursor!=null){ var xc=X(data.cursor);
-    g.strokeStyle='#ffd55a'; g.lineWidth=2.5; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,16); g.lineTo(xc,yB+14); g.stroke(); g.setLineDash([]);
-    g.fillStyle='#ffd55a'; g.beginPath(); g.moveTo(xc,16); g.lineTo(xc-6,6); g.lineTo(xc+6,6); g.closePath(); g.fill(); }
+ g.strokeStyle='#ffd55a'; g.lineWidth=2.5; g.setLineDash([5,4]); g.beginPath(); g.moveTo(xc,16); g.lineTo(xc,yB+14); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#ffd55a'; g.beginPath(); g.moveTo(xc,16); g.lineTo(xc-6,6); g.lineTo(xc+6,6); g.closePath(); g.fill(); }
 }
 function g3Round(){
   g3State.cur=g3Rand(); g3State.locked=false;
@@ -582,9 +430,9 @@ function g3Round(){
   g3Draw(g3State.cur);
   var box=el('gOpts'); box.innerHTML='';
   g3State.cur.opts.forEach(function(o){
-    var b=document.createElement('button'); b.textContent=o;
-    b.addEventListener('click',function(){ g3Answer(b,o); });
-    box.appendChild(b);
+ var b=document.createElement('button'); b.textContent=o;
+ b.addEventListener('click',function(){ g3Answer(b,o); });
+ box.appendChild(b);
   });
 }
 function g3Answer(btn,o){
@@ -592,15 +440,15 @@ function g3Answer(btn,o){
   var good=(o===g3State.cur.ok);
   if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='✓ Bien vu !'; }
   else { btn.classList.add('no'); el('gMsg').textContent='✗ C\u2019était '+g3State.cur.ok+'.';
-    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+ el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
   el('gScore').textContent='✓ '+g3State.hits;
   g3State.idx++;
   setTimeout(function(){
-    if(g3State.idx>=6){ g3State.done=true;
-      el('gProg').textContent='défi terminé';
-      el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
-      el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?'⚡ Excellent réflexe !':(g3State.hits>=3?'Pas mal, opérateur.':'Le pupitre te reverra…');
-    } else { g3Round(); }
+ if(g3State.idx>=6){ g3State.done=true;
+ el('gProg').textContent='défi terminé';
+ el('gQ').textContent='Score au défi : '+g3State.hits+' / 6';
+ el('gOpts').innerHTML=''; el('gMsg').textContent= g3State.hits>=5?' Excellent réflexe !':(g3State.hits>=3?'Pas mal, opérateur.':'Le pupitre te reverra…');
+ } else { g3Round(); }
   }, 900);
 }
 el('gStart').addEventListener('click',function(){
@@ -615,32 +463,32 @@ var alpha=25;
   function X(t){ return x0+(x1-x0)*t/tMax; }
   el('aSlider').addEventListener('input',function(){ alpha=+this.value; el('aVal').textContent=alpha+' %'; });
   function step(){
-    T+=0.05;
-    g.clearRect(0,0,cv.width,cv.height);
-    gridT(g,x0,x1,40,190,tMax,4,false);
-    g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
-    g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
-    g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
-    var a=alpha/100, off=T%TT;
-    var segs=[];
-    for(var k=-1;k<4;k++){ var t0=k*TT-off;
-      segs.push([Math.max(0,t0),Math.min(tMax,Math.max(0,t0+TT*a)),1]);
-      segs.push([Math.max(0,Math.min(tMax,t0+TT*a)),Math.min(tMax,t0+TT),0]); }
-    segs=segs.filter(function(s){ return s[1]>s[0]; });
-    traceSig(g,segs,x0,x1,tMax,yB,hS,'#8A5A7A');
-    g.fillStyle='#8A5A7A'; g.font='800 15px "Bricolage Grotesque",sans-serif';
-    g.fillText('T = 8 ms · t\u2095 = '+String(Math.round(TT*a*10)/10).replace('.',',')+' ms',x0,32);
-    // LED
-    var lx=700, ly=105;
-    g.fillStyle='rgba(189,138,42,'+(0.12+0.78*a)+')'; g.beginPath(); g.arc(lx,ly,42,0,7); g.fill();
-    g.fillStyle='rgba(255,213,90,'+(0.22+0.72*a)+')'; g.beginPath(); g.arc(lx,ly,25,0,7); g.fill();
-    g.strokeStyle='#8a6313'; g.lineWidth=2.5; g.beginPath(); g.arc(lx,ly,25,0,7); g.stroke();
-    g.strokeStyle='#5C544B'; g.lineWidth=3; g.beginPath(); g.moveTo(lx-9,ly+25); g.lineTo(lx-9,ly+50); g.moveTo(lx+9,ly+25); g.lineTo(lx+9,ly+50); g.stroke();
-    g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('LED de la salle',lx,ly+70);
-    // jauge
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('puissance moyenne',636,182);
-    g.fillStyle='#eee6d6'; g.fillRect(636,190,190,13);
-    g.fillStyle='#BD8A2A'; g.fillRect(636,190,190*a,13);
+ T+=0.05;
+ g.clearRect(0,0,cv.width,cv.height);
+ gridT(g,x0,x1,40,190,tMax,4,false);
+ g.fillStyle='#5C544B'; g.font='11px "JetBrains Mono",monospace'; g.textAlign='right';
+ g.fillText('1',x0-8,yB-hS+4); g.fillText('0',x0-8,yB+4);
+ g.textAlign='left'; g.fillText('t (ms)',x1+6,205);
+ var a=alpha/100, off=T%TT;
+ var segs=[];
+ for(var k=-1;k<4;k++){ var t0=k*TT-off;
+ segs.push([Math.max(0,t0),Math.min(tMax,Math.max(0,t0+TT*a)),1]);
+ segs.push([Math.max(0,Math.min(tMax,t0+TT*a)),Math.min(tMax,t0+TT),0]); }
+ segs=segs.filter(function(s){ return s[1]>s[0]; });
+ traceSig(g,segs,x0,x1,tMax,yB,hS,'#8A5A7A');
+ g.fillStyle='#8A5A7A'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+ g.fillText('T = 8 ms · t\u2095 = '+String(Math.round(TT*a*10)/10).replace('.',',')+' ms',x0,32);
+ // LED
+ var lx=700, ly=105;
+ g.fillStyle='rgba(189,138,42,'+(0.12+0.78*a)+')'; g.beginPath(); g.arc(lx,ly,42,0,7); g.fill();
+ g.fillStyle='rgba(255,213,90,'+(0.22+0.72*a)+')'; g.beginPath(); g.arc(lx,ly,25,0,7); g.fill();
+ g.strokeStyle='#8a6313'; g.lineWidth=2.5; g.beginPath(); g.arc(lx,ly,25,0,7); g.stroke();
+ g.strokeStyle='#5C544B'; g.lineWidth=3; g.beginPath(); g.moveTo(lx-9,ly+25); g.lineTo(lx-9,ly+50); g.moveTo(lx+9,ly+25); g.lineTo(lx+9,ly+50); g.stroke();
+ g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center'; g.fillText('LED de la salle',lx,ly+70);
+ // jauge
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left'; g.fillText('puissance moyenne',636,182);
+ g.fillStyle='#eee6d6'; g.fillRect(636,190,190,13);
+ g.fillStyle='#BD8A2A'; g.fillRect(636,190,190*a,13);
   }
   setInterval(step,40); step();
 })();
@@ -698,9 +546,9 @@ el('submit').addEventListener('click',function(){
   document.querySelectorAll('select, .numin, #aSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
   if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
-    el('scoreSt').textContent+='  ·  résultat envoyé au professeur.'; }
-  catch(e){ el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; } }
-  else { el('scoreSt').textContent+='  ·  (hors-ligne : résultat non envoyé).'; }
+ el('scoreSt').textContent+='·  résultat envoyé au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='·  (hors-ligne : résultat non envoyé).'; } }
+  else { el('scoreSt').textContent+='·  (hors-ligne : résultat non envoyé).'; }
 });
 
 /* ============ espace enseignant ============ */
@@ -711,18 +559,18 @@ el('refresh') && el('refresh').addEventListener('click',loadDash);
 function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
-    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
-    var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
-    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:110px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
-    el('perQ').innerHTML=pq;
-    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
-    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+ var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+ var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+ rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
+ var moy = n? (sum/n).toFixed(2).replace('.',',') : '—';
+ el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+ var pq='<h3 style="margin:14px 0 4px;font-size:16px">Réussite par exercice</h3>';
+ for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+ pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:110px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+ el('perQ').innerHTML=pq;
+ var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+ rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'—')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+ if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (règles/connexion).</span>'; });
 }
 </script>

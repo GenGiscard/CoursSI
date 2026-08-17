@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -75,11 +74,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -100,292 +99,103 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_sysml.html">← Séquence : SysML</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>SysML</h1><p>Cours · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
-      <a href="#s2" class="navlink"><span>02</span>Un système</a>
-      <a href="#s3" class="navlink"><span>03</span>Le besoin</a>
-      <a href="#s4" class="navlink"><span>04</span>Les exigences</a>
-      <a href="#s5" class="navlink"><span>05</span>Le langage SysML</a>
-      <a href="#s6" class="navlink"><span>06</span>La structure</a>
-      <a href="#s7" class="navlink"><span>07</span>Le comportement</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">SysML · problématique</span>
-      <h2>Concevoir un système complexe</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un drone, un portail automatique, un vélo électrique&hellip; chacun assemble de nombreux composants pour rendre un <b>service</b>.</p>
-          <p>Comment décrire un tel système sans se perdre, et le partager entre tous les concepteurs&nbsp;? Il faut un <b>langage commun</b>.</p>
-          <div class="chips"><span class="chip s">décrire</span><span class="chip s">partager</span><span class="chip s">concevoir</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-            <rect x="120" y="80" width="120" height="60" rx="8" fill="#2E6A8E"/>
-            <text x="180" y="106" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">Système</text>
-            <text x="180" y="124" font-family="JetBrains Mono,monospace" font-size="9" fill="#cfe2ee" text-anchor="middle">(produit)</text>
-            <g fill="#FFFDF8" stroke="#5C544B" stroke-width="1.8">
-              <rect x="30" y="30" width="64" height="30" rx="5"/><rect x="266" y="30" width="64" height="30" rx="5"/>
-              <rect x="30" y="160" width="64" height="30" rx="5"/><rect x="266" y="160" width="64" height="30" rx="5"/>
-            </g>
-            <g stroke="#BD8A2A" stroke-width="1.8">
-              <line x1="94" y1="45" x2="120" y2="88"/><line x1="266" y1="45" x2="240" y2="88"/>
-              <line x1="94" y1="175" x2="120" y2="132"/><line x1="266" y1="175" x2="240" y2="132"/>
-            </g>
-            <text x="62" y="49" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text>
-            <text x="298" y="49" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text>
-            <text x="62" y="179" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text>
-            <text x="298" y="179" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text>
-          </svg>
-          <figcaption>Un système assemble des composants pour rendre un service.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Pour concevoir un système complexe, il faut un <b>langage commun</b> pour le décrire et le partager.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Définir</span>
-      <h2>Qu'est-ce qu'un système ?</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un <b>système</b> est un ensemble de composants organisés pour remplir une ou plusieurs <b>fonctions</b>.</p>
-          <p>On définit sa <b>frontière</b> (ce qui est dedans / dehors). Il reçoit des <b>entrées</b> et produit des <b>sorties</b>&nbsp;: matière, énergie, information.</p>
-          <div class="eqcard"><div class="eq">entrées → SYSTÈME → sorties</div><div class="leg">Le système <b>transforme</b> ce qu'il reçoit pour rendre le service attendu.</div></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-            <rect x="30" y="30" width="300" height="150" rx="10" fill="none" stroke="#5C544B" stroke-width="1.6" stroke-dasharray="6 5"/>
-            <text x="36" y="22" font-family="JetBrains Mono,monospace" font-size="9" fill="#5C544B">milieu extérieur</text>
-            <rect x="130" y="78" width="100" height="54" rx="8" fill="#2E6A8E"/>
-            <text x="180" y="110" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">SYSTÈME</text>
-            <g stroke="#3D7E5F" stroke-width="2" marker-end="url(#ar)">
-              <line x1="48" y1="92" x2="128" y2="92"/><line x1="48" y1="118" x2="128" y2="118"/>
-            </g>
-            <g stroke="#B85C2E" stroke-width="2" marker-end="url(#ar2)">
-              <line x1="232" y1="105" x2="312" y2="105"/>
-            </g>
-            <text x="60" y="86" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#2c6147">énergie</text>
-            <text x="60" y="133" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#2c6147">ordres / info</text>
-            <text x="300" y="98" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#a44a26" text-anchor="end">service rendu</text>
-            <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3D7E5F"/></marker>
-            <marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#B85C2E"/></marker></defs>
-          </svg>
-          <figcaption>Frontière, entrées et sorties d'un système.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Le point de départ</span>
-      <h2>Le besoin : à quoi sert le système ?</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un système existe pour satisfaire un <b>besoin</b>. Pour le cerner, on pose trois questions (la « bête à cornes »).</p>
-          <p><b>À qui</b> rend-il service&nbsp;? <b>Sur quoi</b> agit-il&nbsp;? <b>Dans quel but</b> existe-t-il&nbsp;?</p>
-          <div class="eqcard"><div class="eq">à qui ? · sur quoi ? · pour quoi ?</div><div class="leg">La réponse au « pour quoi » est la <b>fonction principale</b> du système.</div></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="20" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/>
-            <text x="80" y="42" font-family="JetBrains Mono,monospace" font-size="10" fill="#235877" text-anchor="middle">À qui ?</text>
-            <rect x="220" y="20" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/>
-            <text x="280" y="42" font-family="JetBrains Mono,monospace" font-size="10" fill="#235877" text-anchor="middle">Sur quoi ?</text>
-            <rect x="110" y="95" width="140" height="50" rx="8" fill="#2E6A8E"/>
-            <text x="180" y="118" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Le système</text>
-            <text x="180" y="134" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#cfe2ee" text-anchor="middle">(produit)</text>
-            <g stroke="#5C544B" stroke-width="1.8"><line x1="80" y1="54" x2="130" y2="95"/><line x1="280" y1="54" x2="230" y2="95"/></g>
-            <rect x="110" y="172" width="140" height="30" rx="6" fill="#FCE9B0" stroke="#BD8A2A" stroke-width="2"/>
-            <text x="180" y="191" font-family="JetBrains Mono,monospace" font-size="10" fill="#8a6313" text-anchor="middle">Dans quel but ?</text>
-            <line x1="180" y1="145" x2="180" y2="172" stroke="#5C544B" stroke-width="1.8"/>
-          </svg>
-          <figcaption>La « bête à cornes » : exprimer le besoin.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Traduire le besoin</span>
-      <h2>Des exigences au cahier des charges</h2>
-      <p class="lede">Le besoin se traduit en <b>exigences</b> mesurables. Chaque exigence dit ce que le système <b>doit</b> faire, avec un <b>critère</b> et un <b>niveau</b> (valeur à atteindre).</p>
-      <table class="t">
-        <thead><tr><th>Exigence</th><th>Critère</th><th>Niveau</th></tr></thead>
-        <tbody>
-          <tr><td><b>Autonomie</b></td><td>durée de vol</td><td>≥ 25 min</td></tr>
-          <tr><td><b>Masse</b></td><td>masse totale</td><td>≤ 900 g</td></tr>
-          <tr><td><b>Sécurité</b></td><td>temps d'arrêt d'urgence</td><td>&lt; 1 s</td></tr>
-        </tbody>
-      </table>
-      <div class="eqcard"><div class="eq">le système DOIT … (critère, niveau)</div><div class="leg">L'ensemble des exigences forme le <b>cahier des charges</b>. SysML les regroupe dans le <b>diagramme des exigences</b>.</div></div>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Du besoin aux exigences vérifiées</div>
-        <canvas id="cvexig" width="900" height="260" aria-label="Traçabilité : le besoin se décompose en exigences vérifiées, taux de couverture" style="width:100%;height:auto;display:block"></canvas>
-        <div class="cap"><b id="exphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="excap">Le besoin se décompose en exigences.</span></div>
-      </figure>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Un langage partagé</span>
-      <h2>SysML : un langage de modélisation</h2>
-      <p class="lede"><b>SysML</b> est un langage graphique normalisé pour décrire un système. Chaque <b>diagramme</b> donne un point de vue&nbsp;: le besoin, la structure, le comportement.</p>
-      <div class="card">
-        <ul class="dlist">
-          <li><span class="dg">exigences</span><span class="dt">ce que le système <b>doit</b> faire (le besoin traduit)</span></li>
-          <li><span class="dg">blocs (bdd)</span><span class="dt">la <b>structure</b> : de quoi le système est composé</span></li>
-          <li><span class="dg">cas d'usage</span><span class="dt">ce que l'<b>utilisateur</b> peut faire avec le système</span></li>
-          <li><span class="dg">états</span><span class="dt">le <b>comportement</b> : les états et leurs transitions</span></li>
-          <li><span class="dg">séquence</span><span class="dt">l'<b>ordre</b> des échanges entre éléments dans le temps</span></li>
-        </ul>
-      </div>
-      <div class="big-idea"><div class="t">Deux grandes familles</div><div class="v">SysML décrit la <b>structure</b> (de quoi c'est fait) et le <b>comportement</b> (comment ça réagit).</div></div>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · La structure</span>
-      <h2>La structure : le diagramme de blocs</h2>
-      <p class="lede">Le système se décompose en <b>blocs</b> (sous-systèmes, composants) reliés entre eux. Le diagramme de blocs montre « <b>est composé de</b> ».</p>
-      <figure>
-        <canvas id="cvDecomp" width="640" height="250"></canvas>
-        <div class="cap" id="capDecomp"><span class="ph">—</span><span id="capDecompTxt">…</span></div>
-      </figure>
-      <div class="eqcard"><div class="eq">système = bloc 1 + bloc 2 + bloc 3 + …</div><div class="leg">Chaque bloc peut être <b>décomposé à son tour</b> : on obtient une hiérarchie.</div></div>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Le comportement</span>
-      <h2>Le comportement : le diagramme d'états</h2>
-      <p class="lede">Le système se trouve dans un <b>état</b> à la fois. Un <b>événement</b> déclenche une <b>transition</b> vers un autre état (diagramme d'états-transitions).</p>
-      <figure>
-        <canvas id="cvStates" width="640" height="250"></canvas>
-        <div class="cap" id="capStates"><span class="ph">—</span><span id="capStatesTxt">…</span></div>
-      </figure>
-      <div class="eqcard"><div class="eq">état —[ événement ]→ nouvel état</div><div class="leg">Exemple du portail&nbsp;: l'appui sur le bouton fait passer de <b>FERMÉ</b> à <b>OUVERTURE</b>.</div></div>
-    </section>
-
-    <section id="s8" style="border-bottom:none">
-      <span class="kicker">08 · L'essentiel</span>
-      <h2>Synthèse</h2>
-      <div class="eqcard"><div class="eq">besoin (bête à cornes) → exigences (cahier des charges)</div></div>
-      <div class="eqcard"><div class="eq">modèle SysML : structure (blocs) + comportement (états, cas d'usage)</div></div>
-      <div class="big-idea"><div class="t">La démarche</div><div class="v">On part du <b>besoin</b>, on le traduit en <b>exigences</b>, on <b>modélise</b> le système, puis on le <b>réalise</b>.</div></div>
-      <a class="cta" href="hub_si_sysml.html">🔧 Passer au TP « Modéliser le système » →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_sysml.html">← Séquence : SysML</a> <div class="brand"><div class="mark">C</div> <div><h1>SysML</h1><p>Cours · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Problématique</a> <a href="#s2" class="navlink"><span>02</span>Un système</a> <a href="#s3" class="navlink"><span>03</span>Le besoin</a> <a href="#s4" class="navlink"><span>04</span>Les exigences</a> <a href="#s5" class="navlink"><span>05</span>Le langage SysML</a> <a href="#s6" class="navlink"><span>06</span>La structure</a> <a href="#s7" class="navlink"><span>07</span>Le comportement</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">SysML · problématique</span> <h2>Concevoir un système complexe</h2> <div class="twocol"><div><p class="lede">Un drone, un portail automatique, un vélo électrique&hellip; chacun assemble de nombreux composants pour rendre un <b>service</b>.</p> <p>Comment décrire un tel système sans se perdre, et le partager entre tous les concepteurs&nbsp;? Il faut un <b>langage commun</b>.</p> <div class="chips"><span class="chip s">décrire</span><span class="chip s">partager</span><span class="chip s">concevoir</span></div></div> <figure> <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg"> <rect x="120" y="80" width="120" height="60" rx="8" fill="#2E6A8E"/> <text x="180" y="106" font-family="Bricolage Grotesque,sans-serif" font-size="14" font-weight="800" fill="#fff" text-anchor="middle">Système</text> <text x="180" y="124" font-family="JetBrains Mono,monospace" font-size="9" fill="#cfe2ee" text-anchor="middle">(produit)</text> <g fill="#FFFDF8" stroke="#5C544B" stroke-width="1.8"> <rect x="30" y="30" width="64" height="30" rx="5"/><rect x="266" y="30" width="64" height="30" rx="5"/> <rect x="30" y="160" width="64" height="30" rx="5"/><rect x="266" y="160" width="64" height="30" rx="5"/> </g> <g stroke="#BD8A2A" stroke-width="1.8"> <line x1="94" y1="45" x2="120" y2="88"/><line x1="266" y1="45" x2="240" y2="88"/> <line x1="94" y1="175" x2="120" y2="132"/><line x1="266" y1="175" x2="240" y2="132"/> </g> <text x="62" y="49" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text> <text x="298" y="49" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text> <text x="62" y="179" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text> <text x="298" y="179" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#5C544B" text-anchor="middle">composant</text> </svg> <figcaption>Un système assemble des composants pour rendre un service.</figcaption> </figure></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Pour concevoir un système complexe, il faut un <b>langage commun</b> pour le décrire et le partager.</div></div> </section> <section id="s2"> <span class="kicker">02 · Définir</span> <h2>Qu'est-ce qu'un système ?</h2> <div class="twocol"><div><p class="lede">Un <b>système</b> est un ensemble de composants organisés pour remplir une ou plusieurs <b>fonctions</b>.</p> <p>On définit sa <b>frontière</b> (ce qui est dedans / dehors). Il reçoit des <b>entrées</b> et produit des <b>sorties</b>&nbsp;: matière, énergie, information.</p> <div class="eqcard"><div class="eq">entrées → SYSTÈME → sorties</div><div class="leg">Le système <b>transforme</b> ce qu'il reçoit pour rendre le service attendu.</div></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <rect x="30" y="30" width="300" height="150" rx="10" fill="none" stroke="#5C544B" stroke-width="1.6" stroke-dasharray="6 5"/> <text x="36" y="22" font-family="JetBrains Mono,monospace" font-size="9" fill="#5C544B">milieu extérieur</text> <rect x="130" y="78" width="100" height="54" rx="8" fill="#2E6A8E"/> <text x="180" y="110" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">SYSTÈME</text> <g stroke="#3D7E5F" stroke-width="2" marker-end="url(#ar)"> <line x1="48" y1="92" x2="128" y2="92"/><line x1="48" y1="118" x2="128" y2="118"/> </g> <g stroke="#B85C2E" stroke-width="2" marker-end="url(#ar2)"> <line x1="232" y1="105" x2="312" y2="105"/> </g> <text x="60" y="86" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#2c6147">énergie</text> <text x="60" y="133" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#2c6147">ordres / info</text> <text x="300" y="98" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#a44a26" text-anchor="end">service rendu</text> <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#3D7E5F"/></marker> <marker id="ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#B85C2E"/></marker></defs> </svg> <figcaption>Frontière, entrées et sorties d'un système.</figcaption> </figure></div> </section> <section id="s3"> <span class="kicker">03 · Le point de départ</span> <h2>Le besoin : à quoi sert le système ?</h2> <div class="twocol"><div><p class="lede">Un système existe pour satisfaire un <b>besoin</b>. Pour le cerner, on pose trois questions (la « bête à cornes »).</p> <p><b>À qui</b> rend-il service&nbsp;? <b>Sur quoi</b> agit-il&nbsp;? <b>Dans quel but</b> existe-t-il&nbsp;?</p> <div class="eqcard"><div class="eq">à qui ? · sur quoi ? · pour quoi ?</div><div class="leg">La réponse au « pour quoi » est la <b>fonction principale</b> du système.</div></div></div> <figure> <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg"> <rect x="20" y="20" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/> <text x="80" y="42" font-family="JetBrains Mono,monospace" font-size="10" fill="#235877" text-anchor="middle">À qui ?</text> <rect x="220" y="20" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2"/> <text x="280" y="42" font-family="JetBrains Mono,monospace" font-size="10" fill="#235877" text-anchor="middle">Sur quoi ?</text> <rect x="110" y="95" width="140" height="50" rx="8" fill="#2E6A8E"/> <text x="180" y="118" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">Le système</text> <text x="180" y="134" font-family="JetBrains Mono,monospace" font-size="8.5" fill="#cfe2ee" text-anchor="middle">(produit)</text> <g stroke="#5C544B" stroke-width="1.8"><line x1="80" y1="54" x2="130" y2="95"/><line x1="280" y1="54" x2="230" y2="95"/></g> <rect x="110" y="172" width="140" height="30" rx="6" fill="#FCE9B0" stroke="#BD8A2A" stroke-width="2"/> <text x="180" y="191" font-family="JetBrains Mono,monospace" font-size="10" fill="#8a6313" text-anchor="middle">Dans quel but ?</text> <line x1="180" y1="145" x2="180" y2="172" stroke="#5C544B" stroke-width="1.8"/> </svg> <figcaption>La « bête à cornes » : exprimer le besoin.</figcaption> </figure></div> </section> <section id="s4"> <span class="kicker">04 · Traduire le besoin</span> <h2>Des exigences au cahier des charges</h2> <p class="lede">Le besoin se traduit en <b>exigences</b> mesurables. Chaque exigence dit ce que le système <b>doit</b> faire, avec un <b>critère</b> et un <b>niveau</b> (valeur à atteindre).</p> <table class="t"> <thead><tr><th>Exigence</th><th>Critère</th><th>Niveau</th></tr></thead> <tbody> <tr><td><b>Autonomie</b></td><td>durée de vol</td><td>≥ 25 min</td></tr> <tr><td><b>Masse</b></td><td>masse totale</td><td>≤ 900 g</td></tr> <tr><td><b>Sécurité</b></td><td>temps d'arrêt d'urgence</td><td>&lt; 1 s</td></tr> </tbody> </table> <div class="eqcard"><div class="eq">le système DOIT … (critère, niveau)</div><div class="leg">L'ensemble des exigences forme le <b>cahier des charges</b>. SysML les regroupe dans le <b>diagramme des exigences</b>.</div></div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Du besoin aux exigences vérifiées</div> <canvas id="cvexig" width="900" height="260" aria-label="Traçabilité : le besoin se décompose en exigences vérifiées, taux de couverture" style="width:100%;height:auto;display:block"></canvas> <div class="cap"><b id="exphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="excap">Le besoin se décompose en exigences.</span></div> </figure> </section> <section id="s5"> <span class="kicker">05 · Un langage partagé</span> <h2>SysML : un langage de modélisation</h2> <p class="lede"><b>SysML</b> est un langage graphique normalisé pour décrire un système. Chaque <b>diagramme</b> donne un point de vue&nbsp;: le besoin, la structure, le comportement.</p> <div class="card"><ul class="dlist"> <li><span class="dg">exigences</span><span class="dt">ce que le système <b>doit</b> faire (le besoin traduit)</span></li> <li><span class="dg">blocs (bdd)</span><span class="dt">la <b>structure</b> : de quoi le système est composé</span></li> <li><span class="dg">cas d'usage</span><span class="dt">ce que l'<b>utilisateur</b> peut faire avec le système</span></li> <li><span class="dg">états</span><span class="dt">le <b>comportement</b> : les états et leurs transitions</span></li> <li><span class="dg">séquence</span><span class="dt">l'<b>ordre</b> des échanges entre éléments dans le temps</span></li> </ul></div> <div class="big-idea"><div class="t">Deux grandes familles</div><div class="v">SysML décrit la <b>structure</b> (de quoi c'est fait) et le <b>comportement</b> (comment ça réagit).</div></div> </section> <section id="s6"> <span class="kicker">06 · La structure</span> <h2>La structure : le diagramme de blocs</h2> <p class="lede">Le système se décompose en <b>blocs</b> (sous-systèmes, composants) reliés entre eux. Le diagramme de blocs montre « <b>est composé de</b> ».</p> <figure> <canvas id="cvDecomp" width="640" height="250"></canvas> <div class="cap" id="capDecomp"><span class="ph">—</span><span id="capDecompTxt">…</span></div> </figure> <div class="eqcard"><div class="eq">système = bloc 1 + bloc 2 + bloc 3 + …</div><div class="leg">Chaque bloc peut être <b>décomposé à son tour</b> : on obtient une hiérarchie.</div></div> </section> <section id="s7"> <span class="kicker">07 · Le comportement</span> <h2>Le comportement : le diagramme d'états</h2> <p class="lede">Le système se trouve dans un <b>état</b> à la fois. Un <b>événement</b> déclenche une <b>transition</b> vers un autre état (diagramme d'états-transitions).</p> <figure> <canvas id="cvStates" width="640" height="250"></canvas> <div class="cap" id="capStates"><span class="ph">—</span><span id="capStatesTxt">…</span></div> </figure> <div class="eqcard"><div class="eq">état —[ événement ]→ nouvel état</div><div class="leg">Exemple du portail&nbsp;: l'appui sur le bouton fait passer de <b>FERMÉ</b> à <b>OUVERTURE</b>.</div></div> </section> <section id="s8" style="border-bottom:none"> <span class="kicker">08 · L'essentiel</span> <h2>Synthèse</h2> <div class="eqcard"><div class="eq">besoin (bête à cornes) → exigences (cahier des charges)</div></div> <div class="eqcard"><div class="eq">modèle SysML : structure (blocs) + comportement (états, cas d'usage)</div></div> <div class="big-idea"><div class="t">La démarche</div><div class="v">On part du <b>besoin</b>, on le traduit en <b>exigences</b>, on <b>modélise</b> le système, puis on le <b>réalise</b>.</div></div> <a class="cta" href="hub_si_sysml.html"> Passer au TP « Modéliser le système » →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : décomposition en blocs =====
   (function(){
-    var cv=document.getElementById('cvDecomp'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capDecomp .ph').textContent=n;document.getElementById('capDecompTxt').textContent=t;}
-    var CH=['Châssis','Propulsion','Capteurs','Commande'];
-    var topB={x:W/2-72,y:40,w:144,h:46};
-    var p=0;
-    function childBox(i){var n=CH.length, gap=18, bw=(W-60-(n-1)*gap)/n, x=30+i*(bw+gap); return {x:x,y:182,w:bw,h:46};}
-    function diamond(cx,cy,col){g.fillStyle=col;g.strokeStyle=col;g.lineWidth=1;g.beginPath();g.moveTo(cx,cy-7);g.lineTo(cx+6,cy);g.lineTo(cx,cy+7);g.lineTo(cx-6,cy);g.closePath();g.fill();}
-    function draw(){
-      var step=Math.floor(p/0.9)%6, nShown=Math.min(step,4);
-      g.clearRect(0,0,W,H);
-      // top block
-      g.fillStyle='#2E6A8E';rrect(g,topB.x,topB.y,topB.w,topB.h,9);g.fill();
-      g.fillStyle='#fff';g.font='800 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Drone',W/2,topB.y+24);
-      g.fillStyle='#cfe2ee';g.font='9px "JetBrains Mono",monospace';g.fillText('« bloc » système',W/2,topB.y+39);
-      // children + links
-      for(var i=0;i<nShown;i++){var c=childBox(i),cx=c.x+c.w/2;
-        g.strokeStyle='#5C544B';g.lineWidth=1.8;g.beginPath();g.moveTo(W/2,topB.y+topB.h);g.lineTo(cx,c.y);g.stroke();
-        diamond(W/2,topB.y+topB.h+9,'#2E6A8E');
-        g.fillStyle='#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=2;rrect(g,c.x,c.y,c.w,c.h,8);g.fill();g.stroke();
-        g.fillStyle='#235877';g.font='600 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(CH[i],cx,c.y+22);
-        g.fillStyle='#5C544B';g.font='8.5px "JetBrains Mono",monospace';g.fillText('« bloc »',cx,c.y+37);}
-      if(step<=0) setCap('1','Le système global : le drone (un « bloc »).');
-      else if(step<4) setCap('2','On le décompose en blocs : sous-systèmes et composants.');
-      else setCap('3','Chaque bloc peut être décomposé à son tour : c\u2019est une hiérarchie.');
-      g.textAlign='left';
-    }
-    setInterval(function(){p=(p+0.05)%5.4; draw();},50); draw();
+ var cv=document.getElementById('cvDecomp'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capDecomp .ph').textContent=n;document.getElementById('capDecompTxt').textContent=t;}
+ var CH=['Châssis','Propulsion','Capteurs','Commande'];
+ var topB={x:W/2-72,y:40,w:144,h:46};
+ var p=0;
+ function childBox(i){var n=CH.length, gap=18, bw=(W-60-(n-1)*gap)/n, x=30+i*(bw+gap); return {x:x,y:182,w:bw,h:46};}
+ function diamond(cx,cy,col){g.fillStyle=col;g.strokeStyle=col;g.lineWidth=1;g.beginPath();g.moveTo(cx,cy-7);g.lineTo(cx+6,cy);g.lineTo(cx,cy+7);g.lineTo(cx-6,cy);g.closePath();g.fill();}
+ function draw(){
+ var step=Math.floor(p/0.9)%6, nShown=Math.min(step,4);
+ g.clearRect(0,0,W,H);
+ // top block
+ g.fillStyle='#2E6A8E';rrect(g,topB.x,topB.y,topB.w,topB.h,9);g.fill();
+ g.fillStyle='#fff';g.font='800 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Drone',W/2,topB.y+24);
+ g.fillStyle='#cfe2ee';g.font='9px "JetBrains Mono",monospace';g.fillText('« bloc » système',W/2,topB.y+39);
+ // children + links
+ for(var i=0;i<nShown;i++){var c=childBox(i),cx=c.x+c.w/2;
+ g.strokeStyle='#5C544B';g.lineWidth=1.8;g.beginPath();g.moveTo(W/2,topB.y+topB.h);g.lineTo(cx,c.y);g.stroke();
+ diamond(W/2,topB.y+topB.h+9,'#2E6A8E');
+ g.fillStyle='#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=2;rrect(g,c.x,c.y,c.w,c.h,8);g.fill();g.stroke();
+ g.fillStyle='#235877';g.font='600 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(CH[i],cx,c.y+22);
+ g.fillStyle='#5C544B';g.font='8.5px "JetBrains Mono",monospace';g.fillText('« bloc »',cx,c.y+37);}
+ if(step<=0) setCap('1','Le système global : le drone (un « bloc »).');
+ else if(step<4) setCap('2','On le décompose en blocs : sous-systèmes et composants.');
+ else setCap('3','Chaque bloc peut être décomposé à son tour : c\u2019est une hiérarchie.');
+ g.textAlign='left';
+ }
+ setInterval(function(){p=(p+0.05)%5.4; draw();},50); draw();
   })();
 
   // ===== Animation : diagramme d'états (portail) =====
   (function(){
-    var cv=document.getElementById('cvStates'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capStates .ph').textContent=n;document.getElementById('capStatesTxt').textContent=t;}
-    var ST=[
-      {lab:'FERMÉ',col:'#C0492E',open:1, cap:'État FERMÉ : le portail est clos, il attend un ordre.'},
-      {lab:'OUVERTURE',col:'#BD8A2A',open:0.5, cap:'Événement « bouton » → transition vers OUVERTURE.'},
-      {lab:'OUVERT',col:'#3D7E5F',open:0, cap:'État OUVERT : atteint après la fin de course haute.'},
-      {lab:'FERMETURE',col:'#2E6A8E',open:0.5, cap:'Après la temporisation, le portail se referme.'}
-    ];
-    var EVT=['bouton','fin de course','temporisation','fin de course'];
-    var cx=[88,238,392,544], cyRow=160, bw=118, bh=42;
-    var phaseS=0;
-    function arrowH(x1,x2,y,lab){g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(x1,y);g.lineTo(x2-7,y);g.stroke();
-      g.fillStyle='#5C544B';g.beginPath();g.moveTo(x2,y);g.lineTo(x2-8,y-4);g.lineTo(x2-8,y+4);g.closePath();g.fill();
-      g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,(x1+x2)/2,y-7);}
-    function gate(openFrac){
-      var gx=W/2, top=28, ph=44, postW=8, gap=92;
-      g.fillStyle='#5C544B';g.fillRect(gx-gap/2-postW,top,postW,ph);g.fillRect(gx+gap/2,top,postW,ph);
-      var barW=gap*openFrac;
-      g.fillStyle='#B85C2E';g.fillRect(gx-gap/2, top+ph/2-6, barW, 12);
-      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;g.strokeRect(gx-gap/2, top+ph/2-6, gap, 12);
-      g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('portail',gx,top+ph+13);
-    }
-    function draw(){
-      var active=Math.floor(phaseS/1.6)%4;
-      g.clearRect(0,0,W,H);
-      gate(ST[active].open);
-      // arrows between consecutive
-      for(var i=0;i<3;i++){arrowH(cx[i]+bw/2, cx[i+1]-bw/2, cyRow, EVT[i]);}
-      // loop back 4 -> 1 under
-      g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(cx[3],cyRow+bh/2);g.quadraticCurveTo(W/2,cyRow+78,cx[0],cyRow+bh/2);g.stroke();
-      g.fillStyle='#5C544B';g.beginPath();g.moveTo(cx[0],cyRow+bh/2);g.lineTo(cx[0]-4,cyRow+bh/2+8);g.lineTo(cx[0]+4,cyRow+bh/2+8);g.closePath();g.fill();
-      g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(EVT[3],W/2,cyRow+72);
-      // state boxes
-      for(var k=0;k<4;k++){var on=(k===active),s=ST[k];
-        g.fillStyle=on?s.col:'#FFFDF8';g.strokeStyle=s.col;g.lineWidth=on?3:2;
-        rrect(g,cx[k]-bw/2,cyRow-bh/2,bw,bh,10);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':s.col;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(s.lab,cx[k],cyRow+4);}
-      setCap(String(active+1),ST[active].cap);
-      g.textAlign='left';
-    }
-    setInterval(function(){phaseS+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvStates'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capStates .ph').textContent=n;document.getElementById('capStatesTxt').textContent=t;}
+ var ST=[
+ {lab:'FERMÉ',col:'#C0492E',open:1, cap:'État FERMÉ : le portail est clos, il attend un ordre.'},
+ {lab:'OUVERTURE',col:'#BD8A2A',open:0.5, cap:'Événement « bouton » → transition vers OUVERTURE.'},
+ {lab:'OUVERT',col:'#3D7E5F',open:0, cap:'État OUVERT : atteint après la fin de course haute.'},
+ {lab:'FERMETURE',col:'#2E6A8E',open:0.5, cap:'Après la temporisation, le portail se referme.'}
+ ];
+ var EVT=['bouton','fin de course','temporisation','fin de course'];
+ var cx=[88,238,392,544], cyRow=160, bw=118, bh=42;
+ var phaseS=0;
+ function arrowH(x1,x2,y,lab){g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(x1,y);g.lineTo(x2-7,y);g.stroke();
+ g.fillStyle='#5C544B';g.beginPath();g.moveTo(x2,y);g.lineTo(x2-8,y-4);g.lineTo(x2-8,y+4);g.closePath();g.fill();
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,(x1+x2)/2,y-7);}
+ function gate(openFrac){
+ var gx=W/2, top=28, ph=44, postW=8, gap=92;
+ g.fillStyle='#5C544B';g.fillRect(gx-gap/2-postW,top,postW,ph);g.fillRect(gx+gap/2,top,postW,ph);
+ var barW=gap*openFrac;
+ g.fillStyle='#B85C2E';g.fillRect(gx-gap/2, top+ph/2-6, barW, 12);
+ g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;g.strokeRect(gx-gap/2, top+ph/2-6, gap, 12);
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('portail',gx,top+ph+13);
+ }
+ function draw(){
+ var active=Math.floor(phaseS/1.6)%4;
+ g.clearRect(0,0,W,H);
+ gate(ST[active].open);
+ // arrows between consecutive
+ for(var i=0;i<3;i++){arrowH(cx[i]+bw/2, cx[i+1]-bw/2, cyRow, EVT[i]);}
+ // loop back 4 -> 1 under
+ g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.moveTo(cx[3],cyRow+bh/2);g.quadraticCurveTo(W/2,cyRow+78,cx[0],cyRow+bh/2);g.stroke();
+ g.fillStyle='#5C544B';g.beginPath();g.moveTo(cx[0],cyRow+bh/2);g.lineTo(cx[0]-4,cyRow+bh/2+8);g.lineTo(cx[0]+4,cyRow+bh/2+8);g.closePath();g.fill();
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(EVT[3],W/2,cyRow+72);
+ // state boxes
+ for(var k=0;k<4;k++){var on=(k===active),s=ST[k];
+ g.fillStyle=on?s.col:'#FFFDF8';g.strokeStyle=s.col;g.lineWidth=on?3:2;
+ rrect(g,cx[k]-bw/2,cyRow-bh/2,bw,bh,10);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':s.col;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(s.lab,cx[k],cyRow+4);}
+ setCap(String(active+1),ST[active].cap);
+ g.textAlign='left';
+ }
+ setInterval(function(){phaseS+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -395,38 +205,37 @@
   var reqs=[['R1 \u2014 s\u2019ouvre en moins de 8 s',1],['R2 \u2014 r\u00e9siste \u00e0 500 N',1],['R3 \u2014 autonomie 5 h',1],['R4 \u2014 masse < 800 g',0],['R5 \u2014 signal lumineux',1]];
   var bx=[110,130], rX=340, rW=470, y0=34, dy=46;
   var caps=[
-    'Le besoin se d\u00e9compose en exigences pr\u00e9cises et v\u00e9rifiables.',
-    'On v\u00e9rifie CHAQUE exigence sur le prototype : satisfaite ou non ?',
-    'Le taux de couverture = part d\u2019exigences satisfaites : ici 4 / 5 = 80 %.'
-  ];
+ 'Le besoin se d\u00e9compose en exigences pr\u00e9cises et v\u00e9rifiables.',
+ 'On v\u00e9rifie CHAQUE exigence sur le prototype : satisfaite ou non ?',
+ 'Le taux de couverture = part d\u2019exigences satisfaites : ici 4 / 5 = 80 %.'];
   var T=0;
   function step(){
-    T+=0.03; if(T>10) T=0;
-    var phase=(T<2?0:(T<6?1:2));
-    var shown=phase<1?0:(phase>=2?5:Math.floor((T-2)/0.8)+1);
-    g.clearRect(0,0,W,H);
-    // besoin
-    g.fillStyle='#fbeecf';g.strokeStyle='#BD8A2A';g.lineWidth=2;g.beginPath();g.rect(bx[0]-70,bx[1]-34,140,68);g.fill();g.stroke();
-    g.fillStyle='#8a6313';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('BESOIN',bx[0],bx[1]-6);g.font='11px "JetBrains Mono",monospace';g.fillText('(le portail)',bx[0],bx[1]+14);
-    // exigences
-    for(var k=0;k<5;k++){var y=y0+k*dy+16;
-      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1.4;g.beginPath();g.moveTo(bx[0]+70,bx[1]);g.lineTo(rX-8,y);g.stroke();
-      var ok=reqs[k][1], done=(k<shown);
-      g.fillStyle=done?(ok?'rgba(61,126,95,.10)':'rgba(192,73,46,.10)'):'#FCFAF4';
-      g.strokeStyle=done?(ok?'#3D7E5F':'#C0492E'):'rgba(42,38,34,.22)';g.lineWidth=1.6;
-      g.beginPath();g.rect(rX,y-15,rW,30);g.fill();g.stroke();
-      g.fillStyle='#2A2622';g.font='13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(reqs[k][0],rX+12,y+4);
-      if(done){g.fillStyle=ok?'#2c6147':'#a44a26';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(ok?'\u2713':'\u2717',rX+rW-20,y+6);}
-    }
-    // couverture (phase 2)
-    if(phase>=2){
-      g.fillStyle='#efe9dd';g.fillRect(rX,246,rW,10);
-      g.fillStyle='#3D7E5F';g.fillRect(rX,246,rW*0.8,10);
-      g.fillStyle='#235877';g.font='800 16px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('couverture : 4 / 5 = 80 %',rX,240);
-    }
-    var cap=document.getElementById('excap'), ph=document.getElementById('exphase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ T+=0.03; if(T>10) T=0;
+ var phase=(T<2?0:(T<6?1:2));
+ var shown=phase<1?0:(phase>=2?5:Math.floor((T-2)/0.8)+1);
+ g.clearRect(0,0,W,H);
+ // besoin
+ g.fillStyle='#fbeecf';g.strokeStyle='#BD8A2A';g.lineWidth=2;g.beginPath();g.rect(bx[0]-70,bx[1]-34,140,68);g.fill();g.stroke();
+ g.fillStyle='#8a6313';g.font='700 15px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('BESOIN',bx[0],bx[1]-6);g.font='11px "JetBrains Mono",monospace';g.fillText('(le portail)',bx[0],bx[1]+14);
+ // exigences
+ for(var k=0;k<5;k++){var y=y0+k*dy+16;
+ g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1.4;g.beginPath();g.moveTo(bx[0]+70,bx[1]);g.lineTo(rX-8,y);g.stroke();
+ var ok=reqs[k][1], done=(k<shown);
+ g.fillStyle=done?(ok?'rgba(61,126,95,.10)':'rgba(192,73,46,.10)'):'#FCFAF4';
+ g.strokeStyle=done?(ok?'#3D7E5F':'#C0492E'):'rgba(42,38,34,.22)';g.lineWidth=1.6;
+ g.beginPath();g.rect(rX,y-15,rW,30);g.fill();g.stroke();
+ g.fillStyle='#2A2622';g.font='13px "JetBrains Mono",monospace';g.textAlign='left';g.fillText(reqs[k][0],rX+12,y+4);
+ if(done){g.fillStyle=ok?'#2c6147':'#a44a26';g.font='800 18px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(ok?'\u2713':'\u2717',rX+rW-20,y+6);}
+ }
+ // couverture (phase 2)
+ if(phase>=2){
+ g.fillStyle='#efe9dd';g.fillRect(rX,246,rW,10);
+ g.fillStyle='#3D7E5F';g.fillRect(rX,246,rW*0.8,10);
+ g.fillStyle='#235877';g.font='800 16px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('couverture : 4 / 5 = 80 %',rX,240);
+ }
+ var cap=document.getElementById('excap'), ph=document.getElementById('exphase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();

@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
@@ -116,154 +115,58 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="wrap">
-  <div class="topbar">
-    <div class="mark">SI</div>
-    <div><h1>Évaluation — Ça tient debout ?</h1><p>Option Sciences de l'ingénieur · Seconde</p></div>
-    <a class="back" href="hub_si_2de_structure.html">← Séquence</a>
-  </div>
-
-  <section id="screen-home">
-    <div class="card">
-      <h2>Avant de commencer</h2>
-      <p class="lede">Cette évaluation comporte <b>deux parties</b>&nbsp;: <b>3 exercices</b> appuyés sur des schémas animés (avec <b>calculatrice</b>), puis un <b>questionnaire (QCM)</b>. Note finale sur 20.</p>
-      <label for="inNom">Nom et prénom</label>
-      <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off">
-      <label for="inClasse">Classe</label>
-      <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off">
-      <label for="inCode">Code d'accès</label>
-      <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off">
-      <div class="err" id="homeErr"></div>
-      <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div>
-    </div>
-    <div class="footlink"><a id="profLink">Espace enseignant</a></div>
-  </section>
-
-  <section id="screen-exam" hidden>
-    <div class="pbar"><span class="lab" id="progLab">0 / 17 questions</span><div class="track"><i id="progBar"></i></div></div>
-    <div class="exam-grid">
-      <div id="exoCol"></div>
-      <div class="calc-side">
-        <div class="calc">
-          <div class="ct">🧮 Calculatrice</div>
-          <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div>
-          <div class="keys" id="calcKeys">
-            <button class="key clr" data-k="C">C</button>
-            <button class="key clr" data-k="back">⌫</button>
-            <button class="key op" data-k="(">(</button>
-            <button class="key op" data-k=")">)</button>
-            <button class="key" data-k="7">7</button>
-            <button class="key" data-k="8">8</button>
-            <button class="key" data-k="9">9</button>
-            <button class="key op" data-k="/">÷</button>
-            <button class="key" data-k="4">4</button>
-            <button class="key" data-k="5">5</button>
-            <button class="key" data-k="6">6</button>
-            <button class="key op" data-k="*">×</button>
-            <button class="key" data-k="1">1</button>
-            <button class="key" data-k="2">2</button>
-            <button class="key" data-k="3">3</button>
-            <button class="key op" data-k="-">−</button>
-            <button class="key" data-k="0">0</button>
-            <button class="key" data-k=".">.</button>
-            <button class="key fn" data-k="pi">π</button>
-            <button class="key op" data-k="+">+</button>
-            <button class="key fn" data-k="sqrt">√</button>
-            <button class="key eq" data-k="=">=</button>
-          </div>
-          <div class="chint">+ − × ÷ pour tes calculs</div>
-        </div>
-        <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div>
-        <div class="err" id="examErr" style="text-align:center"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="screen-result" hidden>
-    <div class="card">
-      <h2>Résultat</h2>
-      <div class="scorebig" id="scoreBig">0 / 20</div>
-      <div class="scoresub" id="scoreSub"></div>
-      <div><span class="rankpill" id="rankPill"></span></div>
-      <div class="recap" id="recap"></div>
-      <div class="sync" id="syncMsg"></div>
-    </div>
-  </section>
-
-  <section id="screen-prof" hidden>
-    <div class="card">
-      <h2>Espace enseignant</h2>
-      <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p>
-      <div id="profGate">
-        <label for="inPass">Mot de passe</label>
-        <input type="password" id="inPass" autocomplete="off">
-        <div class="err" id="profErr"></div>
-        <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button>
-          <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div>
-      </div>
-      <div id="profData" hidden>
-        <div id="profTable"></div>
-        <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button>
-          <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<script>
-  var EVAL_CODE='STRUCTURE2026';
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="wrap"><div class="topbar"><div class="mark">SI</div> <div><h1>Évaluation — Ça tient debout ?</h1><p>Option Sciences de l'ingénieur · Seconde</p></div> <a class="back" href="hub_si_2de_structure.html">← Séquence</a></div> <section id="screen-home"> <div class="card"><h2>Avant de commencer</h2> <p class="lede">Cette évaluation comporte <b>deux parties</b>&nbsp;: <b>3 exercices</b> appuyés sur des schémas animés (avec <b>calculatrice</b>), puis un <b>questionnaire (QCM)</b>. Note finale sur 20.</p> <label for="inNom">Nom et prénom</label> <input type="text" id="inNom" placeholder="Ex. Dupont Léa" autocomplete="off"> <label for="inClasse">Classe</label> <input type="text" id="inClasse" placeholder="Ex. 1re SI" autocomplete="off"> <label for="inCode">Code d'accès</label> <input type="text" id="inCode" placeholder="Code fourni en classe" autocomplete="off"> <div class="err" id="homeErr"></div> <div style="margin-top:16px"><button class="btn" id="startBtn">Commencer l'évaluation →</button></div></div> <div class="footlink"><a id="profLink">Espace enseignant</a></div> </section> <section id="screen-exam" hidden> <div class="pbar"><span class="lab" id="progLab">0 / 17 questions</span><div class="track"><i id="progBar"></i></div></div> <div class="exam-grid"><div id="exoCol"></div> <div class="calc-side"><div class="calc"><div class="ct">Calculatrice</div> <div class="disp"><div class="expr" id="calcExpr"></div><div class="res" id="calcRes">0</div></div> <div class="keys" id="calcKeys"><button class="key clr" data-k="C">C</button> <button class="key clr" data-k="back">⌫</button> <button class="key op" data-k="(">(</button> <button class="key op" data-k=")">)</button> <button class="key" data-k="7">7</button> <button class="key" data-k="8">8</button> <button class="key" data-k="9">9</button> <button class="key op" data-k="/">÷</button> <button class="key" data-k="4">4</button> <button class="key" data-k="5">5</button> <button class="key" data-k="6">6</button> <button class="key op" data-k="*">×</button> <button class="key" data-k="1">1</button> <button class="key" data-k="2">2</button> <button class="key" data-k="3">3</button> <button class="key op" data-k="-">−</button> <button class="key" data-k="0">0</button> <button class="key" data-k=".">.</button> <button class="key fn" data-k="pi">π</button> <button class="key op" data-k="+">+</button> <button class="key fn" data-k="sqrt">√</button> <button class="key eq" data-k="=">=</button></div> <div class="chint">+ − × ÷ pour tes calculs</div></div> <div style="margin-top:16px"><button class="btn" id="submitBtn" style="width:100%">Valider l'évaluation</button></div> <div class="err" id="examErr" style="text-align:center"></div></div></div> </section> <section id="screen-result" hidden> <div class="card"><h2>Résultat</h2> <div class="scorebig" id="scoreBig">0 / 20</div> <div class="scoresub" id="scoreSub"></div> <div><span class="rankpill" id="rankPill"></span></div> <div class="recap" id="recap"></div> <div class="sync" id="syncMsg"></div></div> </section> <section id="screen-prof" hidden> <div class="card"><h2>Espace enseignant</h2> <p class="lede">Accès réservé. Saisis le mot de passe pour consulter les résultats enregistrés.</p> <div id="profGate"><label for="inPass">Mot de passe</label> <input type="password" id="inPass" autocomplete="off"> <div class="err" id="profErr"></div> <div style="margin-top:14px"><button class="btn" id="profBtn">Afficher les résultats</button> <button class="btn alt" id="profBack" style="margin-left:8px">Retour</button></div></div> <div id="profData" hidden><div id="profTable"></div> <div style="margin-top:16px"><button class="btn alt" id="profRefresh">Actualiser</button> <button class="btn alt" id="profBack2" style="margin-left:8px">Retour</button></div></div></div> </section></div> <script> var EVAL_CODE='STRUCTURE2026';
   var PROF_PASS='Agostini2025';
   var FB_URL='https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app';
   var FB_NODE='resultats_si_2de_structure';
 
   var EXOS=[
-    { anim:'charges', tag:'Exercice 1 \u00b7 8 pts', title:'Les efforts sur une étagère',
-      ctx:'Une étagère supporte son propre poids, puis la charge posée dessus. Observe les charges qui s\u2019empilent et compare au maximum autorisé.',
-      data:[['Poids propre','6 kg'],['Charge utile (livres)','18 kg'],['Charge max autorisée','30 kg']],
-      parts:[
-        {q:'Charge totale actuelle ?', a:24, tol:0.1, pts:3, unit:'kg', sol:'6 + 18 = 24 kg'},
-        {q:'Marge restante avant le maximum ?', a:6, tol:0.1, pts:2, unit:'kg', sol:'30 \u2212 24 = 6 kg'},
-        {q:'L\u2019étagère est-elle en sécurité ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:3, unit:'', sol:'24 \u2264 30 \u2192 oui \u2192 1'}
-      ] },
-    { anim:'etages', tag:'Exercice 2 \u00b7 8 pts', title:'Chaque étage ajoute sa charge',
-      ctx:'Un immeuble a 4 étages identiques au-dessus du rez-de-chaussée. Chaque étage pèse 50 kN. Le pilier du rez-de-chaussée supporte le poids de tous les étages du dessus, plus le sien.',
-      data:[['Poids d\u2019un étage','50 kN'],['Étages au-dessus du RDC','4'],['Poids du rez-de-chaussée','50 kN']],
-      parts:[
-        {q:'Poids transmis par les 4 \u00e9tages du dessus ?', a:200, tol:1, pts:3, unit:'kN', sol:'50 \u00d7 4 = 200 kN'},
-        {q:'Charge totale sur le pilier du RDC ?', a:250, tol:1, pts:3, unit:'kN', sol:'200 + 50 = 250 kN'},
-        {q:'On ajoute un 5\u1d49 \u00e9tage (+50 kN) : nouvelle charge totale ?', a:300, tol:1, pts:2, unit:'kN', sol:'250 + 50 = 300 kN'}
-      ] },
-    { anim:'poutres', tag:'Exercice 3 \u00b7 8 pts', title:'Comparer deux poutres',
-      ctx:'Deux poutres de même longueur, chargées au même poids en leur milieu. Regarde-les fléchir : poutre A (bois) fléchit de 8 mm, poutre B (acier) de 2 mm.',
-      data:[['Poutre A (bois)','flèche 8 mm'],['Poutre B (acier)','flèche 2 mm'],['Flèche maximale autorisée','5 mm']],
-      parts:[
-        {q:'\u00c9cart de fl\u00e8che entre A et B ?', a:6, tol:0.1, pts:2, unit:'mm', sol:'8 \u2212 2 = 6 mm'},
-        {q:'La poutre A fl\u00e9chit combien de fois plus que B ?', a:4, tol:0.1, pts:3, unit:'fois', sol:'8 / 2 = 4 fois'},
-        {q:'La poutre A respecte-t-elle la flèche maximale (5 mm) ? (1 = oui, 0 = non)', a:0, tol:0.1, pts:3, unit:'', sol:'8 > 5 \u2192 non \u2192 0'}
-      ] }
+ { anim:'charges', tag:'Exercice 1 \u00b7 8 pts', title:'Les efforts sur une étagère',
+ ctx:'Une étagère supporte son propre poids, puis la charge posée dessus. Observe les charges qui s\u2019empilent et compare au maximum autorisé.',
+ data:[['Poids propre','6 kg'],['Charge utile (livres)','18 kg'],['Charge max autorisée','30 kg']],
+ parts:[
+ {q:'Charge totale actuelle ?', a:24, tol:0.1, pts:3, unit:'kg', sol:'6 + 18 = 24 kg'},
+ {q:'Marge restante avant le maximum ?', a:6, tol:0.1, pts:2, unit:'kg', sol:'30 \u2212 24 = 6 kg'},
+ {q:'L\u2019étagère est-elle en sécurité ? (1 = oui, 0 = non)', a:1, tol:0.1, pts:3, unit:'', sol:'24 \u2264 30 \u2192 oui \u2192 1'}
+ ] },
+ { anim:'etages', tag:'Exercice 2 \u00b7 8 pts', title:'Chaque étage ajoute sa charge',
+ ctx:'Un immeuble a 4 étages identiques au-dessus du rez-de-chaussée. Chaque étage pèse 50 kN. Le pilier du rez-de-chaussée supporte le poids de tous les étages du dessus, plus le sien.',
+ data:[['Poids d\u2019un étage','50 kN'],['Étages au-dessus du RDC','4'],['Poids du rez-de-chaussée','50 kN']],
+ parts:[
+ {q:'Poids transmis par les 4 \u00e9tages du dessus ?', a:200, tol:1, pts:3, unit:'kN', sol:'50 \u00d7 4 = 200 kN'},
+ {q:'Charge totale sur le pilier du RDC ?', a:250, tol:1, pts:3, unit:'kN', sol:'200 + 50 = 250 kN'},
+ {q:'On ajoute un 5\u1d49 \u00e9tage (+50 kN) : nouvelle charge totale ?', a:300, tol:1, pts:2, unit:'kN', sol:'250 + 50 = 300 kN'}
+ ] },
+ { anim:'poutres', tag:'Exercice 3 \u00b7 8 pts', title:'Comparer deux poutres',
+ ctx:'Deux poutres de même longueur, chargées au même poids en leur milieu. Regarde-les fléchir : poutre A (bois) fléchit de 8 mm, poutre B (acier) de 2 mm.',
+ data:[['Poutre A (bois)','flèche 8 mm'],['Poutre B (acier)','flèche 2 mm'],['Flèche maximale autorisée','5 mm']],
+ parts:[
+ {q:'\u00c9cart de fl\u00e8che entre A et B ?', a:6, tol:0.1, pts:2, unit:'mm', sol:'8 \u2212 2 = 6 mm'},
+ {q:'La poutre A fl\u00e9chit combien de fois plus que B ?', a:4, tol:0.1, pts:3, unit:'fois', sol:'8 / 2 = 4 fois'},
+ {q:'La poutre A respecte-t-elle la flèche maximale (5 mm) ? (1 = oui, 0 = non)', a:0, tol:0.1, pts:3, unit:'', sol:'8 > 5 \u2192 non \u2192 0'}
+ ] }
   ];
   var MAXPTS=0, NQ=0; EXOS.forEach(function(e){ e.parts.forEach(function(p){ MAXPTS+=p.pts; NQ++; }); });
   var QB=[
-    {q:'Une poutre qui plie sous une charge travaille en\u2026', opts:['traction','flexion','aucun effort'], correct:1, pts:2},
-    {q:'Un pilier qui supporte un poids travaille en\u2026', opts:['compression','traction','flexion'], correct:0, pts:2},
-    {q:'La triangulation d\u2019une structure sert à\u2026', opts:['l\u2019alourdir','la rigidifier','la décorer'], correct:1, pts:2},
-    {q:'Le béton résiste bien\u2026', opts:['en traction','en compression','ni l\u2019un ni l\u2019autre'], correct:1, pts:2},
-    {q:'Chaque étage d\u2019un immeuble\u2026', opts:['n\u2019ajoute aucun poids','ajoute son poids aux étages du dessous','allège les étages du dessous'], correct:1, pts:2},
-    {q:'Une fondation sert à\u2026', opts:['décorer le bâtiment','transmettre les efforts au sol','supporter uniquement le vent'], correct:1, pts:2},
-    {q:'Pour tester une structure avant de la construire, on peut utiliser\u2026', opts:['uniquement l\u2019intuition','une maquette ou une simulation','rien, on construit directement'], correct:1, pts:2},
-    {q:'À dimensions égales, une poutre en acier fléchit généralement\u2026', opts:['plus qu\u2019une poutre en bois','moins qu\u2019une poutre en bois','exactement pareil'], correct:1, pts:2}
+ {q:'Une poutre qui plie sous une charge travaille en\u2026', opts:['traction','flexion','aucun effort'], correct:1, pts:2},
+ {q:'Un pilier qui supporte un poids travaille en\u2026', opts:['compression','traction','flexion'], correct:0, pts:2},
+ {q:'La triangulation d\u2019une structure sert à\u2026', opts:['l\u2019alourdir','la rigidifier','la décorer'], correct:1, pts:2},
+ {q:'Le béton résiste bien\u2026', opts:['en traction','en compression','ni l\u2019un ni l\u2019autre'], correct:1, pts:2},
+ {q:'Chaque étage d\u2019un immeuble\u2026', opts:['n\u2019ajoute aucun poids','ajoute son poids aux étages du dessous','allège les étages du dessous'], correct:1, pts:2},
+ {q:'Une fondation sert à\u2026', opts:['décorer le bâtiment','transmettre les efforts au sol','supporter uniquement le vent'], correct:1, pts:2},
+ {q:'Pour tester une structure avant de la construire, on peut utiliser\u2026', opts:['uniquement l\u2019intuition','une maquette ou une simulation','rien, on construit directement'], correct:1, pts:2},
+ {q:'À dimensions égales, une poutre en acier fléchit généralement\u2026', opts:['plus qu\u2019une poutre en bois','moins qu\u2019une poutre en bois','exactement pareil'], correct:1, pts:2}
   ];
   var qbSel={};
   var MAXB=0; QB.forEach(function(q){ MAXB+=q.pts; }); MAXPTS+=MAXB; NQ+=QB.length;
   function buildQB(){
-    var h='<div class="exo qbexo"><div class="etag">Partie B \u00b7 QCM \u00b7 '+MAXB+' pts</div><h3>Questionnaire</h3><p class="ctx">Choisis la bonne r\u00e9ponse pour chaque question (sans calculatrice).</p>';
-    QB.forEach(function(q,qi){
-      h+='<div class="qb"><div class="pq"><span class="pn">'+(qi+1)+'.</span><span>'+q.q+'</span><span class="pts">'+q.pts+' pts</span></div><div class="qopts">'+
-        q.opts.map(function(o,oi){return '<button type="button" class="qopt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>';}).join('')+'</div></div>';
-    });
-    return h+'</div>';
+ var h='<div class="exo qbexo"><div class="etag">Partie B \u00b7 QCM \u00b7 '+MAXB+' pts</div><h3>Questionnaire</h3><p class="ctx">Choisis la bonne r\u00e9ponse pour chaque question (sans calculatrice).</p>';
+ QB.forEach(function(q,qi){
+ h+='<div class="qb"><div class="pq"><span class="pn">'+(qi+1)+'.</span><span>'+q.q+'</span><span class="pts">'+q.pts+' pts</span></div><div class="qopts">'+
+ q.opts.map(function(o,oi){return '<button type="button" class="qopt" data-q="'+qi+'" data-o="'+oi+'">'+o+'</button>';}).join('')+'</div></div>';
+ });
+ return h+'</div>';
   }
 
   var student={nom:'',classe:''};
@@ -271,130 +174,130 @@
   function parseNum(s){ if(s==null)return NaN; return parseFloat(String(s).replace(',','.').replace(/\s/g,'')); }
 
   document.getElementById('startBtn').addEventListener('click',function(){
-    var nom=document.getElementById('inNom').value.trim();
-    var cls=document.getElementById('inClasse').value.trim();
-    var code=document.getElementById('inCode').value.trim();
-    var err=document.getElementById('homeErr');
-    if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
-    if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
-    err.textContent=''; student.nom=nom; student.classe=cls;
-    buildExam(); show('screen-exam'); startAnim();
+ var nom=document.getElementById('inNom').value.trim();
+ var cls=document.getElementById('inClasse').value.trim();
+ var code=document.getElementById('inCode').value.trim();
+ var err=document.getElementById('homeErr');
+ if(!nom||!cls){ err.textContent='Renseigne ton nom et ta classe.'; return; }
+ if(code.toUpperCase()!==EVAL_CODE){ err.textContent='Code d\u2019acc\u00e8s incorrect.'; return; }
+ err.textContent=''; student.nom=nom; student.classe=cls;
+ buildExam(); show('screen-exam'); startAnim();
   });
   document.getElementById('profLink').addEventListener('click',function(){ show('screen-prof'); });
 
   function buildExam(){
-    var col=document.getElementById('exoCol'); var html='';
-    EXOS.forEach(function(ex,ei){
-      html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
-      html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
-      html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
-      ex.parts.forEach(function(p,pi){
-        html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
-          '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
-      });
-      html+='</div>';
-    });
-    html+=buildQB();
-    col.innerHTML=html;
-    col.addEventListener('input',updateProgress);
-    col.addEventListener('click',function(ev){ var b=ev.target.closest('.qopt'); if(!b)return; var qi=b.getAttribute('data-q'), oi=parseInt(b.getAttribute('data-o'),10); qbSel[qi]=oi; var box=b.parentNode; Array.prototype.forEach.call(box.querySelectorAll('.qopt'),function(x){x.classList.remove('sel');}); b.classList.add('sel'); updateProgress(); });
-    updateProgress();
+ var col=document.getElementById('exoCol'); var html='';
+ EXOS.forEach(function(ex,ei){
+ html+='<div class="exo"><div class="etag">'+ex.tag+'</div><h3>'+ex.title+'</h3><p class="ctx">'+ex.ctx+'</p>';
+ html+='<canvas id="cv_'+ex.anim+'" width="640" height="220"></canvas>';
+ html+='<div class="data">'+ex.data.map(function(d){return '<span class="d">'+d[0]+' : <b>'+d[1]+'</b></span>';}).join('')+'</div>';
+ ex.parts.forEach(function(p,pi){
+ html+='<div class="part"><div class="pq"><span class="pn">'+(pi+1)+'.</span><span>'+p.q+'</span><span class="pts">'+p.pts+' pts</span></div>'+
+ '<div class="ansrow"><input type="text" inputmode="decimal" data-e="'+ei+'" data-p="'+pi+'" placeholder="R\u00e9ponse"><span class="unit">'+p.unit+'</span></div></div>';
+ });
+ html+='</div>';
+ });
+ html+=buildQB();
+ col.innerHTML=html;
+ col.addEventListener('input',updateProgress);
+ col.addEventListener('click',function(ev){ var b=ev.target.closest('.qopt'); if(!b)return; var qi=b.getAttribute('data-q'), oi=parseInt(b.getAttribute('data-o'),10); qbSel[qi]=oi; var box=b.parentNode; Array.prototype.forEach.call(box.querySelectorAll('.qopt'),function(x){x.classList.remove('sel');}); b.classList.add('sel'); updateProgress(); });
+ updateProgress();
   }
   function readAll(){
-    var vals={};
-    document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
-    return vals;
+ var vals={};
+ document.querySelectorAll('#exoCol input[data-e]').forEach(function(inp){ vals[inp.getAttribute('data-e')+'_'+inp.getAttribute('data-p')]=inp.value; });
+ return vals;
   }
   function updateProgress(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
-    n+=Object.keys(qbSel).length;
-    document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
-    document.getElementById('progBar').style.width=(n/NQ*100)+'%';
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k]!==null&&vals[k].trim()!=='')n++; });
+ n+=Object.keys(qbSel).length;
+ document.getElementById('progLab').textContent=n+' / '+NQ+' questions';
+ document.getElementById('progBar').style.width=(n/NQ*100)+'%';
   }
 
   var warned=false;
   document.getElementById('submitBtn').addEventListener('click',function(){
-    var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
-    n+=Object.keys(qbSel).length;
-    var err=document.getElementById('examErr');
-    if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
-    err.textContent=''; grade(vals);
+ var vals=readAll(); var n=0; Object.keys(vals).forEach(function(k){ if(vals[k].trim()!=='')n++; });
+ n+=Object.keys(qbSel).length;
+ var err=document.getElementById('examErr');
+ if(n<NQ && !warned){ warned=true; err.textContent='Il reste '+(NQ-n)+' r\u00e9ponse(s) vide(s). Reclique pour valider quand m\u00eame.'; return; }
+ err.textContent=''; grade(vals);
   });
 
   function grade(vals){
-    var pts=0, recapHtml='';
-    EXOS.forEach(function(ex,ei){
-      recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
-      ex.parts.forEach(function(p,pi){
-        var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
-        var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
-        var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
-        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
-      });
-      recapHtml+='</div>';
-    });
-      recapHtml+='<div class="rexo"><div class="rh">Partie B · QCM</div>';
-      QB.forEach(function(q,qi){
-        var sel=qbSel[qi]; var good=(sel===q.correct); if(good)pts+=q.pts;
-        var shown=(sel==null)?'\u2014 (vide)':q.opts[sel];
-        recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(qi+1)+'. '+q.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 Bonne r\u00e9ponse : '+q.opts[q.correct])+'</div></div></div>';
-      });
-      recapHtml+='</div>';
-    var pct=Math.round(pts/MAXPTS*100);
-    var note=Math.round(pts/MAXPTS*20*10)/10;
-    var rank = pct>=90?'\uD83C\uDFC6 Expert\u00b7e':pct>=70?'\uD83D\uDCD0 Ma\u00eetrise':pct>=50?'\u2699\uFE0F En progr\u00e8s':'\uD83D\uDD27 \u00c0 retravailler';
-    document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
-    document.getElementById('rankPill').textContent=rank;
-    document.getElementById('recap').innerHTML=recapHtml;
-    show('screen-result'); animateScore(note); sendResult(pts,pct,note);
+ var pts=0, recapHtml='';
+ EXOS.forEach(function(ex,ei){
+ recapHtml+='<div class="rexo"><div class="rh">'+ex.title+'</div>';
+ ex.parts.forEach(function(p,pi){
+ var raw=vals[ei+'_'+pi]; var v=parseNum(raw);
+ var good=(!isNaN(v)&&Math.abs(v-p.a)<=p.tol); if(good)pts+=p.pts;
+ var shown=(raw==null||raw.trim()==='')?'\u2014 (vide)':raw;
+ recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(pi+1)+'. '+p.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 '+p.sol)+'</div></div></div>';
+ });
+ recapHtml+='</div>';
+ });
+ recapHtml+='<div class="rexo"><div class="rh">Partie B · QCM</div>';
+ QB.forEach(function(q,qi){
+ var sel=qbSel[qi]; var good=(sel===q.correct); if(good)pts+=q.pts;
+ var shown=(sel==null)?'\u2014 (vide)':q.opts[sel];
+ recapHtml+='<div class="ri '+(good?'good':'bad')+'"><div class="ic">'+(good?'\u2713':'\u2717')+'</div><div class="det"><div>'+(qi+1)+'. '+q.q+'</div><div class="sol">Ta r\u00e9ponse : '+shown+(good?'':' \u00b7 Bonne r\u00e9ponse : '+q.opts[q.correct])+'</div></div></div>';
+ });
+ recapHtml+='</div>';
+ var pct=Math.round(pts/MAXPTS*100);
+ var note=Math.round(pts/MAXPTS*20*10)/10;
+ var rank = pct>=90?' Expert\u00b7e':pct>=70?' Ma\u00eetrise':pct>=50?' En progr\u00e8s':' \u00c0 retravailler';
+ document.getElementById('scoreSub').textContent=pts+' / '+MAXPTS+' points \u00b7 '+pct+' % \u2014 '+student.nom+' ('+student.classe+')';
+ document.getElementById('rankPill').textContent=rank;
+ document.getElementById('recap').innerHTML=recapHtml;
+ show('screen-result'); animateScore(note); sendResult(pts,pct,note);
   }
   function animateScore(note){
-    var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
-    var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
+ var el=document.getElementById('scoreBig'); var target=note, steps=24, i=0;
+ var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
   }
   function sendResult(pts,pct,note){
-    var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
-    var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
-    fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
-      .catch(function(){ msg.textContent='\u26a0 Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
+ var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
+ var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+ fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
+ .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+ .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
+ .catch(function(){ msg.textContent=' Enregistrement impossible (hors connexion). Ton score reste affich\u00e9 ci-dessus.'; });
   }
 
   // ===== Calculatrice =====
   (function(){
-    var expr='', justEval=false;
-    var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
-    function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
-    function evaluate(){
-      try{
-        var s=expr, i=0;
-        function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
-        function factor(){
-          if(s[i]==='-'){ i++; return -factor(); }
-          if(s[i]==='+'){ i++; return factor(); }
-          if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
-          if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
-          if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
-          return number();
-        }
-        function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
-        function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
-        var res=expr2();
-        if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
-        var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
-      }catch(e){ resEl.textContent='Erreur'; return null; }
-    }
-    function press(k){
-      if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
-      if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
-      if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
-      if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
-      if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
-      if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
-      expr+=k; disp();
-    }
-    document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
+ var expr='', justEval=false;
+ var exprEl=document.getElementById('calcExpr'), resEl=document.getElementById('calcRes');
+ function disp(){ exprEl.textContent=expr.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7').replace(/PI/g,'\u03c0').replace(/sqrt\(/g,'\u221a('); }
+ function evaluate(){
+ try{
+ var s=expr, i=0;
+ function number(){ var st=i; while(i<s.length&&/[0-9.]/.test(s[i]))i++; return parseFloat(s.slice(st,i)); }
+ function factor(){
+ if(s[i]==='-'){ i++; return -factor(); }
+ if(s[i]==='+'){ i++; return factor(); }
+ if(s.substr(i,2)==='PI'){ i+=2; return Math.PI; }
+ if(s.substr(i,5)==='sqrt('){ i+=5; var v=expr2(); if(s[i]===')')i++; return Math.sqrt(v); }
+ if(s[i]==='('){ i++; var v2=expr2(); if(s[i]===')')i++; return v2; }
+ return number();
+ }
+ function term(){ var v=factor(); while(s[i]==='*'||s[i]==='/'){ var o=s[i++]; var r=factor(); v=(o==='*')?v*r:v/r; } return v; }
+ function expr2(){ var v=term(); while(s[i]==='+'||s[i]==='-'){ var o=s[i++]; var r=term(); v=(o==='+')?v+r:v-r; } return v; }
+ var res=expr2();
+ if(i<s.length||isNaN(res)||!isFinite(res)) throw new Error('bad');
+ var out=Math.round(res*1e6)/1e6; resEl.textContent=String(out).replace('.',','); return out;
+ }catch(e){ resEl.textContent='Erreur'; return null; }
+ }
+ function press(k){
+ if(k==='C'){ expr=''; justEval=false; disp(); resEl.textContent='0'; return; }
+ if(k==='back'){ if(expr.substr(-5)==='sqrt('){expr=expr.slice(0,-5);} else {expr=expr.slice(0,-1);} justEval=false; disp(); return; }
+ if(k==='='){ var r=evaluate(); if(r!==null){ expr=String(Math.round(r*1e6)/1e6); justEval=true; } disp(); return; }
+ if(k==='pi'){ if(justEval){expr='';justEval=false;} expr+='PI'; disp(); return; }
+ if(k==='sqrt'){ if(justEval){expr='';justEval=false;} expr+='sqrt('; disp(); return; }
+ if(justEval){ if(/[0-9.]/.test(k)){ expr=''; } justEval=false; }
+ expr+=k; disp();
+ }
+ document.getElementById('calcKeys').addEventListener('click',function(ev){ var b=ev.target.closest('.key'); if(!b)return; press(b.getAttribute('data-k')); });
   })();
 
   // ===== Animations =====
@@ -405,70 +308,70 @@
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   function drawCharges(){
-    var o=ctxOf('cv_charges'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var items=[{n:'Poids propre',v:6,c:'#2E6A8E'},{n:'Livres',v:18,c:'#BD8A2A'}];
-    var maxV=32, x0=100,x1=W-30;
-    function bw(v){return v/maxV*(x1-x0);}
-    var seg=phase%9, shown=Math.max(0,Math.min(2,Math.floor(seg/2)));
-    var y=110, bh=42, running=0;
-    g.fillStyle='rgba(42,38,34,.06)';rrect(g,x0,y,x1-x0,bh,8);g.fill();
-    for(var i=0;i<2;i++){
-      if(i<shown){var it=items[i];g.fillStyle=it.c;rrect(g,x0+bw(running),y,bw(it.v),bh,i===0?8:0);g.fill();
-        g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';if(bw(it.v)>36)g.fillText(it.v+' kg',x0+bw(running)+bw(it.v)/2,y+bh/2+4);
-        running+=it.v;}
-    }
-    g.fillStyle='#5C544B';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('Poids propre',x0,y-10);g.fillText('+ Livres',x0+bw(6)+6,y-10);
-    g.strokeStyle='#C0492E';g.lineWidth=2;g.setLineDash([6,4]);g.beginPath();g.moveTo(x0+bw(30),y-14);g.lineTo(x0+bw(30),y+bh+8);g.stroke();g.setLineDash([]);
-    g.fillStyle='#a44a26';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('max 30 kg',x0+bw(30),y-20);
-    if(shown>=2){g.fillStyle='#2c6147';g.font='800 12px "Bricolage Grotesque",sans-serif';g.fillText('Total = 24 kg \u2264 30 kg',W/2,190);}
-    g.textAlign='left';
+ var o=ctxOf('cv_charges'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var items=[{n:'Poids propre',v:6,c:'#2E6A8E'},{n:'Livres',v:18,c:'#BD8A2A'}];
+ var maxV=32, x0=100,x1=W-30;
+ function bw(v){return v/maxV*(x1-x0);}
+ var seg=phase%9, shown=Math.max(0,Math.min(2,Math.floor(seg/2)));
+ var y=110, bh=42, running=0;
+ g.fillStyle='rgba(42,38,34,.06)';rrect(g,x0,y,x1-x0,bh,8);g.fill();
+ for(var i=0;i<2;i++){
+ if(i<shown){var it=items[i];g.fillStyle=it.c;rrect(g,x0+bw(running),y,bw(it.v),bh,i===0?8:0);g.fill();
+ g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';if(bw(it.v)>36)g.fillText(it.v+' kg',x0+bw(running)+bw(it.v)/2,y+bh/2+4);
+ running+=it.v;}
+ }
+ g.fillStyle='#5C544B';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText('Poids propre',x0,y-10);g.fillText('+ Livres',x0+bw(6)+6,y-10);
+ g.strokeStyle='#C0492E';g.lineWidth=2;g.setLineDash([6,4]);g.beginPath();g.moveTo(x0+bw(30),y-14);g.lineTo(x0+bw(30),y+bh+8);g.stroke();g.setLineDash([]);
+ g.fillStyle='#a44a26';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('max 30 kg',x0+bw(30),y-20);
+ if(shown>=2){g.fillStyle='#2c6147';g.font='800 12px "Bricolage Grotesque",sans-serif';g.fillText('Total = 24 kg \u2264 30 kg',W/2,190);}
+ g.textAlign='left';
   }
 
   function drawEtages(){
-    var o=ctxOf('cv_etages'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var n=5, x0=210,x1=430, top=18, fh=32, gap=4;
-    var seg=phase%12, shown=Math.max(0,Math.min(n,Math.floor(seg/2)));
-    var total=0;
-    for(var i=0;i<n;i++){
-      var y=top+i*(fh+gap), isRDC=(i===n-1), on=i<shown;
-      g.fillStyle=on?(isRDC?'#8A5A7A':'#2E6A8E'):'rgba(42,38,34,.05)';
-      g.strokeStyle=on?'#2A2622':'rgba(42,38,34,.2)';g.lineWidth=1.5;
-      rrect(g,x0,y,x1-x0,fh,5);g.fill();g.stroke();
-      g.fillStyle=on?'#fff':'#8a8378';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';
-      g.fillText(isRDC?'RDC (50 kN)':'Étage '+(n-1-i)+' (50 kN)',(x0+x1)/2,y+fh/2+4);
-      if(on)total+=50;
-    }
-    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('la charge de chaque étage s\u2019ajoute à celle du dessous',x0,top-6);
-    if(shown>=1){g.strokeStyle='#C0492E';g.lineWidth=2;g.beginPath();g.moveTo(x1+14,top+fh/2);
-      for(var k=1;k<shown;k++){g.lineTo(x1+14,top+k*(fh+gap)+fh/2);}
-      g.stroke();
-      g.fillStyle='#C0492E';g.beginPath();var yEnd=top+(shown-1)*(fh+gap)+fh/2;g.moveTo(x1+14,yEnd);g.lineTo(x1+9,yEnd-6);g.lineTo(x1+19,yEnd-6);g.closePath();g.fill();}
-    g.fillStyle='#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';
-    g.fillText('Charge cumulée : '+total+' kN',W/2,H-14);
-    g.textAlign='left';
+ var o=ctxOf('cv_etages'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var n=5, x0=210,x1=430, top=18, fh=32, gap=4;
+ var seg=phase%12, shown=Math.max(0,Math.min(n,Math.floor(seg/2)));
+ var total=0;
+ for(var i=0;i<n;i++){
+ var y=top+i*(fh+gap), isRDC=(i===n-1), on=i<shown;
+ g.fillStyle=on?(isRDC?'#8A5A7A':'#2E6A8E'):'rgba(42,38,34,.05)';
+ g.strokeStyle=on?'#2A2622':'rgba(42,38,34,.2)';g.lineWidth=1.5;
+ rrect(g,x0,y,x1-x0,fh,5);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':'#8a8378';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillText(isRDC?'RDC (50 kN)':'Étage '+(n-1-i)+' (50 kN)',(x0+x1)/2,y+fh/2+4);
+ if(on)total+=50;
+ }
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='left';g.fillText('la charge de chaque étage s\u2019ajoute à celle du dessous',x0,top-6);
+ if(shown>=1){g.strokeStyle='#C0492E';g.lineWidth=2;g.beginPath();g.moveTo(x1+14,top+fh/2);
+ for(var k=1;k<shown;k++){g.lineTo(x1+14,top+k*(fh+gap)+fh/2);}
+ g.stroke();
+ g.fillStyle='#C0492E';g.beginPath();var yEnd=top+(shown-1)*(fh+gap)+fh/2;g.moveTo(x1+14,yEnd);g.lineTo(x1+9,yEnd-6);g.lineTo(x1+19,yEnd-6);g.closePath();g.fill();}
+ g.fillStyle='#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+ g.fillText('Charge cumulée : '+total+' kN',W/2,H-14);
+ g.textAlign='left';
   }
 
   function drawPoutres(){
-    var o=ctxOf('cv_poutres'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
-    var seg=phase%9, prog=Math.max(0,Math.min(1,seg/6));
-    function beam(y0,label,sagMax,col){
-      var xL=90,xR=W-40, midY=y0;
-      g.strokeStyle='#5C544B';g.lineWidth=2;
-      g.beginPath();g.moveTo(xL-14,y0+18);g.lineTo(xL,y0);g.lineTo(xL+14,y0+18);g.stroke();
-      g.beginPath();g.moveTo(xR-14,y0+18);g.lineTo(xR,y0);g.lineTo(xR+14,y0+18);g.stroke();
-      var sag=sagMax*prog;
-      g.strokeStyle=col;g.lineWidth=4;g.lineCap='round';
-      g.beginPath();g.moveTo(xL,y0);
-      for(var t=0;t<=1.001;t+=0.05){var x=xL+t*(xR-xL);var yy=y0+sag*4*t*(1-t);g.lineTo(x,yy);}
-      g.stroke();g.lineCap='butt';
-      if(prog>0.15){g.fillStyle='#C0492E';g.beginPath();g.moveTo((xL+xR)/2,y0-26);g.lineTo((xL+xR)/2,y0-6);g.lineTo((xL+xR)/2-5,y0-12);g.moveTo((xL+xR)/2,y0-6);g.lineTo((xL+xR)/2+5,y0-12);g.stroke();}
-      g.fillStyle='#2A2622';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText(label,xL-6,y0-32);
-      g.fillStyle=col;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText((sag).toFixed(1)+' mm',(xL+xR)/2,y0+sag*4*0.25+20);
-    }
-    beam(74,'Poutre A (bois)',8,'#C0492E');
-    beam(168,'Poutre B (acier)',2,'#2E6A8E');
-    g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('même charge, au centre de chaque poutre',W/2,16);
-    g.textAlign='left';
+ var o=ctxOf('cv_poutres'); if(!o)return; var g=o.x,W=o.W,H=o.H; g.clearRect(0,0,W,H);
+ var seg=phase%9, prog=Math.max(0,Math.min(1,seg/6));
+ function beam(y0,label,sagMax,col){
+ var xL=90,xR=W-40, midY=y0;
+ g.strokeStyle='#5C544B';g.lineWidth=2;
+ g.beginPath();g.moveTo(xL-14,y0+18);g.lineTo(xL,y0);g.lineTo(xL+14,y0+18);g.stroke();
+ g.beginPath();g.moveTo(xR-14,y0+18);g.lineTo(xR,y0);g.lineTo(xR+14,y0+18);g.stroke();
+ var sag=sagMax*prog;
+ g.strokeStyle=col;g.lineWidth=4;g.lineCap='round';
+ g.beginPath();g.moveTo(xL,y0);
+ for(var t=0;t<=1.001;t+=0.05){var x=xL+t*(xR-xL);var yy=y0+sag*4*t*(1-t);g.lineTo(x,yy);}
+ g.stroke();g.lineCap='butt';
+ if(prog>0.15){g.fillStyle='#C0492E';g.beginPath();g.moveTo((xL+xR)/2,y0-26);g.lineTo((xL+xR)/2,y0-6);g.lineTo((xL+xR)/2-5,y0-12);g.moveTo((xL+xR)/2,y0-6);g.lineTo((xL+xR)/2+5,y0-12);g.stroke();}
+ g.fillStyle='#2A2622';g.font='700 11px "Bricolage Grotesque",sans-serif';g.textAlign='left';g.fillText(label,xL-6,y0-32);
+ g.fillStyle=col;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText((sag).toFixed(1)+' mm',(xL+xR)/2,y0+sag*4*0.25+20);
+ }
+ beam(74,'Poutre A (bois)',8,'#C0492E');
+ beam(168,'Poutre B (acier)',2,'#2E6A8E');
+ g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('même charge, au centre de chaque poutre',W/2,16);
+ g.textAlign='left';
   }
 
   // ===== Prof =====
@@ -476,27 +379,27 @@
   document.getElementById('profBack').addEventListener('click',backHome);
   document.getElementById('profBack2').addEventListener('click',backHome);
   document.getElementById('profBtn').addEventListener('click',function(){
-    var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
-    if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
-    err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
+ var p=document.getElementById('inPass').value; var err=document.getElementById('profErr');
+ if(p!==PROF_PASS){ err.textContent='Mot de passe incorrect.'; return; }
+ err.textContent=''; document.getElementById('profGate').hidden=true; document.getElementById('profData').hidden=false; loadResults();
   });
   document.getElementById('profRefresh').addEventListener('click',loadResults);
   function loadResults(){
-    var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
-    fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
-      if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
-      var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
-      rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
-      var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
-      rows.forEach(function(r){
-        var d=r.date?new Date(r.date):null;
-        var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
-        var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
-        html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
-      });
-      html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
-      box.innerHTML=html;
-    }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
+ var box=document.getElementById('profTable'); box.innerHTML='<div class="hint">Chargement\u2026</div>';
+ fetch(FB_URL+'/'+FB_NODE+'.json').then(function(r){return r.json();}).then(function(data){
+ if(!data){ box.innerHTML='<div class="hint">Aucun r\u00e9sultat enregistr\u00e9 pour le moment.</div>'; return; }
+ var rows=Object.keys(data).map(function(k){return data[k];}).filter(Boolean);
+ rows.sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+ var html='<table><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>%</th><th>Date</th></tr></thead><tbody>';
+ rows.forEach(function(r){
+ var d=r.date?new Date(r.date):null;
+ var ds=d?d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'\u2014';
+ var note=r.note!=null?(String(r.note).replace('.',',')+'/20'):(r.score!=null?r.score+'/'+(r.total||MAXPTS):'\u2014');
+ html+='<tr><td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'\u2014')+'</td><td><b>'+note+'</b></td><td>'+(r.pourcentage!=null?r.pourcentage+'%':'\u2014')+'</td><td>'+ds+'</td></tr>';
+ });
+ html+='</tbody></table><div class="hint" style="margin-top:8px">'+rows.length+' r\u00e9sultat(s).</div>';
+ box.innerHTML=html;
+ }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
 </body>

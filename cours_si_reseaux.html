@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -70,11 +69,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -95,266 +94,109 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_reseaux.html">← Séquence : réseaux</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>Réseaux</h1><p>Cours · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
-      <a href="#s2" class="navlink"><span>02</span>Qu'est-ce qu'un réseau</a>
-      <a href="#s3" class="navlink"><span>03</span>Adresse IP</a>
-      <a href="#s4" class="navlink"><span>04</span>Les paquets</a>
-      <a href="#s5" class="navlink"><span>05</span>Les protocoles</a>
-      <a href="#s6" class="navlink"><span>06</span>Le modèle en couches</a>
-      <a href="#s7" class="navlink"><span>07</span>Le débit</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">Réseaux · problématique</span>
-      <h2>Faire dialoguer les objets</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un capteur qui envoie sa mesure, un téléphone qui charge une page, une imprimante partagée&hellip; tous ont besoin de <b>communiquer</b>.</p>
-          <p>Pour cela, ils sont reliés par un <b>réseau</b> et suivent des <b>règles communes</b> pour s'échanger des données sans erreur.</p>
-          <div class="chips"><span class="chip s">échanger</span><span class="chip s">relier</span><span class="chip s">communiquer</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
-            <rect x="150" y="92" width="60" height="36" rx="6" fill="#2E6A8E"/>
-            <text x="180" y="115" font-family="JetBrains Mono,monospace" font-size="10" fill="#fff" text-anchor="middle">réseau</text>
-            <g stroke="#2A2622" stroke-width="2">
-              <line x1="60" y1="50" x2="150" y2="100"/><line x1="60" y1="170" x2="150" y2="120"/><line x1="300" y1="50" x2="210" y2="100"/><line x1="300" y1="170" x2="210" y2="120"/>
-            </g>
-            <g fill="#FFFDF8" stroke="#5C544B" stroke-width="2">
-              <rect x="30" y="35" width="50" height="34" rx="4"/><rect x="30" y="155" width="50" height="34" rx="4"/>
-              <rect x="280" y="35" width="50" height="34" rx="4"/><rect x="280" y="155" width="50" height="34" rx="4"/>
-            </g>
-            <circle cx="120" cy="83" r="5" fill="#BD8A2A"/><circle cx="240" cy="83" r="5" fill="#3D7E5F"/>
-          </svg>
-          <figcaption>Des équipements reliés qui échangent des données.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Un <b>réseau</b> relie des équipements pour qu'ils <b>échangent des données</b>.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Le principe</span>
-      <h2>Réseau &amp; modèle client / serveur</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un <b>réseau</b> est un ensemble d'équipements reliés qui échangent des données.</p>
-          <p>Souvent, l'un <b>demande</b> (le <b>client</b>) et l'autre <b>répond</b> (le <b>serveur</b>)&nbsp;: c'est le modèle <b>client / serveur</b>.</p>
-          <div class="eqcard"><div class="eq">client → requête&nbsp;&nbsp;|&nbsp;&nbsp;serveur → réponse</div><div class="leg">Ton navigateur (client) demande une page&nbsp;; le <b>serveur</b> web la lui renvoie.</div></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="65" width="90" height="50" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2.5"/>
-            <text x="65" y="95" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#235877" text-anchor="middle">Client</text>
-            <rect x="250" y="65" width="90" height="50" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2.5"/>
-            <text x="295" y="95" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#2c6147" text-anchor="middle">Serveur</text>
-            <line x1="112" y1="80" x2="248" y2="80" stroke="#C0492E" stroke-width="2.5" marker-end="url(#a1)"/>
-            <text x="180" y="73" font-family="JetBrains Mono,monospace" font-size="10" fill="#C0492E" text-anchor="middle">requête</text>
-            <line x1="248" y1="105" x2="112" y2="105" stroke="#3D7E5F" stroke-width="2.5" marker-end="url(#a2)"/>
-            <text x="180" y="120" font-family="JetBrains Mono,monospace" font-size="10" fill="#2c6147" text-anchor="middle">réponse</text>
-            <defs><marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0492E"/></marker>
-            <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#3D7E5F"/></marker></defs>
-          </svg>
-          <figcaption>Le dialogue client / serveur.</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Identifier &amp; relier</span>
-      <h2>L'adresse IP &amp; les équipements</h2>
-      <p class="lede">Sur un réseau, chaque équipement possède une <b>adresse IP</b> unique qui l'identifie, comme une adresse postale.</p>
-      <div class="chips"><span class="chip s">192.168.1.10</span><span class="chip s">192.168.1.20</span><span class="chip s">unique sur le réseau</span></div>
-      <table class="t">
-        <thead><tr><th>Équipement</th><th>Rôle</th></tr></thead>
-        <tbody>
-          <tr><td><b>Carte réseau</b></td><td>donne à l'équipement son identité (adresse) sur le réseau</td></tr>
-          <tr><td><b>Switch</b></td><td>relie entre eux les équipements d'un <b>même réseau local</b></td></tr>
-          <tr><td><b>Routeur / box</b></td><td>relie le réseau local à <b>d'autres réseaux</b> (Internet)</td></tr>
-        </tbody>
-      </table>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">L'adresse IP guide le paquet vers la bonne machine</div>
-        <canvas id="cvroute" width="900" height="250" aria-label="Acheminement d'un paquet vers la machine .20 grâce à l'adresse IP" style="width:100%;height:auto;display:block"></canvas>
-        <div class="cap"><b id="rtphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="rtcap">Chaque machine a une adresse IP unique.</span></div>
-      </figure>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Découper pour transmettre</span>
-      <h2>La transmission par paquets</h2>
-      <p class="lede">Les données ne voyagent pas d'un bloc&nbsp;: elles sont <b>découpées en paquets</b> qui circulent dans le réseau, puis sont rassemblés à l'arrivée.</p>
-      <figure>
-        <canvas id="cvPackets" width="640" height="250"></canvas>
-        <div class="cap" id="capPackets"><span class="ph">—</span><span id="capPacketsTxt">…</span></div>
-      </figure>
-      <div class="eqcard"><div class="eq">message → paquets → message</div><div class="leg">Chaque paquet porte l'<b>adresse du destinataire</b>&nbsp;; les paquets sont remis dans le <b>bon ordre</b> à l'arrivée.</div></div>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Se comprendre</span>
-      <h2>Les protocoles : un langage commun</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un <b>protocole</b> est un ensemble de <b>règles communes</b> que tous les équipements respectent pour se comprendre.</p>
-          <p>Sans langage commun, pas de communication&nbsp;: deux personnes doivent parler la même langue.</p>
-          <div class="chips"><span class="chip s">HTTP (web)</span><span class="chip s">TCP / IP (Internet)</span><span class="chip s">Wi-Fi</span></div>
-        </div>
-        <div class="eqcard"><div class="eq">protocole = règles communes</div><div class="leg">Il fixe le <b>format</b> des messages, l'ordre des échanges et la gestion des erreurs.</div></div>
-      </div>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · Organiser la communication</span>
-      <h2>Le modèle en couches</h2>
-      <p class="lede">La communication est organisée en <b>couches</b> superposées. En descendant, chaque couche ajoute son <b>en-tête</b> (<b>encapsulation</b>)&nbsp;; à l'arrivée, chaque couche le retire.</p>
-      <figure>
-        <canvas id="cvLayers" width="640" height="250"></canvas>
-        <div class="cap" id="capLayers"><span class="ph">—</span><span id="capLayersTxt">…</span></div>
-      </figure>
-      <div class="eqcard"><div class="eq">application → &hellip; → support physique</div><div class="leg">Comme une lettre&nbsp;: le <b>message</b> est glissé dans une <b>enveloppe</b>, qui reçoit une <b>adresse</b>, puis est confiée au <b>transport</b>.</div></div>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Mesurer la vitesse</span>
-      <h2>Débit &amp; temps de transmission</h2>
-      <p class="lede">Le <b>débit</b> mesure la quantité de données transmises par seconde (en bit/s). Il fixe le <b>temps</b> nécessaire pour envoyer un fichier.</p>
-      <div class="eqcard"><div class="eq">t = taille / débit</div><div class="leg">Attention aux unités&nbsp;: <b>1 octet = 8 bits</b>. Le débit est souvent en bit/s (kbit/s, Mbit/s).</div></div>
-      <div class="card"><h3 style="margin-top:0">Exemple</h3><p style="margin:0">Un fichier de <b>10 Mbit</b> envoyé sur une liaison à <b>5 Mbit/s</b>&nbsp;: t = 10 / 5 = <b>2 s</b>.</p></div>
-    </section>
-
-    <section id="s8" style="border-bottom:none">
-      <span class="kicker">08 · L'essentiel</span>
-      <h2>Synthèse</h2>
-      <div class="eqcard"><div class="eq">Réseau : équipements reliés · adresse IP unique · client / serveur</div></div>
-      <div class="eqcard"><div class="eq">Données → paquets (adresse du destinataire) → réassemblage</div></div>
-      <div class="big-idea"><div class="t">Protocoles &amp; couches</div><div class="v">Un <b>protocole</b> = des règles communes. La communication est organisée en <b>couches</b> (encapsulation).</div></div>
-      <div class="card"><h3 style="margin-top:0">Débit</h3><p style="margin:0">t = taille / débit&nbsp;&nbsp;(1 octet = 8 bits).</p></div>
-      <a class="cta" href="hub_si_reseaux.html">🔧 Passer au TP « Adresses &amp; transmissions » →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_reseaux.html">← Séquence : réseaux</a> <div class="brand"><div class="mark">C</div> <div><h1>Réseaux</h1><p>Cours · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Problématique</a> <a href="#s2" class="navlink"><span>02</span>Qu'est-ce qu'un réseau</a> <a href="#s3" class="navlink"><span>03</span>Adresse IP</a> <a href="#s4" class="navlink"><span>04</span>Les paquets</a> <a href="#s5" class="navlink"><span>05</span>Les protocoles</a> <a href="#s6" class="navlink"><span>06</span>Le modèle en couches</a> <a href="#s7" class="navlink"><span>07</span>Le débit</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Réseaux · problématique</span> <h2>Faire dialoguer les objets</h2> <div class="twocol"><div><p class="lede">Un capteur qui envoie sa mesure, un téléphone qui charge une page, une imprimante partagée&hellip; tous ont besoin de <b>communiquer</b>.</p> <p>Pour cela, ils sont reliés par un <b>réseau</b> et suivent des <b>règles communes</b> pour s'échanger des données sans erreur.</p> <div class="chips"><span class="chip s">échanger</span><span class="chip s">relier</span><span class="chip s">communiquer</span></div></div> <figure> <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg"> <rect x="150" y="92" width="60" height="36" rx="6" fill="#2E6A8E"/> <text x="180" y="115" font-family="JetBrains Mono,monospace" font-size="10" fill="#fff" text-anchor="middle">réseau</text> <g stroke="#2A2622" stroke-width="2"> <line x1="60" y1="50" x2="150" y2="100"/><line x1="60" y1="170" x2="150" y2="120"/><line x1="300" y1="50" x2="210" y2="100"/><line x1="300" y1="170" x2="210" y2="120"/> </g> <g fill="#FFFDF8" stroke="#5C544B" stroke-width="2"> <rect x="30" y="35" width="50" height="34" rx="4"/><rect x="30" y="155" width="50" height="34" rx="4"/> <rect x="280" y="35" width="50" height="34" rx="4"/><rect x="280" y="155" width="50" height="34" rx="4"/> </g> <circle cx="120" cy="83" r="5" fill="#BD8A2A"/><circle cx="240" cy="83" r="5" fill="#3D7E5F"/> </svg> <figcaption>Des équipements reliés qui échangent des données.</figcaption> </figure></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Un <b>réseau</b> relie des équipements pour qu'ils <b>échangent des données</b>.</div></div> </section> <section id="s2"> <span class="kicker">02 · Le principe</span> <h2>Réseau &amp; modèle client / serveur</h2> <div class="twocol"><div><p class="lede">Un <b>réseau</b> est un ensemble d'équipements reliés qui échangent des données.</p> <p>Souvent, l'un <b>demande</b> (le <b>client</b>) et l'autre <b>répond</b> (le <b>serveur</b>)&nbsp;: c'est le modèle <b>client / serveur</b>.</p> <div class="eqcard"><div class="eq">client → requête&nbsp;&nbsp;|&nbsp;&nbsp;serveur → réponse</div><div class="leg">Ton navigateur (client) demande une page&nbsp;; le <b>serveur</b> web la lui renvoie.</div></div></div> <figure> <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg"> <rect x="20" y="65" width="90" height="50" rx="6" fill="#FFFDF8" stroke="#2E6A8E" stroke-width="2.5"/> <text x="65" y="95" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#235877" text-anchor="middle">Client</text> <rect x="250" y="65" width="90" height="50" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2.5"/> <text x="295" y="95" font-family="Bricolage Grotesque,sans-serif" font-size="13" font-weight="800" fill="#2c6147" text-anchor="middle">Serveur</text> <line x1="112" y1="80" x2="248" y2="80" stroke="#C0492E" stroke-width="2.5" marker-end="url(#a1)"/> <text x="180" y="73" font-family="JetBrains Mono,monospace" font-size="10" fill="#C0492E" text-anchor="middle">requête</text> <line x1="248" y1="105" x2="112" y2="105" stroke="#3D7E5F" stroke-width="2.5" marker-end="url(#a2)"/> <text x="180" y="120" font-family="JetBrains Mono,monospace" font-size="10" fill="#2c6147" text-anchor="middle">réponse</text> <defs><marker id="a1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#C0492E"/></marker> <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#3D7E5F"/></marker></defs> </svg> <figcaption>Le dialogue client / serveur.</figcaption> </figure></div> </section> <section id="s3"> <span class="kicker">03 · Identifier &amp; relier</span> <h2>L'adresse IP &amp; les équipements</h2> <p class="lede">Sur un réseau, chaque équipement possède une <b>adresse IP</b> unique qui l'identifie, comme une adresse postale.</p> <div class="chips"><span class="chip s">192.168.1.10</span><span class="chip s">192.168.1.20</span><span class="chip s">unique sur le réseau</span></div> <table class="t"> <thead><tr><th>Équipement</th><th>Rôle</th></tr></thead> <tbody> <tr><td><b>Carte réseau</b></td><td>donne à l'équipement son identité (adresse) sur le réseau</td></tr> <tr><td><b>Switch</b></td><td>relie entre eux les équipements d'un <b>même réseau local</b></td></tr> <tr><td><b>Routeur / box</b></td><td>relie le réseau local à <b>d'autres réseaux</b> (Internet)</td></tr> </tbody> </table> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">L'adresse IP guide le paquet vers la bonne machine</div> <canvas id="cvroute" width="900" height="250" aria-label="Acheminement d'un paquet vers la machine .20 grâce à l'adresse IP" style="width:100%;height:auto;display:block"></canvas> <div class="cap"><b id="rtphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="rtcap">Chaque machine a une adresse IP unique.</span></div> </figure> </section> <section id="s4"> <span class="kicker">04 · Découper pour transmettre</span> <h2>La transmission par paquets</h2> <p class="lede">Les données ne voyagent pas d'un bloc&nbsp;: elles sont <b>découpées en paquets</b> qui circulent dans le réseau, puis sont rassemblés à l'arrivée.</p> <figure> <canvas id="cvPackets" width="640" height="250"></canvas> <div class="cap" id="capPackets"><span class="ph">—</span><span id="capPacketsTxt">…</span></div> </figure> <div class="eqcard"><div class="eq">message → paquets → message</div><div class="leg">Chaque paquet porte l'<b>adresse du destinataire</b>&nbsp;; les paquets sont remis dans le <b>bon ordre</b> à l'arrivée.</div></div> </section> <section id="s5"> <span class="kicker">05 · Se comprendre</span> <h2>Les protocoles : un langage commun</h2> <div class="twocol"><div><p class="lede">Un <b>protocole</b> est un ensemble de <b>règles communes</b> que tous les équipements respectent pour se comprendre.</p> <p>Sans langage commun, pas de communication&nbsp;: deux personnes doivent parler la même langue.</p> <div class="chips"><span class="chip s">HTTP (web)</span><span class="chip s">TCP / IP (Internet)</span><span class="chip s">Wi-Fi</span></div></div> <div class="eqcard"><div class="eq">protocole = règles communes</div><div class="leg">Il fixe le <b>format</b> des messages, l'ordre des échanges et la gestion des erreurs.</div></div></div> </section> <section id="s6"> <span class="kicker">06 · Organiser la communication</span> <h2>Le modèle en couches</h2> <p class="lede">La communication est organisée en <b>couches</b> superposées. En descendant, chaque couche ajoute son <b>en-tête</b> (<b>encapsulation</b>)&nbsp;; à l'arrivée, chaque couche le retire.</p> <figure> <canvas id="cvLayers" width="640" height="250"></canvas> <div class="cap" id="capLayers"><span class="ph">—</span><span id="capLayersTxt">…</span></div> </figure> <div class="eqcard"><div class="eq">application → &hellip; → support physique</div><div class="leg">Comme une lettre&nbsp;: le <b>message</b> est glissé dans une <b>enveloppe</b>, qui reçoit une <b>adresse</b>, puis est confiée au <b>transport</b>.</div></div> </section> <section id="s7"> <span class="kicker">07 · Mesurer la vitesse</span> <h2>Débit &amp; temps de transmission</h2> <p class="lede">Le <b>débit</b> mesure la quantité de données transmises par seconde (en bit/s). Il fixe le <b>temps</b> nécessaire pour envoyer un fichier.</p> <div class="eqcard"><div class="eq">t = taille / débit</div><div class="leg">Attention aux unités&nbsp;: <b>1 octet = 8 bits</b>. Le débit est souvent en bit/s (kbit/s, Mbit/s).</div></div> <div class="card"><h3 style="margin-top:0">Exemple</h3><p style="margin:0">Un fichier de <b>10 Mbit</b> envoyé sur une liaison à <b>5 Mbit/s</b>&nbsp;: t = 10 / 5 = <b>2 s</b>.</p></div> </section> <section id="s8" style="border-bottom:none"> <span class="kicker">08 · L'essentiel</span> <h2>Synthèse</h2> <div class="eqcard"><div class="eq">Réseau : équipements reliés · adresse IP unique · client / serveur</div></div> <div class="eqcard"><div class="eq">Données → paquets (adresse du destinataire) → réassemblage</div></div> <div class="big-idea"><div class="t">Protocoles &amp; couches</div><div class="v">Un <b>protocole</b> = des règles communes. La communication est organisée en <b>couches</b> (encapsulation).</div></div> <div class="card"><h3 style="margin-top:0">Débit</h3><p style="margin:0">t = taille / débit&nbsp;&nbsp;(1 octet = 8 bits).</p></div> <a class="cta" href="hub_si_reseaux.html"> Passer au TP « Adresses &amp; transmissions » →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : transmission par paquets =====
   (function(){
-    var cv=document.getElementById('cvPackets'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capPackets .ph').textContent=n;document.getElementById('capPacketsTxt').textContent=t;}
-    var WP=[{x:150,y:125},{x:300,y:72},{x:440,y:182},{x:540,y:125}];
-    var COL=['#C0492E','#2E6A8E','#3D7E5F'];
-    function pathPoint(t){var segs=[],total=0,i;for(i=0;i<WP.length-1;i++){var L=Math.hypot(WP[i+1].x-WP[i].x,WP[i+1].y-WP[i].y);segs.push(L);total+=L;}
-      var d=t*total;for(i=0;i<segs.length;i++){if(d<=segs[i]){var f=d/segs[i];return {x:WP[i].x+(WP[i+1].x-WP[i].x)*f,y:WP[i].y+(WP[i+1].y-WP[i].y)*f};}d-=segs[i];}return WP[WP.length-1];}
-    var p=0;
-    function endbox(c,lab,col){g.fillStyle='#FFFDF8';g.strokeStyle=col;g.lineWidth=2.5;rrect(g,c.x-34,c.y-26,68,52,8);g.fill();g.stroke();
-      g.fillStyle=col;g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,c.x,c.y+4);}
-    function packet(x,y,n){g.fillStyle=COL[n];g.strokeStyle='#fff';g.lineWidth=1.5;rrect(g,x-11,y-9,22,18,4);g.fill();g.stroke();
-      g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(n+1),x,y+4);}
-    function draw(){
-      var idx=Math.floor(p)%3, frac=p-Math.floor(p);
-      g.clearRect(0,0,W,H);
-      // path + routers
-      g.strokeStyle='rgba(46,106,142,.3)';g.lineWidth=2;g.setLineDash([6,5]);g.beginPath();g.moveTo(WP[0].x,WP[0].y);for(var i=1;i<WP.length;i++)g.lineTo(WP[i].x,WP[i].y);g.stroke();g.setLineDash([]);
-      [WP[1],WP[2]].forEach(function(r){g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.arc(r.x,r.y,16,0,7);g.fill();g.stroke();g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('routeur',r.x,r.y+27);});
-      endbox(WP[0],'ENVOI','#C0492E'); endbox(WP[3],'RÉCEPTION','#3D7E5F');
-      // packets
-      for(var k=0;k<3;k++){
-        if(idx===0){ packet(WP[0].x-2,WP[0].y-16+k*16,k); }
-        else if(idx===1){ var t=Math.max(0,Math.min(1,frac*1.25 - k*0.12)); var pt=pathPoint(t); packet(pt.x,pt.y,k); }
-        else { packet(WP[3].x-2,WP[3].y-16+k*16,k); }
-      }
-      if(idx===0) setCap('1','Le message est découpé en petits paquets numérotés.');
-      else if(idx===1) setCap('2','Chaque paquet porte l\u2019adresse du destinataire et voyage dans le réseau.');
-      else setCap('3','À l\u2019arrivée, les paquets sont rassemblés dans le bon ordre.');
-      g.textAlign='left';
-    }
-    setInterval(function(){p=(p+0.009)%3; draw();},40); draw();
+ var cv=document.getElementById('cvPackets'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capPackets .ph').textContent=n;document.getElementById('capPacketsTxt').textContent=t;}
+ var WP=[{x:150,y:125},{x:300,y:72},{x:440,y:182},{x:540,y:125}];
+ var COL=['#C0492E','#2E6A8E','#3D7E5F'];
+ function pathPoint(t){var segs=[],total=0,i;for(i=0;i<WP.length-1;i++){var L=Math.hypot(WP[i+1].x-WP[i].x,WP[i+1].y-WP[i].y);segs.push(L);total+=L;}
+ var d=t*total;for(i=0;i<segs.length;i++){if(d<=segs[i]){var f=d/segs[i];return {x:WP[i].x+(WP[i+1].x-WP[i].x)*f,y:WP[i].y+(WP[i+1].y-WP[i].y)*f};}d-=segs[i];}return WP[WP.length-1];}
+ var p=0;
+ function endbox(c,lab,col){g.fillStyle='#FFFDF8';g.strokeStyle=col;g.lineWidth=2.5;rrect(g,c.x-34,c.y-26,68,52,8);g.fill();g.stroke();
+ g.fillStyle=col;g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,c.x,c.y+4);}
+ function packet(x,y,n){g.fillStyle=COL[n];g.strokeStyle='#fff';g.lineWidth=1.5;rrect(g,x-11,y-9,22,18,4);g.fill();g.stroke();
+ g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(String(n+1),x,y+4);}
+ function draw(){
+ var idx=Math.floor(p)%3, frac=p-Math.floor(p);
+ g.clearRect(0,0,W,H);
+ // path + routers
+ g.strokeStyle='rgba(46,106,142,.3)';g.lineWidth=2;g.setLineDash([6,5]);g.beginPath();g.moveTo(WP[0].x,WP[0].y);for(var i=1;i<WP.length;i++)g.lineTo(WP[i].x,WP[i].y);g.stroke();g.setLineDash([]);
+ [WP[1],WP[2]].forEach(function(r){g.fillStyle='#FFFDF8';g.strokeStyle='#5C544B';g.lineWidth=2;g.beginPath();g.arc(r.x,r.y,16,0,7);g.fill();g.stroke();g.fillStyle='#5C544B';g.font='9px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('routeur',r.x,r.y+27);});
+ endbox(WP[0],'ENVOI','#C0492E'); endbox(WP[3],'RÉCEPTION','#3D7E5F');
+ // packets
+ for(var k=0;k<3;k++){
+ if(idx===0){ packet(WP[0].x-2,WP[0].y-16+k*16,k); }
+ else if(idx===1){ var t=Math.max(0,Math.min(1,frac*1.25 - k*0.12)); var pt=pathPoint(t); packet(pt.x,pt.y,k); }
+ else { packet(WP[3].x-2,WP[3].y-16+k*16,k); }
+ }
+ if(idx===0) setCap('1','Le message est découpé en petits paquets numérotés.');
+ else if(idx===1) setCap('2','Chaque paquet porte l\u2019adresse du destinataire et voyage dans le réseau.');
+ else setCap('3','À l\u2019arrivée, les paquets sont rassemblés dans le bon ordre.');
+ g.textAlign='left';
+ }
+ setInterval(function(){p=(p+0.009)%3; draw();},40); draw();
   })();
 
   // ===== Animation : modèle en couches =====
   (function(){
-    var cv=document.getElementById('cvLayers'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capLayers .ph').textContent=n;document.getElementById('capLayersTxt').textContent=t;}
-    var LY=['Application','Transport','Réseau','Physique'];
-    var rowH=40, top=44, leftX=36, lw=170, rightX=434, rw=170;
-    function lbox(i){return {x:leftX,y:top+i*rowH,w:lw,h:rowH-9};}
-    function rbox(i){return {x:rightX,y:top+i*rowH,w:rw,h:rowH-9};}
-    function drawStack(boxFn,title,activeRow){
-      g.fillStyle='#5C544B';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
-      g.fillText(title, boxFn(0).x+boxFn(0).w/2, top-14);
-      for(var i=0;i<4;i++){var b=boxFn(i),on=(i===activeRow);
-        g.fillStyle=on?'rgba(46,106,142,.14)':'#FFFDF8';g.strokeStyle=on?'#2E6A8E':'var';g.strokeStyle=on?'#2E6A8E':'rgba(42,38,34,.22)';g.lineWidth=on?2.4:1.5;
-        rrect(g,b.x,b.y,b.w,b.h,7);g.fill();g.stroke();
-        g.fillStyle=on?'#235877':'#5C544B';g.font='600 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(LY[i],b.x+b.w/2,b.y+b.h/2+4);}
-    }
-    function token(x,y,headers){
-      for(var hh=headers;hh>=1;hh--){var sw=24+(hh-1)*9;
-        g.fillStyle=(hh===1)?'#3D7E5F':'rgba(46,106,142,'+(0.22+0.13*hh).toFixed(2)+')';
-        rrect(g,x-sw,y-11,sw*2,22,5);g.fill();}
-      g.fillStyle='#fff';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('data',x,y+4);
-    }
-    function draw(){
-      var step=Math.floor(phaseL/1.2)%10;
-      g.clearRect(0,0,W,H);
-      var side,row,headers,pos;
-      if(step<=3){side='L';row=step;headers=step+1;var b=lbox(row);pos={x:b.x+b.w/2,y:b.y+b.h/2};}
-      else if(step===4){side='B';row=3;headers=4;pos={x:(leftX+lw+rightX)/2,y:top+3*rowH+rowH/2};}
-      else if(step<=8){side='R';row=8-step;headers=row+1;var b2=rbox(row);pos={x:b2.x+b2.w/2,y:b2.y+b2.h/2};}
-      else {side='R';row=0;headers=1;var b3=rbox(0);pos={x:b3.x+b3.w/2,y:b3.y+b3.h/2};}
-      // physical link line at bottom
-      var py=top+3*rowH+rowH/2-4;
-      g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.setLineDash([5,5]);g.beginPath();g.moveTo(leftX+lw,py);g.lineTo(rightX,py);g.stroke();g.setLineDash([]);
-      drawStack(lbox,'ÉMETTEUR',side==='L'?row:-1);
-      drawStack(rbox,'RÉCEPTEUR',side==='R'?row:-1);
-      token(pos.x,pos.y,headers);
-      g.fillStyle='#5C544B';g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('en-têtes : '+headers, pos.x, pos.y+24);
-      if(step===0) setCap('1','L\u2019application crée le message à envoyer.');
-      else if(step<=3) setCap('2','Chaque couche ajoute son en-tête : c\u2019est l\u2019encapsulation.');
-      else if(step===4) setCap('3','Le message traverse le support physique.');
-      else if(step<=8) setCap('4','À l\u2019arrivée, chaque couche retire son en-tête.');
-      else setCap('5','Message reconstitué : l\u2019application le reçoit.');
-      g.textAlign='left';
-    }
-    var phaseL=0;
-    setInterval(function(){phaseL+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvLayers'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capLayers .ph').textContent=n;document.getElementById('capLayersTxt').textContent=t;}
+ var LY=['Application','Transport','Réseau','Physique'];
+ var rowH=40, top=44, leftX=36, lw=170, rightX=434, rw=170;
+ function lbox(i){return {x:leftX,y:top+i*rowH,w:lw,h:rowH-9};}
+ function rbox(i){return {x:rightX,y:top+i*rowH,w:rw,h:rowH-9};}
+ function drawStack(boxFn,title,activeRow){
+ g.fillStyle='#5C544B';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillText(title, boxFn(0).x+boxFn(0).w/2, top-14);
+ for(var i=0;i<4;i++){var b=boxFn(i),on=(i===activeRow);
+ g.fillStyle=on?'rgba(46,106,142,.14)':'#FFFDF8';g.strokeStyle=on?'#2E6A8E':'var';g.strokeStyle=on?'#2E6A8E':'rgba(42,38,34,.22)';g.lineWidth=on?2.4:1.5;
+ rrect(g,b.x,b.y,b.w,b.h,7);g.fill();g.stroke();
+ g.fillStyle=on?'#235877':'#5C544B';g.font='600 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(LY[i],b.x+b.w/2,b.y+b.h/2+4);}
+ }
+ function token(x,y,headers){
+ for(var hh=headers;hh>=1;hh--){var sw=24+(hh-1)*9;
+ g.fillStyle=(hh===1)?'#3D7E5F':'rgba(46,106,142,'+(0.22+0.13*hh).toFixed(2)+')';
+ rrect(g,x-sw,y-11,sw*2,22,5);g.fill();}
+ g.fillStyle='#fff';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('data',x,y+4);
+ }
+ function draw(){
+ var step=Math.floor(phaseL/1.2)%10;
+ g.clearRect(0,0,W,H);
+ var side,row,headers,pos;
+ if(step<=3){side='L';row=step;headers=step+1;var b=lbox(row);pos={x:b.x+b.w/2,y:b.y+b.h/2};}
+ else if(step===4){side='B';row=3;headers=4;pos={x:(leftX+lw+rightX)/2,y:top+3*rowH+rowH/2};}
+ else if(step<=8){side='R';row=8-step;headers=row+1;var b2=rbox(row);pos={x:b2.x+b2.w/2,y:b2.y+b2.h/2};}
+ else {side='R';row=0;headers=1;var b3=rbox(0);pos={x:b3.x+b3.w/2,y:b3.y+b3.h/2};}
+ // physical link line at bottom
+ var py=top+3*rowH+rowH/2-4;
+ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.setLineDash([5,5]);g.beginPath();g.moveTo(leftX+lw,py);g.lineTo(rightX,py);g.stroke();g.setLineDash([]);
+ drawStack(lbox,'ÉMETTEUR',side==='L'?row:-1);
+ drawStack(rbox,'RÉCEPTEUR',side==='R'?row:-1);
+ token(pos.x,pos.y,headers);
+ g.fillStyle='#5C544B';g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('en-têtes : '+headers, pos.x, pos.y+24);
+ if(step===0) setCap('1','L\u2019application crée le message à envoyer.');
+ else if(step<=3) setCap('2','Chaque couche ajoute son en-tête : c\u2019est l\u2019encapsulation.');
+ else if(step===4) setCap('3','Le message traverse le support physique.');
+ else if(step<=8) setCap('4','À l\u2019arrivée, chaque couche retire son en-tête.');
+ else setCap('5','Message reconstitué : l\u2019application le reçoit.');
+ g.textAlign='left';
+ }
+ var phaseL=0;
+ setInterval(function(){phaseL+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -363,39 +205,38 @@
   var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var pc=[110,125], rt=[430,125], M=[[800,55,'.10'],[800,125,'.20'],[800,195,'.30']], target=1;
   var caps=[
-    'Chaque machine a une adresse IP unique. Un paquet est destin\u00e9 \u00e0 la machine .20.',
-    'Le paquet arrive \u00e0 l\u2019\u00e9quipement (routeur/switch), qui LIT l\u2019adresse de destination.',
-    'Il l\u2019achemine vers la BONNE machine (.20) \u2014 pas les autres \u2014 gr\u00e2ce \u00e0 l\u2019adresse IP.'
-  ];
+ 'Chaque machine a une adresse IP unique. Un paquet est destin\u00e9 \u00e0 la machine .20.',
+ 'Le paquet arrive \u00e0 l\u2019\u00e9quipement (routeur/switch), qui LIT l\u2019adresse de destination.',
+ 'Il l\u2019achemine vers la BONNE machine (.20) \u2014 pas les autres \u2014 gr\u00e2ce \u00e0 l\u2019adresse IP.'];
   function box(cxy,w,hh,fill,stroke,lab,dim){
-    g.globalAlpha=dim?0.35:1;g.fillStyle=fill;g.strokeStyle=stroke;g.lineWidth=2;
-    g.beginPath();g.rect(cxy[0]-w/2,cxy[1]-hh/2,w,hh);g.fill();g.stroke();
-    g.fillStyle=stroke;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,cxy[0],cxy[1]+4);g.globalAlpha=1;
+ g.globalAlpha=dim?0.35:1;g.fillStyle=fill;g.strokeStyle=stroke;g.lineWidth=2;
+ g.beginPath();g.rect(cxy[0]-w/2,cxy[1]-hh/2,w,hh);g.fill();g.stroke();
+ g.fillStyle=stroke;g.font='700 12px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(lab,cxy[0],cxy[1]+4);g.globalAlpha=1;
   }
   var T=0;
   function step(){
-    T+=0.03; if(T>9.5) T=0;
-    var phase=(T<2?0:(T<4.5?1:2));
-    g.clearRect(0,0,W,H);
-    // liens
-    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;
-    g.beginPath();g.moveTo(pc[0]+30,pc[1]);g.lineTo(rt[0]-26,rt[1]);g.stroke();
-    for(var m=0;m<3;m++){g.beginPath();g.moveTo(rt[0]+26,rt[1]);g.lineTo(M[m][0]-42,M[m][1]);g.stroke();}
-    // machines
-    for(var m=0;m<3;m++){var isT=(m===target && phase===2);box([M[m][0],M[m][1]],84,40,isT?'#e3efe8':'#f2ece0',isT?'#3D7E5F':'#9a9385','192.168.1'+M[m][2], phase===2 && m!==target);}
-    // routeur + PC
-    box(rt,60,52,'#fbeecf','#BD8A2A','routeur',false);
-    box(pc,64,44,'#dce8f2','#2E6A8E','PC',false);
-    // paquet
-    var pk;
-    if(phase===0){pk=[pc[0]+40,pc[1]];}
-    else if(phase===1){var pr=Math.min(1,(T-2)/2.3);pk=[pc[0]+30+pr*(rt[0]-26-(pc[0]+30)),pc[1]];}
-    else {var pr2=Math.min(1,(T-4.5)/2.6);pk=[rt[0]+26+pr2*(M[target][0]-42-(rt[0]+26)), rt[1]+pr2*(M[target][1]-rt[1])];}
-    g.fillStyle='#C0492E';g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.rect(pk[0]-16,pk[1]-12,32,24);g.fill();g.stroke();
-    g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('\u2192.20',pk[0],pk[1]+4);
-    var cap=document.getElementById('rtcap'), ph=document.getElementById('rtphase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ T+=0.03; if(T>9.5) T=0;
+ var phase=(T<2?0:(T<4.5?1:2));
+ g.clearRect(0,0,W,H);
+ // liens
+ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;
+ g.beginPath();g.moveTo(pc[0]+30,pc[1]);g.lineTo(rt[0]-26,rt[1]);g.stroke();
+ for(var m=0;m<3;m++){g.beginPath();g.moveTo(rt[0]+26,rt[1]);g.lineTo(M[m][0]-42,M[m][1]);g.stroke();}
+ // machines
+ for(var m=0;m<3;m++){var isT=(m===target && phase===2);box([M[m][0],M[m][1]],84,40,isT?'#e3efe8':'#f2ece0',isT?'#3D7E5F':'#9a9385','192.168.1'+M[m][2], phase===2 && m!==target);}
+ // routeur + PC
+ box(rt,60,52,'#fbeecf','#BD8A2A','routeur',false);
+ box(pc,64,44,'#dce8f2','#2E6A8E','PC',false);
+ // paquet
+ var pk;
+ if(phase===0){pk=[pc[0]+40,pc[1]];}
+ else if(phase===1){var pr=Math.min(1,(T-2)/2.3);pk=[pc[0]+30+pr*(rt[0]-26-(pc[0]+30)),pc[1]];}
+ else {var pr2=Math.min(1,(T-4.5)/2.6);pk=[rt[0]+26+pr2*(M[target][0]-42-(rt[0]+26)), rt[1]+pr2*(M[target][1]-rt[1])];}
+ g.fillStyle='#C0492E';g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.rect(pk[0]-16,pk[1]-12,32,24);g.fill();g.stroke();
+ g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('\u2192.20',pk[0],pk[1]+4);
+ var cap=document.getElementById('rtcap'), ph=document.getElementById('rtphase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();

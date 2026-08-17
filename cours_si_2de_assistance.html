@@ -7,33 +7,32 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:230px;flex:0 0 230px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--steel);border-color:var(--steel)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:16px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--steel);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .prog{height:5px;background:var(--cream);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-bottom:16px}
   .prog i{display:block;height:100%;width:0;background:var(--steel);transition:width .25s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:16px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--steel);font-weight:500}
@@ -71,11 +70,11 @@
   .cta{margin-top:22px;display:inline-flex;gap:10px;align-items:center;font-family:var(--mono);font-size:13px;background:var(--amber);color:#fff;border-radius:10px;padding:12px 18px;text-decoration:none}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.prog{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .twocol{grid-template-columns:1fr}.main{padding:0 16px}section{padding:38px 0 34px;min-height:auto}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -96,232 +95,77 @@
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_assistance.html">← Séquence : assistance</a>
-    <div class="brand">
-      <div class="mark">C</div>
-      <div><h1>Un coup de main</h1><p>Cours · Option SI 2de</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="prog"><i id="progBar"></i></div>
-    <div class="links" id="links">
-      <a href="#s1" class="navlink"><span>01</span>Problématique</a>
-      <a href="#s2" class="navlink"><span>02</span>Pour qui, pourquoi ?</a>
-      <a href="#s3" class="navlink"><span>03</span>Ordre, traitement, action</a>
-      <a href="#s4" class="navlink"><span>04</span>La boucle de commande</a>
-      <a href="#s5" class="navlink"><span>05</span>Des automatismes partout</a>
-      <a href="#s6" class="navlink"><span>06</span>Rendre accessible</a>
-      <a href="#s7" class="navlink"><span>07</span>Communiquer clairement</a>
-      <a href="#s8" class="navlink"><span>08</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="s1">
-      <span class="kicker">Un coup de main · problématique</span>
-      <h2>Un système qui vient en aide</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Ouvrir une porte, allumer une lumière, fermer un volet : des gestes simples, mais pas toujours faciles pour tout le monde.</p>
-          <p>Un système <b>automatisé</b> peut accomplir ces tâches à la place de l'utilisateur, pour plus de <b>confort</b>, de <b>sécurité</b> ou d'<b>autonomie</b>.</p>
-          <div class="chips"><span class="chip s">confort</span><span class="chip s">sécurité</span><span class="chip s">autonomie</span></div>
-        </div>
-        <figure>
-          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="80" cy="90" r="26" fill="none" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="80" y1="116" x2="80" y2="160" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="80" y1="130" x2="55" y2="150" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="80" y1="130" x2="105" y2="150" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="80" y1="160" x2="60" y2="190" stroke="#2E6A8E" stroke-width="4"/>
-            <line x1="80" y1="160" x2="100" y2="190" stroke="#2E6A8E" stroke-width="4"/>
-            <rect x="220" y="60" width="90" height="120" rx="8" fill="none" stroke="#B85C2E" stroke-width="4"/>
-            <rect x="260" y="60" width="50" height="120" rx="0" fill="#FFFDF8" stroke="#B85C2E" stroke-width="3" opacity="0.95"/>
-            <path d="M150 110 Q 190 90 218 100" fill="none" stroke="#3D7E5F" stroke-width="3" stroke-dasharray="6 5"/>
-            <path d="M210 96 L220 100 L211 106" fill="none" stroke="#3D7E5F" stroke-width="3"/>
-            <text x="185" y="80" font-family="JetBrains Mono,monospace" font-size="10" fill="#2c6147" text-anchor="middle">détection</text>
-          </svg>
-          <figcaption>Une personne approche : la porte s'ouvre automatiquement.</figcaption>
-        </figure>
-      </div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Automatiser un geste du quotidien peut rendre la vie plus <b>simple</b>, plus <b>sûre</b>, ou plus <b>accessible</b>.</div></div>
-    </section>
-
-    <section id="s2">
-      <span class="kicker">02 · Analyser</span>
-      <h2>Pour qui, pourquoi ?</h2>
-      <p class="lede">Avant de concevoir un système d'assistance, on <b>analyse</b> qui en a besoin, et pourquoi.</p>
-      <table class="t">
-        <thead><tr><th>Utilisateur</th><th>Besoin principal</th></tr></thead>
-        <tbody>
-          <tr><td>Personne âgée</td><td><b>sécurité</b> et autonomie à domicile</td></tr>
-          <tr><td>Personne à mobilité réduite</td><td><b>accessibilité</b> des lieux et objets</td></tr>
-          <tr><td>Famille</td><td><b>confort</b> et économies d'énergie</td></tr>
-        </tbody>
-      </table>
-      <div class="card"><b>À retenir.</b> Un même système (porte automatique, volet motorisé…) peut répondre à plusieurs besoins différents.</div>
-    </section>
-
-    <section id="s3">
-      <span class="kicker">03 · Vocabulaire</span>
-      <h2>Ordre, traitement, action</h2>
-      <div class="twocol">
-        <div>
-          <p class="lede">Un système automatisé suit toujours le même principe : il reçoit un <b>ordre</b>, le <b>traite</b>, puis <b>agit</b>.</p>
-          <div class="chips"><span class="chip">ordre</span><span class="chip">traitement</span><span class="chip">action</span></div>
-        </div>
-        <div>
-          <div class="eqcard"><div class="eq">j'appuie sur un bouton &rarr; ordre</div><div class="leg">L'utilisateur exprime ce qu'il veut.</div></div>
-          <div class="eqcard"><div class="eq">le système décide quoi faire &rarr; traitement</div><div class="leg">Il analyse l'ordre reçu.</div></div>
-          <div class="eqcard"><div class="eq">le moteur s'active &rarr; action</div><div class="leg">Le système agit concrètement.</div></div>
-        </div>
-      </div>
-    
-      <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden">
-        <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Capteur → traitement → actionneur</div>
-        <canvas id="cvota" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Chaîne d'un automatisme : le capteur détecte, le traitement décide, l'actionneur agit"></canvas>
-        <div class="cap"><b id="otphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="otcap">Le capteur détecte.</span></div>
-      </figure>
-    </section>
-
-    <section id="s4">
-      <span class="kicker">04 · Modéliser</span>
-      <h2>La boucle de commande</h2>
-      <p class="lede">Ordre, traitement, action, vérification : ce cycle se répète en boucle, encore et encore.</p>
-      <figure>
-        <canvas id="cvBoucle" width="640" height="250"></canvas>
-        <div class="cap" id="capBcl"><span class="ph">—</span><span id="capBclTxt">…</span></div>
-      </figure>
-      <p>Après l'action, le système <b>vérifie</b> le résultat avant de revenir en attente d'un nouvel ordre.</p>
-    </section>
-
-    <section id="s5">
-      <span class="kicker">05 · Des exemples</span>
-      <h2>Des automatismes partout</h2>
-      <p class="lede">La domotique multiplie les petits automatismes du quotidien.</p>
-      <table class="t">
-        <thead><tr><th>Système</th><th>Déclencheur</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>Volet roulant</td><td>heure programmée</td><td>monte ou descend</td></tr>
-          <tr><td>Thermostat</td><td>température mesurée</td><td>chauffe ou s'arrête</td></tr>
-          <tr><td>Lumière d'entrée</td><td>détection de mouvement</td><td>s'allume</td></tr>
-          <tr><td>Porte de garage</td><td>télécommande</td><td>s'ouvre ou se ferme</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="s6">
-      <span class="kicker">06 · Expérimenter</span>
-      <h2>Rendre accessible</h2>
-      <p class="lede">Une porte automatique n'est pas qu'un confort : pour certaines personnes, c'est ce qui rend un lieu <b>accessible</b>.</p>
-      <figure>
-        <canvas id="cvAcces" width="640" height="250"></canvas>
-        <div class="cap" id="capAcc"><span class="ph">—</span><span id="capAccTxt">…</span></div>
-      </figure>
-      <p>Sans capteur ni moteur, cette même porte serait un obstacle pour un fauteuil roulant.</p>
-    </section>
-
-    <section id="s7">
-      <span class="kicker">07 · Communiquer</span>
-      <h2>Communiquer clairement</h2>
-      <p class="lede">Un système d'assistance doit être <b>compris</b> par son utilisateur, sinon il n'est pas vraiment utile.</p>
-      <div class="chips"><span class="chip">📋 notice claire</span><span class="chip">🔵 pictogramme</span><span class="chip">🔔 retour sonore</span><span class="chip">💡 voyant lumineux</span></div>
-      <div class="big-idea"><div class="t">Idée clé</div><div class="v">Un bon système d'assistance <b>explique</b> ce qu'il fait : un voyant, un bip, un pictogramme suffisent souvent.</div></div>
-    </section>
-
-    <section id="s8">
-      <span class="kicker">08 · Synthèse</span>
-      <h2>L'essentiel</h2>
-      <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Un système d'assistance <b>capte un ordre</b>, le <b>traite</b>, <b>agit</b>, puis <b>vérifie</b> — au service du confort, de la sécurité et de l'accessibilité.</div></div>
-      <table class="t">
-        <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead>
-        <tbody>
-          <tr><td><b>Automatisme</b></td><td>système qui agit seul selon un ordre reçu</td></tr>
-          <tr><td><b>Capteur</b></td><td>détecte l'ordre ou l'événement déclencheur</td></tr>
-          <tr><td><b>Actionneur</b></td><td>exécute l'action (moteur, lumière…)</td></tr>
-          <tr><td><b>Accessibilité</b></td><td>rendre un lieu ou un objet utilisable par tous</td></tr>
-        </tbody>
-      </table>
-      <a class="cta" href="hub_si_2de_assistance.html">Passer aux activités →</a>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_assistance.html">← Séquence : assistance</a> <div class="brand"><div class="mark">C</div> <div><h1>Un coup de main</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Problématique</a> <a href="#s2" class="navlink"><span>02</span>Pour qui, pourquoi ?</a> <a href="#s3" class="navlink"><span>03</span>Ordre, traitement, action</a> <a href="#s4" class="navlink"><span>04</span>La boucle de commande</a> <a href="#s5" class="navlink"><span>05</span>Des automatismes partout</a> <a href="#s6" class="navlink"><span>06</span>Rendre accessible</a> <a href="#s7" class="navlink"><span>07</span>Communiquer clairement</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Un coup de main · problématique</span> <h2>Un système qui vient en aide</h2> <div class="twocol"><div><p class="lede">Ouvrir une porte, allumer une lumière, fermer un volet : des gestes simples, mais pas toujours faciles pour tout le monde.</p> <p>Un système <b>automatisé</b> peut accomplir ces tâches à la place de l'utilisateur, pour plus de <b>confort</b>, de <b>sécurité</b> ou d'<b>autonomie</b>.</p> <div class="chips"><span class="chip s">confort</span><span class="chip s">sécurité</span><span class="chip s">autonomie</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <circle cx="80" cy="90" r="26" fill="none" stroke="#2E6A8E" stroke-width="4"/> <line x1="80" y1="116" x2="80" y2="160" stroke="#2E6A8E" stroke-width="4"/> <line x1="80" y1="130" x2="55" y2="150" stroke="#2E6A8E" stroke-width="4"/> <line x1="80" y1="130" x2="105" y2="150" stroke="#2E6A8E" stroke-width="4"/> <line x1="80" y1="160" x2="60" y2="190" stroke="#2E6A8E" stroke-width="4"/> <line x1="80" y1="160" x2="100" y2="190" stroke="#2E6A8E" stroke-width="4"/> <rect x="220" y="60" width="90" height="120" rx="8" fill="none" stroke="#B85C2E" stroke-width="4"/> <rect x="260" y="60" width="50" height="120" rx="0" fill="#FFFDF8" stroke="#B85C2E" stroke-width="3" opacity="0.95"/> <path d="M150 110 Q 190 90 218 100" fill="none" stroke="#3D7E5F" stroke-width="3" stroke-dasharray="6 5"/><path d="M210 96 L220 100 L211 106" fill="none" stroke="#3D7E5F" stroke-width="3"/><text x="185" y="80" font-family="JetBrains Mono,monospace" font-size="10" fill="#2c6147" text-anchor="middle">détection</text> </svg> <figcaption>Une personne approche : la porte s'ouvre automatiquement.</figcaption> </figure></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Automatiser un geste du quotidien peut rendre la vie plus <b>simple</b>, plus <b>sûre</b>, ou plus <b>accessible</b>.</div></div> </section> <section id="s2"> <span class="kicker">02 · Analyser</span> <h2>Pour qui, pourquoi ?</h2> <p class="lede">Avant de concevoir un système d'assistance, on <b>analyse</b> qui en a besoin, et pourquoi.</p> <table class="t"> <thead><tr><th>Utilisateur</th><th>Besoin principal</th></tr></thead> <tbody> <tr><td>Personne âgée</td><td><b>sécurité</b> et autonomie à domicile</td></tr> <tr><td>Personne à mobilité réduite</td><td><b>accessibilité</b> des lieux et objets</td></tr> <tr><td>Famille</td><td><b>confort</b> et économies d'énergie</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> Un même système (porte automatique, volet motorisé…) peut répondre à plusieurs besoins différents.</div> </section> <section id="s3"> <span class="kicker">03 · Vocabulaire</span> <h2>Ordre, traitement, action</h2> <div class="twocol"><div><p class="lede">Un système automatisé suit toujours le même principe : il reçoit un <b>ordre</b>, le <b>traite</b>, puis <b>agit</b>.</p> <div class="chips"><span class="chip">ordre</span><span class="chip">traitement</span><span class="chip">action</span></div></div> <div><div class="eqcard"><div class="eq">j'appuie sur un bouton &rarr; ordre</div><div class="leg">L'utilisateur exprime ce qu'il veut.</div></div> <div class="eqcard"><div class="eq">le système décide quoi faire &rarr; traitement</div><div class="leg">Il analyse l'ordre reçu.</div></div> <div class="eqcard"><div class="eq">le moteur s'active &rarr; action</div><div class="leg">Le système agit concrètement.</div></div></div></div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Capteur → traitement → actionneur</div> <canvas id="cvota" width="900" height="220" style="width:100%;height:auto;display:block" aria-label="Chaîne d'un automatisme : le capteur détecte, le traitement décide, l'actionneur agit"></canvas> <div class="cap"><b id="otphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="otcap">Le capteur détecte.</span></div> </figure> </section> <section id="s4"> <span class="kicker">04 · Modéliser</span> <h2>La boucle de commande</h2> <p class="lede">Ordre, traitement, action, vérification : ce cycle se répète en boucle, encore et encore.</p> <figure> <canvas id="cvBoucle" width="640" height="250"></canvas> <div class="cap" id="capBcl"><span class="ph">—</span><span id="capBclTxt">…</span></div> </figure> <p>Après l'action, le système <b>vérifie</b> le résultat avant de revenir en attente d'un nouvel ordre.</p> </section> <section id="s5"> <span class="kicker">05 · Des exemples</span> <h2>Des automatismes partout</h2> <p class="lede">La domotique multiplie les petits automatismes du quotidien.</p> <table class="t"> <thead><tr><th>Système</th><th>Déclencheur</th><th>Action</th></tr></thead> <tbody> <tr><td>Volet roulant</td><td>heure programmée</td><td>monte ou descend</td></tr> <tr><td>Thermostat</td><td>température mesurée</td><td>chauffe ou s'arrête</td></tr> <tr><td>Lumière d'entrée</td><td>détection de mouvement</td><td>s'allume</td></tr> <tr><td>Porte de garage</td><td>télécommande</td><td>s'ouvre ou se ferme</td></tr> </tbody> </table> </section> <section id="s6"> <span class="kicker">06 · Expérimenter</span> <h2>Rendre accessible</h2> <p class="lede">Une porte automatique n'est pas qu'un confort : pour certaines personnes, c'est ce qui rend un lieu <b>accessible</b>.</p> <figure> <canvas id="cvAcces" width="640" height="250"></canvas> <div class="cap" id="capAcc"><span class="ph">—</span><span id="capAccTxt">…</span></div> </figure> <p>Sans capteur ni moteur, cette même porte serait un obstacle pour un fauteuil roulant.</p> </section> <section id="s7"> <span class="kicker">07 · Communiquer</span> <h2>Communiquer clairement</h2> <p class="lede">Un système d'assistance doit être <b>compris</b> par son utilisateur, sinon il n'est pas vraiment utile.</p> <div class="chips"><span class="chip">notice claire</span><span class="chip">pictogramme</span><span class="chip">retour sonore</span><span class="chip">voyant lumineux</span></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Un bon système d'assistance <b>explique</b> ce qu'il fait : un voyant, un bip, un pictogramme suffisent souvent.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Un système d'assistance <b>capte un ordre</b>, le <b>traite</b>, <b>agit</b>, puis <b>vérifie</b> — au service du confort, de la sécurité et de l'accessibilité.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Automatisme</b></td><td>système qui agit seul selon un ordre reçu</td></tr> <tr><td><b>Capteur</b></td><td>détecte l'ordre ou l'événement déclencheur</td></tr> <tr><td><b>Actionneur</b></td><td>exécute l'action (moteur, lumière…)</td></tr> <tr><td><b>Accessibilité</b></td><td>rendre un lieu ou un objet utilisable par tous</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_assistance.html">Passer aux activités →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
   var ids=Object.keys(map);
   var prog=document.getElementById('progBar');
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){
-    links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
-    var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
+ links.forEach(function(l){l.classList.remove('on');}); if(map[en.target.id])map[en.target.id].classList.add('on');
+ var idx=ids.indexOf(en.target.id); if(prog)prog.style.width=((idx+1)/ids.length*100)+'%';
   }});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
   function rrect(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath();}
 
   // ===== Animation : la boucle de commande =====
   (function(){
-    var cv=document.getElementById('cvBoucle'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capBcl .ph').textContent=n;document.getElementById('capBclTxt').textContent=t;}
-    var STEPS=[
-      {n:'Ordre',cap:'L\u2019utilisateur donne un ordre (bouton, capteur\u2026).'},
-      {n:'Traiter',cap:'Le système analyse l\u2019ordre reçu.'},
-      {n:'Agir',cap:'L\u2019actionneur exécute l\u2019action (moteur, lumière\u2026).'},
-      {n:'Vérifier',cap:'Le système vérifie le résultat obtenu.'}
-    ];
-    var cx=W/2, cy=125, R=95, N=STEPS.length, pts=[];
-    for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N;pts.push({x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});}
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%8)/1.4)%N;
-      g.clearRect(0,0,W,H);
-      g.strokeStyle='rgba(46,106,142,.22)';g.lineWidth=2;g.beginPath();g.arc(cx,cy,R,0,2*Math.PI);g.stroke();
-      g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('boucle',cx,cy-5);g.fillText('continue',cx,cy+9);
-      for(var j=0;j<N;j++){var p=pts[j],on=(j===active),w=112,hh=40;
-        g.fillStyle=on?'#2E6A8E':'#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=on?3:2;rrect(g,p.x-w/2,p.y-hh/2,w,hh,10);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':'#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText((j+1)+'. '+STEPS[j].n,p.x,p.y+5);}
-      setCap(String(active+1),STEPS[active].cap);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvBoucle'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capBcl .ph').textContent=n;document.getElementById('capBclTxt').textContent=t;}
+ var STEPS=[
+ {n:'Ordre',cap:'L\u2019utilisateur donne un ordre (bouton, capteur\u2026).'},
+ {n:'Traiter',cap:'Le système analyse l\u2019ordre reçu.'},
+ {n:'Agir',cap:'L\u2019actionneur exécute l\u2019action (moteur, lumière\u2026).'},
+ {n:'Vérifier',cap:'Le système vérifie le résultat obtenu.'}
+ ];
+ var cx=W/2, cy=125, R=95, N=STEPS.length, pts=[];
+ for(var i=0;i<N;i++){var a=-Math.PI/2+i*2*Math.PI/N;pts.push({x:cx+R*Math.cos(a),y:cy+R*Math.sin(a)});}
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%8)/1.4)%N;
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='rgba(46,106,142,.22)';g.lineWidth=2;g.beginPath();g.arc(cx,cy,R,0,2*Math.PI);g.stroke();
+ g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('boucle',cx,cy-5);g.fillText('continue',cx,cy+9);
+ for(var j=0;j<N;j++){var p=pts[j],on=(j===active),w=112,hh=40;
+ g.fillStyle=on?'#2E6A8E':'#FFFDF8';g.strokeStyle='#2E6A8E';g.lineWidth=on?3:2;rrect(g,p.x-w/2,p.y-hh/2,w,hh,10);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':'#235877';g.font='800 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText((j+1)+'. '+STEPS[j].n,p.x,p.y+5);}
+ setCap(String(active+1),STEPS[active].cap);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 
   // ===== Animation : rendre accessible (porte automatique) =====
   (function(){
-    var cv=document.getElementById('cvAcces'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function setCap(n,t){document.querySelector('#capAcc .ph').textContent=n;document.getElementById('capAccTxt').textContent=t;}
-    var STAGES=[{t:'Approche',s:'la personne approche',c:'#B85C2E'},{t:'Détection',s:'le capteur la repère',c:'#2E6A8E'},{t:'Ouverture',s:'la porte s\u2019ouvre',c:'#3D7E5F'},{t:'Passage',s:'l\u2019accès est libre',c:'#8A5A7A'}];
-    var CAPS=['Une personne en fauteuil roulant approche de la porte.','Le capteur détecte sa présence.','La porte s\u2019ouvre automatiquement.','Le passage est libre : l\u2019accès est garanti.'];
-    var cx=[92,248,404,556], cy=132, w=132, hh=72;
-    var ph=0;
-    function draw(){
-      var active=Math.floor((ph%9)/1.6)%4;
-      g.clearRect(0,0,W,H);
-      for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
-      for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
-        g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
-        g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
-        g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
-      g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Une porte qui rend un lieu accessible',W/2,18);
-      setCap(String(active+1),CAPS[active]);
-      g.textAlign='left';
-    }
-    setInterval(function(){ph+=0.05; draw();},50); draw();
+ var cv=document.getElementById('cvAcces'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function setCap(n,t){document.querySelector('#capAcc .ph').textContent=n;document.getElementById('capAccTxt').textContent=t;}
+ var STAGES=[{t:'Approche',s:'la personne approche',c:'#B85C2E'},{t:'Détection',s:'le capteur la repère',c:'#2E6A8E'},{t:'Ouverture',s:'la porte s\u2019ouvre',c:'#3D7E5F'},{t:'Passage',s:'l\u2019accès est libre',c:'#8A5A7A'}];
+ var CAPS=['Une personne en fauteuil roulant approche de la porte.','Le capteur détecte sa présence.','La porte s\u2019ouvre automatiquement.','Le passage est libre : l\u2019accès est garanti.'];
+ var cx=[92,248,404,556], cy=132, w=132, hh=72;
+ var ph=0;
+ function draw(){
+ var active=Math.floor((ph%9)/1.6)%4;
+ g.clearRect(0,0,W,H);
+ for(var i=0;i<3;i++){var xa=cx[i]+w/2, xb=cx[i+1]-w/2;g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;g.beginPath();g.moveTo(xa,cy);g.lineTo(xb-6,cy);g.stroke();g.fillStyle='rgba(42,38,34,.3)';g.beginPath();g.moveTo(xb,cy);g.lineTo(xb-8,cy-4);g.lineTo(xb-8,cy+4);g.closePath();g.fill();}
+ for(var j=0;j<4;j++){var on=(j===active),st=STAGES[j];
+ g.fillStyle=on?st.c:'#FFFDF8';g.strokeStyle=st.c;g.lineWidth=on?3:2;rrect(g,cx[j]-w/2,cy-hh/2,w,hh,11);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':st.c;g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(st.t,cx[j],cy-4);
+ g.fillStyle=on?'rgba(255,255,255,.85)':'#5C544B';g.font='10px "JetBrains Mono",monospace';g.fillText(st.s,cx[j],cy+15);}
+ g.fillStyle='#235877';g.font='800 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('Une porte qui rend un lieu accessible',W/2,18);
+ setCap(String(active+1),CAPS[active]);
+ g.textAlign='left';
+ }
+ setInterval(function(){ph+=0.05; draw();},50); draw();
   })();
 </script>
 <script>
@@ -329,39 +173,38 @@
   var cv=document.getElementById('cvota'); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), W=cv.width, H=cv.height, midY=96;
   var caps=[
-    'Le capteur re\u00e7oit une information : une pr\u00e9sence est d\u00e9tect\u00e9e.',
-    'Le traitement d\u00e9cide selon une condition : SI pr\u00e9sence ALORS agir.',
-    'L\u2019actionneur ex\u00e9cute l\u2019action : la porte s\u2019ouvre.'
-  ];
+ 'Le capteur re\u00e7oit une information : une pr\u00e9sence est d\u00e9tect\u00e9e.',
+ 'Le traitement d\u00e9cide selon une condition : SI pr\u00e9sence ALORS agir.',
+ 'L\u2019actionneur ex\u00e9cute l\u2019action : la porte s\u2019ouvre.'];
   function block(x1,x2,col,t1,t2,hl){g.fillStyle=hl?col+'22':'#FFFDF8';g.strokeStyle=col;g.lineWidth=hl?2.6:1.8;g.beginPath();g.rect(x1,midY-34,x2-x1,68);g.fill();g.stroke();
-    g.fillStyle=col;g.font='700 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(t1,(x1+x2)/2,midY-4);g.font='11px "JetBrains Mono",monospace';g.fillStyle='#5C544B';g.fillText(t2,(x1+x2)/2,midY+16);}
+ g.fillStyle=col;g.font='700 13px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(t1,(x1+x2)/2,midY-4);g.font='11px "JetBrains Mono",monospace';g.fillStyle='#5C544B';g.fillText(t2,(x1+x2)/2,midY+16);}
   function tok(x){g.fillStyle='#BD8A2A';g.beginPath();g.arc(x,midY,7,0,7);g.fill();}
   var T=0;
   function step(){
-    T+=0.03; if(T>9) T=0;
-    var phase=(T<2?0:(T<4.5?1:2)), present=(T<7.5);
-    g.clearRect(0,0,W,H);
-    // personne (présence)
-    if(present){g.fillStyle='#5C544B';g.beginPath();g.arc(40,midY-14,9,0,7);g.fill();g.fillRect(35,midY-4,10,26);g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('pr\u00e9sence',40,midY+40);}
-    // blocs
-    block(80,250,'#2E6A8E','CAPTEUR','d\u00e9tecte',phase===0&&present);
-    var vrai=(phase>=1&&present);
-    block(360,560,'#BD8A2A','TRAITEMENT',(phase>=1?('pr\u00e9sence ? '+(vrai?'VRAI':'FAUX')):'condition'),phase===1);
-    block(670,850,'#3D7E5F','ACTIONNEUR',(phase>=2?'porte OUVERTE':'porte ferm\u00e9e'),phase===2);
-    // flèches
-    g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;
-    g.beginPath();g.moveTo(250,midY);g.lineTo(354,midY);g.moveTo(560,midY);g.lineTo(664,midY);g.stroke();
-    // token
-    if(phase===1){var u=Math.min(1,(T-2)/2);tok(250+u*104);}
-    if(phase===2){var u2=Math.min(1,(T-4.5)/1.6);tok(560+u2*104);}
-    // porte (près de l'actionneur)
-    var dx=760, open=(phase>=2);
-    g.strokeStyle='#7a7064';g.lineWidth=3;g.beginPath();g.moveTo(dx-2,midY+44);g.lineTo(dx-2,midY+80);g.moveTo(dx+42,midY+44);g.lineTo(dx+42,midY+80);g.stroke();
-    g.fillStyle=open?'rgba(61,126,95,.35)':'rgba(122,112,100,.35)';
-    if(open){g.fillRect(dx-2,midY+46,8,32);g.fillRect(dx+34,midY+46,8,32);} else {g.fillRect(dx,midY+46,40,32);}
-    var cap=document.getElementById('otcap'), ph=document.getElementById('otphase');
-    if(cap) cap.textContent=caps[phase];
-    if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
+ T+=0.03; if(T>9) T=0;
+ var phase=(T<2?0:(T<4.5?1:2)), present=(T<7.5);
+ g.clearRect(0,0,W,H);
+ // personne (présence)
+ if(present){g.fillStyle='#5C544B';g.beginPath();g.arc(40,midY-14,9,0,7);g.fill();g.fillRect(35,midY-4,10,26);g.font='10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('pr\u00e9sence',40,midY+40);}
+ // blocs
+ block(80,250,'#2E6A8E','CAPTEUR','d\u00e9tecte',phase===0&&present);
+ var vrai=(phase>=1&&present);
+ block(360,560,'#BD8A2A','TRAITEMENT',(phase>=1?('pr\u00e9sence ? '+(vrai?'VRAI':'FAUX')):'condition'),phase===1);
+ block(670,850,'#3D7E5F','ACTIONNEUR',(phase>=2?'porte OUVERTE':'porte ferm\u00e9e'),phase===2);
+ // flèches
+ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=2;
+ g.beginPath();g.moveTo(250,midY);g.lineTo(354,midY);g.moveTo(560,midY);g.lineTo(664,midY);g.stroke();
+ // token
+ if(phase===1){var u=Math.min(1,(T-2)/2);tok(250+u*104);}
+ if(phase===2){var u2=Math.min(1,(T-4.5)/1.6);tok(560+u2*104);}
+ // porte (près de l'actionneur)
+ var dx=760, open=(phase>=2);
+ g.strokeStyle='#7a7064';g.lineWidth=3;g.beginPath();g.moveTo(dx-2,midY+44);g.lineTo(dx-2,midY+80);g.moveTo(dx+42,midY+44);g.lineTo(dx+42,midY+80);g.stroke();
+ g.fillStyle=open?'rgba(61,126,95,.35)':'rgba(122,112,100,.35)';
+ if(open){g.fillRect(dx-2,midY+46,8,32);g.fillRect(dx+34,midY+46,8,32);} else {g.fillRect(dx,midY+46,40,32);}
+ var cap=document.getElementById('otcap'), ph=document.getElementById('otphase');
+ if(cap) cap.textContent=caps[phase];
+ if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
   setInterval(step,40); step();
 })();
