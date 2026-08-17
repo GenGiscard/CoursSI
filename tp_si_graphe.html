@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
@@ -51,119 +50,53 @@
   .steps.show{display:block}
   .stepline{display:flex;gap:10px;align-items:flex-start;background:#f3eef6;border:1px solid #e0d4e6;border-radius:10px;padding:10px 14px;margin:8px 0;font-size:15px}
   .stepline .sn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#fff;background:var(--plum);border-radius:7px;padding:2px 9px;flex:none;margin-top:2px}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">TP — Le graphe des liaisons<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="k">TP · Première spé SI</div>
-      <h1>La benne basculante</h1>
-      <p class="lede">Un vérin hydraulique soulève la benne d'un camion. À toi de constituer les classes d'équivalence, de compléter le graphe et de lire sa structure.</p>
-    </div>
-
-    <div class="sysfig">
-      <svg viewBox="0 0 640 220" style="width:100%;height:auto;display:block" aria-label="Benne basculante : châssis, benne, vérin (corps + tige)">
-        <rect x="30" y="160" width="420" height="26" rx="4" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/>
-        <circle cx="80" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/><circle cx="180" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/>
-        <rect x="40" y="110" width="70" height="50" rx="6" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/>
-        <g transform="rotate(-14 440 160)">
-          <rect x="150" y="112" width="300" height="42" rx="4" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2"/>
-        </g>
-        <circle cx="440" cy="158" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
-        <line x1="250" y1="164" x2="316" y2="98" stroke="#C0492E" stroke-width="10" stroke-linecap="round"/>
-        <line x1="316" y1="98" x2="352" y2="62" stroke="#8A5A7A" stroke-width="6" stroke-linecap="round"/>
-        <circle cx="250" cy="164" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
-        <circle cx="352" cy="62" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/>
-        <text x="75" y="100" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">cabine</text>
-        <text x="240" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">châssis</text>
-        <text x="330" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D7E5F">benne (levée)</text>
-        <text x="252" y="130" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C0492E">corps du vérin</text>
-        <text x="392" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A5A7A">tige</text>
-        <text x="510" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8a6313">● = articulations</text>
-      </svg>
-    </div>
-
-    <section class="exo-card" id="a">
-      <h2><span class="num">A</span> Constituer les classes</h2>
-      <p class="task">Range chaque pièce dans sa classe d'équivalence. Rappel : même classe = aucun mouvement relatif.</p>
-      <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
-      <div class="steps" id="aSteps"></div>
-      <div class="exo-fb" id="aFb"></div>
-      <div class="exo-sol" id="aSol"><b>A (bâti) = {châssis, cabine}</b> — la cabine est boulonnée au châssis.<br><b>B = {benne, axe de basculement}</b> — l'axe est soudé à la benne.<br><b>C = {corps du vérin}</b> · <b>D = {tige du vérin}</b> — la tige coulisse dans le corps : mouvement relatif, donc deux classes.</div>
-    </section>
-
-    <section class="exo-card" id="b">
-      <h2><span class="num">B</span> Compléter le graphe</h2>
-      <p class="task">Le graphe de la benne a 4 bulles et 4 liaisons. Nomme chaque liaison L1 à L4.</p>
-      <div class="sysfig">
-        <svg viewBox="0 0 560 250" style="width:100%;height:auto;display:block" aria-label="Graphe : A, B, C, D en boucle">
-          <line x1="150" y1="60" x2="410" y2="60" stroke="#5C544B" stroke-width="2"/>
-          <line x1="120" y1="90" x2="120" y2="180" stroke="#5C544B" stroke-width="2"/>
-          <line x1="440" y1="90" x2="440" y2="180" stroke="#5C544B" stroke-width="2"/>
-          <line x1="150" y1="205" x2="410" y2="205" stroke="#5C544B" stroke-width="2"/>
-          <circle cx="120" cy="60" r="26" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2.5"/><text x="120" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">A</text>
-          <circle cx="440" cy="60" r="26" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2.5"/><text x="440" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">B</text>
-          <circle cx="120" cy="205" r="26" fill="#f9e9e4" stroke="#C0492E" stroke-width="2.5"/><text x="120" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">C</text>
-          <circle cx="440" cy="205" r="26" fill="#f3eef6" stroke="#8A5A7A" stroke-width="2.5"/><text x="440" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">D</text>
-          <text x="280" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L1 : A–B</text>
-          <text x="95" y="140" text-anchor="end" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L2 : A–C</text>
-          <text x="465" y="140" text-anchor="start" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L3 : B–D</text>
-          <text x="280" y="232" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L4 : C–D</text>
-          <text x="35" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">bâti</text>
-          <text x="510" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">benne</text>
-          <text x="35" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">corps</text>
-          <text x="510" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">tige</text>
-        </svg>
-      </div>
-      <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
-      <div class="steps" id="bSteps"></div>
-      <div class="exo-fb" id="bFb"></div>
-      <div class="exo-sol" id="bSol"><b>L1 (A–B) : pivot</b> — la benne bascule autour d'un axe fixé au châssis.<br><b>L2 (A–C) : pivot</b> — le corps du vérin est articulé sur le châssis.<br><b>L3 (B–D) : pivot</b> — la tige est articulée sur la benne.<br><b>L4 (C–D) : pivot glissant</b> — la tige coulisse ET peut tourner dans le corps du vérin.<br>Le graphe forme une <b>boucle</b> : chaîne fermée.</div>
-    </section>
-
-    <section class="exo-card" id="c">
-      <h2><span class="num">C</span> Ouverte ou fermée ?</h2>
-      <p class="task">D'après la forme de son graphe, chaque système est-il une chaîne ouverte ou fermée ?</p>
-      <div class="match" id="cMatch"></div>
-      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="cFb"></div>
-      <div class="exo-sol" id="cSol"><b>Bras de robot</b> (A–B–C–D en ligne) → <b>ouverte</b> : le graphe est une ligne, chaque articulation est motorisée indépendamment.<br><b>Étau</b> (A–B–C en triangle) → <b>fermée</b> : boucle, mouvements couplés.<br><b>Benne + vérin</b> (A–B–D–C–A) → <b>fermée</b> : la boucle impose que sortir la tige fasse basculer la benne.</div>
-    </section>
-
-    <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Compter</h2>
-      <p class="task">Applique les définitions.</p>
-      <div class="row"><span>a) Un mécanisme a 5 pièces, dont 2 vissées ensemble. Combien de classes d'équivalence ?</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div>
-      <div class="row"><span>b) Combien de liaisons forment la boucle du graphe de la benne ?</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div>
-      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="dFb"></div>
-      <div class="exo-sol" id="dSol"><b>a)</b> Les 2 pièces vissées ne forment qu'une classe : 5 pièces → <b>4 classes</b>.<br><b>b)</b> A–B, A–C, B–D, C–D : <b>4 liaisons</b> dans la boucle.</div>
-    </section>
-
-    <section class="exo-card" id="e">
-      <h2><span class="num">★</span> À quoi sert le graphe ?</h2>
-      <p class="task">Avant de dessiner le schéma cinématique, on trace toujours le graphe des liaisons.</p>
-      <p>Quel est son intérêt principal ?</p>
-      <div class="opt" id="eOpt">
-        <button data-v="0">Il donne les dimensions des pièces</button>
-        <button data-v="1">Il révèle la structure du mécanisme et évite d'oublier une liaison</button>
-        <button data-v="2">Il calcule la puissance du vérin</button>
-      </div>
-      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div>
-      <div class="exo-fb" id="eFb"></div>
-      <div class="exo-sol" id="eSol"><b>Il révèle la structure.</b> Le graphe recense toutes les classes et toutes les liaisons : chaque trait devra apparaître sur le schéma cinématique. Il montre aussi immédiatement si la chaîne est ouverte ou fermée — donc si les mouvements sont indépendants ou couplés. Ni dimensions, ni efforts : uniquement la <b>structure</b>.</div>
-    </section>
-  </div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Le graphe des liaisons<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI</div> <h1>La benne basculante</h1> <p class="lede">Un vérin hydraulique soulève la benne d'un camion. À toi de constituer les classes d'équivalence, de compléter le graphe et de lire sa structure.</p></div> <div class="sysfig"><svg viewBox="0 0 640 220" style="width:100%;height:auto;display:block" aria-label="Benne basculante : châssis, benne, vérin (corps + tige)"> <rect x="30" y="160" width="420" height="26" rx="4" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/> <circle cx="80" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/><circle cx="180" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/> <rect x="40" y="110" width="70" height="50" rx="6" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/> <g transform="rotate(-14 440 160)"> <rect x="150" y="112" width="300" height="42" rx="4" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2"/> </g> <circle cx="440" cy="158" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <line x1="250" y1="164" x2="316" y2="98" stroke="#C0492E" stroke-width="10" stroke-linecap="round"/> <line x1="316" y1="98" x2="352" y2="62" stroke="#8A5A7A" stroke-width="6" stroke-linecap="round"/> <circle cx="250" cy="164" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <circle cx="352" cy="62" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <text x="75" y="100" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">cabine</text> <text x="240" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">châssis</text> <text x="330" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D7E5F">benne (levée)</text> <text x="252" y="130" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C0492E">corps du vérin</text> <text x="392" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A5A7A">tige</text> <text x="510" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8a6313">● = articulations</text> </svg></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> Constituer les classes</h2> <p class="task">Range chaque pièce dans sa classe d'équivalence. Rappel : même classe = aucun mouvement relatif.</p> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>A (bâti) = {châssis, cabine}</b> — la cabine est boulonnée au châssis.<br><b>B = {benne, axe de basculement}</b> — l'axe est soudé à la benne.<br><b>C = {corps du vérin}</b> · <b>D = {tige du vérin}</b> — la tige coulisse dans le corps : mouvement relatif, donc deux classes.</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> Compléter le graphe</h2> <p class="task">Le graphe de la benne a 4 bulles et 4 liaisons. Nomme chaque liaison L1 à L4.</p> <div class="sysfig"><svg viewBox="0 0 560 250" style="width:100%;height:auto;display:block" aria-label="Graphe : A, B, C, D en boucle"> <line x1="150" y1="60" x2="410" y2="60" stroke="#5C544B" stroke-width="2"/> <line x1="120" y1="90" x2="120" y2="180" stroke="#5C544B" stroke-width="2"/> <line x1="440" y1="90" x2="440" y2="180" stroke="#5C544B" stroke-width="2"/> <line x1="150" y1="205" x2="410" y2="205" stroke="#5C544B" stroke-width="2"/> <circle cx="120" cy="60" r="26" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2.5"/><text x="120" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">A</text> <circle cx="440" cy="60" r="26" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2.5"/><text x="440" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">B</text> <circle cx="120" cy="205" r="26" fill="#f9e9e4" stroke="#C0492E" stroke-width="2.5"/><text x="120" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">C</text> <circle cx="440" cy="205" r="26" fill="#f3eef6" stroke="#8A5A7A" stroke-width="2.5"/><text x="440" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">D</text> <text x="280" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L1 : A–B</text> <text x="95" y="140" text-anchor="end" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L2 : A–C</text> <text x="465" y="140" text-anchor="start" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L3 : B–D</text> <text x="280" y="232" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L4 : C–D</text> <text x="35" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">bâti</text> <text x="510" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">benne</text> <text x="35" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">corps</text> <text x="510" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">tige</text> </svg></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>L1 (A–B) : pivot</b> — la benne bascule autour d'un axe fixé au châssis.<br><b>L2 (A–C) : pivot</b> — le corps du vérin est articulé sur le châssis.<br><b>L3 (B–D) : pivot</b> — la tige est articulée sur la benne.<br><b>L4 (C–D) : pivot glissant</b> — la tige coulisse ET peut tourner dans le corps du vérin.<br>Le graphe forme une <b>boucle</b> : chaîne fermée.</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> Ouverte ou fermée ?</h2> <p class="task">D'après la forme de son graphe, chaque système est-il une chaîne ouverte ou fermée ?</p> <div class="match" id="cMatch"></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>Bras de robot</b> (A–B–C–D en ligne) → <b>ouverte</b> : le graphe est une ligne, chaque articulation est motorisée indépendamment.<br><b>Étau</b> (A–B–C en triangle) → <b>fermée</b> : boucle, mouvements couplés.<br><b>Benne + vérin</b> (A–B–D–C–A) → <b>fermée</b> : la boucle impose que sortir la tige fasse basculer la benne.</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> Compter</h2> <p class="task">Applique les définitions.</p> <div class="row"><span>a) Un mécanisme a 5 pièces, dont 2 vissées ensemble. Combien de classes d'équivalence ?</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div> <div class="row"><span>b) Combien de liaisons forment la boucle du graphe de la benne ?</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol"><b>a)</b> Les 2 pièces vissées ne forment qu'une classe : 5 pièces → <b>4 classes</b>.<br><b>b)</b> A–B, A–C, B–D, C–D : <b>4 liaisons</b> dans la boucle.</div> </section> <section class="exo-card" id="e"> <h2><span class="num">★</span> À quoi sert le graphe ?</h2> <p class="task">Avant de dessiner le schéma cinématique, on trace toujours le graphe des liaisons.</p> <p>Quel est son intérêt principal ?</p> <div class="opt" id="eOpt"><button data-v="0">Il donne les dimensions des pièces</button> <button data-v="1">Il révèle la structure du mécanisme et évite d'oublier une liaison</button> <button data-v="2">Il calcule la puissance du vérin</button></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>Il révèle la structure.</b> Le graphe recense toutes les classes et toutes les liaisons : chaque trait devra apparaître sur le schéma cinématique. Il montre aussi immédiatement si la chaîne est ouverte ou fermée — donc si les mouvements sont indépendants ou couplés. Ni dimensions, ni efforts : uniquement la <b>structure</b>.</div> </section></div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -172,12 +105,12 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
 function setupSteps(btnId, boxId, steps){
   var i=0, btn=el(btnId), box=el(boxId);
   btn.addEventListener('click',function(){
-    if(btn.disabled||i>=steps.length) return;
-    var d=document.createElement('div'); d.className='stepline';
-    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
-    box.appendChild(d); box.classList.add('show'); i++;
-    if(i<steps.length){ btn.textContent='\ud83e\ude9c \u00c9tape suivante ('+i+'/'+steps.length+')'; }
-    else { btn.textContent='\u2714 R\u00e9solution compl\u00e8te'; btn.disabled=true; }
+ if(btn.disabled||i>=steps.length) return;
+ var d=document.createElement('div'); d.className='stepline';
+ d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+ box.appendChild(d); box.classList.add('show'); i++;
+ if(i<steps.length){ btn.textContent=' \u00c9tape suivante ('+i+'/'+steps.length+')'; }
+ else { btn.textContent=' R\u00e9solution compl\u00e8te'; btn.disabled=true; }
   });
 }
 setupSteps('aStepBtn','aSteps',[
@@ -196,12 +129,12 @@ setupSteps('bStepBtn','bSteps',[
 function buildMatch(boxId, prefix, scen, opts){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
-    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
-    box.appendChild(d); });
+ d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+ box.appendChild(d); });
 }
 function checkMatch(prefix, scen){
   var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
-    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+ el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
   return all;
 }
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
@@ -222,7 +155,7 @@ buildMatch('aMatch','a',A_SCEN,['— choisir —','A','B','C','D']);
 lockExo('aCheck','aShow','aSol','aFb',function(){
   if(checkMatch('a',A_SCEN)) return {ok:true,msg:'✓ Les 4 classes sont bien constituées !'};
   el('aStepBtn').disabled=false;
-  return {ok:false,msg:'✗ Certaines pièces sont mal classées — la résolution pas à pas est débloquée 🪜'};
+  return {ok:false,msg:'✗ Certaines pièces sont mal classées — la résolution pas à pas est débloquée '};
 });
 
 /* ---- B : graphe ---- */
@@ -236,7 +169,7 @@ buildMatch('bMatch','b',B_SCEN,['— choisir —','Pivot','Glissière','Pivot gl
 lockExo('bCheck','bShow','bSol','bFb',function(){
   if(checkMatch('b',B_SCEN)) return {ok:true,msg:'✓ Graphe complet : 3 pivots + 1 pivot glissant, en boucle !'};
   el('bStepBtn').disabled=false;
-  return {ok:false,msg:'✗ Certaines liaisons sont fausses — la résolution pas à pas est débloquée 🪜'};
+  return {ok:false,msg:'✗ Certaines liaisons sont fausses — la résolution pas à pas est débloquée '};
 });
 
 /* ---- C : ouverte / fermée ---- */
@@ -260,11 +193,237 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
 /* ---- E ---- */
 (function(){ var sel=-1;
   el('eOpt').querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
-    el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
+ el('eOpt').querySelectorAll('button').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); sel=+b.dataset.v; }); });
   lockExo('eCheck','eShow','eSol','eFb',function(){
-    if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
-    if(sel===1) return {ok:true,msg:'✓ Oui : le graphe rend la structure visible et exhaustive.'};
-    return {ok:false,msg:'✗ Non — le graphe ne parle ni de dimensions ni d\u2019efforts.'};
+ if(sel<0) return {ok:false,msg:'Choisis une réponse.'};
+ if(sel===1) return {ok:true,msg:'✓ Oui : le graphe rend la structure visible et exhaustive.'};
+ return {ok:false,msg:'✗ Non — le graphe ne parle ni de dimensions ni d\u2019efforts.'};
+  });
+})();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_graphe', TP_TITRE='TP — Le graphe des liaisons';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
   });
 })();
 </script>

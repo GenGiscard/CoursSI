@@ -7,16 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --space:#060a12; --hull:#0e1826; --hull2:#16222f; --line:#22384a;
-    --cyan:#4fd6e0; --cyan-dim:#2a7f88; --amber:#f0a53a; --alarm:#e8556b; --oxy:#57d99a;
-    --bone:#d7dee6; --dim:#7c8a99;
+<style> :root{
+ --space:#060a12; --hull:#0e1826; --hull2:#16222f; --line:#22384a;
+ --cyan:#4fd6e0; --cyan-dim:#2a7f88; --amber:#f0a53a; --alarm:#e8556b; --oxy:#57d99a;
+ --bone:#d7dee6; --dim:#7c8a99;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{background:var(--space);color:var(--bone);
-    font-family:'Space Grotesk',system-ui,sans-serif;font-size:18px;line-height:1.58;overflow:hidden;-webkit-font-smoothing:antialiased}
+ font-family:'Space Grotesk',system-ui,sans-serif;font-size:18px;line-height:1.58;overflow:hidden;-webkit-font-smoothing:antialiased}
   .layer{position:fixed;inset:0;pointer-events:none;z-index:0}
   #stars{z-index:0}
   #scan{background:repeating-linear-gradient(0deg,rgba(79,214,224,.04) 0 1px,transparent 1px 3px);opacity:.5;mix-blend-mode:screen}
@@ -27,7 +26,7 @@
 
   /* HUD */
   .hud{position:fixed;z-index:6;top:0;left:0;right:0;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-    padding:9px clamp(12px,3vw,24px);background:linear-gradient(#08111be6,#08111b99);border-bottom:1px solid var(--line);backdrop-filter:blur(4px)}
+ padding:9px clamp(12px,3vw,24px);background:linear-gradient(#08111be6,#08111b99);border-bottom:1px solid var(--line);backdrop-filter:blur(4px)}
   .hud .id{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--cyan);text-transform:uppercase;white-space:nowrap}
   .hud .sys{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);flex:1;min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase}
   .integ{display:flex;align-items:center;gap:8px;min-width:180px}
@@ -44,7 +43,7 @@
   #stage{position:relative;z-index:4;height:100%;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;padding:64px clamp(14px,4vw,28px) 40px}
   .panel{width:100%;max-width:740px}
   .viewport{position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#04070d;margin-bottom:18px;
-    box-shadow:0 10px 34px rgba(0,0,0,.5), inset 0 0 50px rgba(0,0,0,.6)}
+ box-shadow:0 10px 34px rgba(0,0,0,.5), inset 0 0 50px rgba(0,0,0,.6)}
   .viewport::before,.viewport::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--cyan-dim);z-index:2;opacity:.7}
   .viewport::before{top:8px;left:8px;border-right:none;border-bottom:none}
   .viewport::after{bottom:8px;right:8px;border-left:none;border-top:none}
@@ -58,8 +57,8 @@
 
   #interact{margin-top:20px;display:grid;gap:11px}
   .choice{font-family:'Space Grotesk',sans-serif;font-size:17px;text-align:left;color:var(--bone);
-    background:linear-gradient(var(--hull),#0b131d);border:1px solid var(--line);border-left:3px solid var(--cyan-dim);
-    border-radius:7px;padding:13px 15px;cursor:pointer;transition:.15s}
+ background:linear-gradient(var(--hull),#0b131d);border:1px solid var(--line);border-left:3px solid var(--cyan-dim);
+ border-radius:7px;padding:13px 15px;cursor:pointer;transition:.15s}
   .choice:hover{border-color:var(--cyan);border-left-color:var(--cyan);transform:translateX(3px)}
   .choice .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cyan);margin-right:9px}
 
@@ -109,12 +108,12 @@
 
   /* toast */
   #toast{position:fixed;z-index:25;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;transition:.3s;
-    font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.05em;background:#0b1620;border:1px solid var(--cyan-dim);color:var(--cyan);padding:10px 16px;border-radius:8px;pointer-events:none}
+ font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.05em;background:#0b1620;border:1px solid var(--cyan-dim);color:var(--cyan);padding:10px 16px;border-radius:8px;pointer-events:none}
   #toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
   /* titre & fins */
   #title{position:fixed;z-index:30;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;
-    background:radial-gradient(120% 100% at 50% 30%,rgba(79,214,224,.1),transparent 55%),var(--space)}
+ background:radial-gradient(120% 100% at 50% 30%,rgba(79,214,224,.1),transparent 55%),var(--space)}
   #title h1{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:.02em;font-size:clamp(40px,10vw,86px);margin:0;color:var(--bone);text-shadow:0 0 40px rgba(79,214,224,.3)}
   #title .sub{font-family:'JetBrains Mono',monospace;letter-spacing:.4em;font-size:clamp(10px,2.6vw,13px);color:var(--amber);text-transform:uppercase;margin:14px 0 4px}
   #title .tag{max-width:520px;color:var(--dim);font-size:17px;margin:22px auto 28px}
@@ -126,59 +125,7 @@
   a{color:var(--cyan)}
 </style>
 </head>
-<body>
-  <canvas id="stars" class="layer"></canvas>
-  <div id="scan" class="layer"></div>
-  <div id="alarmL" class="layer"></div>
-  <div id="vign" class="layer"></div>
-
-  <div class="hud">
-    <span class="id">DEIMOS</span>
-    <span class="sys" id="sysName">— système —</span>
-    <div class="integ" id="integ">
-      <span class="lbl">Intégrité</span>
-      <div class="bar"><i id="integBar"></i></div>
-      <span class="pct" id="integPct">100</span>
-    </div>
-    <button class="hbtn" id="jrnBtn">JOURNAL</button>
-    <button class="hbtn" id="sndBtn">SON ✕</button>
-  </div>
-
-  <div id="stage">
-    <div class="panel">
-      <div class="viewport" id="viewport"></div>
-      <p class="eyebrow" id="eyebrow"></p>
-      <div id="narrative"></div>
-      <div id="interact"></div>
-    </div>
-  </div>
-
-  <div class="overlay" id="lesson"><div class="obox">
-    <div class="lk">Cours · aide technique</div><h4 id="lessonTitle"></h4>
-    <div class="body" id="lessonBody"></div>
-    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('lesson')">Revenir à l'épreuve</button>
-  </div></div>
-
-  <div class="overlay" id="journal"><div class="obox">
-    <div class="lk">Journal de bord</div><h4>Compétences &amp; réparations</h4>
-    <div class="comps" id="compList"></div>
-    <div style="margin:14px 0 4px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Historique</div>
-    <div id="logList"></div>
-    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('journal')">Fermer</button>
-  </div></div>
-
-  <div id="toast"></div>
-
-  <div id="title">
-    <div class="sub">Sciences de l'ingénieur · JDR de survie</div>
-    <h1>DÉRIVE</h1>
-    <p class="tag">Station Deimos, orbite basse. Après l'explosion, tu es la seule ingénieure encore consciente — et l'orbite se dégrade. Répare les systèmes avant la rentrée atmosphérique. Ton calcul ouvre la voie&nbsp;; les dés décident si tu tiens le coup.</p>
-    <input id="nameIn" maxlength="18" placeholder="Ton nom, ingénieure…" autocomplete="off">
-    <div><button class="btn" id="startBtn">Prendre les commandes</button></div>
-  </div>
-  <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div>
-
-<script>
+<body><canvas id="stars" class="layer"></canvas> <div id="scan" class="layer"></div> <div id="alarmL" class="layer"></div> <div id="vign" class="layer"></div> <div class="hud"><span class="id">DEIMOS</span> <span class="sys" id="sysName">— système —</span> <div class="integ" id="integ"><span class="lbl">Intégrité</span> <div class="bar"><i id="integBar"></i></div> <span class="pct" id="integPct">100</span></div> <button class="hbtn" id="jrnBtn">JOURNAL</button> <button class="hbtn" id="sndBtn">SON</button></div> <div id="stage"><div class="panel"><div class="viewport" id="viewport"></div> <p class="eyebrow" id="eyebrow"></p> <div id="narrative"></div> <div id="interact"></div></div></div> <div class="overlay" id="lesson"><div class="obox"><div class="lk">Cours · aide technique</div><h4 id="lessonTitle"></h4> <div class="body" id="lessonBody"></div> <button class="btn ghost" style="margin-top:18px" onclick="closeOv('lesson')">Revenir à l'épreuve</button></div></div> <div class="overlay" id="journal"><div class="obox"><div class="lk">Journal de bord</div><h4>Compétences &amp; réparations</h4> <div class="comps" id="compList"></div> <div style="margin:14px 0 4px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Historique</div> <div id="logList"></div> <button class="btn ghost" style="margin-top:18px" onclick="closeOv('journal')">Fermer</button></div></div> <div id="toast"></div> <div id="title"><div class="sub">Sciences de l'ingénieur · JDR de survie</div> <h1>DÉRIVE</h1> <p class="tag">Station Deimos, orbite basse. Après l'explosion, tu es la seule ingénieure encore consciente — et l'orbite se dégrade. Répare les systèmes avant la rentrée atmosphérique. Ton calcul ouvre la voie&nbsp;; les dés décident si tu tiens le coup.</p> <input id="nameIn" maxlength="18" placeholder="Ton nom, ingénieure…" autocomplete="off"> <div><button class="btn" id="startBtn">Prendre les commandes</button></div></div> <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -220,42 +167,42 @@ intro:{chap:"Réveil", art:'station', eye:"310 km d'altitude",
 
 power:{chap:"Système 1/7 — Alimentation", art:'power', eye:"Bus principal",
   epreuve:{sys:"ALIMENTATION", dom:'energie', diff:9,
-    q:"Le convertisseur doit fournir 900 W utiles, mais son rendement n'est que de 0,6. Quelle puissance doit-il absorber au réseau de secours, en watts ?",
-    ans:1500, tol:5, ok:"hull",
-    intro:"Le bus est mort. Sans lui, rien ne répond. Il faut dimensionner la puissance à tirer du réseau de secours — trop peu et le bus reste éteint."}},
+ q:"Le convertisseur doit fournir 900 W utiles, mais son rendement n'est que de 0,6. Quelle puissance doit-il absorber au réseau de secours, en watts ?",
+ ans:1500, tol:5, ok:"hull",
+ intro:"Le bus est mort. Sans lui, rien ne répond. Il faut dimensionner la puissance à tirer du réseau de secours — trop peu et le bus reste éteint."}},
 hull:{chap:"Système 2/7 — Structure", art:'hull', eye:"Cloison bâbord",
   epreuve:{sys:"STRUCTURE", dom:'statique', diff:9,
-    q:"Une passerelle de coursive supporte 1200 N en son milieu, sur deux appuis. Quel effort reprend chaque appui, en newtons ?",
-    ans:600, tol:2, ok:"beacon",
-    intro:"Une fissure court le long d'une cloison. Pour poser l'étai au bon endroit, tu dois connaître l'effort que reprend chaque appui de la passerelle."}},
+ q:"Une passerelle de coursive supporte 1200 N en son milieu, sur deux appuis. Quel effort reprend chaque appui, en newtons ?",
+ ans:600, tol:2, ok:"beacon",
+ intro:"Une fissure court le long d'une cloison. Pour poser l'étai au bon endroit, tu dois connaître l'effort que reprend chaque appui de la passerelle."}},
 beacon:{chap:"Système 3/7 — Communication", art:'beacon', eye:"Balise de détresse",
   epreuve:{sys:"BALISE", dom:'info', diff:10,
-    q:"La balise attend un code d'activation. L'écran affiche l'octet 1010 0011. Convertis-le en décimal.",
-    ans:163, tol:0.5, ok:"pressure",
-    intro:"La balise de détresse est verrouillée. Son code d'armement est gravé en binaire sur le boîtier."}},
+ q:"La balise attend un code d'activation. L'écran affiche l'octet 1010 0011. Convertis-le en décimal.",
+ ans:163, tol:0.5, ok:"pressure",
+ intro:"La balise de détresse est verrouillée. Son code d'armement est gravé en binaire sur le boîtier."}},
 pressure:{chap:"Système 4/7 — Mesure", art:'pressure', eye:"Capteur de pression",
   epreuve:{sys:"PRESSION", dom:'mesure', diff:10,
-    q:"Le capteur s'affole. Trois relevés successifs : 1013, 1015, 1014 (hPa). Quelle valeur fiable retenir, en hPa ?",
-    ans:1014, tol:0.5, ok:"wheel",
-    intro:"Impossible de savoir si la coque tient sans une mesure fiable. Le capteur tremble : répète, et prends la moyenne."}},
+ q:"Le capteur s'affole. Trois relevés successifs : 1013, 1015, 1014 (hPa). Quelle valeur fiable retenir, en hPa ?",
+ ans:1014, tol:0.5, ok:"wheel",
+ intro:"Impossible de savoir si la coque tient sans une mesure fiable. Le capteur tremble : répète, et prends la moyenne."}},
 wheel:{chap:"Système 5/7 — Attitude", art:'wheel', eye:"Roue de réaction",
   epreuve:{sys:"ATTITUDE", dom:'meca', diff:11,
-    q:"Pour réorienter la station, la roue de réaction doit tourner à 240 tr/min. Combien de tours effectuera-t-elle en 30 secondes ?",
-    ans:120, tol:1, ok:"thermal",
-    intro:"La station tangue. La roue de réaction va corriger l'attitude — encore faut-il compter les tours de la manœuvre programmée."}},
+ q:"Pour réorienter la station, la roue de réaction doit tourner à 240 tr/min. Combien de tours effectuera-t-elle en 30 secondes ?",
+ ans:120, tol:1, ok:"thermal",
+ intro:"La station tangue. La roue de réaction va corriger l'attitude — encore faut-il compter les tours de la manœuvre programmée."}},
 thermal:{chap:"Système 6/7 — Thermique", art:'thermal', eye:"Résistance de puissance",
   epreuve:{sys:"THERMIQUE", dom:'elec', diff:11,
-    q:"Une résistance de 5 Ω est parcourue par un courant de 3 A. Quelle puissance dissipe-t-elle en chaleur, en watts ? (P = R·I²)",
-    ans:45, tol:1, ok:"bridge",
-    intro:"Un circuit surchauffe. Tu dois savoir combien de puissance il dissipe pour décider s'il faut le délester."}},
+ q:"Une résistance de 5 Ω est parcourue par un courant de 3 A. Quelle puissance dissipe-t-elle en chaleur, en watts ? (P = R·I²)",
+ ans:45, tol:1, ok:"bridge",
+ intro:"Un circuit surchauffe. Tu dois savoir combien de puissance il dissipe pour décider s'il faut le délester."}},
 bridge:{chap:"Poste de pilotage", art:'bridge', eye:"Décision",
   text:"Six systèmes rétablis. Le poste de pilotage se rallume.\nDeux options s'affichent. <em>Rester</em> et tenter la manœuvre de stabilisation d'orbite — sauver la station et l'équipage. Ou <em>rejoindre la capsule</em> et t'éjecter maintenant, pendant qu'il en est encore temps.",
   choices:[{t:"Rester — stabiliser l'orbite",go:"burn"},{t:"Rejoindre la capsule de sauvetage",go:"end_pod"}]},
 burn:{chap:"Système 7/7 — Stabilisation", art:'burn', eye:"Manœuvre finale",
   epreuve:{sys:"STABILISATION", dom:'energt', diff:12,
-    q:"La manœuvre exige que le propulseur délivre 2000 W pendant 15 s. Quelle énergie consomme-t-il, en kilojoules ? (E = P·t)",
-    ans:30, tol:0.5, ok:"end_saved",
-    intro:"Dernière manœuvre. Tu dois vérifier que les batteries tiendront l'énergie de la poussée avant de l'engager."}},
+ q:"La manœuvre exige que le propulseur délivre 2000 W pendant 15 s. Quelle énergie consomme-t-il, en kilojoules ? (E = P·t)",
+ ans:30, tol:0.5, ok:"end_saved",
+ intro:"Dernière manœuvre. Tu dois vérifier que les batteries tiendront l'énergie de la poussée avant de l'engager."}},
 
 /* fins */
 end_saved:{chap:"Fin — Orbite stabilisée", art:'saved', eye:"Deimos tient", end:true,
@@ -288,11 +235,11 @@ function typewrite(html,cb){
   while((m=re.exec(html))!==null){ tokens.push(m[1]?{tag:m[1]}:{ch:m[2]}); }
   var out='', i=0;
   function tick(){
-    if(!G.typing){ target.innerHTML=html; if(cb)cb(); return; }
-    if(i>=tokens.length){ G.typing=false; target.innerHTML=html; if(cb)cb(); return; }
-    var t=tokens[i++]; out+=t.tag?t.tag:t.ch;
-    target.innerHTML=out+'<span class="caret">▍</span>';
-    setTimeout(tick, t.tag?0:(t.ch==='.'||t.ch==='\n'?40:(t.ch===','?22:12)));
+ if(!G.typing){ target.innerHTML=html; if(cb)cb(); return; }
+ if(i>=tokens.length){ G.typing=false; target.innerHTML=html; if(cb)cb(); return; }
+ var t=tokens[i++]; out+=t.tag?t.tag:t.ch;
+ target.innerHTML=out+'<span class="caret">▍</span>';
+ setTimeout(tick, t.tag?0:(t.ch==='.'||t.ch==='\n'?40:(t.ch===','?22:12)));
   }
   target.innerHTML='<span class="caret">▍</span>'; tick();
 }
@@ -310,17 +257,17 @@ function go(id){
 function renderInteract(sc){
   var box=el('interact'); box.innerHTML='';
   if(sc.end){
-    var p=document.createElement('div'); p.className='epreuve'; p.style.borderColor='#22384a';
-    p.innerHTML='<div class="rk"><span>Rapport final</span></div><div class="q" style="color:var(--cyan)">'+(typeof sc.final==='function'?sc.final():sc.final)+'</div>';
-    box.appendChild(p);
-    var b=document.createElement('button'); b.className='btn'; b.textContent='Rejouer'; b.onclick=function(){location.reload();};
-    box.appendChild(b); return;
+ var p=document.createElement('div'); p.className='epreuve'; p.style.borderColor='#22384a';
+ p.innerHTML='<div class="rk"><span>Rapport final</span></div><div class="q" style="color:var(--cyan)">'+(typeof sc.final==='function'?sc.final():sc.final)+'</div>';
+ box.appendChild(p);
+ var b=document.createElement('button'); b.className='btn'; b.textContent='Rejouer'; b.onclick=function(){location.reload();};
+ box.appendChild(b); return;
   }
   if(sc.epreuve){ renderEpreuve(sc.epreuve); return; }
   (sc.choices||[]).forEach(function(c,i){
-    var b=document.createElement('button'); b.className='choice';
-    b.innerHTML='<span class="k">'+String.fromCharCode(65+i)+'</span>'+c.t;
-    b.onclick=function(){ go(c.go); }; box.appendChild(b);
+ var b=document.createElement('button'); b.className='choice';
+ b.innerHTML='<span class="k">'+String.fromCharCode(65+i)+'</span>'+c.t;
+ b.onclick=function(){ go(c.go); }; box.appendChild(b);
   });
 }
 
@@ -333,24 +280,24 @@ function renderEpreuve(ep){
   var sub=document.createElement('button'); sub.className='btn'; sub.textContent='Valider le calcul';
   var fb=document.createElement('div'); fb.className='feedback';
   function check(){
-    if(G.solved) return;
-    var v=numf(inp.value);
-    if(!isNaN(v) && Math.abs(v-ep.ans)<ep.tol){
-      G.solved=true; inp.disabled=true; sub.disabled=true;
-      G.comp[ep.dom]++; toast('+1 '+DOMLAB[ep.dom]+' (maîtrise)'); refreshJournal();
-      fb.className='feedback good'; fb.textContent='✓ Calcul validé. Compétence '+DOMLAB[ep.dom]+' → +'+G.comp[ep.dom]+'. Exécute la manœuvre.';
-      var rb=document.createElement('button'); rb.className='btn warn'; rb.textContent='🎲 Lancer les dés'; rb.style.marginTop='12px';
-      rb.onclick=function(){ rb.remove(); rollFor(ep, w); };
-      w.appendChild(rb);
-    } else {
-      fb.className='feedback bad'; fb.textContent='✗ Résultat erroné. La station encaisse le contretemps.';
-      if(hurt(-6,'calcul erroné')) return;
-    }
+ if(G.solved) return;
+ var v=numf(inp.value);
+ if(!isNaN(v) && Math.abs(v-ep.ans)<ep.tol){
+ G.solved=true; inp.disabled=true; sub.disabled=true;
+ G.comp[ep.dom]++; toast('+1 '+DOMLAB[ep.dom]+' (maîtrise)'); refreshJournal();
+ fb.className='feedback good'; fb.textContent='✓ Calcul validé. Compétence '+DOMLAB[ep.dom]+' → +'+G.comp[ep.dom]+'. Exécute la manœuvre.';
+ var rb=document.createElement('button'); rb.className='btn warn'; rb.textContent=' Lancer les dés'; rb.style.marginTop='12px';
+ rb.onclick=function(){ rb.remove(); rollFor(ep, w); };
+ w.appendChild(rb);
+ } else {
+ fb.className='feedback bad'; fb.textContent='✗ Résultat erroné. La station encaisse le contretemps.';
+ if(hurt(-6,'calcul erroné')) return;
+ }
   }
   sub.onclick=check; inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
   row.appendChild(inp); row.appendChild(sub); w.appendChild(row);
   var tools=document.createElement('div'); tools.style.cssText='margin-top:10px;display:flex;gap:9px;flex-wrap:wrap';
-  var cb=document.createElement('button'); cb.className='btn ghost'; cb.textContent='📖 Cours'; cb.onclick=function(){ openLesson(ep.dom); };
+  var cb=document.createElement('button'); cb.className='btn ghost'; cb.textContent=' Cours'; cb.onclick=function(){ openLesson(ep.dom); };
   var hb=document.createElement('button'); hb.className='btn ghost'; hb.textContent='Indice';
   hb.onclick=function(){ if(w.querySelector('.hint'))return; var h=document.createElement('div'); h.className='hint'; h.textContent='Indice — '+COURS[ep.dom].t+' : consulte le Cours.'; w.insertBefore(h,fb); };
   tools.appendChild(cb); tools.appendChild(hb); w.appendChild(tools);
@@ -370,26 +317,26 @@ function rollFor(ep, w){
   wrap.innerHTML='<div class="dice"><svg class="die" id="d1" viewBox="0 0 100 100"></svg><svg class="die" id="d2" viewBox="0 0 100 100"></svg></div><div class="rollmsg" id="rollmsg">Manœuvre en cours…</div>';
   w.appendChild(wrap);
   var d1=1,d2=1, ticks=0, iv=setInterval(function(){
-    d1=1+Math.floor(Math.random()*6); d2=1+Math.floor(Math.random()*6);
-    el('d1').innerHTML=pips(d1); el('d2').innerHTML=pips(d2); ticks++;
-    if(ticks>16){ clearInterval(iv); resolve(); }
+ d1=1+Math.floor(Math.random()*6); d2=1+Math.floor(Math.random()*6);
+ el('d1').innerHTML=pips(d1); el('d2').innerHTML=pips(d2); ticks++;
+ if(ticks>16){ clearInterval(iv); resolve(); }
   },55);
   function resolve(){
-    var base=d1+d2, bonus=G.comp[ep.dom], mast=3, total=base+bonus+mast;
-    el('rollmsg').innerHTML='2d6 = <b>'+base+'</b>  +  '+DOMLAB[ep.dom]+' <b>'+bonus+'</b>  +  maîtrise <b>3</b>  =  <b>'+total+'</b>   (seuil '+ep.diff+')';
-    var tier, cls, msg, dmg=0;
-    if(base===12 || total>=ep.diff+4){ tier="RÉUSSITE CRITIQUE"; cls="crit"; msg="Manœuvre parfaite. Le système repart, et la station gagne en marge."; dmg=+6; }
-    else if(total>=ep.diff){ tier="RÉUSSITE"; cls="ok"; msg="Système rétabli. Tu passes au suivant."; dmg=0; }
-    else if(total>=ep.diff-3){ tier="RÉUSSITE PARTIELLE"; cls="part"; msg="Ça tient… à peine. La réparation coûte à la station."; dmg=-8; }
-    else { tier="ÉCHEC"; cls="fail"; msg=(base===2?"Échec critique. ":"")+"La manœuvre rate. Tu improvises un contournement, au prix fort."; dmg=-18; }
-    var vd=document.createElement('div'); vd.className='verdict '+cls; vd.textContent=tier; wrap.appendChild(vd);
-    var mp=document.createElement('div'); mp.className='rollmsg'; mp.textContent=msg; wrap.appendChild(mp);
-    G.log.push({sys:ep.sys, dom:ep.dom, total:total, diff:ep.diff, tier:tier}); refreshJournal();
-    if(cls==='fail'||cls==='part'){ var vp=el('viewport'); vp.classList.remove('shake'); void vp.offsetWidth; vp.classList.add('shake'); clank(); } else { chime(); }
-    if(dmg!==0){ if(hurt(dmg, tier.toLowerCase())) return; }
-    var nb=document.createElement('button'); nb.className='btn'; nb.style.marginTop='14px'; nb.textContent='Continuer'; nb.onclick=function(){ go(ep.ok); };
-    wrap.appendChild(nb);
-    el('stage').scrollTop=el('stage').scrollHeight;
+ var base=d1+d2, bonus=G.comp[ep.dom], mast=3, total=base+bonus+mast;
+ el('rollmsg').innerHTML='2d6 = <b>'+base+'</b> +  '+DOMLAB[ep.dom]+' <b>'+bonus+'</b> +  maîtrise <b>3</b> =  <b>'+total+'</b> (seuil '+ep.diff+')';
+ var tier, cls, msg, dmg=0;
+ if(base===12 || total>=ep.diff+4){ tier="RÉUSSITE CRITIQUE"; cls="crit"; msg="Manœuvre parfaite. Le système repart, et la station gagne en marge."; dmg=+6; }
+ else if(total>=ep.diff){ tier="RÉUSSITE"; cls="ok"; msg="Système rétabli. Tu passes au suivant."; dmg=0; }
+ else if(total>=ep.diff-3){ tier="RÉUSSITE PARTIELLE"; cls="part"; msg="Ça tient… à peine. La réparation coûte à la station."; dmg=-8; }
+ else { tier="ÉCHEC"; cls="fail"; msg=(base===2?"Échec critique. ":"")+"La manœuvre rate. Tu improvises un contournement, au prix fort."; dmg=-18; }
+ var vd=document.createElement('div'); vd.className='verdict '+cls; vd.textContent=tier; wrap.appendChild(vd);
+ var mp=document.createElement('div'); mp.className='rollmsg'; mp.textContent=msg; wrap.appendChild(mp);
+ G.log.push({sys:ep.sys, dom:ep.dom, total:total, diff:ep.diff, tier:tier}); refreshJournal();
+ if(cls==='fail'||cls==='part'){ var vp=el('viewport'); vp.classList.remove('shake'); void vp.offsetWidth; vp.classList.add('shake'); clank(); } else { chime(); }
+ if(dmg!==0){ if(hurt(dmg, tier.toLowerCase())) return; }
+ var nb=document.createElement('button'); nb.className='btn'; nb.style.marginTop='14px'; nb.textContent='Continuer'; nb.onclick=function(){ go(ep.ok); };
+ wrap.appendChild(nb);
+ el('stage').scrollTop=el('stage').scrollHeight;
   }
 }
 
@@ -399,7 +346,7 @@ function closeOv(id){ el(id).classList.remove('on'); }
 function refreshJournal(){
   var order=['energie','statique','info','mesure','meca','elec','energt'], seen={}, rows='';
   ['energie','statique','info','mesure','meca','elec'].forEach(function(k){
-    rows+='<div class="comprow"><span>'+DOMLAB[k]+'</span><span class="v">+'+G.comp[k]+'</span></div>';
+ rows+='<div class="comprow"><span>'+DOMLAB[k]+'</span><span class="v">+'+G.comp[k]+'</span></div>';
   });
   el('compList').innerHTML=rows;
   el('logList').innerHTML = G.log.length ? G.log.map(function(l){return '<div class="logline"><b>'+l.sys+'</b> — '+l.tier+' ('+l.total+'/'+l.diff+')</div>';}).join('') : '<div class="logline">Aucune manœuvre encore tentée.</div>';
@@ -410,11 +357,11 @@ var AC=null;
 function ctx(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } } return AC; }
 var droneNodes=null;
 function toggleSound(){
-  var c=ctx(); if(!c) return; G.sound=!G.sound; el('sndBtn').textContent=G.sound?'SON ●':'SON ✕';
+  var c=ctx(); if(!c) return; G.sound=!G.sound; el('sndBtn').textContent=G.sound?'SON ●':'SON ';
   if(G.sound){ if(c.state==='suspended')c.resume();
-    var o=c.createOscillator(),g=c.createGain(),o2=c.createOscillator(),g2=c.createGain();
-    o.type='sine'; o.frequency.value=55; g.gain.value=0.04; o2.type='sine'; o2.frequency.value=82.5; g2.gain.value=0.02;
-    o.connect(g).connect(c.destination); o2.connect(g2).connect(c.destination); o.start(); o2.start(); droneNodes=[o,o2];
+ var o=c.createOscillator(),g=c.createGain(),o2=c.createOscillator(),g2=c.createGain();
+ o.type='sine'; o.frequency.value=55; g.gain.value=0.04; o2.type='sine'; o2.frequency.value=82.5; g2.gain.value=0.02;
+ o.connect(g).connect(c.destination); o2.connect(g2).connect(c.destination); o.start(); o2.start(); droneNodes=[o,o2];
   } else if(droneNodes){ try{droneNodes[0].stop();droneNodes[1].stop();}catch(e){} droneNodes=null; }
 }
 function clank(){ if(!(G.sound&&AC))return; try{ var o=AC.createOscillator(),g=AC.createGain(); o.type='square'; o.frequency.value=110; g.gain.value=0.08; o.connect(g).connect(AC.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+0.35); o.stop(AC.currentTime+0.37);}catch(e){} }
@@ -429,8 +376,8 @@ function chime(){ if(!(G.sound&&AC))return; try{ var o=AC.createOscillator(),g=A
   rz(); window.addEventListener('resize',rz);
   for(var i=0;i<90;i++) St.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()*1.4+.2,tw:Math.random()*6.28,v:Math.random()*.15});
   function loop(){ g.clearRect(0,0,W,H);
-    for(var i=0;i<St.length;i++){var p=St[i]; if(!reduce){p.tw+=0.03; p.y+=p.v; if(p.y>H)p.y=0;} var a=0.4+0.4*Math.sin(p.tw); g.fillStyle='rgba(150,200,220,'+a+')'; g.beginPath(); g.arc(p.x,p.y,p.s,0,7); g.fill();}
-    raf(loop);
+ for(var i=0;i<St.length;i++){var p=St[i]; if(!reduce){p.tw+=0.03; p.y+=p.v; if(p.y>H)p.y=0;} var a=0.4+0.4*Math.sin(p.tw); g.fillStyle='rgba(150,200,220,'+a+')'; g.beginPath(); g.arc(p.x,p.y,p.s,0,7); g.fill();}
+ raf(loop);
   } loop();
 }catch(e){} })();
 

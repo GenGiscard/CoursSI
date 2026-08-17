@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -23,13 +22,13 @@
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--amber);border-color:var(--amber)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .tpscore{background:var(--ink);color:var(--cream);border-radius:11px;padding:12px 14px;margin-bottom:14px}
@@ -39,7 +38,7 @@
   .tpscore .sc-track{height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:8px}
   .tpscore .sc-track i{display:block;height:100%;width:0;background:#E9A36F;transition:width .4s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
@@ -71,7 +70,7 @@
   .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
   .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+ align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
   .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
   .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
   .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
@@ -82,7 +81,7 @@
   .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
   .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
   .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
-    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+ padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
   .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
   .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
@@ -149,12 +148,12 @@
 
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
-    .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:96px 1fr 76px}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
+ .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:96px 1fr 76px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
 
@@ -199,257 +198,54 @@
   .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
   .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
   .btn[disabled]{opacity:.42;cursor:not-allowed}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_cinematique.html">← Séquence : cinématique</a>
-    <div class="brand">
-      <div class="mark">TP</div>
-      <div><h1>Cinématique</h1><p>6 défis · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="tpscore">
-      <div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div>
-      <div class="sc-rank" id="scRank">🔧 Apprenti</div>
-      <div class="sc-track"><i id="scTrack"></i></div>
-    </div>
-    <div class="links" id="links">
-      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
-      <a href="#proto" class="navlink"><span>02</span>Repère</a>
-      <a href="#exos" class="navlink"><span>🎯</span>Exercices d'application</a>
-      <a href="#defi1" class="navlink"><span>D1</span>Chaîne de transmission</a>
-      <a href="#defi2" class="navlink"><span>D2</span>Vitesse express</a>
-      <a href="#defi3" class="navlink"><span>D3</span>Translation / Rotation</a>
-      <a href="#defi4" class="navlink"><span>D4</span>Règle le réducteur</a>
-      <a href="#defi5" class="navlink"><span>D5</span>La course</a>
-      <a href="#defi6" class="navlink"><span>D6</span>Liaison ↔ mouvement</a>
-      <a href="#synth" class="navlink"><span>07</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="obj">
-      <span class="kicker">TP · Cinématique</span>
-      <h2>6 défis pour décrire<br>et transmettre le mouvement</h2>
-      <p class="lede">On joue&nbsp;: tu montes une chaîne de transmission, tu calcules des vitesses à toute allure, tu règles un réducteur pour viser une vitesse cible, et tu pilotes une course entre mouvement uniforme et accéléré. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
-      <div class="two">
-        <div class="panel"><h4>Les 6 défis</h4><ul>
-          <li><b>D1 · Chaîne de transmission</b> — remets les blocs dans l'ordre.</li>
-          <li><b>D2 · Vitesse express</b> — V = R·ω et tr/min → rad/s contre la montre.</li>
-          <li><b>D3 · Translation / Rotation</b> — classe les mouvements en un éclair.</li>
-          <li><b>D4 · Règle le réducteur</b> — choisis Z₁ et Z₂ pour la bonne vitesse.</li>
-          <li><b>D5 · La course</b> — règle l'accélération pour finir ex æquo.</li>
-          <li><b>D6 · Liaison ↔ mouvement</b> — relie chaque liaison à ses mobilités.</li>
-        </ul></div>
-        <div class="panel"><h4>Notions travaillées</h4>
-          <div class="chips"><span class="chip k">trajectoire</span><span class="chip k">V = R·ω</span><span class="chip k">tr/min → rad/s</span><span class="chip k">v = v₀ + a·t</span><span class="chip k">réducteur</span><span class="chip k">liaisons</span></div>
-          <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="proto">
-      <span class="kicker">02 · Repère</span>
-      <h3>Vitesses &amp; transmission en bref</h3>
-      <p class="lede">Un point en rotation à la distance R de l'axe a une vitesse V = R·ω. Un réducteur relie l'entrée et la sortie par le rapport des dentures.</p>
-      <table class="data">
-        <thead><tr><th>Relation</th><th>Formule</th><th>Unités</th></tr></thead>
-        <tbody>
-          <tr><td>Vitesse d'un point en rotation</td><td><b>V = R·ω</b></td><td>m/s · m · rad/s</td></tr>
-          <tr><td>Conversion vitesse de rotation</td><td><b>ω = N·2π/60</b></td><td>rad/s ← tr/min</td></tr>
-          <tr><td>Mouvement uniformément varié</td><td><b>v = v₀ + a·t</b></td><td>m/s · m/s² · s</td></tr>
-          <tr><td>Réducteur (loi entrée/sortie)</td><td><b>ω_s / ω_e = Z₁ / Z₂</b></td><td>rapport des dentures</td></tr>
-        </tbody>
-      </table>
-      <div class="note">Repère clé&nbsp;: pour <b>réduire</b> la vitesse (ω_s &lt; ω_e), il faut une roue de sortie <b>plus grande</b> que l'entrée (Z₂ &gt; Z₁).</div>
-    </section>
-
-    <!-- DÉFI 1 -->
-    <section id="exos">
-      <span class="kicker">Exercices d'application</span>
-      <h2>S'entraîner : du concret au calcul</h2>
-      <p class="lede">Quatre exercices sur les mouvements : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
-      <div class="exo-wrap">
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">1</span> Cas concret — l'accélération d'une voiture</div>
-          <p>Une voiture passe de <b>0 à 30 m/s</b> en <b>6 s</b>. On rappelle : accélération a = variation de vitesse ÷ durée (Δv / Δt), et v = a × t.</p>
-          <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
-            <line x1="14" y1="82" x2="286" y2="82" stroke="#5C544B" stroke-width="1.5"/>
-            <g fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.4">
-              <rect x="30" y="62" width="34" height="16" rx="4"/><rect x="150" y="62" width="34" height="16" rx="4"/><rect x="238" y="62" width="34" height="16" rx="4"/>
-            </g>
-            <g fill="#7a7064"><circle cx="38" cy="80" r="4"/><circle cx="56" cy="80" r="4"/><circle cx="158" cy="80" r="4"/><circle cx="176" cy="80" r="4"/><circle cx="246" cy="80" r="4"/><circle cx="264" cy="80" r="4"/></g>
-            <line x1="66" y1="54" x2="86" y2="54" stroke="#C0492E" stroke-width="3"/><polygon points="92,54 82,49 82,59" fill="#C0492E"/>
-            <line x1="186" y1="54" x2="222" y2="54" stroke="#C0492E" stroke-width="3"/><polygon points="228,54 218,49 218,59" fill="#C0492E"/>
-            <line x1="274" y1="54" x2="296" y2="54" stroke="#C0492E" stroke-width="3"/>
-            <text x="47" y="44" text-anchor="middle" fill="#5C544B">t = 0</text><text x="167" y="44" text-anchor="middle" fill="#5C544B">t = 3s</text><text x="255" y="44" text-anchor="middle" fill="#5C544B">t = 6s</text>
-            <text x="150" y="98" text-anchor="middle" fill="#c0392b" font-weight="700">la vitesse augmente : mouvement accéléré</text>
-          </svg>
-          <div class="exo-q">a) Accélération = <input class="numin" id="ex1a" inputmode="decimal"> m/s²</div>
-          <div class="exo-q">b) Vitesse après 4 s = <input class="numin" id="ex1b" inputmode="decimal"> m/s</div>
-          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
-          <div class="exo-fb" id="ex1fb"></div>
-          <div class="exo-sol" id="ex1sol" hidden>
-            <p><b>a)</b> a = Δv / Δt = 30 ÷ 6 = <b>5 m/s²</b>.</p>
-            <p><b>b)</b> v = a × t = 5 × 4 = <b>20 m/s</b>.</p>
-          </div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">2</span> Simulateur — la chronophotographie</div>
-          <p>On photographie un mobile à intervalles de temps <b>égaux</b>. Si le mouvement est accéléré, les <b>écarts entre les positions augmentent</b>. Règle l'accélération et observe.</p>
-          <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas>
-          <div class="sliders">
-            <label><span class="nm2">Accélération (m/s²)</span><input type="range" id="ex2acc" min="0" max="4" step="0.5" value="1.5"><b><span id="ex2accv">1.5</span></b></label>
-          </div>
-          <div class="exo-out" id="ex2out">—</div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">3</span> Calcul — le mouvement de rotation</div>
-          <p>Une roue tourne à <b>300 tours par minute</b> (tr/min). On rappelle : 1 minute = 60 secondes.</p>
-          <div class="exo-q">a) Fréquence = <input class="numin" id="ex3a" inputmode="decimal"> tours/s</div>
-          <div class="exo-q">b) Nombre de tours en 2 minutes = <input class="numin" id="ex3b" inputmode="decimal"></div>
-          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
-          <div class="exo-fb" id="ex3fb"></div>
-          <div class="exo-sol" id="ex3sol" hidden>
-            <p><b>a)</b> 300 ÷ 60 = <b>5 tours/s</b>.</p>
-            <p><b>b)</b> 300 × 2 = <b>600 tours</b>.</p>
-          </div>
-        </div>
-
-        <div class="exo-card adv">
-          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — distance et graphe v-t <span class="lvl-badge">prépa / L1</span></div>
-          <p>Un train part du repos avec une accélération constante de <b>0,5 m/s²</b> pendant <b>20 s</b>. On rappelle : v = a·t, et la distance est <b>l'aire sous le graphe v-t</b> (d = ½·a·t²).</p>
-          <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
-            <line x1="34" y1="14" x2="34" y2="100" stroke="#5C544B" stroke-width="1.4"/>
-            <line x1="34" y1="100" x2="280" y2="100" stroke="#5C544B" stroke-width="1.4"/>
-            <polygon points="34,100 250,40 250,100" fill="#8A5A7A" fill-opacity="0.18"/>
-            <line x1="34" y1="100" x2="250" y2="40" stroke="#8A5A7A" stroke-width="2.5"/>
-            <text x="150" y="80" text-anchor="middle" fill="#6a4560" font-weight="700">aire = distance</text>
-            <text x="20" y="26" fill="#5C544B">v</text><text x="272" y="114" fill="#5C544B">t</text>
-            <text x="250" y="114" text-anchor="middle" fill="#5C544B">20 s</text>
-            <text x="46" y="42" fill="#6a4560" font-weight="700">10 m/s</text>
-          </svg>
-          <div class="exo-q">a) Vitesse après 20 s = <input class="numin" id="ex4a" inputmode="decimal"> m/s</div>
-          <div class="exo-q">b) Distance parcourue = <input class="numin" id="ex4b" inputmode="decimal"> m</div>
-          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
-          <div class="exo-fb" id="ex4fb"></div>
-          <div class="exo-sol" id="ex4sol" hidden>
-            <p><b>a)</b> v = a × t = 0,5 × 20 = <b>10 m/s</b>.</p>
-            <p><b>b)</b> d = ½ × a × t² = ½ × 0,5 × 20² = ½ × 0,5 × 400 = <b>100 m</b> (c'est l'aire du triangle : ½ × base × hauteur = ½ × 20 × 10).</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="defi1">
-      <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div>
-      <h3>Assemble la chaîne de transmission</h3>
-      <p class="lede">Clique les blocs pour les ranger&nbsp;: du moteur (rotation) jusqu'au chariot (translation), en passant par la conversion du mouvement.</p>
-      <div class="builder">
-        <div class="bslots" id="bslots"></div>
-        <div class="bhint">Le système vis-écrou transforme la rotation en translation.</div>
-        <div class="bpool" id="bpool"></div>
-        <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 2 -->
-    <section id="defi2">
-      <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
-      <h3>Vitesse express</h3>
-      <p class="lede">40 secondes&nbsp;: calcule la vitesse d'un point V = R·ω, ou convertis une vitesse de rotation tr/min rad/s. Choisis la bonne valeur.</p>
-      <div class="game" id="g2">
-        <div class="ghead"><div class="gtitle">⚡ Vitesse express</div>
-          <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
-        <div class="gbar"><i id="g2Bar"></i></div>
-        <div id="g2Area"><div class="gstart"><p>V = R·ω et ω ≈ N·π/30. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
-        <div class="gflash" id="g2Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 3 -->
-    <section id="defi3">
-      <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
-      <h3>Translation ou Rotation ?</h3>
-      <p class="lede">30 secondes pour classer chaque mouvement&nbsp;: <b>translation</b> (tous les points vont dans le même sens) ou <b>rotation</b> (autour d'un axe)&nbsp;?</p>
-      <div class="game" id="g3">
-        <div class="ghead"><div class="gtitle">⚡ Nature du mouvement</div>
-          <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
-        <div class="gbar"><i id="g3Bar"></i></div>
-        <div id="g3Area"><div class="gstart"><p>Identifie la nature du mouvement le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
-        <div class="gflash" id="g3Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 4 -->
-    <section id="defi4">
-      <div class="badge-defi">DÉFI 4 · réglage · jusqu'à 140 pts</div>
-      <h3>Règle le réducteur</h3>
-      <p class="lede">Le moteur tourne à <b>300 tr/min</b>. Choisis les dentures Z₁ (entrée) et Z₂ (sortie) pour que la sortie tourne à la <b>vitesse cible</b>. Rappel&nbsp;: ω_s = ω_e · Z₁/Z₂.</p>
-      <div class="resbox">
-        <div class="orow"><span class="oname">Pignon entrée Z₁</span><input type="range" min="10" max="40" value="20" id="z1"><span class="oeta" id="z1v">20 dents</span></div>
-        <div class="orow"><span class="oname">Pignon sortie Z₂</span><input type="range" min="10" max="60" value="40" id="z2"><span class="oeta" id="z2v">40 dents</span></div>
-        <div class="opt-readout">
-          <div class="ord"><div class="l">Rapport Z₁/Z₂</div><div class="v" id="redRatio">0,50</div></div>
-          <div class="ord"><div class="l">ω entrée</div><div class="v">300 tr/min</div></div>
-          <div class="ord"><div class="l">ω sortie</div><div class="v" id="redWs">150 tr/min</div></div>
-        </div>
-        <div class="opt-status miss" id="redStatus">🎯 Objectif : ω_s = 100 tr/min (±4). Règle Z₁ et Z₂.</div>
-      </div>
-    </section>
-
-    <!-- DÉFI 5 -->
-    <section id="defi5">
-      <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
-      <h3>La course — uniforme contre accéléré</h3>
-      <p class="lede">Deux mobiles, 100 m à parcourir. <b>A</b> roule à vitesse constante (8 m/s). <b>B</b> part de l'arrêt et accélère. Règle l'accélération <b>a</b> de B pour finir <b>ex æquo</b> avec A&nbsp;!</p>
-      <div class="park">
-        <canvas id="raceCv" width="900" height="180"></canvas>
-        <div class="orow"><span class="oname">Accélération a</span><input type="range" min="5" max="30" value="13" id="raceA"><span class="oeta" id="raceAv">1,3 m/s²</span></div>
-        <div class="vactions"><button class="btn primary" id="raceGo">▶ Lancer la course</button><button class="btn" id="raceReset">↻ Rejouer</button></div>
-        <div class="opt-status miss" id="raceStatus">Règle a, puis lance la course (A = uniforme à 8 m/s).</div>
-      </div>
-      <div class="note" style="margin-top:12px">B parcourt x = ½·a·t². Pour finir en même temps que A (qui met 12,5 s), il faut a ≈ <b>1,28 m/s²</b>. À toi de l'approcher&nbsp;!</div>
-    </section>
-
-    <!-- DÉFI 6 -->
-    <section id="defi6">
-      <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
-      <h3>Liaison Mouvement</h3>
-      <p class="lede">Relie chaque liaison mécanique aux mobilités qu'elle autorise. Clique une liaison, puis son mouvement.</p>
-      <div class="match" id="match">
-        <div class="mcol" id="mLeft"></div>
-        <div class="mcol" id="mRight"></div>
-      </div>
-      <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
-    </section>
-
-    <section id="synth" style="border-bottom:none">
-      <span class="kicker">07 · Bilan</span>
-      <h3>Ce qu'il faut retenir</h3>
-      <div class="panel"><ul>
-        <li>Deux mouvements de base&nbsp;: <b>translation</b> et <b>rotation</b>&nbsp;; certains les combinent.</li>
-        <li>En rotation, un point à la distance R a la vitesse <b>V = R·ω</b> (ω en rad/s).</li>
-        <li>Mouvement uniformément varié&nbsp;: <b>v = v₀ + a·t</b>&nbsp;; à l'arrêt, x = ½·a·t².</li>
-        <li>Un réducteur applique <b>ω_s/ω_e = Z₁/Z₂</b>&nbsp;; chaque liaison autorise des mobilités précises.</li>
-      </ul></div>
-      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  // ===== Nav =====
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_cinematique.html">← Séquence : cinématique</a> <div class="brand"><div class="mark">TP</div> <div><h1>Cinématique</h1><p>6 défis · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="tpscore"><div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div> <div class="sc-rank" id="scRank">Apprenti</div> <div class="sc-track"><i id="scTrack"></i></div></div> <div class="links" id="links"><a href="#obj" class="navlink"><span>01</span>Objectif</a> <a href="#proto" class="navlink"><span>02</span>Repère</a> <a href="#exos" class="navlink"><span></span>Exercices d'application</a> <a href="#defi1" class="navlink"><span>D1</span>Chaîne de transmission</a> <a href="#defi2" class="navlink"><span>D2</span>Vitesse express</a> <a href="#defi3" class="navlink"><span>D3</span>Translation / Rotation</a> <a href="#defi4" class="navlink"><span>D4</span>Règle le réducteur</a> <a href="#defi5" class="navlink"><span>D5</span>La course</a> <a href="#defi6" class="navlink"><span>D6</span>Liaison ↔ mouvement</a> <a href="#synth" class="navlink"><span>07</span>Synthèse</a></div> </aside> <main class="main"> <section id="obj"> <span class="kicker">TP · Cinématique</span> <h2>6 défis pour décrire<br>et transmettre le mouvement</h2> <p class="lede">On joue&nbsp;: tu montes une chaîne de transmission, tu calcules des vitesses à toute allure, tu règles un réducteur pour viser une vitesse cible, et tu pilotes une course entre mouvement uniforme et accéléré. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p> <div class="two"><div class="panel"><h4>Les 6 défis</h4><ul> <li><b>D1 · Chaîne de transmission</b> — remets les blocs dans l'ordre.</li> <li><b>D2 · Vitesse express</b> — V = R·ω et tr/min → rad/s contre la montre.</li> <li><b>D3 · Translation / Rotation</b> — classe les mouvements en un éclair.</li> <li><b>D4 · Règle le réducteur</b> — choisis Z₁ et Z₂ pour la bonne vitesse.</li> <li><b>D5 · La course</b> — règle l'accélération pour finir ex æquo.</li> <li><b>D6 · Liaison ↔ mouvement</b> — relie chaque liaison à ses mobilités.</li> </ul></div> <div class="panel"><h4>Notions travaillées</h4> <div class="chips"><span class="chip k">trajectoire</span><span class="chip k">V = R·ω</span><span class="chip k">tr/min → rad/s</span><span class="chip k">v = v₀ + a·t</span><span class="chip k">réducteur</span><span class="chip k">liaisons</span></div> <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div></div></div> </section> <section id="proto"> <span class="kicker">02 · Repère</span> <h3>Vitesses &amp; transmission en bref</h3> <p class="lede">Un point en rotation à la distance R de l'axe a une vitesse V = R·ω. Un réducteur relie l'entrée et la sortie par le rapport des dentures.</p> <table class="data"> <thead><tr><th>Relation</th><th>Formule</th><th>Unités</th></tr></thead> <tbody> <tr><td>Vitesse d'un point en rotation</td><td><b>V = R·ω</b></td><td>m/s · m · rad/s</td></tr> <tr><td>Conversion vitesse de rotation</td><td><b>ω = N·2π/60</b></td><td>rad/s ← tr/min</td></tr> <tr><td>Mouvement uniformément varié</td><td><b>v = v₀ + a·t</b></td><td>m/s · m/s² · s</td></tr> <tr><td>Réducteur (loi entrée/sortie)</td><td><b>ω_s / ω_e = Z₁ / Z₂</b></td><td>rapport des dentures</td></tr> </tbody> </table> <div class="note">Repère clé&nbsp;: pour <b>réduire</b> la vitesse (ω_s &lt; ω_e), il faut une roue de sortie <b>plus grande</b> que l'entrée (Z₂ &gt; Z₁).</div> </section> <!-- DÉFI 1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices sur les mouvements : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — l'accélération d'une voiture</div> <p>Une voiture passe de <b>0 à 30 m/s</b> en <b>6 s</b>. On rappelle : accélération a = variation de vitesse ÷ durée (Δv / Δt), et v = a × t.</p> <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <line x1="14" y1="82" x2="286" y2="82" stroke="#5C544B" stroke-width="1.5"/> <g fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.4"> <rect x="30" y="62" width="34" height="16" rx="4"/><rect x="150" y="62" width="34" height="16" rx="4"/><rect x="238" y="62" width="34" height="16" rx="4"/> </g> <g fill="#7a7064"><circle cx="38" cy="80" r="4"/><circle cx="56" cy="80" r="4"/><circle cx="158" cy="80" r="4"/><circle cx="176" cy="80" r="4"/><circle cx="246" cy="80" r="4"/><circle cx="264" cy="80" r="4"/></g> <line x1="66" y1="54" x2="86" y2="54" stroke="#C0492E" stroke-width="3"/><polygon points="92,54 82,49 82,59" fill="#C0492E"/><line x1="186" y1="54" x2="222" y2="54" stroke="#C0492E" stroke-width="3"/><polygon points="228,54 218,49 218,59" fill="#C0492E"/><line x1="274" y1="54" x2="296" y2="54" stroke="#C0492E" stroke-width="3"/> <text x="47" y="44" text-anchor="middle" fill="#5C544B">t = 0</text><text x="167" y="44" text-anchor="middle" fill="#5C544B">t = 3s</text><text x="255" y="44" text-anchor="middle" fill="#5C544B">t = 6s</text> <text x="150" y="98" text-anchor="middle" fill="#c0392b" font-weight="700">la vitesse augmente : mouvement accéléré</text> </svg> <div class="exo-q">a) Accélération = <input class="numin" id="ex1a" inputmode="decimal"> m/s²</div> <div class="exo-q">b) Vitesse après 4 s = <input class="numin" id="ex1b" inputmode="decimal"> m/s</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> a = Δv / Δt = 30 ÷ 6 = <b>5 m/s²</b>.</p> <p><b>b)</b> v = a × t = 5 × 4 = <b>20 m/s</b>.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — la chronophotographie</div> <p>On photographie un mobile à intervalles de temps <b>égaux</b>. Si le mouvement est accéléré, les <b>écarts entre les positions augmentent</b>. Règle l'accélération et observe.</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Accélération (m/s²)</span><input type="range" id="ex2acc" min="0" max="4" step="0.5" value="1.5"><b><span id="ex2accv">1.5</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — le mouvement de rotation</div> <p>Une roue tourne à <b>300 tours par minute</b> (tr/min). On rappelle : 1 minute = 60 secondes.</p> <div class="exo-q">a) Fréquence = <input class="numin" id="ex3a" inputmode="decimal"> tours/s</div> <div class="exo-q">b) Nombre de tours en 2 minutes = <input class="numin" id="ex3b" inputmode="decimal"></div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 300 ÷ 60 = <b>5 tours/s</b>.</p> <p><b>b)</b> 300 × 2 = <b>600 tours</b>.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — distance et graphe v-t <span class="lvl-badge">prépa / L1</span></div> <p>Un train part du repos avec une accélération constante de <b>0,5 m/s²</b> pendant <b>20 s</b>. On rappelle : v = a·t, et la distance est <b>l'aire sous le graphe v-t</b> (d = ½·a·t²).</p> <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <line x1="34" y1="14" x2="34" y2="100" stroke="#5C544B" stroke-width="1.4"/> <line x1="34" y1="100" x2="280" y2="100" stroke="#5C544B" stroke-width="1.4"/> <polygon points="34,100 250,40 250,100" fill="#8A5A7A" fill-opacity="0.18"/><line x1="34" y1="100" x2="250" y2="40" stroke="#8A5A7A" stroke-width="2.5"/> <text x="150" y="80" text-anchor="middle" fill="#6a4560" font-weight="700">aire = distance</text> <text x="20" y="26" fill="#5C544B">v</text><text x="272" y="114" fill="#5C544B">t</text> <text x="250" y="114" text-anchor="middle" fill="#5C544B">20 s</text> <text x="46" y="42" fill="#6a4560" font-weight="700">10 m/s</text> </svg> <div class="exo-q">a) Vitesse après 20 s = <input class="numin" id="ex4a" inputmode="decimal"> m/s</div> <div class="exo-q">b) Distance parcourue = <input class="numin" id="ex4b" inputmode="decimal"> m</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> v = a × t = 0,5 × 20 = <b>10 m/s</b>.</p> <p><b>b)</b> d = ½ × a × t² = ½ × 0,5 × 20² = ½ × 0,5 × 400 = <b>100 m</b> (c'est l'aire du triangle : ½ × base × hauteur = ½ × 20 × 10).</p></div></div></div> </section> <section id="defi1"> <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div> <h3>Assemble la chaîne de transmission</h3> <p class="lede">Clique les blocs pour les ranger&nbsp;: du moteur (rotation) jusqu'au chariot (translation), en passant par la conversion du mouvement.</p> <div class="builder"><div class="bslots" id="bslots"></div> <div class="bhint">Le système vis-écrou transforme la rotation en translation.</div> <div class="bpool" id="bpool"></div> <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div></div> </section> <!-- DÉFI 2 --> <section id="defi2"> <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div> <h3>Vitesse express</h3> <p class="lede">40 secondes&nbsp;: calcule la vitesse d'un point V = R·ω, ou convertis une vitesse de rotation tr/min rad/s. Choisis la bonne valeur.</p> <div class="game" id="g2"><div class="ghead"><div class="gtitle">Vitesse express</div> <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div> <div class="gbar"><i id="g2Bar"></i></div> <div id="g2Area"><div class="gstart"><p>V = R·ω et ω ≈ N·π/30. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div> <div class="gflash" id="g2Flash"></div></div> </section> <!-- DÉFI 3 --> <section id="defi3"> <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div> <h3>Translation ou Rotation ?</h3> <p class="lede">30 secondes pour classer chaque mouvement&nbsp;: <b>translation</b> (tous les points vont dans le même sens) ou <b>rotation</b> (autour d'un axe)&nbsp;?</p> <div class="game" id="g3"><div class="ghead"><div class="gtitle">Nature du mouvement</div> <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div> <div class="gbar"><i id="g3Bar"></i></div> <div id="g3Area"><div class="gstart"><p>Identifie la nature du mouvement le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div> <div class="gflash" id="g3Flash"></div></div> </section> <!-- DÉFI 4 --> <section id="defi4"> <div class="badge-defi">DÉFI 4 · réglage · jusqu'à 140 pts</div> <h3>Règle le réducteur</h3> <p class="lede">Le moteur tourne à <b>300 tr/min</b>. Choisis les dentures Z₁ (entrée) et Z₂ (sortie) pour que la sortie tourne à la <b>vitesse cible</b>. Rappel&nbsp;: ω_s = ω_e · Z₁/Z₂.</p> <div class="resbox"><div class="orow"><span class="oname">Pignon entrée Z₁</span><input type="range" min="10" max="40" value="20" id="z1"><span class="oeta" id="z1v">20 dents</span></div> <div class="orow"><span class="oname">Pignon sortie Z₂</span><input type="range" min="10" max="60" value="40" id="z2"><span class="oeta" id="z2v">40 dents</span></div> <div class="opt-readout"><div class="ord"><div class="l">Rapport Z₁/Z₂</div><div class="v" id="redRatio">0,50</div></div> <div class="ord"><div class="l">ω entrée</div><div class="v">300 tr/min</div></div> <div class="ord"><div class="l">ω sortie</div><div class="v" id="redWs">150 tr/min</div></div></div> <div class="opt-status miss" id="redStatus">Objectif : ω_s = 100 tr/min (±4). Règle Z₁ et Z₂.</div></div> </section> <!-- DÉFI 5 --> <section id="defi5"> <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div> <h3>La course — uniforme contre accéléré</h3> <p class="lede">Deux mobiles, 100 m à parcourir. <b>A</b> roule à vitesse constante (8 m/s). <b>B</b> part de l'arrêt et accélère. Règle l'accélération <b>a</b> de B pour finir <b>ex æquo</b> avec A&nbsp;!</p> <div class="park"><canvas id="raceCv" width="900" height="180"></canvas> <div class="orow"><span class="oname">Accélération a</span><input type="range" min="5" max="30" value="13" id="raceA"><span class="oeta" id="raceAv">1,3 m/s²</span></div> <div class="vactions"><button class="btn primary" id="raceGo">▶ Lancer la course</button><button class="btn" id="raceReset">↻ Rejouer</button></div> <div class="opt-status miss" id="raceStatus">Règle a, puis lance la course (A = uniforme à 8 m/s).</div></div> <div class="note" style="margin-top:12px">B parcourt x = ½·a·t². Pour finir en même temps que A (qui met 12,5 s), il faut a ≈ <b>1,28 m/s²</b>. À toi de l'approcher&nbsp;!</div> </section> <!-- DÉFI 6 --> <section id="defi6"> <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div> <h3>Liaison Mouvement</h3> <p class="lede">Relie chaque liaison mécanique aux mobilités qu'elle autorise. Clique une liaison, puis son mouvement.</p> <div class="match" id="match"><div class="mcol" id="mLeft"></div> <div class="mcol" id="mRight"></div></div> <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div> </section> <section id="synth" style="border-bottom:none"> <span class="kicker">07 · Bilan</span> <h3>Ce qu'il faut retenir</h3> <div class="panel"><ul> <li>Deux mouvements de base&nbsp;: <b>translation</b> et <b>rotation</b>&nbsp;; certains les combinent.</li> <li>En rotation, un point à la distance R a la vitesse <b>V = R·ω</b> (ω en rad/s).</li> <li>Mouvement uniformément varié&nbsp;: <b>v = v₀ + a·t</b>&nbsp;; à l'arrêt, x = ½·a·t².</li> <li>Un réducteur applique <b>ω_s/ω_e = Z₁/Z₂</b>&nbsp;; chaque liaison autorise des mobilités précises.</li> </ul></div> <div class="cta">Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div> </section> </main></div> <script> // ===== Nav =====
   var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
@@ -459,266 +255,266 @@
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
 
   // ===== Score global =====
   var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0};
-  var RANKS=[[0,'🔧 Apprenti'],[200,'⚙️ Technicien·ne'],[450,'📐 Ingénieur·e'],[700,'🏆 Expert·e']];
+  var RANKS=[[0,' Apprenti'],[200,' Technicien·ne'],[450,' Ingénieur·e'],[700,' Expert·e']];
   function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
   function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
   function renderScore(){
-    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
-    document.getElementById('scVal').textContent=tot;
-    document.getElementById('scRank').textContent=rankFor(tot);
-    document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
+ var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
+ document.getElementById('scVal').textContent=tot;
+ document.getElementById('scRank').textContent=rankFor(tot);
+ document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
   }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
 
   // ===== DÉFI 1 : Chaîne de transmission =====
   (function(){
-    var CHAIN=[{lb:'Moteur',ic:'\u2699\uFE0F'},{lb:'Réducteur',ic:'\uD83D\uDD27'},{lb:'Vis-écrou',ic:'\uD83D\uDD29'},{lb:'Chariot',ic:'\uD83D\uDCE6'}];
-    var N=CHAIN.length;
-    var slots=[]; for(var z=0;z<N;z++)slots.push(null);
-    var pool=shuffle(CHAIN.map(function(_,i){return i;}));
-    var attempts=0, solved=false;
-    var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
-    function render(){
-      slotsEl.innerHTML=slots.map(function(idx,i){
-        if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25">\u2795</span></div>';
-        return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
-      }).join('');
-      poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
-    }
-    slotsEl.addEventListener('click',function(ev){
-      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
-      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
-      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
-    });
-    poolEl.addEventListener('click',function(ev){
-      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
-      var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
-      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
-    });
-    document.getElementById('bverify').addEventListener('click',function(){
-      if(solved)return;
-      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
-      attempts++;
-      var ok=slots.every(function(idx,i){return idx===i;});
-      var cells=slotsEl.querySelectorAll('.bslot');
-      if(ok){
-        solved=true;
-        var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
-        var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
-        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
-        setContrib('d1',pts);
-      }else{
-        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
-        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
-        msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
-      }
-    });
-    render();
+ var CHAIN=[{lb:'Moteur',ic:''},{lb:'Réducteur',ic:''},{lb:'Vis-écrou',ic:''},{lb:'Chariot',ic:''}];
+ var N=CHAIN.length;
+ var slots=[]; for(var z=0;z<N;z++)slots.push(null);
+ var pool=shuffle(CHAIN.map(function(_,i){return i;}));
+ var attempts=0, solved=false;
+ var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
+ function render(){
+ slotsEl.innerHTML=slots.map(function(idx,i){
+ if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25"></span></div>';
+ return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
+ }).join('');
+ poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
+ }
+ slotsEl.addEventListener('click',function(ev){
+ if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+ var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+ pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+ });
+ poolEl.addEventListener('click',function(ev){
+ if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+ var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
+ slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+ });
+ document.getElementById('bverify').addEventListener('click',function(){
+ if(solved)return;
+ if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
+ attempts++;
+ var ok=slots.every(function(idx,i){return idx===i;});
+ var cells=slotsEl.querySelectorAll('.bslot');
+ if(ok){
+ solved=true;
+ var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
+ var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+ setContrib('d1',pts);
+ }else{
+ var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+ setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+ msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
+ }
+ });
+ render();
   })();
 
   // ===== DÉFI 2 : Vitesse express (arcade) =====
   (function(){
-    var PAIRS=[{R:0.2,w:15,V:3},{R:0.25,w:8,V:2},{R:0.5,w:6,V:3},{R:0.3,w:10,V:3},{R:0.1,w:20,V:2},{R:0.4,w:5,V:2},{R:0.2,w:25,V:5},{R:0.15,w:20,V:3},{R:0.5,w:8,V:4},{R:0.25,w:16,V:4}];
-    var NS=[60,90,120,180,300,600];
-    function makeOptions(correct){
-      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
-      var cands=[correct+1,correct-1,Math.round(correct*2),Math.round(correct*1.5),Math.max(1,correct-2),correct+3];
-      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
-      while(arr.length<4){var v=correct+ri(1,8);if(!seen[v]){seen[v]=1;arr.push(v);}}
-      return shuffle(arr);
-    }
-    function makeRound(){
-      if(Math.random()<0.5){ var p=PAIRS[ri(0,PAIRS.length-1)]; return {q:'R = '+String(p.R).replace('.',',')+' m \u00b7 \u03c9 = '+p.w+' rad/s', ask:'V = R\u00b7\u03c9 ? (m/s)', correct:p.V, opts:makeOptions(p.V)}; }
-      else { var Nn=NS[ri(0,NS.length-1)]; var c=Math.round(Nn*Math.PI/30); return {q:'N = '+Nn+' tr/min', ask:'\u03c9 \u2248 ? (rad/s)', correct:c, opts:makeOptions(c)}; }
-    }
-    var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
-    var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
-    var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function next(){ cur=makeRound();
-      area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
-        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
-    }
-    function answer(v){
-      if(!playing)return;
-      if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'  (\u22123 s)'; flash.style.color='#E29A86'; }
-      hud(); next();
-    }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d2', Math.min(150,score));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent='';
-    }
-    document.getElementById('g2').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
-    });
+ var PAIRS=[{R:0.2,w:15,V:3},{R:0.25,w:8,V:2},{R:0.5,w:6,V:3},{R:0.3,w:10,V:3},{R:0.1,w:20,V:2},{R:0.4,w:5,V:2},{R:0.2,w:25,V:5},{R:0.15,w:20,V:3},{R:0.5,w:8,V:4},{R:0.25,w:16,V:4}];
+ var NS=[60,90,120,180,300,600];
+ function makeOptions(correct){
+ var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+ var cands=[correct+1,correct-1,Math.round(correct*2),Math.round(correct*1.5),Math.max(1,correct-2),correct+3];
+ for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+ while(arr.length<4){var v=correct+ri(1,8);if(!seen[v]){seen[v]=1;arr.push(v);}}
+ return shuffle(arr);
+ }
+ function makeRound(){
+ if(Math.random()<0.5){ var p=PAIRS[ri(0,PAIRS.length-1)]; return {q:'R = '+String(p.R).replace('.',',')+' m \u00b7 \u03c9 = '+p.w+' rad/s', ask:'V = R\u00b7\u03c9 ? (m/s)', correct:p.V, opts:makeOptions(p.V)}; }
+ else { var Nn=NS[ri(0,NS.length-1)]; var c=Math.round(Nn*Math.PI/30); return {q:'N = '+Nn+' tr/min', ask:'\u03c9 \u2248 ? (rad/s)', correct:c, opts:makeOptions(c)}; }
+ }
+ var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
+ var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
+ var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function next(){ cur=makeRound();
+ area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
+ '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
+ }
+ function answer(v){
+ if(!playing)return;
+ if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'(\u22123 s)'; flash.style.color='#E29A86'; }
+ hud(); next();
+ }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d2', Math.min(150,score));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent='';
+ }
+ document.getElementById('g2').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+ });
   })();
 
   // ===== DÉFI 3 : Translation / Rotation (reflex) =====
   (function(){
-    var MOV=[
-      {n:'Ascenseur qui monte',t:'tr'},{n:'Roue de v\u00e9lo',t:'ro'},{n:'Tapis roulant',t:'tr'},{n:'H\u00e9lice de drone',t:'ro'},
-      {n:'Tiroir qu\u2019on ouvre',t:'tr'},{n:'Man\u00e8ge',t:'ro'},{n:'Piston dans un cylindre',t:'tr'},{n:'Aiguille d\u2019horloge',t:'ro'},
-      {n:'Porte coulissante',t:'tr'},{n:'Toupie',t:'ro'},{n:'Chariot sur un rail droit',t:'tr'},{n:'Disque vinyle',t:'ro'}
-    ];
-    var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
-    var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
-    var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    var FR={tr:'TRANSLATION',ro:'ROTATION'};
-    function pick(){ cur=MOV[Math.floor(Math.random()*MOV.length)];
-      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
-        '<div class="gbtns"><button class="gbtn tr" data-t="tr">TRANSLATION<small>même direction</small></button>'+
-        '<button class="gbtn ro" data-t="ro">ROTATION<small>autour d\u2019un axe</small></button></div>'; }
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function answer(t){ if(!playing)return;
-      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait une '+FR[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
-      hud(); pick(); }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d3', Math.min(150,score*6));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent=''; }
-    document.getElementById('g3').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
+ var MOV=[
+ {n:'Ascenseur qui monte',t:'tr'},{n:'Roue de v\u00e9lo',t:'ro'},{n:'Tapis roulant',t:'tr'},{n:'H\u00e9lice de drone',t:'ro'},
+ {n:'Tiroir qu\u2019on ouvre',t:'tr'},{n:'Man\u00e8ge',t:'ro'},{n:'Piston dans un cylindre',t:'tr'},{n:'Aiguille d\u2019horloge',t:'ro'},
+ {n:'Porte coulissante',t:'tr'},{n:'Toupie',t:'ro'},{n:'Chariot sur un rail droit',t:'tr'},{n:'Disque vinyle',t:'ro'}
+ ];
+ var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
+ var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
+ var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ var FR={tr:'TRANSLATION',ro:'ROTATION'};
+ function pick(){ cur=MOV[Math.floor(Math.random()*MOV.length)];
+ area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
+ '<div class="gbtns"><button class="gbtn tr" data-t="tr">TRANSLATION<small>même direction</small></button>'+
+ '<button class="gbtn ro" data-t="ro">ROTATION<small>autour d\u2019un axe</small></button></div>'; }
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function answer(t){ if(!playing)return;
+ if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait une '+FR[cur.t]+'(\u22122 s)'; flash.style.color='#E29A86'; }
+ hud(); pick(); }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d3', Math.min(150,score*6));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent=''; }
+ document.getElementById('g3').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
   })();
 
   // ===== DÉFI 4 : Règle le réducteur =====
   (function(){
-    var WE=300, TARGET=100, BAND=4;
-    var z1El=document.getElementById('z1'), z2El=document.getElementById('z2');
-    var z1v=document.getElementById('z1v'), z2v=document.getElementById('z2v');
-    var ratioEl=document.getElementById('redRatio'), wsEl=document.getElementById('redWs'), st=document.getElementById('redStatus');
-    function upd(){
-      var z1=+z1El.value, z2=+z2El.value;
-      var ratio=z1/z2, ws=WE*ratio;
-      z1v.textContent=z1+' dents'; z2v.textContent=z2+' dents';
-      ratioEl.textContent=ratio.toFixed(2).replace('.',',');
-      wsEl.textContent=Math.round(ws)+' tr/min';
-      var diff=Math.abs(ws-TARGET);
-      if(diff<=BAND){
-        var pts=Math.min(140, 100 + (diff<1?40:diff<=2?20:8));
-        st.className='opt-status win'; st.textContent='\u2713 ω_s = '+Math.round(ws)+' tr/min \u2014 cible atteinte ! +'+pts+' pts'+(diff<1?' (pile poil \uD83C\uDFAF)':'');
-        setContrib('d4',pts);
-      } else {
-        st.className='opt-status miss';
-        st.textContent='ω_s = '+Math.round(ws)+' tr/min \u2014 vise 100 tr/min ('+(ws>TARGET?'augmente Z₂ ou baisse Z₁':'baisse Z₂ ou augmente Z₁')+').';
-      }
-    }
-    z1El.addEventListener('input',upd); z2El.addEventListener('input',upd); upd();
+ var WE=300, TARGET=100, BAND=4;
+ var z1El=document.getElementById('z1'), z2El=document.getElementById('z2');
+ var z1v=document.getElementById('z1v'), z2v=document.getElementById('z2v');
+ var ratioEl=document.getElementById('redRatio'), wsEl=document.getElementById('redWs'), st=document.getElementById('redStatus');
+ function upd(){
+ var z1=+z1El.value, z2=+z2El.value;
+ var ratio=z1/z2, ws=WE*ratio;
+ z1v.textContent=z1+' dents'; z2v.textContent=z2+' dents';
+ ratioEl.textContent=ratio.toFixed(2).replace('.',',');
+ wsEl.textContent=Math.round(ws)+' tr/min';
+ var diff=Math.abs(ws-TARGET);
+ if(diff<=BAND){
+ var pts=Math.min(140, 100 + (diff<1?40:diff<=2?20:8));
+ st.className='opt-status win'; st.textContent='\u2713 ω_s = '+Math.round(ws)+' tr/min \u2014 cible atteinte ! +'+pts+' pts'+(diff<1?' (pile poil )':'');
+ setContrib('d4',pts);
+ } else {
+ st.className='opt-status miss';
+ st.textContent='ω_s = '+Math.round(ws)+' tr/min \u2014 vise 100 tr/min ('+(ws>TARGET?'augmente Z₂ ou baisse Z₁':'baisse Z₂ ou augmente Z₁')+').';
+ }
+ }
+ z1El.addEventListener('input',upd); z2El.addEventListener('input',upd); upd();
   })();
 
   // ===== DÉFI 5 : La course (uniforme vs accéléré) =====
   (function(){
-    var cv=document.getElementById('raceCv'); if(!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
-    var D=100, VA=8;
-    var a=1.3, t=0, xA=0, xB=0, fA=null, fB=null, timer=null, running=false, done=false;
-    var aEl=document.getElementById('raceA'), aV=document.getElementById('raceAv'), st=document.getElementById('raceStatus');
-    var x0=60, x1=W-50;
-    function sx(x){ return x0+(x/D)*(x1-x0); }
-    function car(x,yc,col){ ctx.fillStyle=col; ctx.fillRect(sx(x)-30,yc-13,30,20); ctx.fillStyle='rgba(0,0,0,.55)'; ctx.beginPath(); ctx.arc(sx(x)-23,yc+7,5,0,7); ctx.arc(sx(x)-7,yc+7,5,0,7); ctx.fill(); }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      var yA=54, yB=H-46;
-      // finish line
-      ctx.strokeStyle='rgba(42,38,34,.4)';ctx.setLineDash([6,5]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx(D),24);ctx.lineTo(sx(D),H-18);ctx.stroke();ctx.setLineDash([]);
-      ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('100 m',sx(D),18);
-      // lanes
-      ctx.strokeStyle='rgba(42,38,34,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,yA+14);ctx.lineTo(x1,yA+14);ctx.moveTo(x0,yB+14);ctx.lineTo(x1,yB+14);ctx.stroke();
-      // labels
-      ctx.textAlign='left';ctx.fillStyle='#2E6A8E';ctx.font='700 12px "JetBrains Mono",monospace';ctx.fillText('A · uniforme 8 m/s',x0,yA-18);
-      ctx.fillStyle='#B85C2E';ctx.fillText('B · accéléré '+(+aEl.value/10).toFixed(1).replace('.',',')+' m/s²',x0,yB-18);
-      // live distances
-      ctx.textAlign='right';ctx.fillStyle='#5C544B';ctx.font='11px "JetBrains Mono",monospace';
-      ctx.fillText(Math.min(D,xA).toFixed(0)+' m',x1,yA-18);
-      ctx.fillText(Math.min(D,xB).toFixed(0)+' m',x1,yB-18);
-      car(Math.min(D,xA),yA,'#2E6A8E'); car(Math.min(D,xB),yB,'#B85C2E');
-    }
-    function finish(){
-      if(timer){clearInterval(timer);timer=null;} running=false; done=true; draw();
-      var d=fB-fA;
-      var pts=Math.max(40,Math.round(150-Math.abs(d)*50));
-      var verdict;
-      if(Math.abs(d)<=0.15) verdict='\u2713 EX \u00c6QUO parfait ! ';
-      else if(d<0) verdict='B gagne de '+Math.abs(d).toFixed(1).replace('.',',')+' s. ';
-      else verdict='A gagne de '+d.toFixed(1).replace('.',',')+' s. ';
-      st.className='opt-status '+(Math.abs(d)<=0.15?'win':'miss');
-      st.textContent=verdict+'+'+pts+' pts  (A : '+fA.toFixed(1).replace('.',',')+' s · B : '+fB.toFixed(1).replace('.',',')+' s)';
-      setContrib('d5',pts);
-    }
-    function tick(){
-      var dt=0.08; t+=dt;
-      if(fA===null){ xA=VA*t; if(xA>=D){xA=D; fA=t;} }
-      if(fB===null){ xB=0.5*a*t*t; if(xB>=D){xB=D; fB=t;} }
-      draw();
-      if(fA!==null&&fB!==null) finish();
-    }
-    aEl.addEventListener('input',function(){ aV.textContent=(+aEl.value/10).toFixed(1).replace('.',',')+' m/s\u00b2'; if(!running&&!done)draw(); });
-    document.getElementById('raceGo').addEventListener('click',function(){
-      if(running)return; a=+aEl.value/10; t=0; xA=0; xB=0; fA=null; fB=null; running=true; done=false;
-      st.className='opt-status miss'; st.textContent='Course en cours\u2026';
-      if(timer)clearInterval(timer); timer=setInterval(tick,50);
-    });
-    document.getElementById('raceReset').addEventListener('click',function(){
-      if(timer){clearInterval(timer);timer=null;} t=0;xA=0;xB=0;fA=null;fB=null;running=false;done=false;
-      st.className='opt-status miss'; st.textContent='Règle a, puis lance la course (A = uniforme à 8 m/s).'; draw();
-    });
-    draw();
+ var cv=document.getElementById('raceCv'); if(!cv||!cv.getContext)return;
+ var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+ var D=100, VA=8;
+ var a=1.3, t=0, xA=0, xB=0, fA=null, fB=null, timer=null, running=false, done=false;
+ var aEl=document.getElementById('raceA'), aV=document.getElementById('raceAv'), st=document.getElementById('raceStatus');
+ var x0=60, x1=W-50;
+ function sx(x){ return x0+(x/D)*(x1-x0); }
+ function car(x,yc,col){ ctx.fillStyle=col; ctx.fillRect(sx(x)-30,yc-13,30,20); ctx.fillStyle='rgba(0,0,0,.55)'; ctx.beginPath(); ctx.arc(sx(x)-23,yc+7,5,0,7); ctx.arc(sx(x)-7,yc+7,5,0,7); ctx.fill(); }
+ function draw(){
+ ctx.clearRect(0,0,W,H);
+ var yA=54, yB=H-46;
+ // finish line
+ ctx.strokeStyle='rgba(42,38,34,.4)';ctx.setLineDash([6,5]);ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx(D),24);ctx.lineTo(sx(D),H-18);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('100 m',sx(D),18);
+ // lanes
+ ctx.strokeStyle='rgba(42,38,34,.12)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,yA+14);ctx.lineTo(x1,yA+14);ctx.moveTo(x0,yB+14);ctx.lineTo(x1,yB+14);ctx.stroke();
+ // labels
+ ctx.textAlign='left';ctx.fillStyle='#2E6A8E';ctx.font='700 12px "JetBrains Mono",monospace';ctx.fillText('A · uniforme 8 m/s',x0,yA-18);
+ ctx.fillStyle='#B85C2E';ctx.fillText('B · accéléré '+(+aEl.value/10).toFixed(1).replace('.',',')+' m/s²',x0,yB-18);
+ // live distances
+ ctx.textAlign='right';ctx.fillStyle='#5C544B';ctx.font='11px "JetBrains Mono",monospace';
+ ctx.fillText(Math.min(D,xA).toFixed(0)+' m',x1,yA-18);
+ ctx.fillText(Math.min(D,xB).toFixed(0)+' m',x1,yB-18);
+ car(Math.min(D,xA),yA,'#2E6A8E'); car(Math.min(D,xB),yB,'#B85C2E');
+ }
+ function finish(){
+ if(timer){clearInterval(timer);timer=null;} running=false; done=true; draw();
+ var d=fB-fA;
+ var pts=Math.max(40,Math.round(150-Math.abs(d)*50));
+ var verdict;
+ if(Math.abs(d)<=0.15) verdict='\u2713 EX \u00c6QUO parfait ! ';
+ else if(d<0) verdict='B gagne de '+Math.abs(d).toFixed(1).replace('.',',')+' s. ';
+ else verdict='A gagne de '+d.toFixed(1).replace('.',',')+' s. ';
+ st.className='opt-status '+(Math.abs(d)<=0.15?'win':'miss');
+ st.textContent=verdict+'+'+pts+' pts  (A : '+fA.toFixed(1).replace('.',',')+' s · B : '+fB.toFixed(1).replace('.',',')+' s)';
+ setContrib('d5',pts);
+ }
+ function tick(){
+ var dt=0.08; t+=dt;
+ if(fA===null){ xA=VA*t; if(xA>=D){xA=D; fA=t;} }
+ if(fB===null){ xB=0.5*a*t*t; if(xB>=D){xB=D; fB=t;} }
+ draw();
+ if(fA!==null&&fB!==null) finish();
+ }
+ aEl.addEventListener('input',function(){ aV.textContent=(+aEl.value/10).toFixed(1).replace('.',',')+' m/s\u00b2'; if(!running&&!done)draw(); });
+ document.getElementById('raceGo').addEventListener('click',function(){
+ if(running)return; a=+aEl.value/10; t=0; xA=0; xB=0; fA=null; fB=null; running=true; done=false;
+ st.className='opt-status miss'; st.textContent='Course en cours\u2026';
+ if(timer)clearInterval(timer); timer=setInterval(tick,50);
+ });
+ document.getElementById('raceReset').addEventListener('click',function(){
+ if(timer){clearInterval(timer);timer=null;} t=0;xA=0;xB=0;fA=null;fB=null;running=false;done=false;
+ st.className='opt-status miss'; st.textContent='Règle a, puis lance la course (A = uniforme à 8 m/s).'; draw();
+ });
+ draw();
   })();
 
   // ===== DÉFI 6 : Liaison <-> Mouvement =====
   (function(){
-    var PAIRS=[{c:'Pivot',f:'Rotation (1 axe)'},{c:'Glissière',f:'Translation (1 axe)'},{c:'Pivot glissant',f:'Rotation + translation'},{c:'Hélicoïdale',f:'Rotation-translation liées'},{c:'Encastrement',f:'Aucun mouvement'}];
-    var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
-    var selL=null, matched=0, wrong=0, done=false;
-    var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
-    function render(){
-      leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
-      rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
-    }
-    function onClick(ev){
-      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
-      var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
-      if(side==='L'){
-        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
-        it.classList.add('sel'); selL={p:p,el:it};
-      } else {
-        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord une liaison.'; return; }
-        if(selL.p===p){
-          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
-          msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
-          if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
-        } else {
-          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
-          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
-          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
-        }
-      }
-    }
-    leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
-    document.getElementById('mReset').addEventListener('click',function(){
-      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
-    });
-    render();
+ var PAIRS=[{c:'Pivot',f:'Rotation (1 axe)'},{c:'Glissière',f:'Translation (1 axe)'},{c:'Pivot glissant',f:'Rotation + translation'},{c:'Hélicoïdale',f:'Rotation-translation liées'},{c:'Encastrement',f:'Aucun mouvement'}];
+ var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
+ var selL=null, matched=0, wrong=0, done=false;
+ var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
+ function render(){
+ leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
+ rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
+ }
+ function onClick(ev){
+ if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+ var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
+ if(side==='L'){
+ document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+ it.classList.add('sel'); selL={p:p,el:it};
+ } else {
+ if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord une liaison.'; return; }
+ if(selL.p===p){
+ selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
+ if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
+ } else {
+ wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+ setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+ selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+ }
+ }
+ }
+ leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
+ document.getElementById('mReset').addEventListener('click',function(){
+ L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+ });
+ render();
   })();
 
   renderScore();
@@ -728,64 +524,290 @@
 function el(id){return document.getElementById(id);}
   // ===== Exercices d'application =====
   (function(){
-    function num(v){return parseFloat(String(v||'').replace(',','.'));}
-    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
-    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
-    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
-    gate('ex3reveal','ex3sol','Correction','Masquer');
-    gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
+ function num(v){return parseFloat(String(v||'').replace(',','.'));}
+ function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+ function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+ gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+ gate('ex3reveal','ex3sol','Correction','Masquer');
+ gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
 
-    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
-      var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-20)<0.5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : a = 30/6 = 5 m/s\u00b2 ; v = 5 \u00d7 4 = 20 m/s.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) \u0394v \u00f7 \u0394t. ')+(okB?'':'b) a \u00d7 4.');}
-      unlock('ex1reveal','Voir l\u2019analyse');
-    });
-    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
-      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
-      var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-600)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 300/60 = 5 tr/s ; 300 \u00d7 2 = 600 tours.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 300 \u00f7 60. ')+(okB?'':'b) 300 \u00d7 2.');}
-      unlock('ex3reveal','Correction');
-    });
-    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
-      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
-      var okA=Math.abs(a-10)<0.3, okB=Math.abs(b-100)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : v = 0,5 \u00d7 20 = 10 m/s ; d = \u00bd \u00d7 0,5 \u00d7 400 = 100 m.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) a \u00d7 t. ')+(okB?'':'b) \u00bd \u00d7 a \u00d7 t\u00b2 (aire du triangle).');}
-      unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
-    });
+ var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+ var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+ var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-20)<0.5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : a = 30/6 = 5 m/s\u00b2 ; v = 5 \u00d7 4 = 20 m/s.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) \u0394v \u00f7 \u0394t. ')+(okB?'':'b) a \u00d7 4.');}
+ unlock('ex1reveal','Voir l\u2019analyse');
+ });
+ var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+ var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+ var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-600)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 300/60 = 5 tr/s ; 300 \u00d7 2 = 600 tours.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 300 \u00f7 60. ')+(okB?'':'b) 300 \u00d7 2.');}
+ unlock('ex3reveal','Correction');
+ });
+ var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+ var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+ var okA=Math.abs(a-10)<0.3, okB=Math.abs(b-100)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : v = 0,5 \u00d7 20 = 10 m/s ; d = \u00bd \u00d7 0,5 \u00d7 400 = 100 m.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) a \u00d7 t. ')+(okB?'':'b) \u00bd \u00d7 a \u00d7 t\u00b2 (aire du triangle).');}
+ unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
+ });
 
-    (function(){
-      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-      var t=0, marks=[];
-      function step(){
-        var a=+el('ex2acc').value;
-        el('ex2accv').textContent=a.toFixed(1);
-        t+=0.08;
-        var k=6;
-        var x=20+0.5*a*t*t*k + 0.5*t*k; // demi at^2 (+ petit terme pour a=0)
-        if(x>W-24){ t=0; marks=[]; x=20; }
-        var lastMark=marks.length?marks[marks.length-1].t:-1;
-        if(Math.floor(t)>lastMark){ marks.push({t:Math.floor(t), x:x}); }
-        g.clearRect(0,0,W,H);
-        var cy=H*0.5;
-        g.strokeStyle='rgba(42,38,34,.18)';g.lineWidth=1;g.beginPath();g.moveTo(14,cy+16);g.lineTo(W-14,cy+16);g.stroke();
-        // marks (chronophoto)
-        for(var i=0;i<marks.length;i++){g.fillStyle='rgba(46,106,142,.35)';g.beginPath();g.arc(marks[i].x,cy,7,0,7);g.fill();
-          if(i>0){g.strokeStyle='rgba(189,138,42,.7)';g.lineWidth=1.5;g.beginPath();g.moveTo(marks[i-1].x,cy+16);g.lineTo(marks[i].x,cy+16);g.stroke();}}
-        // mobile courant
-        g.fillStyle='#C0492E';g.beginPath();g.arc(x,cy,10,0,7);g.fill();
-        var v=a*t, d=0.5*a*t*t;
-        g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
-        g.fillText('t = '+t.toFixed(1)+' s   v = '+v.toFixed(1)+' m/s   d = '+d.toFixed(1)+' m',16,20);
-        var o=el('ex2out'); if(o) o.textContent=(a===0?'a = 0 : mouvement uniforme (\u00e9carts \u00e9gaux)':'a = '+a.toFixed(1)+' m/s\u00b2 : mouvement acc\u00e9l\u00e9r\u00e9 (\u00e9carts croissants)');
-      }
-      var e=el('ex2acc'); if(e) e.addEventListener('input',function(){t=0;marks=[];});
-      setInterval(step,40); step();
-    })();
+ (function(){
+ var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ var t=0, marks=[];
+ function step(){
+ var a=+el('ex2acc').value;
+ el('ex2accv').textContent=a.toFixed(1);
+ t+=0.08;
+ var k=6;
+ var x=20+0.5*a*t*t*k + 0.5*t*k; // demi at^2 (+ petit terme pour a=0)
+ if(x>W-24){ t=0; marks=[]; x=20; }
+ var lastMark=marks.length?marks[marks.length-1].t:-1;
+ if(Math.floor(t)>lastMark){ marks.push({t:Math.floor(t), x:x}); }
+ g.clearRect(0,0,W,H);
+ var cy=H*0.5;
+ g.strokeStyle='rgba(42,38,34,.18)';g.lineWidth=1;g.beginPath();g.moveTo(14,cy+16);g.lineTo(W-14,cy+16);g.stroke();
+ // marks (chronophoto)
+ for(var i=0;i<marks.length;i++){g.fillStyle='rgba(46,106,142,.35)';g.beginPath();g.arc(marks[i].x,cy,7,0,7);g.fill();
+ if(i>0){g.strokeStyle='rgba(189,138,42,.7)';g.lineWidth=1.5;g.beginPath();g.moveTo(marks[i-1].x,cy+16);g.lineTo(marks[i].x,cy+16);g.stroke();}}
+ // mobile courant
+ g.fillStyle='#C0492E';g.beginPath();g.arc(x,cy,10,0,7);g.fill();
+ var v=a*t, d=0.5*a*t*t;
+ g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.textAlign='left';
+ g.fillText('t = '+t.toFixed(1)+' s v = '+v.toFixed(1)+' m/s d = '+d.toFixed(1)+' m',16,20);
+ var o=el('ex2out'); if(o) o.textContent=(a===0?'a = 0 : mouvement uniforme (\u00e9carts \u00e9gaux)':'a = '+a.toFixed(1)+' m/s\u00b2 : mouvement acc\u00e9l\u00e9r\u00e9 (\u00e9carts croissants)');
+ }
+ var e=el('ex2acc'); if(e) e.addEventListener('input',function(){t=0;marks=[];});
+ setInterval(step,40); step();
+ })();
   })();
+})();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_cinematique', TP_TITRE='TP Cinématique — 6 défis';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
 })();
 </script>
 </body>

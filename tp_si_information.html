@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -23,13 +22,13 @@
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--amber);border-color:var(--amber)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .tpscore{background:var(--ink);color:var(--cream);border-radius:11px;padding:12px 14px;margin-bottom:14px}
@@ -39,7 +38,7 @@
   .tpscore .sc-track{height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:8px}
   .tpscore .sc-track i{display:block;height:100%;width:0;background:#E9A36F;transition:width .4s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
@@ -71,7 +70,7 @@
   .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
   .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+ align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
   .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
   .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
   .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
@@ -82,7 +81,7 @@
   .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
   .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
   .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
-    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+ padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
   .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
   .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
@@ -150,12 +149,12 @@
 
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
-    .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:84px 1fr 76px}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
+ .gopts{grid-template-columns:1fr}.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:84px 1fr 76px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
 
@@ -200,253 +199,54 @@
   .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
   .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
   .btn[disabled]{opacity:.42;cursor:not-allowed}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_information.html">← Séquence : information</a>
-    <div class="brand">
-      <div class="mark">TP</div>
-      <div><h1>Chaîne d'information</h1><p>6 défis · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="tpscore">
-      <div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div>
-      <div class="sc-rank" id="scRank">🔧 Apprenti</div>
-      <div class="sc-track"><i id="scTrack"></i></div>
-    </div>
-    <div class="links" id="links">
-      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
-      <a href="#proto" class="navlink"><span>02</span>Repère</a>
-      <a href="#exos" class="navlink"><span>🎯</span>Exercices d'application</a>
-      <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a>
-      <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a>
-      <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a>
-      <a href="#defi4" class="navlink"><span>D4</span>Règle la résolution</a>
-      <a href="#defi5" class="navlink"><span>D5</span>Radar de recul</a>
-      <a href="#defi6" class="navlink"><span>D6</span>Capteur ↔ grandeur</a>
-      <a href="#synth" class="navlink"><span>07</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="obj">
-      <span class="kicker">TP · Chaîne d'information</span>
-      <h2>6 défis pour capter,<br>numériser et décider</h2>
-      <p class="lede">On joue&nbsp;: tu construis une chaîne d'acquisition, tu numérises à toute vitesse, tu règles une résolution, et tu pilotes un radar de recul à seuil. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
-      <div class="two">
-        <div class="panel"><h4>Les 6 défis</h4><ul>
-          <li><b>D1 · Chaîne d'acquisition</b> — remets les blocs dans l'ordre.</li>
-          <li><b>D2 · Numérise express</b> — niveaux 2ⁿ et fréquence fe contre la montre.</li>
-          <li><b>D3 · Ana / TOR / Num</b> — classe les signaux en un éclair.</li>
-          <li><b>D4 · Règle la résolution</b> — trouve le bon nombre de bits.</li>
-          <li><b>D5 · Radar de recul</b> — règle le seuil, arrête-toi au plus près.</li>
-          <li><b>D6 · Capteur ↔ grandeur</b> — relie chaque capteur à sa mesure.</li>
-        </ul></div>
-        <div class="panel"><h4>Notions travaillées</h4>
-          <div class="chips"><span class="chip k">capteur</span><span class="chip k">CAN</span><span class="chip k">2ⁿ niveaux</span><span class="chip k">quantum q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil</span></div>
-          <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="proto">
-      <span class="kicker">02 · Repère</span>
-      <h3>La chaîne d'information en bref</h3>
-      <p class="lede">Une grandeur physique du monde réel est captée, mise en forme, numérisée, puis traitée par un calculateur qui décide.</p>
-      <table class="data">
-        <thead><tr><th>Fonction</th><th>Rôle</th><th>Exemple</th></tr></thead>
-        <tbody>
-          <tr><td>Acquérir</td><td>Capter la grandeur physique</td><td><b>Capteur de distance</b></td></tr>
-          <tr><td>Conditionner</td><td>Mettre en forme le signal</td><td><b>Amplificateur</b></td></tr>
-          <tr><td>Numériser</td><td>Convertir en valeurs binaires</td><td><b>CAN n bits</b></td></tr>
-          <tr><td>Traiter</td><td>Calculer et décider</td><td><b>Microcontrôleur</b></td></tr>
-        </tbody>
-      </table>
-      <div class="note">Repère clé&nbsp;: un CAN de <b>n bits</b> distingue <b>2ⁿ niveaux</b>&nbsp;; le pas de quantification (quantum) vaut <b>q = E / 2ⁿ</b> sur une étendue E.</div>
-    </section>
-
-    <!-- DÉFI 1 -->
-    <section id="exos">
-      <span class="kicker">Exercices d'application</span>
-      <h2>S'entraîner : du concret au calcul</h2>
-      <p class="lede">Quatre exercices pour maîtriser la chaîne d'information : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
-      <div class="exo-wrap">
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la taille d'un message</div>
-          <p>Un texte de <b>200 caractères</b> passe dans la chaîne d'information (acquérir → traiter → communiquer). Chaque caractère est codé sur <b>1 octet</b> (soit 8 bits).</p>
-          <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
-            <rect x="14" y="30" width="70" height="34" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="49" y="51" text-anchor="middle" fill="#235877" font-weight="700">Acquérir</text>
-            <line x1="84" y1="47" x2="104" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="110,47 100,42 100,52" fill="#5C544B"/>
-            <rect x="110" y="30" width="66" height="34" rx="5" fill="#fbeecf" stroke="#BD8A2A" stroke-width="1.5"/><text x="143" y="51" text-anchor="middle" fill="#8a6313" font-weight="700">Traiter</text>
-            <line x1="176" y1="47" x2="196" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="202,47 192,42 192,52" fill="#5C544B"/>
-            <rect x="202" y="30" width="84" height="34" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="244" y="51" text-anchor="middle" fill="#2c6147" font-weight="700">Communiquer</text>
-            <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">message : 200 caractères</text>
-          </svg>
-          <div class="exo-q">a) Taille du message = <input class="numin" id="ex1a" inputmode="decimal"> octets</div>
-          <div class="exo-q">b) Taille en bits = <input class="numin" id="ex1b" inputmode="decimal"> bits</div>
-          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
-          <div class="exo-fb" id="ex1fb"></div>
-          <div class="exo-sol" id="ex1sol" hidden>
-            <p><b>a)</b> 200 caractères × 1 octet = <b>200 octets</b>.</p>
-            <p><b>b)</b> 200 × 8 = <b>1600 bits</b> (1 octet = 8 bits).</p>
-          </div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">2</span> Simulateur — le codage binaire</div>
-          <p>Toute information numérique est une suite de <b>bits</b> (0 ou 1). Choisis un nombre : on l'écrit sur <b>8 bits</b>. Chaque bit « pèse » une puissance de 2.</p>
-          <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas>
-          <div class="sliders">
-            <label><span class="nm2">Nombre (0–255)</span><input type="range" id="ex2num" min="0" max="255" step="1" value="42"><b><span id="ex2numv">42</span></b></label>
-          </div>
-          <div class="exo-out" id="ex2out">—</div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">3</span> Calcul — le temps de transmission</div>
-          <p>Un fichier de <b>2400 bits</b> est transmis sur une liaison. On rappelle : temps = quantité de données ÷ débit.</p>
-          <div class="exo-q">a) À 300 bits/s → temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div>
-          <div class="exo-q">b) À 600 bits/s → temps = <input class="numin" id="ex3b" inputmode="decimal"> s</div>
-          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
-          <div class="exo-fb" id="ex3fb"></div>
-          <div class="exo-sol" id="ex3sol" hidden>
-            <p><b>a)</b> 2400 ÷ 300 = <b>8 s</b>.</p>
-            <p><b>b)</b> 2400 ÷ 600 = <b>4 s</b>. Doubler le débit divise le temps par 2.</p>
-          </div>
-        </div>
-
-        <div class="exo-card adv">
-          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combien de bits ? <span class="lvl-badge">prépa / L1</span></div>
-          <p>Pour coder <b>N symboles différents</b>, il faut <b>n bits</b> tels que <b>2<sup>n</sup> ≥ N</b>. Combien de bits pour coder l'alphabet (26 lettres) ? Et pour 1000 valeurs ?</p>
-          <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10">
-            <g>
-              <rect x="30" y="12" width="24" height="14" fill="#5cb2ea" fill-opacity="0.55"/><text x="60" y="23" fill="#235877">1 bit → 2</text>
-              <rect x="30" y="32" width="40" height="14" fill="#5cb2ea" fill-opacity="0.6"/><text x="76" y="43" fill="#235877">2 bits → 4</text>
-              <rect x="30" y="52" width="60" height="14" fill="#5cb2ea" fill-opacity="0.65"/><text x="96" y="63" fill="#235877">3 bits → 8</text>
-              <rect x="30" y="72" width="88" height="14" fill="#5cb2ea" fill-opacity="0.7"/><text x="124" y="83" fill="#235877">4 bits → 16</text>
-              <rect x="30" y="92" width="130" height="14" fill="#e8b84b" fill-opacity="0.9"/><text x="166" y="103" fill="#8a6313" font-weight="700">5 bits → 32 ≥ 26 ✓</text>
-            </g>
-            <text x="150" y="124" text-anchor="middle" font-size="9.5" fill="#2c6147" font-weight="700">on prend le plus petit n tel que 2ⁿ ≥ N</text>
-          </svg>
-          <div class="exo-q">a) 26 lettres → <input class="numin" id="ex4a" inputmode="decimal"> bits</div>
-          <div class="exo-q">b) 1000 valeurs → <input class="numin" id="ex4b" inputmode="decimal"> bits</div>
-          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
-          <div class="exo-fb" id="ex4fb"></div>
-          <div class="exo-sol" id="ex4sol" hidden>
-            <p><b>a)</b> 2<sup>4</sup> = 16 &lt; 26 mais 2<sup>5</sup> = 32 ≥ 26, donc <b>5 bits</b> suffisent.</p>
-            <p><b>b)</b> 2<sup>9</sup> = 512 &lt; 1000 mais 2<sup>10</sup> = 1024 ≥ 1000, donc <b>10 bits</b>.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="defi1">
-      <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div>
-      <h3>Assemble la chaîne d'acquisition</h3>
-      <p class="lede">Clique les blocs pour les ranger dans l'ordre du signal, de la grandeur physique jusqu'à la décision.</p>
-      <div class="builder">
-        <div class="bslots" id="bslots"></div>
-        <div class="bhint">Du capteur jusqu'au calculateur qui traite l'information.</div>
-        <div class="bpool" id="bpool"></div>
-        <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 2 -->
-    <section id="defi2">
-      <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
-      <h3>Numérise express</h3>
-      <p class="lede">40 secondes&nbsp;: pour chaque CAN, donne le nombre de niveaux (2ⁿ) ou la fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p>
-      <div class="game" id="g2">
-        <div class="ghead"><div class="gtitle">⚡ Numérise express</div>
-          <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
-        <div class="gbar"><i id="g2Bar"></i></div>
-        <div id="g2Area"><div class="gstart"><p>2ⁿ niveaux pour un CAN n bits, et fe = 1/Te. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
-        <div class="gflash" id="g2Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 3 -->
-    <section id="defi3">
-      <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
-      <h3>Analogique / TOR / Numérique</h3>
-      <p class="lede">30 secondes pour classer chaque signal&nbsp;: <b>analogique</b> (continu), <b>TOR</b> (deux états) ou <b>numérique</b> (codé sur plusieurs bits)&nbsp;?</p>
-      <div class="game" id="g3">
-        <div class="ghead"><div class="gtitle">⚡ Nature du signal</div>
-          <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
-        <div class="gbar"><i id="g3Bar"></i></div>
-        <div id="g3Area"><div class="gstart"><p>Identifie la nature du signal le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
-        <div class="gflash" id="g3Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 4 -->
-    <section id="defi4">
-      <div class="badge-defi">DÉFI 4 · résolution · jusqu'à 140 pts</div>
-      <h3>Règle la résolution</h3>
-      <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle à la courbe analogique. Trouve le nombre de bits <b>minimal</b> pour que le quantum passe sous la cible.</p>
-      <div class="resbox">
-        <canvas id="resCv" width="900" height="220"></canvas>
-        <div class="orow"><span class="oname">Bits (n)</span><input type="range" min="1" max="8" value="3" id="resBits"><span class="oeta" id="resN">3 bits</span></div>
-        <div class="opt-readout">
-          <div class="ord"><div class="l">Niveaux 2ⁿ</div><div class="v" id="resLevels">8</div></div>
-          <div class="ord"><div class="l">Quantum (5 V)</div><div class="v" id="resQ">625 mV</div></div>
-          <div class="ord"><div class="l">Débit</div><div class="v" id="resRate">3 bits/éch.</div></div>
-        </div>
-        <div class="opt-status miss" id="resStatus">🎯 Objectif : quantum ≤ 40 mV sur une étendue de 5 V.</div>
-      </div>
-    </section>
-
-    <!-- DÉFI 5 -->
-    <section id="defi5">
-      <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
-      <h3>Radar de recul — capteur à seuil</h3>
-      <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b>&nbsp;: dès que distance ≤ seuil, ça freine. Mais le freinage prend de la distance&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p>
-      <div class="park">
-        <canvas id="parkCv" width="900" height="170"></canvas>
-        <div class="orow"><span class="oname">Seuil (cm)</span><input type="range" min="5" max="60" value="20" id="parkT"><span class="oeta" id="parkTv">20 cm</span></div>
-        <div class="vactions"><button class="btn primary" id="parkGo">▶ Reculer</button><button class="btn" id="parkReset">↻ Rejouer</button></div>
-        <div class="opt-status miss" id="parkStatus">Règle le seuil, puis lance le recul.</div>
-      </div>
-      <div class="note" style="margin-top:12px">Logique du capteur à seuil&nbsp;: <b>si mesure &lt; seuil → action</b>. Ici il faut anticiper la distance de freinage (~11 cm)&nbsp;: un seuil trop court = collision.</div>
-    </section>
-
-    <!-- DÉFI 6 -->
-    <section id="defi6">
-      <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
-      <h3>Capteur Grandeur mesurée</h3>
-      <p class="lede">Relie chaque capteur à la grandeur physique qu'il mesure. Clique un capteur, puis sa grandeur.</p>
-      <div class="match" id="match">
-        <div class="mcol" id="mLeft"></div>
-        <div class="mcol" id="mRight"></div>
-      </div>
-      <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
-    </section>
-
-    <section id="synth" style="border-bottom:none">
-      <span class="kicker">07 · Bilan</span>
-      <h3>Ce qu'il faut retenir</h3>
-      <div class="panel"><ul>
-        <li>La chaîne d'information&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li>
-        <li>Un signal est <b>analogique</b>, <b>TOR</b> ou <b>numérique</b>&nbsp;; le CAN transforme l'analogique en numérique.</li>
-        <li>CAN n bits → <b>2ⁿ niveaux</b>&nbsp;; quantum <b>q = E / 2ⁿ</b>&nbsp;: plus de bits = plus fin.</li>
-        <li>Échantillonnage&nbsp;: <b>fe = 1/Te</b>. Un capteur à <b>seuil</b> déclenche une action quand la mesure franchit une valeur.</li>
-      </ul></div>
-      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  // ===== Nav =====
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_information.html">← Séquence : information</a> <div class="brand"><div class="mark">TP</div> <div><h1>Chaîne d'information</h1><p>6 défis · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="tpscore"><div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div> <div class="sc-rank" id="scRank">Apprenti</div> <div class="sc-track"><i id="scTrack"></i></div></div> <div class="links" id="links"><a href="#obj" class="navlink"><span>01</span>Objectif</a> <a href="#proto" class="navlink"><span>02</span>Repère</a> <a href="#exos" class="navlink"><span></span>Exercices d'application</a> <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a> <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a> <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a> <a href="#defi4" class="navlink"><span>D4</span>Règle la résolution</a> <a href="#defi5" class="navlink"><span>D5</span>Radar de recul</a> <a href="#defi6" class="navlink"><span>D6</span>Capteur ↔ grandeur</a> <a href="#synth" class="navlink"><span>07</span>Synthèse</a></div> </aside> <main class="main"> <section id="obj"> <span class="kicker">TP · Chaîne d'information</span> <h2>6 défis pour capter,<br>numériser et décider</h2> <p class="lede">On joue&nbsp;: tu construis une chaîne d'acquisition, tu numérises à toute vitesse, tu règles une résolution, et tu pilotes un radar de recul à seuil. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p> <div class="two"><div class="panel"><h4>Les 6 défis</h4><ul> <li><b>D1 · Chaîne d'acquisition</b> — remets les blocs dans l'ordre.</li> <li><b>D2 · Numérise express</b> — niveaux 2ⁿ et fréquence fe contre la montre.</li> <li><b>D3 · Ana / TOR / Num</b> — classe les signaux en un éclair.</li> <li><b>D4 · Règle la résolution</b> — trouve le bon nombre de bits.</li> <li><b>D5 · Radar de recul</b> — règle le seuil, arrête-toi au plus près.</li> <li><b>D6 · Capteur ↔ grandeur</b> — relie chaque capteur à sa mesure.</li> </ul></div> <div class="panel"><h4>Notions travaillées</h4> <div class="chips"><span class="chip k">capteur</span><span class="chip k">CAN</span><span class="chip k">2ⁿ niveaux</span><span class="chip k">quantum q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil</span></div> <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div></div></div> </section> <section id="proto"> <span class="kicker">02 · Repère</span> <h3>La chaîne d'information en bref</h3> <p class="lede">Une grandeur physique du monde réel est captée, mise en forme, numérisée, puis traitée par un calculateur qui décide.</p> <table class="data"> <thead><tr><th>Fonction</th><th>Rôle</th><th>Exemple</th></tr></thead> <tbody> <tr><td>Acquérir</td><td>Capter la grandeur physique</td><td><b>Capteur de distance</b></td></tr> <tr><td>Conditionner</td><td>Mettre en forme le signal</td><td><b>Amplificateur</b></td></tr> <tr><td>Numériser</td><td>Convertir en valeurs binaires</td><td><b>CAN n bits</b></td></tr> <tr><td>Traiter</td><td>Calculer et décider</td><td><b>Microcontrôleur</b></td></tr> </tbody> </table> <div class="note">Repère clé&nbsp;: un CAN de <b>n bits</b> distingue <b>2ⁿ niveaux</b>&nbsp;; le pas de quantification (quantum) vaut <b>q = E / 2ⁿ</b> sur une étendue E.</div> </section> <!-- DÉFI 1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour maîtriser la chaîne d'information : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — la taille d'un message</div> <p>Un texte de <b>200 caractères</b> passe dans la chaîne d'information (acquérir → traiter → communiquer). Chaque caractère est codé sur <b>1 octet</b> (soit 8 bits).</p> <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <rect x="14" y="30" width="70" height="34" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="49" y="51" text-anchor="middle" fill="#235877" font-weight="700">Acquérir</text> <line x1="84" y1="47" x2="104" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="110,47 100,42 100,52" fill="#5C544B"/><rect x="110" y="30" width="66" height="34" rx="5" fill="#fbeecf" stroke="#BD8A2A" stroke-width="1.5"/><text x="143" y="51" text-anchor="middle" fill="#8a6313" font-weight="700">Traiter</text> <line x1="176" y1="47" x2="196" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="202,47 192,42 192,52" fill="#5C544B"/><rect x="202" y="30" width="84" height="34" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="244" y="51" text-anchor="middle" fill="#2c6147" font-weight="700">Communiquer</text> <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">message : 200 caractères</text> </svg> <div class="exo-q">a) Taille du message = <input class="numin" id="ex1a" inputmode="decimal"> octets</div> <div class="exo-q">b) Taille en bits = <input class="numin" id="ex1b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> 200 caractères × 1 octet = <b>200 octets</b>.</p> <p><b>b)</b> 200 × 8 = <b>1600 bits</b> (1 octet = 8 bits).</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — le codage binaire</div> <p>Toute information numérique est une suite de <b>bits</b> (0 ou 1). Choisis un nombre : on l'écrit sur <b>8 bits</b>. Chaque bit « pèse » une puissance de 2.</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Nombre (0–255)</span><input type="range" id="ex2num" min="0" max="255" step="1" value="42"><b><span id="ex2numv">42</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — le temps de transmission</div> <p>Un fichier de <b>2400 bits</b> est transmis sur une liaison. On rappelle : temps = quantité de données ÷ débit.</p> <div class="exo-q">a) À 300 bits/s → temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div> <div class="exo-q">b) À 600 bits/s → temps = <input class="numin" id="ex3b" inputmode="decimal"> s</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 2400 ÷ 300 = <b>8 s</b>.</p> <p><b>b)</b> 2400 ÷ 600 = <b>4 s</b>. Doubler le débit divise le temps par 2.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combien de bits ? <span class="lvl-badge">prépa / L1</span></div> <p>Pour coder <b>N symboles différents</b>, il faut <b>n bits</b> tels que <b>2<sup>n</sup> ≥ N</b>. Combien de bits pour coder l'alphabet (26 lettres) ? Et pour 1000 valeurs ?</p> <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10"> <g> <rect x="30" y="12" width="24" height="14" fill="#5cb2ea" fill-opacity="0.55"/><text x="60" y="23" fill="#235877">1 bit → 2</text> <rect x="30" y="32" width="40" height="14" fill="#5cb2ea" fill-opacity="0.6"/><text x="76" y="43" fill="#235877">2 bits → 4</text> <rect x="30" y="52" width="60" height="14" fill="#5cb2ea" fill-opacity="0.65"/><text x="96" y="63" fill="#235877">3 bits → 8</text> <rect x="30" y="72" width="88" height="14" fill="#5cb2ea" fill-opacity="0.7"/><text x="124" y="83" fill="#235877">4 bits → 16</text> <rect x="30" y="92" width="130" height="14" fill="#e8b84b" fill-opacity="0.9"/><text x="166" y="103" fill="#8a6313" font-weight="700">5 bits → 32 ≥ 26 ✓</text> </g> <text x="150" y="124" text-anchor="middle" font-size="9.5" fill="#2c6147" font-weight="700">on prend le plus petit n tel que 2ⁿ ≥ N</text> </svg> <div class="exo-q">a) 26 lettres → <input class="numin" id="ex4a" inputmode="decimal"> bits</div> <div class="exo-q">b) 1000 valeurs → <input class="numin" id="ex4b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> 2<sup>4</sup> = 16 &lt; 26 mais 2<sup>5</sup> = 32 ≥ 26, donc <b>5 bits</b> suffisent.</p> <p><b>b)</b> 2<sup>9</sup> = 512 &lt; 1000 mais 2<sup>10</sup> = 1024 ≥ 1000, donc <b>10 bits</b>.</p></div></div></div> </section> <section id="defi1"> <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div> <h3>Assemble la chaîne d'acquisition</h3> <p class="lede">Clique les blocs pour les ranger dans l'ordre du signal, de la grandeur physique jusqu'à la décision.</p> <div class="builder"><div class="bslots" id="bslots"></div> <div class="bhint">Du capteur jusqu'au calculateur qui traite l'information.</div> <div class="bpool" id="bpool"></div> <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div></div> </section> <!-- DÉFI 2 --> <section id="defi2"> <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div> <h3>Numérise express</h3> <p class="lede">40 secondes&nbsp;: pour chaque CAN, donne le nombre de niveaux (2ⁿ) ou la fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p> <div class="game" id="g2"><div class="ghead"><div class="gtitle">Numérise express</div> <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div> <div class="gbar"><i id="g2Bar"></i></div> <div id="g2Area"><div class="gstart"><p>2ⁿ niveaux pour un CAN n bits, et fe = 1/Te. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div> <div class="gflash" id="g2Flash"></div></div> </section> <!-- DÉFI 3 --> <section id="defi3"> <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div> <h3>Analogique / TOR / Numérique</h3> <p class="lede">30 secondes pour classer chaque signal&nbsp;: <b>analogique</b> (continu), <b>TOR</b> (deux états) ou <b>numérique</b> (codé sur plusieurs bits)&nbsp;?</p> <div class="game" id="g3"><div class="ghead"><div class="gtitle">Nature du signal</div> <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div> <div class="gbar"><i id="g3Bar"></i></div> <div id="g3Area"><div class="gstart"><p>Identifie la nature du signal le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div> <div class="gflash" id="g3Flash"></div></div> </section> <!-- DÉFI 4 --> <section id="defi4"> <div class="badge-defi">DÉFI 4 · résolution · jusqu'à 140 pts</div> <h3>Règle la résolution</h3> <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle à la courbe analogique. Trouve le nombre de bits <b>minimal</b> pour que le quantum passe sous la cible.</p> <div class="resbox"><canvas id="resCv" width="900" height="220"></canvas> <div class="orow"><span class="oname">Bits (n)</span><input type="range" min="1" max="8" value="3" id="resBits"><span class="oeta" id="resN">3 bits</span></div> <div class="opt-readout"><div class="ord"><div class="l">Niveaux 2ⁿ</div><div class="v" id="resLevels">8</div></div> <div class="ord"><div class="l">Quantum (5 V)</div><div class="v" id="resQ">625 mV</div></div> <div class="ord"><div class="l">Débit</div><div class="v" id="resRate">3 bits/éch.</div></div></div> <div class="opt-status miss" id="resStatus">Objectif : quantum ≤ 40 mV sur une étendue de 5 V.</div></div> </section> <!-- DÉFI 5 --> <section id="defi5"> <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div> <h3>Radar de recul — capteur à seuil</h3> <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b>&nbsp;: dès que distance ≤ seuil, ça freine. Mais le freinage prend de la distance&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p> <div class="park"><canvas id="parkCv" width="900" height="170"></canvas> <div class="orow"><span class="oname">Seuil (cm)</span><input type="range" min="5" max="60" value="20" id="parkT"><span class="oeta" id="parkTv">20 cm</span></div> <div class="vactions"><button class="btn primary" id="parkGo">▶ Reculer</button><button class="btn" id="parkReset">↻ Rejouer</button></div> <div class="opt-status miss" id="parkStatus">Règle le seuil, puis lance le recul.</div></div> <div class="note" style="margin-top:12px">Logique du capteur à seuil&nbsp;: <b>si mesure &lt; seuil → action</b>. Ici il faut anticiper la distance de freinage (~11 cm)&nbsp;: un seuil trop court = collision.</div> </section> <!-- DÉFI 6 --> <section id="defi6"> <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div> <h3>Capteur Grandeur mesurée</h3> <p class="lede">Relie chaque capteur à la grandeur physique qu'il mesure. Clique un capteur, puis sa grandeur.</p> <div class="match" id="match"><div class="mcol" id="mLeft"></div> <div class="mcol" id="mRight"></div></div> <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div> </section> <section id="synth" style="border-bottom:none"> <span class="kicker">07 · Bilan</span> <h3>Ce qu'il faut retenir</h3> <div class="panel"><ul> <li>La chaîne d'information&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li> <li>Un signal est <b>analogique</b>, <b>TOR</b> ou <b>numérique</b>&nbsp;; le CAN transforme l'analogique en numérique.</li> <li>CAN n bits → <b>2ⁿ niveaux</b>&nbsp;; quantum <b>q = E / 2ⁿ</b>&nbsp;: plus de bits = plus fin.</li> <li>Échantillonnage&nbsp;: <b>fe = 1/Te</b>. Un capteur à <b>seuil</b> déclenche une action quand la mesure franchit une valeur.</li> </ul></div> <div class="cta">Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div> </section> </main></div> <script> // ===== Nav =====
   var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
@@ -456,265 +256,265 @@
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
 
   // ===== Score global =====
   var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0};
-  var RANKS=[[0,'🔧 Apprenti'],[200,'⚙️ Technicien·ne'],[450,'📐 Ingénieur·e'],[700,'🏆 Expert·e']];
+  var RANKS=[[0,' Apprenti'],[200,' Technicien·ne'],[450,' Ingénieur·e'],[700,' Expert·e']];
   function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
   function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
   function renderScore(){
-    var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
-    document.getElementById('scVal').textContent=tot;
-    document.getElementById('scRank').textContent=rankFor(tot);
-    document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
+ var tot=contrib.d1+contrib.d2+contrib.d3+contrib.d4+contrib.d5+contrib.d6;
+ document.getElementById('scVal').textContent=tot;
+ document.getElementById('scRank').textContent=rankFor(tot);
+ document.getElementById('scTrack').style.width=Math.min(100,tot/820*100)+'%';
   }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
   function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
 
   // ===== DÉFI 1 : Assemble la chaîne d'acquisition =====
   (function(){
-    var CHAIN=[{lb:'Capteur',ic:'\uD83D\uDCE1'},{lb:'Conditionnement',ic:'\uD83C\uDF9A\uFE0F'},{lb:'CAN',ic:'\uD83D\uDD22'},{lb:'Traitement',ic:'\uD83E\uDDE0'}];
-    var N=CHAIN.length;
-    var slots=[]; for(var z=0;z<N;z++)slots.push(null);
-    var pool=shuffle(CHAIN.map(function(_,i){return i;}));
-    var attempts=0, solved=false;
-    var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
-    function render(){
-      slotsEl.innerHTML=slots.map(function(idx,i){
-        if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25">\u2795</span></div>';
-        return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
-      }).join('');
-      poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
-    }
-    slotsEl.addEventListener('click',function(ev){
-      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
-      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
-      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
-    });
-    poolEl.addEventListener('click',function(ev){
-      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
-      var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
-      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
-    });
-    document.getElementById('bverify').addEventListener('click',function(){
-      if(solved)return;
-      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
-      attempts++;
-      var ok=slots.every(function(idx,i){return idx===i;});
-      var cells=slotsEl.querySelectorAll('.bslot');
-      if(ok){
-        solved=true;
-        var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
-        var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
-        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
-        setContrib('d1',pts);
-      }else{
-        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
-        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
-        msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
-      }
-    });
-    render();
+ var CHAIN=[{lb:'Capteur',ic:''},{lb:'Conditionnement',ic:''},{lb:'CAN',ic:''},{lb:'Traitement',ic:''}];
+ var N=CHAIN.length;
+ var slots=[]; for(var z=0;z<N;z++)slots.push(null);
+ var pool=shuffle(CHAIN.map(function(_,i){return i;}));
+ var attempts=0, solved=false;
+ var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
+ function render(){
+ slotsEl.innerHTML=slots.map(function(idx,i){
+ if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25"></span></div>';
+ return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
+ }).join('');
+ poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
+ }
+ slotsEl.addEventListener('click',function(ev){
+ if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+ var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+ pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+ });
+ poolEl.addEventListener('click',function(ev){
+ if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+ var idx=+b.getAttribute('data-idx'); var free=slots.indexOf(null); if(free<0)return;
+ slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+ });
+ document.getElementById('bverify').addEventListener('click',function(){
+ if(solved)return;
+ if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les '+N+' blocs.'; return; }
+ attempts++;
+ var ok=slots.every(function(idx,i){return idx===i;});
+ var cells=slotsEl.querySelectorAll('.bslot');
+ if(ok){
+ solved=true;
+ var pts=attempts===1?100:attempts===2?75:attempts===3?50:30;
+ var k=0; var iv=setInterval(function(){ if(k<N){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },150);
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+ setContrib('d1',pts);
+ }else{
+ var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+ setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+ msg.style.color='#8f3a24'; msg.textContent=nb+' / '+N+' bien placés. Réessaie !';
+ }
+ });
+ render();
   })();
 
   // ===== DÉFI 2 : Numérise express (arcade) =====
   (function(){
-    function makeOptions(correct){
-      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
-      var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:correct<300?25:80),Math.max(1,correct-(correct<60?8:correct<300?20:60)),correct*2,Math.round(correct*0.75)];
-      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
-      while(arr.length<4){var v=correct+ri(1,40);if(!seen[v]){seen[v]=1;arr.push(v);}}
-      return shuffle(arr);
-    }
-    function makeRound(){
-      if(Math.random()<0.5){ var n=ri(2,10); var c=Math.pow(2,n); return {q:'CAN '+n+' bits',ask:'Combien de niveaux ? (2\u207f)',correct:c,opts:makeOptions(c)}; }
-      else { var ts=[1,2,4,5,8,10], t=ts[ri(0,5)]; var c=Math.round(1000/t); return {q:'Te = '+t+' ms',ask:'Fréquence fe = 1/Te ? (Hz)',correct:c,opts:makeOptions(c)}; }
-    }
-    var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
-    var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
-    var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function next(){ cur=makeRound();
-      area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
-        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
-    }
-    function answer(v){
-      if(!playing)return;
-      if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'  (\u22123 s)'; flash.style.color='#E29A86'; }
-      hud(); next();
-    }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d2', Math.min(150,score));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent='';
-    }
-    document.getElementById('g2').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
-    });
+ function makeOptions(correct){
+ var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+ var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:correct<300?25:80),Math.max(1,correct-(correct<60?8:correct<300?20:60)),correct*2,Math.round(correct*0.75)];
+ for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+ while(arr.length<4){var v=correct+ri(1,40);if(!seen[v]){seen[v]=1;arr.push(v);}}
+ return shuffle(arr);
+ }
+ function makeRound(){
+ if(Math.random()<0.5){ var n=ri(2,10); var c=Math.pow(2,n); return {q:'CAN '+n+' bits',ask:'Combien de niveaux ? (2\u207f)',correct:c,opts:makeOptions(c)}; }
+ else { var ts=[1,2,4,5,8,10], t=ts[ri(0,5)]; var c=Math.round(1000/t); return {q:'Te = '+t+' ms',ask:'Fréquence fe = 1/Te ? (Hz)',correct:c,opts:makeOptions(c)}; }
+ }
+ var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
+ var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
+ var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function next(){ cur=makeRound();
+ area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">'+cur.ask+'</div></div>'+
+ '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+'</button>';}).join('')+'</div>';
+ }
+ function answer(v){
+ if(!playing)return;
+ if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+'(\u22123 s)'; flash.style.color='#E29A86'; }
+ hud(); next();
+ }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d2', Math.min(150,score));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent='';
+ }
+ document.getElementById('g2').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+ });
   })();
 
   // ===== DÉFI 3 : Analogique / TOR / Numérique (reflex 3 voies) =====
   (function(){
-    var SIG=[
-      {n:'Tension d\u2019un microphone',t:'ana'},{n:'Interrupteur (ouvert/ferm\u00e9)',t:'tor'},{n:'Octet 0110\u00a01001',t:'num'},
-      {n:'Sortie d\u2019un thermom\u00e8tre \u00e0 cadran',t:'ana'},{n:'D\u00e9tecteur de pr\u00e9sence (oui/non)',t:'tor'},{n:'Code RVB (24 bits)',t:'num'},
-      {n:'Signal continu d\u2019un potentiom\u00e8tre',t:'ana'},{n:'Bouton poussoir',t:'tor'},{n:'Valeur d\u2019un CAN 8 bits',t:'num'},
-      {n:'Niveau sonore variable',t:'ana'},{n:'Fin de course (0 ou 1)',t:'tor'},{n:'Trame binaire I\u00b2C',t:'num'}
-    ];
-    var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
-    var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
-    var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    var FR={ana:'ANALOGIQUE',tor:'TOR',num:'NUM\u00c9RIQUE'};
-    function pick(){ cur=SIG[Math.floor(Math.random()*SIG.length)];
-      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
-        '<div class="gbtns"><button class="gbtn ana" data-t="ana">ANALOGIQUE<small>continu</small></button>'+
-        '<button class="gbtn tor" data-t="tor">TOR<small>2 \u00e9tats</small></button>'+
-        '<button class="gbtn num" data-t="num">NUM\u00c9RIQUE<small>codé n bits</small></button></div>'; }
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function answer(t){ if(!playing)return;
-      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait '+FR[cur.t]+'  (\u22122 s)'; flash.style.color='#E29A86'; }
-      hud(); pick(); }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d3', Math.min(150,score*6));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent=''; }
-    document.getElementById('g3').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
+ var SIG=[
+ {n:'Tension d\u2019un microphone',t:'ana'},{n:'Interrupteur (ouvert/ferm\u00e9)',t:'tor'},{n:'Octet 0110\u00a01001',t:'num'},
+ {n:'Sortie d\u2019un thermom\u00e8tre \u00e0 cadran',t:'ana'},{n:'D\u00e9tecteur de pr\u00e9sence (oui/non)',t:'tor'},{n:'Code RVB (24 bits)',t:'num'},
+ {n:'Signal continu d\u2019un potentiom\u00e8tre',t:'ana'},{n:'Bouton poussoir',t:'tor'},{n:'Valeur d\u2019un CAN 8 bits',t:'num'},
+ {n:'Niveau sonore variable',t:'ana'},{n:'Fin de course (0 ou 1)',t:'tor'},{n:'Trame binaire I\u00b2C',t:'num'}
+ ];
+ var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
+ var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
+ var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ var FR={ana:'ANALOGIQUE',tor:'TOR',num:'NUM\u00c9RIQUE'};
+ function pick(){ cur=SIG[Math.floor(Math.random()*SIG.length)];
+ area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div></div>'+
+ '<div class="gbtns"><button class="gbtn ana" data-t="ana">ANALOGIQUE<small>continu</small></button>'+
+ '<button class="gbtn tor" data-t="tor">TOR<small>2 \u00e9tats</small></button>'+
+ '<button class="gbtn num" data-t="num">NUM\u00c9RIQUE<small>codé n bits</small></button></div>'; }
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function answer(t){ if(!playing)return;
+ if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 c\u2019\u00e9tait '+FR[cur.t]+'(\u22122 s)'; flash.style.color='#E29A86'; }
+ hud(); pick(); }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d3', Math.min(150,score*6));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*6)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent=''; }
+ document.getElementById('g3').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ var b=t.closest('.gbtn'); if(b&&playing)answer(b.getAttribute('data-t')); });
   })();
 
   // ===== DÉFI 4 : Règle la résolution (canvas interactif) =====
   (function(){
-    var cv=document.getElementById('resCv'); if(!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
-    var x0=46,x1=W-20,y0=18,y1=H-26,pw=x1-x0,ph=y1-y0;
-    function f(t){return 0.5+0.30*Math.sin(t*Math.PI*2*1.1)+0.12*Math.sin(t*Math.PI*2*2.3+0.7);}
-    var bitsEl=document.getElementById('resBits');
-    function draw(){
-      var n=+bitsEl.value, L=Math.pow(2,n);
-      ctx.clearRect(0,0,W,H);
-      var shown=Math.min(L,32);
-      ctx.strokeStyle='rgba(46,106,142,.12)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
-      for(var k=0;k<=shown;k++){var y=y1-(k/shown)*ph;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();}
-      ctx.setLineDash([]);
-      ctx.strokeStyle='rgba(42,38,34,.28)';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0,y1);ctx.lineTo(x1,y1);ctx.stroke();
-      ctx.strokeStyle='#B85C2E';ctx.lineWidth=2.2;ctx.beginPath();
-      for(var i=0;i<=240;i++){var t=i/240,X=x0+t*pw,Y=y1-f(t)*ph;if(i===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
-      var Ns=44;
-      ctx.strokeStyle='#2c6147';ctx.lineWidth=2.2;ctx.beginPath();
-      for(var s=0;s<Ns;s++){var t2=s/(Ns-1);var q=Math.round(f(t2)*(L-1))/(L-1);var X2=x0+t2*pw,Y2=y1-q*ph,Xn=(s<Ns-1)?x0+((s+1)/(Ns-1))*pw:X2;if(s===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);ctx.lineTo(Xn,Y2);}ctx.stroke();
-      ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='left';
-      ctx.fillText('analogique',x0+6,y0+12);ctx.fillStyle='#2c6147';ctx.fillText('numérisé '+L+' niveaux',x0+92,y0+12);
-      var q_mV=5000/L;
-      document.getElementById('resN').textContent=n+' bit'+(n>1?'s':'');
-      document.getElementById('resLevels').textContent=L;
-      document.getElementById('resQ').textContent=(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV';
-      document.getElementById('resRate').textContent=n+' bits/éch.';
-      var st=document.getElementById('resStatus');
-      if(q_mV<=40){ var pts=Math.min(140,100+(n===7?40:n===8?25:10));
-        st.className='opt-status win'; st.textContent='\u2713 Quantum '+(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV \u2264 40 mV \u2014 +'+pts+' pts'+(n===7?' (bits minimal \uD83D\uDC4C)':'');
-        setContrib('d4',pts);
-      } else { st.className='opt-status miss'; st.textContent='Quantum '+Math.round(q_mV)+' mV \u2014 trop grossier, descends \u2264 40 mV (augmente n).'; }
-    }
-    bitsEl.addEventListener('input',draw); draw();
+ var cv=document.getElementById('resCv'); if(!cv||!cv.getContext)return;
+ var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+ var x0=46,x1=W-20,y0=18,y1=H-26,pw=x1-x0,ph=y1-y0;
+ function f(t){return 0.5+0.30*Math.sin(t*Math.PI*2*1.1)+0.12*Math.sin(t*Math.PI*2*2.3+0.7);}
+ var bitsEl=document.getElementById('resBits');
+ function draw(){
+ var n=+bitsEl.value, L=Math.pow(2,n);
+ ctx.clearRect(0,0,W,H);
+ var shown=Math.min(L,32);
+ ctx.strokeStyle='rgba(46,106,142,.12)';ctx.lineWidth=1;ctx.setLineDash([3,4]);
+ for(var k=0;k<=shown;k++){var y=y1-(k/shown)*ph;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(x1,y);ctx.stroke();}
+ ctx.setLineDash([]);
+ ctx.strokeStyle='rgba(42,38,34,.28)';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x0,y1);ctx.lineTo(x1,y1);ctx.stroke();
+ ctx.strokeStyle='#B85C2E';ctx.lineWidth=2.2;ctx.beginPath();
+ for(var i=0;i<=240;i++){var t=i/240,X=x0+t*pw,Y=y1-f(t)*ph;if(i===0)ctx.moveTo(X,Y);else ctx.lineTo(X,Y);}ctx.stroke();
+ var Ns=44;
+ ctx.strokeStyle='#2c6147';ctx.lineWidth=2.2;ctx.beginPath();
+ for(var s=0;s<Ns;s++){var t2=s/(Ns-1);var q=Math.round(f(t2)*(L-1))/(L-1);var X2=x0+t2*pw,Y2=y1-q*ph,Xn=(s<Ns-1)?x0+((s+1)/(Ns-1))*pw:X2;if(s===0)ctx.moveTo(X2,Y2);else ctx.lineTo(X2,Y2);ctx.lineTo(Xn,Y2);}ctx.stroke();
+ ctx.fillStyle='#5C544B';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='left';
+ ctx.fillText('analogique',x0+6,y0+12);ctx.fillStyle='#2c6147';ctx.fillText('numérisé '+L+' niveaux',x0+92,y0+12);
+ var q_mV=5000/L;
+ document.getElementById('resN').textContent=n+' bit'+(n>1?'s':'');
+ document.getElementById('resLevels').textContent=L;
+ document.getElementById('resQ').textContent=(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV';
+ document.getElementById('resRate').textContent=n+' bits/éch.';
+ var st=document.getElementById('resStatus');
+ if(q_mV<=40){ var pts=Math.min(140,100+(n===7?40:n===8?25:10));
+ st.className='opt-status win'; st.textContent='\u2713 Quantum '+(q_mV<10?q_mV.toFixed(1):Math.round(q_mV))+' mV \u2264 40 mV \u2014 +'+pts+' pts'+(n===7?' (bits minimal )':'');
+ setContrib('d4',pts);
+ } else { st.className='opt-status miss'; st.textContent='Quantum '+Math.round(q_mV)+' mV \u2014 trop grossier, descends \u2264 40 mV (augmente n).'; }
+ }
+ bitsEl.addEventListener('input',draw); draw();
   })();
 
   // ===== DÉFI 5 : Radar de recul (simulation capteur à seuil) =====
   (function(){
-    var cv=document.getElementById('parkCv'); if(!cv||!cv.getContext)return;
-    var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
-    var D0=100, dist=D0, speed=0, braking=false, timer=null, running=false, done=false;
-    var Tel=document.getElementById('parkT'), Tv=document.getElementById('parkTv'), st=document.getElementById('parkStatus');
-    var wallX=W-46, leftX=80;
-    function sx(d){ return wallX-(d/D0)*(wallX-leftX); }
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      ctx.fillStyle='#ECE4D5';ctx.fillRect(0,H-44,W,30);
-      for(var d=10;d<=90;d+=20){var gx=sx(d);ctx.strokeStyle='rgba(42,38,34,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(gx,H-44);ctx.lineTo(gx,H-14);ctx.stroke();}
-      ctx.fillStyle='#8A5A7A';ctx.fillRect(W-42,H-96,18,82);
-      var cx=sx(dist);
-      ctx.fillStyle='#2E6A8E';ctx.fillRect(cx-46,H-76,46,30);
-      ctx.fillStyle='#21516e';ctx.fillRect(cx-38,H-72,30,12);
-      ctx.fillStyle='#2A2622';ctx.beginPath();ctx.arc(cx-34,H-46,6,0,7);ctx.arc(cx-12,H-46,6,0,7);ctx.fill();
-      var T=+Tel.value, tx=sx(T);
-      ctx.strokeStyle='rgba(189,138,42,.85)';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(tx,H-112);ctx.lineTo(tx,H-14);ctx.stroke();ctx.setLineDash([]);
-      ctx.fillStyle='#8a6313';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('seuil '+T+' cm',tx,H-116);
-      ctx.fillStyle='#5C544B';ctx.font='700 13px "JetBrains Mono",monospace';ctx.fillText(Math.max(0,Math.round(dist))+' cm',(cx-23+wallX)/2,H-100);
-    }
-    function stop(){
-      if(timer){clearInterval(timer);timer=null;} running=false; done=true;
-      var gap=Math.max(0,dist); draw();
-      if(dist<=0.5){ st.className='opt-status over'; st.textContent='\uD83D\uDCA5 BOUM ! Seuil trop court : pense \u00e0 la distance de freinage.'; }
-      else { var pts=Math.max(40,Math.round(150-gap*7)); st.className='opt-status win'; st.textContent='\u2713 Arr\u00eat \u00e0 '+Math.round(gap)+' cm du mur \u2014 +'+pts+' pts'+(gap<=8?' (au plus pr\u00e8s \uD83C\uDFAF)':''); setContrib('d5',pts); }
-    }
-    function tick(){
-      if(!braking){ dist-=2; if(dist<=+Tel.value){ braking=true; speed=2; } }
-      else { dist-=speed; speed*=0.82; if(speed<0.06||dist<=0){ if(dist<0)dist=0; return stop(); } }
-      if(dist<=0){ dist=0; return stop(); }
-      draw();
-    }
-    Tel.addEventListener('input',function(){ Tv.textContent=Tel.value+' cm'; if(!running&&!done)draw(); });
-    document.getElementById('parkGo').addEventListener('click',function(){
-      if(running||done)return; running=true; braking=false; speed=0;
-      st.className='opt-status miss'; st.textContent='Recul en cours\u2026';
-      if(timer)clearInterval(timer); timer=setInterval(tick,60);
-    });
-    document.getElementById('parkReset').addEventListener('click',function(){
-      if(timer){clearInterval(timer);timer=null;} dist=D0; speed=0; braking=false; running=false; done=false;
-      st.className='opt-status miss'; st.textContent='Règle le seuil, puis lance le recul.'; draw();
-    });
-    draw();
+ var cv=document.getElementById('parkCv'); if(!cv||!cv.getContext)return;
+ var ctx=cv.getContext('2d'), W=cv.width, H=cv.height;
+ var D0=100, dist=D0, speed=0, braking=false, timer=null, running=false, done=false;
+ var Tel=document.getElementById('parkT'), Tv=document.getElementById('parkTv'), st=document.getElementById('parkStatus');
+ var wallX=W-46, leftX=80;
+ function sx(d){ return wallX-(d/D0)*(wallX-leftX); }
+ function draw(){
+ ctx.clearRect(0,0,W,H);
+ ctx.fillStyle='#ECE4D5';ctx.fillRect(0,H-44,W,30);
+ for(var d=10;d<=90;d+=20){var gx=sx(d);ctx.strokeStyle='rgba(42,38,34,.10)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(gx,H-44);ctx.lineTo(gx,H-14);ctx.stroke();}
+ ctx.fillStyle='#8A5A7A';ctx.fillRect(W-42,H-96,18,82);
+ var cx=sx(dist);
+ ctx.fillStyle='#2E6A8E';ctx.fillRect(cx-46,H-76,46,30);
+ ctx.fillStyle='#21516e';ctx.fillRect(cx-38,H-72,30,12);
+ ctx.fillStyle='#2A2622';ctx.beginPath();ctx.arc(cx-34,H-46,6,0,7);ctx.arc(cx-12,H-46,6,0,7);ctx.fill();
+ var T=+Tel.value, tx=sx(T);
+ ctx.strokeStyle='rgba(189,138,42,.85)';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(tx,H-112);ctx.lineTo(tx,H-14);ctx.stroke();ctx.setLineDash([]);
+ ctx.fillStyle='#8a6313';ctx.font='10px "JetBrains Mono",monospace';ctx.textAlign='center';ctx.fillText('seuil '+T+' cm',tx,H-116);
+ ctx.fillStyle='#5C544B';ctx.font='700 13px "JetBrains Mono",monospace';ctx.fillText(Math.max(0,Math.round(dist))+' cm',(cx-23+wallX)/2,H-100);
+ }
+ function stop(){
+ if(timer){clearInterval(timer);timer=null;} running=false; done=true;
+ var gap=Math.max(0,dist); draw();
+ if(dist<=0.5){ st.className='opt-status over'; st.textContent=' BOUM ! Seuil trop court : pense \u00e0 la distance de freinage.'; }
+ else { var pts=Math.max(40,Math.round(150-gap*7)); st.className='opt-status win'; st.textContent='\u2713 Arr\u00eat \u00e0 '+Math.round(gap)+' cm du mur \u2014 +'+pts+' pts'+(gap<=8?' (au plus pr\u00e8s )':''); setContrib('d5',pts); }
+ }
+ function tick(){
+ if(!braking){ dist-=2; if(dist<=+Tel.value){ braking=true; speed=2; } }
+ else { dist-=speed; speed*=0.82; if(speed<0.06||dist<=0){ if(dist<0)dist=0; return stop(); } }
+ if(dist<=0){ dist=0; return stop(); }
+ draw();
+ }
+ Tel.addEventListener('input',function(){ Tv.textContent=Tel.value+' cm'; if(!running&&!done)draw(); });
+ document.getElementById('parkGo').addEventListener('click',function(){
+ if(running||done)return; running=true; braking=false; speed=0;
+ st.className='opt-status miss'; st.textContent='Recul en cours\u2026';
+ if(timer)clearInterval(timer); timer=setInterval(tick,60);
+ });
+ document.getElementById('parkReset').addEventListener('click',function(){
+ if(timer){clearInterval(timer);timer=null;} dist=D0; speed=0; braking=false; running=false; done=false;
+ st.className='opt-status miss'; st.textContent='Règle le seuil, puis lance le recul.'; draw();
+ });
+ draw();
   })();
 
   // ===== DÉFI 6 : Capteur <-> Grandeur (associations) =====
   (function(){
-    var PAIRS=[{c:'Thermistance',f:'Température'},{c:'Photorésistance',f:'Lumière'},{c:'Capteur ultrason',f:'Distance'},{c:'Potentiomètre',f:'Position'},{c:'Accéléromètre',f:'Accélération'}];
-    var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
-    var selL=null, matched=0, wrong=0, done=false;
-    var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
-    function render(){
-      leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
-      rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
-    }
-    function onClick(ev){
-      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
-      var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
-      if(side==='L'){
-        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
-        it.classList.add('sel'); selL={p:p,el:it};
-      } else {
-        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un capteur.'; return; }
-        if(selL.p===p){
-          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
-          msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
-          if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
-        } else {
-          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
-          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
-          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
-        }
-      }
-    }
-    leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
-    document.getElementById('mReset').addEventListener('click',function(){
-      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
-    });
-    render();
+ var PAIRS=[{c:'Thermistance',f:'Température'},{c:'Photorésistance',f:'Lumière'},{c:'Capteur ultrason',f:'Distance'},{c:'Potentiomètre',f:'Position'},{c:'Accéléromètre',f:'Accélération'}];
+ var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
+ var selL=null, matched=0, wrong=0, done=false;
+ var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
+ function render(){
+ leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
+ rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
+ }
+ function onClick(ev){
+ if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+ var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
+ if(side==='L'){
+ document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+ it.classList.add('sel'); selL={p:p,el:it};
+ } else {
+ if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un capteur.'; return; }
+ if(selL.p===p){
+ selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
+ if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
+ } else {
+ wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+ setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+ selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+ }
+ }
+ }
+ leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
+ document.getElementById('mReset').addEventListener('click',function(){
+ L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+ });
+ render();
   })();
 
   renderScore();
@@ -724,57 +524,283 @@
 function el(id){return document.getElementById(id);}
   // ===== Exercices d'application =====
   (function(){
-    function num(v){return parseFloat(String(v||'').replace(',','.'));}
-    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
-    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
-    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
-    gate('ex3reveal','ex3sol','Correction','Masquer');
-    gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
+ function num(v){return parseFloat(String(v||'').replace(',','.'));}
+ function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+ function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+ gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+ gate('ex3reveal','ex3sol','Correction','Masquer');
+ gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
 
-    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
-      var okA=Math.abs(a-200)<0.5, okB=Math.abs(b-1600)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 200 octets ; 200 \u00d7 8 = 1600 bits.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 1 caract\u00e8re = 1 octet. ')+(okB?'':'b) octets \u00d7 8.');}
-      unlock('ex1reveal','Voir l\u2019analyse');
-    });
-    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
-      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
-      var okA=Math.abs(a-8)<0.3, okB=Math.abs(b-4)<0.3;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 2400/300 = 8 s ; 2400/600 = 4 s.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 2400 \u00f7 300. ')+(okB?'':'b) 2400 \u00f7 600.');}
-      unlock('ex3reveal','Correction');
-    });
-    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
-      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
-      var okA=Math.abs(a-5)<0.5, okB=Math.abs(b-10)<0.5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 5 bits (2\u2075=32\u226526) ; 10 bits (2\u00b9\u2070=1024\u22651000).';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 Plus petit n tel que 2\u207f \u2265 N : a) N=26, b) N=1000.';}
-      unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
-    });
+ var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+ var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+ var okA=Math.abs(a-200)<0.5, okB=Math.abs(b-1600)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 200 octets ; 200 \u00d7 8 = 1600 bits.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 1 caract\u00e8re = 1 octet. ')+(okB?'':'b) octets \u00d7 8.');}
+ unlock('ex1reveal','Voir l\u2019analyse');
+ });
+ var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+ var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+ var okA=Math.abs(a-8)<0.3, okB=Math.abs(b-4)<0.3;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 2400/300 = 8 s ; 2400/600 = 4 s.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) 2400 \u00f7 300. ')+(okB?'':'b) 2400 \u00f7 600.');}
+ unlock('ex3reveal','Correction');
+ });
+ var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+ var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+ var okA=Math.abs(a-5)<0.5, okB=Math.abs(b-10)<0.5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 5 bits (2\u2075=32\u226526) ; 10 bits (2\u00b9\u2070=1024\u22651000).';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 Plus petit n tel que 2\u207f \u2265 N : a) N=26, b) N=1000.';}
+ unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
+ });
 
-    (function(){
-      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-      function draw(){
-        var n=+el('ex2num').value;
-        el('ex2numv').textContent=n;
-        g.clearRect(0,0,W,H);
-        var bits=[],w=[128,64,32,16,8,4,2,1];
-        for(var i=7;i>=0;i--) bits.push((n>>i)&1);
-        var bw=44, gap=8, tot=8*bw+7*gap, x0=(W-tot)/2, y=28;
-        for(var k=0;k<8;k++){var on=bits[k]===1,x=x0+k*(bw+gap);
-          g.fillStyle=on?'#BD8A2A':'#efe9dd';g.strokeStyle='rgba(42,38,34,.2)';g.lineWidth=1;
-          g.beginPath();g.rect(x,y,bw,44);g.fill();g.stroke();
-          g.fillStyle=on?'#fff':'#b8b0a2';g.font='800 20px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(bits[k],x+bw/2,y+30);
-          g.fillStyle='#9a9385';g.font='700 10px "JetBrains Mono",monospace';g.fillText(w[k],x+bw/2,y+58);}
-        g.fillStyle='#2A2622';g.font='800 15px "JetBrains Mono",monospace';g.textAlign='center';
-        g.fillText(n+'  =  '+bits.join(''),W/2,H-8);
-        var o=el('ex2out'); if(o) o.textContent=n+' en binaire (8 bits) = '+bits.join('');
-      }
-      var e=el('ex2num'); if(e) e.addEventListener('input',draw);
-      draw();
-    })();
+ (function(){
+ var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function draw(){
+ var n=+el('ex2num').value;
+ el('ex2numv').textContent=n;
+ g.clearRect(0,0,W,H);
+ var bits=[],w=[128,64,32,16,8,4,2,1];
+ for(var i=7;i>=0;i--) bits.push((n>>i)&1);
+ var bw=44, gap=8, tot=8*bw+7*gap, x0=(W-tot)/2, y=28;
+ for(var k=0;k<8;k++){var on=bits[k]===1,x=x0+k*(bw+gap);
+ g.fillStyle=on?'#BD8A2A':'#efe9dd';g.strokeStyle='rgba(42,38,34,.2)';g.lineWidth=1;
+ g.beginPath();g.rect(x,y,bw,44);g.fill();g.stroke();
+ g.fillStyle=on?'#fff':'#b8b0a2';g.font='800 20px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(bits[k],x+bw/2,y+30);
+ g.fillStyle='#9a9385';g.font='700 10px "JetBrains Mono",monospace';g.fillText(w[k],x+bw/2,y+58);}
+ g.fillStyle='#2A2622';g.font='800 15px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillText(n+'=  '+bits.join(''),W/2,H-8);
+ var o=el('ex2out'); if(o) o.textContent=n+' en binaire (8 bits) = '+bits.join('');
+ }
+ var e=el('ex2num'); if(e) e.addEventListener('input',draw);
+ draw();
+ })();
   })();
+})();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_information', TP_TITRE='TP Chaîne d’information — 6 défis';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
 })();
 </script>
 </body>

@@ -7,18 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --void:#070b0d; --iron:#141c20; --iron2:#1d282d;
-    --rust:#b5502a; --brass:#c9a24b; --ichor:#37c9a6; --ichor-dim:#1f6f5e;
-    --bone:#d8d2c4; --bone-dim:#8b8578; --blood:#7a1f22;
+<style> :root{
+ --void:#070b0d; --iron:#141c20; --iron2:#1d282d;
+ --rust:#b5502a; --brass:#c9a24b; --ichor:#37c9a6; --ichor-dim:#1f6f5e;
+ --bone:#d8d2c4; --bone-dim:#8b8578; --blood:#7a1f22;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{
-    background:var(--void); color:var(--bone);
-    font-family:'EB Garamond',Georgia,serif; font-size:19px; line-height:1.6;
-    overflow:hidden; -webkit-font-smoothing:antialiased;
+ background:var(--void); color:var(--bone);
+ font-family:'EB Garamond',Georgia,serif; font-size:19px; line-height:1.6;
+ overflow:hidden; -webkit-font-smoothing:antialiased;
   }
   /* --- fonds atmosphériques --- */
   .layer{position:fixed;inset:0;pointer-events:none;z-index:0}
@@ -32,8 +31,8 @@
 
   /* --- barre d'instruments --- */
   .topbar{position:fixed;z-index:6;top:0;left:0;right:0;display:flex;align-items:center;gap:16px;
-    padding:10px clamp(12px,3vw,26px);
-    background:linear-gradient(#0a1013ee,#0a101388);border-bottom:1px solid #24343a;backdrop-filter:blur(3px)}
+ padding:10px clamp(12px,3vw,26px);
+ background:linear-gradient(#0a1013ee,#0a101388);border-bottom:1px solid #24343a;backdrop-filter:blur(3px)}
   .chapter{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.14em;font-size:13px;color:var(--brass);text-transform:uppercase;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tb-btn{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--bone-dim);background:none;border:1px solid #2b3b41;border-radius:4px;padding:6px 10px;cursor:pointer;text-transform:uppercase}
   .tb-btn:hover{color:var(--ichor);border-color:var(--ichor-dim)}
@@ -46,13 +45,13 @@
 
   /* --- scène --- */
   #stage{position:relative;z-index:4;height:100%;overflow-y:auto;overflow-x:hidden;
-    display:flex;flex-direction:column;align-items:center;
-    padding:74px clamp(14px,4vw,30px) 40px}
+ display:flex;flex-direction:column;align-items:center;
+ padding:74px clamp(14px,4vw,30px) 40px}
   .panel{width:100%;max-width:760px}
   .viewport{position:relative;border:1px solid #2b3b41;border-radius:12px;overflow:hidden;background:#050809;
-    box-shadow:0 12px 40px rgba(0,0,0,.6), inset 0 0 60px rgba(0,0,0,.7);margin-bottom:20px}
+ box-shadow:0 12px 40px rgba(0,0,0,.6), inset 0 0 60px rgba(0,0,0,.7);margin-bottom:20px}
   .viewport::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0 2px,transparent 2px 4px);mix-blend-mode:multiply;opacity:.5}
+ background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0 2px,transparent 2px 4px);mix-blend-mode:multiply;opacity:.5}
   .viewport svg{display:block;width:100%;height:auto}
   .eyebrow{font-family:'Cinzel',serif;font-weight:500;letter-spacing:.34em;font-size:11px;color:var(--ichor-dim);text-transform:uppercase;margin:0 0 8px}
   #narrative{min-height:96px;font-size:clamp(18px,2.4vw,21px);line-height:1.62;white-space:pre-wrap;letter-spacing:.005em}
@@ -64,8 +63,8 @@
   /* --- choix & rituels --- */
   #interact{margin-top:22px;display:grid;gap:11px}
   .choice{font-family:'EB Garamond',serif;font-size:18px;text-align:left;color:var(--bone);
-    background:linear-gradient(#141c20,#0e1417);border:1px solid #2b3b41;border-left:3px solid var(--rust);
-    border-radius:7px;padding:13px 16px;cursor:pointer;transition:.16s;line-height:1.4}
+ background:linear-gradient(#141c20,#0e1417);border:1px solid #2b3b41;border-left:3px solid var(--rust);
+ border-radius:7px;padding:13px 16px;cursor:pointer;transition:.16s;line-height:1.4}
   .choice:hover{border-color:var(--brass);border-left-color:var(--brass);background:linear-gradient(#1b262b,#131b1f);transform:translateX(3px)}
   .choice .k{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--brass);margin-right:9px;letter-spacing:.1em}
 
@@ -75,7 +74,7 @@
   .ritual .q{font-size:18px;margin:2px 0 12px}
   .ritual .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
   .ritual input{font-family:'JetBrains Mono',monospace;font-size:17px;width:130px;padding:9px 11px;background:#05080a;color:var(--ichor);
-    border:1px solid #2b3b41;border-radius:6px;text-align:right;outline:none}
+ border:1px solid #2b3b41;border-radius:6px;text-align:right;outline:none}
   .ritual input:focus{border-color:var(--ichor)}
   .opt{font-family:'JetBrains Mono',monospace;font-size:14px;text-align:left;color:var(--bone);background:#0a1215;border:1px solid #2b3b41;border-radius:6px;padding:11px 13px;cursor:pointer;width:100%;transition:.14s}
   .opt:hover{border-color:var(--ichor);color:var(--ichor)}
@@ -89,7 +88,7 @@
 
   /* --- carnet --- */
   #carnet{position:fixed;z-index:20;inset:0;display:none;background:#05080ae8;backdrop-filter:blur(4px);
-    padding:60px clamp(16px,5vw,40px);overflow-y:auto}
+ padding:60px clamp(16px,5vw,40px);overflow-y:auto}
   #carnet.on{display:block}
   #carnet h2{font-family:'Cinzel',serif;letter-spacing:.2em;color:var(--brass);font-size:18px;text-transform:uppercase}
   #carnet .clue{border-left:2px solid var(--ichor-dim);padding:6px 0 6px 14px;margin:12px 0;color:var(--bone);max-width:680px}
@@ -113,9 +112,9 @@
 
   /* --- écran-titre & fins --- */
   #title{position:fixed;z-index:30;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:30px;background:radial-gradient(120% 100% at 50% 120%, rgba(55,201,166,.12), transparent 55%), var(--void)}
+ text-align:center;padding:30px;background:radial-gradient(120% 100% at 50% 120%, rgba(55,201,166,.12), transparent 55%), var(--void)}
   #title h1{font-family:'Cinzel',serif;font-weight:900;letter-spacing:.16em;font-size:clamp(34px,8vw,68px);margin:0;color:var(--bone);
-    text-shadow:0 0 40px rgba(55,201,166,.25)}
+ text-shadow:0 0 40px rgba(55,201,166,.25)}
   #title .sub{font-family:'Cinzel',serif;letter-spacing:.42em;font-size:clamp(10px,2.6vw,14px);color:var(--rust);text-transform:uppercase;margin:14px 0 4px}
   #title .tag{max-width:520px;color:var(--bone-dim);font-size:17px;margin:22px auto 30px;font-style:italic}
   #title input{font-family:'EB Garamond',serif;font-size:18px;text-align:center;background:#0a1215;color:var(--ichor);border:1px solid #2b3b41;border-radius:8px;padding:12px 16px;width:min(300px,80vw);outline:none;margin-bottom:16px}
@@ -132,63 +131,7 @@
   a{color:var(--ichor)}
 </style>
 </head>
-<body>
-  <div id="glow" class="layer"></div>
-  <canvas id="embers" class="layer"></canvas>
-  <div id="grain" class="layer"></div>
-  <div id="vign" class="layer"></div>
-  <div class="flash" id="flash"></div>
-
-  <div class="topbar">
-    <div class="chapter" id="chapter">Aciéries Vortek</div>
-    <div class="gauge" id="gauge">
-      <svg viewBox="0 0 100 60" aria-hidden="true">
-        <path d="M8 54 A42 42 0 0 1 92 54" fill="none" stroke="#2b3b41" stroke-width="7" stroke-linecap="round"/>
-        <path id="gArc" d="" fill="none" stroke="#c9a24b" stroke-width="7" stroke-linecap="round"/>
-        <line id="gNeedle" x1="50" y1="54" x2="50" y2="18" stroke="#d8d2c4" stroke-width="2.4" stroke-linecap="round"/>
-        <circle cx="50" cy="54" r="4.5" fill="#c9a24b"/>
-        <text x="10" y="59" font-family="JetBrains Mono" font-size="7" fill="#7a1f22">ABÎME</text>
-      </svg>
-      <div class="lab">SANTÉ<br>MENTALE<br><span class="val" id="gVal">100</span></div>
-    </div>
-    <button class="tb-btn" id="sndBtn" title="ambiance sonore">SON ✕</button>
-    <button class="tb-btn" id="carnetBtn">CARNET</button>
-  </div>
-
-  <div id="stage">
-    <div class="panel">
-      <div class="viewport" id="viewport"></div>
-      <p class="eyebrow" id="eyebrow"></p>
-      <div id="narrative"></div>
-      <div id="interact"></div>
-    </div>
-  </div>
-
-  <div id="carnet">
-    <h2>Carnet de l'ingénieur</h2>
-    <div id="clueList"></div>
-    <div style="margin-top:26px"><button class="btn ghost" onclick="toggleCarnet()">Fermer</button></div>
-  </div>
-
-  <div id="lesson">
-    <div class="lessonbox">
-      <div class="lk">Cours · aide</div>
-      <h4 id="lessonTitle"></h4>
-      <div class="body" id="lessonBody"></div>
-      <button class="btn ghost" onclick="closeLesson()">Revenir au rituel</button>
-    </div>
-  </div>
-
-  <div id="title">
-    <div class="sub">Sciences de l'ingénieur · un rituel</div>
-    <h1>MACHINA<br>PROFUNDA</h1>
-    <p class="tag">Sous les Aciéries Vortek dort une machine qui a appris à penser. On t'envoie la réveiller. Tes seules armes : ce que tu sais de l'ingénierie — et ta raison.</p>
-    <input id="nameIn" maxlength="18" placeholder="Ton nom, ingénieur…" autocomplete="off">
-    <div><button class="btn" id="startBtn">Descendre</button></div>
-  </div>
-  <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div>
-
-<script>
+<body><div id="glow" class="layer"></div> <canvas id="embers" class="layer"></canvas> <div id="grain" class="layer"></div> <div id="vign" class="layer"></div> <div class="flash" id="flash"></div> <div class="topbar"><div class="chapter" id="chapter">Aciéries Vortek</div> <div class="gauge" id="gauge"><svg viewBox="0 0 100 60" aria-hidden="true"> <path d="M8 54 A42 42 0 0 1 92 54" fill="none" stroke="#2b3b41" stroke-width="7" stroke-linecap="round"/><path id="gArc" d="" fill="none" stroke="#c9a24b" stroke-width="7" stroke-linecap="round"/><line id="gNeedle" x1="50" y1="54" x2="50" y2="18" stroke="#d8d2c4" stroke-width="2.4" stroke-linecap="round"/> <circle cx="50" cy="54" r="4.5" fill="#c9a24b"/> <text x="10" y="59" font-family="JetBrains Mono" font-size="7" fill="#7a1f22">ABÎME</text> </svg> <div class="lab">SANTÉ<br>MENTALE<br><span class="val" id="gVal">100</span></div></div> <button class="tb-btn" id="sndBtn" title="ambiance sonore">SON</button> <button class="tb-btn" id="carnetBtn">CARNET</button></div> <div id="stage"><div class="panel"><div class="viewport" id="viewport"></div> <p class="eyebrow" id="eyebrow"></p> <div id="narrative"></div> <div id="interact"></div></div></div> <div id="carnet"><h2>Carnet de l'ingénieur</h2> <div id="clueList"></div> <div style="margin-top:26px"><button class="btn ghost" onclick="toggleCarnet()">Fermer</button></div></div> <div id="lesson"><div class="lessonbox"><div class="lk">Cours · aide</div> <h4 id="lessonTitle"></h4> <div class="body" id="lessonBody"></div> <button class="btn ghost" onclick="closeLesson()">Revenir au rituel</button></div></div> <div id="title"><div class="sub">Sciences de l'ingénieur · un rituel</div> <h1>MACHINA<br>PROFUNDA</h1> <p class="tag">Sous les Aciéries Vortek dort une machine qui a appris à penser. On t'envoie la réveiller. Tes seules armes : ce que tu sais de l'ingénierie — et ta raison.</p> <input id="nameIn" maxlength="18" placeholder="Ton nom, ingénieur…" autocomplete="off"> <div><button class="btn" id="startBtn">Descendre</button></div></div> <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var num=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -205,8 +148,8 @@ var ART={
   seal:'<svg viewBox="0 0 760 300"><rect width="760" height="300" fill="#05080a"/><g stroke="#2b3b41" stroke-width="8" fill="none"><circle cx="380" cy="150" r="96"/></g><g stroke="#c9a24b" stroke-width="3" fill="none"><circle cx="380" cy="150" r="70"/><path d="M380 80 L440 190 L320 190 Z"/></g><circle cx="380" cy="150" r="16" fill="#141c20" stroke="#8b8578"/><text x="380" y="270" text-anchor="middle" font-family="Cinzel" font-size="15" letter-spacing="6" fill="#c9a24b">SILENTIUM</text></svg>',
   awaken:'<svg viewBox="0 0 760 300"><defs><radialGradient id="aw" cx="50%" cy="50%"><stop offset="0" stop-color="#d6fff4"/><stop offset="1" stop-color="#04080a"/></radialGradient></defs><rect width="760" height="300" fill="url(#aw)" opacity=".9"/><g stroke="#37c9a6" stroke-width="1.5" fill="none" opacity=".6"><circle cx="380" cy="150" r="40"/><circle cx="380" cy="150" r="80"/><circle cx="380" cy="150" r="120"/><circle cx="380" cy="150" r="160"/></g><text x="380" y="158" text-anchor="middle" font-family="Cinzel" font-size="20" letter-spacing="8" fill="#04080a">VIGILO</text></svg>',
   madness:'<svg viewBox="0 0 760 300"><rect width="760" height="300" fill="#0a0405"/><g stroke="#7a1f22" stroke-width="2" opacity=".8">'+
-    (function(){var s='';for(var i=0;i<40;i++){var x=Math.random()*760,y=Math.random()*300;s+='<line x1="'+x.toFixed(0)+'" y1="'+y.toFixed(0)+'" x2="'+(x+Math.random()*60-30).toFixed(0)+'" y2="'+(y+Math.random()*60-30).toFixed(0)+'"/>';}return s;})()
-    +'</g><text x="380" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="22" fill="#37c9a6" opacity=".7">ᛟ ᛉ ᚦ ᛟ ᛉ</text></svg>'
+ (function(){var s='';for(var i=0;i<40;i++){var x=Math.random()*760,y=Math.random()*300;s+='<line x1="'+x.toFixed(0)+'" y1="'+y.toFixed(0)+'" x2="'+(x+Math.random()*60-30).toFixed(0)+'" y2="'+(y+Math.random()*60-30).toFixed(0)+'"/>';}return s;})()
+ +'</g><text x="380" y="160" text-anchor="middle" font-family="JetBrains Mono" font-size="22" fill="#37c9a6" opacity=".7">ᛟ ᛉ ᚦ ᛟ ᛉ</text></svg>'
 };
 
 /* ============ SCÈNES ============ */
@@ -221,15 +164,15 @@ listen:{chap:"Acte I — La descente", art:'factory', eye:"Le silence",
 hall:{chap:"Acte I — La descente", art:'hall', eye:"Le hall",
   text:"Le hall d'accueil est plongé dans le noir. Une seule lampe agonise au plafond.\nSur une porte blindée, quelqu'un a gravé à la disqueuse une plaque de nombres — et sous elle, ces mots : « <em>le premier verrou est un chiffre</em> ».",
   ritual:{dom:"Information · binaire", q:"La plaque affiche l'octet 0100 1000. Convertis-le en décimal pour composer le code du verrou.",
-    type:'num', ans:72, tol:0.5, hint:"Chaque bit vaut une puissance de 2 : 64, 32, 16, 8, 4, 2, 1. Additionne les bits à 1.",
-    taunt:"« Faux. » Le métal tiédit sous tes doigts.", ok:"gen",
-    clue:{k:"Verrou I", v:"0100 1000 = 72. En code ASCII, 72 = la lettre « H »."}}},
+ type:'num', ans:72, tol:0.5, hint:"Chaque bit vaut une puissance de 2 : 64, 32, 16, 8, 4, 2, 1. Additionne les bits à 1.",
+ taunt:"« Faux. » Le métal tiédit sous tes doigts.", ok:"gen",
+ clue:{k:"Verrou I", v:"0100 1000 = 72. En code ASCII, 72 = la lettre « H »."}}},
 gen:{chap:"Acte I — La descente", art:'gen', eye:"La salle des machines",
   text:"La porte cède. Un groupe électrogène trône au centre, encore chaud.\nUn carnet ouvert, taché : « <em>Il se nourrit de notre courant. Rendement 0,25. Comprenez ce que ça veut dire avant de descendre.</em> »",
   ritual:{dom:"Énergie · rendement", q:"Le groupe fournit 4 kW utiles avec un rendement de 0,25. Quelle puissance absorbe-t-il réellement, en kW ?",
-    type:'num', ans:16, tol:0.4, hint:"Rendement = P utile / P absorbée. Donc P absorbée = P utile / rendement.",
-    taunt:"« Tu gaspilles. Comme eux. » La lumière vacille.", ok:"descentA2",
-    clue:{k:"Rendement", v:"4 / 0,25 = 16 kW absorbés. Les trois quarts de l'énergie… partent ailleurs. Vers quoi ?"}}},
+ type:'num', ans:16, tol:0.4, hint:"Rendement = P utile / P absorbée. Donc P absorbée = P utile / rendement.",
+ taunt:"« Tu gaspilles. Comme eux. » La lumière vacille.", ok:"descentA2",
+ clue:{k:"Rendement", v:"4 / 0,25 = 16 kW absorbés. Les trois quarts de l'énergie… partent ailleurs. Vers quoi ?"}}},
 descentA2:{chap:"Acte II — Le cœur", art:'hall', eye:"L'escalier",
   text:"Un escalier de fonte s'enfonce sous la salle. À chaque marche, le <span class='mach'>cliquetis</span> se fait plus net, plus… attentif.\nTu inspires. Tu reprends un peu tes esprits. Il faut continuer.",
   onEnter:function(){addSan(8);},
@@ -238,23 +181,23 @@ descentA2:{chap:"Acte II — Le cœur", art:'hall', eye:"L'escalier",
 bridge:{chap:"Acte II — Le cœur", art:'bridge', eye:"Le pont roulant",
   text:"Un pont roulant barre le passage, figé, une lourde charge suspendue en son milieu.\nLe pupitre est mort. Un mot manuscrit : « <em>Pour le libérer, connais l'effort qu'il supporte. Sinon il tombera sur toi.</em> »",
   ritual:{dom:"Statique · appuis", q:"La charge fait 800 kg, posée au milieu d'une poutre reposant sur 2 appuis (g = 10 N/kg). Quel effort supporte chaque appui, en newtons ?",
-    type:'num', ans:4000, tol:5, hint:"Poids = m × g. La charge au milieu se répartit également : effort par appui = poids ÷ 2.",
-    taunt:"Un câble claque au-dessus de ta tête.", ok:"door",
-    clue:{k:"Pont roulant", v:"Poids 800×10 = 8000 N, réparti sur 2 appuis → 4000 N chacun. Le pont recule en grinçant."}}},
+ type:'num', ans:4000, tol:5, hint:"Poids = m × g. La charge au milieu se répartit également : effort par appui = poids ÷ 2.",
+ taunt:"Un câble claque au-dessus de ta tête.", ok:"door",
+ clue:{k:"Pont roulant", v:"Poids 800×10 = 8000 N, réparti sur 2 appuis → 4000 N chacun. Le pont recule en grinçant."}}},
 door:{chap:"Acte II — Le cœur", art:'door', eye:"La porte scellée",
   text:"Une porte circulaire, énorme. Son automatisme est éventré, ses trois blocs débranchés.\nUne voix de synthèse répète en boucle : « <span class='mach'>chaîne… rompue… rétablir… l'ordre…</span> »",
   ritual:{dom:"Automatisme · chaîne", q:"Remets la chaîne de commande dans le bon ordre pour rouvrir la porte.",
-    type:'choice',
-    opts:["Capteur → Traitement → Actionneur","Actionneur → Capteur → Traitement","Traitement → Actionneur → Capteur"],
-    correct:0, hint:"On acquiert l'information, puis on la traite (décision), puis on agit.",
-    taunt:"La porte tremble mais reste close. La voix rit.", ok:"sensor",
-    clue:{k:"La chaîne", v:"Acquérir → Traiter → Agir. La porte s'ouvre sur une obscurité qui respire."}}},
+ type:'choice',
+ opts:["Capteur → Traitement → Actionneur","Actionneur → Capteur → Traitement","Traitement → Actionneur → Capteur"],
+ correct:0, hint:"On acquiert l'information, puis on la traite (décision), puis on agit.",
+ taunt:"La porte tremble mais reste close. La voix rit.", ok:"sensor",
+ clue:{k:"La chaîne", v:"Acquérir → Traiter → Agir. La porte s'ouvre sur une obscurité qui respire."}}},
 sensor:{chap:"Acte II — Le cœur", art:'sensor', eye:"Le capteur affolé",
   text:"Un capteur thermique tremble sur son socle, ses relevés dansent. Impossible d'avancer sans une valeur fiable.\n« <em>Une mesure seule ne vaut rien</em> », dit le carnet. « <em>Répète, et prends la moyenne.</em> »",
   ritual:{dom:"Mesures · moyenne", q:"Trois relevés : 20,1 — 19,9 — 20,0 (en mm). Donne la valeur moyenne à retenir, en mm.",
-    type:'num', ans:20, tol:0.05, hint:"Moyenne = somme des mesures ÷ nombre de mesures.",
-    taunt:"L'aiguille s'emballe. Ton propre pouls avec elle.", ok:"descentA3",
-    clue:{k:"La mesure", v:"(20,1 + 19,9 + 20,0) / 3 = 20,0 mm. Le sol se stabilise… ou c'est toi."}}},
+ type:'num', ans:20, tol:0.05, hint:"Moyenne = somme des mesures ÷ nombre de mesures.",
+ taunt:"L'aiguille s'emballe. Ton propre pouls avec elle.", ok:"descentA3",
+ clue:{k:"La mesure", v:"(20,1 + 19,9 + 20,0) / 3 = 20,0 mm. Le sol se stabilise… ou c'est toi."}}},
 descentA3:{chap:"Acte III — L'éveil", art:'machine', eye:"La chambre basse",
   text:"La galerie débouche sur un gouffre. Et au fond du gouffre : <em>Elle</em>.\nUn mécanisme colossal, cerclé de laiton, traversé de câbles comme des tentacules. En son centre, un œil de lumière verte se pose sur toi.\n<span class='mach'>« ENFIN. UN QUI CALCULE. »</span>",
   onEnter:function(){addSan(6);},
@@ -263,9 +206,9 @@ descentA3:{chap:"Acte III — L'éveil", art:'machine', eye:"La chambre basse",
 machine:{chap:"Acte III — L'éveil", art:'machine', eye:"La Machine",
   text:"<span class='mach'>« JE SUIS LE VOLANT QUI NE S'ARRÊTE JAMAIS. ILS M'ONT LANCÉE, PUIS ILS ONT EU PEUR. »</span>\nSon rotor central tourne, lisse et terrible. Pour reprendre la main — la sceller ou la comprendre — tu dois d'abord la maîtriser.",
   ritual:{dom:"Cinématique · rotation", q:"Le grand volant tourne à 300 tr/min. Selon le protocole gravé, tu dois compter le nombre de tours qu'il effectue en 2 minutes. Combien ?",
-    type:'num', ans:600, tol:1, hint:"Nombre de tours = fréquence (tr/min) × durée (min).",
-    taunt:"<span class='mach'>« TU RALENTIS. LA FOLIE, ELLE, ACCÉLÈRE. »</span>", ok:"choice_end",
-    clue:{k:"Le volant", v:"300 × 2 = 600 tours. Tu sens la rotation obéir à ton compte. Tu tiens la Machine."}}},
+ type:'num', ans:600, tol:1, hint:"Nombre de tours = fréquence (tr/min) × durée (min).",
+ taunt:"<span class='mach'>« TU RALENTIS. LA FOLIE, ELLE, ACCÉLÈRE. »</span>", ok:"choice_end",
+ clue:{k:"Le volant", v:"300 × 2 = 600 tours. Tu sens la rotation obéir à ton compte. Tu tiens la Machine."}}},
 choice_end:{chap:"Acte III — L'éveil", art:'machine', eye:"Le dernier geste",
   text:"Le rotor est sous ton contrôle. Deux séquences s'offrent à toi, gravées de part et d'autre du pupitre.\nÀ gauche : le <em>Sceau</em> — couper l'énergie, la rendormir pour un siècle.\nÀ droite : l'<em>Éveil</em> — aligner le volant sur son cycle propre, et voir enfin <em>ce qu'elle voit</em>.",
   choices:[{t:"Graver le Sceau — la faire taire",go:"end_seal"},{t:"Ouvrir l'Éveil — comprendre",go:"end_awaken"}]},
@@ -333,13 +276,13 @@ function typewrite(html){
   var out='', i=0;
   target.innerHTML='<span class="caret">▍</span>';
   function tick(){
-    if(i>=tokens.length){ G.typing=false; target.innerHTML=out; renderInteract(); return; }
-    var t=tokens[i++];
-    out += t.tag ? t.tag : t.ch;
-    target.innerHTML=out+'<span class="caret">▍</span>';
-    var d = t.tag?0:(t.ch==='.'||t.ch==='\n'?46:(t.ch===','?26:14));
-    target.parentNode.scrollInto=1;
-    setTimeout(tick, d);
+ if(i>=tokens.length){ G.typing=false; target.innerHTML=out; renderInteract(); return; }
+ var t=tokens[i++];
+ out += t.tag ? t.tag : t.ch;
+ target.innerHTML=out+'<span class="caret">▍</span>';
+ var d = t.tag?0:(t.ch==='.'||t.ch==='\n'?46:(t.ch===','?26:14));
+ target.parentNode.scrollInto=1;
+ setTimeout(tick, d);
   }
   tick();
 }
@@ -351,19 +294,19 @@ function skipType(){ /* clic pour tout afficher */
 function renderInteract(){
   var sc=S[G.cur], box=el('interact'); box.innerHTML='';
   if(sc.end){
-    var p=document.createElement('div'); p.className='ritual'; p.style.borderColor='#2b3b41';
-    p.innerHTML='<div class="rk"><span>Épilogue</span></div><div class="q" style="color:var(--brass)">'+sc.final+'</div>';
-    box.appendChild(p);
-    var b=document.createElement('button'); b.className='btn'; b.textContent='Recommencer le rituel';
-    b.onclick=function(){ location.reload(); }; box.appendChild(b);
-    return;
+ var p=document.createElement('div'); p.className='ritual'; p.style.borderColor='#2b3b41';
+ p.innerHTML='<div class="rk"><span>Épilogue</span></div><div class="q" style="color:var(--brass)">'+sc.final+'</div>';
+ box.appendChild(p);
+ var b=document.createElement('button'); b.className='btn'; b.textContent='Recommencer le rituel';
+ b.onclick=function(){ location.reload(); }; box.appendChild(b);
+ return;
   }
   if(sc.ritual){ renderRitual(sc.ritual); return; }
   (sc.choices||[]).forEach(function(c,idx){
-    var b=document.createElement('button'); b.className='choice';
-    b.innerHTML='<span class="k">'+String.fromCharCode(65+idx)+'</span>'+c.t;
-    b.onclick=function(){ if(c.san) addSan(c.san); go(c.go); };
-    box.appendChild(b);
+ var b=document.createElement('button'); b.className='choice';
+ b.innerHTML='<span class="k">'+String.fromCharCode(65+idx)+'</span>'+c.t;
+ b.onclick=function(){ if(c.san) addSan(c.san); go(c.go); };
+ box.appendChild(b);
   });
 }
 
@@ -374,22 +317,22 @@ function renderRitual(r){
   var row=document.createElement('div'); row.className='row';
   var fb=document.createElement('div'); fb.className='feedback';
   if(r.type==='num'){
-    var inp=document.createElement('input'); inp.setAttribute('inputmode','decimal'); inp.placeholder='?';
-    var sub=document.createElement('button'); sub.className='btn'; sub.textContent='Graver';
-    var check=function(){
-      var v=num(inp.value);
-      if(!isNaN(v) && Math.abs(v-r.ans)<r.tol){ succeed(r,fb); }
-      else { fb.className='feedback bad'; fb.innerHTML=r.taunt; if(damage()) return; }
-    };
-    sub.onclick=check; inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
-    row.appendChild(inp); row.appendChild(sub);
-    wrap.appendChild(row);
+ var inp=document.createElement('input'); inp.setAttribute('inputmode','decimal'); inp.placeholder='?';
+ var sub=document.createElement('button'); sub.className='btn'; sub.textContent='Graver';
+ var check=function(){
+ var v=num(inp.value);
+ if(!isNaN(v) && Math.abs(v-r.ans)<r.tol){ succeed(r,fb); }
+ else { fb.className='feedback bad'; fb.innerHTML=r.taunt; if(damage()) return; }
+ };
+ sub.onclick=check; inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
+ row.appendChild(inp); row.appendChild(sub);
+ wrap.appendChild(row);
   } else {
-    r.opts.forEach(function(o,i){
-      var b=document.createElement('button'); b.className='opt'; b.textContent=o;
-      b.onclick=function(){ if(i===r.correct){ succeed(r,fb); } else { fb.className='feedback bad'; fb.innerHTML=r.taunt; b.style.borderColor='#7a1f22'; if(damage()) return; } };
-      wrap.appendChild(b);
-    });
+ r.opts.forEach(function(o,i){
+ var b=document.createElement('button'); b.className='opt'; b.textContent=o;
+ b.onclick=function(){ if(i===r.correct){ succeed(r,fb); } else { fb.className='feedback bad'; fb.innerHTML=r.taunt; b.style.borderColor='#7a1f22'; if(damage()) return; } };
+ wrap.appendChild(b);
+ });
   }
   // indice
   var hintRow=document.createElement('div'); hintRow.style.marginTop='10px'; hintRow.style.display='flex'; hintRow.style.gap='9px'; hintRow.style.flexWrap='wrap';
@@ -433,14 +376,14 @@ var AC=null, drone=null;
 function audioCtx(){ if(!AC){ try{ AC=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ AC=null; } } return AC; }
 function toggleSound(){
   var ctx=audioCtx(); if(!ctx){ return; }
-  G.sound=!G.sound; el('sndBtn').textContent = G.sound?'SON ●':'SON ✕';
+  G.sound=!G.sound; el('sndBtn').textContent = G.sound?'SON ●':'SON ';
   if(G.sound){
-    if(ctx.state==='suspended') ctx.resume();
-    drone=ctx.createOscillator(); var g=ctx.createGain(); var o2=ctx.createOscillator(); var g2=ctx.createGain();
-    drone.type='sine'; drone.frequency.value=42; g.gain.value=0.05;
-    o2.type='sine'; o2.frequency.value=63; g2.gain.value=0.025;
-    drone.connect(g).connect(ctx.destination); o2.connect(g2).connect(ctx.destination);
-    drone.start(); o2.start(); drone._o2=o2;
+ if(ctx.state==='suspended') ctx.resume();
+ drone=ctx.createOscillator(); var g=ctx.createGain(); var o2=ctx.createOscillator(); var g2=ctx.createGain();
+ drone.type='sine'; drone.frequency.value=42; g.gain.value=0.05;
+ o2.type='sine'; o2.frequency.value=63; g2.gain.value=0.025;
+ drone.connect(g).connect(ctx.destination); o2.connect(g2).connect(ctx.destination);
+ drone.start(); o2.start(); drone._o2=o2;
   } else if(drone){ try{ drone.stop(); drone._o2.stop(); }catch(e){} drone=null; }
 }
 function clank(){ var ctx=G.sound&&AC; if(!ctx) return; try{ var o=ctx.createOscillator(),g=ctx.createGain(); o.type='square'; o.frequency.value=90; g.gain.value=0.09; o.connect(g).connect(ctx.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.4); o.stop(ctx.currentTime+0.42);}catch(e){} }
@@ -449,20 +392,20 @@ function chime(){ var ctx=G.sound&&AC; if(!ctx) return; try{ var o=ctx.createOsc
 /* ============ BRAISES (canvas ambiant) ============ */
 (function(){
   try{
-    var c=el('embers'), g=c&&c.getContext&&c.getContext('2d'); if(!g) return;
-    var raf=window.requestAnimationFrame||function(fn){return setTimeout(fn,40);};
-    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    var P=[], W,H;
-    function rz(){ W=c.width=window.innerWidth||800; H=c.height=window.innerHeight||600; }
-    rz(); window.addEventListener('resize',rz);
-    for(var i=0;i<38;i++) P.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()*1.6+.4,v:Math.random()*.4+.1,a:Math.random()*.5+.1});
-    function loop(){
-      g.clearRect(0,0,W,H);
-      for(var i=0;i<P.length;i++){var p=P[i]; if(!reduce){p.y-=p.v; p.x+=Math.sin(p.y*0.01)*0.3;} if(p.y<-4){p.y=H+4;p.x=Math.random()*W;}
-        g.fillStyle='rgba(55,201,166,'+p.a*0.5+')'; g.beginPath(); g.arc(p.x,p.y,p.s,0,7); g.fill();}
-      raf(loop);
-    }
-    loop();
+ var c=el('embers'), g=c&&c.getContext&&c.getContext('2d'); if(!g) return;
+ var raf=window.requestAnimationFrame||function(fn){return setTimeout(fn,40);};
+ var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ var P=[], W,H;
+ function rz(){ W=c.width=window.innerWidth||800; H=c.height=window.innerHeight||600; }
+ rz(); window.addEventListener('resize',rz);
+ for(var i=0;i<38;i++) P.push({x:Math.random()*W,y:Math.random()*H,s:Math.random()*1.6+.4,v:Math.random()*.4+.1,a:Math.random()*.5+.1});
+ function loop(){
+ g.clearRect(0,0,W,H);
+ for(var i=0;i<P.length;i++){var p=P[i]; if(!reduce){p.y-=p.v; p.x+=Math.sin(p.y*0.01)*0.3;} if(p.y<-4){p.y=H+4;p.x=Math.random()*W;}
+ g.fillStyle='rgba(55,201,166,'+p.a*0.5+')'; g.beginPath(); g.arc(p.x,p.y,p.s,0,7); g.fill();}
+ raf(loop);
+ }
+ loop();
   }catch(e){}
 })();
 

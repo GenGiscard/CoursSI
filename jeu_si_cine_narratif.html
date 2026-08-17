@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A;
-    --night:#0d1018; --panel:#171d29; --panel2:#1f2735; --edge:#313c53;
-    --neonA:#f0b558; --neonC:#7fd6e8; --neonG:#6ee3a0; --neonR:#e87060; --txt:#e9e4d8; --dim:#98a1b8; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A;
+ --night:#0d1018; --panel:#171d29; --panel2:#1f2735; --edge:#313c53;
+ --neonA:#f0b558; --neonC:#7fd6e8; --neonG:#6ee3a0; --neonR:#e87060; --txt:#e9e4d8; --dim:#98a1b8; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--night);color:var(--txt);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55;
-       background-image:radial-gradient(ellipse at 50% -10%, #1a2231 0%, #0d1018 62%);min-height:100vh}
+ background-image:radial-gradient(ellipse at 50% -10%, #1a2231 0%, #0d1018 62%);min-height:100vh}
   .estic-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:12px;padding:8px clamp(14px,3vw,26px);background:var(--paper);border-bottom:1px solid var(--line);color:var(--ink)}
   .estic-bar .logo{width:26px;height:32px;flex:none;object-fit:contain}
   .estic-bar .who{font-weight:800;font-size:14px}
@@ -24,7 +23,7 @@
   .wrap{max-width:940px;margin:0 auto;padding:16px clamp(12px,4vw,26px) 80px}
 
   .hud{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:rgba(23,29,41,.94);border:1px solid var(--edge);
-       border-radius:14px;padding:9px 13px;margin-bottom:14px}
+ border-radius:14px;padding:9px 13px;margin-bottom:14px}
   .hud .lab{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
   .proofs{display:flex;gap:6px;flex-wrap:wrap}
   .proofs .p{font-family:'JetBrains Mono',monospace;font-size:11px;border:1px dashed var(--edge);color:#4f5871;border-radius:16px;padding:4px 10px}
@@ -42,7 +41,7 @@
   .dlg .txt .cur{color:var(--neonA)}
   .choices{display:grid;gap:9px;margin-top:14px}
   .choices button{font-family:'Bricolage Grotesque',sans-serif;font-size:16px;text-align:left;background:#1b2231;border:1px solid var(--edge);
-                  color:var(--txt);border-radius:11px;padding:13px 16px;cursor:pointer}
+ color:var(--txt);border-radius:11px;padding:13px 16px;cursor:pointer}
   .choices button:hover{border-color:var(--neonA);background:#222b3c}
   .choices button .tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);display:block;margin-top:3px}
   .calcbox{background:#141a26;border:1px solid var(--edge);border-left:3px solid var(--neonC);border-radius:11px;padding:14px 16px;margin-top:14px}
@@ -52,7 +51,7 @@
   .numin:focus{border-color:var(--neonC)}
   .unit{color:var(--dim)}
   .btn{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;
-       color:#0d1018;background:var(--neonC);border:none;border-radius:9px;padding:11px 17px;cursor:pointer}
+ color:#0d1018;background:var(--neonC);border:none;border-radius:9px;padding:11px 17px;cursor:pointer}
   .btn:hover{filter:brightness(1.1)}
   .btn.ghost{background:none;color:var(--dim);border:1px solid var(--edge)}
   .btn.ghost:hover{color:var(--txt);border-color:var(--neonA)}
@@ -78,16 +77,16 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -99,52 +98,7 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Jeu narratif — Cinématique<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hud">
-      <span class="lab">Carnet</span>
-      <div class="proofs">
-        <div class="p" id="pv">vitesse réelle</div>
-        <div class="p" id="pf">freinage</div>
-        <div class="p" id="pr">temps de réaction</div>
-        <div class="p" id="pw">virage</div>
-      </div>
-      <span class="rig">rigueur : <b id="rig">100</b> %</span>
-    </div>
-
-    <div class="stage"><canvas id="cv" width="940" height="330" aria-label="Scène de l’enquête"></canvas></div>
-
-    <div class="chapter" id="chap">Prologue</div>
-    <div class="dlg">
-      <div class="spk narr" id="spk">—</div>
-      <div class="txt" id="txt"></div>
-      <div class="choices" id="choices"></div>
-      <div id="extra"></div>
-    </div>
-  </div>
-
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Jeu narratif — Cinématique<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hud"><span class="lab">Carnet</span> <div class="proofs"><div class="p" id="pv">vitesse réelle</div> <div class="p" id="pf">freinage</div> <div class="p" id="pr">temps de réaction</div> <div class="p" id="pw">virage</div></div> <span class="rig">rigueur : <b id="rig">100</b> %</span></div> <div class="stage"><canvas id="cv" width="940" height="330" aria-label="Scène de l’enquête"></canvas></div> <div class="chapter" id="chap">Prologue</div> <div class="dlg"><div class="spk narr" id="spk">—</div> <div class="txt" id="txt"></div> <div class="choices" id="choices"></div> <div id="extra"></div></div></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -156,138 +110,138 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
 })();
@@ -320,9 +274,9 @@ function rack(g,x,y,h,w,dep){
   for(var k=1;k<4;k++){ g.beginPath(); g.moveTo(x,y-h*k/4); g.lineTo(x+w,y-h*k/4); g.stroke(); }
   var R=rng(Math.round(x*7+h));
   for(var s=0;s<4;s++){ for(var c=0;c<2;c++){
-    if(R()<0.35) continue;
-    g.fillStyle='rgba('+(90+R()*50|0)+','+(75+R()*40|0)+','+(55+R()*30|0)+',.85)';
-    g.fillRect(x+6+c*(w/2), y-h*(s+1)/4+6, w/2-12, h/4-12); } }
+ if(R()<0.35) continue;
+ g.fillStyle='rgba('+(90+R()*50|0)+','+(75+R()*40|0)+','+(55+R()*30|0)+',.85)';
+ g.fillRect(x+6+c*(w/2), y-h*(s+1)/4+6, w/2-12, h/4-12); } }
 }
 function agv(g,cx,cy,sc,broken){
   g.save(); g.translate(cx,cy); g.scale(sc,sc); if(broken) g.rotate(0.13);
@@ -335,7 +289,7 @@ function agv(g,cx,cy,sc,broken){
   g.fillStyle='#7fd6e8'; g.fillRect(-44,-24,22,10);
   g.fillStyle='#e87060'; g.fillRect(30,-24,14,10);
   if(broken){ g.strokeStyle='#e87060'; g.lineWidth=3;
-    g.beginPath(); g.moveTo(-20,-30); g.lineTo(-8,-6); g.lineTo(-24,4); g.stroke(); }
+ g.beginPath(); g.moveTo(-20,-30); g.lineTo(-8,-6); g.lineTo(-24,4); g.stroke(); }
   g.restore();
 }
 function silhouette(g,cx,cy,sc,col){
@@ -352,109 +306,109 @@ function drawDecor(){
   sky.addColorStop(0,'#0f1520'); sky.addColorStop(1,'#0a0e15');
   g.fillStyle=sky; g.fillRect(0,0,CW,CH);
   if(DECOR==='entrepot'||DECOR==='quai'||DECOR==='virage'){
-    solBeton(g,214);
-    /* rangées de racks en perspective */
-    rack(g,20,214,180,120); rack(g,150,214,150,96); rack(g,700,214,152,110); rack(g,830,214,182,110);
-    /* néons du plafond */
-    for(var i=0;i<4;i++){
-      var nx=150+i*220, fl=0.75+0.25*Math.sin(t*3+i*2);
-      g.fillStyle='rgba(200,222,235,'+(0.7*fl)+')'; g.fillRect(nx-56,26,112,7);
-      halo(g,nx,32,220,'rgba(190,220,235,ALPHA)',0.10*fl);
-    }
-    /* marquage au sol de l'allée */
-    g.strokeStyle='rgba(240,181,88,.35)'; g.lineWidth=3; g.setLineDash([26,20]);
-    g.beginPath(); g.moveTo(300,CH); g.lineTo(455,214); g.stroke();
-    g.beginPath(); g.moveTo(660,CH); g.lineTo(505,214); g.stroke(); g.setLineDash([]);
+ solBeton(g,214);
+ /* rangées de racks en perspective */
+ rack(g,20,214,180,120); rack(g,150,214,150,96); rack(g,700,214,152,110); rack(g,830,214,182,110);
+ /* néons du plafond */
+ for(var i=0;i<4;i++){
+ var nx=150+i*220, fl=0.75+0.25*Math.sin(t*3+i*2);
+ g.fillStyle='rgba(200,222,235,'+(0.7*fl)+')'; g.fillRect(nx-56,26,112,7);
+ halo(g,nx,32,220,'rgba(190,220,235,ALPHA)',0.10*fl);
+ }
+ /* marquage au sol de l'allée */
+ g.strokeStyle='rgba(240,181,88,.35)'; g.lineWidth=3; g.setLineDash([26,20]);
+ g.beginPath(); g.moveTo(300,CH); g.lineTo(455,214); g.stroke();
+ g.beginPath(); g.moveTo(660,CH); g.lineTo(505,214); g.stroke(); g.setLineDash([]);
   }
   if(DECOR==='entrepot'){
-    agv(g,470,250,1,false);
-    silhouette(g,760,268,0.85,'#1b2330');
+ agv(g,470,250,1,false);
+ silhouette(g,760,268,0.85,'#1b2330');
   }
   if(DECOR==='quai'){
-    /* rack effondré + AGV accidenté + gyrophare */
-    g.save(); g.translate(700,214); g.rotate(0.38);
-    g.fillStyle='#242c3a'; g.fillRect(-40,-150,110,150);
-    g.strokeStyle='#3d4759'; g.lineWidth=2; g.strokeRect(-40,-150,110,150);
-    g.restore();
-    /* colis répandus */
-    var R=rng(9);
-    for(var c=0;c<9;c++){ var bx=520+R()*260, by=250+R()*60, s2=14+R()*16;
-      g.save(); g.translate(bx,by); g.rotate(R()*3);
-      g.fillStyle='rgba(120,98,68,.9)'; g.fillRect(-s2/2,-s2/2,s2,s2); g.restore(); }
-    agv(g,560,254,1,true);
-    /* traces de freinage */
-    g.strokeStyle='rgba(20,24,32,.75)'; g.lineWidth=7;
-    g.beginPath(); g.moveTo(300,300); g.lineTo(524,262); g.stroke();
-    g.beginPath(); g.moveTo(316,318); g.lineTo(540,278); g.stroke();
-    /* gyrophare */
-    var gy=0.5+0.5*Math.sin(t*5);
-    halo(g,560,200,260,'rgba(232,112,96,ALPHA)',0.20*gy);
+ /* rack effondré + AGV accidenté + gyrophare */
+ g.save(); g.translate(700,214); g.rotate(0.38);
+ g.fillStyle='#242c3a'; g.fillRect(-40,-150,110,150);
+ g.strokeStyle='#3d4759'; g.lineWidth=2; g.strokeRect(-40,-150,110,150);
+ g.restore();
+ /* colis répandus */
+ var R=rng(9);
+ for(var c=0;c<9;c++){ var bx=520+R()*260, by=250+R()*60, s2=14+R()*16;
+ g.save(); g.translate(bx,by); g.rotate(R()*3);
+ g.fillStyle='rgba(120,98,68,.9)'; g.fillRect(-s2/2,-s2/2,s2,s2); g.restore(); }
+ agv(g,560,254,1,true);
+ /* traces de freinage */
+ g.strokeStyle='rgba(20,24,32,.75)'; g.lineWidth=7;
+ g.beginPath(); g.moveTo(300,300); g.lineTo(524,262); g.stroke();
+ g.beginPath(); g.moveTo(316,318); g.lineTo(540,278); g.stroke();
+ /* gyrophare */
+ var gy=0.5+0.5*Math.sin(t*5);
+ halo(g,560,200,260,'rgba(232,112,96,ALPHA)',0.20*gy);
   }
   if(DECOR==='controle'){
-    /* salle de contrôle : baies d'écrans + chronogramme animé */
-    g.fillStyle='#141a26'; g.fillRect(0,0,CW,CH);
-    g.fillStyle='#1b2330'; g.fillRect(0,240,CW,90);
-    for(var s=0;s<3;s++){
-      var ex=90+s*290;
-      g.fillStyle='#0e131d'; g.fillRect(ex,42,250,160);
-      g.strokeStyle='#39445c'; g.lineWidth=2; g.strokeRect(ex,42,250,160);
-      halo(g,ex+125,120,190,'rgba(127,214,232,ALPHA)',0.07);
-      if(s===1){
-        /* chronogramme de vitesse : palier puis freinage */
-        g.strokeStyle='#5b6678'; g.lineWidth=1.4;
-        g.beginPath(); g.moveTo(ex+24,180); g.lineTo(ex+228,180); g.moveTo(ex+24,180); g.lineTo(ex+24,64); g.stroke();
-        g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
-        g.beginPath(); g.moveTo(ex+24,96); g.lineTo(ex+150,96); g.lineTo(ex+206,180); g.stroke();
-        g.strokeStyle='rgba(240,181,88,.6)'; g.setLineDash([4,4]); g.lineWidth=1.6;
-        g.beginPath(); g.moveTo(ex+24,124); g.lineTo(ex+228,124); g.stroke(); g.setLineDash([]);
-        g.fillStyle='#f0b558'; g.font='700 9px "JetBrains Mono",monospace'; g.fillText('consigne 2 m/s',ex+150,120);
-        g.fillStyle='#7fd6e8'; g.fillText('mesure',ex+40,90);
-        /* curseur qui balaie */
-        var cxp=ex+24+((t*40)%204);
-        g.strokeStyle='rgba(232,112,96,.8)'; g.lineWidth=1.4;
-        g.beginPath(); g.moveTo(cxp,64); g.lineTo(cxp,180); g.stroke();
-      } else {
-        var R2=rng(s*77+3);
-        for(var l=0;l<9;l++){
-          g.fillStyle='rgba(110,227,160,'+(0.15+R2()*0.3)+')';
-          g.fillRect(ex+18,58+l*16,40+R2()*170,7);
-        }
-      }
-    }
-    silhouette(g,820,300,1.05,'#10161f');
+ /* salle de contrôle : baies d'écrans + chronogramme animé */
+ g.fillStyle='#141a26'; g.fillRect(0,0,CW,CH);
+ g.fillStyle='#1b2330'; g.fillRect(0,240,CW,90);
+ for(var s=0;s<3;s++){
+ var ex=90+s*290;
+ g.fillStyle='#0e131d'; g.fillRect(ex,42,250,160);
+ g.strokeStyle='#39445c'; g.lineWidth=2; g.strokeRect(ex,42,250,160);
+ halo(g,ex+125,120,190,'rgba(127,214,232,ALPHA)',0.07);
+ if(s===1){
+ /* chronogramme de vitesse : palier puis freinage */
+ g.strokeStyle='#5b6678'; g.lineWidth=1.4;
+ g.beginPath(); g.moveTo(ex+24,180); g.lineTo(ex+228,180); g.moveTo(ex+24,180); g.lineTo(ex+24,64); g.stroke();
+ g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;
+ g.beginPath(); g.moveTo(ex+24,96); g.lineTo(ex+150,96); g.lineTo(ex+206,180); g.stroke();
+ g.strokeStyle='rgba(240,181,88,.6)'; g.setLineDash([4,4]); g.lineWidth=1.6;
+ g.beginPath(); g.moveTo(ex+24,124); g.lineTo(ex+228,124); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#f0b558'; g.font='700 9px "JetBrains Mono",monospace'; g.fillText('consigne 2 m/s',ex+150,120);
+ g.fillStyle='#7fd6e8'; g.fillText('mesure',ex+40,90);
+ /* curseur qui balaie */
+ var cxp=ex+24+((t*40)%204);
+ g.strokeStyle='rgba(232,112,96,.8)'; g.lineWidth=1.4;
+ g.beginPath(); g.moveTo(cxp,64); g.lineTo(cxp,180); g.stroke();
+ } else {
+ var R2=rng(s*77+3);
+ for(var l=0;l<9;l++){
+ g.fillStyle='rgba(110,227,160,'+(0.15+R2()*0.3)+')';
+ g.fillRect(ex+18,58+l*16,40+R2()*170,7);
+ }
+ }
+ }
+ silhouette(g,820,300,1.05,'#10161f');
   }
   if(DECOR==='atelier'){
-    solBeton(g,220);
-    g.fillStyle='#232b39'; g.fillRect(60,150,300,70);
-    g.fillStyle='#2f3949'; g.fillRect(60,140,300,12);
-    /* AGV démonté sur tréteaux */
-    agv(g,220,140,0.8,false);
-    g.fillStyle='#3a4453'; g.fillRect(140,220,16,60); g.fillRect(292,220,16,60);
-    /* établi + outils */
-    g.fillStyle='#40372b'; g.fillRect(560,196,320,18);
-    g.fillStyle='#2f2a22'; g.fillRect(584,214,16,66); g.fillRect(840,214,16,66);
-    g.strokeStyle='#8b95a8'; g.lineWidth=5;
-    for(var o=0;o<4;o++){ g.beginPath(); g.moveTo(600+o*54,120); g.lineTo(600+o*54,176); g.stroke(); }
-    for(var i2=0;i2<3;i2++) halo(g,200+i2*300,60,200,'rgba(190,220,235,ALPHA)',0.07);
-    silhouette(g,470,280,1.0,'#141b26');
+ solBeton(g,220);
+ g.fillStyle='#232b39'; g.fillRect(60,150,300,70);
+ g.fillStyle='#2f3949'; g.fillRect(60,140,300,12);
+ /* AGV démonté sur tréteaux */
+ agv(g,220,140,0.8,false);
+ g.fillStyle='#3a4453'; g.fillRect(140,220,16,60); g.fillRect(292,220,16,60);
+ /* établi + outils */
+ g.fillStyle='#40372b'; g.fillRect(560,196,320,18);
+ g.fillStyle='#2f2a22'; g.fillRect(584,214,16,66); g.fillRect(840,214,16,66);
+ g.strokeStyle='#8b95a8'; g.lineWidth=5;
+ for(var o=0;o<4;o++){ g.beginPath(); g.moveTo(600+o*54,120); g.lineTo(600+o*54,176); g.stroke(); }
+ for(var i2=0;i2<3;i2++) halo(g,200+i2*300,60,200,'rgba(190,220,235,ALPHA)',0.07);
+ silhouette(g,470,280,1.0,'#141b26');
   }
   if(DECOR==='bureau'){
-    g.fillStyle='#131926'; g.fillRect(0,0,CW,CH);
-    /* baie vitrée sur l'entrepôt de nuit */
-    g.fillStyle='#0c1119'; g.fillRect(80,40,780,200);
-    g.strokeStyle='#39445c'; g.lineWidth=3; g.strokeRect(80,40,780,200);
-    for(var v=1;v<4;v++){ g.beginPath(); g.moveTo(80+v*195,40); g.lineTo(80+v*195,240); g.stroke(); }
-    for(var r3=0;r3<7;r3++){
-      var lx=110+r3*112, ly=190-((r3*53)%90);
-      g.fillStyle='rgba(240,181,88,'+(0.10+((r3*13)%7)/40)+')'; g.fillRect(lx,ly,10,10);
-    }
-    halo(g,470,140,340,'rgba(240,181,88,ALPHA)',0.06);
-    /* bureau + dossier */
-    g.fillStyle='#2b241c'; g.fillRect(0,262,CW,68);
-    g.fillStyle='#e8e2d0'; g.save(); g.translate(470,286); g.rotate(-0.03);
-    g.fillRect(-120,-24,240,52); g.restore();
-    g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('RAPPORT D\u2019EXPERTISE',470,288); g.textAlign='left';
+ g.fillStyle='#131926'; g.fillRect(0,0,CW,CH);
+ /* baie vitrée sur l'entrepôt de nuit */
+ g.fillStyle='#0c1119'; g.fillRect(80,40,780,200);
+ g.strokeStyle='#39445c'; g.lineWidth=3; g.strokeRect(80,40,780,200);
+ for(var v=1;v<4;v++){ g.beginPath(); g.moveTo(80+v*195,40); g.lineTo(80+v*195,240); g.stroke(); }
+ for(var r3=0;r3<7;r3++){
+ var lx=110+r3*112, ly=190-((r3*53)%90);
+ g.fillStyle='rgba(240,181,88,'+(0.10+((r3*13)%7)/40)+')'; g.fillRect(lx,ly,10,10);
+ }
+ halo(g,470,140,340,'rgba(240,181,88,ALPHA)',0.06);
+ /* bureau + dossier */
+ g.fillStyle='#2b241c'; g.fillRect(0,262,CW,68);
+ g.fillStyle='#e8e2d0'; g.save(); g.translate(470,286); g.rotate(-0.03);
+ g.fillRect(-120,-24,240,52); g.restore();
+ g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('RAPPORT D\u2019EXPERTISE',470,288); g.textAlign='left';
   }
   /* grain */
   var Rg=rng(Math.floor(t*30));
@@ -472,34 +426,34 @@ function say(spk,cls,text,after){
   clearInterval(TW.timer);
   var i=0, box=el('txt');
   TW.timer=setInterval(function(){
-    i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
-    if(i>=text.length){ clearInterval(TW.timer); if(after) after(); }
+ i++; box.innerHTML=text.slice(0,i)+(i<text.length?'<span class="cur">\u258c</span>':'');
+ if(i>=text.length){ clearInterval(TW.timer); if(after) after(); }
   },14);
 }
 function choices(list){
   var box=el('choices'); box.innerHTML='';
   list.forEach(function(c){
-    var b=document.createElement('button');
-    b.innerHTML=c.t+(c.sub?'<span class="tag">'+c.sub+'</span>':'');
-    b.addEventListener('click',function(){ box.innerHTML=''; el('extra').innerHTML=''; c.go(); });
-    box.appendChild(b);
+ var b=document.createElement('button');
+ b.innerHTML=c.t+(c.sub?'<span class="tag">'+c.sub+'</span>':'');
+ b.addEventListener('click',function(){ box.innerHTML=''; el('extra').innerHTML=''; c.go(); });
+ box.appendChild(b);
   });
 }
 function calcul(question, verif, okMsg, koMsg, onOk){
   var box=el('extra');
   box.innerHTML='<div class="calcbox"><div class="q">'+question+'</div>'+
-    '<div class="row"><input class="numin" id="ci" inputmode="decimal" placeholder="?"><span class="unit" id="cu"></span>'+
-    '<button class="btn" id="cb">Consigner</button></div><div class="fb" id="cf"></div></div>';
+ '<div class="row"><input class="numin" id="ci" inputmode="decimal" placeholder="?"><span class="unit" id="cu"></span>'+
+ '<button class="btn" id="cb">Consigner</button></div><div class="fb" id="cf"></div></div>';
   el('cb').addEventListener('click',function(){
-    var v=numf(el('ci').value);
-    if(verif(v)){
-      el('cf').className='fb ok'; el('cf').textContent=okMsg;
-      el('cb').disabled=true; el('ci').disabled=true;
-      setTimeout(onOk,900);
-    } else {
-      el('cf').className='fb no'; el('cf').textContent=koMsg;
-      loseRig(8);
-    }
+ var v=numf(el('ci').value);
+ if(verif(v)){
+ el('cf').className='fb ok'; el('cf').textContent=okMsg;
+ el('cb').disabled=true; el('ci').disabled=true;
+ setTimeout(onOk,900);
+ } else {
+ el('cf').className='fb no'; el('cf').textContent=koMsg;
+ loseRig(8);
+ }
   });
 }
 function note(html){ el('extra').innerHTML+='<div class="note">'+html+'</div>'; }
@@ -511,126 +465,126 @@ var SC={};
 SC.p0=function(){
   DECOR='entrepot'; chap('Prologue \u00b7 22 h 40, entrep\u00f4t logistique du Val');
   say('','narr','Une alarme t\u2019a sorti du lit. Sur le quai 7, un chariot autonome \u2014 un AGV de 1,2 tonne \u2014 a percut\u00e9 un rack de stockage. Personne n\u2019a \u00e9t\u00e9 bless\u00e9 : l\u2019allée \u00e9tait vide. Mais demain matin, il faudra dire pourquoi. Et tu es l\u2019expert.',function(){
-    choices([
-      {t:'\u2192 Aller voir la sc\u00e8ne', sub:'quai 7', go:SC.c1},
-      {t:'\u2192 Demander d\u2019abord le rapport de l\u2019exploitant', sub:'gagner du temps, perdre des traces', go:function(){
-        say('Josserand, chef de quai','jos','\u00ab Le rapport ? Il dira ce que je vous dis : la machine a d\u00e9raill\u00e9, point. \u00c7a fait trois ans qu\u2019elle tourne sans un pet de travers. \u00bb  \u2014 Il hausse les \u00e9paules. Pendant ce temps, l\u2019\u00e9quipe de nuit balaie d\u00e9j\u00e0 les colis autour de l\u2019\u00e9pave.',function(){
-          loseRig(5);
-          note('\u26a0 <b>Rigueur \u22125 %</b> : en expertise, on relève les traces AVANT qu\u2019elles disparaissent.');
-          choices([{t:'\u2192 Filer sur le quai 7', go:SC.c1}]);
-        });
-      }}
-    ]);
+ choices([
+ {t:'\u2192 Aller voir la sc\u00e8ne', sub:'quai 7', go:SC.c1},
+ {t:'\u2192 Demander d\u2019abord le rapport de l\u2019exploitant', sub:'gagner du temps, perdre des traces', go:function(){
+ say('Josserand, chef de quai','jos','\u00ab Le rapport ? Il dira ce que je vous dis : la machine a d\u00e9raill\u00e9, point. \u00c7a fait trois ans qu\u2019elle tourne sans un pet de travers. \u00bb  \u2014 Il hausse les \u00e9paules. Pendant ce temps, l\u2019\u00e9quipe de nuit balaie d\u00e9j\u00e0 les colis autour de l\u2019\u00e9pave.',function(){
+ loseRig(5);
+ note(' <b>Rigueur \u22125 %</b> : en expertise, on relève les traces AVANT qu\u2019elles disparaissent.');
+ choices([{t:'\u2192 Filer sur le quai 7', go:SC.c1}]);
+ });
+ }}
+ ]);
   });
 };
 
 SC.c1=function(){
   DECOR='quai'; chap('Chapitre 1 \u00b7 La sc\u00e8ne');
   say('','narr','Le gyrophare bat sur les colis \u00e9vent\u00e9s. L\u2019AGV est encastr\u00e9 dans le montant du rack, l\u2019avant enfonc\u00e9. Au sol, deux traces noires partent en ligne droite jusqu\u2019aux roues : il a frein\u00e9. Il a m\u00eame frein\u00e9 fort.',function(){
-    choices([
-      {t:'\ud83d\udd0d Interroger le chef de quai', sub:'la version humaine', go:function(){
-        say('Josserand, chef de quai','jos','\u00ab Il roulait comme d\u2019habitude, \u00e0 2 m\u00e8tres par seconde, la consigne du site. Le capteur avant a d\u00fb l\u00e2cher, sinon il se serait arr\u00eat\u00e9. Ces machines, un jour \u00e7a d\u00e9cide de ne plus voir. \u00bb',function(){
-          note('\ud83d\uddd2\ufe0f <b>Version de l\u2019exploitant</b> : vitesse 2 m/s, capteur d\u00e9faillant. \u00c0 v\u00e9rifier \u2014 une version n\u2019est pas une mesure.');
-          choices([{t:'\u2192 Monter en salle de contr\u00f4le relever les donn\u00e9es', go:SC.c2}]);
-        });
-      }},
-      {t:'\ud83d\udcd0 Mesurer les traces de freinage', sub:'ce que le sol raconte', go:function(){
-        say('','narr','Tu d\u00e9roules le d\u00e9cam\u00e8tre le long de la trace la plus nette. Elle commence \u00e0 hauteur du pilier bleu et finit sous les roues : <b>9,0 m\u00e8tres</b>. Tu photographies, tu notes. Le sol, lui, ne cherche pas \u00e0 se couvrir.',function(){
-          note('\ud83d\uddd2\ufe0f <b>Trace de freinage : 9,0 m</b> \u2014 exploitable d\u00e8s que tu conna\u00eetras la d\u00e9c\u00e9l\u00e9ration de la machine.');
-          choices([{t:'\u2192 Monter en salle de contr\u00f4le', go:SC.c2}]);
-        });
-      }}
-    ]);
+ choices([
+ {t:' Interroger le chef de quai', sub:'la version humaine', go:function(){
+ say('Josserand, chef de quai','jos','\u00ab Il roulait comme d\u2019habitude, \u00e0 2 m\u00e8tres par seconde, la consigne du site. Le capteur avant a d\u00fb l\u00e2cher, sinon il se serait arr\u00eat\u00e9. Ces machines, un jour \u00e7a d\u00e9cide de ne plus voir. \u00bb',function(){
+ note(' <b>Version de l\u2019exploitant</b> : vitesse 2 m/s, capteur d\u00e9faillant. \u00c0 v\u00e9rifier \u2014 une version n\u2019est pas une mesure.');
+ choices([{t:'\u2192 Monter en salle de contr\u00f4le relever les donn\u00e9es', go:SC.c2}]);
+ });
+ }},
+ {t:' Mesurer les traces de freinage', sub:'ce que le sol raconte', go:function(){
+ say('','narr','Tu d\u00e9roules le d\u00e9cam\u00e8tre le long de la trace la plus nette. Elle commence \u00e0 hauteur du pilier bleu et finit sous les roues : <b>9,0 m\u00e8tres</b>. Tu photographies, tu notes. Le sol, lui, ne cherche pas \u00e0 se couvrir.',function(){
+ note(' <b>Trace de freinage : 9,0 m</b> \u2014 exploitable d\u00e8s que tu conna\u00eetras la d\u00e9c\u00e9l\u00e9ration de la machine.');
+ choices([{t:'\u2192 Monter en salle de contr\u00f4le', go:SC.c2}]);
+ });
+ }}
+ ]);
   });
 };
 
 SC.c2=function(){
   DECOR='controle'; chap('Chapitre 2 \u00b7 La salle de contr\u00f4le');
   say('Naïma, technicienne maintenance','tech','\u00ab J\u2019ai sorti le journal de bord. Les balises au sol horodatent chaque passage : la B12 \u00e0 22 h 07 min 12 s, la B13 \u00e0 22 h 07 min 20 s. Elles sont distantes de <b>24 m\u00e8tres</b>. Fais-en ce que tu veux, moi je ne suis pas ing\u00e9nieure. \u00bb',function(){
-    calcul('Vitesse moyenne de l\u2019AGV entre les deux balises : v = ?  <span style="color:var(--dim)">(m/s)</span>',
-      function(v){ return Math.abs(v-3)<0.2; },
-      '\u2713 3 m/s. La consigne du site est de 2 m/s.',
-      '\u2717 Reprends : distance parcourue divis\u00e9e par la dur\u00e9e \u00e9coul\u00e9e entre les deux horodatages.',
-      function(){
-        proof('pv');
-        say('','narr','Trois m\u00e8tres par seconde. La machine roulait <b>50 % plus vite</b> que la consigne annonc\u00e9e par Josserand. Naïma siffle entre ses dents et fait d\u00e9filer l\u2019\u00e9cran.',function(){
-          note('\ud83d\udcc1 <b>Preuve 1 \u2014 vitesse r\u00e9elle : 3 m/s</b> (au lieu de 2 m/s). La version de l\u2019exploitant vient de perdre un pilier.');
-          choices([
-            {t:'\ud83e\uddee V\u00e9rifier cette vitesse par le freinage', sub:'recouper avec les traces au sol', go:SC.c3},
-            {t:'\u2192 Passer directement au journal du capteur', sub:'plus rapide, moins solide', go:function(){
-              loseRig(6);
-              note('\u26a0 <b>Rigueur \u22126 %</b> : une mesure unique ne fait pas une preuve. Un expert recoupe toujours.');
-              SC.c4();
-            }}
-          ]);
-        });
-      });
+ calcul('Vitesse moyenne de l\u2019AGV entre les deux balises : v = ?  <span style="color:var(--dim)">(m/s)</span>',
+ function(v){ return Math.abs(v-3)<0.2; },
+ '\u2713 3 m/s. La consigne du site est de 2 m/s.',
+ '\u2717 Reprends : distance parcourue divis\u00e9e par la dur\u00e9e \u00e9coul\u00e9e entre les deux horodatages.',
+ function(){
+ proof('pv');
+ say('','narr','Trois m\u00e8tres par seconde. La machine roulait <b>50 % plus vite</b> que la consigne annonc\u00e9e par Josserand. Naïma siffle entre ses dents et fait d\u00e9filer l\u2019\u00e9cran.',function(){
+ note(' <b>Preuve 1 \u2014 vitesse r\u00e9elle : 3 m/s</b> (au lieu de 2 m/s). La version de l\u2019exploitant vient de perdre un pilier.');
+ choices([
+ {t:' V\u00e9rifier cette vitesse par le freinage', sub:'recouper avec les traces au sol', go:SC.c3},
+ {t:'\u2192 Passer directement au journal du capteur', sub:'plus rapide, moins solide', go:function(){
+ loseRig(6);
+ note(' <b>Rigueur \u22126 %</b> : une mesure unique ne fait pas une preuve. Un expert recoupe toujours.');
+ SC.c4();
+ }}
+ ]);
+ });
+ });
   });
 };
 
 SC.c3=function(){
   DECOR='atelier'; chap('Chapitre 3 \u00b7 L\u2019atelier');
   say('Naïma, technicienne maintenance','tech','\u00ab Le freinage d\u2019urgence de ce mod\u00e8le est brid\u00e9 \u00e0 <b>0,5 m/s\u00b2</b>, c\u2019est \u00e9crit dans la doc et je l\u2019ai v\u00e9rifi\u00e9 au banc la semaine derni\u00e8re : le frein va parfaitement bien. Vous avez mesur\u00e9 combien, la trace ? Neuf m\u00e8tres ? \u00bb',function(){
-    calcul('Avec une trace de 9 m et une d\u00e9c\u00e9l\u00e9ration de 0,5 m/s\u00b2, quelle \u00e9tait la vitesse au d\u00e9but du freinage ?  <span style="color:var(--dim)">(m/s)</span>',
-      function(v){ return Math.abs(v-3)<0.25; },
-      '\u2713 3 m/s \u2014 exactement la vitesse trouv\u00e9e aux balises. Les deux mesures se recoupent.',
-      '\u2717 Pense \u00e0 la relation entre vitesse, d\u00e9c\u00e9l\u00e9ration et distance d\u2019arr\u00eat : d = v\u00b2/(2a).',
-      function(){
-        proof('pf');
-        say('','narr','Deux chemins ind\u00e9pendants, un seul r\u00e9sultat : <b>3 m/s</b>. Le frein a fait son travail \u2014 il a m\u00eame parfaitement respect\u00e9 sa fiche technique. Ce n\u2019est pas lui, le coupable.',function(){
-          note('\ud83d\udcc1 <b>Preuve 2 \u2014 le freinage est conforme</b> : 9 m \u00e0 0,5 m/s\u00b2 correspondent bien \u00e0 un d\u00e9part \u00e0 3 m/s.');
-          choices([{t:'\u2192 Ouvrir le journal du capteur avant', go:SC.c4}]);
-        });
-      });
+ calcul('Avec une trace de 9 m et une d\u00e9c\u00e9l\u00e9ration de 0,5 m/s\u00b2, quelle \u00e9tait la vitesse au d\u00e9but du freinage ?  <span style="color:var(--dim)">(m/s)</span>',
+ function(v){ return Math.abs(v-3)<0.25; },
+ '\u2713 3 m/s \u2014 exactement la vitesse trouv\u00e9e aux balises. Les deux mesures se recoupent.',
+ '\u2717 Pense \u00e0 la relation entre vitesse, d\u00e9c\u00e9l\u00e9ration et distance d\u2019arr\u00eat : d = v\u00b2/(2a).',
+ function(){
+ proof('pf');
+ say('','narr','Deux chemins ind\u00e9pendants, un seul r\u00e9sultat : <b>3 m/s</b>. Le frein a fait son travail \u2014 il a m\u00eame parfaitement respect\u00e9 sa fiche technique. Ce n\u2019est pas lui, le coupable.',function(){
+ note(' <b>Preuve 2 \u2014 le freinage est conforme</b> : 9 m \u00e0 0,5 m/s\u00b2 correspondent bien \u00e0 un d\u00e9part \u00e0 3 m/s.');
+ choices([{t:'\u2192 Ouvrir le journal du capteur avant', go:SC.c4}]);
+ });
+ });
   });
 };
 
 SC.c4=function(){
   DECOR='controle'; chap('Chapitre 4 \u00b7 Le journal du capteur');
   say('Naïma, technicienne maintenance','tech','\u00ab Voil\u00e0 la ligne qui vous int\u00e9resse. Le t\u00e9l\u00e9m\u00e8tre a bien vu le rack : d\u00e9tection \u00e0 <b>12 m\u00e8tres</b>. Et le frein s\u2019est d\u00e9clench\u00e9 <b>1,5 seconde</b> plus tard \u2014 c\u2019est le temps de traitement normal, il est dans les specs lui aussi. \u00bb',function(){
-    calcul('\u00c0 3 m/s, quelle distance l\u2019AGV parcourt-il pendant cette seconde et demie de r\u00e9action ?  <span style="color:var(--dim)">(m)</span>',
-      function(v){ return Math.abs(v-4.5)<0.3; },
-      '\u2713 4,5 m avant m\u00eame de commencer \u00e0 freiner.',
-      '\u2717 Pendant la r\u00e9action, la vitesse ne change pas encore : c\u2019est un mouvement uniforme.',
-      function(){
-        proof('pr');
-        say('','narr','Tu poses l\u2019addition sur le coin de l\u2019\u00e9cran : 4,5 m\u00e8tres de r\u00e9action, puis 9 m\u00e8tres de freinage. Total : <b>13,5 m\u00e8tres</b> pour s\u2019arr\u00eater. Le rack \u00e9tait \u00e0 12. La collision \u00e9tait <b>math\u00e9matiquement in\u00e9vitable</b> \u2014 le capteur avait pourtant tout vu, et \u00e0 temps.',function(){
-          note('\ud83d\udcc1 <b>Preuve 3 \u2014 distance d\u2019arr\u00eat totale : 13,5 m &gt; 12 m</b>. Ni le capteur ni le frein n\u2019ont failli : c\u2019est la VITESSE qui a rendu l\u2019arr\u00eat impossible.');
-          choices([
-            {t:'\ud83e\uddee Et si l\u2019AGV avait roul\u00e9 \u00e0 la consigne de 2 m/s ?', sub:'la question qui tue', go:SC.c5},
-            {t:'\u2192 Assez calcul\u00e9 : r\u00e9diger le rapport', go:SC.fin}
-          ]);
-        });
-      });
+ calcul('\u00c0 3 m/s, quelle distance l\u2019AGV parcourt-il pendant cette seconde et demie de r\u00e9action ?  <span style="color:var(--dim)">(m)</span>',
+ function(v){ return Math.abs(v-4.5)<0.3; },
+ '\u2713 4,5 m avant m\u00eame de commencer \u00e0 freiner.',
+ '\u2717 Pendant la r\u00e9action, la vitesse ne change pas encore : c\u2019est un mouvement uniforme.',
+ function(){
+ proof('pr');
+ say('','narr','Tu poses l\u2019addition sur le coin de l\u2019\u00e9cran : 4,5 m\u00e8tres de r\u00e9action, puis 9 m\u00e8tres de freinage. Total : <b>13,5 m\u00e8tres</b> pour s\u2019arr\u00eater. Le rack \u00e9tait \u00e0 12. La collision \u00e9tait <b>math\u00e9matiquement in\u00e9vitable</b> \u2014 le capteur avait pourtant tout vu, et \u00e0 temps.',function(){
+ note(' <b>Preuve 3 \u2014 distance d\u2019arr\u00eat totale : 13,5 m &gt; 12 m</b>. Ni le capteur ni le frein n\u2019ont failli : c\u2019est la VITESSE qui a rendu l\u2019arr\u00eat impossible.');
+ choices([
+ {t:' Et si l\u2019AGV avait roul\u00e9 \u00e0 la consigne de 2 m/s ?', sub:'la question qui tue', go:SC.c5},
+ {t:'\u2192 Assez calcul\u00e9 : r\u00e9diger le rapport', go:SC.fin}
+ ]);
+ });
+ });
   });
 };
 
 SC.c5=function(){
   DECOR='virage'; chap('Chapitre 5 \u00b7 La contre-\u00e9preuve');
   say('','narr','Tu refais tout le trajet \u00e0 la vitesse r\u00e9glementaire. R\u00e9action : 2 \u00d7 1,5 = 3 m\u00e8tres. Freinage : 2\u00b2/(2 \u00d7 0,5) = 4 m\u00e8tres. Total : <b>7 m\u00e8tres</b>. Sur les 12 disponibles, l\u2019AGV se serait immobilis\u00e9 avec cinq m\u00e8tres de marge.',function(){
-    calcul('La vitesse a augment\u00e9 de moiti\u00e9 (2 \u2192 3 m/s). De combien la SEULE distance de freinage a-t-elle \u00e9t\u00e9 multipli\u00e9e ? <span style="color:var(--dim)">(sans unit\u00e9)</span>',
-      function(v){ return Math.abs(v-2.25)<0.12; },
-      '\u2713 \u00d72,25 : parce que la distance de freinage d\u00e9pend du CARR\u00c9 de la vitesse.',
-      '\u2717 Compare 4 m et 9 m. Et souviens-toi : d = v\u00b2/(2a) \u2014 le v est au carr\u00e9.',
-      function(){
-        proof('pw');
-        say('Naïma, technicienne maintenance','tech','\u00ab \u00c0 une fois et demie la vitesse, presque deux fois et quart la distance de freinage\u2026 C\u2019est pour \u00e7a que la consigne \u00e9tait \u00e0 2. Restait \u00e0 savoir qui l\u2019a mont\u00e9e \u00e0 3. \u00bb  \u2014 Elle ouvre l\u2019historique des param\u00e8tres. Une seule ligne modifi\u00e9e, il y a onze jours, lors d\u2019une intervention pour \u00ab am\u00e9liorer la cadence \u00bb. Sign\u00e9e du bureau d\u2019exploitation.',function(){
-          note('\ud83d\udcc1 <b>Preuve 4 \u2014 la cause racine</b> : le param\u00e8tre de vitesse a \u00e9t\u00e9 relev\u00e9 de 2 \u00e0 3 m/s sans recalculer la distance d\u2019arr\u00eat. Le syst\u00e8me de s\u00e9curit\u00e9 avait \u00e9t\u00e9 dimensionn\u00e9 pour 2 m/s.');
-          choices([{t:'\u2192 R\u00e9diger le rapport d\u2019expertise', go:SC.fin}]);
-        });
-      });
+ calcul('La vitesse a augment\u00e9 de moiti\u00e9 (2 \u2192 3 m/s). De combien la SEULE distance de freinage a-t-elle \u00e9t\u00e9 multipli\u00e9e ? <span style="color:var(--dim)">(sans unit\u00e9)</span>',
+ function(v){ return Math.abs(v-2.25)<0.12; },
+ '\u2713 \u00d72,25 : parce que la distance de freinage d\u00e9pend du CARR\u00c9 de la vitesse.',
+ '\u2717 Compare 4 m et 9 m. Et souviens-toi : d = v\u00b2/(2a) \u2014 le v est au carr\u00e9.',
+ function(){
+ proof('pw');
+ say('Naïma, technicienne maintenance','tech','\u00ab \u00c0 une fois et demie la vitesse, presque deux fois et quart la distance de freinage\u2026 C\u2019est pour \u00e7a que la consigne \u00e9tait \u00e0 2. Restait \u00e0 savoir qui l\u2019a mont\u00e9e \u00e0 3. \u00bb  \u2014 Elle ouvre l\u2019historique des param\u00e8tres. Une seule ligne modifi\u00e9e, il y a onze jours, lors d\u2019une intervention pour \u00ab am\u00e9liorer la cadence \u00bb. Sign\u00e9e du bureau d\u2019exploitation.',function(){
+ note(' <b>Preuve 4 \u2014 la cause racine</b> : le param\u00e8tre de vitesse a \u00e9t\u00e9 relev\u00e9 de 2 \u00e0 3 m/s sans recalculer la distance d\u2019arr\u00eat. Le syst\u00e8me de s\u00e9curit\u00e9 avait \u00e9t\u00e9 dimensionn\u00e9 pour 2 m/s.');
+ choices([{t:'\u2192 R\u00e9diger le rapport d\u2019expertise', go:SC.fin}]);
+ });
+ });
   });
 };
 
 SC.fin=function(){
   DECOR='bureau'; chap('\u00c9pilogue \u00b7 Le rapport');
   say('','narr','06 h 15. La page est blanche, le caf\u00e9 est froid, et il faut conclure. Une seule ligne compte : la cause de l\u2019accident. Choisis \u2014 tu la d\u00e9fendras devant l\u2019inspection du travail.',function(){
-    choices([
-      {t:'\u00ab D\u00e9faillance du capteur avant \u00bb', sub:'la version de l\u2019exploitant', go:function(){ SC.verdict('capteur'); }},
-      {t:'\u00ab D\u00e9faillance du syst\u00e8me de freinage \u00bb', sub:'l\u2019\u00e9pave est spectaculaire', go:function(){ SC.verdict('frein'); }},
-      {t:'\u00ab Param\u00e8tre de vitesse relev\u00e9 sans recalcul de la distance d\u2019arr\u00eat \u00bb', sub:'ce que disent les chiffres', go:function(){ SC.verdict('vitesse'); }},
-      {t:'\u00ab Cause ind\u00e9termin\u00e9e \u00bb', sub:'ne pas se mouiller', go:function(){ SC.verdict('rien'); }}
-    ]);
+ choices([
+ {t:'\u00ab D\u00e9faillance du capteur avant \u00bb', sub:'la version de l\u2019exploitant', go:function(){ SC.verdict('capteur'); }},
+ {t:'\u00ab D\u00e9faillance du syst\u00e8me de freinage \u00bb', sub:'l\u2019\u00e9pave est spectaculaire', go:function(){ SC.verdict('frein'); }},
+ {t:'\u00ab Param\u00e8tre de vitesse relev\u00e9 sans recalcul de la distance d\u2019arr\u00eat \u00bb', sub:'ce que disent les chiffres', go:function(){ SC.verdict('vitesse'); }},
+ {t:'\u00ab Cause ind\u00e9termin\u00e9e \u00bb', sub:'ne pas se mouiller', go:function(){ SC.verdict('rien'); }}
+ ]);
   });
 };
 
@@ -638,31 +592,31 @@ SC.verdict=function(kind){
   var n=nProofs(), box=el('extra');
   var titre, cls, corps;
   if(kind==='vitesse'&&n>=3){
-    cls='good'; titre='\ud83c\udfaf Rapport retenu \u2014 et cause racine identifi\u00e9e';
-    corps='L\u2019inspection valide ton rapport point par point : deux mesures ind\u00e9pendantes donnant 3 m/s, une distance d\u2019arr\u00eat de 13,5 m sup\u00e9rieure aux 12 m disponibles, et un param\u00e8tre modifi\u00e9 sans \u00e9tude. Le site abaisse la consigne \u00e0 2 m/s et impose d\u00e9sormais un recalcul de la distance d\u2019arr\u00eat \u00e0 chaque changement de vitesse. <b>Ni le capteur ni le frein n\u2019\u00e9taient en cause : c\u2019est la cin\u00e9matique qui a tranch\u00e9.</b>';
+ cls='good'; titre=' Rapport retenu \u2014 et cause racine identifi\u00e9e';
+ corps='L\u2019inspection valide ton rapport point par point : deux mesures ind\u00e9pendantes donnant 3 m/s, une distance d\u2019arr\u00eat de 13,5 m sup\u00e9rieure aux 12 m disponibles, et un param\u00e8tre modifi\u00e9 sans \u00e9tude. Le site abaisse la consigne \u00e0 2 m/s et impose d\u00e9sormais un recalcul de la distance d\u2019arr\u00eat \u00e0 chaque changement de vitesse. <b>Ni le capteur ni le frein n\u2019\u00e9taient en cause : c\u2019est la cin\u00e9matique qui a tranch\u00e9.</b>';
   } else if(kind==='vitesse'){
-    cls='mid'; titre='\u26a0 Bonne intuition, dossier trop mince';
-    corps='Tu vises juste, mais tu n\u2019as pas r\u00e9uni assez de mesures pour l\u2019\u00e9tablir. L\u2019exploitant conteste, et faute de recoupement, le dossier repart en contre-expertise. En m\u00e9canique comme au tribunal : une affirmation sans mesure ne p\u00e8se rien.';
+ cls='mid'; titre=' Bonne intuition, dossier trop mince';
+ corps='Tu vises juste, mais tu n\u2019as pas r\u00e9uni assez de mesures pour l\u2019\u00e9tablir. L\u2019exploitant conteste, et faute de recoupement, le dossier repart en contre-expertise. En m\u00e9canique comme au tribunal : une affirmation sans mesure ne p\u00e8se rien.';
   } else if(kind==='capteur'){
-    cls='bad'; titre='\u2717 Rapport invalid\u00e9';
-    corps='Le t\u00e9l\u00e9m\u00e8tre est d\u00e9mont\u00e9, test\u00e9\u2026 et parfaitement fonctionnel : il avait d\u00e9tect\u00e9 l\u2019obstacle \u00e0 12 m, comme pr\u00e9vu. Le journal le prouvait d\u00e9j\u00e0. Un capteur neuf est install\u00e9, la vitesse reste \u00e0 3 m/s \u2014 et six semaines plus tard, un second AGV percute un rack. Cette fois, quelqu\u2019un travaillait dans l\u2019allée.';
+ cls='bad'; titre='\u2717 Rapport invalid\u00e9';
+ corps='Le t\u00e9l\u00e9m\u00e8tre est d\u00e9mont\u00e9, test\u00e9\u2026 et parfaitement fonctionnel : il avait d\u00e9tect\u00e9 l\u2019obstacle \u00e0 12 m, comme pr\u00e9vu. Le journal le prouvait d\u00e9j\u00e0. Un capteur neuf est install\u00e9, la vitesse reste \u00e0 3 m/s \u2014 et six semaines plus tard, un second AGV percute un rack. Cette fois, quelqu\u2019un travaillait dans l\u2019allée.';
   } else if(kind==='frein'){
-    cls='bad'; titre='\u2717 Rapport invalid\u00e9';
-    corps='Le banc d\u2019essai est formel : le freinage d\u00e9veloppe exactement les 0,5 m/s\u00b2 de sa fiche technique \u2014 tes propres 9 m\u00e8tres de trace le confirmaient. Le frein est remplac\u00e9 pour rien, la vraie cause reste en place, et le risque avec elle.';
+ cls='bad'; titre='\u2717 Rapport invalid\u00e9';
+ corps='Le banc d\u2019essai est formel : le freinage d\u00e9veloppe exactement les 0,5 m/s\u00b2 de sa fiche technique \u2014 tes propres 9 m\u00e8tres de trace le confirmaient. Le frein est remplac\u00e9 pour rien, la vraie cause reste en place, et le risque avec elle.';
   } else {
-    cls='bad'; titre='\u2717 Non-lieu \u2014 et machine remise en service';
-    corps='Sans conclusion, l\u2019AGV repart le lendemain avec le m\u00eame param\u00e8tre de vitesse. Tu avais pourtant tout ce qu\u2019il fallait : quelques divisions, une distance d\u2019arr\u00eat, et le courage de contredire un chef de quai.';
+ cls='bad'; titre='\u2717 Non-lieu \u2014 et machine remise en service';
+ corps='Sans conclusion, l\u2019AGV repart le lendemain avec le m\u00eame param\u00e8tre de vitesse. Tu avais pourtant tout ce qu\u2019il fallait : quelques divisions, une distance d\u2019arr\u00eat, et le courage de contredire un chef de quai.';
   }
   box.innerHTML='<div class="end"><div class="verdict '+cls+'">'+(cls==='good'?'affaire r\u00e9solue':(cls==='mid'?'partiellement':'\u00e9chec'))+
-    '</div><h3>'+titre+'</h3><p style="color:#cfc8ba">'+corps+'</p>'+
-    '<p style="font-family:\'JetBrains Mono\',monospace;font-size:13px;color:var(--dim)">preuves r\u00e9unies : '+n+' / 4 \u00b7 rigueur : '+S.rig+' %</p>'+
-    '<div class="note" style="margin-top:12px">\ud83d\udcd8 <b>Ce que tu viens d\u2019utiliser :</b> vitesse moyenne v = \u0394d/\u0394t \u00b7 distance d\u2019arr\u00eat d = v\u00b2/(2a) \u00b7 mouvement uniforme pendant le temps de r\u00e9action \u00b7 et la loi qui fait toute la diff\u00e9rence : <b>la distance de freinage cro\u00eet comme le CARR\u00c9 de la vitesse</b>.</div>'+
-    '<div class="row" style="margin-top:14px"><button class="btn big" id="again">\u21bb Reprendre l\u2019enqu\u00eate</button></div></div>';
+ '</div><h3>'+titre+'</h3><p style="color:#cfc8ba">'+corps+'</p>'+
+ '<p style="font-family:\'JetBrains Mono\',monospace;font-size:13px;color:var(--dim)">preuves r\u00e9unies : '+n+' / 4 \u00b7 rigueur : '+S.rig+' %</p>'+
+ '<div class="note" style="margin-top:12px"><b>Ce que tu viens d\u2019utiliser :</b> vitesse moyenne v = \u0394d/\u0394t \u00b7 distance d\u2019arr\u00eat d = v\u00b2/(2a) \u00b7 mouvement uniforme pendant le temps de r\u00e9action \u00b7 et la loi qui fait toute la diff\u00e9rence : <b>la distance de freinage cro\u00eet comme le CARR\u00c9 de la vitesse</b>.</div>'+
+ '<div class="row" style="margin-top:14px"><button class="btn big" id="again">\u21bb Reprendre l\u2019enqu\u00eate</button></div></div>';
   el('again').addEventListener('click',function(){
-    S={ scene:'p0', proofs:{}, rig:100, t:S.t };
-    ['pv','pf','pr','pw'].forEach(function(k){ el(k).classList.remove('got'); });
-    el('rig').textContent='100'; el('extra').innerHTML='';
-    SC.p0();
+ S={ scene:'p0', proofs:{}, rig:100, t:S.t };
+ ['pv','pf','pr','pw'].forEach(function(k){ el(k).classList.remove('got'); });
+ el('rig').textContent='100'; el('extra').innerHTML='';
+ SC.p0();
   });
   say('','narr','Tu signes. Dehors, le jour se l\u00e8ve sur les quais.');
 };

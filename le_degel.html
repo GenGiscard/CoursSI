@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --frost:#e4f0f7; --dim:#8ba0ad; --night:#04070e;
-    --ice:#8fd8ff; --ice-dim:#3a7fa8; --aurora:#7effc0; --violet:#b57ce8; --warm:#f0a53a; --alarm:#e05a6b; }
+<style> :root{ --frost:#e4f0f7; --dim:#8ba0ad; --night:#04070e;
+ --ice:#8fd8ff; --ice-dim:#3a7fa8; --aurora:#7effc0; --violet:#b57ce8; --warm:#f0a53a; --alarm:#e05a6b; }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;overflow:hidden;background:var(--night)}
   body{color:var(--frost);font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;-webkit-font-smoothing:antialiased}
   #fx{position:fixed;inset:0;z-index:0;display:block}
   #frost{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:screen;
-    background:radial-gradient(120% 80% at 50% -10%,rgba(143,216,255,.06),transparent 55%)}
+ background:radial-gradient(120% 80% at 50% -10%,rgba(143,216,255,.06),transparent 55%)}
   #vign{position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(120% 120% at 50% 42%,transparent 40%,rgba(0,0,0,.74) 100%)}
   #fade{position:fixed;inset:0;z-index:40;background:#000;pointer-events:none;opacity:1;transition:opacity 1.1s ease}
   #fade.clear{opacity:0}
@@ -102,58 +101,7 @@
   a{color:var(--ice)}
 </style>
 </head>
-<body>
-  <svg id="gdefs" width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs>
-    <radialGradient id="gNight" cx="50%" cy="38%" r="85%"><stop offset="0" stop-color="#0a1826"/><stop offset=".7" stop-color="#050c18"/><stop offset="1" stop-color="#03060e"/></radialGradient>
-    <radialGradient id="gWarm" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff0d0"/><stop offset=".35" stop-color="#f0a53a"/><stop offset="1" stop-color="#3a1e08" stop-opacity="0"/></radialGradient>
-    <radialGradient id="gIce" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#e9f8ff"/><stop offset=".4" stop-color="#8fd8ff"/><stop offset="1" stop-color="#0e2436" stop-opacity="0"/></radialGradient>
-    <linearGradient id="gMetal" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#3a5060"/><stop offset=".5" stop-color="#182833"/><stop offset="1" stop-color="#070f18"/></linearGradient>
-    <linearGradient id="gGlassC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c3a48"/><stop offset="1" stop-color="#060f18"/></linearGradient>
-    <linearGradient id="gIceWall" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#2a4a5e"/><stop offset="1" stop-color="#0a1622"/></linearGradient>
-    <filter id="fglow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="fbloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="15"/></filter>
-    <filter id="forganic"><feTurbulence type="fractalNoise" baseFrequency="0.016 0.024" numOctaves="2" seed="3" result="n"><animate attributeName="baseFrequency" dur="14s" values="0.016 0.024;0.022 0.03;0.016 0.024" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter>
-  </defs></svg>
-  <canvas id="fx"></canvas>
-  <div id="frost"></div>
-  <div id="vign"></div>
-  <div id="focal"></div>
-
-  <div class="hud">
-    <span class="tag">THULÉ-6</span>
-    <span class="depth" id="depth">−48 m sous la glace</span>
-    <div class="stat" id="chalStat"><span class="l">Chaleur</span><div class="bar"><i id="chalBar"></i></div></div>
-    <button class="hbtn" id="codexBtn">DOSSIER</button>
-    <button class="hbtn" id="sndBtn">SON ✕</button>
-  </div>
-
-  <div id="stage"><div id="speaker"></div><div id="line"></div><div id="next"><span>Continuer</span><span class="a">▸</span></div></div>
-  <div id="act"></div>
-
-  <div class="overlay" id="lesson"><div class="obox">
-    <div class="lk">Journal technique · aide</div><h4 id="lessonTitle"></h4>
-    <div class="body" id="lessonBody"></div>
-    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('lesson')">Revenir</button>
-  </div></div>
-  <div class="overlay" id="codex"><div class="obox">
-    <div class="lk">Dossier — Station Thulé-6</div><h4>Ce que tu as trouvé sous la glace</h4>
-    <div id="codexList"></div>
-    <button class="btn ghost" style="margin-top:18px" onclick="closeOv('codex')">Fermer</button>
-  </div></div>
-
-  <div id="toast"></div><div id="flash"></div><div id="fade" class="clear"></div>
-
-  <div id="title">
-    <div class="sub">Sciences de l'ingénieur · récit d'horreur</div>
-    <h1>LE DÉGEL</h1>
-    <div class="depth">STATION THULÉ-6 · −62 °C</div>
-    <p class="tag">Ensevelie depuis l'automne, silencieuse depuis six jours. Tu descends la rallumer. Ils l'avaient laissée geler — exprès.</p>
-    <input id="nameIn" maxlength="16" placeholder="Ton nom…" autocomplete="off">
-    <div><button class="btn" id="startBtn">Entrer</button></div>
-  </div>
-  <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div>
-
-<script>
+<body><svg id="gdefs" width="0" height="0" style="position:absolute;pointer-events:none" aria-hidden="true"><defs> <radialGradient id="gNight" cx="50%" cy="38%" r="85%"><stop offset="0" stop-color="#0a1826"/><stop offset=".7" stop-color="#050c18"/><stop offset="1" stop-color="#03060e"/></radialGradient> <radialGradient id="gWarm" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff0d0"/><stop offset=".35" stop-color="#f0a53a"/><stop offset="1" stop-color="#3a1e08" stop-opacity="0"/></radialGradient> <radialGradient id="gIce" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#e9f8ff"/><stop offset=".4" stop-color="#8fd8ff"/><stop offset="1" stop-color="#0e2436" stop-opacity="0"/></radialGradient> <linearGradient id="gMetal" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#3a5060"/><stop offset=".5" stop-color="#182833"/><stop offset="1" stop-color="#070f18"/></linearGradient> <linearGradient id="gGlassC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c3a48"/><stop offset="1" stop-color="#060f18"/></linearGradient> <linearGradient id="gIceWall" x1="0" y1="0" x2="0.3" y2="1"><stop offset="0" stop-color="#2a4a5e"/><stop offset="1" stop-color="#0a1622"/></linearGradient> <filter id="fglow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter> <filter id="fbloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="15"/></filter> <filter id="forganic"><feTurbulence type="fractalNoise" baseFrequency="0.016 0.024" numOctaves="2" seed="3" result="n"><animate attributeName="baseFrequency" dur="14s" values="0.016 0.024;0.022 0.03;0.016 0.024" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/></filter> </defs></svg> <canvas id="fx"></canvas> <div id="frost"></div> <div id="vign"></div> <div id="focal"></div> <div class="hud"><span class="tag">THULÉ-6</span> <span class="depth" id="depth">−48 m sous la glace</span> <div class="stat" id="chalStat"><span class="l">Chaleur</span><div class="bar"><i id="chalBar"></i></div></div> <button class="hbtn" id="codexBtn">DOSSIER</button> <button class="hbtn" id="sndBtn">SON</button></div> <div id="stage"><div id="speaker"></div><div id="line"></div><div id="next"><span>Continuer</span><span class="a">▸</span></div></div> <div id="act"></div> <div class="overlay" id="lesson"><div class="obox"><div class="lk">Journal technique · aide</div><h4 id="lessonTitle"></h4> <div class="body" id="lessonBody"></div> <button class="btn ghost" style="margin-top:18px" onclick="closeOv('lesson')">Revenir</button></div></div> <div class="overlay" id="codex"><div class="obox"><div class="lk">Dossier — Station Thulé-6</div><h4>Ce que tu as trouvé sous la glace</h4> <div id="codexList"></div> <button class="btn ghost" style="margin-top:18px" onclick="closeOv('codex')">Fermer</button></div></div> <div id="toast"></div><div id="flash"></div><div id="fade" class="clear"></div> <div id="title"><div class="sub">Sciences de l'ingénieur · récit d'horreur</div> <h1>LE DÉGEL</h1> <div class="depth">STATION THULÉ-6 · −62 °C</div> <p class="tag">Ensevelie depuis l'automne, silencieuse depuis six jours. Tu descends la rallumer. Ils l'avaient laissée geler — exprès.</p> <input id="nameIn" maxlength="16" placeholder="Ton nom…" autocomplete="off"> <div><button class="btn" id="startBtn">Entrer</button></div></div> <div class="credit">Professeur AGOSTINI · Sciences de l'ingénieur · ESTIC — © ESTIC</div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -163,73 +111,73 @@ var FX=(function(){
   var cv,g,W,H,t=0,cfg={},raf,reduce=false,shakeAmt=0,flakes=[],motes=[];
   function rnd(a,b){ return a+Math.random()*(b-a); }
   function seed(){
-    flakes=[]; var n=cfg.dense||120;
-    for(var i=0;i<n;i++){ var d=rnd(0.3,1); flakes.push({x:Math.random()*W,y:Math.random()*H,d:d,len:rnd(4,12)*d,s:rnd(1,3)*d,ph:Math.random()*6.28}); }
-    motes=[]; for(var j=0;j<10;j++) motes.push({x:Math.random()*W,y:Math.random()*H,r:rnd(1.2,3),ph:Math.random()*6.28,sp:rnd(0.04,0.14)});
+ flakes=[]; var n=cfg.dense||120;
+ for(var i=0;i<n;i++){ var d=rnd(0.3,1); flakes.push({x:Math.random()*W,y:Math.random()*H,d:d,len:rnd(4,12)*d,s:rnd(1,3)*d,ph:Math.random()*6.28}); }
+ motes=[]; for(var j=0;j<10;j++) motes.push({x:Math.random()*W,y:Math.random()*H,r:rnd(1.2,3),ph:Math.random()*6.28,sp:rnd(0.04,0.14)});
   }
   function resize(){ W=cv.width=window.innerWidth||800; H=cv.height=window.innerHeight||600; seed(); }
   function set(c){ cfg=c||{}; seed(); }
   function shake(a){ shakeAmt=a||10; }
   function aurora(){
-    g.globalCompositeOperation='lighter';
-    var cols=[[126,255,192],[150,130,255]];
-    for(var c=0;c<2;c++){ var col=cols[c], yb=46+c*26, amp=22+c*10;
-      function edge(x){ return yb+Math.sin(x*0.006+t*0.008+c*2)*amp+Math.sin(x*0.014+t*0.016)*amp*0.4; }
-      g.beginPath(); g.moveTo(0,edge(0));
-      for(var x=0;x<=W;x+=22) g.lineTo(x,edge(x));
-      for(var x2=W;x2>=0;x2-=22) g.lineTo(x2,edge(x2)+130);
-      g.closePath();
-      var ag=g.createLinearGradient(0,yb-amp,0,yb+amp+130); ag.addColorStop(0,'rgba('+col.join(',')+',.10)'); ag.addColorStop(1,'rgba('+col.join(',')+',0)');
-      g.fillStyle=ag; g.fill();
-    }
-    g.globalCompositeOperation='source-over';
+ g.globalCompositeOperation='lighter';
+ var cols=[[126,255,192],[150,130,255]];
+ for(var c=0;c<2;c++){ var col=cols[c], yb=46+c*26, amp=22+c*10;
+ function edge(x){ return yb+Math.sin(x*0.006+t*0.008+c*2)*amp+Math.sin(x*0.014+t*0.016)*amp*0.4; }
+ g.beginPath(); g.moveTo(0,edge(0));
+ for(var x=0;x<=W;x+=22) g.lineTo(x,edge(x));
+ for(var x2=W;x2>=0;x2-=22) g.lineTo(x2,edge(x2)+130);
+ g.closePath();
+ var ag=g.createLinearGradient(0,yb-amp,0,yb+amp+130); ag.addColorStop(0,'rgba('+col.join(',')+',.10)'); ag.addColorStop(1,'rgba('+col.join(',')+',0)');
+ g.fillStyle=ag; g.fill();
+ }
+ g.globalCompositeOperation='source-over';
   }
   function thing(px,py){
-    g.fillStyle='rgba(8,16,26,'+cfg.presence+')'; g.beginPath();
-    var R=Math.min(W,H)*0.33;
-    for(var k=0;k<=11;k++){ var a=k/11*6.28, rr=R*(0.62+0.38*Math.sin(k*2.7+t*0.004)); var x=px+Math.cos(a)*rr*0.92, y=py+Math.sin(a)*rr; if(k===0)g.moveTo(x,y); else g.lineTo(x,y); }
-    g.closePath(); g.fill();
-    g.strokeStyle='rgba(143,216,255,'+(cfg.presence*0.5)+')'; g.lineWidth=1;
-    for(var v=0;v<5;v++){ var a2=v*1.3+t*0.003; g.beginPath(); g.moveTo(px,py); g.lineTo(px+Math.cos(a2)*R*0.7,py+Math.sin(a2)*R*0.7); g.stroke(); }
-    if(cfg.eyes){ g.globalCompositeOperation='lighter';
-      for(var e=0;e<2;e++){ var ex=px+(e?42:-42), ey=py-20, er=5+2*Math.sin(t*0.05+e);
-        var eg=g.createRadialGradient(ex,ey,0,ex,ey,er*4); eg.addColorStop(0,'rgba(180,230,255,.9)'); eg.addColorStop(1,'rgba(143,216,255,0)');
-        g.fillStyle=eg; g.beginPath(); g.arc(ex,ey,er*4,0,7); g.fill(); }
-      g.globalCompositeOperation='source-over';
-    }
+ g.fillStyle='rgba(8,16,26,'+cfg.presence+')'; g.beginPath();
+ var R=Math.min(W,H)*0.33;
+ for(var k=0;k<=11;k++){ var a=k/11*6.28, rr=R*(0.62+0.38*Math.sin(k*2.7+t*0.004)); var x=px+Math.cos(a)*rr*0.92, y=py+Math.sin(a)*rr; if(k===0)g.moveTo(x,y); else g.lineTo(x,y); }
+ g.closePath(); g.fill();
+ g.strokeStyle='rgba(143,216,255,'+(cfg.presence*0.5)+')'; g.lineWidth=1;
+ for(var v=0;v<5;v++){ var a2=v*1.3+t*0.003; g.beginPath(); g.moveTo(px,py); g.lineTo(px+Math.cos(a2)*R*0.7,py+Math.sin(a2)*R*0.7); g.stroke(); }
+ if(cfg.eyes){ g.globalCompositeOperation='lighter';
+ for(var e=0;e<2;e++){ var ex=px+(e?42:-42), ey=py-20, er=5+2*Math.sin(t*0.05+e);
+ var eg=g.createRadialGradient(ex,ey,0,ex,ey,er*4); eg.addColorStop(0,'rgba(180,230,255,.9)'); eg.addColorStop(1,'rgba(143,216,255,0)');
+ g.fillStyle=eg; g.beginPath(); g.arc(ex,ey,er*4,0,7); g.fill(); }
+ g.globalCompositeOperation='source-over';
+ }
   }
   function frame(){
-    t+=reduce?0.3:1;
-    var sx=0,sy=0; if(shakeAmt>0.2){ sx=(Math.random()-.5)*shakeAmt; sy=(Math.random()-.5)*shakeAmt; shakeAmt*=0.88; }
-    g.setTransform(1,0,0,1,sx,sy); g.clearRect(-40,-40,W+80,H+80);
-    var top=cfg.top||[10,22,34], bot=cfg.bot||[3,6,12];
-    var grd=g.createLinearGradient(0,0,0,H); grd.addColorStop(0,'rgb('+top.join(',')+')'); grd.addColorStop(1,'rgb('+bot.join(',')+')');
-    g.fillStyle=grd; g.fillRect(-40,-40,W+80,H+80);
-    if(cfg.aurora) aurora();
-    if(cfg.presence){ var px=W*0.5+Math.sin(t*0.001)*W*0.18, py=H*0.56; thing(px,py); }
-    // blizzard : stries poussées par le vent
-    var wind=cfg.wind||3, pc=cfg.partCol||[220,240,255];
-    for(var i=0;i<flakes.length;i++){ var p=flakes[i];
-      if(!reduce){ p.x-=wind*p.d+Math.sin(t*0.02+p.ph)*0.6; p.y+=p.s; }
-      if(p.x<-14){ p.x=W+14; p.y=Math.random()*H; } if(p.y>H+14){ p.y=-14; p.x=Math.random()*W; }
-      var a=(0.12+0.3*p.d);
-      g.strokeStyle='rgba('+pc[0]+','+pc[1]+','+pc[2]+','+a+')'; g.lineWidth=p.d*1.3;
-      g.beginPath(); g.moveTo(p.x,p.y); g.lineTo(p.x+wind*1.4*p.d,p.y-p.len*0.4); g.stroke();
-    }
-    g.globalCompositeOperation='lighter'; var mc=cfg.presence?[143,216,255]:[200,235,255];
-    for(var mm=0;mm<motes.length;mm++){ var mo=motes[mm]; if(!reduce){ mo.y-=mo.sp; mo.x-=wind*0.3; if(mo.y<-6||mo.x<-6){mo.y=H+6;mo.x=Math.random()*W;} }
-      var gl=0.22+0.28*Math.sin(t*0.04+mo.ph); if(gl<0)gl=0; var rr=mo.r*5;
-      var mg=g.createRadialGradient(mo.x,mo.y,0,mo.x,mo.y,rr); mg.addColorStop(0,'rgba('+mc[0]+','+mc[1]+','+mc[2]+','+gl+')'); mg.addColorStop(1,'rgba('+mc[0]+','+mc[1]+','+mc[2]+',0)');
-      g.fillStyle=mg; g.beginPath(); g.arc(mo.x,mo.y,rr,0,7); g.fill();
-    }
-    g.globalCompositeOperation='source-over';
-    if(cfg.grade){ g.fillStyle=cfg.grade; g.fillRect(-40,-40,W+80,H+80); }
-    g.setTransform(1,0,0,1,0,0); raf(frame);
+ t+=reduce?0.3:1;
+ var sx=0,sy=0; if(shakeAmt>0.2){ sx=(Math.random()-.5)*shakeAmt; sy=(Math.random()-.5)*shakeAmt; shakeAmt*=0.88; }
+ g.setTransform(1,0,0,1,sx,sy); g.clearRect(-40,-40,W+80,H+80);
+ var top=cfg.top||[10,22,34], bot=cfg.bot||[3,6,12];
+ var grd=g.createLinearGradient(0,0,0,H); grd.addColorStop(0,'rgb('+top.join(',')+')'); grd.addColorStop(1,'rgb('+bot.join(',')+')');
+ g.fillStyle=grd; g.fillRect(-40,-40,W+80,H+80);
+ if(cfg.aurora) aurora();
+ if(cfg.presence){ var px=W*0.5+Math.sin(t*0.001)*W*0.18, py=H*0.56; thing(px,py); }
+ // blizzard : stries poussées par le vent
+ var wind=cfg.wind||3, pc=cfg.partCol||[220,240,255];
+ for(var i=0;i<flakes.length;i++){ var p=flakes[i];
+ if(!reduce){ p.x-=wind*p.d+Math.sin(t*0.02+p.ph)*0.6; p.y+=p.s; }
+ if(p.x<-14){ p.x=W+14; p.y=Math.random()*H; } if(p.y>H+14){ p.y=-14; p.x=Math.random()*W; }
+ var a=(0.12+0.3*p.d);
+ g.strokeStyle='rgba('+pc[0]+','+pc[1]+','+pc[2]+','+a+')'; g.lineWidth=p.d*1.3;
+ g.beginPath(); g.moveTo(p.x,p.y); g.lineTo(p.x+wind*1.4*p.d,p.y-p.len*0.4); g.stroke();
+ }
+ g.globalCompositeOperation='lighter'; var mc=cfg.presence?[143,216,255]:[200,235,255];
+ for(var mm=0;mm<motes.length;mm++){ var mo=motes[mm]; if(!reduce){ mo.y-=mo.sp; mo.x-=wind*0.3; if(mo.y<-6||mo.x<-6){mo.y=H+6;mo.x=Math.random()*W;} }
+ var gl=0.22+0.28*Math.sin(t*0.04+mo.ph); if(gl<0)gl=0; var rr=mo.r*5;
+ var mg=g.createRadialGradient(mo.x,mo.y,0,mo.x,mo.y,rr); mg.addColorStop(0,'rgba('+mc[0]+','+mc[1]+','+mc[2]+','+gl+')'); mg.addColorStop(1,'rgba('+mc[0]+','+mc[1]+','+mc[2]+',0)');
+ g.fillStyle=mg; g.beginPath(); g.arc(mo.x,mo.y,rr,0,7); g.fill();
+ }
+ g.globalCompositeOperation='source-over';
+ if(cfg.grade){ g.fillStyle=cfg.grade; g.fillRect(-40,-40,W+80,H+80); }
+ g.setTransform(1,0,0,1,0,0); raf(frame);
   }
   return { init:function(){ cv=el('fx'); if(!cv||!cv.getContext) return; g=cv.getContext('2d');
-      raf=window.requestAnimationFrame||function(f){return setTimeout(f,33);};
-      reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-      resize(); window.addEventListener('resize',resize); frame(); }, set:set, shake:shake };
+ raf=window.requestAnimationFrame||function(f){return setTimeout(f,33);};
+ reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ resize(); window.addEventListener('resize',resize); frame(); }, set:set, shake:shake };
 })();
 
 /* ===================== PLANS FOCAUX ===================== */
@@ -298,9 +246,9 @@ thaw:{ depth:"−52 m · salle 3", mood:{top:[10,10,18],bot:[3,3,9],wind:1,dense
 offer:{ depth:"−52 m · le choix", mood:{top:[8,8,16],bot:[2,3,9],wind:2,dense:44,partCol:[181,124,232],presence:0.32,eyes:true}, focal:'entity',
   seq:[{sp:'froid',t:"« Reste. <em>Plus jamais froid.</em> »"},{sp:'you',t:"Trois gestes. Un seul me ramène à la surface."}],
   ch:[
-    {t:"Rejoindre le traîneau — fuir",go:"end_evac"},
-    {t:"Surcharger le réacteur — la brûler",go:"end_burn",cls:'danger'},
-    {t:"S'asseoir. Se reposer.",go:"end_sleep",cls:'lure',sub:"il fait si bon…"}
+ {t:"Rejoindre le traîneau — fuir",go:"end_evac"},
+ {t:"Surcharger le réacteur — la brûler",go:"end_burn",cls:'danger'},
+ {t:"S'asseoir. Se reposer.",go:"end_sleep",cls:'lure',sub:"il fait si bon…"}
   ] },
 
 end_evac:{ depth:"surface", mood:{top:[12,22,36],bot:[4,8,16],aurora:true,wind:4,dense:120,partCol:[225,242,255]}, focal:'evac', end:true,
@@ -338,7 +286,7 @@ function enter(id){
   if(sc.scare) setTimeout(function(){ scare(sc.focal==='entity'); }, 520);
   setTimeout(showLine, 380);
 }
-var SPKLAB={you:'toi',crew:'équipage — dernière salve',froid:'❄  la voix sous la glace',dead:'—'};
+var SPKLAB={you:'toi',crew:'équipage — dernière salve',froid:'la voix sous la glace',dead:'—'};
 function showLine(){
   var sc=S[G.cur];
   if(G.si>=G.seq.length){ afterLines(sc); return; }
@@ -352,13 +300,13 @@ function afterLines(sc){
   el('next').classList.remove('show'); el('speaker').style.opacity=0; el('line').classList.remove('in');
   var act=el('act'); act.className='on'; act.innerHTML='';
   if(sc.end){ var box=document.createElement('div'); box.className='term'; box.style.borderColor='rgba(139,160,173,.3)';
-    box.innerHTML='<div class="rk"><span>Fin</span><span>THULÉ-6</span></div><div class="q" style="color:var(--ice)">'+sc.final()+'</div>';
-    var b=document.createElement('button'); b.className='btn'; b.textContent='Recommencer'; b.onclick=function(){location.reload();}; box.appendChild(b); act.appendChild(box); return; }
+ box.innerHTML='<div class="rk"><span>Fin</span><span>THULÉ-6</span></div><div class="q" style="color:var(--ice)">'+sc.final()+'</div>';
+ var b=document.createElement('button'); b.className='btn'; b.textContent='Recommencer'; b.onclick=function(){location.reload();}; box.appendChild(b); act.appendChild(box); return; }
   if(sc.pz){ renderPuzzle(sc.pz); return; }
   var wrap=document.createElement('div'); wrap.className='choices';
   (sc.ch||[]).forEach(function(c){ var b=document.createElement('button'); b.className='choice'+(c.cls?' '+c.cls:'');
-    b.innerHTML=c.t+(c.sub?'<small>'+c.sub+'</small>':'');
-    b.onclick=function(){ transition(c.go); }; wrap.appendChild(b); });
+ b.innerHTML=c.t+(c.sub?'<small>'+c.sub+'</small>':'');
+ b.onclick=function(){ transition(c.go); }; wrap.appendChild(b); });
   act.appendChild(wrap);
 }
 function renderPuzzle(pz){
@@ -369,30 +317,30 @@ function renderPuzzle(pz){
   var sub=document.createElement('button'); sub.className='btn'; sub.textContent='Exécuter';
   var fb=document.createElement('div'); fb.className='fbk'; var done=false;
   function check(){ if(done)return; var v=numf(inp.value);
-    if(!isNaN(v)&&Math.abs(v-pz.ans)<pz.tol){ done=true; inp.disabled=true; sub.disabled=true;
-      var warm=(pz.dom==='energie'||pz.dom==='elec')?16:6; cool(warm);
-      fb.className='fbk good'; fb.textContent='✓ '+(pz.okline||'Rétabli.');
-      var nb=document.createElement('button'); nb.className='btn'; nb.style.marginTop='12px'; nb.textContent='Continuer'; nb.onclick=function(){ transition(pz.ok); }; w.appendChild(nb);
-    } else { fb.className='fbk bad'; fb.textContent='✗ Erreur. Tes doigts tremblent de froid.'; if(cool(-10,'erreur')) return; } }
+ if(!isNaN(v)&&Math.abs(v-pz.ans)<pz.tol){ done=true; inp.disabled=true; sub.disabled=true;
+ var warm=(pz.dom==='energie'||pz.dom==='elec')?16:6; cool(warm);
+ fb.className='fbk good'; fb.textContent='✓ '+(pz.okline||'Rétabli.');
+ var nb=document.createElement('button'); nb.className='btn'; nb.style.marginTop='12px'; nb.textContent='Continuer'; nb.onclick=function(){ transition(pz.ok); }; w.appendChild(nb);
+ } else { fb.className='fbk bad'; fb.textContent='✗ Erreur. Tes doigts tremblent de froid.'; if(cool(-10,'erreur')) return; } }
   sub.onclick=check; inp.addEventListener('keydown',function(e){if(e.key==='Enter')check();});
   row.appendChild(inp); row.appendChild(sub); w.appendChild(row);
   var tools=document.createElement('div'); tools.style.cssText='margin-top:10px;display:flex;gap:9px;flex-wrap:wrap';
-  var cb=document.createElement('button'); cb.className='btn ghost'; cb.textContent='📖 Cours'; cb.onclick=function(){ openLesson(pz.dom); };
+  var cb=document.createElement('button'); cb.className='btn ghost'; cb.textContent=' Cours'; cb.onclick=function(){ openLesson(pz.dom); };
   tools.appendChild(cb); w.appendChild(tools); w.appendChild(fb); act.appendChild(w); inp.focus();
 }
 function openLesson(dom){ var c=COURS[dom]; if(!c)return; el('lessonTitle').textContent=c.t; el('lessonBody').innerHTML=c.h; el('lesson').classList.add('on'); }
 function closeOv(id){ el(id).classList.remove('on'); }
 function renderCodex(){ var order=['v1','v2','v3','v4','v5'], html='';
   order.forEach(function(id){ var L=LORE[id], has=G.codex.indexOf(id)>=0;
-    html+='<div class="frag'+(has?'':' locked')+'"><div class="fk">'+(has?L.k:'▨ fragment non trouvé')+'</div><div class="fb">'+(has?L.b:'—')+'</div></div>'; });
+ html+='<div class="frag'+(has?'':' locked')+'"><div class="fk">'+(has?L.k:'▨ fragment non trouvé')+'</div><div class="fb">'+(has?L.b:'—')+'</div></div>'; });
   el('codexList').innerHTML=html; }
 
 var AC=null,dn=null;
 function actx(){ if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){AC=null;} } return AC; }
-function toggleSound(){ var c=actx(); if(!c)return; G.sound=!G.sound; el('sndBtn').textContent=G.sound?'SON ●':'SON ✕';
+function toggleSound(){ var c=actx(); if(!c)return; G.sound=!G.sound; el('sndBtn').textContent=G.sound?'SON ●':'SON ';
   if(G.sound){ if(c.state==='suspended')c.resume(); var o=c.createOscillator(),gg=c.createGain(),o2=c.createOscillator(),g2=c.createGain();
-    o.type='sine'; o.frequency.value=40; gg.gain.value=0.05; o2.type='triangle'; o2.frequency.value=61; g2.gain.value=0.02;
-    o.connect(gg).connect(c.destination); o2.connect(g2).connect(c.destination); o.start(); o2.start(); dn=[o,o2];
+ o.type='sine'; o.frequency.value=40; gg.gain.value=0.05; o2.type='triangle'; o2.frequency.value=61; g2.gain.value=0.02;
+ o.connect(gg).connect(c.destination); o2.connect(g2).connect(c.destination); o.start(); o2.start(); dn=[o,o2];
   } else if(dn){ try{dn[0].stop();dn[1].stop();}catch(e){} dn=null; } }
 function sting(){ if(!(G.sound&&AC))return; try{ var o=AC.createOscillator(),gg=AC.createGain(); o.type='sawtooth'; o.frequency.value=300; gg.gain.value=0.08; o.connect(gg).connect(AC.destination); o.start(); o.frequency.exponentialRampToValueAtTime(1400,AC.currentTime+0.14); gg.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+0.4); o.stop(AC.currentTime+0.42);}catch(e){} }
 

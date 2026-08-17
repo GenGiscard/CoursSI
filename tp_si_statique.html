@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -23,13 +22,13 @@
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--amber-d);border-color:var(--amber)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .scorebox{background:var(--ink);border-radius:13px;padding:13px 15px;margin-bottom:14px;color:#fff}
@@ -40,7 +39,7 @@
   .scorebox .prog{height:6px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:9px}
   .scorebox .prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .35s}
   .nav a.navlink{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink .dn{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
   .nav a.navlink .nm{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nav a.navlink .bd{font-size:10px;font-weight:700;color:var(--amber-d)}
@@ -120,12 +119,12 @@
 
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
-    .opts,.two,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
+ .opts,.two,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -197,16 +196,16 @@
   #calc .tt{font-family:var(--mono);font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -216,314 +215,65 @@
   #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
   #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABQCAYAAABGfRh7AAAMsUlEQVR42u2ce3Bc1X3HP+ecu+9dvSXLsnjUZkiMeZqQpIlbexIeNpi4NthYMhYppanBaZnMUEjTB4aGTmLayaMT6kBDMClYxA4QIGATD2SIDQ6JCzgkpjSm02IaLD9Wj13t695z+sfdXcl4Jd1d7drNzN6Z9Whmr3fv+Z7v7/f7fn/nJ4mOT19vOAWXAuJGcFvYsC4Eg0agTvIzGK2RsQhWNmdzqkDIGrBzBiyBMWBOAQjYOSwhxCkBQRRexX9OxUMIEAJJ/aqDAGBNzRhR03AY+6GGgWdM5SAYY9Ba1+zxHCMwjgFH1DArmnHJp0wQDOD3WSglpwKy4uqQMWAFDSJQI0KY/OIdjXGc8kBQSjI4nORfvnQzVy64GNvRKFn99KGBmDDEhKC9FhxwHKRlEd/5Ioe+8zBWQ0NJMCZkgjaG9uYmutpbT5puqFnia2gAbSrLCTnbxhiD42ikktVOVy5ba5gXjeMglMLYduWJUQhRfMkaVImaS6S8GJpKjNV1Qh2EOgh1EOog1EGowEBNqvi0RkrJK/v2s/6r9xMJBd1GhUf0R4zgs0HN6iAMmzJ2RAiwbbpv/wKB07pBa5iGop0WCAUNNpxM8dqbbxOORtCTaPQPKsSkgYMRQy4kSRnjXTUKicllMenMqWdC8UOkJBgOEQkFPLvOQnvNHzKIkECWyQRjqap1pKoCgsmHhtYGrb1ZToEr5402rpMqx6kK3BCoJ8Z6daiDUAehDsL/Q7F0HJrjeg9eE7wEhJhGA9MYt0pog1tiPqjmDAg9vW6zZ+VoDOlsFp/PV5ZOyBmDHZBU2lwTgYCrFOVEmsp9Q/h8kwJRFRCCAT9nzOokGg6VBcKwETToBNqkKavPZAxCKX77rfuRkXB+gaLEbQYhBbmBI8hweEJJPy0QCh3oT14wl/3bvlXsG3q6HAcsiyMPPcLw1sexGhsnbYuXUo3Jfb/yJJqEz0L4/ROyoSpMUFISCvjLj2ch8Fmq4nMXGQ55/65ah0OBemXdX+gET+dkp0rSuWoglH1mWUYlqeuEOgh1EH73FGPZiXGKjO0prUjpSV4YfZKqQ7lJTlhWUW5XetnJJDh6cm1uXMUog4Ha6oRsLkcilXaB8Li7RmuEUqQy2Yoqi3EcZvT14pvRkW+0itLeQUqSb/ySwR+/iAqHSqrGaYHgaHdu4eU39nPdF+8lGgmXJZuHDHxeZviTSJhBxynPQWhN48IF+GfN9HCvQ/xHOyASrh0TcrbDkcFhMjm7LBAGDaSiAhGWFY3rOMmkK7W1KckE42iEkuhUprJxnXLzgc+y8FlWWSBYBqTQ00qMQinXLk9w7iCUKh0qtaoOhZen+6Ems1B1nVAH4RSDIIRAypNshqSs2glUVUDI5nKkUxkspWrvDIXIZ/xUeU2YWoEghMAYw5zuLi6adzaHjsZxHI2lajOQV5hEs+NDhM6bh9XWWmzOnDIQXMkrOPuMLnY/+BW+cusNBIM+jg4NI6Ws3gBonvr20BAyFqPz1pv5vXv/Hl9Ls6fptJqHg6uUDaGAnztuuIbd393I2qWLSIymGBlNTS9EhEAohU6OYnI5WpYtZfY3N9J29RKkVFWrsVUTS+4RgGbOrE4e2vAF1ixZxIZNW3h533/QEA4R8Puwy4hhoRQ6k8HJZAjPP5+OvjVEz/nwmO+oYmKsoot0Z6J1XjBd9rGLWHTx+Wza9hz3Pvw4Bw8dpbkhihQCZxJVKaTEaI09NISvq4sZvdfScsWlrmPW2mVHlees5VQq0CmzmSmFQEmJozU+S/Hnq5fyykMbWXftFaQzWYaTo6VDJL84J5nEaE3rqhXM/ua9tF5xKcIwNpJT7u7rqU+g5GQABAK+4oLKbZooKTGA42hmdbRx31/dwo777mLBRedwZHCYbM52q0g+7k02i50YIXLJxZzxT/cw808/i68x5lpfQfkzSYWmjZTgs5jMoanQmedtKNWLkFLym3f/lzndM5nT3YkQAtvRCCk8nxW5n+OWUW0MZ87s4Ialn6J7RhtvvHWAgYFjfDKk+Eg6gT1rFl3rP0fnjWvxt7QU2+migsUbbVxzJSVDP/s5Rx7b5s43fZBFxiADfkTzwh4zEa2TqTRCCq6/chF/c9MqTu/sOK6PUO6ltUYIiRBwND7EXz+4jY5du7hjxWX4r1mOLxw6fgfLNXGFhAmk3z3IwMP9jOzajVAK4T+xs2S0RjVEJgaBPBswhmPDCbraW7itbzm3rLwSv8/C0bri6XfH0aj8rw4kE0ki0chY/FaS9AqLEwInleLwD37IsSeewYwkkLHohCdQRRBaFvVMGe6WUmRyOYaTo3z83A9x55/1sPgT890+n6NRsvyDlILtllIWs37ZSc8Yt6GSB3Twpy9z+HtbyLzz36hoBGFZk0prozWqMYpo+sPVxrIUjqOn1AJKSkZGU2itWXX5Au783GrOOq1rWiFijKlMTI1jTeqd/+LQ5n4Se15F+ixkMD9U6iGZy0gQ0f6pNeboUILmhigw9QiezH9xfDhBW1OUW3s/w629nyESDBb/b00d5TjW2CMjHP7+4ww+sx09mkZFI95a+fkwd4ZH8J/Whdrz/NMb4iNJ9u4/gNaaYMA/abuvQONoKEjWdnh2115+tOsXdLY2M3f2aQghcBydf84qgjEuYRohiO98gfc2fp3Ey68i/QFkIDD1SHFBho+m0LZN05JLmfkX6xAmnxGeeulV7v72FvbuP0BjNIzfN7XMLYRIIpUmZ9ssW/hRNqzr5dw5Z5yQAKe9+3kGJt96m0ObH2F07+vIQH7xHuS4UAqdzaJTKULnzaOjbzWxCy9w33McbcBNUKlMln/uf5qv/dtTDMQHaW6IIfLxPjm7BAJBfCRJQzTE+pVLuG3tChpjEXT+1+ErCpFxi8/GBzm8ZStD23dislmX+tor9TXOSAKro4PW1Stou2qxW0oLMrzAhPGJ7Z333ufuB/rp3/FTMNAQCXtSjZaS5GzN4EiCubO7+dubrqNn8cIiK6TXKjKO+lobjj23gyP927DfH0DFoiDk1LMJBRmeSIJP0XTFZbT3rMTf2nwCwEUQCt/taI2Vp/DOn73GnZv6eWXfW0TDIYIenKAAlFKMpjOkMlkWf2I+d93cy0fmnuUtRBxdLHmJfW9yaPOjpPa9iQqFEH6/d+pnMuhMhsj8C2nv6xlzoPmziOPuNyW2t+AElZTYjsOmbc+xcbN3J1hQnFK6IRIKBLhp+WV88Y+vpaO5Mb/RulhpPrgzmYHDDDzyGMM7fwLaoCJhTyWv4ECdRAL/rJm09q6k5fLjHWgpLVIShLFNGQuR9waOcM93trL5mRewbU1j1FuIKCVxHE18OMns7hl86caV3LjsUreKaO3OMuZjV9s2R556lmNbn8A+egwVjboP7YX6QuAkk4hggKarFtNx3TVYDTFPMnxSEAqHJG7f0P2Q3a//mr/b9Cgv/vyXREJBQgG/p2aJpRSpTIZkKsOiS87j7nW9LLjwnOL7I794jUObHyG9/21UJIzw+aamvgAhFTqdRudyRD92CR19PYTPmn2Cl5j0Y4xHj1xwgq5FNnz3yZ38w4NbOXDwfZobosUd91JShxJJLCm5Yfnl3L7kD/Bt30H8hZeQQiILJ8dTUb/QdE0mCZx5Ou3Xr6Z54YITBJUnt2vKbBSMd4KH40N89aFt3P/E86TTORpjYYx2wZqq1yC05nAixe1Nis/7bIZCEZQX6ud3VicSyGiE5mVX0XbtH2GF80OdhinPHqcNQiknuHf/b7hz06M8t/vfCQX8hIMBHO1MupkKGBaS20KaW8KSuKMnP5rPlzydSmMcm9iC36ejr5fg6d3Tc6DTAaEYItoUwdiy/SW+/K/9/PqdgzTFoljWxCHi/p0luD1sWB8SxM3EE85CKUwuh5McJXD2HNr7emj6+Ecron7VQRgfIuR7C0OJJP/4vSe57/vPMpRI0hyLYkoYM08g5I2OTiSQTY20XLOMtuVXo/z+qiy+qiCUCpFfHfgfNnx7C0/+ZA8+SxENhY4rqZOCUKD+6CgGQWzRAjrXrsY/s3Pa1K85CGMdalMsqU++uIe7HniM1986QGM0gt9nYedHc0qBcJzRmfdh2vvW0DD/gposvmYgjIWIoWDMRtMZvvHoU3xjy9Mcjg+7JRU46ugxEIREGeManfZWWletoPXqJUilqkr9kwpCKdV54N3fctf9rjGzpMAOhfjLfHU4mkiilKLp8k/TvmYV/rbWmu7+SQWh2ArUY/ni+T2vcc8D/by07z+5o9nHeitH+vxzmbm2h+i8uRMand9pEEoaM9thw8NPYG3fwR19y/EvvdJNjE5+JvEkTsD/H/USMayikj2kAAAAAElFTkSuQmCC"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_statique.html">← Séquence : statique</a>
-    <div class="brand">
-      <div class="mark">🔧</div>
-      <div><h1>Leviers &amp; équilibres</h1><p>TP · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Défis</button>
-    </div>
-    <div class="scorebox">
-      <div class="sl">Score total</div>
-      <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div>
-      <div class="rk" id="rankLine">🔧 Apprenti</div>
-      <div class="prog"><i id="progBar"></i></div>
-    </div>
-    <div class="links" id="links">
-            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
-      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a>
-      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a>
-      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a>
-      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a>
-      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a>
-      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a>
-      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
-      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
-    </div>
-  </aside>
-
-  <main class="main">
-    <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 8 défis</span>
-      <h2>Leviers &amp; équilibres</h2>
-      <div class="intro">
-        <p class="lede">Huit défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
-        <div class="ranks">
-          <span class="rankchip">🔧 Apprenti · &lt; 200</span>
-          <span class="rankchip">⚙️ Technicien·ne · 200+</span>
-          <span class="rankchip">📐 Ingénieur·e · 450+</span>
-          <span class="rankchip">🏆 Expert·e · 700+</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- D1 -->
-    <section id="exos">
-      <span class="kicker">Exercices d'application</span>
-      <h2>S'entraîner : du concret au calcul</h2>
-      <p class="lede">Quatre exercices pour appliquer la statique : un cas réel, un simulateur, un calcul avec formule, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
-      <div class="exo-wrap">
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">1</span> Cas concret — l'étagère au mur</div>
-          <p>Une étagère est fixée au mur par une équerre. On pose dessus une pile de livres de <b>3 kg</b>, dont le centre de gravité est à <b>20 cm</b> du mur. Décris les actions mécaniques en jeu et explique pourquoi l'équerre risque de se déformer si on éloigne les livres.</p>
-          <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
-            <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/>
-            <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
-            <path d="M32 79 L32 114 L74 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
-            <rect x="150" y="44" width="15" height="26" fill="#B85C2E"/>
-            <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/>
-            <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/>
-            <line x1="174" y1="40" x2="174" y2="112" stroke="#a44a26" stroke-width="2.6"/>
-            <polygon points="174,120 169,109 179,109" fill="#a44a26"/>
-            <text x="182" y="100" fill="#a44a26" font-weight="700">P</text>
-            <line x1="32" y1="142" x2="174" y2="142" stroke="#5C544B" stroke-width="1"/>
-            <polygon points="32,142 41,138 41,146" fill="#5C544B"/>
-            <polygon points="174,142 165,138 165,146" fill="#5C544B"/>
-            <text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text>
-          </svg>
-          <p>Calcule le poids des livres, puis le moment qu’il crée par rapport à la fixation (g = 9,81 N/kg).</p>
-          <div class="exo-q">a) Poids P = <input class="numin" id="ex1p" inputmode="decimal"> N</div>
-          <div class="exo-q">b) Moment M = P × d = <input class="numin" id="ex1m" inputmode="decimal"> N·m</div>
-          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
-          <div class="exo-fb" id="ex1fb"></div>
-          <div class="exo-sol" id="ex1sol" hidden>
-            <p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p>
-            <p>Par rapport à la fixation, ce poids crée un <b>moment</b> M = P × d ≈ 29 × 0,20 ≈ <b>5,9 N·m</b> qui tend à faire basculer l'étagère.</p>
-            <p>L'équerre exerce une <b>réaction</b> (force vers le haut + moment) pour rétablir l'équilibre. Plus les livres sont <b>loin</b> du mur, plus d augmente → plus le moment est grand → plus l'équerre est sollicitée et risque de plier.</p>
-          </div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">2</span> Simulateur — la balance (loi du levier)</div>
-          <p>Fais varier les masses et les distances. La balance est en équilibre quand <b>m<sub>G</sub> × d<sub>G</sub> = m<sub>D</sub> × d<sub>D</sub></b> (les moments se compensent).</p>
-          <canvas id="ex2cv" width="480" height="240" class="gamecanvas"></canvas>
-          <div class="sliders">
-            <label><span class="nm2">Masse gauche</span><input type="range" id="ex2mL" min="1" max="10" step="1" value="4"><b><span id="ex2mLv">4</span> kg</b></label>
-            <label><span class="nm2">Distance gauche</span><input type="range" id="ex2dL" min="0.5" max="2.5" step="0.5" value="1"><b><span id="ex2dLv">1.0</span> m</b></label>
-            <label><span class="nm2">Masse droite</span><input type="range" id="ex2mR" min="1" max="10" step="1" value="2"><b><span id="ex2mRv">2</span> kg</b></label>
-            <label><span class="nm2">Distance droite</span><input type="range" id="ex2dR" min="0.5" max="2.5" step="0.5" value="2"><b><span id="ex2dRv">2.0</span> m</b></label>
-          </div>
-          <div class="exo-out" id="ex2out">—</div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">3</span> Calcul — moment de serrage</div>
-          <p>On serre un boulon avec une clé de longueur <b>d = 25 cm</b>, en tirant perpendiculairement avec <b>F = 80 N</b>. Formule du moment : <b>M = F × d</b> (d en mètres).</p>
-          <div class="exo-q">a) Moment M = <input class="numin" id="ex3a" inputmode="decimal"> N·m</div>
-          <div class="exo-q">b) Force F' pour M = 30 N·m avec la même clé : F' = <input class="numin" id="ex3b" inputmode="decimal"> N</div>
-          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
-          <div class="exo-fb" id="ex3fb"></div>
-          <div class="exo-sol" id="ex3sol" hidden>
-            <p><b>a)</b> d = 25 cm = 0,25 m → M = F × d = 80 × 0,25 = <b>20 N·m</b>.</p>
-            <p><b>b)</b> F' = M / d = 30 / 0,25 = <b>120 N</b> (une clé plus longue demande moins de force).</p>
-          </div>
-        </div>
-
-        <div class="exo-card adv">
-          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div>
-          <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p>
-          <svg class="exo-fig" viewBox="0 0 320 184" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11">
-            <line x1="100" y1="16" x2="100" y2="44" stroke="#a44a26" stroke-width="2.6"/>
-            <polygon points="100,50 94,38 106,38" fill="#a44a26"/>
-            <text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text>
-            <rect x="40" y="50" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/>
-            <polygon points="40,60 30,80 50,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
-            <polygon points="280,60 270,80 290,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/>
-            <text x="20" y="56" fill="#6a4560" font-weight="700">A</text>
-            <text x="294" y="56" fill="#6a4560" font-weight="700">B</text>
-            <line x1="40" y1="120" x2="40" y2="94" stroke="#3D7E5F" stroke-width="2.4"/>
-            <polygon points="40,84 35,94 45,94" fill="#3D7E5F"/>
-            <text x="40" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text>
-            <line x1="280" y1="120" x2="280" y2="94" stroke="#3D7E5F" stroke-width="2.4"/>
-            <polygon points="280,84 275,94 285,94" fill="#3D7E5F"/>
-            <text x="280" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text>
-            <line x1="40" y1="152" x2="100" y2="152" stroke="#5C544B" stroke-width="1"/>
-            <polygon points="40,152 47,148.5 47,155.5" fill="#5C544B"/>
-            <polygon points="100,152 93,148.5 93,155.5" fill="#5C544B"/>
-            <text x="70" y="148" text-anchor="middle" fill="#5C544B">1 m</text>
-            <line x1="40" y1="170" x2="280" y2="170" stroke="#5C544B" stroke-width="1"/>
-            <polygon points="40,170 47,166.5 47,173.5" fill="#5C544B"/>
-            <polygon points="280,170 273,166.5 273,173.5" fill="#5C544B"/>
-            <text x="160" y="182" text-anchor="middle" fill="#5C544B">L = 4 m</text>
-          </svg>
-          <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div>
-          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
-          <div class="exo-fb" id="ex4fb"></div>
-          <div class="exo-sol" id="ex4sol" hidden>
-            <p><b>Bilan :</b> charge F = 600 N (↓) à 1 m de A ; réactions R<sub>A</sub>, R<sub>B</sub> (↑).</p>
-            <p><b>Moment en A</b> (ΣM<sub>/A</sub> = 0) : R<sub>B</sub> × 4 − 600 × 1 = 0 → R<sub>B</sub> = 600 / 4 = <b>150 N</b>.</p>
-            <p><b>Résultante</b> (ΣF = 0) : R<sub>A</sub> + R<sub>B</sub> − 600 = 0 → R<sub>A</sub> = 600 − 150 = <b>450 N</b>.</p>
-            <p><b>Vérif.</b> (ΣM<sub>/B</sub>) : R<sub>A</sub> × 4 − 600 × 3 = 1800 − 1800 = 0 ✓</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="d1">
-      <span class="tag">🧩 Défi 1<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Assemble la condition d'équilibre</h2>
-      <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p>
-      <div class="game">
-        <div class="slots" id="d1slots"></div>
-        <div class="hint" style="margin-bottom:8px">À placer :</div>
-        <div class="pool" id="d1pool"></div>
-        <div class="msg" id="d1msg"></div>
-        <div style="margin-top:12px"><button class="btn alt" id="d1reset">Recommencer</button></div>
-      </div>
-    </section>
-
-    <!-- D2 -->
-    <section id="d2">
-      <span class="tag">⚡ Défi 2<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Bras de levier express</h2>
-      <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d2time">40</b> s</span>
-          <span class="timepill">Score : <b id="d2score">0</b></span>
-          <button class="btn" id="d2start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d2q">Appuie sur Démarrer pour lancer le défi.</div>
-        <div class="opts" id="d2opts"></div>
-        <div class="streak" id="d2streak"></div>
-        <div class="msg" id="d2msg"></div>
-      </div>
-    </section>
-
-    <!-- D3 -->
-    <section id="d3">
-      <span class="tag">🎯 Défi 3<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Force ou moment ?</h2>
-      <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d3time">35</b> s</span>
-          <span class="timepill">Score : <b id="d3score">0</b></span>
-          <button class="btn" id="d3start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d3q">Appuie sur Démarrer.</div>
-        <div class="two">
-          <button class="bigbtn force" id="d3force" disabled>FORCE<br><span style="font-size:11px;font-weight:500">translation</span></button>
-          <button class="bigbtn moment" id="d3moment" disabled>MOMENT<br><span style="font-size:11px;font-weight:500">rotation</span></button>
-        </div>
-        <div class="streak" id="d3streak"></div>
-        <div class="msg" id="d3msg"></div>
-      </div>
-    </section>
-
-    <!-- D4 -->
-    <section id="d4">
-      <span class="tag">⚖️ Défi 4<span class="pts-badge">/ 120 pts</span></span>
-      <h2>L'équilibre du levier</h2>
-      <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b>: il faut F₁·d₁ = F₂·d₂.</p>
-      <div class="game">
-        <div class="roundpill" id="d4round">Manche 1 / 3</div>
-        <canvas id="cvLevier" width="640" height="240"></canvas>
-        <div class="ctrl">
-          <label>d₂ (droite)</label>
-          <input type="range" id="d4slider" min="0.1" max="1" step="0.05" value="0.5">
-          <span class="readout" id="d4d2">0,50 m</span>
-        </div>
-        <div class="ctrl" style="gap:18px">
-          <span class="readout" id="d4left">à gauche : —</span>
-          <span class="readout" id="d4mom">Δ moment : —</span>
-        </div>
-        <button class="btn" id="d4check">Valider l'équilibre</button>
-        <div class="msg" id="d4msg"></div>
-      </div>
-    </section>
-
-    <!-- D5 -->
-    <section id="d5">
-      <span class="tag">📐 Défi 5<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Ferme le triangle</h2>
-      <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p>
-      <div class="game">
-        <div class="roundpill" id="d5round">Manche 1 / 4</div>
-        <canvas id="cvTri" width="640" height="240"></canvas>
-        <div class="hint" style="margin:10px 0 6px">Quelle force F₃ ferme le triangle ? <b>Composantes ( x ; y ) en newtons, y positif vers le haut.</b></div>
-        <div class="opts" id="d5opts"></div>
-        <div class="msg" id="d5msg"></div>
-      </div>
-    </section>
-
-    <!-- D6 -->
-    <section id="d6">
-      <span class="tag">🔗 Défi 6<span class="pts-badge">/ 110 pts</span></span>
-      <h2>Liaison réaction</h2>
-      <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p>
-      <div class="game">
-        <div class="match">
-          <div class="mcol"><div class="h">Notion</div><div id="d6left"></div></div>
-          <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div>
-        </div>
-        <div class="msg" id="d6msg"></div>
-      </div>
-    </section>
-
-    <section id="d7">
-      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Runner à portes</h2>
-      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
-      <div class="game">
-        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
-        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
-        <div class="pad">
-          <button class="padbtn" id="d7left">◀ Gauche</button>
-          <button class="padbtn" id="d7right">Droite ▶</button>
-        </div>
-        <div class="msg" id="d7msg"></div>
-      </div>
-    </section>
-
-    <section id="d8">
-      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Tape-taupe</h2>
-      <p class="lede">Tape <b>seulement</b> ce qui relève de la notion demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d8time">40</b> s</span>
-          <span class="timepill">Vies : <b id="d8life">❤❤❤</b></span>
-          <span class="timepill">Score : <b id="d8score">0</b></span>
-          <button class="btn" id="d8start">Démarrer</button>
-        </div>
-        <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
-        <div class="molegrid" id="d8grid"></div>
-        <div class="msg" id="d8msg"></div>
-      </div>
-    </section>
-
-    <section id="fin" style="border-bottom:none">
-      <div class="final">
-        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
-        <div class="fs"><span id="finScore">0</span> / 820</div>
-        <div class="fr" id="finRank">🔧 Apprenti</div>
-        <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<script>
-  // ===== Socle score =====
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_statique.html">← Séquence : statique</a> <div class="brand"><div class="mark"></div> <div><h1>Leviers &amp; équilibres</h1><p>TP · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Leviers &amp; équilibres</h2> <div class="intro"><p class="lede">Huit défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <!-- D1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour appliquer la statique : un cas réel, un simulateur, un calcul avec formule, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — l'étagère au mur</div> <p>Une étagère est fixée au mur par une équerre. On pose dessus une pile de livres de <b>3 kg</b>, dont le centre de gravité est à <b>20 cm</b> du mur. Décris les actions mécaniques en jeu et explique pourquoi l'équerre risque de se déformer si on éloigne les livres.</p> <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/> <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <path d="M32 79 L32 114 L74 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/><rect x="150" y="44" width="15" height="26" fill="#B85C2E"/> <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/> <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/> <line x1="174" y1="40" x2="174" y2="112" stroke="#a44a26" stroke-width="2.6"/> <polygon points="174,120 169,109 179,109" fill="#a44a26"/><text x="182" y="100" fill="#a44a26" font-weight="700">P</text> <line x1="32" y1="142" x2="174" y2="142" stroke="#5C544B" stroke-width="1"/> <polygon points="32,142 41,138 41,146" fill="#5C544B"/><polygon points="174,142 165,138 165,146" fill="#5C544B"/><text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text> </svg> <p>Calcule le poids des livres, puis le moment qu’il crée par rapport à la fixation (g = 9,81 N/kg).</p> <div class="exo-q">a) Poids P = <input class="numin" id="ex1p" inputmode="decimal"> N</div> <div class="exo-q">b) Moment M = P × d = <input class="numin" id="ex1m" inputmode="decimal"> N·m</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p> <p>Par rapport à la fixation, ce poids crée un <b>moment</b> M = P × d ≈ 29 × 0,20 ≈ <b>5,9 N·m</b> qui tend à faire basculer l'étagère.</p> <p>L'équerre exerce une <b>réaction</b> (force vers le haut + moment) pour rétablir l'équilibre. Plus les livres sont <b>loin</b> du mur, plus d augmente → plus le moment est grand → plus l'équerre est sollicitée et risque de plier.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — la balance (loi du levier)</div> <p>Fais varier les masses et les distances. La balance est en équilibre quand <b>m<sub>G</sub> × d<sub>G</sub> = m<sub>D</sub> × d<sub>D</sub></b> (les moments se compensent).</p> <canvas id="ex2cv" width="480" height="240" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Masse gauche</span><input type="range" id="ex2mL" min="1" max="10" step="1" value="4"><b><span id="ex2mLv">4</span> kg</b></label> <label><span class="nm2">Distance gauche</span><input type="range" id="ex2dL" min="0.5" max="2.5" step="0.5" value="1"><b><span id="ex2dLv">1.0</span> m</b></label> <label><span class="nm2">Masse droite</span><input type="range" id="ex2mR" min="1" max="10" step="1" value="2"><b><span id="ex2mRv">2</span> kg</b></label> <label><span class="nm2">Distance droite</span><input type="range" id="ex2dR" min="0.5" max="2.5" step="0.5" value="2"><b><span id="ex2dRv">2.0</span> m</b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — moment de serrage</div> <p>On serre un boulon avec une clé de longueur <b>d = 25 cm</b>, en tirant perpendiculairement avec <b>F = 80 N</b>. Formule du moment : <b>M = F × d</b> (d en mètres).</p> <div class="exo-q">a) Moment M = <input class="numin" id="ex3a" inputmode="decimal"> N·m</div> <div class="exo-q">b) Force F' pour M = 30 N·m avec la même clé : F' = <input class="numin" id="ex3b" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> d = 25 cm = 0,25 m → M = F × d = 80 × 0,25 = <b>20 N·m</b>.</p> <p><b>b)</b> F' = M / d = 30 / 0,25 = <b>120 N</b> (une clé plus longue demande moins de force).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div> <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p> <svg class="exo-fig" viewBox="0 0 320 184" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <line x1="100" y1="16" x2="100" y2="44" stroke="#a44a26" stroke-width="2.6"/> <polygon points="100,50 94,38 106,38" fill="#a44a26"/><text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text> <rect x="40" y="50" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <polygon points="40,60 30,80 50,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><polygon points="280,60 270,80 290,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><text x="20" y="56" fill="#6a4560" font-weight="700">A</text> <text x="294" y="56" fill="#6a4560" font-weight="700">B</text> <line x1="40" y1="120" x2="40" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="40,84 35,94 45,94" fill="#3D7E5F"/><text x="40" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text> <line x1="280" y1="120" x2="280" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="280,84 275,94 285,94" fill="#3D7E5F"/><text x="280" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text> <line x1="40" y1="152" x2="100" y2="152" stroke="#5C544B" stroke-width="1"/> <polygon points="40,152 47,148.5 47,155.5" fill="#5C544B"/><polygon points="100,152 93,148.5 93,155.5" fill="#5C544B"/><text x="70" y="148" text-anchor="middle" fill="#5C544B">1 m</text> <line x1="40" y1="170" x2="280" y2="170" stroke="#5C544B" stroke-width="1"/> <polygon points="40,170 47,166.5 47,173.5" fill="#5C544B"/><polygon points="280,170 273,166.5 273,173.5" fill="#5C544B"/><text x="160" y="182" text-anchor="middle" fill="#5C544B">L = 4 m</text> </svg> <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>Bilan :</b> charge F = 600 N (↓) à 1 m de A ; réactions R<sub>A</sub>, R<sub>B</sub> (↑).</p> <p><b>Moment en A</b> (ΣM<sub>/A</sub> = 0) : R<sub>B</sub> × 4 − 600 × 1 = 0 → R<sub>B</sub> = 600 / 4 = <b>150 N</b>.</p> <p><b>Résultante</b> (ΣF = 0) : R<sub>A</sub> + R<sub>B</sub> − 600 = 0 → R<sub>A</sub> = 600 − 150 = <b>450 N</b>.</p> <p><b>Vérif.</b> (ΣM<sub>/B</sub>) : R<sub>A</sub> × 4 − 600 × 3 = 1800 − 1800 = 0 ✓</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 90 pts</span></span> <h2>Assemble la condition d'équilibre</h2> <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d1slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d1pool"></div> <div class="msg" id="d1msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d1reset">Recommencer</button></div></div> </section> <!-- D2 --> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 120 pts</span></span> <h2>Bras de levier express</h2> <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d2time">40</b> s</span> <span class="timepill">Score : <b id="d2score">0</b></span> <button class="btn" id="d2start">Démarrer</button></div> <div class="qbox" id="d2q">Appuie sur Démarrer pour lancer le défi.</div> <div class="opts" id="d2opts"></div> <div class="streak" id="d2streak"></div> <div class="msg" id="d2msg"></div></div> </section> <!-- D3 --> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 100 pts</span></span> <h2>Force ou moment ?</h2> <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d3time">35</b> s</span> <span class="timepill">Score : <b id="d3score">0</b></span> <button class="btn" id="d3start">Démarrer</button></div> <div class="qbox" id="d3q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn force" id="d3force" disabled>FORCE<br><span style="font-size:11px;font-weight:500">translation</span></button> <button class="bigbtn moment" id="d3moment" disabled>MOMENT<br><span style="font-size:11px;font-weight:500">rotation</span></button></div> <div class="streak" id="d3streak"></div> <div class="msg" id="d3msg"></div></div> </section> <!-- D4 --> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>L'équilibre du levier</h2> <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b>: il faut F₁·d₁ = F₂·d₂.</p> <div class="game"><div class="roundpill" id="d4round">Manche 1 / 3</div> <canvas id="cvLevier" width="640" height="240"></canvas> <div class="ctrl"><label>d₂ (droite)</label> <input type="range" id="d4slider" min="0.1" max="1" step="0.05" value="0.5"> <span class="readout" id="d4d2">0,50 m</span></div> <div class="ctrl" style="gap:18px"><span class="readout" id="d4left">à gauche : —</span> <span class="readout" id="d4mom">Δ moment : —</span></div> <button class="btn" id="d4check">Valider l'équilibre</button> <div class="msg" id="d4msg"></div></div> </section> <!-- D5 --> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Ferme le triangle</h2> <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p> <div class="game"><div class="roundpill" id="d5round">Manche 1 / 4</div> <canvas id="cvTri" width="640" height="240"></canvas> <div class="hint" style="margin:10px 0 6px">Quelle force F₃ ferme le triangle ? <b>Composantes ( x ; y ) en newtons, y positif vers le haut.</b></div> <div class="opts" id="d5opts"></div> <div class="msg" id="d5msg"></div></div> </section> <!-- D6 --> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 110 pts</span></span> <h2>Liaison réaction</h2> <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Notion</div><div id="d6left"></div></div> <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> ce qui relève de la notion demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> // ===== Socle score =====
   var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
   var MAXES={d1:90,d2:120,d3:100,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
-  function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
+  function rankOf(t){return t>=700?' Expert·e':t>=450?' Ingénieur·e':t>=200?' Technicien·ne':' Apprenti';}
   function refresh(){
-    var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
-    el('scoreNow').textContent=tot; el('finScore').textContent=tot;
-    var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
-    el('progBar').style.width=(tot/TOTALMAX*100)+'%';
-    KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
+ var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
+ el('scoreNow').textContent=tot; el('finScore').textContent=tot;
+ var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
+ el('progBar').style.width=(tot/TOTALMAX*100)+'%';
+ KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
   }
   function setContrib(key,val){var m=MAXES[key];var v=Math.max(0,Math.min(m,Math.round(val)));if(v>(best[key]||0)){best[key]=v;refresh();}}
   function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -539,399 +289,385 @@
 
   /* tete proportionnelle a l'epaisseur, base posee au bout du trait, pointe au-dela */
   function arrow(g,x1,y1,x2,y2,col,w){var ww=w||3;
-    g.strokeStyle=col;g.fillStyle=col;g.lineWidth=ww;
-    g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
-    var a=Math.atan2(y2-y1,x2-x1), L=9+ww*2.1, hw=ww*1.6+2.5;
-    var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
-    var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
-    g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();}
+ g.strokeStyle=col;g.fillStyle=col;g.lineWidth=ww;
+ g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke();
+ var a=Math.atan2(y2-y1,x2-x1), L=9+ww*2.1, hw=ww*1.6+2.5;
+ var tx=x2+L*Math.cos(a), ty=y2+L*Math.sin(a);
+ var nx=-Math.sin(a)*hw, ny=Math.cos(a)*hw;
+ g.beginPath();g.moveTo(tx,ty);g.lineTo(x2+nx,y2+ny);g.lineTo(x2-nx,y2-ny);g.closePath();g.fill();}
 
   // ===== D1 — builder =====
   (function(){
-    var STEPS=['Isoler le solide étudié','Faire le bilan des actions mécaniques',
-      'Écrire Σ F\u20D7 = 0\u20D7 (translation)','Écrire Σ M = 0 (rotation)','Résoudre les inconnues'];
-    var slots=el('d1slots'), pool=el('d1pool'), msg=el('d1msg');
-    var idx, wrong;
-    function start(){
-      idx=0; wrong=0; msg.textContent=''; msg.className='msg';
-      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d1s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
-      var order=shuffle(STEPS.map(function(s,i){return {s:s,i:i};}));
-      pool.innerHTML=order.map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');
-    }
-    pool.addEventListener('click',function(ev){
-      var b=ev.target.closest('.pchip'); if(!b)return;
-      var i=parseInt(b.getAttribute('data-i'),10);
-      if(i===idx){
-        var sl=el('d1s'+idx); sl.classList.add('filled'); sl.querySelector('.txt').textContent=STEPS[idx];
-        b.remove(); idx++;
-        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*14); setContrib('d1',sc); msg.className='msg ok'; msg.textContent='✓ Raisonnement complet ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}
-      } else { wrong++; b.classList.add('bad'); setTimeout(function(){b.classList.remove('bad');},320); msg.className='msg no'; msg.textContent='Ce n\u2019est pas la prochaine étape.'; }
-    });
-    el('d1reset').addEventListener('click',start);
-    start();
+ var STEPS=['Isoler le solide étudié','Faire le bilan des actions mécaniques',
+ 'Écrire Σ F\u20D7 = 0\u20D7 (translation)','Écrire Σ M = 0 (rotation)','Résoudre les inconnues'];
+ var slots=el('d1slots'), pool=el('d1pool'), msg=el('d1msg');
+ var idx, wrong;
+ function start(){
+ idx=0; wrong=0; msg.textContent=''; msg.className='msg';
+ slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d1s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+ var order=shuffle(STEPS.map(function(s,i){return {s:s,i:i};}));
+ pool.innerHTML=order.map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');
+ }
+ pool.addEventListener('click',function(ev){
+ var b=ev.target.closest('.pchip'); if(!b)return;
+ var i=parseInt(b.getAttribute('data-i'),10);
+ if(i===idx){
+ var sl=el('d1s'+idx); sl.classList.add('filled'); sl.querySelector('.txt').textContent=STEPS[idx];
+ b.remove(); idx++;
+ if(idx===STEPS.length){var sc=Math.max(30,90-wrong*14); setContrib('d1',sc); msg.className='msg ok'; msg.textContent='✓ Raisonnement complet ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}
+ } else { wrong++; b.classList.add('bad'); setTimeout(function(){b.classList.remove('bad');},320); msg.className='msg no'; msg.textContent='Ce n\u2019est pas la prochaine étape.'; }
+ });
+ el('d1reset').addEventListener('click',start);
+ start();
   })();
 
   // ===== D2 — arcade M=F·d =====
   (function(){
-    var ds=[0.2,0.25,0.3,0.4,0.5,0.6,0.8,1.0];
-    var qEl=el('d2q'),opts=el('d2opts'),msg=el('d2msg'),stEl=el('d2streak');
-    var time,score,streak,timer,cur,running=false;
-    function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
-    function gen(){
-      var type=Math.floor(Math.random()*3);
-      var F=(Math.floor(Math.random()*10)+1)*10, d=ds[Math.floor(Math.random()*ds.length)];
-      var M=Math.round(F*d*100)/100, q, ans, unit;
-      if(type===0){q='F = '+F+' N , d = '+fmt(d)+' m → M = ?';ans=M;unit=' N·m';}
-      else if(type===1){q='M = '+fmt(M)+' N·m , d = '+fmt(d)+' m → F = ?';ans=F;unit=' N';}
-      else {q='M = '+fmt(M)+' N·m , F = '+F+' N → d = ?';ans=Math.round(M/F*100)/100;unit=' m';}
-      var set={}; set[ans]=true; var arr=[ans];
-      var tries=0;
-      while(arr.length<4 && tries<40){tries++;
-        var cand;
-        if(unit===' m') cand=Math.round((ans*(0.4+Math.random()*1.4))*100)/100;
-        else cand=Math.round(ans+(Math.floor(Math.random()*9)-4)*(unit===' N·m'?Math.max(1,Math.round(ans*0.12)):10));
-        if(cand>0 && !set[cand]){set[cand]=true;arr.push(cand);}
-      }
-      while(arr.length<4){var c2=ans+arr.length;if(!set[c2]){set[c2]=true;arr.push(c2);}}
-      cur={ans:ans,unit:unit};
-      qEl.textContent=q;
-      opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+fmt(v)+unit+'</button>';}).join('');
-    }
-    function tick(){ time--; el('d2time').textContent=time; if(time<=0) stop(); }
-    function start(){ if(running)return; running=true; score=0;streak=0;time=40; el('d2score').textContent='0'; el('d2time').textContent='40'; msg.textContent='';stEl.textContent=''; el('d2start').disabled=true; gen(); timer=setInterval(tick,1000); }
-    function stop(){ running=false; clearInterval(timer); el('d2start').disabled=false; el('d2start').textContent='Rejouer'; opts.innerHTML=''; qEl.textContent='Terminé !'; setContrib('d2',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
-    opts.addEventListener('click',function(ev){ if(!running)return; var b=ev.target.closest('.opt'); if(!b)return;
-      var v=parseFloat(b.getAttribute('data-v'));
-      if(Math.abs(v-cur.ans)<1e-6){ streak++; var g=18+Math.min(streak,5)*2; score+=g; el('d2score').textContent=score; stEl.textContent='🔥 série ×'+streak+'  (+'+g+')'; b.classList.add('ok'); setTimeout(gen,180); }
-      else { streak=0; stEl.textContent='série perdue'; b.classList.add('no'); var ok=opts.querySelector('.opt[data-v="'+cur.ans+'"]'); if(ok)ok.classList.add('ok'); setTimeout(gen,420); }
-    });
-    el('d2start').addEventListener('click',start);
+ var ds=[0.2,0.25,0.3,0.4,0.5,0.6,0.8,1.0];
+ var qEl=el('d2q'),opts=el('d2opts'),msg=el('d2msg'),stEl=el('d2streak');
+ var time,score,streak,timer,cur,running=false;
+ function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
+ function gen(){
+ var type=Math.floor(Math.random()*3);
+ var F=(Math.floor(Math.random()*10)+1)*10, d=ds[Math.floor(Math.random()*ds.length)];
+ var M=Math.round(F*d*100)/100, q, ans, unit;
+ if(type===0){q='F = '+F+' N , d = '+fmt(d)+' m → M = ?';ans=M;unit=' N·m';}
+ else if(type===1){q='M = '+fmt(M)+' N·m , d = '+fmt(d)+' m → F = ?';ans=F;unit=' N';}
+ else {q='M = '+fmt(M)+' N·m , F = '+F+' N → d = ?';ans=Math.round(M/F*100)/100;unit=' m';}
+ var set={}; set[ans]=true; var arr=[ans];
+ var tries=0;
+ while(arr.length<4 && tries<40){tries++;
+ var cand;
+ if(unit===' m') cand=Math.round((ans*(0.4+Math.random()*1.4))*100)/100;
+ else cand=Math.round(ans+(Math.floor(Math.random()*9)-4)*(unit===' N·m'?Math.max(1,Math.round(ans*0.12)):10));
+ if(cand>0 && !set[cand]){set[cand]=true;arr.push(cand);}
+ }
+ while(arr.length<4){var c2=ans+arr.length;if(!set[c2]){set[c2]=true;arr.push(c2);}}
+ cur={ans:ans,unit:unit};
+ qEl.textContent=q;
+ opts.innerHTML=shuffle(arr).map(function(v){return '<button class="opt" data-v="'+v+'">'+fmt(v)+unit+'</button>';}).join('');
+ }
+ function tick(){ time--; el('d2time').textContent=time; if(time<=0) stop(); }
+ function start(){ if(running)return; running=true; score=0;streak=0;time=40; el('d2score').textContent='0'; el('d2time').textContent='40'; msg.textContent='';stEl.textContent=''; el('d2start').disabled=true; gen(); timer=setInterval(tick,1000); }
+ function stop(){ running=false; clearInterval(timer); el('d2start').disabled=false; el('d2start').textContent='Rejouer'; opts.innerHTML=''; qEl.textContent='Terminé !'; setContrib('d2',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
+ opts.addEventListener('click',function(ev){ if(!running)return; var b=ev.target.closest('.opt'); if(!b)return;
+ var v=parseFloat(b.getAttribute('data-v'));
+ if(Math.abs(v-cur.ans)<1e-6){ streak++; var g=18+Math.min(streak,5)*2; score+=g; el('d2score').textContent=score; stEl.textContent=' série ×'+streak+'(+'+g+')'; b.classList.add('ok'); setTimeout(gen,180); }
+ else { streak=0; stEl.textContent='série perdue'; b.classList.add('no'); var ok=opts.querySelector('.opt[data-v="'+cur.ans+'"]'); if(ok)ok.classList.add('ok'); setTimeout(gen,420); }
+ });
+ el('d2start').addEventListener('click',start);
   })();
 
   // ===== D3 — reflex force/moment =====
   (function(){
-    var ITEMS=[
-      {t:'une intensité en newtons (N)',k:'force'},{t:'fait glisser le solide',k:'force'},
-      {t:'la tension d\u2019un câble',k:'force'},{t:'le poids P d\u2019un objet',k:'force'},
-      {t:'pousser un chariot',k:'force'},{t:'une traction sur une barre',k:'force'},
-      {t:'s\u2019exprime en N·m',k:'moment'},{t:'fait tourner autour d\u2019un axe',k:'moment'},
-      {t:'M = F × d',k:'moment'},{t:'le bras de levier intervient',k:'moment'},
-      {t:'serrer un boulon avec une clé',k:'moment'},{t:'un effet de rotation',k:'moment'}
-    ];
-    var qEl=el('d3q'),msg=el('d3msg'),stEl=el('d3streak'),bF=el('d3force'),bM=el('d3moment');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){ if(!pool.length)pool=shuffle(ITEMS); cur=pool.pop(); qEl.textContent='« '+cur.t+' »'; }
-    function tick(){ time--; el('d3time').textContent=time; if(time<=0) stop(); }
-    function start(){ if(running)return; running=true; score=0;streak=0;time=35;pool=shuffle(ITEMS);
-      el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';
-      bF.disabled=false;bM.disabled=false; el('d3start').disabled=true; next(); timer=setInterval(tick,1000); }
-    function stop(){ running=false; clearInterval(timer); bF.disabled=true;bM.disabled=true; el('d3start').disabled=false; el('d3start').textContent='Rejouer'; qEl.textContent='Terminé !'; setContrib('d3',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
-    function answer(k){ if(!running)return;
-      if(k===cur.k){ streak++; score+=11+Math.min(streak,4)*2; el('d3score').textContent=score; stEl.textContent='🔥 série ×'+streak; }
-      else { streak=0; stEl.textContent='raté — c\u2019était '+(cur.k==='force'?'FORCE':'MOMENT'); }
-      next();
-    }
-    bF.addEventListener('click',function(){answer('force');});
-    bM.addEventListener('click',function(){answer('moment');});
-    el('d3start').addEventListener('click',start);
+ var ITEMS=[
+ {t:'une intensité en newtons (N)',k:'force'},{t:'fait glisser le solide',k:'force'},
+ {t:'la tension d\u2019un câble',k:'force'},{t:'le poids P d\u2019un objet',k:'force'},
+ {t:'pousser un chariot',k:'force'},{t:'une traction sur une barre',k:'force'},
+ {t:'s\u2019exprime en N·m',k:'moment'},{t:'fait tourner autour d\u2019un axe',k:'moment'},
+ {t:'M = F × d',k:'moment'},{t:'le bras de levier intervient',k:'moment'},
+ {t:'serrer un boulon avec une clé',k:'moment'},{t:'un effet de rotation',k:'moment'}
+ ];
+ var qEl=el('d3q'),msg=el('d3msg'),stEl=el('d3streak'),bF=el('d3force'),bM=el('d3moment');
+ var time,score,streak,timer,cur,running=false,pool;
+ function next(){ if(!pool.length)pool=shuffle(ITEMS); cur=pool.pop(); qEl.textContent='« '+cur.t+' »'; }
+ function tick(){ time--; el('d3time').textContent=time; if(time<=0) stop(); }
+ function start(){ if(running)return; running=true; score=0;streak=0;time=35;pool=shuffle(ITEMS);
+ el('d3score').textContent='0';el('d3time').textContent='35';msg.textContent='';stEl.textContent='';
+ bF.disabled=false;bM.disabled=false; el('d3start').disabled=true; next(); timer=setInterval(tick,1000); }
+ function stop(){ running=false; clearInterval(timer); bF.disabled=true;bM.disabled=true; el('d3start').disabled=false; el('d3start').textContent='Rejouer'; qEl.textContent='Terminé !'; setContrib('d3',score); msg.className='msg ok'; msg.textContent='⏱ Fini — score du défi : '+score+' pts'; }
+ function answer(k){ if(!running)return;
+ if(k===cur.k){ streak++; score+=11+Math.min(streak,4)*2; el('d3score').textContent=score; stEl.textContent=' série ×'+streak; }
+ else { streak=0; stEl.textContent='raté — c\u2019était '+(cur.k==='force'?'FORCE':'MOMENT'); }
+ next();
+ }
+ bF.addEventListener('click',function(){answer('force');});
+ bM.addEventListener('click',function(){answer('moment');});
+ el('d3start').addEventListener('click',start);
   })();
 
   // ===== D4 — simulateur levier =====
   (function(){
-    var cv=el('cvLevier'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
-    var ROUNDS=[{F1:40,d1:0.30,F2:30},{F1:50,d1:0.40,F2:40},{F1:60,d1:0.50,F2:50}];
-    var ri=0, solved=false;
-    var sl=el('d4slider');
-    function cur(){return ROUNDS[ri];}
-    function d2(){return parseFloat(sl.value);}
-    function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
-    function draw(){
-      g.clearRect(0,0,W,H); var c=cur();
-      var ox=W/2, oy=120, halfPx=250, scale=halfPx/1.0; // 1 m -> 250 px
-      var dM=c.F2*d2()-c.F1*c.d1; // >0 : penche à droite
-      var ang=Math.max(-0.28,Math.min(0.28, dM/120));
-      // support
-      g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-16,oy+70);g.lineTo(ox+16,oy+70);g.closePath();g.fill();
-      g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;g.beginPath();g.moveTo(60,oy+70);g.lineTo(W-60,oy+70);g.stroke();
-      // beam
-      var cos=Math.cos(ang),sin=Math.sin(ang);
-      function P(dx){return {x:ox+dx*cos, y:oy+dx*sin};}
-      var lP=P(-c.d1*scale), rP=P(d2()*scale);
-      g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';
-      var a=P(-halfPx), b=P(halfPx); g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();g.lineCap='butt';
-      g.fillStyle='#fff';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(ox,oy,6,0,7);g.fill();g.stroke();
-      // weights (taille ∝ F)
-      function box(p,F,col,lab){var w=20+F*0.5;g.fillStyle=col;g.fillRect(p.x-w/2,p.y-w-4,w,w);
-        g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(F+' N',p.x,p.y-w/2-2);}
-      box(lP,c.F1,'#2E6A8E'); box(rP,c.F2,'#BD8A2A');
-      // distances
-      g.fillStyle='#235877';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';
-      g.fillText('d₁ = '+fmt(c.d1)+' m',lP.x,oy+92);
-      g.fillStyle='#8a6313';g.fillText('d₂ = '+fmt(d2())+' m',rP.x,oy+92);
-      el('d4d2').textContent=fmt(d2())+' m';
-      el('d4left').textContent='à gauche : F₁·d₁ = '+fmt(c.F1*c.d1)+' N·m';
-      el('d4mom').textContent='Δ moment : '+(dM>0?'+':'')+fmt(dM)+' N·m';
-    }
-    function setRound(){ solved=false; el('d4round').textContent='Manche '+(ri+1)+' / 3'; el('d4msg').textContent=''; el('d4msg').className='msg'; el('d4check').disabled=false; sl.value='0.5'; draw(); }
-    sl.addEventListener('input',draw);
-    el('d4check').addEventListener('click',function(){
-      if(solved)return; var c=cur(); var dM=Math.abs(c.F2*d2()-c.F1*c.d1);
-      var msg=el('d4msg');
-      if(dM<=0.6){ solved=true; setContrib('d4',(ri+1)*40); msg.className='msg ok';
-        if(ri<2){ msg.textContent='⚖️ Équilibre parfait ! Manche suivante…'; el('d4check').disabled=true; setTimeout(function(){ri++;setRound();},1100); }
-        else { msg.textContent='🏆 Les 3 manches réussies — défi complet ! +120 pts'; el('d4check').disabled=true; }
-      } else if(dM<=c.F2*0.18){ msg.className='msg no'; msg.textContent='Tout proche ! Ajuste encore un peu (Δ = '+fmt(dM)+' N·m).'; }
-      else { msg.className='msg no'; msg.textContent='Pas encore équilibré (Δ = '+fmt(dM)+' N·m). Vise F₁·d₁ = F₂·d₂.'; }
-    });
-    setRound();
+ var cv=el('cvLevier'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+ var ROUNDS=[{F1:40,d1:0.30,F2:30},{F1:50,d1:0.40,F2:40},{F1:60,d1:0.50,F2:50}];
+ var ri=0, solved=false;
+ var sl=el('d4slider');
+ function cur(){return ROUNDS[ri];}
+ function d2(){return parseFloat(sl.value);}
+ function fmt(x){return (Math.round(x*100)/100).toString().replace('.',',');}
+ function draw(){
+ g.clearRect(0,0,W,H); var c=cur();
+ var ox=W/2, oy=120, halfPx=250, scale=halfPx/1.0; // 1 m -> 250 px
+ var dM=c.F2*d2()-c.F1*c.d1; // >0 : penche à droite
+ var ang=Math.max(-0.28,Math.min(0.28, dM/120));
+ // support
+ g.fillStyle='#7a7064';g.beginPath();g.moveTo(ox,oy);g.lineTo(ox-16,oy+70);g.lineTo(ox+16,oy+70);g.closePath();g.fill();
+ g.strokeStyle='rgba(42,38,34,.25)';g.lineWidth=1;g.beginPath();g.moveTo(60,oy+70);g.lineTo(W-60,oy+70);g.stroke();
+ // beam
+ var cos=Math.cos(ang),sin=Math.sin(ang);
+ function P(dx){return {x:ox+dx*cos, y:oy+dx*sin};}
+ var lP=P(-c.d1*scale), rP=P(d2()*scale);
+ g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';
+ var a=P(-halfPx), b=P(halfPx); g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();g.lineCap='butt';
+ g.fillStyle='#fff';g.strokeStyle='#2A2622';g.lineWidth=2;g.beginPath();g.arc(ox,oy,6,0,7);g.fill();g.stroke();
+ // weights (taille ∝ F)
+ function box(p,F,col,lab){var w=20+F*0.5;g.fillStyle=col;g.fillRect(p.x-w/2,p.y-w-4,w,w);
+ g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(F+' N',p.x,p.y-w/2-2);}
+ box(lP,c.F1,'#2E6A8E'); box(rP,c.F2,'#BD8A2A');
+ // distances
+ g.fillStyle='#235877';g.font='11px "JetBrains Mono",monospace';g.textAlign='center';
+ g.fillText('d₁ = '+fmt(c.d1)+' m',lP.x,oy+92);
+ g.fillStyle='#8a6313';g.fillText('d₂ = '+fmt(d2())+' m',rP.x,oy+92);
+ el('d4d2').textContent=fmt(d2())+' m';
+ el('d4left').textContent='à gauche : F₁·d₁ = '+fmt(c.F1*c.d1)+' N·m';
+ el('d4mom').textContent='Δ moment : '+(dM>0?'+':'')+fmt(dM)+' N·m';
+ }
+ function setRound(){ solved=false; el('d4round').textContent='Manche '+(ri+1)+' / 3'; el('d4msg').textContent=''; el('d4msg').className='msg'; el('d4check').disabled=false; sl.value='0.5'; draw(); }
+ sl.addEventListener('input',draw);
+ el('d4check').addEventListener('click',function(){
+ if(solved)return; var c=cur(); var dM=Math.abs(c.F2*d2()-c.F1*c.d1);
+ var msg=el('d4msg');
+ if(dM<=0.6){ solved=true; setContrib('d4',(ri+1)*40); msg.className='msg ok';
+ if(ri<2){ msg.textContent=' Équilibre parfait ! Manche suivante…'; el('d4check').disabled=true; setTimeout(function(){ri++;setRound();},1100); }
+ else { msg.textContent=' Les 3 manches réussies — défi complet ! +120 pts'; el('d4check').disabled=true; }
+ } else if(dM<=c.F2*0.18){ msg.className='msg no'; msg.textContent='Tout proche ! Ajuste encore un peu (Δ = '+fmt(dM)+' N·m).'; }
+ else { msg.className='msg no'; msg.textContent='Pas encore équilibré (Δ = '+fmt(dM)+' N·m). Vise F₁·d₁ = F₂·d₂.'; }
+ });
+ setRound();
   })();
 
   // ===== D5 — ferme le triangle =====
   (function(){
-    var cv=el('cvTri'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
-    /* composantes en convention PHYSIQUE : y positif vers le HAUT.
-       Le dessin convertit (y ecran = -y physique). */
-    var ROUNDS=[
-      {F1:{x:60,y:20},F2:{x:-30,y:-50}},
-      {F1:{x:50,y:-30},F2:{x:20,y:60}},
-      {F1:{x:-40,y:40},F2:{x:70,y:-10}},
-      {F1:{x:0,y:70},F2:{x:55,y:-30}}
-    ];
-    var ri=0, locked=false, opts=el('d5opts'), msg=el('d5msg'), CHOSEN=null;
-    function sum(c){return {x:c.F1.x+c.F2.x, y:c.F1.y+c.F2.y};}
-    function draw(extra){
-      g.clearRect(0,0,W,H); var c=ROUNDS[ri];
-      var sc=1.4;
-      /* sommets relatifs, y ecran = -y physique */
-      var p0={x:0,y:0};
-      var p1={x:c.F1.x*sc, y:-c.F1.y*sc};
-      var p2={x:p1.x+c.F2.x*sc, y:p1.y-c.F2.y*sc};
-      /* recentrage automatique du triangle dans le canvas */
-      var xs=[p0.x,p1.x,p2.x], ys=[p0.y,p1.y,p2.y];
-      var minx=Math.min.apply(null,xs), maxx=Math.max.apply(null,xs);
-      var miny=Math.min.apply(null,ys), maxy=Math.max.apply(null,ys);
-      var span=Math.max(maxx-minx,maxy-miny);
-      var sx=W/2-(minx+maxx)/2, sy=H/2-(miny+maxy)/2+6;
-      if(span>0){ /* marge pour les tetes de fleche qui depassent */ }
-      var A={x:sx+p1.x, y:sy+p1.y};
-      var B={x:sx+p2.x, y:sy+p2.y};
-      arrow(g,sx,sy,A.x,A.y,'#C0492E',6); 
-      g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('F₁',(sx+A.x)/2+8,(sy+A.y)/2-6);
-      arrow(g,A.x,A.y,B.x,B.y,'#2E6A8E',6);
-      g.fillStyle='#2E6A8E';g.fillText('F₂',(A.x+B.x)/2+8,(A.y+B.y)/2-6);
-      // point de départ et d'arrivée
-      g.fillStyle='#2A2622';g.beginPath();g.arc(sx,sy,5,0,7);g.fill();
-      g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.fillText('départ',sx,sy-12);
-      g.fillStyle='#2A2622';g.beginPath();g.arc(B.x,B.y,5,0,7);g.fill();
-      // gap B -> départ (à fermer)
-      if(!extra){ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1.6;g.setLineDash([5,5]);
-        g.beginPath();g.moveTo(B.x,B.y);g.lineTo(sx,sy);g.stroke();g.setLineDash([]);
-        g.fillStyle='#5C544B';g.fillText('F₃ = ?',(B.x+sx)/2,(B.y+sy)/2-8); }
-      else { arrow(g,B.x,B.y,sx,sy,'#3D7E5F',6); g.fillStyle='#3D7E5F';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F₃',(B.x+sx)/2-10,(B.y+sy)/2-8);
-        g.fillStyle='#235877';g.fillText('triangle fermé ✓', sx+ (B.x-sx)/2, sy-30); }
-    }
-    function setRound(){
-      locked=false; CHOSEN=null; el('d5round').textContent='Manche '+(ri+1)+' / 4'; msg.textContent='';msg.className='msg'; draw(false);
-      var c=ROUNDS[ri], s=sum(c); var correct={x:-s.x,y:-s.y};
-      var set={}, arr=[]; function key(o){return o.x+'_'+o.y;}
-      arr.push(correct); set[key(correct)]=true;
-      var distr=[{x:s.x,y:s.y},{x:-s.x,y:s.y},{x:s.x,y:-s.y}];
-      distr.forEach(function(d){if(!set[key(d)]){set[key(d)]=true;arr.push(d);}});
-      var k=1; while(arr.length<4){var d2={x:-s.x+k*7,y:-s.y-k*5};if(!set[key(d2)]){set[key(d2)]=true;arr.push(d2);}k++;}
-      opts.innerHTML=shuffle(arr).map(function(o){return '<button class="opt" data-x="'+o.x+'" data-y="'+o.y+'">( '+o.x+' ; '+o.y+' )</button>';}).join('');
-    }
-    opts.addEventListener('click',function(ev){ if(locked)return; var b=ev.target.closest('.opt'); if(!b)return;
-      var c=ROUNDS[ri], s=sum(c); var x=parseInt(b.getAttribute('data-x'),10), y=parseInt(b.getAttribute('data-y'),10);
-      if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*25); msg.className='msg ok';
-        if(ri<3){ msg.textContent='✓ Triangle fermé ! Manche suivante…'; setTimeout(function(){ri++;setRound();},1100); }
-        else { msg.textContent='🏆 Les 4 triangles fermés — défi complet ! +100 pts'; }
-      } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ram\u00e8ne pas au point de d\u00e9part. Pense \u00e0 F\u2083 = \u2212(F\u2081+F\u2082), composante par composante.'; setTimeout(function(){b.classList.remove('no');},500); }
-    });
-    setRound();
+ var cv=el('cvTri'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'),W=cv.width,H=cv.height;
+ /* composantes en convention PHYSIQUE : y positif vers le HAUT.
+ Le dessin convertit (y ecran = -y physique). */
+ var ROUNDS=[
+ {F1:{x:60,y:20},F2:{x:-30,y:-50}},
+ {F1:{x:50,y:-30},F2:{x:20,y:60}},
+ {F1:{x:-40,y:40},F2:{x:70,y:-10}},
+ {F1:{x:0,y:70},F2:{x:55,y:-30}}
+ ];
+ var ri=0, locked=false, opts=el('d5opts'), msg=el('d5msg'), CHOSEN=null;
+ function sum(c){return {x:c.F1.x+c.F2.x, y:c.F1.y+c.F2.y};}
+ function draw(extra){
+ g.clearRect(0,0,W,H); var c=ROUNDS[ri];
+ var sc=1.4;
+ /* sommets relatifs, y ecran = -y physique */
+ var p0={x:0,y:0};
+ var p1={x:c.F1.x*sc, y:-c.F1.y*sc};
+ var p2={x:p1.x+c.F2.x*sc, y:p1.y-c.F2.y*sc};
+ /* recentrage automatique du triangle dans le canvas */
+ var xs=[p0.x,p1.x,p2.x], ys=[p0.y,p1.y,p2.y];
+ var minx=Math.min.apply(null,xs), maxx=Math.max.apply(null,xs);
+ var miny=Math.min.apply(null,ys), maxy=Math.max.apply(null,ys);
+ var span=Math.max(maxx-minx,maxy-miny);
+ var sx=W/2-(minx+maxx)/2, sy=H/2-(miny+maxy)/2+6;
+ if(span>0){ /* marge pour les tetes de fleche qui depassent */ }
+ var A={x:sx+p1.x, y:sy+p1.y};
+ var B={x:sx+p2.x, y:sy+p2.y};
+ arrow(g,sx,sy,A.x,A.y,'#C0492E',6); 
+ g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('F₁',(sx+A.x)/2+8,(sy+A.y)/2-6);
+ arrow(g,A.x,A.y,B.x,B.y,'#2E6A8E',6);
+ g.fillStyle='#2E6A8E';g.fillText('F₂',(A.x+B.x)/2+8,(A.y+B.y)/2-6);
+ // point de départ et d'arrivée
+ g.fillStyle='#2A2622';g.beginPath();g.arc(sx,sy,5,0,7);g.fill();
+ g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.fillText('départ',sx,sy-12);
+ g.fillStyle='#2A2622';g.beginPath();g.arc(B.x,B.y,5,0,7);g.fill();
+ // gap B -> départ (à fermer)
+ if(!extra){ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1.6;g.setLineDash([5,5]);
+ g.beginPath();g.moveTo(B.x,B.y);g.lineTo(sx,sy);g.stroke();g.setLineDash([]);
+ g.fillStyle='#5C544B';g.fillText('F₃ = ?',(B.x+sx)/2,(B.y+sy)/2-8); }
+ else { arrow(g,B.x,B.y,sx,sy,'#3D7E5F',6); g.fillStyle='#3D7E5F';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F₃',(B.x+sx)/2-10,(B.y+sy)/2-8);
+ g.fillStyle='#235877';g.fillText('triangle fermé ✓', sx+ (B.x-sx)/2, sy-30); }
+ }
+ function setRound(){
+ locked=false; CHOSEN=null; el('d5round').textContent='Manche '+(ri+1)+' / 4'; msg.textContent='';msg.className='msg'; draw(false);
+ var c=ROUNDS[ri], s=sum(c); var correct={x:-s.x,y:-s.y};
+ var set={}, arr=[]; function key(o){return o.x+'_'+o.y;}
+ arr.push(correct); set[key(correct)]=true;
+ var distr=[{x:s.x,y:s.y},{x:-s.x,y:s.y},{x:s.x,y:-s.y}];
+ distr.forEach(function(d){if(!set[key(d)]){set[key(d)]=true;arr.push(d);}});
+ var k=1; while(arr.length<4){var d2={x:-s.x+k*7,y:-s.y-k*5};if(!set[key(d2)]){set[key(d2)]=true;arr.push(d2);}k++;}
+ opts.innerHTML=shuffle(arr).map(function(o){return '<button class="opt" data-x="'+o.x+'" data-y="'+o.y+'">( '+o.x+' ; '+o.y+' )</button>';}).join('');
+ }
+ opts.addEventListener('click',function(ev){ if(locked)return; var b=ev.target.closest('.opt'); if(!b)return;
+ var c=ROUNDS[ri], s=sum(c); var x=parseInt(b.getAttribute('data-x'),10), y=parseInt(b.getAttribute('data-y'),10);
+ if(x===-s.x && y===-s.y){ locked=true; b.classList.add('ok'); draw(true); setContrib('d5',(ri+1)*25); msg.className='msg ok';
+ if(ri<3){ msg.textContent='✓ Triangle fermé ! Manche suivante…'; setTimeout(function(){ri++;setRound();},1100); }
+ else { msg.textContent=' Les 4 triangles fermés — défi complet ! +100 pts'; }
+ } else { b.classList.add('no'); msg.className='msg no'; msg.textContent='Cette force ne ram\u00e8ne pas au point de d\u00e9part. Pense \u00e0 F\u2083 = \u2212(F\u2081+F\u2082), composante par composante.'; setTimeout(function(){b.classList.remove('no');},500); }
+ });
+ setRound();
   })();
 
   // ===== D6 — matching =====
   (function(){
-    var PAIRS=[
-      ['Appui simple','1 réaction perpendiculaire au contact'],
-      ['Articulation (pivot)','réaction quelconque = 2 composantes'],
-      ['Encastrement','1 réaction + 1 moment'],
-      ['Le PFS','Σ F\u20D7 = 0\u20D7 et Σ M = 0'],
-      ['Bras de levier','distance ⊥ à la droite d\u2019action']
-    ];
-    var left=el('d6left'), right=el('d6right'), msg=el('d6msg');
-    var sel=null, done=0;
-    function build(){
-      done=0; sel=null; msg.textContent='';msg.className='msg';
-      var L=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};}));
-      var R=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};}));
-      left.innerHTML=L.map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
-      right.innerHTML=R.map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
-    }
-    function click(ev){
-      var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
-      if(!sel){ if(it.getAttribute('data-side')!=='L'){return;} sel=it; it.classList.add('sel'); return; }
-      if(it.getAttribute('data-side')!=='R'){ sel.classList.remove('sel'); sel=(it.getAttribute('data-side')==='L')?it:null; if(sel)sel.classList.add('sel'); return; }
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){
-        it.classList.add('done'); sel.classList.remove('sel'); sel.classList.add('done'); sel=null; done++;
-        setContrib('d6',done*22);
-        if(done===PAIRS.length){ msg.className='msg ok'; msg.textContent='🔗 Tout est relié — défi complet ! +110 pts'; }
-      } else { var bad=it, s=sel; bad.classList.add('bad'); s.classList.add('bad'); setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420); sel=null; msg.className='msg no'; msg.textContent='Mauvaise correspondance, réessaie.'; }
-    }
-    left.addEventListener('click',click); right.addEventListener('click',click);
-    build();
+ var PAIRS=[
+ ['Appui simple','1 réaction perpendiculaire au contact'],
+ ['Articulation (pivot)','réaction quelconque = 2 composantes'],
+ ['Encastrement','1 réaction + 1 moment'],
+ ['Le PFS','Σ F\u20D7 = 0\u20D7 et Σ M = 0'],
+ ['Bras de levier','distance ⊥ à la droite d\u2019action']
+ ];
+ var left=el('d6left'), right=el('d6right'), msg=el('d6msg');
+ var sel=null, done=0;
+ function build(){
+ done=0; sel=null; msg.textContent='';msg.className='msg';
+ var L=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};}));
+ var R=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};}));
+ left.innerHTML=L.map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+ right.innerHTML=R.map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+ }
+ function click(ev){
+ var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+ if(!sel){ if(it.getAttribute('data-side')!=='L'){return;} sel=it; it.classList.add('sel'); return; }
+ if(it.getAttribute('data-side')!=='R'){ sel.classList.remove('sel'); sel=(it.getAttribute('data-side')==='L')?it:null; if(sel)sel.classList.add('sel'); return; }
+ if(it.getAttribute('data-i')===sel.getAttribute('data-i')){
+ it.classList.add('done'); sel.classList.remove('sel'); sel.classList.add('done'); sel=null; done++;
+ setContrib('d6',done*22);
+ if(done===PAIRS.length){ msg.className='msg ok'; msg.textContent=' Tout est relié — défi complet ! +110 pts'; }
+ } else { var bad=it, s=sel; bad.classList.add('bad'); s.classList.add('bad'); setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420); sel=null; msg.className='msg no'; msg.textContent='Mauvaise correspondance, réessaie.'; }
+ }
+ left.addEventListener('click',click); right.addEventListener('click',click);
+ build();
   })();
 
   // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
   (function(){
-    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
-    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
-    var QBANK=[
-      {q:'Une force se mesure en\u2026',ok:'newtons',no:'mètres'},
-      {q:'À l\u2019équilibre, la somme des forces est\u2026',ok:'nulle',no:'maximale'},
-      {q:'Le moment dépend de\u2026',ok:'la distance (bras de levier)',no:'la couleur'},
-      {q:'Une action mécanique peut être\u2026',ok:'une force',no:'une température'},
-      {q:'Un appui simple crée une réaction\u2026',ok:'perpendiculaire',no:'nulle'},
-      {q:'Le PFS s\u2019applique à un solide\u2026',ok:'en équilibre',no:'en mouvement rapide'},
-      {q:'Deux forces s\u2019équilibrent si elles sont\u2026',ok:'opposées et égales',no:'dans le même sens'},
-      {q:'Le poids s\u2019applique au\u2026',ok:'centre de gravité',no:'coin supérieur'},
-      {q:'Un moment se mesure en\u2026',ok:'newton-mètres',no:'litres'},
-      {q:'Plus le bras de levier est grand, le moment est\u2026',ok:'plus grand',no:'plus petit'},
-      {q:'Une liaison pivot autorise\u2026',ok:'une rotation',no:'aucun mouvement'},
-      {q:'La résultante, c\u2019est\u2026',ok:'la somme des forces',no:'la plus petite force'}
-    ];
-    var TARGET=12;
-    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
-    var lane=0, gateY=-gateH, speed=1.15, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
-    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
-    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
-    function draw(){
-      g.clearRect(0,0,W,H);
-      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
-      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
-      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
-        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
-        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
-      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
-      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
-      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
-      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
-    }
-    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
-    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
-    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
-      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
-      draw();}
-    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
-    startBtn.addEventListener('click',start);
-    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
-    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
-    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
-    newQ();draw();
+ var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+ function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+ var QBANK=[
+ {q:'Une force se mesure en\u2026',ok:'newtons',no:'mètres'},
+ {q:'À l\u2019équilibre, la somme des forces est\u2026',ok:'nulle',no:'maximale'},
+ {q:'Le moment dépend de\u2026',ok:'la distance (bras de levier)',no:'la couleur'},
+ {q:'Une action mécanique peut être\u2026',ok:'une force',no:'une température'},
+ {q:'Un appui simple crée une réaction\u2026',ok:'perpendiculaire',no:'nulle'},
+ {q:'Le PFS s\u2019applique à un solide\u2026',ok:'en équilibre',no:'en mouvement rapide'},
+ {q:'Deux forces s\u2019équilibrent si elles sont\u2026',ok:'opposées et égales',no:'dans le même sens'},
+ {q:'Le poids s\u2019applique au\u2026',ok:'centre de gravité',no:'coin supérieur'},
+ {q:'Un moment se mesure en\u2026',ok:'newton-mètres',no:'litres'},
+ {q:'Plus le bras de levier est grand, le moment est\u2026',ok:'plus grand',no:'plus petit'},
+ {q:'Une liaison pivot autorise\u2026',ok:'une rotation',no:'aucun mouvement'},
+ {q:'La résultante, c\u2019est\u2026',ok:'la somme des forces',no:'la plus petite force'}
+ ];
+ var TARGET=12;
+ var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+ var lane=0, gateY=-gateH, speed=1.15, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+ var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+ function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+ function draw(){
+ g.clearRect(0,0,W,H);
+ g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+ g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+ if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+ g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+ g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+ g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+ g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+ g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText(' '+lives,8,H-8);
+ g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+ }
+ function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+ function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?' Gagné ! ':' Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+ function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+ if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+ draw();}
+ function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+ startBtn.addEventListener('click',start);
+ el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+ el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+ document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+ newQ();draw();
   })();
 
   // ===== D8 — tape-taupe (3 vies, ralenti) =====
   (function(){
-    var ITEMS=[
-      {t:'le poids d\u2019un objet',cat:'force'},{t:'une traction sur un câble',cat:'force'},{t:'une poussée',cat:'force'},{t:'la réaction d\u2019un appui',cat:'force'},{t:'une force de contact',cat:'force'},
-      {t:'un couple de serrage',cat:'moment'},{t:'un bras de levier',cat:'moment'},{t:'faire tourner autour d\u2019un axe',cat:'moment'},{t:'un moment de force',cat:'moment'},{t:'desserrer un boulon',cat:'moment'},
-      {t:'somme des forces nulle',cat:'equi'},{t:'un solide immobile',cat:'equi'},{t:'des forces qui se compensent',cat:'equi'},{t:'le PFS',cat:'equi'},{t:'une résultante nulle',cat:'equi'}
-    ];
-    var CATS={force:'la FORCE',moment:'le MOMENT',equi:'l\u2019ÉQUILIBRE'};
-    var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
-    var HOLES=6, cells=[], target='force', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
-    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
-    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
-    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
-    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
-    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
-    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
-    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
-    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
-    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
-    startBtn.addEventListener('click',start);
-    build();setConsigne();lifeEl.textContent=hearts();
+ var ITEMS=[
+ {t:'le poids d\u2019un objet',cat:'force'},{t:'une traction sur un câble',cat:'force'},{t:'une poussée',cat:'force'},{t:'la réaction d\u2019un appui',cat:'force'},{t:'une force de contact',cat:'force'},
+ {t:'un couple de serrage',cat:'moment'},{t:'un bras de levier',cat:'moment'},{t:'faire tourner autour d\u2019un axe',cat:'moment'},{t:'un moment de force',cat:'moment'},{t:'desserrer un boulon',cat:'moment'},
+ {t:'somme des forces nulle',cat:'equi'},{t:'un solide immobile',cat:'equi'},{t:'des forces qui se compensent',cat:'equi'},{t:'le PFS',cat:'equi'},{t:'une résultante nulle',cat:'equi'}
+ ];
+ var CATS={force:'la FORCE',moment:'le MOMENT',equi:'l\u2019ÉQUILIBRE'};
+ var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
+ var HOLES=6, cells=[], target='force', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+ function hearts(){return lives>0?Array(lives+1).join(''):'\u2014';}
+ function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+ function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent=' Tape '+CATS[target]+' !';}
+ function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+ function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+ function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+ function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+ function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+ function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?' 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+ startBtn.addEventListener('click',start);
+ build();setConsigne();lifeEl.textContent=hearts();
   })();
 
   // ===== Exercices d'application =====
   (function(){
-    function num(v){return parseFloat(String(v||'').replace(',','.'));}
-    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
-    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
-    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
-    gate('ex3reveal','ex3sol','Correction','Masquer');
-    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+ function num(v){return parseFloat(String(v||'').replace(',','.'));}
+ function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+ function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+ gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+ gate('ex3reveal','ex3sol','Correction','Masquer');
+ gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
 
-    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var p=num(el('ex1p').value), m=num(el('ex1m').value), fb=el('ex1fb');
-      var okP=Math.abs(p-29.4)<1.2, okM=Math.abs(m-5.9)<0.5;
-      if(okP&&okM){fb.className='exo-fb ok';fb.textContent='✓ Exact : P = 3 × 9,81 ≈ 29,4 N et M = P × 0,20 ≈ 5,9 N·m.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ '+(okP?'':'a) P = m × g. ')+(okM?'':'b) M = P × d (d en mètres).');}
-      unlock('ex1reveal','Voir l’analyse');
-    });
-    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
-      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
-      var okA=Math.abs(a-20)<0.5, okB=Math.abs(b-120)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : M = 80 × 0,25 = 20 N·m et F\u2019 = 30 / 0,25 = 120 N.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) M = F × d avec d en mètres. ')+(okB?'':'b) isole F\u2019 = M / d.');}
-      unlock('ex3reveal','Correction');
-    });
-    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
-      var ra=num(el('ex4ra').value), rb=num(el('ex4rb').value), fb=el('ex4fb');
-      var okA=Math.abs(ra-450)<5, okB=Math.abs(rb-150)<5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : R_B = 600×1/4 = 150 N, puis R_A = 600 − 150 = 450 N.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ Écris ΣM/A = 0 pour R_B, puis ΣF = 0 pour R_A.';}
-      unlock('ex4reveal','Correction détaillée');
-    });
+ var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+ var p=num(el('ex1p').value), m=num(el('ex1m').value), fb=el('ex1fb');
+ var okP=Math.abs(p-29.4)<1.2, okM=Math.abs(m-5.9)<0.5;
+ if(okP&&okM){fb.className='exo-fb ok';fb.textContent='✓ Exact : P = 3 × 9,81 ≈ 29,4 N et M = P × 0,20 ≈ 5,9 N·m.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ '+(okP?'':'a) P = m × g. ')+(okM?'':'b) M = P × d (d en mètres).');}
+ unlock('ex1reveal','Voir l’analyse');
+ });
+ var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+ var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+ var okA=Math.abs(a-20)<0.5, okB=Math.abs(b-120)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : M = 80 × 0,25 = 20 N·m et F\u2019 = 30 / 0,25 = 120 N.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) M = F × d avec d en mètres. ')+(okB?'':'b) isole F\u2019 = M / d.');}
+ unlock('ex3reveal','Correction');
+ });
+ var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+ var ra=num(el('ex4ra').value), rb=num(el('ex4rb').value), fb=el('ex4fb');
+ var okA=Math.abs(ra-450)<5, okB=Math.abs(rb-150)<5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : R_B = 600×1/4 = 150 N, puis R_A = 600 − 150 = 450 N.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ Écris ΣM/A = 0 pour R_B, puis ΣF = 0 pour R_A.';}
+ unlock('ex4reveal','Correction détaillée');
+ });
 
-    (function(){
-      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-      function v(id){return parseFloat(el(id).value);}
-      function draw(){
-        var mL=v('ex2mL'),dL=v('ex2dL'),mR=v('ex2mR'),dR=v('ex2dR');
-        el('ex2mLv').textContent=mL; el('ex2dLv').textContent=dL.toFixed(1);
-        el('ex2mRv').textContent=mR; el('ex2dRv').textContent=dR.toFixed(1);
-        var pL=mL*dL, pR=mR*dR;
-        var rot=Math.max(-0.34,Math.min(0.34,(pR-pL)*0.014));
-        var cx=W/2, py=H-72, L=190;
-        g.clearRect(0,0,W,H);
-        g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=1;g.beginPath();g.moveTo(40,py+42);g.lineTo(W-40,py+42);g.stroke();
-        g.fillStyle='#5C544B';g.beginPath();g.moveTo(cx,py);g.lineTo(cx-18,py+42);g.lineTo(cx+18,py+42);g.closePath();g.fill();
-        var lx=cx-L*Math.cos(rot), ly=py-L*Math.sin(rot), rx=cx+L*Math.cos(rot), ry=py+L*Math.sin(rot);
-        g.strokeStyle='#2E6A8E';g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(lx,ly);g.lineTo(rx,ry);g.stroke();
-        function weight(m,d,side){var f=d/2.5; var wx=cx-side*f*L*Math.cos(rot), wy=py-side*f*L*Math.sin(rot); var r=9+m*1.4;
-          g.strokeStyle='rgba(42,38,34,.35)';g.lineWidth=1.5;g.beginPath();g.moveTo(wx,wy);g.lineTo(wx,wy+r+4);g.stroke();
-          g.fillStyle='#B85C2E';g.beginPath();g.arc(wx,wy+r+4+r,r,0,7);g.fill();
-          g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(m+'kg',wx,wy+r+4+r+4);}
-        weight(mL,dL,1); weight(mR,dR,-1);
-        var out=el('ex2out'); var eq=Math.abs(pL-pR)<0.05;
-        var verdict=eq?'⚖️ ÉQUILIBRÉ':(pL>pR?'⬅️ penche à GAUCHE':'penche à DROITE ➡️');
-        out.textContent='Gauche m×d = '+pL.toFixed(1)+'   ·   Droite m×d = '+pR.toFixed(1)+'   →   '+verdict;
-      }
-      ['ex2mL','ex2dL','ex2mR','ex2dR'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
-      draw();
-    })();
+ (function(){
+ var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function v(id){return parseFloat(el(id).value);}
+ function draw(){
+ var mL=v('ex2mL'),dL=v('ex2dL'),mR=v('ex2mR'),dR=v('ex2dR');
+ el('ex2mLv').textContent=mL; el('ex2dLv').textContent=dL.toFixed(1);
+ el('ex2mRv').textContent=mR; el('ex2dRv').textContent=dR.toFixed(1);
+ var pL=mL*dL, pR=mR*dR;
+ var rot=Math.max(-0.34,Math.min(0.34,(pR-pL)*0.014));
+ var cx=W/2, py=H-72, L=190;
+ g.clearRect(0,0,W,H);
+ g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=1;g.beginPath();g.moveTo(40,py+42);g.lineTo(W-40,py+42);g.stroke();
+ g.fillStyle='#5C544B';g.beginPath();g.moveTo(cx,py);g.lineTo(cx-18,py+42);g.lineTo(cx+18,py+42);g.closePath();g.fill();
+ var lx=cx-L*Math.cos(rot), ly=py-L*Math.sin(rot), rx=cx+L*Math.cos(rot), ry=py+L*Math.sin(rot);
+ g.strokeStyle='#2E6A8E';g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(lx,ly);g.lineTo(rx,ry);g.stroke();
+ function weight(m,d,side){var f=d/2.5; var wx=cx-side*f*L*Math.cos(rot), wy=py-side*f*L*Math.sin(rot); var r=9+m*1.4;
+ g.strokeStyle='rgba(42,38,34,.35)';g.lineWidth=1.5;g.beginPath();g.moveTo(wx,wy);g.lineTo(wx,wy+r+4);g.stroke();
+ g.fillStyle='#B85C2E';g.beginPath();g.arc(wx,wy+r+4+r,r,0,7);g.fill();
+ g.fillStyle='#fff';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText(m+'kg',wx,wy+r+4+r+4);}
+ weight(mL,dL,1); weight(mR,dR,-1);
+ var out=el('ex2out'); var eq=Math.abs(pL-pR)<0.05;
+ var verdict=eq?' ÉQUILIBRÉ':(pL>pR?' penche à GAUCHE':'penche à DROITE ');
+ out.textContent='Gauche m×d = '+pL.toFixed(1)+'· Droite m×d = '+pR.toFixed(1)+'→ '+verdict;
+ }
+ ['ex2mL','ex2dL','ex2mR','ex2dR'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
+ draw();
+ })();
   })();
 
   refresh();
-</script>
-
-<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-<div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
+</script> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div>
 <script>
 (function(){
   var expr='', last='', deg=true;
@@ -939,140 +675,366 @@
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
+})();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_statique', TP_TITRE='Statique — TP « Leviers & équilibres »';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
 })();
 </script>
 </body>

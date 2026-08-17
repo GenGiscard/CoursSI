@@ -7,28 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --amber-d:#9a6f15; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{margin:0;font-family:var(--body);color:var(--ink);background-color:#FAF6EF;background-image:radial-gradient(1100px 760px at 10% -10%,rgba(46,106,142,.11),transparent 56%),radial-gradient(1000px 700px at 108% 6%,rgba(189,138,42,.11),transparent 54%),radial-gradient(1000px 880px at 55% 120%,rgba(61,126,95,.10),transparent 60%);background-repeat:no-repeat;background-attachment:fixed;line-height:1.55;-webkit-font-smoothing:antialiased}
   .shell{display:flex;max-width:1300px;margin:0 auto}
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:22px 16px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--amber-d);border-color:var(--amber)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .scorebox{background:var(--ink);border-radius:13px;padding:13px 15px;margin-bottom:14px;color:#fff}
@@ -39,7 +38,7 @@
   .scorebox .prog{height:6px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:9px}
   .scorebox .prog i{display:block;height:100%;width:0;background:var(--amber);transition:width .35s}
   .nav a.navlink{display:flex;gap:9px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:8px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink .dn{width:18px;height:18px;flex:0 0 18px;border-radius:5px;background:var(--cream);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
   .nav a.navlink .nm{flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .nav a.navlink .bd{font-size:10px;font-weight:700;color:var(--amber-d)}
@@ -109,12 +108,12 @@
   .final .fd{font-size:13.5px;opacity:.8;margin-top:10px}
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
-    .opts,.opts.three,.two,.three,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.scorebox .prog{display:none}.nav.open .links{display:block;margin-top:10px}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .scorebox{display:flex;align-items:center;gap:12px;padding:10px 13px}.scorebox .sv{font-size:22px;margin:0}.scorebox .rk{margin:0}
+ .opts,.opts.three,.two,.three,.match{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 30px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
 
@@ -169,286 +168,64 @@
   .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
   .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
   .btn[disabled]{opacity:.42;cursor:not-allowed}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_2de_assistance.html">← Séquence : assistance</a>
-    <div class="brand">
-      <div class="mark">🤝</div>
-      <div><h1>Concevoir un automatisme</h1><p>TP · Option SI</p></div>
-      <button class="menu-btn" id="menuBtn">Défis</button>
-    </div>
-    <div class="scorebox">
-      <div class="sl">Score total</div>
-      <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div>
-      <div class="rk" id="rankLine">🔧 Apprenti</div>
-      <div class="prog"><i id="progBar"></i></div>
-    </div>
-    <div class="links" id="links">
-            <a href="#exos" class="navlink"><span class="dn">🎯</span><span class="nm">Exercices d'application</span></a>
-      <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Ordre, traitement, action</span><b class="bd" id="bd1">0</b></a>
-      <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Déclencheur ↔ système</span><b class="bd" id="bd2">0</b></a>
-      <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">La boucle de commande</span><b class="bd" id="bd3">0</b></a>
-      <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle solution choisir ?</span><b class="bd" id="bd4">0</b></a>
-      <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Confort ou sécurité ?</span><b class="bd" id="bd5">0</b></a>
-      <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a>
-      <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a>
-      <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a>
-    </div>
-  </aside>
-
-  <main class="main">
-    <section id="intro" style="border-bottom:none;padding-bottom:8px">
-      <span class="kicker">TP · 8 défis</span>
-      <h2>Concevoir un automatisme</h2>
-      <div class="intro">
-        <p class="lede">Huit défis-jeux sur les systèmes d'assistance : reconnaître ordre/traitement/action, associer déclencheur et système, ordonner la boucle de commande, choisir la bonne solution. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p>
-        <div class="ranks">
-          <span class="rankchip">🔧 Apprenti · &lt; 200</span>
-          <span class="rankchip">⚙️ Technicien·ne · 200+</span>
-          <span class="rankchip">📐 Ingénieur·e · 450+</span>
-          <span class="rankchip">🏆 Expert·e · 700+</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="exos">
-      <span class="kicker">Exercices d'application</span>
-      <h2>S'entraîner : du concret au calcul</h2>
-      <p class="lede">Quatre exercices pour concevoir un automatisme : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
-      <div class="exo-wrap">
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">1</span> Cas concret — le portail automatique</div>
-          <p>Un portail automatique met <b>6 s</b> à s'ouvrir, reste <b>ouvert 12 s</b>, puis met <b>6 s</b> à se fermer. a) Durée d'un cycle complet ? b) Combien de cycles complets en <b>4 minutes</b> ?</p>
-          <svg class="exo-fig" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
-            <rect x="26" y="24" width="8" height="56" fill="#7a7064"/><rect x="266" y="24" width="8" height="56" fill="#7a7064"/>
-            <rect x="34" y="40" width="106" height="34" fill="none" stroke="#2E6A8E" stroke-width="2"/>
-            <line x1="34" y1="57" x2="140" y2="57" stroke="#2E6A8E" stroke-width="1"/>
-            <rect x="160" y="40" width="106" height="34" fill="none" stroke="#2E6A8E" stroke-width="2"/>
-            <line x1="160" y1="57" x2="266" y2="57" stroke="#2E6A8E" stroke-width="1"/>
-            <rect x="30" y="94" width="60" height="14" rx="2" fill="#3D7E5F" fill-opacity="0.8"/><text x="60" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ouv. 6s</text>
-            <rect x="90" y="94" width="120" height="14" rx="2" fill="#BD8A2A" fill-opacity="0.85"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ouvert 12s</text>
-            <rect x="210" y="94" width="60" height="14" rx="2" fill="#C0492E" fill-opacity="0.85"/><text x="240" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ferm. 6s</text>
-          </svg>
-          <div class="exo-q">a) Durée d'un cycle = <input class="numin" id="ex1a" inputmode="decimal"> s</div>
-          <div class="exo-q">b) Cycles en 4 minutes = <input class="numin" id="ex1b" inputmode="decimal"></div>
-          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
-          <div class="exo-fb" id="ex1fb"></div>
-          <div class="exo-sol" id="ex1sol" hidden>
-            <p><b>a)</b> cycle = 6 + 12 + 6 = <b>24 s</b>.</p>
-            <p><b>b)</b> 4 min = 240 s ; 240 ÷ 24 = <b>10 cycles</b>.</p>
-          </div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">2</span> Simulateur — capteur à seuil</div>
-          <p>Un capteur mesure la distance d'un objet. L'automatisme ouvre le portail <b>si la distance est inférieure à 50 cm</b> (le seuil). Approche l'objet et observe la décision.</p>
-          <canvas id="ex2cv" width="480" height="140" class="gamecanvas"></canvas>
-          <div class="sliders">
-            <label><span class="nm2">Distance objet (cm)</span><input type="range" id="ex2dist" min="0" max="200" step="5" value="120"><b><span id="ex2distv">120</span></b></label>
-          </div>
-          <div class="exo-out" id="ex2out">—</div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">3</span> Calcul — l'arrosage automatique</div>
-          <p>Un système d'arrosage automatique se déclenche <b>3 fois par jour</b>, pendant <b>5 minutes</b> à chaque fois, avec un débit de <b>4 L/min</b>. On rappelle : volume = débit × durée.</p>
-          <div class="exo-q">a) Eau par arrosage = <input class="numin" id="ex3a" inputmode="decimal"> L</div>
-          <div class="exo-q">b) Eau par jour = <input class="numin" id="ex3b" inputmode="decimal"> L</div>
-          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
-          <div class="exo-fb" id="ex3fb"></div>
-          <div class="exo-sol" id="ex3sol" hidden>
-            <p><b>a)</b> volume = 4 × 5 = <b>20 L</b> par arrosage.</p>
-            <p><b>b)</b> 20 × 3 = <b>60 L</b> par jour.</p>
-          </div>
-        </div>
-
-        <div class="exo-card adv">
-          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combinaisons de capteurs <span class="lvl-badge">niveau +</span></div>
-          <p>Chaque capteur d'un automatisme est soit <b>actif</b>, soit <b>inactif</b> (2 états). Avec plusieurs capteurs, le nombre de combinaisons d'états est <b>2<sup>n</sup></b>. Calcule-le pour 3 capteurs, puis 4.</p>
-          <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
-            <g stroke="#9a9385" stroke-width="1.2">
-              <line x1="150" y1="16" x2="90" y2="45"/><line x1="150" y1="16" x2="210" y2="45"/>
-              <line x1="90" y1="45" x2="50" y2="78"/><line x1="90" y1="45" x2="120" y2="78"/><line x1="210" y1="45" x2="180" y2="78"/><line x1="210" y1="45" x2="250" y2="78"/>
-              <line x1="50" y1="78" x2="25" y2="108"/><line x1="50" y1="78" x2="60" y2="108"/><line x1="120" y1="78" x2="105" y2="108"/><line x1="120" y1="78" x2="135" y2="108"/><line x1="180" y1="78" x2="165" y2="108"/><line x1="180" y1="78" x2="195" y2="108"/><line x1="250" y1="78" x2="240" y2="108"/><line x1="250" y1="78" x2="275" y2="108"/>
-            </g>
-            <circle cx="150" cy="16" r="5" fill="#2E6A8E"/>
-            <g fill="#BD8A2A"><circle cx="90" cy="45" r="4"/><circle cx="210" cy="45" r="4"/></g>
-            <g fill="#3D7E5F"><circle cx="50" cy="78" r="4"/><circle cx="120" cy="78" r="4"/><circle cx="180" cy="78" r="4"/><circle cx="250" cy="78" r="4"/></g>
-            <g fill="#8A5A7A"><circle cx="25" cy="108" r="3.5"/><circle cx="60" cy="108" r="3.5"/><circle cx="105" cy="108" r="3.5"/><circle cx="135" cy="108" r="3.5"/><circle cx="165" cy="108" r="3.5"/><circle cx="195" cy="108" r="3.5"/><circle cx="240" cy="108" r="3.5"/><circle cx="275" cy="108" r="3.5"/></g>
-            <text x="150" y="126" text-anchor="middle" font-size="10" fill="#6a4560" font-weight="700">3 capteurs → 8 combinaisons</text>
-          </svg>
-          <div class="exo-q">a) 3 capteurs → <input class="numin" id="ex4a" inputmode="decimal"> combinaisons</div>
-          <div class="exo-q">b) 4 capteurs → <input class="numin" id="ex4b" inputmode="decimal"> combinaisons</div>
-          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
-          <div class="exo-fb" id="ex4fb"></div>
-          <div class="exo-sol" id="ex4sol" hidden>
-            <p><b>a)</b> 2<sup>3</sup> = <b>8 combinaisons</b> (chaque capteur double le nombre de cas).</p>
-            <p><b>b)</b> 2<sup>4</sup> = <b>16 combinaisons</b>. Plus il y a de capteurs, plus l'automatisme doit gérer de cas : d'où l'intérêt d'une logique bien pensée.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="d1">
-      <span class="tag">🔘 Défi 1<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Ordre, traitement ou action ?</h2>
-      <p class="lede">Pour chaque situation, dis à quelle étape de la boucle de commande elle correspond. 40 secondes.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d1time">40</b> s</span>
-          <span class="timepill">Score : <b id="d1score">0</b></span>
-          <button class="btn" id="d1start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d1q">Appuie sur Démarrer.</div>
-        <div class="three">
-          <button class="bigbtn stl" id="d1or" disabled>ORDRE<br><span style="font-size:10px;font-weight:500">l'utilisateur demande</span></button>
-          <button class="bigbtn grn" id="d1tr" disabled>TRAITEMENT<br><span style="font-size:10px;font-weight:500">le système décide</span></button>
-          <button class="bigbtn cop" id="d1ac" disabled>ACTION<br><span style="font-size:10px;font-weight:500">ça bouge, ça s'allume</span></button>
-        </div>
-        <div class="streak" id="d1streak"></div>
-        <div class="msg" id="d1msg"></div>
-      </div>
-    </section>
-
-    <section id="d2">
-      <span class="tag">🔗 Défi 2<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Déclencheur système</h2>
-      <p class="lede">Relie chaque déclencheur au système domotique qu'il actionne. Clique à gauche, puis sa correspondance à droite.</p>
-      <div class="game">
-        <div class="match">
-          <div class="mcol"><div class="h">Déclencheur</div><div id="d2left"></div></div>
-          <div class="mcol"><div class="h">Système</div><div id="d2right"></div></div>
-        </div>
-        <div class="msg" id="d2msg"></div>
-      </div>
-    </section>
-
-    <section id="d3">
-      <span class="tag">🧩 Défi 3<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Ordonne la boucle de commande</h2>
-      <p class="lede">Remets dans l'ordre les quatre étapes de la boucle de commande. Clique les étiquettes dans le bon ordre.</p>
-      <div class="game">
-        <div class="slots" id="d3slots"></div>
-        <div class="hint" style="margin-bottom:8px">À placer :</div>
-        <div class="pool" id="d3pool"></div>
-        <div class="msg" id="d3msg"></div>
-        <div style="margin-top:12px"><button class="btn alt" id="d3reset">Recommencer</button></div>
-      </div>
-    </section>
-
-    <section id="d4">
-      <span class="tag">🤝 Défi 4<span class="pts-badge">/ 120 pts</span></span>
-      <h2>Quelle solution choisir ?</h2>
-      <p class="lede">Pour chaque situation, choisis la meilleure solution d'assistance.</p>
-      <div class="game">
-        <div class="roundpill" id="d4round">Situation 1 / 4</div>
-        <div class="specbox" id="d4spec"></div>
-        <div class="opts three" id="d4opts"></div>
-        <div class="msg" id="d4msg"></div>
-      </div>
-    </section>
-
-    <section id="d5">
-      <span class="tag">🛎️ Défi 5<span class="pts-badge">/ 100 pts</span></span>
-      <h2>Confort ou sécurité ?</h2>
-      <p class="lede">Ce système d'assistance répond-il d'abord à un besoin de confort, ou de sécurité ? 35 secondes.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d5time">35</b> s</span>
-          <span class="timepill">Score : <b id="d5score">0</b></span>
-          <button class="btn" id="d5start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d5q">Appuie sur Démarrer.</div>
-        <div class="two">
-          <button class="bigbtn grn" id="d5co" disabled>CONFORT</button>
-          <button class="bigbtn cop" id="d5se" disabled>SÉCURITÉ</button>
-        </div>
-        <div class="streak" id="d5streak"></div>
-        <div class="msg" id="d5msg"></div>
-      </div>
-    </section>
-
-    <section id="d6">
-      <span class="tag">⚡ Défi 6<span class="pts-badge">/ 110 pts</span></span>
-      <h2>Vrai ou faux ?</h2>
-      <p class="lede">Réponds vite : l'affirmation sur les automatismes est-elle vraie ou fausse ? 35 secondes.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d6time">35</b> s</span>
-          <span class="timepill">Score : <b id="d6score">0</b></span>
-          <button class="btn" id="d6start">Démarrer</button>
-        </div>
-        <div class="qbox" id="d6q">Appuie sur Démarrer.</div>
-        <div class="two">
-          <button class="bigbtn grn" id="d6v" disabled>VRAI</button>
-          <button class="bigbtn cop" id="d6f" disabled>FAUX</button>
-        </div>
-        <div class="streak" id="d6streak"></div>
-        <div class="msg" id="d6msg"></div>
-      </div>
-    </section>
-
-    <section id="d7">
-      <span class="tag">🏃 Défi 7<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Runner à portes</h2>
-      <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p>
-      <div class="game">
-        <div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div>
-        <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas>
-        <div class="pad">
-          <button class="padbtn" id="d7left">◀ Gauche</button>
-          <button class="padbtn" id="d7right">Droite ▶</button>
-        </div>
-        <div class="msg" id="d7msg"></div>
-      </div>
-    </section>
-
-    <section id="d8">
-      <span class="tag">🔨 Défi 8<span class="pts-badge">/ 90 pts</span></span>
-      <h2>Tape-taupe</h2>
-      <p class="lede">Tape <b>seulement</b> les éléments qui correspondent au rôle demandé (il change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p>
-      <div class="game">
-        <div class="arc-head">
-          <span class="timepill">⏱ <b id="d8time">40</b> s</span>
-          <span class="timepill">Vies : <b id="d8life">❤❤❤</b></span>
-          <span class="timepill">Score : <b id="d8score">0</b></span>
-          <button class="btn" id="d8start">Démarrer</button>
-        </div>
-        <div class="consigne" id="d8cons">Appuie sur Démarrer.</div>
-        <div class="molegrid" id="d8grid"></div>
-        <div class="msg" id="d8msg"></div>
-      </div>
-    </section>
-
-    <section id="fin" style="border-bottom:none">
-      <div class="final">
-        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div>
-        <div class="fs"><span id="finScore">0</span> / 820</div>
-        <div class="fr" id="finRank">🔧 Apprenti</div>
-        <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div>
-      </div>
-    </section>
-  </main>
-</div>
-
-<script>
-  var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_assistance.html">← Séquence : assistance</a> <div class="brand"><div class="mark"></div> <div><h1>Concevoir un automatisme</h1><p>TP · Option SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Ordre, traitement, action</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Déclencheur ↔ système</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">La boucle de commande</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle solution choisir ?</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Confort ou sécurité ?</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Concevoir un automatisme</h2> <div class="intro"><p class="lede">Huit défis-jeux sur les systèmes d'assistance : reconnaître ordre/traitement/action, associer déclencheur et système, ordonner la boucle de commande, choisir la bonne solution. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour concevoir un automatisme : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — le portail automatique</div> <p>Un portail automatique met <b>6 s</b> à s'ouvrir, reste <b>ouvert 12 s</b>, puis met <b>6 s</b> à se fermer. a) Durée d'un cycle complet ? b) Combien de cycles complets en <b>4 minutes</b> ?</p> <svg class="exo-fig" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <rect x="26" y="24" width="8" height="56" fill="#7a7064"/><rect x="266" y="24" width="8" height="56" fill="#7a7064"/> <rect x="34" y="40" width="106" height="34" fill="none" stroke="#2E6A8E" stroke-width="2"/> <line x1="34" y1="57" x2="140" y2="57" stroke="#2E6A8E" stroke-width="1"/> <rect x="160" y="40" width="106" height="34" fill="none" stroke="#2E6A8E" stroke-width="2"/> <line x1="160" y1="57" x2="266" y2="57" stroke="#2E6A8E" stroke-width="1"/> <rect x="30" y="94" width="60" height="14" rx="2" fill="#3D7E5F" fill-opacity="0.8"/><text x="60" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ouv. 6s</text> <rect x="90" y="94" width="120" height="14" rx="2" fill="#BD8A2A" fill-opacity="0.85"/><text x="150" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ouvert 12s</text> <rect x="210" y="94" width="60" height="14" rx="2" fill="#C0492E" fill-opacity="0.85"/><text x="240" y="104" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="700">ferm. 6s</text> </svg> <div class="exo-q">a) Durée d'un cycle = <input class="numin" id="ex1a" inputmode="decimal"> s</div> <div class="exo-q">b) Cycles en 4 minutes = <input class="numin" id="ex1b" inputmode="decimal"></div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> cycle = 6 + 12 + 6 = <b>24 s</b>.</p> <p><b>b)</b> 4 min = 240 s ; 240 ÷ 24 = <b>10 cycles</b>.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — capteur à seuil</div> <p>Un capteur mesure la distance d'un objet. L'automatisme ouvre le portail <b>si la distance est inférieure à 50 cm</b> (le seuil). Approche l'objet et observe la décision.</p> <canvas id="ex2cv" width="480" height="140" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Distance objet (cm)</span><input type="range" id="ex2dist" min="0" max="200" step="5" value="120"><b><span id="ex2distv">120</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — l'arrosage automatique</div> <p>Un système d'arrosage automatique se déclenche <b>3 fois par jour</b>, pendant <b>5 minutes</b> à chaque fois, avec un débit de <b>4 L/min</b>. On rappelle : volume = débit × durée.</p> <div class="exo-q">a) Eau par arrosage = <input class="numin" id="ex3a" inputmode="decimal"> L</div> <div class="exo-q">b) Eau par jour = <input class="numin" id="ex3b" inputmode="decimal"> L</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> volume = 4 × 5 = <b>20 L</b> par arrosage.</p> <p><b>b)</b> 20 × 3 = <b>60 L</b> par jour.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combinaisons de capteurs <span class="lvl-badge">niveau +</span></div> <p>Chaque capteur d'un automatisme est soit <b>actif</b>, soit <b>inactif</b> (2 états). Avec plusieurs capteurs, le nombre de combinaisons d'états est <b>2<sup>n</sup></b>. Calcule-le pour 3 capteurs, puis 4.</p> <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <g stroke="#9a9385" stroke-width="1.2"> <line x1="150" y1="16" x2="90" y2="45"/><line x1="150" y1="16" x2="210" y2="45"/> <line x1="90" y1="45" x2="50" y2="78"/><line x1="90" y1="45" x2="120" y2="78"/><line x1="210" y1="45" x2="180" y2="78"/><line x1="210" y1="45" x2="250" y2="78"/> <line x1="50" y1="78" x2="25" y2="108"/><line x1="50" y1="78" x2="60" y2="108"/><line x1="120" y1="78" x2="105" y2="108"/><line x1="120" y1="78" x2="135" y2="108"/><line x1="180" y1="78" x2="165" y2="108"/><line x1="180" y1="78" x2="195" y2="108"/><line x1="250" y1="78" x2="240" y2="108"/><line x1="250" y1="78" x2="275" y2="108"/> </g> <circle cx="150" cy="16" r="5" fill="#2E6A8E"/> <g fill="#BD8A2A"><circle cx="90" cy="45" r="4"/><circle cx="210" cy="45" r="4"/></g> <g fill="#3D7E5F"><circle cx="50" cy="78" r="4"/><circle cx="120" cy="78" r="4"/><circle cx="180" cy="78" r="4"/><circle cx="250" cy="78" r="4"/></g> <g fill="#8A5A7A"><circle cx="25" cy="108" r="3.5"/><circle cx="60" cy="108" r="3.5"/><circle cx="105" cy="108" r="3.5"/><circle cx="135" cy="108" r="3.5"/><circle cx="165" cy="108" r="3.5"/><circle cx="195" cy="108" r="3.5"/><circle cx="240" cy="108" r="3.5"/><circle cx="275" cy="108" r="3.5"/></g> <text x="150" y="126" text-anchor="middle" font-size="10" fill="#6a4560" font-weight="700">3 capteurs → 8 combinaisons</text> </svg> <div class="exo-q">a) 3 capteurs → <input class="numin" id="ex4a" inputmode="decimal"> combinaisons</div> <div class="exo-q">b) 4 capteurs → <input class="numin" id="ex4b" inputmode="decimal"> combinaisons</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> 2<sup>3</sup> = <b>8 combinaisons</b> (chaque capteur double le nombre de cas).</p> <p><b>b)</b> 2<sup>4</sup> = <b>16 combinaisons</b>. Plus il y a de capteurs, plus l'automatisme doit gérer de cas : d'où l'intérêt d'une logique bien pensée.</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 120 pts</span></span> <h2>Ordre, traitement ou action ?</h2> <p class="lede">Pour chaque situation, dis à quelle étape de la boucle de commande elle correspond. 40 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d1time">40</b> s</span> <span class="timepill">Score : <b id="d1score">0</b></span> <button class="btn" id="d1start">Démarrer</button></div> <div class="qbox" id="d1q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn stl" id="d1or" disabled>ORDRE<br><span style="font-size:10px;font-weight:500">l'utilisateur demande</span></button> <button class="bigbtn grn" id="d1tr" disabled>TRAITEMENT<br><span style="font-size:10px;font-weight:500">le système décide</span></button> <button class="bigbtn cop" id="d1ac" disabled>ACTION<br><span style="font-size:10px;font-weight:500">ça bouge, ça s'allume</span></button></div> <div class="streak" id="d1streak"></div> <div class="msg" id="d1msg"></div></div> </section> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 100 pts</span></span> <h2>Déclencheur système</h2> <p class="lede">Relie chaque déclencheur au système domotique qu'il actionne. Clique à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Déclencheur</div><div id="d2left"></div></div> <div class="mcol"><div class="h">Système</div><div id="d2right"></div></div></div> <div class="msg" id="d2msg"></div></div> </section> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 90 pts</span></span> <h2>Ordonne la boucle de commande</h2> <p class="lede">Remets dans l'ordre les quatre étapes de la boucle de commande. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d3slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d3pool"></div> <div class="msg" id="d3msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d3reset">Recommencer</button></div></div> </section> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>Quelle solution choisir ?</h2> <p class="lede">Pour chaque situation, choisis la meilleure solution d'assistance.</p> <div class="game"><div class="roundpill" id="d4round">Situation 1 / 4</div> <div class="specbox" id="d4spec"></div> <div class="opts three" id="d4opts"></div> <div class="msg" id="d4msg"></div></div> </section> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Confort ou sécurité ?</h2> <p class="lede">Ce système d'assistance répond-il d'abord à un besoin de confort, ou de sécurité ? 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d5time">35</b> s</span> <span class="timepill">Score : <b id="d5score">0</b></span> <button class="btn" id="d5start">Démarrer</button></div> <div class="qbox" id="d5q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn grn" id="d5co" disabled>CONFORT</button> <button class="bigbtn cop" id="d5se" disabled>SÉCURITÉ</button></div> <div class="streak" id="d5streak"></div> <div class="msg" id="d5msg"></div></div> </section> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 110 pts</span></span> <h2>Vrai ou faux ?</h2> <p class="lede">Réponds vite : l'affirmation sur les automatismes est-elle vraie ou fausse ? 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d6time">35</b> s</span> <span class="timepill">Score : <b id="d6score">0</b></span> <button class="btn" id="d6start">Démarrer</button></div> <div class="qbox" id="d6q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn grn" id="d6v" disabled>VRAI</button> <button class="bigbtn cop" id="d6f" disabled>FAUX</button></div> <div class="streak" id="d6streak"></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> les éléments qui correspondent au rôle demandé (il change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
   var MAXES={d1:120,d2:100,d3:90,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
-  function rankOf(t){return t>=700?'🏆 Expert·e':t>=450?'📐 Ingénieur·e':t>=200?'⚙️ Technicien·ne':'🔧 Apprenti';}
+  function rankOf(t){return t>=700?' Expert·e':t>=450?' Ingénieur·e':t>=200?' Technicien·ne':' Apprenti';}
   function refresh(){
-    var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
-    el('scoreNow').textContent=tot; el('finScore').textContent=tot;
-    var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
-    el('progBar').style.width=(tot/TOTALMAX*100)+'%';
-    KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
+ var tot=0; KEYS.forEach(function(k){tot+=best[k]||0;});
+ el('scoreNow').textContent=tot; el('finScore').textContent=tot;
+ var r=rankOf(tot); el('rankLine').textContent=r; el('finRank').textContent=r;
+ el('progBar').style.width=(tot/TOTALMAX*100)+'%';
+ KEYS.forEach(function(k){var b=el('bd'+k.slice(1)); if(b)b.textContent=best[k]||0;});
   }
   function setContrib(key,val){var m=MAXES[key];var v=Math.max(0,Math.min(m,Math.round(val)));if(v>(best[key]||0)){best[key]=v;refresh();}}
   function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
@@ -463,277 +240,503 @@
 
   // ===== D1 — ordre, traitement ou action ? =====
   (function(){
-    var ITEMS=[
-      {t:'j\u2019appuie sur le bouton de la sonnette',k:'or'},{t:'le capteur détecte une présence',k:'or'},{t:'je donne un ordre vocal à l\u2019assistant',k:'or'},{t:'j\u2019actionne l\u2019interrupteur',k:'or'},
-      {t:'le système vérifie si la porte peut s\u2019ouvrir',k:'tr'},{t:'le programme compare la température à la consigne',k:'tr'},{t:'le microcontrôleur décide quelle action lancer',k:'tr'},{t:'le système analyse l\u2019ordre reçu',k:'tr'},
-      {t:'le moteur ouvre le portail',k:'ac'},{t:'la lumière s\u2019allume',k:'ac'},{t:'le volet descend',k:'ac'},{t:'l\u2019alarme se déclenche',k:'ac'}
-    ];
-    var LAB={or:'ORDRE',tr:'TRAITEMENT',ac:'ACTION'};
-    var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bO=el('d1or'),bT=el('d1tr'),bA=el('d1ac');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
-    function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
-    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';en(bO);en(bT);en(bA);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bO);dis(bT);dis(bA);el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(k){if(!running)return;if(k===cur.k){streak++;score+=12+Math.min(streak,5)*2;el('d1score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+LAB[cur.k];}next();}
-    bO.addEventListener('click',function(){answer('or');});
-    bT.addEventListener('click',function(){answer('tr');});
-    bA.addEventListener('click',function(){answer('ac');});
-    el('d1start').addEventListener('click',start);
+ var ITEMS=[
+ {t:'j\u2019appuie sur le bouton de la sonnette',k:'or'},{t:'le capteur détecte une présence',k:'or'},{t:'je donne un ordre vocal à l\u2019assistant',k:'or'},{t:'j\u2019actionne l\u2019interrupteur',k:'or'},
+ {t:'le système vérifie si la porte peut s\u2019ouvrir',k:'tr'},{t:'le programme compare la température à la consigne',k:'tr'},{t:'le microcontrôleur décide quelle action lancer',k:'tr'},{t:'le système analyse l\u2019ordre reçu',k:'tr'},
+ {t:'le moteur ouvre le portail',k:'ac'},{t:'la lumière s\u2019allume',k:'ac'},{t:'le volet descend',k:'ac'},{t:'l\u2019alarme se déclenche',k:'ac'}
+ ];
+ var LAB={or:'ORDRE',tr:'TRAITEMENT',ac:'ACTION'};
+ var qEl=el('d1q'),msg=el('d1msg'),stEl=el('d1streak'),bO=el('d1or'),bT=el('d1tr'),bA=el('d1ac');
+ var time,score,streak,timer,cur,running=false,pool;
+ function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+ function tick(){time--;el('d1time').textContent=time;if(time<=0)stop();}
+ function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
+ function start(){if(running)return;running=true;score=0;streak=0;time=40;pool=shuffle(ITEMS);el('d1score').textContent='0';el('d1time').textContent='40';msg.textContent='';stEl.textContent='';en(bO);en(bT);en(bA);el('d1start').disabled=true;next();timer=setInterval(tick,1000);}
+ function stop(){running=false;clearInterval(timer);dis(bO);dis(bT);dis(bA);el('d1start').disabled=false;el('d1start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d1',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+ function answer(k){if(!running)return;if(k===cur.k){streak++;score+=12+Math.min(streak,5)*2;el('d1score').textContent=score;stEl.textContent=' série ×'+streak;}else{streak=0;stEl.textContent='raté — c\u2019était '+LAB[cur.k];}next();}
+ bO.addEventListener('click',function(){answer('or');});
+ bT.addEventListener('click',function(){answer('tr');});
+ bA.addEventListener('click',function(){answer('ac');});
+ el('d1start').addEventListener('click',start);
   })();
 
   // ===== D2 — matching déclencheur / système =====
   (function(){
-    var PAIRS=[
-      ['Heure programmée','Volet roulant'],
-      ['Température mesurée','Thermostat'],
-      ['Détection de mouvement','Lumière d\u2019entrée'],
-      ['Télécommande','Porte de garage'],
-      ['Capteur de présence','Porte automatique']
-    ];
-    var left=el('d2left'),right=el('d2right'),msg=el('d2msg');
-    var sel=null,done=0;
-    function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
-      left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
-      right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
-    function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
-      if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
-      if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
-      if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d2',done*20);
-        if(done===PAIRS.length){msg.className='msg ok';msg.textContent='🔗 Tout est relié — défi complet ! +100 pts';}}
-      else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
-    left.addEventListener('click',click);right.addEventListener('click',click);
-    build();
+ var PAIRS=[
+ ['Heure programmée','Volet roulant'],
+ ['Température mesurée','Thermostat'],
+ ['Détection de mouvement','Lumière d\u2019entrée'],
+ ['Télécommande','Porte de garage'],
+ ['Capteur de présence','Porte automatique']
+ ];
+ var left=el('d2left'),right=el('d2right'),msg=el('d2msg');
+ var sel=null,done=0;
+ function build(){done=0;sel=null;msg.textContent='';msg.className='msg';
+ left.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[0],i:i};})).map(function(o){return '<div class="mitem" data-side="L" data-i="'+o.i+'">'+o.t+'</div>';}).join('');
+ right.innerHTML=shuffle(PAIRS.map(function(p,i){return {t:p[1],i:i};})).map(function(o){return '<div class="mitem" data-side="R" data-i="'+o.i+'">'+o.t+'</div>';}).join('');}
+ function click(ev){var it=ev.target.closest('.mitem');if(!it||it.classList.contains('done'))return;
+ if(!sel){if(it.getAttribute('data-side')!=='L')return;sel=it;it.classList.add('sel');return;}
+ if(it.getAttribute('data-side')!=='R'){sel.classList.remove('sel');sel=(it.getAttribute('data-side')==='L')?it:null;if(sel)sel.classList.add('sel');return;}
+ if(it.getAttribute('data-i')===sel.getAttribute('data-i')){it.classList.add('done');sel.classList.remove('sel');sel.classList.add('done');sel=null;done++;setContrib('d2',done*20);
+ if(done===PAIRS.length){msg.className='msg ok';msg.textContent=' Tout est relié — défi complet ! +100 pts';}}
+ else{var bad=it,s=sel;bad.classList.add('bad');s.classList.add('bad');setTimeout(function(){bad.classList.remove('bad');s.classList.remove('bad');s.classList.remove('sel');},420);sel=null;msg.className='msg no';msg.textContent='Mauvaise correspondance, réessaie.';}}
+ left.addEventListener('click',click);right.addEventListener('click',click);
+ build();
   })();
 
   // ===== D3 — builder boucle de commande =====
   (function(){
-    var STEPS=['Ordre (l\u2019utilisateur demande)','Traiter (le système décide)','Agir (l\u2019actionneur s\u2019active)','Vérifier (le résultat obtenu)'];
-    var slots=el('d3slots'),pool=el('d3pool'),msg=el('d3msg');
-    var idx,wrong;
-    function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
-      slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d3s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
-      pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
-    pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
-      if(i===idx){var sl=el('d3s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
-        if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Boucle ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
-      else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
-    el('d3reset').addEventListener('click',start);
-    start();
+ var STEPS=['Ordre (l\u2019utilisateur demande)','Traiter (le système décide)','Agir (l\u2019actionneur s\u2019active)','Vérifier (le résultat obtenu)'];
+ var slots=el('d3slots'),pool=el('d3pool'),msg=el('d3msg');
+ var idx,wrong;
+ function start(){idx=0;wrong=0;msg.textContent='';msg.className='msg';
+ slots.innerHTML=STEPS.map(function(_,i){return '<div class="slot" id="d3s'+i+'"><span class="sn">'+(i+1)+'</span><span class="txt"></span></div>';}).join('');
+ pool.innerHTML=shuffle(STEPS.map(function(s,i){return {s:s,i:i};})).map(function(o){return '<button class="pchip" data-i="'+o.i+'">'+o.s+'</button>';}).join('');}
+ pool.addEventListener('click',function(ev){var b=ev.target.closest('.pchip');if(!b)return;var i=parseInt(b.getAttribute('data-i'),10);
+ if(i===idx){var sl=el('d3s'+idx);sl.classList.add('filled');sl.querySelector('.txt').textContent=STEPS[idx];b.remove();idx++;
+ if(idx===STEPS.length){var sc=Math.max(30,90-wrong*12);setContrib('d3',sc);msg.className='msg ok';msg.textContent='✓ Boucle ordonnée ! +'+Math.min(90,sc)+' pts'+(wrong?' ('+wrong+' erreur'+(wrong>1?'s':'')+')':' — sans faute !');}}
+ else{wrong++;b.classList.add('bad');setTimeout(function(){b.classList.remove('bad');},320);msg.className='msg no';msg.textContent='Ce n\u2019est pas la prochaine étape.';}});
+ el('d3reset').addEventListener('click',start);
+ start();
   })();
 
   // ===== D4 — quelle solution choisir ? (rounds MCQ) =====
   (function(){
-    var ROUNDS=[
-      {part:'Une personne âgée risque de tomber et de ne pouvoir prévenir personne',ans:'Un bouton d\u2019alerte porté au poignet',opts:['Un bouton d\u2019alerte porté au poignet','Une simple horloge','Un thermostat']},
-      {part:'Une personne en fauteuil roulant doit franchir un lourd portail',ans:'Un portail motorisé avec télécommande',opts:['Un portail motorisé avec télécommande','Une sonnette','Un thermostat']},
-      {part:'Une famille veut économiser l\u2019énergie sans y penser',ans:'Un thermostat programmable',opts:['Un thermostat programmable','Un bouton d\u2019alerte','Une porte automatique']},
-      {part:'Un magasin veut que les clients entrent les mains chargées',ans:'Une porte automatique à capteur',opts:['Une porte automatique à capteur','Un volet roulant','Un thermostat']}
-    ];
-    var ri=0,locked=false,spec=el('d4spec'),opts=el('d4opts'),msg=el('d4msg');
-    function setRound(){locked=false;el('d4round').textContent='Situation '+(ri+1)+' / 4';var r=ROUNDS[ri];
-      spec.innerHTML='<div class="gr">'+r.part+'</div><div class="rowline"><span>quelle solution choisir ?</span><b>?</b></div>';
-      opts.innerHTML=shuffle(r.opts.slice()).map(function(o){return '<button class="opt" data-o="'+o+'">'+o+'</button>';}).join('');
-      msg.textContent='';msg.className='msg';}
-    opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var o=b.getAttribute('data-o'),r=ROUNDS[ri];locked=true;
-      if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
-        if(ri<3){msg.textContent='✓ Bon choix ! Situation suivante…';setTimeout(function(){ri++;setRound();},1000);}
-        else{msg.textContent='🏆 Solutions bien choisies — défi complet ! +120 pts';}}
-      else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ Le meilleur choix : '+r.ans+'. On rejoue la situation.';setTimeout(setRound,1700);}});
-    setRound();
+ var ROUNDS=[
+ {part:'Une personne âgée risque de tomber et de ne pouvoir prévenir personne',ans:'Un bouton d\u2019alerte porté au poignet',opts:['Un bouton d\u2019alerte porté au poignet','Une simple horloge','Un thermostat']},
+ {part:'Une personne en fauteuil roulant doit franchir un lourd portail',ans:'Un portail motorisé avec télécommande',opts:['Un portail motorisé avec télécommande','Une sonnette','Un thermostat']},
+ {part:'Une famille veut économiser l\u2019énergie sans y penser',ans:'Un thermostat programmable',opts:['Un thermostat programmable','Un bouton d\u2019alerte','Une porte automatique']},
+ {part:'Un magasin veut que les clients entrent les mains chargées',ans:'Une porte automatique à capteur',opts:['Une porte automatique à capteur','Un volet roulant','Un thermostat']}
+ ];
+ var ri=0,locked=false,spec=el('d4spec'),opts=el('d4opts'),msg=el('d4msg');
+ function setRound(){locked=false;el('d4round').textContent='Situation '+(ri+1)+' / 4';var r=ROUNDS[ri];
+ spec.innerHTML='<div class="gr">'+r.part+'</div><div class="rowline"><span>quelle solution choisir ?</span><b>?</b></div>';
+ opts.innerHTML=shuffle(r.opts.slice()).map(function(o){return '<button class="opt" data-o="'+o+'">'+o+'</button>';}).join('');
+ msg.textContent='';msg.className='msg';}
+ opts.addEventListener('click',function(ev){if(locked)return;var b=ev.target.closest('.opt');if(!b)return;var o=b.getAttribute('data-o'),r=ROUNDS[ri];locked=true;
+ if(o===r.ans){b.classList.add('ok');setContrib('d4',Math.round((ri+1)/4*120));msg.className='msg ok';
+ if(ri<3){msg.textContent='✓ Bon choix ! Situation suivante…';setTimeout(function(){ri++;setRound();},1000);}
+ else{msg.textContent=' Solutions bien choisies — défi complet ! +120 pts';}}
+ else{b.classList.add('no');var okb=opts.querySelector('.opt[data-o="'+r.ans+'"]');if(okb)okb.classList.add('ok');msg.className='msg no';msg.textContent='✗ Le meilleur choix : '+r.ans+'. On rejoue la situation.';setTimeout(setRound,1700);}});
+ setRound();
   })();
 
   // ===== D5 — confort ou sécurité ? (arcade) =====
   (function(){
-    var ITEMS=[
-      {t:'un volet qui se ferme automatiquement le soir',v:true},
-      {t:'un bouton d\u2019alerte pour personne âgée',v:false},
-      {t:'un thermostat qui règle la température idéale',v:true},
-      {t:'un détecteur de fumée connecté',v:false},
-      {t:'une lumière qui s\u2019allume à l\u2019approche',v:true},
-      {t:'une caméra qui alerte en cas d\u2019intrusion',v:false},
-      {t:'une porte de garage qui s\u2019ouvre à distance',v:true},
-      {t:'une porte qui se verrouille automatiquement la nuit',v:false},
-      {t:'un assistant vocal qui met de la musique',v:true},
-      {t:'un capteur qui coupe le gaz en cas de fuite',v:false}
-    ];
-    var qEl=el('d5q'),msg=el('d5msg'),stEl=el('d5streak'),bC=el('d5co'),bS=el('d5se');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
-    function tick(){time--;el('d5time').textContent=time;if(time<=0)stop();}
-    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';en(bC);en(bS);el('d5start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bC);dis(bS);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d5score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
-    bC.addEventListener('click',function(){answer(true);});
-    bS.addEventListener('click',function(){answer(false);});
-    el('d5start').addEventListener('click',start);
+ var ITEMS=[
+ {t:'un volet qui se ferme automatiquement le soir',v:true},
+ {t:'un bouton d\u2019alerte pour personne âgée',v:false},
+ {t:'un thermostat qui règle la température idéale',v:true},
+ {t:'un détecteur de fumée connecté',v:false},
+ {t:'une lumière qui s\u2019allume à l\u2019approche',v:true},
+ {t:'une caméra qui alerte en cas d\u2019intrusion',v:false},
+ {t:'une porte de garage qui s\u2019ouvre à distance',v:true},
+ {t:'une porte qui se verrouille automatiquement la nuit',v:false},
+ {t:'un assistant vocal qui met de la musique',v:true},
+ {t:'un capteur qui coupe le gaz en cas de fuite',v:false}
+ ];
+ var qEl=el('d5q'),msg=el('d5msg'),stEl=el('d5streak'),bC=el('d5co'),bS=el('d5se');
+ var time,score,streak,timer,cur,running=false,pool;
+ function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+ function tick(){time--;el('d5time').textContent=time;if(time<=0)stop();}
+ function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
+ function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d5score').textContent='0';el('d5time').textContent='35';msg.textContent='';stEl.textContent='';en(bC);en(bS);el('d5start').disabled=true;next();timer=setInterval(tick,1000);}
+ function stop(){running=false;clearInterval(timer);dis(bC);dis(bS);el('d5start').disabled=false;el('d5start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d5',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+ function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d5score').textContent=score;stEl.textContent=' série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
+ bC.addEventListener('click',function(){answer(true);});
+ bS.addEventListener('click',function(){answer(false);});
+ el('d5start').addEventListener('click',start);
   })();
 
   // ===== D6 — vrai ou faux ? (arcade) =====
   (function(){
-    var ITEMS=[
-      {t:'Un automatisme reçoit un ordre avant d\u2019agir.',v:true},
-      {t:'Un automatisme n\u2019a jamais besoin d\u2019être compris par l\u2019utilisateur.',v:false},
-      {t:'Un thermostat compare la température mesurée à une consigne.',v:true},
-      {t:'Une porte automatique s\u2019ouvre sans aucun capteur.',v:false},
-      {t:'La boucle de commande se répète en continu.',v:true},
-      {t:'L\u2019accessibilité ne concerne que les personnes en fauteuil roulant.',v:false},
-      {t:'Un voyant lumineux peut indiquer l\u2019état d\u2019un système à l\u2019utilisateur.',v:true},
-      {t:'Un système d\u2019assistance ne sert jamais à la sécurité.',v:false},
-      {t:'La domotique regroupe les automatismes de la maison.',v:true},
-      {t:'Vérifier le résultat d\u2019une action n\u2019est jamais utile.',v:false}
-    ];
-    var qEl=el('d6q'),msg=el('d6msg'),stEl=el('d6streak'),bV=el('d6v'),bF=el('d6f');
-    var time,score,streak,timer,cur,running=false,pool;
-    function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
-    function tick(){time--;el('d6time').textContent=time;if(time<=0)stop();}
-    function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
-    function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d6score').textContent='0';el('d6time').textContent='35';msg.textContent='';stEl.textContent='';en(bV);en(bF);el('d6start').disabled=true;next();timer=setInterval(tick,1000);}
-    function stop(){running=false;clearInterval(timer);dis(bV);dis(bF);el('d6start').disabled=false;el('d6start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d6',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
-    function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d6score').textContent=score;stEl.textContent='🔥 série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
-    bV.addEventListener('click',function(){answer(true);});
-    bF.addEventListener('click',function(){answer(false);});
-    el('d6start').addEventListener('click',start);
+ var ITEMS=[
+ {t:'Un automatisme reçoit un ordre avant d\u2019agir.',v:true},
+ {t:'Un automatisme n\u2019a jamais besoin d\u2019être compris par l\u2019utilisateur.',v:false},
+ {t:'Un thermostat compare la température mesurée à une consigne.',v:true},
+ {t:'Une porte automatique s\u2019ouvre sans aucun capteur.',v:false},
+ {t:'La boucle de commande se répète en continu.',v:true},
+ {t:'L\u2019accessibilité ne concerne que les personnes en fauteuil roulant.',v:false},
+ {t:'Un voyant lumineux peut indiquer l\u2019état d\u2019un système à l\u2019utilisateur.',v:true},
+ {t:'Un système d\u2019assistance ne sert jamais à la sécurité.',v:false},
+ {t:'La domotique regroupe les automatismes de la maison.',v:true},
+ {t:'Vérifier le résultat d\u2019une action n\u2019est jamais utile.',v:false}
+ ];
+ var qEl=el('d6q'),msg=el('d6msg'),stEl=el('d6streak'),bV=el('d6v'),bF=el('d6f');
+ var time,score,streak,timer,cur,running=false,pool;
+ function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
+ function tick(){time--;el('d6time').textContent=time;if(time<=0)stop();}
+ function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
+ function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d6score').textContent='0';el('d6time').textContent='35';msg.textContent='';stEl.textContent='';en(bV);en(bF);el('d6start').disabled=true;next();timer=setInterval(tick,1000);}
+ function stop(){running=false;clearInterval(timer);dis(bV);dis(bF);el('d6start').disabled=false;el('d6start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d6',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
+ function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d6score').textContent=score;stEl.textContent=' série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
+ bV.addEventListener('click',function(){answer(true);});
+ bF.addEventListener('click',function(){answer(false);});
+ el('d6start').addEventListener('click',start);
   })();
 
   // ===== D7 — runner à portes (12 portes, sans indice couleur) =====
   (function(){
-    var cv=el('d7cv'); if(!cv||!cv.getContext)return;
-    var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-    function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
-    function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
-    var QBANK=[
-      {q:'Un capteur donne au système\u2026',ok:'une information',no:'de la force'},
-      {q:'Un actionneur sert à\u2026',ok:'agir sur le monde',no:'mesurer'},
-      {q:'Un détecteur de mouvement est un\u2026',ok:'capteur',no:'actionneur'},
-      {q:'Un moteur qui ouvre un portail est un\u2026',ok:'actionneur',no:'capteur'},
-      {q:'Un système automatique fonctionne\u2026',ok:'sans intervention humaine',no:'seulement à la main'},
-      {q:'La domotique automatise\u2026',ok:'la maison',no:'la voiture'},
-      {q:'Une consigne, c\u2019est\u2026',ok:'la valeur souhaitée',no:'une panne'},
-      {q:'1re action d\u2019une boucle de commande :',ok:'comparer à la consigne',no:'tout éteindre'},
-      {q:'Un thermostat compare la température à\u2026',ok:'la consigne',no:'l\u2019heure'},
-      {q:'Rendre un lieu accessible, c\u2019est\u2026',ok:'faciliter l\u2019usage pour tous',no:'le rendre plus cher'},
-      {q:'Une porte automatique s\u2019ouvre avec un\u2026',ok:'capteur de présence',no:'interrupteur manuel'},
-      {q:'Le « traitement » sert à\u2026',ok:'décider quoi faire',no:'éclairer la pièce'}
-    ];
-    var TARGET=12;
-    var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
-    var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
-    var loop=null, startBtn=el('d7start'), msg=el('d7msg');
-    function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
-    function draw(){
-      g.clearRect(0,0,W,H);
-      g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
-      g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
-      if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
-        g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
-        g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
-      g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
-      g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
-      g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText('\u2764 '+lives,8,H-8);
-      g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
-    }
-    function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
-    function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?'🏁 Gagné ! ':'💥 Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
-    function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
-      if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
-      draw();}
-    function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
-    startBtn.addEventListener('click',start);
-    el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
-    el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
-    document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
-    newQ();draw();
+ var cv=el('d7cv'); if(!cv||!cv.getContext)return;
+ var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+ function fit(c,t,cx,cy,mw){var fs=13;c.font='700 '+fs+'px "JetBrains Mono",monospace';while(c.measureText(t).width>mw&&fs>8){fs--;c.font='700 '+fs+'px "JetBrains Mono",monospace';}c.fillText(t,cx,cy);}
+ var QBANK=[
+ {q:'Un capteur donne au système\u2026',ok:'une information',no:'de la force'},
+ {q:'Un actionneur sert à\u2026',ok:'agir sur le monde',no:'mesurer'},
+ {q:'Un détecteur de mouvement est un\u2026',ok:'capteur',no:'actionneur'},
+ {q:'Un moteur qui ouvre un portail est un\u2026',ok:'actionneur',no:'capteur'},
+ {q:'Un système automatique fonctionne\u2026',ok:'sans intervention humaine',no:'seulement à la main'},
+ {q:'La domotique automatise\u2026',ok:'la maison',no:'la voiture'},
+ {q:'Une consigne, c\u2019est\u2026',ok:'la valeur souhaitée',no:'une panne'},
+ {q:'1re action d\u2019une boucle de commande :',ok:'comparer à la consigne',no:'tout éteindre'},
+ {q:'Un thermostat compare la température à\u2026',ok:'la consigne',no:'l\u2019heure'},
+ {q:'Rendre un lieu accessible, c\u2019est\u2026',ok:'faciliter l\u2019usage pour tous',no:'le rendre plus cher'},
+ {q:'Une porte automatique s\u2019ouvre avec un\u2026',ok:'capteur de présence',no:'interrupteur manuel'},
+ {q:'Le « traitement » sert à\u2026',ok:'décider quoi faire',no:'éclairer la pièce'}
+ ];
+ var TARGET=12;
+ var laneX=[W*0.28,W*0.72], runnerY=H-40, gateH=54;
+ var lane=0, gateY=-gateH, speed=2.2, lives=3, correct=0, running=false, done=false, cur=null, flash=0, flashCol='';
+ var loop=null, startBtn=el('d7start'), msg=el('d7msg');
+ function newQ(){var qq=QBANK[Math.floor(Math.random()*QBANK.length)];var okLeft=Math.random()<0.5;cur={q:qq.q,left:okLeft?qq.ok:qq.no,right:okLeft?qq.no:qq.ok,ok:okLeft?0:1};gateY=-gateH;}
+ function draw(){
+ g.clearRect(0,0,W,H);
+ g.fillStyle='#2A2622';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText(cur?cur.q:'',W/2,24);
+ g.strokeStyle='rgba(42,38,34,.12)';g.lineWidth=2;g.beginPath();g.moveTo(W/2,32);g.lineTo(W/2,H);g.stroke();
+ if(cur){for(var i=0;i<2;i++){var gx=(i===0)?W*0.06:W*0.54, gw=W*0.40;
+ g.fillStyle='rgba(46,106,142,.08)';g.strokeStyle='#2E6A8E';g.lineWidth=2;rr(g,gx,gateY,gw,gateH,10);g.fill();g.stroke();
+ g.fillStyle='#2A2622';fit(g,(i===0?cur.left:cur.right),gx+gw/2,gateY+gateH/2+4,gw-14);}}
+ g.fillStyle=flash>0?flashCol:'#B85C2E';g.beginPath();g.arc(laneX[lane],runnerY,15,0,7);g.fill();
+ g.fillStyle='#fff';g.font='700 12px "Bricolage Grotesque",sans-serif';g.textAlign='center';g.fillText('RUN',laneX[lane],runnerY+4);
+ g.textAlign='left';g.fillStyle='#5C544B';g.font='700 12px "JetBrains Mono",monospace';g.fillText(' '+lives,8,H-8);
+ g.textAlign='right';g.fillText('\u2713 '+correct+'/'+TARGET,W-8,H-8);g.textAlign='left';
+ }
+ function commit(){setContrib('d7',Math.min(90,Math.round(correct/TARGET*90)));}
+ function finish(win){running=false;done=true;if(loop)clearInterval(loop);draw();var pts=Math.min(90,Math.round(correct/TARGET*90));setContrib('d7',pts);msg.className='msg '+(win?'ok':'no');msg.textContent=(win?' Gagné ! ':' Plus de vies. ')+correct+'/'+TARGET+' bonnes portes · '+pts+' pts. Rejoue pour améliorer.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+ function tick(){if(!running)return;gateY+=speed;if(flash>0)flash--;
+ if(gateY+gateH>=runnerY){if(lane===cur.ok){correct++;commit();flash=8;flashCol='#3D7E5F';if(correct>=TARGET){finish(true);return;}}else{lives--;flash=8;flashCol='#C0492E';if(lives<=0){finish(false);return;}}newQ();}
+ draw();}
+ function start(){if(running)return;lane=0;lives=3;correct=0;done=false;msg.textContent='';newQ();running=true;startBtn.disabled=true;loop=setInterval(tick,30);}
+ startBtn.addEventListener('click',start);
+ el('d7left').addEventListener('click',function(){lane=0;if(!running)draw();});
+ el('d7right').addEventListener('click',function(){lane=1;if(!running)draw();});
+ document.addEventListener('keydown',function(e){if(!running)return;if(e.key==='ArrowLeft')lane=0;else if(e.key==='ArrowRight')lane=1;});
+ newQ();draw();
   })();
 
   // ===== D8 — tape-taupe (3 vies, ralenti) =====
   (function(){
-    var ITEMS=[
-      {t:'un détecteur de présence',cat:'capt'},{t:'un capteur de température',cat:'capt'},{t:'un bouton poussoir',cat:'capt'},{t:'un capteur de lumière',cat:'capt'},{t:'un interrupteur',cat:'capt'},
-      {t:'un moteur',cat:'act'},{t:'une LED',cat:'act'},{t:'un vérin',cat:'act'},{t:'une sonnette',cat:'act'},{t:'un radiateur',cat:'act'},
-      {t:'un microcontrôleur',cat:'trait'},{t:'une carte programmable',cat:'trait'},{t:'un programme',cat:'trait'},{t:'une condition si\u2026alors',cat:'trait'},{t:'comparer à un seuil',cat:'trait'}
-    ];
-    var CATS={capt:'les CAPTEURS',act:'les ACTIONNEURS',trait:'le TRAITEMENT'};
-    var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
-    var HOLES=6, cells=[], target='capt', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
-    function hearts(){return lives>0?Array(lives+1).join('\u2764'):'\u2014';}
-    function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
-    function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent='🔨 Tape '+CATS[target]+' !';}
-    function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
-    function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
-    function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
-    function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
-    function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
-    function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?'💥 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
-    startBtn.addEventListener('click',start);
-    build();setConsigne();lifeEl.textContent=hearts();
+ var ITEMS=[
+ {t:'un détecteur de présence',cat:'capt'},{t:'un capteur de température',cat:'capt'},{t:'un bouton poussoir',cat:'capt'},{t:'un capteur de lumière',cat:'capt'},{t:'un interrupteur',cat:'capt'},
+ {t:'un moteur',cat:'act'},{t:'une LED',cat:'act'},{t:'un vérin',cat:'act'},{t:'une sonnette',cat:'act'},{t:'un radiateur',cat:'act'},
+ {t:'un microcontrôleur',cat:'trait'},{t:'une carte programmable',cat:'trait'},{t:'un programme',cat:'trait'},{t:'une condition si\u2026alors',cat:'trait'},{t:'comparer à un seuil',cat:'trait'}
+ ];
+ var CATS={capt:'les CAPTEURS',act:'les ACTIONNEURS',trait:'le TRAITEMENT'};
+ var grid=el('d8grid'), consEl=el('d8cons'), msg=el('d8msg'), startBtn=el('d8start'), timeEl=el('d8time'), scoreEl=el('d8score'), lifeEl=el('d8life');
+ var HOLES=6, cells=[], target='capt', time=40, sc=0, streak=0, lives=3, running=false, spawnT=null, clockT=null, consT=null;
+ function hearts(){return lives>0?Array(lives+1).join(''):'\u2014';}
+ function build(){grid.innerHTML='';cells=[];for(var i=0;i<HOLES;i++){var d=document.createElement('div');d.className='hole empty';var b=document.createElement('button');b.className='mole';b.setAttribute('tabindex','-1');d.appendChild(b);grid.appendChild(d);var c={el:d,btn:b,item:null,timer:null};cells.push(c);(function(cc){cc.btn.addEventListener('click',function(){hit(cc);});})(c);}}
+ function setConsigne(){var ks=Object.keys(CATS);target=ks[Math.floor(Math.random()*ks.length)];consEl.textContent=' Tape '+CATS[target]+' !';}
+ function clearMole(c){if(c.timer)clearTimeout(c.timer);c.timer=null;c.item=null;c.el.className='hole empty';c.btn.textContent='';}
+ function spawn(){if(!running)return;var empty=cells.filter(function(c){return !c.item;});if(!empty.length)return;var c=empty[Math.floor(Math.random()*empty.length)];var it=ITEMS[Math.floor(Math.random()*ITEMS.length)];c.item=it;c.el.className='hole';c.btn.textContent=it.t;c.timer=setTimeout(function(){clearMole(c);},1550);}
+ function hit(c){if(!running||!c.item)return;var good=(c.item.cat===target);if(good){streak++;sc+=10+Math.min(streak,5)*2;scoreEl.textContent=sc;setContrib('d8',Math.min(90,sc));clearMole(c);}else{streak=0;lives--;lifeEl.textContent=hearts();clearMole(c);if(lives<=0){stop(true);}}}
+ function clock(){time--;timeEl.textContent=time;if(time<=0)stop(false);}
+ function start(){if(running)return;sc=0;streak=0;lives=3;time=40;scoreEl.textContent='0';timeEl.textContent='40';lifeEl.textContent=hearts();msg.textContent='';running=true;startBtn.disabled=true;setConsigne();build();spawnT=setInterval(spawn,820);clockT=setInterval(clock,1000);consT=setInterval(setConsigne,8000);}
+ function stop(dead){running=false;clearInterval(spawnT);clearInterval(clockT);clearInterval(consT);cells.forEach(clearMole);var pts=Math.min(90,sc);setContrib('d8',pts);msg.className='msg '+(dead?'no':'ok');msg.textContent=(dead?' 3 erreurs — perdu ! ':'⏱ Temps écoulé — ')+'score : '+pts+' pts.';startBtn.disabled=false;startBtn.textContent='Rejouer';}
+ startBtn.addEventListener('click',start);
+ build();setConsigne();lifeEl.textContent=hearts();
   })();
 
   // ===== Exercices d'application =====
   (function(){
-    function num(v){return parseFloat(String(v||'').replace(',','.'));}
-    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
-    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
-    gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
-    gate('ex3reveal','ex3sol','Correction','Masquer');
-    gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
+ function num(v){return parseFloat(String(v||'').replace(',','.'));}
+ function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+ function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+ gate('ex1reveal','ex1sol','Voir l’analyse','Masquer');
+ gate('ex3reveal','ex3sol','Correction','Masquer');
+ gate('ex4reveal','ex4sol','Correction détaillée','Masquer');
 
-    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
-      var okA=Math.abs(a-24)<0.5, okB=Math.abs(b-10)<0.5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 6+12+6 = 24 s ; 240 ÷ 24 = 10 cycles.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) additionne les 3 phases. ')+(okB?'':'b) 240 s ÷ durée du cycle.');}
-      unlock('ex1reveal','Voir l’analyse');
-    });
-    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
-      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
-      var okA=Math.abs(a-20)<0.5, okB=Math.abs(b-60)<0.5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 4 × 5 = 20 L ; 20 × 3 = 60 L.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) débit × durée. ')+(okB?'':'b) × 3 arrosages.');}
-      unlock('ex3reveal','Correction');
-    });
-    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
-      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
-      var okA=Math.abs(a-8)<0.5, okB=Math.abs(b-16)<0.5;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2³ = 8 ; 2⁴ = 16 combinaisons.';}
-      else{fb.className='exo-fb no';fb.textContent='✗ Applique 2 puissance n : a) n=3, b) n=4.';}
-      unlock('ex4reveal','Correction détaillée');
-    });
+ var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+ var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+ var okA=Math.abs(a-24)<0.5, okB=Math.abs(b-10)<0.5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 6+12+6 = 24 s ; 240 ÷ 24 = 10 cycles.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) additionne les 3 phases. ')+(okB?'':'b) 240 s ÷ durée du cycle.');}
+ unlock('ex1reveal','Voir l’analyse');
+ });
+ var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+ var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+ var okA=Math.abs(a-20)<0.5, okB=Math.abs(b-60)<0.5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Parfait : 4 × 5 = 20 L ; 20 × 3 = 60 L.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ '+(okA?'':'a) débit × durée. ')+(okB?'':'b) × 3 arrosages.');}
+ unlock('ex3reveal','Correction');
+ });
+ var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+ var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+ var okA=Math.abs(a-8)<0.5, okB=Math.abs(b-16)<0.5;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='✓ Exact : 2³ = 8 ; 2⁴ = 16 combinaisons.';}
+ else{fb.className='exo-fb no';fb.textContent='✗ Applique 2 puissance n : a) n=3, b) n=4.';}
+ unlock('ex4reveal','Correction détaillée');
+ });
 
-    (function(){
-      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-      function draw(){
-        var d=parseInt(el('ex2dist').value,10), seuil=50, detect=d<seuil;
-        el('ex2distv').textContent=d;
-        g.clearRect(0,0,W,H);
-        var cy=H*0.42;
-        // capteur (gauche)
-        g.fillStyle='#2E6A8E';g.beginPath();g.rect(20,cy-16,26,32);g.fill();
-        g.fillStyle='#235877';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('capteur',33,cy+30);
-        // faisceau
-        var gx=W-70;
-        g.strokeStyle=detect?'rgba(61,126,95,.9)':'rgba(42,38,34,.2)';g.lineWidth=2;g.setLineDash([6,5]);g.beginPath();g.moveTo(46,cy);g.lineTo(gx,cy);g.stroke();g.setLineDash([]);
-        // objet (position selon distance)
-        var ox=46+(d/200)*(gx-90);
-        g.fillStyle='#BD8A2A';g.beginPath();g.arc(ox,cy,12,0,7);g.fill();
-        g.fillStyle='#8a6313';g.fillText(d+' cm',ox,cy-20);
-        // portail (droite)
-        g.strokeStyle='#7a7064';g.lineWidth=4;g.beginPath();g.moveTo(gx,cy-34);g.lineTo(gx,cy+34);g.moveTo(W-24,cy-34);g.lineTo(W-24,cy+34);g.stroke();
-        g.strokeStyle=detect?'#3D7E5F':'#C0492E';g.lineWidth=6;
-        if(detect){ g.beginPath();g.moveTo(gx,cy-30);g.lineTo(gx+8,cy-30);g.moveTo(W-24,cy-30);g.lineTo(W-32,cy-30);g.stroke(); }
-        else { g.beginPath();g.moveTo(gx,cy);g.lineTo(W-24,cy);g.stroke(); }
-        g.fillStyle=detect?'#2c6147':'#a44a26';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';
-        g.fillText((detect?'DÉTECTÉ (< 50 cm) → portail OUVERT':'rien détecté (≥ 50 cm) → portail FERMÉ'),W/2,H-14);
-        var o=el('ex2out'); if(o) o.textContent='distance '+d+' cm '+(detect?'< 50 → actionneur activé (ouverture)':'≥ 50 → actionneur au repos (fermé)');
-      }
-      var e=el('ex2dist'); if(e) e.addEventListener('input',draw);
-      draw();
-    })();
+ (function(){
+ var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function draw(){
+ var d=parseInt(el('ex2dist').value,10), seuil=50, detect=d<seuil;
+ el('ex2distv').textContent=d;
+ g.clearRect(0,0,W,H);
+ var cy=H*0.42;
+ // capteur (gauche)
+ g.fillStyle='#2E6A8E';g.beginPath();g.rect(20,cy-16,26,32);g.fill();
+ g.fillStyle='#235877';g.font='700 10px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('capteur',33,cy+30);
+ // faisceau
+ var gx=W-70;
+ g.strokeStyle=detect?'rgba(61,126,95,.9)':'rgba(42,38,34,.2)';g.lineWidth=2;g.setLineDash([6,5]);g.beginPath();g.moveTo(46,cy);g.lineTo(gx,cy);g.stroke();g.setLineDash([]);
+ // objet (position selon distance)
+ var ox=46+(d/200)*(gx-90);
+ g.fillStyle='#BD8A2A';g.beginPath();g.arc(ox,cy,12,0,7);g.fill();
+ g.fillStyle='#8a6313';g.fillText(d+' cm',ox,cy-20);
+ // portail (droite)
+ g.strokeStyle='#7a7064';g.lineWidth=4;g.beginPath();g.moveTo(gx,cy-34);g.lineTo(gx,cy+34);g.moveTo(W-24,cy-34);g.lineTo(W-24,cy+34);g.stroke();
+ g.strokeStyle=detect?'#3D7E5F':'#C0492E';g.lineWidth=6;
+ if(detect){ g.beginPath();g.moveTo(gx,cy-30);g.lineTo(gx+8,cy-30);g.moveTo(W-24,cy-30);g.lineTo(W-32,cy-30);g.stroke(); }
+ else { g.beginPath();g.moveTo(gx,cy);g.lineTo(W-24,cy);g.stroke(); }
+ g.fillStyle=detect?'#2c6147':'#a44a26';g.font='800 14px "Bricolage Grotesque",sans-serif';g.textAlign='center';
+ g.fillText((detect?'DÉTECTÉ (< 50 cm) → portail OUVERT':'rien détecté (≥ 50 cm) → portail FERMÉ'),W/2,H-14);
+ var o=el('ex2out'); if(o) o.textContent='distance '+d+' cm '+(detect?'< 50 → actionneur activé (ouverture)':'≥ 50 → actionneur au repos (fermé)');
+ }
+ var e=el('ex2dist'); if(e) e.addEventListener('input',draw);
+ draw();
+ })();
   })();
 
   refresh();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_2de_assistance', TP_TITRE='Assistance — TP « Concevoir un automatisme »';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
+})();
 </script>
 </body>
 </html>

@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   html,body{margin:0}
@@ -61,173 +60,7 @@
   .verdict .v span{font-size:15px;color:var(--sub)}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Cours — Hyperstatisme<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="layout">
-    <nav class="snav" id="snav">
-      <a href="#s1">1 · Le montage impossible</a>
-      <a href="#s2">2 · Le vocabulaire</a>
-      <a href="#s3">3 · Le graphe et les cycles</a>
-      <a href="#s4">4 · La formule</a>
-      <a href="#s5">5 · Trouver la mobilité m</a>
-      <a href="#s6">6 · L’arbre sur deux pivots</a>
-      <a href="#s7">7 · Le montage isostatique</a>
-      <a href="#s8">8 · Plan ou espace ?</a>
-      <a href="#s9">9 · Déshyperstatiser</a>
-      <a href="#s10">10 · À retenir</a>
-    </nav>
-
-    <main class="slides">
-
-      <section class="slide" id="s1">
-        <div class="k">Cours · Première spé SI · Statique des mécanismes</div>
-        <h1>L’hyperstatisme :<br>quand le mécanisme se bride lui-même</h1>
-        <p class="lede">Un arbre, deux paliers. Sur le plan, tout va bien. À l’atelier, l’arbre refuse d’entrer — ou il entre en forçant, et le roulement chauffe au bout de trois semaines. Le coupable n’est pas l’ouvrier : c’est le <b>modèle</b>. Ce mécanisme est <b>hyperstatique</b>, et cela se calcule bien avant la fabrication.</p>
-        <div class="anim">
-          <canvas id="cvIntro" width="860" height="300" aria-label="Arbre monté sur deux paliers légèrement désalignés"></canvas>
-          <div class="ctrl"><button id="inPrev">◀</button><button id="inNext">▶</button><div class="leg" id="inLeg"></div></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s2">
-        <div class="k">Slide 2 · Vocabulaire</div>
-        <h2>Trois situations, trois mots</h2>
-        <p class="lede">Le degré d’hyperstatisme, noté <b>h</b>, compte les <b>contraintes en trop</b>: celles que la géométrie doit satisfaire pour que le montage soit possible.</p>
-        <div class="verdict">
-          <div class="v h0"><b>h = 0</b><span><b>Isostatique.</b> Juste ce qu’il faut de liaisons. Le montage se fait sans forcer, quelles que soient les petites imprécisions d’usinage. Les efforts se calculent entièrement avec la statique.</span></div>
-          <div class="v hp"><b>h &gt; 0</b><span><b>Hyperstatique.</b> h contraintes géométriques en trop : il faut usiner très précis, sinon le mécanisme se déforme au montage. En contrepartie : plus rigide, plus résistant.</span></div>
-          <div class="v m"><b>m</b><span><b>La mobilité</b>, à ne pas confondre : c’est le nombre de mouvements indépendants possibles. Un arbre qui tourne dans ses paliers : m = 1.</span></div>
-        </div>
-        <div class="hint">🎯 L’objectif de ce cours : savoir calculer <b>h</b> sur un mécanisme donné, en quatre lignes, sans jamais résoudre le moindre système d’équations.</div>
-      </section>
-
-      <section class="slide" id="s3">
-        <div class="k">Slide 3 · L’outil</div>
-        <h2>Le graphe des liaisons et ses cycles</h2>
-        <p class="lede">Avant toute formule, on dessine le <b>graphe</b>: un rond par solide, un trait par liaison. Ce petit schéma donne les deux nombres dont on a besoin — et il se trace en dix secondes.</p>
-        <div class="anim">
-          <canvas id="cvGraphe" width="860" height="340" aria-label="Construction du graphe des liaisons et comptage des cycles"></canvas>
-          <div class="ctrl"><button id="grPrev">◀</button><button id="grNext">▶</button><div class="leg" id="grLeg"></div></div>
-        </div>
-        <div class="big">γ = L − n + 1<small><b>n</b> = nombre de solides, <b>bâti compris</b> · <b>L</b> = nombre de liaisons · <b>γ</b> = nombre de cycles indépendants (les « boucles » fermées du graphe).</small></div>
-      </section>
-
-      <section class="slide" id="s4">
-        <div class="k">Slide 4 · La formule</div>
-        <h2>Quatre nombres, un résultat</h2>
-        <p class="lede">Tout tient dans une seule relation. Elle compare ce que le mécanisme <b>peut faire</b> (les degrés de liberté de ses liaisons) à ce que la géométrie <b>impose</b> (les équations des cycles).</p>
-        <div class="big">h = m + E<sub>c</sub> − I<sub>c</sub><small><b>m</b> : mobilité (mouvements indépendants) · <b>E<sub>c</sub></b> : nombre d’équations = <b>6γ dans l’espace</b>, <b>3γ dans le plan</b> · <b>I<sub>c</sub></b> : nombre d’inconnues = <b>somme des degrés de liberté de toutes les liaisons</b>.</small></div>
-        <table class="ddl">
-          <tr><th>liaison</th><th>pivot</th><th>glissière</th><th>pivot glissant</th><th>rotule</th><th>appui plan</th><th>linéaire annulaire</th><th>ponctuelle</th></tr>
-          <tr><td>ddl (espace)</td><td class="hi"><b>1</b></td><td><b>1</b></td><td><b>2</b></td><td class="hi"><b>3</b></td><td><b>3</b></td><td class="hi"><b>4</b></td><td><b>5</b></td></tr>
-        </table>
-        <div class="astuce"><span class="lab">le sens physique</span>Si les liaisons offrent <b>moins</b> de libertés que les cycles n’en réclament, le mécanisme est bridé : <b>h &gt; 0</b>. S’il en offre exactement autant, tout est juste : <b>h = 0</b>. La formule ne fait que compter cet écart.</div>
-      </section>
-
-      <section class="slide" id="s5">
-        <div class="k">Slide 5 · La grandeur oubliée</div>
-        <h2>Trouver la mobilité m</h2>
-        <p class="lede">Dans la formule, trois nombres se comptent sur le graphe — mais <b>m ne se compte pas, il s’observe</b>. C’est la seule grandeur qui demande de regarder le mécanisme fonctionner, et c’est pour cela qu’on l’oublie.</p>
-        <div class="big">m = nombre de mouvements indépendants du mécanisme<small>Autrement dit : combien de paramètres faut-il imposer pour que <b>tout</b> le mécanisme soit figé ? Chaque paramètre indépendant compte pour 1.</small></div>
-        <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">D’où vient m — et d’où vient la formule</h3>
-        <p class="lede">Les deux se démontrent ensemble. Fermer un cycle du graphe, c’est écrire que si l’on part d’un solide et qu’on en fait le tour, on doit revenir exactement au point de départ : cela donne des <b>équations</b>. Les <b>inconnues</b>, ce sont les degrés de liberté des liaisons.</p>
-        <div class="anim">
-          <canvas id="cvOrig" width="860" height="330" aria-label="Origine de la formule : équations, inconnues et rang du système"></canvas>
-          <div class="ctrl"><button id="orPrev">◀</button><button id="orNext">▶</button><div class="leg" id="orLeg"></div></div>
-        </div>
-        <div class="big">m = I<sub>c</sub> − r<sub>c</sub>        h = E<sub>c</sub> − r<sub>c</sub><small><b>r<sub>c</sub></b> est le <b>rang</b> du système : le nombre d’équations réellement indépendantes. Les inconnues que ces équations ne fixent pas restent libres — ce sont les mouvements, donc <b>m</b>. Les équations en trop, celles qui répètent ce que les autres disent déjà, sont les contraintes redondantes — donc <b>h</b>.</small></div>
-        <div class="big" style="border-left-color:var(--green)">m − h = I<sub>c</sub> − E<sub>c</sub>   ⟺   h = m + E<sub>c</sub> − I<sub>c</sub><small>On soustrait les deux lignes précédentes : <b>r<sub>c</sub> disparaît</b>. C’est tout l’intérêt de la formule — elle permet de se passer du rang, qu’on ne sait pas calculer à la main en Première.</small></div>
-        <div class="warn">⚠️ <b>Le piège de circularité.</b> La formule contient <b>deux</b> inconnues, m et h. Elle ne peut donc pas les donner toutes les deux : il faut en déterminer une <b>par ailleurs</b>. Et c’est toujours m, parce que m s’observe sur le mécanisme, alors que h ne se voit pas. <b>On ne calcule jamais m avec la formule</b> — sinon on tourne en rond.</div>
-        <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">Comment le trouver en pratique</h3>
-        <div class="anim">
-          <canvas id="cvMob" width="860" height="330" aria-label="Comment déterminer la mobilité d'un mécanisme"></canvas>
-          <div class="ctrl"><button id="mbPrev">◀</button><button id="mbNext">▶</button><div class="leg" id="mbLeg"></div></div>
-        </div>
-        <div class="cols c2">
-          <div class="panel"><h3>La méthode du blocage</h3><p>Bloque les entrées une par une, par la pensée. Tant qu’une pièce peut encore bouger, il reste une mobilité. Le nombre d’entrées à bloquer pour tout immobiliser, <b>c’est m</b>.</p></div>
-          <div class="panel"><h3>Mobilité utile et mobilité interne</h3><p>Certaines mobilités servent la fonction (<b>m<sub>u</sub></b> : le bras qui tourne), d’autres non (<b>m<sub>i</sub></b> : une bielle qui pivote sur elle-même sans rien changer). On compte <b>m = m<sub>u</sub> + m<sub>i</sub></b> : la formule ne fait pas le tri.</p></div>
-        </div>
-        <table class="ddl">
-          <tr><th>mécanisme</th><th>ce qui bouge indépendamment</th><th>m</th></tr>
-          <tr><td>arbre dans ses paliers</td><td>la rotation de l’arbre</td><td><b>1</b></td></tr>
-          <tr><td>bielle-manivelle</td><td>la rotation de la manivelle (le piston suit)</td><td><b>1</b></td></tr>
-          <tr><td>quatre-barres</td><td>la rotation d’une barre (les autres suivent)</td><td><b>1</b></td></tr>
-          <tr><td>bras à deux axes</td><td>l’épaule, puis le coude</td><td><b>2</b></td></tr>
-          <tr><td>table posée sur le sol</td><td>2 glissements + 1 rotation dans le plan</td><td><b>3</b></td></tr>
-        </table>
-        <div class="astuce"><span class="lab">le contrôle qui rassure</span><b>m = nombre de moteurs (ou d’actionneurs) du mécanisme</b>, dans l’immense majorité des cas. Un vérin, une manivelle, un moteur : une mobilité chacun. Si ton m dépasse le nombre d’actionneurs, cherche une <b>mobilité interne</b> — une pièce qui tourne sur elle-même sans effet sur la fonction. C’est fréquent dès qu’il y a deux rotules alignées.</div>
-        <div class="warn">⚠️ Erreur classique : compter les degrés de liberté des liaisons au lieu des mouvements du mécanisme. Un quatre-barres a 4 pivots, donc I<sub>c</sub> = 4 — mais <b>m = 1</b> seulement, car bloquer une seule barre fige tout le reste.</div>
-      </section>
-
-      <section class="slide" id="s6">
-        <div class="k">Slide 6 · Application guidée</div>
-        <h2>L’arbre sur deux pivots</h2>
-        <p class="lede">Reprenons le montage du début, modélisé « naturellement » par deux liaisons pivot. Déroulons la méthode — c’est la première fois, on prend le temps.</p>
-        <div class="anim">
-          <canvas id="cvCalc1" width="860" height="330" aria-label="Calcul du degré d'hyperstatisme pour un arbre sur deux pivots"></canvas>
-          <div class="ctrl"><button id="c1Prev">◀</button><button id="c1Next">▶</button><div class="leg" id="c1Leg"></div></div>
-        </div>
-        <div class="warn">⚠️ <b>h = 5.</b> Cinq contraintes géométriques doivent être respectées <i>simultanément</i> : les deux axes de paliers doivent être parfaitement coaxiaux (2 conditions de position + 2 d’orientation… et une de plus en translation axiale). Autant dire : impossible à garantir en série sans coût prohibitif.</div>
-      </section>
-
-      <section class="slide" id="s7">
-        <div class="k">Slide 7 · La solution</div>
-        <h2>Le montage isostatique du bureau d’études</h2>
-        <p class="lede">On ne change ni l’arbre ni les paliers : on change <b>le type de liaisons</b>. Une rotule d’un côté, une linéaire annulaire de l’autre — et le mécanisme cesse de se battre contre lui-même.</p>
-        <div class="anim">
-          <canvas id="cvCalc2" width="860" height="340" aria-label="Comparaison du montage deux pivots et du montage rotule plus linéaire annulaire"></canvas>
-          <div class="ctrl"><button id="c2Prev">◀</button><button id="c2Next">▶</button><div class="leg" id="c2Leg"></div></div>
-        </div>
-        <div class="big">I<sub>c</sub> = 3 + 4 = 7   →   h = 1 + 6 − 7 = 0<small>Même arbre, même fonction, même mobilité m = 1 — mais <b>zéro contrainte géométrique en trop</b>. Le montage se fait sans forcer, même avec des tolérances d’usinage ordinaires.</small></div>
-      </section>
-
-      <section class="slide" id="s8">
-        <div class="k">Slide 8 · Le piège</div>
-        <h2>Plan ou espace ? La réponse change !</h2>
-        <p class="lede">Le même mécanisme peut être isostatique <b>dans le plan</b> et hyperstatique <b>dans l’espace</b>. Ce n’est pas une contradiction : ce sont deux modèles différents, et il faut annoncer lequel on utilise.</p>
-        <div class="anim">
-          <canvas id="cvPlan" width="860" height="340" aria-label="Le quatre-barres analysé dans le plan puis dans l'espace"></canvas>
-          <div class="ctrl"><button id="plPrev">◀</button><button id="plNext">▶</button><div class="leg" id="plLeg"></div></div>
-        </div>
-        <div class="hint">🧭 <b>Le réflexe :</b> écris toujours en tête de copie « <i>étude dans le plan</i> » ou « <i>étude dans l’espace</i> », puis prends Ec = 3γ ou 6γ en conséquence. Un h juste avec la mauvaise hypothèse reste faux.</div>
-      </section>
-
-      <section class="slide" id="s9">
-        <div class="k">Slide 9 · En pratique</div>
-        <h2>Faut-il toujours viser h = 0 ?</h2>
-        <p class="lede">Non — et c’est là que l’ingénieur arbitre. L’hyperstatisme a un coût, mais aussi des vertus. Le tout est de le <b>choisir</b> plutôt que de le subir.</p>
-        <div class="cols c2">
-          <div class="panel"><h3>Ce qu’il coûte</h3><p>Tolérances serrées, usinage précis, montage difficile, contraintes internes qui fatiguent les pièces, roulements qui chauffent. Chaque unité de h est une condition géométrique à garantir en production.</p></div>
-          <div class="panel"><h3>Ce qu’il apporte</h3><p>Rigidité, précision de guidage, meilleure répartition des efforts, tenue aux vibrations. Un vilebrequin de moteur est volontairement très hyperstatique : on ne veut pas qu’il fléchisse.</p></div>
-        </div>
-        <div class="cols c3">
-          <div class="panel"><h3>Remplacer une liaison</h3><p>Un pivot (1 ddl) devient une rotule (3 ddl) : on gagne 2 sur h d’un seul coup. C’est le levier le plus courant.</p></div>
-          <div class="panel"><h3>Supprimer une liaison</h3><p>Trois pieds au lieu de quatre : un tabouret à trois pieds ne bancale jamais, c’est de l’isostatisme appliqué.</p></div>
-          <div class="panel"><h3>Garantir la géométrie</h3><p>On assume h &gt; 0 et l’on impose des spécifications de coaxialité, de parallélisme… au prix fort. C’est le choix des machines de précision.</p></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s10">
-        <div class="k">Slide 10 · Synthèse</div>
-        <h2>À retenir</h2>
-        <div class="big">① graphe → ② n, L, γ = L − n + 1 → ③ E<sub>c</sub> = 6γ ou 3γ → ④ I<sub>c</sub> = Σ ddl → ⑤ m par blocage → ⑥ h = m + E<sub>c</sub> − I<sub>c</sub><small>Six temps, toujours les mêmes. Aucune équation à résoudre : on ne fait que compter — sauf m, qui s’observe en faisant fonctionner le mécanisme.</small></div>
-        <div class="cols c3">
-          <div class="panel"><h3>Le sens de h</h3><p>h = nombre de conditions géométriques à respecter pour que le montage soit possible. h = 0 : aucune, on monte sans forcer.</p></div>
-          <div class="panel"><h3>Le piège du modèle</h3><p>Plan ou espace, il faut choisir et l’écrire. Un même mécanisme peut donner h = 0 dans le plan et h = 3 dans l’espace.</p></div>
-          <div class="panel"><h3>Le réflexe d’ingénieur</h3><p>Trop de h ? On remplace un pivot par une rotule ou une linéaire annulaire. On ne change pas la fonction, on change le modèle de liaison.</p></div>
-        </div>
-        <div class="astuce"><span class="lab">au TP</span>Tu construiras les graphes toi-même, tu calculeras h sur six mécanismes réels, et tu piloteras un <b>banc de montage</b> où il faudra choisir les liaisons pour atteindre h = 0 sans perdre la mobilité.</div>
-      </section>
-
-    </main>
-  </div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Cours — Hyperstatisme<br>© ESTIC — Tous droits réservés</div></div> <div class="layout"><nav class="snav" id="snav"> <a href="#s1">1 · Le montage impossible</a> <a href="#s2">2 · Le vocabulaire</a> <a href="#s3">3 · Le graphe et les cycles</a> <a href="#s4">4 · La formule</a> <a href="#s5">5 · Trouver la mobilité m</a> <a href="#s6">6 · L’arbre sur deux pivots</a> <a href="#s7">7 · Le montage isostatique</a> <a href="#s8">8 · Plan ou espace ?</a> <a href="#s9">9 · Déshyperstatiser</a> <a href="#s10">10 · À retenir</a> </nav> <main class="slides"> <section class="slide" id="s1"> <div class="k">Cours · Première spé SI · Statique des mécanismes</div> <h1>L’hyperstatisme :<br>quand le mécanisme se bride lui-même</h1> <p class="lede">Un arbre, deux paliers. Sur le plan, tout va bien. À l’atelier, l’arbre refuse d’entrer — ou il entre en forçant, et le roulement chauffe au bout de trois semaines. Le coupable n’est pas l’ouvrier : c’est le <b>modèle</b>. Ce mécanisme est <b>hyperstatique</b>, et cela se calcule bien avant la fabrication.</p> <div class="anim"><canvas id="cvIntro" width="860" height="300" aria-label="Arbre monté sur deux paliers légèrement désalignés"></canvas> <div class="ctrl"><button id="inPrev">◀</button><button id="inNext">▶</button><div class="leg" id="inLeg"></div></div></div> </section> <section class="slide" id="s2"> <div class="k">Slide 2 · Vocabulaire</div> <h2>Trois situations, trois mots</h2> <p class="lede">Le degré d’hyperstatisme, noté <b>h</b>, compte les <b>contraintes en trop</b>: celles que la géométrie doit satisfaire pour que le montage soit possible.</p> <div class="verdict"><div class="v h0"><b>h = 0</b><span><b>Isostatique.</b> Juste ce qu’il faut de liaisons. Le montage se fait sans forcer, quelles que soient les petites imprécisions d’usinage. Les efforts se calculent entièrement avec la statique.</span></div> <div class="v hp"><b>h &gt; 0</b><span><b>Hyperstatique.</b> h contraintes géométriques en trop : il faut usiner très précis, sinon le mécanisme se déforme au montage. En contrepartie : plus rigide, plus résistant.</span></div> <div class="v m"><b>m</b><span><b>La mobilité</b>, à ne pas confondre : c’est le nombre de mouvements indépendants possibles. Un arbre qui tourne dans ses paliers : m = 1.</span></div></div> <div class="hint">L’objectif de ce cours : savoir calculer <b>h</b> sur un mécanisme donné, en quatre lignes, sans jamais résoudre le moindre système d’équations.</div> </section> <section class="slide" id="s3"> <div class="k">Slide 3 · L’outil</div> <h2>Le graphe des liaisons et ses cycles</h2> <p class="lede">Avant toute formule, on dessine le <b>graphe</b>: un rond par solide, un trait par liaison. Ce petit schéma donne les deux nombres dont on a besoin — et il se trace en dix secondes.</p> <div class="anim"><canvas id="cvGraphe" width="860" height="340" aria-label="Construction du graphe des liaisons et comptage des cycles"></canvas> <div class="ctrl"><button id="grPrev">◀</button><button id="grNext">▶</button><div class="leg" id="grLeg"></div></div></div> <div class="big">γ = L − n + 1<small><b>n</b> = nombre de solides, <b>bâti compris</b> · <b>L</b> = nombre de liaisons · <b>γ</b> = nombre de cycles indépendants (les « boucles » fermées du graphe).</small></div> </section> <section class="slide" id="s4"> <div class="k">Slide 4 · La formule</div> <h2>Quatre nombres, un résultat</h2> <p class="lede">Tout tient dans une seule relation. Elle compare ce que le mécanisme <b>peut faire</b> (les degrés de liberté de ses liaisons) à ce que la géométrie <b>impose</b> (les équations des cycles).</p> <div class="big">h = m + E<sub>c</sub> − I<sub>c</sub><small><b>m</b> : mobilité (mouvements indépendants) · <b>E<sub>c</sub></b> : nombre d’équations = <b>6γ dans l’espace</b>, <b>3γ dans le plan</b> · <b>I<sub>c</sub></b> : nombre d’inconnues = <b>somme des degrés de liberté de toutes les liaisons</b>.</small></div> <table class="ddl"> <tr><th>liaison</th><th>pivot</th><th>glissière</th><th>pivot glissant</th><th>rotule</th><th>appui plan</th><th>linéaire annulaire</th><th>ponctuelle</th></tr> <tr><td>ddl (espace)</td><td class="hi"><b>1</b></td><td><b>1</b></td><td><b>2</b></td><td class="hi"><b>3</b></td><td><b>3</b></td><td class="hi"><b>4</b></td><td><b>5</b></td></tr> </table> <div class="astuce"><span class="lab">le sens physique</span>Si les liaisons offrent <b>moins</b> de libertés que les cycles n’en réclament, le mécanisme est bridé : <b>h &gt; 0</b>. S’il en offre exactement autant, tout est juste : <b>h = 0</b>. La formule ne fait que compter cet écart.</div> </section> <section class="slide" id="s5"> <div class="k">Slide 5 · La grandeur oubliée</div> <h2>Trouver la mobilité m</h2> <p class="lede">Dans la formule, trois nombres se comptent sur le graphe — mais <b>m ne se compte pas, il s’observe</b>. C’est la seule grandeur qui demande de regarder le mécanisme fonctionner, et c’est pour cela qu’on l’oublie.</p> <div class="big">m = nombre de mouvements indépendants du mécanisme<small>Autrement dit : combien de paramètres faut-il imposer pour que <b>tout</b> le mécanisme soit figé ? Chaque paramètre indépendant compte pour 1.</small></div> <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">D’où vient m — et d’où vient la formule</h3> <p class="lede">Les deux se démontrent ensemble. Fermer un cycle du graphe, c’est écrire que si l’on part d’un solide et qu’on en fait le tour, on doit revenir exactement au point de départ : cela donne des <b>équations</b>. Les <b>inconnues</b>, ce sont les degrés de liberté des liaisons.</p> <div class="anim"><canvas id="cvOrig" width="860" height="330" aria-label="Origine de la formule : équations, inconnues et rang du système"></canvas> <div class="ctrl"><button id="orPrev">◀</button><button id="orNext">▶</button><div class="leg" id="orLeg"></div></div></div> <div class="big">m = I<sub>c</sub> − r<sub>c</sub> h = E<sub>c</sub> − r<sub>c</sub><small><b>r<sub>c</sub></b> est le <b>rang</b> du système : le nombre d’équations réellement indépendantes. Les inconnues que ces équations ne fixent pas restent libres — ce sont les mouvements, donc <b>m</b>. Les équations en trop, celles qui répètent ce que les autres disent déjà, sont les contraintes redondantes — donc <b>h</b>.</small></div> <div class="big" style="border-left-color:var(--green)">m − h = I<sub>c</sub> − E<sub>c</sub> ⟺ h = m + E<sub>c</sub> − I<sub>c</sub><small>On soustrait les deux lignes précédentes : <b>r<sub>c</sub> disparaît</b>. C’est tout l’intérêt de la formule — elle permet de se passer du rang, qu’on ne sait pas calculer à la main en Première.</small></div> <div class="warn"><b>Le piège de circularité.</b> La formule contient <b>deux</b> inconnues, m et h. Elle ne peut donc pas les donner toutes les deux : il faut en déterminer une <b>par ailleurs</b>. Et c’est toujours m, parce que m s’observe sur le mécanisme, alors que h ne se voit pas. <b>On ne calcule jamais m avec la formule</b> — sinon on tourne en rond.</div> <h3 style="font-size:21px;margin:22px 0 6px;font-weight:800">Comment le trouver en pratique</h3> <div class="anim"><canvas id="cvMob" width="860" height="330" aria-label="Comment déterminer la mobilité d'un mécanisme"></canvas> <div class="ctrl"><button id="mbPrev">◀</button><button id="mbNext">▶</button><div class="leg" id="mbLeg"></div></div></div> <div class="cols c2"><div class="panel"><h3>La méthode du blocage</h3><p>Bloque les entrées une par une, par la pensée. Tant qu’une pièce peut encore bouger, il reste une mobilité. Le nombre d’entrées à bloquer pour tout immobiliser, <b>c’est m</b>.</p></div> <div class="panel"><h3>Mobilité utile et mobilité interne</h3><p>Certaines mobilités servent la fonction (<b>m<sub>u</sub></b> : le bras qui tourne), d’autres non (<b>m<sub>i</sub></b> : une bielle qui pivote sur elle-même sans rien changer). On compte <b>m = m<sub>u</sub> + m<sub>i</sub></b> : la formule ne fait pas le tri.</p></div></div> <table class="ddl"> <tr><th>mécanisme</th><th>ce qui bouge indépendamment</th><th>m</th></tr> <tr><td>arbre dans ses paliers</td><td>la rotation de l’arbre</td><td><b>1</b></td></tr> <tr><td>bielle-manivelle</td><td>la rotation de la manivelle (le piston suit)</td><td><b>1</b></td></tr> <tr><td>quatre-barres</td><td>la rotation d’une barre (les autres suivent)</td><td><b>1</b></td></tr> <tr><td>bras à deux axes</td><td>l’épaule, puis le coude</td><td><b>2</b></td></tr> <tr><td>table posée sur le sol</td><td>2 glissements + 1 rotation dans le plan</td><td><b>3</b></td></tr> </table> <div class="astuce"><span class="lab">le contrôle qui rassure</span><b>m = nombre de moteurs (ou d’actionneurs) du mécanisme</b>, dans l’immense majorité des cas. Un vérin, une manivelle, un moteur : une mobilité chacun. Si ton m dépasse le nombre d’actionneurs, cherche une <b>mobilité interne</b> — une pièce qui tourne sur elle-même sans effet sur la fonction. C’est fréquent dès qu’il y a deux rotules alignées.</div> <div class="warn">Erreur classique : compter les degrés de liberté des liaisons au lieu des mouvements du mécanisme. Un quatre-barres a 4 pivots, donc I<sub>c</sub> = 4 — mais <b>m = 1</b> seulement, car bloquer une seule barre fige tout le reste.</div> </section> <section class="slide" id="s6"> <div class="k">Slide 6 · Application guidée</div> <h2>L’arbre sur deux pivots</h2> <p class="lede">Reprenons le montage du début, modélisé « naturellement » par deux liaisons pivot. Déroulons la méthode — c’est la première fois, on prend le temps.</p> <div class="anim"><canvas id="cvCalc1" width="860" height="330" aria-label="Calcul du degré d'hyperstatisme pour un arbre sur deux pivots"></canvas> <div class="ctrl"><button id="c1Prev">◀</button><button id="c1Next">▶</button><div class="leg" id="c1Leg"></div></div></div> <div class="warn"><b>h = 5.</b> Cinq contraintes géométriques doivent être respectées <i>simultanément</i> : les deux axes de paliers doivent être parfaitement coaxiaux (2 conditions de position + 2 d’orientation… et une de plus en translation axiale). Autant dire : impossible à garantir en série sans coût prohibitif.</div> </section> <section class="slide" id="s7"> <div class="k">Slide 7 · La solution</div> <h2>Le montage isostatique du bureau d’études</h2> <p class="lede">On ne change ni l’arbre ni les paliers : on change <b>le type de liaisons</b>. Une rotule d’un côté, une linéaire annulaire de l’autre — et le mécanisme cesse de se battre contre lui-même.</p> <div class="anim"><canvas id="cvCalc2" width="860" height="340" aria-label="Comparaison du montage deux pivots et du montage rotule plus linéaire annulaire"></canvas> <div class="ctrl"><button id="c2Prev">◀</button><button id="c2Next">▶</button><div class="leg" id="c2Leg"></div></div></div> <div class="big">I<sub>c</sub> = 3 + 4 = 7 → h = 1 + 6 − 7 = 0<small>Même arbre, même fonction, même mobilité m = 1 — mais <b>zéro contrainte géométrique en trop</b>. Le montage se fait sans forcer, même avec des tolérances d’usinage ordinaires.</small></div> </section> <section class="slide" id="s8"> <div class="k">Slide 8 · Le piège</div> <h2>Plan ou espace ? La réponse change !</h2> <p class="lede">Le même mécanisme peut être isostatique <b>dans le plan</b> et hyperstatique <b>dans l’espace</b>. Ce n’est pas une contradiction : ce sont deux modèles différents, et il faut annoncer lequel on utilise.</p> <div class="anim"><canvas id="cvPlan" width="860" height="340" aria-label="Le quatre-barres analysé dans le plan puis dans l'espace"></canvas> <div class="ctrl"><button id="plPrev">◀</button><button id="plNext">▶</button><div class="leg" id="plLeg"></div></div></div> <div class="hint"><b>Le réflexe :</b> écris toujours en tête de copie « <i>étude dans le plan</i> » ou « <i>étude dans l’espace</i> », puis prends Ec = 3γ ou 6γ en conséquence. Un h juste avec la mauvaise hypothèse reste faux.</div> </section> <section class="slide" id="s9"> <div class="k">Slide 9 · En pratique</div> <h2>Faut-il toujours viser h = 0 ?</h2> <p class="lede">Non — et c’est là que l’ingénieur arbitre. L’hyperstatisme a un coût, mais aussi des vertus. Le tout est de le <b>choisir</b> plutôt que de le subir.</p> <div class="cols c2"><div class="panel"><h3>Ce qu’il coûte</h3><p>Tolérances serrées, usinage précis, montage difficile, contraintes internes qui fatiguent les pièces, roulements qui chauffent. Chaque unité de h est une condition géométrique à garantir en production.</p></div> <div class="panel"><h3>Ce qu’il apporte</h3><p>Rigidité, précision de guidage, meilleure répartition des efforts, tenue aux vibrations. Un vilebrequin de moteur est volontairement très hyperstatique : on ne veut pas qu’il fléchisse.</p></div></div> <div class="cols c3"><div class="panel"><h3>Remplacer une liaison</h3><p>Un pivot (1 ddl) devient une rotule (3 ddl) : on gagne 2 sur h d’un seul coup. C’est le levier le plus courant.</p></div> <div class="panel"><h3>Supprimer une liaison</h3><p>Trois pieds au lieu de quatre : un tabouret à trois pieds ne bancale jamais, c’est de l’isostatisme appliqué.</p></div> <div class="panel"><h3>Garantir la géométrie</h3><p>On assume h &gt; 0 et l’on impose des spécifications de coaxialité, de parallélisme… au prix fort. C’est le choix des machines de précision.</p></div></div> </section> <section class="slide" id="s10"> <div class="k">Slide 10 · Synthèse</div> <h2>À retenir</h2> <div class="big">① graphe → ② n, L, γ = L − n + 1 → ③ E<sub>c</sub> = 6γ ou 3γ → ④ I<sub>c</sub> = Σ ddl → ⑤ m par blocage → ⑥ h = m + E<sub>c</sub> − I<sub>c</sub><small>Six temps, toujours les mêmes. Aucune équation à résoudre : on ne fait que compter — sauf m, qui s’observe en faisant fonctionner le mécanisme.</small></div> <div class="cols c3"><div class="panel"><h3>Le sens de h</h3><p>h = nombre de conditions géométriques à respecter pour que le montage soit possible. h = 0 : aucune, on monte sans forcer.</p></div> <div class="panel"><h3>Le piège du modèle</h3><p>Plan ou espace, il faut choisir et l’écrire. Un même mécanisme peut donner h = 0 dans le plan et h = 3 dans l’espace.</p></div> <div class="panel"><h3>Le réflexe d’ingénieur</h3><p>Trop de h ? On remplace un pivot par une rotule ou une linéaire annulaire. On ne change pas la fonction, on change le modèle de liaison.</p></div></div> <div class="astuce"><span class="lab">au TP</span>Tu construiras les graphes toi-même, tu calculeras h sur six mécanismes réels, et tu piloteras un <b>banc de montage</b> où il faudra choisir les liaisons pour atteindre h = 0 sans perdre la mobilité.</div> </section> </main></div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var fr=function(x){ return String(x).replace('.',','); };
@@ -238,29 +71,29 @@ var D2R=Math.PI/180;
   var links=document.querySelectorAll('#snav a'), map={};
   links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
   var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
-        var a=map[en.target.id]; if(a) a.classList.add('on'); }
-    });
+ entries.forEach(function(en){
+ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
+ var a=map[en.target.id]; if(a) a.classList.add('on'); }
+ });
   },{rootMargin:'-40% 0px -50% 0px'});
   document.querySelectorAll('.slide').forEach(function(s){ obs.observe(s); });
 })();
 (function(){
   var ids=['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10'];
   function current(){ var best=0,bd=1e9;
-    ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
-    return best; }
+ ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
+ return best; }
   document.addEventListener('keydown',function(ev){
-    if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault(); el(ids[Math.min(ids.length-1,current()+1)]).scrollIntoView({behavior:'smooth'}); }
-    if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault(); el(ids[Math.max(0,current()-1)]).scrollIntoView({behavior:'smooth'}); }
+ if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault(); el(ids[Math.min(ids.length-1,current()+1)]).scrollIntoView({behavior:'smooth'}); }
+ if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault(); el(ids[Math.max(0,current()-1)]).scrollIntoView({behavior:'smooth'}); }
   });
 })();
 function stepper(cvId, prevId, nextId, legId, phases){
   var cv=el(cvId); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), idx=0, t=0;
   function show(){ t=0;
-    el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
-    el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
+ el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
+ el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
   el(prevId).addEventListener('click',function(){ if(idx>0){ idx--; show(); } });
   el(nextId).addEventListener('click',function(){ if(idx<phases.length-1){ idx++; show(); } });
   setInterval(function(){ t+=0.033; g.clearRect(0,0,cv.width,cv.height); phases[idx].draw(g,t); },40);
@@ -273,9 +106,9 @@ function bati(g,x,y,w){
   for(var i=0;i<w;i+=12){ g.beginPath(); g.moveTo(x+i,y+16); g.lineTo(x+i-8,y+28); g.stroke(); }
   g.beginPath(); g.moveTo(x,y+16); g.lineTo(x+w,y+16); g.stroke();
 }
-var RA_=12;   /* rayon de l'arbre */
+var RA_=12; /* rayon de l'arbre */
 /* Vue de COTE : l'axe de l'arbre est horizontal, dans le plan de l'ecran.
-   Les liaisons sont donc dessinees en coupe longitudinale, pas en vue de bout. */
+ Les liaisons sont donc dessinees en coupe longitudinale, pas en vue de bout. */
 function palier(g,cx,cy,col,lab){
   var R=RA_;
   /* corps du palier : deux demi-coussinets de part et d'autre de l'arbre */
@@ -284,34 +117,34 @@ function palier(g,cx,cy,col,lab){
   g.beginPath(); g.rect(cx-24,cy+R,48,15); g.fill(); g.stroke();
   var t=(lab||'').toLowerCase();
   if(t.indexOf('rotule')>=0){
-    /* rotule : sphere solidaire de l'arbre, cage qui l'epouse */
-    var sr=R+5;
-    g.strokeStyle=col; g.lineWidth=2.4;
-    g.beginPath(); g.arc(cx,cy,sr+6,Math.PI*0.16,Math.PI*0.84); g.stroke();
-    g.beginPath(); g.arc(cx,cy,sr+6,Math.PI*1.16,Math.PI*1.84); g.stroke();
-    var sg=g.createRadialGradient(cx-4,cy-5,2,cx,cy,sr);
-    sg.addColorStop(0,'#ffffff'); sg.addColorStop(1,'#b9c6d1');
-    g.fillStyle=sg; g.strokeStyle='#5C544B'; g.lineWidth=1.6;
-    g.beginPath(); g.arc(cx,cy,sr,0,7); g.fill(); g.stroke();
+ /* rotule : sphere solidaire de l'arbre, cage qui l'epouse */
+ var sr=R+5;
+ g.strokeStyle=col; g.lineWidth=2.4;
+ g.beginPath(); g.arc(cx,cy,sr+6,Math.PI*0.16,Math.PI*0.84); g.stroke();
+ g.beginPath(); g.arc(cx,cy,sr+6,Math.PI*1.16,Math.PI*1.84); g.stroke();
+ var sg=g.createRadialGradient(cx-4,cy-5,2,cx,cy,sr);
+ sg.addColorStop(0,'#ffffff'); sg.addColorStop(1,'#b9c6d1');
+ g.fillStyle=sg; g.strokeStyle='#5C544B'; g.lineWidth=1.6;
+ g.beginPath(); g.arc(cx,cy,sr,0,7); g.fill(); g.stroke();
   } else if(t.indexOf('annulaire')>=0){
-    /* lineaire annulaire : bague courte, la sphere peut coulisser et s'orienter */
-    var sr2=R+5;
-    g.fillStyle='#e7eef2'; g.strokeStyle=col; g.lineWidth=2.4;
-    g.beginPath(); g.rect(cx-8,cy-sr2-8,16,2*sr2+16); g.fill(); g.stroke();
-    g.strokeStyle=col; g.lineWidth=1.5; g.setLineDash([3,3]);
-    g.beginPath(); g.moveTo(cx-36,cy-sr2-15); g.lineTo(cx+36,cy-sr2-15); g.stroke(); g.setLineDash([]);
-    var sg2=g.createRadialGradient(cx-4,cy-5,2,cx,cy,sr2);
-    sg2.addColorStop(0,'#ffffff'); sg2.addColorStop(1,'#b9c6d1');
-    g.fillStyle=sg2; g.strokeStyle='#5C544B'; g.lineWidth=1.6;
-    g.beginPath(); g.arc(cx,cy,sr2,0,7); g.fill(); g.stroke();
+ /* lineaire annulaire : bague courte, la sphere peut coulisser et s'orienter */
+ var sr2=R+5;
+ g.fillStyle='#e7eef2'; g.strokeStyle=col; g.lineWidth=2.4;
+ g.beginPath(); g.rect(cx-8,cy-sr2-8,16,2*sr2+16); g.fill(); g.stroke();
+ g.strokeStyle=col; g.lineWidth=1.5; g.setLineDash([3,3]);
+ g.beginPath(); g.moveTo(cx-36,cy-sr2-15); g.lineTo(cx+36,cy-sr2-15); g.stroke(); g.setLineDash([]);
+ var sg2=g.createRadialGradient(cx-4,cy-5,2,cx,cy,sr2);
+ sg2.addColorStop(0,'#ffffff'); sg2.addColorStop(1,'#b9c6d1');
+ g.fillStyle=sg2; g.strokeStyle='#5C544B'; g.lineWidth=1.6;
+ g.beginPath(); g.arc(cx,cy,sr2,0,7); g.fill(); g.stroke();
   } else {
-    /* pivot : deux epaulements bloquent la translation axiale */
-    g.fillStyle=col;
-    g.fillRect(cx-28,cy-R-3,4,2*R+6);
-    g.fillRect(cx+24,cy-R-3,4,2*R+6);
+ /* pivot : deux epaulements bloquent la translation axiale */
+ g.fillStyle=col;
+ g.fillRect(cx-28,cy-R-3,4,2*R+6);
+ g.fillRect(cx+24,cy-R-3,4,2*R+6);
   }
   if(lab){ g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText(lab,cx,cy+R+40); g.textAlign='left'; }
+ g.fillText(lab,cx,cy+R+40); g.textAlign='left'; }
 }
 /* arbre dessine comme un cylindre vu de cote : ses deux generatrices se courbent */
 function arbre(g,x1,x2,y,flex,col){
@@ -343,53 +176,53 @@ function rotAxe(g,cx,cy,t){
 /* ============ s1 : le montage impossible ============ */
 (function(){
   stepper('cvIntro','inPrev','inNext','inLeg',[
-    {leg:'Le plan du bureau d\u2019\u00e9tudes : un arbre, deux paliers align\u00e9s, tout est parfait sur le papier.',
-     draw:function(g,t){
-       bati(g,120,246,620);
-       palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,190,'#2E6A8E','palier B');
-       arbre(g,190,670,190,0);
-       g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('sur le plan : axes parfaitement coaxiaux \u2713',250,60);
-       g.strokeStyle='#3D7E5F'; g.lineWidth=1.6; g.setLineDash([6,5]);
-       g.beginPath(); g.moveTo(150,190); g.lineTo(720,190); g.stroke(); g.setLineDash([]); }},
-    {leg:'\u00c0 l\u2019atelier, le palier B est perc\u00e9 <b>0,2 mm trop haut</b> \u2014 une imprécision tout \u00e0 fait ordinaire. Les deux axes ne sont plus coaxiaux.',
-     draw:function(g,t){
-       bati(g,120,246,620);
-       palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,176,'#C0492E','palier B');
-       g.strokeStyle='#3D7E5F'; g.lineWidth=1.6; g.setLineDash([6,5]);
-       g.beginPath(); g.moveTo(150,190); g.lineTo(720,190); g.stroke(); g.setLineDash([]);
-       g.strokeStyle='#C0492E'; g.setLineDash([4,4]);
-       g.beginPath(); g.moveTo(560,176); g.lineTo(720,176); g.stroke(); g.setLineDash([]);
-       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('\u00e9cart 0,2 mm',640,150);
-       arbre(g,190,670,190,0); }},
-    {leg:'Pour entrer dans les deux paliers, l\u2019arbre <b>doit se tordre</b>. Il se monte\u2026 en forçant. Les roulements travaillent en permanence sous contrainte, et chauffent.',
-     draw:function(g,t){
-       bati(g,120,246,620);
-       var f=-8+Math.sin(t*2)*0.6;
-       palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,176,'#C0492E','palier B');
-       arbre(g,190,670,190,f,'#C0492E');
-       g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('\u26a0 l\u2019arbre se d\u00e9forme au montage',270,60);
-       g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('contraintes internes permanentes \u00b7 usure pr\u00e9matur\u00e9e',255,86);
-       /* chaleur */
-       for(var i=0;i<4;i++){
-         var y=150-((t*40+i*12)%40);
-         g.fillStyle='rgba(192,73,46,'+(0.35-i*0.06)+')';
-         g.fillRect(612+i*4,y,3,8);
-       } }},
-    {leg:'La cause n\u2019est ni l\u2019ouvrier ni la machine : c\u2019est le <b>choix des liaisons</b>. Ce montage exige une coaxialité parfaite \u2014 il est <b>hyperstatique</b>. Et cela se calcule, en quatre lignes, dès le bureau d\u2019\u00e9tudes.',
-     draw:function(g,t){
-       bati(g,120,246,620);
-       palier(g,240,190,'#2E6A8E','pivot'); palier(g,620,190,'#2E6A8E','pivot');
-       arbre(g,190,670,190,0);
-       g.fillStyle='#2A2622'; g.font='800 20px "JetBrains Mono",monospace';
-       g.fillText('h = 5',360,70);
-       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('cinq conditions g\u00e9om\u00e9triques \u00e0 garantir',290,96);
-       g.fillStyle='#3D7E5F';
-       g.fillText('\u2192 on va voir comment ramener h \u00e0 0',300,122); }}
+ {leg:'Le plan du bureau d\u2019\u00e9tudes : un arbre, deux paliers align\u00e9s, tout est parfait sur le papier.',
+ draw:function(g,t){
+ bati(g,120,246,620);
+ palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,190,'#2E6A8E','palier B');
+ arbre(g,190,670,190,0);
+ g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('sur le plan : axes parfaitement coaxiaux \u2713',250,60);
+ g.strokeStyle='#3D7E5F'; g.lineWidth=1.6; g.setLineDash([6,5]);
+ g.beginPath(); g.moveTo(150,190); g.lineTo(720,190); g.stroke(); g.setLineDash([]); }},
+ {leg:'\u00c0 l\u2019atelier, le palier B est perc\u00e9 <b>0,2 mm trop haut</b> \u2014 une imprécision tout \u00e0 fait ordinaire. Les deux axes ne sont plus coaxiaux.',
+ draw:function(g,t){
+ bati(g,120,246,620);
+ palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,176,'#C0492E','palier B');
+ g.strokeStyle='#3D7E5F'; g.lineWidth=1.6; g.setLineDash([6,5]);
+ g.beginPath(); g.moveTo(150,190); g.lineTo(720,190); g.stroke(); g.setLineDash([]);
+ g.strokeStyle='#C0492E'; g.setLineDash([4,4]);
+ g.beginPath(); g.moveTo(560,176); g.lineTo(720,176); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('\u00e9cart 0,2 mm',640,150);
+ arbre(g,190,670,190,0); }},
+ {leg:'Pour entrer dans les deux paliers, l\u2019arbre <b>doit se tordre</b>. Il se monte\u2026 en forçant. Les roulements travaillent en permanence sous contrainte, et chauffent.',
+ draw:function(g,t){
+ bati(g,120,246,620);
+ var f=-8+Math.sin(t*2)*0.6;
+ palier(g,240,190,'#2E6A8E','palier A'); palier(g,620,176,'#C0492E','palier B');
+ arbre(g,190,670,190,f,'#C0492E');
+ g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText(' l\u2019arbre se d\u00e9forme au montage',270,60);
+ g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('contraintes internes permanentes \u00b7 usure pr\u00e9matur\u00e9e',255,86);
+ /* chaleur */
+ for(var i=0;i<4;i++){
+ var y=150-((t*40+i*12)%40);
+ g.fillStyle='rgba(192,73,46,'+(0.35-i*0.06)+')';
+ g.fillRect(612+i*4,y,3,8);
+ } }},
+ {leg:'La cause n\u2019est ni l\u2019ouvrier ni la machine : c\u2019est le <b>choix des liaisons</b>. Ce montage exige une coaxialité parfaite \u2014 il est <b>hyperstatique</b>. Et cela se calcule, en quatre lignes, dès le bureau d\u2019\u00e9tudes.',
+ draw:function(g,t){
+ bati(g,120,246,620);
+ palier(g,240,190,'#2E6A8E','pivot'); palier(g,620,190,'#2E6A8E','pivot');
+ arbre(g,190,670,190,0);
+ g.fillStyle='#2A2622'; g.font='800 20px "JetBrains Mono",monospace';
+ g.fillText('h = 5',360,70);
+ g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('cinq conditions g\u00e9om\u00e9triques \u00e0 garantir',290,96);
+ g.fillStyle='#3D7E5F';
+ g.fillText('\u2192 on va voir comment ramener h \u00e0 0',300,122); }}
   ]);
 })();
 
@@ -397,60 +230,60 @@ function rotAxe(g,cx,cy,t){
 (function(){
   /* exemple support : arbre sur deux pivots — Ic = 2, Ec = 6, rc = 1 → m = 1, h = 5 */
   function grille(g,x0,y0,n,cols,col,fill,lab){
-    var s=26, k=0;
-    for(var i=0;i<n;i++){
-      var cx=x0+(i%cols)*s, cy=y0+Math.floor(i/cols)*s;
-      g.fillStyle=fill; g.strokeStyle=col; g.lineWidth=2;
-      g.beginPath(); g.rect(cx,cy,s-6,s-6); g.fill(); g.stroke();
-      k++;
-    }
-    g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
-    g.fillText(lab,x0,y0-10);
+ var s=26, k=0;
+ for(var i=0;i<n;i++){
+ var cx=x0+(i%cols)*s, cy=y0+Math.floor(i/cols)*s;
+ g.fillStyle=fill; g.strokeStyle=col; g.lineWidth=2;
+ g.beginPath(); g.rect(cx,cy,s-6,s-6); g.fill(); g.stroke();
+ k++;
+ }
+ g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='left';
+ g.fillText(lab,x0,y0-10);
   }
   stepper('cvOrig','orPrev','orNext','orLeg',[
-    {leg:'Prenons l\u2019arbre sur deux pivots. Les <b>inconnues</b> du probl\u00e8me cin\u00e9matique, ce sont les degr\u00e9s de libert\u00e9 des liaisons : 1 par pivot, soit <b>I<sub>c</sub> = 2</b>.',
-     draw:function(g,t){
-       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues (les ddl des liaisons)');
-       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('une inconnue = une vitesse que la liaison autorise',120,190); }},
-    {leg:'Le graphe a un cycle. Le refermer dans l\u2019espace impose <b>6 \u00e9quations</b> (3 de translation, 3 de rotation) : <b>E<sub>c</sub> = 6</b>.',
-     draw:function(g,t){
-       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
-       grille(g,120,190,6,6,'#2E6A8E','#e7eef2','E_c = 6 \u00e9quations (fermeture du cycle)');
-       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('6 \u00e9quations pour 2 inconnues : le syst\u00e8me est tr\u00e8s surcharg\u00e9',120,290); }},
-    {leg:'Mais ces 6 \u00e9quations ne disent pas 6 choses diff\u00e9rentes : beaucoup r\u00e9p\u00e8tent ce que d\u2019autres affirment d\u00e9j\u00e0. Le nombre d\u2019\u00e9quations <b>r\u00e9ellement ind\u00e9pendantes</b> s\u2019appelle le <b>rang r<sub>c</sub></b> : ici r<sub>c</sub> = 1.',
-     draw:function(g,t){
-       grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
-       var s=26;
-       for(var i=0;i<6;i++){
-         var cx=120+i*s, indep=(i===0);
-         g.fillStyle= indep? '#e7eef2':'#f3efe6';
-         g.strokeStyle= indep? '#2E6A8E':'#c8bfae'; g.lineWidth=2;
-         g.beginPath(); g.rect(cx,190,s-6,s-6); g.fill(); g.stroke();
-         if(!indep){ g.strokeStyle='#C0492E'; g.lineWidth=1.8;
-           g.beginPath(); g.moveTo(cx+3,193); g.lineTo(cx+17,207); g.moveTo(cx+17,193); g.lineTo(cx+3,207); g.stroke(); }
-       }
-       g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('E_c = 6 \u00e9quations, dont r_c = 1 ind\u00e9pendante',120,180);
-       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('les 5 autres sont redondantes \u2192 elles deviennent des CONTRAINTES',120,290); }},
-    {leg:'On lit alors tout : les inconnues que les \u00e9quations ne fixent pas restent <b>libres</b> \u2192 <b>m = I<sub>c</sub> \u2212 r<sub>c</sub> = 1</b> (l\u2019arbre tourne). Les \u00e9quations en trop \u2192 <b>h = E<sub>c</sub> \u2212 r<sub>c</sub> = 5</b>.',
-     draw:function(g,t){
-       g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='left';
-       g.fillText('m = I_c \u2212 r_c = 2 \u2212 1 = 1',120,90);
-       g.fillStyle='#C0492E';
-       g.fillText('h = E_c \u2212 r_c = 6 \u2212 1 = 5',120,124);
-       g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
-       g.beginPath(); g.moveTo(110,146); g.lineTo(560,146); g.stroke();
-       g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
-       g.fillText('on soustrait :  m \u2212 h = I_c \u2212 E_c',120,178);
-       g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('le rang r_c dispara\u00eet des deux c\u00f4t\u00e9s',120,204);
-       g.fillStyle='#2E6A8E'; g.font='800 22px "JetBrains Mono",monospace';
-       g.fillText('h = m + E_c \u2212 I_c',120,254);
-       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('v\u00e9rification : 1 + 6 \u2212 2 = 5 \u2713',120,286); }}
+ {leg:'Prenons l\u2019arbre sur deux pivots. Les <b>inconnues</b> du probl\u00e8me cin\u00e9matique, ce sont les degr\u00e9s de libert\u00e9 des liaisons : 1 par pivot, soit <b>I<sub>c</sub> = 2</b>.',
+ draw:function(g,t){
+ grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues (les ddl des liaisons)');
+ g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('une inconnue = une vitesse que la liaison autorise',120,190); }},
+ {leg:'Le graphe a un cycle. Le refermer dans l\u2019espace impose <b>6 \u00e9quations</b> (3 de translation, 3 de rotation) : <b>E<sub>c</sub> = 6</b>.',
+ draw:function(g,t){
+ grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
+ grille(g,120,190,6,6,'#2E6A8E','#e7eef2','E_c = 6 \u00e9quations (fermeture du cycle)');
+ g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('6 \u00e9quations pour 2 inconnues : le syst\u00e8me est tr\u00e8s surcharg\u00e9',120,290); }},
+ {leg:'Mais ces 6 \u00e9quations ne disent pas 6 choses diff\u00e9rentes : beaucoup r\u00e9p\u00e8tent ce que d\u2019autres affirment d\u00e9j\u00e0. Le nombre d\u2019\u00e9quations <b>r\u00e9ellement ind\u00e9pendantes</b> s\u2019appelle le <b>rang r<sub>c</sub></b> : ici r<sub>c</sub> = 1.',
+ draw:function(g,t){
+ grille(g,120,90,2,6,'#3D7E5F','#eef6f0','I_c = 2 inconnues');
+ var s=26;
+ for(var i=0;i<6;i++){
+ var cx=120+i*s, indep=(i===0);
+ g.fillStyle= indep? '#e7eef2':'#f3efe6';
+ g.strokeStyle= indep? '#2E6A8E':'#c8bfae'; g.lineWidth=2;
+ g.beginPath(); g.rect(cx,190,s-6,s-6); g.fill(); g.stroke();
+ if(!indep){ g.strokeStyle='#C0492E'; g.lineWidth=1.8;
+ g.beginPath(); g.moveTo(cx+3,193); g.lineTo(cx+17,207); g.moveTo(cx+17,193); g.lineTo(cx+3,207); g.stroke(); }
+ }
+ g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('E_c = 6 \u00e9quations, dont r_c = 1 ind\u00e9pendante',120,180);
+ g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('les 5 autres sont redondantes \u2192 elles deviennent des CONTRAINTES',120,290); }},
+ {leg:'On lit alors tout : les inconnues que les \u00e9quations ne fixent pas restent <b>libres</b> \u2192 <b>m = I<sub>c</sub> \u2212 r<sub>c</sub> = 1</b> (l\u2019arbre tourne). Les \u00e9quations en trop \u2192 <b>h = E<sub>c</sub> \u2212 r<sub>c</sub> = 5</b>.',
+ draw:function(g,t){
+ g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace'; g.textAlign='left';
+ g.fillText('m = I_c \u2212 r_c = 2 \u2212 1 = 1',120,90);
+ g.fillStyle='#C0492E';
+ g.fillText('h = E_c \u2212 r_c = 6 \u2212 1 = 5',120,124);
+ g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
+ g.beginPath(); g.moveTo(110,146); g.lineTo(560,146); g.stroke();
+ g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+ g.fillText('on soustrait :  m \u2212 h = I_c \u2212 E_c',120,178);
+ g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('le rang r_c dispara\u00eet des deux c\u00f4t\u00e9s',120,204);
+ g.fillStyle='#2E6A8E'; g.font='800 22px "JetBrains Mono",monospace';
+ g.fillText('h = m + E_c \u2212 I_c',120,254);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('v\u00e9rification : 1 + 6 \u2212 2 = 5 \u2713',120,286); }}
   ]);
 })();
 
@@ -458,48 +291,48 @@ function rotAxe(g,cx,cy,t){
 (function(){
   var ox=170, oy=210, L1=120, L2=92;
   function bras(g,th,ph,lockA,lockB){
-    var a1=-th*D2R, a2=-(th+ph)*D2R;
-    var jx=ox+L1*Math.cos(a1), jy=oy+L1*Math.sin(a1);
-    var ex=jx+L2*Math.cos(a2), ey=jy+L2*Math.sin(a2);
-    g.fillStyle='#e6ded0'; g.fillRect(ox-50,oy+14,100,24);
-    g.strokeStyle='#b9b1a2'; g.lineWidth=2; g.strokeRect(ox-50,oy+14,100,24);
-    g.strokeStyle='#5C544B'; g.lineWidth=12; g.lineCap='round';
-    g.beginPath(); g.moveTo(ox,oy); g.lineTo(jx,jy); g.stroke();
-    g.strokeStyle='#7d7466'; g.lineWidth=9;
-    g.beginPath(); g.moveTo(jx,jy); g.lineTo(ex,ey); g.stroke(); g.lineCap='butt';
-    [[ox,oy,lockA],[jx,jy,lockB]].forEach(function(p){
-      g.fillStyle=p[2]?'#C0492E':'#BD8A2A';
-      g.beginPath(); g.arc(p[0],p[1],9,0,7); g.fill();
-      if(p[2]){ g.strokeStyle='#C0492E'; g.lineWidth=2.6;
-        g.beginPath(); g.arc(p[0],p[1],15,0,7); g.stroke();
-        g.beginPath(); g.moveTo(p[0]-10,p[1]-10); g.lineTo(p[0]+10,p[1]+10); g.stroke(); }
-    });
-    return {jx:jx,jy:jy,ex:ex,ey:ey};
+ var a1=-th*D2R, a2=-(th+ph)*D2R;
+ var jx=ox+L1*Math.cos(a1), jy=oy+L1*Math.sin(a1);
+ var ex=jx+L2*Math.cos(a2), ey=jy+L2*Math.sin(a2);
+ g.fillStyle='#e6ded0'; g.fillRect(ox-50,oy+14,100,24);
+ g.strokeStyle='#b9b1a2'; g.lineWidth=2; g.strokeRect(ox-50,oy+14,100,24);
+ g.strokeStyle='#5C544B'; g.lineWidth=12; g.lineCap='round';
+ g.beginPath(); g.moveTo(ox,oy); g.lineTo(jx,jy); g.stroke();
+ g.strokeStyle='#7d7466'; g.lineWidth=9;
+ g.beginPath(); g.moveTo(jx,jy); g.lineTo(ex,ey); g.stroke(); g.lineCap='butt';
+ [[ox,oy,lockA],[jx,jy,lockB]].forEach(function(p){
+ g.fillStyle=p[2]?'#C0492E':'#BD8A2A';
+ g.beginPath(); g.arc(p[0],p[1],9,0,7); g.fill();
+ if(p[2]){ g.strokeStyle='#C0492E'; g.lineWidth=2.6;
+ g.beginPath(); g.arc(p[0],p[1],15,0,7); g.stroke();
+ g.beginPath(); g.moveTo(p[0]-10,p[1]-10); g.lineTo(p[0]+10,p[1]+10); g.stroke(); }
+ });
+ return {jx:jx,jy:jy,ex:ex,ey:ey};
   }
   stepper('cvMob','mbPrev','mbNext','mbLeg',[
-    {leg:'Un bras \u00e0 deux articulations. Question : combien vaut sa mobilit\u00e9 m ? On ne compte pas \u2014 <b>on essaie de le bloquer</b>.',
-     draw:function(g,t){ var th=30+18*Math.sin(t*0.7), ph=35+22*Math.sin(t*0.9+1);
-       bras(g,th,ph,false,false);
-       g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('tout bouge : m = ?',540,90); }},
-    {leg:'<b>On bloque la premi\u00e8re articulation</b> (l\u2019\u00e9paule). Le premier segment est fig\u00e9\u2026 mais le second continue de tourner. Il reste donc au moins une mobilit\u00e9.',
-     draw:function(g,t){ var ph=35+22*Math.sin(t*0.9);
-       bras(g,30,ph,true,false);
-       g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
-       g.fillText('\u00e9paule bloqu\u00e9e',540,84);
-       g.fillStyle='#BD8A2A'; g.fillText('\u2192 le coude tourne encore',540,110); }},
-    {leg:'<b>On bloque aussi la seconde</b> (le coude). Cette fois plus rien ne bouge : le m\u00e9canisme est enti\u00e8rement fig\u00e9.',
-     draw:function(g,t){ bras(g,30,35,true,true);
-       g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
-       g.fillText('les deux articulations bloqu\u00e9es',540,84);
-       g.fillStyle='#3D7E5F'; g.fillText('\u2192 plus aucun mouvement possible',540,110); }},
-    {leg:'Il a fallu <b>deux blocages</b> pour tout immobiliser : <b>m = 2</b>. Et cela se recoupe avec le bon sens industriel \u2014 ce bras a bien <b>deux moteurs</b>, un par articulation.',
-     draw:function(g,t){ bras(g,30,35,true,true);
-       g.fillStyle='#2A2622'; g.font='800 26px "JetBrains Mono",monospace';
-       g.fillText('m = 2',540,96);
-       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('2 blocages n\u00e9cessaires',540,126);
-       g.fillText('= 2 moteurs sur la machine',540,148); }}
+ {leg:'Un bras \u00e0 deux articulations. Question : combien vaut sa mobilit\u00e9 m ? On ne compte pas \u2014 <b>on essaie de le bloquer</b>.',
+ draw:function(g,t){ var th=30+18*Math.sin(t*0.7), ph=35+22*Math.sin(t*0.9+1);
+ bras(g,th,ph,false,false);
+ g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('tout bouge : m = ?',540,90); }},
+ {leg:'<b>On bloque la premi\u00e8re articulation</b> (l\u2019\u00e9paule). Le premier segment est fig\u00e9\u2026 mais le second continue de tourner. Il reste donc au moins une mobilit\u00e9.',
+ draw:function(g,t){ var ph=35+22*Math.sin(t*0.9);
+ bras(g,30,ph,true,false);
+ g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+ g.fillText('\u00e9paule bloqu\u00e9e',540,84);
+ g.fillStyle='#BD8A2A'; g.fillText('\u2192 le coude tourne encore',540,110); }},
+ {leg:'<b>On bloque aussi la seconde</b> (le coude). Cette fois plus rien ne bouge : le m\u00e9canisme est enti\u00e8rement fig\u00e9.',
+ draw:function(g,t){ bras(g,30,35,true,true);
+ g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+ g.fillText('les deux articulations bloqu\u00e9es',540,84);
+ g.fillStyle='#3D7E5F'; g.fillText('\u2192 plus aucun mouvement possible',540,110); }},
+ {leg:'Il a fallu <b>deux blocages</b> pour tout immobiliser : <b>m = 2</b>. Et cela se recoupe avec le bon sens industriel \u2014 ce bras a bien <b>deux moteurs</b>, un par articulation.',
+ draw:function(g,t){ bras(g,30,35,true,true);
+ g.fillStyle='#2A2622'; g.font='800 26px "JetBrains Mono",monospace';
+ g.fillText('m = 2',540,96);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('2 blocages n\u00e9cessaires',540,126);
+ g.fillText('= 2 moteurs sur la machine',540,148); }}
   ]);
 })();
 
@@ -507,226 +340,226 @@ function rotAxe(g,cx,cy,t){
 (function(){
   var N=[{x:200,y:230,l:'0',n:'b\u00e2ti'},{x:330,y:110,l:'1',n:'manivelle'},{x:520,y:110,l:'2',n:'bielle'},{x:650,y:230,l:'3',n:'coulisseau'}];
   function noeud(g,p,col){
-    g.fillStyle='#fdfaf2'; g.strokeStyle=col||'#5C544B'; g.lineWidth=2.6;
-    g.beginPath(); g.arc(p.x,p.y,26,0,7); g.fill(); g.stroke();
-    g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText(p.l,p.x,p.y+6);
-    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
-    g.fillText(p.n,p.x,p.y+44); g.textAlign='left';
+ g.fillStyle='#fdfaf2'; g.strokeStyle=col||'#5C544B'; g.lineWidth=2.6;
+ g.beginPath(); g.arc(p.x,p.y,26,0,7); g.fill(); g.stroke();
+ g.fillStyle='#2A2622'; g.font='800 17px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText(p.l,p.x,p.y+6);
+ g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+ g.fillText(p.n,p.x,p.y+44); g.textAlign='left';
   }
   function arete(g,a,b,col,lab,w){
-    g.strokeStyle=col; g.lineWidth=w||3;
-    g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b.x,b.y); g.stroke();
-    if(lab){ g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-      g.fillText(lab,(a.x+b.x)/2,(a.y+b.y)/2-10); g.textAlign='left'; }
+ g.strokeStyle=col; g.lineWidth=w||3;
+ g.beginPath(); g.moveTo(a.x,a.y); g.lineTo(b.x,b.y); g.stroke();
+ if(lab){ g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText(lab,(a.x+b.x)/2,(a.y+b.y)/2-10); g.textAlign='left'; }
   }
   function meca(g){
-    /* petit dessin du système bielle-manivelle */
-    g.strokeStyle='#c8bfae'; g.lineWidth=2;
-    g.strokeRect(600,20,240,120);
-    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace';
-    g.fillText('le m\u00e9canisme',610,36);
-    g.strokeStyle='#5C544B'; g.lineWidth=5; g.lineCap='round';
-    g.beginPath(); g.moveTo(650,110); g.lineTo(690,70); g.stroke();
-    g.beginPath(); g.moveTo(690,70); g.lineTo(770,100); g.stroke();
-    g.fillStyle='#BD8A2A'; g.fillRect(770,88,40,24);
-    g.fillStyle='#5C544B'; g.beginPath(); g.arc(650,110,5,0,7); g.fill();
-    g.beginPath(); g.arc(690,70,4,0,7); g.fill();
-    g.beginPath(); g.arc(770,100,4,0,7); g.fill();
-    g.strokeStyle='#8c8578'; g.lineWidth=2;
-    g.beginPath(); g.moveTo(760,120); g.lineTo(830,120); g.stroke();
+ /* petit dessin du système bielle-manivelle */
+ g.strokeStyle='#c8bfae'; g.lineWidth=2;
+ g.strokeRect(600,20,240,120);
+ g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace';
+ g.fillText('le m\u00e9canisme',610,36);
+ g.strokeStyle='#5C544B'; g.lineWidth=5; g.lineCap='round';
+ g.beginPath(); g.moveTo(650,110); g.lineTo(690,70); g.stroke();
+ g.beginPath(); g.moveTo(690,70); g.lineTo(770,100); g.stroke();
+ g.fillStyle='#BD8A2A'; g.fillRect(770,88,40,24);
+ g.fillStyle='#5C544B'; g.beginPath(); g.arc(650,110,5,0,7); g.fill();
+ g.beginPath(); g.arc(690,70,4,0,7); g.fill();
+ g.beginPath(); g.arc(770,100,4,0,7); g.fill();
+ g.strokeStyle='#8c8578'; g.lineWidth=2;
+ g.beginPath(); g.moveTo(760,120); g.lineTo(830,120); g.stroke();
   }
   stepper('cvGraphe','grPrev','grNext','grLeg',[
-    {leg:'Un système bielle-manivelle : b\u00e2ti, manivelle, bielle, coulisseau. On pose <b>un rond par solide</b> \u2014 sans oublier le b\u00e2ti, qui compte comme un solide.',
-     draw:function(g,t){ meca(g); N.forEach(function(p){ noeud(g,p); });
-       g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('n = 4 solides (b\u00e2ti compris)',200,300); }},
-    {leg:'On relie ensuite par <b>un trait par liaison</b> : trois pivots et une glissi\u00e8re. Voil\u00e0 le graphe des liaisons.',
-     draw:function(g,t){ meca(g);
-       arete(g,N[0],N[1],'#2E6A8E','pivot'); arete(g,N[1],N[2],'#2E6A8E','pivot');
-       arete(g,N[2],N[3],'#2E6A8E','pivot'); arete(g,N[3],N[0],'#BD8A2A','glissi\u00e8re');
-       N.forEach(function(p){ noeud(g,p); });
-       g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('n = 4 solides   \u00b7   L = 4 liaisons',200,300); }},
-    {leg:'Le graphe forme une <b>boucle ferm\u00e9e</b> : c\u2019est un cycle. On le compte avec γ = L − n + 1 = 4 − 4 + 1 = <b>1 cycle</b>.',
-     draw:function(g,t){ meca(g);
-       var pulse=3+Math.sin(t*4)*1.5;
-       g.strokeStyle='rgba(192,73,46,.35)'; g.lineWidth=14+pulse;
-       g.beginPath(); g.moveTo(N[0].x,N[0].y); g.lineTo(N[1].x,N[1].y);
-       g.lineTo(N[2].x,N[2].y); g.lineTo(N[3].x,N[3].y); g.closePath(); g.stroke();
-       arete(g,N[0],N[1],'#2E6A8E','pivot'); arete(g,N[1],N[2],'#2E6A8E','pivot');
-       arete(g,N[2],N[3],'#2E6A8E','pivot'); arete(g,N[3],N[0],'#BD8A2A','glissi\u00e8re');
-       N.forEach(function(p){ noeud(g,p); });
-       g.fillStyle='#C0492E'; g.font='800 17px "JetBrains Mono",monospace';
-       g.fillText('\u03b3 = L \u2212 n + 1 = 4 \u2212 4 + 1 = 1',200,300); }},
-    {leg:'Chaque cycle impose de <b>« revenir au point de départ »</b> : c\u2019est ce qui fournit les équations. Un cycle dans l\u2019espace = <b>6 équations</b>, dans le plan = <b>3 équations</b>.',
-     draw:function(g,t){ meca(g);
-       arete(g,N[0],N[1],'#c8bfae'); arete(g,N[1],N[2],'#c8bfae');
-       arete(g,N[2],N[3],'#c8bfae'); arete(g,N[3],N[0],'#c8bfae');
-       N.forEach(function(p){ noeud(g,p,'#c8bfae'); });
-       /* parcours animé du cycle */
-       var pos=(t*0.4)%4, i=Math.floor(pos), f=pos-i;
-       var a=N[i], b=N[(i+1)%4];
-       g.fillStyle='#C0492E'; g.beginPath();
-       g.arc(a.x+(b.x-a.x)*f, a.y+(b.y-a.y)*f, 9,0,7); g.fill();
-       g.fillStyle='#2A2622'; g.font='800 16px "JetBrains Mono",monospace';
-       g.fillText('E_c = 6\u03b3 = 6   (espace)',200,286);
-       g.fillStyle='#8A5A7A';
-       g.fillText('E_c = 3\u03b3 = 3   (plan)',200,312); }}
+ {leg:'Un système bielle-manivelle : b\u00e2ti, manivelle, bielle, coulisseau. On pose <b>un rond par solide</b> \u2014 sans oublier le b\u00e2ti, qui compte comme un solide.',
+ draw:function(g,t){ meca(g); N.forEach(function(p){ noeud(g,p); });
+ g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('n = 4 solides (b\u00e2ti compris)',200,300); }},
+ {leg:'On relie ensuite par <b>un trait par liaison</b> : trois pivots et une glissi\u00e8re. Voil\u00e0 le graphe des liaisons.',
+ draw:function(g,t){ meca(g);
+ arete(g,N[0],N[1],'#2E6A8E','pivot'); arete(g,N[1],N[2],'#2E6A8E','pivot');
+ arete(g,N[2],N[3],'#2E6A8E','pivot'); arete(g,N[3],N[0],'#BD8A2A','glissi\u00e8re');
+ N.forEach(function(p){ noeud(g,p); });
+ g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('n = 4 solides \u00b7 L = 4 liaisons',200,300); }},
+ {leg:'Le graphe forme une <b>boucle ferm\u00e9e</b> : c\u2019est un cycle. On le compte avec γ = L − n + 1 = 4 − 4 + 1 = <b>1 cycle</b>.',
+ draw:function(g,t){ meca(g);
+ var pulse=3+Math.sin(t*4)*1.5;
+ g.strokeStyle='rgba(192,73,46,.35)'; g.lineWidth=14+pulse;
+ g.beginPath(); g.moveTo(N[0].x,N[0].y); g.lineTo(N[1].x,N[1].y);
+ g.lineTo(N[2].x,N[2].y); g.lineTo(N[3].x,N[3].y); g.closePath(); g.stroke();
+ arete(g,N[0],N[1],'#2E6A8E','pivot'); arete(g,N[1],N[2],'#2E6A8E','pivot');
+ arete(g,N[2],N[3],'#2E6A8E','pivot'); arete(g,N[3],N[0],'#BD8A2A','glissi\u00e8re');
+ N.forEach(function(p){ noeud(g,p); });
+ g.fillStyle='#C0492E'; g.font='800 17px "JetBrains Mono",monospace';
+ g.fillText('\u03b3 = L \u2212 n + 1 = 4 \u2212 4 + 1 = 1',200,300); }},
+ {leg:'Chaque cycle impose de <b>« revenir au point de départ »</b> : c\u2019est ce qui fournit les équations. Un cycle dans l\u2019espace = <b>6 équations</b>, dans le plan = <b>3 équations</b>.',
+ draw:function(g,t){ meca(g);
+ arete(g,N[0],N[1],'#c8bfae'); arete(g,N[1],N[2],'#c8bfae');
+ arete(g,N[2],N[3],'#c8bfae'); arete(g,N[3],N[0],'#c8bfae');
+ N.forEach(function(p){ noeud(g,p,'#c8bfae'); });
+ /* parcours animé du cycle */
+ var pos=(t*0.4)%4, i=Math.floor(pos), f=pos-i;
+ var a=N[i], b=N[(i+1)%4];
+ g.fillStyle='#C0492E'; g.beginPath();
+ g.arc(a.x+(b.x-a.x)*f, a.y+(b.y-a.y)*f, 9,0,7); g.fill();
+ g.fillStyle='#2A2622'; g.font='800 16px "JetBrains Mono",monospace';
+ g.fillText('E_c = 6\u03b3 = 6 (espace)',200,286);
+ g.fillStyle='#8A5A7A';
+ g.fillText('E_c = 3\u03b3 = 3 (plan)',200,312); }}
   ]);
 })();
 
 /* ============ s5 : arbre sur deux pivots ============ */
 (function(){
   function scene(g){
-    bati(g,120,238,560);
-    palier(g,230,180,'#2E6A8E','pivot'); palier(g,570,180,'#2E6A8E','pivot');
-    arbre(g,180,620,180,0);
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('arbre (1)',380,166); g.fillText('b\u00e2ti (0)',380,266);
+ bati(g,120,238,560);
+ palier(g,230,180,'#2E6A8E','pivot'); palier(g,570,180,'#2E6A8E','pivot');
+ arbre(g,180,620,180,0);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('arbre (1)',380,166); g.fillText('b\u00e2ti (0)',380,266);
   }
   function ligne(g,y,txt,col,size){
-    g.fillStyle=col||'#2A2622'; g.font='700 '+(size||15)+'px "JetBrains Mono",monospace';
-    g.fillText(txt,700,y);
+ g.fillStyle=col||'#2A2622'; g.font='700 '+(size||15)+'px "JetBrains Mono",monospace';
+ g.fillText(txt,700,y);
   }
   stepper('cvCalc1','c1Prev','c1Next','c1Leg',[
-    {leg:'<b>Temps 1 \u2014 le graphe.</b> Deux solides seulement : l\u2019arbre et le b\u00e2ti. Deux liaisons pivot entre eux. Donc n = 2 et L = 2.',
-     draw:function(g,t){ scene(g);
-       ligne(g,70,'n = 2 solides'); ligne(g,96,'L = 2 liaisons'); }},
-    {leg:'<b>Temps 2 \u2014 les cycles.</b> γ = L − n + 1 = 2 − 2 + 1 = <b>1</b>. Étude dans l\u2019espace : E<sub>c</sub> = 6 × 1 = <b>6 équations</b>.',
-     draw:function(g,t){ scene(g);
-       ligne(g,70,'n = 2   L = 2'); ligne(g,96,'\u03b3 = 2 \u2212 2 + 1 = 1','#C0492E');
-       ligne(g,126,'E_c = 6 \u00d7 1 = 6','#2E6A8E'); }},
-    {leg:'<b>Temps 3 \u2014 les inconnues.</b> Chaque pivot n\u2019offre qu\u2019un seul degré de liberté : I<sub>c</sub> = 1 + 1 = <b>2</b>.',
-     draw:function(g,t){ scene(g);
-       ligne(g,70,'n = 2   L = 2'); ligne(g,96,'\u03b3 = 1'); ligne(g,122,'E_c = 6','#2E6A8E');
-       ligne(g,152,'I_c = 1 + 1 = 2','#3D7E5F'); }},
-    {leg:'<b>Temps 4 \u2014 la mobilité.</b> L\u2019arbre tourne : un seul mouvement possible, donc <b>m = 1</b>.',
-     draw:function(g,t){ scene(g);
-       rotAxe(g,400,180,t);
-       g.fillStyle='#8a6313'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
-       g.fillText('rotation autour de l\u2019axe',400,180+34); g.textAlign='left';
-       ligne(g,70,'\u03b3 = 1'); ligne(g,96,'E_c = 6','#2E6A8E'); ligne(g,122,'I_c = 2','#3D7E5F');
-       ligne(g,152,'m = 1','#BD8A2A'); }},
-    {leg:'<b>Temps 5 \u2014 le résultat.</b> h = m + E<sub>c</sub> − I<sub>c</sub> = 1 + 6 − 2 = <b>5</b>. Cinq contraintes géométriques en trop : ce montage exige une coaxialité quasi parfaite.',
-     draw:function(g,t){ scene(g);
-       ligne(g,70,'\u03b3 = 1'); ligne(g,96,'E_c = 6','#2E6A8E'); ligne(g,122,'I_c = 2','#3D7E5F'); ligne(g,148,'m = 1','#BD8A2A');
-       g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
-       g.beginPath(); g.moveTo(700,164); g.lineTo(846,164); g.stroke();
-       ligne(g,196,'h = 1 + 6 \u2212 2','#C0492E');
-       ligne(g,232,'h = 5','#C0492E',26);
-       g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('hyperstatique',700,258); }}
+ {leg:'<b>Temps 1 \u2014 le graphe.</b> Deux solides seulement : l\u2019arbre et le b\u00e2ti. Deux liaisons pivot entre eux. Donc n = 2 et L = 2.',
+ draw:function(g,t){ scene(g);
+ ligne(g,70,'n = 2 solides'); ligne(g,96,'L = 2 liaisons'); }},
+ {leg:'<b>Temps 2 \u2014 les cycles.</b> γ = L − n + 1 = 2 − 2 + 1 = <b>1</b>. Étude dans l\u2019espace : E<sub>c</sub> = 6 × 1 = <b>6 équations</b>.',
+ draw:function(g,t){ scene(g);
+ ligne(g,70,'n = 2 L = 2'); ligne(g,96,'\u03b3 = 2 \u2212 2 + 1 = 1','#C0492E');
+ ligne(g,126,'E_c = 6 \u00d7 1 = 6','#2E6A8E'); }},
+ {leg:'<b>Temps 3 \u2014 les inconnues.</b> Chaque pivot n\u2019offre qu\u2019un seul degré de liberté : I<sub>c</sub> = 1 + 1 = <b>2</b>.',
+ draw:function(g,t){ scene(g);
+ ligne(g,70,'n = 2 L = 2'); ligne(g,96,'\u03b3 = 1'); ligne(g,122,'E_c = 6','#2E6A8E');
+ ligne(g,152,'I_c = 1 + 1 = 2','#3D7E5F'); }},
+ {leg:'<b>Temps 4 \u2014 la mobilité.</b> L\u2019arbre tourne : un seul mouvement possible, donc <b>m = 1</b>.',
+ draw:function(g,t){ scene(g);
+ rotAxe(g,400,180,t);
+ g.fillStyle='#8a6313'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('rotation autour de l\u2019axe',400,180+34); g.textAlign='left';
+ ligne(g,70,'\u03b3 = 1'); ligne(g,96,'E_c = 6','#2E6A8E'); ligne(g,122,'I_c = 2','#3D7E5F');
+ ligne(g,152,'m = 1','#BD8A2A'); }},
+ {leg:'<b>Temps 5 \u2014 le résultat.</b> h = m + E<sub>c</sub> − I<sub>c</sub> = 1 + 6 − 2 = <b>5</b>. Cinq contraintes géométriques en trop : ce montage exige une coaxialité quasi parfaite.',
+ draw:function(g,t){ scene(g);
+ ligne(g,70,'\u03b3 = 1'); ligne(g,96,'E_c = 6','#2E6A8E'); ligne(g,122,'I_c = 2','#3D7E5F'); ligne(g,148,'m = 1','#BD8A2A');
+ g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
+ g.beginPath(); g.moveTo(700,164); g.lineTo(846,164); g.stroke();
+ ligne(g,196,'h = 1 + 6 \u2212 2','#C0492E');
+ ligne(g,232,'h = 5','#C0492E',26);
+ g.fillStyle='#C0492E'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('hyperstatique',700,258); }}
   ]);
 })();
 
 /* ============ s6 : le montage isostatique ============ */
 (function(){
   function montage(g,x0,titre,l1,l2,ic,h,col){
-    g.fillStyle='#fdfaf2'; g.strokeStyle=col; g.lineWidth=2.4;
-    g.beginPath(); g.rect(x0,40,390,250); g.fill(); g.stroke();
-    g.fillStyle=col; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText(titre,x0+195,66); g.textAlign='left';
-    bati(g,x0+40,220,310);
-    palier(g,x0+110,166,col,l1); palier(g,x0+280,166,col,l2);
-    arbre(g,x0+70,x0+330,166,0);
-    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
-    g.fillText('I_c = '+ic,x0+30,262);
-    g.fillStyle=col; g.font='800 18px "JetBrains Mono",monospace';
-    g.fillText('h = '+h,x0+300,262);
+ g.fillStyle='#fdfaf2'; g.strokeStyle=col; g.lineWidth=2.4;
+ g.beginPath(); g.rect(x0,40,390,250); g.fill(); g.stroke();
+ g.fillStyle=col; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText(titre,x0+195,66); g.textAlign='left';
+ bati(g,x0+40,220,310);
+ palier(g,x0+110,166,col,l1); palier(g,x0+280,166,col,l2);
+ arbre(g,x0+70,x0+330,166,0);
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('I_c = '+ic,x0+30,262);
+ g.fillStyle=col; g.font='800 18px "JetBrains Mono",monospace';
+ g.fillText('h = '+h,x0+300,262);
   }
   stepper('cvCalc2','c2Prev','c2Next','c2Leg',[
-    {leg:'À gauche, le montage « naturel » : deux pivots. On l\u2019a calculé, il vaut h = 5.',
-     draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E'); }},
-    {leg:'À droite, le montage du bureau d\u2019études : une <b>rotule</b> (3 ddl) et une <b>linéaire annulaire</b> (4 ddl). La rotule positionne, la linéaire annulaire laisse libre.',
-     draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E');
-       montage(g,440,'rotule + lin\u00e9aire annulaire','rotule','lin. annulaire',7,0,'#3D7E5F'); }},
-    {leg:'Le calcul est identique, seul I<sub>c</sub> change : <b>I<sub>c</sub> = 3 + 4 = 7</b>, donc h = 1 + 6 − 7 = <b>0</b>. Même mobilité m = 1 : l\u2019arbre tourne toujours aussi bien.',
-     draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E');
-       montage(g,440,'rotule + lin\u00e9aire annulaire','rotule','lin. annulaire',7,0,'#3D7E5F');
-       g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('h = 1 + 6 \u2212 7 = 0',470,306);
-       g.fillStyle='#C0492E';
-       g.fillText('h = 1 + 6 \u2212 2 = 5',60,306); }},
-    {leg:'Le test qui parle : on d\u00e9saligne le palier de droite. À gauche l\u2019arbre se tord ; à droite, la linéaire annulaire absorbe le d\u00e9faut <b>sans aucune contrainte</b>. Voilà ce que « h = 0 » signifie concrètement.',
-     draw:function(g,t){
-       var d=6+Math.sin(t*2)*0.5;
-       /* gauche : déformé */
-       g.fillStyle='#fdfaf2'; g.strokeStyle='#C0492E'; g.lineWidth=2.4;
-       g.beginPath(); g.rect(30,40,390,250); g.fill(); g.stroke();
-       g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
-       g.fillText('h = 5 : l\u2019arbre se tord',225,66); g.textAlign='left';
-       bati(g,70,220,310);
-       palier(g,140,166,'#C0492E','pivot'); palier(g,310,166-d,'#C0492E','pivot');
-       arbre(g,100,360,166,-d*1.4,'#C0492E');
-       /* droite : libre */
-       g.fillStyle='#fdfaf2'; g.strokeStyle='#3D7E5F'; g.lineWidth=2.4;
-       g.beginPath(); g.rect(440,40,390,250); g.fill(); g.stroke();
-       g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
-       g.fillText('h = 0 : le d\u00e9faut est absorb\u00e9',635,66); g.textAlign='left';
-       bati(g,480,220,310);
-       palier(g,550,166,'#3D7E5F','rotule'); palier(g,720,166-d,'#3D7E5F','lin. annulaire');
-       arbre(g,510,770,166,0,'#3D7E5F');
-       g.fillStyle='#3D7E5F'; g.font='700 11px "JetBrains Mono",monospace';
-       g.fillText('aucune contrainte interne',560,262); }}
+ {leg:'À gauche, le montage « naturel » : deux pivots. On l\u2019a calculé, il vaut h = 5.',
+ draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E'); }},
+ {leg:'À droite, le montage du bureau d\u2019études : une <b>rotule</b> (3 ddl) et une <b>linéaire annulaire</b> (4 ddl). La rotule positionne, la linéaire annulaire laisse libre.',
+ draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E');
+ montage(g,440,'rotule + lin\u00e9aire annulaire','rotule','lin. annulaire',7,0,'#3D7E5F'); }},
+ {leg:'Le calcul est identique, seul I<sub>c</sub> change : <b>I<sub>c</sub> = 3 + 4 = 7</b>, donc h = 1 + 6 − 7 = <b>0</b>. Même mobilité m = 1 : l\u2019arbre tourne toujours aussi bien.',
+ draw:function(g,t){ montage(g,30,'montage \u00e0 deux pivots','pivot','pivot',2,5,'#C0492E');
+ montage(g,440,'rotule + lin\u00e9aire annulaire','rotule','lin. annulaire',7,0,'#3D7E5F');
+ g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('h = 1 + 6 \u2212 7 = 0',470,306);
+ g.fillStyle='#C0492E';
+ g.fillText('h = 1 + 6 \u2212 2 = 5',60,306); }},
+ {leg:'Le test qui parle : on d\u00e9saligne le palier de droite. À gauche l\u2019arbre se tord ; à droite, la linéaire annulaire absorbe le d\u00e9faut <b>sans aucune contrainte</b>. Voilà ce que « h = 0 » signifie concrètement.',
+ draw:function(g,t){
+ var d=6+Math.sin(t*2)*0.5;
+ /* gauche : déformé */
+ g.fillStyle='#fdfaf2'; g.strokeStyle='#C0492E'; g.lineWidth=2.4;
+ g.beginPath(); g.rect(30,40,390,250); g.fill(); g.stroke();
+ g.fillStyle='#C0492E'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('h = 5 : l\u2019arbre se tord',225,66); g.textAlign='left';
+ bati(g,70,220,310);
+ palier(g,140,166,'#C0492E','pivot'); palier(g,310,166-d,'#C0492E','pivot');
+ arbre(g,100,360,166,-d*1.4,'#C0492E');
+ /* droite : libre */
+ g.fillStyle='#fdfaf2'; g.strokeStyle='#3D7E5F'; g.lineWidth=2.4;
+ g.beginPath(); g.rect(440,40,390,250); g.fill(); g.stroke();
+ g.fillStyle='#3D7E5F'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('h = 0 : le d\u00e9faut est absorb\u00e9',635,66); g.textAlign='left';
+ bati(g,480,220,310);
+ palier(g,550,166,'#3D7E5F','rotule'); palier(g,720,166-d,'#3D7E5F','lin. annulaire');
+ arbre(g,510,770,166,0,'#3D7E5F');
+ g.fillStyle='#3D7E5F'; g.font='700 11px "JetBrains Mono",monospace';
+ g.fillText('aucune contrainte interne',560,262); }}
   ]);
 })();
 
 /* ============ s7 : plan ou espace ============ */
 (function(){
   function quatreBarres(g,ox,oy,t,col){
-    var a=t*0.8;
-    var A={x:ox,y:oy}, D={x:ox+180,y:oy};
-    var B={x:A.x+70*Math.cos(a), y:A.y-70*Math.sin(a)};
-    var C={x:D.x+70*Math.cos(a+2.2), y:D.y-70*Math.sin(a+2.2)};
-    g.strokeStyle=col; g.lineWidth=8; g.lineCap='round';
-    [[A,B],[B,C],[C,D]].forEach(function(s){
-      g.beginPath(); g.moveTo(s[0].x,s[0].y); g.lineTo(s[1].x,s[1].y); g.stroke(); });
-    bati(g,ox-30,oy+10,240);
-    g.fillStyle='#BD8A2A';
-    [A,B,C,D].forEach(function(p){ g.beginPath(); g.arc(p.x,p.y,6,0,7); g.fill(); });
+ var a=t*0.8;
+ var A={x:ox,y:oy}, D={x:ox+180,y:oy};
+ var B={x:A.x+70*Math.cos(a), y:A.y-70*Math.sin(a)};
+ var C={x:D.x+70*Math.cos(a+2.2), y:D.y-70*Math.sin(a+2.2)};
+ g.strokeStyle=col; g.lineWidth=8; g.lineCap='round';
+ [[A,B],[B,C],[C,D]].forEach(function(s){
+ g.beginPath(); g.moveTo(s[0].x,s[0].y); g.lineTo(s[1].x,s[1].y); g.stroke(); });
+ bati(g,ox-30,oy+10,240);
+ g.fillStyle='#BD8A2A';
+ [A,B,C,D].forEach(function(p){ g.beginPath(); g.arc(p.x,p.y,6,0,7); g.fill(); });
   }
   stepper('cvPlan','plPrev','plNext','plLeg',[
-    {leg:'Un quatre-barres : quatre solides (b\u00e2ti compris), quatre liaisons pivot. n = 4, L = 4, donc γ = 4 − 4 + 1 = <b>1 cycle</b>. Et sa mobilité vaut m = 1.',
-     draw:function(g,t){ quatreBarres(g,180,200,t,'#5C544B');
-       g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
-       g.fillText('n = 4   \u00b7   L = 4   \u00b7   \u03b3 = 1   \u00b7   m = 1',480,120);
-       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('I_c = 4 pivots \u00d7 1 ddl = 4',480,152); }},
-    {leg:'<b>Étude dans le plan</b> : E<sub>c</sub> = 3γ = 3. Donc h = 1 + 3 − 4 = <b>0</b> : le mécanisme est <b>isostatique</b>. C\u2019est ce que dit le modèle plan.',
-     draw:function(g,t){ quatreBarres(g,180,200,t,'#3D7E5F');
-       g.fillStyle='#3D7E5F'; g.font='700 15px "JetBrains Mono",monospace';
-       g.fillText('MOD\u00c8LE PLAN',480,110);
-       g.fillStyle='#2A2622'; g.fillText('E_c = 3 \u00d7 1 = 3',480,142);
-       g.fillText('I_c = 4',480,168);
-       g.fillStyle='#3D7E5F'; g.font='800 20px "JetBrains Mono",monospace';
-       g.fillText('h = 1 + 3 \u2212 4 = 0',480,210);
-       g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('isostatique',480,238); }},
-    {leg:'<b>Étude dans l\u2019espace</b> : E<sub>c</sub> = 6γ = 6, avec les mêmes 4 inconnues. h = 1 + 6 − 4 = <b>3</b> : le mécanisme est <b>hyperstatique de degré 3</b>.',
-     draw:function(g,t){ quatreBarres(g,180,200,t,'#C0492E');
-       g.fillStyle='#C0492E'; g.font='700 15px "JetBrains Mono",monospace';
-       g.fillText('MOD\u00c8LE SPATIAL',480,110);
-       g.fillStyle='#2A2622'; g.fillText('E_c = 6 \u00d7 1 = 6',480,142);
-       g.fillText('I_c = 4',480,168);
-       g.fillStyle='#C0492E'; g.font='800 20px "JetBrains Mono",monospace';
-       g.fillText('h = 1 + 6 \u2212 4 = 3',480,210);
-       g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('hyperstatique de degr\u00e9 3',480,238); }},
-    {leg:'Les deux résultats sont <b>justes tous les deux</b>. Les 3 contraintes du modèle spatial, ce sont les 3 conditions de <b>parallélisme des quatre axes de pivot</b> : elles sont invisibles dans le plan, mais bien réelles à l\u2019atelier.',
-     draw:function(g,t){ quatreBarres(g,180,210,t,'#8A5A7A');
-       /* axes de pivot en perspective */
-       g.strokeStyle='rgba(138,90,122,.55)'; g.lineWidth=2.4; g.setLineDash([5,4]);
-       [[180,210],[360,210],[250,150],[300,150]].forEach(function(p){
-         g.beginPath(); g.moveTo(p[0]-22,p[1]+14); g.lineTo(p[0]+22,p[1]-14); g.stroke(); });
-       g.setLineDash([]);
-       g.fillStyle='#8A5A7A'; g.font='700 14px "JetBrains Mono",monospace';
-       g.fillText('les 4 axes doivent \u00eatre parall\u00e8les',450,130);
-       g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('\u2192 3 conditions g\u00e9om\u00e9triques = h = 3',450,162);
-       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('invisibles dans le plan\u2026',450,200);
-       g.fillText('\u2026bien r\u00e9elles \u00e0 l\u2019atelier',450,224); }}
+ {leg:'Un quatre-barres : quatre solides (b\u00e2ti compris), quatre liaisons pivot. n = 4, L = 4, donc γ = 4 − 4 + 1 = <b>1 cycle</b>. Et sa mobilité vaut m = 1.',
+ draw:function(g,t){ quatreBarres(g,180,200,t,'#5C544B');
+ g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+ g.fillText('n = 4 \u00b7 L = 4 \u00b7 \u03b3 = 1 \u00b7 m = 1',480,120);
+ g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('I_c = 4 pivots \u00d7 1 ddl = 4',480,152); }},
+ {leg:'<b>Étude dans le plan</b> : E<sub>c</sub> = 3γ = 3. Donc h = 1 + 3 − 4 = <b>0</b> : le mécanisme est <b>isostatique</b>. C\u2019est ce que dit le modèle plan.',
+ draw:function(g,t){ quatreBarres(g,180,200,t,'#3D7E5F');
+ g.fillStyle='#3D7E5F'; g.font='700 15px "JetBrains Mono",monospace';
+ g.fillText('MOD\u00c8LE PLAN',480,110);
+ g.fillStyle='#2A2622'; g.fillText('E_c = 3 \u00d7 1 = 3',480,142);
+ g.fillText('I_c = 4',480,168);
+ g.fillStyle='#3D7E5F'; g.font='800 20px "JetBrains Mono",monospace';
+ g.fillText('h = 1 + 3 \u2212 4 = 0',480,210);
+ g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('isostatique',480,238); }},
+ {leg:'<b>Étude dans l\u2019espace</b> : E<sub>c</sub> = 6γ = 6, avec les mêmes 4 inconnues. h = 1 + 6 − 4 = <b>3</b> : le mécanisme est <b>hyperstatique de degré 3</b>.',
+ draw:function(g,t){ quatreBarres(g,180,200,t,'#C0492E');
+ g.fillStyle='#C0492E'; g.font='700 15px "JetBrains Mono",monospace';
+ g.fillText('MOD\u00c8LE SPATIAL',480,110);
+ g.fillStyle='#2A2622'; g.fillText('E_c = 6 \u00d7 1 = 6',480,142);
+ g.fillText('I_c = 4',480,168);
+ g.fillStyle='#C0492E'; g.font='800 20px "JetBrains Mono",monospace';
+ g.fillText('h = 1 + 6 \u2212 4 = 3',480,210);
+ g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('hyperstatique de degr\u00e9 3',480,238); }},
+ {leg:'Les deux résultats sont <b>justes tous les deux</b>. Les 3 contraintes du modèle spatial, ce sont les 3 conditions de <b>parallélisme des quatre axes de pivot</b> : elles sont invisibles dans le plan, mais bien réelles à l\u2019atelier.',
+ draw:function(g,t){ quatreBarres(g,180,210,t,'#8A5A7A');
+ /* axes de pivot en perspective */
+ g.strokeStyle='rgba(138,90,122,.55)'; g.lineWidth=2.4; g.setLineDash([5,4]);
+ [[180,210],[360,210],[250,150],[300,150]].forEach(function(p){
+ g.beginPath(); g.moveTo(p[0]-22,p[1]+14); g.lineTo(p[0]+22,p[1]-14); g.stroke(); });
+ g.setLineDash([]);
+ g.fillStyle='#8A5A7A'; g.font='700 14px "JetBrains Mono",monospace';
+ g.fillText('les 4 axes doivent \u00eatre parall\u00e8les',450,130);
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('\u2192 3 conditions g\u00e9om\u00e9triques = h = 3',450,162);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('invisibles dans le plan\u2026',450,200);
+ g.fillText('\u2026bien r\u00e9elles \u00e0 l\u2019atelier',450,224); }}
   ]);
 })();
 </script>

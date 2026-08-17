@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   html,body{margin:0}
@@ -53,131 +52,7 @@
   table.rep td b{font-family:'JetBrains Mono',monospace}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Cours — Projections &amp; repères<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="layout">
-    <nav class="snav" id="snav">
-      <a href="#s1">1 · Le problème</a>
-      <a href="#s2">2 · Les deux ombres</a>
-      <a href="#s3">3 · Le chemin inverse</a>
-      <a href="#s4">4 · Adjacent ou opposé ?</a>
-      <a href="#s5">5 · Le repère est un choix</a>
-      <a href="#s6">6 · Le plan incliné</a>
-      <a href="#s7">7 · La méthode en 4 temps</a>
-      <a href="#s8">8 · À retenir</a>
-    </nav>
-
-    <main class="slides">
-
-      <section class="slide" id="s1">
-        <div class="k">Cours · Première spé SI · Statique</div>
-        <h1>Projeter pour résoudre :<br>l’art de changer de repère</h1>
-        <p class="lede">Une force verticale, on sait la manier. Une force horizontale aussi. Mais dès qu’elle penche — un hauban, une élingue, une caisse sur une rampe — elle devient incalculable telle quelle. La solution des ingénieurs tient en un mot : <b>projeter</b>. Et le vrai savoir-faire n’est pas de calculer plus fort, c’est de <b>choisir le bon repère</b>.</p>
-        <div>
-          <span class="tag">Fx = F·cos α</span>
-          <span class="tag">Fy = F·sin α</span>
-          <span class="tag">ΣFx = 0 · ΣFy = 0</span>
-        </div>
-        <div class="hint">🏗️ Ce cours prépare directement le TP de la séance : élingues de levage, plan incliné, nœud de potence et ferrure de façade.</div>
-      </section>
-
-      <section class="slide" id="s2">
-        <div class="k">Slide 2 · Définition</div>
-        <h2>Une force a deux ombres</h2>
-        <p class="lede">Éclaire une force penchée depuis le haut, puis depuis le côté : tu obtiens ses deux <b>ombres</b> sur les axes. Ces ombres sont ses composantes — et elles, on sait les additionner.</p>
-        <div class="big">Fx = F · cos α    Fy = F · sin α<small>α se mesure toujours <b>depuis l’axe x</b>. Les deux composantes remplacent la force : elles produisent exactement le même effet.</small></div>
-        <div class="anim">
-          <canvas id="cvOmbre" width="860" height="330" aria-label="Force qui tourne et ses deux projections sur les axes"></canvas>
-          <div class="ctrl"><button id="omPrev">◀</button><button id="omNext">▶</button><div class="leg" id="omLeg"></div></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s3">
-        <div class="k">Slide 3 · Réciproque</div>
-        <h2>Le chemin inverse</h2>
-        <p class="lede">Un capteur d’effort à deux voies ne mesure jamais la force : il en donne les deux ombres. À l’ingénieur de refermer le rectangle et de reconstituer l’original.</p>
-        <div class="big">F = √(Fx² + Fy²)    tan α = Fy / Fx<small>Pythagore pour l’intensité, arctangente pour la direction. Une force, c’est un couple (intensité ; direction) — jamais un simple nombre.</small></div>
-        <div class="anim">
-          <canvas id="cvInv" width="860" height="320" aria-label="Recomposition d'une force à partir de ses deux composantes"></canvas>
-          <div class="ctrl"><button id="invPrev">◀</button><button id="invNext">▶</button><div class="leg" id="invLeg"></div></div>
-        </div>
-        <div class="hint">📐 60, 80, 100 : c’est le triangle 3-4-5 des maçons, en version force. Un classique qui tombe juste — profites-en pour vérifier tes réflexes.</div>
-      </section>
-
-      <section class="slide" id="s4">
-        <div class="k">Slide 4 · L’erreur n°1</div>
-        <h2>Adjacent ou opposé ?</h2>
-        <p class="lede">Neuf erreurs sur dix en statique viennent d’un sinus mis à la place d’un cosinus. Le remède n’est pas de réciter : c’est de <b>regarder la figure</b>, puis de <b>tester les cas extrêmes</b>.</p>
-        <div class="cols c2">
-          <div class="panel"><h3>Le réflexe visuel</h3><p>La composante <b>collée à l’angle</b> (le côté adjacent) prend le <b>cosinus</b>. Celle d’en face (le côté opposé) prend le <b>sinus</b>. Toujours.</p></div>
-          <div class="panel"><h3>Le test qui sauve</h3><p>Remplace α par <b>0°</b> puis <b>90°</b>. Si la formule donne un résultat absurde dans un de ces deux cas, elle est fausse — et tu le vois en trois secondes.</p></div>
-        </div>
-        <div class="anim">
-          <canvas id="cvTest" width="860" height="300" aria-label="Test des cas extrêmes sur une formule de projection"></canvas>
-          <div class="ctrl"><button id="tsPrev">◀</button><button id="tsNext">▶</button><div class="leg" id="tsLeg"></div></div>
-        </div>
-      </section>
-
-      <section class="slide" id="s5">
-        <div class="k">Slide 5 · L’idée clé</div>
-        <h2>Le repère n’est pas donné : il se choisit</h2>
-        <p class="lede">Les axes ne sont pas peints sur le sol. C’est toi qui les poses — et selon l’endroit où tu les poses, le même problème demande une décomposition… ou trois.</p>
-        <div class="anim">
-          <canvas id="cvChoix" width="860" height="340" aria-label="La même caisse étudiée dans deux repères différents"></canvas>
-          <div class="ctrl"><button id="chPrev">◀</button><button id="chNext">▶</button><div class="leg" id="chLeg"></div></div>
-        </div>
-        <div class="big">Bon repère = celui qui aligne le PLUS de forces sur ses axes<small>Une force déjà portée par un axe n’a pas besoin d’être décomposée : elle entre telle quelle dans l’équation. Chaque décomposition évitée, c’est une erreur en moins.</small></div>
-      </section>
-
-      <section class="slide" id="s6">
-        <div class="k">Slide 6 · Le cas roi</div>
-        <h2>Le plan incliné, démonstration</h2>
-        <p class="lede">Pourquoi le glissement est-il en <b>sinus</b> et l’écrasement en <b>cosinus</b>? Ce n’est pas une convention à apprendre : c’est une conséquence géométrique. En quatre images.</p>
-        <div class="anim">
-          <canvas id="cvPente" width="860" height="360" aria-label="Démonstration géométrique des projections du poids sur un plan incliné"></canvas>
-          <div class="ctrl"><button id="peQPrev">◀</button><button id="peNext">▶</button><div class="leg" id="peLeg"></div></div>
-        </div>
-        <div class="big">Pt = P · sin α  (fait glisser)    Pn = P · cos α  (plaque au sol)<small>Le poids ne change jamais : c’est le repère qu’on incline pour épouser la pente.</small></div>
-      </section>
-
-      <section class="slide" id="s7">
-        <div class="k">Slide 7 · Méthode</div>
-        <h2>Résoudre en 4 temps</h2>
-        <p class="lede">Une fois le repère choisi, la résolution est un rituel. Toujours le même, du nœud de potence au pont en treillis.</p>
-        <div class="anim">
-          <canvas id="cvMeth" width="860" height="340" aria-label="Méthode de résolution appliquée au nœud de potence"></canvas>
-          <div class="ctrl"><button id="mePrev">◀</button><button id="meNext">▶</button><div class="leg" id="meLeg"></div></div>
-        </div>
-        <table class="rep">
-          <tr><th>temps</th><th>geste</th><th>piège à éviter</th></tr>
-          <tr><td><b>1</b></td><td>Isoler le point ou le solide</td><td>oublier une force extérieure</td></tr>
-          <tr><td><b>2</b></td><td>Choisir le repère qui aligne le plus de forces</td><td>prendre l’horizontal par habitude</td></tr>
-          <tr><td><b>3</b></td><td>Projeter chaque force, <b>avec son signe</b></td><td>confondre adjacent et opposé</td></tr>
-          <tr><td><b>4</b></td><td>Commencer par l’équation à <b>une seule inconnue</b></td><td>se lancer dans un système inutile</td></tr>
-        </table>
-      </section>
-
-      <section class="slide" id="s8">
-        <div class="k">Slide 8 · Synthèse</div>
-        <h2>À retenir</h2>
-        <div class="big">F  ⇄  (Fx ; Fy)<small>Vers la droite : PROJETER (cos pour l’adjacent, sin pour l’opposé). Vers la gauche : RECOMPOSER (Pythagore + arctangente).</small></div>
-        <div class="cols c3">
-          <div class="panel"><h3>Réflexe figure</h3><p>Ne récite pas la formule : regarde où est l’angle. Adjacent → cos, opposé → sin.</p></div>
-          <div class="panel"><h3>Réflexe repère</h3><p>Avant de calculer, demande-toi quel repère aligne le plus de forces. C’est là qu’on gagne du temps.</p></div>
-          <div class="panel"><h3>Réflexe extrêmes</h3><p>Teste 0° et 90° sur ta formule. Une erreur de sin/cos se trahit toujours.</p></div>
-        </div>
-        <div class="warn">⚠️ Et le piège de la séance : dans une élingue à deux brins, chaque brin ne porte <b>pas</b> la moitié de la charge. À 60° d’écartement, il en porte la totalité. On le vérifiera au simulateur du TP.</div>
-      </section>
-
-    </main>
-  </div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Cours — Projections &amp; repères<br>© ESTIC — Tous droits réservés</div></div> <div class="layout"><nav class="snav" id="snav"> <a href="#s1">1 · Le problème</a> <a href="#s2">2 · Les deux ombres</a> <a href="#s3">3 · Le chemin inverse</a> <a href="#s4">4 · Adjacent ou opposé ?</a> <a href="#s5">5 · Le repère est un choix</a> <a href="#s6">6 · Le plan incliné</a> <a href="#s7">7 · La méthode en 4 temps</a> <a href="#s8">8 · À retenir</a> </nav> <main class="slides"> <section class="slide" id="s1"> <div class="k">Cours · Première spé SI · Statique</div> <h1>Projeter pour résoudre :<br>l’art de changer de repère</h1> <p class="lede">Une force verticale, on sait la manier. Une force horizontale aussi. Mais dès qu’elle penche — un hauban, une élingue, une caisse sur une rampe — elle devient incalculable telle quelle. La solution des ingénieurs tient en un mot : <b>projeter</b>. Et le vrai savoir-faire n’est pas de calculer plus fort, c’est de <b>choisir le bon repère</b>.</p> <div><span class="tag">Fx = F·cos α</span> <span class="tag">Fy = F·sin α</span> <span class="tag">ΣFx = 0 · ΣFy = 0</span></div> <div class="hint">Ce cours prépare directement le TP de la séance : élingues de levage, plan incliné, nœud de potence et ferrure de façade.</div> </section> <section class="slide" id="s2"> <div class="k">Slide 2 · Définition</div> <h2>Une force a deux ombres</h2> <p class="lede">Éclaire une force penchée depuis le haut, puis depuis le côté : tu obtiens ses deux <b>ombres</b> sur les axes. Ces ombres sont ses composantes — et elles, on sait les additionner.</p> <div class="big">Fx = F · cos α Fy = F · sin α<small>α se mesure toujours <b>depuis l’axe x</b>. Les deux composantes remplacent la force : elles produisent exactement le même effet.</small></div> <div class="anim"><canvas id="cvOmbre" width="860" height="330" aria-label="Force qui tourne et ses deux projections sur les axes"></canvas> <div class="ctrl"><button id="omPrev">◀</button><button id="omNext">▶</button><div class="leg" id="omLeg"></div></div></div> </section> <section class="slide" id="s3"> <div class="k">Slide 3 · Réciproque</div> <h2>Le chemin inverse</h2> <p class="lede">Un capteur d’effort à deux voies ne mesure jamais la force : il en donne les deux ombres. À l’ingénieur de refermer le rectangle et de reconstituer l’original.</p> <div class="big">F = √(Fx² + Fy²) tan α = Fy / Fx<small>Pythagore pour l’intensité, arctangente pour la direction. Une force, c’est un couple (intensité ; direction) — jamais un simple nombre.</small></div> <div class="anim"><canvas id="cvInv" width="860" height="320" aria-label="Recomposition d'une force à partir de ses deux composantes"></canvas> <div class="ctrl"><button id="invPrev">◀</button><button id="invNext">▶</button><div class="leg" id="invLeg"></div></div></div> <div class="hint">60, 80, 100 : c’est le triangle 3-4-5 des maçons, en version force. Un classique qui tombe juste — profites-en pour vérifier tes réflexes.</div> </section> <section class="slide" id="s4"> <div class="k">Slide 4 · L’erreur n°1</div> <h2>Adjacent ou opposé ?</h2> <p class="lede">Neuf erreurs sur dix en statique viennent d’un sinus mis à la place d’un cosinus. Le remède n’est pas de réciter : c’est de <b>regarder la figure</b>, puis de <b>tester les cas extrêmes</b>.</p> <div class="cols c2"><div class="panel"><h3>Le réflexe visuel</h3><p>La composante <b>collée à l’angle</b> (le côté adjacent) prend le <b>cosinus</b>. Celle d’en face (le côté opposé) prend le <b>sinus</b>. Toujours.</p></div> <div class="panel"><h3>Le test qui sauve</h3><p>Remplace α par <b>0°</b> puis <b>90°</b>. Si la formule donne un résultat absurde dans un de ces deux cas, elle est fausse — et tu le vois en trois secondes.</p></div></div> <div class="anim"><canvas id="cvTest" width="860" height="300" aria-label="Test des cas extrêmes sur une formule de projection"></canvas> <div class="ctrl"><button id="tsPrev">◀</button><button id="tsNext">▶</button><div class="leg" id="tsLeg"></div></div></div> </section> <section class="slide" id="s5"> <div class="k">Slide 5 · L’idée clé</div> <h2>Le repère n’est pas donné : il se choisit</h2> <p class="lede">Les axes ne sont pas peints sur le sol. C’est toi qui les poses — et selon l’endroit où tu les poses, le même problème demande une décomposition… ou trois.</p> <div class="anim"><canvas id="cvChoix" width="860" height="340" aria-label="La même caisse étudiée dans deux repères différents"></canvas> <div class="ctrl"><button id="chPrev">◀</button><button id="chNext">▶</button><div class="leg" id="chLeg"></div></div></div> <div class="big">Bon repère = celui qui aligne le PLUS de forces sur ses axes<small>Une force déjà portée par un axe n’a pas besoin d’être décomposée : elle entre telle quelle dans l’équation. Chaque décomposition évitée, c’est une erreur en moins.</small></div> </section> <section class="slide" id="s6"> <div class="k">Slide 6 · Le cas roi</div> <h2>Le plan incliné, démonstration</h2> <p class="lede">Pourquoi le glissement est-il en <b>sinus</b> et l’écrasement en <b>cosinus</b>? Ce n’est pas une convention à apprendre : c’est une conséquence géométrique. En quatre images.</p> <div class="anim"><canvas id="cvPente" width="860" height="360" aria-label="Démonstration géométrique des projections du poids sur un plan incliné"></canvas> <div class="ctrl"><button id="peQPrev">◀</button><button id="peNext">▶</button><div class="leg" id="peLeg"></div></div></div> <div class="big">Pt = P · sin α  (fait glisser) Pn = P · cos α  (plaque au sol)<small>Le poids ne change jamais : c’est le repère qu’on incline pour épouser la pente.</small></div> </section> <section class="slide" id="s7"> <div class="k">Slide 7 · Méthode</div> <h2>Résoudre en 4 temps</h2> <p class="lede">Une fois le repère choisi, la résolution est un rituel. Toujours le même, du nœud de potence au pont en treillis.</p> <div class="anim"><canvas id="cvMeth" width="860" height="340" aria-label="Méthode de résolution appliquée au nœud de potence"></canvas> <div class="ctrl"><button id="mePrev">◀</button><button id="meNext">▶</button><div class="leg" id="meLeg"></div></div></div> <table class="rep"> <tr><th>temps</th><th>geste</th><th>piège à éviter</th></tr> <tr><td><b>1</b></td><td>Isoler le point ou le solide</td><td>oublier une force extérieure</td></tr> <tr><td><b>2</b></td><td>Choisir le repère qui aligne le plus de forces</td><td>prendre l’horizontal par habitude</td></tr> <tr><td><b>3</b></td><td>Projeter chaque force, <b>avec son signe</b></td><td>confondre adjacent et opposé</td></tr> <tr><td><b>4</b></td><td>Commencer par l’équation à <b>une seule inconnue</b></td><td>se lancer dans un système inutile</td></tr> </table> </section> <section class="slide" id="s8"> <div class="k">Slide 8 · Synthèse</div> <h2>À retenir</h2> <div class="big">F  ⇄  (Fx ; Fy)<small>Vers la droite : PROJETER (cos pour l’adjacent, sin pour l’opposé). Vers la gauche : RECOMPOSER (Pythagore + arctangente).</small></div> <div class="cols c3"><div class="panel"><h3>Réflexe figure</h3><p>Ne récite pas la formule : regarde où est l’angle. Adjacent → cos, opposé → sin.</p></div> <div class="panel"><h3>Réflexe repère</h3><p>Avant de calculer, demande-toi quel repère aligne le plus de forces. C’est là qu’on gagne du temps.</p></div> <div class="panel"><h3>Réflexe extrêmes</h3><p>Teste 0° et 90° sur ta formule. Une erreur de sin/cos se trahit toujours.</p></div></div> <div class="warn">Et le piège de la séance : dans une élingue à deux brins, chaque brin ne porte <b>pas</b> la moitié de la charge. À 60° d’écartement, il en porte la totalité. On le vérifiera au simulateur du TP.</div> </section> </main></div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var D2R=Math.PI/180;
@@ -188,21 +63,21 @@ var fr=function(x){ return String(x).replace('.',','); };
   var links=document.querySelectorAll('#snav a'), map={};
   links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
   var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
-        var a=map[en.target.id]; if(a) a.classList.add('on'); }
-    });
+ entries.forEach(function(en){
+ if(en.isIntersecting){ links.forEach(function(a){a.classList.remove('on');});
+ var a=map[en.target.id]; if(a) a.classList.add('on'); }
+ });
   },{rootMargin:'-40% 0px -50% 0px'});
   document.querySelectorAll('.slide').forEach(function(s){ obs.observe(s); });
 })();
 (function(){
   var ids=['s1','s2','s3','s4','s5','s6','s7','s8'];
   function current(){ var best=0,bd=1e9;
-    ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
-    return best; }
+ ids.forEach(function(id,i){ var r=el(id).getBoundingClientRect(); var d=Math.abs(r.top-80); if(d<bd){bd=d;best=i;} });
+ return best; }
   document.addEventListener('keydown',function(ev){
-    if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault(); el(ids[Math.min(ids.length-1,current()+1)]).scrollIntoView({behavior:'smooth'}); }
-    if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault(); el(ids[Math.max(0,current()-1)]).scrollIntoView({behavior:'smooth'}); }
+ if(ev.key==='ArrowDown'||ev.key==='PageDown'){ ev.preventDefault(); el(ids[Math.min(ids.length-1,current()+1)]).scrollIntoView({behavior:'smooth'}); }
+ if(ev.key==='ArrowUp'||ev.key==='PageUp'){ ev.preventDefault(); el(ids[Math.max(0,current()-1)]).scrollIntoView({behavior:'smooth'}); }
   });
 })();
 
@@ -211,8 +86,8 @@ function stepper(cvId, prevId, nextId, legId, phases){
   var cv=el(cvId); if(!cv||!cv.getContext) return;
   var g=cv.getContext('2d'), idx=0, t=0;
   function show(){ t=0;
-    el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
-    el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
+ el(legId).innerHTML='<b>étape '+(idx+1)+'/'+phases.length+'</b> — '+phases[idx].leg;
+ el(prevId).disabled=(idx===0); el(nextId).disabled=(idx===phases.length-1); }
   el(prevId).addEventListener('click',function(){ if(idx>0){ idx--; show(); } });
   el(nextId).addEventListener('click',function(){ if(idx<phases.length-1){ idx++; show(); } });
   setInterval(function(){ t+=0.033; g.clearRect(0,0,cv.width,cv.height); phases[idx].draw(g,t); },40);
@@ -232,7 +107,7 @@ function arcAngle(g,cx,cy,r,a0,a1,col,lab){
   g.strokeStyle=col; g.lineWidth=2.2;
   g.beginPath(); g.arc(cx,cy,r,a0,a1,a1<a0); g.stroke();
   if(lab){ var am=(a0+a1)/2; g.fillStyle=col; g.font='700 13px "JetBrains Mono",monospace';
-    g.fillText(lab,cx+Math.cos(am)*(r+18)-10,cy+Math.sin(am)*(r+18)+5); }
+ g.fillText(lab,cx+Math.cos(am)*(r+18)-10,cy+Math.sin(am)*(r+18)+5); }
 }
 function axes(g,ox,oy,w,h){
   g.strokeStyle='#5C544B'; g.lineWidth=2;
@@ -245,40 +120,40 @@ function axes(g,ox,oy,w,h){
 (function(){
   var F=200, SC=0.62, ox=150, oy=250;
   function scene(g,ang,showX,showY,lampe){
-    axes(g,ox,oy,380,200);
-    var fx=F*Math.cos(ang*D2R), fy=F*Math.sin(ang*D2R);
-    var ex=ox+fx*SC, ey=oy-fy*SC;
-    if(lampe==='haut'){
-      var gl=g.createLinearGradient(0,20,0,oy);
-      gl.addColorStop(0,'rgba(240,181,88,.30)'); gl.addColorStop(1,'rgba(240,181,88,0)');
-      g.fillStyle=gl; g.fillRect(ox,20,ex-ox,oy-20);
-      g.fillStyle='#BD8A2A'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('lumière verticale',ox+10,34);
-    }
-    if(lampe==='cote'){
-      var gl2=g.createLinearGradient(ox+400,0,ox,0);
-      gl2.addColorStop(0,'rgba(61,126,95,.28)'); gl2.addColorStop(1,'rgba(61,126,95,0)');
-      g.fillStyle=gl2; g.fillRect(ox,ey,400,oy-ey);
-      g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('lumière horizontale',ox+250,ey-10);
-    }
-    g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
-    g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex,oy); g.moveTo(ex,ey); g.lineTo(ox,ey); g.stroke(); g.setLineDash([]);
-    if(showX) arrow(g,ox,oy,ex,oy,'#2E6A8E','',0,0,5.5);
-    if(showY) arrow(g,ox,oy,ox,ey,'#3D7E5F','',0,0,5.5);
-    arrow(g,ox,oy,ex,ey,'#C0492E','F = 200 N',12,-6,5);
-    arcAngle(g,ox,oy,48,-ang*D2R,0,'#8A5A7A','\u03b1 = '+Math.round(ang)+'\u00b0');
-    g.font='700 14px "JetBrains Mono",monospace';
-    if(showX){ g.fillStyle='#2E6A8E'; g.fillText('Fx = F\u00b7cos \u03b1 = '+fr(fx.toFixed(0))+' N',600,110); }
-    if(showY){ g.fillStyle='#3D7E5F'; g.fillText('Fy = F\u00b7sin \u03b1 = '+fr(fy.toFixed(0))+' N',600,140); }
+ axes(g,ox,oy,380,200);
+ var fx=F*Math.cos(ang*D2R), fy=F*Math.sin(ang*D2R);
+ var ex=ox+fx*SC, ey=oy-fy*SC;
+ if(lampe==='haut'){
+ var gl=g.createLinearGradient(0,20,0,oy);
+ gl.addColorStop(0,'rgba(240,181,88,.30)'); gl.addColorStop(1,'rgba(240,181,88,0)');
+ g.fillStyle=gl; g.fillRect(ox,20,ex-ox,oy-20);
+ g.fillStyle='#BD8A2A'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('lumière verticale',ox+10,34);
+ }
+ if(lampe==='cote'){
+ var gl2=g.createLinearGradient(ox+400,0,ox,0);
+ gl2.addColorStop(0,'rgba(61,126,95,.28)'); gl2.addColorStop(1,'rgba(61,126,95,0)');
+ g.fillStyle=gl2; g.fillRect(ox,ey,400,oy-ey);
+ g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.fillText('lumière horizontale',ox+250,ey-10);
+ }
+ g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
+ g.beginPath(); g.moveTo(ex,ey); g.lineTo(ex,oy); g.moveTo(ex,ey); g.lineTo(ox,ey); g.stroke(); g.setLineDash([]);
+ if(showX) arrow(g,ox,oy,ex,oy,'#2E6A8E','',0,0,5.5);
+ if(showY) arrow(g,ox,oy,ox,ey,'#3D7E5F','',0,0,5.5);
+ arrow(g,ox,oy,ex,ey,'#C0492E','F = 200 N',12,-6,5);
+ arcAngle(g,ox,oy,48,-ang*D2R,0,'#8A5A7A','\u03b1 = '+Math.round(ang)+'\u00b0');
+ g.font='700 14px "JetBrains Mono",monospace';
+ if(showX){ g.fillStyle='#2E6A8E'; g.fillText('Fx = F\u00b7cos \u03b1 = '+fr(fx.toFixed(0))+' N',600,110); }
+ if(showY){ g.fillStyle='#3D7E5F'; g.fillText('Fy = F\u00b7sin \u03b1 = '+fr(fy.toFixed(0))+' N',600,140); }
   }
   stepper('cvOmbre','omPrev','omNext','omLeg',[
-    {leg:'Une force de 200 N inclinée de 30°. Telle quelle, impossible de l\u2019additionner à une force verticale : elles ne « parlent » pas le même axe.',
-     draw:function(g,t){ scene(g,30,false,false,null); }},
-    {leg:'Éclaire-la <b>par le haut</b> : son ombre sur l\u2019axe x est la composante horizontale <b>Fx = F·cos α ≈ 173 N</b>.',
-     draw:function(g,t){ scene(g,30,true,false,'haut'); }},
-    {leg:'Éclaire-la <b>par le côté</b> : son ombre sur l\u2019axe y est la composante verticale <b>Fy = F·sin α = 100 N</b>.',
-     draw:function(g,t){ scene(g,30,true,true,'cote'); }},
-    {leg:'Fais tourner la force : les deux ombres respirent en permanence. À 0° tout est horizontal, à 90° tout est vertical. <b>La force n\u2019a pas changé — seule sa répartition sur les axes évolue.</b>',
-     draw:function(g,t){ scene(g,45+44*Math.sin(t*0.7),true,true,null); }}
+ {leg:'Une force de 200 N inclinée de 30°. Telle quelle, impossible de l\u2019additionner à une force verticale : elles ne « parlent » pas le même axe.',
+ draw:function(g,t){ scene(g,30,false,false,null); }},
+ {leg:'Éclaire-la <b>par le haut</b> : son ombre sur l\u2019axe x est la composante horizontale <b>Fx = F·cos α ≈ 173 N</b>.',
+ draw:function(g,t){ scene(g,30,true,false,'haut'); }},
+ {leg:'Éclaire-la <b>par le côté</b> : son ombre sur l\u2019axe y est la composante verticale <b>Fy = F·sin α = 100 N</b>.',
+ draw:function(g,t){ scene(g,30,true,true,'cote'); }},
+ {leg:'Fais tourner la force : les deux ombres respirent en permanence. À 0° tout est horizontal, à 90° tout est vertical. <b>La force n\u2019a pas changé — seule sa répartition sur les axes évolue.</b>',
+ draw:function(g,t){ scene(g,45+44*Math.sin(t*0.7),true,true,null); }}
   ]);
 })();
 
@@ -287,27 +162,27 @@ function axes(g,ox,oy,w,h){
   var ox=170, oy=250, SC=1.5;
   function base(g){ axes(g,ox,oy,380,210); }
   stepper('cvInv','invPrev','invNext','invLeg',[
-    {leg:'Le capteur affiche deux nombres : <b>Fx = 60 N</b> sur l\u2019axe x. Une seule ombre ne dit rien de la force.',
-     draw:function(g,t){ base(g); arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','60 N',6,22,5.5); }},
-    {leg:'Deuxième voie : <b>Fy = 80 N</b> sur l\u2019axe y. Deux ombres, deux directions.',
-     draw:function(g,t){ base(g);
-       arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','60 N',6,22,5.5);
-       arrow(g,ox,oy,ox,oy-80*SC,'#3D7E5F','80 N',-64,0,5.5); }},
-    {leg:'On referme le rectangle : la diagonale EST la force cherchée. Son intensité vient de Pythagore : <b>F = √(60² + 80²) = 100 N</b>.',
-     draw:function(g,t){ base(g);
-       g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
-       g.beginPath(); g.moveTo(ox+60*SC,oy); g.lineTo(ox+60*SC,oy-80*SC); g.lineTo(ox,oy-80*SC); g.stroke(); g.setLineDash([]);
-       arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','',0,0,4);
-       arrow(g,ox,oy,ox,oy-80*SC,'#3D7E5F','',0,0,4);
-       arrow(g,ox,oy,ox+60*SC,oy-80*SC,'#C0492E','F = 100 N',12,-4,5.5); }},
-    {leg:'Reste la direction : <b>tan α = Fy/Fx = 80/60 ≈ 1,33 → α ≈ 53°</b>. Contrôle de bon sens : Fy dépasse Fx, donc l\u2019angle doit dépasser 45° ✓',
-     draw:function(g,t){ base(g);
-       arrow(g,ox,oy,ox+60*SC,oy-80*SC,'#C0492E','F = 100 N',12,-4,5.5);
-       arcAngle(g,ox,oy,58,-53.13*D2R,0,'#8A5A7A','\u03b1 \u2248 53\u00b0');
-       g.strokeStyle='#d9cfbb'; g.setLineDash([4,4]); g.lineWidth=1.4;
-       g.beginPath(); g.moveTo(ox,oy); g.lineTo(ox+230,oy-230); g.stroke(); g.setLineDash([]);
-       g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('la diagonale à 45° pour comparer',ox+200,oy-190); }}
+ {leg:'Le capteur affiche deux nombres : <b>Fx = 60 N</b> sur l\u2019axe x. Une seule ombre ne dit rien de la force.',
+ draw:function(g,t){ base(g); arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','60 N',6,22,5.5); }},
+ {leg:'Deuxième voie : <b>Fy = 80 N</b> sur l\u2019axe y. Deux ombres, deux directions.',
+ draw:function(g,t){ base(g);
+ arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','60 N',6,22,5.5);
+ arrow(g,ox,oy,ox,oy-80*SC,'#3D7E5F','80 N',-64,0,5.5); }},
+ {leg:'On referme le rectangle : la diagonale EST la force cherchée. Son intensité vient de Pythagore : <b>F = √(60² + 80²) = 100 N</b>.',
+ draw:function(g,t){ base(g);
+ g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
+ g.beginPath(); g.moveTo(ox+60*SC,oy); g.lineTo(ox+60*SC,oy-80*SC); g.lineTo(ox,oy-80*SC); g.stroke(); g.setLineDash([]);
+ arrow(g,ox,oy,ox+60*SC,oy,'#2E6A8E','',0,0,4);
+ arrow(g,ox,oy,ox,oy-80*SC,'#3D7E5F','',0,0,4);
+ arrow(g,ox,oy,ox+60*SC,oy-80*SC,'#C0492E','F = 100 N',12,-4,5.5); }},
+ {leg:'Reste la direction : <b>tan α = Fy/Fx = 80/60 ≈ 1,33 → α ≈ 53°</b>. Contrôle de bon sens : Fy dépasse Fx, donc l\u2019angle doit dépasser 45° ✓',
+ draw:function(g,t){ base(g);
+ arrow(g,ox,oy,ox+60*SC,oy-80*SC,'#C0492E','F = 100 N',12,-4,5.5);
+ arcAngle(g,ox,oy,58,-53.13*D2R,0,'#8A5A7A','\u03b1 \u2248 53\u00b0');
+ g.strokeStyle='#d9cfbb'; g.setLineDash([4,4]); g.lineWidth=1.4;
+ g.beginPath(); g.moveTo(ox,oy); g.lineTo(ox+230,oy-230); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('la diagonale à 45° pour comparer',ox+200,oy-190); }}
   ]);
 })();
 
@@ -315,88 +190,88 @@ function axes(g,ox,oy,w,h){
 (function(){
   var ox=140, oy=230, len=300;
   function rampe(g,al){
-    var a=al*D2R, ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
-    g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
-    g.strokeStyle='#5C544B'; g.lineWidth=3; g.stroke();
-    arcAngle(g,ox,oy,44,-a,0,'#8A5A7A','\u03b1 = '+Math.round(al)+'\u00b0');
-    var px=ox+len*0.5*Math.cos(a), py=oy-len*0.5*Math.sin(a);
-    g.save(); g.translate(px,py); g.rotate(-a);
-    g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
-    g.beginPath(); g.rect(-26,-36,52,36); g.fill(); g.stroke(); g.restore();
-    return {x:px-Math.sin(a)*18, y:py-Math.cos(a)*18, a:a};
+ var a=al*D2R, ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
+ g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
+ g.strokeStyle='#5C544B'; g.lineWidth=3; g.stroke();
+ arcAngle(g,ox,oy,44,-a,0,'#8A5A7A','\u03b1 = '+Math.round(al)+'\u00b0');
+ var px=ox+len*0.5*Math.cos(a), py=oy-len*0.5*Math.sin(a);
+ g.save(); g.translate(px,py); g.rotate(-a);
+ g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
+ g.beginPath(); g.rect(-26,-36,52,36); g.fill(); g.stroke(); g.restore();
+ return {x:px-Math.sin(a)*18, y:py-Math.cos(a)*18, a:a};
   }
   stepper('cvTest','tsPrev','tsNext','tsLeg',[
-    {leg:'Un élève écrit : « la composante qui fait glisser vaut <b>P·cos α</b> ». Vrai ou faux ? Au lieu de discuter, testons la formule sur un cas où la réponse est évidente.',
-     draw:function(g,t){ rampe(g,30);
-       g.fillStyle='#C0492E'; g.font='800 17px "Bricolage Grotesque",sans-serif';
-       g.fillText('« glissement = P \u00b7 cos \u03b1 »  \u2014  \u00e0 tester',480,80); }},
-    {leg:'<b>Test à 0°</b> : la rampe est plate. Une caisse posée sur un sol horizontal ne glisse évidemment pas. Or cos 0° = 1 : la formule annoncerait <b>P tout entier</b> pour la retenir. Absurde.',
-     draw:function(g,t){ var c=rampe(g,0);
-       arrow(g,c.x,c.y,c.x,c.y+70,'#C0492E','P',10,10,4);
-       g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('P \u00b7 cos 0\u00b0 = P  \u2192 il faudrait retenir toute la caisse ?!',430,110);
-       g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace';
-       g.fillText('P \u00b7 sin 0\u00b0 = 0  \u2192 rien ne glisse \u2713',430,142); }},
-    {leg:'<b>Test à 90°</b> : la « rampe » est un mur, la caisse tombe en chute libre — tout le poids fait glisser. sin 90° = 1 confirme, cos 90° = 0 se contredit. La bonne formule est bien <b>P·sin α</b>.',
-     draw:function(g,t){ var c=rampe(g,88);
-       arrow(g,c.x,c.y,c.x,c.y+70,'#C0492E','P',10,10,4);
-       g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('P \u00b7 cos 90\u00b0 = 0  \u2192 la caisse ne tomberait pas ?!',430,110);
-       g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace';
-       g.fillText('P \u00b7 sin 90\u00b0 = P  \u2192 chute libre \u2713',430,142); }}
+ {leg:'Un élève écrit : « la composante qui fait glisser vaut <b>P·cos α</b> ». Vrai ou faux ? Au lieu de discuter, testons la formule sur un cas où la réponse est évidente.',
+ draw:function(g,t){ rampe(g,30);
+ g.fillStyle='#C0492E'; g.font='800 17px "Bricolage Grotesque",sans-serif';
+ g.fillText('« glissement = P \u00b7 cos \u03b1 »  \u2014  \u00e0 tester',480,80); }},
+ {leg:'<b>Test à 0°</b> : la rampe est plate. Une caisse posée sur un sol horizontal ne glisse évidemment pas. Or cos 0° = 1 : la formule annoncerait <b>P tout entier</b> pour la retenir. Absurde.',
+ draw:function(g,t){ var c=rampe(g,0);
+ arrow(g,c.x,c.y,c.x,c.y+70,'#C0492E','P',10,10,4);
+ g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('P \u00b7 cos 0\u00b0 = P  \u2192 il faudrait retenir toute la caisse ?!',430,110);
+ g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace';
+ g.fillText('P \u00b7 sin 0\u00b0 = 0  \u2192 rien ne glisse \u2713',430,142); }},
+ {leg:'<b>Test à 90°</b> : la « rampe » est un mur, la caisse tombe en chute libre — tout le poids fait glisser. sin 90° = 1 confirme, cos 90° = 0 se contredit. La bonne formule est bien <b>P·sin α</b>.',
+ draw:function(g,t){ var c=rampe(g,88);
+ arrow(g,c.x,c.y,c.x,c.y+70,'#C0492E','P',10,10,4);
+ g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('P \u00b7 cos 90\u00b0 = 0  \u2192 la caisse ne tomberait pas ?!',430,110);
+ g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace';
+ g.fillText('P \u00b7 sin 90\u00b0 = P  \u2192 chute libre \u2713',430,142); }}
   ]);
 })();
 
 /* ============ s5 : deux repères pour la même caisse ============ */
 (function(){
   function pente(g,ox,oy,len,al,titre){
-    var a=al*D2R, ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
-    g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
-    g.strokeStyle='#5C544B'; g.lineWidth=2.6; g.stroke();
-    var px=ox+len*0.55*Math.cos(a), py=oy-len*0.55*Math.sin(a);
-    g.save(); g.translate(px,py); g.rotate(-a);
-    g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.2;
-    g.beginPath(); g.rect(-22,-30,44,30); g.fill(); g.stroke(); g.restore();
-    g.fillStyle='#2A2622'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
-    g.fillText(titre,ox+len/2,oy+42); g.textAlign='left';
-    return {x:px-Math.sin(a)*15, y:py-Math.cos(a)*15, a:a};
+ var a=al*D2R, ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
+ g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
+ g.strokeStyle='#5C544B'; g.lineWidth=2.6; g.stroke();
+ var px=ox+len*0.55*Math.cos(a), py=oy-len*0.55*Math.sin(a);
+ g.save(); g.translate(px,py); g.rotate(-a);
+ g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.2;
+ g.beginPath(); g.rect(-22,-30,44,30); g.fill(); g.stroke(); g.restore();
+ g.fillStyle='#2A2622'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+ g.fillText(titre,ox+len/2,oy+42); g.textAlign='left';
+ return {x:px-Math.sin(a)*15, y:py-Math.cos(a)*15, a:a};
   }
   function forces(g,c,mode){
-    var a=c.a, ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
-    /* poids */
-    arrow(g,c.x,c.y,c.x,c.y+62,'#C0492E','P',8,10,3.4);
-    /* réaction normale */
-    arrow(g,c.x,c.y,c.x+nx*54,c.y-ny*54,'#2E6A8E','',0,0,3.4);
-    /* frottement le long de la pente, vers le haut */
-    arrow(g,c.x,c.y,c.x+ux*50,c.y+uy*50,'#3D7E5F','',0,0,3.4);
-    if(mode==='pente'){
-      g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
-      g.beginPath(); g.moveTo(c.x-ux*70,c.y-uy*70); g.lineTo(c.x+ux*70,c.y+uy*70); g.stroke();
-      g.beginPath(); g.moveTo(c.x-nx*62,c.y+ny*62); g.lineTo(c.x+nx*62,c.y-ny*62); g.stroke(); g.setLineDash([]);
-      g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
-      g.fillText('t',c.x+ux*78,c.y+uy*78); g.fillText('n',c.x+nx*70,c.y-ny*70);
-    } else {
-      g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
-      g.beginPath(); g.moveTo(c.x-70,c.y); g.lineTo(c.x+70,c.y); g.stroke();
-      g.beginPath(); g.moveTo(c.x,c.y-62); g.lineTo(c.x,c.y+62); g.stroke(); g.setLineDash([]);
-      g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
-      g.fillText('x',c.x+78,c.y+4); g.fillText('y',c.x-4,c.y-70);
-    }
+ var a=c.a, ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
+ /* poids */
+ arrow(g,c.x,c.y,c.x,c.y+62,'#C0492E','P',8,10,3.4);
+ /* réaction normale */
+ arrow(g,c.x,c.y,c.x+nx*54,c.y-ny*54,'#2E6A8E','',0,0,3.4);
+ /* frottement le long de la pente, vers le haut */
+ arrow(g,c.x,c.y,c.x+ux*50,c.y+uy*50,'#3D7E5F','',0,0,3.4);
+ if(mode==='pente'){
+ g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
+ g.beginPath(); g.moveTo(c.x-ux*70,c.y-uy*70); g.lineTo(c.x+ux*70,c.y+uy*70); g.stroke();
+ g.beginPath(); g.moveTo(c.x-nx*62,c.y+ny*62); g.lineTo(c.x+nx*62,c.y-ny*62); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('t',c.x+ux*78,c.y+uy*78); g.fillText('n',c.x+nx*70,c.y-ny*70);
+ } else {
+ g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
+ g.beginPath(); g.moveTo(c.x-70,c.y); g.lineTo(c.x+70,c.y); g.stroke();
+ g.beginPath(); g.moveTo(c.x,c.y-62); g.lineTo(c.x,c.y+62); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#8A5A7A'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('x',c.x+78,c.y+4); g.fillText('y',c.x-4,c.y-70);
+ }
   }
   stepper('cvChoix','chPrev','chNext','chLeg',[
-    {leg:'La même caisse, les mêmes trois forces : le poids (rouge), la réaction du sol (bleu, perpendiculaire à la pente) et le frottement (vert, le long de la pente).',
-     draw:function(g,t){ var c=pente(g,120,250,300,30,'la situation'); forces(g,c,'none'); }},
-    {leg:'<b>Repère horizontal / vertical</b> : le poids tombe pile sur l\u2019axe y… mais la réaction ET le frottement sont tous deux penchés. <b>Deux décompositions à faire.</b>',
-     draw:function(g,t){ var c=pente(g,120,250,300,30,'repère classique'); forces(g,c,'hv');
-       g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('2 forces à décomposer',540,120); }},
-    {leg:'<b>Repère lié à la pente</b> : la réaction est entièrement sur l\u2019axe n, le frottement entièrement sur l\u2019axe t. <b>Seul le poids doit être décomposé.</b> Moitié moins de travail, moitié moins d\u2019erreurs.',
-     draw:function(g,t){ var c=pente(g,120,250,300,30,'repère de la pente'); forces(g,c,'pente');
-       g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('1 seule force à décomposer',540,120);
-       g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('la réaction est déjà sur n',540,150);
-       g.fillText('le frottement est déjà sur t',540,172); }}
+ {leg:'La même caisse, les mêmes trois forces : le poids (rouge), la réaction du sol (bleu, perpendiculaire à la pente) et le frottement (vert, le long de la pente).',
+ draw:function(g,t){ var c=pente(g,120,250,300,30,'la situation'); forces(g,c,'none'); }},
+ {leg:'<b>Repère horizontal / vertical</b> : le poids tombe pile sur l\u2019axe y… mais la réaction ET le frottement sont tous deux penchés. <b>Deux décompositions à faire.</b>',
+ draw:function(g,t){ var c=pente(g,120,250,300,30,'repère classique'); forces(g,c,'hv');
+ g.fillStyle='#C0492E'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('2 forces à décomposer',540,120); }},
+ {leg:'<b>Repère lié à la pente</b> : la réaction est entièrement sur l\u2019axe n, le frottement entièrement sur l\u2019axe t. <b>Seul le poids doit être décomposé.</b> Moitié moins de travail, moitié moins d\u2019erreurs.',
+ draw:function(g,t){ var c=pente(g,120,250,300,30,'repère de la pente'); forces(g,c,'pente');
+ g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('1 seule force à décomposer',540,120);
+ g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('la réaction est déjà sur n',540,150);
+ g.fillText('le frottement est déjà sur t',540,172); }}
   ]);
 })();
 
@@ -404,54 +279,54 @@ function axes(g,ox,oy,w,h){
 (function(){
   var ox=110, oy=280, len=380, al=32, a=al*D2R;
   function decor(g){
-    var ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
-    g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
-    g.strokeStyle='#5C544B'; g.lineWidth=3; g.stroke();
-    arcAngle(g,ox,oy,50,-a,0,'#8A5A7A','\u03b1');
-    var px=ox+len*0.52*Math.cos(a), py=oy-len*0.52*Math.sin(a);
-    g.save(); g.translate(px,py); g.rotate(-a);
-    g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
-    g.beginPath(); g.rect(-26,-36,52,36); g.fill(); g.stroke(); g.restore();
-    return {x:px-Math.sin(a)*18, y:py-Math.cos(a)*18};
+ var ex=ox+len*Math.cos(a), ey=oy-len*Math.sin(a);
+ g.fillStyle='#efe8d8'; g.beginPath(); g.moveTo(ox,oy); g.lineTo(ex,ey); g.lineTo(ex,oy); g.closePath(); g.fill();
+ g.strokeStyle='#5C544B'; g.lineWidth=3; g.stroke();
+ arcAngle(g,ox,oy,50,-a,0,'#8A5A7A','\u03b1');
+ var px=ox+len*0.52*Math.cos(a), py=oy-len*0.52*Math.sin(a);
+ g.save(); g.translate(px,py); g.rotate(-a);
+ g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
+ g.beginPath(); g.rect(-26,-36,52,36); g.fill(); g.stroke(); g.restore();
+ return {x:px-Math.sin(a)*18, y:py-Math.cos(a)*18};
   }
   var P=500, SC=0.17;
   stepper('cvPente','peQPrev','peNext','peLeg',[
-    {leg:'Le poids est <b>vertical</b>, toujours. Il ne sait pas qu\u2019il y a une pente : c\u2019est nous qui allons adapter nos axes.',
-     draw:function(g,t){ var c=decor(g); arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P = 500 N',10,10,4.4); }},
-    {leg:'On pose les axes du nouveau repère : <b>t</b> le long de la pente, <b>n</b> perpendiculaire à la pente. Ils tournent avec la rampe.',
-     draw:function(g,t){ var c=decor(g);
-       var ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
-       g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.setLineDash([6,4]);
-       g.beginPath(); g.moveTo(c.x-ux*90,c.y-uy*90); g.lineTo(c.x+ux*90,c.y+uy*90); g.stroke();
-       g.beginPath(); g.moveTo(c.x+nx*70,c.y-ny*70); g.lineTo(c.x-nx*50,c.y+ny*50); g.stroke(); g.setLineDash([]);
-       g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('t',c.x+ux*98,c.y+uy*98); g.fillText('n',c.x+nx*78,c.y-ny*78);
-       arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P',10,10,4.4); }},
-    {leg:'<b>Le point clé.</b> L\u2019angle entre le poids (vertical) et l\u2019axe n est <b>égal à l\u2019angle de la pente α</b> : leurs côtés sont perpendiculaires deux à deux. C\u2019est toute la démonstration.',
-     draw:function(g,t){ var c=decor(g);
-       var nx=Math.sin(a), ny=Math.cos(a);
-       g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.setLineDash([6,4]);
-       g.beginPath(); g.moveTo(c.x+nx*70,c.y-ny*70); g.lineTo(c.x,c.y); g.stroke(); g.setLineDash([]);
-       arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P',10,10,4.4);
-       g.strokeStyle='#8A5A7A'; g.lineWidth=2.4;
-       g.beginPath(); g.arc(c.x,c.y,44,-Math.PI/2,-Math.PI/2+a); g.stroke();
-       g.fillStyle='#8A5A7A'; g.font='800 15px "JetBrains Mono",monospace';
-       g.fillText('\u03b1',c.x+18,c.y-44);
-       g.fillStyle='#8A5A7A'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('m\u00eame angle qu\u2019en bas : c\u00f4t\u00e9s perpendiculaires',560,120); }},
-    {leg:'Dès lors tout se lit : la composante <b>sur n</b> est le côté ADJACENT à α → <b>Pn = P·cos α ≈ 424 N</b>. Celle <b>le long de la pente</b> est le côté OPPOSÉ → <b>Pt = P·sin α ≈ 265 N</b>. C\u2019est elle qui fait glisser.',
-     draw:function(g,t){ var c=decor(g);
-       var ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
-       var Pt=P*Math.sin(a), Pn=P*Math.cos(a);
-       g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
-       g.beginPath(); g.moveTo(c.x,c.y+P*SC); g.lineTo(c.x-ux*Pt*SC,c.y-uy*Pt*SC); g.stroke();
-       g.beginPath(); g.moveTo(c.x,c.y+P*SC); g.lineTo(c.x-nx*Pn*SC,c.y+ny*Pn*SC); g.stroke(); g.setLineDash([]);
-       arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P = 500',10,10,3.6);
-       arrow(g,c.x,c.y,c.x-ux*Pt*SC,c.y-uy*Pt*SC,'#3D7E5F','',0,0,4.4);
-       arrow(g,c.x,c.y,c.x-nx*Pn*SC,c.y+ny*Pn*SC,'#8A5A7A','',0,0,4.4);
-       g.font='700 14px "JetBrains Mono",monospace';
-       g.fillStyle='#3D7E5F'; g.fillText('Pt = P\u00b7sin \u03b1 = '+fr(Pt.toFixed(0))+' N \u2192 glisse',560,110);
-       g.fillStyle='#8A5A7A'; g.fillText('Pn = P\u00b7cos \u03b1 = '+fr(Pn.toFixed(0))+' N \u2192 plaque',560,138); }}
+ {leg:'Le poids est <b>vertical</b>, toujours. Il ne sait pas qu\u2019il y a une pente : c\u2019est nous qui allons adapter nos axes.',
+ draw:function(g,t){ var c=decor(g); arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P = 500 N',10,10,4.4); }},
+ {leg:'On pose les axes du nouveau repère : <b>t</b> le long de la pente, <b>n</b> perpendiculaire à la pente. Ils tournent avec la rampe.',
+ draw:function(g,t){ var c=decor(g);
+ var ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
+ g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.setLineDash([6,4]);
+ g.beginPath(); g.moveTo(c.x-ux*90,c.y-uy*90); g.lineTo(c.x+ux*90,c.y+uy*90); g.stroke();
+ g.beginPath(); g.moveTo(c.x+nx*70,c.y-ny*70); g.lineTo(c.x-nx*50,c.y+ny*50); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('t',c.x+ux*98,c.y+uy*98); g.fillText('n',c.x+nx*78,c.y-ny*78);
+ arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P',10,10,4.4); }},
+ {leg:'<b>Le point clé.</b> L\u2019angle entre le poids (vertical) et l\u2019axe n est <b>égal à l\u2019angle de la pente α</b> : leurs côtés sont perpendiculaires deux à deux. C\u2019est toute la démonstration.',
+ draw:function(g,t){ var c=decor(g);
+ var nx=Math.sin(a), ny=Math.cos(a);
+ g.strokeStyle='#2E6A8E'; g.lineWidth=2; g.setLineDash([6,4]);
+ g.beginPath(); g.moveTo(c.x+nx*70,c.y-ny*70); g.lineTo(c.x,c.y); g.stroke(); g.setLineDash([]);
+ arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P',10,10,4.4);
+ g.strokeStyle='#8A5A7A'; g.lineWidth=2.4;
+ g.beginPath(); g.arc(c.x,c.y,44,-Math.PI/2,-Math.PI/2+a); g.stroke();
+ g.fillStyle='#8A5A7A'; g.font='800 15px "JetBrains Mono",monospace';
+ g.fillText('\u03b1',c.x+18,c.y-44);
+ g.fillStyle='#8A5A7A'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('m\u00eame angle qu\u2019en bas : c\u00f4t\u00e9s perpendiculaires',560,120); }},
+ {leg:'Dès lors tout se lit : la composante <b>sur n</b> est le côté ADJACENT à α → <b>Pn = P·cos α ≈ 424 N</b>. Celle <b>le long de la pente</b> est le côté OPPOSÉ → <b>Pt = P·sin α ≈ 265 N</b>. C\u2019est elle qui fait glisser.',
+ draw:function(g,t){ var c=decor(g);
+ var ux=Math.cos(a), uy=-Math.sin(a), nx=Math.sin(a), ny=Math.cos(a);
+ var Pt=P*Math.sin(a), Pn=P*Math.cos(a);
+ g.strokeStyle='#d9cfbb'; g.lineWidth=1.6; g.setLineDash([5,4]);
+ g.beginPath(); g.moveTo(c.x,c.y+P*SC); g.lineTo(c.x-ux*Pt*SC,c.y-uy*Pt*SC); g.stroke();
+ g.beginPath(); g.moveTo(c.x,c.y+P*SC); g.lineTo(c.x-nx*Pn*SC,c.y+ny*Pn*SC); g.stroke(); g.setLineDash([]);
+ arrow(g,c.x,c.y,c.x,c.y+P*SC,'#C0492E','P = 500',10,10,3.6);
+ arrow(g,c.x,c.y,c.x-ux*Pt*SC,c.y-uy*Pt*SC,'#3D7E5F','',0,0,4.4);
+ arrow(g,c.x,c.y,c.x-nx*Pn*SC,c.y+ny*Pn*SC,'#8A5A7A','',0,0,4.4);
+ g.font='700 14px "JetBrains Mono",monospace';
+ g.fillStyle='#3D7E5F'; g.fillText('Pt = P\u00b7sin \u03b1 = '+fr(Pt.toFixed(0))+' N \u2192 glisse',560,110);
+ g.fillStyle='#8A5A7A'; g.fillText('Pn = P\u00b7cos \u03b1 = '+fr(Pn.toFixed(0))+' N \u2192 plaque',560,138); }}
   ]);
 })();
 
@@ -459,54 +334,54 @@ function axes(g,ox,oy,w,h){
 (function(){
   var A={x:430,y:180};
   function potence(g){
-    g.fillStyle='#e6ded0'; g.fillRect(120,40,32,240);
-    g.strokeStyle='#b9b1a2'; g.lineWidth=1.4;
-    for(var i=0;i<9;i++){ g.beginPath(); g.moveTo(120,52+i*26); g.lineTo(152,52+i*26); g.stroke(); }
-    var C={x:152,y:A.y-Math.tan(30*D2R)*(A.x-152)};
-    g.strokeStyle='#5C544B'; g.lineWidth=8; g.lineCap='round';
-    g.beginPath(); g.moveTo(152,A.y); g.lineTo(A.x,A.y); g.stroke();
-    g.strokeStyle='#2E6A8E'; g.lineWidth=4;
-    g.beginPath(); g.moveTo(C.x,C.y); g.lineTo(A.x,A.y); g.stroke();
-    g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
-    g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(A.x,A.y+46); g.stroke();
-    g.fillStyle='#e9e2d2'; g.strokeStyle='#BD8A2A';
-    g.beginPath(); g.rect(A.x-26,A.y+46,52,36); g.fill(); g.stroke();
-    g.fillStyle='#BD8A2A'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('600 N',A.x,A.y+69); g.textAlign='left';
-    arcAngle(g,A.x,A.y,58,Math.PI-30*D2R,Math.PI,'#8A5A7A','30\u00b0');
+ g.fillStyle='#e6ded0'; g.fillRect(120,40,32,240);
+ g.strokeStyle='#b9b1a2'; g.lineWidth=1.4;
+ for(var i=0;i<9;i++){ g.beginPath(); g.moveTo(120,52+i*26); g.lineTo(152,52+i*26); g.stroke(); }
+ var C={x:152,y:A.y-Math.tan(30*D2R)*(A.x-152)};
+ g.strokeStyle='#5C544B'; g.lineWidth=8; g.lineCap='round';
+ g.beginPath(); g.moveTo(152,A.y); g.lineTo(A.x,A.y); g.stroke();
+ g.strokeStyle='#2E6A8E'; g.lineWidth=4;
+ g.beginPath(); g.moveTo(C.x,C.y); g.lineTo(A.x,A.y); g.stroke();
+ g.strokeStyle='#BD8A2A'; g.lineWidth=2.4;
+ g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(A.x,A.y+46); g.stroke();
+ g.fillStyle='#e9e2d2'; g.strokeStyle='#BD8A2A';
+ g.beginPath(); g.rect(A.x-26,A.y+46,52,36); g.fill(); g.stroke();
+ g.fillStyle='#BD8A2A'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('600 N',A.x,A.y+69); g.textAlign='left';
+ arcAngle(g,A.x,A.y,58,Math.PI-30*D2R,Math.PI,'#8A5A7A','30\u00b0');
   }
   stepper('cvMeth','mePrev','meNext','meLeg',[
-    {leg:'<b>Temps 1 — isoler.</b> On entoure le point d\u2019accroche A et on ne garde QUE les forces qui s\u2019y appliquent : la tension du câble, l\u2019effort de la barre, et la charge suspendue.',
-     draw:function(g,t){ potence(g);
-       g.strokeStyle='#C0492E'; g.lineWidth=2.4; g.setLineDash([7,5]);
-       g.beginPath(); g.arc(A.x,A.y,52+Math.sin(t*3)*2,0,7); g.stroke(); g.setLineDash([]);
-       g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
-       g.fillText('on isole le n\u0153ud A',560,100); }},
-    {leg:'<b>Temps 2 — choisir le repère.</b> Ici, la charge est verticale et la barre horizontale : le repère x/y classique aligne déjà deux forces sur trois. Inutile de chercher mieux.',
-     draw:function(g,t){ potence(g);
-       g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
-       g.beginPath(); g.moveTo(A.x-90,A.y); g.lineTo(A.x+90,A.y); g.moveTo(A.x,A.y-80); g.lineTo(A.x,A.y+90); g.stroke(); g.setLineDash([]);
-       g.fillStyle='#8A5A7A'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('x',A.x+96,A.y+4); g.fillText('y',A.x-4,A.y-88);
-       g.font='800 15px "Bricolage Grotesque",sans-serif';
-       g.fillText('2 forces sur 3 sont déjà sur les axes',540,110); }},
-    {leg:'<b>Temps 3 — projeter avec les signes.</b> Seule la tension T est penchée : elle donne T·cos 30° sur x et T·sin 30° sur y. La barre est sur x, la charge sur y (vers le bas : signe −).',
-     draw:function(g,t){ potence(g);
-       arrow(g,A.x,A.y,A.x-100,A.y-58,'#2E6A8E','T',-24,-6,3.6);
-       arrow(g,A.x,A.y,A.x+72,A.y,'#3D7E5F','N',8,-8,3.6);
-       arrow(g,A.x,A.y,A.x,A.y+62,'#C0492E','P',10,10,3.6);
-       g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
-       g.fillText('sur x :  N \u2212 T\u00b7cos 30\u00b0 = 0',540,96);
-       g.fillText('sur y :  T\u00b7sin 30\u00b0 \u2212 600 = 0',540,124); }},
-    {leg:'<b>Temps 4 — commencer par l\u2019équation à une inconnue.</b> Celle sur y ne contient que T : <b>T = 600/sin 30° = 1200 N</b>. On la réinjecte ensuite dans l\u2019autre : <b>N = 1200·cos 30° ≈ 1039 N</b>.',
-     draw:function(g,t){ potence(g);
-       arrow(g,A.x,A.y,A.x-100,A.y-58,'#2E6A8E','T = 1200 N',-30,-16,4);
-       arrow(g,A.x,A.y,A.x+72,A.y,'#3D7E5F','N \u2248 1039 N',6,-12,4);
-       arrow(g,A.x,A.y,A.x,A.y+62,'#C0492E','600 N',10,10,3.6);
-       g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
-       g.fillText('le c\u00e2ble est tendu \u00e0 DEUX FOIS la charge',480,110);
-       g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-       g.fillText('c\u2019est l\u2019angle faible (30\u00b0) qui l\u2019exige',480,136); }}
+ {leg:'<b>Temps 1 — isoler.</b> On entoure le point d\u2019accroche A et on ne garde QUE les forces qui s\u2019y appliquent : la tension du câble, l\u2019effort de la barre, et la charge suspendue.',
+ draw:function(g,t){ potence(g);
+ g.strokeStyle='#C0492E'; g.lineWidth=2.4; g.setLineDash([7,5]);
+ g.beginPath(); g.arc(A.x,A.y,52+Math.sin(t*3)*2,0,7); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#C0492E'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+ g.fillText('on isole le n\u0153ud A',560,100); }},
+ {leg:'<b>Temps 2 — choisir le repère.</b> Ici, la charge est verticale et la barre horizontale : le repère x/y classique aligne déjà deux forces sur trois. Inutile de chercher mieux.',
+ draw:function(g,t){ potence(g);
+ g.strokeStyle='#8A5A7A'; g.lineWidth=1.8; g.setLineDash([6,4]);
+ g.beginPath(); g.moveTo(A.x-90,A.y); g.lineTo(A.x+90,A.y); g.moveTo(A.x,A.y-80); g.lineTo(A.x,A.y+90); g.stroke(); g.setLineDash([]);
+ g.fillStyle='#8A5A7A'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('x',A.x+96,A.y+4); g.fillText('y',A.x-4,A.y-88);
+ g.font='800 15px "Bricolage Grotesque",sans-serif';
+ g.fillText('2 forces sur 3 sont déjà sur les axes',540,110); }},
+ {leg:'<b>Temps 3 — projeter avec les signes.</b> Seule la tension T est penchée : elle donne T·cos 30° sur x et T·sin 30° sur y. La barre est sur x, la charge sur y (vers le bas : signe −).',
+ draw:function(g,t){ potence(g);
+ arrow(g,A.x,A.y,A.x-100,A.y-58,'#2E6A8E','T',-24,-6,3.6);
+ arrow(g,A.x,A.y,A.x+72,A.y,'#3D7E5F','N',8,-8,3.6);
+ arrow(g,A.x,A.y,A.x,A.y+62,'#C0492E','P',10,10,3.6);
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('sur x :  N \u2212 T\u00b7cos 30\u00b0 = 0',540,96);
+ g.fillText('sur y :  T\u00b7sin 30\u00b0 \u2212 600 = 0',540,124); }},
+ {leg:'<b>Temps 4 — commencer par l\u2019équation à une inconnue.</b> Celle sur y ne contient que T : <b>T = 600/sin 30° = 1200 N</b>. On la réinjecte ensuite dans l\u2019autre : <b>N = 1200·cos 30° ≈ 1039 N</b>.',
+ draw:function(g,t){ potence(g);
+ arrow(g,A.x,A.y,A.x-100,A.y-58,'#2E6A8E','T = 1200 N',-30,-16,4);
+ arrow(g,A.x,A.y,A.x+72,A.y,'#3D7E5F','N \u2248 1039 N',6,-12,4);
+ arrow(g,A.x,A.y,A.x,A.y+62,'#C0492E','600 N',10,10,3.6);
+ g.fillStyle='#3D7E5F'; g.font='800 16px "Bricolage Grotesque",sans-serif';
+ g.fillText('le c\u00e2ble est tendu \u00e0 DEUX FOIS la charge',480,110);
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('c\u2019est l\u2019angle faible (30\u00b0) qui l\u2019exige',480,136); }}
   ]);
 })();
 </script>

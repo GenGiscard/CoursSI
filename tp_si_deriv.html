@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
@@ -66,16 +65,16 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -85,175 +84,53 @@
   #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
   #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAABACAYAAABVy1Q8AAALHklEQVR42u1aWXAc1RU9973unp7FGsuSsSUWmcVAXECB2UwIyGYNYBxSYexYmH1NsNkJBOPIsiHGUGFzPlIkgbiMsZECBEwgVIUYhWI3S7GGIgkEW8SWrW00mtF093s3Hz1jy9JskkeQAl6VPjQ10/1O33PPPfe+pvEnzGOM0iIALoBqAtZEGWOI4GU+L/vSDBG2Ybieh9EG5BLAo4ZkByD2PBhENKqACADRgH9G9WYEga/ZMvKBlVKW5aExAIMAkn6kyhUoVqo0QATA0xqd8UTZAIEAlwFPoGyiIMPhDJcLACIiuK6HidWVuO3KeWW5sQYQJKDOAmwAelcuyuyD8Dxse3wdVKIPJKX/eW5AgOspVI+twII5M/+vc6Xz2b9CxXuBQakxlHLkU871PJRTAWU5LpKJEDvOTlEpSRQMKTGakr5LlCsgWF872f5m1KFSllIaDB6dHCICCfHlApJSfL0i9PAz69HW3gnLNMHMBetQCIyzbEYABF2osBKBXQdWbS2ixx/rV2UaZUDZe9yz+km89fZHEKEgtNYFnUIlAVPHAlEq4hSEgO5LoOK70zKAOKcbGJUIVVZEEK6MIlIEULYfMqO+p0MxQKbh25qvQhQ8peApVRCQB8AjgBXAhMIywgxWCpznet9I2f4W0Ne2sBLRTn9FW/BhFOFsLkGzn3iDzanS5QfkuB7SjgvTMIqqnCOGcStmkGH4fU4ee0FBmVfORwxoQlUl9qrZDaFgAKy5IKBx0CDdUxoYy0L/xk3Y/MBDmRaBdq6CRGCloBN9vj0aVNSHDSh7+dW3XwetuSS773V1o+3am6BS/UM6zCGATBNu+1Zsa3liYBM/qFQTZDgE5PB7I46QbVml16ygPWRrxShnRKPlGZIMp9cqusVMhFSemxcVhS9X5VCacyyggt/WodGMUKGWYRAvS/vuMBu8sudQSTTKfMc0jGGBYc+DSqYKSm1Jg8bhrHhfEp5ShYFlRaEnjpKCRAR2XVi1NYhOPy5HP+RLNiuFrmeeg+5LDpHuETd45yz8Fd744BOEQ8GCdt8DMA6M30sHY4SAx1y4Y3UcBGprMH7u2QX30fPCi1C9icKT0+Gsnt4+bOuOo99xi1ofEMDj5LAot93LiRxebriDxpLUxJAwDaOolwMAc7jmlMh/8pQbUKFB4y6p3MC/QhQdtTPPctahUS2Wu3DtEQNyPQ9SivICy9Qf3oVzXzECrgEAqqJRJHsSUFrBKMPQkaQElIKXSECOjX65EWJmPLT4KjQuOBcEQmc8ASkEhBhBtIQAhICKx0GmiYnzL0fN/Mv8BzeC6xkjzZ3KiggWX96A2ad8D4t/swZ/Wv8qDCkRCQWhtC5udzL00skkGEDFySdgt3lzEKiZ+NV5Oa0ZU/beC83Lb8JTra+h6YG1eOujfyEaCcMyjbxtA0kJdlx4qV7YUw7Ebuc3oGLqoRmPpkG7QOG8gJTWkCJ/0hMRpCRoZoCBWfVH4+Rph+H+Netwz+onsbUrjnEVYQgQwHoHvZjh9cRhjq9C9UXzUHXmaRBSAlpn6o8onsMFnInI95vsCZ5ShaeYgghCEJTWCAYs3HTBj/DyQ8sx74zpSCT7kUimYBgSJCV0MgntOBg78/vY+/67MP6smTvACFFUrjkL2rbzOgUZnHTw4p2AGBJdvQl0xntx+Hf2QzgY2F48C0m0IMo8PI2qsRX44YxpmHbwAfjoszZs+rwNDcJB5SEHoeaGqzB+1umQoZBPL0HF604WiBBwO7uw+XcrkfrwH74yDpyfWAaosn5uTqhd8QQm19Vi4cUxnD/zRJ+GSkOI4h2ozjwAKQRcpbCq+WmcGLZQN+u0nTZYFAhzRu0EWGt0/Pk5dKx9DF77VohIePBNQWEbVFk/N+eRjSElkuk0Uv1pnHT0oWi6ogHTDj5gO7BSDryyeTjkaZdwOjdQHBLvvIstKx9B6v0PIYNBkGUNbfA0A2GbKXr8XBaAAg0d6/n5IdDd2wfLMnDRD07CLRfGMLG6Mv+Gc+awhiCUdsw4ALCzpR1bHn4U8b+1ApohwyE/j4bmD7NibUZsKasOnHqNR0ZIey4TkR4oFJyhTzBgQQqB1jffx2PPvwTbMnHYgftCCgGldWbcS3ltWSk0HUgv7brY9sQ6fHH3Cj8qoRDIMnOqGzMUgUWFaQo3Eu6SF1760zVbu7qDnuYjPYaA0oqIdnrHKFskx4SC6E2m8Pj617B+w3vYu3YC9tl94nY1JEHDf52GGazZjx4Rel7fgLY770XPc8/7pSEU8oEMigoDDM06YhhS2JanqipXBGadOo+y2j3z6qXHv//ppiXxVLredRwI1h6IjJz1RwjE+5IgIpxzej0WXTIHdTW7lUzDgTKcpWH/pja0r1qL+N9fgiABke2EcwFhVhZgBINB9NuBv+gJtbfsv/wXb/s9GDOBZgugRZlS4Mjzb7j0880di/rS3p7a6YcQQiHH2FwKAWZGZzyBmupKXH/uWZg/5wxYpuk3fEQQ+WiW3SQRVKof2x5/Eh1PrAPHE5BjIn7/lJ9ecqxtoz9of87V1Qv3vWfZw1AKHItJNDfveDcqFovJlpYWDYB/uWJl1eoX37ils7vv6pTrSnieIn93Ipcapl0X8UQSRx20PxZfPhenHXu4P09QGnJg/gzIEwDoefFltK9ai/S/P4OMhEGGkXM8xYCGZq6wTJmSst+sqr7Pvu6Ku2v226+9ERCLGxtBTU069+gzFpNoaVEE4Jyb7zr6lY/+uSSeTJ/i7KChHPy7LA17kylorXH2Scei8bIfY/+63XfQMGt9AKQ+/QztKx9B7yuvQ5gmhG0XpJcthGEGAlCRyFPGQfsu2vOaa94FAI7FJLW0qFxt/+DYEqZPl2ht9UwpcNQFNza0belcGk85+yg3DQHKLfOZDXfFE6iKjsFVDWfi2oZZCAdtH1iiD+2PPoaup58FJ/shI2FfcHLYGGYoAZbRgI1UwPxA7lG7eNLyJX+EZqyvrzemv/CCIiLON8fIuRobG0VTUxMA6A0bNkR/ct/qWzZu6VrQ76oglKOJBPLR0PU8dPf24ZDJdVgy/zzMgIP/PrgK7sYvIMdE/M40Z56wBjMqLEukLTMha2vvte9aekcNUR8DAgPoVWgwU3hlaAgAsetvn/Le523LOrr7ZjmOB2LlUR4aGkKgK5nCOGKsizLGSAm2bSB3njCYVUhKg0wTKhJeEzjmsKY9LrnkY59ezZJaZhc9khhG2WBCbLZAS4syCDjqwhtnfdHevay3353iOf05aUgAlCBUA1gbJVQQ5xw0MkMZYBmxbaRt6005eb+ldbf+7MlsnqClWROopOHR8HvcxkaBHTQMnbf8oQVdvcmf9zsqqt209ttwn4sD3yRpjgIVg16NYbBmzRQ1LUoHrA45oXpZx9133H8Ekdsci8kPpkzhpgL0Kg+gHDQ8b+Gd+77x8X+WdsSTcx3HAbRSRH5jkAsQAGbNOiylZDsAEa34g3vw5F9MvvLKjfnUa/QBZX9fXy/R2upJADOuWHTqJxs335ZIO0d4jgMJKJcgBwJywZ4FMsK2jXTIftXYfY+b97ptYSsYWF9fb8xobVW7Mpssz1DNpyEBUMwsD2u4ev7WrsStKUdVp700JgjitVFwFCzGBGwkpWgzqqqb6lYsf5CIVDMgY8w6lwx/NSd4Ps8VYjFJROqdNfffN+ekw6dOmlD5YMCylCKioCBh2YF0alx0BU47Y+qkX9/5WyJSzbGYnA2ocoAZtUEu6usNZAzgMfMbTzh85sXvvTbv0rfal999XPZL6+sbjdG4+f8AiqspSbEV7VUAAAAASUVORK5CYII=" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">TP — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="k">TP · Première spé SI · Dérivées &amp; primitives</div>
-      <h1>La pente, le sommet et l’aire</h1>
-      <p class="lede">Radar tronçon, métro à garer au millimètre, balle au sommet de sa trajectoire, tram à mesurer à l’aire : sept situations où dériver et intégrer ne sont plus des exercices de maths mais des outils d’ingénieur. La calculatrice t’attend en bas à droite.</p>
-    </div>
-
-    <section class="exo-card" id="a">
-      <h2><span class="num">A</span> Le radar tronçon</h2>
-      <p class="task">Sur l’autoroute, un tronçon de 3000 m est chronométré : une voiture le parcourt en 90 s.</p>
-      <div class="row"><span>a) Vitesse moyenne de la voiture sur le tronçon : v ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) Cette vitesse, convertie en km/h :</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">km/h</span></div>
-      <div class="match" id="aMatch"></div>
-      <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div>
-      <div class="steps" id="aSteps"></div>
-      <div class="exo-fb" id="aFb"></div>
-      <div class="exo-sol" id="aSol"><b>a)</b> 3000/90 ≈ <b>33,3 m/s</b>. <b>b)</b> ≈ <b>120 km/h</b>.<br><b>c)</b> Le radar tronçon calcule Δx/Δt : une vitesse <b>MOYENNE</b> — c’est la sécante du cours. Une pointe brève à 150 peut lui échapper si le reste compense… mais pas au radar classique, qui mesure la vitesse <b>instantanée</b> (la tangente !).</div>
-    </section>
-
-    <section class="exo-card" id="b">
-      <h2><span class="num">B</span> La pente sur le graphe</h2>
-      <p class="task">Voici la position x(t) d’un chariot d’atelier. Trois segments de droite = trois vitesses constantes à lire À LA PENTE.</p>
-      <div class="schema">
-        <svg viewBox="0 0 640 250" aria-label="Graphe x(t) en trois segments : montée, palier, descente">
-          <g stroke="#5C544B" stroke-width="2">
-            <path d="M70 210 v-180 M70 210 h540"/>
-          </g>
-          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
-            <text x="76" y="42">x (m)</text>
-            <text x="590" y="230">t (s)</text>
-            <text x="56" y="215">0</text>
-            <text x="46" y="78">20</text>
-            <text x="52" y="160">8</text>
-            <text x="266" y="230">4</text>
-            <text x="366" y="230">6</text>
-            <text x="566" y="230">10</text>
-          </g>
-          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4">
-            <path d="M70 74 h500 M270 74 v136 M370 74 v136 M570 154 v56"/>
-          </g>
-          <g stroke-width="4" fill="none" stroke-linejoin="round">
-            <path d="M70 210 L270 74" stroke="#3D7E5F"/>
-            <path d="M270 74 L370 74" stroke="#BD8A2A"/>
-            <path d="M370 74 L570 154" stroke="#C0492E"/>
-          </g>
-          <g font-family="JetBrains Mono" font-size="12" font-weight="700">
-            <text x="120" y="130" fill="#3D7E5F">segment ①</text>
-            <text x="284" y="60" fill="#8a6313">segment ②</text>
-            <text x="440" y="100" fill="#C0492E">segment ③</text>
-          </g>
-        </svg>
-      </div>
-      <div class="row"><span>a) Vitesse du chariot sur le segment ① : v =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) Vitesse sur le segment ② : v =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="match" id="bMatch"></div>
-      <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>🪜 Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div>
-      <div class="steps" id="bSteps"></div>
-      <div class="exo-fb" id="bFb"></div>
-      <div class="exo-sol" id="bSol"><b>a)</b> pente = (20−0)/(4−0) = <b>5 m/s</b>. <b>b)</b> palier horizontal : <b>0 m/s</b>, le chariot est à l’arrêt.<br><b>c)</b> Segment ③ : x DESCEND de 20 à 8 m → pente (8−20)/(10−6) = <b>−3 m/s</b> : vitesse négative, le chariot <b>recule</b>. La dérivée a un signe, et ce signe raconte le sens du mouvement.</div>
-    </section>
-
-    <section class="exo-card" id="c">
-      <h2><span class="num">C</span> L’architecte du freinage</h2>
-      <p class="task">Mission : le métro entre en station à v₀ = 16 m/s et doit s’arrêter <b>pile au bout du quai de 64 m</b> (heurtoir juste derrière !). Distance d’arrêt : d = v₀²/(2a). <b>Règle la décélération a</b>, regarde la rame rejouer son freinage… et l’aire du triangle se remplir.</p>
-      <div class="schema">
-        <canvas id="cvFrein" width="640" height="300" aria-label="Métro qui freine le long du quai avec courbe de vitesse et aire"></canvas>
-        <div class="slider-row">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">a =</span>
-          <input type="range" id="aSlider" min="0.5" max="4" step="0.25" value="1">
-          <span class="val" id="aVal">1,00 m/s²</span>
-        </div>
-      </div>
-      <div class="row"><span>a) Décélération nécessaire pour s’arrêter à 64 m pile : a =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
-      <div class="row"><span>b) Durée de ce freinage : t =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
-      <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="cFb"></div>
-      <div class="exo-sol" id="cSol"><b>a)</b> d = v₀²/(2a) → a = 256/128 = <b>2 m/s²</b>.<br><b>b)</b> t = 16/2 = <b>8 s</b>. Et regarde le triangle : aire = ½ × 8 × 16 = <b>64 m</b> — la distance d’arrêt EST l’aire sous v(t). Trop mou → 💥 heurtoir ; trop fort → les passagers valdinguent. Le bon freinage est une primitive bien choisie.</div>
-    </section>
-
-    <section class="exo-card" id="d">
-      <h2><span class="num">D</span> Dériver les formules</h2>
-      <p class="task">Un chariot suit la loi horaire ci-dessous (x en m, t en s). Dérive terme à terme, comme en maths.</p>
-      <div class="formula">x(t) = 5t² + 3t + 2</div>
-      <div class="row"><span>a) Dérive x(t) pour obtenir v(t), puis calcule v(2) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div>
-      <div class="row"><span>b) Dérive encore : a =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div>
-      <div class="match" id="dMatch"></div>
-      <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="dFb"></div>
-      <div class="exo-sol" id="dSol"><b>a)</b> v(t) = 10t + 3 → v(2) = <b>23 m/s</b>. <b>b)</b> a = <b>10 m/s²</b>, constante : c’est un MRUA.<br><b>c)</b> Le « + 2 » (position initiale) a <b>disparu</b> en dérivant : une constante a une pente nulle. C’est exactement pour ça qu’en intégrant, il faudra la remettre (exercice ★).</div>
-    </section>
-
-    <section class="exo-card" id="e">
-      <h2><span class="num">E</span> Le sommet de la balle</h2>
-      <p class="task">Une balle est lancée verticalement : h(t) = 30t − 5t² (h en m, t en s). À toi de dériver.</p>
-      <div class="row"><span>a) Dérive h(t), puis trouve l’instant du sommet (v = 0) : t =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">s</span></div>
-      <div class="row"><span>b) Hauteur maximale atteinte : h_max =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="match" id="eMatch"></div>
-      <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="eFb"></div>
-      <div class="exo-sol" id="eSol"><b>a)</b> t = <b>3 s</b>. <b>b)</b> h_max = <b>45 m</b>.<br><b>c)</b> Au sommet la VITESSE est nulle… mais pas l’accélération : la pesanteur tire toujours (a = −10 m/s², c’est d’ailleurs elle, la dérivée de v). Réflexe sommet du cours : <b>extremum de h ⇔ v = 0</b>, et c’est ainsi qu’on trouve tous les maximums en SI.</div>
-    </section>
-
-    <section class="exo-card" id="f">
-      <h2><span class="num">F</span> L’aire du trapèze</h2>
-      <p class="task">Le tram de la ligne 1 : il accélère de 0 à 10 m/s en 5 s, roule 10 s en palier, puis freine en 5 s. Voici v(t) — la distance se lit À L’AIRE.</p>
-      <div class="schema">
-        <svg viewBox="0 0 640 240" aria-label="Courbe de vitesse en trapèze du tram">
-          <g stroke="#5C544B" stroke-width="2"><path d="M70 200 v-160 M70 200 h540"/></g>
-          <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B">
-            <text x="76" y="52">v (m/s)</text>
-            <text x="592" y="220">t (s)</text>
-            <text x="40" y="105">10</text>
-            <text x="190" y="220">5</text>
-            <text x="440" y="220">15</text>
-            <text x="562" y="220">20</text>
-          </g>
-          <path d="M70 200 L195 100 L445 100 L570 200 Z" fill="rgba(46,106,142,.16)" stroke="none"/>
-          <path d="M70 200 L195 100 L445 100 L570 200" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/>
-          <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4"><path d="M195 100 v100 M445 100 v100"/></g>
-          <g font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#2E6A8E">
-            <text x="105" y="180">△ montée</text>
-            <text x="280" y="160">▭ palier</text>
-            <text x="465" y="180">△ freinage</text>
-          </g>
-        </svg>
-      </div>
-      <div class="row"><span>a) Distance parcourue pendant la montée (0 → 5 s) :</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="row"><span>b) Distance totale du trajet, d’arrêt à arrêt :</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="fFb"></div>
-      <div class="exo-sol" id="fSol"><b>a)</b> ½ × 5 × 10 = <b>25 m</b>. <b>b)</b> palier = 10 × 10 = 100 m → total = <b>150 m</b> : l’aire du trapèze, ½(20+10)×10, donne la même chose d’un coup. Intégrer graphiquement = découper en rectangles et triangles. La géométrie de collège au service du tram.</div>
-    </section>
-
-    <section class="exo-card" id="g">
-      <h2><span class="num">★</span> La constante perdue</h2>
-      <p class="task">Un robot roule à v = 4 m/s, constante, depuis dix secondes. Question piège : OÙ est-il à t = 10 s ?</p>
-      <div class="match" id="gMatch"></div>
-      <div class="row"><span>b) On t’apprend enfin que x₀ = 15 m. Calcule x(10) =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div>
-      <div class="exo-fb" id="gFb"></div>
-      <div class="exo-sol" id="gSol"><b>a)</b> <b>Impossible sans x₀</b> : la vitesse dit comment la position CHANGE, pas d’où elle part. C’est la constante que la dérivée avait effacée (exercice D !) — en intégrant, elle réapparaît sous forme d’inconnue.<br><b>b)</b> Avec x₀ = 15 m : x(10) = <b>55 m</b>. Primitive + condition initiale = trajectoire complète. C’est la routine quotidienne des GPS et des centrales inertielles.</div>
-    </section>
-  </div>
-
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
-
-<script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Dérivées &amp; primitives<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI · Dérivées &amp; primitives</div> <h1>La pente, le sommet et l’aire</h1> <p class="lede">Radar tronçon, métro à garer au millimètre, balle au sommet de sa trajectoire, tram à mesurer à l’aire : sept situations où dériver et intégrer ne sont plus des exercices de maths mais des outils d’ingénieur. La calculatrice t’attend en bas à droite.</p></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> Le radar tronçon</h2> <p class="task">Sur l’autoroute, un tronçon de 3000 m est chronométré : une voiture le parcourt en 90 s.</p> <div class="row"><span>a) Vitesse moyenne de la voiture sur le tronçon : v ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div> <div class="row"><span>b) Cette vitesse, convertie en km/h :</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">km/h</span></div> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>a)</b> 3000/90 ≈ <b>33,3 m/s</b>. <b>b)</b> ≈ <b>120 km/h</b>.<br><b>c)</b> Le radar tronçon calcule Δx/Δt : une vitesse <b>MOYENNE</b> — c’est la sécante du cours. Une pointe brève à 150 peut lui échapper si le reste compense… mais pas au radar classique, qui mesure la vitesse <b>instantanée</b> (la tangente !).</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> La pente sur le graphe</h2> <p class="task">Voici la position x(t) d’un chariot d’atelier. Trois segments de droite = trois vitesses constantes à lire À LA PENTE.</p> <div class="schema"><svg viewBox="0 0 640 250" aria-label="Graphe x(t) en trois segments : montée, palier, descente"> <g stroke="#5C544B" stroke-width="2"> <path d="M70 210 v-180 M70 210 h540"/></g> <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B"> <text x="76" y="42">x (m)</text> <text x="590" y="230">t (s)</text> <text x="56" y="215">0</text> <text x="46" y="78">20</text> <text x="52" y="160">8</text> <text x="266" y="230">4</text> <text x="366" y="230">6</text> <text x="566" y="230">10</text> </g> <g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4"> <path d="M70 74 h500 M270 74 v136 M370 74 v136 M570 154 v56"/></g> <g stroke-width="4" fill="none" stroke-linejoin="round"> <path d="M70 210 L270 74" stroke="#3D7E5F"/><path d="M270 74 L370 74" stroke="#BD8A2A"/><path d="M370 74 L570 154" stroke="#C0492E"/></g> <g font-family="JetBrains Mono" font-size="12" font-weight="700"> <text x="120" y="130" fill="#3D7E5F">segment ①</text> <text x="284" y="60" fill="#8a6313">segment ②</text> <text x="440" y="100" fill="#C0492E">segment ③</text> </g> </svg></div> <div class="row"><span>a) Vitesse du chariot sur le segment ① : v =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div> <div class="row"><span>b) Vitesse sur le segment ② : v =</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>a)</b> pente = (20−0)/(4−0) = <b>5 m/s</b>. <b>b)</b> palier horizontal : <b>0 m/s</b>, le chariot est à l’arrêt.<br><b>c)</b> Segment ③ : x DESCEND de 20 à 8 m → pente (8−20)/(10−6) = <b>−3 m/s</b> : vitesse négative, le chariot <b>recule</b>. La dérivée a un signe, et ce signe raconte le sens du mouvement.</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> L’architecte du freinage</h2> <p class="task">Mission : le métro entre en station à v₀ = 16 m/s et doit s’arrêter <b>pile au bout du quai de 64 m</b> (heurtoir juste derrière !). Distance d’arrêt : d = v₀²/(2a). <b>Règle la décélération a</b>, regarde la rame rejouer son freinage… et l’aire du triangle se remplir.</p> <div class="schema"><canvas id="cvFrein" width="640" height="300" aria-label="Métro qui freine le long du quai avec courbe de vitesse et aire"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">a =</span> <input type="range" id="aSlider" min="0.5" max="4" step="0.25" value="1"> <span class="val" id="aVal">1,00 m/s²</span></div></div> <div class="row"><span>a) Décélération nécessaire pour s’arrêter à 64 m pile : a =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div> <div class="row"><span>b) Durée de ce freinage : t =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">s</span></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>a)</b> d = v₀²/(2a) → a = 256/128 = <b>2 m/s²</b>.<br><b>b)</b> t = 16/2 = <b>8 s</b>. Et regarde le triangle : aire = ½ × 8 × 16 = <b>64 m</b> — la distance d’arrêt EST l’aire sous v(t). Trop mou →  heurtoir ; trop fort → les passagers valdinguent. Le bon freinage est une primitive bien choisie.</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> Dériver les formules</h2> <p class="task">Un chariot suit la loi horaire ci-dessous (x en m, t en s). Dérive terme à terme, comme en maths.</p> <div class="formula">x(t) = 5t² + 3t + 2</div> <div class="row"><span>a) Dérive x(t) pour obtenir v(t), puis calcule v(2) =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div> <div class="row"><span>b) Dérive encore : a =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">m/s²</span></div> <div class="match" id="dMatch"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol"><b>a)</b> v(t) = 10t + 3 → v(2) = <b>23 m/s</b>. <b>b)</b> a = <b>10 m/s²</b>, constante : c’est un MRUA.<br><b>c)</b> Le « + 2 » (position initiale) a <b>disparu</b> en dérivant : une constante a une pente nulle. C’est exactement pour ça qu’en intégrant, il faudra la remettre (exercice ★).</div> </section> <section class="exo-card" id="e"> <h2><span class="num">E</span> Le sommet de la balle</h2> <p class="task">Une balle est lancée verticalement : h(t) = 30t − 5t² (h en m, t en s). À toi de dériver.</p> <div class="row"><span>a) Dérive h(t), puis trouve l’instant du sommet (v = 0) : t =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">s</span></div> <div class="row"><span>b) Hauteur maximale atteinte : h_max =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div> <div class="match" id="eMatch"></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>a)</b> t = <b>3 s</b>. <b>b)</b> h_max = <b>45 m</b>.<br><b>c)</b> Au sommet la VITESSE est nulle… mais pas l’accélération : la pesanteur tire toujours (a = −10 m/s², c’est d’ailleurs elle, la dérivée de v). Réflexe sommet du cours : <b>extremum de h ⇔ v = 0</b>, et c’est ainsi qu’on trouve tous les maximums en SI.</div> </section> <section class="exo-card" id="f"> <h2><span class="num">F</span> L’aire du trapèze</h2> <p class="task">Le tram de la ligne 1 : il accélère de 0 à 10 m/s en 5 s, roule 10 s en palier, puis freine en 5 s. Voici v(t) — la distance se lit À L’AIRE.</p> <div class="schema"><svg viewBox="0 0 640 240" aria-label="Courbe de vitesse en trapèze du tram"> <g stroke="#5C544B" stroke-width="2"><path d="M70 200 v-160 M70 200 h540"/></g> <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B"> <text x="76" y="52">v (m/s)</text> <text x="592" y="220">t (s)</text> <text x="40" y="105">10</text> <text x="190" y="220">5</text> <text x="440" y="220">15</text> <text x="562" y="220">20</text> </g> <path d="M70 200 L195 100 L445 100 L570 200 Z" fill="rgba(46,106,142,.16)" stroke="none"/><path d="M70 200 L195 100 L445 100 L570 200" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/><g stroke="#d9cfbb" stroke-width="1.4" stroke-dasharray="4 4"><path d="M195 100 v100 M445 100 v100"/></g> <g font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#2E6A8E"> <text x="105" y="180">△ montée</text> <text x="280" y="160">▭ palier</text> <text x="465" y="180">△ freinage</text> </g> </svg></div> <div class="row"><span>a) Distance parcourue pendant la montée (0 → 5 s) :</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">m</span></div> <div class="row"><span>b) Distance totale du trajet, d’arrêt à arrêt :</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol"><b>a)</b> ½ × 5 × 10 = <b>25 m</b>. <b>b)</b> palier = 10 × 10 = 100 m → total = <b>150 m</b> : l’aire du trapèze, ½(20+10)×10, donne la même chose d’un coup. Intégrer graphiquement = découper en rectangles et triangles. La géométrie de collège au service du tram.</div> </section> <section class="exo-card" id="g"> <h2><span class="num">★</span> La constante perdue</h2> <p class="task">Un robot roule à v = 4 m/s, constante, depuis dix secondes. Question piège : OÙ est-il à t = 10 s ?</p> <div class="match" id="gMatch"></div> <div class="row"><span>b) On t’apprend enfin que x₀ = 15 m. Calcule x(10) =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">m</span></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol"><b>a)</b> <b>Impossible sans x₀</b> : la vitesse dit comment la position CHANGE, pas d’où elle part. C’est la constante que la dérivée avait effacée (exercice D !) — en intégrant, elle réapparaît sous forme d’inconnue.<br><b>b)</b> Avec x₀ = 15 m : x(10) = <b>55 m</b>. Primitive + condition initiale = trajectoire complète. C’est la routine quotidienne des GPS et des centrales inertielles.</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
 "use strict";
 var el=function(id){return document.getElementById(id);};
 var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
@@ -265,138 +142,138 @@ var numf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
 })();
@@ -407,59 +284,59 @@ var aDec=1;
   var cv=el('cvFrein'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
   var V0=16, QUAI=64, T=0;
   el('aSlider').addEventListener('input',function(){ aDec=+this.value;
-    el('aVal').textContent=String(aDec.toFixed(2)).replace('.',',')+' m/s²'; T=0; });
+ el('aVal').textContent=String(aDec.toFixed(2)).replace('.',',')+' m/s²'; T=0; });
   function step(){
-    T+=0.033;
-    var tStop=V0/aDec, dStop=V0*V0/(2*aDec);
-    var cyc=tStop+1.4, tc=(T*2.2)%cyc, tt=Math.min(tc,tStop);
-    var xm=V0*tt-0.5*aDec*tt*tt;
-    var vm=Math.max(0,V0-aDec*tt);
-    g.clearRect(0,0,cv.width,cv.height);
-    /* --- vue du quai (0..90 m) --- */
-    var X0=30, SC=(640-60)/90;
-    g.strokeStyle='#5C544B'; g.lineWidth=3;
-    g.beginPath(); g.moveTo(X0,96); g.lineTo(X0+90*SC,96); g.stroke();
-    // quai 0..64
-    g.fillStyle='#efe8d8'; g.fillRect(X0,96,QUAI*SC,10);
-    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('0 m',X0,122); g.fillText('64 m — bout du quai',X0+QUAI*SC,122);
-    // heurtoir
-    g.fillStyle='#C0492E'; g.fillRect(X0+(QUAI+2)*SC-3,66,6,30);
-    // repère cible
-    g.strokeStyle='#C0492E'; g.lineWidth=2; g.setLineDash([4,4]);
-    g.beginPath(); g.moveTo(X0+QUAI*SC,60); g.lineTo(X0+QUAI*SC,96); g.stroke(); g.setLineDash([]);
-    // rame
-    var xr=Math.min(xm,88);
-    g.fillStyle='#e7eef2'; g.strokeStyle='#2E6A8E'; g.lineWidth=2.5;
-    g.beginPath(); g.rect(X0+xr*SC-46,66,46,24); g.fill(); g.stroke();
-    g.fillStyle='#2E6A8E'; g.beginPath(); g.arc(X0+xr*SC-34,94,5,0,7); g.fill(); g.beginPath(); g.arc(X0+xr*SC-12,94,5,0,7); g.fill();
-    // verdict
-    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
-    if(dStop>QUAI+1){ g.fillStyle='#C0492E'; g.fillText('💥 '+String(dStop.toFixed(1)).replace('.',',')+' m : heurtoir percuté !',360,36); }
-    else if(dStop<QUAI-1){ g.fillStyle='#BD8A2A'; g.fillText(String(dStop.toFixed(1)).replace('.',',')+' m : arrêt trop brutal, trop court',330,36); }
-    else { g.fillStyle='#3D7E5F'; g.fillText('🎯 64 m pile : arrêt parfait au quai !',360,36); }
-    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
-    g.fillText('d = 16²/(2×'+String(aDec.toFixed(2)).replace('.',',')+') = '+String(dStop.toFixed(1)).replace('.',',')+' m',30,36);
-    /* --- courbe v(t) + aire --- */
-    var gx=70, gy=272, gw=420, gh=110, tMax=10;
-    g.strokeStyle='#5C544B'; g.lineWidth=2;
-    g.beginPath(); g.moveTo(gx,gy-gh); g.lineTo(gx,gy); g.lineTo(gx+gw,gy); g.stroke();
-    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
-    g.fillText('v (m/s)',gx+6,gy-gh+12); g.textAlign='right'; g.fillText('t (s)',gx+gw,gy+16); g.textAlign='left';
-    g.fillText('16',gx-24,gy-16*(gh/18)+4);
-    function PX(t2){ return gx+t2/tMax*gw; }
-    function PY(v2){ return gy-v2*(gh/18); }
-    // aire remplie jusqu'à tt
-    g.fillStyle='rgba(46,106,142,.20)';
-    g.beginPath(); g.moveTo(PX(0),PY(V0));
-    for(var k=0;k<=60;k++){ var t2=tt*k/60; g.lineTo(PX(t2),PY(Math.max(0,V0-aDec*t2))); }
-    g.lineTo(PX(tt),gy); g.lineTo(PX(0),gy); g.closePath(); g.fill();
-    // droite v(t)
-    g.strokeStyle='#2E6A8E'; g.lineWidth=3;
-    g.beginPath(); g.moveTo(PX(0),PY(V0)); g.lineTo(PX(Math.min(tStop,tMax)),PY(Math.max(0,V0-aDec*Math.min(tStop,tMax)))); g.stroke();
-    g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('aire = distance = '+String((V0*tt-0.5*aDec*tt*tt).toFixed(1)).replace('.',',')+' m',gx+150,gy-gh+14);
-    g.fillText('t arrêt = '+String(tStop.toFixed(1)).replace('.',',')+' s',520,gy-40);
+ T+=0.033;
+ var tStop=V0/aDec, dStop=V0*V0/(2*aDec);
+ var cyc=tStop+1.4, tc=(T*2.2)%cyc, tt=Math.min(tc,tStop);
+ var xm=V0*tt-0.5*aDec*tt*tt;
+ var vm=Math.max(0,V0-aDec*tt);
+ g.clearRect(0,0,cv.width,cv.height);
+ /* --- vue du quai (0..90 m) --- */
+ var X0=30, SC=(640-60)/90;
+ g.strokeStyle='#5C544B'; g.lineWidth=3;
+ g.beginPath(); g.moveTo(X0,96); g.lineTo(X0+90*SC,96); g.stroke();
+ // quai 0..64
+ g.fillStyle='#efe8d8'; g.fillRect(X0,96,QUAI*SC,10);
+ g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('0 m',X0,122); g.fillText('64 m — bout du quai',X0+QUAI*SC,122);
+ // heurtoir
+ g.fillStyle='#C0492E'; g.fillRect(X0+(QUAI+2)*SC-3,66,6,30);
+ // repère cible
+ g.strokeStyle='#C0492E'; g.lineWidth=2; g.setLineDash([4,4]);
+ g.beginPath(); g.moveTo(X0+QUAI*SC,60); g.lineTo(X0+QUAI*SC,96); g.stroke(); g.setLineDash([]);
+ // rame
+ var xr=Math.min(xm,88);
+ g.fillStyle='#e7eef2'; g.strokeStyle='#2E6A8E'; g.lineWidth=2.5;
+ g.beginPath(); g.rect(X0+xr*SC-46,66,46,24); g.fill(); g.stroke();
+ g.fillStyle='#2E6A8E'; g.beginPath(); g.arc(X0+xr*SC-34,94,5,0,7); g.fill(); g.beginPath(); g.arc(X0+xr*SC-12,94,5,0,7); g.fill();
+ // verdict
+ g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+ if(dStop>QUAI+1){ g.fillStyle='#C0492E'; g.fillText(' '+String(dStop.toFixed(1)).replace('.',',')+' m : heurtoir percuté !',360,36); }
+ else if(dStop<QUAI-1){ g.fillStyle='#BD8A2A'; g.fillText(String(dStop.toFixed(1)).replace('.',',')+' m : arrêt trop brutal, trop court',330,36); }
+ else { g.fillStyle='#3D7E5F'; g.fillText(' 64 m pile : arrêt parfait au quai !',360,36); }
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('d = 16²/(2×'+String(aDec.toFixed(2)).replace('.',',')+') = '+String(dStop.toFixed(1)).replace('.',',')+' m',30,36);
+ /* --- courbe v(t) + aire --- */
+ var gx=70, gy=272, gw=420, gh=110, tMax=10;
+ g.strokeStyle='#5C544B'; g.lineWidth=2;
+ g.beginPath(); g.moveTo(gx,gy-gh); g.lineTo(gx,gy); g.lineTo(gx+gw,gy); g.stroke();
+ g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+ g.fillText('v (m/s)',gx+6,gy-gh+12); g.textAlign='right'; g.fillText('t (s)',gx+gw,gy+16); g.textAlign='left';
+ g.fillText('16',gx-24,gy-16*(gh/18)+4);
+ function PX(t2){ return gx+t2/tMax*gw; }
+ function PY(v2){ return gy-v2*(gh/18); }
+ // aire remplie jusqu'à tt
+ g.fillStyle='rgba(46,106,142,.20)';
+ g.beginPath(); g.moveTo(PX(0),PY(V0));
+ for(var k=0;k<=60;k++){ var t2=tt*k/60; g.lineTo(PX(t2),PY(Math.max(0,V0-aDec*t2))); }
+ g.lineTo(PX(tt),gy); g.lineTo(PX(0),gy); g.closePath(); g.fill();
+ // droite v(t)
+ g.strokeStyle='#2E6A8E'; g.lineWidth=3;
+ g.beginPath(); g.moveTo(PX(0),PY(V0)); g.lineTo(PX(Math.min(tStop,tMax)),PY(Math.max(0,V0-aDec*Math.min(tStop,tMax)))); g.stroke();
+ g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('aire = distance = '+String((V0*tt-0.5*aDec*tt*tt).toFixed(1)).replace('.',',')+' m',gx+150,gy-gh+14);
+ g.fillText('t arrêt = '+String(tStop.toFixed(1)).replace('.',',')+' s',520,gy-40);
   }
   setInterval(step,40); step();
 })();
@@ -468,12 +345,12 @@ var aDec=1;
 function setupSteps(btnId, boxId, steps){
   var i=0, btn=el(btnId), box=el(boxId);
   btn.addEventListener('click',function(){
-    if(btn.disabled||i>=steps.length) return;
-    var d=document.createElement('div'); d.className='stepline';
-    d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
-    box.appendChild(d); box.classList.add('show'); i++;
-    if(i<steps.length){ btn.textContent='🪜 Étape suivante ('+i+'/'+steps.length+')'; }
-    else { btn.textContent='✔ Résolution complète'; btn.disabled=true; }
+ if(btn.disabled||i>=steps.length) return;
+ var d=document.createElement('div'); d.className='stepline';
+ d.innerHTML='<span class="sn">'+(i+1)+'</span><span>'+steps[i]+'</span>';
+ box.appendChild(d); box.classList.add('show'); i++;
+ if(i<steps.length){ btn.textContent=' Étape suivante ('+i+'/'+steps.length+')'; }
+ else { btn.textContent=' Résolution complète'; btn.disabled=true; }
   });
 }
 setupSteps('aStepBtn','aSteps',[
@@ -494,12 +371,12 @@ setupSteps('bStepBtn','bSteps',[
 function buildMatch(boxId, prefix, scen){
   var box=el(boxId);
   scen.forEach(function(s,i){ var d=document.createElement('div'); d.className='m'; d.id=prefix+'m'+i;
-    d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
-    box.appendChild(d); });
+ d.innerHTML='<span class="sc">'+s.sc+'</span><select id="'+prefix+'sel'+i+'">'+s.opts.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';
+ box.appendChild(d); });
 }
 function checkMatch(prefix, scen){
   var all=true; scen.forEach(function(s,i){ var v=el(prefix+'sel'+i).value; var good=(v===s.ok); if(!good)all=false;
-    el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
+ el(prefix+'m'+i).className='m '+(good?'ok':'no'); });
   return all;
 }
 function lockExo(checkBtn, showBtn, solId, fbId, validator){
@@ -517,7 +394,7 @@ lockExo('aCheck','aShow','aSol','aFb',function(){
   var okA=Math.abs(a-33.3)<0.6, okB=Math.abs(b-120)<2, okM=checkMatch('a',A_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 120 km/h de moyenne : la sécante du cours, en vrai sur l\u2019A31.'};
   el('aStepBtn').disabled=false;
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée 🪜'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée '};
 });
 
 /* B */
@@ -530,7 +407,7 @@ lockExo('bCheck','bShow','bSol','bFb',function(){
   var okA=Math.abs(a-5)<0.3, okB=Math.abs(b-0)<0.3, okM=checkMatch('b',B_SCEN);
   if(okA&&okB&&okM) return {ok:true,msg:'✓ 5, 0, −3 : trois pentes, trois vies du chariot.'};
   el('bStepBtn').disabled=false;
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée 🪜'};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗')+' '+(okB?'b✓':'b✗')+' '+(okM?'c✓':'c✗')+' — la résolution pas à pas est débloquée '};
 });
 
 /* C */
@@ -538,7 +415,7 @@ lockExo('cCheck','cShow','cSol','cFb',function(){
   var a=numf(el('cA').value), b=numf(el('cB').value);
   var okA=Math.abs(a-2)<0.15, okB=Math.abs(b-8)<0.4;
   if(okA&&okB) return {ok:true,msg:'✓ a = 2 m/s², 8 s de freinage : la RATP t\u2019embauche.'};
-  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (cherche le 🎯 au simulateur !)')+' '+(okB?'b✓':'b✗ (v\u2080/a)')};
+  return {ok:false,msg:'✗ '+(okA?'a✓':'a✗ (cherche le  au simulateur !)')+' '+(okB?'b✓':'b✗ (v\u2080/a)')};
 });
 
 /* D */
@@ -584,6 +461,232 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
   if(okM&&okB) return {ok:true,msg:'✓ Primitive + condition initiale = position complète. La boucle est bouclée.'};
   return {ok:false,msg:'✗ '+(okM?'a✓':'a✗ (que sait-on du point de départ ?)')+' '+(okB?'b✓':'b✗ (x\u2080 + v·t)')};
 });
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_deriv', TP_TITRE='TP — Dérivées &amp; primitives en mécanique';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
+})();
 </script>
 </body>
 </html>

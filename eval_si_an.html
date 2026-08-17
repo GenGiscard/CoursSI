@@ -7,9 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
-    --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
+<style> :root{ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --sub:#5C544B; --line:#E4DCCB;
+ --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --copper:#C0492E; --plum:#8A5A7A; }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;font-size:17px;line-height:1.55}
@@ -87,16 +86,16 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sub);text-align:center;margin-top:6px}
   /* ---------- calculatrice scientifique (styles unifiés) ---------- */
   #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
-        border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
   #calc.show{display:block}
   #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
   #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
-                 min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
   #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
-                 min-height:30px;overflow:hidden;white-space:nowrap}
+ min-height:30px;overflow:hidden;white-space:nowrap}
   #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
   #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
-                     border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
   #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
   #calc .keys button:active{transform:translateY(1px)}
   #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
@@ -108,157 +107,7 @@
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
 </style>
 </head>
-<body>
-  <div class="estic-bar">
-    <img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC">
-    <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div>
-    <div class="rt">Évaluation — Application numérique<br>© ESTIC — Tous droits réservés</div>
-  </div>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="k">Évaluation · Première spé SI · /15</div>
-      <h1>Le bureau de contrôle</h1>
-      <p>Tu viens d’être affecté au bureau de contrôle d’un constructeur de machines. Ton métier tient en une phrase : <b>vérifier les notes de calcul avant qu’elles ne partent en production</b>. Une conversion manquée, un rendement mal appliqué, et c’est un moteur surdimensionné — ou pire, sous-dimensionné. La calculatrice est en bas à droite.</p>
-      <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div>
-    </div>
-
-    <!-- ============ EX 1 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">1</span> La plaque signalétique <span class="pts">3 pts</span></h2>
-      <p class="task">Premier dossier : une plaque moteur arrive sur ton bureau. Avant tout calcul, convertis ses trois données en unités du système international.</p>
-      <div class="chrono">
-        <svg viewBox="0 0 860 210" aria-label="Plaque signalétique d'un moteur électrique">
-          <rect x="150" y="18" width="560" height="174" rx="10" fill="#e3ded2" stroke="#8c8578" stroke-width="3"/>
-          <rect x="150" y="18" width="560" height="42" rx="10" fill="#5C544B"/>
-          <text x="430" y="47" text-anchor="middle" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#f2ead8">MOTEUR ASYNCHRONE TRIPHASÉ</text>
-          <g font-family="JetBrains Mono" font-size="16" fill="#2A2622">
-            <text x="184" y="92">Vitesse nominale</text><text x="640" y="92" text-anchor="end" font-weight="700">1800 tr/min</text>
-            <text x="184" y="128">Puissance utile</text><text x="640" y="128" text-anchor="end" font-weight="700">7,5 kW</text>
-            <text x="184" y="164">Ø arbre de sortie</text><text x="640" y="164" text-anchor="end" font-weight="700">250 mm</text>
-          </g>
-          <g stroke="#b5aea0" stroke-width="1.5"><path d="M176 104 H684 M176 140 H684"/></g>
-          <circle cx="168" cy="34" r="5" fill="#c8bfae"/><circle cx="692" cy="34" r="5" fill="#c8bfae"/>
-          <circle cx="168" cy="178" r="5" fill="#8c8578"/><circle cx="692" cy="178" r="5" fill="#8c8578"/>
-        </svg>
-      </div>
-      <div class="qrow" id="q1a"><span class="sc">a) Vitesse en rad/s :</span><input class="numin" id="n1a" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
-      <div class="qrow" id="q1b"><span class="sc">b) Puissance en watts :</span><input class="numin" id="n1b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="qrow" id="q1c"><span class="sc">c) Diamètre en mètres :</span><input class="numin" id="n1c" inputmode="decimal" placeholder="?"><span class="unit">m</span></div>
-      <div class="corr" id="c1"></div>
-    </section>
-
-    <!-- ============ EX 2 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">2</span> Le calcul en chaîne <span class="pts">3 pts</span></h2>
-      <p class="task">Un motoréducteur de convoyeur : moteur <b>N₁ = 900 tr/min</b>, couple <b>C₁ = 15 N·m</b>, réducteur de rapport <b>1/3</b> et de rendement <b>η = 0,90</b>. Descends la chaîne dans l’ordre.</p>
-      <div class="qrow" id="q2a"><span class="sc">a) Vitesse angulaire du moteur ω₁ :</span><input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div>
-      <div class="qrow" id="q2b"><span class="sc">b) Puissance en sortie de réducteur P₂ :</span><input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="qrow" id="q2c"><span class="sc">c) Le couple de sortie C₂ peut se vérifier par un second chemin. Lequel ?</span>
-        <select id="s2c"><option>— choisir —</option><option>C₂ = C₁ × 3 × 0,90 = 40,5 N·m</option><option>C₂ = C₁ / 3 × 0,90</option><option>C₂ = C₁ × 3 / 0,90</option></select></div>
-      <div class="corr" id="c2"></div>
-    </section>
-
-    <!-- ============ EX 3 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">3</span> Défi : l’audit express <span class="pts">2 pts</span></h2>
-      <p class="task"><b>6 contrôles</b> à passer au crible. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p>
-      <div class="game">
-        <div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div>
-        <div class="gq" id="gQ">Prêt ? Les dossiers arrivent…</div>
-        <div class="gopts" id="gOpts"></div>
-        <div class="gmsg" id="gMsg"></div>
-        <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div>
-      </div>
-      <div class="corr" id="c3"></div>
-    </section>
-
-    <!-- ============ EX 4 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">4</span> Le curseur des arrondis <span class="pts">2 pts</span></h2>
-      <p class="task">Une note de calcul fait intervenir quatre fois le facteur cos 30° : <b>R = 1000 × (cos 30°)⁴</b>. <b>Fais varier le nombre de décimales conservées</b> et observe la dérive du résultat.</p>
-      <div class="chrono">
-        <canvas id="cv4" width="860" height="230" aria-label="Dérive du résultat selon le nombre de décimales conservées"></canvas>
-        <div class="slider-row">
-          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">décimales gardées</span>
-          <input type="range" id="pSlider" min="1" max="6" step="1" value="2">
-          <span class="val" id="pVal">2 décimales</span>
-        </div>
-      </div>
-      <div class="qrow" id="q4a"><span class="sc">a) Valeur exacte de R (sans arrondi intermédiaire) :</span><input class="numin" id="n4a" inputmode="decimal" placeholder="?"></div>
-      <div class="qrow" id="q4b"><span class="sc">b) Ce que montre le curseur :</span>
-        <select id="s4b"><option>— choisir —</option><option>plus on arrondit tôt, plus l’écart final est grand : l’erreur se multiplie</option><option>l’arrondi n’a aucun effet sur le résultat</option><option>arrondir tôt rend le résultat plus précis</option></select></div>
-      <div class="corr" id="c4"></div>
-    </section>
-
-    <!-- ============ EX 5 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">5</span> Chasse à l’erreur <span class="pts">2 pts</span></h2>
-      <p class="task">Une note de calcul te parvient pour un vélo électrique (batterie 288 W ; variateur 0,95 · moteur 0,85 · transmission 0,92) :</p>
-      <div class="chrono">
-        <svg viewBox="0 0 860 170" aria-label="Note de calcul erronée sur le rendement global">
-          <rect x="70" y="14" width="720" height="140" rx="10" fill="#fffdf6" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="8 5"/>
-          <g font-family="JetBrains Mono" font-size="16" fill="#2A2622">
-            <text x="100" y="52">« Rendement global : η = (0,95 + 0,85 + 0,92) / 3 = 0,907</text>
-            <text x="100" y="86">  Puissance utile : P = 288 × 0,907 ≈ 261 W</text>
-          </g>
-          <text x="100" y="126" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E">⚠ le chef de projet a entouré la première ligne en rouge</text>
-        </svg>
-      </div>
-      <div class="qrow" id="q5a"><span class="sc">a) L’erreur commise :</span>
-        <select id="s5a"><option>— choisir —</option><option>les rendements se MULTIPLIENT, ils ne se moyennent pas</option><option>il fallait additionner sans diviser par 3</option><option>il n’y a pas d’erreur</option></select></div>
-      <div class="qrow" id="q5b"><span class="sc">b) Puissance utile réelle :</span><input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="corr" id="c5"></div>
-    </section>
-
-    <!-- ============ EX 6 ============ -->
-    <section class="exo-card">
-      <h2><span class="num">6</span> Le rapport de contrôle <span class="pts">3 pts</span></h2>
-      <p class="task">Dernier dossier : un monte-charge élève <b>250 kg</b> à la vitesse constante de <b>0,5 m/s</b>, sur une hauteur de <b>12 m</b>. Le rendement global de la chaîne vaut <b>0,80</b>. On prendra g = 10 N/kg. Attention au sens de la chaîne !</p>
-      <div class="chrono"><canvas id="cv6" width="860" height="300" aria-label="Monte-charge avec flux d'énergie de la prise vers la charge"></canvas></div>
-      <div class="qrow" id="q6a"><span class="sc">a) Puissance utile (celle qui soulève la charge) :</span><input class="numin" id="n6a" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="qrow" id="q6b"><span class="sc">b) Puissance absorbée au réseau :</span><input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div>
-      <div class="qrow" id="q6c"><span class="sc">c) Énergie absorbée pour toute la montée :</span><input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">kJ</span></div>
-      <div class="corr" id="c6"></div>
-    </section>
-
-    <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div>
-    <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div>
-
-    <div class="teacher">
-      <span class="tlink" id="tlink">· Espace enseignant ·</span>
-      <div id="dash">
-        <div id="dashLogin" style="margin-top:8px">
-          <input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none">
-          <button class="btn g" id="pwBtn">Ouvrir</button>
-          <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span>
-        </div>
-        <div id="dashData" style="display:none">
-          <div id="stats" style="margin:10px 0"></div><div id="perQ"></div>
-          <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3>
-          <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div>
-          <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
-  <div id="calc" role="dialog" aria-label="Calculatrice scientifique">
-    <div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div>
-    <div class="keys">
-      <button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button>
-      <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button>
-      <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button>
-      <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button>
-      <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button>
-      <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button>
-      <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button>
-    </div>
-    <div class="tt">parenthèses gérées · résultat calculé en direct</div>
-  </div>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">Évaluation — Application numérique<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">Évaluation · Première spé SI · /15</div> <h1>Le bureau de contrôle</h1> <p>Tu viens d’être affecté au bureau de contrôle d’un constructeur de machines. Ton métier tient en une phrase : <b>vérifier les notes de calcul avant qu’elles ne partent en production</b>. Une conversion manquée, un rendement mal appliqué, et c’est un moteur surdimensionné — ou pire, sous-dimensionné. La calculatrice est en bas à droite.</p> <div class="idbox"><input id="nom" placeholder="Nom Prénom" autocomplete="off"><input id="classe" placeholder="Classe (ex. 1SI2)" autocomplete="off" style="max-width:170px"></div></div> <!-- ============ EX 1 ============ --> <section class="exo-card"> <h2><span class="num">1</span> La plaque signalétique <span class="pts">3 pts</span></h2> <p class="task">Premier dossier : une plaque moteur arrive sur ton bureau. Avant tout calcul, convertis ses trois données en unités du système international.</p> <div class="chrono"><svg viewBox="0 0 860 210" aria-label="Plaque signalétique d'un moteur électrique"> <rect x="150" y="18" width="560" height="174" rx="10" fill="#e3ded2" stroke="#8c8578" stroke-width="3"/> <rect x="150" y="18" width="560" height="42" rx="10" fill="#5C544B"/> <text x="430" y="47" text-anchor="middle" font-family="JetBrains Mono" font-size="19" font-weight="700" fill="#f2ead8">MOTEUR ASYNCHRONE TRIPHASÉ</text> <g font-family="JetBrains Mono" font-size="16" fill="#2A2622"> <text x="184" y="92">Vitesse nominale</text><text x="640" y="92" text-anchor="end" font-weight="700">1800 tr/min</text> <text x="184" y="128">Puissance utile</text><text x="640" y="128" text-anchor="end" font-weight="700">7,5 kW</text> <text x="184" y="164">Ø arbre de sortie</text><text x="640" y="164" text-anchor="end" font-weight="700">250 mm</text> </g> <g stroke="#b5aea0" stroke-width="1.5"><path d="M176 104 H684 M176 140 H684"/></g> <circle cx="168" cy="34" r="5" fill="#c8bfae"/><circle cx="692" cy="34" r="5" fill="#c8bfae"/> <circle cx="168" cy="178" r="5" fill="#8c8578"/><circle cx="692" cy="178" r="5" fill="#8c8578"/> </svg></div> <div class="qrow" id="q1a"><span class="sc">a) Vitesse en rad/s :</span><input class="numin" id="n1a" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="qrow" id="q1b"><span class="sc">b) Puissance en watts :</span><input class="numin" id="n1b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="qrow" id="q1c"><span class="sc">c) Diamètre en mètres :</span><input class="numin" id="n1c" inputmode="decimal" placeholder="?"><span class="unit">m</span></div> <div class="corr" id="c1"></div> </section> <!-- ============ EX 2 ============ --> <section class="exo-card"> <h2><span class="num">2</span> Le calcul en chaîne <span class="pts">3 pts</span></h2> <p class="task">Un motoréducteur de convoyeur : moteur <b>N₁ = 900 tr/min</b>, couple <b>C₁ = 15 N·m</b>, réducteur de rapport <b>1/3</b> et de rendement <b>η = 0,90</b>. Descends la chaîne dans l’ordre.</p> <div class="qrow" id="q2a"><span class="sc">a) Vitesse angulaire du moteur ω₁ :</span><input class="numin" id="n2a" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="qrow" id="q2b"><span class="sc">b) Puissance en sortie de réducteur P₂ :</span><input class="numin" id="n2b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="qrow" id="q2c"><span class="sc">c) Le couple de sortie C₂ peut se vérifier par un second chemin. Lequel ?</span> <select id="s2c"><option>— choisir —</option><option>C₂ = C₁ × 3 × 0,90 = 40,5 N·m</option><option>C₂ = C₁ / 3 × 0,90</option><option>C₂ = C₁ × 3 / 0,90</option></select></div> <div class="corr" id="c2"></div> </section> <!-- ============ EX 3 ============ --> <section class="exo-card"> <h2><span class="num">3</span> Défi : l’audit express <span class="pts">2 pts</span></h2> <p class="task"><b>6 contrôles</b> à passer au crible. <b>Une seule tentative</b> (5-6 ✓ 2 pts · 3-4 ✓ 1 pt).</p> <div class="game"><div class="ghead"><span id="gProg">défi non lancé</span><span id="gScore">✓ 0</span></div> <div class="gq" id="gQ">Prêt ? Les dossiers arrivent…</div> <div class="gopts" id="gOpts"></div> <div class="gmsg" id="gMsg"></div> <div style="text-align:center;margin-top:10px"><button class="btn go" id="gStart">Lancer le défi</button></div></div> <div class="corr" id="c3"></div> </section> <!-- ============ EX 4 ============ --> <section class="exo-card"> <h2><span class="num">4</span> Le curseur des arrondis <span class="pts">2 pts</span></h2> <p class="task">Une note de calcul fait intervenir quatre fois le facteur cos 30° : <b>R = 1000 × (cos 30°)⁴</b>. <b>Fais varier le nombre de décimales conservées</b> et observe la dérive du résultat.</p> <div class="chrono"><canvas id="cv4" width="860" height="230" aria-label="Dérive du résultat selon le nombre de décimales conservées"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">décimales gardées</span> <input type="range" id="pSlider" min="1" max="6" step="1" value="2"> <span class="val" id="pVal">2 décimales</span></div></div> <div class="qrow" id="q4a"><span class="sc">a) Valeur exacte de R (sans arrondi intermédiaire) :</span><input class="numin" id="n4a" inputmode="decimal" placeholder="?"></div> <div class="qrow" id="q4b"><span class="sc">b) Ce que montre le curseur :</span> <select id="s4b"><option>— choisir —</option><option>plus on arrondit tôt, plus l’écart final est grand : l’erreur se multiplie</option><option>l’arrondi n’a aucun effet sur le résultat</option><option>arrondir tôt rend le résultat plus précis</option></select></div> <div class="corr" id="c4"></div> </section> <!-- ============ EX 5 ============ --> <section class="exo-card"> <h2><span class="num">5</span> Chasse à l’erreur <span class="pts">2 pts</span></h2> <p class="task">Une note de calcul te parvient pour un vélo électrique (batterie 288 W ; variateur 0,95 · moteur 0,85 · transmission 0,92) :</p> <div class="chrono"><svg viewBox="0 0 860 170" aria-label="Note de calcul erronée sur le rendement global"> <rect x="70" y="14" width="720" height="140" rx="10" fill="#fffdf6" stroke="#C0492E" stroke-width="2.5" stroke-dasharray="8 5"/> <g font-family="JetBrains Mono" font-size="16" fill="#2A2622"> <text x="100" y="52">« Rendement global : η = (0,95 + 0,85 + 0,92) / 3 = 0,907</text> <text x="100" y="86"> Puissance utile : P = 288 × 0,907 ≈ 261 W</text> </g> <text x="100" y="126" font-family="JetBrains Mono" font-size="15" font-weight="700" fill="#C0492E"> le chef de projet a entouré la première ligne en rouge</text> </svg></div> <div class="qrow" id="q5a"><span class="sc">a) L’erreur commise :</span> <select id="s5a"><option>— choisir —</option><option>les rendements se MULTIPLIENT, ils ne se moyennent pas</option><option>il fallait additionner sans diviser par 3</option><option>il n’y a pas d’erreur</option></select></div> <div class="qrow" id="q5b"><span class="sc">b) Puissance utile réelle :</span><input class="numin" id="n5b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="corr" id="c5"></div> </section> <!-- ============ EX 6 ============ --> <section class="exo-card"> <h2><span class="num">6</span> Le rapport de contrôle <span class="pts">3 pts</span></h2> <p class="task">Dernier dossier : un monte-charge élève <b>250 kg</b> à la vitesse constante de <b>0,5 m/s</b>, sur une hauteur de <b>12 m</b>. Le rendement global de la chaîne vaut <b>0,80</b>. On prendra g = 10 N/kg. Attention au sens de la chaîne !</p> <div class="chrono"><canvas id="cv6" width="860" height="300" aria-label="Monte-charge avec flux d'énergie de la prise vers la charge"></canvas></div> <div class="qrow" id="q6a"><span class="sc">a) Puissance utile (celle qui soulève la charge) :</span><input class="numin" id="n6a" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="qrow" id="q6b"><span class="sc">b) Puissance absorbée au réseau :</span><input class="numin" id="n6b" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="qrow" id="q6c"><span class="sc">c) Énergie absorbée pour toute la montée :</span><input class="numin" id="n6c" inputmode="decimal" placeholder="?"><span class="unit">kJ</span></div> <div class="corr" id="c6"></div> </section> <div style="margin-top:14px;text-align:center"><button class="btn go" id="submit">Terminer &amp; envoyer</button></div> <div class="scorebox" id="scorebox"><div class="big" id="scoreBig">—</div><div class="st" id="scoreSt"></div></div> <div class="teacher"><span class="tlink" id="tlink">· Espace enseignant ·</span> <div id="dash"><div id="dashLogin" style="margin-top:8px"><input id="pw" type="password" placeholder="Mot de passe" style="font-family:'Bricolage Grotesque';font-size:15px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;outline:none"> <button class="btn g" id="pwBtn">Ouvrir</button> <span id="pwFb" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--copper)"></span></div> <div id="dashData" style="display:none"><div id="stats" style="margin:10px 0"></div><div id="perQ"></div> <h3 style="margin:16px 0 4px;font-size:16px">Copies reçues</h3> <div style="overflow-x:auto"><table id="tbl"><thead><tr><th>Nom</th><th>Classe</th><th>Note</th><th>Date</th></tr></thead><tbody></tbody></table></div> <div style="margin-top:10px"><button class="btn g" id="refresh">Rafraîchir</button></div></div></div></div></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 "use strict";
@@ -277,147 +126,147 @@ var NODE='eval_an';
   if(!dE||!dR) return;
   var D2R=Math.PI/180;
   function fmt(x){
-    if(x===null||x===undefined||!isFinite(x)) return 'Err';
-    var r=Math.round(x*1e10)/1e10;
-    var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
-    return s.replace('.',',');
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
   /* --- tokenizer --- */
   var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
   function tok(s){
-    var T=[], i=0;
-    while(i<s.length){
-      var c=s[i];
-      if(c===' '){ i++; continue; }
-      if(c>='0'&&c<='9'||c==='.'){
-        var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
-        T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
-      }
-      if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
-      var got=null;
-      for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
-      if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
-      if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
-      throw new Error('car');
-    }
-    return T;
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
   }
   /* --- parseur descendant --- */
   function parse(T){
-    var p=0;
-    function peek(){ return T[p]; }
-    function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
-    function expression(){
-      var v=term();
-      while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
-        var op=T[p].t; p++;
-        var r=term(); v=(op==='+')? v+r : v-r;
-      }
-      return v;
-    }
-    function term(){
-      var v=power();
-      while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
-        var op=T[p].t; p++;
-        var r=power();
-        if(op==='/'&&r===0) throw new Error('div0');
-        v=(op==='*')? v*r : v/r;
-      }
-      return v;
-    }
-    function power(){
-      var b=unary();
-      if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
-      return b;
-    }
-    function unary(){
-      if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
-      if(T[p]&&T[p].t==='+'){ p++; return unary(); }
-      return primary();
-    }
-    function primary(){
-      var t=T[p];
-      if(!t) throw new Error('fin');
-      if(t.t==='num'){ p++; return t.v; }
-      if(t.t==='fn'){
-        p++;
-        if(!eat('(')) throw new Error('par');
-        var a=expression();
-        if(!eat(')')) throw new Error('par');
-        return applyFn(t.v,a);
-      }
-      if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
-      throw new Error('tok');
-    }
-    var res=expression();
-    if(p<T.length) throw new Error('reste');
-    return res;
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
   }
   function applyFn(f,a){
-    switch(f){
-      case 'sin': return Math.sin(deg? a*D2R : a);
-      case 'cos': return Math.cos(deg? a*D2R : a);
-      case 'tan': return Math.tan(deg? a*D2R : a);
-      case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
-      case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
-      case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
-      case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
-      case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
-      case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
-      case 'abs': return Math.abs(a);
-    }
-    throw new Error('fn');
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
   }
   function evaluate(s){
-    if(!s.trim()) return null;
-    /* fermeture automatique des parenthèses ouvertes */
-    var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
-    var full=s+')'.repeat(Math.max(0,o-c));
-    return parse(tok(full));
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
   }
   function pretty(s){
-    return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
-            .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
   }
   function render(){
-    dE.textContent = expr? pretty(expr) : '\u00a0';
-    var out='';
-    try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
-    catch(e){ out=last||'\u00a0'; }
-    dR.textContent=out;
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
   }
   function ins(s){ expr+=s; render(); }
   var host=document.getElementById('calc');
   document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
   host.addEventListener('click',function(ev){
-    var b=ev.target.closest('button'); if(!b) return;
-    var a=b.dataset.act;
-    if(a==='C'){ expr=''; last=''; render(); return; }
-    if(a==='del'){ 
-      var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
-      expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
-      render(); return; }
-    if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
-    if(a==='eq'){
-      try{ var v=evaluate(expr); if(v===null) return;
-        last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
-      catch(e){ dR.textContent='Err'; }
-      return; }
-    if(a==='neg'){
-      var mm=expr.match(/(\d+\.?\d*)$/);
-      if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
-      else { expr+='(-'; }
-      render(); return; }
-    ins(a);
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
   });
   render();
 })();
 
 /* ---------- valeurs de référence ---------- */
-var W1800=2*Math.PI*1800/60;                 /* 188,50 rad/s */
+var W1800=2*Math.PI*1800/60; /* 188,50 rad/s */
 var W900=2*Math.PI*900/60, P1=15*W900, P2=0.90*P1, W2=W900/3, C2=P2/W2;
-var R_EXACT=1000*Math.pow(Math.cos(30*D2R),4);   /* 562,5 */
-var ETA_VAE=0.95*0.85*0.92, P_VAE=288*ETA_VAE;   /* 0,7429 → 213,9 W */
+var R_EXACT=1000*Math.pow(Math.cos(30*D2R),4); /* 562,5 */
+var ETA_VAE=0.95*0.85*0.92, P_VAE=288*ETA_VAE; /* 0,7429 → 213,9 W */
 var PU6=250*10*0.5, PA6=PU6/0.80, T6=12/0.5, E6=PA6*T6/1000;  /* 1250 W · 1562,5 W · 24 s · 37,5 kJ */
 
 /* ============ EX3 : défi ============ */
@@ -427,39 +276,39 @@ function g3Rand(){
   function sh(a){ for(var k=a.length-1;k>0;k--){ var j=(Math.random()*(k+1))|0; var t=a[k]; a[k]=a[j]; a[j]=t; } return a; }
   var r=Math.random();
   if(r<0.30){
-    var N=pk([600,900,1200,1500,1800]);
-    var w=Math.round(2*Math.PI*N/60*10)/10;
-    var o={}; o[fr(w)]=1; var opts=[fr(w)+' rad/s'];
-    [N, Math.round(N/60*10)/10, Math.round(N*2*Math.PI*10)/10].forEach(function(v){
-      var s=fr(v)+' rad/s'; if(!o[fr(v)]&&opts.length<4){ o[fr(v)]=1; opts.push(s); } });
-    var ex=w+7; while(opts.length<4){ var s2=fr(Math.round(ex*10)/10)+' rad/s'; if(opts.indexOf(s2)<0) opts.push(s2); ex+=5; }
-    return {q:N+' tr/min, c\u2019est combien de rad/s ?', opts:sh(opts), ok:fr(w)+' rad/s',
-      why:'2\u03c0 \u00d7 '+N+' / 60 \u2248 '+fr(w)};
+ var N=pk([600,900,1200,1500,1800]);
+ var w=Math.round(2*Math.PI*N/60*10)/10;
+ var o={}; o[fr(w)]=1; var opts=[fr(w)+' rad/s'];
+ [N, Math.round(N/60*10)/10, Math.round(N*2*Math.PI*10)/10].forEach(function(v){
+ var s=fr(v)+' rad/s'; if(!o[fr(v)]&&opts.length<4){ o[fr(v)]=1; opts.push(s); } });
+ var ex=w+7; while(opts.length<4){ var s2=fr(Math.round(ex*10)/10)+' rad/s'; if(opts.indexOf(s2)<0) opts.push(s2); ex+=5; }
+ return {q:N+' tr/min, c\u2019est combien de rad/s ?', opts:sh(opts), ok:fr(w)+' rad/s',
+ why:'2\u03c0 \u00d7 '+N+' / 60 \u2248 '+fr(w)};
   }
   if(r<0.55){
-    var it=pk([
-      {ok:'P = C \u00b7 \u03c9', bad:['P = C / \u03c9','P = C \u00b7 N','P = C + \u03c9'], why:'N\u00b7m \u00d7 rad/s = W'},
-      {ok:'P = F \u00b7 v', bad:['P = F / v','P = F \u00b7 v\u00b2','P = F + v'], why:'N \u00d7 m/s = W'},
-      {ok:'M = F \u00b7 d', bad:['M = F / d','M = F + d','M = F \u00b7 d\u00b2'], why:'N \u00d7 m = N\u00b7m'}
-    ]);
-    return {q:'Quelle \u00e9criture est homog\u00e8ne ?', opts:sh([it.ok].concat(it.bad)), ok:it.ok, why:it.why};
+ var it=pk([
+ {ok:'P = C \u00b7 \u03c9', bad:['P = C / \u03c9','P = C \u00b7 N','P = C + \u03c9'], why:'N\u00b7m \u00d7 rad/s = W'},
+ {ok:'P = F \u00b7 v', bad:['P = F / v','P = F \u00b7 v\u00b2','P = F + v'], why:'N \u00d7 m/s = W'},
+ {ok:'M = F \u00b7 d', bad:['M = F / d','M = F + d','M = F \u00b7 d\u00b2'], why:'N \u00d7 m = N\u00b7m'}
+ ]);
+ return {q:'Quelle \u00e9criture est homog\u00e8ne ?', opts:sh([it.ok].concat(it.bad)), ok:it.ok, why:it.why};
   }
   if(r<0.80){
-    var it2=pk([
-      {q:'Rendement global d\u2019une cha\u00eene : 1,12', ok:'impossible : on ne cr\u00e9e pas d\u2019\u00e9nergie', why:'un rendement est toujours < 1'},
-      {q:'Distance d\u2019arr\u00eat : \u221218 m', ok:'impossible : signe absurde', why:'une distance ne peut pas \u00eatre n\u00e9gative'},
-      {q:'Puissance d\u2019un moteur : 1500 N\u00b7m', ok:'impossible : unit\u00e9 fausse', why:'une puissance se compte en watts'},
-      {q:'Couple d\u2019une visseuse : 15 N\u00b7m', ok:'plausible', why:'ordre de grandeur classique'}
-    ]);
-    return {q:'\u00c0 auditer : \u00ab '+it2.q+' \u00bb', ok:it2.ok, why:it2.why,
-      opts:sh(['plausible','impossible : on ne cr\u00e9e pas d\u2019\u00e9nergie','impossible : signe absurde','impossible : unit\u00e9 fausse'])};
+ var it2=pk([
+ {q:'Rendement global d\u2019une cha\u00eene : 1,12', ok:'impossible : on ne cr\u00e9e pas d\u2019\u00e9nergie', why:'un rendement est toujours < 1'},
+ {q:'Distance d\u2019arr\u00eat : \u221218 m', ok:'impossible : signe absurde', why:'une distance ne peut pas \u00eatre n\u00e9gative'},
+ {q:'Puissance d\u2019un moteur : 1500 N\u00b7m', ok:'impossible : unit\u00e9 fausse', why:'une puissance se compte en watts'},
+ {q:'Couple d\u2019une visseuse : 15 N\u00b7m', ok:'plausible', why:'ordre de grandeur classique'}
+ ]);
+ return {q:'\u00c0 auditer : \u00ab '+it2.q+' \u00bb', ok:it2.ok, why:it2.why,
+ opts:sh(['plausible','impossible : on ne cr\u00e9e pas d\u2019\u00e9nergie','impossible : signe absurde','impossible : unit\u00e9 fausse'])};
   }
   var Pe=pk([1000,2000,2500,3000]), e=pk([0.8,0.85,0.9]);
   var ok=Math.round(Pe*e), opts2=[ok+' W'];
   [Math.round(Pe/e), Pe, Math.round(Pe*e/2)].forEach(function(v){ var s=v+' W'; if(opts2.indexOf(s)<0&&opts2.length<4) opts2.push(s); });
   var ex2=ok+130; while(opts2.length<4){ var s3=ex2+' W'; if(opts2.indexOf(s3)<0) opts2.push(s3); ex2+=90; }
   return {q:'Entr\u00e9e '+Pe+' W, rendement '+fr(e)+' \u2192 puissance de sortie ?', opts:sh(opts2), ok:ok+' W',
-    why:'on MULTIPLIE : '+Pe+' \u00d7 '+fr(e)+' = '+ok+' W'};
+ why:'on MULTIPLIE : '+Pe+' \u00d7 '+fr(e)+' = '+ok+' W'};
 }
 function g3Round(){
   g3State.cur=g3Rand(); g3State.locked=false;
@@ -467,9 +316,9 @@ function g3Round(){
   el('gQ').textContent=g3State.cur.q; el('gMsg').textContent='';
   var box=el('gOpts'); box.innerHTML='';
   g3State.cur.opts.forEach(function(o){
-    var b=document.createElement('button'); b.textContent=o;
-    b.addEventListener('click',function(){ g3Answer(b,o); });
-    box.appendChild(b);
+ var b=document.createElement('button'); b.textContent=o;
+ b.addEventListener('click',function(){ g3Answer(b,o); });
+ box.appendChild(b);
   });
 }
 function g3Answer(btn,o){
@@ -477,16 +326,16 @@ function g3Answer(btn,o){
   var good=(o===g3State.cur.ok);
   if(good){ g3State.hits++; btn.classList.add('ok'); el('gMsg').textContent='\u2713 '+g3State.cur.why; }
   else { btn.classList.add('no'); el('gMsg').textContent='\u2717 C\u2019\u00e9tait : '+g3State.cur.ok+' \u00b7 '+g3State.cur.why;
-    el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
+ el('gOpts').querySelectorAll('button').forEach(function(b2){ if(b2.textContent===g3State.cur.ok) b2.classList.add('ok'); }); }
   el('gScore').textContent='\u2713 '+g3State.hits;
   g3State.idx++;
   setTimeout(function(){
-    if(g3State.idx>=6){ g3State.done=true;
-      el('gProg').textContent='d\u00e9fi termin\u00e9';
-      el('gQ').textContent='Score au d\u00e9fi : '+g3State.hits+' / 6';
-      el('gOpts').innerHTML='';
-      el('gMsg').textContent= g3State.hits>=5?'\ud83d\udd0e Auditeur confirm\u00e9 !':(g3State.hits>=3?'Le bureau tient bon.':'Trop de dossiers sont pass\u00e9s\u2026');
-    } else { g3Round(); }
+ if(g3State.idx>=6){ g3State.done=true;
+ el('gProg').textContent='d\u00e9fi termin\u00e9';
+ el('gQ').textContent='Score au d\u00e9fi : '+g3State.hits+' / 6';
+ el('gOpts').innerHTML='';
+ el('gMsg').textContent= g3State.hits>=5?' Auditeur confirm\u00e9 !':(g3State.hits>=3?'Le bureau tient bon.':'Trop de dossiers sont pass\u00e9s\u2026');
+ } else { g3Round(); }
   }, 1150);
 }
 el('gStart').addEventListener('click',function(){
@@ -498,36 +347,36 @@ var dec=2;
 (function(){
   var cv=el('cv4'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
   el('pSlider').addEventListener('input',function(){ dec=+this.value;
-    el('pVal').textContent=dec+' d\u00e9cimale'+(dec>1?'s':''); });
+ el('pVal').textContent=dec+' d\u00e9cimale'+(dec>1?'s':''); });
   function step(){
-    var c=Math.cos(30*D2R);
-    var f=Math.pow(10,dec);
-    var ca=Math.round(c*f)/f;
-    var R=1000*Math.pow(ca,4);
-    var ecart=Math.abs(R-R_EXACT), pct=ecart/R_EXACT*100;
-    g.clearRect(0,0,cv.width,cv.height);
-    g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
-    g.fillText('cos 30\u00b0 = 0,8660254\u2026  \u2192  arrondi \u00e0 '+dec+' d\u00e9cimale'+(dec>1?'s':'')+' : '+fr(ca.toFixed(dec)),40,36);
-    /* barres */
-    var x0=140, w=560, max=620;
-    g.fillStyle='#efe8d8'; g.fillRect(x0,70,w,30);
-    g.fillStyle='#3D7E5F'; g.fillRect(x0,70,w*R_EXACT/max,30);
-    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
-    g.fillText('exact : '+fr(R_EXACT.toFixed(2)),x0+w*R_EXACT/max+10,92);
-    g.fillStyle='#5C544B'; g.textAlign='right'; g.fillText('sans arrondi',x0-12,92);
-    g.fillStyle='#efe8d8'; g.fillRect(x0,120,w,30);
-    g.fillStyle= pct>0.5? '#C0492E' : (pct>0.05? '#BD8A2A':'#3D7E5F');
-    g.fillRect(x0,120,w*R/max,30);
-    g.fillStyle='#2A2622'; g.textAlign='left';
-    g.fillText('arrondi : '+fr(R.toFixed(2)),x0+w*R/max+10,142);
-    g.fillStyle='#5C544B'; g.textAlign='right'; g.fillText(dec+' d\u00e9cimale'+(dec>1?'s':''),x0-12,142); g.textAlign='left';
-    /* verdict */
-    g.font='800 16px "Bricolage Grotesque",sans-serif';
-    if(pct<0.02){ g.fillStyle='#3D7E5F'; g.fillText('\u00e9cart n\u00e9gligeable : '+fr(pct.toFixed(3))+' %',140,190); }
-    else { g.fillStyle= pct>0.5?'#C0492E':'#BD8A2A';
-      g.fillText('\u00e9cart sur le r\u00e9sultat final : '+fr(pct.toFixed(2))+' %  ('+fr(ecart.toFixed(1))+' unit\u00e9s)',140,190); }
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('l\u2019erreur de d\u00e9part est multipli\u00e9e par 4 : le facteur appara\u00eet quatre fois',140,214);
+ var c=Math.cos(30*D2R);
+ var f=Math.pow(10,dec);
+ var ca=Math.round(c*f)/f;
+ var R=1000*Math.pow(ca,4);
+ var ecart=Math.abs(R-R_EXACT), pct=ecart/R_EXACT*100;
+ g.clearRect(0,0,cv.width,cv.height);
+ g.fillStyle='#2A2622'; g.font='700 15px "JetBrains Mono",monospace';
+ g.fillText('cos 30\u00b0 = 0,8660254\u2026  \u2192  arrondi \u00e0 '+dec+' d\u00e9cimale'+(dec>1?'s':'')+' : '+fr(ca.toFixed(dec)),40,36);
+ /* barres */
+ var x0=140, w=560, max=620;
+ g.fillStyle='#efe8d8'; g.fillRect(x0,70,w,30);
+ g.fillStyle='#3D7E5F'; g.fillRect(x0,70,w*R_EXACT/max,30);
+ g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+ g.fillText('exact : '+fr(R_EXACT.toFixed(2)),x0+w*R_EXACT/max+10,92);
+ g.fillStyle='#5C544B'; g.textAlign='right'; g.fillText('sans arrondi',x0-12,92);
+ g.fillStyle='#efe8d8'; g.fillRect(x0,120,w,30);
+ g.fillStyle= pct>0.5? '#C0492E' : (pct>0.05? '#BD8A2A':'#3D7E5F');
+ g.fillRect(x0,120,w*R/max,30);
+ g.fillStyle='#2A2622'; g.textAlign='left';
+ g.fillText('arrondi : '+fr(R.toFixed(2)),x0+w*R/max+10,142);
+ g.fillStyle='#5C544B'; g.textAlign='right'; g.fillText(dec+' d\u00e9cimale'+(dec>1?'s':''),x0-12,142); g.textAlign='left';
+ /* verdict */
+ g.font='800 16px "Bricolage Grotesque",sans-serif';
+ if(pct<0.02){ g.fillStyle='#3D7E5F'; g.fillText('\u00e9cart n\u00e9gligeable : '+fr(pct.toFixed(3))+' %',140,190); }
+ else { g.fillStyle= pct>0.5?'#C0492E':'#BD8A2A';
+ g.fillText('\u00e9cart sur le r\u00e9sultat final : '+fr(pct.toFixed(2))+' %  ('+fr(ecart.toFixed(1))+' unit\u00e9s)',140,190); }
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('l\u2019erreur de d\u00e9part est multipli\u00e9e par 4 : le facteur appara\u00eet quatre fois',140,214);
   }
   setInterval(step,80); step();
 })();
@@ -537,62 +386,62 @@ var dec=2;
   var cv=el('cv6'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d');
   var t=0;
   function step(){
-    t+=0.04;
-    g.clearRect(0,0,cv.width,cv.height);
-    var cyc=(t*0.35)%1;
-    /* gaine */
-    g.fillStyle='#efe8d8'; g.fillRect(560,20,180,250);
-    g.strokeStyle='#b9b1a2'; g.lineWidth=2; g.strokeRect(560,20,180,250);
-    /* poulie */
-    g.fillStyle='#5C544B'; g.beginPath(); g.arc(650,40,16,0,7); g.fill();
-    g.save(); g.translate(650,40); g.rotate(-t*2);
-    g.strokeStyle='#c8bfae'; g.lineWidth=2.4;
-    for(var i=0;i<4;i++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(i*1.57)*11,Math.sin(i*1.57)*11); g.stroke(); }
-    g.restore();
-    /* cabine qui monte */
-    var y=250-cyc*170;
-    g.strokeStyle='#8c8578'; g.lineWidth=3; g.beginPath(); g.moveTo(650,40); g.lineTo(650,y); g.stroke();
-    g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.6;
-    g.beginPath(); g.rect(600,y,100,56); g.fill(); g.stroke();
-    g.fillStyle='#BD8A2A'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
-    g.fillText('250 kg',650,y+34); g.textAlign='left';
-    /* flèche de montée */
-    g.strokeStyle='#3D7E5F'; g.lineWidth=2.4;
-    g.beginPath(); g.moveTo(760,y+40); g.lineTo(760,y-4); g.stroke();
-    g.fillStyle='#3D7E5F'; g.beginPath(); g.moveTo(760,y-12); g.lineTo(755,y-2); g.lineTo(765,y-2); g.closePath(); g.fill();
-    g.font='700 12px "JetBrains Mono",monospace'; g.fillText('0,5 m/s',770,y+16);
-    /* chaîne d'énergie : prise → moteur → réducteur → cabine */
-    var bx=40, by=110;
-    var blocs=[['R\u00c9SEAU','#2E6A8E'],['MOTEUR','#8A5A7A'],['R\u00c9DUCTEUR','#BD8A2A'],['CABINE','#3D7E5F']];
-    blocs.forEach(function(b,i){
-      var x=bx+i*126;
-      g.fillStyle='#fdfaf2'; g.strokeStyle=b[1]; g.lineWidth=2.4;
-      g.beginPath(); g.rect(x,by,104,62); g.fill(); g.stroke();
-      g.fillStyle=b[1]; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
-      g.fillText(b[0],x+52,by+36); g.textAlign='left';
-      if(i<3){
-        g.strokeStyle='#5C544B'; g.lineWidth=2;
-        g.beginPath(); g.moveTo(x+104,by+31); g.lineTo(x+126,by+31); g.stroke();
-        /* particules d'énergie */
-        for(var p=0;p<3;p++){
-          var px=x+104+((t*40+p*8)%22);
-          g.fillStyle='rgba(240,181,88,.8)'; g.fillRect(px,by+28,4,6);
-        }
-      }
-    });
-    /* pertes */
-    g.fillStyle='#C0492E'; g.font='700 11px "JetBrains Mono",monospace';
-    g.fillText('pertes : rendement global 0,80',bx+80,by-16);
-    for(var q=0;q<4;q++){
-      var qy=by-8-((t*26+q*7)%20);
-      g.fillStyle='rgba(192,73,46,'+(0.5-q*0.09)+')';
-      g.fillRect(bx+160+q*40,qy,4,7);
-    }
-    /* rappels */
-    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
-    g.fillText('P utile = m \u00b7 g \u00b7 v      \u00b7      \u03b7 = P utile / P absorb\u00e9e      \u00b7      E = P \u00b7 t',bx,238);
-    g.fillStyle='#C0492E';
-    g.fillText('\u26a0 on remonte la cha\u00eene : le rendement se DIVISE, il ne se multiplie pas',bx,264);
+ t+=0.04;
+ g.clearRect(0,0,cv.width,cv.height);
+ var cyc=(t*0.35)%1;
+ /* gaine */
+ g.fillStyle='#efe8d8'; g.fillRect(560,20,180,250);
+ g.strokeStyle='#b9b1a2'; g.lineWidth=2; g.strokeRect(560,20,180,250);
+ /* poulie */
+ g.fillStyle='#5C544B'; g.beginPath(); g.arc(650,40,16,0,7); g.fill();
+ g.save(); g.translate(650,40); g.rotate(-t*2);
+ g.strokeStyle='#c8bfae'; g.lineWidth=2.4;
+ for(var i=0;i<4;i++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(i*1.57)*11,Math.sin(i*1.57)*11); g.stroke(); }
+ g.restore();
+ /* cabine qui monte */
+ var y=250-cyc*170;
+ g.strokeStyle='#8c8578'; g.lineWidth=3; g.beginPath(); g.moveTo(650,40); g.lineTo(650,y); g.stroke();
+ g.fillStyle='#dccfae'; g.strokeStyle='#BD8A2A'; g.lineWidth=2.6;
+ g.beginPath(); g.rect(600,y,100,56); g.fill(); g.stroke();
+ g.fillStyle='#BD8A2A'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText('250 kg',650,y+34); g.textAlign='left';
+ /* flèche de montée */
+ g.strokeStyle='#3D7E5F'; g.lineWidth=2.4;
+ g.beginPath(); g.moveTo(760,y+40); g.lineTo(760,y-4); g.stroke();
+ g.fillStyle='#3D7E5F'; g.beginPath(); g.moveTo(760,y-12); g.lineTo(755,y-2); g.lineTo(765,y-2); g.closePath(); g.fill();
+ g.font='700 12px "JetBrains Mono",monospace'; g.fillText('0,5 m/s',770,y+16);
+ /* chaîne d'énergie : prise → moteur → réducteur → cabine */
+ var bx=40, by=110;
+ var blocs=[['R\u00c9SEAU','#2E6A8E'],['MOTEUR','#8A5A7A'],['R\u00c9DUCTEUR','#BD8A2A'],['CABINE','#3D7E5F']];
+ blocs.forEach(function(b,i){
+ var x=bx+i*126;
+ g.fillStyle='#fdfaf2'; g.strokeStyle=b[1]; g.lineWidth=2.4;
+ g.beginPath(); g.rect(x,by,104,62); g.fill(); g.stroke();
+ g.fillStyle=b[1]; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+ g.fillText(b[0],x+52,by+36); g.textAlign='left';
+ if(i<3){
+ g.strokeStyle='#5C544B'; g.lineWidth=2;
+ g.beginPath(); g.moveTo(x+104,by+31); g.lineTo(x+126,by+31); g.stroke();
+ /* particules d'énergie */
+ for(var p=0;p<3;p++){
+ var px=x+104+((t*40+p*8)%22);
+ g.fillStyle='rgba(240,181,88,.8)'; g.fillRect(px,by+28,4,6);
+ }
+ }
+ });
+ /* pertes */
+ g.fillStyle='#C0492E'; g.font='700 11px "JetBrains Mono",monospace';
+ g.fillText('pertes : rendement global 0,80',bx+80,by-16);
+ for(var q=0;q<4;q++){
+ var qy=by-8-((t*26+q*7)%20);
+ g.fillStyle='rgba(192,73,46,'+(0.5-q*0.09)+')';
+ g.fillRect(bx+160+q*40,qy,4,7);
+ }
+ /* rappels */
+ g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+ g.fillText('P utile = m \u00b7 g \u00b7 v \u00b7 \u03b7 = P utile / P absorb\u00e9e \u00b7 E = P \u00b7 t',bx,238);
+ g.fillStyle='#C0492E';
+ g.fillText(' on remonte la cha\u00eene : le rendement se DIVISE, il ne se multiplie pas',bx,264);
   }
   setInterval(step,50); step();
 })();
@@ -655,9 +504,9 @@ el('submit').addEventListener('click',function(){
   document.querySelectorAll('select, .numin, #pSlider').forEach(function(x){ x.disabled=true; });
   el('scorebox').scrollIntoView({behavior:'smooth'});
   if(db){ try{ db.ref(NODE).push({ nom:nom, classe:classe, score:score, total:15, detail:[p1,p2,p3,p4,p5,p6], defi:g3State.hits, ts:Date.now(), date:new Date().toLocaleString('fr-FR') });
-    el('scoreSt').textContent+='  \u00b7  r\u00e9sultat envoy\u00e9 au professeur.'; }
-  catch(e){ el('scoreSt').textContent+='  \u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; } }
-  else { el('scoreSt').textContent+='  \u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; }
+ el('scoreSt').textContent+='\u00b7  r\u00e9sultat envoy\u00e9 au professeur.'; }
+  catch(e){ el('scoreSt').textContent+='\u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; } }
+  else { el('scoreSt').textContent+='\u00b7  (hors-ligne : r\u00e9sultat non envoy\u00e9).'; }
 });
 
 /* ============ espace enseignant ============ */
@@ -668,18 +517,18 @@ el('refresh') && el('refresh').addEventListener('click',loadDash);
 function loadDash(){
   if(!db){ el('stats').innerHTML='<span class="stat">Firebase indisponible (hors-ligne).</span>'; return; }
   db.ref(NODE).once('value').then(function(snap){
-    var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
-    var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
-    rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
-    var moy = n? (sum/n).toFixed(2).replace('.',',') : '\u2014';
-    el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
-    var pq='<h3 style="margin:14px 0 4px;font-size:16px">R\u00e9ussite par exercice</h3>';
-    for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
-      pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
-    el('perQ').innerHTML=pq;
-    var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
-    rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
-    if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
+ var rows=[]; snap.forEach(function(ch){ rows.push(ch.val()); }); rows.sort(function(a,b){ return (b.ts||0)-(a.ts||0); });
+ var n=rows.length, sum=0, perQ=[0,0,0,0,0,0];
+ rows.forEach(function(r){ sum+=(r.score||0); (r.detail||[]).forEach(function(d,i){ if(i<6) perQ[i]+=d; }); });
+ var moy = n? (sum/n).toFixed(2).replace('.',',') : '\u2014';
+ el('stats').innerHTML='<span class="stat">Copies : <b>'+n+'</b></span><span class="stat">Moyenne : <b>'+moy+'</b> / 15</span>';
+ var pq='<h3 style="margin:14px 0 4px;font-size:16px">R\u00e9ussite par exercice</h3>';
+ for(var i=0;i<6;i++){ var p=n?Math.round(perQ[i]/(n*EX_MAX[i])*100):0;
+ pq+='<div style="display:flex;align-items:center;gap:10px;margin:5px 0;font-family:\'JetBrains Mono\',monospace;font-size:13px"><span style="width:120px">'+EX_LAB[i]+'</span><span class="barq" style="flex:1"><i style="width:'+p+'%"></i></span><span style="width:44px;text-align:right">'+p+'%</span></div>'; }
+ el('perQ').innerHTML=pq;
+ var tb=el('tbl').querySelector('tbody'); tb.innerHTML='';
+ rows.forEach(function(r){ var tr=document.createElement('tr'); tr.innerHTML='<td>'+(r.nom||'\u2014')+'</td><td>'+(r.classe||'')+'</td><td>'+(r.score||0)+' / '+(r.total||15)+'</td><td>'+(r.date||'')+'</td>'; tb.appendChild(tr); });
+ if(!n){ tb.innerHTML='<tr><td colspan="4" style="color:var(--sub)">Aucune copie pour l\u2019instant.</td></tr>'; }
   }).catch(function(){ el('stats').innerHTML='<span class="stat">Lecture impossible (r\u00e8gles/connexion).</span>'; });
 }
 </script>

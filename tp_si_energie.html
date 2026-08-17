@@ -7,15 +7,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
-    --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
-    --ok:#3D7E5F; --no:#C0492E;
-    --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
-    --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
-    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
-    --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+<style> :root{
+ --cream:#F8F4EC; --paper:#FFFDF8; --ink:#2A2622; --ink-soft:#5C544B;
+ --copper:#B85C2E; --steel:#2E6A8E; --green:#3D7E5F; --amber:#BD8A2A; --plum:#8A5A7A;
+ --ok:#3D7E5F; --no:#C0492E;
+ --line:rgba(42,38,34,.12); --line-strong:rgba(42,38,34,.22);
+ --display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+ --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+ --body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -23,13 +22,13 @@
   .shell{display:flex;max-width:1300px;margin:0 auto}
 
   .nav{width:236px;flex:0 0 236px;position:sticky;top:0;align-self:flex-start;height:100vh;
-    padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
+ padding:24px 18px;border-right:1px solid var(--line);background:var(--paper);overflow-y:auto}
   .nav .back{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);
-    text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
+ text-decoration:none;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 10px;margin-bottom:14px;transition:.15s}
   .nav .back:hover{color:var(--amber);border-color:var(--amber)}
   .brand{display:flex;gap:11px;align-items:center;margin-bottom:14px}
   .brand .mark{width:36px;height:36px;flex:0 0 36px;border-radius:9px;background:var(--amber);color:#fff;
-    font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+ font-family:var(--mono);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
   .brand h1{font-family:var(--display);font-size:14px;line-height:1.1;margin:0;font-weight:800}
   .brand p{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);margin:2px 0 0}
   .tpscore{background:var(--ink);color:var(--cream);border-radius:11px;padding:12px 14px;margin-bottom:14px}
@@ -39,7 +38,7 @@
   .tpscore .sc-track{height:5px;background:rgba(255,255,255,.13);border-radius:4px;overflow:hidden;margin-top:8px}
   .tpscore .sc-track i{display:block;height:100%;width:0;background:#E9A36F;transition:width .4s}
   .nav a.navlink{display:flex;gap:9px;align-items:baseline;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
-    text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
+ text-decoration:none;padding:7px 9px;border-radius:7px;margin-bottom:1px;border-left:2px solid transparent;transition:.15s}
   .nav a.navlink span{font-size:10px;opacity:.6;min-width:14px}
   .nav a.navlink:hover{background:var(--cream);color:var(--ink)}
   .nav a.navlink.on{background:var(--cream);color:var(--ink);border-left-color:var(--amber);font-weight:500}
@@ -71,7 +70,7 @@
   .builder{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px}
   .bslots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .bslot{flex:1 1 130px;min-height:74px;border:2px dashed var(--line-strong);border-radius:11px;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
+ align-items:center;justify-content:center;gap:3px;background:var(--cream);position:relative;transition:.18s;cursor:pointer}
   .bslot .sn{position:absolute;top:6px;left:9px;font-family:var(--mono);font-size:10px;color:var(--ink-soft);font-weight:700}
   .bslot.filled{border-style:solid;border-color:var(--amber);background:#fff;cursor:pointer}
   .bslot.good{border-color:var(--green);background:rgba(61,126,95,.1)}
@@ -82,7 +81,7 @@
   .bhint{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin:10px 0}
   .bpool{display:flex;gap:8px;flex-wrap:wrap;min-height:48px}
   .bblock{font-family:var(--display);font-weight:700;font-size:13px;background:var(--cream);border:1px solid var(--line-strong);border-radius:10px;
-    padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
+ padding:10px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;transition:.12s}
   .bblock:hover{border-color:var(--amber);background:#fff;transform:translateY(-2px)}
   .bactions{display:flex;gap:12px;align-items:center;margin-top:14px;flex-wrap:wrap}
   .bmsg{font-family:var(--mono);font-size:13px;font-weight:700}
@@ -199,12 +198,12 @@
 
   .menu-btn{display:none}
   @media(max-width:880px){
-    .shell{flex-direction:column}
-    .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
-    .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
-    .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
-    .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
-    .gopts,.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:90px 1fr 50px}
+ .shell{flex-direction:column}
+ .nav{position:sticky;top:0;width:100%;flex:none;height:auto;border-right:none;border-bottom:1px solid var(--line);padding:12px 16px;z-index:40}
+ .nav .links,.tpscore{display:none}.nav.open .links{display:block;margin-top:10px}.brand{margin-bottom:0}
+ .menu-btn{display:inline-flex;margin-left:auto;font-family:var(--mono);font-size:12px;background:var(--cream);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer}
+ .two{grid-template-columns:1fr}.main{padding:0 16px}section{padding:34px 0 32px}
+ .gopts,.gbtns{grid-template-columns:1fr}.orow{grid-template-columns:90px 1fr 50px}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
 
@@ -249,282 +248,54 @@
   .exo-out{font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;text-align:center;padding:9px;border-radius:9px;background:rgba(189,138,42,.12);margin-top:6px;color:#8a6313}
   .exo-fig{display:block;margin:10px auto;max-width:340px;width:100%;height:auto}
   .btn[disabled]{opacity:.42;cursor:not-allowed}
+  /* ---------- remise du travail (score TP) ---------- */
+  .tpscore{max-width:920px;margin:34px auto 10px;background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;
+           border-radius:16px;padding:20px 22px;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#2A2622}
+  .tpscore h3{margin:0 0 4px;font-size:20px;font-weight:800}
+  .tpscore .tps-lede{margin:0 0 14px;font-size:15px;color:#5C544B}
+  .tpscore .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tpscore .tps-grid{grid-template-columns:1fr 1fr} }
+  .tpscore .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tpscore .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#5C544B}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .tpscore input:focus,.tpscore select:focus{border-color:#2E6A8E}
+  .tpscore .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tpscore .tps-fill{height:100%;width:0;background:linear-gradient(90deg,#2E6A8E,#3D7E5F);transition:width .45s ease}
+  .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
+  .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
+           padding:13px 20px;cursor:pointer}
+  .tpscore .tps-btn:hover{filter:brightness(1.08)}
+  .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
+  .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
+  .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+  /* ---------- fiche d'équipe et remontée du score ---------- */
+  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
+  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
+      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
+  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
+  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
+  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
+      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
+  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
+  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
+  .send-card{border-color:#cfe0d3;background:#F7FBF8}
+  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
+      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
+  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
+  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
+  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
-<body>
-<header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell">
-
-  <aside class="nav" id="nav">
-    <a class="back" href="hub_si_energie.html">← Séquence : énergie</a>
-    <div class="brand">
-      <div class="mark">TP</div>
-      <div><h1>Chaîne d'énergie</h1><p>4 défis · Spé SI</p></div>
-      <button class="menu-btn" id="menuBtn">Plan</button>
-    </div>
-    <div class="tpscore">
-      <div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div>
-      <div class="sc-rank" id="scRank">🔧 Apprenti</div>
-      <div class="sc-track"><i id="scTrack"></i></div>
-    </div>
-    <div class="links" id="links">
-      <a href="#obj" class="navlink"><span>01</span>Objectif</a>
-      <a href="#proto" class="navlink"><span>02</span>Protocole</a>
-      <a href="#exos" class="navlink"><span>🎯</span>Exercices d'application</a>
-      <a href="#defi1" class="navlink"><span>D1</span>Assemble la chaîne</a>
-      <a href="#defi2" class="navlink"><span>D2</span>Puissance express</a>
-      <a href="#defi3" class="navlink"><span>D3</span>Effort ou Flux ?</a>
-      <a href="#defi4" class="navlink"><span>D4</span>Chasse au rendement</a>
-      <a href="#defi5" class="navlink"><span>D5</span>Le grand voyage</a>
-      <a href="#defi6" class="navlink"><span>D6</span>Composant ↔ fonction</a>
-      <a href="#defi7" class="navlink"><span>D7</span>Mots croisés</a>
-      <a href="#defi8" class="navlink"><span>D8</span>Mission recherche</a>
-      <a href="#synth" class="navlink"><span>09</span>Synthèse</a>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <section id="obj">
-      <span class="kicker">TP · Chaîne d'énergie</span>
-      <h2>4 défis pour maîtriser<br>P, E et η</h2>
-      <p class="lede">Pas de questionnaire&nbsp;: tu apprends en jouant. Quatre défis te font manipuler la chaîne d'énergie, calculer vite, distinguer effort et flux, et optimiser un rendement. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p>
-      <div class="two">
-        <div class="panel"><h4>Les 8 défis</h4><ul>
-          <li><b>D1 · Assemble la chaîne</b> — remets les 5 fonctions dans l'ordre.</li>
-          <li><b>D2 · Puissance express</b> — P = U·I et P = C·ω contre la montre.</li>
-          <li><b>D3 · Effort ou Flux ?</b> — classe les grandeurs en un éclair.</li>
-          <li><b>D4 · Chasse au rendement</b> — règle les étages pour viser la cible.</li>
-          <li><b>D5 · Le grand voyage</b> — simulation d'autonomie de la batterie.</li>
-          <li><b>D6 · Composant ↔ Fonction</b> — associe les éléments.</li>
-          <li><b>D7 · Mots croisés</b> — le vocabulaire de l'énergie.</li>
-          <li><b>D8 · Mission recherche</b> 🔎 — trouve les réponses sur le web.</li>
-        </ul></div>
-        <div class="panel"><h4>Notions travaillées</h4>
-          <div class="chips"><span class="chip k">P = U·I</span><span class="chip k">P = C·ω</span><span class="chip k">η = Pu/Pa</span><span class="chip k">η global = Πη</span><span class="chip k">effort × flux</span></div>
-          <div class="note" style="margin-top:12px">Astuce&nbsp;: tu peux rejouer chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="proto">
-      <span class="kicker">02 · Repère</span>
-      <h3>Protocole &amp; mesures de référence</h3>
-      <p class="lede">Sur le banc moteur, on mesure l'électrique en entrée et le mécanique en sortie. Ces valeurs servent de fil rouge.</p>
-      <table class="data">
-        <thead><tr><th>Grandeur</th><th>Entrée (électrique)</th><th>Sortie (mécanique)</th></tr></thead>
-        <tbody>
-          <tr><td>Effort</td><td><b>U = 24 V</b></td><td><b>C = 2,5 N·m</b></td></tr>
-          <tr><td>Flux</td><td><b>I = 8,0 A</b></td><td><b>ω = 60 rad/s</b></td></tr>
-          <tr><td>Puissance</td><td><b>P = 192 W</b></td><td><b>P = 150 W</b></td></tr>
-        </tbody>
-      </table>
-      <div class="note">Rendement de la chaîne mesuré&nbsp;: η = 150 / 192 ≈ <b>0,78</b>. Remplace par tes relevés sur ton banc réel.</div>
-    </section>
-
-    <!-- DÉFI 1 -->
-    <section id="exos">
-      <span class="kicker">Exercices d'application</span>
-      <h2>S'entraîner : du concret au calcul</h2>
-      <p class="lede">Quatre exercices pour maîtriser l'énergie : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p>
-      <div class="exo-wrap">
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">1</span> Cas concret — la consommation d'un radiateur</div>
-          <p>Un radiateur électrique de <b>1500 W</b> fonctionne <b>4 h par jour</b>. On rappelle : énergie = puissance × durée, et 1 kWh = 1000 Wh.</p>
-          <svg class="exo-fig" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace">
-            <rect x="24" y="34" width="108" height="46" rx="5" fill="#e9a893" fill-opacity="0.35" stroke="#C0492E" stroke-width="1.5"/>
-            <g stroke="#C0492E" stroke-width="2" stroke-opacity="0.7"><line x1="42" y1="40" x2="42" y2="74"/><line x1="60" y1="40" x2="60" y2="74"/><line x1="78" y1="40" x2="78" y2="74"/><line x1="96" y1="40" x2="96" y2="74"/><line x1="114" y1="40" x2="114" y2="74"/></g>
-            <text x="78" y="96" text-anchor="middle" font-size="11" fill="#C0492E" font-weight="700">1500 W</text>
-            <circle cx="222" cy="52" r="28" fill="#eef4f8" stroke="#2E6A8E" stroke-width="1.5"/>
-            <line x1="222" y1="52" x2="222" y2="34" stroke="#235877" stroke-width="2"/><line x1="222" y1="52" x2="236" y2="58" stroke="#235877" stroke-width="2"/>
-            <text x="222" y="96" text-anchor="middle" font-size="11" fill="#235877" font-weight="700">4 h / jour</text>
-          </svg>
-          <div class="exo-q">a) Énergie par jour = <input class="numin" id="ex1a" inputmode="decimal"> kWh</div>
-          <div class="exo-q">b) Coût par jour (1 kWh = 0,20 €) = <input class="numin" id="ex1b" inputmode="decimal"> €</div>
-          <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse 🔒</button></div>
-          <div class="exo-fb" id="ex1fb"></div>
-          <div class="exo-sol" id="ex1sol" hidden>
-            <p><b>a)</b> énergie = 1500 × 4 = 6000 Wh = <b>6 kWh</b>.</p>
-            <p><b>b)</b> coût = 6 × 0,20 = <b>1,20 €</b> par jour (soit ~36 € par mois).</p>
-          </div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">2</span> Simulateur — le rendement</div>
-          <p>Un convertisseur reçoit une puissance et n'en restitue qu'une partie (le reste est perdu, souvent en chaleur). Règle la <b>puissance d'entrée</b> et le <b>rendement</b> : on visualise la puissance utile et les pertes.</p>
-          <canvas id="ex2cv" width="480" height="130" class="gamecanvas"></canvas>
-          <div class="sliders">
-            <label><span class="nm2">Puissance d'entrée (W)</span><input type="range" id="ex2pin" min="100" max="1000" step="50" value="800"><b><span id="ex2pinv">800</span></b></label>
-            <label><span class="nm2">Rendement (%)</span><input type="range" id="ex2eta" min="10" max="100" step="5" value="75"><b><span id="ex2etav">75</span></b></label>
-          </div>
-          <div class="exo-out" id="ex2out">—</div>
-        </div>
-
-        <div class="exo-card">
-          <div class="exo-h"><span class="exo-num">3</span> Calcul — le rendement d'un moteur</div>
-          <p>Un moteur reçoit <b>800 W</b> d'énergie électrique et fournit <b>600 W</b> de puissance mécanique utile. On rappelle : rendement = puissance utile ÷ puissance reçue × 100.</p>
-          <div class="exo-q">a) Rendement = <input class="numin" id="ex3a" inputmode="decimal"> %</div>
-          <div class="exo-q">b) Puissance perdue = <input class="numin" id="ex3b" inputmode="decimal"> W</div>
-          <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction 🔒</button></div>
-          <div class="exo-fb" id="ex3fb"></div>
-          <div class="exo-sol" id="ex3sol" hidden>
-            <p><b>a)</b> rendement = 600 ÷ 800 × 100 = <b>75 %</b>.</p>
-            <p><b>b)</b> puissance perdue = 800 − 600 = <b>200 W</b> (dissipée en chaleur).</p>
-          </div>
-        </div>
-
-        <div class="exo-card adv">
-          <div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — chaîne d'énergie <span class="lvl-badge">prépa / L1</span></div>
-          <p>Une chaîne d'énergie enchaîne deux étages : une <b>conversion</b> (rendement 90 %) puis une <b>transmission</b> (rendement 80 %). Le rendement global est le <b>produit</b> des rendements.</p>
-          <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5">
-            <text x="30" y="44" text-anchor="middle" fill="#235877" font-weight="700">1000 W</text>
-            <line x1="52" y1="48" x2="78" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="84,48 74,43 74,53" fill="#5C544B"/>
-            <rect x="84" y="30" width="60" height="36" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="114" y="46" text-anchor="middle" fill="#235877" font-weight="700">conversion</text><text x="114" y="58" text-anchor="middle" fill="#235877">η = 90%</text>
-            <line x1="144" y1="48" x2="164" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="170,48 160,43 160,53" fill="#5C544B"/>
-            <rect x="170" y="30" width="66" height="36" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="203" y="46" text-anchor="middle" fill="#2c6147" font-weight="700">transmission</text><text x="203" y="58" text-anchor="middle" fill="#2c6147">η = 80%</text>
-            <line x1="236" y1="48" x2="262" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="268,48 258,43 258,53" fill="#5C544B"/>
-            <text x="282" y="44" text-anchor="middle" fill="#8a6313" font-weight="700">? W</text>
-          </svg>
-          <div class="exo-q">a) Rendement global = <input class="numin" id="ex4a" inputmode="decimal"> %</div>
-          <div class="exo-q">b) Puissance de sortie (entrée 1000 W) = <input class="numin" id="ex4b" inputmode="decimal"> W</div>
-          <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée 🔒</button></div>
-          <div class="exo-fb" id="ex4fb"></div>
-          <div class="exo-sol" id="ex4sol" hidden>
-            <p><b>a)</b> rendement global = 0,90 × 0,80 = 0,72 = <b>72 %</b> (les rendements se multiplient, ils ne s'additionnent pas).</p>
-            <p><b>b)</b> sortie = 1000 × 0,72 = <b>720 W</b>. Chaque étage « grignote » l'énergie : d'où l'intérêt de limiter le nombre de conversions.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section id="defi1">
-      <div class="badge-defi">DÉFI 1 · jusqu'à 120 pts</div>
-      <h3>Assemble la chaîne d'énergie</h3>
-      <p class="lede">Clique les blocs pour remplir les cases dans le bon ordre, de la source vers l'effet. Reclique une case pour libérer un bloc.</p>
-      <div class="builder">
-        <div class="bslots" id="bslots"></div>
-        <div class="bhint">De l'alimentation jusqu'à la transmission du mouvement.</div>
-        <div class="bpool" id="bpool"></div>
-        <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 2 -->
-    <section id="defi2">
-      <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div>
-      <h3>Puissance express</h3>
-      <p class="lede">40 secondes pour calculer un maximum de puissances. Choisis la bonne valeur de P. Les bonnes réponses d'affilée font monter le combo.</p>
-      <div class="game" id="g2">
-        <div class="ghead"><div class="gtitle">⚡ Puissance express</div>
-          <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div>
-        <div class="gbar"><i id="g2Bar"></i></div>
-        <div id="g2Area"><div class="gstart"><p>Calcule P = U·I (électrique) ou P = C·ω (mécanique) et choisis la bonne valeur en watts.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div>
-        <div class="gflash" id="g2Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 3 -->
-    <section id="defi3">
-      <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div>
-      <h3>Effort ou Flux ?</h3>
-      <p class="lede">30 secondes pour classer un maximum de grandeurs. Effort (force, couple, tension, pression) ou flux (vitesse, débit, intensité)&nbsp;?</p>
-      <div class="game" id="g3">
-        <div class="ghead"><div class="gtitle">⚡ Effort ou Flux ?</div>
-          <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div>
-        <div class="gbar"><i id="g3Bar"></i></div>
-        <div id="g3Area"><div class="gstart"><p>Classe chaque grandeur selon sa nature dans le bilan P = effort × flux.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div>
-        <div class="gflash" id="g3Flash"></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 4 -->
-    <section id="defi4">
-      <div class="badge-defi">DÉFI 4 · optimisation · jusqu'à 160 pts</div>
-      <h3>La chasse au rendement</h3>
-      <p class="lede">La chaîne reçoit <b>250 W</b>. Règle le rendement de chaque étage pour atteindre la puissance utile cible <b>sans dépasser ton budget</b>. Observe&nbsp;: le rendement global est le <b>produit</b> des trois.</p>
-      <div class="optim">
-        <div class="opt-target" id="optTarget">🎯 Objectif : P utile ≥ 185 W · Budget ≤ 64 pts</div>
-        <div class="opt-bars" id="optBars"></div>
-        <div class="opt-rows" id="optRows"></div>
-        <div class="opt-readout" id="optReadout"></div>
-        <div class="opt-status miss" id="optStatus">Règle les curseurs pour atteindre la cible.</div>
-      </div>
-      <div class="note" style="margin-top:12px">Indice méca&nbsp;: pour un même « budget » réparti, un rendement <b>équilibré</b> entre les étages donne un meilleur produit qu'un réglage déséquilibré.</div>
-    </section>
-
-    <!-- DÉFI 5 -->
-    <section id="defi5">
-      <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div>
-      <h3>Le grand voyage</h3>
-      <p class="lede">Ton VAE doit parcourir <b>40 km</b> avec une batterie de <b>500 Wh</b>. Choisis ton niveau d'assistance&nbsp;: plus tu vas vite, plus tu consommes. Arriveras-tu avant la panne&nbsp;? (E = P·Δt)</p>
-      <div class="voyage" id="voyage">
-        <div class="vstat" id="vStat">Prêt à partir.</div>
-        <div class="vbars">
-          <div class="vbar"><div class="vlab"><span>Distance</span><b id="vDist">0 / 40 km</b></div><div class="vtrack"><i id="vDistBar"></i></div></div>
-          <div class="vbar"><div class="vlab"><span>Batterie</span><b id="vBatt">500 Wh</b></div><div class="vtrack"><i id="vBattBar" style="width:100%;background:#3D7E5F"></i></div></div>
-        </div>
-        <div class="vhud"><span id="vSpeed">0 km/h</span> · mode <span id="vMode">Normal</span> · <span id="vTime">0,0 h</span></div>
-        <div class="vmodes" id="vModes">
-          <button class="vmode" data-m="eco">🍃 Éco<small>150 W · 18 km/h</small></button>
-          <button class="vmode sel" data-m="normal">⚙️ Normal<small>250 W · 25 km/h</small></button>
-          <button class="vmode" data-m="sport">🔥 Sport<small>440 W · 32 km/h</small></button>
-        </div>
-        <div class="vactions"><button class="btn primary" id="vGo">▶ Partir</button><button class="btn" id="vReset">↻ Recommencer</button></div>
-      </div>
-      <div class="note" style="margin-top:12px">Stratégie&nbsp;: le mode Sport est rapide mais gourmand (tu risques la panne)&nbsp;; l'Éco arrive à coup sûr mais lentement. Le meilleur score récompense vitesse <i>et</i> batterie restante.</div>
-    </section>
-
-    <!-- DÉFI 6 -->
-    <section id="defi6">
-      <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div>
-      <h3>Composant Fonction</h3>
-      <p class="lede">Relie chaque composant à la fonction qu'il assure dans la chaîne d'énergie. Clique un composant, puis sa fonction.</p>
-      <div class="match" id="match">
-        <div class="mcol" id="mLeft"></div>
-        <div class="mcol" id="mRight"></div>
-      </div>
-      <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div>
-    </section>
-
-    <!-- DÉFI 7 : mots croisés -->
-    <section id="defi7">
-      <div class="badge-defi">DÉFI 7 · mots croisés · jusqu'à 130 pts</div>
-      <h3>Les mots croisés de l'énergie</h3>
-      <p class="lede">Remplis la grille avec le vocabulaire de la chaîne d'énergie&nbsp;: une lettre par case, puis vérifie.</p>
-      <div class="cwbox">
-        <div class="cw-wrap"><div class="cw" id="cwGrid"></div></div>
-        <div class="cw-clues"><div><h5>Horizontal →</h5><ul id="cwH"></ul></div><div><h5>Vertical ↓</h5><ul id="cwV"></ul></div></div>
-        <div class="bactions"><button class="btn primary" id="cwCheck">Vérifier</button><button class="btn" id="cwClear">Effacer</button><span class="bmsg" id="cwMsg"></span></div>
-      </div>
-    </section>
-
-    <!-- DÉFI 8 : mission recherche -->
-    <section id="defi8">
-      <div class="badge-defi">DÉFI 8 · mission recherche 🔎 · jusqu'à 120 pts</div>
-      <h3>Mission recherche Internet</h3>
-      <p class="lede">Ces réponses ne sont pas dans le cours&nbsp;: fouille le web (moteur de recherche, sites fiables) pour trouver le mot ou la valeur exacte, puis vérifie.</p>
-      <div class="research" id="research"></div>
-    </section>
-
-    <section id="synth" style="border-bottom:none">
-      <span class="kicker">06 · Bilan</span>
-      <h3>Ce qu'il faut retenir</h3>
-      <div class="panel"><ul>
-        <li>La chaîne d'énergie&nbsp;: <b>Alimenter → Stocker → Distribuer → Convertir → Transmettre</b>.</li>
-        <li><b>P = U·I</b> (élec.) et <b>P = C·ω</b> (méca.)&nbsp;; le rendement <b>η = Pu/Pa</b> chiffre les pertes.</li>
-        <li>Toute grandeur est un <b>effort</b> ou un <b>flux</b>&nbsp;; leur produit est une puissance.</li>
-        <li>Le rendement global est le <b>produit</b> des rendements&nbsp;: <b>η_g = η₁·η₂·η₃</b>.</li>
-      </ul></div>
-      <div class="cta">✅ Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div>
-    </section>
-
-  </main>
-</div>
-
-<script>
-  // ===== Nav =====
+<body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_energie.html">← Séquence : énergie</a> <div class="brand"><div class="mark">TP</div> <div><h1>Chaîne d'énergie</h1><p>4 défis · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="tpscore"><div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div> <div class="sc-rank" id="scRank">Apprenti</div> <div class="sc-track"><i id="scTrack"></i></div></div> <div class="links" id="links"><a href="#obj" class="navlink"><span>01</span>Objectif</a> <a href="#proto" class="navlink"><span>02</span>Protocole</a> <a href="#exos" class="navlink"><span></span>Exercices d'application</a> <a href="#defi1" class="navlink"><span>D1</span>Assemble la chaîne</a> <a href="#defi2" class="navlink"><span>D2</span>Puissance express</a> <a href="#defi3" class="navlink"><span>D3</span>Effort ou Flux ?</a> <a href="#defi4" class="navlink"><span>D4</span>Chasse au rendement</a> <a href="#defi5" class="navlink"><span>D5</span>Le grand voyage</a> <a href="#defi6" class="navlink"><span>D6</span>Composant ↔ fonction</a> <a href="#defi7" class="navlink"><span>D7</span>Mots croisés</a> <a href="#defi8" class="navlink"><span>D8</span>Mission recherche</a> <a href="#synth" class="navlink"><span>09</span>Synthèse</a></div> </aside> <main class="main"> <section id="obj"> <span class="kicker">TP · Chaîne d'énergie</span> <h2>4 défis pour maîtriser<br>P, E et η</h2> <p class="lede">Pas de questionnaire&nbsp;: tu apprends en jouant. Quatre défis te font manipuler la chaîne d'énergie, calculer vite, distinguer effort et flux, et optimiser un rendement. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p> <div class="two"><div class="panel"><h4>Les 8 défis</h4><ul> <li><b>D1 · Assemble la chaîne</b> — remets les 5 fonctions dans l'ordre.</li> <li><b>D2 · Puissance express</b> — P = U·I et P = C·ω contre la montre.</li> <li><b>D3 · Effort ou Flux ?</b> — classe les grandeurs en un éclair.</li> <li><b>D4 · Chasse au rendement</b> — règle les étages pour viser la cible.</li> <li><b>D5 · Le grand voyage</b> — simulation d'autonomie de la batterie.</li> <li><b>D6 · Composant ↔ Fonction</b> — associe les éléments.</li> <li><b>D7 · Mots croisés</b> — le vocabulaire de l'énergie.</li> <li><b>D8 · Mission recherche</b> — trouve les réponses sur le web.</li> </ul></div> <div class="panel"><h4>Notions travaillées</h4> <div class="chips"><span class="chip k">P = U·I</span><span class="chip k">P = C·ω</span><span class="chip k">η = Pu/Pa</span><span class="chip k">η global = Πη</span><span class="chip k">effort × flux</span></div> <div class="note" style="margin-top:12px">Astuce&nbsp;: tu peux rejouer chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div></div></div> </section> <section id="proto"> <span class="kicker">02 · Repère</span> <h3>Protocole &amp; mesures de référence</h3> <p class="lede">Sur le banc moteur, on mesure l'électrique en entrée et le mécanique en sortie. Ces valeurs servent de fil rouge.</p> <table class="data"> <thead><tr><th>Grandeur</th><th>Entrée (électrique)</th><th>Sortie (mécanique)</th></tr></thead> <tbody> <tr><td>Effort</td><td><b>U = 24 V</b></td><td><b>C = 2,5 N·m</b></td></tr> <tr><td>Flux</td><td><b>I = 8,0 A</b></td><td><b>ω = 60 rad/s</b></td></tr> <tr><td>Puissance</td><td><b>P = 192 W</b></td><td><b>P = 150 W</b></td></tr> </tbody> </table> <div class="note">Rendement de la chaîne mesuré&nbsp;: η = 150 / 192 ≈ <b>0,78</b>. Remplace par tes relevés sur ton banc réel.</div> </section> <!-- DÉFI 1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour maîtriser l'énergie : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — la consommation d'un radiateur</div> <p>Un radiateur électrique de <b>1500 W</b> fonctionne <b>4 h par jour</b>. On rappelle : énergie = puissance × durée, et 1 kWh = 1000 Wh.</p> <svg class="exo-fig" viewBox="0 0 300 108" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <rect x="24" y="34" width="108" height="46" rx="5" fill="#e9a893" fill-opacity="0.35" stroke="#C0492E" stroke-width="1.5"/> <g stroke="#C0492E" stroke-width="2" stroke-opacity="0.7"><line x1="42" y1="40" x2="42" y2="74"/><line x1="60" y1="40" x2="60" y2="74"/><line x1="78" y1="40" x2="78" y2="74"/><line x1="96" y1="40" x2="96" y2="74"/><line x1="114" y1="40" x2="114" y2="74"/></g> <text x="78" y="96" text-anchor="middle" font-size="11" fill="#C0492E" font-weight="700">1500 W</text> <circle cx="222" cy="52" r="28" fill="#eef4f8" stroke="#2E6A8E" stroke-width="1.5"/> <line x1="222" y1="52" x2="222" y2="34" stroke="#235877" stroke-width="2"/><line x1="222" y1="52" x2="236" y2="58" stroke="#235877" stroke-width="2"/> <text x="222" y="96" text-anchor="middle" font-size="11" fill="#235877" font-weight="700">4 h / jour</text> </svg> <div class="exo-q">a) Énergie par jour = <input class="numin" id="ex1a" inputmode="decimal"> kWh</div> <div class="exo-q">b) Coût par jour (1 kWh = 0,20 €) = <input class="numin" id="ex1b" inputmode="decimal"> €</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> énergie = 1500 × 4 = 6000 Wh = <b>6 kWh</b>.</p> <p><b>b)</b> coût = 6 × 0,20 = <b>1,20 €</b> par jour (soit ~36 € par mois).</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — le rendement</div> <p>Un convertisseur reçoit une puissance et n'en restitue qu'une partie (le reste est perdu, souvent en chaleur). Règle la <b>puissance d'entrée</b> et le <b>rendement</b> : on visualise la puissance utile et les pertes.</p> <canvas id="ex2cv" width="480" height="130" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Puissance d'entrée (W)</span><input type="range" id="ex2pin" min="100" max="1000" step="50" value="800"><b><span id="ex2pinv">800</span></b></label> <label><span class="nm2">Rendement (%)</span><input type="range" id="ex2eta" min="10" max="100" step="5" value="75"><b><span id="ex2etav">75</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — le rendement d'un moteur</div> <p>Un moteur reçoit <b>800 W</b> d'énergie électrique et fournit <b>600 W</b> de puissance mécanique utile. On rappelle : rendement = puissance utile ÷ puissance reçue × 100.</p> <div class="exo-q">a) Rendement = <input class="numin" id="ex3a" inputmode="decimal"> %</div> <div class="exo-q">b) Puissance perdue = <input class="numin" id="ex3b" inputmode="decimal"> W</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> rendement = 600 ÷ 800 × 100 = <b>75 %</b>.</p> <p><b>b)</b> puissance perdue = 800 − 600 = <b>200 W</b> (dissipée en chaleur).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — chaîne d'énergie <span class="lvl-badge">prépa / L1</span></div> <p>Une chaîne d'énergie enchaîne deux étages : une <b>conversion</b> (rendement 90 %) puis une <b>transmission</b> (rendement 80 %). Le rendement global est le <b>produit</b> des rendements.</p> <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <text x="30" y="44" text-anchor="middle" fill="#235877" font-weight="700">1000 W</text> <line x1="52" y1="48" x2="78" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="84,48 74,43 74,53" fill="#5C544B"/><rect x="84" y="30" width="60" height="36" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="114" y="46" text-anchor="middle" fill="#235877" font-weight="700">conversion</text><text x="114" y="58" text-anchor="middle" fill="#235877">η = 90%</text> <line x1="144" y1="48" x2="164" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="170,48 160,43 160,53" fill="#5C544B"/><rect x="170" y="30" width="66" height="36" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="203" y="46" text-anchor="middle" fill="#2c6147" font-weight="700">transmission</text><text x="203" y="58" text-anchor="middle" fill="#2c6147">η = 80%</text> <line x1="236" y1="48" x2="262" y2="48" stroke="#5C544B" stroke-width="2"/><polygon points="268,48 258,43 258,53" fill="#5C544B"/><text x="282" y="44" text-anchor="middle" fill="#8a6313" font-weight="700">? W</text> </svg> <div class="exo-q">a) Rendement global = <input class="numin" id="ex4a" inputmode="decimal"> %</div> <div class="exo-q">b) Puissance de sortie (entrée 1000 W) = <input class="numin" id="ex4b" inputmode="decimal"> W</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> rendement global = 0,90 × 0,80 = 0,72 = <b>72 %</b> (les rendements se multiplient, ils ne s'additionnent pas).</p> <p><b>b)</b> sortie = 1000 × 0,72 = <b>720 W</b>. Chaque étage « grignote » l'énergie : d'où l'intérêt de limiter le nombre de conversions.</p></div></div></div> </section> <section id="defi1"> <div class="badge-defi">DÉFI 1 · jusqu'à 120 pts</div> <h3>Assemble la chaîne d'énergie</h3> <p class="lede">Clique les blocs pour remplir les cases dans le bon ordre, de la source vers l'effet. Reclique une case pour libérer un bloc.</p> <div class="builder"><div class="bslots" id="bslots"></div> <div class="bhint">De l'alimentation jusqu'à la transmission du mouvement.</div> <div class="bpool" id="bpool"></div> <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div></div> </section> <!-- DÉFI 2 --> <section id="defi2"> <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div> <h3>Puissance express</h3> <p class="lede">40 secondes pour calculer un maximum de puissances. Choisis la bonne valeur de P. Les bonnes réponses d'affilée font monter le combo.</p> <div class="game" id="g2"><div class="ghead"><div class="gtitle">Puissance express</div> <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div> <div class="gbar"><i id="g2Bar"></i></div> <div id="g2Area"><div class="gstart"><p>Calcule P = U·I (électrique) ou P = C·ω (mécanique) et choisis la bonne valeur en watts.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div> <div class="gflash" id="g2Flash"></div></div> </section> <!-- DÉFI 3 --> <section id="defi3"> <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div> <h3>Effort ou Flux ?</h3> <p class="lede">30 secondes pour classer un maximum de grandeurs. Effort (force, couple, tension, pression) ou flux (vitesse, débit, intensité)&nbsp;?</p> <div class="game" id="g3"><div class="ghead"><div class="gtitle">Effort ou Flux ?</div> <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div> <div class="gbar"><i id="g3Bar"></i></div> <div id="g3Area"><div class="gstart"><p>Classe chaque grandeur selon sa nature dans le bilan P = effort × flux.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div> <div class="gflash" id="g3Flash"></div></div> </section> <!-- DÉFI 4 --> <section id="defi4"> <div class="badge-defi">DÉFI 4 · optimisation · jusqu'à 160 pts</div> <h3>La chasse au rendement</h3> <p class="lede">La chaîne reçoit <b>250 W</b>. Règle le rendement de chaque étage pour atteindre la puissance utile cible <b>sans dépasser ton budget</b>. Observe&nbsp;: le rendement global est le <b>produit</b> des trois.</p> <div class="optim"><div class="opt-target" id="optTarget">Objectif : P utile ≥ 185 W · Budget ≤ 64 pts</div> <div class="opt-bars" id="optBars"></div> <div class="opt-rows" id="optRows"></div> <div class="opt-readout" id="optReadout"></div> <div class="opt-status miss" id="optStatus">Règle les curseurs pour atteindre la cible.</div></div> <div class="note" style="margin-top:12px">Indice méca&nbsp;: pour un même « budget » réparti, un rendement <b>équilibré</b> entre les étages donne un meilleur produit qu'un réglage déséquilibré.</div> </section> <!-- DÉFI 5 --> <section id="defi5"> <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div> <h3>Le grand voyage</h3> <p class="lede">Ton VAE doit parcourir <b>40 km</b> avec une batterie de <b>500 Wh</b>. Choisis ton niveau d'assistance&nbsp;: plus tu vas vite, plus tu consommes. Arriveras-tu avant la panne&nbsp;? (E = P·Δt)</p> <div class="voyage" id="voyage"><div class="vstat" id="vStat">Prêt à partir.</div> <div class="vbars"><div class="vbar"><div class="vlab"><span>Distance</span><b id="vDist">0 / 40 km</b></div><div class="vtrack"><i id="vDistBar"></i></div></div> <div class="vbar"><div class="vlab"><span>Batterie</span><b id="vBatt">500 Wh</b></div><div class="vtrack"><i id="vBattBar" style="width:100%;background:#3D7E5F"></i></div></div></div> <div class="vhud"><span id="vSpeed">0 km/h</span> · mode <span id="vMode">Normal</span> · <span id="vTime">0,0 h</span></div> <div class="vmodes" id="vModes"><button class="vmode" data-m="eco">Éco<small>150 W · 18 km/h</small></button> <button class="vmode sel" data-m="normal">Normal<small>250 W · 25 km/h</small></button> <button class="vmode" data-m="sport">Sport<small>440 W · 32 km/h</small></button></div> <div class="vactions"><button class="btn primary" id="vGo">▶ Partir</button><button class="btn" id="vReset">↻ Recommencer</button></div></div> <div class="note" style="margin-top:12px">Stratégie&nbsp;: le mode Sport est rapide mais gourmand (tu risques la panne)&nbsp;; l'Éco arrive à coup sûr mais lentement. Le meilleur score récompense vitesse <i>et</i> batterie restante.</div> </section> <!-- DÉFI 6 --> <section id="defi6"> <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div> <h3>Composant Fonction</h3> <p class="lede">Relie chaque composant à la fonction qu'il assure dans la chaîne d'énergie. Clique un composant, puis sa fonction.</p> <div class="match" id="match"><div class="mcol" id="mLeft"></div> <div class="mcol" id="mRight"></div></div> <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div> </section> <!-- DÉFI 7 : mots croisés --> <section id="defi7"> <div class="badge-defi">DÉFI 7 · mots croisés · jusqu'à 130 pts</div> <h3>Les mots croisés de l'énergie</h3> <p class="lede">Remplis la grille avec le vocabulaire de la chaîne d'énergie&nbsp;: une lettre par case, puis vérifie.</p> <div class="cwbox"><div class="cw-wrap"><div class="cw" id="cwGrid"></div></div> <div class="cw-clues"><div><h5>Horizontal →</h5><ul id="cwH"></ul></div><div><h5>Vertical ↓</h5><ul id="cwV"></ul></div></div> <div class="bactions"><button class="btn primary" id="cwCheck">Vérifier</button><button class="btn" id="cwClear">Effacer</button><span class="bmsg" id="cwMsg"></span></div></div> </section> <!-- DÉFI 8 : mission recherche --> <section id="defi8"> <div class="badge-defi">DÉFI 8 · mission recherche  · jusqu'à 120 pts</div> <h3>Mission recherche Internet</h3> <p class="lede">Ces réponses ne sont pas dans le cours&nbsp;: fouille le web (moteur de recherche, sites fiables) pour trouver le mot ou la valeur exacte, puis vérifie.</p> <div class="research" id="research"></div> </section> <section id="synth" style="border-bottom:none"> <span class="kicker">06 · Bilan</span> <h3>Ce qu'il faut retenir</h3> <div class="panel"><ul> <li>La chaîne d'énergie&nbsp;: <b>Alimenter → Stocker → Distribuer → Convertir → Transmettre</b>.</li> <li><b>P = U·I</b> (élec.) et <b>P = C·ω</b> (méca.)&nbsp;; le rendement <b>η = Pu/Pa</b> chiffre les pertes.</li> <li>Toute grandeur est un <b>effort</b> ou un <b>flux</b>&nbsp;; leur produit est une puissance.</li> <li>Le rendement global est le <b>produit</b> des rendements&nbsp;: <b>η_g = η₁·η₂·η₃</b>.</li> </ul></div> <div class="cta">Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div> </section> </main></div> <script> // ===== Nav =====
   var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
@@ -534,340 +305,340 @@
   var obs=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(l){l.classList.remove('on');});if(map[en.target.id])map[en.target.id].classList.add('on');}});},{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ids.forEach(function(id){obs.observe(document.getElementById(id));});
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
-    if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
-    var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
-    var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
-    e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
+ if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+ if(e.key!=='ArrowDown'&&e.key!=='ArrowUp')return;
+ var cur=0;for(var i=0;i<ids.length;i++){if(document.getElementById(ids[i]).getBoundingClientRect().top<=90)cur=i;}
+ var n=e.key==='ArrowDown'?Math.min(cur+1,ids.length-1):Math.max(cur-1,0);
+ e.preventDefault();document.getElementById(ids[n]).scrollIntoView({behavior:'smooth'});
   });
 
   // ===== Score global du TP =====
   var contrib={d1:0,d2:0,d3:0,d4:0,d5:0,d6:0,d7:0,d8:0};
-  var RANKS=[[0,'🔧 Apprenti'],[250,'⚙️ Technicien·ne'],[600,'📐 Ingénieur·e'],[900,'🏆 Expert·e']];
+  var RANKS=[[0,' Apprenti'],[250,' Technicien·ne'],[600,' Ingénieur·e'],[900,' Expert·e']];
   function rankFor(s){var r=RANKS[0][1];for(var i=0;i<RANKS.length;i++){if(s>=RANKS[i][0])r=RANKS[i][1];}return r;}
   function setContrib(k,v){ if(v>contrib[k]){contrib[k]=v; renderScore();} }
   function renderScore(){
-    var tot=0,kk; for(kk in contrib)tot+=contrib[kk];
-    document.getElementById('scVal').textContent=tot;
-    document.getElementById('scRank').textContent=rankFor(tot);
-    document.getElementById('scTrack').style.width=Math.min(100,tot/1110*100)+'%';
+ var tot=0,kk; for(kk in contrib)tot+=contrib[kk];
+ document.getElementById('scVal').textContent=tot;
+ document.getElementById('scRank').textContent=rankFor(tot);
+ document.getElementById('scTrack').style.width=Math.min(100,tot/1110*100)+'%';
   }
   function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 
   // ===== DÉFI 1 : Assemble la chaîne =====
   (function(){
-    var CHAIN=[{lb:'Alimenter',ic:'\uD83D\uDD0C'},{lb:'Stocker',ic:'\uD83D\uDD0B'},{lb:'Distribuer',ic:'\uD83C\uDF9B\uFE0F'},{lb:'Convertir',ic:'\u2699\uFE0F'},{lb:'Transmettre',ic:'\uD83D\uDD29'}];
-    var slots=[null,null,null,null,null];
-    var pool=shuffle([0,1,2,3,4]);
-    var attempts=0, solved=false;
-    var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
+ var CHAIN=[{lb:'Alimenter',ic:''},{lb:'Stocker',ic:''},{lb:'Distribuer',ic:''},{lb:'Convertir',ic:''},{lb:'Transmettre',ic:''}];
+ var slots=[null,null,null,null,null];
+ var pool=shuffle([0,1,2,3,4]);
+ var attempts=0, solved=false;
+ var slotsEl=document.getElementById('bslots'), poolEl=document.getElementById('bpool'), msg=document.getElementById('bmsg');
 
-    function render(){
-      slotsEl.innerHTML=slots.map(function(idx,i){
-        if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25">\u2795</span></div>';
-        return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
-      }).join('');
-      poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
-    }
-    slotsEl.addEventListener('click',function(ev){
-      if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
-      var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
-      pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
-    });
-    poolEl.addEventListener('click',function(ev){
-      if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
-      var idx=+b.getAttribute('data-idx');
-      var free=slots.indexOf(null); if(free<0)return;
-      slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
-    });
-    document.getElementById('bverify').addEventListener('click',function(){
-      if(solved)return;
-      if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les 5 blocs.'; return; }
-      attempts++;
-      var ok=slots.every(function(idx,i){return idx===i;});
-      var cells=slotsEl.querySelectorAll('.bslot');
-      if(ok){
-        solved=true;
-        var pts=attempts===1?120:attempts===2?85:attempts===3?55:35;
-        var k=0; var iv=setInterval(function(){ if(k<5){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },140);
-        msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
-        setContrib('d1',pts);
-      }else{
-        var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
-        setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
-        msg.style.color='#8f3a24'; msg.textContent=nb+' / 5 bien placés. Réessaie !';
-      }
-    });
-    render();
+ function render(){
+ slotsEl.innerHTML=slots.map(function(idx,i){
+ if(idx===null) return '<div class="bslot" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic" style="opacity:.25"></span></div>';
+ return '<div class="bslot filled" data-slot="'+i+'"><span class="sn">'+(i+1)+'</span><span class="ic">'+CHAIN[idx].ic+'</span><span class="lb">'+CHAIN[idx].lb+'</span></div>';
+ }).join('');
+ poolEl.innerHTML=pool.map(function(idx){return '<button class="bblock" data-idx="'+idx+'"><span>'+CHAIN[idx].ic+'</span>'+CHAIN[idx].lb+'</button>';}).join('');
+ }
+ slotsEl.addEventListener('click',function(ev){
+ if(solved)return; var s=ev.target.closest('.bslot'); if(!s)return;
+ var i=+s.getAttribute('data-slot'); if(slots[i]===null)return;
+ pool.push(slots[i]); slots[i]=null; msg.textContent=''; render();
+ });
+ poolEl.addEventListener('click',function(ev){
+ if(solved)return; var b=ev.target.closest('.bblock'); if(!b)return;
+ var idx=+b.getAttribute('data-idx');
+ var free=slots.indexOf(null); if(free<0)return;
+ slots[free]=idx; pool.splice(pool.indexOf(idx),1); msg.textContent=''; render();
+ });
+ document.getElementById('bverify').addEventListener('click',function(){
+ if(solved)return;
+ if(slots.indexOf(null)>=0){ msg.style.color='#8f3a24'; msg.textContent='Place les 5 blocs.'; return; }
+ attempts++;
+ var ok=slots.every(function(idx,i){return idx===i;});
+ var cells=slotsEl.querySelectorAll('.bslot');
+ if(ok){
+ solved=true;
+ var pts=attempts===1?120:attempts===2?85:attempts===3?55:35;
+ var k=0; var iv=setInterval(function(){ if(k<5){cells[k].classList.add('good','lit');k++;} else {clearInterval(iv);} },140);
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Chaîne assemblée en '+attempts+' essai(s) ! +'+pts+' pts';
+ setContrib('d1',pts);
+ }else{
+ var nb=0; slots.forEach(function(idx,i){ if(idx===i){cells[i].classList.add('good');nb++;} else {cells[i].classList.remove('good');cells[i].classList.add('bad');} });
+ setTimeout(function(){cells.forEach(function(c){c.classList.remove('bad');});},400);
+ msg.style.color='#8f3a24'; msg.textContent=nb+' / 5 bien placés. Réessaie !';
+ }
+ });
+ render();
   })();
 
   // ===== DÉFI 2 : Puissance express (arcade MCQ) =====
   (function(){
-    function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
-    function makeOptions(correct){
-      var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
-      var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:25),Math.max(1,correct-(correct<60?8:20)),correct*2,Math.round(correct*0.75)];
-      for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
-      while(arr.length<4){var v=correct+ri(1,30);if(!seen[v]){seen[v]=1;arr.push(v);}}
-      return shuffle(arr);
-    }
-    function makeRound(){
-      var q,c;
-      if(Math.random()<0.5){ var u=[6,9,12,12,15,18,24][ri(0,6)], i=ri(1,8); c=u*i; q='U = '+u+' V \u00b7 I = '+i+' A'; }
-      else{ var cs=[1,1.5,2,2.5,3,4], cc=cs[ri(0,5)], w=[10,20,30,40,50,60][ri(0,5)]; c=Math.round(cc*w); q='C = '+String(cc).replace('.',',')+' N\u00b7m \u00b7 \u03c9 = '+w+' rad/s'; }
-      return {q:q, correct:c, opts:makeOptions(c)};
-    }
-    var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
-    var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
-    var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function next(){ cur=makeRound();
-      area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">P = ? (W)</div></div>'+
-        '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+' W</button>';}).join('')+'</div>';
-    }
-    function answer(v){
-      if(!playing)return;
-      if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+' W  (\u22123 s)'; flash.style.color='#E29A86'; }
-      hud(); next();
-    }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d2', Math.min(150,score));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent='';
-    }
-    document.getElementById('g2').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
-    });
+ function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+ function makeOptions(correct){
+ var seen={}, arr=[]; seen[correct]=1; arr.push(correct);
+ var cands=[Math.round(correct*1.5),Math.round(correct*0.5),correct+(correct<60?10:25),Math.max(1,correct-(correct<60?8:20)),correct*2,Math.round(correct*0.75)];
+ for(var k=0;k<cands.length&&arr.length<4;k++){var v=cands[k];if(v>0&&!seen[v]){seen[v]=1;arr.push(v);}}
+ while(arr.length<4){var v=correct+ri(1,30);if(!seen[v]){seen[v]=1;arr.push(v);}}
+ return shuffle(arr);
+ }
+ function makeRound(){
+ var q,c;
+ if(Math.random()<0.5){ var u=[6,9,12,12,15,18,24][ri(0,6)], i=ri(1,8); c=u*i; q='U = '+u+' V \u00b7 I = '+i+' A'; }
+ else{ var cs=[1,1.5,2,2.5,3,4], cc=cs[ri(0,5)], w=[10,20,30,40,50,60][ri(0,5)]; c=Math.round(cc*w); q='C = '+String(cc).replace('.',',')+' N\u00b7m \u00b7 \u03c9 = '+w+' rad/s'; }
+ return {q:q, correct:c, opts:makeOptions(c)};
+ }
+ var area=document.getElementById('g2Area'), flash=document.getElementById('g2Flash');
+ var sScore=document.getElementById('g2Score'), sStreak=document.getElementById('g2Streak'), sTime=document.getElementById('g2Time'), bar=document.getElementById('g2Bar');
+ var TOTAL=40, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function next(){ cur=makeRound();
+ area.innerHTML='<div class="gprompt"><div class="gq">'+cur.q+'</div><div class="gask">P = ? (W)</div></div>'+
+ '<div class="gopts">'+cur.opts.map(function(o){return '<button class="gopt" data-v="'+o+'">'+o+' W</button>';}).join('')+'</div>';
+ }
+ function answer(v){
+ if(!playing)return;
+ if(v===cur.correct){ streak++; score+=10+streak*2; flash.textContent='\u2713 +'+(10+streak*2)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-3); flash.textContent='\u2717 c\u2019\u00e9tait '+cur.correct+' W  (\u22123 s)'; flash.style.color='#E29A86'; }
+ hud(); next();
+ }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();next(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d2', Math.min(150,score));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent='';
+ }
+ document.getElementById('g2').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g2Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ if(t.classList.contains('gopt')&&playing)answer(+t.getAttribute('data-v'));
+ });
   })();
 
   // ===== DÉFI 3 : Effort ou Flux ? (reflex) =====
   (function(){
-    var GR=[{n:'Force F',u:'N',t:'eff'},{n:'Vitesse V',u:'m/s',t:'flx'},{n:'Couple C',u:'N\u00b7m',t:'eff'},{n:'Vitesse angulaire \u03c9',u:'rad/s',t:'flx'},
-            {n:'Tension U',u:'V',t:'eff'},{n:'Intensit\u00e9 I',u:'A',t:'flx'},{n:'Pression p',u:'Pa',t:'eff'},{n:'D\u00e9bit Q',u:'m\u00b3/s',t:'flx'}];
-    var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
-    var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
-    var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
-    function pick(){ cur=GR[Math.floor(Math.random()*GR.length)];
-      area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div><div class="gask">'+cur.u+'</div></div>'+
-        '<div class="gbtns"><button class="gbtn eff" data-t="eff">EFFORT</button><button class="gbtn flx" data-t="flx">FLUX</button></div>'; }
-    function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
-    function answer(t){ if(!playing)return;
-      if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'  (combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
-      else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 '+(cur.t==='eff'?'c\u2019\u00e9tait un EFFORT':'c\u2019\u00e9tait un FLUX')+'  (\u22122 s)'; flash.style.color='#E29A86'; }
-      hud(); pick(); }
-    function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
-    function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
-    function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
-      setContrib('d3', Math.min(150,score*5));
-      area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*5)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
-      flash.textContent=''; }
-    document.getElementById('g3').addEventListener('click',function(ev){
-      var t=ev.target;
-      if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
-      var tt=t.getAttribute('data-t'); if(tt&&playing)answer(tt); });
+ var GR=[{n:'Force F',u:'N',t:'eff'},{n:'Vitesse V',u:'m/s',t:'flx'},{n:'Couple C',u:'N\u00b7m',t:'eff'},{n:'Vitesse angulaire \u03c9',u:'rad/s',t:'flx'},
+ {n:'Tension U',u:'V',t:'eff'},{n:'Intensit\u00e9 I',u:'A',t:'flx'},{n:'Pression p',u:'Pa',t:'eff'},{n:'D\u00e9bit Q',u:'m\u00b3/s',t:'flx'}];
+ var area=document.getElementById('g3Area'), flash=document.getElementById('g3Flash');
+ var sScore=document.getElementById('g3Score'), sStreak=document.getElementById('g3Streak'), sTime=document.getElementById('g3Time'), bar=document.getElementById('g3Bar');
+ var TOTAL=30, time=TOTAL, score=0, streak=0, cur=null, timer=null, playing=false;
+ function pick(){ cur=GR[Math.floor(Math.random()*GR.length)];
+ area.innerHTML='<div class="gprompt"><div class="gname">'+cur.n+'</div><div class="gask">'+cur.u+'</div></div>'+
+ '<div class="gbtns"><button class="gbtn eff" data-t="eff">EFFORT</button><button class="gbtn flx" data-t="flx">FLUX</button></div>'; }
+ function hud(){ sScore.textContent=score; sStreak.textContent='\u00d7'+(1+streak); sTime.textContent=Math.ceil(time); }
+ function answer(t){ if(!playing)return;
+ if(t===cur.t){ streak++; score+=1+streak; flash.textContent='\u2713 +'+(1+streak)+'(combo \u00d7'+(1+streak)+')'; flash.style.color='#9FCBAE'; }
+ else{ streak=0; time=Math.max(0,time-2); flash.textContent='\u2717 '+(cur.t==='eff'?'c\u2019\u00e9tait un EFFORT':'c\u2019\u00e9tait un FLUX')+'(\u22122 s)'; flash.style.color='#E29A86'; }
+ hud(); pick(); }
+ function tick(){ time-=0.1; if(time<=0){time=0;hud();bar.style.width='0%';return end();} hud(); bar.style.width=(time/TOTAL*100)+'%'; }
+ function start(){ time=TOTAL;score=0;streak=0;playing=true;flash.textContent='';bar.style.width='100%';hud();pick(); if(timer)clearInterval(timer); timer=setInterval(tick,100); }
+ function end(){ playing=false; if(timer){clearInterval(timer);timer=null;}
+ setContrib('d3', Math.min(150,score*5));
+ area.innerHTML='<div class="gover"><div class="gscore">'+score+' pts</div><p style="color:#C9BBA8;font-size:13px;margin:6px 0 14px">Compte au score TP : '+Math.min(150,score*5)+' pts</p><button class="gbig" data-act="restart">\u21bb Rejouer</button></div>';
+ flash.textContent=''; }
+ document.getElementById('g3').addEventListener('click',function(ev){
+ var t=ev.target;
+ if(t.id==='g3Play'||t.getAttribute('data-act')==='restart'){start();return;}
+ var tt=t.getAttribute('data-t'); if(tt&&playing)answer(tt); });
   })();
 
   // ===== DÉFI 4 : Chasse au rendement (optimizer) =====
   (function(){
-    var IN=250, TARGET=185, BUDGET=64, BASE=70;
-    var STAGES=['Variateur','Moteur','R\u00e9ducteur'];
-    var etas=[85,85,85];
-    var rowsEl=document.getElementById('optRows'), barsEl=document.getElementById('optBars'),
-        readEl=document.getElementById('optReadout'), statEl=document.getElementById('optStatus');
-    function compute(){
-      var e=etas.map(function(x){return x/100;});
-      var p1=IN*e[0], p2=p1*e[1], pu=p2*e[2];
-      var glob=e[0]*e[1]*e[2];
-      var cost=etas.reduce(function(s,x){return s+(x-BASE);},0);
-      return {p:[IN,p1,p2,pu], pu:pu, glob:glob, cost:cost};
-    }
-    function renderRows(){
-      rowsEl.innerHTML=STAGES.map(function(nm,i){
-        return '<div class="orow"><span class="oname">'+nm+'</span>'+
-          '<input type="range" min="70" max="99" value="'+etas[i]+'" data-stage="'+i+'">'+
-          '<span class="oeta" id="oeta'+i+'">\u03b7 = '+(etas[i]/100).toFixed(2)+'</span></div>';
-      }).join('');
-    }
-    function renderAll(){
-      var c=compute();
-      var labels=['Entr\u00e9e','apr\u00e8s '+STAGES[0],'apr\u00e8s '+STAGES[1],'P utile'];
-      barsEl.innerHTML=c.p.map(function(pw,i){
-        var h=Math.max(3,pw/IN*100);
-        return '<div class="obar"><span class="ov">'+Math.round(pw)+' W</span><div class="col" style="height:'+h+'%"></div><span class="ol">'+labels[i]+'</span></div>';
-      }).join('');
-      for(var i=0;i<3;i++){var el=document.getElementById('oeta'+i); if(el)el.textContent='\u03b7 = '+(etas[i]/100).toFixed(2);}
-      var over=c.cost>BUDGET;
-      readEl.innerHTML=
-        '<div class="ord"><div class="l">Rendement global</div><div class="v">'+c.glob.toFixed(2)+'</div></div>'+
-        '<div class="ord"><div class="l">Puissance utile</div><div class="v">'+Math.round(c.pu)+' W</div></div>'+
-        '<div class="ord budget"><div class="l">Budget</div><div class="v'+(over?' over':'')+'">'+c.cost+' / '+BUDGET+'</div></div>';
-      if(over){ statEl.className='opt-status over'; statEl.textContent='\u26a0 Budget d\u00e9pass\u00e9 ('+c.cost+' pts) \u2014 baisse un rendement.'; }
-      else if(c.pu>=TARGET){
-        var bal=(Math.max.apply(null,etas)-Math.min.apply(null,etas))<=5;
-        var pts=Math.min(160, 100 + (BUDGET-c.cost)*2 + (bal?30:0));
-        statEl.className='opt-status win'; statEl.textContent='\u2713 Cible atteinte ! +'+pts+' pts'+(bal?' (bonus \u00e9quilibre \u2696)':'');
-        setContrib('d4',pts);
-      } else { statEl.className='opt-status miss'; statEl.textContent='P utile = '+Math.round(c.pu)+' W \u2014 encore '+Math.max(0,Math.ceil(TARGET-c.pu))+' W \u00e0 gagner.'; }
-    }
-    rowsEl.addEventListener('input',function(ev){
-      var t=ev.target; if(t.type!=='range')return;
-      etas[+t.getAttribute('data-stage')]=+t.value; renderAll();
-    });
-    renderRows(); renderAll();
+ var IN=250, TARGET=185, BUDGET=64, BASE=70;
+ var STAGES=['Variateur','Moteur','R\u00e9ducteur'];
+ var etas=[85,85,85];
+ var rowsEl=document.getElementById('optRows'), barsEl=document.getElementById('optBars'),
+ readEl=document.getElementById('optReadout'), statEl=document.getElementById('optStatus');
+ function compute(){
+ var e=etas.map(function(x){return x/100;});
+ var p1=IN*e[0], p2=p1*e[1], pu=p2*e[2];
+ var glob=e[0]*e[1]*e[2];
+ var cost=etas.reduce(function(s,x){return s+(x-BASE);},0);
+ return {p:[IN,p1,p2,pu], pu:pu, glob:glob, cost:cost};
+ }
+ function renderRows(){
+ rowsEl.innerHTML=STAGES.map(function(nm,i){
+ return '<div class="orow"><span class="oname">'+nm+'</span>'+
+ '<input type="range" min="70" max="99" value="'+etas[i]+'" data-stage="'+i+'">'+
+ '<span class="oeta" id="oeta'+i+'">\u03b7 = '+(etas[i]/100).toFixed(2)+'</span></div>';
+ }).join('');
+ }
+ function renderAll(){
+ var c=compute();
+ var labels=['Entr\u00e9e','apr\u00e8s '+STAGES[0],'apr\u00e8s '+STAGES[1],'P utile'];
+ barsEl.innerHTML=c.p.map(function(pw,i){
+ var h=Math.max(3,pw/IN*100);
+ return '<div class="obar"><span class="ov">'+Math.round(pw)+' W</span><div class="col" style="height:'+h+'%"></div><span class="ol">'+labels[i]+'</span></div>';
+ }).join('');
+ for(var i=0;i<3;i++){var el=document.getElementById('oeta'+i); if(el)el.textContent='\u03b7 = '+(etas[i]/100).toFixed(2);}
+ var over=c.cost>BUDGET;
+ readEl.innerHTML=
+ '<div class="ord"><div class="l">Rendement global</div><div class="v">'+c.glob.toFixed(2)+'</div></div>'+
+ '<div class="ord"><div class="l">Puissance utile</div><div class="v">'+Math.round(c.pu)+' W</div></div>'+
+ '<div class="ord budget"><div class="l">Budget</div><div class="v'+(over?' over':'')+'">'+c.cost+' / '+BUDGET+'</div></div>';
+ if(over){ statEl.className='opt-status over'; statEl.textContent=' Budget d\u00e9pass\u00e9 ('+c.cost+' pts) \u2014 baisse un rendement.'; }
+ else if(c.pu>=TARGET){
+ var bal=(Math.max.apply(null,etas)-Math.min.apply(null,etas))<=5;
+ var pts=Math.min(160, 100 + (BUDGET-c.cost)*2 + (bal?30:0));
+ statEl.className='opt-status win'; statEl.textContent='\u2713 Cible atteinte ! +'+pts+' pts'+(bal?' (bonus \u00e9quilibre )':'');
+ setContrib('d4',pts);
+ } else { statEl.className='opt-status miss'; statEl.textContent='P utile = '+Math.round(c.pu)+' W \u2014 encore '+Math.max(0,Math.ceil(TARGET-c.pu))+' W \u00e0 gagner.'; }
+ }
+ rowsEl.addEventListener('input',function(ev){
+ var t=ev.target; if(t.type!=='range')return;
+ etas[+t.getAttribute('data-stage')]=+t.value; renderAll();
+ });
+ renderRows(); renderAll();
   })();
 
   // ===== DÉFI 5 : Le grand voyage (simulation autonomie) =====
   (function(){
-    var GOAL=40, CAP=500;
-    var MODES={eco:{P:150,v:18},normal:{P:250,v:25},sport:{P:440,v:32}};
-    var MODEFR={eco:'\u00c9co',normal:'Normal',sport:'Sport'};
-    var mode='normal', dist=0, batt=CAP, timeH=0, timer=null, running=false, done=false;
-    var st=document.getElementById('vStat'), dEl=document.getElementById('vDist'), dBar=document.getElementById('vDistBar'),
-        bEl=document.getElementById('vBatt'), bBar=document.getElementById('vBattBar'),
-        spEl=document.getElementById('vSpeed'), moEl=document.getElementById('vMode'), tiEl=document.getElementById('vTime');
-    function render(){
-      dEl.textContent=dist.toFixed(1)+' / '+GOAL+' km'; dBar.style.width=Math.min(100,dist/GOAL*100)+'%';
-      bEl.textContent=Math.round(batt)+' Wh';
-      var pc=Math.max(0,batt/CAP*100); bBar.style.width=pc+'%';
-      bBar.style.background = pc>50?'#3D7E5F':(pc>20?'#BD8A2A':'#C0492E');
-      spEl.textContent=(running?MODES[mode].v:0)+' km/h';
-      moEl.textContent=MODEFR[mode]; tiEl.textContent=timeH.toFixed(1).replace('.',',')+' h';
-    }
-    function stop(){ if(timer){clearInterval(timer);timer=null;} running=false; }
-    function win(){
-      stop(); done=true;
-      var pts=Math.min(150, 90+Math.round(batt/CAP*40)+Math.round(Math.max(0,(2.3-timeH))*22));
-      st.className='vstat win'; st.textContent='\u2713 Arriv\u00e9 ! '+Math.round(batt)+' Wh restants en '+timeH.toFixed(1).replace('.',',')+' h \u2014 +'+pts+' pts';
-      setContrib('d5',pts);
-    }
-    function fail(){ stop(); done=true; st.className='vstat fail'; st.textContent='\u26a1 Panne \u00e0 '+dist.toFixed(1)+' km ! Essaie un mode plus \u00e9conome.'; }
-    function tick(){
-      var m=MODES[mode], dt=0.01; dist+=m.v*dt; batt-=m.P*dt; timeH+=dt;
-      if(dist>=GOAL){ dist=GOAL; render(); return win(); }
-      if(batt<=0){ batt=0; render(); return fail(); }
-      render();
-    }
-    document.getElementById('vModes').addEventListener('click',function(ev){
-      var b=ev.target.closest('.vmode'); if(!b||done)return;
-      mode=b.getAttribute('data-m');
-      document.querySelectorAll('.vmode').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); render();
-    });
-    document.getElementById('vGo').addEventListener('click',function(){
-      if(running||done)return; running=true; st.className='vstat'; st.textContent='En route\u2026';
-      if(timer)clearInterval(timer); timer=setInterval(tick,100);
-    });
-    document.getElementById('vReset').addEventListener('click',function(){
-      stop(); dist=0; batt=CAP; timeH=0; done=false; st.className='vstat'; st.textContent='Pr\u00eat \u00e0 partir.'; render();
-    });
-    render();
+ var GOAL=40, CAP=500;
+ var MODES={eco:{P:150,v:18},normal:{P:250,v:25},sport:{P:440,v:32}};
+ var MODEFR={eco:'\u00c9co',normal:'Normal',sport:'Sport'};
+ var mode='normal', dist=0, batt=CAP, timeH=0, timer=null, running=false, done=false;
+ var st=document.getElementById('vStat'), dEl=document.getElementById('vDist'), dBar=document.getElementById('vDistBar'),
+ bEl=document.getElementById('vBatt'), bBar=document.getElementById('vBattBar'),
+ spEl=document.getElementById('vSpeed'), moEl=document.getElementById('vMode'), tiEl=document.getElementById('vTime');
+ function render(){
+ dEl.textContent=dist.toFixed(1)+' / '+GOAL+' km'; dBar.style.width=Math.min(100,dist/GOAL*100)+'%';
+ bEl.textContent=Math.round(batt)+' Wh';
+ var pc=Math.max(0,batt/CAP*100); bBar.style.width=pc+'%';
+ bBar.style.background = pc>50?'#3D7E5F':(pc>20?'#BD8A2A':'#C0492E');
+ spEl.textContent=(running?MODES[mode].v:0)+' km/h';
+ moEl.textContent=MODEFR[mode]; tiEl.textContent=timeH.toFixed(1).replace('.',',')+' h';
+ }
+ function stop(){ if(timer){clearInterval(timer);timer=null;} running=false; }
+ function win(){
+ stop(); done=true;
+ var pts=Math.min(150, 90+Math.round(batt/CAP*40)+Math.round(Math.max(0,(2.3-timeH))*22));
+ st.className='vstat win'; st.textContent='\u2713 Arriv\u00e9 ! '+Math.round(batt)+' Wh restants en '+timeH.toFixed(1).replace('.',',')+' h \u2014 +'+pts+' pts';
+ setContrib('d5',pts);
+ }
+ function fail(){ stop(); done=true; st.className='vstat fail'; st.textContent=' Panne \u00e0 '+dist.toFixed(1)+' km ! Essaie un mode plus \u00e9conome.'; }
+ function tick(){
+ var m=MODES[mode], dt=0.01; dist+=m.v*dt; batt-=m.P*dt; timeH+=dt;
+ if(dist>=GOAL){ dist=GOAL; render(); return win(); }
+ if(batt<=0){ batt=0; render(); return fail(); }
+ render();
+ }
+ document.getElementById('vModes').addEventListener('click',function(ev){
+ var b=ev.target.closest('.vmode'); if(!b||done)return;
+ mode=b.getAttribute('data-m');
+ document.querySelectorAll('.vmode').forEach(function(x){x.classList.remove('sel');}); b.classList.add('sel'); render();
+ });
+ document.getElementById('vGo').addEventListener('click',function(){
+ if(running||done)return; running=true; st.className='vstat'; st.textContent='En route\u2026';
+ if(timer)clearInterval(timer); timer=setInterval(tick,100);
+ });
+ document.getElementById('vReset').addEventListener('click',function(){
+ stop(); dist=0; batt=CAP; timeH=0; done=false; st.className='vstat'; st.textContent='Pr\u00eat \u00e0 partir.'; render();
+ });
+ render();
   })();
 
   // ===== DÉFI 6 : Composant <-> Fonction (associations) =====
   (function(){
-    var PAIRS=[{c:'Batterie',f:'Stocker'},{c:'Panneau PV',f:'Alimenter'},{c:'Variateur',f:'Distribuer'},{c:'Moteur',f:'Convertir'},{c:'R\u00e9ducteur',f:'Transmettre'}];
-    var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
-    var selL=null, matched=0, wrong=0, done=false;
-    var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
-    function render(){
-      leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
-      rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
-    }
-    function onClick(ev){
-      if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
-      var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
-      if(side==='L'){
-        document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
-        it.classList.add('sel'); selL={p:p,el:it};
-      } else {
-        if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un composant.'; return; }
-        if(selL.p===p){
-          selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
-          msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
-          if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
-        } else {
-          wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
-          setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
-          selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
-        }
-      }
-    }
-    leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
-    document.getElementById('mReset').addEventListener('click',function(){
-      L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
-    });
-    render();
+ var PAIRS=[{c:'Batterie',f:'Stocker'},{c:'Panneau PV',f:'Alimenter'},{c:'Variateur',f:'Distribuer'},{c:'Moteur',f:'Convertir'},{c:'R\u00e9ducteur',f:'Transmettre'}];
+ var L=shuffle([0,1,2,3,4]), R=shuffle([0,1,2,3,4]);
+ var selL=null, matched=0, wrong=0, done=false;
+ var leftEl=document.getElementById('mLeft'), rightEl=document.getElementById('mRight'), msg=document.getElementById('mMsg');
+ function render(){
+ leftEl.innerHTML=L.map(function(p){return '<div class="mitem" data-side="L" data-p="'+p+'">'+PAIRS[p].c+'</div>';}).join('');
+ rightEl.innerHTML=R.map(function(p){return '<div class="mitem" data-side="R" data-p="'+p+'">'+PAIRS[p].f+'</div>';}).join('');
+ }
+ function onClick(ev){
+ if(done)return; var it=ev.target.closest('.mitem'); if(!it||it.classList.contains('done'))return;
+ var side=it.getAttribute('data-side'), p=+it.getAttribute('data-p');
+ if(side==='L'){
+ document.querySelectorAll('.mitem[data-side="L"]').forEach(function(x){x.classList.remove('sel');});
+ it.classList.add('sel'); selL={p:p,el:it};
+ } else {
+ if(!selL){ msg.style.color='#8a6313'; msg.textContent='Choisis d\u2019abord un composant.'; return; }
+ if(selL.p===p){
+ selL.el.classList.remove('sel'); selL.el.classList.add('done'); it.classList.add('done'); matched++; selL=null;
+ msg.style.color='#2c6147'; msg.textContent='\u2713 Bonne association !';
+ if(matched===PAIRS.length){ done=true; var pts=Math.max(60,130-wrong*12); msg.textContent='\u2713 Tout reli\u00e9 ! +'+pts+' pts ('+wrong+' erreur(s))'; setContrib('d6',pts); }
+ } else {
+ wrong++; var bad=it, sl=selL.el; bad.classList.add('bad');
+ setTimeout(function(){bad.classList.remove('bad');sl.classList.remove('sel');},400);
+ selL=null; msg.style.color='#8f3a24'; msg.textContent='\u2717 Non, essaie encore.';
+ }
+ }
+ }
+ leftEl.addEventListener('click',onClick); rightEl.addEventListener('click',onClick);
+ document.getElementById('mReset').addEventListener('click',function(){
+ L=shuffle([0,1,2,3,4]); R=shuffle([0,1,2,3,4]); selL=null; matched=0; wrong=0; done=false; msg.textContent=''; render();
+ });
+ render();
   })();
 
   // ===== DÉFI 7 : mots croisés =====
   (function(){
-    var CW={"GRID": ["COUPLE.....", "...U.......", "...I.......", "...S.......", "...S..B....", "...A..A....", "...N..T...W", "...C..T...A", "..RENDEMENT", "......R.N.T", "......I.E..", "...MOTEUR..", "........G..", "........I..", "....JOULE.."], "H": {"8,2": "Rapport Pu/Pa, toujours < 1", "11,3": "Convertit l'electrique en mecanique", "0,0": "Effort de rotation (N.m)", "14,4": "Unite SI d'energie"}, "V": {"0,3": "Effort x flux, en watts", "4,6": "Stocke l'energie electrique", "8,8": "Puissance integree dans le temps", "6,10": "Unite SI de puissance"}};
-    var box=document.getElementById('cwGrid'); if(!box)return;
-    var rows=CW.GRID.map(function(r){return r.split('');});
-    var Hn=rows.length, Wn=rows[0].length;
-    function white(r,c){return r>=0&&r<Hn&&c>=0&&c<Wn&&rows[r][c]!=='.';}
-    function norm(s){return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z]/g,'');}
-    var num={},cnt=0,across=[],down=[];
-    for(var r=0;r<Hn;r++)for(var c=0;c<Wn;c++){ if(!white(r,c))continue;
-      var sA=!white(r,c-1)&&white(r,c+1), sD=!white(r-1,c)&&white(r+1,c);
-      if(sA||sD){cnt++;num[r+'_'+c]=cnt;}
-      if(sA){var len=0,a='';while(white(r,c+len)){a+=rows[r][c+len];len++;} across.push({n:cnt,r:r,c:c,len:len,clue:(CW.H[r+','+c]||'')});}
-      if(sD){var l2=0,b='';while(white(r+l2,c)){b+=rows[r+l2][c];l2++;} down.push({n:num[r+'_'+c],r:r,c:c,len:l2,clue:(CW.V[r+','+c]||'')});}
-    }
-    box.style.display='grid'; box.style.gridTemplateColumns='repeat('+Wn+',30px)';
-    var html='';
-    for(var rr=0;rr<Hn;rr++)for(var cc=0;cc<Wn;cc++){
-      if(!white(rr,cc)){html+='<div class="cell block"></div>';continue;}
-      var n=num[rr+'_'+cc];
-      html+='<div class="cell" data-r="'+rr+'" data-c="'+cc+'">'+(n?'<span class="num">'+n+'</span>':'')+'<input maxlength="1" data-r="'+rr+'" data-c="'+cc+'"></div>';
-    }
-    box.innerHTML=html;
-    box.addEventListener('input',function(ev){ var t=ev.target; if(t.tagName==='INPUT'){ t.value=t.value.toUpperCase().replace(/[^A-Za-z]/g,''); t.parentNode.classList.remove('good','bad'); } });
-    function clues(list,el){ el.innerHTML=list.slice().sort(function(x,y){return x.n-y.n;}).map(function(w){return '<li><b>'+w.n+'.</b> '+w.clue+' <span style="opacity:.5">('+w.len+')</span></li>';}).join(''); }
-    clues(across,document.getElementById('cwH')); clues(down,document.getElementById('cwV'));
-    function cellInput(r,c){return box.querySelector('input[data-r="'+r+'"][data-c="'+c+'"]');}
-    function wordOk(w,isDown){ for(var i=0;i<w.len;i++){var r=w.r+(isDown?i:0),c=w.c+(isDown?0:i);if(norm(cellInput(r,c).value)!==rows[r][c])return false;} return true; }
-    document.getElementById('cwCheck').addEventListener('click',function(){
-      var inputs=box.querySelectorAll('input');
-      inputs.forEach(function(inp){ var r=+inp.getAttribute('data-r'),c=+inp.getAttribute('data-c'); var cell=inp.parentNode; cell.classList.remove('good','bad');
-        if(norm(inp.value)===rows[r][c]){cell.classList.add('good');} else if(inp.value){cell.classList.add('bad');} });
-      var cwn=0; across.forEach(function(w){if(wordOk(w,false))cwn++;}); down.forEach(function(w){if(wordOk(w,true))cwn++;});
-      var totalW=across.length+down.length, pts=Math.round(cwn/totalW*130);
-      var msg=document.getElementById('cwMsg');
-      if(cwn===totalW){ msg.style.color='#2c6147'; msg.textContent='\u2713 Grille compl\u00e8te ! +130 pts'; }
-      else { msg.style.color='#8a6313'; msg.textContent=cwn+' / '+totalW+' mots corrects \u2014 +'+pts+' pts'; }
-      setContrib('d7',pts);
-    });
-    document.getElementById('cwClear').addEventListener('click',function(){
-      box.querySelectorAll('input').forEach(function(inp){inp.value='';inp.parentNode.classList.remove('good','bad');});
-      document.getElementById('cwMsg').textContent='';
-    });
+ var CW={"GRID": ["COUPLE.....", "...U.......", "...I.......", "...S.......", "...S..B....", "...A..A....", "...N..T...W", "...C..T...A", "..RENDEMENT", "......R.N.T", "......I.E..", "...MOTEUR..", "........G..", "........I..", "....JOULE.."], "H": {"8,2": "Rapport Pu/Pa, toujours < 1", "11,3": "Convertit l'electrique en mecanique", "0,0": "Effort de rotation (N.m)", "14,4": "Unite SI d'energie"}, "V": {"0,3": "Effort x flux, en watts", "4,6": "Stocke l'energie electrique", "8,8": "Puissance integree dans le temps", "6,10": "Unite SI de puissance"}};
+ var box=document.getElementById('cwGrid'); if(!box)return;
+ var rows=CW.GRID.map(function(r){return r.split('');});
+ var Hn=rows.length, Wn=rows[0].length;
+ function white(r,c){return r>=0&&r<Hn&&c>=0&&c<Wn&&rows[r][c]!=='.';}
+ function norm(s){return (s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z]/g,'');}
+ var num={},cnt=0,across=[],down=[];
+ for(var r=0;r<Hn;r++)for(var c=0;c<Wn;c++){ if(!white(r,c))continue;
+ var sA=!white(r,c-1)&&white(r,c+1), sD=!white(r-1,c)&&white(r+1,c);
+ if(sA||sD){cnt++;num[r+'_'+c]=cnt;}
+ if(sA){var len=0,a='';while(white(r,c+len)){a+=rows[r][c+len];len++;} across.push({n:cnt,r:r,c:c,len:len,clue:(CW.H[r+','+c]||'')});}
+ if(sD){var l2=0,b='';while(white(r+l2,c)){b+=rows[r+l2][c];l2++;} down.push({n:num[r+'_'+c],r:r,c:c,len:l2,clue:(CW.V[r+','+c]||'')});}
+ }
+ box.style.display='grid'; box.style.gridTemplateColumns='repeat('+Wn+',30px)';
+ var html='';
+ for(var rr=0;rr<Hn;rr++)for(var cc=0;cc<Wn;cc++){
+ if(!white(rr,cc)){html+='<div class="cell block"></div>';continue;}
+ var n=num[rr+'_'+cc];
+ html+='<div class="cell" data-r="'+rr+'" data-c="'+cc+'">'+(n?'<span class="num">'+n+'</span>':'')+'<input maxlength="1" data-r="'+rr+'" data-c="'+cc+'"></div>';
+ }
+ box.innerHTML=html;
+ box.addEventListener('input',function(ev){ var t=ev.target; if(t.tagName==='INPUT'){ t.value=t.value.toUpperCase().replace(/[^A-Za-z]/g,''); t.parentNode.classList.remove('good','bad'); } });
+ function clues(list,el){ el.innerHTML=list.slice().sort(function(x,y){return x.n-y.n;}).map(function(w){return '<li><b>'+w.n+'.</b> '+w.clue+' <span style="opacity:.5">('+w.len+')</span></li>';}).join(''); }
+ clues(across,document.getElementById('cwH')); clues(down,document.getElementById('cwV'));
+ function cellInput(r,c){return box.querySelector('input[data-r="'+r+'"][data-c="'+c+'"]');}
+ function wordOk(w,isDown){ for(var i=0;i<w.len;i++){var r=w.r+(isDown?i:0),c=w.c+(isDown?0:i);if(norm(cellInput(r,c).value)!==rows[r][c])return false;} return true; }
+ document.getElementById('cwCheck').addEventListener('click',function(){
+ var inputs=box.querySelectorAll('input');
+ inputs.forEach(function(inp){ var r=+inp.getAttribute('data-r'),c=+inp.getAttribute('data-c'); var cell=inp.parentNode; cell.classList.remove('good','bad');
+ if(norm(inp.value)===rows[r][c]){cell.classList.add('good');} else if(inp.value){cell.classList.add('bad');} });
+ var cwn=0; across.forEach(function(w){if(wordOk(w,false))cwn++;}); down.forEach(function(w){if(wordOk(w,true))cwn++;});
+ var totalW=across.length+down.length, pts=Math.round(cwn/totalW*130);
+ var msg=document.getElementById('cwMsg');
+ if(cwn===totalW){ msg.style.color='#2c6147'; msg.textContent='\u2713 Grille compl\u00e8te ! +130 pts'; }
+ else { msg.style.color='#8a6313'; msg.textContent=cwn+' / '+totalW+' mots corrects \u2014 +'+pts+' pts'; }
+ setContrib('d7',pts);
+ });
+ document.getElementById('cwClear').addEventListener('click',function(){
+ box.querySelectorAll('input').forEach(function(inp){inp.value='';inp.parentNode.classList.remove('good','bad');});
+ document.getElementById('cwMsg').textContent='';
+ });
   })();
 
   // ===== DÉFI 8 : mission recherche =====
   (function(){
-    var DATA=[
-      {q:"\uD83D\uDD0E Combien de watts vaut environ 1 cheval-vapeur (ch)\u00a0?", type:'num', min:730, max:750, hint:"Cherche \u00ab cheval-vapeur en watts \u00bb."},
-      {q:"\uD83D\uDD0E Quel est le nom de l\u2019unit\u00e9 d\u2019\u00e9nergie (\u2248 3600 J) factur\u00e9e par EDF\u00a0?", type:'text', accept:['wattheure','kilowattheure','kwh'], hint:"Regarde une facture d\u2019\u00e9lectricit\u00e9."},
-      {q:"\uD83D\uDD0E En quelle ann\u00e9e Alessandro Volta a-t-il invent\u00e9 la pile \u00e9lectrique\u00a0?", type:'num', min:1799, max:1801, hint:"Cherche \u00ab pile de Volta date \u00bb."}
-    ];
-    var box=document.getElementById('research'); if(!box)return;
-    var solved=[false,false,false];
-    function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
-    box.innerHTML=DATA.map(function(d,i){return '<div class="ritem" id="ri'+i+'"><div class="rq">'+d.q+'</div><div class="rrow"><input type="text" data-i="'+i+'" placeholder="ta r\u00e9ponse\u2026"><button class="btn primary" data-check="'+i+'">V\u00e9rifier</button><span class="rmsg" id="rm'+i+'"></span></div><div class="rhint">'+d.hint+'</div></div>';}).join('');
-    function check(i){
-      var d=DATA[i], inp=box.querySelector('input[data-i="'+i+'"]'), val=inp.value, m=document.getElementById('rm'+i), ok=false;
-      if(d.type==='num'){ var mt=val.replace(',','.').match(/-?\d+(\.\d+)?/); if(mt){var x=parseFloat(mt[0]); ok=x>=d.min&&x<=d.max;} }
-      else { var nv=norm(val); ok=d.accept.some(function(a){var na=norm(a);return na.length>0&&nv.indexOf(na)>=0;}); }
-      if(ok){ solved[i]=true; m.style.color='#2c6147'; m.textContent='\u2713 Trouv\u00e9 !'; document.getElementById('ri'+i).classList.add('solved'); var n=0;solved.forEach(function(s){if(s)n++;}); setContrib('d8',n*40); }
-      else { m.style.color='#8f3a24'; m.textContent='\u2717 Continue \u00e0 chercher'; }
-    }
-    box.addEventListener('click',function(ev){ var b=ev.target.closest('[data-check]'); if(b)check(+b.getAttribute('data-check')); });
-    box.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){var inp=ev.target;if(inp.tagName==='INPUT'){ev.preventDefault();check(+inp.getAttribute('data-i'));}} });
+ var DATA=[
+ {q:" Combien de watts vaut environ 1 cheval-vapeur (ch)\u00a0?", type:'num', min:730, max:750, hint:"Cherche \u00ab cheval-vapeur en watts \u00bb."},
+ {q:" Quel est le nom de l\u2019unit\u00e9 d\u2019\u00e9nergie (\u2248 3600 J) factur\u00e9e par EDF\u00a0?", type:'text', accept:['wattheure','kilowattheure','kwh'], hint:"Regarde une facture d\u2019\u00e9lectricit\u00e9."},
+ {q:" En quelle ann\u00e9e Alessandro Volta a-t-il invent\u00e9 la pile \u00e9lectrique\u00a0?", type:'num', min:1799, max:1801, hint:"Cherche \u00ab pile de Volta date \u00bb."}
+ ];
+ var box=document.getElementById('research'); if(!box)return;
+ var solved=[false,false,false];
+ function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');}
+ box.innerHTML=DATA.map(function(d,i){return '<div class="ritem" id="ri'+i+'"><div class="rq">'+d.q+'</div><div class="rrow"><input type="text" data-i="'+i+'" placeholder="ta r\u00e9ponse\u2026"><button class="btn primary" data-check="'+i+'">V\u00e9rifier</button><span class="rmsg" id="rm'+i+'"></span></div><div class="rhint">'+d.hint+'</div></div>';}).join('');
+ function check(i){
+ var d=DATA[i], inp=box.querySelector('input[data-i="'+i+'"]'), val=inp.value, m=document.getElementById('rm'+i), ok=false;
+ if(d.type==='num'){ var mt=val.replace(',','.').match(/-?\d+(\.\d+)?/); if(mt){var x=parseFloat(mt[0]); ok=x>=d.min&&x<=d.max;} }
+ else { var nv=norm(val); ok=d.accept.some(function(a){var na=norm(a);return na.length>0&&nv.indexOf(na)>=0;}); }
+ if(ok){ solved[i]=true; m.style.color='#2c6147'; m.textContent='\u2713 Trouv\u00e9 !'; document.getElementById('ri'+i).classList.add('solved'); var n=0;solved.forEach(function(s){if(s)n++;}); setContrib('d8',n*40); }
+ else { m.style.color='#8f3a24'; m.textContent='\u2717 Continue \u00e0 chercher'; }
+ }
+ box.addEventListener('click',function(ev){ var b=ev.target.closest('[data-check]'); if(b)check(+b.getAttribute('data-check')); });
+ box.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){var inp=ev.target;if(inp.tagName==='INPUT'){ev.preventDefault();check(+inp.getAttribute('data-i'));}} });
   })();
 
   renderScore();
@@ -877,63 +648,289 @@
 function el(id){return document.getElementById(id);}
   // ===== Exercices d'application =====
   (function(){
-    function num(v){return parseFloat(String(v||'').replace(',','.'));}
-    function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
-    function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
-    gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
-    gate('ex3reveal','ex3sol','Correction','Masquer');
-    gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
+ function num(v){return parseFloat(String(v||'').replace(',','.'));}
+ function gate(btnId,solId,showTxt,hideTxt){var b=el(btnId),s=el(solId);if(!b||!s)return;b.addEventListener('click',function(){if(b.disabled)return;if(s.hasAttribute('hidden')){s.removeAttribute('hidden');b.textContent=hideTxt;}else{s.setAttribute('hidden','');b.textContent=showTxt;}});}
+ function unlock(btnId,showTxt){var b=el(btnId);if(b){b.disabled=false;b.textContent=showTxt;}}
+ gate('ex1reveal','ex1sol','Voir l\u2019analyse','Masquer');
+ gate('ex3reveal','ex3sol','Correction','Masquer');
+ gate('ex4reveal','ex4sol','Correction d\u00e9taill\u00e9e','Masquer');
 
-    var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
-      var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
-      var okA=Math.abs(a-6)<0.1, okB=Math.abs(b-1.2)<0.05;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 1500 \u00d7 4 = 6000 Wh = 6 kWh ; 6 \u00d7 0,20 = 1,20 \u20ac.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) P \u00d7 t, puis \u00f7 1000. ')+(okB?'':'b) kWh \u00d7 0,20.');}
-      unlock('ex1reveal','Voir l\u2019analyse');
-    });
-    var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
-      var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
-      var okA=Math.abs(a-75)<0.5, okB=Math.abs(b-200)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 600/800 \u00d7 100 = 75 % ; 800 \u2212 600 = 200 W.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) utile \u00f7 re\u00e7ue \u00d7 100. ')+(okB?'':'b) re\u00e7ue \u2212 utile.');}
-      unlock('ex3reveal','Correction');
-    });
-    var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
-      var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
-      var okA=Math.abs(a-72)<0.5, okB=Math.abs(b-720)<1;
-      if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 0,9 \u00d7 0,8 = 72 % ; 1000 \u00d7 0,72 = 720 W.';}
-      else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) multiplie les rendements. ')+(okB?'':'b) 1000 \u00d7 rendement global.');}
-      unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
-    });
+ var t1=el('ex1try'); if(t1) t1.addEventListener('click',function(){
+ var a=num(el('ex1a').value), b=num(el('ex1b').value), fb=el('ex1fb');
+ var okA=Math.abs(a-6)<0.1, okB=Math.abs(b-1.2)<0.05;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 1500 \u00d7 4 = 6000 Wh = 6 kWh ; 6 \u00d7 0,20 = 1,20 \u20ac.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) P \u00d7 t, puis \u00f7 1000. ')+(okB?'':'b) kWh \u00d7 0,20.');}
+ unlock('ex1reveal','Voir l\u2019analyse');
+ });
+ var b3=el('ex3check'); if(b3) b3.addEventListener('click',function(){
+ var a=num(el('ex3a').value), b=num(el('ex3b').value), fb=el('ex3fb');
+ var okA=Math.abs(a-75)<0.5, okB=Math.abs(b-200)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Parfait : 600/800 \u00d7 100 = 75 % ; 800 \u2212 600 = 200 W.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) utile \u00f7 re\u00e7ue \u00d7 100. ')+(okB?'':'b) re\u00e7ue \u2212 utile.');}
+ unlock('ex3reveal','Correction');
+ });
+ var b4=el('ex4check'); if(b4) b4.addEventListener('click',function(){
+ var a=num(el('ex4a').value), b=num(el('ex4b').value), fb=el('ex4fb');
+ var okA=Math.abs(a-72)<0.5, okB=Math.abs(b-720)<1;
+ if(okA&&okB){fb.className='exo-fb ok';fb.textContent='\u2713 Exact : 0,9 \u00d7 0,8 = 72 % ; 1000 \u00d7 0,72 = 720 W.';}
+ else{fb.className='exo-fb no';fb.textContent='\u2717 '+(okA?'':'a) multiplie les rendements. ')+(okB?'':'b) 1000 \u00d7 rendement global.');}
+ unlock('ex4reveal','Correction d\u00e9taill\u00e9e');
+ });
 
-    (function(){
-      var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
-      function draw(){
-        var Pin=+el('ex2pin').value, eta=+el('ex2eta').value;
-        el('ex2pinv').textContent=Pin; el('ex2etav').textContent=eta;
-        var Put=Pin*eta/100, pertes=Pin-Put;
-        g.clearRect(0,0,W,H);
-        var cy=H*0.42, bx=W*0.42, bw=70, sc=44/1000;
-        g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=1.5;g.beginPath();g.rect(bx,cy-26,bw,52);g.fill();g.stroke();
-        g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('convertisseur',bx+bw/2,cy+3);
-        // entrée
-        var hIn=Math.max(6,Pin*sc);
-        g.fillStyle='rgba(46,106,142,.7)';g.beginPath();g.rect(20,cy-hIn/2,bx-20,hIn);g.fill();
-        g.fillStyle='#235877';g.textAlign='left';g.fillText(Pin+' W',24,cy-hIn/2-4);
-        // sortie utile
-        var hOut=Math.max(4,Put*sc);
-        g.fillStyle='rgba(61,126,95,.8)';g.beginPath();g.rect(bx+bw,cy-hOut/2,W-40-(bx+bw),hOut);g.fill();
-        g.fillStyle='#2c6147';g.textAlign='right';g.fillText('utile '+Put.toFixed(0)+' W',W-22,cy-hOut/2-4);
-        // pertes (vers le bas)
-        var hL=Math.max(2,pertes*sc);
-        g.fillStyle='rgba(192,73,46,.65)';g.beginPath();g.rect(bx+bw/2-hL/2,cy+26,hL,26);g.fill();
-        g.fillStyle='#a44a26';g.textAlign='center';g.fillText('pertes '+pertes.toFixed(0)+' W',bx+bw/2,H-6);
-        var o=el('ex2out'); if(o) o.textContent='P utile = '+Pin+' \u00d7 '+eta+'% = '+Put.toFixed(0)+' W   \u00b7   pertes = '+pertes.toFixed(0)+' W';
-      }
-      ['ex2pin','ex2eta'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
-      draw();
-    })();
+ (function(){
+ var cv=el('ex2cv'); if(!cv||!cv.getContext)return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+ function draw(){
+ var Pin=+el('ex2pin').value, eta=+el('ex2eta').value;
+ el('ex2pinv').textContent=Pin; el('ex2etav').textContent=eta;
+ var Put=Pin*eta/100, pertes=Pin-Put;
+ g.clearRect(0,0,W,H);
+ var cy=H*0.42, bx=W*0.42, bw=70, sc=44/1000;
+ g.fillStyle='#dce8f2';g.strokeStyle='#2E6A8E';g.lineWidth=1.5;g.beginPath();g.rect(bx,cy-26,bw,52);g.fill();g.stroke();
+ g.fillStyle='#235877';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';g.fillText('convertisseur',bx+bw/2,cy+3);
+ // entrée
+ var hIn=Math.max(6,Pin*sc);
+ g.fillStyle='rgba(46,106,142,.7)';g.beginPath();g.rect(20,cy-hIn/2,bx-20,hIn);g.fill();
+ g.fillStyle='#235877';g.textAlign='left';g.fillText(Pin+' W',24,cy-hIn/2-4);
+ // sortie utile
+ var hOut=Math.max(4,Put*sc);
+ g.fillStyle='rgba(61,126,95,.8)';g.beginPath();g.rect(bx+bw,cy-hOut/2,W-40-(bx+bw),hOut);g.fill();
+ g.fillStyle='#2c6147';g.textAlign='right';g.fillText('utile '+Put.toFixed(0)+' W',W-22,cy-hOut/2-4);
+ // pertes (vers le bas)
+ var hL=Math.max(2,pertes*sc);
+ g.fillStyle='rgba(192,73,46,.65)';g.beginPath();g.rect(bx+bw/2-hL/2,cy+26,hL,26);g.fill();
+ g.fillStyle='#a44a26';g.textAlign='center';g.fillText('pertes '+pertes.toFixed(0)+' W',bx+bw/2,H-6);
+ var o=el('ex2out'); if(o) o.textContent='P utile = '+Pin+' \u00d7 '+eta+'% = '+Put.toFixed(0)+' W \u00b7 pertes = '+pertes.toFixed(0)+' W';
+ }
+ ['ex2pin','ex2eta'].forEach(function(id){var e=el(id);if(e)e.addEventListener('input',draw);});
+ draw();
+ })();
   })();
+})();
+</script>
+
+  <section class="tpscore" id="tpScore">
+    <h3>Remise du travail</h3>
+    <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Participant 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Participant 2</span><input id="tpsP2" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Participant 3</span><input id="tpsP3" autocomplete="off" placeholder="(facultatif)"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_energie', TP_TITRE='TP Chaîne d’énergie — 4 défis';
+  var db=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
+              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
+      db=firebase.database(app);
+    }
+  }catch(e){ db=null; }
+
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+
+  /* Un exercice est consid\u00e9r\u00e9 valid\u00e9 d\u00e8s que sa zone de retour passe en \u00e9tat "ok".
+     On rep\u00e8re ces zones quel que soit le moteur de validation du TP. */
+  function conteneur(n){
+    var c=n.closest('.exo-card, .puz, .exo, .card, section, article');
+    return c||n.parentElement;
+  }
+  function recense(){
+    var zones=document.querySelectorAll('.fb, .exo-fb, .msg');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z);
+      if(!c) return;
+      var i=vus.indexOf(c);
+      if(i<0){ vus.push(c); EX.push({el:c, zones:[z]}); }
+      else { EX[i].zones.push(z); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    return n;
+  }
+  function observe(){
+    var obs=new MutationObserver(function(muts){
+      var change=false;
+      muts.forEach(function(m){
+        var z=m.target;
+        if(!z.className||typeof z.className!=='string') return;
+        if(z.className.indexOf('ok')<0) return;
+        EX.forEach(function(e,i){
+          if(done[i]) return;
+          if(e.zones.indexOf(z)>=0){ done[i]=true; change=true; }
+        });
+      });
+      if(change) maj();
+    });
+    EX.forEach(function(e){ e.zones.forEach(function(z){ obs.observe(z,{attributes:true,attributeFilter:['class']}); }); });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    db.ref('scores/'+TP_ID).push({
+      tp:TP_ID, titre:TP_TITRE,
+      participants:p, classe:cl,
+      score:n, total:tot,
+      pourcent: tot? Math.round(n/tot*100):0,
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    }).then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    }).catch(function(){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      b.disabled=false;
+    });
+  }
+  function init(){
+    if(!d('tpScore')) return;
+    recense(); observe();
+    d('tpsSend').addEventListener('click',envoyer);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+
+/* ================================================================
+   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
+   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
+   Liste des classes modifiable ci-dessous en une seule ligne.
+   ================================================================ */
+var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+(function(){
+  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
+  var NODE='scores_tp';
+  var titreEl=document.querySelector('h1');
+  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
+  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
+
+  /* ---- repérage des exercices : une carte = un exercice noté ---- */
+  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
+  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
+  var suivis=[];
+  fbs.forEach(function(fb,i){
+    if(fb.closest('.send-card')) return;
+    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
+    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
+    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
+    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
+    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
+    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
+  });
+  var TOTAL=suivis.length;
+  if(!TOTAL) return;
+
+  /* ---- observation des retours : on note la première réussite ---- */
+  suivis.forEach(function(s){
+    var obs=new MutationObserver(function(){
+      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
+      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+    });
+    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+  });
+
+  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
+  var wrap=document.querySelector('.wrap')||document.body;
+  var hero=wrap.querySelector('.hero');
+  var fiche=document.createElement('div');
+  fiche.className='team-card';
+  fiche.innerHTML=
+    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
+    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
+    '<div class="tgrid">'+
+      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
+      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
+      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
+        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
+      '</select></label>'+
+    '</div>';
+  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
+  else wrap.insertBefore(fiche,wrap.firstChild);
+
+  /* ---- bloc de fin : avancement et envoi ---- */
+  var envoi=document.createElement('div');
+  envoi.className='send-card';
+  envoi.innerHTML=
+    '<div class="tk">Fin de s\u00e9ance</div>'+
+    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
+    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
+  wrap.appendChild(envoi);
+
+  function maj(){
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
+    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  }
+  maj();
+
+  var envoye=false;
+  document.getElementById('tpSend').addEventListener('click',function(){
+    if(envoye) return;
+    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
+    var cls=document.getElementById('tpCls').value;
+    var fb=document.getElementById('tpFb');
+    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
+    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
+    var n=suivis.filter(function(s){return s.ok;}).length;
+    var data={
+      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
+      score:n, total:TOTAL,
+      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    };
+    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
+    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+      .then(function(){
+        envoye=true;
+        fb.className='sfb ok';
+        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
+        document.getElementById('tpSend').disabled=true;
+      })
+      .catch(function(){
+        fb.className='sfb no';
+        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+      });
+  });
 })();
 </script>
 </body>
