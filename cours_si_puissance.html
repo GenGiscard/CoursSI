@@ -136,7 +136,7 @@ function arrowHead(g,x,y,dx,dy,size,color){
   var cv=el('cvGear'); if(!cv||!cv.getContext) return; var g=cv.getContext('2d'), W=cv.width, H=cv.height;
   var caps=['Un réducteur relie deux roues dentées : Z₁ = 10 (entrée) et Z₂ = 30 (sortie).','La petite entraîne la grande : la sortie tourne 3× moins vite.','Vitesse ÷ 3 → mais couple × 3 : on adapte le mouvement à l\u2019effort utile.'];
   var getPhase=stepper('grPrev','grNext','grPh','grCap',caps,null);
-  var cx1=300, cy=140, R1=52, Z1=10, cx2=470, R2=150, Z2=30;
+    var cx1=300, cy=140, R1=38, Z1=10, cx2=470, R2=114, Z2=30;
   var ang=0;
   function gear(cx,cy,R,teeth,a,color,fill){
  g.save(); g.translate(cx,cy); g.rotate(a);
@@ -156,7 +156,7 @@ function arrowHead(g,x,y,dx,dy,size,color){
  gear(cx1,cy,R1,Z1,ang,'#2E6A8E','#eef3f6'); // petite (entrée)
  g.textAlign='center'; g.font='700 13px "JetBrains Mono",monospace';
  g.fillStyle='#2E6A8E'; g.fillText('Z₁ = 10',cx1,cy+R1+40); g.fillText('ENTRÉE (moteur)',cx1,cy+R1+58);
- g.fillStyle='#3D7E5F'; g.fillText('Z₂ = 30',cx2,cy-R2-14); g.fillText('SORTIE',cx2,cy-R2-32);
+ g.fillStyle='#3D7E5F'; g.fillText('Z₂ = 30',cx2,cy-R2-14); g.fillText('SORTIE',cx2,Math.max(14,cy-R2-32));
  if(phase>=2){ g.font='800 15px "Bricolage Grotesque",sans-serif';
  g.fillStyle='#2E6A8E'; g.textAlign='left'; g.fillText('vite · couple faible',20,40);
  g.fillStyle='#3D7E5F'; g.textAlign='right'; g.fillText('lent · couple fort',W-20,40);

@@ -93,10 +93,105 @@
   @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
   @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* ---------- commandes manuelles des animations ---------- */
+  .phctl{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .phctl button{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#2E6A8E;color:#fff;
+      border:none;border-radius:9px;padding:8px 16px;cursor:pointer}
+  .phctl button:hover{filter:brightness(1.1)}
+  .phctl button:disabled{opacity:.35;cursor:not-allowed}
+  .phctl .pn{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;letter-spacing:.04em}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a> <div class="brand"><div class="mark">C</div> <div><h1>Notre innovation</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Le défi</a> <a href="#s2" class="navlink"><span>02</span>Innover = un besoin</a> <a href="#s3" class="navlink"><span>03</span>Le cahier des charges</a> <a href="#s4" class="navlink"><span>04</span>La démarche de projet</a> <a href="#s5" class="navlink"><span>05</span>Trouver des idées</a> <a href="#s6" class="navlink"><span>06</span>Du besoin au prototype</a> <a href="#s7" class="navlink"><span>07</span>Présenter son projet</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Notre innovation · le défi</span> <h2>Imaginer un objet qui rend service</h2> <div class="twocol"><div><p class="lede">C'est votre grand défi&nbsp;: <b>imaginer</b>, concevoir et <b>présenter</b> un objet innovant qui répond à un vrai besoin.</p> <p>Vous allez réunir tout ce que vous avez appris cette année : besoin, fonctions, énergie, structure, automatisme… au service d'une seule idée.</p> <div class="chips"><span class="chip s">imaginer</span><span class="chip s">concevoir</span><span class="chip s">présenter</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <circle cx="180" cy="80" r="34" fill="none" stroke="#BD8A2A" stroke-width="4"/> <path d="M180 80 L180 52 M180 80 L200 92 M180 80 L160 92" stroke="#BD8A2A" stroke-width="3"/><path d="M164 44 Q180 22 196 44" fill="none" stroke="#B85C2E" stroke-width="4"/><line x1="180" y1="18" x2="180" y2="30" stroke="#B85C2E" stroke-width="3"/> <line x1="150" y1="26" x2="156" y2="36" stroke="#B85C2E" stroke-width="3"/> <line x1="210" y1="26" x2="204" y2="36" stroke="#B85C2E" stroke-width="3"/> <rect x="120" y="140" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2"/> <text x="180" y="162" font-family="JetBrains Mono,monospace" font-size="11" fill="#2c6147" text-anchor="middle">votre idée</text> </svg> <figcaption>Une idée qui naît, puis prend forme.</figcaption> </figure></div> <div class="big-idea"><div class="t">Le défi</div><div class="v">Concevoir un objet innovant, du <b>besoin</b> jusqu'à la <b>présentation</b> devant la classe.</div></div> </section> <section id="s2"> <span class="kicker">02 · Innover</span> <h2>Innover, c'est répondre à un besoin</h2> <p class="lede">Une innovation n'est pas forcément high-tech : c'est une idée qui rend un <b>service utile</b>, mieux qu'avant.</p> <table class="t"> <thead><tr><th>Objet</th><th>Besoin auquel il répond</th></tr></thead> <tbody> <tr><td>Gourde filtrante</td><td>boire une eau saine partout</td></tr> <tr><td>Sac à dos solaire</td><td>recharger son téléphone en marchant</td></tr> <tr><td>Canne connectée</td><td>sécuriser les déplacements d'une personne âgée</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> On part toujours d'un <b>besoin réel</b>, pas d'une technologie que l'on cherche à caser.</div> </section> <section id="s3"> <span class="kicker">03 · Cadrer</span> <h2>Le cahier des charges</h2> <div class="twocol"><div><p class="lede">Avant de construire, on écrit ce que l'objet <b>doit faire</b> et les <b>contraintes</b> à respecter.</p> <div class="chips"><span class="chip">fonctions</span><span class="chip">contraintes</span><span class="chip">critères</span></div></div> <div><div class="eqcard"><div class="eq">« l'objet doit… » &rarr; fonction</div><div class="leg">Ce que l'utilisateur attend.</div></div> <div class="eqcard"><div class="eq">« sans dépasser… » &rarr; contrainte</div><div class="leg">Prix, taille, poids, sécurité…</div></div> <div class="eqcard"><div class="eq">« mesuré par… » &rarr; critère</div><div class="leg">Comment vérifier que c'est réussi.</div></div></div></div> </section> <section id="s4"> <span class="kicker">04 · Innover</span> <h2>La démarche de projet</h2> <p class="lede">Un projet suit un cycle : imaginer, concevoir, réaliser, tester… et recommencer pour améliorer.</p> <figure> <canvas id="cvDemarche" width="640" height="250"></canvas> <div class="cap" id="capDem"><span class="ph">—</span><span id="capDemTxt">…</span></div> </figure> <p>On ne réussit presque jamais du premier coup : on <b>itère</b>, on corrige, on recommence.</p> </section> <section id="s5"> <span class="kicker">05 · Créer</span> <h2>Trouver des idées</h2> <p class="lede">Pour faire naître des idées, on utilise des techniques simples de <b>créativité</b>.</p> <table class="t"> <thead><tr><th>Technique</th><th>Principe</th></tr></thead> <tbody> <tr><td><b>Brainstorming</b></td><td>lancer plein d'idées sans se censurer</td></tr> <tr><td><b>Carte mentale</b></td><td>relier les idées autour du besoin</td></tr> <tr><td><b>Croquis</b></td><td>dessiner vite pour visualiser</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> Au début, aucune idée n'est mauvaise : la sélection vient <b>ensuite</b>.</div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Diverger, puis converger</div> <canvas id="cvidee" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Créativité : produire beaucoup d'idées puis retenir la meilleure"></canvas> <div class="cap"><b id="idphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="idcap">On part d'un besoin.</span></div> </figure> </section> <section id="s6"> <span class="kicker">06 · Réaliser</span> <h2>Du besoin au prototype</h2> <p class="lede">L'idée devient concrète étape par étape, jusqu'à un <b>prototype</b> que l'on peut tester.</p> <figure> <canvas id="cvProto" width="640" height="250"></canvas> <div class="cap" id="capPro"><span class="ph">—</span><span id="capProTxt">…</span></div> </figure> <p>Le prototype n'a pas besoin d'être parfait : il sert à <b>vérifier l'idée</b> et à convaincre.</p> </section> <section id="s7"> <span class="kicker">07 · Communiquer</span> <h2>Présenter son projet</h2> <p class="lede">Un bon projet doit être bien <b>présenté</b>: sans communication, la meilleure idée reste invisible.</p> <div class="chips"><span class="chip">pitch clair</span><span class="chip">visuel</span><span class="chip">prototype</span><span class="chip">démonstration</span></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Expliquer <b>le besoin</b>, montrer <b>la solution</b>, prouver <b>que ça marche</b> : voilà une bonne présentation.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Innover, c'est partir d'un <b>besoin</b>, imaginer une <b>solution</b>, la <b>prototyper</b>, la <b>tester</b> et la <b>présenter</b>.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Innovation</b></td><td>une idée utile qui améliore l'existant</td></tr> <tr><td><b>Cahier des charges</b></td><td>ce que l'objet doit faire, et ses contraintes</td></tr> <tr><td><b>Prototype</b></td><td>une première version pour tester l'idée</td></tr> <tr><td><b>Itérer</b></td><td>améliorer en recommençant plusieurs fois</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_projet.html">Passer aux activités →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a> <div class="brand"><div class="mark">C</div> <div><h1>Notre innovation</h1><p>Cours · Option SI 2de</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="prog"><i id="progBar"></i></div> <div class="links" id="links"><a href="#s1" class="navlink"><span>01</span>Le défi</a> <a href="#s2" class="navlink"><span>02</span>Innover = un besoin</a> <a href="#s3" class="navlink"><span>03</span>Le cahier des charges</a> <a href="#s4" class="navlink"><span>04</span>La démarche de projet</a> <a href="#s5" class="navlink"><span>05</span>Trouver des idées</a> <a href="#s6" class="navlink"><span>06</span>Du besoin au prototype</a> <a href="#s7" class="navlink"><span>07</span>Présenter son projet</a> <a href="#s8" class="navlink"><span>08</span>Synthèse</a></div> </aside> <main class="main"> <section id="s1"> <span class="kicker">Notre innovation · le défi</span> <h2>Imaginer un objet qui rend service</h2> <div class="twocol"><div><p class="lede">C'est votre grand défi&nbsp;: <b>imaginer</b>, concevoir et <b>présenter</b> un objet innovant qui répond à un vrai besoin.</p> <p>Vous allez réunir tout ce que vous avez appris cette année : besoin, fonctions, énergie, structure, automatisme… au service d'une seule idée.</p> <div class="chips"><span class="chip s">imaginer</span><span class="chip s">concevoir</span><span class="chip s">présenter</span></div></div> <figure> <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg"> <circle cx="180" cy="80" r="34" fill="none" stroke="#BD8A2A" stroke-width="4"/> <path d="M180 80 L180 52 M180 80 L200 92 M180 80 L160 92" stroke="#BD8A2A" stroke-width="3"/><path d="M164 44 Q180 22 196 44" fill="none" stroke="#B85C2E" stroke-width="4"/><line x1="180" y1="18" x2="180" y2="30" stroke="#B85C2E" stroke-width="3"/> <line x1="150" y1="26" x2="156" y2="36" stroke="#B85C2E" stroke-width="3"/> <line x1="210" y1="26" x2="204" y2="36" stroke="#B85C2E" stroke-width="3"/> <rect x="120" y="140" width="120" height="34" rx="6" fill="#FFFDF8" stroke="#3D7E5F" stroke-width="2"/> <text x="180" y="162" font-family="JetBrains Mono,monospace" font-size="11" fill="#2c6147" text-anchor="middle">votre idée</text> </svg> <figcaption>Une idée qui naît, puis prend forme.</figcaption> </figure></div> <div class="big-idea"><div class="t">Le défi</div><div class="v">Concevoir un objet innovant, du <b>besoin</b> jusqu'à la <b>présentation</b> devant la classe.</div></div> </section> <section id="s2"> <span class="kicker">02 · Innover</span> <h2>Innover, c'est répondre à un besoin</h2> <p class="lede">Une innovation n'est pas forcément high-tech : c'est une idée qui rend un <b>service utile</b>, mieux qu'avant.</p> <table class="t"> <thead><tr><th>Objet</th><th>Besoin auquel il répond</th></tr></thead> <tbody> <tr><td>Gourde filtrante</td><td>boire une eau saine partout</td></tr> <tr><td>Sac à dos solaire</td><td>recharger son téléphone en marchant</td></tr> <tr><td>Canne connectée</td><td>sécuriser les déplacements d'une personne âgée</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> On part toujours d'un <b>besoin réel</b>, pas d'une technologie que l'on cherche à caser.</div> </section> <section id="s3"> <span class="kicker">03 · Cadrer</span> <h2>Le cahier des charges</h2> <div class="twocol"><div><p class="lede">Avant de construire, on écrit ce que l'objet <b>doit faire</b> et les <b>contraintes</b> à respecter.</p> <div class="chips"><span class="chip">fonctions</span><span class="chip">contraintes</span><span class="chip">critères</span></div></div> <div><div class="eqcard"><div class="eq">« l'objet doit… » &rarr; fonction</div><div class="leg">Ce que l'utilisateur attend.</div></div> <div class="eqcard"><div class="eq">« sans dépasser… » &rarr; contrainte</div><div class="leg">Prix, taille, poids, sécurité…</div></div> <div class="eqcard"><div class="eq">« mesuré par… » &rarr; critère</div><div class="leg">Comment vérifier que c'est réussi.</div></div></div></div> </section> <section id="s4"> <span class="kicker">04 · Innover</span> <h2>La démarche de projet</h2> <p class="lede">Un projet suit un cycle : imaginer, concevoir, réaliser, tester… et recommencer pour améliorer.</p> <figure> <canvas id="cvDemarche" width="640" height="250"></canvas> <div class="cap" id="capDem"><span class="ph">—</span><span id="capDemTxt">…</span></div> </figure> <p>On ne réussit presque jamais du premier coup : on <b>itère</b>, on corrige, on recommence.</p> </section> <section id="s5"> <span class="kicker">05 · Créer</span> <h2>Trouver des idées</h2> <p class="lede">Pour faire naître des idées, on utilise des techniques simples de <b>créativité</b>.</p> <table class="t"> <thead><tr><th>Technique</th><th>Principe</th></tr></thead> <tbody> <tr><td><b>Brainstorming</b></td><td>lancer plein d'idées sans se censurer</td></tr> <tr><td><b>Carte mentale</b></td><td>relier les idées autour du besoin</td></tr> <tr><td><b>Croquis</b></td><td>dessiner vite pour visualiser</td></tr> </tbody> </table> <div class="card"><b>À retenir.</b> Au début, aucune idée n'est mauvaise : la sélection vient <b>ensuite</b>.</div> <figure style="margin:14px 0 0;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:hidden"> <div style="font-weight:700;color:var(--ink);margin-bottom:8px">Diverger, puis converger</div> <canvas id="cvidee" width="900" height="240" style="width:100%;height:auto;display:block" aria-label="Créativité : produire beaucoup d'idées puis retenir la meilleure"></canvas> <div class="cap"><b id="idphase" style="color:var(--steel);font-family:'JetBrains Mono',monospace;font-size:18px">①</b><span id="idcap">On part d'un besoin.</span></div> </figure> </section> <section id="s6"> <span class="kicker">06 · Réaliser</span> <h2>Du besoin au prototype</h2> <p class="lede">L'idée devient concrète étape par étape, jusqu'à un <b>prototype</b> que l'on peut tester.</p> <figure> <canvas id="cvProto" width="640" height="250"></canvas> <div class="cap" id="capPro"><span class="ph">—</span><span id="capProTxt">…</span></div> </figure> <p>Le prototype n'a pas besoin d'être parfait : il sert à <b>vérifier l'idée</b> et à convaincre.</p> </section> <section id="s7"> <span class="kicker">07 · Communiquer</span> <h2>Présenter son projet</h2> <p class="lede">Un bon projet doit être bien <b>présenté</b>: sans communication, la meilleure idée reste invisible.</p> <div class="chips"><span class="chip">pitch clair</span><span class="chip">visuel</span><span class="chip">prototype</span><span class="chip">démonstration</span></div> <div class="big-idea"><div class="t">Idée clé</div><div class="v">Expliquer <b>le besoin</b>, montrer <b>la solution</b>, prouver <b>que ça marche</b> : voilà une bonne présentation.</div></div> </section> <section id="s8"> <span class="kicker">08 · Synthèse</span> <h2>L'essentiel</h2> <div class="big-idea"><div class="t">Ce qu'il faut retenir</div><div class="v">Innover, c'est partir d'un <b>besoin</b>, imaginer une <b>solution</b>, la <b>prototyper</b>, la <b>tester</b> et la <b>présenter</b>.</div></div> <table class="t"> <thead><tr><th>Mot-clé</th><th>Définition courte</th></tr></thead> <tbody> <tr><td><b>Innovation</b></td><td>une idée utile qui améliore l'existant</td></tr> <tr><td><b>Cahier des charges</b></td><td>ce que l'objet doit faire, et ses contraintes</td></tr> <tr><td><b>Prototype</b></td><td>une première version pour tester l'idée</td></tr> <tr><td><b>Itérer</b></td><td>améliorer en recommençant plusieurs fois</td></tr> </tbody> </table> <a class="cta" href="hub_si_2de_projet.html">Passer aux activités →</a> </section> </main></div> <script>
+/* STEPCTL — pilotage manuel des animations dont la phase se déduit d'un
+   compteur de tics (t) : on fige le compteur dans la fenêtre de l'étape,
+   ce qui laisse l'animation vivre à l'intérieur de celle-ci. */
+function STEPCTL(cvId, get, set, bornes, tick){
+  var cv=document.getElementById(cvId); if(!cv){ setInterval(tick,40); return; }
+  var box=cv.closest('figure')||cv.closest('.anim')||cv.parentNode;
+  var cap=box? box.querySelector('.cap') : null;
+  var hote=cap||box;
+  if(!hote||!hote.parentNode){ setInterval(tick,40); return; }
+  var bar=document.createElement('div');
+  bar.className='phctl';
+  bar.innerHTML='<button type="button" data-d="-1">Précédent</button>'+
+                '<button type="button" data-d="1">Suivant</button><span class="pn"></span>';
+  hote.parentNode.insertBefore(bar,hote.nextSibling);
+  var bPrev=bar.querySelector('[data-d="-1"]'), bNext=bar.querySelector('[data-d="1"]');
+  var num=bar.querySelector('.pn'), idx=0, N=bornes.length;
+  function fin(i){ return (i+1<N)? bornes[i+1] : bornes[i]+(bornes[i]-(i>0?bornes[i-1]:0)||60); }
+  function aller(p){
+    idx=Math.max(0,Math.min(N-1,p));
+    set(bornes[idx]); tick();
+    num.textContent='étape '+(idx+1)+' / '+N;
+    bPrev.disabled=(idx===0); bNext.disabled=(idx===N-1);
+  }
+  bar.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) aller(idx+(+b.dataset.d)); });
+  aller(0);
+  setInterval(function(){ tick(); if(get()>=fin(idx)) set(bornes[idx]); },40);
+}
+
+/* ================================================================
+   PHCTL — pilotage manuel des animations de cours.
+   Le contrôleur SONDE l'animation : il fait défiler la variable de
+   phase, lit la légende à chaque pas et en déduit les étapes.
+   Ensuite : boutons Précédent / Suivant, et l'animation continue de
+   tourner EN BOUCLE À L'INTÉRIEUR de l'étape choisie.
+   ================================================================ */
+function PHCTL(cvId, get, set, inc, draw, span){
+  var cv=document.getElementById(cvId); if(!cv) return;
+  var box=cv.closest('figure')||cv.closest('.anim')||cv.parentNode;
+  var cap=box? box.querySelector('.cap') : null;
+  if(!cap){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+
+  /* ---- sondage : on parcourt la variable et on relève les changements de légende ---- */
+  var save=get(), etapes=[], last=null, LIM=span||20, N=Math.ceil(LIM/inc)+2;
+  for(var k=0;k<N;k++){
+    var v=k*inc;
+    set(v); draw();
+    var txt=cap.textContent.replace(/\s+/g,' ').trim();
+    if(txt!==last){ etapes.push({v:v, txt:txt}); last=txt; }
+    if(etapes.length>12) break;
+  }
+  /* une animation cyclique repasse par sa première légende : on coupe là */
+  for(var i=1;i<etapes.length;i++){ if(etapes[i].txt===etapes[0].txt){ etapes=etapes.slice(0,i); break; } }
+  set(save); draw();
+  if(etapes.length<2){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+
+  /* ---- barre de commande ---- */
+  if(!cap.parentNode){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+  var bar=document.createElement('div');
+  bar.className='phctl';
+  bar.innerHTML='<button type="button" data-d="-1">Précédent</button>'+
+                '<button type="button" data-d="1">Suivant</button>'+
+                '<span class="pn"></span>';
+  cap.parentNode.insertBefore(bar,cap.nextSibling);
+  var bPrev=bar.querySelector('[data-d="-1"]'), bNext=bar.querySelector('[data-d="1"]');
+  var num=bar.querySelector('.pn');
+
+  var idx=0;
+  function borne(){ return (idx+1<etapes.length)? etapes[idx+1].v : (span||etapes[etapes.length-1].v+inc*40); }
+  function aller(p){
+    idx=Math.max(0,Math.min(etapes.length-1,p));
+    set(etapes[idx].v); draw();
+    num.textContent='étape '+(idx+1)+' / '+etapes.length;
+    bPrev.disabled=(idx===0); bNext.disabled=(idx===etapes.length-1);
+  }
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    aller(idx+(+b.dataset.d));
+  });
+  aller(0);
+
+  /* ---- l'animation vit à l'intérieur de l'étape courante ---- */
+  setInterval(function(){
+    var v=get()+inc;
+    if(v>=borne()) v=etapes[idx].v;      /* rebouclage dans l'étape */
+    set(v); draw();
+  },50);
+}
+ var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
@@ -144,7 +239,7 @@
  setCap(String(active+1),STEPS[active].cap);
  g.textAlign='left';
  }
- setInterval(function(){ph+=0.05; draw();},50); draw();
+ PHCTL('cvDemarche',function(){return ph;},function(v){ph=v;},0.05,draw,null);
   })();
 
   // ===== Animation : du besoin au prototype =====
@@ -168,7 +263,7 @@
  setCap(String(active+1),CAPS[active]);
  g.textAlign='left';
  }
- setInterval(function(){ph+=0.05; draw();},50); draw();
+ PHCTL('cvProto',function(){return ph;},function(v){ph=v;},0.05,draw,null);
   })();
 </script>
 <script>
@@ -205,7 +300,7 @@
  if(cap) cap.textContent=caps[phase];
  if(ph) ph.textContent=['\u2460','\u2461','\u2462'][phase];
   }
-  setInterval(step,40); step();
+  STEPCTL('cvidee',function(){return T;},function(v){T=v;},[0,2,5.5],step); step();
 })();
 </script>
 </body>

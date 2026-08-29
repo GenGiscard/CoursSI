@@ -1005,10 +1005,12 @@ el('b11').addEventListener('click',function(){
  /* treuil (tambour) */
  g.fillStyle='#39424f'; g.fillRect(cx-34,6,68,26);
  g.strokeStyle='#5b6678'; g.lineWidth=2; g.strokeRect(cx-34,6,68,26);
- g.save(); g.translate(cx,19); g.rotate(y*0.05);
- g.strokeStyle='#7d8798'; g.lineWidth=2;
- for(var s=0;s<4;s++){ g.beginPath(); g.moveTo(0,0); g.lineTo(Math.cos(s*1.57)*9,Math.sin(s*1.57)*9); g.stroke(); }
- g.restore();
+ /* le tambour est vu de c\u00f4t\u00e9 : rotation autour de son axe horizontal */
+  g.strokeStyle='rgba(125,135,152,.7)'; g.lineWidth=1.6;
+  g.beginPath(); g.ellipse(cx,19,5,10,0,0,7); g.stroke();
+  var an2=y*0.05, tx=cx+5*Math.cos(an2), ty=19+10*Math.sin(an2);
+  g.fillStyle=(Math.cos(an2)>0)?'#9aa5b8':'rgba(154,165,184,.35)';
+  g.beginPath(); g.arc(tx,ty,3,0,7); g.fill();
  /* câble vibrant */
  var wob=Math.abs(T-P_PALETTE)>1? Math.sin(t*15)*1.8 : 0;
  g.strokeStyle='#7fd6e8'; g.lineWidth=2.6;

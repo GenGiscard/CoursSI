@@ -90,6 +90,13 @@
   @keyframes auroraA{from{transform:translate(0,0)}to{transform:translate(26vw,20vh)}}
   @keyframes auroraB{from{transform:translate(0,0)}to{transform:translate(-24vw,-16vh)}}
   @media (prefers-reduced-motion:reduce){body::before,body::after{animation:none}}
+  /* ---------- commandes manuelles des animations ---------- */
+  .phctl{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .phctl button{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;background:#2E6A8E;color:#fff;
+      border:none;border-radius:9px;padding:8px 16px;cursor:pointer}
+  .phctl button:hover{filter:brightness(1.1)}
+  .phctl button:disabled{opacity:.35;cursor:not-allowed}
+  .phctl .pn{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;letter-spacing:.04em}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABQCAYAAABGfRh7AAAMsUlEQVR42u2ce3Bc1X3HP+ecu+9dvSXLsnjUZkiMeZqQpIlbexIeNpi4NthYMhYppanBaZnMUEjTB4aGTmLayaMT6kBDMClYxA4QIGATD2SIDQ6JCzgkpjSm02IaLD9Wj13t695z+sfdXcl4Jd1d7drNzN6Z9Whmr3fv+Z7v7/f7fn/nJ4mOT19vOAWXAuJGcFvYsC4Eg0agTvIzGK2RsQhWNmdzqkDIGrBzBiyBMWBOAQjYOSwhxCkBQRRexX9OxUMIEAJJ/aqDAGBNzRhR03AY+6GGgWdM5SAYY9Ba1+zxHCMwjgFH1DArmnHJp0wQDOD3WSglpwKy4uqQMWAFDSJQI0KY/OIdjXGc8kBQSjI4nORfvnQzVy64GNvRKFn99KGBmDDEhKC9FhxwHKRlEd/5Ioe+8zBWQ0NJMCZkgjaG9uYmutpbT5puqFnia2gAbSrLCTnbxhiD42ikktVOVy5ba5gXjeMglMLYduWJUQhRfMkaVImaS6S8GJpKjNV1Qh2EOgh1EOog1EGowEBNqvi0RkrJK/v2s/6r9xMJBd1GhUf0R4zgs0HN6iAMmzJ2RAiwbbpv/wKB07pBa5iGop0WCAUNNpxM8dqbbxOORtCTaPQPKsSkgYMRQy4kSRnjXTUKicllMenMqWdC8UOkJBgOEQkFPLvOQnvNHzKIkECWyQRjqap1pKoCgsmHhtYGrb1ZToEr5402rpMqx6kK3BCoJ8Z6daiDUAehDsL/Q7F0HJrjeg9eE7wEhJhGA9MYt0pog1tiPqjmDAg9vW6zZ+VoDOlsFp/PV5ZOyBmDHZBU2lwTgYCrFOVEmsp9Q/h8kwJRFRCCAT9nzOokGg6VBcKwETToBNqkKavPZAxCKX77rfuRkXB+gaLEbQYhBbmBI8hweEJJPy0QCh3oT14wl/3bvlXsG3q6HAcsiyMPPcLw1sexGhsnbYuXUo3Jfb/yJJqEz0L4/ROyoSpMUFISCvjLj2ch8Fmq4nMXGQ55/65ah0OBemXdX+gET+dkp0rSuWoglH1mWUYlqeuEOgh1EH73FGPZiXGKjO0prUjpSV4YfZKqQ7lJTlhWUW5XetnJJDh6cm1uXMUog4Ha6oRsLkcilXaB8Li7RmuEUqQy2Yoqi3EcZvT14pvRkW+0itLeQUqSb/ySwR+/iAqHSqrGaYHgaHdu4eU39nPdF+8lGgmXJZuHDHxeZviTSJhBxynPQWhN48IF+GfN9HCvQ/xHOyASrh0TcrbDkcFhMjm7LBAGDaSiAhGWFY3rOMmkK7W1KckE42iEkuhUprJxnXLzgc+y8FlWWSBYBqTQ00qMQinXLk9w7iCUKh0qtaoOhZen+6Ems1B1nVAH4RSDIIRAypNshqSs2glUVUDI5nKkUxkspWrvDIXIZ/xUeU2YWoEghMAYw5zuLi6adzaHjsZxHI2lajOQV5hEs+NDhM6bh9XWWmzOnDIQXMkrOPuMLnY/+BW+cusNBIM+jg4NI6Ws3gBonvr20BAyFqPz1pv5vXv/Hl9Ls6fptJqHg6uUDaGAnztuuIbd393I2qWLSIymGBlNTS9EhEAohU6OYnI5WpYtZfY3N9J29RKkVFWrsVUTS+4RgGbOrE4e2vAF1ixZxIZNW3h533/QEA4R8Puwy4hhoRQ6k8HJZAjPP5+OvjVEz/nwmO+oYmKsoot0Z6J1XjBd9rGLWHTx+Wza9hz3Pvw4Bw8dpbkhihQCZxJVKaTEaI09NISvq4sZvdfScsWlrmPW2mVHlees5VQq0CmzmSmFQEmJozU+S/Hnq5fyykMbWXftFaQzWYaTo6VDJL84J5nEaE3rqhXM/ua9tF5xKcIwNpJT7u7rqU+g5GQABAK+4oLKbZooKTGA42hmdbRx31/dwo777mLBRedwZHCYbM52q0g+7k02i50YIXLJxZzxT/cw808/i68x5lpfQfkzSYWmjZTgs5jMoanQmedtKNWLkFLym3f/lzndM5nT3YkQAtvRCCk8nxW5n+OWUW0MZ87s4Ialn6J7RhtvvHWAgYFjfDKk+Eg6gT1rFl3rP0fnjWvxt7QU2+migsUbbVxzJSVDP/s5Rx7b5s43fZBFxiADfkTzwh4zEa2TqTRCCq6/chF/c9MqTu/sOK6PUO6ltUYIiRBwND7EXz+4jY5du7hjxWX4r1mOLxw6fgfLNXGFhAmk3z3IwMP9jOzajVAK4T+xs2S0RjVEJgaBPBswhmPDCbraW7itbzm3rLwSv8/C0bri6XfH0aj8rw4kE0ki0chY/FaS9AqLEwInleLwD37IsSeewYwkkLHohCdQRRBaFvVMGe6WUmRyOYaTo3z83A9x55/1sPgT890+n6NRsvyDlILtllIWs37ZSc8Yt6GSB3Twpy9z+HtbyLzz36hoBGFZk0prozWqMYpo+sPVxrIUjqOn1AJKSkZGU2itWXX5Au783GrOOq1rWiFijKlMTI1jTeqd/+LQ5n4Se15F+ixkMD9U6iGZy0gQ0f6pNeboUILmhigw9QiezH9xfDhBW1OUW3s/w629nyESDBb/b00d5TjW2CMjHP7+4ww+sx09mkZFI95a+fkwd4ZH8J/Whdrz/NMb4iNJ9u4/gNaaYMA/abuvQONoKEjWdnh2115+tOsXdLY2M3f2aQghcBydf84qgjEuYRohiO98gfc2fp3Ey68i/QFkIDD1SHFBho+m0LZN05JLmfkX6xAmnxGeeulV7v72FvbuP0BjNIzfN7XMLYRIIpUmZ9ssW/hRNqzr5dw5Z5yQAKe9+3kGJt96m0ObH2F07+vIQH7xHuS4UAqdzaJTKULnzaOjbzWxCy9w33McbcBNUKlMln/uf5qv/dtTDMQHaW6IIfLxPjm7BAJBfCRJQzTE+pVLuG3tChpjEXT+1+ErCpFxi8/GBzm8ZStD23dislmX+tor9TXOSAKro4PW1Stou2qxW0oLMrzAhPGJ7Z333ufuB/rp3/FTMNAQCXtSjZaS5GzN4EiCubO7+dubrqNn8cIiK6TXKjKO+lobjj23gyP927DfH0DFoiDk1LMJBRmeSIJP0XTFZbT3rMTf2nwCwEUQCt/taI2Vp/DOn73GnZv6eWXfW0TDIYIenKAAlFKMpjOkMlkWf2I+d93cy0fmnuUtRBxdLHmJfW9yaPOjpPa9iQqFEH6/d+pnMuhMhsj8C2nv6xlzoPmziOPuNyW2t+AElZTYjsOmbc+xcbN3J1hQnFK6IRIKBLhp+WV88Y+vpaO5Mb/RulhpPrgzmYHDDDzyGMM7fwLaoCJhTyWv4ECdRAL/rJm09q6k5fLjHWgpLVIShLFNGQuR9waOcM93trL5mRewbU1j1FuIKCVxHE18OMns7hl86caV3LjsUreKaO3OMuZjV9s2R556lmNbn8A+egwVjboP7YX6QuAkk4hggKarFtNx3TVYDTFPMnxSEAqHJG7f0P2Q3a//mr/b9Cgv/vyXREJBQgG/p2aJpRSpTIZkKsOiS87j7nW9LLjwnOL7I794jUObHyG9/21UJIzw+aamvgAhFTqdRudyRD92CR19PYTPmn2Cl5j0Y4xHj1xwgq5FNnz3yZ38w4NbOXDwfZobosUd91JShxJJLCm5Yfnl3L7kD/Bt30H8hZeQQiILJ8dTUb/QdE0mCZx5Ou3Xr6Z54YITBJUnt2vKbBSMd4KH40N89aFt3P/E86TTORpjYYx2wZqq1yC05nAixe1Nis/7bIZCEZQX6ud3VicSyGiE5mVX0XbtH2GF80OdhinPHqcNQiknuHf/b7hz06M8t/vfCQX8hIMBHO1MupkKGBaS20KaW8KSuKMnP5rPlzydSmMcm9iC36ejr5fg6d3Tc6DTAaEYItoUwdiy/SW+/K/9/PqdgzTFoljWxCHi/p0luD1sWB8SxM3EE85CKUwuh5McJXD2HNr7emj6+Ecron7VQRgfIuR7C0OJJP/4vSe57/vPMpRI0hyLYkoYM08g5I2OTiSQTY20XLOMtuVXo/z+qiy+qiCUCpFfHfgfNnx7C0/+ZA8+SxENhY4rqZOCUKD+6CgGQWzRAjrXrsY/s3Pa1K85CGMdalMsqU++uIe7HniM1986QGM0gt9nYedHc0qBcJzRmfdh2vvW0DD/gposvmYgjIWIoWDMRtMZvvHoU3xjy9Mcjg+7JRU46ugxEIREGeManfZWWletoPXqJUilqkr9kwpCKdV54N3fctf9rjGzpMAOhfjLfHU4mkiilKLp8k/TvmYV/rbWmu7+SQWh2ArUY/ni+T2vcc8D/by07z+5o9nHeitH+vxzmbm2h+i8uRMand9pEEoaM9thw8NPYG3fwR19y/EvvdJNjE5+JvEkTsD/H/USMayikj2kAAAAAElFTkSuQmCC"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
@@ -106,7 +113,95 @@ nom = "barriere"<span class="cm"># une chaîne de caractères (str)</span></pre>
 <span class="kw">elif</span> etat == "VERT" <span class="kw">and</span> temps > 25:
  etat = "ORANGE"
 <span class="kw">elif</span> etat == "ORANGE" <span class="kw">and</span> temps > 3:
- etat = "ROUGE"</pre> <div class="card"><p style="margin:0">On retrouve exactement le diagramme du feu tricolore&nbsp;: trois états, trois transitions, chacune traduite par une condition.</p></div> </section> <section id="s8" style="border-bottom:none"> <span class="kicker">08 · L'essentiel</span> <h2>Synthèse</h2> <div class="eqcard"><div class="eq">Variables (int, float, bool, str) · affectation avec =</div></div> <div class="eqcard"><div class="eq">Conditions : if / else&nbsp;&nbsp;—&nbsp;&nbsp;Boucles : for / while</div></div> <div class="big-idea"><div class="t">Système à états</div><div class="v">Un nombre limité d'<b>états</b>, des <b>transitions</b> sur événement&nbsp;: chaque transition devient une <b>condition</b> dans le code.</div></div> <div class="card"><h3 style="margin-top:0">Algorithme</h3><p style="margin:0">Entrées (capteurs) → Traitement (programme) → Sorties (actionneurs).</p></div> <a class="cta" href="hub_si_prog.html"> Passer au TP « Algorithmes &amp; états » →</a> </section> </main></div> <script> var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
+ etat = "ROUGE"</pre> <div class="card"><p style="margin:0">On retrouve exactement le diagramme du feu tricolore&nbsp;: trois états, trois transitions, chacune traduite par une condition.</p></div> </section> <section id="s8" style="border-bottom:none"> <span class="kicker">08 · L'essentiel</span> <h2>Synthèse</h2> <div class="eqcard"><div class="eq">Variables (int, float, bool, str) · affectation avec =</div></div> <div class="eqcard"><div class="eq">Conditions : if / else&nbsp;&nbsp;—&nbsp;&nbsp;Boucles : for / while</div></div> <div class="big-idea"><div class="t">Système à états</div><div class="v">Un nombre limité d'<b>états</b>, des <b>transitions</b> sur événement&nbsp;: chaque transition devient une <b>condition</b> dans le code.</div></div> <div class="card"><h3 style="margin-top:0">Algorithme</h3><p style="margin:0">Entrées (capteurs) → Traitement (programme) → Sorties (actionneurs).</p></div> <a class="cta" href="hub_si_prog.html"> Passer au TP « Algorithmes &amp; états » →</a> </section> </main></div> <script>
+/* ================================================================
+   PHCTL — pilotage manuel des animations de cours.
+   Le contrôleur SONDE l'animation : il fait défiler la variable de
+   phase, lit la légende à chaque pas et en déduit les étapes.
+   Ensuite : boutons Précédent / Suivant, et l'animation continue de
+   tourner EN BOUCLE À L'INTÉRIEUR de l'étape choisie.
+   ================================================================ */
+function PHCTL(cvId, get, set, inc, draw, span){
+  var cv=document.getElementById(cvId); if(!cv) return;
+  var box=cv.closest('figure')||cv.closest('.anim')||cv.parentNode;
+  var cap=box? box.querySelector('.cap') : null;
+  if(!cap){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+
+  /* ---- sondage : on parcourt la variable et on relève les changements de légende ---- */
+  var save=get(), etapes=[], last=null, LIM=span||20, N=Math.ceil(LIM/inc)+2;
+  for(var k=0;k<N;k++){
+    var v=k*inc;
+    set(v); draw();
+    var txt=cap.textContent.replace(/\s+/g,' ').trim();
+    if(txt!==last){ etapes.push({v:v, txt:txt}); last=txt; }
+    if(etapes.length>12) break;
+  }
+  /* une animation cyclique repasse par sa première légende : on coupe là */
+  for(var i=1;i<etapes.length;i++){ if(etapes[i].txt===etapes[0].txt){ etapes=etapes.slice(0,i); break; } }
+  set(save); draw();
+  if(etapes.length<2){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+
+  /* ---- barre de commande ---- */
+  if(!cap.parentNode){ setInterval(function(){ set(get()+inc); draw(); },50); draw(); return; }
+  var bar=document.createElement('div');
+  bar.className='phctl';
+  bar.innerHTML='<button type="button" data-d="-1">Précédent</button>'+
+                '<button type="button" data-d="1">Suivant</button>'+
+                '<span class="pn"></span>';
+  cap.parentNode.insertBefore(bar,cap.nextSibling);
+  var bPrev=bar.querySelector('[data-d="-1"]'), bNext=bar.querySelector('[data-d="1"]');
+  var num=bar.querySelector('.pn');
+
+  var idx=0;
+  function borne(){ return (idx+1<etapes.length)? etapes[idx+1].v : (span||etapes[etapes.length-1].v+inc*40); }
+  function aller(p){
+    idx=Math.max(0,Math.min(etapes.length-1,p));
+    set(etapes[idx].v); draw();
+    num.textContent='étape '+(idx+1)+' / '+etapes.length;
+    bPrev.disabled=(idx===0); bNext.disabled=(idx===etapes.length-1);
+  }
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    aller(idx+(+b.dataset.d));
+  });
+  aller(0);
+
+  /* ---- l'animation vit à l'intérieur de l'étape courante ---- */
+  setInterval(function(){
+    var v=get()+inc;
+    if(v>=borne()) v=etapes[idx].v;      /* rebouclage dans l'étape */
+    set(v); draw();
+  },50);
+}
+
+/* STEPCTL — pilotage manuel des animations dont la phase se déduit d'un
+   compteur de tics (t) : on fige le compteur dans la fenêtre de l'étape,
+   ce qui laisse l'animation vivre à l'intérieur de celle-ci. */
+function STEPCTL(cvId, get, set, bornes, tick){
+  var cv=document.getElementById(cvId); if(!cv){ setInterval(tick,40); return; }
+  var box=cv.closest('figure')||cv.closest('.anim')||cv.parentNode;
+  var cap=box? box.querySelector('.cap') : null;
+  var hote=cap||box;
+  if(!hote||!hote.parentNode){ setInterval(tick,40); return; }
+  var bar=document.createElement('div');
+  bar.className='phctl';
+  bar.innerHTML='<button type="button" data-d="-1">Précédent</button>'+
+                '<button type="button" data-d="1">Suivant</button><span class="pn"></span>';
+  hote.parentNode.insertBefore(bar,hote.nextSibling);
+  var bPrev=bar.querySelector('[data-d="-1"]'), bNext=bar.querySelector('[data-d="1"]');
+  var num=bar.querySelector('.pn'), idx=0, N=bornes.length;
+  function fin(i){ return (i+1<N)? bornes[i+1] : bornes[i]+(bornes[i]-(i>0?bornes[i-1]:0)||60); }
+  function aller(p){
+    idx=Math.max(0,Math.min(N-1,p));
+    set(bornes[idx]); tick();
+    num.textContent='étape '+(idx+1)+' / '+N;
+    bPrev.disabled=(idx===0); bNext.disabled=(idx===N-1);
+  }
+  bar.addEventListener('click',function(e){ var b=e.target.closest('button'); if(b) aller(idx+(+b.dataset.d)); });
+  aller(0);
+  setInterval(function(){ tick(); if(get()>=fin(idx)) set(bornes[idx]); },40);
+}
+ var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink')), map={};
   links.forEach(function(l){var id=l.getAttribute('href').slice(1);if(document.getElementById(id)){map[id]=l;l.addEventListener('click',function(){nav.classList.remove('open');});}});
@@ -153,7 +248,7 @@ nom = "barriere"<span class="cm"># une chaîne de caractères (str)</span></pre>
  else setCap('2',cond?'Vrai → branche du haut : le ventilateur passe à ON.':'Faux → branche du bas : le ventilateur reste à OFF.');
  g.textAlign='left';
  }
- setInterval(function(){p+=0.01; if(p>=1){p=0; v=(v===30?18:30);} draw();},40); draw();
+ PHCTL('cvCond',function(){return p;},function(x){p=x;},0.01,draw,1); draw();
   })();
 
   // ===== Animation : systèmes à états =====
@@ -192,7 +287,7 @@ nom = "barriere"<span class="cm"># une chaîne de caractères (str)</span></pre>
  setCap(String(active+1),'État actuel : '+S[active].lab+' — après '+S[active].tr+', transition vers '+S[nxt].lab+'.');
  g.textAlign='left';
  }
- setInterval(function(){fr++; if(fr%55===0){active=(active+1)%3;} draw();},40); draw();
+ STEPCTL('cvStates',function(){return active;},function(v){active=v;},[0,1,2],function(){fr++; draw();}); draw();
   })();
 </script>
 <script>
@@ -238,7 +333,7 @@ nom = "barriere"<span class="cm"># une chaîne de caractères (str)</span></pre>
  if(cap) cap.textContent=caps[st];
  if(ph) ph.textContent=ind[st];
   }
-  setInterval(step,40); step();
+  STEPCTL('cvloop',function(){return p;},function(v){p=v;},[0,0.34,0.67],step); step();
 })();
 </script>
 </body>

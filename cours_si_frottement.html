@@ -224,7 +224,7 @@ function arrow(g,x1,y1,x2,y2,col,w){
  g.beginPath(); g.rect(cx-30,cy-R-14-gap,60,14); g.fill(); g.stroke();
  g.beginPath(); g.rect(cx-30,cy-R+ (phase===0? gap:0),60,14); g.fill(); g.stroke();
  g.fillStyle='#5C544B'; g.font='12px "JetBrains Mono",monospace'; g.textAlign='center';
- g.fillText('plaquettes',cx,cy-R-34-gap);
+ g.fillText('plaquettes',cx,Math.max(14,cy-R-34-gap));
  if(phase>=1){
  arrow2(cx,cy-R-42,cx,cy-R-16,'#3D7E5F'); g.fillStyle='#3D7E5F'; g.font='700 14px "JetBrains Mono",monospace'; g.fillText('N',cx+16,cy-R-26);
  arrow2(cx+44,cy-R+7,cx-44,cy-R+7,'#C0492E'); g.fillStyle='#C0492E'; g.fillText('T = µ·N',cx-80,cy-R+2);
