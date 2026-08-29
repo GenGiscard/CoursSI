@@ -107,26 +107,6 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Puissance, couple, vitesse<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI · Grandeurs mécaniques</div> <h1>Puissance, couple, vitesse</h1> <p class="lede">Perceuse, vélo électrique, treuil de chantier : sept machines à ausculter avec trois formules — ω = 2πN/60, P = C·ω, v = R·ω. La calculatrice t'attend en bas à droite.</p></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> La perceuse</h2> <p class="task">Le mandrin tourne à N = 1500 tr/min et délivre un couple C = 2 N·m.</p> <div class="schema"><svg viewBox="0 0 560 170" aria-label="Perceuse : mandrin et flèche de couple"> <rect x="60" y="52" width="200" height="66" rx="16" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/> <rect x="118" y="118" width="46" height="34" rx="8" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/> <rect x="260" y="68" width="46" height="34" rx="6" fill="#f3ead6" stroke="#BD8A2A" stroke-width="2.5"/> <path d="M306 85 h74" stroke="#5C544B" stroke-width="7" stroke-linecap="round"/><path d="M380 85 l30 0" stroke="#5C544B" stroke-width="3.5" stroke-dasharray="6 5"/><path d="M352 46 a38 38 0 1 1 -38 39" fill="none" stroke="#C0492E" stroke-width="4"/><path d="M352 46 l12 -9 M352 46 l-3 14" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/><text x="392" y="42" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">C = 2 N·m</text> <text x="392" y="126" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">N = 1500 tr/min</text> <text x="96" y="90" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">moteur</text> </svg></div> <div class="row"><span>a) Vitesse angulaire du mandrin : ω =</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">rad/s (arrondi entier)</span></div> <div class="row"><span>b) Puissance délivrée : P =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>a)</b> ω = 2π×1500/60 = 2π×25 ≈ <b>157 rad/s</b>.<br><b>b)</b> P = C·ω = 2 × 157 ≈ <b>314 W</b>. Toujours convertir les tr/min en rad/s avant P = C·ω !</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> Le vélo électrique</h2> <p class="task">En France, un VAE est limité à P = 250 W. Le moteur de roue tourne à ω = 25 rad/s à pleine puissance.</p> <div class="schema"><svg viewBox="0 0 560 180" aria-label="Vélo électrique : roue motorisée"> <circle cx="150" cy="110" r="56" fill="none" stroke="#2A2622" stroke-width="4"/> <circle cx="390" cy="110" r="56" fill="none" stroke="#2A2622" stroke-width="4"/> <circle cx="390" cy="110" r="24" fill="#f3ead6" stroke="#BD8A2A" stroke-width="3"/> <path d="M150 110 L246 46 L330 96 M246 46 L262 110 M150 110 L262 110 L390 110 M262 110 L246 46" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linecap="round"/><path d="M240 34 l14 -12 M320 88 l22 -10" stroke="#2E6A8E" stroke-width="4" stroke-linecap="round"/><path d="M424 76 a48 48 0 0 1 8 52" fill="none" stroke="#C0492E" stroke-width="4"/><path d="M432 128 l8 -12 M432 128 l-13 -4" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/><text x="452" y="102" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">ω = 25 rad/s</text> <text x="352" y="118" font-family="JetBrains Mono" font-size="11" fill="#8a6313">moteur</text> </svg></div> <div class="row"><span>a) Couple délivré par le moteur : C =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>a)</b> C = P/ω = 250/25 = <b>10 N·m</b>.<br><b>b)</b> Un moteur débridé à 500 W au même régime doublerait le couple (20 N·m)… mais le vélo ne serait <b>plus homologué</b> : au-delà de 250 W, ce n'est plus un vélo mais un cyclomoteur (immatriculation, assurance, casque).</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> Le banc moteur</h2> <p class="task">Mission d'essai : le frein du banc impose un couple C = 3 N·m constant. <b>Règle le régime N</b> pour obtenir exactement <b>P = 300 W</b>, puis relève tes mesures.</p> <div class="schema"><canvas id="cvBanc" width="560" height="210" aria-label="Banc moteur : jauge de puissance"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">N =</span> <input type="range" id="nSlider" min="0" max="2000" step="5" value="0"> <span class="val" id="nVal">0 tr/min</span></div></div> <div class="row"><span>a) Quelle vitesse ω donne P = 300 W ? ω =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="row"><span>b) À quel régime N cela correspond-il ? N ≈</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">tr/min (±20)</span></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>a)</b> ω = P/C = 300/3 = <b>100 rad/s</b>.<br><b>b)</b> N = 60×100/(2π) ≈ <b>955 tr/min</b>. Le banc devait afficher «  objectif atteint » autour de cette valeur !</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> Le treuil de chantier</h2> <p class="task">Un treuil enroule son câble sur un tambour de rayon R = 0,2 m. Il soulève une charge de F = 1000 N, tambour tournant à ω = 2 rad/s.</p> <div class="schema"><svg viewBox="0 0 560 210" aria-label="Treuil : tambour, câble et charge"> <rect x="120" y="30" width="180" height="24" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/> <circle cx="210" cy="100" r="46" fill="#f3ead6" stroke="#BD8A2A" stroke-width="3"/> <circle cx="210" cy="100" r="8" fill="#8a6313"/> <path d="M210 54 v-0" stroke="#5C544B"/><path d="M256 100 a46 46 0 0 1 -18 37" fill="none" stroke="#C0492E" stroke-width="4"/><path d="M238 137 l14 -2 M238 137 l4 -13" stroke="#C0492E" stroke-width="4" stroke-linecap="round"/><text x="268" y="146" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">ω = 2 rad/s</text> <path d="M210 100 L242 68" stroke="#5C544B" stroke-width="2" stroke-dasharray="4 4"/><text x="238" y="60" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#5C544B">R = 0,2 m</text> <path d="M164 100 v78" stroke="#5C544B" stroke-width="3"/><rect x="140" y="178" width="48" height="26" rx="4" fill="#e9e2d2" stroke="#5C544B" stroke-width="2"/> <path d="M164 158 v-4" stroke="#5C544B" stroke-width="3"/><path d="M164 214 v-4" stroke="#C0492E" stroke-width="4"/><path d="M154 236 h20 M164 210 v26 M164 236 l-7 -9 M164 236 l7 -9" transform="translate(0,-26)" stroke="#C0492E" stroke-width="3.5" stroke-linecap="round" fill="none"/><text x="196" y="196" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#C0492E">F = 1000 N</text> </svg></div> <div class="row"><span>a) Couple sur le tambour : C = F·R =</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div> <div class="row"><span>b) Puissance du treuil : P = C·ω =</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><span>c) Vitesse de montée de la charge : v = R·ω =</span><input class="numin" id="dC" inputmode="decimal" placeholder="?"><span class="unit">m/s</span></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol"><b>a)</b> C = F·R = 1000 × 0,2 = <b>200 N·m</b>.<br><b>b)</b> P = C·ω = 200 × 2 = <b>400 W</b>.<br><b>c)</b> v = R·ω = 0,2 × 2 = <b>0,4 m/s</b>. Vérification : P = F·v = 1000 × 0,4 = 400 W — les deux chemins donnent la même puissance !</div> </section> <section class="exo-card" id="e"> <h2><span class="num">E</span> Le réducteur</h2> <p class="task">Un réducteur de rapport 1/3 reçoit ω₁ = 300 rad/s et C₁ = 1 N·m.</p> <div class="schema"><svg viewBox="0 0 560 190" aria-label="Réducteur : deux engrenages"> <circle cx="180" cy="95" r="38" fill="#e7eef2" stroke="#2E6A8E" stroke-width="3" stroke-dasharray="7 5"/> <circle cx="180" cy="95" r="7" fill="#2E6A8E"/> <circle cx="316" cy="95" r="98" fill="#eef6f0" stroke="#3D7E5F" stroke-width="3" stroke-dasharray="7 5"/> <circle cx="316" cy="95" r="7" fill="#3D7E5F"/> <text x="180" y="42" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">ENTRÉE</text> <text x="120" y="160" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">ω₁ = 300 rad/s</text> <text x="120" y="178" font-family="JetBrains Mono" font-size="12" fill="#2E6A8E">C₁ = 1 N·m</text> <text x="440" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#3D7E5F">SORTIE</text> <text x="428" y="160" font-family="JetBrains Mono" font-size="12" fill="#3D7E5F">ω₂ = ?</text> <text x="428" y="178" font-family="JetBrains Mono" font-size="12" fill="#3D7E5F">C₂ = ?</text> <text x="252" y="18" font-family="JetBrains Mono" font-size="12" fill="#8a6313">rapport 1/3</text> </svg></div> <div class="row"><span>a) Vitesse de sortie : ω₂ =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="row"><span>b) Couple de sortie (η = 100 %) : C₂ =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div> <div class="row"><span>c) En réalité η = 0,9. Puissance de sortie : P₂ = η·P₁ =</span><input class="numin" id="eC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>a)</b> ω₂ = 300/3 = <b>100 rad/s</b>.<br><b>b)</b> Sans pertes, P se conserve : C₂ = C₁·ω₁/ω₂ = 300/100 = <b>3 N·m</b> (vitesse ÷3 → couple ×3).<br><b>c)</b> P₁ = 1×300 = 300 W → P₂ = 0,9 × 300 = <b>270 W</b> (le reste part en chaleur dans les dentures).</div> </section> <section class="exo-card" id="f"> <h2><span class="num">F</span> Le podium des machines</h2> <p class="task">Récapitule tes mesures des exercices A, B et D… et remets chaque machine à sa place !</p> <div class="match" id="fMatch"></div> <div class="match" id="f2Match" style="margin-top:14px"></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol"><b>Podium :</b> treuil (400 W) ·  perceuse (314 W) ·  vélo (250 W).<br><b>Besoins :</b> la visseuse a besoin de <b>couple</b> (serrer fort, tourner lentement) ; le ventilateur de <b>vitesse</b> (brasser l'air, effort minime) ; le treuil de <b>couple</b> énorme (soulever) — d'où son réducteur intégré.</div> </section> <section class="exo-card" id="g"> <h2><span class="num">★</span> L'énergie de la pizza</h2> <p class="task">Le four du foyer (P = 2000 W) chauffe ta part de pizza pendant 90 s.</p> <div class="row"><span>Énergie consommée : E = P·t =</span><input class="numin" id="gA" inputmode="decimal" placeholder="?"><span class="unit">J</span></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol">E = P·t = 2000 × 90 = <b>180 000 J</b> (180 kJ). La puissance est un débit (des joules par seconde) : le compteur du foyer, lui, facture les joules accumulés.</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
@@ -445,20 +425,12 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_grandeurs', TP_TITRE='TP — Puissance, couple, vitesse';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -514,21 +486,27 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -541,109 +519,7 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
-(function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
 
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
-  }
-  maj();
-
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
-  });
-})();
 </script>
 </body>
 </html>

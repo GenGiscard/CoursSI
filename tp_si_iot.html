@@ -110,26 +110,6 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Objets connectés (IoT)<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI · Objets connectés</div> <h1>La serre connectée du lycée</h1> <p class="lede">Le club jardin veut une serre qui se surveille toute seule : à toi de disséquer le capteur, d'écrire sa trame, de planifier son énergie pour tenir tout le trimestre, de choisir ses réseaux… et de programmer l'arrosage. La calculatrice t'attend en bas à droite.</p></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> L'anatomie de l'objet connecté</h2> <p class="task">On a ouvert le boîtier du capteur de la serre : quatre organes. Associe chacun à son rôle.</p> <div class="schema"><svg viewBox="0 0 640 190" aria-label="Vue éclatée du capteur connecté : capteur, microcontrôleur, radio, batterie"> <rect x="30" y="40" width="580" height="110" rx="14" fill="none" stroke="#5C544B" stroke-width="2" stroke-dasharray="8 6"/> <text x="320" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="12" font-weight="700" fill="#5C544B">le boîtier, ouvert</text> <g font-family="JetBrains Mono" font-size="11" font-weight="700" text-anchor="middle"> <rect x="52" y="62" width="118" height="66" rx="9" fill="#eef6f0" stroke="#3D7E5F" stroke-width="2.5"/> <text x="111" y="90" fill="#3D7E5F"> capteur</text> <text x="111" y="108" fill="#3D7E5F">temp/hum</text> <rect x="196" y="62" width="118" height="66" rx="9" fill="#e7eef2" stroke="#2E6A8E" stroke-width="2.5"/> <text x="255" y="90" fill="#2E6A8E"> micro-</text> <text x="255" y="108" fill="#2E6A8E">contrôleur</text> <rect x="340" y="62" width="118" height="66" rx="9" fill="#f6eef4" stroke="#8A5A7A" stroke-width="2.5"/> <text x="399" y="90" fill="#8A5A7A"> module</text> <text x="399" y="108" fill="#8A5A7A">radio</text> <rect x="484" y="62" width="104" height="66" rx="9" fill="#f6f1e6" stroke="#BD8A2A" stroke-width="2.5"/> <text x="536" y="90" fill="#8a6313"> batterie</text> <text x="536" y="108" fill="#8a6313">3000 mAh</text> </g> </svg></div> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol">Le <b>capteur</b> traduit la grandeur physique en signal électrique · le <b>microcontrôleur</b> lit, met en forme et décide · le <b>module radio</b> expédie la trame sur le réseau. Et la batterie nourrit tout ce petit monde — tu vas t’en occuper à l’exercice C.</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> Le constructeur de trame</h2> <p class="task">Ce matin la serre n°2 affiche 21,5 °C et 65 % d'humidité. Complète la trame JSON que le capteur doit envoyer.</p> <div class="json"><span>{</span> <span class="k2">"serre"</span><span>:</span><select id="bS1"><option>?</option><option>2</option><option>65</option><option>21.5</option></select><span>,</span> <span class="k2">"temp"</span><span>:</span><select id="bS2"><option>?</option><option>2</option><option>65</option><option>21.5</option></select><span>,</span> <span class="k2">"hum"</span><span>:</span><select id="bS3"><option>?</option><option>2</option><option>65</option><option>21.5</option></select> <span>}</span></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol">{"serre": <b>2</b>, "temp": <b>21.5</b>, "hum": <b>65</b>} — chaque valeur derrière SA clé. Le JSON organise tout en <b>paires clé : valeur</b>, lisibles autant par le cloud que par toi.</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> Le planificateur d'énergie</h2> <p class="task">Mission : la serre doit mesurer <b>au moins 4 fois par heure</b> ET tenir <b>au moins 60 jours</b> sur sa batterie de 3000 mAh. Consommation : I = 1 + 0,25 × n (mA, avec n mesures/heure). <b>Trouve le réglage qui satisfait les DEUX contraintes</b>, puis relève tes valeurs.</p> <div class="schema"><canvas id="cvNrj" width="640" height="250" aria-label="Serre, cadence de mesure et autonomie calculée"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">n =</span> <input type="range" id="nSlider" min="1" max="60" step="1" value="12"> <span class="val" id="nVal">12 mesures/h</span></div></div> <div class="row"><span>a) Au réglage gagnant : I = 1 + 0,25 × 4 =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">mA</span></div> <div class="row"><span>b) Autonomie : 3000 / 2 =</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">h</span></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>a)</b> I = 1 + 0,25×4 = <b>2 mA</b>.<br><b>b)</b> 3000/2 = <b>1500 h</b> ≈ 62,5 jours ✓. Le seul réglage qui coche les deux cases est n = 4 : une mesure de plus par heure et l’autonomie tombait sous les 60 jours. Concevoir un objet connecté, c’est arbitrer données ↔ énergie.</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> Le match des réseaux</h2> <p class="task">Trois profils très différents. Compare-les sur le schéma, puis affecte le bon réseau à chaque objet du jardin.</p> <div class="schema"><svg viewBox="0 0 640 210" aria-label="Comparatif portée, débit, consommation : WiFi, Bluetooth, LoRa"> <g font-family="JetBrains Mono" font-size="11.5" font-weight="700"> <text x="30" y="52" fill="#5C544B">portée</text> <text x="30" y="102" fill="#5C544B">débit</text> <text x="30" y="152" fill="#5C544B">conso</text> <text x="196" y="26" fill="#2E6A8E" text-anchor="middle">WiFi</text> <text x="376" y="26" fill="#8A5A7A" text-anchor="middle">Bluetooth</text> <text x="556" y="26" fill="#3D7E5F" text-anchor="middle">LoRa</text> </g> <g fill="#2E6A8E"><rect x="126" y="40" width="60" height="14" rx="4"/><rect x="126" y="90" width="140" height="14" rx="4"/><rect x="126" y="140" width="130" height="14" rx="4"/></g> <g fill="#8A5A7A"><rect x="306" y="40" width="26" height="14" rx="4"/><rect x="306" y="90" width="70" height="14" rx="4"/><rect x="306" y="140" width="44" height="14" rx="4"/></g> <g fill="#3D7E5F"><rect x="486" y="40" width="140" height="14" rx="4"/><rect x="486" y="90" width="14" height="14" rx="4"/><rect x="486" y="140" width="10" height="14" rx="4"/></g> <text x="320" y="196" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#5C544B">LoRa : des kilomètres avec trois miettes d'énergie… mais de tout petits messages</text> </svg></div> <div class="match" id="dMatch"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol">Caméra + images = débit → <b>WiFi</b> (le routeur est à 10 m) · capteur au fond du parc, loin et sobre → <b>LoRa</b> · casque du jardinier → <b>Bluetooth</b>. Le bon réseau = celui du BESOIN, jamais « le plus puissant ».</div> </section> <section class="exo-card" id="e"> <h2><span class="num">E</span> Le volume de données</h2> <p class="task">La serre envoie une trame de 40 octets toutes les 15 minutes, jour et nuit.</p> <div class="row"><span>a) Trames par jour : 24 × 4 =</span><input class="numin" id="eA" inputmode="decimal" placeholder="?"><span class="unit">trames</span></div> <div class="row"><span>b) Volume quotidien : 96 × 40 =</span><input class="numin" id="eB" inputmode="decimal" placeholder="?"><span class="unit">octets</span></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>a)</b> 4 trames/heure × 24 h = <b>96 trames</b>. <b>b)</b> 96 × 40 = <b>3840 octets</b> ≈ 3,8 ko par jour — moins qu’une seule photo ! Les objets connectés bien conçus sont d’une sobriété redoutable.</div> </section> <section class="exo-card" id="f"> <h2><span class="num">F</span> La serre sous clé</h2> <p class="task">Un objet connecté est une porte d'entrée sur le réseau du lycée. Associe chaque geste de sécurité à ce qu'il protège.</p> <div class="match" id="fMatch"></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol">Changer le <b>mot de passe par défaut</b> (admin/admin est dans tous les dictionnaires de pirates) · <b>mettre à jour le firmware</b> pour boucher les failles connues · <b>chiffrer</b> les trames : interceptées, elles restent illisibles. Trois gestes, trois murailles.</div> </section> <section class="exo-card" id="g"> <h2><span class="num">★</span> L'algorithme d'arrosage</h2> <p class="task">La serre devient autonome : « SI humidité &lt; 40 % ALORS ouvrir la vanne pendant 30 s ». La vanne débite 2 L/min ; en plein été, le sol repasse sous 40 % six fois par jour.</p> <div class="match" id="gMatch"></div> <div class="row"><span>b) Eau utilisée par jour : 6 arrosages × 1 L =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">L</span></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol"><b>a)</b> C’est la boucle complète <b>capteur → traitement (seuil) → actionneur</b> : l’objet ne fait plus que mesurer, il AGIT.<br><b>b)</b> 30 s à 2 L/min = 1 L par arrosage → 6 × 1 = <b>6 L/jour</b>, livrés pile quand la terre a soif. L’IoT au service du jardin (et de la facture d’eau).</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
@@ -485,20 +465,12 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_iot', TP_TITRE='TP — Objets connectés (IoT)';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -554,21 +526,27 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -581,109 +559,7 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
-(function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
 
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
-  }
-  maj();
-
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
-  });
-})();
 </script>
 </body>
 </html>

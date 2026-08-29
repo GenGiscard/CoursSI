@@ -112,26 +112,6 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — IA embarquée<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI · IA embarquée</div> <h1>Le robot désherbeur</h1> <p class="lede">Un robot autonome sillonne le potager : sa caméra scanne chaque plante et son IA embarquée décide — salade ou mauvaise herbe ? Aujourd'hui tu prépares ses données, tu règles son seuil de décision (attention aux salades !), tu audites sa qualité… et tu questionnes ses limites. La calculatrice t'attend en bas à droite.</p></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> Les deux vies du réseau</h2> <p class="task">Le réseau de neurones du robot vit deux périodes très différentes. Remets chacune à sa place.</p> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>Entraînement</b> (au labo) : le réseau ajuste ses paramètres sur des milliers de photos étiquetées · <b>inférence</b> (dans le champ) : il applique ce qu’il sait, figé, sur des plantes jamais vues · et toujours dans cet ordre : on apprend AVANT de décider.</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> Le jeu de données</h2> <p class="task">Le club a photographié et étiqueté 2000 plantes. Règle d'or : 80 % pour entraîner, 20 % mis de côté pour tester.</p> <div class="row"><span>a) Combien de photos pour l’entraînement ?</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div> <div class="row"><span>b) Combien de photos pour le test ?</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">photos</span></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>a)</b> <b>1600</b> pour apprendre. <b>b)</b> <b>400</b> gardées sous clé pour le contrôle final : le réseau ne doit JAMAIS les voir pendant l’entraînement — sinon c’est réciter par cœur, pas comprendre.</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> L'entraîneur de seuil</h2> <p class="task">Pour chaque plante, le réseau sort un « score mauvaise herbe » de 0 à 100. Au-dessus du seuil le robot désherbe. Mission : <b>protège TOUTES les salades (0 arrachée) en manquant le MOINS d'herbes possible</b>. Déplace le seuil et regarde les croix rouges…</p> <div class="schema"><canvas id="cvSeuil" width="640" height="260" aria-label="Scores des salades et mauvaises herbes avec seuil de décision réglable"></canvas> <div class="slider-row"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)">seuil =</span> <input type="range" id="sSlider" min="0" max="100" step="1" value="30"> <span class="val" id="sVal">30</span></div></div> <div class="row"><span>a) Au réglage , combien d'herbes sont manquées ?</span><input class="numin" id="cA" inputmode="numeric" placeholder="?"><span class="unit">herbes</span></div> <div class="row"><span>b) Pour faire mieux que ce compromis, il faudrait :</span> <select id="cSel"><option>— choisir —</option><option>améliorer le MODÈLE (plus de photos, meilleur réseau) — le seuil ne peut pas tout</option><option>pousser le seuil à 0</option><option>pousser le seuil à 100</option></select></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>a)</b> Dès que le seuil dépasse 48 (la salade la plus « suspecte »), plus aucune salade n’est arrachée… mais les herbes à 42 et 46 passent entre les mailles : <b>2 herbes manquées</b>, incompressibles.<br><b>b)</b> Les scores se CHEVAUCHENT (zone 42–48) : aucun seuil ne peut les séparer parfaitement. La seule issue : <b>améliorer le modèle</b>. Le seuil arbitre, il ne corrige pas.</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> La prédiction en direct</h2> <p class="task">Le robot scanne deux plantes coup sur coup. Sortie n°1 : salade 8 % · mauvaise herbe 92 %. Sortie n°2 : salade 49 % · mauvaise herbe 51 %.</p> <div class="match" id="dMatch"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol">92 % : le réseau est sûr de lui → <b>désherber</b> · 51/49 : il hausse les épaules → dans le doute, <b>laisser passer</b> : une herbe de plus repoussera, une salade arrachée est perdue. Les bons systèmes d’IA savent dire « je ne sais pas ».</div> </section> <section class="exo-card" id="e"> <h2><span class="num">E</span> Embarqué dans le champ</h2> <p class="task">L'IA tourne DANS le robot (embarquée), pas sur un serveur distant. Justifie… puis mesure sa cadence : 2 plantes analysées par seconde, 5 heures de travail par jour.</p> <div class="match" id="eMatch"></div> <div class="row"><span>c) Plantes analysées par jour : 2 × 3600 × 5 =</span><input class="numin" id="eC" inputmode="decimal" placeholder="?"><span class="unit">plantes</span></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol">Au fond du champ, <b>pas de réseau fiable</b> → le calcul doit être local · décider en 0,1 s exige une <b>latence minimale</b> (l’aller-retour vers un serveur serait trop lent) · et <b>c)</b> 2 × 3600 × 5 = <b>36 000 plantes/jour</b> — aucun humain ne suit cette cadence.</div> </section> <section class="exo-card" id="f"> <h2><span class="num">F</span> L'enquête qualité</h2> <p class="task">Contrôle sur les 200 plantes du jeu de test. Voici les résultats du robot :</p> <table class="mx"> <tr><th></th><th>décidé : garder</th><th>décidé : désherber</th></tr> <tr><th>vraie salade</th><td class="good">90 ✓</td><td class="bad">10 </td></tr> <tr><th>vraie herbe</th><td class="bad">5 </td><td class="good">95 ✓</td></tr> </table> <div class="row"><span>a) Taux de bonnes décisions : (90 + 95) / 200 =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">%</span></div> <div class="match" id="fMatch"></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol"><b>a)</b> 185/200 = <b>92,5 %</b> — honorable, mais… <b>b)</b> les <b>10 salades arrachées</b> sont l’erreur GRAVE : c’est de la récolte détruite, quand les 5 herbes manquées ne coûtent qu’un coup de binette. Toutes les erreurs ne se valent pas : on re-règle le seuil côté prudence — exactement ce que tu as fait à l’exercice C.</div> </section> <section class="exo-card" id="g"> <h2><span class="num">★</span> IA et responsabilité</h2> <p class="task">Le robot, entraîné uniquement avec des photos d'été en plein soleil, se met à massacrer le potager en octobre sous la pluie…</p> <div class="match" id="gMatch"></div> <div class="row"><span>b) Ré-entraînement : il faut étiqueter 500 nouvelles photos, à 30 s chacune : 500 × 30 / 60 =</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">min</span></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol"><b>a)</b> Le jeu de données n’était <b>pas représentatif</b> (que l’été, que le soleil) : c’est un <b>biais</b> — l’IA ne sait que ce qu’on lui a montré. Remède : compléter avec des photos variées (saisons, météo, heures).<br><b>b)</b> 500 × 30 = 15 000 s = <b>250 min</b> (plus de 4 h d’étiquetage !). La vraie richesse d’une IA, ce sont ses données — et elles se paient en travail humain.</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
@@ -491,20 +471,12 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_ia', TP_TITRE='TP — IA embarquée';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -560,21 +532,27 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -587,109 +565,7 @@ lockExo('gCheck','gShow','gSol','gFb',function(){
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
-(function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
 
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
-  }
-  maj();
-
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
-  });
-})();
 </script>
 </body>
 </html>

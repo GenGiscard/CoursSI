@@ -195,30 +195,76 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+ min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cahier .cx{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #BD8A2A;
+      border-radius:14px;padding:15px 18px}
+  .cahier .cxh{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cahier .cxn{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;
+      background:#BD8A2A;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cahier p{font-size:14.5px;line-height:1.55;margin:6px 0}
+  .cahier .cq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px}
+  .cahier .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:100px;padding:7px 9px;
+      border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cahier .cq input:focus{border-color:#2E6A8E}
+  .cahier .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B}
+  .cahier .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .cahier .csol{display:none;background:rgba(189,138,42,.1);border-radius:10px;padding:12px 14px;
+      margin-top:10px;font-size:13.5px;line-height:1.6}
+  .cahier .csol.show{display:block}
+  .cahier .csol b{color:#8a6313}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a> <div class="brand"><div class="mark"></div> <div><h1>Construire son projet</h1><p>TP · Option SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, contrainte</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Créativité ↔ principe</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">La démarche de projet</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle idée choisir ?</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Bonne ou mauvaise pratique ?</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Vrai ou faux ?</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Tape-taupe</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Snake gourmand</span><b class="bd" id="bd8">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Construire son projet</h2> <div class="intro"><p class="lede">Huit défis-jeux sur la démarche de projet : distinguer besoin, fonction et contrainte, ordonner les étapes, connaître les outils de créativité, choisir la bonne idée. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour piloter un projet : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — le planning du projet</div> <p>Votre équipe conçoit une innovation en 4 étapes : <b>idée (2 j)</b>, <b>plan (3 j)</b>, <b>prototype (4 j)</b>, <b>test (1 j)</b>. a) Durée totale si les étapes s'enchaînent ? b) En vous répartissant le travail, vous faites le prototype <b>2× plus vite (4 → 2 j)</b> : nouvelle durée totale ?</p> <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9"> <line x1="20" y1="66" x2="252" y2="66" stroke="#5C544B" stroke-width="1"/> <rect x="20" y="34" width="44" height="22" rx="2" fill="#2E6A8E" fill-opacity="0.8"/><text x="42" y="49" text-anchor="middle" fill="#fff" font-weight="700">idée 2</text> <rect x="64" y="34" width="66" height="22" rx="2" fill="#3D7E5F" fill-opacity="0.85"/><text x="97" y="49" text-anchor="middle" fill="#fff" font-weight="700">plan 3</text> <rect x="130" y="34" width="88" height="22" rx="2" fill="#BD8A2A" fill-opacity="0.9"/><text x="174" y="49" text-anchor="middle" fill="#fff" font-weight="700">proto 4</text> <rect x="218" y="34" width="22" height="22" rx="2" fill="#C0492E" fill-opacity="0.85"/><text x="229" y="49" text-anchor="middle" fill="#fff" font-weight="700">1</text> <text x="240" y="82" text-anchor="middle" fill="#5C544B" font-weight="700">10 j</text> </svg> <div class="exo-q">a) Durée totale = <input class="numin" id="ex1a" inputmode="decimal"> jours</div> <div class="exo-q">b) Avec le prototype accéléré = <input class="numin" id="ex1b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> 2 + 3 + 4 + 1 = <b>10 jours</b>.</p> <p><b>b)</b> le prototype passe de 4 à 2 j : 2 + 3 + 2 + 1 = <b>8 jours</b>. Bien s'organiser fait gagner du temps.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — répartir le budget</div> <p>Votre projet dispose d'un budget de <b>200 €</b>. Répartis-le entre <b>matériaux</b>, <b>impression 3D</b> et <b>divers</b> : la barre reste verte tant que tu ne dépasses pas le budget.</p> <canvas id="ex2cv" width="480" height="112" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Matériaux (€)</span><input type="range" id="ex2mat" min="0" max="150" step="5" value="80"><b><span id="ex2matv">80</span></b></label> <label><span class="nm2">Impression 3D (€)</span><input type="range" id="ex2imp" min="0" max="120" step="5" value="45"><b><span id="ex2impv">45</span></b></label> <label><span class="nm2">Divers (€)</span><input type="range" id="ex2div" min="0" max="80" step="5" value="30"><b><span id="ex2divv">30</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — répartir le travail en équipe</div> <p>Une partie du projet représente <b>36 heures</b> de travail. On rappelle : durée = charge ÷ (heures par jour).</p> <div class="exo-q">a) Seul, à 6 h/jour → <input class="numin" id="ex3a" inputmode="decimal"> jours</div> <div class="exo-q">b) À 3 (18 h/jour au total) → <input class="numin" id="ex3b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 36 ÷ 6 = <b>6 jours</b>.</p> <p><b>b)</b> 36 ÷ 18 = <b>2 jours</b>. À plusieurs, on avance plus vite (si le travail est partageable).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — série ou parallèle ? <span class="lvl-badge">niveau +</span></div> <p>Deux tâches indépendantes : <b>A (5 j)</b> et <b>B (3 j)</b>. a) Durée si on les fait l'une après l'autre (en série). b) Durée si deux équipes les font <b>en parallèle</b>.</p> <svg class="exo-fig" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <text x="10" y="30" fill="#5C544B" font-weight="700">série</text> <rect x="46" y="18" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="31" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text> <rect x="156" y="18" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="189" y="31" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text> <text x="228" y="31" fill="#c0392b" font-weight="700">8 j</text> <text x="10" y="72" fill="#5C544B" font-weight="700">parallèle</text> <rect x="46" y="56" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="69" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text> <rect x="46" y="78" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="79" y="91" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text> <text x="164" y="76" fill="#2c6147" font-weight="700">5 j</text> </svg> <div class="exo-q">a) En série = <input class="numin" id="ex4a" inputmode="decimal"> jours</div> <div class="exo-q">b) En parallèle = <input class="numin" id="ex4b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> en série : 5 + 3 = <b>8 jours</b>.</p> <p><b>b)</b> en parallèle : la durée est celle de la tâche la plus longue, max(5 ; 3) = <b>5 jours</b>. Paralléliser fait gagner 3 jours ici.</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 120 pts</span></span> <h2>Besoin, fonction ou contrainte ?</h2> <p class="lede">Pour chaque phrase, dis s'il s'agit d'un <b>besoin</b>, d'une <b>fonction</b> ou d'une <b>contrainte</b>. 40 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d1time">40</b> s</span> <span class="timepill">Score : <b id="d1score">0</b></span> <button class="btn" id="d1start">Démarrer</button></div> <div class="qbox" id="d1q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn cop" id="d1be" disabled>BESOIN<br><span style="font-size:10px;font-weight:500">le problème</span></button> <button class="bigbtn stl" id="d1fo" disabled>FONCTION<br><span style="font-size:10px;font-weight:500">ce que ça doit faire</span></button> <button class="bigbtn grn" id="d1co" disabled>CONTRAINTE<br><span style="font-size:10px;font-weight:500">la limite à respecter</span></button></div> <div class="streak" id="d1streak"></div> <div class="msg" id="d1msg"></div></div> </section> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 100 pts</span></span> <h2>Créativité principe</h2> <p class="lede">Relie chaque outil du projet à son principe. Clique à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Outil</div><div id="d2left"></div></div> <div class="mcol"><div class="h">Principe</div><div id="d2right"></div></div></div> <div class="msg" id="d2msg"></div></div> </section> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 90 pts</span></span> <h2>Ordonne la démarche de projet</h2> <p class="lede">Remets dans l'ordre les quatre étapes de la démarche de projet. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d3slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d3pool"></div> <div class="msg" id="d3msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d3reset">Recommencer</button></div></div> </section> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>Quelle idée choisir ?</h2> <p class="lede">Pour chaque besoin, choisis l'idée d'objet la plus pertinente.</p> <div class="game"><div class="roundpill" id="d4round">Besoin 1 / 4</div> <div class="specbox" id="d4spec"></div> <div class="opts three" id="d4opts"></div> <div class="msg" id="d4msg"></div></div> </section> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Bonne ou mauvaise pratique ?</h2> <p class="lede">En gestion de projet, cette pratique est-elle une bonne ou une mauvaise idée ? 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d5time">35</b> s</span> <span class="timepill">Score : <b id="d5score">0</b></span> <button class="btn" id="d5start">Démarrer</button></div> <div class="qbox" id="d5q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn grn" id="d5bon" disabled>BONNE</button> <button class="bigbtn cop" id="d5mau" disabled>MAUVAISE</button></div> <div class="streak" id="d5streak"></div> <div class="msg" id="d5msg"></div></div> </section> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 110 pts</span></span> <h2>Vrai ou faux ?</h2> <p class="lede">Réponds vite : l'affirmation sur la démarche de projet est-elle vraie ou fausse ? 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d6time">35</b> s</span> <span class="timepill">Score : <b id="d6score">0</b></span> <button class="btn" id="d6start">Démarrer</button></div> <div class="qbox" id="d6q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn grn" id="d6v" disabled>VRAI</button> <button class="bigbtn cop" id="d6f" disabled>FAUX</button></div> <div class="streak" id="d6streak"></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> ce qui correspond à la phase demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d7time">40</b> s</span> <span class="timepill">Vies : <b id="d7life"></b></span> <span class="timepill">Score : <b id="d7score">0</b></span> <button class="btn" id="d7start">Démarrer</button></div> <div class="consigne" id="d7cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d7grid"></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Snake gourmand</h2> <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p> <div class="game"><div class="arc-head"><button class="btn" id="d8start">Démarrer</button></div> <canvas id="d8cv" width="440" height="330" class="gamecanvas"></canvas> <div class="snakeleg" id="d8leg"></div> <div class="pad"><button class="padbtn" id="d8up">▲</button></div> <div class="pad"><button class="padbtn" id="d8left">◀</button> <button class="padbtn" id="d8down">▼</button> <button class="padbtn" id="d8right">▶</button></div> <div class="msg" id="d8msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_projet.html">← Séquence : projet</a> <div class="brand"><div class="mark"></div> <div><h1>Construire son projet</h1><p>TP · Option SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, contrainte</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Créativité ↔ principe</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">La démarche de projet</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Quelle idée choisir ?</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Bonne ou mauvaise pratique ?</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Cahier d’exercices</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Tape-taupe</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Snake gourmand</span><b class="bd" id="bd8">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Construire son projet</h2> <div class="intro"><p class="lede">Huit défis-jeux sur la démarche de projet : distinguer besoin, fonction et contrainte, ordonner les étapes, connaître les outils de créativité, choisir la bonne idée. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour piloter un projet : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — le planning du projet</div> <p>Votre équipe conçoit une innovation en 4 étapes : <b>idée (2 j)</b>, <b>plan (3 j)</b>, <b>prototype (4 j)</b>, <b>test (1 j)</b>. a) Durée totale si les étapes s'enchaînent ? b) En vous répartissant le travail, vous faites le prototype <b>2× plus vite (4 → 2 j)</b> : nouvelle durée totale ?</p> <svg class="exo-fig" viewBox="0 0 300 96" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9"> <line x1="20" y1="66" x2="252" y2="66" stroke="#5C544B" stroke-width="1"/> <rect x="20" y="34" width="44" height="22" rx="2" fill="#2E6A8E" fill-opacity="0.8"/><text x="42" y="49" text-anchor="middle" fill="#fff" font-weight="700">idée 2</text> <rect x="64" y="34" width="66" height="22" rx="2" fill="#3D7E5F" fill-opacity="0.85"/><text x="97" y="49" text-anchor="middle" fill="#fff" font-weight="700">plan 3</text> <rect x="130" y="34" width="88" height="22" rx="2" fill="#BD8A2A" fill-opacity="0.9"/><text x="174" y="49" text-anchor="middle" fill="#fff" font-weight="700">proto 4</text> <rect x="218" y="34" width="22" height="22" rx="2" fill="#C0492E" fill-opacity="0.85"/><text x="229" y="49" text-anchor="middle" fill="#fff" font-weight="700">1</text> <text x="240" y="82" text-anchor="middle" fill="#5C544B" font-weight="700">10 j</text> </svg> <div class="exo-q">a) Durée totale = <input class="numin" id="ex1a" inputmode="decimal"> jours</div> <div class="exo-q">b) Avec le prototype accéléré = <input class="numin" id="ex1b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> 2 + 3 + 4 + 1 = <b>10 jours</b>.</p> <p><b>b)</b> le prototype passe de 4 à 2 j : 2 + 3 + 2 + 1 = <b>8 jours</b>. Bien s'organiser fait gagner du temps.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — répartir le budget</div> <p>Votre projet dispose d'un budget de <b>200 €</b>. Répartis-le entre <b>matériaux</b>, <b>impression 3D</b> et <b>divers</b> : la barre reste verte tant que tu ne dépasses pas le budget.</p> <canvas id="ex2cv" width="480" height="112" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Matériaux (€)</span><input type="range" id="ex2mat" min="0" max="150" step="5" value="80"><b><span id="ex2matv">80</span></b></label> <label><span class="nm2">Impression 3D (€)</span><input type="range" id="ex2imp" min="0" max="120" step="5" value="45"><b><span id="ex2impv">45</span></b></label> <label><span class="nm2">Divers (€)</span><input type="range" id="ex2div" min="0" max="80" step="5" value="30"><b><span id="ex2divv">30</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — répartir le travail en équipe</div> <p>Une partie du projet représente <b>36 heures</b> de travail. On rappelle : durée = charge ÷ (heures par jour).</p> <div class="exo-q">a) Seul, à 6 h/jour → <input class="numin" id="ex3a" inputmode="decimal"> jours</div> <div class="exo-q">b) À 3 (18 h/jour au total) → <input class="numin" id="ex3b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 36 ÷ 6 = <b>6 jours</b>.</p> <p><b>b)</b> 36 ÷ 18 = <b>2 jours</b>. À plusieurs, on avance plus vite (si le travail est partageable).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — série ou parallèle ? <span class="lvl-badge">niveau +</span></div> <p>Deux tâches indépendantes : <b>A (5 j)</b> et <b>B (3 j)</b>. a) Durée si on les fait l'une après l'autre (en série). b) Durée si deux équipes les font <b>en parallèle</b>.</p> <svg class="exo-fig" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <text x="10" y="30" fill="#5C544B" font-weight="700">série</text> <rect x="46" y="18" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="31" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text> <rect x="156" y="18" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="189" y="31" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text> <text x="228" y="31" fill="#c0392b" font-weight="700">8 j</text> <text x="10" y="72" fill="#5C544B" font-weight="700">parallèle</text> <rect x="46" y="56" width="110" height="18" rx="2" fill="#2E6A8E" fill-opacity="0.85"/><text x="101" y="69" text-anchor="middle" fill="#fff" font-weight="700">A 5j</text> <rect x="46" y="78" width="66" height="18" rx="2" fill="#3D7E5F" fill-opacity="0.9"/><text x="79" y="91" text-anchor="middle" fill="#fff" font-weight="700">B 3j</text> <text x="164" y="76" fill="#2c6147" font-weight="700">5 j</text> </svg> <div class="exo-q">a) En série = <input class="numin" id="ex4a" inputmode="decimal"> jours</div> <div class="exo-q">b) En parallèle = <input class="numin" id="ex4b" inputmode="decimal"> jours</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> en série : 5 + 3 = <b>8 jours</b>.</p> <p><b>b)</b> en parallèle : la durée est celle de la tâche la plus longue, max(5 ; 3) = <b>5 jours</b>. Paralléliser fait gagner 3 jours ici.</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 120 pts</span></span> <h2>Besoin, fonction ou contrainte ?</h2> <p class="lede">Pour chaque phrase, dis s'il s'agit d'un <b>besoin</b>, d'une <b>fonction</b> ou d'une <b>contrainte</b>. 40 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d1time">40</b> s</span> <span class="timepill">Score : <b id="d1score">0</b></span> <button class="btn" id="d1start">Démarrer</button></div> <div class="qbox" id="d1q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn cop" id="d1be" disabled>BESOIN<br><span style="font-size:10px;font-weight:500">le problème</span></button> <button class="bigbtn stl" id="d1fo" disabled>FONCTION<br><span style="font-size:10px;font-weight:500">ce que ça doit faire</span></button> <button class="bigbtn grn" id="d1co" disabled>CONTRAINTE<br><span style="font-size:10px;font-weight:500">la limite à respecter</span></button></div> <div class="streak" id="d1streak"></div> <div class="msg" id="d1msg"></div></div> </section> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 100 pts</span></span> <h2>Créativité principe</h2> <p class="lede">Relie chaque outil du projet à son principe. Clique à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Outil</div><div id="d2left"></div></div> <div class="mcol"><div class="h">Principe</div><div id="d2right"></div></div></div> <div class="msg" id="d2msg"></div></div> </section> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 90 pts</span></span> <h2>Ordonne la démarche de projet</h2> <p class="lede">Remets dans l'ordre les quatre étapes de la démarche de projet. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d3slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d3pool"></div> <div class="msg" id="d3msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d3reset">Recommencer</button></div></div> </section> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>Quelle idée choisir ?</h2> <p class="lede">Pour chaque besoin, choisis l'idée d'objet la plus pertinente.</p> <div class="game"><div class="roundpill" id="d4round">Besoin 1 / 4</div> <div class="specbox" id="d4spec"></div> <div class="opts three" id="d4opts"></div> <div class="msg" id="d4msg"></div></div> </section> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Bonne ou mauvaise pratique ?</h2> <p class="lede">En gestion de projet, cette pratique est-elle une bonne ou une mauvaise idée ? 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d5time">35</b> s</span> <span class="timepill">Score : <b id="d5score">0</b></span> <button class="btn" id="d5start">Démarrer</button></div> <div class="qbox" id="d5q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn grn" id="d5bon" disabled>BONNE</button> <button class="bigbtn cop" id="d5mau" disabled>MAUVAISE</button></div> <div class="streak" id="d5streak"></div> <div class="msg" id="d5msg"></div></div> </section> <section id="d6">
+<span class="tag">Défi 6<span class="pts-badge">cahier</span></span>
+<h2>Cahier d’exercices — piloter son projet</h2>
+<p class="lede">Trois exercices de gestion de projet. Pose les calculs sur ta feuille avant de saisir tes réponses.</p>
+<div class="cahier">
+  <div class="cx"><div class="cxh"><span class="cxn">1</span>Le budget du prototype</div>
+  <p>Le budget alloué est de <b>250 €</b>. Les achats prévus sont : structure <b>60 €</b>, électronique <b>45 €</b>, moteur <b>80 €</b>, visserie et divers <b>30 €</b>.</p>
+  <div class="cq"><span>a) Total des dépenses prévues :</span><input id="c6_1_a" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+  <div class="cq"><span>b) Marge restante :</span><input id="c6_1_b" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+  <div class="cq"><button class="btn" id="c6_1chk">Vérifier</button><button class="btn ghost" id="c6_1rev">Voir la correction</button></div>
+  <div class="exo-fb" id="c6_1fb"></div>
+  <div class="csol" id="c6_1sol">Total : 60 + 45 + 80 + 30 = <b>215 €</b>. Marge : 250 − 215 = <b>35 €</b>, soit 14 % du budget. Une marge inférieure à 10 % est imprudente : il y a toujours une pièce cassée à racheter.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">2</span>Le planning</div>
+  <p>Le projet comporte cinq tâches : <b>3, 2, 4, 2 et 3 jours</b>.</p>
+  <div class="cq"><span>a) Durée si toutes les tâches se suivent :</span><input id="c6_2_a" inputmode="decimal" placeholder="?"><span class="cu">j</span></div>
+  <div class="cq"><span>b) Durée si les deux tâches de 4 et 2 jours sont menées en parallèle :</span><input id="c6_2_b" inputmode="decimal" placeholder="?"><span class="cu">j</span></div>
+  <div class="cq"><button class="btn" id="c6_2chk">Vérifier</button><button class="btn ghost" id="c6_2rev">Voir la correction</button></div>
+  <div class="exo-fb" id="c6_2fb"></div>
+  <div class="csol" id="c6_2sol">En série : 3 + 2 + 4 + 2 + 3 = <b>14 jours</b>. En parallélisant les tâches de 4 et 2 jours, cette étape ne dure plus que 4 jours au lieu de 6, soit <b>12 jours</b> au total. Paralléliser ne fait gagner que sur la tâche la plus courte : le chemin le plus long impose sa loi.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">3</span>Les itérations</div>
+  <p>Chaque cycle « concevoir, fabriquer, tester » dure <b>12 jours</b>. Le projet en prévoit <b>3</b>.</p>
+  <div class="cq"><span>a) Durée totale des itérations :</span><input id="c6_3_a" inputmode="decimal" placeholder="?"><span class="cu">j</span></div>
+  <div class="cq"><span>b) Nombre d’itérations tenant dans 30 jours :</span><input id="c6_3_b" inputmode="decimal" placeholder="?"><span class="cu"></span></div>
+  <div class="cq"><button class="btn" id="c6_3chk">Vérifier</button><button class="btn ghost" id="c6_3rev">Voir la correction</button></div>
+  <div class="exo-fb" id="c6_3fb"></div>
+  <div class="csol" id="c6_3sol">Trois cycles : 3 × 12 = <b>36 jours</b>. Dans 30 jours, on n’en case que <b>2</b> complets. Il faut alors choisir : réduire le périmètre, ou accepter de livrer un prototype moins abouti. Un projet ne s’étire pas, il se négocie.</div></div>
+</div>
+</section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> ce qui correspond à la phase demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d7time">40</b> s</span> <span class="timepill">Vies : <b id="d7life"></b></span> <span class="timepill">Score : <b id="d7score">0</b></span> <button class="btn" id="d7start">Démarrer</button></div> <div class="consigne" id="d7cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d7grid"></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Snake gourmand</h2> <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p> <div class="game"><div class="arc-head"><button class="btn" id="d8start">Démarrer</button></div> <canvas id="d8cv" width="440" height="330" class="gamecanvas"></canvas> <div class="snakeleg" id="d8leg"></div> <div class="pad"><button class="padbtn" id="d8up">▲</button></div> <div class="pad"><button class="padbtn" id="d8left">◀</button> <button class="padbtn" id="d8down">▼</button> <button class="padbtn" id="d8right">▶</button></div> <div class="msg" id="d8msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
   var MAXES={d1:120,d2:100,d3:90,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
@@ -349,33 +395,6 @@
  bB.addEventListener('click',function(){answer(true);});
  bM.addEventListener('click',function(){answer(false);});
  el('d5start').addEventListener('click',start);
-  })();
-
-  // ===== D6 — vrai ou faux ? (arcade) =====
-  (function(){
- var ITEMS=[
- {t:'Une innovation part toujours d\u2019un besoin.',v:true},
- {t:'Une innovation doit forcément être high-tech.',v:false},
- {t:'Le cahier des charges décrit ce que l\u2019objet doit faire.',v:true},
- {t:'On réussit toujours un projet du premier coup.',v:false},
- {t:'Un prototype sert à tester une idée avant de la finaliser.',v:true},
- {t:'Itérer, c\u2019est abandonner le projet.',v:false},
- {t:'Pendant un brainstorming, on cherche d\u2019abord la quantité d\u2019idées.',v:true},
- {t:'Une bonne idée n\u2019a jamais besoin d\u2019être présentée.',v:false},
- {t:'Une contrainte peut être un prix maximum ou un poids maximum.',v:true},
- {t:'La communication n\u2019a aucune importance dans un projet.',v:false}
- ];
- var qEl=el('d6q'),msg=el('d6msg'),stEl=el('d6streak'),bV=el('d6v'),bF=el('d6f');
- var time,score,streak,timer,cur,running=false,pool;
- function next(){if(!pool.length)pool=shuffle(ITEMS);cur=pool.pop();qEl.textContent='« '+cur.t+' »';}
- function tick(){time--;el('d6time').textContent=time;if(time<=0)stop();}
- function en(b){b.disabled=false;} function dis(b){b.disabled=true;}
- function start(){if(running)return;running=true;score=0;streak=0;time=35;pool=shuffle(ITEMS);el('d6score').textContent='0';el('d6time').textContent='35';msg.textContent='';stEl.textContent='';en(bV);en(bF);el('d6start').disabled=true;next();timer=setInterval(tick,1000);}
- function stop(){running=false;clearInterval(timer);dis(bV);dis(bF);el('d6start').disabled=false;el('d6start').textContent='Rejouer';qEl.textContent='Terminé !';setContrib('d6',score);msg.className='msg ok';msg.textContent='⏱ Fini — score du défi : '+score+' pts';}
- function answer(v){if(!running)return;if(v===cur.v){streak++;score+=12+Math.min(streak,4)*2;el('d6score').textContent=score;stEl.textContent=' série ×'+streak;}else{streak=0;stEl.textContent='raté';}next();}
- bV.addEventListener('click',function(){answer(true);});
- bF.addEventListener('click',function(){answer(false);});
- el('d6start').addEventListener('click',start);
   })();
 
   // ===== D7 — tape-taupe (3 vies, ralenti) =====
@@ -543,20 +562,12 @@
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_2de_projet', TP_TITRE='Projet — TP « Construire son projet »';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -612,21 +623,27 @@
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -639,107 +656,175 @@
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+
+</script>
+
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div>
+<script>
 (function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
-
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
-  maj();
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
+  }
+  function applyFn(f,a){
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
+  }
+  function evaluate(s){
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
+  }
+  function pretty(s){
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
+  });
+  render();
+})();
 
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
+/* ---------- cahier d'exercices (défi 6) ---------- */
+(function(){
+  function el(i){return document.getElementById(i);}
+  function nf(v){return parseFloat(String(v==null?'':v).replace(',','.'));}
+  var EX=[[[215, 1], [35, 1]], [[14, 0.2], [12, 0.2]], [[36, 0.2], [2, 0.1]]];
+  EX.forEach(function(rep,n){
+    var p='c6_'+(n+1);
+    var c=el(p+'chk'), r=el(p+'rev'), fb=el(p+'fb'), sol=el(p+'sol');
+    if(!c) return;
+    c.addEventListener('click',function(){
+      var ok=0;
+      rep.forEach(function(q,k){
+        var v=nf(el(p+'_'+String.fromCharCode(97+k)).value);
+        if(Math.abs(v-q[0])<=q[1]) ok++;
       });
+      fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+      fb.textContent=(ok===rep.length)? '\u2713 Les deux r\u00e9ponses sont justes.'
+        : ('\u2717 '+ok+' / '+rep.length+' \u2014 reprends le calcul sur ta feuille, puis corrige.');
+      r.disabled=false;
+    });
+    r.addEventListener('click',function(){ sol.classList.add('show'); });
   });
 })();
 </script>

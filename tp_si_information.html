@@ -223,30 +223,86 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+ min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cahier .cx{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #BD8A2A;border-radius:14px;padding:15px 18px}
+  .cahier .cx.fe{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .cahier .cxh{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cahier .cxn{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#BD8A2A;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cahier .cx.fe .cxn{background:#8A5A7A}
+  .cahier p{font-size:14.5px;line-height:1.55;margin:6px 0}
+  .cahier code{font-family:'JetBrains Mono',monospace;font-size:13.5px;background:rgba(42,38,34,.07);border-radius:5px;padding:1px 6px}
+  .cahier .consigne{background:#FFFDF8;border:1px dashed rgba(42,38,34,.24);border-radius:10px;padding:10px 13px;margin-top:8px;font-size:14px}
+  .cahier .consigne b{color:#6f4a63}
+  .cahier .cq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px}
+  .cahier .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:104px;padding:7px 9px;border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cahier .cq input:focus{border-color:#2E6A8E}
+  .cahier .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B}
+  .cahier .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .cahier .csol{display:none;background:rgba(189,138,42,.1);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .cahier .csol.show{display:block}
+  .cahier .csol b{color:#8a6313}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_information.html">← Séquence : information</a> <div class="brand"><div class="mark">TP</div> <div><h1>Chaîne d'information</h1><p>6 défis · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="tpscore"><div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div> <div class="sc-rank" id="scRank">Apprenti</div> <div class="sc-track"><i id="scTrack"></i></div></div> <div class="links" id="links"><a href="#obj" class="navlink"><span>01</span>Objectif</a> <a href="#proto" class="navlink"><span>02</span>Repère</a> <a href="#exos" class="navlink"><span></span>Exercices d'application</a> <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a> <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a> <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a> <a href="#defi4" class="navlink"><span>D4</span>Règle la résolution</a> <a href="#defi5" class="navlink"><span>D5</span>Radar de recul</a> <a href="#defi6" class="navlink"><span>D6</span>Capteur ↔ grandeur</a> <a href="#synth" class="navlink"><span>07</span>Synthèse</a></div> </aside> <main class="main"> <section id="obj"> <span class="kicker">TP · Chaîne d'information</span> <h2>6 défis pour capter,<br>numériser et décider</h2> <p class="lede">On joue&nbsp;: tu construis une chaîne d'acquisition, tu numérises à toute vitesse, tu règles une résolution, et tu pilotes un radar de recul à seuil. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p> <div class="two"><div class="panel"><h4>Les 6 défis</h4><ul> <li><b>D1 · Chaîne d'acquisition</b> — remets les blocs dans l'ordre.</li> <li><b>D2 · Numérise express</b> — niveaux 2ⁿ et fréquence fe contre la montre.</li> <li><b>D3 · Ana / TOR / Num</b> — classe les signaux en un éclair.</li> <li><b>D4 · Règle la résolution</b> — trouve le bon nombre de bits.</li> <li><b>D5 · Radar de recul</b> — règle le seuil, arrête-toi au plus près.</li> <li><b>D6 · Capteur ↔ grandeur</b> — relie chaque capteur à sa mesure.</li> </ul></div> <div class="panel"><h4>Notions travaillées</h4> <div class="chips"><span class="chip k">capteur</span><span class="chip k">CAN</span><span class="chip k">2ⁿ niveaux</span><span class="chip k">quantum q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil</span></div> <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div></div></div> </section> <section id="proto"> <span class="kicker">02 · Repère</span> <h3>La chaîne d'information en bref</h3> <p class="lede">Une grandeur physique du monde réel est captée, mise en forme, numérisée, puis traitée par un calculateur qui décide.</p> <table class="data"> <thead><tr><th>Fonction</th><th>Rôle</th><th>Exemple</th></tr></thead> <tbody> <tr><td>Acquérir</td><td>Capter la grandeur physique</td><td><b>Capteur de distance</b></td></tr> <tr><td>Conditionner</td><td>Mettre en forme le signal</td><td><b>Amplificateur</b></td></tr> <tr><td>Numériser</td><td>Convertir en valeurs binaires</td><td><b>CAN n bits</b></td></tr> <tr><td>Traiter</td><td>Calculer et décider</td><td><b>Microcontrôleur</b></td></tr> </tbody> </table> <div class="note">Repère clé&nbsp;: un CAN de <b>n bits</b> distingue <b>2ⁿ niveaux</b>&nbsp;; le pas de quantification (quantum) vaut <b>q = E / 2ⁿ</b> sur une étendue E.</div> </section> <!-- DÉFI 1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour maîtriser la chaîne d'information : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — la taille d'un message</div> <p>Un texte de <b>200 caractères</b> passe dans la chaîne d'information (acquérir → traiter → communiquer). Chaque caractère est codé sur <b>1 octet</b> (soit 8 bits).</p> <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <rect x="14" y="30" width="70" height="34" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="49" y="51" text-anchor="middle" fill="#235877" font-weight="700">Acquérir</text> <line x1="84" y1="47" x2="104" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="110,47 100,42 100,52" fill="#5C544B"/><rect x="110" y="30" width="66" height="34" rx="5" fill="#fbeecf" stroke="#BD8A2A" stroke-width="1.5"/><text x="143" y="51" text-anchor="middle" fill="#8a6313" font-weight="700">Traiter</text> <line x1="176" y1="47" x2="196" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="202,47 192,42 192,52" fill="#5C544B"/><rect x="202" y="30" width="84" height="34" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="244" y="51" text-anchor="middle" fill="#2c6147" font-weight="700">Communiquer</text> <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">message : 200 caractères</text> </svg> <div class="exo-q">a) Taille du message = <input class="numin" id="ex1a" inputmode="decimal"> octets</div> <div class="exo-q">b) Taille en bits = <input class="numin" id="ex1b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> 200 caractères × 1 octet = <b>200 octets</b>.</p> <p><b>b)</b> 200 × 8 = <b>1600 bits</b> (1 octet = 8 bits).</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — le codage binaire</div> <p>Toute information numérique est une suite de <b>bits</b> (0 ou 1). Choisis un nombre : on l'écrit sur <b>8 bits</b>. Chaque bit « pèse » une puissance de 2.</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Nombre (0–255)</span><input type="range" id="ex2num" min="0" max="255" step="1" value="42"><b><span id="ex2numv">42</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — le temps de transmission</div> <p>Un fichier de <b>2400 bits</b> est transmis sur une liaison. On rappelle : temps = quantité de données ÷ débit.</p> <div class="exo-q">a) À 300 bits/s → temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div> <div class="exo-q">b) À 600 bits/s → temps = <input class="numin" id="ex3b" inputmode="decimal"> s</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 2400 ÷ 300 = <b>8 s</b>.</p> <p><b>b)</b> 2400 ÷ 600 = <b>4 s</b>. Doubler le débit divise le temps par 2.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combien de bits ? <span class="lvl-badge">prépa / L1</span></div> <p>Pour coder <b>N symboles différents</b>, il faut <b>n bits</b> tels que <b>2<sup>n</sup> ≥ N</b>. Combien de bits pour coder l'alphabet (26 lettres) ? Et pour 1000 valeurs ?</p> <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10"> <g> <rect x="30" y="12" width="24" height="14" fill="#5cb2ea" fill-opacity="0.55"/><text x="60" y="23" fill="#235877">1 bit → 2</text> <rect x="30" y="32" width="40" height="14" fill="#5cb2ea" fill-opacity="0.6"/><text x="76" y="43" fill="#235877">2 bits → 4</text> <rect x="30" y="52" width="60" height="14" fill="#5cb2ea" fill-opacity="0.65"/><text x="96" y="63" fill="#235877">3 bits → 8</text> <rect x="30" y="72" width="88" height="14" fill="#5cb2ea" fill-opacity="0.7"/><text x="124" y="83" fill="#235877">4 bits → 16</text> <rect x="30" y="92" width="130" height="14" fill="#e8b84b" fill-opacity="0.9"/><text x="166" y="103" fill="#8a6313" font-weight="700">5 bits → 32 ≥ 26 ✓</text> </g> <text x="150" y="124" text-anchor="middle" font-size="9.5" fill="#2c6147" font-weight="700">on prend le plus petit n tel que 2ⁿ ≥ N</text> </svg> <div class="exo-q">a) 26 lettres → <input class="numin" id="ex4a" inputmode="decimal"> bits</div> <div class="exo-q">b) 1000 valeurs → <input class="numin" id="ex4b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> 2<sup>4</sup> = 16 &lt; 26 mais 2<sup>5</sup> = 32 ≥ 26, donc <b>5 bits</b> suffisent.</p> <p><b>b)</b> 2<sup>9</sup> = 512 &lt; 1000 mais 2<sup>10</sup> = 1024 ≥ 1000, donc <b>10 bits</b>.</p></div></div></div> </section> <section id="defi1"> <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div> <h3>Assemble la chaîne d'acquisition</h3> <p class="lede">Clique les blocs pour les ranger dans l'ordre du signal, de la grandeur physique jusqu'à la décision.</p> <div class="builder"><div class="bslots" id="bslots"></div> <div class="bhint">Du capteur jusqu'au calculateur qui traite l'information.</div> <div class="bpool" id="bpool"></div> <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div></div> </section> <!-- DÉFI 2 --> <section id="defi2"> <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div> <h3>Numérise express</h3> <p class="lede">40 secondes&nbsp;: pour chaque CAN, donne le nombre de niveaux (2ⁿ) ou la fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p> <div class="game" id="g2"><div class="ghead"><div class="gtitle">Numérise express</div> <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div> <div class="gbar"><i id="g2Bar"></i></div> <div id="g2Area"><div class="gstart"><p>2ⁿ niveaux pour un CAN n bits, et fe = 1/Te. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div> <div class="gflash" id="g2Flash"></div></div> </section> <!-- DÉFI 3 --> <section id="defi3"> <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div> <h3>Analogique / TOR / Numérique</h3> <p class="lede">30 secondes pour classer chaque signal&nbsp;: <b>analogique</b> (continu), <b>TOR</b> (deux états) ou <b>numérique</b> (codé sur plusieurs bits)&nbsp;?</p> <div class="game" id="g3"><div class="ghead"><div class="gtitle">Nature du signal</div> <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div> <div class="gbar"><i id="g3Bar"></i></div> <div id="g3Area"><div class="gstart"><p>Identifie la nature du signal le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div> <div class="gflash" id="g3Flash"></div></div> </section> <!-- DÉFI 4 --> <section id="defi4"> <div class="badge-defi">DÉFI 4 · résolution · jusqu'à 140 pts</div> <h3>Règle la résolution</h3> <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle à la courbe analogique. Trouve le nombre de bits <b>minimal</b> pour que le quantum passe sous la cible.</p> <div class="resbox"><canvas id="resCv" width="900" height="220"></canvas> <div class="orow"><span class="oname">Bits (n)</span><input type="range" min="1" max="8" value="3" id="resBits"><span class="oeta" id="resN">3 bits</span></div> <div class="opt-readout"><div class="ord"><div class="l">Niveaux 2ⁿ</div><div class="v" id="resLevels">8</div></div> <div class="ord"><div class="l">Quantum (5 V)</div><div class="v" id="resQ">625 mV</div></div> <div class="ord"><div class="l">Débit</div><div class="v" id="resRate">3 bits/éch.</div></div></div> <div class="opt-status miss" id="resStatus">Objectif : quantum ≤ 40 mV sur une étendue de 5 V.</div></div> </section> <!-- DÉFI 5 --> <section id="defi5"> <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div> <h3>Radar de recul — capteur à seuil</h3> <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b>&nbsp;: dès que distance ≤ seuil, ça freine. Mais le freinage prend de la distance&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p> <div class="park"><canvas id="parkCv" width="900" height="170"></canvas> <div class="orow"><span class="oname">Seuil (cm)</span><input type="range" min="5" max="60" value="20" id="parkT"><span class="oeta" id="parkTv">20 cm</span></div> <div class="vactions"><button class="btn primary" id="parkGo">▶ Reculer</button><button class="btn" id="parkReset">↻ Rejouer</button></div> <div class="opt-status miss" id="parkStatus">Règle le seuil, puis lance le recul.</div></div> <div class="note" style="margin-top:12px">Logique du capteur à seuil&nbsp;: <b>si mesure &lt; seuil → action</b>. Ici il faut anticiper la distance de freinage (~11 cm)&nbsp;: un seuil trop court = collision.</div> </section> <!-- DÉFI 6 --> <section id="defi6"> <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div> <h3>Capteur Grandeur mesurée</h3> <p class="lede">Relie chaque capteur à la grandeur physique qu'il mesure. Clique un capteur, puis sa grandeur.</p> <div class="match" id="match"><div class="mcol" id="mLeft"></div> <div class="mcol" id="mRight"></div></div> <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div> </section> <section id="synth" style="border-bottom:none"> <span class="kicker">07 · Bilan</span> <h3>Ce qu'il faut retenir</h3> <div class="panel"><ul> <li>La chaîne d'information&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li> <li>Un signal est <b>analogique</b>, <b>TOR</b> ou <b>numérique</b>&nbsp;; le CAN transforme l'analogique en numérique.</li> <li>CAN n bits → <b>2ⁿ niveaux</b>&nbsp;; quantum <b>q = E / 2ⁿ</b>&nbsp;: plus de bits = plus fin.</li> <li>Échantillonnage&nbsp;: <b>fe = 1/Te</b>. Un capteur à <b>seuil</b> déclenche une action quand la mesure franchit une valeur.</li> </ul></div> <div class="cta">Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div> </section> </main></div> <script> // ===== Nav =====
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_information.html">← Séquence : information</a> <div class="brand"><div class="mark">TP</div> <div><h1>Chaîne d'information</h1><p>6 défis · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Plan</button></div> <div class="tpscore"><div class="sc-row"><span>Score TP</span><b id="scVal">0</b></div> <div class="sc-rank" id="scRank">Apprenti</div> <div class="sc-track"><i id="scTrack"></i></div></div> <div class="links" id="links"><a href="#obj" class="navlink"><span>01</span>Objectif</a> <a href="#proto" class="navlink"><span>02</span>Repère</a> <a href="#exos" class="navlink"><span></span>Exercices d'application</a> <a href="#defi1" class="navlink"><span>D1</span>Chaîne d'acquisition</a> <a href="#defi2" class="navlink"><span>D2</span>Numérise express</a> <a href="#defi3" class="navlink"><span>D3</span>Ana / TOR / Num</a> <a href="#defi4" class="navlink"><span>D4</span>Règle la résolution</a> <a href="#defi5" class="navlink"><span>D5</span>Radar de recul</a> <a href="#defi6" class="navlink"><span>D6</span>Capteur ↔ grandeur</a> <a href="#synth" class="navlink"><span>07</span>Synthèse</a> <a href="#cahier" class="navlink"><span class="dn">✎</span><span class="nm">Cahier d’exercices</span></a></div> </aside> <main class="main"> <section id="obj"> <span class="kicker">TP · Chaîne d'information</span> <h2>6 défis pour capter,<br>numériser et décider</h2> <p class="lede">On joue&nbsp;: tu construis une chaîne d'acquisition, tu numérises à toute vitesse, tu règles une résolution, et tu pilotes un radar de recul à seuil. Chaque défi rapporte des points&nbsp;: vise le rang <b>Expert</b>.</p> <div class="two"><div class="panel"><h4>Les 6 défis</h4><ul> <li><b>D1 · Chaîne d'acquisition</b> — remets les blocs dans l'ordre.</li> <li><b>D2 · Numérise express</b> — niveaux 2ⁿ et fréquence fe contre la montre.</li> <li><b>D3 · Ana / TOR / Num</b> — classe les signaux en un éclair.</li> <li><b>D4 · Règle la résolution</b> — trouve le bon nombre de bits.</li> <li><b>D5 · Radar de recul</b> — règle le seuil, arrête-toi au plus près.</li> <li><b>D6 · Capteur ↔ grandeur</b> — relie chaque capteur à sa mesure.</li> </ul></div> <div class="panel"><h4>Notions travaillées</h4> <div class="chips"><span class="chip k">capteur</span><span class="chip k">CAN</span><span class="chip k">2ⁿ niveaux</span><span class="chip k">quantum q = E/2ⁿ</span><span class="chip k">fe = 1/Te</span><span class="chip k">seuil</span></div> <div class="note" style="margin-top:12px">Astuce&nbsp;: rejoue chaque défi pour améliorer ton score. Seul ton <b>meilleur</b> résultat compte.</div></div></div> </section> <section id="proto"> <span class="kicker">02 · Repère</span> <h3>La chaîne d'information en bref</h3> <p class="lede">Une grandeur physique du monde réel est captée, mise en forme, numérisée, puis traitée par un calculateur qui décide.</p> <table class="data"> <thead><tr><th>Fonction</th><th>Rôle</th><th>Exemple</th></tr></thead> <tbody> <tr><td>Acquérir</td><td>Capter la grandeur physique</td><td><b>Capteur de distance</b></td></tr> <tr><td>Conditionner</td><td>Mettre en forme le signal</td><td><b>Amplificateur</b></td></tr> <tr><td>Numériser</td><td>Convertir en valeurs binaires</td><td><b>CAN n bits</b></td></tr> <tr><td>Traiter</td><td>Calculer et décider</td><td><b>Microcontrôleur</b></td></tr> </tbody> </table> <div class="note">Repère clé&nbsp;: un CAN de <b>n bits</b> distingue <b>2ⁿ niveaux</b>&nbsp;; le pas de quantification (quantum) vaut <b>q = E / 2ⁿ</b> sur une étendue E.</div> </section> <!-- DÉFI 1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour maîtriser la chaîne d'information : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — la taille d'un message</div> <p>Un texte de <b>200 caractères</b> passe dans la chaîne d'information (acquérir → traiter → communiquer). Chaque caractère est codé sur <b>1 octet</b> (soit 8 bits).</p> <svg class="exo-fig" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="9.5"> <rect x="14" y="30" width="70" height="34" rx="5" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><text x="49" y="51" text-anchor="middle" fill="#235877" font-weight="700">Acquérir</text> <line x1="84" y1="47" x2="104" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="110,47 100,42 100,52" fill="#5C544B"/><rect x="110" y="30" width="66" height="34" rx="5" fill="#fbeecf" stroke="#BD8A2A" stroke-width="1.5"/><text x="143" y="51" text-anchor="middle" fill="#8a6313" font-weight="700">Traiter</text> <line x1="176" y1="47" x2="196" y2="47" stroke="#5C544B" stroke-width="2"/><polygon points="202,47 192,42 192,52" fill="#5C544B"/><rect x="202" y="30" width="84" height="34" rx="5" fill="#eaf4ee" stroke="#3D7E5F" stroke-width="1.5"/><text x="244" y="51" text-anchor="middle" fill="#2c6147" font-weight="700">Communiquer</text> <text x="150" y="86" text-anchor="middle" font-size="10" fill="#5C544B" font-weight="700">message : 200 caractères</text> </svg> <div class="exo-q">a) Taille du message = <input class="numin" id="ex1a" inputmode="decimal"> octets</div> <div class="exo-q">b) Taille en bits = <input class="numin" id="ex1b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> 200 caractères × 1 octet = <b>200 octets</b>.</p> <p><b>b)</b> 200 × 8 = <b>1600 bits</b> (1 octet = 8 bits).</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — le codage binaire</div> <p>Toute information numérique est une suite de <b>bits</b> (0 ou 1). Choisis un nombre : on l'écrit sur <b>8 bits</b>. Chaque bit « pèse » une puissance de 2.</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Nombre (0–255)</span><input type="range" id="ex2num" min="0" max="255" step="1" value="42"><b><span id="ex2numv">42</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — le temps de transmission</div> <p>Un fichier de <b>2400 bits</b> est transmis sur une liaison. On rappelle : temps = quantité de données ÷ débit.</p> <div class="exo-q">a) À 300 bits/s → temps = <input class="numin" id="ex3a" inputmode="decimal"> s</div> <div class="exo-q">b) À 600 bits/s → temps = <input class="numin" id="ex3b" inputmode="decimal"> s</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> 2400 ÷ 300 = <b>8 s</b>.</p> <p><b>b)</b> 2400 ÷ 600 = <b>4 s</b>. Doubler le débit divise le temps par 2.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — combien de bits ? <span class="lvl-badge">prépa / L1</span></div> <p>Pour coder <b>N symboles différents</b>, il faut <b>n bits</b> tels que <b>2<sup>n</sup> ≥ N</b>. Combien de bits pour coder l'alphabet (26 lettres) ? Et pour 1000 valeurs ?</p> <svg class="exo-fig" viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="10"> <g> <rect x="30" y="12" width="24" height="14" fill="#5cb2ea" fill-opacity="0.55"/><text x="60" y="23" fill="#235877">1 bit → 2</text> <rect x="30" y="32" width="40" height="14" fill="#5cb2ea" fill-opacity="0.6"/><text x="76" y="43" fill="#235877">2 bits → 4</text> <rect x="30" y="52" width="60" height="14" fill="#5cb2ea" fill-opacity="0.65"/><text x="96" y="63" fill="#235877">3 bits → 8</text> <rect x="30" y="72" width="88" height="14" fill="#5cb2ea" fill-opacity="0.7"/><text x="124" y="83" fill="#235877">4 bits → 16</text> <rect x="30" y="92" width="130" height="14" fill="#e8b84b" fill-opacity="0.9"/><text x="166" y="103" fill="#8a6313" font-weight="700">5 bits → 32 ≥ 26 ✓</text> </g> <text x="150" y="124" text-anchor="middle" font-size="9.5" fill="#2c6147" font-weight="700">on prend le plus petit n tel que 2ⁿ ≥ N</text> </svg> <div class="exo-q">a) 26 lettres → <input class="numin" id="ex4a" inputmode="decimal"> bits</div> <div class="exo-q">b) 1000 valeurs → <input class="numin" id="ex4b" inputmode="decimal"> bits</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> 2<sup>4</sup> = 16 &lt; 26 mais 2<sup>5</sup> = 32 ≥ 26, donc <b>5 bits</b> suffisent.</p> <p><b>b)</b> 2<sup>9</sup> = 512 &lt; 1000 mais 2<sup>10</sup> = 1024 ≥ 1000, donc <b>10 bits</b>.</p></div></div></div> </section> <section id="defi1"> <div class="badge-defi">DÉFI 1 · jusqu'à 100 pts</div> <h3>Assemble la chaîne d'acquisition</h3> <p class="lede">Clique les blocs pour les ranger dans l'ordre du signal, de la grandeur physique jusqu'à la décision.</p> <div class="builder"><div class="bslots" id="bslots"></div> <div class="bhint">Du capteur jusqu'au calculateur qui traite l'information.</div> <div class="bpool" id="bpool"></div> <div class="bactions"><button class="btn primary" id="bverify">Vérifier l'ordre</button><span class="bmsg" id="bmsg"></span></div></div> </section> <!-- DÉFI 2 --> <section id="defi2"> <div class="badge-defi">DÉFI 2 · arcade · jusqu'à 150 pts</div> <h3>Numérise express</h3> <p class="lede">40 secondes&nbsp;: pour chaque CAN, donne le nombre de niveaux (2ⁿ) ou la fréquence d'échantillonnage (fe = 1/Te). Choisis la bonne valeur.</p> <div class="game" id="g2"><div class="ghead"><div class="gtitle">Numérise express</div> <div class="ghud"><div>Score<b id="g2Score">0</b></div><div>Combo<b id="g2Streak">×1</b></div><div>Temps<b id="g2Time">40</b></div></div></div> <div class="gbar"><i id="g2Bar"></i></div> <div id="g2Area"><div class="gstart"><p>2ⁿ niveaux pour un CAN n bits, et fe = 1/Te. Réponds vite, enchaîne les combos.</p><button class="gbig" id="g2Play">▶ Démarrer (40 s)</button></div></div> <div class="gflash" id="g2Flash"></div></div> </section> <!-- DÉFI 3 --> <section id="defi3"> <div class="badge-defi">DÉFI 3 · arcade · jusqu'à 150 pts</div> <h3>Analogique / TOR / Numérique</h3> <p class="lede">30 secondes pour classer chaque signal&nbsp;: <b>analogique</b> (continu), <b>TOR</b> (deux états) ou <b>numérique</b> (codé sur plusieurs bits)&nbsp;?</p> <div class="game" id="g3"><div class="ghead"><div class="gtitle">Nature du signal</div> <div class="ghud"><div>Score<b id="g3Score">0</b></div><div>Combo<b id="g3Streak">×1</b></div><div>Temps<b id="g3Time">30</b></div></div></div> <div class="gbar"><i id="g3Bar"></i></div> <div id="g3Area"><div class="gstart"><p>Identifie la nature du signal le plus vite possible.</p><button class="gbig" id="g3Play">▶ Démarrer (30 s)</button></div></div> <div class="gflash" id="g3Flash"></div></div> </section> <!-- DÉFI 4 --> <section id="defi4"> <div class="badge-defi">DÉFI 4 · résolution · jusqu'à 140 pts</div> <h3>Règle la résolution</h3> <p class="lede">Plus le CAN a de bits, plus l'escalier numérique colle à la courbe analogique. Trouve le nombre de bits <b>minimal</b> pour que le quantum passe sous la cible.</p> <div class="resbox"><canvas id="resCv" width="900" height="220"></canvas> <div class="orow"><span class="oname">Bits (n)</span><input type="range" min="1" max="8" value="3" id="resBits"><span class="oeta" id="resN">3 bits</span></div> <div class="opt-readout"><div class="ord"><div class="l">Niveaux 2ⁿ</div><div class="v" id="resLevels">8</div></div> <div class="ord"><div class="l">Quantum (5 V)</div><div class="v" id="resQ">625 mV</div></div> <div class="ord"><div class="l">Débit</div><div class="v" id="resRate">3 bits/éch.</div></div></div> <div class="opt-status miss" id="resStatus">Objectif : quantum ≤ 40 mV sur une étendue de 5 V.</div></div> </section> <!-- DÉFI 5 --> <section id="defi5"> <div class="badge-defi">DÉFI 5 · simulation · jusqu'à 150 pts</div> <h3>Radar de recul — capteur à seuil</h3> <p class="lede">La voiture recule vers le mur&nbsp;; le capteur ultrason mesure la distance. Règle le <b>seuil de freinage</b>&nbsp;: dès que distance ≤ seuil, ça freine. Mais le freinage prend de la distance&nbsp;! Arrête-toi au plus près <b>sans toucher</b>.</p> <div class="park"><canvas id="parkCv" width="900" height="170"></canvas> <div class="orow"><span class="oname">Seuil (cm)</span><input type="range" min="5" max="60" value="20" id="parkT"><span class="oeta" id="parkTv">20 cm</span></div> <div class="vactions"><button class="btn primary" id="parkGo">▶ Reculer</button><button class="btn" id="parkReset">↻ Rejouer</button></div> <div class="opt-status miss" id="parkStatus">Règle le seuil, puis lance le recul.</div></div> <div class="note" style="margin-top:12px">Logique du capteur à seuil&nbsp;: <b>si mesure &lt; seuil → action</b>. Ici il faut anticiper la distance de freinage (~11 cm)&nbsp;: un seuil trop court = collision.</div> </section> <!-- DÉFI 6 --> <section id="defi6"> <div class="badge-defi">DÉFI 6 · associations · jusqu'à 130 pts</div> <h3>Capteur Grandeur mesurée</h3> <p class="lede">Relie chaque capteur à la grandeur physique qu'il mesure. Clique un capteur, puis sa grandeur.</p> <div class="match" id="match"><div class="mcol" id="mLeft"></div> <div class="mcol" id="mRight"></div></div> <div class="mfoot"><span class="mmsg" id="mMsg"></span><button class="btn" id="mReset">↻ Recommencer</button></div> </section> <section id="cahier"> <span class="tag">Cahier<span class="pts-badge">exercices</span></span> <h2>Cahier d’exercices</h2> <p class="lede">Trois exercices à traiter au calme, puis deux à rédiger entièrement sur ta copie. Pose les calculs sur ta feuille avant de saisir les résultats.</p>
+<div class="cahier">
+  <div class="cx"><div class="cxh"><span class="cxn">1</span>Du binaire au décimal</div>
+  <p>Un capteur envoie l’octet <b>1011 0101</b>. Le microcontrôleur doit ensuite coder la valeur <b>200</b> sur un octet.</p>
+  <div class="cq"><span>a) Valeur décimale de l’octet reçu :</span><input id="ch_1_a" inputmode="decimal" placeholder="?"><span class="cu"></span></div>
+  <div class="cq"><span>b) Nombre de bits à 1 dans cet octet :</span><input id="ch_1_b" inputmode="decimal" placeholder="?"><span class="cu"></span></div>
+  <div class="cq"><button class="btn" id="ch_1chk">Vérifier</button><button class="btn ghost" id="ch_1rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_1fb"></div>
+  <div class="csol" id="ch_1sol">128 + 32 + 16 + 4 + 1 = <b>181</b>. L’octet comporte <b>5 bits à 1</b>.<br>Et 200 s’écrit <b>1100 1000</b>. Retiens les poids de gauche à droite : 128, 64, 32, 16, 8, 4, 2, 1. Les additionner mentalement est plus rapide que n’importe quelle division successive.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">2</span>Le poids d’une image</div>
+  <p>Une photo mesure <b>800 × 600 pixels</b>. En couleurs vraies, chaque pixel occupe <b>3 octets</b>.</p>
+  <div class="cq"><span>a) Poids du fichier en couleurs vraies :</span><input id="ch_2_a" inputmode="decimal" placeholder="?"><span class="cu">Mo</span></div>
+  <div class="cq"><span>b) Poids en 256 couleurs (1 octet par pixel) :</span><input id="ch_2_b" inputmode="decimal" placeholder="?"><span class="cu">Mo</span></div>
+  <div class="cq"><button class="btn" id="ch_2chk">Vérifier</button><button class="btn ghost" id="ch_2rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_2fb"></div>
+  <div class="csol" id="ch_2sol">Nombre de pixels : 800 × 600 = 480 000. En couleurs vraies : × 3 = 1 440 000 octets = <b>1,44 Mo</b>. En 256 couleurs : <b>0,48 Mo</b>, soit trois fois moins.<br>Réduire la palette divise le poids par trois — c’est le principe de tous les formats compressés, avant même le codage.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">3</span>Le son numérisé</div>
+  <p>Un enregistrement stéréo est échantillonné à <b>44 100 Hz</b> sur <b>16 bits</b> par voie, pendant <b>3 minutes</b>.</p>
+  <div class="cq"><span>a) Nombre d’octets par seconde :</span><input id="ch_3_a" inputmode="decimal" placeholder="?"><span class="cu">o/s</span></div>
+  <div class="cq"><span>b) Poids du fichier :</span><input id="ch_3_b" inputmode="decimal" placeholder="?"><span class="cu">Mo</span></div>
+  <div class="cq"><button class="btn" id="ch_3chk">Vérifier</button><button class="btn ghost" id="ch_3rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_3fb"></div>
+  <div class="csol" id="ch_3sol">Par seconde : 44 100 × 2 octets × 2 voies = <b>176 400 o/s</b>. Sur 180 s : 31 752 000 octets ≈ <b>31,8 Mo</b>.<br>Un CD contient environ 74 minutes à ce débit, ce qui donne bien les 700 Mo de sa capacité. Les formats compressés divisent ce poids par dix.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F1</span>Passer du binaire à l’hexadécimal</div>
+  <p>On doit lire une adresse mémoire notée <b>0x2F</b> et coder la valeur <b>173</b> en hexadécimal.</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> convertis 0x2F en décimal en détaillant le calcul. <b>2.</b> convertis 173 en binaire sur un octet. <b>3.</b> regroupe ce binaire par quartets et déduis-en l’écriture hexadécimale. <b>4.</b> explique en une phrase pourquoi les informaticiens utilisent l’hexadécimal plutôt que le binaire.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f1rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f1sol"><b>1.</b> 0x2F = 2 × 16 + 15 = <b>47</b>.<br><b>2.</b> 173 = 128 + 32 + 8 + 4 + 1 = <b>1010 1101</b>.<br><b>3.</b> Quartets : 1010 = A, 1101 = D, donc 173 = <b>0xAD</b>.<br><b>4.</b> Parce qu’<b>un quartet vaut exactement un chiffre hexadécimal</b> : la conversion est immédiate, sans calcul, et l’écriture est quatre fois plus courte que le binaire.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F2</span>Le temps de transfert</div>
+  <p>Un fichier de <b>4,2 Mo</b> doit être envoyé sur une liaison de <b>8 Mbit/s</b>.</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> convertis la taille du fichier en mégabits, en détaillant le facteur utilisé. <b>2.</b> calcule la durée du transfert. <b>3.</b> recalcule cette durée si la liaison tombe à 512 kbit/s. <b>4.</b> explique le piège de l’énoncé en une phrase.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f2rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f2sol"><b>1.</b> 4,2 Mo × 8 = <b>33,6 Mbit</b> (un octet vaut huit bits).<br><b>2.</b> t = 33,6 / 8 = <b>4,2 s</b>.<br><b>3.</b> À 512 kbit/s = 0,512 Mbit/s : t = 33,6 / 0,512 ≈ <b>65,6 s</b>.<br><b>4.</b> Le piège est l’unité : <b>les fichiers se comptent en octets, les débits en bits</b>. Oublier le facteur 8 donne un résultat huit fois trop petit.</div></div>
+</div>
+</section>
+
+    <section id="synth" style="border-bottom:none"> <span class="kicker">07 · Bilan</span> <h3>Ce qu'il faut retenir</h3> <div class="panel"><ul> <li>La chaîne d'information&nbsp;: <b>Capteur → Conditionnement → CAN → Traitement</b>.</li> <li>Un signal est <b>analogique</b>, <b>TOR</b> ou <b>numérique</b>&nbsp;; le CAN transforme l'analogique en numérique.</li> <li>CAN n bits → <b>2ⁿ niveaux</b>&nbsp;; quantum <b>q = E / 2ⁿ</b>&nbsp;: plus de bits = plus fin.</li> <li>Échantillonnage&nbsp;: <b>fe = 1/Te</b>. Un capteur à <b>seuil</b> déclenche une action quand la mesure franchit une valeur.</li> </ul></div> <div class="cta">Prêt·e pour l'<b>évaluation</b> ? Retourne au hub de séquence.</div> </section> </main></div> <script> // ===== Nav =====
   var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn');
   if(menuBtn) menuBtn.addEventListener('click',function(){nav.classList.toggle('open');});
   var links=Array.prototype.slice.call(document.querySelectorAll('.navlink'));
@@ -578,7 +634,11 @@ function el(id){return document.getElementById(id);}
 })();
 </script>
 
-  <section class="tpscore" id="tpScore">
+  
+
+    
+
+    <section class="tpscore" id="tpScore">
     <h3>Remise du travail</h3>
     <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
     <div class="tps-grid">
@@ -603,20 +663,12 @@ function el(id){return document.getElementById(id);}
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_information', TP_TITRE='TP Chaîne d’information — 6 défis';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -672,21 +724,27 @@ function el(id){return document.getElementById(id);}
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -699,107 +757,175 @@ function el(id){return document.getElementById(id);}
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+
+</script>
+
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div>
+<script>
 (function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
-
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
-  maj();
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
+  }
+  function applyFn(f,a){
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
+  }
+  function evaluate(s){
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
+  }
+  function pretty(s){
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
+  });
+  render();
+})();
 
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
+/* ---------- cahier d'exercices ---------- */
+(function(){
+  function gi(i){return document.getElementById(i);}
+  function nf(v){return parseFloat(String(v==null?'':v).replace(',','.'));}
+  var EX=[[[181, 0.5], [5, 0.5]], [[1.44, 0.02], [0.48, 0.02]], [[176400, 500], [31.8, 0.3]]];
+  EX.forEach(function(rep,n){
+    var p='ch_'+(n+1);
+    var c=gi(p+'chk'), r=gi(p+'rev'), fb=gi(p+'fb'), sol=gi(p+'sol');
+    if(!c) return;
+    c.addEventListener('click',function(){
+      var ok=0;
+      rep.forEach(function(q,k){ var v=nf(gi(p+'_'+String.fromCharCode(97+k)).value); if(Math.abs(v-q[0])<=q[1]) ok++; });
+      fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+      fb.textContent=(ok===rep.length)?'\u2713 Les deux r\u00e9ponses sont justes.':('\u2717 '+ok+' / '+rep.length+' \u2014 reprends le calcul sur ta feuille.');
+      r.disabled=false;
+    });
+    r.addEventListener('click',function(){ sol.classList.add('show'); });
+  });
+  ['ch_f1','ch_f2'].forEach(function(p){
+    var b=gi(p+'rev'), s2=gi(p+'sol');
+    if(b&&s2) b.addEventListener('click',function(){ s2.classList.add('show'); b.disabled=true; b.textContent='Correction affich\u00e9e'; });
   });
 })();
 </script>

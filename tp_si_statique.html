@@ -239,30 +239,86 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
+
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cahier .cx{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #BD8A2A;border-radius:14px;padding:15px 18px}
+  .cahier .cx.fe{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .cahier .cxh{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cahier .cxn{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#BD8A2A;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cahier .cx.fe .cxn{background:#8A5A7A}
+  .cahier p{font-size:14.5px;line-height:1.55;margin:6px 0}
+  .cahier code{font-family:'JetBrains Mono',monospace;font-size:13.5px;background:rgba(42,38,34,.07);border-radius:5px;padding:1px 6px}
+  .cahier .consigne{background:#FFFDF8;border:1px dashed rgba(42,38,34,.24);border-radius:10px;padding:10px 13px;margin-top:8px;font-size:14px}
+  .cahier .consigne b{color:#6f4a63}
+  .cahier .cq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px}
+  .cahier .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:104px;padding:7px 9px;border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cahier .cq input:focus{border-color:#2E6A8E}
+  .cahier .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B}
+  .cahier .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .cahier .csol{display:none;background:rgba(189,138,42,.1);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .cahier .csol.show{display:block}
+  .cahier .csol b{color:#8a6313}
+
+  .objectifs{background:#FFFDF8;border:1px solid #E4DCCB;border-left:4px solid #2E6A8E;border-radius:14px;padding:16px 20px;margin:16px 0}
+  .objectifs .ok{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#2E6A8E;margin-bottom:8px}
+  .objectifs h3{margin:0 0 8px;font-size:17px;font-weight:800;color:#2A2622}
+  .objectifs .ointro{font-size:15px;color:#5C544B;margin:0 0 12px}
+  .objectifs ul{margin:0 0 14px;padding-left:20px}
+  .objectifs li{font-size:15.5px;color:#2A2622;margin:5px 0}
+  .objectifs .comp{display:grid;gap:8px;margin-top:6px}
+  .objectifs .c{display:flex;gap:12px;align-items:flex-start;background:#F6F1E6;border:1px solid #E4DCCB;border-radius:10px;padding:9px 13px}
+  .objectifs .c .code{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:#3D7E5F;border-radius:6px;padding:3px 8px;flex:none;min-width:52px;text-align:center}
+  .objectifs .c .lib{font-size:15px;color:#2A2622;line-height:1.45}
+  .objectifs .c .lib i{display:block;font-size:13.5px;color:#5C544B;font-style:normal;margin-top:2px}
+  .objectifs .vraie{margin-top:16px;background:linear-gradient(160deg,rgba(189,138,42,.10),rgba(189,138,42,.04));
+      border:1px solid rgba(189,138,42,.32);border-radius:12px;padding:13px 16px}
+  .objectifs .vraie .vk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a6313;margin-bottom:8px}
+  .objectifs .vraie ul{margin:0;padding-left:18px}
+  .objectifs .vraie li{font-size:15px;margin:6px 0;color:#2A2622}
+  .objectifs .vraie li b{color:#8a6313}
+  .objectifs .vraie .punch{margin:10px 0 0;font-size:15px;font-weight:700;color:#8a6313;font-style:italic}
+  .objectifs .prereq{font-size:14px;color:#5C544B;margin-top:12px;padding-top:10px;border-top:1px dashed #E4DCCB}
+  .objectifs .prereq b{color:#8a6313}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_statique.html">← Séquence : statique</a> <div class="brand"><div class="mark"></div> <div><h1>Leviers &amp; équilibres</h1><p>TP · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Leviers &amp; équilibres</h2> <div class="intro"><p class="lede">Huit défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <!-- D1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour appliquer la statique : un cas réel, un simulateur, un calcul avec formule, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — l'étagère au mur</div> <p>Une étagère est fixée au mur par une équerre. On pose dessus une pile de livres de <b>3 kg</b>, dont le centre de gravité est à <b>20 cm</b> du mur. Décris les actions mécaniques en jeu et explique pourquoi l'équerre risque de se déformer si on éloigne les livres.</p> <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/> <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <path d="M32 79 L32 114 L74 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/><rect x="150" y="44" width="15" height="26" fill="#B85C2E"/> <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/> <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/> <line x1="174" y1="40" x2="174" y2="112" stroke="#a44a26" stroke-width="2.6"/> <polygon points="174,120 169,109 179,109" fill="#a44a26"/><text x="182" y="100" fill="#a44a26" font-weight="700">P</text> <line x1="32" y1="142" x2="174" y2="142" stroke="#5C544B" stroke-width="1"/> <polygon points="32,142 41,138 41,146" fill="#5C544B"/><polygon points="174,142 165,138 165,146" fill="#5C544B"/><text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text> </svg> <p>Calcule le poids des livres, puis le moment qu’il crée par rapport à la fixation (g = 9,81 N/kg).</p> <div class="exo-q">a) Poids P = <input class="numin" id="ex1p" inputmode="decimal"> N</div> <div class="exo-q">b) Moment M = P × d = <input class="numin" id="ex1m" inputmode="decimal"> N·m</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p> <p>Par rapport à la fixation, ce poids crée un <b>moment</b> M = P × d ≈ 29 × 0,20 ≈ <b>5,9 N·m</b> qui tend à faire basculer l'étagère.</p> <p>L'équerre exerce une <b>réaction</b> (force vers le haut + moment) pour rétablir l'équilibre. Plus les livres sont <b>loin</b> du mur, plus d augmente → plus le moment est grand → plus l'équerre est sollicitée et risque de plier.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — la balance (loi du levier)</div> <p>Fais varier les masses et les distances. La balance est en équilibre quand <b>m<sub>G</sub> × d<sub>G</sub> = m<sub>D</sub> × d<sub>D</sub></b> (les moments se compensent).</p> <canvas id="ex2cv" width="480" height="240" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Masse gauche</span><input type="range" id="ex2mL" min="1" max="10" step="1" value="4"><b><span id="ex2mLv">4</span> kg</b></label> <label><span class="nm2">Distance gauche</span><input type="range" id="ex2dL" min="0.5" max="2.5" step="0.5" value="1"><b><span id="ex2dLv">1.0</span> m</b></label> <label><span class="nm2">Masse droite</span><input type="range" id="ex2mR" min="1" max="10" step="1" value="2"><b><span id="ex2mRv">2</span> kg</b></label> <label><span class="nm2">Distance droite</span><input type="range" id="ex2dR" min="0.5" max="2.5" step="0.5" value="2"><b><span id="ex2dRv">2.0</span> m</b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — moment de serrage</div> <p>On serre un boulon avec une clé de longueur <b>d = 25 cm</b>, en tirant perpendiculairement avec <b>F = 80 N</b>. Formule du moment : <b>M = F × d</b> (d en mètres).</p> <div class="exo-q">a) Moment M = <input class="numin" id="ex3a" inputmode="decimal"> N·m</div> <div class="exo-q">b) Force F' pour M = 30 N·m avec la même clé : F' = <input class="numin" id="ex3b" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> d = 25 cm = 0,25 m → M = F × d = 80 × 0,25 = <b>20 N·m</b>.</p> <p><b>b)</b> F' = M / d = 30 / 0,25 = <b>120 N</b> (une clé plus longue demande moins de force).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div> <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p> <svg class="exo-fig" viewBox="0 0 320 184" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <line x1="100" y1="16" x2="100" y2="44" stroke="#a44a26" stroke-width="2.6"/> <polygon points="100,50 94,38 106,38" fill="#a44a26"/><text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text> <rect x="40" y="50" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <polygon points="40,60 30,80 50,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><polygon points="280,60 270,80 290,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><text x="20" y="56" fill="#6a4560" font-weight="700">A</text> <text x="294" y="56" fill="#6a4560" font-weight="700">B</text> <line x1="40" y1="120" x2="40" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="40,84 35,94 45,94" fill="#3D7E5F"/><text x="40" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text> <line x1="280" y1="120" x2="280" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="280,84 275,94 285,94" fill="#3D7E5F"/><text x="280" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text> <line x1="40" y1="152" x2="100" y2="152" stroke="#5C544B" stroke-width="1"/> <polygon points="40,152 47,148.5 47,155.5" fill="#5C544B"/><polygon points="100,152 93,148.5 93,155.5" fill="#5C544B"/><text x="70" y="148" text-anchor="middle" fill="#5C544B">1 m</text> <line x1="40" y1="170" x2="280" y2="170" stroke="#5C544B" stroke-width="1"/> <polygon points="40,170 47,166.5 47,173.5" fill="#5C544B"/><polygon points="280,170 273,166.5 273,173.5" fill="#5C544B"/><text x="160" y="182" text-anchor="middle" fill="#5C544B">L = 4 m</text> </svg> <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>Bilan :</b> charge F = 600 N (↓) à 1 m de A ; réactions R<sub>A</sub>, R<sub>B</sub> (↑).</p> <p><b>Moment en A</b> (ΣM<sub>/A</sub> = 0) : R<sub>B</sub> × 4 − 600 × 1 = 0 → R<sub>B</sub> = 600 / 4 = <b>150 N</b>.</p> <p><b>Résultante</b> (ΣF = 0) : R<sub>A</sub> + R<sub>B</sub> − 600 = 0 → R<sub>A</sub> = 600 − 150 = <b>450 N</b>.</p> <p><b>Vérif.</b> (ΣM<sub>/B</sub>) : R<sub>A</sub> × 4 − 600 × 3 = 1800 − 1800 = 0 ✓</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 90 pts</span></span> <h2>Assemble la condition d'équilibre</h2> <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d1slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d1pool"></div> <div class="msg" id="d1msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d1reset">Recommencer</button></div></div> </section> <!-- D2 --> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 120 pts</span></span> <h2>Bras de levier express</h2> <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d2time">40</b> s</span> <span class="timepill">Score : <b id="d2score">0</b></span> <button class="btn" id="d2start">Démarrer</button></div> <div class="qbox" id="d2q">Appuie sur Démarrer pour lancer le défi.</div> <div class="opts" id="d2opts"></div> <div class="streak" id="d2streak"></div> <div class="msg" id="d2msg"></div></div> </section> <!-- D3 --> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 100 pts</span></span> <h2>Force ou moment ?</h2> <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d3time">35</b> s</span> <span class="timepill">Score : <b id="d3score">0</b></span> <button class="btn" id="d3start">Démarrer</button></div> <div class="qbox" id="d3q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn force" id="d3force" disabled>FORCE<br><span style="font-size:11px;font-weight:500">translation</span></button> <button class="bigbtn moment" id="d3moment" disabled>MOMENT<br><span style="font-size:11px;font-weight:500">rotation</span></button></div> <div class="streak" id="d3streak"></div> <div class="msg" id="d3msg"></div></div> </section> <!-- D4 --> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>L'équilibre du levier</h2> <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b>: il faut F₁·d₁ = F₂·d₂.</p> <div class="game"><div class="roundpill" id="d4round">Manche 1 / 3</div> <canvas id="cvLevier" width="640" height="240"></canvas> <div class="ctrl"><label>d₂ (droite)</label> <input type="range" id="d4slider" min="0.1" max="1" step="0.05" value="0.5"> <span class="readout" id="d4d2">0,50 m</span></div> <div class="ctrl" style="gap:18px"><span class="readout" id="d4left">à gauche : —</span> <span class="readout" id="d4mom">Δ moment : —</span></div> <button class="btn" id="d4check">Valider l'équilibre</button> <div class="msg" id="d4msg"></div></div> </section> <!-- D5 --> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Ferme le triangle</h2> <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p> <div class="game"><div class="roundpill" id="d5round">Manche 1 / 4</div> <canvas id="cvTri" width="640" height="240"></canvas> <div class="hint" style="margin:10px 0 6px">Quelle force F₃ ferme le triangle ? <b>Composantes ( x ; y ) en newtons, y positif vers le haut.</b></div> <div class="opts" id="d5opts"></div> <div class="msg" id="d5msg"></div></div> </section> <!-- D6 --> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 110 pts</span></span> <h2>Liaison réaction</h2> <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Notion</div><div id="d6left"></div></div> <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> ce qui relève de la notion demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> // ===== Socle score =====
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_statique.html">← Séquence : statique</a> <div class="brand"><div class="mark"></div> <div><h1>Leviers &amp; équilibres</h1><p>TP · Spé SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Condition d'équilibre</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Bras de levier express</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Force ou moment ?</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">L'équilibre du levier</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ferme le triangle</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Liaison ↔ réaction</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a> <a href="#cahier" class="navlink"><span class="dn">✎</span><span class="nm">Cahier d’exercices</span></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 8 défis</span> <h2>Leviers &amp; équilibres</h2> <div class="intro"><p class="lede">Huit défis-jeux pour maîtriser la statique en agissant : assembler un raisonnement, calculer des moments contre la montre, équilibrer un levier, fermer un triangle de forces. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <!-- D1 --> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour appliquer la statique : un cas réel, un simulateur, un calcul avec formule, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — l'étagère au mur</div> <p>Une étagère est fixée au mur par une équerre. On pose dessus une pile de livres de <b>3 kg</b>, dont le centre de gravité est à <b>20 cm</b> du mur. Décris les actions mécaniques en jeu et explique pourquoi l'équerre risque de se déformer si on éloigne les livres.</p> <svg class="exo-fig" viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <rect x="16" y="6" width="16" height="152" fill="#e8e0d2" stroke="#9a9080"/> <rect x="32" y="70" width="200" height="9" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <path d="M32 79 L32 114 L74 79" fill="none" stroke="#2E6A8E" stroke-width="4" stroke-linejoin="round"/><rect x="150" y="44" width="15" height="26" fill="#B85C2E"/> <rect x="167" y="38" width="15" height="32" fill="#3D7E5F"/> <rect x="184" y="48" width="15" height="22" fill="#8A5A7A"/> <line x1="174" y1="40" x2="174" y2="112" stroke="#a44a26" stroke-width="2.6"/> <polygon points="174,120 169,109 179,109" fill="#a44a26"/><text x="182" y="100" fill="#a44a26" font-weight="700">P</text> <line x1="32" y1="142" x2="174" y2="142" stroke="#5C544B" stroke-width="1"/> <polygon points="32,142 41,138 41,146" fill="#5C544B"/><polygon points="174,142 165,138 165,146" fill="#5C544B"/><text x="103" y="157" fill="#5C544B" text-anchor="middle">d = 20 cm</text> </svg> <p>Calcule le poids des livres, puis le moment qu’il crée par rapport à la fixation (g = 9,81 N/kg).</p> <div class="exo-q">a) Poids P = <input class="numin" id="ex1p" inputmode="decimal"> N</div> <div class="exo-q">b) Moment M = P × d = <input class="numin" id="ex1m" inputmode="decimal"> N·m</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p>Le <b>poids</b> des livres P = m·g ≈ 3 × 9,81 ≈ <b>29 N</b> s'applique verticalement vers le bas, au centre de gravité (20 cm du mur).</p> <p>Par rapport à la fixation, ce poids crée un <b>moment</b> M = P × d ≈ 29 × 0,20 ≈ <b>5,9 N·m</b> qui tend à faire basculer l'étagère.</p> <p>L'équerre exerce une <b>réaction</b> (force vers le haut + moment) pour rétablir l'équilibre. Plus les livres sont <b>loin</b> du mur, plus d augmente → plus le moment est grand → plus l'équerre est sollicitée et risque de plier.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — la balance (loi du levier)</div> <p>Fais varier les masses et les distances. La balance est en équilibre quand <b>m<sub>G</sub> × d<sub>G</sub> = m<sub>D</sub> × d<sub>D</sub></b> (les moments se compensent).</p> <canvas id="ex2cv" width="480" height="240" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Masse gauche</span><input type="range" id="ex2mL" min="1" max="10" step="1" value="4"><b><span id="ex2mLv">4</span> kg</b></label> <label><span class="nm2">Distance gauche</span><input type="range" id="ex2dL" min="0.5" max="2.5" step="0.5" value="1"><b><span id="ex2dLv">1.0</span> m</b></label> <label><span class="nm2">Masse droite</span><input type="range" id="ex2mR" min="1" max="10" step="1" value="2"><b><span id="ex2mRv">2</span> kg</b></label> <label><span class="nm2">Distance droite</span><input type="range" id="ex2dR" min="0.5" max="2.5" step="0.5" value="2"><b><span id="ex2dRv">2.0</span> m</b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — moment de serrage</div> <p>On serre un boulon avec une clé de longueur <b>d = 25 cm</b>, en tirant perpendiculairement avec <b>F = 80 N</b>. Formule du moment : <b>M = F × d</b> (d en mètres).</p> <div class="exo-q">a) Moment M = <input class="numin" id="ex3a" inputmode="decimal"> N·m</div> <div class="exo-q">b) Force F' pour M = 30 N·m avec la même clé : F' = <input class="numin" id="ex3b" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> d = 25 cm = 0,25 m → M = F × d = 80 × 0,25 = <b>20 N·m</b>.</p> <p><b>b)</b> F' = M / d = 30 / 0,25 = <b>120 N</b> (une clé plus longue demande moins de force).</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — poutre sur 2 appuis <span class="lvl-badge">prépa / L1</span></div> <p>Une poutre horizontale AB de longueur <b>L = 4 m</b> repose sur deux appuis simples A et B. Une charge <b>F = 600 N</b> est appliquée à <b>1 m de A</b>. Par le <b>Principe Fondamental de la Statique</b>, calcule les réactions verticales des appuis.</p> <svg class="exo-fig" viewBox="0 0 320 184" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace" font-size="11"> <line x1="100" y1="16" x2="100" y2="44" stroke="#a44a26" stroke-width="2.6"/> <polygon points="100,50 94,38 106,38" fill="#a44a26"/><text x="100" y="12" text-anchor="middle" fill="#a44a26" font-weight="700">F = 600 N</text> <rect x="40" y="50" width="240" height="10" rx="2" fill="#c8a56d" stroke="#8a6a3c"/> <polygon points="40,60 30,80 50,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><polygon points="280,60 270,80 290,80" fill="#efe7f0" stroke="#8A5A7A" stroke-width="2"/><text x="20" y="56" fill="#6a4560" font-weight="700">A</text> <text x="294" y="56" fill="#6a4560" font-weight="700">B</text> <line x1="40" y1="120" x2="40" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="40,84 35,94 45,94" fill="#3D7E5F"/><text x="40" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_A</text> <line x1="280" y1="120" x2="280" y2="94" stroke="#3D7E5F" stroke-width="2.4"/> <polygon points="280,84 275,94 285,94" fill="#3D7E5F"/><text x="280" y="134" text-anchor="middle" fill="#2c6147" font-weight="700">R_B</text> <line x1="40" y1="152" x2="100" y2="152" stroke="#5C544B" stroke-width="1"/> <polygon points="40,152 47,148.5 47,155.5" fill="#5C544B"/><polygon points="100,152 93,148.5 93,155.5" fill="#5C544B"/><text x="70" y="148" text-anchor="middle" fill="#5C544B">1 m</text> <line x1="40" y1="170" x2="280" y2="170" stroke="#5C544B" stroke-width="1"/> <polygon points="40,170 47,166.5 47,173.5" fill="#5C544B"/><polygon points="280,170 273,166.5 273,173.5" fill="#5C544B"/><text x="160" y="182" text-anchor="middle" fill="#5C544B">L = 4 m</text> </svg> <div class="exo-q">R<sub>A</sub> = <input class="numin" id="ex4ra" inputmode="decimal"> N &nbsp;&nbsp; R<sub>B</sub> = <input class="numin" id="ex4rb" inputmode="decimal"> N</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>Bilan :</b> charge F = 600 N (↓) à 1 m de A ; réactions R<sub>A</sub>, R<sub>B</sub> (↑).</p> <p><b>Moment en A</b> (ΣM<sub>/A</sub> = 0) : R<sub>B</sub> × 4 − 600 × 1 = 0 → R<sub>B</sub> = 600 / 4 = <b>150 N</b>.</p> <p><b>Résultante</b> (ΣF = 0) : R<sub>A</sub> + R<sub>B</sub> − 600 = 0 → R<sub>A</sub> = 600 − 150 = <b>450 N</b>.</p> <p><b>Vérif.</b> (ΣM<sub>/B</sub>) : R<sub>A</sub> × 4 − 600 × 3 = 1800 − 1800 = 0 ✓</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 90 pts</span></span> <h2>Assemble la condition d'équilibre</h2> <p class="lede">Remets dans l'ordre les <b>5 étapes</b> de la résolution d'un problème de statique. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d1slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d1pool"></div> <div class="msg" id="d1msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d1reset">Recommencer</button></div></div> </section> <!-- D2 --> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 120 pts</span></span> <h2>Bras de levier express</h2> <p class="lede">Calcule un maximum de <b>moments M = F × d</b> en 40 secondes. Bonne réponse = points, et une série enchaînée rapporte un bonus.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d2time">40</b> s</span> <span class="timepill">Score : <b id="d2score">0</b></span> <button class="btn" id="d2start">Démarrer</button></div> <div class="qbox" id="d2q">Appuie sur Démarrer pour lancer le défi.</div> <div class="opts" id="d2opts"></div> <div class="streak" id="d2streak"></div> <div class="msg" id="d2msg"></div></div> </section> <!-- D3 --> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 100 pts</span></span> <h2>Force ou moment ?</h2> <p class="lede">Pour chaque élément qui apparaît, décide en un éclair s'il relève d'une <b>force</b> (effet de translation) ou d'un <b>moment</b> (effet de rotation). 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d3time">35</b> s</span> <span class="timepill">Score : <b id="d3score">0</b></span> <button class="btn" id="d3start">Démarrer</button></div> <div class="qbox" id="d3q">Appuie sur Démarrer.</div> <div class="two"><button class="bigbtn force" id="d3force" disabled>FORCE<br><span style="font-size:11px;font-weight:500">translation</span></button> <button class="bigbtn moment" id="d3moment" disabled>MOMENT<br><span style="font-size:11px;font-weight:500">rotation</span></button></div> <div class="streak" id="d3streak"></div> <div class="msg" id="d3msg"></div></div> </section> <!-- D4 --> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 120 pts</span></span> <h2>L'équilibre du levier</h2> <p class="lede">Une charge est posée à gauche du pivot. Règle la <b>distance</b> de la charge de droite pour que le levier soit <b>en équilibre</b>: il faut F₁·d₁ = F₂·d₂.</p> <div class="game"><div class="roundpill" id="d4round">Manche 1 / 3</div> <canvas id="cvLevier" width="640" height="240"></canvas> <div class="ctrl"><label>d₂ (droite)</label> <input type="range" id="d4slider" min="0.1" max="1" step="0.05" value="0.5"> <span class="readout" id="d4d2">0,50 m</span></div> <div class="ctrl" style="gap:18px"><span class="readout" id="d4left">à gauche : —</span> <span class="readout" id="d4mom">Δ moment : —</span></div> <button class="btn" id="d4check">Valider l'équilibre</button> <div class="msg" id="d4msg"></div></div> </section> <!-- D5 --> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 100 pts</span></span> <h2>Ferme le triangle</h2> <p class="lede">Deux forces sont déjà placées bout à bout. Choisis la <b>troisième force F₃</b> qui ferme le triangle (Σ F⃗ = 0⃗) et met le solide en équilibre.</p> <div class="game"><div class="roundpill" id="d5round">Manche 1 / 4</div> <canvas id="cvTri" width="640" height="240"></canvas> <div class="hint" style="margin:10px 0 6px">Quelle force F₃ ferme le triangle ? <b>Composantes ( x ; y ) en newtons, y positif vers le haut.</b></div> <div class="opts" id="d5opts"></div> <div class="msg" id="d5msg"></div></div> </section> <!-- D6 --> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 110 pts</span></span> <h2>Liaison réaction</h2> <p class="lede">Relie chaque notion de statique à sa bonne définition. Clique un élément à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Notion</div><div id="d6left"></div></div> <div class="mcol"><div class="h">Définition</div><div id="d6right"></div></div></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 90 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 90 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> ce qui relève de la notion demandée (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="cahier"> <span class="tag">Cahier<span class="pts-badge">exercices</span></span> <h2>Cahier d’exercices</h2> <p class="lede">Trois exercices à traiter au calme, puis deux à rédiger entièrement sur ta copie. Pose les calculs sur ta feuille avant de saisir les résultats.</p>
+<div class="cahier">
+  <div class="cx"><div class="cxh"><span class="cxn">1</span>Du kilogramme au newton</div>
+  <p>Une caisse a une masse de <b>45 kg</b>. On prendra <b>g = 9,81 N/kg</b> sur Terre et <b>g = 1,62 N/kg</b> sur la Lune.</p>
+  <div class="cq"><span>a) Poids sur Terre :</span><input id="ch_1_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+  <div class="cq"><span>b) Poids sur la Lune :</span><input id="ch_1_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+  <div class="cq"><button class="btn" id="ch_1chk">Vérifier</button><button class="btn ghost" id="ch_1rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_1fb"></div>
+  <div class="csol" id="ch_1sol">P = m × g. Sur Terre : 45 × 9,81 = <b>441,5 N</b>. Sur la Lune : 45 × 1,62 = <b>72,9 N</b>.<br><b>La masse ne change pas</b> — c’est une quantité de matière, elle vaut 45 kg partout. Seul le poids change, parce qu’il dépend de l’astre. Confondre les deux est l’erreur la plus fréquente de toute la mécanique.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">2</span>La clé et son bras de levier</div>
+  <p>On serre un boulon avec une clé de <b>0,25 m</b> en poussant à <b>140 N</b>.</p>
+  <div class="cq"><span>a) Moment exercé :</span><input id="ch_2_a" inputmode="decimal" placeholder="?"><span class="cu">N·m</span></div>
+  <div class="cq"><span>b) Longueur de clé nécessaire pour atteindre 50 N·m avec la même force :</span><input id="ch_2_b" inputmode="decimal" placeholder="?"><span class="cu">m</span></div>
+  <div class="cq"><button class="btn" id="ch_2chk">Vérifier</button><button class="btn ghost" id="ch_2rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_2fb"></div>
+  <div class="csol" id="ch_2sol">M = F × d = 140 × 0,25 = <b>35 N·m</b>. Pour 50 N·m à force constante : d = 50 / 140 ≈ <b>0,357 m</b>.<br>On n’augmente pas sa force, on <b>allonge le bras de levier</b> : c’est exactement ce que fait une rallonge de clé, et c’est aussi pour cela qu’une clé trop longue casse le boulon.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">3</span>La poutre et ses deux appuis</div>
+  <p>Une poutre de <b>5 m</b> repose sur deux appuis A et B placés à ses extrémités. Une charge de <b>800 N</b> est posée à <b>1,5 m</b> de A.</p>
+  <div class="cq"><span>a) Réaction en B :</span><input id="ch_3_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+  <div class="cq"><span>b) Réaction en A :</span><input id="ch_3_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+  <div class="cq"><button class="btn" id="ch_3chk">Vérifier</button><button class="btn ghost" id="ch_3rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_3fb"></div>
+  <div class="csol" id="ch_3sol">Moments par rapport à A : R<sub>B</sub> × 5 = 800 × 1,5, donc R<sub>B</sub> = <b>240 N</b>. Somme des forces verticales : R<sub>A</sub> = 800 − 240 = <b>560 N</b>.<br><b>Le contrôle immédiat</b> : la charge est plus proche de A, donc A doit encaisser davantage. Si tu trouves l’inverse, tu as interverti les distances.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F1</span>Le panneau suspendu</div>
+  <p>Un panneau de <b>300 N</b> est retenu par un câble faisant un angle de <b>35°</b> avec l’horizontale, et par une barre horizontale.</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> isole le point d’accroche et fais le bilan des forces. <b>2.</b> écris les deux équations de projection, sur la verticale puis sur l’horizontale. <b>3.</b> calcule la tension du câble, puis l’effort dans la barre. Pose chaque formule en lettres avant l’application numérique.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f1rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f1sol"><b>1.</b> Trois forces concourantes : le poids (300 N, vertical), la tension T du câble (à 35°), l’effort H de la barre (horizontal).<br><b>2.</b> Sur y : T·sin 35° − 300 = 0. Sur x : H − T·cos 35° = 0.<br><b>3.</b> T = 300 / sin 35° ≈ <b>523 N</b> ; H = 523 × cos 35° ≈ <b>428 N</b>.<br><b>Ce qui est attendu</b> : commencer par la projection qui ne contient qu’une inconnue — ici la verticale, où la barre horizontale ne compte pas.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F2</span>La caisse sur la rampe</div>
+  <p>Une caisse de <b>250 N</b> repose sur une rampe inclinée à <b>20°</b>.</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> trace le repère lié à la pente et décompose le poids. <b>2.</b> calcule la composante qui fait glisser la caisse. <b>3.</b> calcule celle qui la plaque sur la rampe. <b>4.</b> vérifie tes formules en testant les cas extrêmes 0° et 90°.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f2rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f2sol"><b>2.</b> P<sub>t</sub> = P·sin α = 250 × sin 20° ≈ <b>85,5 N</b> (parallèle à la pente).<br><b>3.</b> P<sub>n</sub> = P·cos α = 250 × cos 20° ≈ <b>234,9 N</b> (perpendiculaire).<br><b>4.</b> À 0° : sin 0 = 0, rien ne fait glisser ✓. À 90° : sin 90 = 1, tout le poids fait glisser ✓. Ce test départage en trois secondes le sinus du cosinus.</div></div>
+</div>
+</section>
+
+    <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> // ===== Socle score =====
   var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8'];
   var MAXES={d1:90,d2:120,d3:100,d4:120,d5:100,d6:110,d7:90,d8:90}, TOTALMAX=820;
   var best={};
@@ -812,7 +868,41 @@
 })();
 </script>
 
-  <section class="tpscore" id="tpScore">
+  
+
+    
+    <div class="objectifs">
+      <div class="ok">Objectifs et compétences</div>
+      <h3>Objectifs du TP</h3>
+      <p class="ointro">Ce TP te fait pratiquer ce que le cours a établi. À la fin, tu dois savoir :</p>
+      <ul>
+        <li>isoler un solide et faire le <b>bilan des forces</b> qui s’y appliquent ;</li>
+        <li>appliquer le principe fondamental de la statique : <b>ΣF = 0 et ΣM = 0</b> ;</li>
+        <li>calculer un <b>moment</b> et repérer le bras de levier effectif ;</li>
+        <li>déterminer les réactions d’appui d’une poutre chargée ;</li>
+        <li>résoudre un problème à trois forces concourantes par le triangle des forces.</li>
+      </ul>
+      <div class="ok" style="margin-top:4px">Compétences du programme travaillées</div>
+      <div class="comp">
+        <div class="c"><span class="code">A2</span><span class="lib"><b>Analyser le système</b><i>Isoler un solide et inventorier les actions mécaniques extérieures.</i></span></div>
+        <div class="c"><span class="code">B1</span><span class="lib"><b>Identifier et caractériser les grandeurs</b><i>Distinguer masse et poids, force et moment, avec leurs unités.</i></span></div>
+        <div class="c"><span class="code">B3</span><span class="lib"><b>Résoudre et simuler</b><i>Déterminer des efforts inconnus par les équations d’équilibre.</i></span></div>
+        <div class="c"><span class="code">E1</span><span class="lib"><b>Communiquer une conclusion</b><i>Traduire un résultat en exigence pour la fabrication ou la sécurité.</i></span></div>
+      </div>
+      <div class="vraie"><div class="vk">À quoi ça sert dans la vraie vie</div>
+        <ul>
+          <li><b>Le grutier</b> qui lit son abaque de charge applique un calcul de moments : la même charge devient interdite quand la flèche s’allonge. Une erreur ici renverse une grue de vingt tonnes.</li>
+          <li><b>Le charpentier</b> qui dimensionne une poutre calcule les réactions d’appui avant de choisir sa section. Trop juste, le plancher fléchit ; trop large, le client paie du bois pour rien.</li>
+          <li><b>Ton vélo</b> te fait faire de la statique sans le savoir : plus la clé est longue, moins tu forces sur le boulon. C’est du moment, exactement comme dans l’exercice.</li>
+        </ul>
+        <p class="punch">Tout ce qui tient debout autour de toi tient parce que quelqu’un a vérifié que la somme des forces valait zéro.</p>
+      </div>
+      <p class="prereq">Prérequis : cours de statique · calculatrice intégrée.</p>
+    </div>
+
+    
+
+    <section class="tpscore" id="tpScore">
     <h3>Remise du travail</h3>
     <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
     <div class="tps-grid">
@@ -837,20 +927,12 @@
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_statique', TP_TITRE='Statique — TP « Leviers & équilibres »';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -906,21 +988,27 @@
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -933,107 +1021,29 @@
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+
+
+/* ---------- cahier d'exercices ---------- */
 (function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
-
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
+  function gi(i){return document.getElementById(i);}
+  function nf(v){return parseFloat(String(v==null?'':v).replace(',','.'));}
+  var EX=[[[441.5, 2], [72.9, 1]], [[35, 0.5], [0.357, 0.01]], [[240, 5], [560, 5]]];
+  EX.forEach(function(rep,n){
+    var p='ch_'+(n+1);
+    var c=gi(p+'chk'), r=gi(p+'rev'), fb=gi(p+'fb'), sol=gi(p+'sol');
+    if(!c) return;
+    c.addEventListener('click',function(){
+      var ok=0;
+      rep.forEach(function(q,k){ var v=nf(gi(p+'_'+String.fromCharCode(97+k)).value); if(Math.abs(v-q[0])<=q[1]) ok++; });
+      fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+      fb.textContent=(ok===rep.length)?'\u2713 Les deux r\u00e9ponses sont justes.':('\u2717 '+ok+' / '+rep.length+' \u2014 reprends le calcul sur ta feuille.');
+      r.disabled=false;
     });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
+    r.addEventListener('click',function(){ sol.classList.add('show'); });
   });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
-  }
-  maj();
-
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
+  ['ch_f1','ch_f2'].forEach(function(p){
+    var b=gi(p+'rev'), s2=gi(p+'sol');
+    if(b&&s2) b.addEventListener('click',function(){ s2.classList.add('show'); b.disabled=true; b.textContent='Correction affich\u00e9e'; });
   });
 })();
 </script>

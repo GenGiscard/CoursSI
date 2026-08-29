@@ -194,30 +194,86 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
-  /* ---------- fiche d'équipe et remontée du score ---------- */
-  .team-card,.send-card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:16px;padding:16px 20px;margin:16px 0}
-  .team-card .tk,.send-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
-      text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
-  .team-card .th{margin:0 0 12px;font-size:15px;color:#5C544B}
-  .team-card .tgrid{display:grid;gap:11px;grid-template-columns:1fr}
-  @media(min-width:700px){ .team-card .tgrid{grid-template-columns:repeat(4,1fr)} }
-  .team-card label{display:flex;flex-direction:column;gap:4px;font-family:'JetBrains Mono',monospace;
-      font-size:11px;letter-spacing:.05em;color:#5C544B;text-transform:uppercase}
-  .team-card input,.team-card select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
-      border:1px solid #E4DCCB;border-radius:9px;background:#fff;color:#2A2622;outline:none;width:100%}
-  .team-card input:focus,.team-card select:focus{border-color:#2E6A8E}
-  .send-card{border-color:#cfe0d3;background:#F7FBF8}
-  .send-card .prog{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px;
-      font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .pbar{flex:1;min-width:180px;height:9px;background:#e6efe8;border-radius:5px;overflow:hidden}
-  .send-card .pbar>i{display:block;height:100%;width:0;background:#3D7E5F;transition:width .35s ease}
-  .send-card .srow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .send-card .sfb{font-family:'JetBrains Mono',monospace;font-size:13px;color:#5C544B}
-  .send-card .sfb.ok{color:#3D7E5F} .send-card .sfb.no{color:#C0492E}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+ min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cahier .cx{background:#FFFDF8;border:1px solid rgba(42,38,34,.14);border-left:4px solid #BD8A2A;border-radius:14px;padding:15px 18px}
+  .cahier .cx.fe{border-left-color:#8A5A7A;background:rgba(138,90,122,.05)}
+  .cahier .cxh{font-weight:800;font-size:16px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cahier .cxn{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;background:#BD8A2A;color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cahier .cx.fe .cxn{background:#8A5A7A}
+  .cahier p{font-size:14.5px;line-height:1.55;margin:6px 0}
+  .cahier code{font-family:'JetBrains Mono',monospace;font-size:13.5px;background:rgba(42,38,34,.07);border-radius:5px;padding:1px 6px}
+  .cahier .consigne{background:#FFFDF8;border:1px dashed rgba(42,38,34,.24);border-radius:10px;padding:10px 13px;margin-top:8px;font-size:14px}
+  .cahier .consigne b{color:#6f4a63}
+  .cahier .cq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0;font-size:15px}
+  .cahier .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:104px;padding:7px 9px;border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cahier .cq input:focus{border-color:#2E6A8E}
+  .cahier .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B}
+  .cahier .exo-fb{font-size:13.5px;font-weight:700;margin-top:6px;min-height:18px}
+  .cahier .csol{display:none;background:rgba(189,138,42,.1);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
+  .cahier .csol.show{display:block}
+  .cahier .csol b{color:#8a6313}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
-<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_ingenieur.html">← Séquence : ingénieur ?</a> <div class="brand"><div class="mark"></div> <div><h1>Décortiquer un produit</h1><p>TP · Option SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, solution ?</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Fonction ↔ solution</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Quelle contrainte ?</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Décortiquer la trottinette</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ordonne la démarche</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Le bon métier</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a> <a href="#d9" class="navlink"><span class="dn">9</span><span class="nm">Snake gourmand</span><b class="bd" id="bd9">0</b></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 9 défis</span> <h2>Décortiquer un produit</h2> <div class="intro"><p class="lede">Neuf défis-jeux pour penser comme un ingénieur : distinguer besoin, fonction et solution, repérer les contraintes, décortiquer un objet, ordonner la démarche. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour analyser un objet technique : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — analyser un sac à dos</div> <p>Le cahier des charges d'un sac à dos impose un <b>poids maximal de 800 g</b> (et un volume de 30 L). Le prototype fabriqué pèse <b>950 g</b>. On rappelle : écart relatif = écart ÷ valeur du CdC × 100.</p> <svg class="exo-fig" viewBox="0 0 300 128" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <path d="M60 46 Q60 28 82 28 L118 28 Q140 28 140 46 L140 110 Q140 122 128 122 L72 122 Q60 122 60 110 Z" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><rect x="76" y="52" width="48" height="30" rx="4" fill="#fff" stroke="#2E6A8E"/> <path d="M84 28 Q78 8 100 10" fill="none" stroke="#2E6A8E" stroke-width="2"/><text x="100" y="18" text-anchor="middle" font-size="9.5" fill="#5C544B">sac à dos</text> <text x="176" y="44" font-size="10.5" fill="#2c6147" font-weight="700">cahier des charges</text> <text x="176" y="62" font-size="10" fill="#5C544B">• poids ≤ 800 g</text> <text x="176" y="79" font-size="10" fill="#5C544B">• volume 30 L</text> <text x="176" y="102" font-size="10.5" fill="#c0392b" font-weight="700">prototype : 950 g</text> </svg> <div class="exo-q">a) Dépassement de poids = <input class="numin" id="ex1a" inputmode="decimal"> g</div> <div class="exo-q">b) Écart relatif = <input class="numin" id="ex1b" inputmode="decimal"> %</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> dépassement = 950 − 800 = <b>150 g</b>.</p> <p><b>b)</b> écart relatif = 150 ÷ 800 × 100 = <b>18,75 %</b>. Le prototype ne respecte pas le cahier des charges : l'ingénieur doit alléger le sac.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — respecter le cahier des charges</div> <p>Le cahier des charges impose : <b>poids ≤ 800 g</b> et <b>autonomie ≥ 8 h</b>. Règle les valeurs du prototype ; chaque critère devient vert (respecté) ou rouge (non respecté).</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Poids (g)</span><input type="range" id="ex2poids" min="400" max="1200" step="10" value="950"><b><span id="ex2poidsv">950</span></b></label> <label><span class="nm2">Autonomie (h)</span><input type="range" id="ex2auto" min="2" max="16" step="1" value="6"><b><span id="ex2autov">6</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — l'autonomie d'une batterie</div> <p>Un objet connecté est alimenté par une batterie qui stocke <b>20 Wh</b> d'énergie. L'objet consomme <b>4 W</b>. On rappelle : autonomie = énergie ÷ puissance.</p> <div class="exo-q">a) Autonomie = <input class="numin" id="ex3a" inputmode="decimal"> h</div> <div class="exo-q">b) Pour 8 h d'autonomie, énergie nécessaire = <input class="numin" id="ex3b" inputmode="decimal"> Wh</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> autonomie = 20 ÷ 4 = <b>5 h</b>.</p> <p><b>b)</b> énergie = puissance × durée = 4 × 8 = <b>32 Wh</b>. Il faut une batterie plus grosse pour tenir plus longtemps.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — comparer deux solutions <span class="lvl-badge">niveau +</span></div> <p>Pour le même éclairage, on compare une ampoule à <b>incandescence (60 W)</b> et une <b>LED (8 W)</b>. On les utilise <b>500 h</b>. On rappelle : énergie = puissance × durée, et 1 kWh = 1000 Wh.</p> <svg class="exo-fig" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <circle cx="80" cy="50" r="26" fill="#f7d774" fill-opacity="0.9" stroke="#BD8A2A" stroke-width="1.5"/> <rect x="72" y="74" width="16" height="12" fill="#9a9385"/> <text x="80" y="104" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="700">60 W</text> <text x="80" y="18" text-anchor="middle" font-size="9" fill="#5C544B">incandescence</text> <text x="147" y="55" text-anchor="middle" font-size="15" fill="#5C544B" font-weight="700">vs</text> <circle cx="215" cy="50" r="26" fill="#eef4f8" stroke="#3D7E5F" stroke-width="1.5"/><circle cx="215" cy="50" r="11" fill="#cfe6da"/> <rect x="207" y="74" width="16" height="12" fill="#9a9385"/> <text x="215" y="104" text-anchor="middle" font-size="11" fill="#2c6147" font-weight="700">8 W</text> <text x="215" y="18" text-anchor="middle" font-size="9" fill="#5C544B">LED</text> </svg> <div class="exo-q">a) Puissance économisée = <input class="numin" id="ex4a" inputmode="decimal"> W</div> <div class="exo-q">b) Énergie économisée sur 500 h = <input class="numin" id="ex4b" inputmode="decimal"> kWh</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> économie de puissance = 60 − 8 = <b>52 W</b>.</p> <p><b>b)</b> énergie économisée = 52 × 500 = 26 000 Wh = <b>26 kWh</b>. La LED consomme bien moins : c'est un choix d'ingénieur pour l'environnement et la facture.</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 120 pts</span></span> <h2>Besoin, fonction ou solution ?</h2> <p class="lede">Pour chaque phrase, dis s'il s'agit d'un <b>besoin</b> (le pourquoi), d'une <b>fonction</b> (le quoi) ou d'une <b>solution technique</b> (le comment). 40 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d1time">40</b> s</span> <span class="timepill">Score : <b id="d1score">0</b></span> <button class="btn" id="d1start">Démarrer</button></div> <div class="qbox" id="d1q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn stl" id="d1b" disabled>BESOIN<br><span style="font-size:10px;font-weight:500">le pourquoi</span></button> <button class="bigbtn grn" id="d1f" disabled>FONCTION<br><span style="font-size:10px;font-weight:500">le quoi</span></button> <button class="bigbtn cop" id="d1s" disabled>SOLUTION<br><span style="font-size:10px;font-weight:500">le comment</span></button></div> <div class="streak" id="d1streak"></div> <div class="msg" id="d1msg"></div></div> </section> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 100 pts</span></span> <h2>Fonction solution</h2> <p class="lede">Relie chaque fonction à une solution technique qui la réalise. Clique à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Fonction</div><div id="d2left"></div></div> <div class="mcol"><div class="h">Solution technique</div><div id="d2right"></div></div></div> <div class="msg" id="d2msg"></div></div> </section> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 90 pts</span></span> <h2>Quelle contrainte ?</h2> <p class="lede">Chaque exigence est une contrainte. Dis si elle concerne la <b>sécurité</b>, l'<b>environnement</b> ou le <b>coût</b>. 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d3time">35</b> s</span> <span class="timepill">Score : <b id="d3score">0</b></span> <button class="btn" id="d3start">Démarrer</button></div> <div class="qbox" id="d3q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn cop" id="d3s" disabled>SÉCURITÉ</button> <button class="bigbtn grn" id="d3e" disabled>ENVIRONNEMENT</button> <button class="bigbtn stl" id="d3c" disabled>COÛT</button></div> <div class="streak" id="d3streak"></div> <div class="msg" id="d3msg"></div></div> </section> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 110 pts</span></span> <h2>Décortiquer la trottinette</h2> <p class="lede">Pour chaque pièce de la trottinette électrique, choisis la <b>fonction</b> qu'elle assure.</p> <div class="game"><div class="roundpill" id="d4round">Pièce 1 / 4</div> <div class="specbox" id="d4spec"></div> <div class="opts three" id="d4opts"></div> <div class="msg" id="d4msg"></div></div> </section> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 90 pts</span></span> <h2>Ordonne la démarche</h2> <p class="lede">Remets dans l'ordre les cinq temps de la démarche de l'ingénieur. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d5slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d5pool"></div> <div class="msg" id="d5msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d5reset">Recommencer</button></div></div> </section> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 100 pts</span></span> <h2>Le bon métier</h2> <p class="lede">Relie chaque réalisation au domaine d'ingénierie correspondant. Clique à gauche, puis à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Réalisation</div><div id="d6left"></div></div> <div class="mcol"><div class="h">Domaine</div><div id="d6right"></div></div></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 70 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 70 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> les étiquettes qui collent à la consigne (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="d9"> <span class="tag">Défi 9<span class="pts-badge">/ 70 pts</span></span> <h2>Snake gourmand</h2> <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p> <div class="game"><div class="arc-head"><button class="btn" id="d9start">Démarrer</button></div> <canvas id="d9cv" width="440" height="330" class="gamecanvas"></canvas> <div class="snakeleg" id="d9leg"></div> <div class="pad"><button class="padbtn" id="d9up">▲</button></div> <div class="pad"><button class="padbtn" id="d9left">◀</button> <button class="padbtn" id="d9down">▼</button> <button class="padbtn" id="d9right">▶</button></div> <div class="msg" id="d9msg"></div></div> </section> <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8','d9'];
+<div class="shell"><aside class="nav" id="nav"> <a class="back" href="hub_si_2de_ingenieur.html">← Séquence : ingénieur ?</a> <div class="brand"><div class="mark"></div> <div><h1>Décortiquer un produit</h1><p>TP · Option SI</p></div> <button class="menu-btn" id="menuBtn">Défis</button></div> <div class="scorebox"><div class="sl">Score total</div> <div class="sv"><span id="scoreNow">0</span> <span class="mx">/ 820</span></div> <div class="rk" id="rankLine">Apprenti</div> <div class="prog"><i id="progBar"></i></div></div> <div class="links" id="links"><a href="#exos" class="navlink"><span class="dn"></span><span class="nm">Exercices d'application</span></a> <a href="#d1" class="navlink"><span class="dn">1</span><span class="nm">Besoin, fonction, solution ?</span><b class="bd" id="bd1">0</b></a> <a href="#d2" class="navlink"><span class="dn">2</span><span class="nm">Fonction ↔ solution</span><b class="bd" id="bd2">0</b></a> <a href="#d3" class="navlink"><span class="dn">3</span><span class="nm">Quelle contrainte ?</span><b class="bd" id="bd3">0</b></a> <a href="#d4" class="navlink"><span class="dn">4</span><span class="nm">Décortiquer la trottinette</span><b class="bd" id="bd4">0</b></a> <a href="#d5" class="navlink"><span class="dn">5</span><span class="nm">Ordonne la démarche</span><b class="bd" id="bd5">0</b></a> <a href="#d6" class="navlink"><span class="dn">6</span><span class="nm">Le bon métier</span><b class="bd" id="bd6">0</b></a> <a href="#d7" class="navlink"><span class="dn">7</span><span class="nm">Runner à portes</span><b class="bd" id="bd7">0</b></a> <a href="#d8" class="navlink"><span class="dn">8</span><span class="nm">Tape-taupe</span><b class="bd" id="bd8">0</b></a> <a href="#d9" class="navlink"><span class="dn">9</span><span class="nm">Snake gourmand</span><b class="bd" id="bd9">0</b></a> <a href="#cahier" class="navlink"><span class="dn">✎</span><span class="nm">Cahier d’exercices</span></a></div> </aside> <main class="main"> <section id="intro" style="border-bottom:none;padding-bottom:8px"> <span class="kicker">TP · 9 défis</span> <h2>Décortiquer un produit</h2> <div class="intro"><p class="lede">Neuf défis-jeux pour penser comme un ingénieur : distinguer besoin, fonction et solution, repérer les contraintes, décortiquer un objet, ordonner la démarche. Chaque défi rapporte des points — seul ton <b>meilleur score</b> est conservé.</p> <div class="ranks"><span class="rankchip">Apprenti · &lt; 200</span> <span class="rankchip">Technicien·ne · 200+</span> <span class="rankchip">Ingénieur·e · 450+</span> <span class="rankchip">Expert·e · 700+</span></div></div> </section> <section id="exos"> <span class="kicker">Exercices d'application</span> <h2>S'entraîner : du concret au calcul</h2> <p class="lede">Quatre exercices pour analyser un objet technique : un cas réel, un simulateur, un calcul, et un défi de niveau supérieur. La correction n'apparaît qu'après avoir tenté l'exercice.</p> <div class="exo-wrap"><div class="exo-card"><div class="exo-h"><span class="exo-num">1</span> Cas concret — analyser un sac à dos</div> <p>Le cahier des charges d'un sac à dos impose un <b>poids maximal de 800 g</b> (et un volume de 30 L). Le prototype fabriqué pèse <b>950 g</b>. On rappelle : écart relatif = écart ÷ valeur du CdC × 100.</p> <svg class="exo-fig" viewBox="0 0 300 128" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <path d="M60 46 Q60 28 82 28 L118 28 Q140 28 140 46 L140 110 Q140 122 128 122 L72 122 Q60 122 60 110 Z" fill="#dce8f2" stroke="#2E6A8E" stroke-width="1.5"/><rect x="76" y="52" width="48" height="30" rx="4" fill="#fff" stroke="#2E6A8E"/> <path d="M84 28 Q78 8 100 10" fill="none" stroke="#2E6A8E" stroke-width="2"/><text x="100" y="18" text-anchor="middle" font-size="9.5" fill="#5C544B">sac à dos</text> <text x="176" y="44" font-size="10.5" fill="#2c6147" font-weight="700">cahier des charges</text> <text x="176" y="62" font-size="10" fill="#5C544B">• poids ≤ 800 g</text> <text x="176" y="79" font-size="10" fill="#5C544B">• volume 30 L</text> <text x="176" y="102" font-size="10.5" fill="#c0392b" font-weight="700">prototype : 950 g</text> </svg> <div class="exo-q">a) Dépassement de poids = <input class="numin" id="ex1a" inputmode="decimal"> g</div> <div class="exo-q">b) Écart relatif = <input class="numin" id="ex1b" inputmode="decimal"> %</div> <div class="exo-q"><button class="btn" id="ex1try">Vérifier</button> <button class="btn alt" id="ex1reveal" disabled>Voir l'analyse</button></div> <div class="exo-fb" id="ex1fb"></div> <div class="exo-sol" id="ex1sol" hidden><p><b>a)</b> dépassement = 950 − 800 = <b>150 g</b>.</p> <p><b>b)</b> écart relatif = 150 ÷ 800 × 100 = <b>18,75 %</b>. Le prototype ne respecte pas le cahier des charges : l'ingénieur doit alléger le sac.</p></div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">2</span> Simulateur — respecter le cahier des charges</div> <p>Le cahier des charges impose : <b>poids ≤ 800 g</b> et <b>autonomie ≥ 8 h</b>. Règle les valeurs du prototype ; chaque critère devient vert (respecté) ou rouge (non respecté).</p> <canvas id="ex2cv" width="480" height="120" class="gamecanvas"></canvas> <div class="sliders"><label><span class="nm2">Poids (g)</span><input type="range" id="ex2poids" min="400" max="1200" step="10" value="950"><b><span id="ex2poidsv">950</span></b></label> <label><span class="nm2">Autonomie (h)</span><input type="range" id="ex2auto" min="2" max="16" step="1" value="6"><b><span id="ex2autov">6</span></b></label></div> <div class="exo-out" id="ex2out">—</div></div> <div class="exo-card"><div class="exo-h"><span class="exo-num">3</span> Calcul — l'autonomie d'une batterie</div> <p>Un objet connecté est alimenté par une batterie qui stocke <b>20 Wh</b> d'énergie. L'objet consomme <b>4 W</b>. On rappelle : autonomie = énergie ÷ puissance.</p> <div class="exo-q">a) Autonomie = <input class="numin" id="ex3a" inputmode="decimal"> h</div> <div class="exo-q">b) Pour 8 h d'autonomie, énergie nécessaire = <input class="numin" id="ex3b" inputmode="decimal"> Wh</div> <div class="exo-q"><button class="btn" id="ex3check">Vérifier</button> <button class="btn alt" id="ex3reveal" disabled>Correction</button></div> <div class="exo-fb" id="ex3fb"></div> <div class="exo-sol" id="ex3sol" hidden><p><b>a)</b> autonomie = 20 ÷ 4 = <b>5 h</b>.</p> <p><b>b)</b> énergie = puissance × durée = 4 × 8 = <b>32 Wh</b>. Il faut une batterie plus grosse pour tenir plus longtemps.</p></div></div> <div class="exo-card adv"><div class="exo-h"><span class="exo-num">★</span> Pour aller plus loin — comparer deux solutions <span class="lvl-badge">niveau +</span></div> <p>Pour le même éclairage, on compare une ampoule à <b>incandescence (60 W)</b> et une <b>LED (8 W)</b>. On les utilise <b>500 h</b>. On rappelle : énergie = puissance × durée, et 1 kWh = 1000 Wh.</p> <svg class="exo-fig" viewBox="0 0 300 118" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono',monospace"> <circle cx="80" cy="50" r="26" fill="#f7d774" fill-opacity="0.9" stroke="#BD8A2A" stroke-width="1.5"/> <rect x="72" y="74" width="16" height="12" fill="#9a9385"/> <text x="80" y="104" text-anchor="middle" font-size="11" fill="#8a6313" font-weight="700">60 W</text> <text x="80" y="18" text-anchor="middle" font-size="9" fill="#5C544B">incandescence</text> <text x="147" y="55" text-anchor="middle" font-size="15" fill="#5C544B" font-weight="700">vs</text> <circle cx="215" cy="50" r="26" fill="#eef4f8" stroke="#3D7E5F" stroke-width="1.5"/><circle cx="215" cy="50" r="11" fill="#cfe6da"/> <rect x="207" y="74" width="16" height="12" fill="#9a9385"/> <text x="215" y="104" text-anchor="middle" font-size="11" fill="#2c6147" font-weight="700">8 W</text> <text x="215" y="18" text-anchor="middle" font-size="9" fill="#5C544B">LED</text> </svg> <div class="exo-q">a) Puissance économisée = <input class="numin" id="ex4a" inputmode="decimal"> W</div> <div class="exo-q">b) Énergie économisée sur 500 h = <input class="numin" id="ex4b" inputmode="decimal"> kWh</div> <div class="exo-q"><button class="btn" id="ex4check">Vérifier</button> <button class="btn alt" id="ex4reveal" disabled>Correction détaillée</button></div> <div class="exo-fb" id="ex4fb"></div> <div class="exo-sol" id="ex4sol" hidden><p><b>a)</b> économie de puissance = 60 − 8 = <b>52 W</b>.</p> <p><b>b)</b> énergie économisée = 52 × 500 = 26 000 Wh = <b>26 kWh</b>. La LED consomme bien moins : c'est un choix d'ingénieur pour l'environnement et la facture.</p></div></div></div> </section> <section id="d1"> <span class="tag">Défi 1<span class="pts-badge">/ 120 pts</span></span> <h2>Besoin, fonction ou solution ?</h2> <p class="lede">Pour chaque phrase, dis s'il s'agit d'un <b>besoin</b> (le pourquoi), d'une <b>fonction</b> (le quoi) ou d'une <b>solution technique</b> (le comment). 40 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d1time">40</b> s</span> <span class="timepill">Score : <b id="d1score">0</b></span> <button class="btn" id="d1start">Démarrer</button></div> <div class="qbox" id="d1q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn stl" id="d1b" disabled>BESOIN<br><span style="font-size:10px;font-weight:500">le pourquoi</span></button> <button class="bigbtn grn" id="d1f" disabled>FONCTION<br><span style="font-size:10px;font-weight:500">le quoi</span></button> <button class="bigbtn cop" id="d1s" disabled>SOLUTION<br><span style="font-size:10px;font-weight:500">le comment</span></button></div> <div class="streak" id="d1streak"></div> <div class="msg" id="d1msg"></div></div> </section> <section id="d2"> <span class="tag">Défi 2<span class="pts-badge">/ 100 pts</span></span> <h2>Fonction solution</h2> <p class="lede">Relie chaque fonction à une solution technique qui la réalise. Clique à gauche, puis sa correspondance à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Fonction</div><div id="d2left"></div></div> <div class="mcol"><div class="h">Solution technique</div><div id="d2right"></div></div></div> <div class="msg" id="d2msg"></div></div> </section> <section id="d3"> <span class="tag">Défi 3<span class="pts-badge">/ 90 pts</span></span> <h2>Quelle contrainte ?</h2> <p class="lede">Chaque exigence est une contrainte. Dis si elle concerne la <b>sécurité</b>, l'<b>environnement</b> ou le <b>coût</b>. 35 secondes.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d3time">35</b> s</span> <span class="timepill">Score : <b id="d3score">0</b></span> <button class="btn" id="d3start">Démarrer</button></div> <div class="qbox" id="d3q">Appuie sur Démarrer.</div> <div class="three"><button class="bigbtn cop" id="d3s" disabled>SÉCURITÉ</button> <button class="bigbtn grn" id="d3e" disabled>ENVIRONNEMENT</button> <button class="bigbtn stl" id="d3c" disabled>COÛT</button></div> <div class="streak" id="d3streak"></div> <div class="msg" id="d3msg"></div></div> </section> <section id="d4"> <span class="tag">Défi 4<span class="pts-badge">/ 110 pts</span></span> <h2>Décortiquer la trottinette</h2> <p class="lede">Pour chaque pièce de la trottinette électrique, choisis la <b>fonction</b> qu'elle assure.</p> <div class="game"><div class="roundpill" id="d4round">Pièce 1 / 4</div> <div class="specbox" id="d4spec"></div> <div class="opts three" id="d4opts"></div> <div class="msg" id="d4msg"></div></div> </section> <section id="d5"> <span class="tag">Défi 5<span class="pts-badge">/ 90 pts</span></span> <h2>Ordonne la démarche</h2> <p class="lede">Remets dans l'ordre les cinq temps de la démarche de l'ingénieur. Clique les étiquettes dans le bon ordre.</p> <div class="game"><div class="slots" id="d5slots"></div> <div class="hint" style="margin-bottom:8px">À placer :</div> <div class="pool" id="d5pool"></div> <div class="msg" id="d5msg"></div> <div style="margin-top:12px"><button class="btn alt" id="d5reset">Recommencer</button></div></div> </section> <section id="d6"> <span class="tag">Défi 6<span class="pts-badge">/ 100 pts</span></span> <h2>Le bon métier</h2> <p class="lede">Relie chaque réalisation au domaine d'ingénierie correspondant. Clique à gauche, puis à droite.</p> <div class="game"><div class="match"><div class="mcol"><div class="h">Réalisation</div><div id="d6left"></div></div> <div class="mcol"><div class="h">Domaine</div><div id="d6right"></div></div></div> <div class="msg" id="d6msg"></div></div> </section> <section id="d7"> <span class="tag">Défi 7<span class="pts-badge">/ 70 pts</span></span> <h2>Runner à portes</h2> <p class="lede">Le coureur avance ! Place-toi devant la <b>bonne porte</b> avant de l'atteindre ( ou boutons). Les portes ne sont pas colorées : à toi de savoir. 3 vies, <b>12 bonnes portes</b> pour gagner.</p> <div class="game"><div class="arc-head"><button class="btn" id="d7start">Démarrer</button></div> <canvas id="d7cv" width="480" height="300" class="gamecanvas"></canvas> <div class="pad"><button class="padbtn" id="d7left">◀ Gauche</button> <button class="padbtn" id="d7right">Droite ▶</button></div> <div class="msg" id="d7msg"></div></div> </section> <section id="d8"> <span class="tag">Défi 8<span class="pts-badge">/ 70 pts</span></span> <h2>Tape-taupe</h2> <p class="lede">Tape <b>seulement</b> les étiquettes qui collent à la consigne (elle change !). Une erreur = une vie en moins ; <b>3 erreurs et c'est fini</b>.</p> <div class="game"><div class="arc-head"><span class="timepill">⏱ <b id="d8time">40</b> s</span> <span class="timepill">Vies : <b id="d8life"></b></span> <span class="timepill">Score : <b id="d8score">0</b></span> <button class="btn" id="d8start">Démarrer</button></div> <div class="consigne" id="d8cons">Appuie sur Démarrer.</div> <div class="molegrid" id="d8grid"></div> <div class="msg" id="d8msg"></div></div> </section> <section id="d9"> <span class="tag">Défi 9<span class="pts-badge">/ 70 pts</span></span> <h2>Snake gourmand</h2> <p class="lede">Pilote le serpent pour manger la <b>bonne réponse</b> (le chiffre indiqué sous le plateau), évite les mauvaises et les murs. Flèches ou boutons. 3 vies.</p> <div class="game"><div class="arc-head"><button class="btn" id="d9start">Démarrer</button></div> <canvas id="d9cv" width="440" height="330" class="gamecanvas"></canvas> <div class="snakeleg" id="d9leg"></div> <div class="pad"><button class="padbtn" id="d9up">▲</button></div> <div class="pad"><button class="padbtn" id="d9left">◀</button> <button class="padbtn" id="d9down">▼</button> <button class="padbtn" id="d9right">▶</button></div> <div class="msg" id="d9msg"></div></div> </section> <section id="cahier"> <span class="tag">Cahier<span class="pts-badge">exercices</span></span> <h2>Cahier d’exercices</h2> <p class="lede">Trois exercices à traiter au calme, puis deux à rédiger entièrement sur ta copie. Pose les calculs sur ta feuille avant de saisir les résultats.</p>
+<div class="cahier">
+  <div class="cx"><div class="cxh"><span class="cxn">1</span>La consommation de la lampe</div>
+  <p>La lampe de bureau comporte <b>6 LED</b> de <b>2 W</b> chacune. Elle éclaire <b>5 heures par jour</b>.</p>
+  <div class="cq"><span>a) Puissance totale des LED :</span><input id="ch_1_a" inputmode="decimal" placeholder="?"><span class="cu">W</span></div>
+  <div class="cq"><span>b) Énergie consommée en une journée :</span><input id="ch_1_b" inputmode="decimal" placeholder="?"><span class="cu">Wh</span></div>
+  <div class="cq"><button class="btn" id="ch_1chk">Vérifier</button><button class="btn ghost" id="ch_1rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_1fb"></div>
+  <div class="csol" id="ch_1sol">Puissance : 6 × 2 = <b>12 W</b>. Énergie sur 5 heures : 12 × 5 = <b>60 Wh</b>.<br>Retiens la différence : le <b>watt</b> dit à quelle vitesse on consomme, le <b>wattheure</b> dit combien on a consommé. Une lampe puissante allumée une minute consomme moins qu’une lampe faible allumée toute la nuit.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">2</span>L’autonomie sur batterie</div>
+  <p>On alimente cette lampe de <b>12 W</b> par une batterie de <b>60 Wh</b>.</p>
+  <div class="cq"><span>a) Autonomie de la batterie :</span><input id="ch_2_a" inputmode="decimal" placeholder="?"><span class="cu">h</span></div>
+  <div class="cq"><span>b) Autonomie si l’on n’allume que 4 LED :</span><input id="ch_2_b" inputmode="decimal" placeholder="?"><span class="cu">h</span></div>
+  <div class="cq"><button class="btn" id="ch_2chk">Vérifier</button><button class="btn ghost" id="ch_2rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_2fb"></div>
+  <div class="csol" id="ch_2sol">Autonomie : 60 / 12 = <b>5 heures</b>. Avec 4 LED, la puissance tombe à 8 W : 60 / 8 = <b>7,5 heures</b>.<br>Réduire la puissance d’un tiers augmente l’autonomie de moitié : le rapport n’est <b>pas</b> proportionnel, parce qu’on divise au lieu de multiplier.</div></div>
+  <div class="cx"><div class="cxh"><span class="cxn">3</span>Le coût sur une année</div>
+  <p>La lampe de <b>12 W</b> fonctionne <b>5 heures par jour</b>, <b>300 jours par an</b>. Le kilowattheure coûte <b>0,20 €</b>.</p>
+  <div class="cq"><span>a) Énergie consommée dans l’année :</span><input id="ch_3_a" inputmode="decimal" placeholder="?"><span class="cu">kWh</span></div>
+  <div class="cq"><span>b) Coût annuel :</span><input id="ch_3_b" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+  <div class="cq"><button class="btn" id="ch_3chk">Vérifier</button><button class="btn ghost" id="ch_3rev">Voir la correction</button></div>
+  <div class="exo-fb" id="ch_3fb"></div>
+  <div class="csol" id="ch_3sol">Énergie : 12 × 5 × 300 = 18 000 Wh = <b>18 kWh</b>. Coût : 18 × 0,20 = <b>3,60 €</b>.<br>Une lampe halogène équivalente consommerait environ 60 W, soit 90 kWh et 18 € par an. <b>L’écart se paie en cinq ans</b> — c’est ce calcul qui justifie le passage à la LED, bien plus que l’argument écologique seul.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F1</span>Décomposer un produit en fonctions</div>
+  <p>On étudie une trottinette électrique.</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> énonce la <b>fonction principale</b> du produit, sous la forme « permettre à … de … ». <b>2.</b> liste quatre fonctions techniques nécessaires pour la réaliser. <b>3.</b> associe à chacune le composant qui l’assure. <b>4.</b> explique en une phrase la différence entre fonction principale et fonction technique.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f1rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f1sol"><b>1.</b> Fonction principale : « permettre à une personne de se déplacer en ville sur de courtes distances ».<br><b>2-3.</b> Stocker l’énergie → batterie ; convertir l’énergie → moteur ; commander la vitesse → gâchette et variateur ; freiner → frein et système de récupération ; supporter l’utilisateur → châssis.<br><b>4.</b> La fonction principale est le <b>service attendu par l’utilisateur</b> — il paie pour elle. Les fonctions techniques n’existent que pour la rendre possible, et l’utilisateur ne les demande jamais explicitement.</div></div>
+  <div class="cx fe"><div class="cxh"><span class="cxn">F2</span>Comparer deux solutions</div>
+  <p>Pour la structure de la lampe, deux matériaux sont possibles : l’aluminium (<b>3 kg</b>, <b>40 €</b>) et le composite (<b>2 kg</b>, <b>55 €</b>).</p>
+  <p class="consigne">Sur ta feuille : <b>1.</b> présente les deux solutions dans un tableau à deux critères. <b>2.</b> calcule le coût du kilogramme économisé. <b>3.</b> indique quelle solution l’emporte si la masse compte pour 70 % du choix, puis si c’est le prix. <b>4.</b> conclus en une phrase sur ce que ce calcul montre du rôle du cahier des charges.</p>
+  <div class="cq"><button class="btn ghost" id="ch_f2rev">Afficher la correction rédigée</button></div>
+  <div class="csol" id="ch_f2sol"><b>2.</b> Surcoût 15 € pour 1 kg gagné, soit <b>15 €/kg</b>.<br><b>3.</b> Masse à 70 % → <b>composite</b>. Prix à 70 % → <b>aluminium</b>.<br><b>4.</b> Les deux solutions n’ont pas changé : seule la <b>pondération</b> a bougé, et elle suffit à inverser la décision. Il n’existe pas de meilleure solution dans l’absolu, seulement une meilleure solution pour un cahier des charges donné.</div></div>
+</div>
+</section>
+
+    <section id="fin" style="border-bottom:none"> <div class="final"><div style="font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7">Score final</div> <div class="fs"><span id="finScore">0</span> / 820</div> <div class="fr" id="finRank">Apprenti</div> <div class="fd">Rejoue n'importe quel défi pour améliorer ton score, puis passe à l'évaluation.</div></div> </section> </main></div> <script> var KEYS=['d1','d2','d3','d4','d5','d6','d7','d8','d9'];
   var MAXES={d1:120,d2:100,d3:90,d4:110,d5:90,d6:100,d7:70,d8:70,d9:70}, TOTALMAX=820;
   var best={};
   function el(id){return document.getElementById(id);}
@@ -563,7 +619,11 @@
   refresh();
 </script>
 
-  <section class="tpscore" id="tpScore">
+  
+
+    
+
+    <section class="tpscore" id="tpScore">
     <h3>Remise du travail</h3>
     <p class="tps-lede">Indiquez les noms des participants et votre classe, puis envoyez votre résultat au professeur. Vous pouvez envoyer à tout moment : seule la dernière remise compte.</p>
     <div class="tps-grid">
@@ -588,20 +648,12 @@
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
   </section>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
 /* ================= remise du travail : suivi et envoi du score ================= */
 (function(){
   var TP_ID='tp_si_2de_ingenieur', TP_TITRE='Ingénieur ? — TP « Décortiquer un produit »';
-  var db=null;
-  try{
-    if(typeof firebase!=='undefined'){
-      var app=(firebase.apps||[]).filter(function(a){return a.name==='scoretp';})[0]
-              || firebase.initializeApp({ databaseURL:"https://score-tp-default-rtdb.europe-west1.firebasedatabase.app" },'scoretp');
-      db=firebase.database(app);
-    }
-  }catch(e){ db=null; }
+  /* envoi direct en HTTPS : aucune d\u00e9pendance au SDK, donc rien \u00e0 charger */
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
 
   var d=document.getElementById.bind(document);
   var EX=[], done={};
@@ -657,21 +709,27 @@
     if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
     if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
     var n=maj(), tot=EX.length;
-    if(!db){ msg.className='tps-msg no'; msg.textContent='Envoi impossible : pas de connexion. R\u00e9essayez plus tard.'; return; }
     var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
-    db.ref('scores/'+TP_ID).push({
-      tp:TP_ID, titre:TP_TITRE,
-      participants:p, classe:cl,
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
       score:n, total:tot,
-      pourcent: tot? Math.round(n/tot*100):0,
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    }).then(function(){
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
       msg.className='tps-msg ok';
       msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
-    }).catch(function(){
+    }).catch(function(err){
       msg.className='tps-msg no';
-      msg.textContent='L\u2019envoi a \u00e9chou\u00e9. V\u00e9rifiez la connexion et r\u00e9essayez.';
+      var code=(err&&(err.code||err.name))||'', txt=(err&&err.message)||'erreur inconnue';
+      if(/permission|PERMISSION_DENIED/i.test(code+txt)){
+        msg.textContent='Envoi refus\u00e9 par la base (permission denied). Le professeur doit v\u00e9rifier les r\u00e8gles du n\u0153ud scores_tp.';
+      } else {
+        msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+txt;
+      }
+      try{ console.error('[envoi TP] n\u0153ud=scores_tp', err); }catch(e){}
       b.disabled=false;
     });
   }
@@ -684,107 +742,175 @@
   else init();
 })();
 
-/* ================================================================
-   ============ FICHE D'ÉQUIPE ET REMONTÉE DU SCORE ===============
-   Base : score-tp (europe-west1) · envoi par REST, sans SDK.
-   Liste des classes modifiable ci-dessous en une seule ligne.
-   ================================================================ */
-var TP_CLASSES=['2de 1','2de 2','2de 3','2de 4','2de 5','2de 6','1re SI 1','1re SI 2','Tle SI 1','Tle SI 2'];
+
+</script>
+
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div>
+<script>
 (function(){
-  var DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app';
-  var NODE='scores_tp';
-  var titreEl=document.querySelector('h1');
-  var TP_NOM=titreEl? titreEl.textContent.trim() : document.title;
-  var FICHIER=(location.pathname.split('/').pop()||'tp').replace('.html','');
-
-  /* ---- repérage des exercices : une carte = un exercice noté ---- */
-  /* un retour d'exercice = un exercice not\u00e9, quelle que soit la structure du TP */
-  var fbs=[].slice.call(document.querySelectorAll('.exo-fb, .fb'));
-  var suivis=[];
-  fbs.forEach(function(fb,i){
-    if(fb.closest('.send-card')) return;
-    var box=fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section')||fb.parentNode;
-    var t=box? (box.querySelector('h3')||box.querySelector('h2')) : null;
-    var nom=t? t.textContent.replace(/\s+/g,' ').trim().slice(0,80) : ('exercice '+(i+1));
-    /* si plusieurs retours partagent le m\u00eame titre, on num\u00e9rote */
-    var d=suivis.filter(function(s){return s.nom.indexOf(nom)===0;}).length;
-    suivis.push({fb:fb, nom:nom+(d?' ('+(d+1)+')':''), ok:false, tente:false});
-  });
-  var TOTAL=suivis.length;
-  if(!TOTAL) return;
-
-  /* ---- observation des retours : on note la première réussite ---- */
-  suivis.forEach(function(s){
-    var obs=new MutationObserver(function(){
-      if(s.fb.className.indexOf('ok')>=0){ if(!s.ok){ s.ok=true; s.tente=true; maj(); } }
-      else if(s.fb.className.indexOf('no')>=0){ if(!s.tente){ s.tente=true; maj(); } }
-    });
-    obs.observe(s.fb,{attributes:true,attributeFilter:['class']});
-  });
-
-  /* ---- fiche d'équipe, insérée juste après le bandeau d'intro ---- */
-  var wrap=document.querySelector('.wrap')||document.body;
-  var hero=wrap.querySelector('.hero');
-  var fiche=document.createElement('div');
-  fiche.className='team-card';
-  fiche.innerHTML=
-    '<div class="tk">Fiche d\u2019\u00e9quipe</div>'+
-    '<p class="th">Renseignez le nom de chaque participant et votre classe. En fin de s\u00e9ance, le bouton en bas de page enverra votre score au professeur.</p>'+
-    '<div class="tgrid">'+
-      '<label>\u00c9l\u00e8ve 1<input id="tpEl1" autocomplete="off" placeholder="Nom Pr\u00e9nom"></label>'+
-      '<label>\u00c9l\u00e8ve 2<input id="tpEl2" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>\u00c9l\u00e8ve 3<input id="tpEl3" autocomplete="off" placeholder="facultatif"></label>'+
-      '<label>Classe<select id="tpCls"><option value="">\u2014 choisir \u2014</option>'+
-        TP_CLASSES.map(function(c){return '<option>'+c+'</option>';}).join('')+
-      '</select></label>'+
-    '</div>';
-  if(hero&&hero.parentNode) hero.parentNode.insertBefore(fiche,hero.nextSibling);
-  else wrap.insertBefore(fiche,wrap.firstChild);
-
-  /* ---- bloc de fin : avancement et envoi ---- */
-  var envoi=document.createElement('div');
-  envoi.className='send-card';
-  envoi.innerHTML=
-    '<div class="tk">Fin de s\u00e9ance</div>'+
-    '<div class="prog"><div class="pbar"><i id="tpBar"></i></div><span id="tpCount">0 / '+TOTAL+' exercices r\u00e9ussis</span></div>'+
-    '<div class="srow"><button class="btn" id="tpSend">Envoyer notre score au professeur</button><span class="sfb" id="tpFb"></span></div>';
-  wrap.appendChild(envoi);
-
-  function maj(){
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    document.getElementById('tpBar').style.width=Math.round(n/TOTAL*100)+'%';
-    document.getElementById('tpCount').textContent=n+' / '+TOTAL+' exercices r\u00e9ussis';
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
   }
-  maj();
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
+  }
+  function applyFn(f,a){
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
+  }
+  function evaluate(s){
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
+  }
+  function pretty(s){
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
+  });
+  render();
+})();
 
-  var envoye=false;
-  document.getElementById('tpSend').addEventListener('click',function(){
-    if(envoye) return;
-    var noms=['tpEl1','tpEl2','tpEl3'].map(function(id){return (document.getElementById(id).value||'').trim();}).filter(Boolean);
-    var cls=document.getElementById('tpCls').value;
-    var fb=document.getElementById('tpFb');
-    if(!noms.length){ fb.className='sfb no'; fb.textContent='Indiquez au moins un nom avant d\u2019envoyer.'; document.getElementById('tpEl1').focus(); return; }
-    if(!cls){ fb.className='sfb no'; fb.textContent='S\u00e9lectionnez votre classe.'; return; }
-    var n=suivis.filter(function(s){return s.ok;}).length;
-    var data={
-      tp:TP_NOM, fichier:FICHIER, classe:cls, eleves:noms,
-      score:n, total:TOTAL,
-      detail:suivis.map(function(s){ return {exercice:s.nom, reussi:s.ok, tente:s.tente}; }),
-      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
-    };
-    fb.className='sfb'; fb.textContent='Envoi en cours\u2026';
-    fetch(DB+'/'+NODE+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
-      .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
-      .then(function(){
-        envoye=true;
-        fb.className='sfb ok';
-        fb.textContent='Score envoy\u00e9 : '+n+' / '+TOTAL+' pour '+noms.join(', ')+' ('+cls+').';
-        document.getElementById('tpSend').disabled=true;
-      })
-      .catch(function(){
-        fb.className='sfb no';
-        fb.textContent='Envoi impossible (connexion ou r\u00e8gles de la base). R\u00e9essayez, ou pr\u00e9venez le professeur.';
-      });
+/* ---------- cahier d'exercices ---------- */
+(function(){
+  function gi(i){return document.getElementById(i);}
+  function nf(v){return parseFloat(String(v==null?'':v).replace(',','.'));}
+  var EX=[[[12, 0.2], [60, 1]], [[5, 0.2], [7.5, 0.3]], [[18, 0.5], [3.6, 0.15]]];
+  EX.forEach(function(rep,n){
+    var p='ch_'+(n+1);
+    var c=gi(p+'chk'), r=gi(p+'rev'), fb=gi(p+'fb'), sol=gi(p+'sol');
+    if(!c) return;
+    c.addEventListener('click',function(){
+      var ok=0;
+      rep.forEach(function(q,k){ var v=nf(gi(p+'_'+String.fromCharCode(97+k)).value); if(Math.abs(v-q[0])<=q[1]) ok++; });
+      fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+      fb.textContent=(ok===rep.length)?'\u2713 Les deux r\u00e9ponses sont justes.':('\u2717 '+ok+' / '+rep.length+' \u2014 reprends le calcul sur ta feuille.');
+      r.disabled=false;
+    });
+    r.addEventListener('click',function(){ sol.classList.add('show'); });
+  });
+  ['ch_f1','ch_f2'].forEach(function(p){
+    var b=gi(p+'rev'), s2=gi(p+'sol');
+    if(b&&s2) b.addEventListener('click',function(){ s2.classList.add('show'); b.disabled=true; b.textContent='Correction affich\u00e9e'; });
   });
 })();
 </script>
