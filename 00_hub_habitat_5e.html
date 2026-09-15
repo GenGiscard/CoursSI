@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séquence 5ème — Les ponts · ESTIC</title>
+<style>
+:root{
+ --ink:#1e3a5f; --bleu:#1d4ed8; --bleu-fonce:#1e40af; --orange:#ea580c;
+ --papier:#f8fafc; --carte:#ffffff; --gris:#64748b; --vert:#16a34a;
+ --ombre:0 4px 14px rgba(30,58,95,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--papier);color:var(--ink);min-height:100vh}
+/* ===== Bandeau ESTIC ===== */
+.estic-bar{display:flex;align-items:center;gap:14px;background:#fff;border-bottom:3px solid var(--bleu);padding:10px 22px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.estic-bar img{height:44px}
+.estic-bar .id{line-height:1.25}
+.estic-bar .id b{color:var(--bleu-fonce);font-size:15px}
+.estic-bar .id span{display:block;font-size:12px;color:var(--gris)}
+.estic-bar .copy{margin-left:auto;font-size:11px;color:var(--gris)}
+header.seq{max-width:1000px;margin:36px auto 10px;padding:0 24px;text-align:center}
+header.seq .eyebrow{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);font-weight:700}
+header.seq h1{font-size:42px;color:var(--bleu-fonce);margin:8px 0 6px}
+header.seq p{color:var(--gris);font-size:17px;max-width:640px;margin:0 auto}
+.grid{max-width:1000px;margin:34px auto 50px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.card{background:var(--carte);border-radius:16px;box-shadow:var(--ombre);padding:26px 24px;text-decoration:none;color:var(--ink);position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s;display:block;border-top:5px solid var(--accent,var(--bleu))}
+.card:hover{transform:translateY(-5px);box-shadow:0 10px 26px rgba(30,58,95,.16)}
+.card .num{position:absolute;top:12px;right:16px;font-size:44px;font-weight:800;color:var(--accent,var(--bleu));opacity:.12}
+.card .icone{font-size:38px;margin-bottom:10px}
+.card h2{font-size:20px;margin-bottom:8px;color:var(--accent,var(--bleu))}
+.card p{font-size:14px;color:var(--gris);line-height:1.55}
+.card .tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;background:var(--accent,var(--bleu));padding:4px 12px;border-radius:20px}
+.parcours{max-width:1000px;margin:0 auto 60px;padding:0 24px}
+.parcours h3{text-align:center;color:var(--bleu-fonce);font-size:16px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.etapes{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;align-items:center}
+.etapes .e{background:#fff;border:2px solid var(--bleu);color:var(--bleu-fonce);border-radius:24px;padding:7px 16px;font-size:14px;font-weight:600}
+.etapes .fl{color:var(--orange);font-weight:800}
+footer{padding:18px;text-align:center;font-size:12px;color:var(--gris)}
+.codeprof{display:block;text-align:right;margin-top:10px;font-size:11px}
+.codeprof button{background:none;border:none;color:#cbd5e1;font-size:11px;font-family:inherit;
+ cursor:pointer;padding:2px 4px;text-decoration:underline dotted}
+.codeprof button:hover{color:var(--gris)}
+.codeprof .valeur{display:none;text-align:left;background:#fffbeb;border:1px solid #fde68a;
+ border-radius:8px;padding:6px 10px;line-height:1.5}
+.codeprof .valeur .ligne{display:block;white-space:nowrap}
+.codeprof .valeur b{font-family:'Courier New',monospace;letter-spacing:2px;color:#b45309}
+.codeprof .valeur span{color:#92400e;font-size:10.5px;margin-right:6px}
+.codeprof.ouvert button{display:none}
+.codeprof.ouvert .valeur{display:inline-block}
+@media print{.codeprof{display:none}}
+</style>
+</head>
+<body>
+
+<!-- Logo ESTIC Don Bosco (officiel) -->
+<div class="estic-bar">
+ <img alt="Logo ESTIC" src="logo_estic.png">
+ <div class="id"><b>Professeur AGOSTINI</b><span>Technologie · ESTIC — Saint-Dizier</span></div>
+ <div class="copy">© ESTIC — Tous droits réservés</div>
+</div>
+
+<header class="seq">
+ <div class="eyebrow">Séquence 5ème · Cycle 4</div>
+ <h1>Les ponts</h1>
+<div style="background:#fff;border:1px solid #e2e8f0;border-left:6px solid #0e7490;border-radius:16px;padding:15px 19px;margin:16px 0;font-size:14.5px;line-height:1.7">
+<div style="font-size:12.5px;font-weight:900;letter-spacing:1px;color:#64748b;margin-bottom:6px">OBJECTIFS DE LA SÉQUENCE</div>
+<div style="margin-bottom:12px">Identifier et nommer les efforts subis par un ouvrage · expliquer la triangulation · relier matériau et effort · comparer des types de ponts selon la portée</div>
+<div style="font-size:12.5px;font-weight:900;letter-spacing:1px;color:#64748b;margin-bottom:4px">COMPÉTENCES TRAVAILLÉES — BO n° 9 du 29 février 2024</div>
+<table style="width:100%;border-collapse:collapse;font-size:14px"><tr><td style="white-space:nowrap;font-weight:800;color:#155e75;padding:5px 9px;border-bottom:1px solid #e2e8f0">T2 · C4</td><td style="padding:5px 9px;border-bottom:1px solid #e2e8f0">Décrire et caractériser l’organisation interne d’un objet ou d’un système technique</td></tr><tr><td style="white-space:nowrap;font-weight:800;color:#155e75;padding:5px 9px;border-bottom:1px solid #e2e8f0">T1 · C3</td><td style="padding:5px 9px;border-bottom:1px solid #e2e8f0">Caractériser et choisir un objet ou un système technique selon différents critères</td></tr><tr><td style="white-space:nowrap;font-weight:800;color:#155e75;padding:5px 9px;border-bottom:1px solid #e2e8f0">T3 · C8</td><td style="padding:5px 9px;border-bottom:1px solid #e2e8f0">Valider les solutions techniques par des simulations ou par des protocoles de tests</td></tr></table>
+<div style="margin-top:10px"><a href="01_cours_habitat_ouvrages.html#sObj" style="color:#155e75;font-weight:800;text-decoration:none">Détail des objectifs et trace écrite dans le cours →</a></div>
+</div> <p>Comment un pont tient-il debout ? Pourquoi une maison garde-t-elle la chaleur ?
+ Efforts, structures, matériaux et isolation : deviens ingénieur du bâtiment.</p>
+</header>
+
+<div class="grid">
+ <a class="card" href="01_cours_habitat_ouvrages.html" style="--accent:#1d4ed8">
+ <div class="num">1</div><div class="icone"></div>
+ <h2>Cours projeté</h2>
+ <p>Les ouvrages et leurs fonctions, les efforts, la triangulation, les types de ponts, les matériaux et l'isolation thermique. Avec animations pédagogiques.</p>
+ <span class="tag">Classe entière</span>
+ </a>
+ <a class="card" href="02_tp_ponts.html" style="--accent:#0e7490">
+ <div class="num">2</div><div class="icone"></div>
+ <h2>TP — Simulateur de pont</h2>
+ <p>7 activités progressives : identifier les efforts, tester une poutre, trianguler une structure, construire un pont qui résiste au camion, légender le schéma animé du pont à haubans et dimensionner la poutre au curseur (regarde-la plier !).</p>
+ <span class="tag">Binômes · îlots</span>
+ </a>
+ <a class="card" href="03_jeu_batisseur.html" style="--accent:#ea580c">
+ <div class="num">3</div><div class="icone"></div>
+ <h2>Exercice compétitif — Bâtisseur Fou</h2>
+ <p>Empile les étages avec la grue, résiste au vent, réponds aux questions bonus pour consolider ta tour. Débloqué à la fin du TP.</p>
+ <span class="tag">Arcade · révision</span>
+ </a>
+ <a class="card" href="03b_jeu_inspecteur.html" style="--accent:#0369a1">
+ <div class="num"></div><div class="icone"></div>
+ <h2>Exercice compétitif — Inspecteur des Ouvrages</h2>
+ <p>6 ouvrages qui vieillissent, 2 équipes par jour, tempêtes et convois exceptionnels : répare, triangule, isole… et que rien ne s'effondre.</p>
+ <span class="tag">Gestion · stratégie</span>
+ </a>
+ <a class="card" href="03c_jeu_chantier_express.html" style="--accent:#dc2626">
+ <div class="num"></div><div class="icone"></div>
+ <h2>Exercice compétitif — Chantier Express</h2>
+ <p>Cours sur le tablier du pont : saute les trous, glisse sous les câbles des haubans et ramasse les casques — livraison urgente à l'autre bout !</p>
+ <span class="tag">Action · réflexes</span>
+ </a>
+ <a class="card" href="04_evaluation_habitat.html" style="--accent:#16a34a">
+ <div class="num">4</div><div class="icone"></div>
+ <h2>Évaluation</h2>
+ <p>12 questions sur toute la séquence. Résultats enregistrés automatiquement, tableau de bord professeur intégré.</p>
+ <span class="tag">Individuel · noté</span>
+ </a>
+ <a class="card" href="https://www.youtube.com/watch?v=JidxYO5IPGI" target="_blank" rel="noopener" style="--accent:#b45309">
+ <div class="num">5</div><div class="icone"></div>
+ <h2>Pont papier</h2>
+ <p>Une maquette de pont à structure treillis construite avec presque rien, puis testée en charge jusqu’à la rupture. À regarder avant de lancer le défi en classe : on y voit la triangulation travailler pour de vrai.</p>
+ <span class="tag">À projeter · avant le défi construction</span>
+ </a>
+ <a class="card" href="https://play.kahoot.it/v2/?quizId=162e5bcd-f0a2-4fe5-abf5-c4b3103caaf7&amp;hostId=4fe3d595-5a74-409d-9f56-862a5af5dfa9" target="_blank" rel="noopener" style="--accent:#7c3aed">
+ <div class="num">6</div><div class="icone"></div>
+ <h2>Kahoot — quiz de révision</h2>
+ <p>Quiz collectif à projeter : les familles de ponts, la traction et la compression, le vocabulaire de l’ouvrage. Les élèves répondent depuis leur poste ou leur téléphone.</p>
+ <span class="tag">Classe entière · vidéoprojection</span>
+ </a>
+</div>
+
+<div class="parcours">
+ <h3>Parcours de la séquence</h3>
+ <div class="etapes">
+ <span class="e">Cours (2 séances)</span><span class="fl">→</span>
+ <span class="e">TP simulateur (2 séances)</span><span class="fl">→</span>
+ <span class="e">Jeu de révision</span><span class="fl">→</span>
+ <span class="e">Évaluation</span>
+ </div>
+</div>
+
+<footer>Séquence « Les ponts » · Technologie 5ème · ESTIC Don Bosco<span class="codeprof" id="cp"><button type="button" id="cpBtn" title="Codes de déverrouillage des évaluations">technologie collège</button><span class="valeur"><span class="ligne"><span>Évaluation</span><b>ARCHE62</b></span><span class="ligne"><span>Évaluation des sorciers</span><b>SORCIER7</b></span></span></span></footer>
+<script>
+/* Code de l’évaluation des sorciers, révélé au clic : il ne doit pas
+   être lisible d’emblée par les élèves qui consultent le hub. */
+(function(){var b=document.getElementById('cpBtn');if(!b)return;
+ b.addEventListener('click',function(){document.getElementById('cp').classList.add('ouvert');});
+})();
+</script>
+</body>
+</html>
