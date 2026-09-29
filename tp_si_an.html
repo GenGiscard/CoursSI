@@ -131,6 +131,8 @@
   .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
   .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid #E4DCCB}
+  .tpscore .tps-note b{color:#3D7E5F;font-size:19px}
   .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
            text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
            padding:13px 20px;cursor:pointer}
@@ -159,6 +161,33 @@
   .objectifs .vraie .punch{margin:10px 0 0;font-size:15px;font-weight:700;color:#8a6313;font-style:italic}
   .objectifs .prereq{font-size:14px;color:#5C544B;margin-top:12px;padding-top:10px;border-top:1px dashed #E4DCCB}
   .objectifs .prereq b{color:#8a6313}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Application numérique<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP de méthode · Première spé SI · Application numérique</div> <h1>La chaîne sans maillon faible</h1> <p class="lede">Aujourd’hui, aucune formule nouvelle. Que des calculs longs — le genre où l’on enchaîne cinq étapes et où <b>une seule étourderie fait tout dérailler jusqu’au bout</b>. Tu vas convertir, poser en lettres, estimer, calculer, relire. Et surtout : tu vas apprendre à <b>repérer l’erreur dans une copie</b>, y compris la tienne.</p> <div class="plan"><div class="p"><div class="t">Acte 1 · ≈ 45 min</div><b>Les réflexes</b><span>Conversions, homogénéité, parenthèses : les trois gardes du corps.</span></div> <div class="p"><div class="t">Acte 2 · ≈ 60 min</div><b>Le long calcul</b><span>Un bilan de puissance en 5 étapes, et le détecteur d’étourderie.</span></div> <div class="p"><div class="t">Acte 3 · ≈ 55 min</div><b>La relecture</b><span>Chaîne d’énergie complète, cas extrêmes, chasse à l’erreur.</span></div></div></div> <div class="rappel"><b>La méthode de la séance, à appliquer à CHAQUE exercice.</b> ① Convertir toutes les données en unités SI, sur une ligne dédiée. ② Poser la formule <b>en lettres</b>. ③ Estimer l’ordre de grandeur de tête. ④ Calculer d’un seul trait, sans arrondir en route. ⑤ Relire : unité, signe, ordre de grandeur, question posée, cas extrême.</div> <!-- ============ ACTE 1 ============ --> <div class="acte"><span class="n">ACTE 1</span><h2>Les réflexes</h2><span class="d">≈ 45 min</span></div> <section class="exo-card" id="a"> <h3 class="ex"><span class="num">A</span> La ligne de données converties</h3> <p class="task">Avant toute chose : l’énoncé du TP donne ces six valeurs « telles qu’on les trouve sur une plaque signalétique ». Convertis-les toutes en unités du système international — c’est la ligne que tu écriras désormais en tête de chaque exercice.</p> <div class="conv-grid" id="convGrid"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol">1500 tr/min = 2π×1500/60 ≈ <b>157,08 rad/s</b> · 12 kN = <b>12 000 N</b> · 45 mm = <b>0,045 m</b> · 72 km/h = 72/3,6 = <b>20 m/s</b> · 300 g = <b>0,3 kg</b> · 2,5 kWh = 2,5×3,6 = <b>9 MJ</b>.<br>Retiens surtout le facteur 2π/60 ≈ 0,105 : c’est la conversion la plus oubliée de toute la spécialité, et elle fausse un résultat d’un facteur ≈ 9,55.</div> </section> <section class="exo-card" id="b"> <h3 class="ex"><span class="num">B</span> Le filtre de l’homogénéité</h3> <p class="task">Trois camarades proposent trois formules pour la puissance d’un vérin (F en N, v en m/s). <b>Sans calculer</b>, élimine par les unités.</p> <div class="match" id="bMatch"></div> <div class="row"><span>b) Avec F = 2500 N et v = 0,4 m/s, la puissance vaut :</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol">Seule <b>P = F·v</b> est homogène : N × m/s = N·m/s = J/s = <b>W</b> ✓. « F/v » donnerait des N·s/m et « F·v² » des N·m²/s² — ni l’une ni l’autre n’est une puissance.<br><b>b)</b> P = 2500 × 0,4 = <b>1000 W</b>. Remarque la simplicité du calcul une fois la bonne formule identifiée : <b>le temps passé à vérifier l’homogénéité n’est jamais perdu</b>, il est repris au centuple sur les formules éliminées.</div> </section> <section class="exo-card" id="c"> <h3 class="ex"><span class="num">C</span> Le piège des parenthèses</h3> <p class="task">Une charge de <b>800 N</b> est reprise par deux élingues faisant 40° avec la verticale : T = 800 / (2 × cos 40°). <b>Tape les deux saisies</b> sur l’écran ci-dessous et compare.</p> <div class="schema"><canvas id="cvCalc" width="700" height="250" aria-label="Deux saisies de calculatrice comparées"></canvas> <div class="row" style="justify-content:center"><button class="btn g" id="btnSans">saisir sans parenthèses</button> <button class="btn g" id="btnAvec">saisir avec parenthèses</button></div></div> <div class="row"><span>a) Tension réelle d’un brin : T =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="cMatch"></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>a)</b> cos 40° ≈ 0,766, donc 2 × 0,766 = 1,532 et T = 800/1,532 ≈ <b>522,2 N</b>.<br>Sans parenthèses, la machine calcule (800/2) × 0,766 = <b>306,4 N</b> : un résultat <b>1,7 fois trop petit</b> — et une élingue sous-dimensionnée. <b>Règle :</b> dès que le dénominateur contient plus d’un facteur, parenthèses obligatoires. Le doute se lève en tapant d’abord le dénominateur seul.</div> </section> <!-- ============ ACTE 2 ============ --> <div class="acte"><span class="n">ACTE 2</span><h2>Le long calcul</h2><span class="d">≈ 60 min</span></div> <section class="exo-card" id="d"> <h3 class="ex"><span class="num">D</span> Bilan de puissance d’un motoréducteur</h3> <p class="task">Le convoyeur de l’atelier. Moteur : <b>N₁ = 1500 tr/min</b>, couple <b>C₁ = 12 N·m</b>. Réducteur : rapport <b>1/4</b>, rendement <b>η = 0,92</b>. Cinq étapes s’enchaînent — <b>remplis-les dans l’ordre</b>, chacune nourrit la suivante.</p> <div class="schema"><canvas id="cvChaine" width="700" height="220" aria-label="Chaîne moteur réducteur avec puissances d'entrée et de sortie"></canvas></div> <div class="etape" id="dE1"><span class="st">①</span><span class="lb">Vitesse angulaire du moteur : ω₁ =</span><input class="numin" id="d1" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="etape" id="dE2"><span class="st">②</span><span class="lb">Puissance mécanique du moteur : P₁ = C₁·ω₁ =</span><input class="numin" id="d2" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="etape" id="dE3"><span class="st">③</span><span class="lb">Puissance en sortie de réducteur : P₂ = η·P₁ =</span><input class="numin" id="d3" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="etape" id="dE4"><span class="st">④</span><span class="lb">Vitesse angulaire de sortie : ω₂ =</span><input class="numin" id="d4" inputmode="decimal" placeholder="?"><span class="unit">rad/s</span></div> <div class="etape" id="dE5"><span class="st">⑤</span><span class="lb">Couple disponible en sortie : C₂ = P₂/ω₂ =</span><input class="numin" id="d5" inputmode="decimal" placeholder="?"><span class="unit">N·m</span></div> <div class="match" id="dMatch"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn step" id="dStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="steps" id="dSteps"></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol">① ω₁ = 2π×1500/60 ≈ <b>157,08 rad/s</b> · ② P₁ = 12 × 157,08 ≈ <b>1885 W</b> · ③ P₂ = 0,92 × 1885 ≈ <b>1734 W</b> · ④ ω₂ = 157,08/4 ≈ <b>39,27 rad/s</b> · ⑤ C₂ = 1734/39,27 ≈ <b>44,2 N·m</b>.<br><b>La vérification croisée qui vaut de l’or :</b> le couple doit aussi valoir C₁ × 4 × 0,92 = 12 × 3,68 = <b>44,2 N·m</b> ✓. Deux chemins indépendants, même résultat : ton calcul est juste, et tu le sais <b>sans attendre la correction</b>. Un réducteur divise la vitesse et multiplie le couple — le rendement, lui, ne fait que retirer sa part.</div> </section> <section class="exo-card" id="e"> <h3 class="ex"><span class="num">★</span> Le détecteur d’étourderie</h3> <p class="task">Trois copies te sont soumises. Chacune contient <b>exactement une ligne fautive</b> — les autres sont impeccables. <b>Clique sur la ligne où l’erreur apparaît pour la première fois</b>, puis donne le résultat correct. Attention : l’erreur peut être un signe, un facteur oublié, une conversion, une recopie.</p> <div class="copie" id="copieBox"></div> <div class="row"><span>Résultat correct de cette copie :</span><input class="numin" id="eRes" inputmode="decimal" placeholder="?"><span class="unit" id="eUnit"></span> <button class="btn" id="eCheck">Valider</button><span class="score">copies traitées : <b id="eScore">0</b> / 3</span></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>Copie 1</b> — ligne 3 : le rendement 0,9 a été appliqué… mais la puissance recopiée est 1200 au lieu de 1250 (recopie fautive). Résultat correct : 1125 W.<br><b>Copie 2</b> — ligne 2 : les tr/min n’ont pas été convertis en rad/s. Résultat correct : 628 W.<br><b>Copie 3</b> — ligne 4 : le signe de la composante a été perdu en additionnant. Résultat correct : 200 N.<br><b>Ce qu’il faut retenir :</b> dans les trois cas, le calcul <b>continue sans broncher</b> après l’erreur. Aucune ligne suivante ne « proteste ». C’est précisément pour cela que la relecture doit se faire ligne à ligne, et pas seulement sur le résultat final.</div> </section> <!-- ============ ACTE 3 ============ --> <div class="acte"><span class="n">ACTE 3</span><h2>La relecture</h2><span class="d">≈ 55 min</span></div> <section class="exo-card" id="f"> <h3 class="ex"><span class="num">F</span> La chaîne d’énergie du vélo électrique</h3> <p class="task">Le VAE du lycée. Batterie : <b>36 V</b>, <b>10 Ah</b>, elle débite <b>8 A</b> en usage soutenu. Chaîne : variateur <b>η₁ = 0,95</b>, moteur <b>η₂ = 0,85</b>, transmission <b>η₃ = 0,92</b>. Quatre étapes, dont deux conversions cachées.</p> <div class="row"><span>a) Puissance fournie par la batterie : P = U·I =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><span>b) Rendement global de la chaîne :</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"></div> <div class="row"><span>c) Puissance utile à la roue :</span><input class="numin" id="fC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><span>d) Autonomie à ce régime :</span><input class="numin" id="fD" inputmode="decimal" placeholder="?"><span class="unit">min</span></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn step" id="fStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="steps" id="fSteps"></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol"><b>a)</b> P = 36 × 8 = <b>288 W</b>. <b>b)</b> η = 0,95 × 0,85 × 0,92 ≈ <b>0,743</b> (les rendements se <b>multiplient</b>, ils ne s’additionnent ni ne se moyennent). <b>c)</b> 288 × 0,743 ≈ <b>214 W</b>. <b>d)</b> Énergie stockée = 36 × 10 = 360 Wh ; autonomie = 360/288 = 1,25 h = <b>75 min</b>.<br><b>Les deux pièges du d) :</b> le produit V×Ah donne des <b>Wh</b> (pas des W), et l’heure décimale 1,25 h vaut 75 min, <b>pas 1 h 25</b>. Les deux tombent chaque année.</div> </section> <section class="exo-card" id="g"> <h3 class="ex"><span class="num">G</span> Le contrôle par les extrêmes</h3> <p class="task">Reprends le rendement global de l’exercice F. Sans refaire le calcul complet, réponds à ces contrôles de cohérence — ce sont exactement ceux qu’un ingénieur fait avant de signer.</p> <div class="match" id="gMatch"></div> <div class="row"><span>c) Si les trois rendements valaient 1 (chaîne parfaite), la puissance utile serait :</span><input class="numin" id="gC" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol">Un rendement global est <b>toujours inférieur au plus petit des rendements de la chaîne</b> : ici 0,743 < 0,85, cohérent ✓. S’il avait dépassé 0,95, il aurait fallu chercher l’erreur immédiatement (on ne crée pas d’énergie).<br><b>c)</b> Avec η = 1 partout, la puissance utile égalerait la puissance d’entrée : <b>288 W</b>. Ce cas extrême est le meilleur test de ta formule : si ton expression ne redonne pas 288 W quand les rendements valent 1, elle est fausse.</div> </section> <section class="exo-card" id="h"> <h3 class="ex"><span class="num">H</span> La relecture en 5 contrôles</h3> <p class="task">Un camarade rend cette réponse pour le couple de sortie du convoyeur (exercice D) : <i>« C₂ = −44 »</i>. Applique la grille de relecture : combien de contrôles cette réponse échoue-t-elle, et lesquels ?</p> <div class="match" id="hMatch"></div> <div class="row"><button class="btn" id="hCheck">Vérifier</button><button class="btn g" id="hShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="hFb"></div> <div class="exo-sol" id="hSol">Cette réponse échoue à <b>deux contrôles</b> : ① <b>l’unité manque</b> (44 quoi ? des N·m, des W ?) et ② <b>le signe est absurde</b> — un couple moteur entraînant ne peut pas être négatif ici, rien ne freine le convoyeur.<br>En revanche l’ordre de grandeur est bon (44 est bien la valeur attendue), la question posée était bien celle-là, et le cas extrême passerait. <b>Deux défauts sur cinq contrôles : deux points perdus pour un calcul pourtant juste.</b> C’est exactement le genre de points que la grille récupère en trente secondes.</div> </section> <section class="exo-card" id="i"> <h3 class="ex"><span class="num">★</span> La chasse à l’erreur finale</h3> <p class="task">Note de calcul d’un stagiaire, pour une pompe : <i>« Le moteur développe C = 8 N·m à N = 1200 tr/min. Sa puissance vaut donc P = C × N = 8 × 1200 = 9600 W, soit près de 10 kW. »</i> Le chef de projet a bondi en lisant la conclusion.</p> <div class="match" id="iMatch"></div> <div class="row"><span>b) Puissance réelle du moteur :</span><input class="numin" id="iB" inputmode="decimal" placeholder="?"><span class="unit">W</span></div> <div class="row"><button class="btn" id="iCheck">Vérifier</button><button class="btn step" id="iStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="iShow" disabled>Voir la correction</button></div> <div class="steps" id="iSteps"></div> <div class="exo-fb" id="iFb"></div> <div class="exo-sol" id="iSol"><b>a)</b> Le stagiaire a utilisé <b>N en tr/min directement</b> dans P = C·ω, sans convertir en rad/s.<br><b>b)</b> ω = 2π×1200/60 ≈ 125,7 rad/s, donc P = 8 × 125,7 ≈ <b>1005 W</b>, soit environ 1 kW.<br><b>c)</b> L’écart est d’un facteur <b>9,55</b> (= 60/2π) : le stagiaire commandait un moteur dix fois trop puissant. Et le contrôle qui aurait suffi : l’<b>homogénéité</b> — N·m × tr/min ne donne pas des watts. Suivi du bon sens : 10 kW pour une pompe de ce type, c’est la puissance d’une petite voiture électrique.</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
@@ -680,7 +709,7 @@ setupSteps('iStepBtn','iSteps',[
     </div>
     <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
     <div class="tps-row">
-      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
       <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
@@ -715,12 +744,15 @@ setupSteps('iStepBtn','iSteps',[
     var t=d('tpsTot'); if(t) t.textContent=EX.length;
     maj();
   }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
   function maj(){
     var n=0;
     EX.forEach(function(e,i){ if(done[i]) n++; });
-    var now=d('tpsNow'), fill=d('tpsFill');
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
     if(now) now.textContent=n;
     if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=String(note(n,EX.length)).replace('.',',');
     return n;
   }
   function observe(){
@@ -750,13 +782,13 @@ setupSteps('iStepBtn','iSteps',[
     fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       tp:TP_TITRE, fichier:TP_ID,
       eleves:p, classe:cl,
-      score:n, total:tot,
+      score:n, total:tot, note:note(n,tot),
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
     })})
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
     .then(function(){
       msg.className='tps-msg ok';
-      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+String(note(n,tot)).replace('.',',')+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
     }).catch(function(err){
       msg.className='tps-msg no';
@@ -780,6 +812,93 @@ setupSteps('iStepBtn','iSteps',[
 })();
 
 
+</script>
+
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u)) bloque=true;
+    });
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
+})();
 </script>
 </body>
 </html>

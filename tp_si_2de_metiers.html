@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP — Enquête métiers · Option SI Seconde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px 18px 70px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:11px 17px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+  .estic-bar .b{width:33px;height:33px;border-radius:9px;background:var(--plum);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+  .estic-bar .t{font-weight:800;font-size:16px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  .links{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .navlink{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:12px;
+           text-decoration:none;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .navlink:hover{border-color:var(--steel);color:var(--steel)}
+  .navlink .dn{font-weight:700;color:var(--steel)}
+  section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 26px;margin-bottom:20px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper)}
+  h1{font-size:29px;margin:6px 0 8px;font-weight:800}
+  h2{font-size:23px;margin:6px 0 10px;font-weight:800}
+  .lede{font-size:16.5px;color:var(--sub);margin:0 0 14px}
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cx{background:var(--paper);border:1px solid rgba(42,38,34,.14);border-left:4px solid var(--amber);border-radius:14px;padding:15px 18px}
+  .cx.fe{border-left-color:var(--plum);background:rgba(138,90,122,.05)}
+  .cxh{font-weight:800;font-size:16.5px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cxn{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;background:var(--amber);
+       color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cx.fe .cxn{background:var(--plum)}
+  .cx p{font-size:15px;margin:6px 0}
+  .consigne{background:var(--paper);border:1px dashed rgba(42,38,34,.26);border-radius:10px;padding:11px 14px;margin-top:8px;font-size:14.5px}
+  .consigne b{color:#6f4a63}
+  .cq{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0;font-size:15px}
+  .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:110px;padding:8px 10px;
+            border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cq input:focus{border-color:var(--steel)}
+  .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--sub)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+       border:none;border-radius:9px;padding:9px 15px;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)} .btn.g{background:var(--green)}
+  .btn.ghost{background:#fff;color:var(--steel);border:1px solid var(--steel)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .exo-fb{font-size:14px;font-weight:700;margin-top:6px;min-height:19px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .csol{display:none;background:rgba(189,138,42,.10);border-radius:10px;padding:12px 15px;margin-top:10px;font-size:14px;line-height:1.6}
+  .csol.show{display:block} .csol b{color:#8a6313}
+  .schema{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+  .schema canvas{width:100%;height:auto;display:block}
+  .slider-row{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+  .slider-row label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub)}
+  .slider-row input[type=range]{flex:1;min-width:190px}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);min-width:96px}
+  .rappel{background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.28);border-radius:12px;padding:13px 16px;margin:12px 0;font-size:15px}
+  .rappel code{font-family:'JetBrains Mono',monospace;background:rgba(42,38,34,.07);border-radius:5px;padding:1px 6px}
+  /* remise du travail */
+  .tpscore{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:16px;padding:20px 22px}
+  .tpscore h2{margin:0 0 4px}
+  .tps-lede{margin:0 0 14px;font-size:15px;color:var(--sub)}
+  .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tps-grid{grid-template-columns:1fr 1fr} }
+  .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub)}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);outline:none;width:100%}
+  .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tps-fill{height:100%;width:0;background:linear-gradient(90deg,var(--steel),var(--green));transition:width .45s ease}
+  .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--sub)}
+  .tps-count b{color:var(--steel);font-size:19px}
+  .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid var(--line)}
+  .tps-note b{color:var(--green);font-size:19px}
+  .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .tps-msg{font-size:14px;font-weight:700;margin-top:10px;min-height:19px}
+  .tps-msg.ok{color:var(--green)} .tps-msg.no{color:var(--copper)}
+  /* objectifs */
+  .objectifs{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:14px;padding:16px 20px;margin:16px 0}
+  .objectifs .ok{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-bottom:8px}
+  .objectifs h3{margin:0 0 8px;font-size:17px;font-weight:800}
+  .objectifs .ointro{font-size:15px;color:var(--sub);margin:0 0 12px}
+  .objectifs ul{margin:0 0 14px;padding-left:20px} .objectifs li{font-size:15.5px;margin:5px 0}
+  .objectifs .comp{display:grid;gap:8px;margin-top:6px}
+  .objectifs .c{display:flex;gap:12px;align-items:flex-start;background:#F6F1E6;border:1px solid var(--line);border-radius:10px;padding:9px 13px}
+  .objectifs .c .code{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:var(--green);
+                      border-radius:6px;padding:3px 8px;flex:none;min-width:52px;text-align:center}
+  .objectifs .c .lib{font-size:15px;line-height:1.45}
+  .objectifs .c .lib i{display:block;font-size:13.5px;color:var(--sub);font-style:normal;margin-top:2px}
+  .objectifs .vraie{margin-top:16px;background:linear-gradient(160deg,rgba(189,138,42,.10),rgba(189,138,42,.04));
+      border:1px solid rgba(189,138,42,.32);border-radius:12px;padding:13px 16px}
+  .objectifs .vraie .vk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a6313;margin-bottom:8px}
+  .objectifs .vraie ul{margin:0;padding-left:18px} .objectifs .vraie li{font-size:15px;margin:6px 0}
+  .objectifs .vraie li b{color:#8a6313}
+  .objectifs .vraie .punch{margin:10px 0 0;font-size:15px;font-weight:700;color:#8a6313;font-style:italic}
+  .objectifs .prereq{font-size:14px;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:81;width:52px;height:52px;border-radius:50%;
+              background:var(--steel);border:none;box-shadow:0 8px 22px rgba(20,16,10,.3);cursor:pointer;
+              display:flex;align-items:center;justify-content:center}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+ min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  .jeu{background:linear-gradient(160deg,rgba(138,90,122,.12),rgba(138,90,122,.04));
+       border:2px solid rgba(138,90,122,.40);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .jeu .jk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6f4a63;margin-bottom:8px}
+  .jeu .mission{font-size:18px;font-weight:800;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+  .jeu .ctx{font-size:15px;color:var(--sub);margin-bottom:12px}
+  .jeu .opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .jeu .opt{background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;
+            font-size:15px;font-weight:700;text-align:left;font-family:inherit}
+  .jeu .opt:hover{border-color:var(--plum)}
+  .jeu .opt.bon{background:rgba(61,126,95,.16);border-color:var(--green);color:#2c6147}
+  .jeu .opt.faux{background:rgba(192,73,46,.14);border-color:var(--copper);color:#8f3722}
+  .jeu .fb{margin-top:12px;font-size:15.5px;display:none} .jeu .fb.show{display:block}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">Enquête métiers</div><div class="s">Option SI · Seconde · Travaux pratiques</div></div></div>
+  <div class="links" id="links">
+    <a href="#enq" class="navlink"><span class="dn">1</span><span class="nm">L'offre mystère</span></a>
+    <a href="#eq" class="navlink"><span class="dn">2</span><span class="nm">Composer l'équipe</span></a>
+    <a href="#cahier" class="navlink"><span class="dn">✎</span><span class="nm">Cahier d'exercices</span></a>
+    <a href="#feuille" class="navlink"><span class="dn">✎</span><span class="nm">Sur ta copie</span></a>
+    <a href="#tpScore" class="navlink"><span class="dn">→</span><span class="nm">Remise du travail</span></a>
+  </div>
+
+
+  <section id="intro">
+    <span class="kicker">Travaux pratiques · Seconde</span>
+    <h1>Enquête métiers</h1>
+    <p class="lede">Tu as vu dix métiers en cours. À toi de les reconnaître dans la vraie vie : des offres d'emploi dont on a effacé le titre, une équipe à composer avec un budget, et les chiffres qui font qu'un projet tient ou déraille.</p>
+  </section>
+
+  <section id="enq">
+    <span class="kicker">Partie 1</span>
+    <h2>L'offre mystère</h2>
+    <p class="lede">Quatre offres d'emploi réelles, dont on a effacé le titre. <b>Devine le métier à partir des missions.</b></p>
+    <div class="jeu" id="jeu">
+      <div class="jk">Offre <span id="jNum">1</span> sur 4</div>
+      <div class="mission" id="jTitre"></div>
+      <div class="ctx" id="jMis"></div>
+      <div class="opts" id="jOpts"></div>
+      <div class="fb" id="jFb"></div>
+      <div class="exo-fb" id="enqfb"></div>
+    </div>
+  </section>
+
+  <section id="eq">
+    <span class="kicker">Partie 2</span>
+    <h2>Composer l'équipe</h2>
+    <p class="lede">Projet : concevoir une canette 20 % plus légère, en <b>6 mois</b>, avec <b>132 000 €</b>. Choisis les profils. <b>Trois compétences sont indispensables</b> — à toi de voir lesquelles.</p>
+    <div class="schema">
+      <canvas id="cvEq" width="880" height="330" aria-label="Composition de l'équipe projet : budget et compétences couvertes"></canvas>
+      <div id="eqBtns" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px"></div>
+    </div>
+    <div class="cx"><div class="cxh"><span class="cxn">1</span>Le bon dosage</div>
+    <div class="cq"><span>a) Coût mensuel de ton équipe :</span><input id="c1_a" inputmode="decimal" placeholder="?"><span class="cu">€/mois</span></div>
+    <div class="cq"><span>b) Coût total sur les 6 mois :</span><input id="c1_b" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+    <div class="cq"><button class="btn" id="c1chk">Vérifier</button><button class="btn ghost" id="c1rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c1fb"></div>
+    <div class="csol" id="c1sol">BE 5000 + calcul 5500 + essais 4500 + chef de projet 6000 + 1000 de frais = <b>22 000 €/mois</b>.<br>Sur 6 mois : <b>132 000 €</b>, le budget exact.<br>Sans <b>BE</b>, personne ne dessine.<br>Sans <b>essais</b>, personne ne prouve que ça tient.<br>Sans <b>chef de projet</b>, les 6 mois deviennent 9.</div></div>
+  </section>
+
+  <section id="cahier">
+    <span class="kicker">Partie 3</span>
+    <h2>Cahier d'exercices</h2>
+    <p class="lede">Trois calculs que tout chef de projet fait dans sa semaine.</p>
+    <div class="cahier">
+
+      <div class="cx"><div class="cxh"><span class="cxn">2</span>Le budget qui déborde</div>
+      <p>Une équipe de <b>4 personnes</b> coûte <b>5500 € par mois et par personne</b>. Le projet devait durer <b>6 mois</b>, mais le budget alloué n'est que de <b>120 000 €</b>.</p>
+      <div class="cq"><span>a) Coût réel du projet sur 6 mois :</span><input id="c2_a" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+      <div class="cq"><span>b) Dépassement par rapport au budget :</span><input id="c2_b" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+      <div class="cq"><button class="btn" id="c2chk">Vérifier</button><button class="btn ghost" id="c2rev">Voir la correction</button></div>
+      <div class="exo-fb" id="c2fb"></div>
+      <div class="csol" id="c2sol"><b>a)</b> 4 × 5500 × 6 = <b>132 000 €</b>.<br><b>b)</b> 12 000 € de trop.<br>Deux sorties : <b>5 mois</b> (110 000 €) ou <b>3 personnes</b> (99 000 €).<br>L'une serre les délais, l'autre charge l'équipe.<br><b>C'est l'arbitrage quotidien du chef de projet.</b></div></div>
+
+      <div class="cx"><div class="cxh"><span class="cxn">3</span>Le planning qu'on peut serrer</div>
+      <p>Trois tâches : étude <b>6 semaines</b>, essais <b>4 semaines</b>, industrialisation <b>5 semaines</b>. Les essais et l'industrialisation peuvent démarrer en même temps, une fois l'étude finie.</p>
+      <div class="cq"><span>a) Durée si tout s'enchaîne :</span><input id="c3_a" inputmode="decimal" placeholder="?"><span class="cu">semaines</span></div>
+      <div class="cq"><span>b) Durée en parallélisant :</span><input id="c3_b" inputmode="decimal" placeholder="?"><span class="cu">semaines</span></div>
+      <div class="cq"><button class="btn" id="c3chk">Vérifier</button><button class="btn ghost" id="c3rev">Voir la correction</button></div>
+      <div class="exo-fb" id="c3fb"></div>
+      <div class="csol" id="c3sol"><b>a)</b> 6 + 4 + 5 = <b>15 semaines</b>.<br><b>b)</b> 6 + max(4 ; 5) = <b>11 semaines</b>.<br><b>Le piège :</b> on gagne 4 semaines, pas 9.<br><b>La tâche la plus longue impose la durée.</b></div></div>
+
+      <div class="cx"><div class="cxh"><span class="cxn">4</span>La règle du facteur 10</div>
+      <p>En industrie, un défaut coûte <b>1 €</b> s'il est détecté en conception, <b>10 €</b> en production, et <b>100 €</b> une fois chez le client. Un lot de <b>1000 pièces</b> est défectueux.</p>
+      <div class="cq"><span>a) Coût si le défaut est vu chez le client :</span><input id="c4_a" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+      <div class="cq"><span>b) Coût s'il avait été vu en conception :</span><input id="c4_b" inputmode="decimal" placeholder="?"><span class="cu">€</span></div>
+      <div class="cq"><button class="btn" id="c4chk">Vérifier</button><button class="btn ghost" id="c4rev">Voir la correction</button></div>
+      <div class="exo-fb" id="c4fb"></div>
+      <div class="csol" id="c4sol"><b>a)</b> <b>100 000 €</b>. <b>b)</b> <b>1000 €</b> — cent fois moins.<br>Voilà pourquoi on paie calcul et essais avant de fabriquer.<br>Ils ne produisent rien de visible : ils évitent le coût de l'erreur.</div></div>
+    </div>
+  </section>
+
+  <section id="feuille">
+    <span class="kicker">Partie 4</span>
+    <h2>À rédiger sur ta copie</h2>
+    <p class="lede">Deux travaux à rendre, rédigés à la main.</p>
+    <div class="cahier">
+      <div class="cx fe"><div class="cxh"><span class="cxn">F1</span>Ta fiche métier</div>
+      <p>Choisis <b>un</b> des dix métiers vus en cours — celui qui t'attire, ou celui que tu comprends le moins.</p>
+      <p class="consigne"><b>Sur ta feuille :</b></p>
+          <p class="consigne" style="margin-top:-6px"><b>1.</b> nomme le métier et sa mission en une phrase.</p>
+          <p class="consigne" style="margin-top:-6px"><b>2.</b> décris trois activités concrètes de sa semaine.</p>
+          <p class="consigne" style="margin-top:-6px"><b>3.</b> cite deux autres métiers avec lesquels il travaille tous les jours, et sur quoi.</p>
+          <p class="consigne" style="margin-top:-6px"><b>4.</b> indique une qualité indispensable et une difficulté du poste.</p>
+          <p class="consigne" style="margin-top:-6px"><b>5.</b> termine par une phrase honnête : ce métier te tenterait-il, et pourquoi ?</p>
+      <div class="cq"><button class="btn ghost" id="f1rev">Afficher les attendus</button></div>
+      <div class="csol" id="f1sol">Des activités <b>concrètes</b> : « chronométrer un poste », pas « travailler sur ordinateur ».<br>Les deux métiers cités doivent être différents du tien.<br>Précise le lien : le BE et les méthodes parlent <b>fabricabilité</b>.<br>La dernière question veut un argument, pas un « oui ».</div></div>
+
+      <div class="cx fe"><div class="cxh"><span class="cxn">F2</span>Le planning du projet</div>
+      <p>Reprends le projet de la partie 2 : canette 20 % plus légère, 6 mois, 4 personnes.</p>
+      <p class="consigne"><b>Sur ta feuille :</b></p>
+          <p class="consigne" style="margin-top:-6px"><b>1.</b> découpe le projet en 5 tâches et donne une durée à chacune, pour un total de 6 mois.</p>
+          <p class="consigne" style="margin-top:-6px"><b>2.</b> indique lesquelles peuvent se dérouler en parallèle.</p>
+          <p class="consigne" style="margin-top:-6px"><b>3.</b> trace le planning sur une frise.</p>
+          <p class="consigne" style="margin-top:-6px"><b>4.</b> repère le chemin le plus long et explique pourquoi c'est lui qui fixe la date de fin.</p>
+          <p class="consigne" style="margin-top:-6px"><b>5.</b> place les deux moments où le chef de projet réunira tout le monde.</p>
+      <div class="cq"><button class="btn ghost" id="f2rev">Afficher les attendus</button></div>
+      <div class="csol" id="f2sol">Une réponse possible : cahier des charges 3 sem → étude 8 → prototype 4 → essais 4 → industrialisation 5.<br>Prototype et outillage peuvent se chevaucher.<br><b>La chaîne la plus longue fixe la date de fin.</b><br>Raccourcir une tâche hors de ce chemin ne gagne rien.<br>Deux réunions : après le cahier des charges, après les essais.</div></div>
+    </div>
+  </section>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+var nf=function(v){return parseFloat(String(v==null?'':v).replace(',','.').replace(/\s/g,''));};
+var fr=function(x){return String(x).replace('.',',');};
+
+/* ---------- 1 · l'offre mystère ---------- */
+(function(){
+  var O=[
+   {mis:'Concevoir les pièces sur logiciel de CAO · dimensionner les épaisseurs · réaliser les plans de définition · dialoguer avec les méthodes sur la fabricabilité',
+    o:['Bureau d\u2019études','Ingénieur maintenance','Technico-commercial'],b:0,
+    e:'« Concevoir », « plans de définition », « dimensionner » : ce sont les mots du <b>bureau d\u2019études</b>. Il crée la solution avant qu\u2019elle existe.'},
+   {mis:'Analyser les temps de cycle · définir les gammes de fabrication · implanter les postes · améliorer la productivité de la ligne',
+    o:['Ingénieur méthodes','Ingénieur calcul','Recherche et développement'],b:0,
+    e:'« Gammes de fabrication », « temps de cycle », « implantation » : le vocabulaire des <b>méthodes</b>. Il rend la fabrication possible et rentable.'},
+   {mis:'Traiter les réclamations clients · animer les analyses de cause racine · piloter les audits fournisseurs · statuer sur les lots non conformes',
+    o:['Ingénieur qualité','Chef de projet','Responsable production'],b:0,
+    e:'« Cause racine », « audit », « non conforme » : c\u2019est la <b>qualité</b>. Le seul poste qui a le pouvoir de bloquer une livraison.'},
+   {mis:'Planifier les jalons · animer les revues de projet · suivre le budget et les risques · coordonner cinq services',
+    o:['Chef de projet','Ingénieur essais','Bureau d\u2019études'],b:0,
+    e:'« Jalons », « revues », « budget », « coordonner » : le <b>chef de projet</b>. Il ne conçoit rien, mais sans lui rien n\u2019arrive à temps.'}
+  ];
+  var i=0, ok=0;
+  function melange(a){ var r=a.map(function(x,k){return {x:x,k:k};});
+    for(var j=r.length-1;j>0;j--){ var q=Math.floor(Math.random()*(j+1)); var t=r[j]; r[j]=r[q]; r[q]=t; } return r; }
+  function montre(){
+    var m=O[i];
+    el('jNum').textContent=(i+1);
+    el('jTitre').textContent='Titre du poste : ' + '\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588';
+    el('jMis').innerHTML='<b>Missions :</b> '+m.mis;
+    var box=el('jOpts'); box.innerHTML=''; el('jFb').className='fb';
+    melange(m.o).forEach(function(r){
+      var b=document.createElement('button');
+      b.className='opt'; b.type='button'; b.textContent=r.x;
+      b.addEventListener('click',function(){
+        var bon=(r.k===m.b);
+        Array.prototype.forEach.call(box.children,function(c){ c.disabled=true; });
+        b.classList.add(bon?'bon':'faux');
+        if(!bon) Array.prototype.forEach.call(box.children,function(c){ if(c.textContent===m.o[m.b]) c.classList.add('bon'); });
+        if(bon) ok++;
+        var f=el('jFb');
+        f.innerHTML=(bon?'<b style="color:#3D7E5F">Exact.</b> ':'<b style="color:#C0492E">C\u2019était '+m.o[m.b]+'.</b> ')+m.e+
+          (i<O.length-1? ' <button class="opt" id="jNext" style="margin-top:10px;width:auto;display:inline-block">Offre suivante</button>':'');
+        f.classList.add('show');
+        var n=el('jNext');
+        if(n) n.addEventListener('click',function(){ i++; montre(); });
+        else { var z=el('enqfb'); z.className='exo-fb '+(ok>=3?'ok':'no');
+          z.textContent=(ok>=3?'\u2713 ':'\u2717 ')+ok+' / 4 offres identifiées.'; }
+      });
+      box.appendChild(b);
+    });
+  }
+  montre();
+})();
+
+/* ---------- 2 · composer l'équipe ---------- */
+(function(){
+  var cv=el('cvEq'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var P=[
+   {n:'Bureau d\u2019études',c:5000,k:'concevoir',must:true},
+   {n:'Ingénieur calcul',c:5500,k:'vérifier',must:false},
+   {n:'Ingénieur essais',c:4500,k:'valider',must:true},
+   {n:'Chef de projet',c:6000,k:'coordonner',must:true},
+   {n:'Ingénieur méthodes',c:5000,k:'industrialiser',must:false},
+   {n:'Ingénieur qualité',c:4500,k:'garantir',must:false}
+  ];
+  var pris=[false,false,false,false,false,false], FRAIS=1000, BUD=132000, MOIS=6;
+  var box=el('eqBtns');
+  P.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button'; b.className='btn ghost';
+    b.textContent=p.n+' · '+p.c.toLocaleString('fr-FR')+' €';
+    b.addEventListener('click',function(){
+      pris[i]=!pris[i];
+      b.className = pris[i] ? 'btn' : 'btn ghost';
+    });
+    box.appendChild(b);
+  });
+  function step(){
+    var mens=FRAIS, n=0, manque=[];
+    P.forEach(function(p,i){ if(pris[i]){ mens+=p.c; n++; } });
+    P.forEach(function(p,i){ if(p.must && !pris[i]) manque.push(p.k); });
+    var tot=mens*MOIS, ok=(tot<=BUD && manque.length===0);
+    var col= manque.length? '#C0492E' : (tot>BUD? '#BD8A2A':'#3D7E5F');
+    g.clearRect(0,0,W,H);
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText('Équipe : '+n+' profil'+(n>1?'s':''),40,42);
+    /* jauge budget */
+    var gx=40, gy=70, gw=W-80, gh=28;
+    g.fillStyle='#EFE8D8'; g.fillRect(gx,gy,gw,gh);
+    g.fillStyle=col; g.fillRect(gx,gy,Math.min(gw,gw*tot/BUD),gh);
+    g.strokeStyle='#C0492E'; g.lineWidth=2.4;
+    g.beginPath(); g.moveTo(gx+gw,gy-7); g.lineTo(gx+gw,gy+gh+7); g.stroke();
+    g.fillStyle='#C0492E'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('budget : '+BUD.toLocaleString('fr-FR')+' \u20ac',gx+gw,gy-12);
+    g.textAlign='left';
+    g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText(mens.toLocaleString('fr-FR')+' \u20ac/mois \u00d7 6 mois',gx,gy-12);
+    g.fillStyle=col; g.font='800 26px "JetBrains Mono",monospace';
+    g.fillText(tot.toLocaleString('fr-FR')+' \u20ac',gx,gy+gh+44);
+    /* compétences couvertes */
+    var y=gy+gh+80;
+    g.font='700 12px "JetBrains Mono",monospace';
+    P.forEach(function(p,i){
+      var x=gx+(i%3)*280, yy=y+Math.floor(i/3)*34;
+      var etat = pris[i] ? '#3D7E5F' : (p.must? '#C0492E':'#c8bfae');
+      g.fillStyle=etat; g.beginPath(); g.arc(x+7,yy-4,6,0,7); g.fill();
+      g.fillStyle= pris[i]? '#2A2622' : '#8c8578';
+      g.fillText(p.k+(p.must?'  (indispensable)':''),x+22,yy);
+    });
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.fillStyle=col; g.textAlign='left';
+    var msg = manque.length ? 'il manque : '+manque.join(', ')
+            : (tot>BUD ? 'budget dépassé de '+(tot-BUD).toLocaleString('fr-FR')+' \u20ac'
+                       : 'équipe viable \u2014 il reste '+(BUD-tot).toLocaleString('fr-FR')+' \u20ac');
+    g.fillText(msg,gx,H-24);
+    g.textAlign='center';
+  }
+  setInterval(step,80); step();
+})();
+
+/* ---------- corrections du cahier ---------- */
+var EX=[
+  [[22000,300],[132000,1500]],
+  [[132000,500],[12000,300]],
+  [[15,0.4],[11,0.4]],
+  [[100000,500],[1000,50]]
+];
+EX.forEach(function(rep,n){
+  var p='c'+(n+1);
+  var c=el(p+'chk'), r=el(p+'rev'), fb=el(p+'fb'), sol=el(p+'sol');
+  if(!c) return;
+  c.addEventListener('click',function(){
+    var ok=0;
+    rep.forEach(function(q,k){
+      var v=nf(el(p+'_'+String.fromCharCode(97+k)).value);
+      if(Math.abs(v-q[0])<=q[1]) ok++;
+    });
+    fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+    fb.textContent=(ok===rep.length)?'\u2713 Les deux réponses sont justes.'
+      :('\u2717 '+ok+' / '+rep.length+' \u2014 repose le calcul sur ta feuille.');
+    r.disabled=false;
+  });
+  r.addEventListener('click',function(){ sol.classList.add('show'); });
+});
+['f1','f2'].forEach(function(p){
+  var b=el(p+'rev'), s=el(p+'sol');
+  if(b&&s) b.addEventListener('click',function(){ s.classList.add('show'); b.disabled=true; b.textContent='Attendus affichés'; });
+});
+</script>
+  <section class="tpscore" id="tpScore">
+    <h2>Remise du travail</h2>
+    <p class="tps-lede">Renseignez les participants et votre classe, puis envoyez votre résultat au professeur.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Élève 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Élève 2</span><input id="tpsP2" autocomplete="off" placeholder="facultatif"></label>
+      <label class="tps-f"><span>Élève 3</span><input id="tpsP3" autocomplete="off" placeholder="facultatif"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+</div>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+var nf=function(v){return parseFloat(String(v==null?'':v).replace(',','.'));};
+var fr=function(x){return String(x).replace('.',',');};
+var S_FOND=Math.PI*33*33;
+
+/* ---------- correction des exercices du cahier ---------- */
+var EX=[
+  [[4.81,0.15],[104,2]],
+  [[3421,40],[1026,25]],
+  [[4.15,0.15],[0.83,0.05]],
+  [[38,1],[200000,2000]],
+  [[7.3,0.3],[2.9,0.2]],
+  [[0.09,0.005],[220,12]]
+];
+EX.forEach(function(rep,n){
+  var p='c'+(n+1);
+  var c=el(p+'chk'), r=el(p+'rev'), fb=el(p+'fb'), sol=el(p+'sol');
+  if(!c) return;
+  c.addEventListener('click',function(){
+    var ok=0;
+    rep.forEach(function(q,k){
+      var v=nf(el(p+'_'+String.fromCharCode(97+k)).value);
+      if(Math.abs(v-q[0])<=q[1]) ok++;
+    });
+    fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+    fb.textContent=(ok===rep.length)?'\u2713 Les deux réponses sont justes.'
+      :('\u2717 '+ok+' / '+rep.length+' \u2014 reprends le calcul sur ta feuille, en surveillant les unités.');
+    r.disabled=false;
+  });
+  r.addEventListener('click',function(){ sol.classList.add('show'); });
+});
+['f1','f2'].forEach(function(p){
+  var b=el(p+'rev'), s=el(p+'sol');
+  if(b&&s) b.addEventListener('click',function(){ s.classList.add('show'); b.disabled=true; b.textContent='Correction affichée'; });
+});
+
+/* ---------- simulateur de pression ---------- */
+(function(){
+  var cv=el('cvSim'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, t=0, bar=2.5;
+  el('sPres').addEventListener('input',function(){ bar=nf(this.value); el('vPres').textContent=fr(bar.toFixed(1))+' bar'; });
+  function fleche(x1,y1,x2,y2,col,lw){
+    g.strokeStyle=col; g.fillStyle=col; g.lineWidth=lw;
+    g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke();
+    var a=Math.atan2(y2-y1,x2-x1), L=9+lw*1.5, hw=lw*1.3+2;
+    g.beginPath(); g.moveTo(x2+L*Math.cos(a),y2+L*Math.sin(a));
+    g.lineTo(x2-Math.sin(a)*hw,y2+Math.cos(a)*hw);
+    g.lineTo(x2+Math.sin(a)*hw,y2-Math.cos(a)*hw);
+    g.closePath(); g.fill();
+  }
+  function step(){
+    t+=0.04;
+    var P=bar*0.1, F=P*S_FOND;
+    var rupt=(F>=2500), proche=(F>=2200&&F<2500);
+    var col= rupt? '#C0492E' : (proche? '#BD8A2A' : '#3D7E5F');
+    g.clearRect(0,0,W,H);
+    var cx=250, cy=170, defo= rupt? Math.sin(t*6)*3 : 0;
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=3.4;
+    g.beginPath();
+    g.moveTo(cx-56,cy+78); g.lineTo(cx-56,cy-44);
+    g.quadraticCurveTo(cx-56,cy-72,cx-34,cy-80); g.lineTo(cx+34,cy-80);
+    g.quadraticCurveTo(cx+56,cy-72,cx+56,cy-44); g.lineTo(cx+56,cy+78);
+    g.closePath(); g.fill(); g.stroke();
+    /* fond : la voûte s'aplatit quand la pression monte */
+    var creux=Math.max(4,42-bar*4.4)+defo;
+    g.strokeStyle=col; g.lineWidth=4.4;
+    g.beginPath(); g.moveTo(cx-56,cy+78);
+    g.quadraticCurveTo(cx,cy+78-creux,cx+56,cy+78); g.stroke();
+    /* flèches de pression */
+    var np=Math.min(9,Math.round(2+bar));
+    for(var k=0;k<np;k++){
+      var x=cx-46+k*(92/Math.max(1,np-1));
+      fleche(x,cy+18,x,cy+62,col,2+bar*0.22);
+    }
+    g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('\u2300 66 mm',cx,cy+118);
+    /* lecture */
+    g.textAlign='left'; var x0=470, y0=76;
+    g.fillStyle='#5C544B'; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText('S = \u03c0 \u00d7 33\u00b2 = '+S_FOND.toFixed(0)+' mm\u00b2',x0,y0);
+    g.fillStyle='#BD8A2A';
+    g.fillText('P = '+fr(bar.toFixed(1))+' bar = '+fr(P.toFixed(2))+' MPa',x0,y0+30);
+    g.fillStyle=col; g.font='800 26px "JetBrains Mono",monospace';
+    g.fillText('F = '+F.toFixed(0)+' N',x0,y0+74);
+    g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('soit le poids de '+(F/9.81).toFixed(0)+' kg',x0,y0+100);
+    /* jauge vers la rupture */
+    var gx=x0, gy=y0+130, gw=340;
+    g.fillStyle='#EFE8D8'; g.fillRect(gx,gy,gw,12);
+    g.fillStyle=col; g.fillRect(gx,gy,Math.min(gw,gw*F/2500),12);
+    g.strokeStyle='#C0492E'; g.lineWidth=2;
+    g.beginPath(); g.moveTo(gx+gw,gy-5); g.lineTo(gx+gw,gy+17); g.stroke();
+    g.fillStyle='#C0492E'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('rupture : 2500 N',gx+gw-108,gy-10);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.fillStyle=col;
+    g.fillText(rupt? 'le fond cède' : (proche? 'zone critique' : 'le fond tient'),gx,gy+40);
+    g.textAlign='center';
+  }
+  setInterval(step,50); step();
+})();
+
+
+/* ---------- défi d'allègement ---------- */
+(function(){
+  var cv=el('cvDefi'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var rho=2.70e-3, Spar=23845, Sfond=3421, efond=0.28, mfixe=3.5, prix=2.20, r=33, Rm=275;
+  var e=0.14;
+  el('sEp').addEventListener('input',function(){ e=nf(this.value); el('vEp').textContent=fr(e.toFixed(2))+' mm'; });
+  function masse(x){ return rho*(Spar*x + Sfond*efond) + mfixe; }
+  function step(){
+    var s=6*0.1*r/e, coef=Rm/s, m=masse(e);
+    var etat = coef<1 ? 'rompt' : (coef<1.2 ? 'refuse' : 'ok');
+    var col = etat==='rompt' ? '#C0492E' : (etat==='refuse' ? '#BD8A2A' : '#3D7E5F');
+    g.clearRect(0,0,W,H);
+    /* coupe de paroi, à l'échelle */
+    var x0=64, y0=64, hh=190, ep=Math.max(5,e*150);
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=2.6;
+    g.beginPath(); g.rect(x0,y0,ep,hh); g.fill(); g.stroke();
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('paroi vue en coupe',x0-6,y0-14);
+    g.fillStyle=col; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText(fr(e.toFixed(2))+' mm',x0-4,y0+hh+22);
+    /* jauge de contrainte */
+    var gx=300, gy=88, gw=520, gh=24;
+    g.fillStyle='#EFE8D8'; g.fillRect(gx,gy,gw,gh);
+    g.fillStyle=col; g.fillRect(gx,gy,Math.min(gw,gw*s/Rm),gh);
+    g.strokeStyle='#C0492E'; g.lineWidth=2.4;
+    g.beginPath(); g.moveTo(gx+gw,gy-8); g.lineTo(gx+gw,gy+gh+8); g.stroke();
+    /* seuil du coefficient 1,2 */
+    var xs=gx+gw/1.2*0+gw*(1/1.2);
+    g.strokeStyle='#BD8A2A'; g.setLineDash([5,4]); g.lineWidth=2;
+    g.beginPath(); g.moveTo(gx+gw/1.2,gy-6); g.lineTo(gx+gw/1.2,gy+gh+6); g.stroke(); g.setLineDash([]);
+    g.fillStyle='#8a6313'; g.font='700 10px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('coef 1,2',gx+gw/1.2,gy-12);
+    g.fillStyle='#C0492E'; g.textAlign='right';
+    g.fillText('Rm = 275 MPa',gx+gw,gy-12);
+    g.textAlign='left';
+    g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('\u03c3 = 0,6 \u00d7 33 / '+fr(e.toFixed(2))+' \u00e0 6 bars',gx,gy-12+0);
+    g.fillStyle=col; g.font='800 27px "JetBrains Mono",monospace';
+    g.fillText('\u03c3 = '+s.toFixed(0)+' MPa',gx,gy+gh+48);
+    g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('coefficient de s\u00e9curit\u00e9 : '+fr(coef.toFixed(2)),gx,gy+gh+74);
+    /* masse et coût */
+    g.fillStyle='#2E6A8E'; g.font='800 18px "JetBrains Mono",monospace';
+    g.fillText('masse : '+fr(m.toFixed(1))+' g',gx,gy+gh+112);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText('m\u00e9tal pour 1 million de canettes : '+(m*1000).toFixed(0)+' kg, soit '+(m*1000*prix).toFixed(0)+' \u20ac',gx,gy+gh+136);
+    /* verdict */
+    g.font='800 16px "Bricolage Grotesque",sans-serif'; g.fillStyle=col;
+    var txt = etat==='rompt' ? 'la paroi c\u00e8de \u00e0 6 bars' :
+              (etat==='refuse' ? 'trop juste : le bureau d\u2019\u00e9tudes refuse' : 'accept\u00e9 \u2014 mais peut-on faire plus fin ?');
+    g.fillText(txt,gx,gy+gh+168);
+    g.textAlign='center';
+  }
+  setInterval(step,50); step();
+})();
+
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_2de_metiers', TP_TITRE='Enqu\u00eate m\u00e9tiers';
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+  function conteneur(n){ return n.closest('.cx')||n.parentElement; }
+  function recense(){
+    var zones=document.querySelectorAll('.exo-fb');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z); if(!c) return;
+      if(vus.indexOf(c)<0){ vus.push(c); EX.push({el:c,zones:[z]}); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=fr(note(n,EX.length));
+    return n;
+  }
+  function observe(){
+    EX.forEach(function(e,i){
+      e.zones.forEach(function(z){
+        var obs=new MutationObserver(function(){
+          if(z.className.indexOf('ok')>=0 && !done[i]){ done[i]=true; maj(); }
+        });
+        obs.observe(z,{attributes:true,attributeFilter:['class']});
+      });
+    });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
+      score:n, total:tot, note:note(n,tot),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+fr(note(n,tot))+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    })
+    .catch(function(err){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+((err&&err.message)||'erreur inconnue');
+      b.disabled=false;
+    });
+  }
+  function init(){ if(!d('tpScore')) return; recense(); observe(); d('tpsSend').addEventListener('click',envoyer); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div>
+<script>
+(function(){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
+  }
+  function applyFn(f,a){
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
+  }
+  function evaluate(s){
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
+  }
+  function pretty(s){
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
+  });
+  render();
+})();
+</script>
+
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u)) bloque=true;
+    });
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
+})();
+</script>
+</body>
+</html>

@@ -67,6 +67,8 @@
   .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
   .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid #E4DCCB}
+  .tpscore .tps-note b{color:#3D7E5F;font-size:19px}
   .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
            text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
            padding:13px 20px;cursor:pointer}
@@ -95,6 +97,40 @@
   #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
   #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
   #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  /* ---------- bouton d'ouverture de la calculatrice ---------- */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:81;width:54px;height:54px;border-radius:50%;
+              background:#2E6A8E;border:none;box-shadow:0 8px 22px rgba(20,16,10,.30);cursor:pointer;
+              display:flex;align-items:center;justify-content:center;padding:0}
+  #calcToggle:hover{filter:brightness(1.12)}
+  #calcToggle svg{display:block}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP — Le graphe des liaisons<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP · Première spé SI</div> <h1>La benne basculante</h1> <p class="lede">Un vérin hydraulique soulève la benne d'un camion. À toi de constituer les classes d'équivalence, de compléter le graphe et de lire sa structure.</p></div> <div class="sysfig"><svg viewBox="0 0 640 220" style="width:100%;height:auto;display:block" aria-label="Benne basculante : châssis, benne, vérin (corps + tige)"> <rect x="30" y="160" width="420" height="26" rx="4" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/> <circle cx="80" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/><circle cx="180" cy="200" r="16" fill="#fff" stroke="#2A2622" stroke-width="2"/> <rect x="40" y="110" width="70" height="50" rx="6" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2"/> <g transform="rotate(-14 440 160)"> <rect x="150" y="112" width="300" height="42" rx="4" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2"/> </g> <circle cx="440" cy="158" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <line x1="250" y1="164" x2="316" y2="98" stroke="#C0492E" stroke-width="10" stroke-linecap="round"/> <line x1="316" y1="98" x2="352" y2="62" stroke="#8A5A7A" stroke-width="6" stroke-linecap="round"/> <circle cx="250" cy="164" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <circle cx="352" cy="62" r="6" fill="#BD8A2A" stroke="#8a6313" stroke-width="1.5"/> <text x="75" y="100" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">cabine</text> <text x="240" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#2E6A8E">châssis</text> <text x="330" y="30" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#3D7E5F">benne (levée)</text> <text x="252" y="130" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C0492E">corps du vérin</text> <text x="392" y="80" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8A5A7A">tige</text> <text x="510" y="150" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#8a6313">● = articulations</text> </svg></div> <section class="exo-card" id="a"> <h2><span class="num">A</span> Constituer les classes</h2> <p class="task">Range chaque pièce dans sa classe d'équivalence. Rappel : même classe = aucun mouvement relatif.</p> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>A (bâti) = {châssis, cabine}</b> — la cabine est boulonnée au châssis.<br><b>B = {benne, axe de basculement}</b> — l'axe est soudé à la benne.<br><b>C = {corps du vérin}</b> · <b>D = {tige du vérin}</b> — la tige coulisse dans le corps : mouvement relatif, donc deux classes.</div> </section> <section class="exo-card" id="b"> <h2><span class="num">B</span> Compléter le graphe</h2> <p class="task">Le graphe de la benne a 4 bulles et 4 liaisons. Nomme chaque liaison L1 à L4.</p> <div class="sysfig"><svg viewBox="0 0 560 250" style="width:100%;height:auto;display:block" aria-label="Graphe : A, B, C, D en boucle"> <line x1="150" y1="60" x2="410" y2="60" stroke="#5C544B" stroke-width="2"/> <line x1="120" y1="90" x2="120" y2="180" stroke="#5C544B" stroke-width="2"/> <line x1="440" y1="90" x2="440" y2="180" stroke="#5C544B" stroke-width="2"/> <line x1="150" y1="205" x2="410" y2="205" stroke="#5C544B" stroke-width="2"/> <circle cx="120" cy="60" r="26" fill="#e3edf3" stroke="#2E6A8E" stroke-width="2.5"/><text x="120" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">A</text> <circle cx="440" cy="60" r="26" fill="#e6f2ea" stroke="#3D7E5F" stroke-width="2.5"/><text x="440" y="66" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">B</text> <circle cx="120" cy="205" r="26" fill="#f9e9e4" stroke="#C0492E" stroke-width="2.5"/><text x="120" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">C</text> <circle cx="440" cy="205" r="26" fill="#f3eef6" stroke="#8A5A7A" stroke-width="2.5"/><text x="440" y="211" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="16">D</text> <text x="280" y="48" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L1 : A–B</text> <text x="95" y="140" text-anchor="end" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L2 : A–C</text> <text x="465" y="140" text-anchor="start" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L3 : B–D</text> <text x="280" y="232" text-anchor="middle" font-family="JetBrains Mono" font-size="13" fill="#8a6313">L4 : C–D</text> <text x="35" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">bâti</text> <text x="510" y="60" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">benne</text> <text x="35" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">corps</text> <text x="510" y="208" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#5C544B">tige</text> </svg></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>L1 (A–B) : pivot</b> — la benne bascule autour d'un axe fixé au châssis.<br><b>L2 (A–C) : pivot</b> — le corps du vérin est articulé sur le châssis.<br><b>L3 (B–D) : pivot</b> — la tige est articulée sur la benne.<br><b>L4 (C–D) : pivot glissant</b> — la tige coulisse ET peut tourner dans le corps du vérin.<br>Le graphe forme une <b>boucle</b> : chaîne fermée.</div> </section> <section class="exo-card" id="c"> <h2><span class="num">C</span> Ouverte ou fermée ?</h2> <p class="task">D'après la forme de son graphe, chaque système est-il une chaîne ouverte ou fermée ?</p> <div class="match" id="cMatch"></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol"><b>Bras de robot</b> (A–B–C–D en ligne) → <b>ouverte</b> : le graphe est une ligne, chaque articulation est motorisée indépendamment.<br><b>Étau</b> (A–B–C en triangle) → <b>fermée</b> : boucle, mouvements couplés.<br><b>Benne + vérin</b> (A–B–D–C–A) → <b>fermée</b> : la boucle impose que sortir la tige fasse basculer la benne.</div> </section> <section class="exo-card" id="d"> <h2><span class="num">D</span> Compter</h2> <p class="task">Applique les définitions.</p> <div class="row"><span>a) Un mécanisme a 5 pièces, dont 2 vissées ensemble. Combien de classes d'équivalence ?</span><input class="numin" id="dA" inputmode="numeric" placeholder="?"></div> <div class="row"><span>b) Combien de liaisons forment la boucle du graphe de la benne ?</span><input class="numin" id="dB" inputmode="numeric" placeholder="?"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol"><b>a)</b> Les 2 pièces vissées ne forment qu'une classe : 5 pièces → <b>4 classes</b>.<br><b>b)</b> A–B, A–C, B–D, C–D : <b>4 liaisons</b> dans la boucle.</div> </section> <section class="exo-card" id="e"> <h2><span class="num">★</span> À quoi sert le graphe ?</h2> <p class="task">Avant de dessiner le schéma cinématique, on trace toujours le graphe des liaisons.</p> <p>Quel est son intérêt principal ?</p> <div class="opt" id="eOpt"><button data-v="0">Il donne les dimensions des pièces</button> <button data-v="1">Il révèle la structure du mécanisme et évite d'oublier une liaison</button> <button data-v="2">Il calcule la puissance du vérin</button></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir l'explication</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol"><b>Il révèle la structure.</b> Le graphe recense toutes les classes et toutes les liaisons : chaque trait devra apparaître sur le schéma cinématique. Il montre aussi immédiatement si la chaîne est ouverte ou fermée — donc si les mouvements sont indépendants ou couplés. Ni dimensions, ni efforts : uniquement la <b>structure</b>.</div> </section></div> <script>
@@ -223,7 +259,7 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
     </div>
     <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
     <div class="tps-row">
-      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
       <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
@@ -258,12 +294,15 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
     var t=d('tpsTot'); if(t) t.textContent=EX.length;
     maj();
   }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
   function maj(){
     var n=0;
     EX.forEach(function(e,i){ if(done[i]) n++; });
-    var now=d('tpsNow'), fill=d('tpsFill');
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
     if(now) now.textContent=n;
     if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=String(note(n,EX.length)).replace('.',',');
     return n;
   }
   function observe(){
@@ -293,13 +332,13 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
     fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       tp:TP_TITRE, fichier:TP_ID,
       eleves:p, classe:cl,
-      score:n, total:tot,
+      score:n, total:tot, note:note(n,tot),
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
     })})
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
     .then(function(){
       msg.className='tps-msg ok';
-      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+String(note(n,tot)).replace('.',',')+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
     }).catch(function(err){
       msg.className='tps-msg no';
@@ -468,6 +507,93 @@ lockExo('dCheck','dShow','dSol','dFb',function(){
  ins(a);
   });
   render();
+})();
+</script>
+
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u)) bloque=true;
+    });
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
 })();
 </script>
 </body>

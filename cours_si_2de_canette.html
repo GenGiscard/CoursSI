@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cours — La canette : 6000 par seconde · Option SI Seconde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:960px;margin:0 auto;padding:18px 16px 70px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:14px}
+  .estic-bar .b{width:32px;height:32px;border-radius:9px;background:var(--copper);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+  .estic-bar .t{font-weight:800;font-size:16px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  .score{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)}
+  .score b{color:var(--green);font-size:19px}
+  .nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .nav a{font-family:'JetBrains Mono',monospace;font-size:12px;text-decoration:none;color:var(--sub);
+         background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .nav a:hover{border-color:var(--steel);color:var(--steel)}
+  .slide{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:18px}
+  .slide .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper)}
+  .slide h2{margin:4px 0 8px;font-size:26px;font-weight:800}
+  .punch{font-size:19px;font-weight:700;margin:0 0 12px}
+  .punch b{color:var(--copper)}
+  .anim{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:14px 0}
+  .anim canvas{width:100%;height:auto;display:block;border-radius:10px}
+  .ctrl{display:flex;gap:9px;align-items:center;margin-top:9px;flex-wrap:wrap}
+  .ctrl button{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+               border:none;border-radius:9px;padding:7px 14px;cursor:pointer}
+  .ctrl button:disabled{opacity:.35;cursor:not-allowed}
+  .ctrl .leg{flex:1;min-width:210px;font-size:14.5px;color:var(--sub)}
+  .ctrl .pn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub)}
+  /* ---------- jeu d'estimation ---------- */
+  .devine{background:linear-gradient(160deg,rgba(189,138,42,.13),rgba(189,138,42,.04));
+          border:2px solid rgba(189,138,42,.42);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .devine .dk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+              color:#8a6313;margin-bottom:6px}
+  .devine .q{font-size:18px;font-weight:800;margin-bottom:12px}
+  .devine .sl{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .devine input[type=range]{flex:1;min-width:200px;accent-color:#BD8A2A}
+  .devine .val{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#8a6313;min-width:135px;text-align:right}
+  .devine .go{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--amber);color:#fff;
+              border:none;border-radius:10px;padding:10px 18px;cursor:pointer}
+  .devine .go:disabled{opacity:.45;cursor:not-allowed}
+  .devine .rep{margin-top:12px;font-size:16px;display:none}
+  .devine .rep.show{display:block}
+  .devine .rep .vrai{font-size:25px;font-weight:800;color:var(--copper)}
+  .devine .rep .cmt{margin-top:6px;color:var(--ink)}
+  .devine .jauge{height:12px;background:#EFE8D8;border-radius:7px;overflow:hidden;margin:10px 0 4px;position:relative}
+  .devine .jauge>i{display:block;height:100%;background:var(--green);width:0;transition:width .5s ease}
+  .devine .badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+                 color:#fff;border-radius:8px;padding:4px 10px;margin-top:6px}
+  .fait{background:rgba(61,126,95,.10);border:1px solid rgba(61,126,95,.32);border-radius:12px;padding:11px 15px;margin:12px 0;font-size:15.5px}
+  .fait b{color:var(--green)}
+  .form{background:#eef4f8;border:1.5px solid var(--steel);border-radius:12px;padding:12px 16px;margin:12px 0;text-align:center}
+  .form .f{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:#1d4d69;display:block}
+  .form .u{font-size:13.5px;color:var(--sub);margin-top:5px;display:block}
+  .trace{background:var(--paper);border:2px solid var(--steel);border-radius:16px;padding:18px 22px;margin:20px 0}
+  .trace .th{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+             border-bottom:2px solid var(--line);padding-bottom:9px;margin-bottom:12px}
+  .trace .th .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel)}
+  .trace .th h3{margin:2px 0 0;font-size:20px;font-weight:800}
+  .trace .tprint{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--steel);
+                 color:#fff;border:none;border-radius:9px;padding:8px 14px;cursor:pointer}
+  .trace h4{font-size:14px;font-weight:800;color:var(--steel);margin:13px 0 5px;font-family:'JetBrains Mono',monospace}
+  .trace ol{margin:5px 0;padding-left:20px} .trace li{font-size:15px;margin:4px 0}
+  .trace .rel{background:#eef4f8;border:1.5px solid var(--steel);border-radius:11px;padding:11px 14px;margin:8px 0;text-align:center}
+  .trace .rel .f{font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:700;color:#1d4d69;display:block}
+  .trace .rel .u{font-size:13px;color:var(--sub)}
+  .trace .ex{background:#f4f8f5;border:1px dashed var(--green);border-radius:11px;padding:11px 14px;margin:8px 0;font-size:14.5px}
+  @media print{ body *{visibility:hidden} .trace,.trace *{visibility:visible}
+    .trace{position:absolute;left:0;top:0;width:100%;border:none;padding:0} .trace .tprint{display:none} }
+  .obj{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:14px;padding:14px 18px;margin:14px 0}
+  .obj .ok{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-bottom:6px}
+  .obj ul{margin:6px 0 0;padding-left:20px} .obj li{font-size:15px;margin:4px 0}
+  .obj .cds{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .obj .cds span{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:#fff;
+                 background:var(--green);border-radius:7px;padding:4px 9px}
+  .obj .vv{margin-top:12px;background:rgba(189,138,42,.10);border:1px solid rgba(189,138,42,.32);
+           border-radius:11px;padding:11px 14px;font-size:15px}
+  .obj .vv b{color:#8a6313}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">La canette : 6000 par seconde</div><div class="s">Option SI · Seconde · Cours</div></div>
+    <div class="score">score d'estimation : <b id="scoreG">0</b> / 4</div></div>
+  <div class="nav">
+    <a href="#s1">1 · Le défi</a><a href="#s2">2 · À quoi elle sert</a><a href="#s3">3 · La matière</a>
+    <a href="#s4">4 · La fabrication</a><a href="#s5">5 · La force cachée</a><a href="#s6">6 · Le recyclage</a>
+    <a href="#s7">7 · Le film de la ligne</a><a href="#s8">8 · Pourquoi 0,10 mm suffit</a>
+  </div>
+
+  <div class="obj">
+    <div class="ok">Ce qu'on va savoir faire</div>
+    <ul>
+      <li>trouver la <b>masse</b> d'un objet à partir de son volume ;</li>
+      <li>calculer la <b>force</b> qu'une pression exerce sur une surface ;</li>
+      <li>comparer deux façons de produire un métal, chiffres à l'appui.</li>
+    </ul>
+    <div class="cds"><span>A2 Analyser</span><span>B1 Grandeurs</span><span>B3 Résoudre</span><span>C2 Choisir</span></div>
+    <div class="vv"><b>Pourquoi c'est utile :</b> la relation F = P × S est celle des cocottes-minute, des pneus et des vérins. On l'apprend sur une canette parce qu'elle est dans ton sac.</div>
+  </div>
+
+  <section class="slide" id="s1">
+    <div class="k">Slide 1</div>
+    <h2>L'objet le plus fabriqué au monde</h2>
+    <p class="punch">Chaque seconde, des usines en sortent des milliers. <b>Combien exactement ?</b></p>
+    <div class="devine" data-g="1" data-min="500" data-max="15000" data-pas="500" data-def="5000" data-vrai="6000" data-unite=" par seconde" data-tol="40">
+      <div class="dk">À toi de deviner</div>
+      <div class="q">Combien de canettes sortent des usines du monde chaque seconde ?</div>
+      <div class="sl"><input type="range"><span class="val"></span><button class="go">Valider</button></div>
+      <div class="jauge"><i></i></div>
+      <div class="rep"></div>
+    </div>
+    <div class="fait">Soit <b>200 milliards par an</b>. Aucun autre objet manufacturé n'atteint cette cadence — et chacun ne coûte pas <b>5 centimes</b> à produire.</div>
+  </section>
+
+  <section class="slide" id="s2">
+    <div class="k">Slide 2</div>
+    <h2>Cinq missions, une seule qui compte</h2>
+    <p class="punch">Une canette doit faire cinq choses. <b>Une seule intéresse l'acheteur.</b></p>
+    <div class="anim">
+      <canvas id="cvFonc" width="880" height="320" aria-label="Les fonctions de la canette et les solutions techniques"></canvas>
+      <div class="ctrl"><button id="foPrev">◀</button><button id="foNext">▶</button><div class="leg" id="foLeg"></div><span class="pn" id="foNum"></span></div>
+    </div>
+    <div class="fait">La <b>fonction principale</b>, c'est contenir la boisson. Les quatre autres sont des <b>fonctions techniques</b> : elles n'existent que pour rendre la première possible.</div>
+  </section>
+
+  <section class="slide" id="s3">
+    <div class="k">Slide 3</div>
+    <h2>Combien de métal dans ta main ?</h2>
+    <p class="punch">Prends une canette vide. <b>Elle pèse moins qu'un stylo.</b></p>
+    <div class="devine" data-g="2" data-min="4" data-max="40" data-pas="1" data-def="20" data-vrai="13" data-unite=" g" data-tol="30">
+      <div class="dk">À toi de deviner</div>
+      <div class="q">Quelle est la masse d'une canette vide ?</div>
+      <div class="sl"><input type="range"><span class="val"></span><button class="go">Valider</button></div>
+      <div class="jauge"><i></i></div>
+      <div class="rep"></div>
+    </div>
+    <div class="form"><span class="f">V = m / ρ = 13 / 2,70 ≈ 4,8 cm³</span><span class="u">ρ (rhô) = masse volumique de l'aluminium = 2,70 g/cm³</span></div>
+    <div class="fait">Tout le métal d'une canette tient dans un <b>dé à coudre</b>. La paroi mesure <b>0,10 mm</b> — à peine plus qu'un cheveu.</div>
+  </section>
+
+  <section class="slide" id="s4">
+    <div class="k">Slide 4</div>
+    <h2>D'un disque plat à un cylindre</h2>
+    <p class="punch">Elle n'est pas assemblée : elle est <b>étirée d'une seule pièce</b>.</p>
+    <div class="anim">
+      <canvas id="cvFab" width="880" height="320" aria-label="Les cinq étapes de fabrication par emboutissage-étirage"></canvas>
+      <div class="ctrl"><button id="fbPrev">◀</button><button id="fbNext">▶</button><div class="leg" id="fbLeg"></div><span class="pn" id="fbNum"></span></div>
+    </div>
+    <div class="fait">Le disque de départ fait <b>143 mm</b> pour <b>0,30 mm</b> d'épaisseur. À l'arrivée : <b>0,10 mm</b>. Le métal a été étiré trois fois sans se déchirer.</div>
+  </section>
+
+  <section class="slide" id="s5">
+    <div class="k">Slide 5</div>
+    <h2>La force que tu ne vois pas</h2>
+    <p class="punch">Un soda pousse sur le fond en permanence. <b>Avec quelle force ?</b></p>
+    <div class="devine" data-g="3" data-min="50" data-max="2000" data-pas="50" data-def="300" data-vrai="855" data-unite=" N" data-tol="60">
+      <div class="dk">À toi de deviner</div>
+      <div class="q">À 2,5 bars, quelle force le soda exerce-t-il sur le fond ?</div>
+      <div class="sl"><input type="range"><span class="val"></span><button class="go">Valider</button></div>
+      <div class="jauge"><i></i></div>
+      <div class="rep"></div>
+    </div>
+    <div class="form"><span class="f">F = P × S</span><span class="u">F en newtons (N) · P en mégapascals (MPa) · S en mm² &nbsp;—&nbsp; 1 bar = 0,1 MPa et 1 MPa = 1 N/mm²</span></div>
+    <div class="anim">
+      <canvas id="cvPres" width="880" height="320" aria-label="Force exercée sur le fond selon la pression"></canvas>
+      <div class="ctrl"><button id="prPrev">◀</button><button id="prNext">▶</button><div class="leg" id="prLeg"></div><span class="pn" id="prNum"></span></div>
+    </div>
+    <div class="fait">Le fond porte en permanence le poids d'un <b>adulte de 87 kg</b>. Au soleil, à 6 bars : <b>deux adultes</b>. Et il ne bouge pas, grâce à sa voûte inversée.</div>
+  </section>
+
+  <section class="slide" id="s6">
+    <div class="k">Slide 6</div>
+    <h2>Produire ou recycler</h2>
+    <p class="punch">Fabriquer de l'aluminium neuf dévore de l'électricité. <b>Le refondre, presque pas.</b></p>
+    <div class="devine" data-g="4" data-min="10" data-max="100" data-pas="5" data-def="50" data-vrai="95" data-unite=" %" data-tol="25">
+      <div class="dk">À toi de deviner</div>
+      <div class="q">Quel pourcentage d'énergie économise-t-on en recyclant plutôt qu'en produisant du neuf ?</div>
+      <div class="sl"><input type="range"><span class="val"></span><button class="go">Valider</button></div>
+      <div class="jauge"><i></i></div>
+      <div class="rep"></div>
+    </div>
+    <div class="anim">
+      <canvas id="cvEne" width="880" height="320" aria-label="Énergie de l'aluminium primaire comparée au recyclé"></canvas>
+      <div class="ctrl"><button id="enPrev">◀</button><button id="enNext">▶</button><div class="leg" id="enLeg"></div><span class="pn" id="enNum"></span></div>
+    </div>
+    <div class="fait">Recycler <b>1000 canettes</b> économise <b>173 kWh</b> : six mois de réfrigérateur. Et en 50 ans, la canette est passée de <b>21 g à 13 g</b> — 38 % de métal en moins.</div>
+  </section>
+
+
+  <section class="slide" id="s7">
+    <div class="k">Slide 7 · Le film de la ligne</div>
+    <h2>45 minutes de la bobine à la palette</h2>
+    <p class="punch">Une ligne sort <b>2000 canettes par minute</b>. Voici ce qui se passe, station par station.</p>
+    <div class="anim">
+      <canvas id="cvFilm" width="880" height="360" aria-label="Film de la ligne de production d'une canette, de la bobine à la palettisation"></canvas>
+      <div class="ctrl">
+        <button id="flPlay">⏸ Pause</button>
+        <input type="range" id="flTime" min="0" max="1000" step="1" value="0" style="flex:1;min-width:220px;accent-color:#2E6A8E">
+        <span class="pn" id="flPos"></span>
+      </div>
+      <div class="ctrl"><div class="leg" id="flLeg"></div></div>
+    </div>
+    <div class="fait">Le <b>bodymaker</b> réalise à lui seul le ré-emboutissage, les trois passes de repassage et le dôme — <b>en un seul coup de poinçon</b>, environ 400 fois par minute.</div>
+  </section>
+
+  <section class="slide" id="s8">
+    <div class="k">Slide 8 · Le principe technique</div>
+    <h2>Pourquoi 0,10 mm suffit</h2>
+    <p class="punch">Une paroi plus fine qu'un cheveu contient 2,5 bars. <b>Ce n'est pas de la magie, c'est une formule.</b></p>
+    <div class="form"><span class="f">σ = P × r / e</span><span class="u">σ (sigma) = contrainte dans la paroi, en MPa · P = pression interne en MPa · r = rayon en mm · e = épaisseur en mm<br>C'est la formule du <b>réservoir à paroi mince</b>, valable dès que l'épaisseur est petite devant le rayon.</span></div>
+    <div class="anim">
+      <canvas id="cvSigma" width="880" height="320" aria-label="Contrainte dans la paroi comparée à la résistance de l'alliage"></canvas>
+      <div class="ctrl">
+        <label class="pn">pression</label>
+        <input type="range" id="sgP" min="0.5" max="10" step="0.1" value="2.5" style="flex:1;min-width:200px;accent-color:#BD8A2A">
+        <span class="pn" id="sgV"></span>
+      </div>
+      <div class="ctrl">
+        <label class="pn">épaisseur</label>
+        <input type="range" id="sgE" min="0.05" max="0.30" step="0.01" value="0.10" style="flex:1;min-width:200px;accent-color:#3D7E5F">
+        <span class="pn" id="sgVE"></span>
+      </div>
+    </div>
+    <div class="fait"><b>L'écrouissage.</b> Recuit, l'alliage 3104 ne tient que <b>110 MPa</b>.</div>
+    <div class="fait" style="margin-top:-6px">Chaque déformation à froid le durcit : laminage, emboutissage, repassage.</div>
+    <div class="fait" style="margin-top:-6px">À l'état <b>H19</b>, il tient <b>275 MPa</b> — deux fois et demie plus.</div>
+    <div class="fait" style="margin-top:-6px"><b>Le procédé qui met en forme est celui qui renforce.</b></div>
+    <div class="fait"><b>Le dôme.</b> Un fond plat se déformerait en flexion.</div>
+    <div class="fait" style="margin-top:-6px">Le dôme change la poussée en <b>compression</b> : une voûte de pont, retournée.</div>
+    <div class="fait" style="margin-top:-6px">Cette zone n'est <b>jamais amincie</b> : elle garde l'épaisseur d'origine.</div>
+    <div class="fait">À 2,5 bars : 83 MPa pour 275 admissibles, <b>coefficient 3,3</b>.</div>
+    <div class="fait" style="margin-top:-6px">À 6 bars, il tombe à <b>1,4</b>.</div>
+    <div class="fait" style="margin-top:-6px">La paroi céderait vers 8,3 bars — mais le fond lâche vers 7.</div>
+    <div class="fait" style="margin-top:-6px"><b>Une pièce casse par son point le plus faible.</b></div>
+    <div class="fait" style="background:rgba(46,106,142,.08);border-color:rgba(46,106,142,.3)">
+      <b>Pour aller voir la vraie ligne :</b> le reportage de <a href="https://www.usinenouvelle.com/article/vie-et-mort-d-une-canette-en-aluminium.N325550" target="_blank" rel="noopener">L'Usine Nouvelle</a> suit une canette de la fonderie au recyclage. Les détails du procédé, machine par machine, sont décrits sur <a href="https://mundolatas.com/fr/procedes-de-formage-dans-une-ligne-de-production-de-canettes-de-boisson-en-aluminium/" target="_blank" rel="noopener">Mundolatas</a>. Sur une plateforme vidéo, cherche « <b>aluminium can manufacturing bodymaker</b> » pour voir la presse en fonctionnement.
+    </div>
+  </section>
+
+  <div class="trace">
+    <div class="th"><div><div class="tk">Trace écrite</div><h3>La canette</h3></div>
+    <button class="tprint" type="button" data-print="1">Imprimer</button></div>
+    <h4>Les deux relations</h4>
+    <div class="rel"><span class="f">m = ρ × V</span><span class="u">m en g · ρ en g/cm³ · V en cm³ &nbsp;—&nbsp; 1 cm³ = 1000 mm³</span></div>
+    <div class="rel"><span class="f">F = P × S</span><span class="u">F en N · P en MPa · S en mm² &nbsp;—&nbsp; 1 bar = 0,1 MPa · 1 MPa = 1 N/mm²</span></div>
+    <h4>La méthode pour une force</h4>
+    <ol>
+      <li>Convertir la pression : bars ÷ 10 = MPa.</li>
+      <li>Calculer l'aire : S = π × R², avec le <b>rayon</b>.</li>
+      <li>Multiplier : F = P × S, résultat directement en newtons.</li>
+      <li>Contrôler : F ÷ 10 donne la masse équivalente en kg.</li>
+    </ol>
+    <h4>L'exemple à retenir</h4>
+    <div class="ex">Fond de canette, Ø 66 mm donc R = 33 mm.<br>S = π × 33² = <b>3421 mm²</b> · P = 2,5 bar = <b>0,25 MPa</b><br>F = 0,25 × 3421 ≈ <b>855 N</b>, soit le poids de 87 kg.</div>
+    <h4>Les trois chiffres du recyclage</h4>
+    <ol>
+      <li>Aluminium neuf : <b>14 kWh</b> par kilogramme.</li>
+      <li>Aluminium recyclé : <b>0,7 kWh</b> par kilogramme.</li>
+      <li>Économie : <b>95 %</b>.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+var fr=function(x){return String(x).replace('.',',');};
+
+/* ---------- jeu d'estimation ---------- */
+(function(){
+  var gagnes={}, tot=0;
+  Array.prototype.forEach.call(document.querySelectorAll('.devine'),function(D){
+    var mn=+D.dataset.min, mx=+D.dataset.max, pas=+D.dataset.pas, def=+D.dataset.def;
+    var vrai=+D.dataset.vrai, unite=D.dataset.unite||'', tol=+D.dataset.tol;
+    var sl=D.querySelector('input[type=range]'), val=D.querySelector('.val');
+    var go=D.querySelector('.go'), rep=D.querySelector('.rep'), jau=D.querySelector('.jauge>i');
+    sl.min=mn; sl.max=mx; sl.step=pas; sl.value=def;
+    function aff(){ val.textContent=(+sl.value).toLocaleString('fr-FR')+unite; }
+    sl.addEventListener('input',aff); aff();
+    go.addEventListener('click',function(){
+      var v=+sl.value, ecart=Math.abs(v-vrai)/vrai*100;
+      var pts = ecart<=tol/2 ? 2 : (ecart<=tol ? 1 : 0);
+      var lib = pts===2 ? 'Excellent' : (pts===1 ? 'Bien vu' : (ecart<=tol*2 ? 'Pas si loin' : 'Loin du compte'));
+      var col = pts===2 ? '#3D7E5F' : (pts===1 ? '#BD8A2A' : '#C0492E');
+      var cmt;
+      if(v<vrai) cmt='Tu as vu trop petit. La réalité est <b>'+fr((vrai/v).toFixed(1))+' fois</b> plus grande.';
+      else if(v>vrai) cmt='Tu as vu trop grand. La réalité est <b>'+fr((v/vrai).toFixed(1))+' fois</b> plus petite.';
+      else cmt='Pile poil.';
+      rep.innerHTML='<span class="vrai">'+vrai.toLocaleString('fr-FR')+unite+'</span>'+
+        '<span class="badge" style="background:'+col+'">'+lib+' \u00b7 écart '+Math.round(ecart)+' %</span>'+
+        '<div class="cmt">'+cmt+'</div>';
+      rep.classList.add('show');
+      jau.style.width=Math.max(4,100-Math.min(100,ecart))+'%';
+      jau.style.background=col;
+      go.disabled=true; sl.disabled=true;
+      if(!gagnes[D.dataset.g]){ gagnes[D.dataset.g]=1; if(pts>0) tot++; el('scoreG').textContent=tot; }
+    });
+  });
+})();
+
+/* ---------- moteur d'animation piloté à la main ---------- */
+function stepper(cvId,prevId,nextId,legId,numId,frames){
+  var cv=el(cvId); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, i=0, t=0;
+  function draw(){
+    g.clearRect(0,0,W,H); frames[i].draw(g,W,H,t);
+    el(legId).innerHTML=frames[i].leg;
+    el(numId).textContent=(i+1)+' / '+frames.length;
+    el(prevId).disabled=(i===0); el(nextId).disabled=(i===frames.length-1);
+  }
+  el(prevId).addEventListener('click',function(){ if(i>0){i--;t=0;draw();} });
+  el(nextId).addEventListener('click',function(){ if(i<frames.length-1){i++;t=0;draw();} });
+  setInterval(function(){ t+=0.04; draw(); },50); draw();
+}
+function boite(g,x,y,w,h,r,fill,stroke,lw){
+  g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r);
+  g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath();
+  if(fill){ g.fillStyle=fill; g.fill(); } if(stroke){ g.strokeStyle=stroke; g.lineWidth=lw||2; g.stroke(); }
+}
+function fleche(g,x1,y1,x2,y2,col,lw){
+  g.strokeStyle=col; g.fillStyle=col; g.lineWidth=lw||3;
+  g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke();
+  var a=Math.atan2(y2-y1,x2-x1), L=9+(lw||3)*1.5, hw=(lw||3)*1.3+2;
+  g.beginPath(); g.moveTo(x2+L*Math.cos(a),y2+L*Math.sin(a));
+  g.lineTo(x2-Math.sin(a)*hw,y2+Math.cos(a)*hw); g.lineTo(x2+Math.sin(a)*hw,y2-Math.cos(a)*hw);
+  g.closePath(); g.fill();
+}
+/* ============ s2 : les fonctions de la canette ============ */
+(function(){
+  var F=[{t:'Contenir 33 cl',s:'corps cylindrique',c:'#2E6A8E',p:true},
+         {t:'Résister à la pression',s:'fond bombé',c:'#3D7E5F',p:false},
+         {t:"S'ouvrir sans outil",s:'opercule prédécoupé',c:'#BD8A2A',p:false},
+         {t:"S'empiler",s:'col rétreint',c:'#8A5A7A',p:false},
+         {t:'Se recycler',s:'un seul matériau',c:'#C0492E',p:false}];
+  function scene(g,W,H,n,t){
+    g.fillStyle='#2A2622'; boite(g,W/2-58,14,116,38,10,'#2A2622',null);
+    g.fillStyle='#fff'; g.font='800 15px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    g.fillText('CANETTE',W/2,39);
+    var wB=Math.min(152,W/5.6), yF=104, hF=50, yS=200, hS=56;
+    for(var k=0;k<n;k++){
+      var b=F[k], x=W*(0.11+k*0.195)+wB/2*0;
+      x=W*0.5 + (k-2)*(wB+10);
+      g.strokeStyle=b.c; g.lineWidth=b.p?2.8:1.6; g.setLineDash([4,3]);
+      g.beginPath(); g.moveTo(W/2,52); g.lineTo(x,yF-hF/2); g.stroke(); g.setLineDash([]);
+      boite(g,x-wB/2,yF-hF/2,wB,hF,9,'#FFFDF8',b.c,b.p?3.4:2);
+      g.fillStyle=b.c; g.font='700 13px "Bricolage Grotesque",sans-serif';
+      g.fillText(b.t,x,yF-2);
+      g.fillStyle=b.p?'#C0492E':'#8c8578'; g.font='700 9px "JetBrains Mono",monospace';
+      g.fillText(b.p?'FONCTION PRINCIPALE':'fonction technique',x,yF+15);
+      g.strokeStyle='#8c8578'; g.lineWidth=1.8;
+      g.beginPath(); g.moveTo(x,yF+hF/2); g.lineTo(x,yS-hS/2-7); g.stroke();
+      g.beginPath(); g.moveTo(x,yS-hS/2); g.lineTo(x-5,yS-hS/2-8); g.lineTo(x+5,yS-hS/2-8);
+      g.closePath(); g.fillStyle='#8c8578'; g.fill();
+      g.fillStyle='#F2EDE2'; g.strokeStyle='#5C544B'; g.lineWidth=2;
+      g.beginPath(); g.rect(x-wB/2,yS-hS/2,wB,hS); g.fill(); g.stroke();
+      g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace';
+      g.fillText(b.s,x,yS+5);
+    }
+    g.fillStyle='#235877'; g.font='800 11px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('CE QUE FAIT L\u2019OBJET',12,yF-hF/2-9);
+    g.fillStyle='#5C544B'; g.fillText('CE QUI LE R\u00c9ALISE',12,yS-hS/2-9);
+    g.textAlign='center';
+  }
+  stepper('cvFonc','foPrev','foNext','foLeg','foNum',[
+    {leg:'La <b>fonction principale</b> : contenir 33 cl de boisson. C\u2019est pour elle que le client paie.',
+     draw:function(g,W,H,t){ scene(g,W,H,1,t); }},
+    {leg:'Première fonction technique : <b>résister à la pression</b> du gaz dissous, jusqu\u2019à 6 bars.',
+     draw:function(g,W,H,t){ scene(g,W,H,2,t); }},
+    {leg:'<b>S\u2019ouvrir sans outil</b> : l\u2019opercule est prédécoupé, la languette fait levier.',
+     draw:function(g,W,H,t){ scene(g,W,H,3,t); }},
+    {leg:'<b>S\u2019empiler</b> : le col rétreint entre dans le fond concave de la canette du dessus.',
+     draw:function(g,W,H,t){ scene(g,W,H,4,t); }},
+    {leg:'<b>Se recycler</b> : un seul matériau, sans colle ni assemblage — d\u2019où la refonte possible à l\u2019infini.',
+     draw:function(g,W,H,t){ scene(g,W,H,5,t); }}
+  ]);
+})();
+
+/* ============ s4 : les cinq étapes de fabrication ============ */
+(function(){
+  function socle(g,W,H,titre,sous){
+    g.fillStyle='#2A2622'; g.font='800 16px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+    g.fillText(titre,W/2,26);
+    g.fillStyle='#5C544B'; g.font='700 12px "JetBrains Mono",monospace';
+    g.fillText(sous,W/2,46);
+  }
+  function cote(g,x1,x2,y,txt,col){
+    g.strokeStyle=col; g.lineWidth=1.4;
+    g.beginPath(); g.moveTo(x1,y-5); g.lineTo(x1,y+5); g.moveTo(x2,y-5); g.lineTo(x2,y+5);
+    g.moveTo(x1,y); g.lineTo(x2,y); g.stroke();
+    g.fillStyle=col; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText(txt,(x1+x2)/2,y-10);
+  }
+  var CX=440;
+  stepper('cvFab','fbPrev','fbNext','fbLeg','fbNum',[
+    {leg:'<b>1 · Le flan.</b> On découpe un disque plat dans une bobine d\u2019aluminium : 143 mm de diamètre, 0,30 mm d\u2019épaisseur.',
+     draw:function(g,W,H,t){
+       socle(g,W,H,'Le flan découpé','disque plat de 143 mm \u00d7 0,30 mm');
+       g.fillStyle='#dfe7ee'; g.strokeStyle='#5C544B'; g.lineWidth=2;
+       g.beginPath(); g.ellipse(CX,180,150,34,0,0,7); g.fill(); g.stroke();
+       cote(g,CX-150,CX+150,240,'143 mm','#2E6A8E');
+       g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace';
+       g.fillText('épaisseur 0,30 mm',CX,152);
+     }},
+    {leg:'<b>2 · L\u2019emboutissage.</b> Un poinçon enfonce le disque dans une matrice : il devient une coupelle large et peu profonde.',
+     draw:function(g,W,H,t){
+       socle(g,W,H,'Emboutissage','le disque devient une coupelle');
+       var d=Math.min(46,t*28);
+       g.fillStyle='#8fa3b5'; g.fillRect(CX-52,60,104,58-0+d*0.2);
+       g.fillStyle='#fff'; g.font='700 11px "JetBrains Mono",monospace'; g.fillText('POINÇON',CX,95);
+       g.strokeStyle='#5C544B'; g.lineWidth=3; g.fillStyle='#dfe7ee';
+       g.beginPath();
+       g.moveTo(CX-150,180); g.lineTo(CX-56,180); g.lineTo(CX-52,180+d);
+       g.lineTo(CX+52,180+d); g.lineTo(CX+56,180); g.lineTo(CX+150,180);
+       g.stroke();
+       g.fillStyle='#c8bfae'; g.fillRect(CX-190,180,120,60); g.fillRect(CX+70,180,120,60);
+       g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+       g.fillText('MATRICE',CX-130,215); g.fillText('MATRICE',CX+130,215);
+     }},
+    {leg:'<b>3 · L\u2019étirage.</b> La coupelle traverse plusieurs filières de plus en plus serrées : elle s\u2019allonge et sa paroi s\u2019amincit.',
+     draw:function(g,W,H,t){
+       socle(g,W,H,'Étirage en filières','la paroi passe de 0,30 mm à 0,10 mm');
+       var ph=(t*0.6)%3, k=Math.floor(ph);
+       var haut=[70,120,170][k], larg=[120,86,66][k], ep=[0.30,0.18,0.10][k];
+       g.fillStyle='#dfe7ee'; g.strokeStyle='#2E6A8E'; g.lineWidth=3;
+       g.beginPath(); g.rect(CX-larg/2,250-haut,larg,haut); g.fill(); g.stroke();
+       g.fillStyle='#8c8578'; g.fillRect(CX-larg/2-46,250-haut-14,40,14);
+       g.fillRect(CX+larg/2+6,250-haut-14,40,14);
+       g.fillStyle='#2E6A8E'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='center';
+       g.fillText('filière '+(k+1)+' / 3',CX,90);
+       g.fillText('paroi : '+fr(ep)+' mm',CX,112);
+       cote(g,CX-larg/2,CX+larg/2,264,fr(larg)+' mm','#3D7E5F');
+     }},
+    {leg:'<b>4 · Le fond bombé.</b> Un outil repousse le fond vers l\u2019intérieur : cette voûte inversée encaisse la pression sans se déformer.',
+     draw:function(g,W,H,t){
+       socle(g,W,H,'Formage du fond','une voûte inversée, comme un pont à l\u2019envers');
+       g.fillStyle='#dfe7ee'; g.strokeStyle='#2E6A8E'; g.lineWidth=3;
+       g.beginPath(); g.rect(CX-66,90,132,150); g.fill(); g.stroke();
+       g.strokeStyle='#C0492E'; g.lineWidth=4;
+       g.beginPath(); g.moveTo(CX-66,240); g.quadraticCurveTo(CX,192,CX+66,240); g.stroke();
+       var p=Math.abs(Math.sin(t*1.2));
+       for(var k=0;k<5;k++){ var x=CX-48+k*24;
+         fleche(g,x,286,x,250+p*4,'#BD8A2A',2.4); }
+       g.fillStyle='#BD8A2A'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+       g.fillText('pression interne',CX,306);
+       g.fillStyle='#C0492E'; g.fillText('fond bombé vers l\u2019intérieur',CX+150,206);
+     }},
+    {leg:'<b>5 · Le col et l\u2019opercule.</b> Le haut est rétreint pour économiser le métal du couvercle, puis serti. La canette est prête.',
+     draw:function(g,W,H,t){
+       socle(g,W,H,'Rétreint et sertissage','le col se resserre : moins de métal au couvercle');
+       g.fillStyle='#dfe7ee'; g.strokeStyle='#2E6A8E'; g.lineWidth=3;
+       g.beginPath();
+       g.moveTo(CX-66,240); g.lineTo(CX-66,140);
+       g.quadraticCurveTo(CX-66,108,CX-42,100); g.lineTo(CX+42,100);
+       g.quadraticCurveTo(CX+66,108,CX+66,140); g.lineTo(CX+66,240);
+       g.closePath(); g.fill(); g.stroke();
+       g.strokeStyle='#C0492E'; g.lineWidth=4;
+       g.beginPath(); g.moveTo(CX-66,240); g.quadraticCurveTo(CX,192,CX+66,240); g.stroke();
+       g.fillStyle='#8fa3b5'; g.strokeStyle='#5C544B'; g.lineWidth=2;
+       g.beginPath(); g.rect(CX-44,90,88,12); g.fill(); g.stroke();
+       g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+       g.fillText('couvercle serti',CX+56,96);
+       cote(g,CX-42,CX+42,74,'col rétreint','#3D7E5F');
+       g.textAlign='center';
+       g.fillStyle='#3D7E5F'; g.font='800 14px "Bricolage Grotesque",sans-serif';
+       g.fillText('13 g d\u2019aluminium, 0,10 mm de paroi',CX,296);
+     }}
+  ]);
+})();
+
+/* ============ s5 : la force sur le fond ============ */
+(function(){
+  var D=66, S=Math.PI*Math.pow(D/2,2);
+  function canette(g,cx,cy,col){
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=3;
+    g.beginPath();
+    g.moveTo(cx-52,cy+70); g.lineTo(cx-52,cy-40);
+    g.quadraticCurveTo(cx-52,cy-66,cx-32,cy-74); g.lineTo(cx+32,cy-74);
+    g.quadraticCurveTo(cx+52,cy-66,cx+52,cy-40); g.lineTo(cx+52,cy+70);
+    g.closePath(); g.fill(); g.stroke();
+    g.strokeStyle='#C0492E'; g.lineWidth=4;
+    g.beginPath(); g.moveTo(cx-52,cy+70); g.quadraticCurveTo(cx,cy+30,cx+52,cy+70); g.stroke();
+  }
+  function calcul(g,W,bar,montrer){
+    var P=bar*0.1, F=P*S;
+    g.textAlign='left'; g.font='700 14px "JetBrains Mono",monospace';
+    var x=560, y=92;
+    g.fillStyle='#5C544B'; g.fillText('diamètre du fond : 66 mm',x,y);
+    g.fillStyle='#2E6A8E'; g.fillText('S = \u03c0 \u00d7 33\u00b2 = '+S.toFixed(0)+' mm\u00b2',x,y+28);
+    if(montrer>=1){ g.fillStyle='#BD8A2A'; g.fillText('P = '+fr(bar)+' bar = '+fr(P.toFixed(2))+' MPa',x,y+60); }
+    if(montrer>=2){ g.fillStyle='#C0492E'; g.font='800 20px "JetBrains Mono",monospace';
+      g.fillText('F = P \u00d7 S = '+F.toFixed(0)+' N',x,y+100);
+      g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+      g.fillText('soit le poids de '+(F/9.81).toFixed(0)+' kg',x,y+126); }
+    g.textAlign='center';
+    return F;
+  }
+  stepper('cvPres','prPrev','prNext','prLeg','prNum',[
+    {leg:'Le gaz dissous exerce une pression sur <b>toutes les parois</b>, et notamment sur le fond. Commençons par mesurer ce fond.',
+     draw:function(g,W,H,t){
+       canette(g,300,160,'#2E6A8E');
+       g.fillStyle='#2E6A8E'; g.font='700 12px "JetBrains Mono",monospace';
+       g.fillText('\u2300 66 mm',300,268);
+       g.strokeStyle='#2E6A8E'; g.lineWidth=1.4;
+       g.beginPath(); g.moveTo(248,250); g.lineTo(352,250); g.stroke();
+       calcul(g,W,2.5,0);
+     }},
+    {leg:'Un soda est embouteillé vers <b>2,5 bars</b>. On convertit : 1 bar vaut 0,1 MPa, et 1 MPa vaut 1 N/mm\u00b2.',
+     draw:function(g,W,H,t){
+       canette(g,300,160,'#BD8A2A');
+       var p=Math.abs(Math.sin(t*1.4));
+       for(var k=0;k<5;k++){ var x=282+(k-2)*22; fleche(g,x,206,x,236-p*4,'#BD8A2A',2.4); }
+       calcul(g,W,2.5,1);
+     }},
+    {leg:'<b>F = P \u00d7 S = 855 N</b>. Le fond supporte en permanence le poids d\u2019un adulte de 87 kg — et il ne bouge pas.',
+     draw:function(g,W,H,t){
+       canette(g,300,160,'#C0492E');
+       for(var k=0;k<5;k++){ var x=282+(k-2)*22; fleche(g,x,200,x,238,'#C0492E',3); }
+       calcul(g,W,2.5,2);
+     }},
+    {leg:'Au soleil, la pression peut atteindre <b>6 bars</b> : la force dépasse alors <b>2000 N</b>. C\u2019est la forme bombée du fond qui encaisse.',
+     draw:function(g,W,H,t){
+       canette(g,300,160,'#C0492E');
+       for(var k=0;k<7;k++){ var x=282+(k-3)*17; fleche(g,x,192,x,240,'#C0492E',3.4); }
+       calcul(g,W,6,2);
+       g.fillStyle='#C0492E'; g.font='800 13px "Bricolage Grotesque",sans-serif';
+       g.fillText('une voûte inversée : la pression la plaque, elle ne la déforme pas',W/2,300);
+     }}
+  ]);
+})();
+
+/* ============ s6 : énergie primaire contre recyclé ============ */
+(function(){
+  var Ep=14, Er=0.7, m=0.013;
+  stepper('cvEne','enPrev','enNext','enLeg','enNum',[
+    {leg:'Produire 1 kg d\u2019aluminium <b>à partir du minerai</b> demande environ <b>14 kWh</b> : c\u2019est l\u2019électrolyse qui coûte si cher.',
+     draw:function(g,W,H,t){ barres(g,W,H,1,t); }},
+    {leg:'Le <b>refondre</b> à partir de canettes usagées n\u2019en demande que <b>0,7 kWh</b> — vingt fois moins.',
+     draw:function(g,W,H,t){ barres(g,W,H,2,t); }},
+    {leg:'L\u2019écart représente <b>95 % d\u2019économie</b>. C\u2019est le chiffre à retenir de toute la séquence.',
+     draw:function(g,W,H,t){ barres(g,W,H,3,t); }},
+    {leg:'Ramené à une canette de 13 g : 0,182 kWh contre 0,009 kWh. Pour <b>1000 canettes recyclées</b>, on économise <b>173 kWh</b>.',
+     draw:function(g,W,H,t){ barres(g,W,H,4,t); }}
+  ]);
+  function barres(g,W,H,n,t){
+    var x1=200, x2=520, base=270, ech=13.5;
+    g.strokeStyle='#c8bfae'; g.lineWidth=1.6;
+    g.beginPath(); g.moveTo(90,base); g.lineTo(W-60,base); g.stroke();
+    g.fillStyle='#C0492E';
+    var h1=Ep*ech; g.fillRect(x1-58,base-h1,116,h1);
+    g.fillStyle='#fff'; g.font='800 17px "JetBrains Mono",monospace'; g.textAlign='center';
+    g.fillText('14 kWh',x1,base-h1+28);
+    g.fillStyle='#2A2622'; g.font='700 13px "Bricolage Grotesque",sans-serif';
+    g.fillText('aluminium PRIMAIRE',x1,base+22);
+    g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('par kilogramme',x1,base+40);
+    if(n>=2){
+      var h2=Er*ech;
+      g.fillStyle='#3D7E5F'; g.fillRect(x2-58,base-Math.max(h2,7),116,Math.max(h2,7));
+      g.fillStyle='#2c6147'; g.font='800 17px "JetBrains Mono",monospace';
+      g.fillText('0,7 kWh',x2,base-24);
+      g.fillStyle='#2A2622'; g.font='700 13px "Bricolage Grotesque",sans-serif';
+      g.fillText('aluminium RECYCLÉ',x2,base+22);
+      g.fillStyle='#5C544B'; g.font='700 11px "JetBrains Mono",monospace';
+      g.fillText('par kilogramme',x2,base+40);
+    }
+    if(n>=3){
+      g.strokeStyle='#8A5A7A'; g.lineWidth=2; g.setLineDash([6,4]);
+      g.beginPath(); g.moveTo(x1+62,base-Ep*ech); g.lineTo(x2-62,base-Ep*ech); g.stroke(); g.setLineDash([]);
+      g.fillStyle='#8A5A7A'; g.font='800 22px "Bricolage Grotesque",sans-serif';
+      g.fillText('\u2212 95 %',(x1+x2)/2,base-Ep*ech-14);
+    }
+    if(n>=4){
+      g.fillStyle='#2A2622'; g.font='700 13px "JetBrains Mono",monospace'; g.textAlign='left';
+      g.fillText('une canette de 13 g : '+(Ep*m).toFixed(3)+' kWh  contre  '+(Er*m).toFixed(3)+' kWh',96,52);
+      g.fillStyle='#3D7E5F'; g.font='800 15px "Bricolage Grotesque",sans-serif';
+      g.fillText('1000 canettes recyclées \u2192 '+((Ep-Er)*m*1000).toFixed(0)+' kWh économisés',96,76);
+      g.textAlign='center';
+    }
+  }
+})();
+
+
+
+/* ============ s7 : le film de la ligne de production ============ */
+(function(){
+  var cv=el('cvFilm'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var p=0, play=true;
+  var ST=[
+    {n:'Bobine',        d:'Une bobine d\u2019aluminium 3104-H19, longue de plusieurs kilom\u00e8tres, alimente la presse. Elle donnera 300 000 canettes en 2 h 30.'},
+    {n:'D\u00e9coupe du flan', d:'La presse d\u00e9coupe des disques de 143 mm. Les chutes partent directement \u00e0 la refonte : rien n\u2019est perdu.'},
+    {n:'Emboutissage',  d:'Le poin\u00e7on enfonce le flan dans la matrice : il devient une coupelle large et peu profonde. C\u2019est l\u2019emboutissage profond.'},
+    {n:'Bodymaker',     d:'En un seul coup : r\u00e9-emboutissage, puis trois passes de repassage entre poin\u00e7on et fili\u00e8res. La paroi passe de 0,30 \u00e0 0,10 mm.'},
+    {n:'D\u00f4me',        d:'Emboutissage invers\u00e9 du fond : la voûte se forme. Cette zone n\u2019est jamais amincie, elle garde l\u2019\u00e9paisseur d\u2019origine.'},
+    {n:'Rognage',       d:'La canette tourne, une cisaille \u00e9galise le bord. Les \u00ab oreilles \u00bb dues \u00e0 l\u2019anisotropie du m\u00e9tal sont \u00e9limin\u00e9es.'},
+    {n:'Lavage',        d:'D\u00e9graissage de l\u2019huile d\u2019emboutissage, rin\u00e7ages successifs, s\u00e9chage. Sans cela, ni vernis ni encre ne tiendraient.'},
+    {n:'Impression',    d:'Jusqu\u2019\u00e0 quatre couleurs d\u00e9pos\u00e9es en un passage sur rouleau, puis un vernis protecteur.'},
+    {n:'Vernis interne',d:'Un revêtement alimentaire isole la boisson du m\u00e9tal : sans lui, l\u2019acidit\u00e9 attaquerait l\u2019aluminium.'},
+    {n:'R\u00e9treint du col',d:'Le haut est resserr\u00e9 en une dizaine de passes successives. Un col plus \u00e9troit, c\u2019est moins de m\u00e9tal au couvercle.'},
+    {n:'Palettisation', d:'Contr\u00f4le, empilage, filmage. De la bobine \u00e0 la palette : environ 45 minutes.'}
+  ];
+  function forme(g,cx,cy,k,f){
+    var col='#2E6A8E';
+    g.strokeStyle=col; g.lineWidth=3; g.fillStyle='#dfe7ee';
+    if(k<=0){ g.beginPath(); g.ellipse(cx,cy+34,52,11,0,0,7); g.fill(); g.stroke(); }
+    else if(k===1){ g.beginPath(); g.ellipse(cx,cy+30,46,12,0,0,7); g.fill(); g.stroke(); }
+    else if(k===2){ g.beginPath(); g.rect(cx-46,cy+4,92,38); g.fill(); g.stroke(); }
+    else if(k===3){ var h=38+f*46, l=46-f*14;
+      g.beginPath(); g.rect(cx-l,cy+42-h,2*l,h); g.fill(); g.stroke(); }
+    else { var l2=32, h2=84;
+      g.beginPath();
+      if(k>=9){ g.moveTo(cx-l2,cy+42); g.lineTo(cx-l2,cy+42-h2+14);
+        g.quadraticCurveTo(cx-l2,cy+42-h2,cx-l2+12,cy+42-h2-4); g.lineTo(cx+l2-12,cy+42-h2-4);
+        g.quadraticCurveTo(cx+l2,cy+42-h2,cx+l2,cy+42-h2+14); g.lineTo(cx+l2,cy+42); g.closePath(); }
+      else g.rect(cx-l2,cy+42-h2,2*l2,h2);
+      if(k>=7){ var grd=g.createLinearGradient(cx-l2,0,cx+l2,0);
+        grd.addColorStop(0,'#C0492E'); grd.addColorStop(0.5,'#BD8A2A'); grd.addColorStop(1,'#3D7E5F');
+        g.fillStyle=grd; }
+      g.fill(); g.stroke();
+      if(k>=4){ g.strokeStyle='#C0492E'; g.lineWidth=3.4;
+        g.beginPath(); g.moveTo(cx-l2,cy+42); g.quadraticCurveTo(cx,cy+16,cx+l2,cy+42); g.stroke(); }
+      if(k>=10){ g.fillStyle='#8fa3b5'; g.strokeStyle='#5C544B'; g.lineWidth=2;
+        g.beginPath(); g.rect(cx-24,cy+42-h2-12,48,9); g.fill(); g.stroke(); }
+    }
+  }
+  function step(){
+    if(play) p=(p+0.0014)%1;
+    el('flTime').value=Math.round(p*1000);
+    var pos=p*ST.length, k=Math.min(ST.length-1,Math.floor(pos)), f=pos-k;
+    g.clearRect(0,0,W,H);
+    /* convoyeur */
+    g.fillStyle='#EFE8D8'; g.fillRect(0,236,W,16);
+    g.strokeStyle='#c8bfae'; g.lineWidth=2;
+    for(var x=-((p*900)%34);x<W;x+=34){ g.beginPath(); g.moveTo(x,236); g.lineTo(x+12,252); g.stroke(); }
+    /* stations */
+    var sw=W/ST.length;
+    for(var i=0;i<ST.length;i++){
+      var cx=sw*(i+0.5), actif=(i===k);
+      g.fillStyle= actif? '#2E6A8E':'#EFE8D8';
+      g.beginPath(); g.arc(cx,282,actif?13:8,0,7); g.fill();
+      g.fillStyle= actif? '#2E6A8E':'#8c8578';
+      g.font=(actif?'800 ':'700 ')+(actif?12:10)+'px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(String(i+1),cx,286+(actif?4:3));
+      if(actif){ g.font='800 13px "Bricolage Grotesque",sans-serif'; g.fillStyle='#2A2622';
+        g.fillText(ST[i].n,cx,314); }
+    }
+    /* la pièce en cours */
+    forme(g,sw*(k+0.5),150,k,f);
+    /* bandeau */
+    g.fillStyle='#2A2622'; g.font='800 17px "Bricolage Grotesque",sans-serif'; g.textAlign='left';
+    g.fillText((k+1)+' · '+ST[k].n,26,38);
+    g.fillStyle='#3D7E5F'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('2000 canettes / minute',W-26,38);
+    el('flLeg').innerHTML=ST[k].d;
+    el('flPos').textContent=(k+1)+' / '+ST.length;
+    g.textAlign='center';
+  }
+  el('flPlay').addEventListener('click',function(){
+    play=!play; this.textContent= play? '⏸ Pause':'▶ Lecture';
+  });
+  el('flTime').addEventListener('input',function(){ play=false; el('flPlay').textContent='▶ Lecture'; p=(+this.value)/1000; });
+  setInterval(step,45); step();
+})();
+
+/* ============ s8 : contrainte dans la paroi ============ */
+(function(){
+  var cv=el('cvSigma'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var Rm=275, r=33, bar=2.5, e=0.10;
+  function maj(){ el('sgV').textContent=fr(bar.toFixed(1))+' bar'; el('sgVE').textContent=fr(e.toFixed(2))+' mm'; }
+  el('sgP').addEventListener('input',function(){ bar=parseFloat(this.value); maj(); });
+  el('sgE').addEventListener('input',function(){ e=parseFloat(this.value); maj(); });
+  maj();
+  function step(){
+    var P=bar*0.1, s=P*r/e, ratio=s/Rm;
+    var col= ratio>=1? '#C0492E' : (ratio>=0.72? '#BD8A2A':'#3D7E5F');
+    g.clearRect(0,0,W,H);
+    /* coupe de paroi */
+    var x0=70, y0=70, hh=160, ep=Math.max(4,e*90);
+    g.fillStyle='#dfe7ee'; g.strokeStyle=col; g.lineWidth=2.4;
+    g.beginPath(); g.rect(x0,y0,ep,hh); g.fill(); g.stroke();
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('paroi ('+fr(e.toFixed(2))+' mm)',x0-6,y0-12);
+    for(var k=0;k<5;k++){ var yy=y0+22+k*30;
+      fleche(g,x0-40,yy,x0-4,yy,'#BD8A2A',2.2); }
+    g.fillStyle='#8a6313'; g.fillText('pression',x0-64,y0-12);
+    fleche(g,x0+ep+8,y0+40,x0+ep+8,y0-6,col,3);
+    fleche(g,x0+ep+8,y0+hh-40,x0+ep+8,y0+hh+6,col,3);
+    g.fillStyle=col; g.fillText('contrainte de traction',x0+ep+18,y0+hh/2);
+    /* jauge */
+    var gx=390, gy=96, gw=430, gh=26;
+    g.fillStyle='#EFE8D8'; g.fillRect(gx,gy,gw,gh);
+    g.fillStyle=col; g.fillRect(gx,gy,Math.min(gw,gw*ratio),gh);
+    g.strokeStyle='#C0492E'; g.lineWidth=2.4;
+    g.beginPath(); g.moveTo(gx+gw,gy-8); g.lineTo(gx+gw,gy+gh+8); g.stroke();
+    g.fillStyle='#C0492E'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='right';
+    g.fillText('Rm = 275 MPa (3104-H19)',gx+gw,gy-14);
+    g.textAlign='left';
+    g.fillStyle='#2A2622'; g.font='700 14px "JetBrains Mono",monospace';
+    g.fillText('\u03c3 = '+fr(P.toFixed(2))+' \u00d7 33 / '+fr(e.toFixed(2)),gx,gy-14);
+    g.fillStyle=col; g.font='800 30px "JetBrains Mono",monospace';
+    g.fillText('\u03c3 = '+s.toFixed(0)+' MPa',gx,gy+gh+46);
+    g.fillStyle='#5C544B'; g.font='700 13px "JetBrains Mono",monospace';
+    g.fillText('coefficient de s\u00e9curit\u00e9 : '+fr((Rm/s).toFixed(1)),gx,gy+gh+72);
+    g.font='800 15px "Bricolage Grotesque",sans-serif'; g.fillStyle=col;
+    g.fillText(ratio>=1? 'la paroi c\u00e8de' : (ratio>=0.72? 'zone critique':'la paroi tient largement'),gx,gy+gh+102);
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace';
+    g.fillText('rupture th\u00e9orique de la paroi : '+fr((Rm*e/r*10).toFixed(1))+' bar',gx,gy+gh+126);
+    g.textAlign='center';
+  }
+  setInterval(step,50); step();
+})();
+
+/* ---------- impression de la trace écrite ---------- */
+(function(){
+  var b=document.querySelector('.trace [data-print]');
+  if(b) b.addEventListener('click',function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

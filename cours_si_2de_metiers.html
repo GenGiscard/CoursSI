@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cours — Ingénieur : dix métiers derrière un objet · Option SI Seconde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:960px;margin:0 auto;padding:18px 16px 70px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:14px}
+  .estic-bar .b{width:32px;height:32px;border-radius:9px;background:var(--plum);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+  .estic-bar .t{font-weight:800;font-size:16px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  .score{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--sub)}
+  .score b{color:var(--green);font-size:19px}
+  .nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .nav a{font-family:'JetBrains Mono',monospace;font-size:12px;text-decoration:none;color:var(--sub);
+         background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+  .nav a:hover{border-color:var(--steel);color:var(--steel)}
+  .slide{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:18px}
+  .slide .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--plum)}
+  .slide h2{margin:4px 0 8px;font-size:26px;font-weight:800}
+  .punch{font-size:19px;font-weight:700;margin:0 0 12px} .punch b{color:var(--plum)}
+  .fait{background:rgba(61,126,95,.10);border:1px solid rgba(61,126,95,.32);border-radius:12px;padding:11px 15px;margin:12px 0;font-size:15.5px}
+  .fait b{color:var(--green)}
+  /* cartes métiers */
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:14px 0}
+  .job{background:#fff;border:1px solid var(--line);border-top:4px solid var(--steel);border-radius:14px;padding:14px 16px;cursor:pointer;
+       transition:transform .15s ease,box-shadow .15s ease}
+  .job:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(20,16,10,.10)}
+  .job h3{margin:0 0 4px;font-size:16.5px;font-weight:800}
+  .job .r{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sub)}
+  .job p{margin:7px 0 0;font-size:14.5px;color:var(--sub)}
+  .job .plus{display:none;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:14.5px}
+  .job.open .plus{display:block}
+  .job .plus b{color:var(--steel)}
+  .job .jour{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--plum);margin-top:7px;display:block}
+  /* jeu d'attribution */
+  .jeu{background:linear-gradient(160deg,rgba(138,90,122,.12),rgba(138,90,122,.04));
+       border:2px solid rgba(138,90,122,.40);border-radius:16px;padding:16px 20px;margin:14px 0}
+  .jeu .jk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#6f4a63;margin-bottom:8px}
+  .jeu .mission{font-size:18px;font-weight:800;margin-bottom:4px}
+  .jeu .ctx{font-size:15px;color:var(--sub);margin-bottom:12px}
+  .jeu .opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+  .jeu .opt{background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;cursor:pointer;font-size:15px;font-weight:700;text-align:left}
+  .jeu .opt:hover{border-color:var(--plum)}
+  .jeu .opt.bon{background:rgba(61,126,95,.16);border-color:var(--green);color:#2c6147}
+  .jeu .opt.faux{background:rgba(192,73,46,.14);border-color:var(--copper);color:#8f3722}
+  .jeu .opt:disabled{cursor:default}
+  .jeu .fb{margin-top:12px;font-size:15.5px;display:none}
+  .jeu .fb.show{display:block}
+  .jeu .barre{display:flex;gap:5px;margin-top:12px}
+  .jeu .barre i{flex:1;height:7px;border-radius:4px;background:#EFE8D8}
+  .jeu .barre i.ok{background:var(--green)} .jeu .barre i.no{background:var(--copper)}
+  .jeu .fin{margin-top:12px;font-size:17px;font-weight:800;display:none}
+  .jeu .fin.show{display:block}
+  /* journée */
+  .jour-box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:14px 0}
+  .jour-box .h{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+  .jour-box .sit{font-size:17px;font-weight:700;margin:6px 0 12px}
+  .jour-box .ch{display:grid;gap:8px}
+  .jour-box .ch button{background:#F6F1E6;border:1.5px solid var(--line);border-radius:11px;padding:12px 14px;
+                       text-align:left;font-size:15px;cursor:pointer;font-family:inherit}
+  .jour-box .ch button:hover{border-color:var(--steel)}
+  .jour-box .res{margin-top:12px;font-size:15.5px;display:none;background:#F6F1E6;border-radius:11px;padding:12px 14px}
+  .jour-box .res.show{display:block}
+  .jour-box .res b{color:var(--steel)}
+  .jour-box .horloge{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--steel);float:right}
+  /* parcours */
+  .voie{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:14px 0}
+  .voie .v{background:#fff;border:1px solid var(--line);border-left:4px solid var(--amber);border-radius:12px;padding:12px 14px}
+  .voie .v .d{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--sub);letter-spacing:.1em}
+  .voie .v h4{margin:3px 0 5px;font-size:15.5px;font-weight:800}
+  .voie .v p{margin:0;font-size:14px;color:var(--sub)}
+  .trace{background:var(--paper);border:2px solid var(--steel);border-radius:16px;padding:18px 22px;margin:20px 0}
+  .trace .th{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+             border-bottom:2px solid var(--line);padding-bottom:9px;margin-bottom:12px}
+  .trace .th .tk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--steel)}
+  .trace .th h3{margin:2px 0 0;font-size:20px;font-weight:800}
+  .trace .tprint{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--steel);
+                 color:#fff;border:none;border-radius:9px;padding:8px 14px;cursor:pointer}
+  .trace h4{font-size:14px;font-weight:800;color:var(--steel);margin:13px 0 5px;font-family:'JetBrains Mono',monospace}
+  .trace ol,.trace ul{margin:5px 0;padding-left:20px} .trace li{font-size:15px;margin:4px 0}
+  @media print{ body *{visibility:hidden} .trace,.trace *{visibility:visible}
+    .trace{position:absolute;left:0;top:0;width:100%;border:none;padding:0} .trace .tprint{display:none} }
+
+  .job .ic{margin-bottom:6px}
+  .cyc, .res{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin:14px 0}
+  .cyc canvas, .res canvas{width:100%;height:auto;display:block;border-radius:10px}
+  .ctrl{display:flex;gap:9px;align-items:center;margin-top:9px;flex-wrap:wrap}
+  .ctrl button{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+               border:none;border-radius:9px;padding:7px 14px;cursor:pointer}
+  .ctrl button:disabled{opacity:.35;cursor:not-allowed}
+  .ctrl .leg{flex:1;min-width:210px;font-size:14.5px;color:var(--sub)}
+  .ctrl .pn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub)}
+  table.voies{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0}
+  table.voies th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+                 text-transform:uppercase;color:var(--sub);padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.voies td{padding:9px 10px;border-bottom:1px solid var(--line)}
+  table.voies td b{color:var(--steel)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">Ingénieur : dix métiers derrière un objet</div><div class="s">Option SI · Seconde · Cours</div></div>
+    <div class="score">missions réussies : <b id="sc">0</b> / 8</div></div>
+  <div class="nav">
+    <a href="#s1">1 · Qui a fait la canette ?</a><a href="#s2">2 · Les dix métiers</a>
+    <a href="#s3">3 · À qui la mission ?</a><a href="#s4">4 · Une journée</a>
+    <a href="#s5">5 · Les chemins</a><a href="#s6">6 · Et toi ?</a>
+  </div>
+
+  <section class="slide" id="s1">
+    <div class="k">Slide 1</div>
+    <h2>Qui a fait la canette ?</h2>
+    <p class="punch">Tu viens d'étudier une canette. <b>Personne ne l'a conçue seul.</b></p>
+    <div class="fait">Derrière ces 13 grammes :</div>
+    <div class="fait" style="margin-top:-6px">Quelqu'un a <b>calculé</b> l'épaisseur.</div>
+    <div class="fait" style="margin-top:-6px">Quelqu'un a <b>dessiné</b> l'outil.</div>
+    <div class="fait" style="margin-top:-6px">Quelqu'un a <b>réglé</b> la presse à 2000 pièces/minute.</div>
+    <div class="fait" style="margin-top:-6px">Quelqu'un l'a <b>cassée</b> pour trouver sa limite.</div>
+    <div class="fait" style="margin-top:-6px">Quelqu'un a <b>négocié</b> le prix de l'aluminium.</div>
+    <div class="fait" style="margin-top:-6px"><b>Six métiers, au moins.</b></div>
+    <p class="punch">« Ingénieur » n'est pas un métier. <b>C'est une famille de métiers.</b></p>
+  </section>
+
+  <section class="slide" id="s2">
+    <div class="k">Slide 2</div>
+    <h2>Les dix métiers</h2>
+    <p class="punch">Clique sur une carte pour voir <b>ce qu'on y fait vraiment</b>.</p>
+    
+    <div class="cyc">
+      <canvas id="cvCycle" width="880" height="300" aria-label="Cycle de vie d'un produit et métiers qui interviennent à chaque phase"></canvas>
+      <div class="ctrl"><button id="cyPrev">◀</button><button id="cyNext">▶</button><div class="leg" id="cyLeg"></div><span class="pn" id="cyNum"></span></div>
+    </div>
+    <div class="grid" id="jobs"></div>
+    <div class="res">
+      <canvas id="cvRes" width="880" height="330" aria-label="Qui échange avec qui dans une entreprise industrielle"></canvas>
+      <div class="ctrl"><button id="rePrev">◀</button><button id="reNext">▶</button><div class="leg" id="reLeg"></div><span class="pn" id="reNum"></span></div>
+    </div>
+
+    <table class="voies">
+      <tr><th>Métier</th><th>Où il travaille</th><th>Ce qu'il produit</th><th>Sa hantise</th></tr>
+      <tr><td><b>Bureau d'études</b></td><td>Bureau</td><td>Des plans</td><td>Une pièce infabricable</td></tr>
+      <tr><td><b>Calcul</b></td><td>Bureau</td><td>Un verdict</td><td>Avoir dit oui à tort</td></tr>
+      <tr><td><b>Essais</b></td><td>Laboratoire</td><td>Des mesures</td><td>Un capteur mal posé</td></tr>
+      <tr><td><b>Méthodes</b></td><td>Atelier</td><td>Des gammes</td><td>Une cadence qui chute</td></tr>
+      <tr><td><b>Production</b></td><td>Ligne</td><td>Des pièces</td><td>La panne à 3 h du matin</td></tr>
+      <tr><td><b>Qualité</b></td><td>Partout</td><td>Des preuves</td><td>Le défaut vu par le client</td></tr>
+    </table>
+    <div class="fait">Tous ces métiers existent dans la <b>même usine</b>. On en change trois ou quatre fois dans une carrière.</div>
+  </section>
+
+  <section class="slide" id="s3">
+    <div class="k">Slide 3</div>
+    <h2>À qui la mission ?</h2>
+    <p class="punch">Huit situations réelles. <b>Qui appelle-t-on ?</b></p>
+    <div class="jeu" id="jeu">
+      <div class="jk">Mission <span id="jNum">1</span> sur 8</div>
+      <div class="mission" id="jMis"></div>
+      <div class="ctx" id="jCtx"></div>
+      <div class="opts" id="jOpts"></div>
+      <div class="fb" id="jFb"></div>
+      <div class="barre" id="jBar"></div>
+      <div class="fin" id="jFin"></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s4">
+    <div class="k">Slide 4</div>
+    <h2>Une journée d'ingénieur méthodes</h2>
+    <p class="punch">Il est 8 h. La ligne 3 est arrêtée. <b>Tes décisions comptent.</b></p>
+    <div class="cyc"><canvas id="cvJour" width="880" height="150" aria-label="Frise de la journée d'un ingénieur méthodes"></canvas></div>
+    <div class="jour-box" id="jour">
+      <div class="horloge" id="hOre">08:00</div>
+      <div class="h" id="hLab">Situation 1 sur 5</div>
+      <div class="sit" id="hSit"></div>
+      <div class="ch" id="hCh"></div>
+      <div class="res" id="hRes"></div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5">
+    <div class="k">Slide 5</div>
+    <h2>Comment on y arrive</h2>
+    <p class="punch">Plusieurs chemins mènent au même métier. <b>Aucun n'est le bon pour tout le monde.</b></p>
+    <table class="voies">
+      <tr><th>Voie</th><th>Durée</th><th>Ce qu'on y fait</th><th>Alternance</th></tr>
+      <tr><td><b>BUT</b></td><td>3 ans</td><td>Très concret : projets, stages, ateliers</td><td>oui</td></tr>
+      <tr><td><b>Prépa puis école</b></td><td>2 + 3 ans</td><td>Maths et physique, puis spécialisation</td><td>en école</td></tr>
+      <tr><td><b>École post-bac</b></td><td>5 ans</td><td>Pas de concours intermédiaire</td><td>souvent</td></tr>
+      <tr><td><b>Université</b></td><td>3 + 2 ans</td><td>Plus théorique, ouvre sur la recherche</td><td>en master</td></tr>
+    </table>
+    <div class="fait">Ce qui compte en Seconde : <b>garder les maths et la physique</b>, et choisir des spécialités qui laissent les portes ouvertes. L'option SI en fait partie.</div>
+  </section>
+
+  <section class="slide" id="s6">
+    <div class="k">Slide 6</div>
+    <h2>Et toi, tu ferais quoi ?</h2>
+    <p class="punch">Trois questions honnêtes. <b>Il n'y a pas de bonne réponse.</b></p>
+    <div class="fait">
+      <b>1.</b> <b>Imaginer</b> ce qui n'existe pas, ou <b>faire marcher</b> ce qui existe ?
+    </div>
+    <div class="fait"><b>2.</b> <b>Seul</b> sur un problème dur, ou <b>coordonner</b> une équipe ?</div>
+    <div class="fait"><b>3.</b> Plus à l'aise avec <b>le calcul</b>, <b>les mains</b>, ou <b>les gens</b> ?</div>
+    <div class="fait" style="background:rgba(138,90,122,.10);border-color:rgba(138,90,122,.32)">La 1 sépare conception et maintenance.</div>
+    <div class="fait" style="background:rgba(138,90,122,.10);border-color:rgba(138,90,122,.32);margin-top:-6px">La 2 sépare l'expert du chef de projet.</div>
+    <div class="fait" style="background:rgba(138,90,122,.10);border-color:rgba(138,90,122,.32);margin-top:-6px">La 3 sépare calcul, méthodes et commercial.</div>
+    <div class="fait" style="background:rgba(138,90,122,.10);border-color:rgba(138,90,122,.32);margin-top:-6px"><b>Rien n'est définitif : on change de métier trois ou quatre fois.</b></div>
+  </section>
+
+  <div class="trace">
+    <div class="th"><div><div class="tk">Trace écrite</div><h3>Les métiers de l'ingénieur</h3></div>
+    <button class="tprint" type="button" data-print="1">Imprimer</button></div>
+    <h4>Ce qu'est un ingénieur</h4>
+    <p>Un ingénieur <b>résout des problèmes techniques sous contraintes</b> : un délai, un budget, une exigence de qualité, une règle de sécurité. Ce n'est pas un métier unique mais une famille de métiers.</p>
+    <h4>Les grandes familles</h4>
+    <ol>
+      <li><b>Conception (bureau d'études)</b> : imaginer et calculer la solution.</li>
+      <li><b>Calcul et simulation</b> : vérifier qu'elle tiendra, avant de la fabriquer.</li>
+      <li><b>Essais</b> : la casser pour vérifier que le calcul disait vrai.</li>
+      <li><b>Méthodes et industrialisation</b> : rendre la fabrication possible et rentable.</li>
+      <li><b>Production</b> : faire tourner la ligne au quotidien.</li>
+      <li><b>Maintenance</b> : remettre en marche, et éviter la prochaine panne.</li>
+      <li><b>Qualité</b> : garantir que chaque pièce est conforme.</li>
+      <li><b>Recherche et développement</b> : préparer le produit d'après-demain.</li>
+      <li><b>Chef de projet</b> : tenir les délais et coordonner les autres.</li>
+      <li><b>Technico-commercial</b> : traduire un besoin client en solution technique.</li>
+    </ol>
+    <h4>Ce qu'ils ont tous en commun</h4>
+    <ul>
+      <li>partir d'un <b>besoin</b>, pas d'une solution ;</li>
+      <li>travailler sous <b>contraintes</b> — délai, coût, sécurité ;</li>
+      <li>savoir <b>justifier</b> une décision par un calcul ou une mesure ;</li>
+      <li>travailler <b>en équipe</b>, avec des gens d'autres métiers.</li>
+    </ul>
+    <h4>Les chemins après le bac</h4>
+    <p>BUT en 3 ans · classe préparatoire puis école en 5 ans · école post-bac en 5 ans · université en 5 ans · alternance possible dans presque toutes ces voies.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+
+
+/* ---------- moteur d'animation piloté à la main ---------- */
+function stepper(cvId,prevId,nextId,legId,numId,frames){
+  var cv=el(cvId); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height, i=0, t=0;
+  function draw(){
+    g.clearRect(0,0,W,H); frames[i].draw(g,W,H,t);
+    el(legId).innerHTML=frames[i].leg;
+    el(numId).textContent=(i+1)+' / '+frames.length;
+    el(prevId).disabled=(i===0); el(nextId).disabled=(i===frames.length-1);
+  }
+  el(prevId).addEventListener('click',function(){ if(i>0){i--;t=0;draw();} });
+  el(nextId).addEventListener('click',function(){ if(i<frames.length-1){i++;t=0;draw();} });
+  setInterval(function(){ t+=0.04; draw(); },50); draw();
+}
+function boite(g,x,y,w,h,r,fill,stroke,lw){
+  g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r);
+  g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath();
+  if(fill){ g.fillStyle=fill; g.fill(); } if(stroke){ g.strokeStyle=stroke; g.lineWidth=lw||2; g.stroke(); }
+}
+
+/* ---------- le cycle de vie d'un produit ---------- */
+(function(){
+  var PH=[
+   {n:'Besoin',       m:['Technico-commercial'],            c:'#C0492E', l:'Un client exprime un besoin. Le <b>technico-commercial</b> le traduit en langage technique.'},
+   {n:'Conception',   m:['Bureau d\u2019études','Ingénieur calcul'], c:'#2E6A8E', l:'Le <b>bureau d\u2019études</b> dessine, l\u2019<b>ingénieur calcul</b> vérifie que ça tiendra.'},
+   {n:'Essais',       m:['Ingénieur essais'],               c:'#8A5A7A', l:'L\u2019<b>ingénieur essais</b> casse le prototype pour vérifier le calcul.'},
+   {n:'Industrialisation',m:['Ingénieur méthodes'],         c:'#BD8A2A', l:'L\u2019<b>ingénieur méthodes</b> transforme un plan en gamme de fabrication.'},
+   {n:'Production',   m:['Responsable production','Ingénieur maintenance','Ingénieur qualité'], c:'#3D7E5F',
+    l:'Trois métiers cohabitent : <b>production</b>, <b>maintenance</b> et <b>qualité</b>.'},
+   {n:'Client',       m:['Ingénieur qualité','Recherche et développement'], c:'#2E6A8E',
+    l:'Les retours clients nourrissent la <b>qualité</b> et la <b>R&amp;D</b> : le cycle recommence.'}
+  ];
+  var F=PH.map(function(_,k){
+    return {leg:PH[k].l, draw:function(g,W,H,t){
+      var n=PH.length, bw=Math.min(122,(W-70)/n-8), y=96, bh=54;
+      for(var i=0;i<n;i++){
+        var x=40+i*((W-80)/n), actif=(i===k), fait=(i<k);
+        var col= actif? PH[i].c : (fait? '#c8bfae':'#e6ded0');
+        boite(g,x,y,bw,bh,10, actif? '#FFFDF8':'#F6F1E6', col, actif?3.4:1.8);
+        g.fillStyle= actif? PH[i].c : '#8c8578';
+        g.font=(actif?'800 ':'700 ')+'12px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+        g.fillText(PH[i].n,x+bw/2,y+bh/2+4);
+        if(i<n-1){
+          g.strokeStyle= (i<k)? '#8c8578':'#e0d8c8'; g.lineWidth=2.4;
+          var xa=x+bw+3, xb=x+((W-80)/n)-3;
+          g.beginPath(); g.moveTo(xa,y+bh/2); g.lineTo(xb,y+bh/2); g.stroke();
+          g.beginPath(); g.moveTo(xb,y+bh/2); g.lineTo(xb-6,y+bh/2-4); g.lineTo(xb-6,y+bh/2+4);
+          g.closePath(); g.fillStyle=(i<k)?'#8c8578':'#e0d8c8'; g.fill();
+        }
+      }
+      /* les métiers de la phase active */
+      var xa=40+k*((W-80)/n)+bw/2;
+      PH[k].m.forEach(function(mm,q){
+        var yy=196+q*38;
+        g.strokeStyle=PH[k].c; g.lineWidth=1.8; g.setLineDash([4,3]);
+        g.beginPath(); g.moveTo(xa,y+bh+4); g.lineTo(xa,yy-16); g.stroke(); g.setLineDash([]);
+        var tw=g.measureText(mm).width+34;
+        boite(g,xa-tw/2,yy-16,tw,30,9,'#FFFDF8',PH[k].c,2.4);
+        g.fillStyle=PH[k].c; g.font='700 13px "Bricolage Grotesque",sans-serif';
+        g.fillText(mm,xa,yy+4);
+      });
+      g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+      g.fillText('LE CYCLE DE VIE D\u2019UN PRODUIT',36,42);
+    }};
+  });
+  stepper('cvCycle','cyPrev','cyNext','cyLeg','cyNum',F);
+})();
+
+/* ---------- qui parle à qui ---------- */
+(function(){
+  var N=[{n:'Bureau\nd\u2019études',c:'#2E6A8E'},{n:'Calcul',c:'#3D7E5F'},{n:'Essais',c:'#8A5A7A'},
+         {n:'Méthodes',c:'#BD8A2A'},{n:'Production',c:'#C0492E'},{n:'Qualité',c:'#3D7E5F'},
+         {n:'Chef de\nprojet',c:'#BD8A2A'},{n:'Commercial',c:'#C0492E'}];
+  var L=[
+   {a:0,b:1,t:'\u00e7a tient ?'},{a:0,b:2,t:'à tester'},{a:0,b:3,t:'fabricable ?'},
+   {a:3,b:4,t:'gamme'},{a:4,b:5,t:'contrôles'},{a:5,b:0,t:'défauts'},
+   {a:6,b:0,t:'délais'},{a:6,b:4,t:'planning'},{a:7,b:6,t:'besoin client'},{a:7,b:0,t:'faisable ?'}
+  ];
+  function pos(i,W,H){ var a=-Math.PI/2+i*2*Math.PI/N.length, R=Math.min(W,H)*0.33;
+    return {x:W/2+R*Math.cos(a), y:H/2+18+R*Math.sin(a)*0.86}; }
+  function scene(g,W,H,jusqu,t){
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('QUI \u00c9CHANGE AVEC QUI, TOUS LES JOURS',36,32);
+    L.slice(0,jusqu).forEach(function(l,q){
+      var A=pos(l.a,W,H), B=pos(l.b,W,H), rec=(q===jusqu-1);
+      g.strokeStyle= rec? '#2A2622':'rgba(140,133,120,.45)'; g.lineWidth= rec?2.6:1.4;
+      g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(B.x,B.y); g.stroke();
+      if(rec){
+        var mx=(A.x+B.x)/2, my=(A.y+B.y)/2;
+        var tw=g.measureText(l.t).width+18;
+        boite(g,mx-tw/2,my-13,tw,24,8,'#FFFDF8','#2A2622',1.6);
+        g.fillStyle='#2A2622'; g.font='700 12px "JetBrains Mono",monospace'; g.textAlign='center';
+        g.fillText(l.t,mx,my+4);
+      }
+    });
+    N.forEach(function(nd,i){
+      var p=pos(i,W,H), actif=jusqu>0 && (L[jusqu-1].a===i||L[jusqu-1].b===i);
+      g.fillStyle= actif? nd.c:'#F6F1E6';
+      g.strokeStyle=nd.c; g.lineWidth= actif?3:1.8;
+      g.beginPath(); g.arc(p.x,p.y,actif?30:25,0,7); g.fill(); g.stroke();
+      g.fillStyle= actif? '#fff':nd.c;
+      g.font='700 11px "Bricolage Grotesque",sans-serif'; g.textAlign='center';
+      nd.n.split('\n').forEach(function(ln,q,arr){
+        g.fillText(ln,p.x,p.y+4+(q-(arr.length-1)/2)*12);
+      });
+    });
+  }
+  var F=[];
+  var LEG=['Le <b>bureau d\u2019études</b> demande au <b>calcul</b> si sa pièce tient.',
+           'Il envoie ensuite le prototype aux <b>essais</b>.',
+           'Il vérifie avec les <b>méthodes</b> que la pièce est fabricable.',
+           'Les <b>méthodes</b> transmettent la gamme à la <b>production</b>.',
+           'La <b>qualité</b> définit les contrôles sur la ligne.',
+           'Elle remonte les défauts au <b>bureau d\u2019études</b>.',
+           'Le <b>chef de projet</b> surveille les délais du bureau d\u2019études.',
+           'Il coordonne aussi le planning de <b>production</b>.',
+           'Le <b>commercial</b> lui apporte le besoin du client.',
+           'Et demande au bureau d\u2019études si c\u2019est faisable. <b>Tout le monde parle à tout le monde.</b>'];
+  for(var k=1;k<=L.length;k++){
+    (function(kk){ F.push({leg:LEG[kk-1], draw:function(g,W,H,t){ scene(g,W,H,kk,t); }}); })(k);
+  }
+  stepper('cvRes','rePrev','reNext','reLeg','reNum',F);
+})();
+
+/* ---------- les dix métiers ---------- */
+
+var ICON={
+ 'concevoir':'<path d="M8 40 L24 8 L40 40 Z"/><path d="M14 30h20"/><circle cx="24" cy="8" r="2.5" fill="currentColor"/>',
+ 'vérifier':'<rect x="7" y="9" width="34" height="30" rx="3"/><path d="M7 19h34M17 9v30M27 9v30"/><path d="M12 33l4-6 5 4 4-8"/>',
+ 'éprouver':'<path d="M14 8v12l-6 18h32l-6-18V8"/><path d="M12 8h24"/><path d="M20 26l4 6 4-6"/>',
+ 'industrialiser':'<circle cx="24" cy="24" r="7"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/>',
+ 'produire':'<path d="M6 40V22l9 6V22l9 6V22l9 6V12h5v28z"/><path d="M6 40h35"/>',
+ 'dépanner':'<path d="M31 9a8 8 0 0 0-9 12L9 34a3 3 0 0 0 4 4l13-13a8 8 0 0 0 12-9l-6 6-5-1-1-5z"/>',
+ 'garantir':'<circle cx="21" cy="20" r="11"/><path d="M29 28l10 11"/><path d="M16 20l4 4 7-8"/>',
+ 'inventer':'<path d="M19 6h10v12l8 18a3 3 0 0 1-3 4H14a3 3 0 0 1-3-4l8-18z"/><path d="M17 28h14"/>',
+ 'coordonner':'<path d="M8 12h14M8 22h22M8 32h11"/><circle cx="34" cy="12" r="3"/><circle cx="38" cy="22" r="3"/><circle cx="27" cy="32" r="3"/>',
+ 'traduire':'<circle cx="15" cy="16" r="6"/><circle cx="33" cy="16" r="6"/><path d="M6 40c0-6 4-10 9-10s9 4 9 10M24 40c0-6 4-10 9-10s9 4 9 10"/>'
+};
+
+var JOBS=[
+ {n:'Bureau d\u2019\u00e9tudes',r:'concevoir',c:'#2E6A8E',
+  p:'Il dessine la solution. C\u2019est lui qui a choisi 0,10 mm.',
+  d:'CAO, calculs de dimensions, plans. Il refait vingt fois la m\u00eame pi\u00e8ce.',
+  j:'70 % \u00e9cran, 30 % r\u00e9union.'},
+ {n:'Ing\u00e9nieur calcul',r:'v\u00e9rifier',c:'#3D7E5F',
+  p:'Il prouve que \u00e7a tiendra, avant que \u00e7a existe.',
+  d:'Simulation num\u00e9rique. Trouver o\u00f9 la pi\u00e8ce cassera \u00e9vite un prototype \u00e0 50 000 \u20ac.',
+  j:'Deux mots comptent : \u00e7a passe, ou \u00e7a ne passe pas.'},
+ {n:'Ing\u00e9nieur essais',r:'\u00e9prouver',c:'#C0492E',
+  p:'Il casse pour de vrai ce que le calcul disait solide.',
+  d:'Banc d\u2019essai, capteurs, rupture. Quand la mesure contredit le calcul, son travail commence.',
+  j:'Moiti\u00e9 atelier, moiti\u00e9 courbes.'},
+ {n:'Ing\u00e9nieur m\u00e9thodes',r:'industrialiser',c:'#BD8A2A',
+  p:'Il rend la fabrication possible et rentable.',
+  d:'Machines, gammes, chronom\u00e8tre. Passer de 1500 \u00e0 2000 canettes/minute, c\u2019est lui.',
+  j:'Beaucoup d\u2019atelier, des cadences.'},
+ {n:'Responsable production',r:'produire',c:'#8A5A7A',
+  p:'Il fait tourner la ligne aujourd\u2019hui.',
+  d:'Il arbitre entre cadence, qualit\u00e9 et s\u00e9curit\u00e9. Quand une machine tombe, il d\u00e9cide.',
+  j:'Debout, sur le terrain.'},
+ {n:'Ing\u00e9nieur maintenance',r:'d\u00e9panner',c:'#2E6A8E',
+  p:'Il remet en marche, et \u00e9vite la prochaine panne.',
+  d:'Diagnostic, r\u00e9paration, historiques. Le pr\u00e9ventif co\u00fbte dix fois moins que la panne.',
+  j:'Impr\u00e9visible, parfois de nuit.'},
+ {n:'Ing\u00e9nieur qualit\u00e9',r:'garantir',c:'#3D7E5F',
+  p:'Il garantit que chaque pi\u00e8ce livr\u00e9e est conforme.',
+  d:'Contr\u00f4les, r\u00e9clamations, cause racine. Seul poste qui peut bloquer un lot.',
+  j:'Des donn\u00e9es, et le courage de dire non.'},
+ {n:'Recherche et d\u00e9veloppement',r:'inventer',c:'#8A5A7A',
+  p:'Il pr\u00e9pare le produit de dans cinq ans.',
+  d:'Mat\u00e9riaux, proc\u00e9d\u00e9s, essais. Seul m\u00e9tier o\u00f9 l\u2019\u00e9chec fait partie du travail.',
+  j:'Laboratoire et patience.'},
+ {n:'Chef de projet',r:'coordonner',c:'#BD8A2A',
+  p:'Il tient les d\u00e9lais et fait parler tout le monde.',
+  d:'Il ne con\u00e7oit rien. Sans lui, rien n\u2019arrive \u00e0 temps.',
+  j:'Un planning et de la diplomatie.'},
+ {n:'Technico-commercial',r:'traduire',c:'#C0492E',
+  p:'Il traduit un besoin client en solution technique.',
+  d:'Assez technique pour ne pas promettre l\u2019impossible. Souvent le mieux pay\u00e9.',
+  j:'Sur la route, chez les clients.'}
+];
+(function(){
+  var box=el('jobs');
+  JOBS.forEach(function(j){
+    var d=document.createElement('div');
+    d.className='job'; d.style.borderTopColor=j.c;
+    d.innerHTML='<div class="ic" style="color:'+j.c+'"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'+(ICON[j.r]||'')+'</svg></div>'+
+                '<div class="r" style="color:'+j.c+'">'+j.r+'</div><h3>'+j.n+'</h3><p>'+j.p+'</p>'+
+                '<div class="plus">'+j.d+'<span class="jour">'+j.j+'</span></div>';
+    d.addEventListener('click',function(){ d.classList.toggle('open'); });
+    box.appendChild(d);
+  });
+})();
+
+/* ---------- jeu : à qui la mission ? ---------- */
+(function(){
+  var M=[
+   {m:'La canette se déforme au transport',c:'Un client se plaint : les palettes arrivent avec des canettes écrasées sur le dessus.',
+    o:['Ingénieur calcul','Technico-commercial','Responsable production'],b:0,
+    e:'Résistance à l\u2019empilage : il faut recalculer la charge que supporte une canette vide.'},
+   {m:'La ligne tombe de 2000 à 1600 pièces/minute',c:'Sans panne apparente. La production accuse un retard qui s\u2019accumule.',
+    o:['Ingénieur m\u00e9thodes','Ingénieur qualit\u00e9','Recherche et d\u00e9veloppement'],b:0,
+    e:'Perte de cadence sans panne : c\u2019est un problème de réglage. On chronomètre poste par poste.'},
+   {m:'Un lot présente des micro-fissures',c:'Le contrôle final en détecte trois sur mille. Faut-il livrer ?',
+    o:['Ingénieur qualit\u00e9','Chef de projet','Bureau d\u2019études'],b:0,
+    e:'Décision qualité : bloquer le lot, puis remonter à la cause racine.'},
+   {m:'Il faut une canette 20 % plus légère',c:'La direction veut réduire le coût matière avant l\u2019an prochain.',
+    o:['Bureau d\u2019études','Ingénieur maintenance','Responsable production'],b:0,
+    e:'Conception : redessiner et recalculer. La production ne fabrique que ce qu\u2019on lui donne.'},
+   {m:'La presse s\u2019arrête toutes les deux heures',c:'Un capteur de fin de course déclenche l\u2019arrêt sans raison visible.',
+    o:['Ingénieur maintenance','Technico-commercial','Ingénieur calcul'],b:0,
+    e:'Panne répétitive : maintenance. Réparer, puis analyser pour éviter la récidive.'},
+   {m:'Le client veut une canette carrée',c:'Un fabricant de boissons demande un format inédit pour se distinguer.',
+    o:['Technico-commercial','Ingénieur essais','Ingénieur m\u00e9thodes'],b:0,
+    e:'Le technico-commercial d\u2019abord : comprendre le besoin, dire ce qui est faisable et à quel prix.'},
+   {m:'Le nouveau vernis tient-il l\u2019acidité ?',c:'Un fournisseur propose un revêtement moins cher. Personne ne sait s\u2019il résiste au cola.',
+    o:['Recherche et d\u00e9veloppement','Chef de projet','Responsable production'],b:0,
+    e:'Tester un matériau inconnu, c\u2019est de la R&amp;D. Plusieurs mois d\u2019essais avant un avis.'},
+   {m:'Le projet a trois semaines de retard',c:'Le bureau d\u2019études veut plus de temps, le commercial a promis une date au client.',
+    o:['Chef de projet','Ingénieur qualit\u00e9','Ingénieur calcul'],b:0,
+    e:'Arbitrer entre deux services qui ont raison chacun : c\u2019est le chef de projet.'}
+  ];
+  var i=0, ok=0;
+  var bar=el('jBar');
+  M.forEach(function(){ bar.appendChild(document.createElement('i')); });
+  function melange(a){ var r=a.map(function(x,k){return {x:x,k:k};});
+    for(var j=r.length-1;j>0;j--){ var q=Math.floor(Math.random()*(j+1)); var t=r[j]; r[j]=r[q]; r[q]=t; } return r; }
+  function montre(){
+    var m=M[i];
+    el('jNum').textContent=(i+1);
+    el('jMis').textContent=m.m;
+    el('jCtx').textContent=m.c;
+    var box=el('jOpts'); box.innerHTML='';
+    el('jFb').className='fb';
+    melange(m.o).forEach(function(r){
+      var b=document.createElement('button');
+      b.className='opt'; b.type='button'; b.textContent=r.x;
+      b.addEventListener('click',function(){
+        var bon=(r.k===m.b);
+        Array.prototype.forEach.call(box.children,function(c){ c.disabled=true; });
+        b.classList.add(bon?'bon':'faux');
+        if(!bon){ Array.prototype.forEach.call(box.children,function(c){
+          if(c.textContent===m.o[m.b]) c.classList.add('bon'); }); }
+        if(bon){ ok++; el('sc').textContent=ok; }
+        bar.children[i].className = bon? 'ok':'no';
+        var f=el('jFb');
+        f.innerHTML=(bon?'<b style="color:#3D7E5F">Bien vu.</b> ':'<b style="color:#C0492E">C\u2019était '+m.o[m.b]+'.</b> ')+m.e+
+          (i<M.length-1? ' <button class="opt" id="jNext" style="margin-top:10px;display:inline-block;width:auto">Mission suivante</button>':'');
+        f.classList.add('show');
+        var nx=el('jNext');
+        if(nx) nx.addEventListener('click',function(){ i++; montre(); });
+        else { var fin=el('jFin'); fin.className='fin show';
+          fin.innerHTML= ok>=7? 'Score : '+ok+' / 8 \u2014 tu as le réflexe du bon interlocuteur.' :
+                         (ok>=5? 'Score : '+ok+' / 8 \u2014 solide. Relis les cartes des métiers manqués.' :
+                                 'Score : '+ok+' / 8 \u2014 reprends la slide 2, elle dit qui fait quoi.'); }
+      });
+      box.appendChild(b);
+    });
+  }
+  montre();
+})();
+
+
+/* ---------- frise de la journée ---------- */
+(function(){
+  var cv=el('cvJour'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  var E=[{h:'08:00',t:'ligne arrêtée',c:'#C0492E'},{h:'09:30',t:'décision de régler',c:'#BD8A2A'},
+         {h:'11:00',t:'lot à bloquer',c:'#C0492E'},{h:'14:00',t:'nouvelle solution',c:'#2E6A8E'},
+         {h:'17:00',t:'bilan au chef',c:'#3D7E5F'}];
+  window.__jourIdx=0;
+  function step(){
+    var k=window.__jourIdx||0;
+    g.clearRect(0,0,W,H);
+    var x0=60, x1=W-60, y=88;
+    g.strokeStyle='#e0d8c8'; g.lineWidth=5;
+    g.beginPath(); g.moveTo(x0,y); g.lineTo(x1,y); g.stroke();
+    g.strokeStyle='#8c8578'; g.lineWidth=5;
+    g.beginPath(); g.moveTo(x0,y); g.lineTo(x0+(x1-x0)*k/(E.length-1),y); g.stroke();
+    E.forEach(function(e,i){
+      var x=x0+(x1-x0)*i/(E.length-1), actif=(i===k), fait=(i<k);
+      g.fillStyle= actif? e.c : (fait? '#8c8578':'#e0d8c8');
+      g.beginPath(); g.arc(x,y,actif?13:8,0,7); g.fill();
+      g.fillStyle= actif? e.c:'#8c8578';
+      g.font=(actif?'800 ':'700 ')+'13px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(e.h,x,y-26);
+      g.font=(actif?'700 ':'400 ')+'12px "Bricolage Grotesque",sans-serif';
+      g.fillText(e.t,x,y+34);
+    });
+    g.fillStyle='#8c8578'; g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='left';
+    g.fillText('UNE JOURN\u00c9E D\u2019ING\u00c9NIEUR M\u00c9THODES',36,30);
+  }
+  setInterval(step,120); step();
+})();
+
+/* ---------- la journée de l'ingénieur méthodes ---------- */
+(function(){
+  var J=[
+   {h:'08:00',s:'La ligne 3 est arrêtée depuis 20 minutes. Le régleur pense à un défaut de matière, l\u2019opérateur à un réglage. Que fais-tu en premier ?',
+    c:[{t:'Aller voir la machine et regarder les pièces rebutées',
+        r:'<b>Bon réflexe.</b> Un diagnostic commence toujours par l\u2019observation directe. Les pièces rebutées portent la trace du défaut : c\u2019est la première source d\u2019information.'},
+       {t:'Convoquer une réunion avec les deux services',
+        r:'Tu perds 40 minutes. Une réunion sans faits ne produit que des opinions. <b>On observe d\u2019abord, on réunit ensuite.</b>'},
+       {t:'Commander de la nouvelle matière par précaution',
+        r:'Coûteux et prématuré. Tu traites une hypothèse avant de l\u2019avoir vérifiée — et si le problème vient du réglage, tu auras payé pour rien.'}]},
+   {h:'09:30',s:'Les pièces montrent une paroi trop fine d\u2019un côté. Le poinçon est probablement décentré. Le réglage prend 2 heures et arrête la ligne.',
+    c:[{t:'Régler maintenant, quitte à perdre 2 heures',
+        r:'<b>Décision saine.</b> Produire des pièces non conformes coûte plus cher que l\u2019arrêt : il faudrait les trier, les rebuter, et risquer d\u2019en livrer.'},
+       {t:'Continuer jusqu\u2019à midi et régler pendant la pause',
+        r:'Tentant, mais tu produis 2 heures de pièces douteuses. Il faudra les contrôler une par une — <b>plus long que le réglage</b>.'},
+       {t:'Baisser la cadence pour limiter le défaut',
+        r:'Le défaut vient d\u2019un décentrage, pas de la vitesse. Tu perds en production sans corriger la cause.'}]},
+   {h:'11:00',s:'La qualité te signale que le lot d\u2019hier présente le même défaut. 40 000 canettes sont déjà en stock.',
+    c:[{t:'Bloquer le lot et prévenir la qualité et le client',
+        r:'<b>La seule réponse acceptable.</b> Un défaut connu et livré sciemment engage la responsabilité de l\u2019entreprise — et ta crédibilité.'},
+       {t:'Faire trier le lot par un intérimaire',
+        r:'Un tri à 100 % sur 40 000 pièces est long, coûteux et peu fiable. Il peut compléter la décision, mais ne remplace pas le blocage.'},
+       {t:'Livrer : le défaut est peut-être sans conséquence',
+        r:'« Peut-être » ne suffit pas. <b>Tant qu\u2019on n\u2019a pas mesuré, on ne sait pas</b> — et c\u2019est le client qui découvrirait le problème.'}]},
+   {h:'14:00',s:'Le bureau d\u2019études propose une nouvelle géométrie de poinçon qui éviterait le décentrage. Elle demande 3 semaines d\u2019essais.',
+    c:[{t:'Accepter, mais demander une solution provisoire immédiate',
+        r:'<b>C\u2019est la bonne posture.</b> On traite l\u2019urgence et la cause en parallèle : un contrôle renforcé aujourd\u2019hui, la vraie correction dans trois semaines.'},
+       {t:'Refuser : trop long, on continue avec des réglages',
+        r:'Tu condamnes ton équipe à refaire le même réglage chaque semaine. <b>Traiter le symptôme sans traiter la cause coûte plus cher à la fin.</b>'},
+       {t:'Accepter et arrêter la ligne 3 semaines',
+        r:'Trois semaines d\u2019arrêt pour un défaut maîtrisable, c\u2019est disproportionné. La production a aussi des engagements.'}]},
+   {h:'17:00',s:'Ton chef te demande un bilan. Tu as arrêté 2 heures, bloqué 40 000 pièces et lancé une étude.',
+    c:[{t:'Présenter les faits, les coûts et la cause identifiée',
+        r:'<b>Exactement.</b> Un ingénieur justifie ses décisions par des chiffres : coût de l\u2019arrêt, coût évité du tri, délai de la correction définitive.'},
+       {t:'Minimiser : dire que tout est réglé',
+        r:'Le lot bloqué réapparaîtra dans les indicateurs. <b>Une information tue finit toujours par ressortir</b>, et au pire moment.'},
+       {t:'Rejeter la responsabilité sur le fournisseur de matière',
+        r:'La cause identifiée est un décentrage d\u2019outil, pas la matière. Accuser à tort abîme une relation dont tu auras besoin.'}]}
+  ];
+  var i=0;
+  function montre(){
+    var j=J[i];
+    window.__jourIdx=i;
+    el('hOre').textContent=j.h;
+    el('hLab').textContent='Situation '+(i+1)+' sur '+J.length;
+    el('hSit').textContent=j.s;
+    var box=el('hCh'); box.innerHTML='';
+    el('hRes').className='res';
+    j.c.forEach(function(c){
+      var b=document.createElement('button'); b.type='button'; b.textContent=c.t;
+      b.addEventListener('click',function(){
+        Array.prototype.forEach.call(box.children,function(x){ x.disabled=true; x.style.opacity='.5'; });
+        b.style.opacity='1'; b.style.borderColor='#2E6A8E';
+        var r=el('hRes');
+        r.innerHTML=c.r+(i<J.length-1? ' <button id="hNext" style="margin-top:10px;background:#2E6A8E;color:#fff;border:none;border-radius:9px;padding:9px 15px;cursor:pointer;font-family:inherit;font-size:14px">Suite de la journée</button>':' <b>Fin de journée.</b> Tu as passé une journée entière sans dessiner une seule pièce — et pourtant tu as fait de l\u2019ingénierie toute la journée.');
+        r.classList.add('show');
+        var n=el('hNext');
+        if(n) n.addEventListener('click',function(){ i++; montre(); });
+      });
+      box.appendChild(b);
+    });
+  }
+  montre();
+})();
+
+/* ---------- impression de la trace écrite ---------- */
+(function(){
+  var b=document.querySelector('.trace [data-print]');
+  if(b) b.addEventListener('click',function(){ window.print(); });
+})();
+</script>
+</body>
+</html>

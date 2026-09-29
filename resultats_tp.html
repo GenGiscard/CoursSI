@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résultats des TP · Option SI ESTIC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:22px 18px 60px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:12px 18px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:18px}
+  .estic-bar .b{width:34px;height:34px;border-radius:9px;background:var(--steel);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px}
+  .estic-bar .t{font-weight:800;font-size:17px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  h1{font-size:27px;margin:0 0 6px;font-weight:800}
+  .lede{color:var(--sub);font-size:15.5px;margin:0 0 18px;max-width:760px}
+  .panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:16px}
+  .panel h2{font-size:17px;margin:0 0 10px;font-weight:800}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+       border:none;border-radius:9px;padding:9px 15px;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)} .btn.g{background:var(--green)} .btn.o{background:#fff;color:var(--steel);border:1px solid var(--steel)}
+  select,input[type=text]{font-family:'Bricolage Grotesque',sans-serif;font-size:14.5px;padding:8px 11px;
+       border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);outline:none}
+  select:focus,input:focus{border-color:var(--steel)}
+  textarea{width:100%;min-height:110px;font-family:'JetBrains Mono',monospace;font-size:12px;padding:10px;
+       border:1px solid var(--line);border-radius:10px;resize:vertical;background:#fff}
+  .stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}
+  .stat{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:12px;padding:12px 15px}
+  .stat .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+  .stat .v{font-size:26px;font-weight:800;margin-top:3px}
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+     color:var(--sub);padding:9px 10px;border-bottom:2px solid var(--line);cursor:pointer;white-space:nowrap}
+  th:hover{color:var(--steel)}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:hover td{background:rgba(46,106,142,.04)}
+  .pct{font-family:'JetBrains Mono',monospace;font-weight:700}
+  .bar{height:7px;background:#EFE8D8;border-radius:4px;overflow:hidden;margin-top:4px;min-width:80px}
+  .bar>i{display:block;height:100%}
+  .muted{color:var(--sub);font-size:13px}
+  .empty{text-align:center;padding:36px;color:var(--sub)}
+  .err{color:var(--copper);font-size:14px;margin-top:8px}
+  .ok{color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">Résultats des TP</div><div class="s">Option SI · ESTIC Don Bosco</div></div></div>
+
+  <h1>Tableau de bord des remises</h1>
+  <p class="lede">Consulte, filtre et exporte les scores envoyés par les élèves à la fin des TP. Deux modes de chargement : en direct depuis la base, ou en collant un export JSON téléchargé depuis la console Firebase.</p>
+
+  <div class="panel">
+    <h2>Charger les résultats</h2>
+    <div class="row">
+      <button class="btn" id="load">Charger depuis la base</button>
+      <button class="btn o" id="togglePaste">Coller un export JSON</button>
+      <span class="muted" id="loadMsg"></span>
+    </div>
+    <div id="pasteBox" style="display:none;margin-top:12px">
+      <p class="muted">Console Firebase → base <b>score-tp</b> → nœud <b>scores_tp</b> → menu ⋮ → <b>Exporter le JSON</b>. Ouvre le fichier et colle son contenu ici.</p>
+      <textarea id="json" placeholder='{"-Nx...":{"tp":"...","classe":"...","score":5,"total":7,...}}'></textarea>
+      <div class="row" style="margin-top:8px"><button class="btn g" id="parse">Analyser</button></div>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="panel">
+    <h2>Filtres</h2>
+    <div class="row">
+      <select id="fCl"><option value="">Toutes les classes</option></select>
+      <select id="fTp"><option value="">Tous les TP</option></select>
+      <input type="text" id="fEl" placeholder="Chercher un élève…">
+      <button class="btn o" id="reset">Réinitialiser</button>
+      <button class="btn g" id="csv">Exporter en CSV</button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Remises <span class="muted" id="count"></span></h2>
+    <div style="overflow-x:auto">
+      <table id="tb">
+        <thead><tr>
+          <th data-s="date">Date</th><th data-s="classe">Classe</th><th data-s="eleves">Élèves</th>
+          <th data-s="tp">TP</th><th data-s="score">Score</th><th data-s="note">Note</th><th data-s="pct">Réussite</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="empty">Aucun résultat chargé pour l’instant.</div>
+  </div>
+
+  <div class="panel">
+    <h2>Moyennes par TP</h2>
+    <div style="overflow-x:auto"><table><thead><tr>
+      <th>TP</th><th>Remises</th><th>Moyenne / 20</th><th>Meilleure</th><th>Plus faible</th><th>Réussite</th>
+    </tr></thead><tbody id="agg"></tbody></table></div>
+  </div>
+</div>
+
+<script>
+var URL_DB='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
+var DATA=[], TRI={col:'date',sens:-1};
+function el(i){return document.getElementById(i);}
+function pct(r){ return r.total? Math.round(r.score/r.total*100):0; }
+function note(r){ return (r.note!==undefined&&r.note!==null)? r.note
+        : (r.total? Math.round(r.score/r.total*20*2)/2 : 0); }
+function fr(x){ return String(x).replace('.',','); }
+function coulN(v){ return v>=15?'#3D7E5F':(v>=10?'#BD8A2A':'#C0492E'); }
+function coul(p){ return p>=75?'#3D7E5F':(p>=50?'#BD8A2A':'#C0492E'); }
+
+function normalise(obj){
+  var out=[];
+  Object.keys(obj||{}).forEach(function(k){
+    var v=obj[k]; if(!v||typeof v!=='object') return;
+    var noms=v.eleves||v.participants||[];
+    if(typeof noms==='string') noms=[noms];
+    if(!Array.isArray(noms)) noms=Object.keys(noms).map(function(x){return noms[x];});
+    out.push({ id:k, tp:v.tp||v.titre||v.fichier||'?', fichier:v.fichier||'',
+               classe:v.classe||'?', eleves:noms, score:+v.score||0, total:+v.total||0,
+               note:(v.note!==undefined? +v.note : undefined),
+               ts:+v.ts||0, date:v.date||'' });
+  });
+  return out;
+}
+function charger(src,msg){
+  DATA=src; el('loadMsg').className='muted ok';
+  el('loadMsg').textContent=msg+' — '+DATA.length+' remise'+(DATA.length>1?'s':'')+'.';
+  remplirFiltres(); rendre();
+}
+el('load').addEventListener('click',function(){
+  el('loadMsg').className='muted'; el('loadMsg').textContent='Chargement…';
+  fetch(URL_DB).then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' — la lecture est fermée dans les règles':''));
+    return r.json();
+  }).then(function(j){ charger(normalise(j),'Chargé depuis la base'); })
+  .catch(function(e){
+    el('loadMsg').className='err';
+    el('loadMsg').textContent='Impossible de charger : '+e.message+'. Utilise le collage d’un export JSON.';
+  });
+});
+el('togglePaste').addEventListener('click',function(){
+  var b=el('pasteBox'); b.style.display = b.style.display==='none'?'block':'none';
+});
+el('parse').addEventListener('click',function(){
+  try{
+    var j=JSON.parse(el('json').value);
+    if(j && j.scores_tp) j=j.scores_tp;
+    charger(normalise(j),'Chargé depuis l’export');
+  }catch(e){ el('loadMsg').className='err'; el('loadMsg').textContent='JSON illisible : '+e.message; }
+});
+
+function remplirFiltres(){
+  var cls={}, tps={};
+  DATA.forEach(function(r){ cls[r.classe]=1; tps[r.tp]=1; });
+  function fill(sel,obj,lab){
+    var s=el(sel), v=s.value; s.innerHTML='<option value="">'+lab+'</option>';
+    Object.keys(obj).sort().forEach(function(k){
+      var o=document.createElement('option'); o.textContent=k; o.value=k; s.appendChild(o); });
+    s.value=v;
+  }
+  fill('fCl',cls,'Toutes les classes'); fill('fTp',tps,'Tous les TP');
+}
+function filtres(){
+  var c=el('fCl').value, t=el('fTp').value, q=(el('fEl').value||'').toLowerCase().trim();
+  return DATA.filter(function(r){
+    if(c && r.classe!==c) return false;
+    if(t && r.tp!==t) return false;
+    if(q && r.eleves.join(' ').toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+}
+function rendre(){
+  var L=filtres().slice();
+  L.sort(function(a,b){
+    var k=TRI.col, x,y;
+    if(k==='pct'){ x=pct(a); y=pct(b); }
+    else if(k==='note'){ x=note(a); y=note(b); }
+    else if(k==='date'){ x=a.ts; y=b.ts; }
+    else if(k==='eleves'){ x=a.eleves.join(); y=b.eleves.join(); }
+    else if(k==='score'){ x=a.score; y=b.score; }
+    else { x=String(a[k]||''); y=String(b[k]||''); }
+    return x<y? -TRI.sens : (x>y? TRI.sens : 0);
+  });
+  var tb=el('tbody'); tb.innerHTML='';
+  L.forEach(function(r){
+    var p=pct(r), tr=document.createElement('tr');
+    tr.innerHTML='<td class="muted">'+(r.date||'—')+'</td><td><b>'+r.classe+'</b></td>'+
+      '<td>'+r.eleves.join('<br>')+'</td><td>'+r.tp+'</td>'+
+      '<td class="pct">'+r.score+' / '+r.total+'</td>'+
+      '<td class="pct" style="color:'+coulN(note(r))+';font-size:16px">'+fr(note(r))+' / 20</td>'+
+      '<td><span class="pct" style="color:'+coul(p)+'">'+p+' %</span>'+
+      '<div class="bar"><i style="width:'+p+'%;background:'+coul(p)+'"></i></div></td>';
+    tb.appendChild(tr);
+  });
+  el('empty').style.display = L.length? 'none':'block';
+  el('count').textContent = L.length? '· '+L.length+' affichée'+(L.length>1?'s':''):'';
+  var moy = L.length? Math.round(L.reduce(function(s,r){return s+pct(r);},0)/L.length):0;
+  var moyN = L.length? Math.round(L.reduce(function(s,r){return s+note(r);},0)/L.length*10)/10 : 0;
+  var eleves={}; L.forEach(function(r){ r.eleves.forEach(function(e){ eleves[e]=1; }); });
+  el('stats').innerHTML =
+    stat('Remises',L.length)+stat('Élèves distincts',Object.keys(eleves).length)+
+    stat('Moyenne / 20',fr(moyN))+stat('Réussite moyenne',moy+' %')+stat('TP concernés',Object.keys(L.reduce(function(o,r){o[r.tp]=1;return o;},{})).length);
+  var A={};
+  L.forEach(function(r){ (A[r.tp]=A[r.tp]||[]).push({p:pct(r),n:note(r)}); });
+  var ag=el('agg'); ag.innerHTML='';
+  Object.keys(A).sort().forEach(function(k){
+    var v=A[k];
+    var ns=v.map(function(x){return x.n;}), ps=v.map(function(x){return x.p;});
+    var mn=Math.round(ns.reduce(function(a,b){return a+b;},0)/ns.length*10)/10;
+    var mp=Math.round(ps.reduce(function(a,b){return a+b;},0)/ps.length);
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+k+'</td><td>'+v.length+'</td>'+
+      '<td class="pct" style="color:'+coulN(mn)+';font-size:16px">'+fr(mn)+'</td>'+
+      '<td class="pct">'+fr(Math.max.apply(null,ns))+'</td><td class="pct">'+fr(Math.min.apply(null,ns))+'</td>'+
+      '<td class="pct" style="color:'+coul(mp)+'">'+mp+' %</td>';
+    ag.appendChild(tr);
+  });
+}
+function stat(k,v){ return '<div class="stat"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
+
+Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'),function(th){
+  th.addEventListener('click',function(){
+    var c=th.getAttribute('data-s');
+    TRI.sens = (TRI.col===c)? -TRI.sens : 1; TRI.col=c; rendre();
+  });
+});
+['fCl','fTp'].forEach(function(i){ el(i).addEventListener('change',rendre); });
+el('fEl').addEventListener('input',rendre);
+el('reset').addEventListener('click',function(){ el('fCl').value=''; el('fTp').value=''; el('fEl').value=''; rendre(); });
+el('csv').addEventListener('click',function(){
+  var L=filtres(), l=['Date;Classe;Eleves;TP;Score;Total;Note sur 20;Pourcentage'];
+  L.forEach(function(r){
+    l.push([r.date,r.classe,r.eleves.join(' & '),r.tp,r.score,r.total,fr(note(r)),pct(r)+'%']
+      .map(function(x){return String(x).replace(/;/g,',');}).join(';'));
+  });
+  var b=new Blob(['\ufeff'+l.join('\n')],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=window.URL.createObjectURL(b); a.download='resultats_tp.csv'; a.click();
+});
+rendre();
+</script>
+</body>
+</html>

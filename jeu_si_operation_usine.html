@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opération Usine — Jeu de rôle · Option SI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:1000px;margin:0 auto;padding:18px 16px 60px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:14px}
+  .estic-bar .b{width:32px;height:32px;border-radius:9px;background:var(--plum);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+  .estic-bar .t{font-weight:800;font-size:16px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  .ecran{display:none} .ecran.on{display:block}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 24px;margin-bottom:16px}
+  .card h2{margin:0 0 10px;font-size:24px;font-weight:800}
+  .card h3{margin:0 0 8px;font-size:17px;font-weight:800;color:var(--steel)}
+  .k{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--plum)}
+  p{font-size:15.5px} .sub{color:var(--sub);font-size:15px}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+       border:none;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)} .btn.g{background:var(--green)} .btn.r{background:var(--copper)}
+  .btn.o{background:#fff;color:var(--steel);border:1px solid var(--steel)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin:12px 0}
+  .par{background:#F6F1E6;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .par label{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.12em;
+             text-transform:uppercase;color:var(--sub);margin-bottom:6px}
+  .par input[type=range]{width:100%;accent-color:var(--plum)}
+  .par .v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--plum)}
+  /* carte de rôle */
+  .role{background:linear-gradient(160deg,#FFFDF8,#F6F1E6);border:3px solid var(--steel);border-radius:20px;
+        padding:24px 26px;min-height:330px;position:relative}
+  .role.sab{border-color:var(--copper);background:linear-gradient(160deg,#FFF8F5,#F7E9E3)}
+  .role .num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--sub)}
+  .role h2{font-size:28px;margin:6px 0 4px}
+  .role .miss{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+              color:var(--steel);margin-bottom:14px}
+  .role.sab .miss{color:var(--copper)}
+  .role ul{margin:10px 0;padding-left:20px} .role li{font-size:15.5px;margin:6px 0}
+  .role .secret{margin-top:14px;background:rgba(192,73,46,.10);border:1.5px dashed var(--copper);
+                border-radius:12px;padding:12px 15px}
+  .role .secret .lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+                     text-transform:uppercase;color:var(--copper);margin-bottom:5px}
+  .cache{background:#2A2622;color:#F8F4EC;border-radius:20px;padding:40px 26px;text-align:center;min-height:330px;
+         display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .cache .big{font-size:26px;font-weight:800}
+  .cache .pn{font-family:'JetBrains Mono',monospace;font-size:13px;color:#BDB3A4}
+  /* chrono */
+  .chrono{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+  .chrono canvas{width:100%;height:auto;display:block}
+  .horloge{font-family:'JetBrains Mono',monospace;font-size:52px;font-weight:700;text-align:center;color:var(--ink);line-height:1}
+  .horloge.alerte{color:var(--copper)}
+  .phase{text-align:center;font-size:17px;font-weight:800;margin-top:4px}
+  .liv{display:grid;gap:8px;margin-top:10px}
+  .liv label{display:flex;gap:10px;align-items:flex-start;background:#F6F1E6;border:1px solid var(--line);
+             border-radius:11px;padding:10px 13px;font-size:15px;cursor:pointer}
+  .liv input{margin-top:3px;accent-color:var(--green);width:17px;height:17px}
+  .liv label.ok{background:rgba(61,126,95,.12);border-color:var(--green)}
+  .alea{background:rgba(189,138,42,.12);border:1.5px solid rgba(189,138,42,.4);border-radius:13px;
+        padding:13px 16px;margin-top:12px;display:none}
+  .alea.on{display:block}
+  .alea .lab{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+             text-transform:uppercase;color:#8a6313;margin-bottom:5px}
+  table.b{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+  table.b th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+             text-transform:uppercase;color:var(--sub);padding:8px 10px;border-bottom:2px solid var(--line)}
+  table.b td{padding:9px 10px;border-bottom:1px solid var(--line)}
+  .vote{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-top:10px}
+  .vote button{background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:11px;cursor:pointer;
+               font-family:inherit;font-size:15px;font-weight:700}
+  .vote button.sel{border-color:var(--copper);background:rgba(192,73,46,.10)}
+  .vote button.sab{border-color:var(--copper);background:rgba(192,73,46,.20);color:#8f3722}
+  .vote button.clean{border-color:var(--green);background:rgba(61,126,95,.14);color:#2c6147}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">Opération Usine</div><div class="s">Option SI · Jeu de rôle à rôles cachés</div></div></div>
+
+  <!-- ============ ÉCRAN 1 : RÉGLAGES ============ -->
+  <div class="ecran on" id="e1">
+    <div class="card">
+      <div class="k">Avant de commencer</div>
+      <h2>Opération Usine</h2>
+      <p>Votre classe devient une usine. Un client commande un produit. Vous avez <b>deux heures</b> pour livrer.</p>
+      <p class="sub">Chaque élève reçoit un rôle secret. Certains veulent faire réussir le projet. <b>D'autres non.</b></p>
+      <div class="grid">
+        <div class="par"><label>Nombre d'élèves</label><div class="v" id="vN">18</div><input type="range" id="rN" min="8" max="32" step="1" value="18"></div>
+        <div class="par"><label>Saboteurs</label><div class="v" id="vS">2</div><input type="range" id="rS" min="1" max="4" step="1" value="2"></div>
+        <div class="par"><label>Durée de séance</label><div class="v" id="vD">120 min</div><input type="range" id="rD" min="60" max="180" step="10" value="120"></div>
+        <div class="par"><label>Réunion toutes les</label><div class="v" id="vR">20 min</div><input type="range" id="rR" min="10" max="30" step="5" value="20"></div>
+      </div>
+      <div class="row"><button class="btn g" id="go1">Distribuer les rôles</button></div>
+    </div>
+
+    <div class="card">
+      <h3>Le produit à livrer</h3>
+      <p id="produit" class="sub"></p>
+      <div class="row"><button class="btn o" id="autreProd">Changer de produit</button></div>
+    </div>
+
+    <div class="card">
+      <h3>La règle en cinq lignes</h3>
+      <table class="b">
+        <tr><td><b>1</b></td><td>Chacun lit sa carte seul, puis la garde secrète.</td></tr>
+        <tr><td><b>2</b></td><td>Le chef de projet anime une réunion à chaque jalon.</td></tr>
+        <tr><td><b>3</b></td><td>Entre deux réunions, chaque service travaille son livrable.</td></tr>
+        <tr><td><b>4</b></td><td>Les saboteurs doivent remplir leur mission sans se faire prendre.</td></tr>
+        <tr><td><b>5</b></td><td>À la fin : on livre, puis on vote pour démasquer.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ ÉCRAN 2 : DISTRIBUTION ============ -->
+  <div class="ecran" id="e2">
+    <div class="card">
+      <div class="k">Distribution</div>
+      <h2>Passe l'écran à l'élève suivant</h2>
+      <p class="sub">Chacun lit sa carte, mémorise, puis masque avant de passer. <b>Personne ne regarde par-dessus l'épaule.</b></p>
+    </div>
+    <div class="card" id="boiteCarte"></div>
+    <div class="row">
+      <button class="btn o" id="revele">Afficher mon rôle</button>
+      <button class="btn" id="suivant">Masquer et passer au suivant</button>
+      <button class="btn g" id="go2" style="margin-left:auto">Lancer la partie</button>
+    </div>
+  </div>
+
+  <!-- ============ ÉCRAN 3 : PARTIE ============ -->
+  <div class="ecran" id="e3">
+    <div class="card chrono">
+      <div class="horloge" id="hh">00:00</div>
+      <div class="phase" id="ph"></div>
+      <canvas id="cvFrise" width="900" height="120" aria-label="Frise des jalons de la séance"></canvas>
+      <div class="row">
+        <button class="btn g" id="play">Démarrer</button>
+        <button class="btn o" id="alea">Tirer un aléa</button>
+        <button class="btn r" id="go3" style="margin-left:auto">Fin de partie</button>
+      </div>
+      <div class="alea" id="boiteAlea"><div class="lab">Aléa de production</div><div id="txtAlea"></div></div>
+    </div>
+
+    <div class="card">
+      <h3>Les cinq livrables</h3>
+      <p class="sub">Le chef de projet coche au fur et à mesure. Tout doit être fait avant la fin.</p>
+      <div class="liv" id="livrables"></div>
+    </div>
+
+    <div class="card">
+      <h3>Ordre du jour des réunions</h3>
+      <table class="b" id="ordre"></table>
+    </div>
+  </div>
+
+  <!-- ============ ÉCRAN 4 : BILAN ============ -->
+  <div class="ecran" id="e4">
+    <div class="card">
+      <div class="k">Démasquage</div>
+      <h2>Qui a saboté ?</h2>
+      <p class="sub">La classe vote. Clique sur les rôles suspectés, puis révèle.</p>
+      <div class="vote" id="voteBox"></div>
+      <div class="row"><button class="btn r" id="reveler">Révéler les saboteurs</button></div>
+    </div>
+    <div class="card" id="bilan" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+
+/* ================= données du jeu ================= */
+var PRODUITS=[
+ 'Une <b>trottinette électrique pliable</b> pour la ville. Le client veut moins de 12 kg et 25 km d\u2019autonomie.',
+ 'Un <b>distributeur de croquettes connecté</b>. Le client veut deux repas par jour et une alerte sur téléphone.',
+ 'Un <b>casque de chantier ventilé</b>. Le client veut 15 \u00b0C de moins sous le casque, sans perdre la protection.',
+ 'Une <b>borne de tri automatique</b> pour le lycée. Le client veut trier canettes, plastique et papier.',
+ 'Un <b>porte-vélo pour voiture</b> démontable en deux minutes, pour trois vélos de 22 kg.'
+];
+var ROLES=[
+ {n:'Chef de projet', m:'coordonner', t:[
+   'Tu animes chaque réunion et tu tiens le planning.',
+   'Tu décides quand un livrable est accepté.',
+   'Tu arbitres quand deux services ne sont pas d\u2019accord.'],
+  liv:'Le planning de Gantt, tenu à jour à chaque réunion.'},
+ {n:'Bureau d\u2019études', m:'concevoir', t:[
+   'Tu proposes la solution technique et tu la dessines.',
+   'Tu chiffres les dimensions principales.',
+   'Tu réponds aux méthodes sur la fabricabilité.'],
+  liv:'Un croquis coté de la solution retenue.'},
+ {n:'Achats', m:'approvisionner', t:[
+   'Tu trouves les composants et tu donnes leur prix.',
+   'Tu signales les délais de livraison trop longs.',
+   'Tu défends le budget face aux envies du bureau d\u2019études.'],
+  liv:'La nomenclature chiffrée : pièce, quantité, prix, délai.'},
+ {n:'M\u00e9thodes', m:'industrialiser', t:[
+   'Tu écris comment on fabrique et dans quel ordre.',
+   'Tu estimes le temps de montage.',
+   'Tu refuses ce qui est infabricable en atelier.'],
+  liv:'La gamme de montage, étape par étape.'},
+ {n:'Qualit\u00e9', m:'garantir', t:[
+   'Tu définis ce qu\u2019on contrôle et comment.',
+   'Tu as le droit de bloquer une livraison.',
+   'Tu vérifies que le cahier des charges est respecté.'],
+  liv:'Le plan de contrôle : trois critères et leur méthode de mesure.'},
+ {n:'Essais', m:'\u00e9prouver', t:[
+   'Tu imagines l\u2019essai qui prouve que \u00e7a tient.',
+   'Tu donnes un verdict clair : conforme ou non.',
+   'Tu exiges des valeurs chiffrées, pas des impressions.'],
+  liv:'Le protocole d\u2019essai et son résultat attendu.'},
+ {n:'Production', m:'fabriquer', t:[
+   'Tu dis si la cadence demandée est tenable.',
+   'Tu signales les postes qui manquent de place ou d\u2019outils.',
+   'Tu alertes dès qu\u2019un aléa touche la ligne.'],
+  liv:'L\u2019estimation du temps de production d\u2019une série de 100.'},
+ {n:'Maintenance', m:'fiabiliser', t:[
+   'Tu prévois ce qui tombera en panne et quand.',
+   'Tu demandes un accès aux pièces d\u2019usure.',
+   'Tu chiffres le temps d\u2019une intervention.'],
+  liv:'La liste des pièces d\u2019usure et leur fréquence de remplacement.'},
+ {n:'Commercial', m:'traduire', t:[
+   'Tu portes la voix du client à chaque réunion.',
+   'Tu refuses ce qui ne répond pas au besoin.',
+   'Tu annonces les dates que l\u2019entreprise devra tenir.'],
+  liv:'Le cahier des charges en cinq exigences chiffrées.'},
+ {n:'Contr\u00f4le de gestion', m:'chiffrer', t:[
+   'Tu suis le budget à chaque réunion.',
+   'Tu alertes dès qu\u2019une décision coûte plus que prévu.',
+   'Tu compares le coût de revient au prix de vente visé.'],
+  liv:'Le tableau de budget, mis à jour à chaque jalon.'},
+ {n:'\u00c9co-conception', m:'all\u00e9ger', t:[
+   'Tu traques la matière inutile et les mélanges impossibles à recycler.',
+   'Tu proposes une alternative moins gourmande.',
+   'Tu chiffres ce que ton idée fait gagner.'],
+  liv:'Deux propositions d\u2019allègement, avec le gain estimé.'},
+ {n:'S\u00e9curit\u00e9', m:'prot\u00e9ger', t:[
+   'Tu repères les risques pour l\u2019utilisateur et pour l\u2019opérateur.',
+   'Tu imposes une protection quand un risque est grave.',
+   'Tu vérifies que rien ne coupe, ne brûle ni ne pince.'],
+  liv:'L\u2019analyse des risques : trois risques et leur parade.'}
+];
+var SABOTAGES=[
+ 'Fais adopter une solution <b>au moins 20 % plus chère</b> que nécessaire, sans jamais parler de prix.',
+ 'Fais en sorte que la <b>nomenclature ne soit pas terminée</b> à la troisième réunion.',
+ 'Obtiens que le groupe <b>change d\u2019avis</b> sur une décision déjà validée en réunion.',
+ 'Fais durer une réunion <b>plus de dix minutes</b> sans qu\u2019aucune décision ne soit prise.',
+ 'Fais disparaître une exigence du <b>cahier des charges</b> sans que personne ne le remarque.',
+ 'Obtiens que le planning affiche une <b>tâche au mauvais endroit</b> jusqu\u2019à la fin.',
+ 'Fais valider un livrable <b>incomplet</b> par le chef de projet.',
+ 'Empêche le service <b>qualité</b> de présenter son plan de contrôle avant la dernière réunion.'
+];
+var ALEAS=[
+ 'Le fournisseur annonce <b>trois semaines de retard</b> sur la pièce principale. Que change-t-on ?',
+ 'Le client ajoute une exigence : <b>résister à la pluie</b>. Budget inchangé.',
+ 'Une machine de l\u2019atelier tombe en panne. La cadence chute de <b>30 %</b>.',
+ 'Le prix de la matière augmente de <b>15 %</b>. Le prix de vente, lui, est fixé.',
+ 'Un concurrent sort le même produit <b>200 g plus léger</b>. Le commercial panique.',
+ 'Le service qualité refuse un lot : <b>un défaut sur dix pièces</b>.',
+ 'Un élève du groupe est absent une demi-heure : <b>son service doit être repris</b>.',
+ 'Le client avance la livraison de <b>deux semaines</b>. Que sacrifie-t-on ?'
+];
+var LIVRABLES=[
+ 'Le <b>cahier des charges</b> : cinq exigences chiffrées, avec unités.',
+ 'Le <b>planning de Gantt</b> : au moins six tâches, avec les liens entre elles.',
+ 'La <b>nomenclature</b> : pièce, quantité, prix unitaire, délai.',
+ 'La <b>gamme de montage</b> : les étapes dans l\u2019ordre, avec les temps.',
+ 'Le <b>plan de contrôle</b> : trois critères et comment on les mesure.'
+];
+
+/* ================= état ================= */
+var G={n:18,s:2,duree:120,reunion:20,cartes:[],idx:0,visible:false,t0:null,ecoule:0,marche:false,prod:0,votes:{}};
+function ecran(id){
+  ['e1','e2','e3','e4'].forEach(function(x){ el(x).classList.toggle('on', x===id); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function melange(a){ a=a.slice();
+  for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; }
+  return a; }
+
+/* ---------- écran 1 : réglages ---------- */
+function majProduit(){ el('produit').innerHTML=PRODUITS[G.prod]; }
+el('autreProd').addEventListener('click',function(){ G.prod=(G.prod+1)%PRODUITS.length; majProduit(); });
+[['rN','vN','n',''],['rS','vS','s',''],['rD','vD','duree',' min'],['rR','vR','reunion',' min']].forEach(function(c){
+  var r=el(c[0]);
+  r.addEventListener('input',function(){
+    G[c[2]]=+this.value; el(c[1]).textContent=this.value+c[3];
+    if(c[2]==='n' && G.s>Math.floor(G.n/6)){ G.s=Math.max(1,Math.floor(G.n/6)); el('rS').value=G.s; el('vS').textContent=G.s; }
+  });
+});
+majProduit();
+
+/* ---------- distribution des rôles ---------- */
+function distribuer(){
+  var base=[], i=0;
+  while(base.length<G.n){ base.push(ROLES[i%ROLES.length]); i++; }
+  base=melange(base);
+  var sab=melange(SABOTAGES).slice(0,G.s);
+  G.cartes=base.map(function(r,k){ return {role:r, num:k+1, sab:null}; });
+  var places=melange(G.cartes.filter(function(c){ return c.role.n!=='Chef de projet'; })).slice(0,G.s);
+  places.forEach(function(c,k){ c.sab=sab[k]; });
+  G.idx=0; G.visible=false;
+  carte();
+}
+function carte(){
+  var c=G.cartes[G.idx], b=el('boiteCarte');
+  if(!G.visible){
+    b.innerHTML='<div class="cache"><div class="pn">Carte '+(G.idx+1)+' sur '+G.cartes.length+'</div>'+
+      '<div class="big">Passe l\u2019écran</div><div class="pn">Puis appuie sur « Afficher mon rôle »</div></div>';
+    return;
+  }
+  var h='<div class="role'+(c.sab?' sab':'')+'">'+
+    '<div class="num">JOUEUR '+c.num+' SUR '+G.cartes.length+'</div>'+
+    '<h2>'+c.role.n+'</h2>'+
+    '<div class="miss">ta mission : '+c.role.m+'</div><ul>';
+  c.role.t.forEach(function(x){ h+='<li>'+x+'</li>'; });
+  h+='</ul><p class="sub"><b>Ton livrable :</b> '+c.role.liv+'</p>';
+  if(c.sab) h+='<div class="secret"><div class="lab">Objectif secret \u2014 ne le montre à personne</div>'+c.sab+
+               '<p class="sub" style="margin:8px 0 0">Si la classe te démasque au vote final, tu perds.</p></div>';
+  h+='</div>';
+  el('boiteCarte').innerHTML=h;
+}
+el('go1').addEventListener('click',function(){ distribuer(); ecran('e2'); });
+el('revele').addEventListener('click',function(){ G.visible=true; carte(); });
+el('suivant').addEventListener('click',function(){
+  G.visible=false;
+  if(G.idx<G.cartes.length-1) G.idx++;
+  carte();
+});
+
+/* ---------- écran 3 : la partie ---------- */
+function jalons(){
+  var out=[{t:0, type:'lancement', n:0}], t=G.reunion, k=1;
+  while(t<G.duree){ out.push({t:t, type:'reunion', n:k}); k++; t+=G.reunion; }
+  out.push({t:G.duree, type:'livraison', n:k});
+  return out;
+}
+var ORDRE=[
+ ['Lancement','Le commercial présente le besoin. Chaque service dit ce qu\u2019il lui faut.'],
+ ['Réunion 1','Cahier des charges validé. Le planning est tracé.'],
+ ['Réunion 2','Solution technique choisie. La nomenclature démarre.'],
+ ['Réunion 3','Nomenclature et gamme présentées. Budget vérifié.'],
+ ['Réunion 4','Plan de contrôle et essais. On fige ce qui est fait.'],
+ ['Livraison','Présentation au client, puis vote de démasquage.']
+];
+function tableauOrdre(){
+  var t=el('ordre'); t.innerHTML='<tr><th>Moment</th><th>Ce qui doit sortir de la réunion</th></tr>';
+  ORDRE.forEach(function(o){ t.innerHTML+='<tr><td><b>'+o[0]+'</b></td><td>'+o[1]+'</td></tr>'; });
+}
+function listeLivrables(){
+  var b=el('livrables'); b.innerHTML='';
+  LIVRABLES.forEach(function(x,i){
+    var l=document.createElement('label');
+    l.innerHTML='<input type="checkbox" data-i="'+i+'"><span>'+x+'</span>';
+    l.querySelector('input').addEventListener('change',function(){ l.classList.toggle('ok',this.checked); });
+    b.appendChild(l);
+  });
+}
+(function(){
+  var cv=el('cvFrise'); if(!cv||!cv.getContext) return;
+  var g=cv.getContext('2d'), W=cv.width, H=cv.height;
+  function dessine(){
+    var J=jalons(), min=G.ecoule/60;
+    g.clearRect(0,0,W,H);
+    var x0=50, x1=W-50, y=64;
+    g.strokeStyle='#e0d8c8'; g.lineWidth=6; g.lineCap='round';
+    g.beginPath(); g.moveTo(x0,y); g.lineTo(x1,y); g.stroke();
+    g.strokeStyle='#3D7E5F';
+    g.beginPath(); g.moveTo(x0,y); g.lineTo(x0+(x1-x0)*Math.min(1,min/G.duree),y); g.stroke();
+    g.lineCap='butt';
+    J.forEach(function(j){
+      var x=x0+(x1-x0)*j.t/G.duree, passe=(min>=j.t), proche=(Math.abs(min-j.t)<0.5);
+      g.fillStyle= proche? '#C0492E' : (passe? '#3D7E5F':'#e0d8c8');
+      g.beginPath(); g.arc(x,y,proche?12:8,0,7); g.fill();
+      g.fillStyle= proche? '#C0492E' : '#8c8578';
+      g.font='700 11px "JetBrains Mono",monospace'; g.textAlign='center';
+      g.fillText(j.t+' min',x,y-22);
+      g.font=(proche?'800 ':'700 ')+'11px "Bricolage Grotesque",sans-serif';
+      var lab= j.type==='lancement'? 'lancement' : (j.type==='livraison'? 'livraison':'réunion '+j.n);
+      g.fillText(lab,x,y+28);
+    });
+  }
+  setInterval(dessine,500); dessine();
+})();
+function phaseCourante(){
+  var min=G.ecoule/60, J=jalons(), cur=J[0];
+  J.forEach(function(j){ if(min>=j.t) cur=j; });
+  var suiv=J.filter(function(j){ return j.t>min; })[0];
+  var reste= suiv? Math.ceil(suiv.t-min) : 0;
+  if(cur.type==='lancement') return 'Lancement \u00b7 prochaine réunion dans '+reste+' min';
+  if(cur.type==='livraison') return 'Livraison \u2014 on présente au client';
+  return 'Réunion '+cur.n+' \u00b7 prochain jalon dans '+reste+' min';
+}
+function tic(){
+  if(!G.marche) return;
+  G.ecoule=Math.floor((Date.now()-G.t0)/1000);
+  var m=Math.floor(G.ecoule/60), s=G.ecoule%60;
+  el('hh').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  var min=G.ecoule/60, J=jalons();
+  var proche=J.some(function(j){ return Math.abs(min-j.t)<0.5 && j.t>0; });
+  el('hh').classList.toggle('alerte',proche);
+  el('ph').textContent=phaseCourante();
+}
+el('go2').addEventListener('click',function(){ tableauOrdre(); listeLivrables(); ecran('e3'); });
+el('play').addEventListener('click',function(){
+  if(!G.marche){ G.t0=Date.now()-G.ecoule*1000; G.marche=true; this.textContent='Pause'; this.className='btn r'; }
+  else { G.marche=false; this.textContent='Reprendre'; this.className='btn g'; }
+});
+setInterval(tic,1000);
+el('alea').addEventListener('click',function(){
+  el('txtAlea').innerHTML=ALEAS[Math.floor(Math.random()*ALEAS.length)];
+  el('boiteAlea').classList.add('on');
+});
+
+/* ---------- écran 4 : démasquage ---------- */
+el('go3').addEventListener('click',function(){
+  G.marche=false;
+  var b=el('voteBox'); b.innerHTML='';
+  G.cartes.forEach(function(c){
+    var t=document.createElement('button');
+    t.type='button'; t.textContent='N\u00b0'+c.num+' \u00b7 '+c.role.n;
+    t.addEventListener('click',function(){
+      G.votes[c.num]=!G.votes[c.num];
+      t.classList.toggle('sel',!!G.votes[c.num]);
+    });
+    b.appendChild(t);
+  });
+  el('bilan').style.display='none';
+  ecran('e4');
+});
+el('reveler').addEventListener('click',function(){
+  var bts=el('voteBox').children, bons=0, sabs=0;
+  G.cartes.forEach(function(c,i){
+    var t=bts[i];
+    if(c.sab){ sabs++; t.className='vote-sab'; t.classList.add('sab');
+      if(G.votes[c.num]) bons++; }
+    else if(G.votes[c.num]) t.classList.add('clean');
+  });
+  var coches=Object.keys(G.votes).filter(function(k){ return G.votes[k]; }).length;
+  var liv=el('livrables').querySelectorAll('input');
+  var faits=0; Array.prototype.forEach.call(liv,function(x){ if(x.checked) faits++; });
+  var h='<h3>Bilan de la séance</h3><table class="b">'+
+    '<tr><td>Livrables terminés</td><td><b>'+faits+' / '+LIVRABLES.length+'</b></td></tr>'+
+    '<tr><td>Saboteurs démasqués</td><td><b>'+bons+' / '+sabs+'</b></td></tr>'+
+    '<tr><td>Innocents accusés</td><td><b>'+Math.max(0,coches-bons)+'</b></td></tr></table>';
+  if(faits===LIVRABLES.length && bons===sabs) h+='<p><b>L\u2019usine gagne sur toute la ligne :</b> projet livré et saboteurs démasqués.</p>';
+  else if(faits>=4) h+='<p><b>Le projet est livré</b>, mais des saboteurs s\u2019en tirent. Que leur a-t-on laissé passer ?</p>';
+  else if(bons===sabs) h+='<p><b>Les saboteurs sont pris</b>, mais le projet n\u2019est pas livré. Chercher le coupable a coûté du temps.</p>';
+  else h+='<p><b>Le client n\u2019est pas livré.</b> Reprenez les réunions : où a-t-on perdu les décisions ?</p>';
+  h+='<p class="sub">Trois questions pour finir : à quelle réunion aurait-on pu repérer le sabotage ? Quel livrable a pris le plus de retard ? Qu\u2019est-ce qui aurait changé avec un ordre du jour écrit ?</p>';
+  el('bilan').innerHTML=h; el('bilan').style.display='block';
+});
+</script>
+</body>
+</html>

@@ -183,6 +183,8 @@
   .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
   .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid #E4DCCB}
+  .tpscore .tps-note b{color:#3D7E5F;font-size:19px}
   .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
            text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
            padding:13px 20px;cursor:pointer}
@@ -230,6 +232,40 @@
   .cahier .csol{display:none;background:rgba(189,138,42,.1);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:13.5px;line-height:1.6}
   .cahier .csol.show{display:block}
   .cahier .csol b{color:#8a6313}
+
+  /* ---------- bouton d'ouverture de la calculatrice ---------- */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:81;width:54px;height:54px;border-radius:50%;
+              background:#2E6A8E;border:none;box-shadow:0 8px 22px rgba(20,16,10,.30);cursor:pointer;
+              display:flex;align-items:center;justify-content:center;padding:0}
+  #calcToggle:hover{filter:brightness(1.12)}
+  #calcToggle svg{display:block}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
@@ -591,7 +627,7 @@
     </div>
     <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
     <div class="tps-row">
-      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
       <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
@@ -626,12 +662,15 @@
     var t=d('tpsTot'); if(t) t.textContent=EX.length;
     maj();
   }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
   function maj(){
     var n=0;
     EX.forEach(function(e,i){ if(done[i]) n++; });
-    var now=d('tpsNow'), fill=d('tpsFill');
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
     if(now) now.textContent=n;
     if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=String(note(n,EX.length)).replace('.',',');
     return n;
   }
   function observe(){
@@ -661,13 +700,13 @@
     fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       tp:TP_TITRE, fichier:TP_ID,
       eleves:p, classe:cl,
-      score:n, total:tot,
+      score:n, total:tot, note:note(n,tot),
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
     })})
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
     .then(function(){
       msg.className='tps-msg ok';
-      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+String(note(n,tot)).replace('.',',')+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
     }).catch(function(err){
       msg.className='tps-msg no';
@@ -860,6 +899,93 @@
     var b=gi(p+'rev'), s2=gi(p+'sol');
     if(b&&s2) b.addEventListener('click',function(){ s2.classList.add('show'); b.disabled=true; b.textContent='Correction affich\u00e9e'; });
   });
+})();
+</script>
+
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u)) bloque=true;
+    });
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
 })();
 </script>
 </body>

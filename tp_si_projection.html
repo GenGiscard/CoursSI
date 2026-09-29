@@ -116,6 +116,8 @@
   .tpscore .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .tpscore .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:#5C544B}
   .tpscore .tps-count b{color:#2E6A8E;font-size:19px}
+  .tpscore .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid #E4DCCB}
+  .tpscore .tps-note b{color:#3D7E5F;font-size:19px}
   .tpscore .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
            text-transform:uppercase;font-weight:700;color:#fff;background:#3D7E5F;border:none;border-radius:10px;
            padding:13px 20px;cursor:pointer}
@@ -123,6 +125,33 @@
   .tpscore .tps-btn:disabled{opacity:.5;cursor:not-allowed}
   .tpscore .tps-msg{font-family:'JetBrains Mono',monospace;font-size:13px;margin-top:10px;min-height:19px}
   .tpscore .tps-msg.ok{color:#3D7E5F} .tpscore .tps-msg.no{color:#C0492E}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
 </style>
 </head>
 <body><div class="estic-bar"><img class="logo" src="data:image/png;base64,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" alt="Logo ESTIC"> <div><div class="who">Professeur AGOSTINI</div><div class="meta">Sciences de l'ingénieur · ESTIC</div></div> <div class="rt">TP 3h — Projections &amp; repères<br>© ESTIC — Tous droits réservés</div></div> <div class="wrap"><div class="hero"><div class="k">TP de séance · 3 heures · Première spé SI · Statique</div> <h1>Projeter pour résoudre</h1> <p class="lede">Une force penchée ne se laisse pas calculer directement : il faut la <b>projeter</b>. Et souvent, le secret n’est pas de calculer plus fort — c’est de <b>choisir le bon repère</b>. Élingues de levage, caisse sur plan incliné, nœud de potence, grue de façade : quatre situations où le même geste change tout. Calculatrice trigonométrique en bas à droite.</p> <div class="plan"><div class="p"><div class="t">Acte 1 · ≈ 55 min</div><b>Décomposer</b><span>Passer d’une force à ses deux composantes… et revenir.</span></div> <div class="p"><div class="t">Acte 2 · ≈ 65 min</div><b>Choisir le repère</b><span>Élingues au simulateur, plan incliné en double repère.</span></div> <div class="p"><div class="t">Acte 3 · ≈ 60 min</div><b>Résoudre</b><span>ΣFx = 0 et ΣFy = 0 sur des structures réelles.</span></div></div></div> <div class="rappel"><b>La boîte à outils de la séance.</b> Une force F inclinée d’un angle α par rapport à l’axe x se décompose en <b>F<sub>x</sub> = F·cos α</b> et <b>F<sub>y</sub> = F·sin α</b>. Dans l’autre sens : <b>F = √(F<sub>x</sub>² + F<sub>y</sub>²)</b> et <b>tan α = F<sub>y</sub>/F<sub>x</sub></b>. Règle d’or à retenir dès maintenant : <b>l’axe le long duquel on projette, c’est celui qu’on choisit</b> — et un repère bien choisi divise le travail par deux.</div> <!-- ================= ACTE 1 ================= --> <div class="acte"><span class="n">ACTE 1</span><h2>Décomposer une force</h2><span class="d">≈ 55 min</span></div> <section class="exo-card" id="a"> <h3 class="ex"><span class="num">A</span> Le hauban du panneau</h3> <p class="task">Un hauban tire sur un panneau publicitaire avec une force de <b>200 N</b>, inclinée de <b>30°</b> au-dessus de l’horizontale. Le bureau d’études veut savoir ce qui tire <i>horizontalement</i> (arrachement) et ce qui tire <i>verticalement</i> (soulèvement). <b>Fais tourner le curseur</b> pour voir les deux composantes vivre, puis réponds pour 30°.</p> <div class="schema"><canvas id="cvDeco" width="700" height="300" aria-label="Force inclinée et ses deux projections sur les axes"></canvas> <div class="slider-row"><label>angle α</label><input type="range" id="sAng" min="0" max="90" step="5" value="30"><span class="val" id="vAng">30°</span></div></div> <div class="row"><span>a) Composante horizontale : F<sub>x</sub> ≈</span><input class="numin" id="aA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><span>b) Composante verticale : F<sub>y</sub> =</span><input class="numin" id="aB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="aMatch"></div> <div class="row"><button class="btn" id="aCheck">Vérifier</button><button class="btn step" id="aStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="aShow" disabled>Voir la correction</button></div> <div class="steps" id="aSteps"></div> <div class="exo-fb" id="aFb"></div> <div class="exo-sol" id="aSol"><b>a)</b> F<sub>x</sub> = 200 × cos 30° = 200 × 0,866 ≈ <b>173 N</b>. <b>b)</b> F<sub>y</sub> = 200 × sin 30° = 200 × 0,5 = <b>100 N</b>.<br><b>c)</b> Vérification : √(173² + 100²) ≈ 200 N ✓ — les deux composantes « valent » ensemble la force de départ, mais <b>leur somme arithmétique (273 N) n’a aucun sens physique</b> : on additionne des vecteurs, pas des nombres.</div> </section> <section class="exo-card" id="b"> <h3 class="ex"><span class="num">B</span> Le chemin inverse</h3> <p class="task">Un capteur d’effort à deux voies équipe la même attache. Il ne mesure PAS la force : il mesure ses deux composantes. Ce matin il affiche <b>F<sub>x</sub> = 60 N</b> et <b>F<sub>y</sub> = 80 N</b>. Reconstitue la force réelle et son inclinaison.</p> <div class="schema"><svg viewBox="0 0 700 260" aria-label="Deux composantes mesurées et la force résultante à reconstituer"> <g stroke="#5C544B" stroke-width="2"><path d="M120 210 h420 M120 210 v-170"/></g> <g font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#5C544B"> <text x="530" y="230">x</text><text x="128" y="52">y</text> </g> <path d="M120 210 L300 210" stroke="#2E6A8E" stroke-width="5"/><path d="M292 204 l12 6 l-12 6" fill="#2E6A8E"/><text x="190" y="232" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#2E6A8E">Fx = 60 N</text> <path d="M120 210 L120 90" stroke="#3D7E5F" stroke-width="5"/><path d="M114 98 l6 -12 l6 12" fill="#3D7E5F"/><text x="36" y="150" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#3D7E5F">Fy = 80 N</text> <g stroke="#d9cfbb" stroke-width="1.6" stroke-dasharray="5 4"> <path d="M300 210 L300 90 M120 90 L300 90"/></g> <path d="M120 210 L300 90" stroke="#C0492E" stroke-width="5"/><path d="M292 96 l10 -8 l1 13" fill="#C0492E"/><text x="318" y="130" font-family="JetBrains Mono" font-size="14" font-weight="700" fill="#C0492E">F = ?</text> <path d="M170 210 A 50 50 0 0 0 156 176" fill="none" stroke="#8A5A7A" stroke-width="2.4"/><text x="176" y="188" font-family="JetBrains Mono" font-size="13" font-weight="700" fill="#8A5A7A">α = ?</text> <text x="420" y="80" font-family="JetBrains Mono" font-size="12" fill="#5C544B">le rectangle des composantes</text> <text x="420" y="100" font-family="JetBrains Mono" font-size="12" fill="#5C544B">se referme sur la force réelle</text> </svg></div> <div class="row"><span>a) Intensité de la force : F =</span><input class="numin" id="bA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><span>b) Angle avec l’horizontale : α ≈</span><input class="numin" id="bB" inputmode="decimal" placeholder="?"><span class="unit">°</span></div> <div class="match" id="bMatch"></div> <div class="row"><button class="btn" id="bCheck">Vérifier</button><button class="btn step" id="bStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="bShow" disabled>Voir la correction</button></div> <div class="steps" id="bSteps"></div> <div class="exo-fb" id="bFb"></div> <div class="exo-sol" id="bSol"><b>a)</b> F = √(60² + 80²) = √(3600 + 6400) = √10000 = <b>100 N</b>. <b>b)</b> tan α = 80/60 = 1,333 → α = <b>53°</b> environ.<br><b>c)</b> C’est le fameux triangle 3-4-5 des maçons, en version force : 60-80-100. Un capteur à deux voies ne « voit » jamais la force elle-même — il en donne l’ombre sur deux axes, et c’est à l’ingénieur de la reconstituer.</div> </section> <!-- ================= ACTE 2 ================= --> <div class="acte"><span class="n">ACTE 2</span><h2>Choisir le bon repère</h2><span class="d">≈ 65 min</span></div> <section class="exo-card" id="c"> <h3 class="ex"><span class="num">C</span> L’élingue qui s’écarte</h3> <p class="task">Une charge de <b>1000 N</b> est levée par <b>deux brins d’élingue symétriques</b>, chacun faisant un angle θ avec la verticale. Beaucoup pensent que chaque brin porte 500 N… <b>Écarte les brins au curseur</b> et regarde la vérité s’afficher. Mission : trouve l’angle où <b>chaque brin est tendu à 1000 N</b>, autant que si un seul câble portait toute la charge .</p> <div class="schema"><canvas id="cvEling" width="700" height="330" aria-label="Charge levée par deux brins d'élingue avec tension variable selon l'angle"></canvas> <div class="slider-row"><label>angle θ</label><input type="range" id="sTheta" min="0" max="75" step="5" value="20"><span class="val" id="vTheta">20°</span></div></div> <div class="row"><span>a) Angle où chaque brin atteint 1000 N : θ =</span><input class="numin" id="cA" inputmode="decimal" placeholder="?"><span class="unit">°</span></div> <div class="row"><span>b) Tension d’un brin quand les élingues sont presque verticales (θ ≈ 0°) :</span><input class="numin" id="cB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="cMatch"></div> <div class="row"><button class="btn" id="cCheck">Vérifier</button><button class="btn g" id="cShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="cFb"></div> <div class="exo-sol" id="cSol">Chaque brin ne porte que sa <b>composante verticale</b> T·cos θ. L’équilibre vertical du crochet s’écrit <b>2 × T·cos θ = P</b>, d’où <b>T = P / (2 cos θ)</b>.<br><b>a)</b> T = 1000 N quand 2 cos θ = 1, soit cos θ = 0,5 → <b>θ = 60°</b>. <b>b)</b> À θ ≈ 0° : T = 1000/2 = <b>500 N</b> — là, et seulement là, l’intuition du « moitié-moitié » est juste.<br>À 60°, écarter les brins a <b>doublé</b> l’effort dans chacun : c’est pour cela que les fiches d’élingage interdisent de dépasser 60°, et que la composante horizontale (T·sin θ) écrase la charge par les côtés.</div> </section> <section class="exo-card" id="d"> <h3 class="ex"><span class="num">D</span> Le plan incliné, vu de deux repères</h3> <p class="task">Une caisse de <b>500 N</b> repose sur une rampe de livraison inclinée à <b>30°</b>. Le poids, lui, reste vertical — c’est le REPÈRE qu’on va faire tourner. Le canvas affiche les <b>deux repères en même temps</b>: en gris le repère horizontal/vertical, en couleur le repère lié à la pente. Regarde laquelle des deux décompositions te donne directement ce qui fait glisser la caisse.</p> <div class="schema"><canvas id="cvPlan" width="700" height="330" aria-label="Caisse sur plan incliné avec les deux repères et les projections du poids"></canvas> <div class="slider-row"><label>pente α</label><input type="range" id="sPente" min="0" max="45" step="5" value="30"><span class="val" id="vPente">30°</span></div></div> <div class="row"><span>a) Composante du poids qui fait GLISSER (le long de la pente) :</span><input class="numin" id="dA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><span>b) Composante qui PLAQUE la caisse (perpendiculaire à la pente) :</span><input class="numin" id="dB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="dMatch"></div> <div class="row"><button class="btn" id="dCheck">Vérifier</button><button class="btn step" id="dStepBtn" disabled>Résolution pas à pas</button><button class="btn g" id="dShow" disabled>Voir la correction</button></div> <div class="steps" id="dSteps"></div> <div class="exo-fb" id="dFb"></div> <div class="exo-sol" id="dSol"><b>a)</b> P<sub>t</sub> = P × sin α = 500 × sin 30° = 500 × 0,5 = <b>250 N</b> (parallèle à la pente, vers le bas). <b>b)</b> P<sub>n</sub> = P × cos α = 500 × 0,866 ≈ <b>433 N</b> (perpendiculaire, elle écrase la rampe).<br><b>c)</b> Attention au piège d’écriture : c’est bien le <b>sinus</b> qui accompagne la pente. Vérification par les cas extrêmes : à 0° (rampe plate) sin 0 = 0, rien ne fait glisser ✓ ; à 90° (mur vertical) sin 90 = 1, tout le poids fait glisser ✓. Essaie ces deux positions au curseur.</div> </section> <section class="exo-card" id="e"> <h3 class="ex"><span class="num">E</span> Pourquoi ce repère-là ?</h3> <p class="task">Reprends la caisse de l’exercice D. Un camarade décide de tout projeter dans le repère horizontal/vertical classique, un autre dans le repère de la pente. Les deux ont mathématiquement le droit. Mais l’un va passer trois fois plus de temps que l’autre — et la question suivante t’explique pourquoi.</p> <div class="match" id="eMatch"></div> <div class="row"><button class="btn" id="eCheck">Vérifier</button><button class="btn g" id="eShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="eFb"></div> <div class="exo-sol" id="eSol">Dans le repère de la pente, <b>deux des trois forces sont déjà sur les axes</b> : la réaction du sol est perpendiculaire à la pente (donc entièrement sur l’axe n), le frottement est parallèle à la pente (entièrement sur l’axe t). Seul le poids doit être décomposé. Dans le repère horizontal/vertical, c’est l’inverse : le poids est simple, mais <b>la réaction ET le frottement doivent tous les deux être projetés</b> — deux décompositions au lieu d’une, et autant d’occasions de se tromper.<br><b>La règle de l’ingénieur :</b> on choisit le repère qui aligne le maximum de forces sur ses axes. Ce n’est pas de la paresse, c’est de la fiabilité.</div> </section> <!-- ================= ACTE 3 ================= --> <div class="acte"><span class="n">ACTE 3</span><h2>Résoudre par projection</h2><span class="d">≈ 60 min</span></div> <section class="exo-card" id="f"> <h3 class="ex"><span class="num">F</span> Le nœud de la potence</h3> <p class="task">Une potence murale porte une charge de <b>600 N</b> suspendue au point A. Le câble AC monte vers le mur en faisant <b>30°</b> avec l’horizontale ; la barre AB, horizontale, pousse le nœud. Au point A, trois forces se croisent et s’équilibrent. Écris les deux projections et résous.</p> <div class="schema"><canvas id="cvNoeud" width="700" height="310" aria-label="Nœud de potence avec câble incliné, barre horizontale et charge suspendue"></canvas></div> <div class="row"><span>a) Tension dans le câble AC : T =</span><input class="numin" id="fA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><span>b) Effort dans la barre AB : N ≈</span><input class="numin" id="fB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="fMatch"></div> <div class="row"><button class="btn" id="fCheck">Vérifier</button><button class="btn g" id="fShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="fFb"></div> <div class="exo-sol" id="fSol"><b>Projection sur y</b> (verticale) : seule la composante verticale du câble peut soutenir la charge → T·sin 30° = 600 → T = 600/0,5 = <b>1200 N</b>.<br><b>Projection sur x</b> (horizontale) : la composante horizontale du câble est équilibrée par la barre → N = T·cos 30° = 1200 × 0,866 ≈ <b>1039 N</b>.<br><b>c)</b> Le câble est tendu à <b>deux fois</b> la charge qu’il porte : c’est l’angle faible (30°) qui l’exige. Un câble presque horizontal devient un piège — l’effort explose. On commence toujours par la projection qui ne contient <b>qu’une seule inconnue</b> : ici la verticale, où la barre horizontale ne compte pas.</div> </section> <section class="exo-card" id="g"> <h3 class="ex"><span class="num">G</span> Le contrôle du bureau d’études</h3> <p class="task">Dernière ligne droite : on te transmet trois forces qui s’appliquent en un même point d’une ferrure de façade, et on te demande de <b>vérifier l’équilibre</b>. F₁ = 300 N horizontale vers la droite · F₂ = 400 N verticale vers le haut · F₃ = 500 N inclinée vers le bas à gauche, à 53° sous l’horizontale.</p> <div class="schema"><canvas id="cvFerrure" width="700" height="300" aria-label="Trois forces concourantes sur une ferrure de façade"></canvas></div> <div class="row"><span>a) Somme des projections sur x : ΣF<sub>x</sub> ≈</span><input class="numin" id="gA" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><span>b) Somme des projections sur y : ΣF<sub>y</sub> ≈</span><input class="numin" id="gB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="match" id="gMatch"></div> <div class="row"><button class="btn" id="gCheck">Vérifier</button><button class="btn g" id="gShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="gFb"></div> <div class="exo-sol" id="gSol">Composantes de F₃ : elle pointe vers le bas à gauche, donc ses deux composantes sont <b>négatives</b> : F₃ₓ = −500 × cos 53° ≈ −300 N et F₃ᵧ = −500 × sin 53° ≈ −400 N.<br><b>a)</b> ΣF<sub>x</sub> = +300 + 0 − 300 = <b>0</b>. <b>b)</b> ΣF<sub>y</sub> = 0 + 400 − 400 = <b>0</b>.<br><b>c)</b> Les deux sommes étant nulles, la ferrure est <b>en équilibre</b> : c’est exactement le principe fondamental de la statique, écrit en projection. Le vrai savoir-faire ici n’est pas le calcul, c’est <b>la gestion des signes</b> : une force qui pointe dans le sens opposé à l’axe entre avec un moins.</div> </section> <section class="exo-card" id="h"> <h3 class="ex"><span class="num">H</span> La fiche mémo de l’atelier</h3> <p class="task">Remplis la fiche que tu colleras dans ton classeur : pour chaque situation, quelle est la bonne expression ?</p> <table class="rep"> <tr><th>situation</th><th>ce qu’on cherche</th><th>expression</th></tr> <tr><td>force F à α de l’axe x</td><td>composante SUR l’axe x</td><td><b>F·cos α</b></td></tr> <tr><td>force F à α de l’axe x</td><td>composante perpendiculaire</td><td><b>F·sin α</b></td></tr> <tr><td>poids P, pente à α</td><td>ce qui fait glisser</td><td><b>P·sin α</b></td></tr> <tr><td>poids P, pente à α</td><td>ce qui plaque au sol</td><td><b>P·cos α</b></td></tr> </table> <div class="match" id="hMatch"></div> <div class="row"><button class="btn" id="hCheck">Vérifier</button><button class="btn g" id="hShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="hFb"></div> <div class="exo-sol" id="hSol">La confusion sin/cos vient toujours de la même chose : <b>on récite la formule au lieu de regarder la figure</b>. Le réflexe fiable : la composante <b>collée à l’angle</b> (celle qui forme le côté adjacent) prend le <b>cosinus</b> ; celle d’en face prend le <b>sinus</b>. Sur le plan incliné, l’angle de la pente se retrouve entre le poids et la normale — donc la normale est en cos et le glissement en sin. Et en cas de doute : teste 0° et 90°, la formule fausse se trahit immédiatement.</div> </section> <section class="exo-card" id="i"> <h3 class="ex"><span class="num">★</span> La chasse à l’erreur</h3> <p class="task">Un stagiaire rend cette note de calcul pour la rampe d’accès d’un quai (caisse de 800 N, pente à 20°) : <i>« La composante du poids parallèle à la pente vaut P·cos α = 800 × cos 20° = 752 N. Il faut donc retenir la caisse avec 752 N. »</i> Le chef de projet a entouré la ligne en rouge.</p> <div class="match" id="iMatch"></div> <div class="row"><span>b) Valeur correcte de l’effort à retenir :</span><input class="numin" id="iB" inputmode="decimal" placeholder="?"><span class="unit">N</span></div> <div class="row"><button class="btn" id="iCheck">Vérifier</button><button class="btn g" id="iShow" disabled>Voir la correction</button></div> <div class="exo-fb" id="iFb"></div> <div class="exo-sol" id="iSol"><b>a)</b> L’erreur : le stagiaire a <b>interverti sinus et cosinus</b>. Le long de la pente, c’est <b>P·sin α</b>.<br><b>b)</b> Effort réel = 800 × sin 20° = 800 × 0,342 ≈ <b>274 N</b>.<br><b>c)</b> La conséquence est concrète : il aurait dimensionné le taquet pour presque trois fois trop — matériel surdimensionné, budget envolé. Et le même genre d’inversion dans l’autre sens (sous-dimensionner) laisse une caisse partir dans la rue. <b>Le test des cas extrêmes aurait suffi</b> : avec sa formule, une rampe parfaitement plate (α = 0°) demanderait 800 N pour retenir la caisse — absurde.</div> </section></div> <button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button> <div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div> <script>
@@ -693,7 +722,7 @@ lockExo('iCheck','iShow','iSol','iFb',function(){
     </div>
     <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
     <div class="tps-row">
-      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span></div>
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
       <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
     </div>
     <div class="tps-msg" id="tpsMsg"></div>
@@ -728,12 +757,15 @@ lockExo('iCheck','iShow','iSol','iFb',function(){
     var t=d('tpsTot'); if(t) t.textContent=EX.length;
     maj();
   }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
   function maj(){
     var n=0;
     EX.forEach(function(e,i){ if(done[i]) n++; });
-    var now=d('tpsNow'), fill=d('tpsFill');
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
     if(now) now.textContent=n;
     if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=String(note(n,EX.length)).replace('.',',');
     return n;
   }
   function observe(){
@@ -763,13 +795,13 @@ lockExo('iCheck','iShow','iSol','iFb',function(){
     fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       tp:TP_TITRE, fichier:TP_ID,
       eleves:p, classe:cl,
-      score:n, total:tot,
+      score:n, total:tot, note:note(n,tot),
       ts:Date.now(), date:new Date().toLocaleString('fr-FR')
     })})
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
     .then(function(){
       msg.className='tps-msg ok';
-      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' pour '+p.join(', ')+' ('+cl+').';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+String(note(n,tot)).replace('.',',')+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
       b.disabled=false;
     }).catch(function(err){
       msg.className='tps-msg no';
@@ -793,6 +825,93 @@ lockExo('iCheck','iShow','iSol','iFb',function(){
 })();
 
 
+</script>
+
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u)) bloque=true;
+    });
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
+})();
 </script>
 </body>
 </html>
