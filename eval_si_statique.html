@@ -339,9 +339,9 @@
  // beam
  g.strokeStyle='#2A2622';g.lineWidth=8;g.lineCap='round';g.beginPath();g.moveTo(xA,oy);g.lineTo(xB,oy);g.stroke();g.lineCap='butt';
  function support(x,roller){
- g.fillStyle='#7a7064';g.beginPath();g.moveTo(x,oy+60);g.lineTo(x-13,oy+84);g.lineTo(x+13,oy+84);g.closePath();g.fill();
- if(roller){g.fillStyle='#7a7064';g.beginPath();g.arc(x-7,oy+88,3.5,0,7);g.fill();g.beginPath();g.arc(x+7,oy+88,3.5,0,7);g.fill();}
- g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;var gy=oy+(roller?92:84);
+ g.fillStyle='#7a7064';g.beginPath();g.moveTo(x,oy+4);g.lineTo(x-13,oy+28);g.lineTo(x+13,oy+28);g.closePath();g.fill();
+ if(roller){g.fillStyle='#7a7064';g.beginPath();g.arc(x-7,oy+32,3.5,0,7);g.fill();g.beginPath();g.arc(x+7,oy+32,3.5,0,7);g.fill();}
+ g.strokeStyle='rgba(42,38,34,.3)';g.lineWidth=1;var gy=oy+(roller?36:28);
  g.beginPath();g.moveTo(x-20,gy);g.lineTo(x+20,gy);g.stroke();
  for(var hx=x-16;hx<x+20;hx+=8){g.beginPath();g.moveTo(hx,gy);g.lineTo(hx-5,gy+6);g.stroke();}
  }
@@ -355,10 +355,10 @@
  g.textAlign='center';
  // reactions : la POINTE arrive au contact de la poutre (oy+6), longueur proportionnelle a R
  var lA=(450*0.13), lB=(150*0.13);
- arrow(g,xA,oy+6+lA,xA,oy+6,'#3D7E5F',4);
- arrow(g,xB,oy+6+lB,xB,oy+6,'#3D7E5F',4);
+ arrow(g,xA,oy+4+lA,xA,oy+4,'#3D7E5F',4);
+ arrow(g,xB,oy+4+lB,xB,oy+4,'#3D7E5F',4);
  g.fillStyle='#2c6147';g.font='700 11px "JetBrains Mono",monospace';g.textAlign='left';
- g.fillText('R_A',xA+10,oy+6+lA-6);g.fillText('R_B',xB+10,oy+6+lB-6);
+ g.fillText('R_A',xA+16,oy+4+lA-4);g.fillText('R_B',xB+16,oy+4+lB-4);
  g.textAlign='center';
  // cote a
  g.strokeStyle='#235877';g.lineWidth=1;g.beginPath();g.moveTo(xA,oy-2);g.lineTo(xA,oy-46);g.moveTo(xF,oy-2);g.lineTo(xF,oy-46);g.stroke();
@@ -385,7 +385,7 @@
  g.strokeStyle='#2E6A8E';g.lineWidth=1.6;g.setLineDash([4,4]);g.beginPath();g.moveTo(ox,oy+34);g.lineTo(fx,oy+34);g.stroke();g.setLineDash([]);
  g.fillStyle='#2E6A8E';g.font='12px "JetBrains Mono",monospace';g.fillText('d = 0,25 m',(ox+fx)/2,oy+50);
  // force F vers le bas
- arrow(g,fx,fy,fx,fy+58+10*pulse,'#C0492E',5);
+ arrow(g,fx,fy,fx,fy+64,'#C0492E',5);
  g.fillStyle='#C0492E';g.font='700 13px "JetBrains Mono",monospace';g.fillText('F = 80 N',fx+40,fy+34);
  // moment
  g.strokeStyle='#3D7E5F';g.lineWidth=2.4;g.beginPath();g.arc(ox,oy,38,-0.5,1.0);g.stroke();
@@ -410,9 +410,9 @@
  g.fillStyle='#5C544B';g.font='11px "JetBrains Mono",monospace';g.fillText('point d\u2019\u00e9quilibre',N.x,N.y+P.y+30);
  // triangle des forces (droite) — triangle rectangle fermé
  var S={x:430,y:50}; var A={x:S.x,y:S.y+64}; var B={x:S.x+74,y:S.y+64};
- g.strokeStyle='#C0492E';g.lineWidth=4;g.beginPath();g.moveTo(S.x,S.y);g.lineTo(A.x,A.y);g.stroke();
- g.strokeStyle='#2E6A8E';g.beginPath();g.moveTo(A.x,A.y);g.lineTo(B.x,B.y);g.stroke();
- g.strokeStyle='#3D7E5F';g.beginPath();g.moveTo(B.x,B.y);g.lineTo(S.x,S.y);g.stroke();
+ arrow(g,S.x,S.y,A.x,A.y,'#C0492E',4);   /* P, puis H à sa pointe, puis T qui referme */
+ arrow(g,A.x,A.y,B.x,B.y,'#2E6A8E',4);
+ arrow(g,B.x,B.y,S.x,S.y,'#3D7E5F',4);
  // angle droit en A
  g.strokeStyle='rgba(42,38,34,.5)';g.lineWidth=1.4;g.strokeRect(A.x,A.y-9,9,9);
  g.font='700 11px "JetBrains Mono",monospace';g.textAlign='center';
