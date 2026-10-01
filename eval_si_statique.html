@@ -135,6 +135,23 @@
   .objectifs .vraie .punch{margin:10px 0 0;font-size:15px;font-weight:700;color:#8a6313;font-style:italic}
   .objectifs .prereq{font-size:14px;color:#5C544B;margin-top:12px;padding-top:10px;border-top:1px dashed #E4DCCB}
   .objectifs .prereq b{color:#8a6313}
+  /* ---------- verrou anti-triche ---------- */
+  #atLock{position:fixed;inset:0;z-index:500;background:linear-gradient(160deg,#F8F4EC,#EFE8D8);
+          display:flex;align-items:center;justify-content:center;padding:20px}
+  #atLock .atCard{background:#FFFDF8;border:2px solid #C0492E;border-radius:20px;padding:26px 30px;
+                  max-width:460px;width:100%;box-shadow:0 20px 50px rgba(20,16,10,.2)}
+  #atLock .atK{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+               text-transform:uppercase;color:#C0492E;margin-bottom:6px}
+  #atLock h2{margin:0 0 10px;font-size:23px;font-weight:800;color:#2A2622}
+  #atLock p{margin:0 0 9px;font-size:15px;color:#5C544B;line-height:1.5}
+  #atLock #atEtat{background:#F6F1E6;border-radius:10px;padding:9px 12px;color:#2A2622}
+  #atLock input{width:100%;font-family:'JetBrains Mono',monospace;font-size:14px;padding:10px 12px;margin-top:6px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #atLock button{margin-top:10px;width:100%;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;
+                 background:#2A2622;color:#fff;border:none;border-radius:10px;padding:11px;cursor:pointer}
+  #atLock #atErr{color:#C0492E;font-size:13px;font-weight:700;margin-top:8px;min-height:18px}
+  .abandon{display:inline-block;margin-left:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+           letter-spacing:.08em;color:#fff;background:#C0492E;border-radius:5px;padding:2px 6px}
 </style>
 </head>
 <body><header class="estic-bar"><img class="estic-logo" alt="ESTIC" src="data:image/png;base64,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"><div class="estic-txt"><strong>Professeur AGOSTINI</strong><span>Sciences de l’ingénieur · ESTIC</span></div><div class="estic-copy">© ESTIC — Tous droits réservés</div></header>
@@ -277,8 +294,9 @@
  var iv=setInterval(function(){ i++; var v=Math.min(target, target*i/steps); el.textContent=(Math.round(v*10)/10).toString().replace('.',',')+' / 20'; if(i>=steps){clearInterval(iv); el.textContent=(Math.round(target*10)/10).toString().replace('.',',')+' / 20';} },28);
   }
   function sendResult(pts,pct,note){
+ if(window.__atFin) window.__atFin();
  var msg=document.getElementById('syncMsg'); msg.textContent='Enregistrement\u2026';
- var payload={ nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
+ var payload={ statut:'terminee', tid:(window.__atTid||''), nom:student.nom, classe:student.classe, score:pts, total:MAXPTS, pourcentage:pct, note:note, date:new Date().toISOString() };
  fetch(FB_URL+'/'+FB_NODE+'.json',{ method:'POST', body:JSON.stringify(payload) })
  .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
  .then(function(){ msg.textContent='\u2713 R\u00e9sultat enregistr\u00e9.'; })
@@ -457,5 +475,142 @@
  }).catch(function(){ box.innerHTML='<div class="hint">Impossible de charger les r\u00e9sultats (connexion requise).</div>'; });
   }
 </script>
+<script>
+/* ===== ANTI_TRICHE — copie envoyée même en cas d'abandon, reprise verrouillée =====
+   Repris du portail de technologie (version corrigée v2.1).
+   - pagehide (fermeture, rechargement, navigation) et NON visibilitychange :
+     changer d'onglet vers la calculatrice ne doit rien déclencher.
+   - envoi de sortie : POST simple + x-http-method-override=PUT, sans en-tête
+     Content-Type -> requête CORS simple, qui part pendant la fermeture
+     (keepalive) ET s'écrit sous un identifiant fixe, donc vérifiable.
+   - à la réouverture : vérification réelle, renvoi si besoin, message vrai.
+   - un refus d'écriture peut vouloir dire « déjà présent » : on relit avant
+     de conclure. */
+(function(){
+  var CFG={"url": "https://evaluation-bloc-default-rtdb.europe-west1.firebasedatabase.app", "node": "resultats_si_statique", "total": 0, "idNom": "inNom", "idClasse": "inClasse"};
+  var MDP='Agostini2025', CLE='tentative_si_'+CFG.node;
+  var BASE=CFG.url+'/'+CFG.node+'/';
+  function lire(){ try{ return JSON.parse(localStorage.getItem(CLE)); }catch(e){ return null; } }
+  function ecrire(o){ try{ localStorage.setItem(CLE,JSON.stringify(o)); }catch(e){} }
+  function effacer(){ try{ localStorage.removeItem(CLE); }catch(e){} }
+  function val(id){ var e=document.getElementById(id); return e? String(e.value||'').trim() : ''; }
+  var EXCLUS=[CFG.idNom,CFG.idClasse,'inCode','gateCode','gateGo','startBtn','pw','pwBtn','cpPw','mdpIn','atPw','atGo','tlink','calcToggle'];
+  function exclu(el){
+    if(!el||!el.closest) return true;
+    if(EXCLUS.indexOf(el.id)>=0) return true;
+    return !!el.closest('#calc,#calcToggle,#gate,#dash,#atLock,#mdpBox,.dash,.tdash,header,nav,footer');
+  }
+  /* points acquis : la même règle que la correction finale (famille A) */
+  function points(){
+    try{
+      if(typeof EXOS!=='undefined' && typeof readAll==='function' && typeof parseNum==='function'){
+        var v=readAll(), p=0;
+        EXOS.forEach(function(ex,ei){ ex.parts.forEach(function(q,pi){
+          var x=parseNum(v[ei+'_'+pi]); if(!isNaN(x)&&Math.abs(x-q.a)<=q.tol) p+=q.pts; }); });
+        return p;
+      }
+    }catch(e){}
+    return 0;
+  }
+  function totalMax(){ try{ if(typeof MAXPTS!=='undefined' && MAXPTS>0) return MAXPTS; }catch(e){} return CFG.total; }
+  function saisies(){
+    var out=[];
+    Array.prototype.forEach.call(document.querySelectorAll('input,select,textarea'),function(e){
+      if(exclu(e)||e.type==='password'||e.type==='button') return;
+      var v;
+      if(e.tagName==='SELECT'){ if(e.selectedIndex<=0) return; v=(e.options[e.selectedIndex].text||e.value).trim(); }
+      else if(e.type==='checkbox'||e.type==='radio'){ v=e.checked?(e.value||'oui'):''; }
+      else { v=String(e.value||'').trim(); if((e.type==='range'||e.type==='number') && v===String(e.defaultValue)) return; }   /* jamais touché */
+      if(v && out.length<80) out.push(((e.id||e.name||'champ')+' = '+v).slice(0,150));
+    });
+    return out;
+  }
+  function copie(t){
+    var tot=totalMax(), pts=Math.min(points(),tot);
+    var nom=val(CFG.idNom), cl=val(CFG.idClasse);
+    try{ if(!nom && typeof student!=='undefined' && student){ nom=student.nom||''; cl=student.classe||cl; } }catch(e){}
+    return { nom:nom, classe:cl, score:pts, total:tot,
+             note:Math.round(pts/tot*20*10)/10, pourcentage:Math.round(pts/tot*100),
+             statut:'abandon', tid:t.tid, reponses:saisies(),
+             ts:Date.now(), date:new Date().toLocaleString('fr-FR') };
+  }
+  function ecrireBase(c,keep){
+    return fetch(BASE+c.tid+'.json?x-http-method-override=PUT',{method:'POST',keepalive:!!keep,body:JSON.stringify(c)});
+  }
+
+  /* ---------- début de la tentative : première réponse ---------- */
+  function debut(e){
+    if(lire()||document.getElementById('atLock')) return;
+    if(exclu(e.target)) return;
+    var tid='t'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+    window.__atTid=tid;
+    ecrire({tid:tid,debut:new Date().toISOString(),fini:false,envoye:false});
+  }
+  ['input','change'].forEach(function(t){ document.addEventListener(t,debut,true); });
+  document.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest? e.target.closest('button'):null; if(b) debut({target:b});
+  },true);
+
+  /* ---------- copie gardée à jour dans le navigateur ---------- */
+  setInterval(function(){ var t=lire(); if(t&&!t.fini&&!t.envoye){ t.copie=copie(t); ecrire(t); } },8000);
+
+  /* ---------- fin normale : appelée par l'envoi de l'évaluation ---------- */
+  window.__atFin=function(){ var t=lire()||{tid:window.__atTid||('t'+Date.now().toString(36)),debut:new Date().toISOString()};
+    t.fini=true; ecrire(t); window.__atTid=t.tid; };
+
+  /* ---------- abandon : la page est quittée avant la fin ---------- */
+  window.addEventListener('pagehide',function(){
+    var t=lire(); if(!t||t.fini||t.envoye) return;
+    var c=copie(t); t.copie=c; t.envoye=true; ecrire(t);
+    if(!c.nom||!c.classe) return;                       /* pas d'identité : rien ne peut partir */
+    try{ ecrireBase(c,true).catch(function(){}); }   /* échec rattrapé à la réouverture */
+    catch(e){ try{ navigator.sendBeacon(BASE+c.tid+'.json?x-http-method-override=PUT',JSON.stringify(c)); }catch(x){} }
+  });
+  /* retour arrière restauré depuis le cache : on recharge pour afficher le verrou */
+  window.addEventListener('pageshow',function(e){ var t=lire(); if(e.persisted && t && !t.fini) location.reload(); });
+
+  /* ---------- réouverture : verrou + vérification de la copie ---------- */
+  var t=lire();
+  if(!t) return;
+  window.__atTid=t.tid;
+  var d=new Date(t.debut), quand=d.toLocaleDateString('fr-FR')+' \u00e0 '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  var c=t.copie||{};
+  var qui=(c.nom? c.nom+(c.classe?' ('+c.classe+')':'') : 'Cette \u00e9valuation');
+  var box=document.createElement('div'); box.id='atLock';
+  box.innerHTML='<div class="atCard"><div class="atK">\u00c9valuation verrouill\u00e9e</div>'+
+    '<h2>D\u00e9j\u00e0 commenc\u00e9e</h2>'+
+    '<p>'+qui+' l\u2019a commenc\u00e9e le '+quand+'.</p>'+
+    '<p id="atEtat">'+(t.fini?'La copie a \u00e9t\u00e9 rendue normalement.':'V\u00e9rification de la copie\u2026')+'</p>'+
+    '<p><b>Pour la repasser, appelle ton professeur.</b></p>'+
+    '<input type="password" id="atPw" autocomplete="off" placeholder="mot de passe du professeur">'+
+    '<button type="button" id="atGo">Autoriser une nouvelle tentative</button>'+
+    '<div id="atErr"></div></div>';
+  document.body.appendChild(box);
+  function ouvrir(){
+    if(document.getElementById('atPw').value!==MDP){ document.getElementById('atErr').textContent='Mot de passe incorrect.'; return; }
+    effacer(); window.__atTid=null; box.parentNode.removeChild(box);
+  }
+  document.getElementById('atGo').addEventListener('click',ouvrir);
+  document.getElementById('atPw').addEventListener('keydown',function(e){ if(e.key==='Enter') ouvrir(); });
+  if(t.fini) return;
+  function etat(s){ var e=document.getElementById('atEtat'); if(e) e.innerHTML=s; }
+  if(!c.nom||!c.classe){ etat('Aucune copie n\u2019a pu partir : le nom ou la classe n\u2019\u00e9tait pas rempli.'); return; }
+  function lireCopie(){ return fetch(BASE+c.tid+'.json').then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); }); }
+  setTimeout(function(){
+    lireCopie().then(function(v){
+      if(v){ t.confirme=true; ecrire(t); etat('La copie abandonn\u00e9e est bien arriv\u00e9e chez le professeur : '+v.score+' / '+v.total+'.'); return; }
+      return ecrireBase(c,false).then(function(r){
+        if(r.ok){ t.confirme=true; ecrire(t); etat('La copie abandonn\u00e9e vient d\u2019\u00eatre transmise au professeur.'); return; }
+        var code=r.status;
+        return lireCopie().then(function(v2){
+          if(v2){ t.confirme=true; ecrire(t); etat('La copie abandonn\u00e9e est bien arriv\u00e9e chez le professeur.'); }
+          else etat('Copie NON transmise : la base l\u2019a refus\u00e9e (HTTP '+code+'). Pr\u00e9viens ton professeur.');
+        });
+      });
+    }).catch(function(){ etat('Pas de connexion : la copie sera renvoy\u00e9e \u00e0 la prochaine ouverture sur ce poste.'); });
+  },1500);
+})();
+</script>
+
 </body>
 </html>
