@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TP — Statique, niveau 2 : équilibres à plusieurs inconnues · Spécialité SI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F4EC;--paper:#FFFDF8;--ink:#2A2622;--sub:#5C544B;--line:#E4DCCB;
+        --steel:#2E6A8E;--green:#3D7E5F;--amber:#BD8A2A;--copper:#C0492E;--plum:#8A5A7A}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.55}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px 18px 70px}
+  .estic-bar{display:flex;align-items:center;gap:12px;padding:11px 17px;background:var(--paper);
+             border:1px solid var(--line);border-radius:14px;margin-bottom:16px}
+  .estic-bar .b{width:33px;height:33px;border-radius:9px;background:var(--copper);color:#fff;display:flex;
+                align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px}
+  .estic-bar .t{font-weight:800;font-size:16px}
+  .estic-bar .s{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+  .links{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .navlink{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:12px;
+           text-decoration:none;color:var(--sub);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 11px}
+  .navlink:hover{border-color:var(--steel);color:var(--steel)}
+  .navlink .dn{font-weight:700;color:var(--steel)}
+  section{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 26px;margin-bottom:20px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper)}
+  h1{font-size:29px;margin:6px 0 8px;font-weight:800}
+  h2{font-size:23px;margin:6px 0 10px;font-weight:800}
+  .lede{font-size:16.5px;color:var(--sub);margin:0 0 14px}
+  .cahier{display:grid;gap:14px;margin-top:12px}
+  .cx{background:var(--paper);border:1px solid rgba(42,38,34,.14);border-left:4px solid var(--amber);border-radius:14px;padding:15px 18px}
+  .cx.fe{border-left-color:var(--plum);background:rgba(138,90,122,.05)}
+  .cxh{font-weight:800;font-size:16.5px;margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  .cxn{display:inline-flex;width:28px;height:28px;align-items:center;justify-content:center;background:var(--amber);
+       color:#fff;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:13px}
+  .cx.fe .cxn{background:var(--plum)}
+  .cx p{font-size:15px;margin:6px 0}
+  .consigne{background:var(--paper);border:1px dashed rgba(42,38,34,.26);border-radius:10px;padding:11px 14px;margin-top:8px;font-size:14.5px}
+  .consigne b{color:#6f4a63}
+  .cq{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:10px 0;font-size:15px}
+  .cq input{font-family:'JetBrains Mono',monospace;font-size:15px;width:110px;padding:8px 10px;
+            border:1px solid rgba(42,38,34,.2);border-radius:8px;text-align:right;background:#fff;outline:none}
+  .cq input:focus{border-color:var(--steel)}
+  .cu{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--sub)}
+  .btn{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;background:var(--steel);color:#fff;
+       border:none;border-radius:9px;padding:9px 15px;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)} .btn.g{background:var(--green)}
+  .btn.ghost{background:#fff;color:var(--steel);border:1px solid var(--steel)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .exo-fb{font-size:14px;font-weight:700;margin-top:6px;min-height:19px}
+  .exo-fb.ok{color:var(--green)} .exo-fb.no{color:var(--copper)}
+  .csol{display:none;background:rgba(189,138,42,.10);border-radius:10px;padding:12px 15px;margin-top:10px;font-size:14px;line-height:1.6}
+  .csol.show{display:block} .csol b{color:#8a6313}
+  .schema{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0}
+  .schema canvas{width:100%;height:auto;display:block}
+  .slider-row{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap}
+  .slider-row label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--sub)}
+  .slider-row input[type=range]{flex:1;min-width:190px}
+  .slider-row .val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--steel);min-width:96px}
+  .rappel{background:rgba(46,106,142,.08);border:1px solid rgba(46,106,142,.28);border-radius:12px;padding:13px 16px;margin:12px 0;font-size:15px}
+  .rappel code{font-family:'JetBrains Mono',monospace;background:rgba(42,38,34,.07);border-radius:5px;padding:1px 6px}
+  /* remise du travail */
+  .tpscore{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:16px;padding:20px 22px}
+  .tpscore h2{margin:0 0 4px}
+  .tps-lede{margin:0 0 14px;font-size:15px;color:var(--sub)}
+  .tps-grid{display:grid;gap:10px;grid-template-columns:1fr}
+  @media(min-width:700px){ .tps-grid{grid-template-columns:1fr 1fr} }
+  .tps-f{display:flex;flex-direction:column;gap:4px}
+  .tps-f span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--sub)}
+  .tpscore input,.tpscore select{font-family:'Bricolage Grotesque',sans-serif;font-size:15px;padding:9px 11px;
+           border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);outline:none;width:100%}
+  .tps-bar{height:9px;background:#EFE8D8;border-radius:6px;overflow:hidden;margin:16px 0 10px}
+  .tps-fill{height:100%;width:0;background:linear-gradient(90deg,var(--steel),var(--green));transition:width .45s ease}
+  .tps-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .tps-count{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--sub)}
+  .tps-count b{color:var(--steel);font-size:19px}
+  .tps-note{margin-left:10px;padding-left:10px;border-left:1px solid var(--line)}
+  .tps-note b{color:var(--green);font-size:19px}
+  .tps-btn{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;
+           text-transform:uppercase;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:10px;padding:11px 18px;cursor:pointer}
+  .tps-msg{font-size:14px;font-weight:700;margin-top:10px;min-height:19px}
+  .tps-msg.ok{color:var(--green)} .tps-msg.no{color:var(--copper)}
+  /* objectifs */
+  .objectifs{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--steel);border-radius:14px;padding:16px 20px;margin:16px 0}
+  .objectifs .ok{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);margin-bottom:8px}
+  .objectifs h3{margin:0 0 8px;font-size:17px;font-weight:800}
+  .objectifs .ointro{font-size:15px;color:var(--sub);margin:0 0 12px}
+  .objectifs ul{margin:0 0 14px;padding-left:20px} .objectifs li{font-size:15.5px;margin:5px 0}
+  .objectifs .comp{display:grid;gap:8px;margin-top:6px}
+  .objectifs .c{display:flex;gap:12px;align-items:flex-start;background:#F6F1E6;border:1px solid var(--line);border-radius:10px;padding:9px 13px}
+  .objectifs .c .code{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;background:var(--green);
+                      border-radius:6px;padding:3px 8px;flex:none;min-width:52px;text-align:center}
+  .objectifs .c .lib{font-size:15px;line-height:1.45}
+  .objectifs .c .lib i{display:block;font-size:13.5px;color:var(--sub);font-style:normal;margin-top:2px}
+  .objectifs .vraie{margin-top:16px;background:linear-gradient(160deg,rgba(189,138,42,.10),rgba(189,138,42,.04));
+      border:1px solid rgba(189,138,42,.32);border-radius:12px;padding:13px 16px}
+  .objectifs .vraie .vk{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a6313;margin-bottom:8px}
+  .objectifs .vraie ul{margin:0;padding-left:18px} .objectifs .vraie li{font-size:15px;margin:6px 0}
+  .objectifs .vraie li b{color:#8a6313}
+  .objectifs .vraie .punch{margin:10px 0 0;font-size:15px;font-weight:700;color:#8a6313;font-style:italic}
+  .objectifs .prereq{font-size:14px;color:var(--sub);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+  /* calculatrice */
+  #calcToggle{position:fixed;right:16px;bottom:16px;z-index:81;width:52px;height:52px;border-radius:50%;
+              background:var(--steel);border:none;box-shadow:0 8px 22px rgba(20,16,10,.3);cursor:pointer;
+              display:flex;align-items:center;justify-content:center}
+  /* ---------- calculatrice scientifique (styles unifiés) ---------- */
+  #calc{position:fixed;right:16px;bottom:80px;z-index:80;width:272px;background:#FFFDF8;border:1px solid #E4DCCB;
+ border-radius:15px;box-shadow:0 14px 38px rgba(20,16,10,.35);padding:11px;display:none}
+  #calc.show{display:block}
+  #calc .scr{background:#F6F1E6;border:1px solid #E4DCCB;border-radius:9px;padding:7px 10px;margin-bottom:9px}
+  #calc .scr .ex{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#5C544B;text-align:right;
+ min-height:17px;overflow:hidden;white-space:nowrap;direction:rtl}
+  #calc .scr .rs{font-family:'JetBrains Mono',monospace;font-size:23px;font-weight:700;color:#2A2622;text-align:right;
+ min-height:30px;overflow:hidden;white-space:nowrap}
+  #calc .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  #calc .keys button{font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 0;border:1px solid #E4DCCB;
+ border-radius:7px;background:#fff;cursor:pointer;color:#2A2622;line-height:1.1}
+  #calc .keys button:hover{border-color:#2E6A8E;background:#f4f8fa}
+  #calc .keys button:active{transform:translateY(1px)}
+  #calc .keys .fn{background:#f4eef7;color:#8A5A7A;font-weight:700;font-size:11.5px}
+  #calc .keys .op{background:#eaf1f5;color:#2E6A8E;font-weight:700;font-size:15px}
+  #calc .keys .cl{background:#fbeee9;color:#C0492E;font-weight:700}
+  #calc .keys .eq{background:#3D7E5F;color:#fff;font-weight:700;font-size:17px}
+  #calc .keys .deg{background:#eef6f0;color:#3D7E5F;font-size:10.5px;letter-spacing:.04em}
+  #calc .keys .deg.rad{background:#fdf6e6;color:#8a6313}
+  #calc .tt{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:#5C544B;text-align:center;margin-top:7px;opacity:.85}
+
+  /* ---------- progression verrouillée ---------- */
+  .verrou{position:relative}
+  .verrou::after{content:"Termine l\2019 exercice pr\00E9 c\00E9 dent pour d\00E9 bloquer celui-ci";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;
+      text-align:center;padding:20px;border-radius:14px;border:2px dashed #c8bfae;
+      background:rgba(248,244,236,.86);font-family:'JetBrains Mono',monospace;font-size:13px;
+      font-weight:700;letter-spacing:.02em;color:#5C544B}
+
+  /* ---------- corrections protégées par mot de passe ---------- */
+  #mdpBox{position:fixed;inset:0;z-index:300;background:rgba(42,38,34,.55);display:none;
+          align-items:center;justify-content:center;padding:20px}
+  #mdpBox.on{display:flex}
+  #mdpBox .card{background:#FFFDF8;border:1px solid #E4DCCB;border-radius:18px;padding:22px 24px;
+                width:100%;max-width:360px;box-shadow:0 20px 50px rgba(20,16,10,.3)}
+  #mdpBox .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+              text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  #mdpBox h3{margin:0 0 6px;font-size:19px;font-weight:800;color:#2A2622}
+  #mdpBox p{margin:0 0 12px;font-size:14.5px;color:#5C544B}
+  #mdpBox input{width:100%;font-family:'JetBrains Mono',monospace;font-size:15px;padding:10px 12px;
+                border:1px solid #E4DCCB;border-radius:10px;background:#fff;outline:none}
+  #mdpBox input:focus{border-color:#2E6A8E}
+  #mdpBox .row{display:flex;gap:8px;margin-top:12px}
+  #mdpBox button{flex:1;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;
+                 border-radius:10px;padding:10px;cursor:pointer;border:1px solid #2E6A8E}
+  #mdpBox .ok{background:#2E6A8E;color:#fff} #mdpBox .ann{background:#fff;color:#2E6A8E}
+  #mdpBox .err{font-size:13px;color:#C0492E;font-weight:700;margin-top:8px;min-height:18px}
+
+  /* ---------- jeux en fin de TP, verrouillés tant que les exercices ne sont pas finis ---------- */
+  .jeux-bandeau{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:26px 0 14px;padding:14px 18px;border-radius:14px;
+      background:rgba(192,73,46,.08);border:1.5px dashed rgba(192,73,46,.45);font-size:15px;color:#5C544B}
+  .jeux-bandeau span{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.18em;
+      text-transform:uppercase;color:#fff;background:#C0492E;border-radius:7px;padding:4px 10px}
+  .jeux-bandeau.ouvert{background:rgba(61,126,95,.10);border-color:rgba(61,126,95,.5)}
+  .jeux-bandeau.ouvert span{background:#3D7E5F}
+  .zone-jeu.verrou-jeu{position:relative}
+  .zone-jeu.verrou-jeu::after{content:"Jeu verrouill\00E9  \2014  termine d\2019 abord tous les exercices";
+      position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;text-align:center;
+      padding:20px;border-radius:14px;border:2px dashed #c8bfae;background:rgba(248,244,236,.9);
+      font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#5C544B}
+  .facu{display:inline-block;margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+      letter-spacing:.06em;color:#3D7E5F;background:rgba(61,126,95,.12);border:1px solid rgba(61,126,95,.35);
+      border-radius:6px;padding:2px 8px;vertical-align:middle}
+
+  .mise{background:linear-gradient(160deg,rgba(46,106,142,.10),rgba(46,106,142,.03));border:1px solid rgba(46,106,142,.28);
+        border-radius:16px;padding:16px 20px;margin:14px 0}
+  .mise .mk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#2E6A8E;margin-bottom:6px}
+  .mise p{margin:5px 0;font-size:15.5px}
+  table.meth{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}
+  table.meth td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.meth td:first-child{font-family:'JetBrains Mono',monospace;font-weight:700;color:#2E6A8E;width:34px}
+  .donnees{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:10px 0}
+  .donnees div{background:#fff;border:1px solid var(--line);border-left:3px solid #BD8A2A;border-radius:10px;padding:8px 11px}
+  .donnees .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+  .donnees .v{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#2A2622}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="estic-bar"><div class="b">E·C</div><div><div class="t">Statique · niveau 2</div><div class="s">Spécialité SI · Travaux pratiques</div></div></div>
+  <div class="links" id="links">
+    <a href="#ex1" class="navlink"><span class="dn">1</span><span class="nm">Poutre en porte-à-faux</span></a>
+    <a href="#ex2" class="navlink"><span class="dn">2</span><span class="nm">Deux câbles</span></a>
+    <a href="#ex3" class="navlink"><span class="dn">3</span><span class="nm">Potence murale</span></a>
+    <a href="#ex4" class="navlink"><span class="dn">4</span><span class="nm">L’échelle</span></a>
+    <a href="#ex5" class="navlink"><span class="dn">5</span><span class="nm">Chariot élévateur</span></a>
+    <a href="#feuille" class="navlink"><span class="dn">✎</span><span class="nm">Sur ta copie</span></a>
+    <a href="#tpScore" class="navlink"><span class="dn">→</span><span class="nm">Remise</span></a>
+  </div>
+
+  <section id="intro">
+    <span class="kicker">Travaux pratiques · niveau 2</span>
+    <h1>Équilibres à plusieurs inconnues</h1>
+    <p class="lede">Cinq systèmes réels, deux ou trois inconnues chacun. Un seul repère : x horizontal, y vertical vers le haut.</p>
+    <div class="mise">
+      <div class="mk">La méthode, à appliquer à chaque exercice</div>
+      <table class="meth">
+        <tr><td>1</td><td>Isoler le solide et faire le bilan de toutes les actions extérieures.</td></tr>
+        <tr><td>2</td><td>Remplacer une charge répartie par sa résultante, placée en son milieu.</td></tr>
+        <tr><td>3</td><td>Écrire ΣM = 0 au point où passent le plus d’inconnues.</td></tr>
+        <tr><td>4</td><td>Écrire ΣFx = 0 et ΣFy = 0 pour les inconnues restantes.</td></tr>
+        <tr><td>5</td><td>Vérifier par un second calcul de moments, en un autre point.</td></tr>
+      </table>
+    </div>
+    <div class="rappel">On prend <code>g = 9,81 N/kg</code>. Projections : <code>Fx = F·cos α</code> et <code>Fy = F·sin α</code>, avec α mesuré depuis l’horizontale.</div>
+  </section>
+
+  <section id="ex1">
+    <span class="kicker">Exercice 1</span>
+    <h2>La poutre en porte-à-faux</h2>
+    <p class="lede">Une poutre de 6 m repose sur un pivot en A et un appui simple en B. Elle dépasse de 1 m après B.</p>
+    <div class="donnees">
+      <div><div class="l">F₁ à 1,5 m de A</div><div class="v">2000 N</div></div>
+      <div><div class="l">F₂ à 3,5 m de A</div><div class="v">3000 N</div></div>
+      <div><div class="l">F₃ en bout, à 6 m</div><div class="v">1000 N</div></div>
+      <div><div class="l">charge répartie</div><div class="v">500 N/m sur 6 m</div></div>
+    </div>
+    <div class="schema"><canvas id="cv1" width="880" height="300" aria-label="Poutre sur deux appuis avec porte-à-faux, trois charges et une charge répartie"></canvas></div>
+    <div class="cx"><div class="cxh"><span class="cxn">1</span>Les réactions d’appui</div>
+    <div class="cq"><span>a) Résultante de la charge répartie :</span><input id="c1_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>b) Réaction de l’appui B :</span><input id="c1_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>c) Réaction du pivot A :</span><input id="c1_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><button class="btn" id="c1chk">Vérifier</button><button class="btn ghost" id="c1rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c1fb"></div>
+    <div class="csol" id="c1sol"><b>a)</b> 500 × 6 = <b>3000 N</b>, placée au milieu : à 3 m de A.<br>
+    <b>b)</b> Moments en A : R<sub>B</sub> × 5 = 2000×1,5 + 3000×3,5 + 3000×3 + 1000×6 = 28 500.<br>
+    R<sub>B</sub> = 28 500 / 5 = <b>5700 N</b>.<br>
+    <b>c)</b> ΣFy = 0 : R<sub>A</sub> = 2000 + 3000 + 3000 + 1000 − 5700 = <b>3300 N</b>.<br>
+    <b>Contrôle en B :</b> 3300×5 − 2000×3,5 − 3000×1,5 − 3000×2 + 1000×1 = 0 ✓<br>
+    <b>Le piège :</b> F₃ est au-delà de B. Son bras de levier en B est de 1 m, de l’autre côté.</div></div>
+  </section>
+
+  <section id="ex2">
+    <span class="kicker">Exercice 2</span>
+    <h2>Une charge, deux câbles</h2>
+    <p class="lede">Une machine de 120 kg est suspendue à deux câbles inclinés de 30° et 50° sur l’horizontale.</p>
+    <div class="schema"><canvas id="cv2" width="880" height="300" aria-label="Charge suspendue à deux câbles inclinés de 30 et 50 degrés"></canvas></div>
+    <div class="cx"><div class="cxh"><span class="cxn">2</span>La tension des câbles</div>
+    <div class="cq"><span>a) Poids de la machine :</span><input id="c2_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>b) Tension du câble à 30° :</span><input id="c2_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>c) Tension du câble à 50° :</span><input id="c2_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><button class="btn" id="c2chk">Vérifier</button><button class="btn ghost" id="c2rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c2fb"></div>
+    <div class="csol" id="c2sol"><b>a)</b> P = 120 × 9,81 = <b>1177,2 N</b>.<br>
+    <b>Sur x :</b> T₁·cos 30° = T₂·cos 50°, donc T₁ = 0,742 × T₂.<br>
+    <b>Sur y :</b> T₁·sin 30° + T₂·sin 50° = P.<br>
+    On remplace : T₂ × (0,742×0,5 + 0,766) = 1177,2, soit T₂ × 1,137 = 1177,2.<br>
+    <b>c)</b> T₂ ≈ <b>1035 N</b> · <b>b)</b> T₁ ≈ <b>768 N</b>.<br>
+    <b>À retenir :</b> le câble le plus vertical porte le plus. Et T₁ + T₂ dépasse P : incliner un câble coûte de la tension.</div></div>
+  </section>
+
+  <section id="ex3">
+    <span class="kicker">Exercice 3</span>
+    <h2>La potence murale</h2>
+    <p class="lede">Une barre de 2 m, articulée au mur en A, est retenue par un tirant incliné de 35° sur la barre.</p>
+    <div class="donnees">
+      <div><div class="l">charge en bout B</div><div class="v">4000 N</div></div>
+      <div><div class="l">poids de la barre</div><div class="v">300 N, au milieu</div></div>
+      <div><div class="l">angle tirant / barre</div><div class="v">35°</div></div>
+    </div>
+    <div class="schema"><canvas id="cv3" width="880" height="360" aria-label="Potence murale : barre horizontale articulée au mur et tirant incliné"></canvas></div>
+    <div class="cx"><div class="cxh"><span class="cxn">3</span>Le tirant et l’articulation</div>
+    <div class="cq"><span>a) Tension du tirant :</span><input id="c3_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>b) Composante horizontale de la réaction en A :</span><input id="c3_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>c) Composante verticale de la réaction en A :</span><input id="c3_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><button class="btn" id="c3chk">Vérifier</button><button class="btn ghost" id="c3rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c3fb"></div>
+    <div class="csol" id="c3sol"><b>a)</b> Moments en A : la réaction en A disparaît du calcul.<br>
+    Seule la composante verticale du tirant fait tourner : T·sin 35° × 2 = 4000×2 + 300×1.<br>
+    T = 8300 / (2 × 0,574) ≈ <b>7235 N</b>.<br>
+    <b>b)</b> ΣFx = 0 : A<sub>x</sub> = T·cos 35° ≈ <b>5927 N</b>, vers la droite : le mur pousse la barre.<br>
+    <b>c)</b> ΣFy = 0 : A<sub>y</sub> = 4300 − T·sin 35° ≈ <b>150 N</b>.<br>
+    <b>Ce qui surprend :</b> le tirant tire près de deux fois la charge. Plus il est couché, pire c’est.</div></div>
+  </section>
+
+  <section id="ex4">
+    <span class="kicker">Exercice 4</span>
+    <h2>L’échelle contre le mur</h2>
+    <p class="lede">Une échelle de 5 m et 15 kg fait 65° avec le sol. Le mur est lisse : aucun frottement contre lui.</p>
+    <div class="donnees">
+      <div><div class="l">longueur · masse</div><div class="v">5 m · 15 kg</div></div>
+      <div><div class="l">angle avec le sol</div><div class="v">65°</div></div>
+      <div><div class="l">technicien</div><div class="v">80 kg</div></div>
+    </div>
+    <div class="schema"><canvas id="cv4" width="880" height="330" aria-label="Échelle appuyée contre un mur lisse, technicien en cours de montée"></canvas>
+      <div class="slider-row"><label>position du technicien le long de l’échelle</label><input type="range" id="sPos" min="0" max="5" step="0.05" value="1"><span class="val" id="vPos">1,00 m</span></div>
+      <div class="slider-row"><label>frottement disponible au sol</label><input type="range" id="sF" min="0.20" max="0.60" step="0.05" value="0.40"><span class="val" id="vF">f = 0,40</span></div>
+    </div>
+    <div class="cx"><div class="cxh"><span class="cxn">4</span>Jusqu’où peut-il monter ?</div>
+    <p>Le technicien est d’abord aux <b>trois quarts</b> de l’échelle, à 3,75 m du pied.</p>
+    <div class="cq"><span>a) Réaction du mur :</span><input id="c4_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>b) Coefficient de frottement minimal au sol :</span><input id="c4_b" inputmode="decimal" placeholder="?"></div>
+    <div class="cq"><span>c) Si le sol offre f = 0,40, distance maximale le long de l’échelle :</span><input id="c4_c" inputmode="decimal" placeholder="?"><span class="cu">m</span></div>
+    <div class="cq"><button class="btn" id="c4chk">Vérifier</button><button class="btn ghost" id="c4rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c4fb"></div>
+    <div class="csol" id="c4sol"><b>Moments au pied de l’échelle</b> : le sol (normale et frottement) n’y fait rien tourner.<br>
+    N<sub>mur</sub> × 5·sin 65° = 147,15 × 2,5·cos 65° + 784,8 × 3,75·cos 65°.<br>
+    <b>a)</b> N<sub>mur</sub> ≈ <b>308,8 N</b>.<br>
+    ΣFx = 0 : frottement au sol = 308,8 N · ΣFy = 0 : N<sub>sol</sub> = 147,15 + 784,8 = 932 N.<br>
+    <b>b)</b> f = 308,8 / 932 ≈ <b>0,33</b>.<br>
+    <b>c)</b> Frottement maximal : 0,40 × 932 = 372,8 N = N<sub>mur</sub>. On résout pour x :<br>
+    x = (372,8 × 5·tan 65° − 147,15 × 2,5) / 784,8 ≈ <b>4,62 m</b>.<br>
+    <b>La leçon :</b> une échelle glisse en haut, pas en bas. Plus on monte, plus il faut de frottement.</div></div>
+  </section>
+
+  <section id="ex5">
+    <span class="kicker">Exercice 5</span>
+    <h2>Le chariot élévateur</h2>
+    <p class="lede">Un chariot de 2500 kg soulève une charge devant lui. Il bascule autour de son essieu avant.</p>
+    <div class="donnees">
+      <div><div class="l">G du chariot</div><div class="v">0,9 m derrière l’essieu avant</div></div>
+      <div><div class="l">charge</div><div class="v">0,6 m devant l’essieu avant</div></div>
+      <div><div class="l">essieu arrière</div><div class="v">1,6 m derrière l’avant</div></div>
+    </div>
+    <div class="schema"><canvas id="cv5" width="880" height="320" aria-label="Chariot élévateur de profil, charge sur les fourches"></canvas>
+      <div class="slider-row"><label>masse de la charge</label><input type="range" id="sQ" min="0" max="4500" step="50" value="1000"><span class="val" id="vQ">1000 kg</span></div>
+    </div>
+    <div class="cx"><div class="cxh"><span class="cxn">5</span>Stabilité et charge sur les roues</div>
+    <div class="cq"><span>a) Charge qui provoque le basculement :</span><input id="c5_a" inputmode="decimal" placeholder="?"><span class="cu">kg</span></div>
+    <div class="cq"><span>b) Avec 2000 kg : réaction sur l’essieu arrière :</span><input id="c5_b" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><span>c) Avec 2000 kg : réaction sur l’essieu avant :</span><input id="c5_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
+    <div class="cq"><button class="btn" id="c5chk">Vérifier</button><button class="btn ghost" id="c5rev">Voir la correction</button></div>
+    <div class="exo-fb" id="c5fb"></div>
+    <div class="csol" id="c5sol"><b>a)</b> Au basculement, l’essieu arrière ne porte plus rien. Moments à l’essieu avant :<br>
+    m × 0,6 = 2500 × 0,9, donc m = <b>3750 kg</b>. Avec un coefficient de sécurité de 1,5 : 2500 kg autorisés.<br>
+    <b>b)</b> Moments à l’essieu avant : R<sub>arr</sub> × 1,6 = 24 525 × 0,9 − 19 620 × 0,6.<br>
+    R<sub>arr</sub> ≈ <b>6438 N</b>.<br>
+    <b>c)</b> ΣFy = 0 : R<sub>av</sub> = 24 525 + 19 620 − 6438 ≈ <b>37 707 N</b>.<br>
+    <b>Ce qui compte :</b> l’arrière est presque délesté. Un freinage brusque vers l’avant, et il décolle.</div></div>
+  </section>
+
+  <section id="feuille">
+    <span class="kicker">À rédiger sur ta copie</span>
+    <h2>La grue de chantier</h2>
+    <p class="lede">Rédige entièrement sur ta feuille : isolement, bilan, équation, application numérique, unité.</p>
+    <div class="cahier">
+      <div class="cx fe"><div class="cxh"><span class="cxn">F1</span>Régler le contrepoids</div>
+      <div class="donnees">
+        <div><div class="l">flèche</div><div class="v">6 t, G à 12 m</div></div>
+        <div><div class="l">contre-flèche</div><div class="v">2 t, G à 5 m</div></div>
+        <div><div class="l">contrepoids</div><div class="v">C, à 9 m</div></div>
+        <div><div class="l">charge en bout</div><div class="v">2 t à 30 m</div></div>
+      </div>
+      <p class="consigne"><b>Sur ta feuille :</b></p>
+      <p class="consigne" style="margin-top:-6px"><b>1.</b> Calcule C pour que la grue soit équilibrée, charge en bout de flèche.</p>
+      <p class="consigne" style="margin-top:-6px"><b>2.</b> Calcule le moment au pied du mât quand la grue est à vide.</p>
+      <p class="consigne" style="margin-top:-6px"><b>3.</b> Quelle charge, placée à 15 m, équilibre exactement la grue ?</p>
+      <p class="consigne" style="margin-top:-6px"><b>4.</b> Explique pourquoi l’abaque d’une grue diminue la charge quand la portée augmente.</p>
+      <div class="cq"><button class="btn ghost" id="f1rev">Afficher la correction rédigée</button></div>
+      <div class="csol" id="f1sol"><b>1.</b> Moments au mât, en t·m : C×9 + 2×5 = 6×12 + 2×30, donc C = 122 / 9 ≈ <b>13,6 t</b>.<br>
+      <b>2.</b> À vide : 13,56×9 + 10 − 72 = <b>60 t·m</b>, soit 588,6 kN·m, vers l’arrière.<br>
+      <b>3.</b> Q × 15 = 60, donc <b>Q = 4 t</b>.<br>
+      <b>4.</b> Le moment admissible est fixé par le contrepoids. Doubler la portée divise la charge par deux.<br>
+      <b>Attendu :</b> les unités tenues jusqu’au bout. Mélanger tonnes et newtons dans une même équation est faux.</div></div>
+    </div>
+  </section>
+<section class="tpscore" id="tpScore">
+    <h2>Remise du travail</h2>
+    <p class="tps-lede">Renseignez les participants et votre classe, puis envoyez votre résultat au professeur.</p>
+    <div class="tps-grid">
+      <label class="tps-f"><span>Élève 1</span><input id="tpsP1" autocomplete="off" placeholder="Nom Prénom"></label>
+      <label class="tps-f"><span>Élève 2</span><input id="tpsP2" autocomplete="off" placeholder="facultatif"></label>
+      <label class="tps-f"><span>Élève 3</span><input id="tpsP3" autocomplete="off" placeholder="facultatif"></label>
+      <label class="tps-f"><span>Classe</span>
+        <select id="tpsCl">
+          <option value="">— choisir —</option>
+          <option>2nde 1</option><option>2nde 2</option><option>2nde 3</option><option>2nde 4</option>
+          <option>2nde 5</option><option>2nde 6</option><option>2nde 7</option><option>2nde 8</option>
+          <option>1re spé SI</option><option>1re spé SI (gr. 1)</option><option>1re spé SI (gr. 2)</option>
+          <option>Tle spé SI</option><option>Tle spé SI (gr. 1)</option><option>Tle spé SI (gr. 2)</option>
+          <option>Autre</option>
+        </select>
+      </label>
+    </div>
+    <div class="tps-bar"><div class="tps-fill" id="tpsFill"></div></div>
+    <div class="tps-row">
+      <div class="tps-count">Exercices validés : <b id="tpsNow">0</b> / <span id="tpsTot">0</span> <span class="tps-note">soit <b id="tpsNote">0</b> / 20</span></div>
+      <button class="tps-btn" id="tpsSend">Envoyer le résultat au professeur</button>
+    </div>
+    <div class="tps-msg" id="tpsMsg"></div>
+  </section>
+</div>
+
+<script>
+"use strict";
+var el=function(i){return document.getElementById(i);};
+var nf=function(v){return parseFloat(String(v==null?'':v).replace(',','.').replace(/\s/g,''));};
+var fr=function(x){return String(x).replace('.',',');};
+var G=9.81, RAD=Math.PI/180;
+function fleche(g,x1,y1,x2,y2,col,lw,pointille){
+  g.strokeStyle=col; g.fillStyle=col; g.lineWidth=lw||3;
+  if(pointille) g.setLineDash([6,4]);
+  g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke(); g.setLineDash([]);
+  var a=Math.atan2(y2-y1,x2-x1), L=9+(lw||3)*1.5, hw=(lw||3)*1.3+2;
+  g.beginPath(); g.moveTo(x2+L*Math.cos(a),y2+L*Math.sin(a));
+  g.lineTo(x2-Math.sin(a)*hw,y2+Math.cos(a)*hw); g.lineTo(x2+Math.sin(a)*hw,y2-Math.cos(a)*hw);
+  g.closePath(); g.fill();
+}
+function hachures(g,x1,y1,x2,y2,sens){
+  g.strokeStyle='#8c8578'; g.lineWidth=1.6;
+  g.beginPath(); g.moveTo(x1,y1); g.lineTo(x2,y2); g.stroke();
+  g.lineWidth=1.2;
+  if(y1===y2){ for(var x=x1;x<=x2;x+=10){ g.beginPath(); g.moveTo(x,y1); g.lineTo(x-7,y1+(sens||1)*8); g.stroke(); } }
+  else { for(var y=y1;y<=y2;y+=10){ g.beginPath(); g.moveTo(x1,y); g.lineTo(x1+(sens||1)*8,y+7); g.stroke(); } }
+}
+function txt(g,s,x,y,col,taille,align){
+  g.fillStyle=col||'#2A2622'; g.font='700 '+(taille||12)+'px "JetBrains Mono",monospace';
+  g.textAlign=align||'center'; g.fillText(s,x,y); g.textAlign='left';
+}
+function ctx(id){ var c=el(id); return (c&&c.getContext)? c.getContext('2d') : null; }
+
+/* ===== 1 · poutre en porte-à-faux ===== */
+(function(){
+  var g=ctx('cv1'); if(!g) return;
+  var X=function(m){ return 110+m*100; }, y=120, s=0.025;          /* 100 px/m · 0,025 px/N */
+  g.clearRect(0,0,880,300);
+  /* charge répartie : bande de petites flèches */
+  g.strokeStyle='#BD8A2A'; g.lineWidth=1.6;
+  g.beginPath(); g.moveTo(X(0),96); g.lineTo(X(6),96); g.stroke();
+  for(var m=0;m<=6.001;m+=0.5) fleche(g,X(m),96,X(m),112,'#BD8A2A',1.6);
+  txt(g,'q = 500 N/m',X(4.6),90,'#8a6313',11);
+  /* poutre */
+  g.strokeStyle='#2A2622'; g.lineWidth=8; g.beginPath(); g.moveTo(X(0),y); g.lineTo(X(6),y); g.stroke();
+  /* appuis au contact du dessous (y+4) */
+  g.fillStyle='#7a7064';
+  g.beginPath(); g.moveTo(X(0),y+4); g.lineTo(X(0)-15,y+30); g.lineTo(X(0)+15,y+30); g.closePath(); g.fill();
+  hachures(g,X(0)-26,y+30,X(0)+26,y+30);
+  g.beginPath(); g.moveTo(X(5),y+4); g.lineTo(X(5)-15,y+30); g.lineTo(X(5)+15,y+30); g.closePath(); g.fill();
+  g.beginPath(); g.arc(X(5)-8,y+35,4.5,0,7); g.fill(); g.beginPath(); g.arc(X(5)+8,y+35,4.5,0,7); g.fill();
+  hachures(g,X(5)-26,y+40,X(5)+26,y+40);
+  /* charges concentrées, à l'échelle, pointe sur le dessus (y-4) */
+  [[1.5,2000,'F₁ = 2000 N'],[3.5,3000,'F₂ = 3000 N'],[6,1000,'F₃ = 1000 N']].forEach(function(c){
+    fleche(g,X(c[0]),y-4-c[1]*s,X(c[0]),y-4,'#C0492E',4); txt(g,c[2],X(c[0]),y-12-c[1]*s,'#C0492E',12);
+  });
+  /* réactions inconnues : pointillés, longueur arbitraire */
+  fleche(g,X(0),y+4+70,X(0),y+4,'#3D7E5F',3,true); txt(g,'R_A = ?',X(0)-48,y+64,'#3D7E5F',12);
+  fleche(g,X(5),y+4+70,X(5),y+4,'#3D7E5F',3,true); txt(g,'R_B = ?',X(5)-48,y+64,'#3D7E5F',12);
+  txt(g,'A',X(0)+24,y+24,'#2A2622',13); txt(g,'B',X(5)+24,y+24,'#2A2622',13);
+  /* cotes */
+  var yc=270; g.strokeStyle='#8c8578'; g.lineWidth=1.2;
+  g.beginPath(); g.moveTo(X(0),yc); g.lineTo(X(6),yc); g.stroke();
+  [0,1.5,3.5,5,6].forEach(function(m){ g.beginPath(); g.moveTo(X(m),yc-5); g.lineTo(X(m),yc+5); g.stroke(); txt(g,fr(m)+' m',X(m),yc+18,'#5C544B',11); });
+})();
+
+/* ===== 2 · deux câbles ===== */
+(function(){
+  var g=ctx('cv2'); if(!g) return;
+  var N={x:440,y:170}, h=140, a1=30*RAD, a2=50*RAD;
+  var C1={x:N.x-h/Math.tan(a1),y:N.y-h}, C2={x:N.x+h/Math.tan(a2),y:N.y-h};
+  g.clearRect(0,0,880,300);
+  hachures(g,C1.x-30,30,C2.x+40,30,-1);
+  g.strokeStyle='#2A2622'; g.lineWidth=2.4;
+  g.beginPath(); g.moveTo(C1.x,C1.y); g.lineTo(N.x,N.y); g.lineTo(C2.x,C2.y); g.stroke();
+  g.beginPath(); g.moveTo(N.x,N.y); g.lineTo(N.x,200); g.stroke();
+  g.fillStyle='#5C544B'; g.fillRect(N.x-40,200,80,40);
+  txt(g,'120 kg',N.x,225,'#fff',12);
+  g.fillStyle='#2A2622'; g.beginPath(); g.arc(N.x,N.y,4.5,0,7); g.fill();
+  /* repère horizontal et angles */
+  g.strokeStyle='#c8bfae'; g.lineWidth=1.2; g.setLineDash([4,4]);
+  g.beginPath(); g.moveTo(N.x-120,N.y); g.lineTo(N.x+120,N.y); g.stroke(); g.setLineDash([]);
+  g.strokeStyle='#BD8A2A'; g.lineWidth=2;
+  g.beginPath(); g.arc(N.x,N.y,46,Math.PI,Math.PI+a1); g.stroke();
+  g.beginPath(); g.arc(N.x,N.y,46,-a2,0); g.stroke();
+  txt(g,'30°',N.x-70,N.y-10,'#8a6313',12); txt(g,'50°',N.x+66,N.y-16,'#8a6313',12);
+  /* tensions inconnues, dirigées vers les attaches */
+  var L=78;
+  fleche(g,N.x,N.y,N.x-L*Math.cos(a1),N.y-L*Math.sin(a1),'#2E6A8E',3,true);
+  fleche(g,N.x,N.y,N.x+L*Math.cos(a2),N.y-L*Math.sin(a2),'#2E6A8E',3,true);
+  txt(g,'T₁ = ?',N.x-L*Math.cos(a1)-30,N.y-L*Math.sin(a1)-6,'#2E6A8E',12);
+  txt(g,'T₂ = ?',N.x+L*Math.cos(a2)+36,N.y-L*Math.sin(a2)+4,'#2E6A8E',12);
+  fleche(g,N.x,240,N.x,290,'#C0492E',4); txt(g,'P',N.x+16,276,'#C0492E',13,'left');
+})();
+
+/* ===== 3 · potence murale ===== */
+(function(){
+  var g=ctx('cv3'); if(!g) return;
+  var A={x:150,y:250}, B={x:450,y:250}, a=35*RAD, C={x:150,y:250-300*Math.tan(a)};
+  g.clearRect(0,0,880,360);
+  hachures(g,A.x,18,A.x,340,-1);
+  /* tirant */
+  g.strokeStyle='#5C544B'; g.lineWidth=2.6; g.beginPath(); g.moveTo(B.x,B.y); g.lineTo(C.x,C.y); g.stroke();
+  g.fillStyle='#5C544B'; g.beginPath(); g.arc(C.x,C.y,5,0,7); g.fill();
+  /* barre et articulation au mur */
+  g.strokeStyle='#2A2622'; g.lineWidth=10; g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(B.x,B.y); g.stroke();
+  g.fillStyle='#FFFDF8'; g.strokeStyle='#2A2622'; g.lineWidth=2.4;
+  g.beginPath(); g.arc(A.x,A.y,7,0,7); g.fill(); g.stroke();
+  /* charge suspendue en B */
+  g.strokeStyle='#2A2622'; g.lineWidth=2; g.beginPath(); g.moveTo(B.x,B.y+5); g.lineTo(B.x,276); g.stroke();
+  g.fillStyle='#5C544B'; g.fillRect(B.x-26,276,52,30); txt(g,'charge',B.x,296,'#fff',10);
+  fleche(g,B.x,306,B.x,350,'#C0492E',4); txt(g,'4000 N',B.x+14,336,'#C0492E',12,'left');
+  fleche(g,300,A.y+5,300,A.y+26,'#C0492E',3); txt(g,'300 N',308,A.y+28,'#C0492E',11,'left');
+  /* angle tirant / barre */
+  g.strokeStyle='#BD8A2A'; g.lineWidth=2; g.beginPath(); g.arc(B.x,B.y,48,Math.PI,Math.PI+a); g.stroke();
+  txt(g,'35°',B.x-66,B.y-12,'#8a6313',12);
+  /* inconnues */
+  fleche(g,B.x,B.y,B.x-80*Math.cos(a),B.y-80*Math.sin(a),'#2E6A8E',3,true);
+  txt(g,'T = ?',B.x-58,B.y-62,'#2E6A8E',12);
+  fleche(g,A.x+64,A.y-34,A.x+6,A.y-4,'#3D7E5F',3,true); txt(g,'A = ?',A.x+70,A.y-38,'#3D7E5F',12,'left');
+  txt(g,'A',A.x-16,A.y+22,'#2A2622',13); txt(g,'B',B.x+14,B.y-10,'#2A2622',13,'left'); txt(g,'C',C.x-16,C.y+4,'#2A2622',13);
+  g.strokeStyle='#8c8578'; g.lineWidth=1.2; g.beginPath(); g.moveTo(A.x,A.y+46); g.lineTo(B.x,A.y+46); g.stroke();
+  txt(g,'2 m',(A.x+B.x)/2,A.y+62,'#5C544B',11);
+  txt(g,'flèches de charge non à l\u2019échelle',760,340,'#8c8578',10);
+})();
+
+/* ===== 4 · l'échelle (simulateur) ===== */
+(function(){
+  var g=ctx('cv4'); if(!g) return;
+  var Pe=15*G, Ph=80*G, L=5, a=65*RAD, sc=50, k=0.08;              /* 50 px/m · 0,08 px/N */
+  var A={x:720-L*sc*Math.cos(a), y:300}, B={x:720, y:300-L*sc*Math.sin(a)};
+  var pos=1, fd=0.40;
+  el('sPos').addEventListener('input',function(){ pos=nf(this.value); el('vPos').textContent=fr(pos.toFixed(2))+' m'; });
+  el('sF').addEventListener('input',function(){ fd=nf(this.value); el('vF').textContent='f = '+fr(fd.toFixed(2)); });
+  function pt(m){ return {x:A.x+m*sc*Math.cos(a), y:A.y-m*sc*Math.sin(a)}; }
+  function step(){
+    var Nm=(Pe*L/2+Ph*pos)*Math.cos(a)/(L*Math.sin(a)), Ns=Pe+Ph, tient=(Nm<=fd*Ns);
+    var col= tient? '#3D7E5F':'#C0492E';
+    g.clearRect(0,0,880,330);
+    hachures(g,60,300,770,300); hachures(g,720,24,720,300,1);
+    /* échelle : montant et barreaux */
+    g.strokeStyle='#8a6313'; g.lineWidth=6; g.beginPath(); g.moveTo(A.x,A.y); g.lineTo(B.x,B.y); g.stroke();
+    g.lineWidth=2;
+    for(var m=0.5;m<L;m+=0.5){ var p=pt(m); g.beginPath(); g.moveTo(p.x-9*Math.sin(a),p.y-9*Math.cos(a)); g.lineTo(p.x+9*Math.sin(a),p.y+9*Math.cos(a)); g.stroke(); }
+    /* technicien */
+    var P=pt(pos), cg={x:P.x-14,y:P.y-22};
+    g.strokeStyle='#2A2622'; g.lineWidth=3;
+    g.beginPath(); g.moveTo(P.x-6,P.y); g.lineTo(cg.x,cg.y-14); g.stroke();
+    g.beginPath(); g.arc(cg.x-3,cg.y-26,8,0,7); g.stroke();
+    /* forces, à l'échelle de la figure */
+    var Gm=pt(L/2);
+    fleche(g,Gm.x,Gm.y,Gm.x,Gm.y+Pe*k,'#5C544B',2.4);
+    fleche(g,cg.x,cg.y,cg.x,cg.y+Ph*k,'#C0492E',3.4);
+    /* forces de contact : appliquées au point de contact, dans le sens où elles agissent */
+    fleche(g,B.x,B.y,B.x-Nm*k,B.y,'#2E6A8E',3);                              /* le mur repousse l'échelle */
+    fleche(g,A.x,A.y,A.x,A.y-Ns*k,'#3D7E5F',3);                              /* le sol soutient */
+    fleche(g,A.x,A.y-5,A.x+Nm*k,A.y-5,col,3);                                /* frottement : retient le pied, vers le mur */
+    txt(g,'N mur',B.x-Nm*k-30,B.y-8,'#2E6A8E',11);
+    txt(g,'N sol',A.x-34,A.y-Ns*k+12,'#3D7E5F',11);
+    txt(g,'frottement',A.x+Nm*k+44,A.y-14,col,11);
+    /* verdict, sans valeur numérique */
+    g.font='800 18px "Bricolage Grotesque",sans-serif'; g.fillStyle=col; g.textAlign='left';
+    g.fillText(tient? 'L\u2019échelle tient' : 'L\u2019échelle glisse',60,50);
+    g.font='700 12px "JetBrains Mono",monospace'; g.fillStyle='#5C544B';
+    g.fillText('frottement nécessaire',60,80);
+    g.fillStyle='#EFE8D8'; g.fillRect(60,88,300,12);
+    g.fillStyle=col; g.fillRect(60,88,Math.min(300,300*Nm/(fd*Ns)),12);
+    g.strokeStyle='#C0492E'; g.lineWidth=2; g.beginPath(); g.moveTo(360,82); g.lineTo(360,106); g.stroke();
+    g.fillStyle='#8c8578'; g.fillText('limite offerte par le sol',220,124);
+  }
+  setInterval(step,60); step();
+})();
+
+/* ===== 5 · chariot élévateur (simulateur) ===== */
+(function(){
+  var g=ctx('cv5'); if(!g) return;
+  var M=2500, Q=1000, sc=100, k=0.0016, piv={x:520,y:280};
+  el('sQ').addEventListener('input',function(){ Q=nf(this.value); el('vQ').textContent=Q+' kg'; });
+  function step(){
+    var P=M*G, Fq=Q*G, Rar=(P*0.9-Fq*0.6)/1.6, bascule=(Rar<0);
+    g.clearRect(0,0,880,320);
+    hachures(g,240,280,780,280);
+    g.save();
+    if(bascule){ g.translate(piv.x,piv.y); g.rotate(6*RAD); g.translate(-piv.x,-piv.y); }
+    /* châssis, mât, fourches */
+    g.fillStyle='#BD8A2A'; g.fillRect(330,176,210,62);
+    g.fillStyle='#5C544B'; g.fillRect(368,128,92,48);
+    g.strokeStyle='#2A2622'; g.lineWidth=7; g.beginPath(); g.moveTo(552,96); g.lineTo(552,262); g.stroke();
+    g.lineWidth=5; g.beginPath(); g.moveTo(552,240); g.lineTo(650,240); g.stroke();
+    /* charge, centre à 0,6 m devant l'essieu avant */
+    if(Q>0){ var hq=Math.min(70,20+Q/90); g.fillStyle='#8A5A7A'; g.fillRect(580-36,236-hq,72,hq);
+      fleche(g,580,236-hq/2,580,236-hq/2+Fq*k,'#C0492E',3.4); }
+    /* roues au contact du sol */
+    g.fillStyle='#2A2622';
+    g.beginPath(); g.arc(360,258,22,0,7); g.fill(); g.beginPath(); g.arc(520,258,22,0,7); g.fill();
+    g.fillStyle='#c8bfae'; g.beginPath(); g.arc(360,258,7,0,7); g.fill(); g.beginPath(); g.arc(520,258,7,0,7); g.fill();
+    /* centre de gravité, 0,9 m derrière l'essieu avant */
+    g.strokeStyle='#fff'; g.lineWidth=2; g.beginPath(); g.arc(430,200,8,0,7); g.stroke();
+    g.beginPath(); g.moveTo(422,200); g.lineTo(438,200); g.moveTo(430,192); g.lineTo(430,208); g.stroke();
+    fleche(g,430,208,430,208+P*k,'#5C544B',3.4);
+    g.restore();
+    txt(g,'essieu arrière',360,306,'#5C544B',11); txt(g,'essieu avant',520,306,'#5C544B',11);
+    /* verdict qualitatif */
+    var col= bascule? '#C0492E' : (Rar<P*0.15? '#BD8A2A':'#3D7E5F');
+    g.font='800 18px "Bricolage Grotesque",sans-serif'; g.fillStyle=col; g.textAlign='left';
+    g.fillText(bascule? 'Le chariot bascule' : (Rar<P*0.15? 'L\u2019arrière se délest' : 'Le chariot est stable'),40,46);
+    g.font='700 12px "JetBrains Mono",monospace'; g.fillStyle='#5C544B'; g.fillText('charge sur l\u2019essieu arrière',40,74);
+    g.fillStyle='#EFE8D8'; g.fillRect(40,82,220,12);
+    g.fillStyle=col; g.fillRect(40,82,Math.max(0,220*Rar/(P*0.9/1.6)),12);
+  }
+  setInterval(step,60); step();
+})();
+
+/* ===== corrections ===== */
+var EX=[
+  [[3000,30],[5700,57],[3300,40]],
+  [[1177.2,6],[768.4,8],[1035.2,10]],
+  [[7235,70],[5927,60],[150,8]],
+  [[308.8,4],[0.331,0.006],[4.62,0.05]],
+  [[3750,40],[6438,70],[37707,350]]
+];
+EX.forEach(function(rep,n){
+  var p='c'+(n+1), c=el(p+'chk'), r=el(p+'rev'), fb=el(p+'fb'), sol=el(p+'sol');
+  if(!c) return;
+  c.addEventListener('click',function(){
+    var ok=0;
+    rep.forEach(function(q,k){ var v=nf(el(p+'_'+String.fromCharCode(97+k)).value); if(Math.abs(v-q[0])<=q[1]) ok++; });
+    fb.className='exo-fb '+(ok===rep.length?'ok':'no');
+    fb.textContent=(ok===rep.length)? '\u2713 Les trois réponses sont justes.'
+      : ('\u2717 '+ok+' / '+rep.length+' \u2014 vérifie ton équation de moments et tes projections.');
+    r.disabled=false;
+  });
+  r.addEventListener('click',function(){ sol.classList.add('show'); });
+});
+(function(){ var b=el('f1rev'), s=el('f1sol');
+  if(b&&s) b.addEventListener('click',function(){ s.classList.add('show'); b.disabled=true; b.textContent='Correction affichée'; }); })();
+</script>
+
+<script>
+/* ================= remise du travail : suivi et envoi du score ================= */
+(function(){
+  var TP_ID='tp_si_statique2', TP_TITRE='Statique niveau 2 \u2014 \u00e9quilibres \u00e0 plusieurs inconnues';
+  var DB_URL='https://score-tp-default-rtdb.europe-west1.firebasedatabase.app/scores_tp.json';
+  var d=document.getElementById.bind(document);
+  var EX=[], done={};
+  function conteneur(n){ return n.closest('.cx')||n.parentElement; }
+  function recense(){
+    var zones=document.querySelectorAll('.exo-fb');
+    var vus=[];
+    Array.prototype.forEach.call(zones,function(z){
+      if(z.closest('#tpScore')) return;
+      var c=conteneur(z); if(!c) return;
+      if(vus.indexOf(c)<0){ vus.push(c); EX.push({el:c,zones:[z]}); }
+    });
+    var t=d('tpsTot'); if(t) t.textContent=EX.length;
+    maj();
+  }
+  /* note sur 20, arrondie au demi-point */
+  function note(n,tot){ return tot? Math.round(n/tot*20*2)/2 : 0; }
+  function maj(){
+    var n=0;
+    EX.forEach(function(e,i){ if(done[i]) n++; });
+    var now=d('tpsNow'), fill=d('tpsFill'), nt=d('tpsNote');
+    if(now) now.textContent=n;
+    if(fill) fill.style.width=(EX.length? Math.round(n/EX.length*100):0)+'%';
+    if(nt) nt.textContent=fr(note(n,EX.length));
+    return n;
+  }
+  function observe(){
+    EX.forEach(function(e,i){
+      e.zones.forEach(function(z){
+        var obs=new MutationObserver(function(){
+          if(z.className.indexOf('ok')>=0 && !done[i]){ done[i]=true; maj(); }
+        });
+        obs.observe(z,{attributes:true,attributeFilter:['class']});
+      });
+    });
+  }
+  function envoyer(){
+    var p=[d('tpsP1').value,d('tpsP2').value,d('tpsP3').value]
+          .map(function(x){return (x||'').trim();}).filter(Boolean);
+    var cl=d('tpsCl').value, msg=d('tpsMsg');
+    if(!p.length){ msg.className='tps-msg no'; msg.textContent='Indiquez au moins un participant.'; d('tpsP1').focus(); return; }
+    if(!cl){ msg.className='tps-msg no'; msg.textContent='S\u00e9lectionnez votre classe.'; d('tpsCl').focus(); return; }
+    var n=maj(), tot=EX.length;
+    var b=d('tpsSend'); b.disabled=true; msg.className='tps-msg'; msg.textContent='Envoi en cours\u2026';
+    fetch(DB_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      tp:TP_TITRE, fichier:TP_ID,
+      eleves:p, classe:cl,
+      score:n, total:tot, note:note(n,tot),
+      ts:Date.now(), date:new Date().toLocaleString('fr-FR')
+    })})
+    .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status+(r.status===401||r.status===403?' \u2014 permission refus\u00e9e par les r\u00e8gles':'')); return r.json(); })
+    .then(function(){
+      msg.className='tps-msg ok';
+      msg.textContent='\u2713 R\u00e9sultat envoy\u00e9 : '+n+' / '+tot+' exercices, soit '+fr(note(n,tot))+' / 20 \u2014 '+p.join(', ')+' ('+cl+').';
+      b.disabled=false;
+    })
+    .catch(function(err){
+      msg.className='tps-msg no';
+      msg.textContent='L\u2019envoi a \u00e9chou\u00e9 \u2014 '+((err&&err.message)||'erreur inconnue');
+      b.disabled=false;
+    });
+  }
+  function init(){ if(!d('tpScore')) return; recense(); observe(); d('tpsSend').addEventListener('click',envoyer); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+
+</script>
+<button id="calcToggle" aria-label="Ouvrir la calculatrice"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#fff" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.2"/><rect x="8" y="5.5" width="8" height="4" rx="0.8" fill="#fff" stroke="none"/><g fill="#fff" stroke="none"><circle cx="9" cy="13" r="1.2"/><circle cx="12" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><circle cx="9" cy="17" r="1.2"/><circle cx="12" cy="17" r="1.2"/><circle cx="15" cy="17" r="1.2"/></g></svg></button>
+<div id="calc" role="dialog" aria-label="Calculatrice scientifique"><div class="scr"><div class="ex" id="calcExpr">&nbsp;</div><div class="rs" id="calcRes">0</div></div> <div class="keys"><button class="fn deg" data-act="deg" title="Basculer degrés / radians">DEG</button><button class="cl" data-act="C">C</button><button class="cl" data-act="del">⌫</button><button class="op" data-act="(">(</button><button class="op" data-act=")">)</button> <button class="fn" data-act="sin(">sin</button><button class="fn" data-act="cos(">cos</button><button class="fn" data-act="tan(">tan</button><button class="fn" data-act="π">π</button><button class="op" data-act="/">÷</button> <button class="fn" data-act="asin(">asin</button><button class="fn" data-act="acos(">acos</button><button class="fn" data-act="atan(">atan</button><button class="fn" data-act="sqrt(">√</button><button class="op" data-act="*">×</button> <button data-act="7">7</button><button data-act="8">8</button><button data-act="9">9</button><button class="fn" data-act="^2">x²</button><button class="op" data-act="-">−</button> <button data-act="4">4</button><button data-act="5">5</button><button data-act="6">6</button><button class="fn" data-act="^">xʸ</button><button class="op" data-act="+">+</button> <button data-act="1">1</button><button data-act="2">2</button><button data-act="3">3</button><button class="fn" data-act="ln(">ln</button><button class="eq" data-act="eq" style="grid-row:span 2">=</button> <button data-act="0">0</button><button data-act=".">,</button><button class="op" data-act="neg">±</button><button class="fn" data-act="log(">log</button></div> <div class="tt">parenthèses gérées · résultat calculé en direct</div></div>
+<script>
+
+(function(){
+  var expr='', last='', deg=true;
+  var dE=document.getElementById('calcExpr'), dR=document.getElementById('calcRes');
+  if(!dE||!dR) return;
+  var D2R=Math.PI/180;
+  function fmt(x){
+ if(x===null||x===undefined||!isFinite(x)) return 'Err';
+ var r=Math.round(x*1e10)/1e10;
+ var s=(Math.abs(r)>=1e10||(Math.abs(r)<1e-6&&r!==0))? r.toExponential(6) : String(r);
+ return s.replace('.',',');
+  }
+  /* --- tokenizer --- */
+  var FN=['asin','acos','atan','sin','cos','tan','sqrt','ln','log','abs'];
+  function tok(s){
+ var T=[], i=0;
+ while(i<s.length){
+ var c=s[i];
+ if(c===' '){ i++; continue; }
+ if(c>='0'&&c<='9'||c==='.'){
+ var j=i; while(j<s.length&&((s[j]>='0'&&s[j]<='9')||s[j]==='.')) j++;
+ T.push({t:'num',v:parseFloat(s.slice(i,j))}); i=j; continue;
+ }
+ if(c==='\u03c0'){ T.push({t:'num',v:Math.PI}); i++; continue; }
+ var got=null;
+ for(var k=0;k<FN.length;k++){ if(s.startsWith(FN[k],i)){ got=FN[k]; break; } }
+ if(got){ T.push({t:'fn',v:got}); i+=got.length; continue; }
+ if('+-*/^()'.indexOf(c)>=0){ T.push({t:c}); i++; continue; }
+ throw new Error('car');
+ }
+ return T;
+  }
+  /* --- parseur descendant --- */
+  function parse(T){
+ var p=0;
+ function peek(){ return T[p]; }
+ function eat(t){ if(T[p]&&T[p].t===t){ p++; return true; } return false; }
+ function expression(){
+ var v=term();
+ while(T[p]&&(T[p].t==='+'||T[p].t==='-')){
+ var op=T[p].t; p++;
+ var r=term(); v=(op==='+')? v+r : v-r;
+ }
+ return v;
+ }
+ function term(){
+ var v=power();
+ while(T[p]&&(T[p].t==='*'||T[p].t==='/')){
+ var op=T[p].t; p++;
+ var r=power();
+ if(op==='/'&&r===0) throw new Error('div0');
+ v=(op==='*')? v*r : v/r;
+ }
+ return v;
+ }
+ function power(){
+ var b=unary();
+ if(T[p]&&T[p].t==='^'){ p++; var e=power(); return Math.pow(b,e); }
+ return b;
+ }
+ function unary(){
+ if(T[p]&&T[p].t==='-'){ p++; return -unary(); }
+ if(T[p]&&T[p].t==='+'){ p++; return unary(); }
+ return primary();
+ }
+ function primary(){
+ var t=T[p];
+ if(!t) throw new Error('fin');
+ if(t.t==='num'){ p++; return t.v; }
+ if(t.t==='fn'){
+ p++;
+ if(!eat('(')) throw new Error('par');
+ var a=expression();
+ if(!eat(')')) throw new Error('par');
+ return applyFn(t.v,a);
+ }
+ if(t.t==='('){ p++; var v=expression(); if(!eat(')')) throw new Error('par'); return v; }
+ throw new Error('tok');
+ }
+ var res=expression();
+ if(p<T.length) throw new Error('reste');
+ return res;
+  }
+  function applyFn(f,a){
+ switch(f){
+ case 'sin': return Math.sin(deg? a*D2R : a);
+ case 'cos': return Math.cos(deg? a*D2R : a);
+ case 'tan': return Math.tan(deg? a*D2R : a);
+ case 'asin': if(a<-1||a>1) throw new Error('dom'); return deg? Math.asin(a)/D2R : Math.asin(a);
+ case 'acos': if(a<-1||a>1) throw new Error('dom'); return deg? Math.acos(a)/D2R : Math.acos(a);
+ case 'atan': return deg? Math.atan(a)/D2R : Math.atan(a);
+ case 'sqrt': if(a<0) throw new Error('dom'); return Math.sqrt(a);
+ case 'ln': if(a<=0) throw new Error('dom'); return Math.log(a);
+ case 'log': if(a<=0) throw new Error('dom'); return Math.log(a)/Math.LN10;
+ case 'abs': return Math.abs(a);
+ }
+ throw new Error('fn');
+  }
+  function evaluate(s){
+ if(!s.trim()) return null;
+ /* fermeture automatique des parenthèses ouvertes */
+ var o=(s.match(/\(/g)||[]).length, c=(s.match(/\)/g)||[]).length;
+ var full=s+')'.repeat(Math.max(0,o-c));
+ return parse(tok(full));
+  }
+  function pretty(s){
+ return s.replace(/\*/g,'\u00d7').replace(/\//g,'\u00f7')
+ .replace(/sqrt\(/g,'\u221a(').replace(/\./g,',');
+  }
+  function render(){
+ dE.textContent = expr? pretty(expr) : '\u00a0';
+ var out='';
+ try{ var v=evaluate(expr); out=(v===null)? '0' : fmt(v); }
+ catch(e){ out=last||'\u00a0'; }
+ dR.textContent=out;
+  }
+  function ins(s){ expr+=s; render(); }
+  var host=document.getElementById('calc');
+  document.getElementById('calcToggle').addEventListener('click',function(){ host.classList.toggle('show'); });
+  host.addEventListener('click',function(ev){
+ var b=ev.target.closest('button'); if(!b) return;
+ var a=b.dataset.act;
+ if(a==='C'){ expr=''; last=''; render(); return; }
+ if(a==='del'){ 
+ var m=expr.match(/(asin|acos|atan|sqrt|sin|cos|tan|ln|log|abs)\($/);
+ expr=m? expr.slice(0,-m[0].length) : expr.slice(0,-1);
+ render(); return; }
+ if(a==='deg'){ deg=!deg; b.textContent=deg?'DEG':'RAD'; b.classList.toggle('rad',!deg); render(); return; }
+ if(a==='eq'){
+ try{ var v=evaluate(expr); if(v===null) return;
+ last=fmt(v); dR.textContent=last; expr=String(Math.round(v*1e10)/1e10); dE.textContent=pretty(expr); }
+ catch(e){ dR.textContent='Err'; }
+ return; }
+ if(a==='neg'){
+ var mm=expr.match(/(\d+\.?\d*)$/);
+ if(mm){ expr=expr.slice(0,-mm[0].length)+'(-'+mm[0]+')'; }
+ else { expr+='(-'; }
+ render(); return; }
+ ins(a);
+  });
+  render();
+})();
+
+</script>
+<script>
+/* ================= progression : exercices verrouillés et corrections après tentative ================= */
+(function(){
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas)$/i;
+  function boite(fb){ return fb.closest('.cx')||fb.closest('.exo-card')||fb.closest('.puz')||fb.closest('section'); }
+  var U=[];
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-fb'),function(fb){
+    if(fb.closest('#tpScore')) return;
+    var b=boite(fb); if(!b) return;
+    var u=null; for(var i=0;i<U.length;i++){ if(U[i].el===b){ u=U[i]; break; } }
+    if(!u){ u={el:b,fbs:[],sols:[],revs:[]}; U.push(u); }
+    u.fbs.push(fb);
+  });
+  if(U.length<2 && !U.length) return;
+  U.forEach(function(u){
+    u.sols=[].slice.call(u.el.querySelectorAll('.csol,.exo-sol'));
+    u.revs=[].slice.call(u.el.querySelectorAll('button')).filter(function(b){
+      return REV.test((b.textContent||'').replace(/\s+/g,' ').trim());
+    });
+  });
+  function tente(u){ return u.fbs.some(function(f){ return /\b(ok|no)\b/.test(f.className) || (f.textContent||'').trim().length>0; }); }
+  function reussi(u){ return u.fbs.some(function(f){ return /\bok\b/.test(f.className); }); }
+  function vue(u){ return u.sols.some(function(s){ return /\bshow\b/.test(s.className) || s.style.display==='block'; }); }
+  /* sans correction consultable, une tentative suffit : aucun élève ne doit rester bloqué */
+  function facultatif(u){ return u.el.classList.contains('adv') || !!(u.el.closest && u.el.closest('.adv')); }
+  /* étiquette visible sur les exercices facultatifs */
+  Array.prototype.forEach.call(document.querySelectorAll('.exo-card.adv'),function(c){
+    if(c.querySelector('.facu')) return;
+    var h=c.querySelector('.exo-h'); if(!h) return;
+    var s=document.createElement('span'); s.className='facu'; s.textContent='facultatif \u2014 tu peux passer';
+    h.appendChild(s);
+  });
+  function fini(u){ return reussi(u) || vue(u) || (u.revs.length===0 && tente(u)); }
+  function maj(){
+    var bloque=false;
+    U.forEach(function(u){
+      if(bloque){ u.el.classList.add('verrou'); u.el.inert=true; }
+      else { u.el.classList.remove('verrou'); u.el.inert=false; }
+      var t=tente(u);
+      u.revs.forEach(function(b){
+        if(!t && !b.disabled){ b.disabled=true; b.dataset.verrou='1'; b.title='Propose d\u2019abord une r\u00e9ponse'; }
+        else if(t && b.dataset.verrou==='1'){ b.disabled=false; delete b.dataset.verrou; b.removeAttribute('title'); }
+      });
+      if(!fini(u) && !facultatif(u)) bloque=true;     /* un exercice facultatif ne bloque jamais la suite */
+    });
+    /* les jeux restent fermés tant qu'un exercice obligatoire n'est pas terminé */
+    var exosFinis=U.every(function(u){ return facultatif(u) || fini(u); });
+    Array.prototype.forEach.call(document.querySelectorAll('.zone-jeu'),function(z){
+      z.classList.toggle('verrou-jeu',!exosFinis); z.inert=!exosFinis; });
+    var bd=document.querySelector('.jeux-bandeau'); if(bd) bd.classList.toggle('ouvert',exosFinis);
+  }
+  var obs=new MutationObserver(function(){ maj(); });
+  U.forEach(function(u){
+    u.fbs.forEach(function(f){ obs.observe(f,{attributes:true,attributeFilter:['class'],childList:true,characterData:true,subtree:true}); });
+    u.sols.forEach(function(s){ obs.observe(s,{attributes:true,attributeFilter:['class','style']}); });
+  });
+  maj();
+})();
+</script>
+<div id="mdpBox" role="dialog" aria-modal="true" aria-labelledby="mdpTitre">
+  <div class="card">
+    <div class="mk">Correction</div>
+    <h3 id="mdpTitre">Demande au professeur</h3>
+    <p>La correction se débloque avec le mot de passe de l’enseignant.</p>
+    <input type="password" id="mdpIn" autocomplete="off">
+    <div class="err" id="mdpErr"></div>
+    <div class="row"><button type="button" class="ann" id="mdpAnn">Annuler</button><button type="button" class="ok" id="mdpOk">Débloquer</button></div>
+  </div>
+</div>
+<script>
+/* ================= corrections protégées par le mot de passe de l'enseignant ================= */
+(function(){
+  var MDP_CORRECTION='Agostini2025';
+  var REV=/^(voir la correction|voir l.analyse|correction|correction d\u00e9taill\u00e9e|r\u00e9solution pas \u00e0 pas|afficher la correction r\u00e9dig\u00e9e|afficher les attendus)$/i;
+  var ouvert=false, cible=null;
+  var d=document.getElementById.bind(document);
+  function estCorrection(b){ return b && REV.test((b.textContent||'').replace(/\s+/g,' ').trim()); }
+  function fermer(){ d('mdpBox').classList.remove('on'); d('mdpIn').value=''; d('mdpErr').textContent=''; cible=null; }
+  function valider(){
+    if(d('mdpIn').value===MDP_CORRECTION){
+      ouvert=true; var b=cible; fermer();
+      if(b) b.click();
+    } else { d('mdpErr').textContent='Mot de passe incorrect.'; d('mdpIn').select(); }
+  }
+  /* phase de capture : le clic est arrêté avant d'atteindre la logique de l'exercice */
+  document.addEventListener('click',function(e){
+    if(ouvert) return;
+    var b=e.target && e.target.closest ? e.target.closest('button') : null;
+    if(!estCorrection(b) || b.disabled) return;
+    e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+    cible=b; d('mdpBox').classList.add('on'); d('mdpIn').focus();
+  },true);
+  d('mdpOk').addEventListener('click',valider);
+  d('mdpAnn').addEventListener('click',fermer);
+  d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
+})();
+</script>
+</body>
+</html>
