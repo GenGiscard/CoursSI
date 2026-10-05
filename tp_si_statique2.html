@@ -181,6 +181,27 @@
   .donnees div{background:#fff;border:1px solid var(--line);border-left:3px solid #BD8A2A;border-radius:10px;padding:8px 11px}
   .donnees .l{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
   .donnees .v{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;color:#2A2622}
+
+  /* ---------- mini-cours, distincts des exercices et lisibles même verrouillés ---------- */
+  .lecon{background:linear-gradient(160deg,rgba(43,122,120,.10),rgba(43,122,120,.03));border:1.5px solid rgba(43,122,120,.40);
+         border-left:5px solid #2B7A78;border-radius:14px;padding:15px 19px;margin:14px 0}
+  .lecon .lk{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#1f5f5d;margin-bottom:6px}
+  .lecon .lt{font-size:16px;margin:0 0 10px}
+  .lecon .lfig{width:100%;max-width:560px;height:auto;display:block;margin:6px auto 10px;background:#fff;border:1px solid var(--line);border-radius:10px}
+  .lecon .lm{margin:6px 0;padding-left:22px} .lecon .lm li{font-size:15px;margin:5px 0}
+  .lecon .lx{margin:10px 0 0;font-size:14.5px;background:#fff;border:1px dashed rgba(43,122,120,.5);border-radius:10px;padding:9px 12px}
+  .lecon .lx b{color:#1f5f5d}
+
+  .csol .cl{display:block;margin:4px 0}
+
+  .btn-lecon{display:inline-flex;align-items:center;gap:10px;margin:10px 0 4px;cursor:pointer;font-family:inherit;font-size:15px;
+      color:#1f5f5d;background:rgba(43,122,120,.08);border:1.5px solid rgba(43,122,120,.45);border-radius:11px;padding:9px 15px}
+  .btn-lecon:hover{background:rgba(43,122,120,.16)}
+  .btn-lecon .bl-k{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      color:#fff;background:#2B7A78;border-radius:6px;padding:3px 8px}
+  .btn-lecon::after{content:"\25BE";font-size:13px;transition:transform .2s ease}
+  .btn-lecon[aria-expanded="true"]::after{transform:rotate(180deg)}
+  .lecon[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -217,6 +238,36 @@
     <span class="kicker">Exercice 1</span>
     <h2>La poutre en porte-à-faux</h2>
     <p class="lede">Une poutre de 6 m repose sur un pivot en A et un appui simple en B. Elle dépasse de 1 m après B.</p>
+    <button type="button" class="btn-lecon" aria-expanded="false" aria-controls="lecon1"><span class="bl-k">Mini-cours</span> la charge répartie et le porte-à-faux</button>
+    <div class="lecon" id="lecon1" hidden>
+      <div class="lk">Mini-cours · la charge répartie et le porte-à-faux</div>
+      <p class="lt">Une charge étalée sur une longueur se remplace par <b>une seule force</b>.</p>
+      <svg class="lfig" viewBox="0 0 520 150" aria-label="Une charge répartie remplacée par sa résultante au milieu">
+        <defs><marker id="mk1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#BD8A2A"/></marker>
+              <marker id="mk1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0492E"/></marker></defs>
+        <line x1="30" y1="44" x2="230" y2="44" stroke="#BD8A2A" stroke-width="1.6"/>
+        <g stroke="#BD8A2A" stroke-width="1.6" marker-end="url(#mk1)">
+          <line x1="30" y1="44" x2="30" y2="84"/><line x1="70" y1="44" x2="70" y2="84"/><line x1="110" y1="44" x2="110" y2="84"/>
+          <line x1="150" y1="44" x2="150" y2="84"/><line x1="190" y1="44" x2="190" y2="84"/><line x1="230" y1="44" x2="230" y2="84"/></g>
+        <line x1="30" y1="92" x2="230" y2="92" stroke="#2A2622" stroke-width="7"/>
+        <text x="130" y="34" text-anchor="middle" font-size="12" fill="#8a6313" font-family="JetBrains Mono">q en N/m</text>
+        <line x1="30" y1="118" x2="230" y2="118" stroke="#8c8578" stroke-width="1.2"/>
+        <text x="130" y="134" text-anchor="middle" font-size="12" fill="#5C544B" font-family="JetBrains Mono">longueur L</text>
+        <text x="258" y="96" text-anchor="middle" font-size="24" fill="#5C544B">⇒</text>
+        <line x1="290" y1="92" x2="490" y2="92" stroke="#2A2622" stroke-width="7"/>
+        <line x1="390" y1="26" x2="390" y2="84" stroke="#C0492E" stroke-width="3.4" marker-end="url(#mk1b)"/>
+        <text x="400" y="38" font-size="12" fill="#C0492E" font-family="JetBrains Mono">R = q × L</text>
+        <line x1="290" y1="118" x2="390" y2="118" stroke="#8c8578" stroke-width="1.2"/>
+        <text x="340" y="134" text-anchor="middle" font-size="12" fill="#5C544B" font-family="JetBrains Mono">L / 2</text>
+      </svg>
+      <ol class="lm">
+        <li>Intensité : <b>R = q × L</b>, en newtons.</li>
+        <li>Position : <b>au milieu</b> de la longueur chargée.</li>
+        <li>Une force <b>au-delà d’un appui</b> fait tourner dans l’autre sens : son moment change de signe.</li>
+      </ol>
+      <p class="lx"><b>Exemple :</b> 200 N/m sur 4 m donnent 800 N, placés à 2 m du début de la charge.</p>
+    </div>
+
     <div class="donnees">
       <div><div class="l">F₁ à 1,5 m de A</div><div class="v">2000 N</div></div>
       <div><div class="l">F₂ à 3,5 m de A</div><div class="v">3000 N</div></div>
@@ -230,18 +281,41 @@
     <div class="cq"><span>c) Réaction du pivot A :</span><input id="c1_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
     <div class="cq"><button class="btn" id="c1chk">Vérifier</button><button class="btn ghost" id="c1rev">Voir la correction</button></div>
     <div class="exo-fb" id="c1fb"></div>
-    <div class="csol" id="c1sol"><b>a)</b> 500 × 6 = <b>3000 N</b>, placée au milieu : à 3 m de A.<br>
-    <b>b)</b> Moments en A : R<sub>B</sub> × 5 = 2000×1,5 + 3000×3,5 + 3000×3 + 1000×6 = 28 500.<br>
-    R<sub>B</sub> = 28 500 / 5 = <b>5700 N</b>.<br>
-    <b>c)</b> ΣFy = 0 : R<sub>A</sub> = 2000 + 3000 + 3000 + 1000 − 5700 = <b>3300 N</b>.<br>
-    <b>Contrôle en B :</b> 3300×5 − 2000×3,5 − 3000×1,5 − 3000×2 + 1000×1 = 0 ✓<br>
-    <b>Le piège :</b> F₃ est au-delà de B. Son bras de levier en B est de 1 m, de l’autre côté.</div></div>
+    <div class="csol" id="c1sol"><span class="cl"><b>a)</b> 500 × 6 = <b>3000 N</b>, placée au milieu : à 3 m de A.</span><span class="cl"><b>b)</b> Moments en A : R<sub>B</sub> × 5 = 2000×1,5 + 3000×3,5 + 3000×3 + 1000×6 = 28 500.</span><span class="cl">R<sub>B</sub> = 28 500 / 5 = <b>5700 N</b>.</span><span class="cl"><b>c)</b> ΣFy = 0 : R<sub>A</sub> = 2000 + 3000 + 3000 + 1000 − 5700 = <b>3300 N</b>.</span><span class="cl"><b>Contrôle en B :</b> 3300×5 − 2000×3,5 − 3000×1,5 − 3000×2 + 1000×1 = 0 ✓</span><span class="cl"><b>Le piège :</b> F₃ est au-delà de B. Son bras de levier en B est de 1 m, de l’autre côté.</span></div></div>
   </section>
 
   <section id="ex2">
     <span class="kicker">Exercice 2</span>
     <h2>Une charge, deux câbles</h2>
     <p class="lede">Une machine de 120 kg est suspendue à deux câbles inclinés de 30° et 50° sur l’horizontale.</p>
+    <button type="button" class="btn-lecon" aria-expanded="false" aria-controls="lecon2"><span class="bl-k">Mini-cours</span> projeter une force, résoudre deux équations</button>
+    <div class="lecon" id="lecon2" hidden>
+      <div class="lk">Mini-cours · projeter une force, résoudre deux équations</div>
+      <p class="lt">Une force inclinée se découpe en <b>deux morceaux</b> : un horizontal, un vertical.</p>
+      <svg class="lfig" viewBox="0 0 520 170" aria-label="Décomposition d'une force inclinée en composantes horizontale et verticale">
+        <defs><marker id="mk2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E6A8E"/></marker>
+              <marker id="mk2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3D7E5F"/></marker></defs>
+        <line x1="60" y1="140" x2="250" y2="140" stroke="#c8bfae" stroke-width="1.2" stroke-dasharray="4 4"/>
+        <line x1="60" y1="140" x2="199" y2="42" stroke="#2E6A8E" stroke-width="3.4" marker-end="url(#mk2)"/>
+        <line x1="60" y1="140" x2="199" y2="140" stroke="#3D7E5F" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#mk2b)"/>
+        <line x1="199" y1="140" x2="199" y2="42" stroke="#3D7E5F" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#mk2b)"/>
+        <path d="M100,140 A40 40 0 0 0 92.8,117.1" fill="none" stroke="#BD8A2A" stroke-width="2"/>
+        <text x="108" y="128" font-size="13" fill="#8a6313" font-family="JetBrains Mono">α</text>
+        <text x="118" y="80" font-size="14" fill="#2E6A8E" font-family="JetBrains Mono" font-weight="700">F</text>
+        <text x="128" y="160" text-anchor="middle" font-size="13" fill="#3D7E5F" font-family="JetBrains Mono">Fx</text>
+        <text x="208" y="98" font-size="13" fill="#3D7E5F" font-family="JetBrains Mono">Fy</text>
+        <text x="300" y="70" font-size="17" fill="#2A2622" font-family="JetBrains Mono" font-weight="700">Fx = F · cos α</text>
+        <text x="300" y="104" font-size="17" fill="#2A2622" font-family="JetBrains Mono" font-weight="700">Fy = F · sin α</text>
+        <text x="300" y="132" font-size="11.5" fill="#5C544B" font-family="JetBrains Mono">α mesuré depuis l’horizontale</text>
+      </svg>
+      <ol class="lm">
+        <li>Écrire <b>ΣFx = 0</b> : les morceaux horizontaux se compensent.</li>
+        <li>Écrire <b>ΣFy = 0</b> : les morceaux verticaux équilibrent le poids.</li>
+        <li>Tirer une inconnue de la première équation, la <b>remplacer</b> dans la seconde.</li>
+      </ol>
+      <p class="lx"><b>Exemple :</b> 500 N pendus à deux câbles symétriques à 40°. Par symétrie T₁ = T₂ = T.<br>Sur y : 2 × T × sin 40° = 500, donc T ≈ 389 N — plus de la moitié du poids.</p>
+    </div>
+
     <div class="schema"><canvas id="cv2" width="880" height="300" aria-label="Charge suspendue à deux câbles inclinés de 30 et 50 degrés"></canvas></div>
     <div class="cx"><div class="cxh"><span class="cxn">2</span>La tension des câbles</div>
     <div class="cq"><span>a) Poids de la machine :</span><input id="c2_a" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
@@ -249,18 +323,43 @@
     <div class="cq"><span>c) Tension du câble à 50° :</span><input id="c2_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
     <div class="cq"><button class="btn" id="c2chk">Vérifier</button><button class="btn ghost" id="c2rev">Voir la correction</button></div>
     <div class="exo-fb" id="c2fb"></div>
-    <div class="csol" id="c2sol"><b>a)</b> P = 120 × 9,81 = <b>1177,2 N</b>.<br>
-    <b>Sur x :</b> T₁·cos 30° = T₂·cos 50°, donc T₁ = 0,742 × T₂.<br>
-    <b>Sur y :</b> T₁·sin 30° + T₂·sin 50° = P.<br>
-    On remplace : T₂ × (0,742×0,5 + 0,766) = 1177,2, soit T₂ × 1,137 = 1177,2.<br>
-    <b>c)</b> T₂ ≈ <b>1035 N</b> · <b>b)</b> T₁ ≈ <b>768 N</b>.<br>
-    <b>À retenir :</b> le câble le plus vertical porte le plus. Et T₁ + T₂ dépasse P : incliner un câble coûte de la tension.</div></div>
+    <div class="csol" id="c2sol"><span class="cl"><b>a)</b> P = 120 × 9,81 = <b>1177,2 N</b>.</span><span class="cl"><b>Sur x :</b> T₁·cos 30° = T₂·cos 50°, donc T₁ = 0,742 × T₂.</span><span class="cl"><b>Sur y :</b> T₁·sin 30° + T₂·sin 50° = P.</span><span class="cl">On remplace : T₂ × (0,742×0,5 + 0,766) = 1177,2, soit T₂ × 1,137 = 1177,2.</span><span class="cl"><b>c)</b> T₂ ≈ <b>1035 N</b> · <b>b)</b> T₁ ≈ <b>768 N</b>.</span><span class="cl"><b>À retenir :</b> le câble le plus vertical porte le plus. Et T₁ + T₂ dépasse P : incliner un câble coûte de la tension.</span></div></div>
   </section>
 
   <section id="ex3">
     <span class="kicker">Exercice 3</span>
     <h2>La potence murale</h2>
     <p class="lede">Une barre de 2 m, articulée au mur en A, est retenue par un tirant incliné de 35° sur la barre.</p>
+    <button type="button" class="btn-lecon" aria-expanded="false" aria-controls="lecon3"><span class="bl-k">Mini-cours</span> l’articulation et la force inclinée</button>
+    <div class="lecon" id="lecon3" hidden>
+      <div class="lk">Mini-cours · l’articulation et la force inclinée</div>
+      <p class="lt">Une articulation retient dans <b>toutes les directions</b> : sa réaction a deux inconnues, Ax et Ay.</p>
+      <svg class="lfig" viewBox="0 0 520 190" aria-label="Barre articulée retenue par un câble incliné : seule la composante verticale du câble crée un moment">
+        <defs><marker id="mk3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E6A8E"/></marker>
+              <marker id="mk3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3D7E5F"/></marker></defs>
+        <line x1="40" y1="10" x2="40" y2="180" stroke="#8c8578" stroke-width="1.6"/>
+        <line x1="40" y1="130" x2="240" y2="130" stroke="#2A2622" stroke-width="8"/>
+        <circle cx="40" cy="130" r="6" fill="#FFFDF8" stroke="#2A2622" stroke-width="2.2"/>
+        <line x1="240" y1="130" x2="40" y2="14.5" stroke="#5C544B" stroke-width="2"/>
+        <line x1="240" y1="130" x2="173" y2="91.3" stroke="#2E6A8E" stroke-width="3" marker-end="url(#mk3)"/>
+        <line x1="240" y1="130" x2="240" y2="91.3" stroke="#3D7E5F" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#mk3b)"/>
+        <line x1="240" y1="130" x2="173.0" y2="130" stroke="#3D7E5F" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#mk3b)"/>
+        <text x="166" y="84" font-size="13" fill="#2E6A8E" font-family="JetBrains Mono" font-weight="700">T</text>
+        <text x="248" y="104" font-size="12" fill="#3D7E5F" font-family="JetBrains Mono">Ty</text>
+        <text x="186" y="150" font-size="12" fill="#3D7E5F" font-family="JetBrains Mono">Tx</text>
+        <text x="22" y="150" font-size="13" fill="#2A2622" font-family="JetBrains Mono">A</text>
+        <text x="290" y="60" font-size="13" fill="#2A2622" font-family="JetBrains Mono">Tx est dans l’axe de la barre :</text>
+        <text x="290" y="80" font-size="13" fill="#2A2622" font-family="JetBrains Mono">elle passe par A, moment nul.</text>
+        <text x="290" y="112" font-size="13" fill="#3D7E5F" font-family="JetBrains Mono" font-weight="700">Seule Ty fait tourner.</text>
+      </svg>
+      <ol class="lm">
+        <li>Moments <b>en A</b> : Ax et Ay y passent, ils disparaissent du calcul.</li>
+        <li>Moment de la force inclinée = <b>sa composante perpendiculaire à la barre</b> × la distance.</li>
+        <li>Puis ΣFx = 0 donne Ax, et ΣFy = 0 donne Ay.</li>
+      </ol>
+      <p class="lx"><b>Exemple :</b> barre de 1,5 m, câble à 30° en bout, charge de 1000 N en bout.<br>T · sin 30° × 1,5 = 1000 × 1,5, donc T = 2000 N : le double de la charge.</p>
+    </div>
+
     <div class="donnees">
       <div><div class="l">charge en bout B</div><div class="v">4000 N</div></div>
       <div><div class="l">poids de la barre</div><div class="v">300 N, au milieu</div></div>
@@ -273,18 +372,43 @@
     <div class="cq"><span>c) Composante verticale de la réaction en A :</span><input id="c3_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
     <div class="cq"><button class="btn" id="c3chk">Vérifier</button><button class="btn ghost" id="c3rev">Voir la correction</button></div>
     <div class="exo-fb" id="c3fb"></div>
-    <div class="csol" id="c3sol"><b>a)</b> Moments en A : la réaction en A disparaît du calcul.<br>
-    Seule la composante verticale du tirant fait tourner : T·sin 35° × 2 = 4000×2 + 300×1.<br>
-    T = 8300 / (2 × 0,574) ≈ <b>7235 N</b>.<br>
-    <b>b)</b> ΣFx = 0 : A<sub>x</sub> = T·cos 35° ≈ <b>5927 N</b>, vers la droite : le mur pousse la barre.<br>
-    <b>c)</b> ΣFy = 0 : A<sub>y</sub> = 4300 − T·sin 35° ≈ <b>150 N</b>.<br>
-    <b>Ce qui surprend :</b> le tirant tire près de deux fois la charge. Plus il est couché, pire c’est.</div></div>
+    <div class="csol" id="c3sol"><span class="cl"><b>a)</b> Moments en A : la réaction en A disparaît du calcul.</span><span class="cl">Seule la composante verticale du tirant fait tourner : T·sin 35° × 2 = 4000×2 + 300×1.</span><span class="cl">T = 8300 / (2 × 0,574) ≈ <b>7235 N</b>.</span><span class="cl"><b>b)</b> ΣFx = 0 : A<sub>x</sub> = T·cos 35° ≈ <b>5927 N</b>, vers la droite : le mur pousse la barre.</span><span class="cl"><b>c)</b> ΣFy = 0 : A<sub>y</sub> = 4300 − T·sin 35° ≈ <b>150 N</b>.</span><span class="cl"><b>Ce qui surprend :</b> le tirant tire près de deux fois la charge. Plus il est couché, pire c’est.</span></div></div>
   </section>
 
   <section id="ex4">
     <span class="kicker">Exercice 4</span>
     <h2>L’échelle contre le mur</h2>
     <p class="lede">Une échelle de 5 m et 15 kg fait 65° avec le sol. Le mur est lisse : aucun frottement contre lui.</p>
+    <button type="button" class="btn-lecon" aria-expanded="false" aria-controls="lecon4"><span class="bl-k">Mini-cours</span> le frottement et le contact lisse</button>
+    <div class="lecon" id="lecon4" hidden>
+      <div class="lk">Mini-cours · le frottement et le contact lisse</div>
+      <p class="lt">Un contact <b>lisse</b> ne retient rien de côté : sa réaction est perpendiculaire à la surface.</p>
+      <svg class="lfig" viewBox="0 0 520 180" aria-label="Bloc posé sur le sol : réaction normale, frottement et poussée">
+        <defs><marker id="mk4g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5C544B"/></marker><marker id="mk4v" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#3D7E5F"/></marker><marker id="mk4r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0492E"/></marker></defs>
+        <line x1="30" y1="130" x2="330" y2="130" stroke="#8c8578" stroke-width="1.6"/>
+        <g stroke="#8c8578" stroke-width="1.1"><line x1="40" y1="130" x2="33" y2="138"/><line x1="70" y1="130" x2="63" y2="138"/><line x1="100" y1="130" x2="93" y2="138"/><line x1="130" y1="130" x2="123" y2="138"/><line x1="160" y1="130" x2="153" y2="138"/><line x1="190" y1="130" x2="183" y2="138"/><line x1="220" y1="130" x2="213" y2="138"/><line x1="250" y1="130" x2="243" y2="138"/><line x1="280" y1="130" x2="273" y2="138"/><line x1="310" y1="130" x2="303" y2="138"/></g>
+        <rect x="140" y="70" width="90" height="60" fill="#dfe7ee" stroke="#2E6A8E" stroke-width="2"/>
+        <line x1="70" y1="100" x2="136" y2="100" stroke="#5C544B" stroke-width="3" marker-end="url(#mk4g)"/>
+        <line x1="185" y1="168" x2="185" y2="134" stroke="#3D7E5F" stroke-width="3" marker-end="url(#mk4v)"/>
+        <line x1="185" y1="126" x2="146" y2="126" stroke="#C0492E" stroke-width="3" marker-end="url(#mk4r)"/>
+        <text x="72" y="92" font-size="12" fill="#5C544B" font-family="JetBrains Mono">poussée</text>
+        <text x="194" y="164" font-size="12" fill="#3D7E5F" font-family="JetBrains Mono">N</text>
+        <text x="150" y="118" font-size="12" fill="#C0492E" font-family="JetBrains Mono">T</text>
+        <text x="360" y="62" font-size="16" fill="#2A2622" font-family="JetBrains Mono" font-weight="700">T ≤ f × N</text>
+        <text x="360" y="90" font-size="12" fill="#5C544B" font-family="JetBrains Mono">f : coefficient de</text>
+        <text x="360" y="106" font-size="12" fill="#5C544B" font-family="JetBrains Mono">frottement, sans unité</text>
+        <text x="360" y="136" font-size="12" fill="#C0492E" font-family="JetBrains Mono">T s’oppose au</text>
+        <text x="360" y="152" font-size="12" fill="#C0492E" font-family="JetBrains Mono">glissement</text>
+      </svg>
+      <ol class="lm">
+        <li>Contact lisse : <b>une seule inconnue</b>, la réaction perpendiculaire.</li>
+        <li>Contact avec frottement : deux inconnues, <b>N</b> perpendiculaire et <b>T</b> le long de la surface.</li>
+        <li>L’équilibre donne le T <b>nécessaire</b>. Le sol peut fournir au plus <b>f × N</b>.</li>
+        <li>Si le T nécessaire dépasse f × N : <b>ça glisse</b>. Le f minimal vaut T / N.</li>
+      </ol>
+      <p class="lx"><b>Exemple :</b> N = 600 N et f = 0,3. Le sol retient au plus 0,3 × 600 = 180 N.<br>Si l’équilibre demande 200 N, l’objet glisse.</p>
+    </div>
+
     <div class="donnees">
       <div><div class="l">longueur · masse</div><div class="v">5 m · 15 kg</div></div>
       <div><div class="l">angle avec le sol</div><div class="v">65°</div></div>
@@ -301,20 +425,41 @@
     <div class="cq"><span>c) Si le sol offre f = 0,40, distance maximale le long de l’échelle :</span><input id="c4_c" inputmode="decimal" placeholder="?"><span class="cu">m</span></div>
     <div class="cq"><button class="btn" id="c4chk">Vérifier</button><button class="btn ghost" id="c4rev">Voir la correction</button></div>
     <div class="exo-fb" id="c4fb"></div>
-    <div class="csol" id="c4sol"><b>Moments au pied de l’échelle</b> : le sol (normale et frottement) n’y fait rien tourner.<br>
-    N<sub>mur</sub> × 5·sin 65° = 147,15 × 2,5·cos 65° + 784,8 × 3,75·cos 65°.<br>
-    <b>a)</b> N<sub>mur</sub> ≈ <b>308,8 N</b>.<br>
-    ΣFx = 0 : frottement au sol = 308,8 N · ΣFy = 0 : N<sub>sol</sub> = 147,15 + 784,8 = 932 N.<br>
-    <b>b)</b> f = 308,8 / 932 ≈ <b>0,33</b>.<br>
-    <b>c)</b> Frottement maximal : 0,40 × 932 = 372,8 N = N<sub>mur</sub>. On résout pour x :<br>
-    x = (372,8 × 5·tan 65° − 147,15 × 2,5) / 784,8 ≈ <b>4,62 m</b>.<br>
-    <b>La leçon :</b> une échelle glisse en haut, pas en bas. Plus on monte, plus il faut de frottement.</div></div>
+    <div class="csol" id="c4sol"><span class="cl"><b>Moments au pied de l’échelle</b> : le sol (normale et frottement) n’y fait rien tourner.</span><span class="cl">N<sub>mur</sub> × 5·sin 65° = 147,15 × 2,5·cos 65° + 784,8 × 3,75·cos 65°.</span><span class="cl"><b>a)</b> N<sub>mur</sub> ≈ <b>308,8 N</b>.</span><span class="cl">ΣFx = 0 : frottement au sol = 308,8 N · ΣFy = 0 : N<sub>sol</sub> = 147,15 + 784,8 = 932 N.</span><span class="cl"><b>b)</b> f = 308,8 / 932 ≈ <b>0,33</b>.</span><span class="cl"><b>c)</b> Frottement maximal : 0,40 × 932 = 372,8 N = N<sub>mur</sub>. On résout pour x :</span><span class="cl">x = (372,8 × 5·tan 65° − 147,15 × 2,5) / 784,8 ≈ <b>4,62 m</b>.</span><span class="cl"><b>La leçon :</b> une échelle glisse en haut, pas en bas. Plus on monte, plus il faut de frottement.</span></div></div>
   </section>
 
   <section id="ex5">
     <span class="kicker">Exercice 5</span>
     <h2>Le chariot élévateur</h2>
     <p class="lede">Un chariot de 2500 kg soulève une charge devant lui. Il bascule autour de son essieu avant.</p>
+    <button type="button" class="btn-lecon" aria-expanded="false" aria-controls="lecon5"><span class="bl-k">Mini-cours</span> le basculement</button>
+    <div class="lecon" id="lecon5" hidden>
+      <div class="lk">Mini-cours · le basculement</div>
+      <p class="lt">Un objet bascule autour de son <b>appui le plus en avant</b>. À la limite, l’autre appui ne porte plus rien.</p>
+      <svg class="lfig" viewBox="0 0 520 180" aria-label="Engin chargé en avant, au bord du basculement autour de sa roue avant">
+        <defs><marker id="mk5g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5C544B"/></marker><marker id="mk5r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C0492E"/></marker><marker id="mk5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2E6A8E"/></marker></defs>
+        <line x1="40" y1="160" x2="480" y2="160" stroke="#8c8578" stroke-width="1.6"/>
+        <rect x="90" y="96" width="240" height="36" fill="#BD8A2A"/>
+        <line x1="330" y1="110" x2="420" y2="110" stroke="#2A2622" stroke-width="4"/>
+        <rect x="392" y="80" width="40" height="28" fill="#8A5A7A"/>
+        <circle cx="130" cy="146" r="14" fill="#2A2622"/><circle cx="300" cy="146" r="14" fill="#2A2622"/>
+        <circle cx="180" cy="112" r="6" fill="none" stroke="#fff" stroke-width="2"/>
+        <line x1="180" y1="120" x2="180" y2="152" stroke="#5C544B" stroke-width="3" marker-end="url(#mk5g)"/>
+        <line x1="412" y1="108" x2="412" y2="150" stroke="#C0492E" stroke-width="3" marker-end="url(#mk5r)"/>
+        <path d="M240.9,149.6 A60 60 0 0 1 274.6,105.6" fill="none" stroke="#2E6A8E" stroke-width="2.4" marker-end="url(#mk5b)"/>
+        <text x="186" y="148" font-size="12" fill="#5C544B" font-family="JetBrains Mono">P</text>
+        <text x="420" y="140" font-size="12" fill="#C0492E" font-family="JetBrains Mono">Q</text>
+        <text x="130" y="176" text-anchor="middle" font-size="11" fill="#5C544B" font-family="JetBrains Mono">arrière : R → 0</text>
+        <text x="300" y="176" text-anchor="middle" font-size="11" fill="#2E6A8E" font-family="JetBrains Mono">pivot du basculement</text>
+      </svg>
+      <ol class="lm">
+        <li>Prendre les moments <b>au point de basculement</b> : sa réaction disparaît.</li>
+        <li>À la limite, l’appui arrière vaut <b>zéro</b> : il ne reste que les poids.</li>
+        <li>Coefficient de sécurité = charge de basculement / charge autorisée.</li>
+      </ol>
+      <p class="lx"><b>Exemple :</b> engin de 1000 kg, G à 0,5 m derrière la roue avant, charge à 0,4 m devant.<br>m × 0,4 = 1000 × 0,5, donc il bascule à partir de 1250 kg.</p>
+    </div>
+
     <div class="donnees">
       <div><div class="l">G du chariot</div><div class="v">0,9 m derrière l’essieu avant</div></div>
       <div><div class="l">charge</div><div class="v">0,6 m devant l’essieu avant</div></div>
@@ -329,12 +474,7 @@
     <div class="cq"><span>c) Avec 2000 kg : réaction sur l’essieu avant :</span><input id="c5_c" inputmode="decimal" placeholder="?"><span class="cu">N</span></div>
     <div class="cq"><button class="btn" id="c5chk">Vérifier</button><button class="btn ghost" id="c5rev">Voir la correction</button></div>
     <div class="exo-fb" id="c5fb"></div>
-    <div class="csol" id="c5sol"><b>a)</b> Au basculement, l’essieu arrière ne porte plus rien. Moments à l’essieu avant :<br>
-    m × 0,6 = 2500 × 0,9, donc m = <b>3750 kg</b>. Avec un coefficient de sécurité de 1,5 : 2500 kg autorisés.<br>
-    <b>b)</b> Moments à l’essieu avant : R<sub>arr</sub> × 1,6 = 24 525 × 0,9 − 19 620 × 0,6.<br>
-    R<sub>arr</sub> ≈ <b>6438 N</b>.<br>
-    <b>c)</b> ΣFy = 0 : R<sub>av</sub> = 24 525 + 19 620 − 6438 ≈ <b>37 707 N</b>.<br>
-    <b>Ce qui compte :</b> l’arrière est presque délesté. Un freinage brusque vers l’avant, et il décolle.</div></div>
+    <div class="csol" id="c5sol"><span class="cl"><b>a)</b> Au basculement, l’essieu arrière ne porte plus rien. Moments à l’essieu avant :</span><span class="cl">m × 0,6 = 2500 × 0,9, donc m = <b>3750 kg</b>. Avec un coefficient de sécurité de 1,5 : 2500 kg autorisés.</span><span class="cl"><b>b)</b> Moments à l’essieu avant : R<sub>arr</sub> × 1,6 = 24 525 × 0,9 − 19 620 × 0,6.</span><span class="cl">R<sub>arr</sub> ≈ <b>6438 N</b>.</span><span class="cl"><b>c)</b> ΣFy = 0 : R<sub>av</sub> = 24 525 + 19 620 − 6438 ≈ <b>37 707 N</b>.</span><span class="cl"><b>Ce qui compte :</b> l’arrière est presque délesté. Un freinage brusque vers l’avant, et il décolle.</span></div></div>
   </section>
 
   <section id="feuille">
@@ -355,11 +495,7 @@
       <p class="consigne" style="margin-top:-6px"><b>3.</b> Quelle charge, placée à 15 m, équilibre exactement la grue ?</p>
       <p class="consigne" style="margin-top:-6px"><b>4.</b> Explique pourquoi l’abaque d’une grue diminue la charge quand la portée augmente.</p>
       <div class="cq"><button class="btn ghost" id="f1rev">Afficher la correction rédigée</button></div>
-      <div class="csol" id="f1sol"><b>1.</b> Moments au mât, en t·m : C×9 + 2×5 = 6×12 + 2×30, donc C = 122 / 9 ≈ <b>13,6 t</b>.<br>
-      <b>2.</b> À vide : 13,56×9 + 10 − 72 = <b>60 t·m</b>, soit 588,6 kN·m, vers l’arrière.<br>
-      <b>3.</b> Q × 15 = 60, donc <b>Q = 4 t</b>.<br>
-      <b>4.</b> Le moment admissible est fixé par le contrepoids. Doubler la portée divise la charge par deux.<br>
-      <b>Attendu :</b> les unités tenues jusqu’au bout. Mélanger tonnes et newtons dans une même équation est faux.</div></div>
+      <div class="csol" id="f1sol"><span class="cl"><b>1.</b> Moments au mât, en t·m : C×9 + 2×5 = 6×12 + 2×30, donc C = 122 / 9 ≈ <b>13,6 t</b>.</span><span class="cl"><b>2.</b> À vide : 13,56×9 + 10 − 72 = <b>60 t·m</b>, soit 588,6 kN·m, vers l’arrière.</span><span class="cl"><b>3.</b> Q × 15 = 60, donc <b>Q = 4 t</b>.</span><span class="cl"><b>4.</b> Le moment admissible est fixé par le contrepoids. Doubler la portée divise la charge par deux.</span><span class="cl"><b>Attendu :</b> les unités tenues jusqu’au bout. Mélanger tonnes et newtons dans une même équation est faux.</span></div></div>
     </div>
   </section>
 <section class="tpscore" id="tpScore">
@@ -935,6 +1071,20 @@ EX.forEach(function(rep,n){
   d('mdpOk').addEventListener('click',valider);
   d('mdpAnn').addEventListener('click',fermer);
   d('mdpIn').addEventListener('keydown',function(e){ if(e.key==='Enter') valider(); if(e.key==='Escape') fermer(); });
+})();
+</script>
+
+<script>
+/* mini-cours : fermés par défaut, ouverts à la demande */
+(function(){
+  Array.prototype.forEach.call(document.querySelectorAll('.btn-lecon'),function(b){
+    var l=document.getElementById(b.getAttribute('aria-controls')); if(!l) return;
+    b.addEventListener('click',function(){
+      var ouvrir=l.hasAttribute('hidden');
+      if(ouvrir) l.removeAttribute('hidden'); else l.setAttribute('hidden','');
+      b.setAttribute('aria-expanded',ouvrir?'true':'false');
+    });
+  });
 })();
 </script>
 </body>
